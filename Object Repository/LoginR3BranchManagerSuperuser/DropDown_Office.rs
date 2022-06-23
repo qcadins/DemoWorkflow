@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>DropDown_Office</name>
+   <tag></tag>
+   <elementGuidId>e0e92523-76cb-453e-881c-15bde66e7d16</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/form/div[1]/div[2]/lib-ucdropdownsearch/div/div[2]/input</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/div/form/div[1]/div[2]/lib-ucdropdownsearch/div/div[2]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/form/div[1]/div[2]/lib-ucdropdownsearch/div/div[2]/input</value>
+   </webElementProperties>
+</WebElementEntity>

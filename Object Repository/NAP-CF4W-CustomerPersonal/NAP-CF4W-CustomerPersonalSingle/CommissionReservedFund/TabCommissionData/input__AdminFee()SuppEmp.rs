@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input__AdminFee()SuppEmp</name>
+   <tag></tag>
+   <elementGuidId>be21dc62-9e02-468e-89c3-00acd6e6a3ec</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type=''])[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;][count(. | //input[@formcontrolname = 'AllocationPercentage']) = count(//input[@formcontrolname = 'AllocationPercentage'])]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>formcontrolname</name>
+      <type>Main</type>
+      <value>AllocationPercentage</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>(//input[@type=''])[4]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='ListAllocatedFT ADMIN HEAD1']/div/div/div/div/div/div[2]/input</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[3]/div[5]/div/div/div/div/div/div[2]/input</value>
+   </webElementXpaths>
+</WebElementEntity>

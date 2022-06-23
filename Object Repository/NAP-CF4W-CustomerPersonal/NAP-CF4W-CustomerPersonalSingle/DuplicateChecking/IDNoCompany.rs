@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>IDNoCompany</name>
+   <tag></tag>
+   <elementGuidId>4543a062-0cd6-4223-8070-3132578958f6</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;subSecAppProcess&quot;]/table/tbody/tr[1]/td[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;subSecAppProcess&quot;]/table/tbody/tr[1]/td[3]</value>
+   </webElementProperties>
+</WebElementEntity>
