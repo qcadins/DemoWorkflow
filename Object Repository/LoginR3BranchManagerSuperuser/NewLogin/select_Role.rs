@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_New Consumer Finance</name>
+   <name>select_Role</name>
    <tag></tag>
-   <elementGuidId>cb1da310-7afb-4cd9-a6cd-03c944246056</elementGuidId>
+   <elementGuidId>da0413b9-4820-4504-9390-30bcb54f8c05</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/div/form/div[1]/div[2]/lib-ucdropdownsearch/div/div[2]/div/select
+</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/a/span</value>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

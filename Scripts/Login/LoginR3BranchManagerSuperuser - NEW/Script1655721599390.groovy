@@ -33,15 +33,14 @@ WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Originati
 'click button login'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/button_LOGIN'))
 
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/DropDown_Office'))
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/input_Choose Your Role_Office'))
 
-'pilih role Branch Manager Super User'
-WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/select_Office'), findTestData('Login/Login').getValue(
+WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), findTestData('Login/Login').getValue(
         4, 2), false)
 
-WebUI.sendKeys(findTestObject('LoginR3BranchManagerSuperuser/select_Office'), Keys.chord(Keys.ENTER))
+WebUI.sendKeys(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), Keys.chord(Keys.ENTER))
 
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/button_ChooseRole'))
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/button_Choose Role'))
 
 'click menu consumer finance'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))

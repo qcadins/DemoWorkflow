@@ -15,6 +15,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
@@ -81,8 +82,8 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cus
 'click button asset lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'))
 
-'input asset name'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_Full Asset Name_assetName'), 
+'input asset code'
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_AssetCode'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 8))
 
@@ -265,16 +266,39 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
 }
 
-'select region'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 26), false)
+//'select region'
+//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
+//    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+//        GlobalVariable.NumofColm, 26), false)
+//WebUI.delay(3)
+String servername = findTestData('Login/Login').getValue(1, 8)
 
-WebDriver driver = DriverFactory.getWebDriver()
+String instancename = findTestData('Login/Login').getValue(2, 8)
 
-ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#RefAttrContent > div.form-group.row.ng-pristine.ng-invalid.ng-touched > div label'))
+String username = findTestData('Login/Login').getValue(3, 8)
 
-for (i = 1; i <= variable.size(); i++) {
+String password = findTestData('Login/Login').getValue(4, 8)
+
+String database = findTestData('Login/Login').getValue(5, 8)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
+String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 8)
+
+'count asset attribute'
+String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlconnection, 
+    Fullassetcode)
+
+for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
+	
+	println(i)
+	
     String newAssetAtrributeInput = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input'
 
     'modify button Asset Attribute Input'
@@ -282,6 +306,7 @@ for (i = 1; i <= variable.size(); i++) {
         'xpath', 'equals', newAssetAtrributeInput, true)
 
     if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInput, 5, FailureHandling.OPTIONAL)) {
+        'set text Attribute'
         WebUI.setText(modifyObjectAssetAttributeInput, 'Attribute', FailureHandling.OPTIONAL)
     } else {
         String newAssetAtrributeSelect = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/select'
@@ -290,7 +315,12 @@ for (i = 1; i <= variable.size(); i++) {
         modifyObjectAssetAttributeSelect = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
             'xpath', 'equals', newAssetAtrributeSelect, true)
 
+        'select option index 1'
         WebUI.selectOptionByIndex(modifyObjectAssetAttributeSelect, 1, FailureHandling.OPTIONAL)
+
+        if (i == countAssetAtrtibute) {
+            break
+        }
     }
 }
 
@@ -752,6 +782,7 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Save'))
 
+WebUI.acceptAlert(FailureHandling.OPTIONAL)
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 WebUI.delay(5)

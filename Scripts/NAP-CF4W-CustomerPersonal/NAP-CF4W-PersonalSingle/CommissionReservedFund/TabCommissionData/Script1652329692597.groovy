@@ -245,6 +245,9 @@ if(variableSuppEmp.size()>0){
 	'Looping Supplier Employee List'
 	for (int i = 1; i <= variableSuppEmp.size(); i++) {
 		
+		println(i)
+		println(variableSuppEmp.size())
+		
 		'Variabel untuk flagging ketika berhasil melakukan delete'
 		int flagdelSuppEmployee=0
 		
@@ -333,7 +336,7 @@ if(variableSuppEmp.size()>0){
 			supplierEmployeeCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlConnection, supplierEmployeeName, supplierEmpPos, supplierName)
 			
 			'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
-			variableAllocateCommissionLeft = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ")+ ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
+			variableAllocateCommissionLeft = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ") + ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
 			
 			'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kanan'
 			variableAllocateCommissionRight = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ") + ' > div > div > div:nth-child(2) label.col-md-4.adInsLabel'))
@@ -351,6 +354,11 @@ if(variableSuppEmp.size()>0){
 			for (int j = 1; j <= countAllocateCommission; j++) {
 				String newxpathCommissionAmt, newxpathCommissionPercentage
 				String newxpathAllocateCommission
+				
+				println(countAllocateCommissionLeft)
+				println(countAllocateCommissionRight)
+				println(countAllocateCommission)
+				println(j)
 				
 				'Pengecekan jika looping masih berada pada allocate commission from sebelah kiri'
 				if (j <= countAllocateCommissionLeft) {
@@ -566,6 +574,8 @@ if(variableRef.size()>0){
 				String newxpathCommissionAmt, newxpathCommissionPercentage
 				String newxpathAllocateCommission
 				
+				println(countAllocateCommissionLeft)
+				println(countAllocateCommissionRight)
 				'Pengecekan jika looping masih berada pada allocate commission from sebelah kiri'
 				if (j <= countAllocateCommissionLeft) {
 					newxpathCommissionAmt = (((('//*[@id=\'ListAllocated' + refCode) + '\']/div/div/div[1]/div[') + j) + ']/div/div[1]/input')

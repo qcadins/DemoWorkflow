@@ -150,9 +150,10 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
         }
     }
     
-    'click button save'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/Button Save'))
 }
+
+'click button save'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'REFERANTOR', false, FailureHandling.OPTIONAL)) {

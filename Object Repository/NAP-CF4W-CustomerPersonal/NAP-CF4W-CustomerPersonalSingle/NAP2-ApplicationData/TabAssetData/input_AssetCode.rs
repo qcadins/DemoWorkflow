@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_New Consumer Finance</name>
+   <name>input_AssetCode</name>
    <tag></tag>
-   <elementGuidId>cb1da310-7afb-4cd9-a6cd-03c944246056</elementGuidId>
+   <elementGuidId>199a94bb-297f-4130-ad79-f8cbddbb10ef</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
+         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/a/span</value>
+         <value>//*[@id=&quot;assetCode&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

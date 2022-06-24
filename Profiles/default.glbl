@@ -126,17 +126,17 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
+      <initValue>'0.00'</initValue>
       <name>TotalInsurance</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>0</initValue>
+      <initValue>0.00</initValue>
       <name>InsuranceCapitalizeAmount</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>0</initValue>
+      <initValue>'0'</initValue>
       <name>CapitalizePremiumPercentage</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

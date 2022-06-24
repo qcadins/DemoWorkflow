@@ -33,6 +33,8 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cus
 if (insuredBy == 'Customer') {
 	'Memanggil test case Tab Insurance Data Customer'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/TabInsuranceDataCustomer'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	
 } 
 else if (insuredBy == 'Customer - Multifinance') {
 	'Memanggil Test Case Tab Insurance Data Customer untuk mengisi insurance information bagian customer'
@@ -44,9 +46,6 @@ else if (insuredBy == 'Customer - Multifinance') {
 else if (insuredBy == 'Multifinance') {
 	'Memanggil test case Tab Insurance Data Multifinance'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/TabInsuranceDataMultifinance'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-}else{
-	'set value totalinsurance untuk verify di tab financial data'
-	GlobalVariable.TotalInsurance = '0.00'
 }
 
 WebUI.delay(3)

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_New Consumer Finance</name>
+   <name>card_LOS</name>
    <tag></tag>
-   <elementGuidId>cb1da310-7afb-4cd9-a6cd-03c944246056</elementGuidId>
+   <elementGuidId>cf0a9cac-ea97-4904-8864-e612a5f15a4a</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-content-layout/div/app-module-selection/div/lib-ucmoduleselection/div/div/div[2]/div/div/div[2]</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/a/span</value>
+         <key>BASIC</key>
+         <value></value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

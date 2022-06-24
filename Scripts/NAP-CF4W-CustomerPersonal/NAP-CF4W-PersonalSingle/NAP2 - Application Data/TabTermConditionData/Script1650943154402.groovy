@@ -29,7 +29,7 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
 int count = variable.size()
-
+println(count)
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {
     String newxpathRequired
