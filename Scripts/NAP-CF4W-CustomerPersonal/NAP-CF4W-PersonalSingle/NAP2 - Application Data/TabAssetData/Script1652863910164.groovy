@@ -1,4 +1,3 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -262,15 +261,13 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 9) == 'Used') {
-    'click button check rapindo'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
+    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+        GlobalVariable.NumofColm, 62) == 'Yes') {
+        'click button check rapindo'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
+    }
 }
 
-//'select region'
-//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
-//    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-//        GlobalVariable.NumofColm, 26), false)
-//WebUI.delay(3)
 String servername = findTestData('Login/Login').getValue(1, 8)
 
 String instancename = findTestData('Login/Login').getValue(2, 8)
@@ -296,9 +293,6 @@ String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute
     Fullassetcode)
 
 for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
-	
-	println(i)
-	
     String newAssetAtrributeInput = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input'
 
     'modify button Asset Attribute Input'
@@ -318,9 +312,6 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
         'select option index 1'
         WebUI.selectOptionByIndex(modifyObjectAssetAttributeSelect, 1, FailureHandling.OPTIONAL)
 
-        if (i == countAssetAtrtibute) {
-            break
-        }
     }
 }
 
@@ -782,8 +773,12 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Save'))
 
-WebUI.acceptAlert(FailureHandling.OPTIONAL)
-WebUI.acceptAlert(FailureHandling.OPTIONAL)
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 62) == 'No') {
+    WebUI.waitForAlert(3)
+
+    WebUI.acceptAlert(FailureHandling.OPTIONAL)
+}
 
 WebUI.delay(5)
 

@@ -133,7 +133,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                             String IdNoCustomer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
-                            if (modifyIDNoCustomer == IdNoCustomer) {
+                            if (NewIdNoCustomerMatch == IdNoCustomer) {
                             	String newSelect = ('//div[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[10]/a'
                             			
                             			'modify object id no customer match'
@@ -307,7 +307,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                         
                         if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
-                            if (GuarantorActionArray == 'New') {
+                            if (GuarantorActionArray[g-1] == 'New') {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'),5, 
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
