@@ -87,7 +87,7 @@ if(variableSupp.size()>0){
 	String deleteSupp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 4)
 	
 	'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
-	if (supplierName == deleteSupp) {
+	if (supplierName.equalsIgnoreCase(deleteSupp)) {
 		'Click icon delete (tempat sampah)'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/i_deletesupp'))
 		'Click OK pada alert'
@@ -201,7 +201,7 @@ if(variableSupp.size()>0){
 						'xpath', 'equals', newxpathIncomeInfoAmt, true)
 					
 					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-					if(textIncomeInfo==allocateCommission){
+					if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
 						'Variabel untuk mengambil amount income information yang sesuai'
 						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
 						
@@ -296,7 +296,7 @@ if(variableSuppEmp.size()>0){
 			for(j=1;j<=deleteSuppEmpName.size();j++){
 				
 				'Pengecekan jika nama supplier employee pada web confins sama dengan nama supplier employee dari excel yang akan didelete dan posisinya pada web confins sama dengan posisi dari supplier employee dari excel yang akan didelete'
-				if(supplierEmployeeName == deleteSuppEmpName[j-1] && supplierEmpPos == deleteSuppEmpPos[j-1]){
+				if(supplierEmployeeName.equalsIgnoreCase(deleteSuppEmpName[j-1]) && supplierEmpPos.equalsIgnoreCase(deleteSuppEmpPos[j-1])){
 					newxpathDelSuppEmp = "//*[@id='formInformationSupplierEmployee']/div[" + (i + 1) + "]/div/div[1]/div[2]/div/div[2]/button/i"
 					modifyDelSuppEmp = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/i_deleteSuppEmp'),
 						 'xpath', 'equals', newxpathDelSuppEmp, true)
@@ -446,7 +446,7 @@ if(variableSuppEmp.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo==allocateCommission){
+						if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
@@ -514,7 +514,7 @@ if(variableRef.size()>0){
 			for(j=1;j<=deleteRefName.size();j++){
 				
 				'Pengecekan jika nama referantor pada web confins sama dengan nama referantor dari excel yang akan didelete'
-				if(refName == deleteRefName[j-1]){
+				if(refName.equalsIgnoreCase(deleteRefName[j-1])){
 					newxpathDelRef = "//*[@id='formInformationReferantor']/div[" + (i + 1) + "]/div/div[1]/div[2]/div/div[2]/button/i"
 					modifyDelRef = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/i_deleteref'),
 						 'xpath', 'equals', newxpathDelRef, true)
@@ -660,7 +660,7 @@ if(variableRef.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo==allocateCommission){
+						if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")

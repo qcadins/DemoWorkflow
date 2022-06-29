@@ -17,18 +17,18 @@ import internal.GlobalVariable as GlobalVariable
 
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataEmployee - Personal - Family'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataEmployeeFamily'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'PROFESSIONAL') {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataProfessional - Personal - Family'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataProfessionalFamily'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'NON PROFESSIONAL') {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataNonProfessional - Personal - Family'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataNonProfessionalFamily'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataSME - Personal - Family'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/FamilyPersonal/TabJobDataSMEFamily'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

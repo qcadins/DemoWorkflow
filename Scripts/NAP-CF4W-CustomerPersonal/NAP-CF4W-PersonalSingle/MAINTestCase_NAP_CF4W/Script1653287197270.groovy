@@ -42,7 +42,7 @@ if (Role == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/CommissionReservedFund/MAINComResvFund'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 } else {

@@ -27,5 +27,3 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSing
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP1 - Customer Data/VerifyApplicant'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-WebUI.delay(10)
-

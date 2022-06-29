@@ -145,7 +145,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 			'equals', newxpathSubjectName, true)
 				String textSubjectName = WebUI.getText(modifyObjectSubjectName)
 				for(j=1;j<=checkGuarantor.size();j++){
-					if(textSubjectName == checkGuarantor[j-1]){
+					if(textSubjectName.equalsIgnoreCase(checkGuarantor[j-1])){
 						'Jika belum tercentang'
 						if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
 							'Centang'

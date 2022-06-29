@@ -74,7 +74,7 @@ for (int i = 1; i <= count; i++) {
 			 for(j=1;j<=checkNO.size();j++){
 				 
 				 'Pengecekan jika nama dokumen sama dengan dokumen checkno pada excel'
-				 if(textDocumentName == checkNO[j-1]){
+				 if(textDocumentName.equalsIgnoreCase(checkNO[j-1])){
 					 
 					 'Jika belum tercentang'
 					 if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
@@ -111,7 +111,7 @@ for (int i = 1; i <= count; i++) {
 			 for(j=1;j<=uncheckYES.size();j++){
 				 
 				 'Pengecekan jika nama dokumen sama dengan dokumen uncheckYES pada excel'
-				 if(textDocumentName == uncheckYES[j-1]){
+				 if(textDocumentName.equalsIgnoreCase(uncheckYES[j-1])){
 					 
 					 'Jika sudah tercentang'
 					 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
@@ -150,7 +150,7 @@ for (int i = 1; i <= count; i++) {
 		 for(j=1;j<=expiredDateDocument.size();j++){
 			 
 			 'Pengecekan jika kolom check tercentang dan nama dokumen sama dengan dokumen yang perlu diisi expired date pada excel'
-			 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)&& textDocumentName == expiredDateDocument[j-1] ) {
+			 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)&& textDocumentName.equalsIgnoreCase(expiredDateDocument[j-1]) ) {
 				 
 				 WebUI.delay(1)
 				 'Input expired date'
@@ -177,7 +177,7 @@ for (int i = 1; i <= count; i++) {
 			 for(j=1;j<=waivedDocument.size();j++){
 				 
 				 'Pengecekan nama dokumen sama dengan nama dokumen yang perlu diwaive pada excel'
-				 if (textDocumentName == waivedDocument[j-1]){
+				 if (textDocumentName.equalsIgnoreCase(waivedDocument[j-1])){
 					 		 
 					'Centang Waive'
 					WebUI.check(modifyObjectWaived)

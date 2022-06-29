@@ -94,7 +94,7 @@ for (int i = 1; i <= count; i++) {
             'verify if iscomplete == no'
             if (isComplete == 'NO') {
                 'verify if customerarray == customename'
-                if (CustomerName == (CustomerArray[(c - 1)])) {
+                if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
@@ -106,7 +106,7 @@ for (int i = 1; i <= count; i++) {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
                     GlobalVariable.NumofColm, 4) == 'YES') {
                     'verify if customerarray == customename'
-                    if (CustomerName == (CustomerArray[(c - 1)])) {
+                    if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
@@ -126,7 +126,7 @@ for (int i = 1; i <= count; i++) {
             'verify iscomplete == NO'
             if (isComplete == 'NO') {
                 'verify customername == family array'
-                if (CustomerName == (FamilyArray[(f - 1)])) {
+                if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
@@ -138,7 +138,7 @@ for (int i = 1; i <= count; i++) {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
                     GlobalVariable.NumofColm, 6) == 'YES') {
                     'verify customername == family array'
-                    if (CustomerName == (FamilyArray[(f - 1)])) {
+                    if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
@@ -158,13 +158,13 @@ for (int i = 1; i <= count; i++) {
             'verify iscomplete == NO'
             if (isComplete == 'NO') {
                 'verify customername == guarantorarray'
-                if ((CustomerName == (GuarantorArray[(g - 1)])) && (CustomerType == 'PERSONAL')) {
+                if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'PERSONAL')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                         [:], FailureHandling.CONTINUE_ON_FAILURE)
-                } else if ((CustomerName == (GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
+                } else if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
@@ -176,12 +176,12 @@ for (int i = 1; i <= count; i++) {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
                     GlobalVariable.NumofColm, 8) == 'YES') {
                     'verify customername == guarantorarray'
-                    if ((CustomerName == (GuarantorArray[(g - 1)])) && (CustomerType == 'PERSONAL')) {
+                    if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'PERSONAL')) {
                         WebUI.click(modifynewButtonAction)
 
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if ((CustomerName == (GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
+                    } else if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
                         WebUI.click(modifynewButtonAction)
 
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 

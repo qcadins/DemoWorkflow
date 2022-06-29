@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabJobDataNonProfessional - Personal - Customer</name>
+   <name>TabJobDataEmployeeFamily</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>bb579e18-adcb-490f-8d35-dcf14b326c47</testCaseGuid>
+   <testCaseGuid>63c41b93-0d90-41f2-849b-574c791a7da7</testCaseGuid>
 </TestCaseEntity>

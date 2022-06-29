@@ -112,7 +112,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
         if (CustomerArray.size() > 0) {
             for (c = 1; c <= CustomerArray.size(); c++) {
-                if (subjectName == (CustomerArray[(c - 1)])) {
+                if (subjectName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                     'click button edit'
                     if (WebUI.verifyElementPresent(modifyButtonEdit,5, FailureHandling.OPTIONAL)) {
                         WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
@@ -148,7 +148,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         
                        if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
                             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                                GlobalVariable.NumofColm, 4) == 'New') {
+                                GlobalVariable.NumofColm, 4).equalsIgnoreCase('New')) {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'),5, 
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
@@ -175,7 +175,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
         
         if (FamilyArray.size() > 0) {
             for (f = 1; f <= FamilyArray.size(); f++) {
-                if (subjectName == (FamilyArray[(f - 1)])) {
+                if (subjectName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                     if (WebUI.verifyElementPresent(modifyButtonEdit,5, FailureHandling.OPTIONAL)) {
                         'click button edit'
                         WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
@@ -210,7 +210,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                         
                         if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
-                            if ((FamilyActionArray[(f - 1)]) == 'New') {
+                            if ((FamilyActionArray[(f - 1)]).equalsIgnoreCase('New')) {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'),5, 
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
@@ -236,7 +236,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
         
         if (GuarantorArray.size() > 0) {
             for (g = 1; g <= GuarantorArray.size(); g++) {
-                if (subjectName == (GuarantorArray[(g - 1)])) {
+                if (subjectName.equalsIgnoreCase(GuarantorArray[(g - 1)])) {
                     if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
                         'click button edit'
                         WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
@@ -307,7 +307,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                         
                         if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
-                            if (GuarantorActionArray[g-1] == 'New') {
+                            if (GuarantorActionArray[g-1].equalsIgnoreCase('New')) {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'),5, 
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'

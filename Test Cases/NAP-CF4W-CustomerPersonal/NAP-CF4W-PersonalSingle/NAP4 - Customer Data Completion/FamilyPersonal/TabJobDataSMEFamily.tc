@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabJobDataNonProfessional - Personal - Guarantor</name>
+   <name>TabJobDataSMEFamily</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>6947f334-ea57-4bd7-af62-1fd1e41ec4c2</testCaseGuid>
+   <testCaseGuid>3c271f7f-da1c-457d-9a20-f746c6978ac7</testCaseGuid>
 </TestCaseEntity>
