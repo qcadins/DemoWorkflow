@@ -129,10 +129,10 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 'xpath', 'equals', newIDNoCustomer, true)
 
 
-                            String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer)
+                            String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer, FailureHandling.OPTIONAL)
 
                             String IdNoCustomer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
-
+							if(NewIdNoCustomerMatch != null){
                             if (NewIdNoCustomerMatch == IdNoCustomer) {
                             	String newSelect = ('//div[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[10]/a'
                             			
@@ -144,6 +144,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                 break
                             }
+							}
                         }
                         
                        if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
@@ -192,10 +193,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 'xpath', 'equals', newIDNoFamily, true)
 
 
-                            String NewIdNoFamilyMatch = WebUI.getText(modifyIDNoFamily)
+                            String NewIdNoFamilyMatch = WebUI.getText(modifyIDNoFamily, FailuteHandling.OPTIONAL)
 
                             String IdNoFamily = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
-
+							
+							if(NewIdNoFamilyMatch != null){
                             if (NewIdNoFamilyMatch == IdNoFamily) {
                             	String newselectFamily = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[10]/a'
                             			
@@ -207,6 +209,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                 break
                             }
+							}
                         }
                         
                         if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
@@ -261,15 +264,16 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     'xpath', 'equals', newIDNoGuarantorPersonal, true)
 
 
-                                String NewIdNoGuarantorPersonalMatch = WebUI.getText(modifyIDNoGuarantorPersonal)
+                                String NewIdNoGuarantorPersonalMatch = WebUI.getText(modifyIDNoGuarantorPersonal, FailureHandling.OPTIONAL)
 
                                 String IdNoGuarantorPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
+								if(NewIdNoGuarantorPersonalMatch != null){
                                 if (NewIdNoGuarantorPersonalMatch == IdNoGuarantorPersonal) {
                                 	String newselectGuarantorPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
                                 			']/td[10]/a'
                                 			
-                                			'modify object id no family match'
+                                			'modify object select family match'
                                 			modifyselectGuarantorPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                                 					'xpath', 'equals', newselectGuarantorPersonal, true)
 											
@@ -277,6 +281,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                     break
                                 }
+								}
                             }
                         } else if (counttd == 5) {
                             for (id = 1; id <= countGuarantorPersonalidrow; id++) {
@@ -287,22 +292,27 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 modifyIDNoGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoCompany'), 
                                     'xpath', 'equals', newIDNoGuarantorCompany, true)
 
-                                String newselectGuarantorCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
-                                ']/td[5]/a'
+                                
 
-                                'modify object id no family match'
-                                modifyselectGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'), 
-                                    'xpath', 'equals', newselectGuarantorCompany, true)
-
-                                String NewIdNoGuarantorCompanyMatch = WebUI.getText(modifyIDNoGuarantorCompany)
+                                String NewIdNoGuarantorCompanyMatch = WebUI.getText(modifyIDNoGuarantorCompany, FailureHandling.OPTIONAL)
 
                                 String IdNoGuarantorCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
+								if(NewIdNoGuarantorCompanyMatch != null){
                                 if (NewIdNoGuarantorCompanyMatch == IdNoGuarantorCompany) {
+									
+									String newselectGuarantorCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) +
+									 ']/td[5]/a'
+	 
+									 'modify object select family match'
+									 modifyselectGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'),
+										 'xpath', 'equals', newselectGuarantorCompany, true)
+									 
                                     WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
 
                                     break
                                 }
+								}
                             }
                         }
                         

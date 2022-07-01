@@ -183,9 +183,12 @@ if (textwop == 'Auto Debit') {
 WebUI.selectOptionByLabel(notif, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
         GlobalVariable.NumofColm, 18), false)
 
+if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+        GlobalVariable.NumofColm, 19).length() >0){
 'Select option dropdownlist Installment Source Payment'
 WebUI.selectOptionByLabel(inssource, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
         GlobalVariable.NumofColm, 19), false)
+}
 
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(

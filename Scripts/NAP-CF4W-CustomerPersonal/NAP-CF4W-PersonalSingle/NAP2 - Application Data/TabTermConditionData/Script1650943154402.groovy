@@ -120,8 +120,11 @@ for (int i = 1; i <= count; i++) {
 						 WebUI.uncheck(modifyObjectCheckbox)
 					 }
 					 
-					 'Input Promise Date'
-					 WebUI.setText(modifyObjectPromiseDate,PromiseDate[j-1])
+					 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 3).length()>0){
+						 'Input Promise Date'
+						 WebUI.setText(modifyObjectPromiseDate,PromiseDate[j-1])
+					 }
+				
 				 }
 			 }
 		}
