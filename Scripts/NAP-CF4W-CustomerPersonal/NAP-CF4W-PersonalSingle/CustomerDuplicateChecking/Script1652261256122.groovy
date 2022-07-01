@@ -133,7 +133,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                             String IdNoCustomer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 							if(NewIdNoCustomerMatch != null){
-                            if (NewIdNoCustomerMatch == IdNoCustomer) {
+                            if (NewIdNoCustomerMatch.equalsIgnoreCase(IdNoCustomer)) {
                             	String newSelect = ('//div[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[10]/a'
                             			
                             			'modify object id no customer match'
@@ -198,7 +198,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             String IdNoFamily = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 							
 							if(NewIdNoFamilyMatch != null){
-                            if (NewIdNoFamilyMatch == IdNoFamily) {
+                            if (NewIdNoFamilyMatch.equalsIgnoreCase(IdNoFamily)) {
                             	String newselectFamily = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[10]/a'
                             			
                             			'modify object id no family match'
@@ -269,7 +269,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 String IdNoGuarantorPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
 								if(NewIdNoGuarantorPersonalMatch != null){
-                                if (NewIdNoGuarantorPersonalMatch == IdNoGuarantorPersonal) {
+                                if (NewIdNoGuarantorPersonalMatch.equalsIgnoreCase(IdNoGuarantorPersonal)) {
                                 	String newselectGuarantorPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
                                 			']/td[10]/a'
                                 			
@@ -299,7 +299,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 String IdNoGuarantorCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
 								if(NewIdNoGuarantorCompanyMatch != null){
-                                if (NewIdNoGuarantorCompanyMatch == IdNoGuarantorCompany) {
+                                if (NewIdNoGuarantorCompanyMatch.equalsIgnoreCase(IdNoGuarantorCompany)) {
 									
 									String newselectGuarantorCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) +
 									 ']/td[5]/a'

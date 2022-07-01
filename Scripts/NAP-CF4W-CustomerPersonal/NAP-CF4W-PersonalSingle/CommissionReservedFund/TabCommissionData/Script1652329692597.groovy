@@ -201,7 +201,7 @@ if(variableSupp.size()>0){
 						'xpath', 'equals', newxpathIncomeInfoAmt, true)
 					
 					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-					if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
+					if(textIncomeInfo == allocateCommission){
 						'Variabel untuk mengambil amount income information yang sesuai'
 						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
 						
@@ -446,7 +446,7 @@ if(variableSuppEmp.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
+						if(textIncomeInfo == allocateCommission){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
@@ -660,7 +660,7 @@ if(variableRef.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo.equalsIgnoreCase(allocateCommission)){
+						if(textIncomeInfo == allocateCommission){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
