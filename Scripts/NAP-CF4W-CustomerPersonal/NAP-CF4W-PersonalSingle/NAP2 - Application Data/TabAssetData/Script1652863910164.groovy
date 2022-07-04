@@ -778,10 +778,17 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 62) == 'No') {
+
+	'wait alert if not check rapindo'
     WebUI.waitForAlert(3)
 
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
+	'wait alert if dp is below minimum'
+	WebUI.waitForAlert(3)
+	
+	
+		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 WebUI.delay(5)
 
