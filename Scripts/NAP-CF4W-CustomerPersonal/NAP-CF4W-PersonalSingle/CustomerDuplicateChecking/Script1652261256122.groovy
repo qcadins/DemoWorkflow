@@ -43,8 +43,8 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-    GlobalVariable.NumofColm, 3)
+String DupcheckAppNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(
+    GlobalVariable.NumofColm, 2)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.FindDupCheckCountQuery.checkDupcheck'(sqlconnection, DupcheckAppNo)
@@ -82,6 +82,18 @@ if (Integer.parseInt(DupCheckCount) == 1) {
         'modify object subjecttype'
         modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/SubjectType'), 
             'xpath', 'equals', newSubjectType, true)
+		
+		String newApplicantNo = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[4]'
+		 
+				 'modify object Applicant No'
+				 modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNo'),
+					 'xpath', 'equals', newApplicantNo, true)
+		 
+				 String newCustomerNo = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[5]'
+		 
+				 'modify object Customer No'
+				 modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNo'),
+					 'xpath', 'equals', newCustomerNo, true)
 
         String newButtonedit = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[7]/span/span/span/span/span/span/a'
 
@@ -120,7 +132,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         ArrayList<WebElement> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
                         int countidnorow = variableidno.size()
-
+						
                         for (id = 1; id <= countidnorow; id++) {
                             String newIDNoCustomer = ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]'
 
@@ -128,7 +140,14 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             modifyIDNoCustomer = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
                                 'xpath', 'equals', newIDNoCustomer, true)
 
-
+							String newCustomerNoObject = ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]'
+							 
+														 'modify object Customer No'
+														 modifyCustomerNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'),
+															 'xpath', 'equals', newCustomerNoObject, true)
+							
+							String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject)
+														 
                             String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer, FailureHandling.OPTIONAL)
 
                             String IdNoCustomer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
@@ -141,6 +160,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             					'xpath', 'equals', newSelect, true)
 										
                                 WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
+								
+								WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
 
                                 break
                             }
@@ -148,24 +169,35 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                         
                        if ((WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/subjecttypeheader'), 5, FailureHandling.OPTIONAL))){
-                            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(
                                 GlobalVariable.NumofColm, 4).equalsIgnoreCase('New')) {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'),5, 
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 } else {
+                                	String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), FailureHandling.OPTIONAL)
+								
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
                                 }
                             } else {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'),5, 
                                     FailureHandling.OPTIONAL)) {
+                                	String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), FailureHandling.OPTIONAL)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
                         }
@@ -191,9 +223,17 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             'modify object id no family match'
                             modifyIDNoFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoPersonal'), 
                                 'xpath', 'equals', newIDNoFamily, true)
+							
+							
+							String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) +']/td[1]'
+							 
+															 'modify object applicant No App in process'
+															 modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'),
+																 'xpath', 'equals', newApplicantNoObject, true)
+															 
+															 String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
-
-                            String NewIdNoFamilyMatch = WebUI.getText(modifyIDNoFamily, FailuteHandling.OPTIONAL)
+                            String NewIdNoFamilyMatch = WebUI.getText(modifyIDNoFamily, FailureHandling.OPTIONAL)
 
                             String IdNoFamily = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 							
@@ -206,6 +246,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             					'xpath', 'equals', newselectFamily, true)
 										
                                 WebUI.click(modifyselectFamily, FailureHandling.OPTIONAL)
+								
+								WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
 
                                 break
                             }
@@ -218,17 +260,29 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 } else {
+                                	String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+									
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 }
                             } else {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 5, FailureHandling.OPTIONAL)) {
+                                	String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+									
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
                         }
@@ -259,12 +313,19 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 String newIDNoGuarantorPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
                                 ']/td[4]'
 
-                                'modify object id no family match'
+                                'modify object id no guarantor match'
                                 modifyIDNoGuarantorPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoPersonal'), 
                                     'xpath', 'equals', newIDNoGuarantorPersonal, true)
-
-
-                                String NewIdNoGuarantorPersonalMatch = WebUI.getText(modifyIDNoGuarantorPersonal, FailureHandling.OPTIONAL)
+								
+								String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) +']/td[1]'
+ 
+								 'modify object applicant No App in process'
+								 modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'),
+									 'xpath', 'equals', newApplicantNoObject, true)
+								 
+								 String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
+								
+								String NewIdNoGuarantorPersonalMatch = WebUI.getText(modifyIDNoGuarantorPersonal, FailureHandling.OPTIONAL)
 
                                 String IdNoGuarantorPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
@@ -278,6 +339,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 					'xpath', 'equals', newselectGuarantorPersonal, true)
 											
                                     WebUI.click(modifyselectGuarantorPersonal, FailureHandling.OPTIONAL)
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
 
                                     break
                                 }
@@ -292,9 +355,15 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 modifyIDNoGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoCompany'), 
                                     'xpath', 'equals', newIDNoGuarantorCompany, true)
 
-                                
-
-                                String NewIdNoGuarantorCompanyMatch = WebUI.getText(modifyIDNoGuarantorCompany, FailureHandling.OPTIONAL)
+								String newApplicantNoAppInproccess = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) +']/td[1]'
+								 
+																 'modify object applicant No App in process'
+																 modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'),
+																	 'xpath', 'equals', newApplicantNoAppInproccess, true)
+																 
+																 String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
+								
+								String NewIdNoGuarantorCompanyMatch = WebUI.getText(modifyIDNoGuarantorCompany, FailureHandling.OPTIONAL)
 
                                 String IdNoGuarantorCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IdNoCustomer'))
 
@@ -309,7 +378,9 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 										 'xpath', 'equals', newselectGuarantorCompany, true)
 									 
                                     WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
-
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
+									
                                     break
                                 }
 								}
@@ -322,28 +393,51 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     FailureHandling.OPTIONAL)) {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                                 
                                 'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                                 if (counttd == 10) {
+									
+									String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+									
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else if (counttd == 5) {
+								
+								String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+								
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 }
                             } else {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'),5, 
                                     FailureHandling.OPTIONAL)) {
+								
+								String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+								
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'),5, 
                                     FailureHandling.OPTIONAL)) {
+                                	String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
+								
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
+									
+									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
+									
+									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
                         }
