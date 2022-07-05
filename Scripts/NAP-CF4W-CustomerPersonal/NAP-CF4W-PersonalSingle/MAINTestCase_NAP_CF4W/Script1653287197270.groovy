@@ -51,16 +51,16 @@ if (Role == 'Data Entry') {
             [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/CustomerDuplicateChecking'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/CommissionReservedFund/MAINComResvFund'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            [:], FailureHandling.STOP_ON_FAILURE)
 
         not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            [:], FailureHandling.STOP_ON_FAILURE)
     }
 }
 

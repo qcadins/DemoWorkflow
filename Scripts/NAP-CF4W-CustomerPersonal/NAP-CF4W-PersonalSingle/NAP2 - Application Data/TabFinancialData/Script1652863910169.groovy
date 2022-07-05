@@ -719,6 +719,14 @@ WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPe
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
+if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase('ADVANCE')){
+	'verify interest amount "0.00" if insttalment type Advance'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), '0.00', false)
+}else if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase('ARREAR')){
+	'verify interest amount NOT "0.00" if installment type arrear'
+	WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), '0.00', false)
+}
+
 WebUI.delay(5)
 
 'click button save'
