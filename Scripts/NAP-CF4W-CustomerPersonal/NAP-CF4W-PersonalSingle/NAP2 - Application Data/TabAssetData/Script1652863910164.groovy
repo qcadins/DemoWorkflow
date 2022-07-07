@@ -789,6 +789,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 	
 	
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
+		
+		'wait alert if manufacturing year <=1990'
+		WebUI.waitForAlert(3)
+		
+		
+			WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 WebUI.delay(5)
 

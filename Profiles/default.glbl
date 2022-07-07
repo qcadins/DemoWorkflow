@@ -139,4 +139,14 @@
       <initValue>0</initValue>
       <name>CapitalizePremiumPercentage</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>countRowPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>countColmPersonal</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

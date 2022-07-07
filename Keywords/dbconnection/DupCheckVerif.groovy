@@ -21,7 +21,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class FindDupCheckCountQuery {
+public class DupCheckVerif {
 
 	@Keyword
 	public checkDupcheck (Sql instance, String appNo){
@@ -31,6 +31,46 @@ public class FindDupCheckCountQuery {
 			dupcheckcount = (row[0])
 		})
 		return dupcheckcount
+	}
+
+	@Keyword
+	public checkCustIdNo (Sql instance, String IdNo){
+		String custIdNoCount
+		instance.eachRow(("SELECT COUNT(ID_NO) FROM CUST WHERE ID_NO = '" + IdNo + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+
+			custIdNoCount = (row[0])
+		})
+		return custIdNoCount
+	}
+
+	@Keyword
+	public checkCustName (Sql instance, String Name){
+		ArrayList<String> custName = new ArrayList<String>()
+		instance.eachRow(("SELECT DISTINCT CUST_NAME FROM CUST WHERE CUST_NAME LIKE '%" + Name + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+
+			custName.add(row[0])
+		})
+		return custName
+	}
+
+	@Keyword
+	public checkBirthDate (Sql instance, String BirthDate){
+		String custBirthDateCount
+		instance.eachRow(("SELECT COUNT(DISTINCT FORMAT(BIRTH_DT, 'MM/dd/yyyy')) FROM CUST a JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE BIRTH_DT = '" + BirthDate + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+
+			custBirthDateCount = (row[0])
+		})
+		return custBirthDateCount
+	}
+
+	@Keyword
+	public checkMotherMaidenCust (Sql instance, String MotherMaidenName){
+		ArrayList<String> motherMaidenName = new ArrayList<String>()
+		instance.eachRow(("SELECT DISTINCT MOTHER_MAIDEN_NAME FROM CUST a JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MOTHER_MAIDEN_NAME like '%" + MotherMaidenName + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+
+			motherMaidenName.add(row[0])
+		})
+		return motherMaidenName
 	}
 }
 

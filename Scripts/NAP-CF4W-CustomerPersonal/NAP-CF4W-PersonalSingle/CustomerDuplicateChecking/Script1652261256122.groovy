@@ -28,28 +28,29 @@ GlobalVariable.DataFilePath = filePath
 
 String servername = findTestData('Login/Login').getValue(1, 9)
 
-String instancename = findTestData('Login/Login').getValue(2, 9)
+	String instancename = findTestData('Login/Login').getValue(2, 9)
 
-String username = findTestData('Login/Login').getValue(3, 9)
+	String username = findTestData('Login/Login').getValue(3, 9)
 
-String password = findTestData('Login/Login').getValue(4, 9)
+	String password = findTestData('Login/Login').getValue(4, 9)
 
-String database = findTestData('Login/Login').getValue(5, 9)
+	String database = findTestData('Login/Login').getValue(5, 9)
 
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
+	String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+	String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+	'connect DB'
+	Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(
-    GlobalVariable.NumofColm, 2)
+	String DupcheckAppNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(
+		GlobalVariable.NumofColm, 2)
 
-'count DupcheckAppNo'
-String DupCheckCount = CustomKeywords.'dbconnection.FindDupCheckCountQuery.checkDupcheck'(sqlconnection, DupcheckAppNo)
+	'count DupcheckAppNo'
+	String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
 
-if (Integer.parseInt(DupCheckCount) == 1) {
+	if (Integer.parseInt(DupCheckCount) == 1) {
+
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/a_Customer Duplicate Checking'))
 
