@@ -70,6 +70,10 @@ String servername = findTestData('Login/Login').getValue(1, 9)
     ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
 
     int count = variable.size()
+	
+	def StoreCDCCustomerName
+	def StoreCDCFamilyName
+	def StoreCDCGuarantorName
 
     for (int i = 1; i <= count; i++) {
         String newSubjectName = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[2]'
@@ -160,10 +164,17 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                             			modifynewSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'), 
                             					'xpath', 'equals', newSelect, true)
 										
+								'click select'		
                                 WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 								
+								'verify match CustomerNo'
 								WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
 
+								'get customer name'
+								String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+								'store customer name'
+								StoreCDCCustoemrName = name 
+								
                                 break
                             }
 							}
@@ -177,6 +188,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 } else {
                                 	String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), FailureHandling.OPTIONAL)
@@ -184,6 +196,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'))
 									
+									'verify match CustomerNo'
 									WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
                                 }
                             } else {
@@ -193,18 +206,26 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarData'))
 									
+									'verify match CustomerNo'
 									WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
                         }
+					   'get customer name'
+                       String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+					   'store customer name'
+					   StoreCDCCustomerName = name
                     }
                 }
+                
             }
+			
         }
         
         if (FamilyArray.size() > 0) {
@@ -246,11 +267,24 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                             			modifyselectFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                             					'xpath', 'equals', newselectFamily, true)
 										
+								'click select'
                                 WebUI.click(modifyselectFamily, FailureHandling.OPTIONAL)
 								
+								'verify match ApplicantNo'
 								WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
-
+								
+								'get family name'
+								String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+								if(f == 1){
+									'store family name'
+									StoreCDCFamilyName = name
+								}else{
+								'store family name'
+								StoreCDCFamilyName = StoreCDCFamilyName + ';' + name
+								}
                                 break
+
+
                             }
 							}
                         }
@@ -262,6 +296,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 } else {
                                 	String newApplicantNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProccess'))
@@ -269,6 +304,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 }
                             } else {
@@ -278,18 +314,34 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
+								
+
                             }
                         }
-                    }
+                     }else{
+					 'get family name'
+                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+                    		if(f == 1){
+                    		
+								'store family name'
+                    			StoreCDCFamilyName = name
+                    		}else{
+							'store family name'
+                    			StoreCDCFamilyName = StoreCDCFamilyName + ';' + name
+                    		}
+                     }
                 }
             }
+			
         }
         
         if (GuarantorArray.size() > 0) {
@@ -338,12 +390,26 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                 			'modify object select family match'
                                 			modifyselectGuarantorPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                                 					'xpath', 'equals', newselectGuarantorPersonal, true)
-											
+										
+									'click selct'	
                                     WebUI.click(modifyselectGuarantorPersonal, FailureHandling.OPTIONAL)
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
 
-                                    break
+									'get guarantor name'
+									String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+								if(g == 1){
+									'store guarantor name'
+									StoreCDCGuarantorName = name
+								}else{
+								'store guarantor name'
+								StoreCDCGuarantorName = StoreCDCGuarantorName + ';' + name
+								}
+
+									
+									break
+									
                                 }
 								}
                             }
@@ -377,10 +443,23 @@ String servername = findTestData('Login/Login').getValue(1, 9)
 									 'modify object select family match'
 									 modifyselectGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'),
 										 'xpath', 'equals', newselectGuarantorCompany, true)
-									 
+									
+									'click select'
                                     WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
+									
+										'get guarantor name'
+										String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+								if(g == 1){
+									'store guarantor name'
+									StoreCDCGuarantorName = name
+								}else{
+								'store guarantor name'
+								StoreCDCGuarantorName = StoreCDCGuarantorName + ';' + name
+								}
+
 									
                                     break
                                 }
@@ -395,6 +474,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                                 
@@ -406,6 +486,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else if (counttd == 5) {
 								
@@ -414,6 +495,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 }
                             } else {
@@ -425,6 +507,7 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'),5, 
                                     FailureHandling.OPTIONAL)) {
@@ -433,21 +516,54 @@ String servername = findTestData('Login/Login').getValue(1, 9)
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), false, FailureHandling.OPTIONAL)
                                 } else {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_New Customer'))
 									
+									'verify match ApplicantNo'
 									WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
                         }
+                    }else{
+					
+					'get guarantor name'
+                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+                    		if(g == 1){
+                    			'store guarantor name'
+                    			StoreCDCGuarantorName = name
+                    		}else{
+							'store guarantor name'
+                    			StoreCDCGuarantorName = StoreCDCGuarantorName + ';' + name
+                    		}
                     }
                 }
             }
         }
     }
     
+	
+	println(StoreCDCCustomerName)
+	println(StoreCDCFamilyName)
+	println(StoreCDCGuarantorName)
+	
+	if(StoreCDCCustomerName != null){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+		2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
+	}
+	
+	if(StoreCDCFamilyName != null){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+		4, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
+	}
+	
+	if(StoreCDCGuarantorName != null){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+		6, GlobalVariable.NumofColm - 1, StoreCDCGuarantorName)
+	}
+	
     'click button submit'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_Submit'))
 
@@ -465,3 +581,5 @@ String servername = findTestData('Login/Login').getValue(1, 9)
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, 
         GlobalVariable.NumofColm - 1, 'SUCCESS')
 }
+	
+	
