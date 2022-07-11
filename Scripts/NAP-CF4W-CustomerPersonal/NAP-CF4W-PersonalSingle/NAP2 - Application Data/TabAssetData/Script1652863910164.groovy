@@ -776,6 +776,12 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Save'))
 
+'wait alert if dp is below minimum'
+WebUI.waitForAlert(3)
+
+
+WebUI.acceptAlert(FailureHandling.OPTIONAL)
+
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 62) == 'No') {
 
@@ -784,18 +790,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
-	'wait alert if dp is below minimum'
-	WebUI.waitForAlert(3)
-	
-	
-		WebUI.acceptAlert(FailureHandling.OPTIONAL)
-		
-		'wait alert if manufacturing year <=1990'
-		WebUI.waitForAlert(3)
 		
 		
-			WebUI.acceptAlert(FailureHandling.OPTIONAL)
-
 WebUI.delay(5)
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/ApplicationCurrentStep')), 

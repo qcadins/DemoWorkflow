@@ -176,7 +176,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
                                     'store customer name'
-                                    StoreCDCCustoemrName = name
+                                    StoreCDCCustomerName = name
 
                                     break
                                 }
@@ -335,6 +335,16 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
+							'get family name'
+							String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+	
+							if (f == 1) {
+								'store family name'
+								StoreCDCFamilyName = name
+							} else {
+								'store family name'
+								StoreCDCFamilyName = ((StoreCDCFamilyName + ';') + name)
+							}
                         }
                     } else {
                         'get family name'
@@ -537,6 +547,16 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
                                 }
                             }
+							'get family name'
+							String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+	
+							if (f == 1) {
+								'store family name'
+								StoreCDCFamilyName = name
+							} else {
+								'store family name'
+								StoreCDCFamilyName = ((StoreCDCFamilyName + ';') + name)
+							}
                         }
                     } else {
                         'get guarantor name'
