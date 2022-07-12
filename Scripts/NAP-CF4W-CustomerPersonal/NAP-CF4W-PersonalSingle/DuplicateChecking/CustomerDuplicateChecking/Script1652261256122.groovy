@@ -928,11 +928,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-            0, GlobalVariable.NumofColm - 1, 'FAILED')
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
     }
     
     'write to excel if success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-        0, GlobalVariable.NumofColm - 1, 'SUCCESS')
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 

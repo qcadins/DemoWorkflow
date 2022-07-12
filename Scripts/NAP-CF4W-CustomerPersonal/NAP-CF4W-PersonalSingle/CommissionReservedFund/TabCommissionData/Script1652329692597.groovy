@@ -708,7 +708,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 
     'Write to Excel FAILED'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData', 0, GlobalVariable.NumofColm - 
-        1, 'FAILED')
+        1, GlobalVariable.StatusFailed)
 	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
@@ -720,7 +720,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     
 	'Write to Excel SUCCESS'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData', 0, GlobalVariable.NumofColm - 
-        1, 'SUCCESS')
+        1, GlobalVariable.StatusSuccess)
 }
 
 
