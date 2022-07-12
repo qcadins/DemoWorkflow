@@ -20,7 +20,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
-
+int flagWarning =0
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -152,7 +152,13 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 } else {
     'click X'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-}
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 9)=="New"){
+		
+			flagWarning++
+	
+		}
+	}
 }
 		
 'input BPKP issue date'
@@ -402,7 +408,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -438,7 +444,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -483,7 +489,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
             'write to excel FAILED'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -804,6 +810,10 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
 } else {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
+	if(flagWarning>0){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
+			1, GlobalVariable.StatusWarning)
+	}
 }
 
 WebUI.delay(10)

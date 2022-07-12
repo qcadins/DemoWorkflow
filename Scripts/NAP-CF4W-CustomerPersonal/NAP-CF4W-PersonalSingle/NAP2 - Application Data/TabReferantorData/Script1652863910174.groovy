@@ -110,9 +110,9 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 'click button x'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/button_X'))
 
-                'write to excel FAILED'
+                'write to excel WARNING'
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
-                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
+                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -132,9 +132,9 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
             if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) || 
             WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                 modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
-                'write to excel FAILED'
+                'write to excel WARNING'
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
-                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
+                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)

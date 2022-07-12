@@ -14,7 +14,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
-
+int flagWarning =0
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_2Family Data'),5, 
     FailureHandling.OPTIONAL)) {
     'Loop Multiple family data'
@@ -97,7 +97,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 						}
                     }
@@ -198,7 +198,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 							
 						}
@@ -260,7 +260,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 							
 						}
@@ -355,6 +355,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                         'Write to Excel SUCCESS'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+						if(flagWarning>0){
+							'Write to Excel WARNING'
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+								0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+						}
                     }
                 }
             } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -437,7 +442,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 						}
 					}
@@ -509,7 +514,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 							
 						}
@@ -572,7 +577,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						else{
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
+							flagWarning++
 							continue
 						}
 					}
@@ -593,7 +598,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                         'Write to Excel SUCCESS'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
-                    }
+						if(flagWarning>0){
+							'Write to Excel WARNING'
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+								0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+						}
+					}
                 }
             }
         }
