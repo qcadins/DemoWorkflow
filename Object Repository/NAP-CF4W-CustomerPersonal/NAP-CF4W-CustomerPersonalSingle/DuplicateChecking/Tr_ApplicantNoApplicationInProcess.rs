@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Tr_ApplicantNoApplicationInProccess</name>
+   <name>Tr_ApplicantNoApplicationInProcess</name>
    <tag></tag>
    <elementGuidId>c5ad205c-67be-465e-a681-d96e37fb4785</elementGuidId>
    <selectorCollection>

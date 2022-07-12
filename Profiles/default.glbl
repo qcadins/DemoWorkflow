@@ -149,4 +149,9 @@
       <initValue>''</initValue>
       <name>countColmPersonal</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 1)</initValue>
+      <name>Role</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -776,18 +776,18 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Save'))
 
-'wait alert if dp is below minimum'
+'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 WebUI.waitForAlert(3)
 
-
+'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 62) == 'No') {
 
-	'wait alert if not check rapindo'
+	'Menunggu Alert konfirmasi integrator muncul'
     WebUI.waitForAlert(3)
-
+	'Accept Alert Konfirmasi Integrator'
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
 		

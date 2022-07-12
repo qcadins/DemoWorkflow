@@ -23,17 +23,13 @@ String filePath = userDir + GlobalVariable.Path
 
 GlobalVariable.DataFilePath = filePath
 
-println(GlobalVariable.DataFilePath)
 
-String Role = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(
-    5, 1)
-
-if (Role == 'Data Entry') {
+if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/CustomerDuplicateChecking'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/DuplicateChecking/CustomerDuplicateChecking'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
@@ -50,7 +46,7 @@ if (Role == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/CustomerDuplicateChecking'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/DuplicateChecking/CustomerDuplicateChecking'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>button_SelectMatchSimilarData</name>
+   <name>button_SelectMatchSimilarDataPersonal</name>
    <tag></tag>
    <elementGuidId>6015932f-e603-4434-8f02-0b9cd6fcdf59</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;subSecMatch&quot;)/table[@class=&quot;table table-responsive-md text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-star-inserted&quot;]/td[10]/a[@class=&quot;danger p-0 ng-star-inserted&quot;][count(. | //*[(text() = 'Select' or . = 'Select')]) = count(//*[(text() = 'Select' or . = 'Select')])]</value>
+         <value>//div[@id='subSecMatch']/table/tbody/tr/td[10]/a</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -31,7 +31,7 @@
       <value>danger p-0 ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>

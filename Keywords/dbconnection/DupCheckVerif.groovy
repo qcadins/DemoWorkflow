@@ -36,7 +36,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkCustIdNo (Sql instance, String IdNo){
 		String custIdNoCount
-		instance.eachRow(("SELECT COUNT(ID_NO) FROM CUST WHERE ID_NO = '" + IdNo + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+		instance.eachRow(("SELECT COUNT(ID_NO) FROM CUST WITH (NOLOCK) WHERE ID_NO = '" + IdNo + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
 
 			custIdNoCount = (row[0])
 		})
@@ -46,7 +46,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkCustName (Sql instance, String Name){
 		ArrayList<String> custName = new ArrayList<String>()
-		instance.eachRow(("SELECT DISTINCT CUST_NAME FROM CUST WHERE CUST_NAME LIKE '%" + Name + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+		instance.eachRow(("SELECT DISTINCT CUST_NAME FROM CUST WITH (NOLOCK) WHERE CUST_NAME LIKE '%" + Name + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
 
 			custName.add(row[0])
 		})
@@ -56,7 +56,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkBirthDate (Sql instance, String BirthDate){
 		String custBirthDateCount
-		instance.eachRow(("SELECT COUNT(DISTINCT FORMAT(BIRTH_DT, 'MM/dd/yyyy')) FROM CUST a JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE BIRTH_DT = '" + BirthDate + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+		instance.eachRow(("SELECT COUNT(DISTINCT FORMAT(BIRTH_DT, 'MM/dd/yyyy')) FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE BIRTH_DT = '" + BirthDate + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
 
 			custBirthDateCount = (row[0])
 		})
@@ -66,11 +66,21 @@ public class DupCheckVerif {
 	@Keyword
 	public checkMotherMaidenCust (Sql instance, String MotherMaidenName){
 		ArrayList<String> motherMaidenName = new ArrayList<String>()
-		instance.eachRow(("SELECT DISTINCT MOTHER_MAIDEN_NAME FROM CUST a JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MOTHER_MAIDEN_NAME like '%" + MotherMaidenName + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
+		instance.eachRow(("SELECT DISTINCT MOTHER_MAIDEN_NAME FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MOTHER_MAIDEN_NAME like '%" + MotherMaidenName + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
 
 			motherMaidenName.add(row[0])
 		})
 		return motherMaidenName
+	}
+
+	@Keyword
+	public checkCustomerType (Sql instance, String Appno, String CustName){
+		String Custtype
+		instance.eachRow(("USE LOS select MR_CUST_TYPE_CODE from APP_CUST a join APP b on a.APP_ID = b.APP_ID where APP_NO = '" + Appno + "' and CUST_NAME = '" + CustName + "'"), {  row ->
+
+			Custtype = (row[0])
+		})
+		return Custtype
 	}
 }
 
