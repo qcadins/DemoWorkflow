@@ -143,7 +143,7 @@ def datacust = []
 			datacust.add('-')
 		}
 		
-		println(datacust)
+		
 		
 		'declare variable untuk menampun poin dupcheck per rule'
 		int Score1 , Score2 , Score3 , Score4 , Score5 , Score6 , Score7
@@ -163,11 +163,7 @@ def datacust = []
 		for(row = 13; row <= GlobalVariable.countRowPersonal + 12; row++){
 			
 			'looping colm untuk pemeriksaan kecocokan dan perhitungan scoredupcheck per rule dimulai dari row 3 karena sesuai rule'
-			for(colm = 3; colm <= GlobalVariable.countColmPersonal + 2; colm++){
-			
-			println(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateCheckingRule').getValue(colm, row))
-			println(datacust[colm-3])
-			
+			for(colm = 3; colm <= GlobalVariable.countColmPersonal + 2; colm++){			
 			
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateCheckingRule').getValue(colm, row).equalsIgnoreCase(datacust[colm-3])){
 				'+1 poin untuk masing masing kecocokan'
@@ -183,9 +179,8 @@ def datacust = []
 		
 		'variable untuk menentukan index keberapa nilai terbesarnya berada'
 		int idx = ScoreDupCheck.indexOf(maxVal)
-		println(ScoreDupCheck)
-		println(idx)
+		
 		
 		'variable untuk menyimpan hasil penentuan jenis dupcheck "Lock" / "Review", +13 karena table pada rule dimulai dari row 13'
 		String DupCheckCondition = MatrixRuleDupcheck.getValue(2, idx +13)
-		println(DupCheckCondition)
+		
