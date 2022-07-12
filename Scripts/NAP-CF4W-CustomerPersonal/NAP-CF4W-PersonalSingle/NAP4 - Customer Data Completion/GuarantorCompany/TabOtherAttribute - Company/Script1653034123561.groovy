@@ -47,7 +47,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 
@@ -76,7 +76,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'click lookup counterpart category'
@@ -104,7 +104,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'click lookup sustainable financial business'
@@ -132,7 +132,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'select yes/no'
@@ -164,7 +164,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'select yes/no'
@@ -235,7 +235,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'select yes/no'
@@ -267,7 +267,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 'click lookup Payment Type'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/button_PAYMENT TYPE AML_btn btn-raised btn-primary'))
@@ -294,7 +294,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 'click lookup Business Source AML'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/button_BUSINESS SOURCE AML_btn btn-raised btn-primary'))
@@ -321,7 +321,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'input tanggal business period'
@@ -338,10 +338,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }else{
 	
 'write to excel if success'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm -
-	1, 'SUCCESS')
+	1, GlobalVariable.StatusSuccess)
 }

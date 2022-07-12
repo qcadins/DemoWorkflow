@@ -56,7 +56,7 @@ if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W
 	
 		'write to excel failed'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
-			1, 'FAILED')
+			1, GlobalVariable.StatusFailed)
 		
 		'Pengecekan jika new consumer finance belum diexpand'
 		if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
@@ -258,7 +258,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 	
 		'write to excel failed'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
-			1, 'FAILED')
+			1, GlobalVariable.StatusFailed)
 		'Pengecekan jika new consumer finance belum diexpand'
 		if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
 			
@@ -371,7 +371,7 @@ else{
 
 	'write to excel failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 	'Pengecekan jika new consumer finance belum diexpand'
 	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
 		
@@ -421,7 +421,7 @@ else{
 
 	'write to excel failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 	'Pengecekan jika new consumer finance belum diexpand'
 	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
 		
@@ -449,9 +449,9 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
 
     'write to excel failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm - 
-        1, 'FAILED')
+        1, GlobalVariable.StatusFailed)
 } else {
     'write to excel success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, 
-        GlobalVariable.NumofColm - 1, 'SUCCESS')
+        GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }

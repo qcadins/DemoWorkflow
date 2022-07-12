@@ -59,7 +59,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
-        1, 'FAILED')
+        1, GlobalVariable.StatusFailed)
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -102,7 +102,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
-        1, 'FAILED')
+        1, GlobalVariable.StatusFailed)
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -402,7 +402,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, 'FAILED')
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -438,7 +438,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, 'FAILED')
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -483,7 +483,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
             'write to excel FAILED'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, 'FAILED')
+                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusFailed)
 
             'click delete'
             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -528,7 +528,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
         
         'write to excel success'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
-            GlobalVariable.NumofAccessories - 1, 'SUCCESS')
+            GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
     }
 }
 
@@ -686,7 +686,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 
-                0, GlobalVariable.NumofColm - 1, 'FAILED')
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -761,7 +761,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, 
-            GlobalVariable.NumofColm - 1, 'FAILED')
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -800,10 +800,10 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
-        1, 'FAILED')
+        1, GlobalVariable.StatusFailed)
 } else {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
-        1, 'SUCCESS')
+        1, GlobalVariable.StatusSuccess)
 }
 
 WebUI.delay(10)

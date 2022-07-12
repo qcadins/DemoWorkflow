@@ -51,7 +51,7 @@ else{
 
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
-        0, GlobalVariable.NumofColm - 1, 'FAILED')
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 }
 'select customer relationship'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/select_CustomerRelationship'), 
@@ -78,10 +78,10 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
-        0, GlobalVariable.NumofColm - 1, 'FAILED')
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 } else {
     'write to excel if success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
-        0, GlobalVariable.NumofColm - 1, 'SUCCESS')
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 

@@ -154,4 +154,19 @@
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 1)</initValue>
       <name>Role</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'WARNING'</initValue>
+      <name>StatusWarning</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'FAILED'</initValue>
+      <name>StatusFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'SUCCESS'</initValue>
+      <name>StatusSuccess</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

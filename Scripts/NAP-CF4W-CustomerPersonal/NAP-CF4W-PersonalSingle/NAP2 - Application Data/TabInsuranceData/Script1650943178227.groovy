@@ -62,11 +62,11 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
 
     'write to excel failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, "8.TabInsuranceData", 0, GlobalVariable.NumofColm - 1, 
-        'FAILED')
+        GlobalVariable.StatusFailed)
 } else {
     'write to excel success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, "8.TabInsuranceData", 0, GlobalVariable.NumofColm - 1, 
-        'SUCCESS')
+        GlobalVariable.StatusSuccess)
 }
 
 

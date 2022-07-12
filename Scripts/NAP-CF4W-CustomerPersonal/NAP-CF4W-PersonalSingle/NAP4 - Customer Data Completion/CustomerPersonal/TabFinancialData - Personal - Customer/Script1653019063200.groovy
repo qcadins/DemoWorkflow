@@ -151,10 +151,10 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }else{
 	
 'write to excel if success'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.NumofColm -
-	1, 'SUCCESS')
+	1, GlobalVariable.StatusSuccess)
 }

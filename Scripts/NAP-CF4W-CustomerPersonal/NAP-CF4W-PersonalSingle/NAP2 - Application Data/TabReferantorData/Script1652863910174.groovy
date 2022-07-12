@@ -112,7 +112,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 
                 'write to excel FAILED'
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
-                    0, GlobalVariable.NumofReferantor - 1, 'FAILED')
+                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -134,7 +134,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                 'write to excel FAILED'
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
-                    0, GlobalVariable.NumofReferantor - 1, 'FAILED')
+                    0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -144,7 +144,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
             
             'write to excel SUCCESS'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
-                0, GlobalVariable.NumofReferantor - 1, 'SUCCESS')
+                0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 
             modifyObjectIndex++
         }

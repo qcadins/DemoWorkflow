@@ -109,7 +109,7 @@ else{
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, GlobalVariable.NumofColm -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }
 
 'select customer model'
@@ -132,11 +132,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 	'write to excel if failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, GlobalVariable.NumofGuarantor -
-		1, 'FAILED')
+		1, GlobalVariable.StatusFailed)
 }else{
 	
 'write to excel if success'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, GlobalVariable.NumofGuarantor -
-	1, 'SUCCESS')
+	1, GlobalVariable.StatusSuccess)
 }
 
