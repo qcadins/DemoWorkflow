@@ -14,7 +14,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
-
+int flagWarning = 0
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.DataFileCustomerPersonal
@@ -310,7 +310,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 } else {
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME - Personal/button_X'))
-}
+flagWarning++
+	}
 
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME - Personal/textarea_Notes_Pervious Job Address'), 
@@ -451,7 +452,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 } else {
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME - Personal/button_X'))
-}
+flagWarning++
+	}
 
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME - Personal/textarea_Notes_Other Business Address'), 
@@ -535,5 +537,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'write to excel if success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
+	if(flagWarning>0){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm -
+			1, GlobalVariable.StatusWarning)
+	}
 }
 

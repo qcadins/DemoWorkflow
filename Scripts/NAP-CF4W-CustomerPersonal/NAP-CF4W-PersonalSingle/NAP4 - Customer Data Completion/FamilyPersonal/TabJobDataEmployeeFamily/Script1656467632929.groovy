@@ -14,7 +14,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
-
+int flagWarning = 0
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.DataFileFamilyPersonal
@@ -334,7 +334,7 @@ if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W
 else{
 	'click X'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/Button_X'))
-	
+	flagWarning++
 }
 
 'input note'
@@ -498,7 +498,7 @@ if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W
 else{
 	'click X'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/Button_X'))
-	
+	flagWarning++
 }
 
 'input note'
@@ -582,5 +582,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'write to excel if success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+	if(flagWarning>0){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0,
+			GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+	}
 }
 
