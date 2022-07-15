@@ -83,7 +83,7 @@ def datacust = []
 		}else{
 		
 		'add "-" kedalam array datacust'
-			datacust.add('-')
+			datacust.add('')
 		}
 		
 		'Array String untuk menyimpan Customer name yang terkena dupcheck'
@@ -106,7 +106,7 @@ def datacust = []
 			}
 		}else{
 		'add "-" kedalam array datacust'
-			datacust.add('-')
+			datacust.add('')
 		}
 		
 		'check birthdate'
@@ -117,7 +117,7 @@ def datacust = []
 			
 		}else{
 		'add "-" kedalam array datacust'
-			datacust.add('-')
+			datacust.add('')
 		}
 		
 		'Array untuk menyimpan mother maiden name'
@@ -140,7 +140,7 @@ def datacust = []
 			}
 		}else{
 		'add "=" kedalam array datacust'
-			datacust.add('-')
+			datacust.add('')
 		}
 		
 		
@@ -183,4 +183,6 @@ def datacust = []
 		
 		'variable untuk menyimpan hasil penentuan jenis dupcheck "Lock" / "Review", +13 karena table pada rule dimulai dari row 13'
 		String DupCheckCondition = MatrixRuleDupcheck.getValue(2, idx +13)
+		
+
 		

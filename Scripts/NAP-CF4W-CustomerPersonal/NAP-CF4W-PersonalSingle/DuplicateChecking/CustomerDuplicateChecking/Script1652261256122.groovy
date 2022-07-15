@@ -174,7 +174,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     modifynewSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                                         'xpath', 'equals', newSelect, true)
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
                                     'verify match CustomerNo'
@@ -207,7 +207,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -217,7 +217,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select app in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -230,7 +230,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -247,7 +247,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -260,7 +260,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -277,7 +277,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                         FailureHandling.OPTIONAL)
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -334,7 +334,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     modifyselectFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                                         'xpath', 'equals', newselectFamily, true)
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(modifyselectFamily, FailureHandling.OPTIONAL)
 
                                     'verify match ApplicantNo'
@@ -371,7 +371,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -381,7 +381,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String CustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -393,7 +393,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -410,7 +410,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String CustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -422,7 +422,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String CustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -439,7 +439,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     5, FailureHandling.OPTIONAL)) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -574,7 +574,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                         modifyselectGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'), 
                                             'xpath', 'equals', newselectGuarantorCompany, true)
 
-                                        'click select'
+                                        'click select application in process'
                                         WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
 
                                         'verify match ApplicantNo'
@@ -617,7 +617,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -628,7 +628,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                      String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
                                     'verify match CustomerNo'
@@ -645,7 +645,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -656,7 +656,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select applcation in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
                                     'verify match ApplicantNo'
@@ -675,7 +675,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -686,7 +686,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                      String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
                                     'verify match CustomerNo'
@@ -722,7 +722,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -733,7 +733,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
                                     'verify match ApplicantNo'
@@ -751,7 +751,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
                                     'verify match ApplicantNo'
@@ -762,7 +762,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                     String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-                                    'click select'
+                                    'click select application in process'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
                                     'verify match ApplicantNo'
@@ -798,7 +798,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 if (counttd == 10) {
                                     String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                     'verify match CustomerNo'
@@ -809,7 +809,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 } else if (counttd == 5) {
                                      String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                    'click select'
+                                    'click select match similar data'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
                                     'verify match CustomerNo'
