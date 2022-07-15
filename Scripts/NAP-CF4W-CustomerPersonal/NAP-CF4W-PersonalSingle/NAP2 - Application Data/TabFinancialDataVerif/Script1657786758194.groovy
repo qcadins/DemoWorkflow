@@ -393,3 +393,11 @@ WebUI.verifyEqual(principalamountvalue + interestamountvalue, intTotalAR , Failu
 WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL)
 'verify intNTF + intInterestAmountValue == AR Value'
 WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL)
+
+'verify rumus 1 == rumus 2'
+WebUI.verifyEqual(principalamountvalue + interestamountvalue, installmentamountvalue, FailureHandling.OPTIONAL)
+'verify rumus 1 == rumus 3'
+WebUI.verifyEqual(principalamountvalue + interestamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+'verify rumus 2 == rumus 3'
+WebUI.verifyEqual(installmentamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+
