@@ -3,6 +3,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import java.math.RoundingMode as RoundingMode
 import java.text.NumberFormat as NumberFormat
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -187,13 +188,13 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4
     }
 }
 
+WebDriver driverr = DriverFactory.getWebDriver()
+
+ArrayList<WebElement> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+
+int countData = variableData.size()
+
 for (s = 1; s <= SubsidyTypeArray.size(); s++) {
-    WebDriver driverr = DriverFactory.getWebDriver()
-
-    ArrayList<WebElement> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-
-    int countData = variableData.size()
-
     for (SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
         if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
             'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
@@ -373,6 +374,30 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
     }
 }
 
+for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) {
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
+        'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+        String NewSubsidyAllocation = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + SubsidyCheck) + ']/td[3]'
+
+        'modify object subsidy allocation'
+        modifyNewSubsidyAllocation = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/SubsidyAllocation'), 
+            'xpath', 'equals', NewSubsidyAllocation, true)
+
+        String NewSubsidyAmount = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + SubsidyCheck) + ']/td[7]'
+
+        'modify object SubsidyAmount'
+        modifyNewSubsidyAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/SubsidyAmount'), 
+            'xpath', 'equals', NewSubsidyAmount, true)
+
+        if (WebUI.getText(modifyNewSubsidyAllocation, FailureHandling.OPTIONAL).equalsIgnoreCase('SUBSIDY DP')) {
+            SubsidyDPValue = WebUI.getText(modifyNewSubsidyAmount, FailureHandling.CONTINUE_ON_FAILURE).replace(',', '').replace(
+                '.00', '')
+
+            println(SubsidyDPValue)
+        }
+    }
+}
+
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
     GlobalVariable.NumofColm, 11) == 'No') {
     'input admin fee'
@@ -487,12 +512,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                 GlobalVariable.NumofColm, 24))
     }
     
-
     'input fiducia fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-    		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
-    				GlobalVariable.NumofColm, 16))
-	
+        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+            GlobalVariable.NumofColm, 16))
+
     if (WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
@@ -515,20 +539,21 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
                 GlobalVariable.NumofColm, 26))
     }
-
-		
+    
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
         GlobalVariable.NumofColm, 27) == 'Amount') {
         'click amount radio button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_AmountRadio'))
-		'click amount radio button'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_AmountRadio'))
+
+        'click amount radio button'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_AmountRadio'))
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
         GlobalVariable.NumofColm, 27) == 'Percentage') {
         'click percentage radio button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_PercentageRadio'))
-		'click percentage radio button'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_PercentageRadio'))
+
+        'click percentage radio button'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/div_PercentageRadio'))
     }
     
     'select Provision fee calculation base'
@@ -576,19 +601,18 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                     GlobalVariable.NumofColm, 29)), FailureHandling.OPTIONAL)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
         GlobalVariable.NumofColm, 27) == 'Amount') {
-WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-		Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
+        WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+            Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
-	WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-		Keys.chord(Keys.DELETE), FailureHandling.OPTIONAL)
-	
-	WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),,
-		Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+        WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+            Keys.chord(Keys.DELETE), FailureHandling.OPTIONAL)
 
-	WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-		Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
-			GlobalVariable.NumofColm, 30)))
-		
+        WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+            Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+
+        WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+            Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+                    GlobalVariable.NumofColm, 30)))
     }
 }
 
@@ -648,83 +672,23 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     }
 }
 
-def AdminCapitalizeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-def AdditionalAdminFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-def NotaryFeeCapitalizeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-def OtherFeeCapitalize = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-def FiduciaFeeCapitalize = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-def ProvisionFeeCapitalize = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'), 
-    'value', FailureHandling.OPTIONAL).split(',').join()
-
-BigDecimal intAdminCapitalizeValue = Integer.parseInt(AdminCapitalizeValue)
-
-BigDecimal intAdditionalAdminFeeValue = Integer.parseInt(AdditionalAdminFeeValue)
-
-BigDecimal intNotaryFeeCapitalizeValue = Integer.parseInt(NotaryFeeCapitalizeValue)
-
-BigDecimal intOtherFeeCapitalize = Integer.parseInt(OtherFeeCapitalize)
-
-BigDecimal intFiduciaFeeCapitalize = Integer.parseInt(FiduciaFeeCapitalize)
-
-BigDecimal intProvisionFeeCapitalize = Integer.parseInt(ProvisionFeeCapitalize)
-
-int TotalFeeCapitalize = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE CAPITALIZED')).replace(
-        '.00', '').split(',').join())
-
-int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeValue) + intNotaryFeeCapitalizeValue) + intOtherFeeCapitalize) + 
-intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
-
-WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue)
-
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
-String TotalInsuranceValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE'))
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/TabFinancialDataVerif'),
+	[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE CAPITALIZED')).replace(
-    '.00', '')
 
-WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false)
-
-WebUI.verifyMatch(GlobalVariable.InsuranceCapitalizeAmount, TotalInsuranceCapitalizeValue, false)
-
-NumberFormat decimalFormat = NumberFormat.getPercentInstance()
-
-def TotalLifeInsurance = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE')).replace(
-    '.00', '').split(',').join()
-
-def TotalLifeInsuranceCapitalize = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE CAPITALIZED')).replace(
-    '.00', '').split(',').join()
-
-BigDecimal intTotalLifeInsurance = Integer.parseInt(TotalLifeInsurance)
-
-BigDecimal intTotalLifeInsuranceCapitalize = Integer.parseInt(TotalLifeInsuranceCapitalize)
-
-Number CapitalizePremiumPercentage = GlobalVariable.CapitalizePremiumPercentage
-
-int multiplyTotalLifeInsurancexPercentage = intTotalLifeInsurance * CapitalizePremiumPercentage
-
-WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage)
-
-'click button calculate'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
-
-if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase('ADVANCE')){
-	'verify interest amount "0.00" if insttalment type Advance'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), '0.00', false)
-}else if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase('ARREAR')){
-	'verify interest amount NOT "0.00" if installment type arrear'
-	WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), '0.00', false)
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+    'ADVANCE')) {
+    'verify interest amount "0.00" if insttalment type Advance'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), 
+        '0.00', false)
+} else if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+    'ARREAR')) {
+    'verify interest amount NOT "0.00" if installment type arrear'
+    WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), 
+        '0.00', false)
 }
 
 WebUI.delay(5)
@@ -744,4 +708,4 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 }
 
-	
+

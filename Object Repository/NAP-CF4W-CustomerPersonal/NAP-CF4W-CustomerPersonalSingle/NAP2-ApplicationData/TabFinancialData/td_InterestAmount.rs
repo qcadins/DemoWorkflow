@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div[3]/table/tbody/tr/td[4]</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;FinData_FinData&quot;)/form[@class=&quot;ng-valid ng-dirty ng-touched&quot;]/div[@class=&quot;ng-star-inserted&quot;]/table[@class=&quot;table table-responsive-md text-center table-hover&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-star-inserted&quot;]/td[4]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -20,18 +24,18 @@
       <value>td</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>8,622,460.00</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;FinData_FinData&quot;)/form[@class=&quot;ng-valid ng-dirty ng-touched&quot;]/div[@class=&quot;ng-star-inserted&quot;]/table[@class=&quot;table table-responsive-md text-center table-hover&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-star-inserted&quot;]/td[4]</value>
+      <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[3]/table/tbody/tr[1]/td[4]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
