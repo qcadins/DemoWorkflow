@@ -23,7 +23,7 @@ String filePath = userDir + GlobalVariable.Path
 
 GlobalVariable.DataFilePath = filePath
 
-
+'asduhasdiugasud'
 if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
