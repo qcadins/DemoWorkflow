@@ -26,7 +26,7 @@ WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), findTestData('Login/Login').getValue(
         2, 2))
 
-'input password'
+'input Password'
 WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputPass'), findTestData('Login/Login').getValue(
         3, 2))
 
