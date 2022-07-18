@@ -6,11 +6,15 @@
    <elementGuidId>e8e6c38d-5f58-4023-a402-b958a9a0ae89</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[6]/td[8]/div/span/div/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>(//input[@id='CustAddPremiRate'])[4]</value>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[6]/td[8]/div/span/div/input</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,7 +38,7 @@
       <value>CustAddPremiRate</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -48,11 +52,11 @@
       <value>true</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;ng-pristine ng-touched ng-valid&quot;]/table[@class=&quot;table table-responsive text-center table-hover ng-star-inserted&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-pristine ng-star-inserted ng-touched ng-valid&quot;]/td[@class=&quot;text-center ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/span[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group-row&quot;]/input[@id=&quot;CustAddPremiRate&quot;]</value>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[6]/td[8]/div/span/div/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

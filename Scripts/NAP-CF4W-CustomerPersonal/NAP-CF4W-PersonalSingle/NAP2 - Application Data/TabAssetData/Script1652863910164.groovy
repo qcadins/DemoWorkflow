@@ -1,3 +1,4 @@
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -14,13 +15,15 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
-int flagWarning =0
+import groovy.sql.Sql as Sql
+
+int flagWarning = 0
+
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -29,6 +32,8 @@ String filePath = userDir + GlobalVariable.Path
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
+
+WebUI.delay(5)
 
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
@@ -48,7 +53,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalS
 
 'verify input error'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
+    5, FailureHandling.OPTIONAL)) {
     'click select'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
 } else {
@@ -73,16 +78,19 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cus
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 5), false)
 
-'select admin head'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 6), false)
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 6).length() > 0) {
+    'select admin head'
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
+        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+            GlobalVariable.NumofColm, 6), false)
+}
 
 'click button asset lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'))
 
-'input asset code'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_AssetCode'), 
+'input asset name'
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_FullAssetCode'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 8))
 
@@ -91,7 +99,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalS
 
 'verify input error'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
+    5, FailureHandling.OPTIONAL)) {
     'click select'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
 } else {
@@ -131,36 +139,35 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersona
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 12))
 
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 13).length() > 0){
-'click button BPKB Lookup'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_BPKB City Issuer_btn btn-raised btn-primary'))
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 13).length() > 0) {
+    'click button BPKB Lookup'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_BPKB City Issuer_btn btn-raised btn-primary'))
 
-'input district code'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_District Code'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 13))
+    'input district code'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_District Code'), 
+        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+            GlobalVariable.NumofColm, 13))
 
-'click button search'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_SearchBPKB city Issuer'))
+    'click button search'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_SearchBPKB city Issuer'))
 
-'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
-} else {
-    'click X'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 9)=="New"){
-		
-			flagWarning++
-	
-		}
-	}
+    'verify input error'
+    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
+        5, FailureHandling.OPTIONAL)) {
+        'click select'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
+    } else {
+        'click X'
+        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
+
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+            GlobalVariable.NumofColm, 9) == 'New') {
+            flagWarning++
+        }
+    }
 }
-		
+
 'input BPKP issue date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_BPKB Issue Date'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -176,14 +183,20 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersona
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 16))
 
-'select downpayment type'
+'select security deposit type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 17), false)
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 17) == 'Percentage') {
-    'input down payment percentage'
+    'Untuk handle jika field input percentage terlock'
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
+        'Amount', false)
+
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
+        'Percentage', false)
+
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
         Keys.chord(Keys.CONTROL, 'a'))
 
@@ -198,7 +211,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                 GlobalVariable.NumofColm, 18)))
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 17) == 'Amount') {
-    'input down payment amount'
+    'input security deposit amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
             GlobalVariable.NumofColm, 19))
@@ -237,13 +250,13 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     GlobalVariable.NumofColm, 15) == 'Percentage') {
     int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
 
-    'verify downpayment value equal'
+    'verify security deposit value equal'
     WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 15) == 'Amount') {
     float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
 
-    'verify downpayment value equal'
+    'verify security deposit value equal'
     WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg)
 }
 
@@ -277,6 +290,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     }
 }
 
+//'select region'
+//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
+//    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+//        GlobalVariable.NumofColm, 26), false)
 String servername = findTestData('Login/Login').getValue(1, 8)
 
 String instancename = findTestData('Login/Login').getValue(2, 8)
@@ -291,6 +308,8 @@ String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
+println(url)
+
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
@@ -301,36 +320,38 @@ String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlconnection, 
     Fullassetcode)
 
-for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
+for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
     String newAssetAtrributeInput = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input'
 
     'modify button Asset Attribute Input'
-    modifyObjectAssetAttributeInput = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
+    modifyObjectAssetAttributeInput = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
         'xpath', 'equals', newAssetAtrributeInput, true)
 
-    if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInput, 5, FailureHandling.OPTIONAL)) {
-        'set text Attribute'
+    if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInput, 2, FailureHandling.OPTIONAL)) {
         WebUI.setText(modifyObjectAssetAttributeInput, 'Attribute', FailureHandling.OPTIONAL)
     } else {
         String newAssetAtrributeSelect = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/select'
 
         'modify button Asset Attribute Select'
-        modifyObjectAssetAttributeSelect = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
+        modifyObjectAssetAttributeSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
             'xpath', 'equals', newAssetAtrributeSelect, true)
 
         'select option index 1'
         WebUI.selectOptionByIndex(modifyObjectAssetAttributeSelect, 1, FailureHandling.OPTIONAL)
-
     }
 }
 
 int modifyObjectIndex = 1
 
+GlobalVariable.AssetPrice = 0.00
+
+GlobalVariable.TotalAccessoriesPrice = 0.00
+
 for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 
 1); (GlobalVariable.NumofAccessories)++) {
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-        GlobalVariable.NumofAccessories, 2) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 3)) {
+        GlobalVariable.NumofAccessories, 2).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 3))) {
         'click button add'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Add'))
 
@@ -354,19 +375,19 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
         String newDownPaymentTypeXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select'
 
-        'modify select downpayment type'
+        'modify select security deposit type'
         modifyObjectDownPaymentType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/select_-Select One- Amount  Percentage'), 
             'xpath', 'equals', newDownPaymentTypeXpath, true)
 
         String newInputPercentageXpath = ('//*[@id="AccessoryDownPaymentPrcnt' + (modifyObjectIndex - 1)) + '"]'
 
-        'modify input downpayment percentage'
+        'modify input security deposit percentage'
         modifyObjectInputPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentPrcnt0'), 
             'xpath', 'equals', newInputPercentageXpath, true)
 
         String newInputAmountXpath = ('//*[@id="AccessoryDownPaymentAmt' + (modifyObjectIndex - 1)) + '"]'
 
-        'modify input downpayment amount'
+        'modify input security deposit amount'
         modifyObjectInputAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentAmt0'), 
             'xpath', 'equals', newInputAmountXpath, true)
 
@@ -398,9 +419,8 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 
-        'verify lookup'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            5, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
         } else {
@@ -459,13 +479,13 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
         WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
                 GlobalVariable.NumofAccessories, 7), FailureHandling.OPTIONAL)
 
-        'select downpayment type'
+        'select security deposit type'
         WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
                 GlobalVariable.NumofAccessories, 8), false, FailureHandling.OPTIONAL)
 
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 8) == 'Percentage') {
-            'input downpayment percentage'
+            'input security deposit percentage'
             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
@@ -476,7 +496,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
                         GlobalVariable.NumofAccessories, 9)), FailureHandling.OPTIONAL)
         } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 8) == 'Amount') {
-            'input downpayment amount'
+            'input security deposit amount'
             WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
                     GlobalVariable.NumofAccessories, 10), FailureHandling.OPTIONAL)
         }
@@ -487,7 +507,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
         if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage, 
             'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
-            'write to excel FAILED'
+            'write to excel WARNING'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
                 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
@@ -522,16 +542,18 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
             GlobalVariable.NumofAccessories, 8) == 'Percentage') {
             int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
-            'verify downpayment value equal'
+            'verify securitydeposit value equal'
             WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
         } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 8) == 'Amount') {
             float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
-            'verify downpayment value equal'
+            'verify securitydeposit value equal'
             WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
         }
         
+        GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
+
         'write to excel success'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
             GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
@@ -597,7 +619,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
             'verify input error'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-                10, FailureHandling.OPTIONAL)) {
+                5, FailureHandling.OPTIONAL)) {
                 'click select'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
             } else {
@@ -664,12 +686,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         'input Kecamatan'
         WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_KecamatanAssetOwner'), 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-                GlobalVariable.NumofColm, 48))
+                GlobalVariable.NumofColm, 49))
 
         'input kelurahan'
         WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_KelurahanAssetOwner'), 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-                GlobalVariable.NumofColm, 49))
+                GlobalVariable.NumofColm, 48))
 
         'input Kota'
         WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_KotaAssetOwner'), 
@@ -681,7 +703,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            5, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
         } else {
@@ -739,12 +761,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     'input Kecamatan'
     WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-            GlobalVariable.NumofColm, 58))
+            GlobalVariable.NumofColm, 59))
 
     'input kelurahan'
     WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-            GlobalVariable.NumofColm, 59))
+            GlobalVariable.NumofColm, 58))
 
     'input Kota'
     WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'), 
@@ -756,7 +778,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
     'verify input error'
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
+        5, FailureHandling.OPTIONAL)) {
         'click select'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/a_Select'))
     } else {
@@ -777,7 +799,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     }
 }
 
-WebUI.delay(5)
+GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
+        'value').replace(',', ''))
+
+println(GlobalVariable.AssetPrice)
+
+println(GlobalVariable.TotalAccessoriesPrice)
 
 'click button save'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Save'))
@@ -790,31 +817,35 @@ WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 62) == 'No') {
-
-	'Menunggu Alert konfirmasi integrator muncul'
+    'Menunggu Alert konfirmasi integrator muncul'
     WebUI.waitForAlert(3)
-	'Accept Alert Konfirmasi Integrator'
+
+    'Accept Alert Konfirmasi Integrator'
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
-		
-		
-WebUI.delay(5)
 
-if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/ApplicationCurrentStep')), 
-    'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL)) {
+WebUI.delay(20)
+
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'), 
+    5, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+
+    'Click cancel'
+    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_CancelAssetCollateral'))
 
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusFailed)
 } else {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
-	if(flagWarning>0){
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusWarning)
-	}
+
+    if (flagWarning > 0) {
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+    }
+    
 }
 
-WebUI.delay(10)
+WebUI.delay(5)
 

@@ -141,18 +141,33 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>countRowPersonal</name>
+      <initValue>0.00</initValue>
+      <name>TotalCommissionAmt</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>countColmPersonal</name>
+      <initValue>0.00</initValue>
+      <name>TotalCommissionAmtAftTax</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 1)</initValue>
-      <name>Role</name>
+      <initValue>0.00</initValue>
+      <name>TotalTax</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>TotalVat</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>TotalDisburseAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>TotalExpenseAmt</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -168,5 +183,30 @@
       <description></description>
       <initValue>'SUCCESS'</initValue>
       <name>StatusSuccess</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 1)</initValue>
+      <name>Role</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>AssetPrice</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>TotalAccessoriesPrice</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>countRowPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>countColmPersonal</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

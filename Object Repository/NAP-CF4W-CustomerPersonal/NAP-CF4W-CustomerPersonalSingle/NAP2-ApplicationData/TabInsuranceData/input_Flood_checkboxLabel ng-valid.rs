@@ -6,12 +6,8 @@
    <elementGuidId>f6eea83b-42e4-47e3-b418-322fa89c0c0d</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@type = 'checkbox']</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[2]/div/label[1]/div/label/input</value>
+         <value>//input[@type='checkbox']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -6,11 +6,15 @@
    <elementGuidId>ad48a74a-0f29-4507-a5fa-f128fa66d410</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[6]/td[6]/div/div/label/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='checkbox'])[13]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,18 +38,18 @@
       <value>Value</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>checkbox</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;ng-pristine ng-touched ng-valid&quot;]/table[@class=&quot;table table-responsive text-center table-hover ng-star-inserted&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-pristine ng-star-inserted ng-touched ng-valid&quot;]/td[@class=&quot;text-left&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/label[1]/input[@class=&quot;checkboxLabel ng-pristine ng-valid ng-touched&quot;]</value>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[6]/td[6]/div/div/label/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

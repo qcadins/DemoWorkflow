@@ -1,6 +1,8 @@
 
 /bin/
 /Libs/
+/Excel/
+/settings/
 /.settings/
 /.classpath
 .svn/

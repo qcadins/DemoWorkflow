@@ -6,11 +6,15 @@
    <elementGuidId>39e22fa3-8233-498b-81e5-a927391ed6c2</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[2]/div[3]/label</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[3]/div[2]/div[3]/label</value>
+         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[2]/div[3]/label</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>adInsLabel ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 0.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[3]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[2]/div[3]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

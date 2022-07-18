@@ -6,12 +6,12 @@
    <elementGuidId>70da80ae-75e5-4a91-85ba-c68d4f1680d8</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[10]</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
+         <key>XPATH</key>
+         <value>(//button[@type='button'])[10]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
+      <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

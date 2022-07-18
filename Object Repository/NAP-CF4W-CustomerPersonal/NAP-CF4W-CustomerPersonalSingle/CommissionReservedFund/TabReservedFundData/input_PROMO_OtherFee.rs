@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Kecelakaan Diri Untuk Penumpang_CustAddPremiRate</name>
+   <name>input_PROMO_OtherFee</name>
    <tag></tag>
-   <elementGuidId>6987f74e-b6de-4cf8-8c73-a88344411d35</elementGuidId>
+   <elementGuidId>756c1557-cb6f-45d1-8829-9dafb22601a1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[8]/td[8]/div/span/div/input</value>
+         <value>//input[@id='ReservedFundAmt6']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -24,55 +24,55 @@
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>form-control ng-untouched ng-pristine ng-valid</value>
+      <value>form-control ng-untouched ng-pristine ng-valid ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
-      <value>CustAddPremiRate</value>
+      <value>ReservedFundAmt</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>max</name>
+      <type>Main</type>
+      <value>DictRemainingIncomeForm[RsvForm.controls['ReservedFundObjs']['controls'][i]['controls'].MrReservedFundSourceName.value]</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
-      <value>CustAddPremiRate</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>disabled</name>
-      <type>Main</type>
-      <value>true</value>
+      <value>ReservedFundAmt6</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;ng-pristine ng-touched ng-valid&quot;]/table[@class=&quot;table table-responsive text-center table-hover ng-star-inserted&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-pristine ng-star-inserted ng-touched ng-valid&quot;]/td[@class=&quot;text-center ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/span[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group-row&quot;]/input[@id=&quot;CustAddPremiRate&quot;]</value>
+      <value>id(&quot;ReservedFundAmt6&quot;)</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:attributes</name>
       <type>Main</type>
-      <value>(//input[@id='CustAddPremiRate'])[6]</value>
+      <value>//input[@id='ReservedFundAmt6']</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[8]/td[8]/div/span/div/input</value>
+      <value>//div[@id='reservedFundDataId6']/div/div/input</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//tr[8]/td[8]/div/span/div/input</value>
+      <value>//div[7]/div/div/div/input</value>
    </webElementXpaths>
 </WebElementEntity>

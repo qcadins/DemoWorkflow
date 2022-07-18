@@ -6,11 +6,15 @@
    <elementGuidId>9643eea9-9e6e-4aac-8f75-4a7f288a3cde</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[10]/td[9]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[10]/td[9]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>text-center</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 47,000.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/table[@class=&quot;table table-responsive text-center table-hover ng-star-inserted&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-untouched ng-pristine ng-star-inserted ng-valid&quot;]/td[@class=&quot;text-center&quot;]</value>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[10]/td[9]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -32,8 +32,8 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersona
 
 'Input Promo pada Admin Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/input_PROMO_AdminFee'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        5), FailureHandling.OPTIONAL)
+    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
+        GlobalVariable.NumofColm, 5), FailureHandling.OPTIONAL)
 
 'Input Promo pada Provision Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/input_PROMO_ProvisionFee'), 
@@ -85,6 +85,8 @@ String totalReservedFundAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPer
 'Verifikasi hasil perhitungan total reserved fund amount sesuai dnegan nilai total reserved fund amount dari web'
 WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false)
 
+WebUI.delay(5)
+
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/button_Save'))
 
@@ -98,20 +100,23 @@ String filePath = userDir + GlobalVariable.Path
 GlobalVariable.DataFilePath = filePath
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
-if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/button_Cancel'), 5, FailureHandling.OPTIONAL)){
-	'Klik cancel'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/button_Cancel'))
-	'Write to Excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusFailed)
-	'Pengecekan jika new consumer finance belum diexpand'
-	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
-		'Klik new consumer finance'
-		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-	}
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
+    5, FailureHandling.OPTIONAL)) {
+    'Klik cancel'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData/button_Cancel'))
+
+    'Write to Excel FAILED'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+    'Pengecekan jika new consumer finance belum diexpand'
+    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+        'Klik new consumer finance'
+        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+    }
+} else {
+    'Write to Excel SUCCESS'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-else{
-	'Write to Excel SUCCESS'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
-}
+

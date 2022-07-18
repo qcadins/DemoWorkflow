@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@id='CustAddPremiRate'])[2]</value>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[8]/div/span/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

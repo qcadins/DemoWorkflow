@@ -270,7 +270,7 @@ BigDecimal intTotalLifeInsuranceCapitalize = Integer.parseInt(TotalLifeInsurance
 Number CapitalizePremiumPercentage = GlobalVariable.CapitalizePremiumPercentage
 
 'calculate total life insurance x capitalize premium percentage' 
-int multiplyTotalLifeInsurancexPercentage = intTotalLifeInsurance * CapitalizePremiumPercentage
+int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * CapitalizePremiumPercentage)
 
 'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
 WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage)

@@ -21,9 +21,18 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement
 
+if(WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'),FailureHandling.OPTIONAL)){
+	
+	'click menu Consumer finance 4w'
+	WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	
+}
+
+
 'Klik Commission Reserved Fund'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
 
+WebUI.delay(5)
 'Input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -111,8 +120,12 @@ if(variableSupp.size()>0){
 		'Menghitung count (size dari variabel) sebelah kiri'
 		int countAllocateCommissionLeft  = variableAllocateCommissionLeft.size()
 		
+		
+		
 		'Menghitung count (size dari variabel) sebelah kanan'
 		int countAllocateCommissionRight  = variableAllocateCommissionRight.size()
+		
+		
 		
 		'Menghitung count (size dari variabel) gabungan kiri dan kanan'
 		int countAllocateCommission  = countAllocateCommissionLeft  + countAllocateCommissionRight 
@@ -201,7 +214,7 @@ if(variableSupp.size()>0){
 						'xpath', 'equals', newxpathIncomeInfoAmt, true)
 					
 					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-					if(textIncomeInfo == allocateCommission){
+					if(textIncomeInfo==allocateCommission){
 						'Variabel untuk mengambil amount income information yang sesuai'
 						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
 						
@@ -244,9 +257,6 @@ ArrayList<WebElement> variableSuppEmp = driver.findElements(By.cssSelector('#for
 if(variableSuppEmp.size()>0){
 	'Looping Supplier Employee List'
 	for (int i = 1; i <= variableSuppEmp.size(); i++) {
-		
-		println(i)
-		println(variableSuppEmp.size())
 		
 		'Variabel untuk flagging ketika berhasil melakukan delete'
 		int flagdelSuppEmployee=0
@@ -335,18 +345,21 @@ if(variableSuppEmp.size()>0){
 			'Query select pada database untuk mengambil nilai supplier employee no'
 			supplierEmployeeCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlConnection, supplierEmployeeName, supplierEmpPos, supplierName)
 			
+			
 			'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
-			variableAllocateCommissionLeft = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ") + ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
+			variableAllocateCommissionLeft = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ")+ ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
 			
 			'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kanan'
-			variableAllocateCommissionRight = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ") + ' > div > div > div:nth-child(2) label.col-md-4.adInsLabel'))
+			variableAllocateCommissionRight = driver.findElements(By.cssSelector('#ListAllocated' + supplierEmployeeCode.replace(" ","\\ ")+ ' > div > div > div:nth-child(2) label.col-md-4.adInsLabel'))
 	
 			'Menghitung count (size dari variabel) sebelah kiri'
 			int countAllocateCommissionLeft = variableAllocateCommissionLeft.size()
 			
+			
 			'Menghitung count (size dari variabel) sebelah kanan'
 			int countAllocateCommissionRight = variableAllocateCommissionRight.size()
 		
+			
 			'Menghitung count (size dari variabel) gabungan kiri dan kanan'
 			int countAllocateCommission = countAllocateCommissionLeft + countAllocateCommissionRight
 			
@@ -354,11 +367,6 @@ if(variableSuppEmp.size()>0){
 			for (int j = 1; j <= countAllocateCommission; j++) {
 				String newxpathCommissionAmt, newxpathCommissionPercentage
 				String newxpathAllocateCommission
-				
-				println(countAllocateCommissionLeft)
-				println(countAllocateCommissionRight)
-				println(countAllocateCommission)
-				println(j)
 				
 				'Pengecekan jika looping masih berada pada allocate commission from sebelah kiri'
 				if (j <= countAllocateCommissionLeft) {
@@ -446,7 +454,7 @@ if(variableSuppEmp.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo == allocateCommission){
+						if(textIncomeInfo==allocateCommission){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
@@ -554,6 +562,7 @@ if(variableRef.size()>0){
 			'Query select pada database untuk mengambil nilai referantor code/nomor'
 			refCode = CustomKeywords.'dbconnection.checkCommissionCode.checkReferantorCode'(sqlConnection, refName)
 			
+			
 			'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
 			variableAllocateCommissionLeft = driver.findElements(By.cssSelector('#ListAllocated' + refCode+ ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
 	
@@ -574,8 +583,6 @@ if(variableRef.size()>0){
 				String newxpathCommissionAmt, newxpathCommissionPercentage
 				String newxpathAllocateCommission
 				
-				println(countAllocateCommissionLeft)
-				println(countAllocateCommissionRight)
 				'Pengecekan jika looping masih berada pada allocate commission from sebelah kiri'
 				if (j <= countAllocateCommissionLeft) {
 					newxpathCommissionAmt = (((('//*[@id=\'ListAllocated' + refCode) + '\']/div/div/div[1]/div[') + j) + ']/div/div[1]/input')
@@ -660,7 +667,7 @@ if(variableRef.size()>0){
 							'xpath', 'equals', newxpathIncomeInfoAmt, true)
 						
 						'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-						if(textIncomeInfo == allocateCommission){
+						if(textIncomeInfo==allocateCommission){
 							
 							'Variabel untuk mengambil amount income information yang sesuai'
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
@@ -696,8 +703,171 @@ if(variableRef.size()>0){
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
+variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
+variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
+variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
+
+GlobalVariable.TotalCommissionAmt = 0.00
+GlobalVariable.TotalCommissionAmtAftTax = 0.00
+GlobalVariable.TotalTax = 0.00
+GlobalVariable.TotalVat = 0.00
+GlobalVariable.TotalDisburseAmt = 0.00
+GlobalVariable.TotalExpenseAmt = 0.00
+
+'Looping data Supplier'
+for (int i = 1; i<=variableSupp.size(); i++){
+	 newxpathCommAmt = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[2]/div[2]/label'
+	 newxpathAmtAftTax = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[3]/div[1]/label'
+	 newxpathTax = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[1]/div[3]/label'
+	 newxpathVat = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[2]/div[3]/label'
+	 newxpathDisburse = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[3]/div[2]/label'
+	 newxpathExpense = '//*[@id="formInformationSupplier"]/div['+(i+1)+']/div/div[2]/div[4]/div[3]/label'
+	 
+	 'modify object total commission amount'
+	 modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtSupplier'),
+		 'xpath', 'equals', newxpathCommAmt, true)
+	 
+	 'modify object total commission after tax amount'
+	 modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommisssionAfterTaxAmtSupplier'),
+		 'xpath', 'equals', newxpathAmtAftTax, true)
+	 
+	 'modify object withholding tax amount'
+	 modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtSupp'),
+		 'xpath', 'equals', newxpathTax, true)
+	 
+	 'modify object vat amount'
+	 modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_VatAmtSupp'),
+		 'xpath', 'equals', newxpathVat, true)
+	 
+	 'modify object disburse amount'
+	 modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_DisburseAmtSupp'),
+		 'xpath', 'equals', newxpathDisburse, true)
+	 
+	 'modify object expense amount'
+	 modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_ExpenseAmtSupp'),
+		 'xpath', 'equals', newxpathExpense, true)
+	 
+	 'Menghitung total amount untuk verify summary'
+	 CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+	
+}
+
+'Looping data supplier employee'
+for (int j = 1; j <= variableSuppEmp.size(); j++) {
+	newxpathCommAmt = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[2]/div[2]/label'
+	newxpathAmtAftTax = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[3]/div[1]/label'
+	newxpathTax = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[1]/div[3]/label'
+	newxpathVat = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[2]/div[3]/label'
+	newxpathDisburse = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[3]/div[2]/label'
+	newxpathExpense = '//*[@id="formInformationSupplierEmployee"]/div['+(j+1)+']/div/div[3]/div[4]/div[3]/label'
+	
+	'modify object total commission amount'
+	modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtSuppEmp'),
+		'xpath', 'equals', newxpathCommAmt, true)
+	
+	'modify object total commission after tax amount'
+	modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAfterTaxAmtSuppEmp'),
+		'xpath', 'equals', newxpathAmtAftTax, true)
+	
+	'modify object withholding tax amount'
+	modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtSuppEmp'),
+		'xpath', 'equals', newxpathTax, true)
+	
+	'modify object vat amount'
+	modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_VatAmtSuppEmp'),
+		'xpath', 'equals', newxpathVat, true)
+	
+	'modify object disburse amount'
+	modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_DisburseAmtSuppEmp'),
+		'xpath', 'equals', newxpathDisburse, true)
+	
+	'modify object expense amount'
+	modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_ExpenseAmtSuppEmp'),
+		'xpath', 'equals', newxpathExpense, true)
+	
+	'Menghitung total amount untuk verify summary'
+	CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+
+}
+
+'Looping data referantor'
+for(int k=1; k <= variableRef.size(); k++){
+	 newxpathCommAmt = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[2]/div[2]/label'
+	 newxpathAmtAftTax = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[3]/div[1]/label'
+	 newxpathTax = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[1]/div[3]/label'
+	 newxpathVat = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[2]/div[3]/label'
+	 newxpathDisburse = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[3]/div[2]/label'
+	 newxpathExpense = '//*[@id="formInformationReferantor"]/div['+(k+1)+']/div/div[2]/div[4]/div[3]/label'
+	 
+	 'modify object total commission amount'
+	 modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtRef'),
+		 'xpath', 'equals', newxpathCommAmt, true)
+	 
+	 'modify object total commission after tax amount'
+	 modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAfterTaxAmtRef'),
+		 'xpath', 'equals', newxpathAmtAftTax, true)
+	 
+	 'modify object withholding tax amount'
+	 modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtRef'),
+		 'xpath', 'equals', newxpathTax, true)
+	 
+	 'modify object vat amount'
+	 modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_VatAmtRef'),
+		 'xpath', 'equals', newxpathVat, true)
+	 
+	 'modify object disburse amount'
+	 modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_DisburseAmtRef'),
+		 'xpath', 'equals', newxpathDisburse, true)
+	 
+	 'modify object expense amount'
+	 modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_ExpenseAmtRef'),
+		 'xpath', 'equals', newxpathExpense, true)
+	 
+	 'Menghitung total amount untuk verify summary'
+	 CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+	
+}
+
+'Mengambil nilai summary total commission amount dari confins'
+String textTotalCommAmt = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommisionAmt')).replace(",","")
+
+'Mengambil nilai summary total commission after tax amount dari confins'
+String textTotalCommAmtAftTax = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalCommissionAfterTaxAmt')).replace(",","")
+
+'Mengambil nilai summary total disburse amount dari confins'
+String textTotalDisburseAmt = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalDisburseAmt')).replace(",","")
+
+'Mengambil nilai summary total expense amount dari confins'
+String textTotalExpenseAmt = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalExpenseAmt')).replace(",","")
+
+'Mengambil nilai summary total tax dari confins'
+String textTotalTax = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalTax')).replace(",","")
+
+'Mengambil nilai summary total vat dari confins'
+String textTotalVat = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/label_TotalVat')).replace(",","")
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalCommAmt, String.format("%.2f", GlobalVariable.TotalCommissionAmt),false)
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalCommAmtAftTax, String.format("%.2f",GlobalVariable.TotalCommissionAmtAftTax),false)
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalDisburseAmt, String.format("%.2f",GlobalVariable.TotalDisburseAmt),false)
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalExpenseAmt, String.format("%.2f",GlobalVariable.TotalExpenseAmt),false)
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalTax, String.format("%.2f",GlobalVariable.TotalTax),false)
+
+'Verify nilai pada section summary sesuai dengan perhitungan'
+WebUI.verifyMatch(textTotalVat, String.format("%.2f",GlobalVariable.TotalVat),false)
+
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/button_Save'))
+
+WebUI.delay(3)
 
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
@@ -714,7 +884,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
 		
 		'Klik new consumer finance'
-		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 	}
 } else {
     

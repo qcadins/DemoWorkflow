@@ -24,6 +24,8 @@ String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.Path
 
+String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
+
 String CDCFamilyPath = userDir + GlobalVariable.DataFileFamilyPersonal
 
 String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
@@ -76,44 +78,35 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
     int count = variable.size()
 
-    def StoreCDCCustomerName = ''
+    def StoreCDCCustomerName = '' 
 
-    def StoreCDCFamilyName = ''
-
-    def StoreCDCGuarantorPersonalName = ''
+	def StoreCDCFamilyName = ''
+	
+	def StoreCDCGuarantorPersonalName = ''
 	
 	def StoreCDCGuarantorCompanyName = ''
-
+	
     for (int i = 1; i <= count; i++) {
-        String newSubjectName = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[2]'
-
+       
         'modify object subjectname'
         modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/SubjectName'), 
-            'xpath', 'equals', newSubjectName, true)
-
-        String newSubjectType = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[3]'
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i + ']/td[2]'), true)
 
         'modify object subjecttype'
         modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/SubjectType'), 
-            'xpath', 'equals', newSubjectType, true)
-
-        String newApplicantNo = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[4]'
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i + ']/td[3]'), true)
 
         'modify object Applicant No'
         modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNo'), 
-            'xpath', 'equals', newApplicantNo, true)
-
-        String newCustomerNo = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[5]'
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i + ']/td[4]'), true)
 
         'modify object Customer No'
         modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNo'), 
-            'xpath', 'equals', newCustomerNo, true)
-
-        String newButtonedit = ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i) + ']/td[7]/span/span/span/span/span/span/a'
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i + ']/td[5]'), true)
 
         'modify object edit icon'
         modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
-            'xpath', 'equals', newButtonedit, true)
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + i + ']/td[7]/span/span/span/span/span/span/a'), true)
 
         'get text subject name'
         String subjectName = WebUI.getText(modifySubjectName)
@@ -148,17 +141,15 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         int countidnorow = variableidno.size()
 
                         for (id = 1; id <= countidnorow; id++) {
-                            String newIDNoCustomer = ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]'
-
-                            'modify object id no customer match'
+							'modify object id no customer match'
                             modifyIDNoCustomer = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
-                                'xpath', 'equals', newIDNoCustomer, true)
+                                'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id + ']/td[4]'), true)
 
-                            String newCustomerNoObject = ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]'
+                            
 
                             'modify object Customer No'
                             modifyCustomerNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_CustomerNoSimilarData'), 
-                                'xpath', 'equals', newCustomerNoObject, true)
+                                'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id + ']/td[1]'), true)
 
                             String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject)
 
@@ -168,11 +159,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                             if (NewIdNoCustomerMatch != null) {
                                 if (NewIdNoCustomerMatch.equalsIgnoreCase(IdNoCustomer)) {
-                                    String newSelect = ('//div[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[10]/a'
+                                    
 
                                     'modify object id no customer match'
                                     modifynewSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
-                                        'xpath', 'equals', newSelect, true)
+                                        'xpath', 'equals', ('//div[@id="subSecMatch"]/table/tbody/tr[' + id + ']/td[10]/a'), true)
 
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
@@ -285,13 +276,14 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 }
                             }
                         }
+                    }else{
                         
                         'get customer name'
                         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-                        'store customer name'
-                        StoreCDCCustomerName = name
-                    }
+                        		
+                        		'store customer name'
+                        		StoreCDCCustomerName = name
+                        }
                 }
             }
         }
@@ -308,17 +300,14 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         int countfamilyidrow = variablefamilyidno.size()
 
                         for (id = 1; id <= countfamilyidrow; id++) {
-                            String newIDNoFamily = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[4]'
-
-                            'modify object id no family match'
+                           'modify object id no family match'
                             modifyIDNoFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/IDNoPersonal'), 
-                                'xpath', 'equals', newIDNoFamily, true)
+                                'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[4]'), true)
 
-                            String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]'
-
+                            
                             'modify object applicant No App in process'
                             modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
-                                'xpath', 'equals', newApplicantNoObject, true)
+                                'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[1]'), true)
 
                             String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
@@ -486,9 +475,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                         int countGuarantorPersonalidrow = variableGuarantorPersonalidno.size()
 
-                        WebDriver Driver = DriverFactory.getWebDriver()
-
-                        ArrayList<WebElement> variabletd = Driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
+                        ArrayList<WebElement> variabletd = driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
 
                         int counttd = variabletd.size()
 
@@ -875,14 +862,6 @@ if (Integer.parseInt(DupCheckCount) == 1) {
         }
     }
     }
-    
-    println(StoreCDCCustomerName)
-
-    println(StoreCDCFamilyName)
-
-    println(StoreCDCGuarantorPersonalName)
-	
-	println(StoreCDCGuarantorCompanyName)
 
     if (StoreCDCCustomerName != null) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
@@ -899,9 +878,12 @@ if (Integer.parseInt(DupCheckCount) == 1) {
             6, GlobalVariable.NumofColm - 1, StoreCDCGuarantorPersonalName + ';' + StoreCDCGuarantorCompanyName)
     }
 	
-	def StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
-	def StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
-	def StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
+	 StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
+	 StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
+	 StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
+	 
+	 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail',
+		 2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 	
 	for(FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail',
@@ -935,4 +917,3 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-

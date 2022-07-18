@@ -1,96 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>label_ExpenseAmtSuppEmp</name>
+   <name>button_CancelCollateral</name>
    <tag></tag>
-   <elementGuidId>adca0cd5-6315-4602-81cb-e9f8127b2287</elementGuidId>
+   <elementGuidId>353636b6-83f1-4c21-8fdb-4601cd53547c</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[4]/div[3]/label</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[4]/div[3]/label</value>
+         <value>(//button[@type='button'])[11]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>label</value>
+      <value>button</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>adInsLabel ng-star-inserted</value>
+      <value>btn btn-raised btn-warning mr-1 ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>button</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value> 4,989,386.00 </value>
+      <value> Cancel</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[4]/div[3]/label</value>
+      <value>id(&quot;stepperPersonal&quot;)/div[@class=&quot;bs-stepper-content&quot;]/div[@id=&quot;insurance-tab&quot;]/app-insurance-multi-asset-data[@class=&quot;ng-star-inserted&quot;]/app-uc-insurance[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;px-3&quot;]/div[@class=&quot;ng-star-inserted&quot;]/form[@class=&quot;form form-horizontal ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-actions right&quot;]/button[@class=&quot;btn btn-raised btn-warning mr-1 ng-star-inserted&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>(//button[@type='button'])[11]</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[3]/div[4]/div[3]/label</value>
+      <value>//div[@id='insurance-tab']/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/form/div[2]/button</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Expense Amount'])[2]/following::label[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Total Discount Amount'])[1]/following::button[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Gross'])[2]/following::label[2]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Total Capitalized Amount'])[1]/following::button[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Allocate Commission From'])[2]/preceding::label[1]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Admin Fee (Amt/%)'])[2]/preceding::label[1]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>//*/text()[normalize-space(.)='4,989,386.00']/parent::*</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Save'])[1]/preceding::button[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//div[3]/div[4]/div[3]/label</value>
+      <value>//form/div[2]/button</value>
    </webElementXpaths>
 </WebElementEntity>

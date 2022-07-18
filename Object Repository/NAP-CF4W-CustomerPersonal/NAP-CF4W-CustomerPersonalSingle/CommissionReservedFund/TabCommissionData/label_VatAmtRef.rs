@@ -6,11 +6,15 @@
    <elementGuidId>b8b6b7a4-8c5e-48fd-9482-65e1c32181cb</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[2]/div[2]/div[3]/label</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationReferantor']/div[2]/div/div[2]/div[2]/div[3]/label</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>adInsLabel ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 1,026.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[2]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[2]/div[2]/div[3]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
