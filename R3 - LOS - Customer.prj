@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>R3 - LOS - Customer</name>
+   <name>NAP-CF4W-UF</name>
    <tag></tag>
    <UUID>2da8d18a-c066-4372-a14e-1d002e35bcf8</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>C:\Users\fendy.tio\Katalon Studio\R3 - LOS - Customer - LookUp\R3 - LOS - Customer.prj</projectFileLocation>
+   <projectFileLocation>C:\Users\fendy.tio\git\NAP-CF4W-UF\R3 - LOS - Customer.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
