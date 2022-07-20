@@ -23,7 +23,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-
+'Pengecekan jika tdp at mf tidak kosong'
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 40).length()>0){
 	'input tdp at mf'
@@ -426,24 +426,27 @@ WebUI.verifyMatch(textAssetPriceInclAccessory, String.format('%.2f', GlobalVaria
 'Verifikasi perhitungan asset accessory price'
 WebUI.verifyMatch(textAssetAccessoryPrice, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice), false)
 
+'Ambil nilai tdp dan simpan dari confins financial data'
 String textTDP = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TDP')).replace(",","")
+'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(",","")
+'Convert total insurance dari string ke tipe data angka'
 BigDecimal totalInsurance = Double.parseDouble(TotalInsuranceValue.replace(",",""))
+'Convert total fee dari string ke tipe data angka'
 BigDecimal totalFee = Double.parseDouble(textTotalFee)
+'Perhitungan tdp'
 BigDecimal TDP = intDPAssetAccessoryMinSubValue+totalFee+totalInsurance+intTotalLifeInsurance-BDTotalfeeCapitalized-BDTotalInsuranceCap-intTotalLifeInsuranceCapitalize
-println(intDPAssetAccessoryMinSubValue)
-println(totalFee)
-println(totalInsurance)
-println(intTotalLifeInsurance)
-println(BDTotalfeeCapitalized)
-println(BDTotalInsuranceCap)
-println(intTotalLifeInsuranceCapitalize)
 
 
+'Pengecekan jika installment type advance'
 if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase("Advance")){
+	'Ambil installment amount segno 1'
 	BigDecimal firstInstallmentAmount = Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InstallmentAmount')).replace(",",""))
+	'Nilai tdp ditambahkan dengan installment amount segno 1'
 	TDP+=firstInstallmentAmount
-	println(firstInstallmentAmount)
+	
 }
+'Verifikasi tdp pada confins sesuai perhitungan'
 WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false)
+'Verifikasi tdp paid at mf <= tdp'
 WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'),'value').replace(",","")),Long.parseLong(textTDP.replace(".00","")))
