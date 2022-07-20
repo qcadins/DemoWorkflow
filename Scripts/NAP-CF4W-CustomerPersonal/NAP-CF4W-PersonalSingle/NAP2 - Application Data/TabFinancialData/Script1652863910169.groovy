@@ -22,6 +22,7 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 
+GlobalVariable.SubsidyDPValue = "0"
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -390,10 +391,10 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
             'xpath', 'equals', NewSubsidyAmount, true)
 
         if (WebUI.getText(modifyNewSubsidyAllocation, FailureHandling.OPTIONAL).equalsIgnoreCase('SUBSIDY DP')) {
-            SubsidyDPValue = WebUI.getText(modifyNewSubsidyAmount, FailureHandling.CONTINUE_ON_FAILURE).replace(',', '').replace(
+            GlobalVariable.SubsidyDPValue = WebUI.getText(modifyNewSubsidyAmount, FailureHandling.CONTINUE_ON_FAILURE).replace(',', '').replace(
                 '.00', '')
 
-            println(SubsidyDPValue)
+            println(GlobalVariable.SubsidyDPValue)
         }
     }
 }

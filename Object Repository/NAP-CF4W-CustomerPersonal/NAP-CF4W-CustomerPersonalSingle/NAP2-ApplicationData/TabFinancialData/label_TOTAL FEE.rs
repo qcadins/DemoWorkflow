@@ -9,6 +9,10 @@
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div/div[3]/div/div/div[2]/label</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = '53,050,000.00' or . = '53,050,000.00')]</value>
+      </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>

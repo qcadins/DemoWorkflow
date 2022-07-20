@@ -209,4 +209,9 @@
       <initValue>''</initValue>
       <name>countColmPersonal</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'0'</initValue>
+      <name>SubsidyDPValue</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

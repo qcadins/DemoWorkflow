@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Calculate'])[1]/following::button[1]</value>
+         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3/div/div/div/form/div[3]/button[4]</value>
       </entry>
       <entry>
          <key>BASIC</key>

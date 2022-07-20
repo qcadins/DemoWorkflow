@@ -24,10 +24,17 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 
+if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+		GlobalVariable.NumofColm, 40).length()>0){
+	'input tdp at mf'
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'),
+		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+			GlobalVariable.NumofColm, 40))
+}
+		
 'declare NTFforProvisionCalc Value'
 BigDecimal NTFforProvisionCalc
-'declare SubsidyDP Value'
-String SubsidyDPValue = '0'
+
 
 'get total asset price'
 def TotalAssetPrice = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TotalAssetPrice(InclAccessory)'),
@@ -234,7 +241,7 @@ WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue)
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
 'verify equal DPAssetAccessory minus subsidy DP = DPAssetAccessoryMinSubsidyDP'
-WebUI.verifyEqual(intDPAssetAccessoryValue - Integer.parseInt(SubsidyDPValue), intDPAssetAccessoryMinSubValue, FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.verifyEqual(intDPAssetAccessoryValue - Integer.parseInt(GlobalVariable.SubsidyDPValue), intDPAssetAccessoryMinSubValue, FailureHandling.CONTINUE_ON_FAILURE)
 
 'Get value Total insurance value'
 String TotalInsuranceValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE'))
@@ -243,7 +250,7 @@ String TotalInsuranceValue = WebUI.getText(findTestObject('Object Repository/NAP
 def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE CAPITALIZED')).replace(
 	'.00', '')
 
-'convert total insurance value to BigDecimal'
+'convert total insurance capitalize value to BigDecimal'
 BigDecimal intTotalInsurancevalue = new BigDecimal(TotalInsuranceCapitalizeValue.replace(',', ''))
 
 'verify match Total insurance(from tab insruance) and total insurance (from tab financial)'
@@ -401,3 +408,42 @@ WebUI.verifyEqual(principalamountvalue + interestamountvalue, intNTF + intIntere
 'verify rumus 2 == rumus 3'
 WebUI.verifyEqual(installmentamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
 
+'Ambil dan simpan nilai asset price dari confins tab financial data'
+String textAssetPrice = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL ASSET PRICE')).replace(",","")
+
+'Ambil dan simpan nilai asset accessory price dari confins tab financial data'
+String textAssetAccessoryPrice = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL ASSET ACCESSORY PRICE')).replace(",","")
+
+'Ambil dan simpan nilai asset price incl accessory dari confins tab financial data'
+String textAssetPriceInclAccessory = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TotalAssetPrice(InclAccessory)')).replace(",","")
+
+'Verifikasi perhitungan asset price'
+WebUI.verifyMatch(textAssetPrice, String.format('%.2f', GlobalVariable.AssetPrice), false)
+
+'Verifikasi perhitungan asset price incl accessories'
+WebUI.verifyMatch(textAssetPriceInclAccessory, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false)
+
+'Verifikasi perhitungan asset accessory price'
+WebUI.verifyMatch(textAssetAccessoryPrice, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice), false)
+
+String textTDP = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TDP')).replace(",","")
+String textTotalFee = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(",","")
+BigDecimal totalInsurance = Double.parseDouble(TotalInsuranceValue.replace(",",""))
+BigDecimal totalFee = Double.parseDouble(textTotalFee)
+BigDecimal TDP = intDPAssetAccessoryMinSubValue+totalFee+totalInsurance+intTotalLifeInsurance-BDTotalfeeCapitalized-BDTotalInsuranceCap-intTotalLifeInsuranceCapitalize
+println(intDPAssetAccessoryMinSubValue)
+println(totalFee)
+println(totalInsurance)
+println(intTotalLifeInsurance)
+println(BDTotalfeeCapitalized)
+println(BDTotalInsuranceCap)
+println(intTotalLifeInsuranceCapitalize)
+
+
+if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase("Advance")){
+	BigDecimal firstInstallmentAmount = Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/td_InstallmentAmount')).replace(",",""))
+	TDP+=firstInstallmentAmount
+	println(firstInstallmentAmount)
+}
+WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false)
+WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'),'value').replace(",","")),Long.parseLong(textTDP.replace(".00","")))
