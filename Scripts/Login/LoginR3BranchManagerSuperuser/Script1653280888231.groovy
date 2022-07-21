@@ -21,7 +21,7 @@ WebUI.openBrowser('')
 'input web R3 LOS'
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 1))
 
-'input Username'
+'input username'
 WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), findTestData('Login/Login').getValue(
         2, 1))
 
