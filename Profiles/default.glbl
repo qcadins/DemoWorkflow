@@ -31,7 +31,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-<<<<<<< HEAD
       <initValue>2</initValue>
       <name>NumofFamily</name>
    </GlobalVariableEntity>
@@ -232,9 +231,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 1)</initValue>
-      <name>RoleCompany</name>
-=======
       <initValue>'f'</initValue>
       <name>NumofFamily</name>
    </GlobalVariableEntity>
@@ -417,6 +413,10 @@
       <description></description>
       <initValue>'0'</initValue>
       <name>SubsidyDPValue</name>
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>test</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
