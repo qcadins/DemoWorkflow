@@ -321,24 +321,38 @@ String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute
     Fullassetcode)
 
 for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
-    String newAssetAtrributeInput = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input'
-
-    'modify button Asset Attribute Input'
-    modifyObjectAssetAttributeInput = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', newAssetAtrributeInput, true)
-
-    if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInput, 2, FailureHandling.OPTIONAL)) {
-        WebUI.setText(modifyObjectAssetAttributeInput, 'Attribute', FailureHandling.OPTIONAL)
-    } else {
-        String newAssetAtrributeSelect = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/select'
-
-        'modify button Asset Attribute Select'
-        modifyObjectAssetAttributeSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-            'xpath', 'equals', newAssetAtrributeSelect, true)
-
-        'select option index 1'
-        WebUI.selectOptionByIndex(modifyObjectAssetAttributeSelect, 1, FailureHandling.OPTIONAL)
-    }
+    
+	 String newAssetAtrributeInputText = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
+	 String newAssetAtrributeList = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/select'
+	 String newAssetAtrributeInputDate = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]'
+	 String newAssetAtrributeInputNumber = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]'
+	  
+	 'modify Asset Attribute Input Text'
+	 modifyObjectAssetAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'),
+		 'xpath', 'equals', newAssetAtrributeInputText, true)
+	 'modify Asset Attribute Select Dropdownlist'
+	 modifyObjectAssetAttributeList = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'),
+		 'xpath', 'equals', newAssetAtrributeList, true)
+	 'modify Asset Attribute Input Date'
+	 modifyObjectAssetAttributeInputDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'),
+		 'xpath', 'equals', newAssetAtrributeInputDate, true)
+	 'modify Asset Attribute Input Number '
+	 modifyObjectAssetAttributeInputNumber = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/AssetAttribute'),
+		 'xpath', 'equals', newAssetAtrributeInputNumber, true)
+ 
+	 if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, 1, FailureHandling.OPTIONAL)) {
+		 'input "Attribute"'
+		 WebUI.setText(modifyObjectAssetAttributeInputText, 'Attribute', FailureHandling.OPTIONAL)
+	 }else if(WebUI.verifyElementPresent(modifyObjectAssetAttributeList,1,FailureHandling.OPTIONAL)){
+		 'select option index 1'
+		 WebUI.selectOptionByIndex(modifyObjectAssetAttributeList, 1, FailureHandling.OPTIONAL)
+	 }else if(WebUI.verifyElementPresent(modifyObjectAssetAttributeInputDate, 1, FailureHandling.OPTIONAL)){
+		 'input date 01/01/2000'
+		 WebUI.setText(modifyObjectAssetAttributeInputDate, '01/01/2000', FailureHandling.OPTIONAL)
+	 }else if(WebUI.verifyElementPresent(modifyObjectAssetAttributeInputNumber,1,FailureHandling.OPTIONAL)){
+	 	 'input number 0'
+		 WebUI.setText(modifyObjectAssetAttributeInputNumber, '0', FailureHandling.OPTIONAL)
+	 }
 }
 
 int modifyObjectIndex = 1
@@ -824,16 +838,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
 
-WebUI.delay(20)
+WebUI.delay(15)
 
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'), 
     5, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
-    'Click cancel'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData/button_CancelAssetCollateral'))
-
+   
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusFailed)
 } else {

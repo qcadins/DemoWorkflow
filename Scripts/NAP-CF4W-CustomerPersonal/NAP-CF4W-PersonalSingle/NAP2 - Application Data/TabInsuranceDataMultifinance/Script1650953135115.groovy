@@ -226,7 +226,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalS
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Inisialisasi Variabel'
-ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div.ng-untouched.ng-pristine.ng-valid > table tbody'))
+ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
 
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya tahun pada insurance '
@@ -234,12 +234,19 @@ int count = variable.size()
 
 BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0
 BigDecimal totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0
+int counterPaidByMF=0
 'Looping data insurance'
 for (int i = 1; i <= count; i++) {
-	
+	println(count)
 	'Inisialisasi Format untuk mendapatkan nilai desimal dari nilai persen'
 	NumberFormat decimalFormat = NumberFormat.getPercentInstance()
-
+	
+	paidByObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
+	
+	if(WebUI.verifyOptionSelectedByLabel(paidByObject,'MULTIFINANCE',false,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
+		counterPaidByMF = 1
+	}
+	
 	rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Rate'), 'xpath', 'equals',
 			"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input", true)
 	
@@ -283,6 +290,8 @@ for (int i = 1; i <= count; i++) {
 	
 	'Tambahkan main premium ke total main premium'
 	totalMainPremiumResult+=Result
+	
+	
 	
 	floodRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[8]/div/span/div/input",true)
 	tplRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[8]/div/span/div/input",true)
@@ -483,9 +492,11 @@ WebUI.verifyMatch(textTotalFeeAmt, String.format("%.2f", totalFeeResult), false)
 'Verif total premi to customer sesuai perhitungan'
 WebUI.verifyMatch(textTotalPremitoCust, String.format("%.2f", totalPremitoCustResult), false)
 
-
-'Input diskon'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 35))
+if(counterPaidByMF==0){
+	'Input diskon'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 35))
+	
+}
 
 'Ambil nilai total premi to customer after discount dari confins'
 String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomerAfterDiscount')).replace(",","")
