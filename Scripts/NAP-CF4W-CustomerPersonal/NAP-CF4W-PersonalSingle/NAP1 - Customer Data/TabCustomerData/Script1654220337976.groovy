@@ -18,7 +18,7 @@ import org.openqa.selenium.Keys as Keys
 int flagWarning = 0
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 

@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement as WebElement
 String userDir = System.getProperty('user.dir')
 
 'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
@@ -54,7 +54,7 @@ def SubsidyValuePercentageArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF
 
 WebDriver driver = DriverFactory.getWebDriver()
 
-ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+ArrayList<String> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
@@ -190,7 +190,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4
 
 WebDriver driverr = DriverFactory.getWebDriver()
 
-ArrayList<WebElement> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+ArrayList<String> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
 int countData = variableData.size()
 
@@ -675,9 +675,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/TabFinancialDataVerif'),
-	[:], FailureHandling.CONTINUE_ON_FAILURE)
-
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP2 - Application Data/TabFinancialDataVerif'), 
+    [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
     'ADVANCE')) {
@@ -707,5 +706,4 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 }
-
 

@@ -252,7 +252,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W
 
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 

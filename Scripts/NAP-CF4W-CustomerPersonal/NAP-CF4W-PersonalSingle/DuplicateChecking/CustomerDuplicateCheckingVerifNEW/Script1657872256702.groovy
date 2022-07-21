@@ -202,3 +202,4 @@ if (DupcheckTypeResult.contains('REVIEW')) {
      DupCheckCondition = 'LOCK'
 }
 
+println(DupCheckCondition)

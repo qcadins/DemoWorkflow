@@ -6,10 +6,11 @@
    <elementGuidId>dc9683e7-edfe-4806-88d5-704dd4cd40b5</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
+         <key>BASIC</key>
+         <value></value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>CSS</key>
       </entry>
       <entry>
          <key>XPATH</key>

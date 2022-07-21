@@ -22,7 +22,7 @@ import org.openqa.selenium.By as By
 
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
 
