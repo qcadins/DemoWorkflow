@@ -239,4 +239,9 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 1)</initValue>
       <name>RoleCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>countNumofCustomer</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -187,4 +187,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-C
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	}
+	GlobalVariable.countNumofCustomer++
 }
+
+println(GlobalVariable.countNumofCustomer)
