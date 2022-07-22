@@ -43,6 +43,10 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('body > app-
 
 int count = variable.size()
 
+'verify equal number of customer'
+WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
+
+
 for (int i = 1; i <= count; i++) {
     String newCustomerName = ('//*[@class="table-responsive"]/table/tbody/tr[' + i + ']/td[2]')
 
@@ -252,7 +256,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W
 
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 

@@ -27,7 +27,7 @@ import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
 String userDir = System.getProperty('user.dir')
 
 'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath

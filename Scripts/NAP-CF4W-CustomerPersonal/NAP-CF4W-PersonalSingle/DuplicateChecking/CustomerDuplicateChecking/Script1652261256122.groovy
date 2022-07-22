@@ -22,7 +22,7 @@ import org.openqa.selenium.By as By
 
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.Path
+String filePath = userDir + GlobalVariable.PathPersonal
 
 String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
 
@@ -85,6 +85,9 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 	def StoreCDCGuarantorPersonalName = ''
 	
 	def StoreCDCGuarantorCompanyName = ''
+	
+	'verify equal number of customer'
+	WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
 	
     for (int i = 1; i <= count; i++) {
        

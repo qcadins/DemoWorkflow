@@ -255,6 +255,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
 								0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
 						}
+						'customer added +1'
+						GlobalVariable.countNumofCustomer++
+						
                     }
                 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                     GlobalVariable.NumofGuarantorPersonal, 3) == 'LookUp') {
@@ -378,6 +381,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                         
                         'click button save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
+						
+						
 
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -391,10 +396,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                             'write to excel success'
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusSuccess)
+									
                         	if(flagWarning>0){
 								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
 									0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
 							}
+							'customer added +1'
+							GlobalVariable.countNumofCustomer++
+							
 						}
                     }
                 }
@@ -533,6 +542,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
 								0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
 						}
+						'customer added +1'
+						GlobalVariable.countNumofCustomer++
+						
                     }
                 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                     GlobalVariable.NumofGuarantorCompany, 3) == 'LookUp') {
@@ -594,6 +606,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                         
                         'Click save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
+						
+						
 
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -607,10 +621,15 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                             'write to excel success'
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusSuccess)
+							
+							
                         	if(flagWarning>0){
 								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 									'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
 							}
+							
+							'customer added +1'
+                            GlobalVariable.countNumofCustomer++
 						}
                     }
                 }
@@ -627,3 +646,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     WebUI.delay(15)
 }
 
+println(GlobalVariable.countNumofCustomer)

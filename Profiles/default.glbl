@@ -31,12 +31,12 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'f'</initValue>
+      <initValue>2</initValue>
       <name>NumofFamily</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'y'</initValue>
+      <initValue>2</initValue>
       <name>NumofGuarantorPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -52,11 +52,11 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>'\\Excel\\2. DataFile_NAP_CF4W.xlsx'</initValue>
-      <name>Path</name>
+      <name>PathPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'b'</initValue>
+      <initValue>2</initValue>
       <name>NumofGuarantorCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -211,7 +211,37 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Excel\\DataFile_NAP_CF4W_Company.xlsx'</initValue>
+      <name>PathCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 1)</initValue>
+      <name>CountAManagementShareholder</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 1)</initValue>
+      <name>CountAGuarantorPersonalCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 1)</initValue>
+      <name>CountAGuarantorCompanyCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'0'</initValue>
       <name>SubsidyDPValue</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 1)</initValue>
+      <name>RoleCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>countNumofCustomer</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
