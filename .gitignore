@@ -1,7 +1,15 @@
 /bin/
 /Libs/
-/Excel/
-/settings/
-/.settings/
+settings/
 /.classpath
 .svn/
+Excel/
+/.settings/
+.project
+settings/internal/com.kms.katalon.composer.testcase.properties
+settings/internal/com.kms.katalon.composer.testcase.settings.properties
+Excel/2. DataFile_NAP_CF4W.xlsx
+Excel/3. CustomerDataCompletion-Personal - Customer.xlsx
+Excel/4. CustomerDataCompletion-Personal - Family.xlsm
+Excel/5. CustomerDataCompletion-Personal - Guarantor.xlsm
+Excel/6. CustomerDataCompletion-Company - Guarantor.xlsm

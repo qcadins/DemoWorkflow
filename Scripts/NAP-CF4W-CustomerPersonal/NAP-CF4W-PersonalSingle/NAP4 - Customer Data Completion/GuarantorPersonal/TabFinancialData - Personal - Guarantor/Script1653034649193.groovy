@@ -64,15 +64,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-    GlobalVariable.NumofGuarantor, 10).length() > 1) {
+    GlobalVariable.NumofGuarantor, 11).length() > 1) {
     'input jumlah harta'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Jumlah Harta'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 10))
+            GlobalVariable.NumofGuarantor, 11))
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-    GlobalVariable.NumofGuarantor, 13).length() > 1) {
+    GlobalVariable.NumofGuarantor, 14).length() > 1) {
     'click button add bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
 
@@ -82,7 +82,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Bank Code_BankCode'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 12))
+            GlobalVariable.NumofGuarantor, 13))
 
     'click button search bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Search'))
@@ -104,30 +104,30 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank branch name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Bank Branch_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 14))
+            GlobalVariable.NumofGuarantor, 15))
 
     'input bank account name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Account Name_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 15))
+            GlobalVariable.NumofGuarantor, 16))
 
     'input bank account number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Account No_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 16))
+            GlobalVariable.NumofGuarantor, 17))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'), 
         2, FailureHandling.OPTIONAL)) {
         'checkbox default'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 17) == 'Yes') {
+            GlobalVariable.NumofGuarantor, 18) == 'Yes') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'))
         }
     } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'), 
         2)) {
         'checkbox default'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 17) == 'No') {
+            GlobalVariable.NumofGuarantor, 18) == 'No') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'))
         }
     }
@@ -136,14 +136,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         2, FailureHandling.OPTIONAL)) {
         'checkbox active'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 18) == 'Yes') {
+            GlobalVariable.NumofGuarantor, 19) == 'Yes') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
         }
     } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
         2)) {
         'checkbox active'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 18) == 'No') {
+            GlobalVariable.NumofGuarantor, 19) == 'No') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
         }
     }
@@ -151,7 +151,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank begining balance'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Beginning Balance_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 19))
+            GlobalVariable.NumofGuarantor, 20))
 
     'click button calculate bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_CalculateBank'))
