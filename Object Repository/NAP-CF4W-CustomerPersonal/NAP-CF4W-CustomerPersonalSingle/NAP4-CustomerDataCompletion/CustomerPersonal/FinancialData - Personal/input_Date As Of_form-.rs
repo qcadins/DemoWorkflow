@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//input[@type='date']</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@type='date']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,18 +38,18 @@
       <value>DateAsOf</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>date</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;modal fade show d-block&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/form[@class=&quot;form form-horizontal ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;form-body&quot;]/div[@class=&quot;form-group row adins-required&quot;]/div[@class=&quot;col-md-6&quot;]/input[@class=&quot;form-control adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
+      <value>//input[@type='date']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

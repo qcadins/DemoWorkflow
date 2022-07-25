@@ -617,12 +617,24 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
             }
         }
     }
-    
+	
+	'click button save and continue'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
+	
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/th_Family Name'),5, 
         FailureHandling.OPTIONAL)) {
-        'click button save and continue'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
+		'click back'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_Back'))
+	
+		'Write to Excel FAILED'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
     }
+	else{
+		'Write to Excel SUCCESS'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+	}
 }
 
 println(GlobalVariable.countNumofCustomer)
