@@ -244,4 +244,9 @@
       <initValue>0</initValue>
       <name>countNumofCustomer</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DupcheckVerif</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

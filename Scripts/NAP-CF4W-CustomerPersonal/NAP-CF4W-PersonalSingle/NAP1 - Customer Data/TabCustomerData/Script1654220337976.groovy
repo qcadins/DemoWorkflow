@@ -24,7 +24,7 @@ GlobalVariable.DataFilePath = filePath
 
 int countcustomer
 
-'click menu customer main data'
+'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
 'click button add'
