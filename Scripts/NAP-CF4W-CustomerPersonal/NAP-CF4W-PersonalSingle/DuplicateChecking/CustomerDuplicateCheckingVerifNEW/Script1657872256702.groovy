@@ -64,7 +64,7 @@ def GuarantorCompanyStatus = []
 
 'check rule 1'
 if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11), dataCustomer.getValue(GlobalVariable.NumofColm, 
+            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11).replace('-',''), dataCustomer.getValue(GlobalVariable.NumofColm, 
             20))) > 0) {
     'add "LOCK" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus.add('LOCK')
@@ -72,7 +72,7 @@ if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRul
 
 'check rule 2'
 if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11), dataCustomer.getValue(GlobalVariable.NumofColm, 
+            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11).replace('-',''), dataCustomer.getValue(GlobalVariable.NumofColm, 
             9))) > 0) {
     'add "LOCK" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus.add('LOCK')
@@ -80,7 +80,7 @@ if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRul
 
 'check rule 3'
 if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11), dataCustomer.getValue(GlobalVariable.NumofColm, 
+            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11).replace('-',''), dataCustomer.getValue(GlobalVariable.NumofColm, 
             17))) > 0) {
     'add "LOCK" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus.add('LOCK')
@@ -95,7 +95,7 @@ if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRul
 
 'check rule 5'
 if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11), dataCustomer.getValue(GlobalVariable.NumofColm, 
+            GlobalVariable.NumofColm, 18), dataCustomer.getValue(GlobalVariable.NumofColm, 11).replace('-',''), dataCustomer.getValue(GlobalVariable.NumofColm, 
             9))) > 0) {
     'add "REVIEW" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus.add('REVIEW')
@@ -133,7 +133,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         GlobalVariable.NumofColm, 3)) {
         'check rule 1'
         if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11), dataFamily.getValue(
+                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11).replace('-',''), dataFamily.getValue(
                     GlobalVariable.NumofFamily, 23))) > 0) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
             FamilyPersonalStatus.add('LOCK')
@@ -141,7 +141,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         
         'check rule 2'
         if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11), dataFamily.getValue(
+                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11).replace('-',''), dataFamily.getValue(
                     GlobalVariable.NumofFamily, 9))) > 0) {
             'add "LOCK" kedalam array FamilyPersonalStatus'
             FamilyPersonalStatus.add('LOCK')
@@ -149,7 +149,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         
         'check rule 3'
         if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11), dataFamily.getValue(
+                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11).replace('-',''), dataFamily.getValue(
                     GlobalVariable.NumofFamily, 20))) > 0) {
             'add "LOCK" kedalam array FamilyPersonalStatus'
             FamilyPersonalStatus.add('LOCK')
@@ -164,7 +164,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         
         'check rule 5'
         if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11), dataFamily.getValue(
+                    GlobalVariable.NumofFamily, 21), dataFamily.getValue(GlobalVariable.NumofFamily, 11).replace('-',''), dataFamily.getValue(
                     GlobalVariable.NumofFamily, 9))) > 0) {
             'add "REVIEW" kedalam array FamilyPersonalStatus'
             FamilyPersonalStatus.add('REVIEW')
@@ -184,6 +184,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             FamilyPersonalStatus.add('REVIEW')
         }
         
+				println(FamilyPersonalStatus)
+					
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (FamilyPersonalStatus.contains('REVIEW')) {
             'declare value result = review'
@@ -205,54 +207,53 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
         GlobalVariable.NumofColm, 3)) {
         'check rule 1'
         if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 18), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                    11), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 20))) > 0) {
+                    GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 11).replace('-',''), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 20))) > 0) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
             GuarantorPersonalStatus.add('LOCK')
         }
         
         'check rule 2'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 18), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                    11), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                    11).replace('-',''), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
             'add "LOCK" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('LOCK')
         }
         
         'check rule 3'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 18), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                    11), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 17))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                    11).replace('-',''), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 17))) > 0) {
             'add "LOCK" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('LOCK')
         }
         
         'check rule 4'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, dataFamily.getValue(
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, dataGuarantorPersonal.getValue(
                     GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
             'add "REVIEW" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('REVIEW')
         }
         
         'check rule 5'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 18), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                    11), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                    11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
             'add "REVIEW" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('REVIEW')
         }
         
         'check rule 6'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 9), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                     20))) > 0) {
             'add "REVIEW" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('REVIEW')
         }
         
         'check rule 7'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 9), dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                     17))) > 0) {
             'add "REVIEW" kedalam array GuarantorPersonalStatus'
             GuarantorPersonalStatus.add('REVIEW')
@@ -278,20 +279,22 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
         GlobalVariable.NumofGuarantorCompany, 2) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 3)) {
         'check rule company 1'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataFamily.getValue(
-                    GlobalVariable.NumofGuarantorCompany, 8), dataFamily.getValue(GlobalVariable.NumofGuarantorCompany, 
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataGuarantorPersonal.getValue(
+                    GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                     9))) > 0) {
             'add "REVIEW" kedalam array GuarantorCompanyStatus'
             GuarantorCompanyStatus.add('LOCK')
         }
         
         'check rule company 2'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataFamily.getValue(
+        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataGuarantorCompany.getValue(
                     GlobalVariable.NumofGuarantorCompany, 8))) > 0) {
             'add "REVIEW" kedalam array GuarantorCompanyStatus'
             GuarantorCompanyStatus.add('REVIEW')
         }
         
+					
+					
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (GuarantorCompanyStatus.contains('REVIEW')) {
             'declare value result = review'
@@ -305,6 +308,11 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
         }
     }
 }
+println(CustomerPersonalStatus)
+println(FamilyPersonalStatus)
+println(GuarantorPersonalStatus)
+println(GuarantorCompanyStatus)
+println(DupcheckResult)
 
 if(DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')){
 	
