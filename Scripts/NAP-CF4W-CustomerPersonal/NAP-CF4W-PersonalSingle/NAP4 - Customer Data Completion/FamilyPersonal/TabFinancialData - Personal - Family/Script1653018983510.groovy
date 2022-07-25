@@ -21,6 +21,8 @@ String filePath = userDir + GlobalVariable.DataFileFamilyPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+String maritalStatus = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/label_MaritalStatus'))
+
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family').getValue(GlobalVariable.NumofFamily, 2).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'))
@@ -43,7 +45,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
 	datesAsOf=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Date As Of_form-')
 	buttonCalculate=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Calculate')
 	buttonSave=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Save')
-	if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/label_MaritalStatus')).equalsIgnoreCase("Married")){
+	if(maritalStatus.equalsIgnoreCase("Married")){
 		monthlyInstallment = WebUI.modifyObjectProperty(monthlyInstallment,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[6]/div/input",true)
 		monthlyExpense = WebUI.modifyObjectProperty(monthlyExpense,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[7]/div/input",true)
 		datesAsOf = WebUI.modifyObjectProperty(datesAsOf,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[10]/div/input",true)
