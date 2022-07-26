@@ -279,6 +279,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 35), false)
 
+	'get customer name'
+	custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 'value', FailureHandling.OPTIONAL)
+	
+	'add name to Global variable'
+	GlobalVariable.CustomerName = custname
+	
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -300,6 +306,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		}
 		'customer added +1'
 		GlobalVariable.countNumofCustomer++
+
     }
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 4) == 'LookUp') {
@@ -416,11 +423,16 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         	flagWarning++
 		}
     }
+		
+		'get customer name'
+		custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 'value', FailureHandling.OPTIONAL)
+		
+		'add name to Global variable'
+		GlobalVariable.CustomerName = custname
     
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/button_Save'))
 	
-    GlobalVariable.countNumofCustomer = GlobalVariable.countNumofCustomer + 1
 
     'verify fail'
     if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -449,7 +461,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		} 
 		'customer added +1'
         GlobalVariable.countNumofCustomer++
+		
+		
     }
 }
-	println(countcustomer)
-	println(GlobalVariable.countNumofCustomer)
+	println(GlobalVariable.CustomerName)

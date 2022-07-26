@@ -131,6 +131,12 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
         def GuarantorActionArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(
             GlobalVariable.NumofColm, 8).split(';')
+			
+		'array customer name data inputan'
+		def CustomerNameArray = GlobalVariable.CustomerName.split(';')
+		
+		'verify name == data inputan'
+		WebUI.verifyMatch(subjectName, CustomerNameArray[i-1], false)
 
         if (CustomerArray.size() > 0) {
             for (c = 1; c <= CustomerArray.size(); c++) {
