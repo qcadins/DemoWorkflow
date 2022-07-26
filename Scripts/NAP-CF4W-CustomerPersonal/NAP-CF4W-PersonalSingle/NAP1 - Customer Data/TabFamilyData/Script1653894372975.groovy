@@ -338,6 +338,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
                             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                 GlobalVariable.NumofFamily, 44), false)
                     }
+						
+						'get customer name'
+						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 'value', FailureHandling.OPTIONAL)
+						
+						'add name to Global variable'
+						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
                     
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_Save'))
@@ -362,6 +368,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 						}
 						'customer added +1'
 						GlobalVariable.countNumofCustomer++
+						
+						
                     }
                 }
             } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -583,6 +591,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 							continue
 						}
 					}
+						
+						'get customer name'
+						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 'value', FailureHandling.OPTIONAL)
+						
+						'add name to Global variable'
+						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
 
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData/button_Save'))
@@ -609,9 +623,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
 								0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
 							
-							'customer added +1'
-							GlobalVariable.countNumofCustomer++
 						}
+                        'customer added +1'
+                        GlobalVariable.countNumofCustomer++
+						
+						
 					}
                 }
             }
@@ -637,5 +653,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	}
 }
 
-println(GlobalVariable.countNumofCustomer)
-
+println(GlobalVariable.CustomerName)
