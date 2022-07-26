@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_ShareHolderLegalName</name>
+   <tag></tag>
+   <elementGuidId>010fe947-0e79-4ef1-b0f3-9c439c5b3b78</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[1]/div[1]/div/div/lib-uclookupgeneric[1]/div/div/div[1]/span/button/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+</WebElementEntity>
