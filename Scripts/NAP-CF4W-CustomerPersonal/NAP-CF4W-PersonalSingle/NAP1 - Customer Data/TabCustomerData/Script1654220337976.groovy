@@ -465,4 +465,4 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		
     }
 }
-	println(GlobalVariable.CustomerName)
+	

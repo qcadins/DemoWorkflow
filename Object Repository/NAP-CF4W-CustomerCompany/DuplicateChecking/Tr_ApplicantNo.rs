@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Tr_ApplicantNo</name>
+   <tag></tag>
+   <elementGuidId>4ced80cc-77d0-455a-acc8-b96cda989668</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[4]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[4]</value>
+   </webElementProperties>
+</WebElementEntity>

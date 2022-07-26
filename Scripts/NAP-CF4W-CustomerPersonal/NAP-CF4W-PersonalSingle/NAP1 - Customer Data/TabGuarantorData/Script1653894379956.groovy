@@ -676,5 +676,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     
     WebUI.delay(15)
 }
-	println(GlobalVariable.CustomerName)
-println(GlobalVariable.countNumofCustomer)
+	

@@ -653,4 +653,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	}
 }
 
-println(GlobalVariable.CustomerName)
+

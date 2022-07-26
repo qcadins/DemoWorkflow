@@ -136,7 +136,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 		def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 		
 		'verify name == data inputan'
-		WebUI.verifyMatch(subjectName, CustomerNameArray[i-1], false)
+		WebUI.verifyMatch(subjectName, CustomerNameArray[i-1], false, FailureHandling.OPTIONAL)
 
         if (CustomerArray.size() > 0) {
             for (c = 1; c <= CustomerArray.size(); c++) {

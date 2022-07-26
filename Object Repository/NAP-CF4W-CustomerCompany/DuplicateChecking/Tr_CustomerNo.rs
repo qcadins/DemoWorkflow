@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Tr_CustomerNo</name>
+   <tag></tag>
+   <elementGuidId>3bf4e1a0-caba-4191-a723-3f64dbd2cda7</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[5]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[5]</value>
+   </webElementProperties>
+</WebElementEntity>
