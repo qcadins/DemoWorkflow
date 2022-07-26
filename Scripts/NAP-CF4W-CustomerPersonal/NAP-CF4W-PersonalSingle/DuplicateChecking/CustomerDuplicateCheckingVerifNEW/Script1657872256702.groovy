@@ -184,7 +184,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             FamilyPersonalStatus.add('REVIEW')
         }
         
-				println(FamilyPersonalStatus)
+				
 					
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (FamilyPersonalStatus.contains('REVIEW')) {
@@ -308,11 +308,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
         }
     }
 }
-println(CustomerPersonalStatus)
-println(FamilyPersonalStatus)
-println(GuarantorPersonalStatus)
-println(GuarantorCompanyStatus)
-println(DupcheckResult)
+
 
 if(DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')){
 	

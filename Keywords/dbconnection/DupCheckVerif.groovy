@@ -34,56 +34,6 @@ public class DupCheckVerif {
 	}
 
 	@Keyword
-	public checkCustIdNo (Sql instance, String IdNo){
-		String custIdNoCount
-		instance.eachRow(("SELECT COUNT(ID_NO) FROM CUST WITH (NOLOCK) WHERE ID_NO = '" + IdNo + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
-
-			custIdNoCount = (row[0])
-		})
-		return custIdNoCount
-	}
-
-	@Keyword
-	public checkCustName (Sql instance, String Name){
-		ArrayList<String> custName = new ArrayList<String>()
-		instance.eachRow(("SELECT DISTINCT CUST_NAME FROM CUST WITH (NOLOCK) WHERE CUST_NAME LIKE '%" + Name + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
-
-			custName.add(row[0])
-		})
-		return custName
-	}
-
-	@Keyword
-	public checkBirthDate (Sql instance, String BirthDate){
-		String custBirthDateCount
-		instance.eachRow(("SELECT COUNT(DISTINCT FORMAT(BIRTH_DT, 'MM/dd/yyyy')) FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE BIRTH_DT = '" + BirthDate + "' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
-
-			custBirthDateCount = (row[0])
-		})
-		return custBirthDateCount
-	}
-
-	@Keyword
-	public checkMotherMaidenCust (Sql instance, String MotherMaidenName){
-		ArrayList<String> motherMaidenName = new ArrayList<String>()
-		instance.eachRow(("SELECT DISTINCT MOTHER_MAIDEN_NAME FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MOTHER_MAIDEN_NAME like '%" + MotherMaidenName + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL'"), {  row ->
-
-			motherMaidenName.add(row[0])
-		})
-		return motherMaidenName
-	}
-
-	@Keyword
-	public checkCustomerType (Sql instance, String Appno, String CustName){
-		String Custtype
-		instance.eachRow(("USE LOS select MR_CUST_TYPE_CODE from APP_CUST a join APP b on a.APP_ID = b.APP_ID where APP_NO = '" + Appno + "' and CUST_NAME = '" + CustName + "'"), {  row ->
-
-			Custtype = (row[0])
-		})
-		return Custtype
-	}
-
-	@Keyword
 	public checkDupcheckRulePersonal1 (Sql instance, String idno, String idtype, String Mothername){
 		String Result1
 		instance.eachRow(("SELECT count(a.CUST_ID) FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND MR_ID_TYPE_CODE = '" + idtype + "' AND MOTHER_MAIDEN_NAME like '%" + Mothername + "%'"), { row ->
@@ -166,7 +116,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRuleCompany2 (Sql instance, String custname){
 		String Result9
-		instance.eachRow(("SELECT COUNT(a.CUST_NAME) FROM CUST a WITH (NOLOCK) JOIN CUST_COMPANY b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME LIKE '%" + custname + "%'"), { row ->
+		instance.eachRow(("SELECT COUNT(a.CUST_NAME) FROM CUST a WITH (NOLOCK) JOIN CUST_COMPANY b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME = '" + custname + "'"), { row ->
 
 			Result9 = (row[0])
 		})

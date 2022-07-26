@@ -233,24 +233,24 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 
                     'select multifinance / supplier'
                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'), 
-                        SubsidyTypeArray[(s - 1)], false)
+                        "(?i)"+SubsidyTypeArray[(s - 1)], true)
 
                     if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
                         'select subsidy from value'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'), 
-                            SubsidyfromValueArray[(s - 1)], false)
+                            "(?i)"+SubsidyfromValueArray[(s - 1)], true)
 
                         'select subsidy allocation from '
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'), 
-                            AllocationformArray[(s - 1)], false)
+                            "(?i)"+AllocationformArray[(s - 1)], true)
 
                         'select subsidy source'
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'), 
-                            SubsidySourceArray[(s - 1)], false)
+                            "(?i)"+SubsidySourceArray[(s - 1)], true)
 
                         'select subsidy value type'
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'), 
-                            SubsidyValueTypeArray[(s - 1)], false)
+                            "(?i)"+SubsidyValueTypeArray[(s - 1)], true)
 
                         if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
                             'input subsidy value amount'
@@ -264,15 +264,15 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
                     } else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
                         'select subsidy allocation from'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'), 
-                            AllocationformArray[(s - 1)], false)
+                            "(?i)"+AllocationformArray[(s - 1)], true)
 
                         'select subsidy source'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'), 
-                            SubsidySourceArray[(s - 1)], false)
+                            "(?i)"+SubsidySourceArray[(s - 1)], true)
 
                         'select subsidy value type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'), 
-                            SubsidyValueTypeArray[(s - 1)], false)
+                            "(?i)"+SubsidyValueTypeArray[(s - 1)], true)
 
                         if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
                             'input subsidy value amount'
@@ -308,46 +308,46 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 
                     'select multifinance / supplier'
                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'), 
-                        SubsidyTypeArray[(s - 1)], false)
+                        "(?i)"+SubsidyTypeArray[(s - 1)], true)
 
                     if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
                         'select subsidy from value'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'), 
-                            SubsidyfromValueArray[(s - 1)], false)
+                            "(?i)"+SubsidyfromValueArray[(s - 1)], true)
 
                         'select subsidy allocation from '
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'), 
-                            AllocationformArray[(s - 1)], false)
+                            "(?i)"+AllocationformArray[(s - 1)], true)
 
                         'select subsidy source'
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'), 
-                            SubsidySourceArray[(s - 1)], false)
+                            "(?i)"+SubsidySourceArray[(s - 1)], true)
 
                         'select subsidy value type'
                         WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'), 
-                            SubsidyValueTypeArray[(s - 1)], false)
+                            "(?i)"+SubsidyValueTypeArray[(s - 1)], true)
 
                         if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
                             'input subsidy value amount'
                             WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'), 
-                                SubsidyValueAmountArray[(s - 1)])
+                                "(?i)"+SubsidyValueAmountArray[(s - 1)])
                         } else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
                             'input subsidy value percentage'
                             WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'), 
-                                SubsidyValuePercentageArray[(s - 1)])
+                                "(?i)"+SubsidyValuePercentageArray[(s - 1)])
                         }
                     } else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
                         'select subsidy allocation from'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'), 
-                            AllocationformArray[(s - 1)], false)
+                            "(?i)"+AllocationformArray[(s - 1)], true)
 
                         'select subsidy source'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'), 
-                            SubsidySourceArray[(s - 1)], false)
+                            "(?i)"+SubsidySourceArray[(s - 1)], true)
 
                         'select subsidy value type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'), 
-                            SubsidyValueTypeArray[(s - 1)], false)
+                            "(?i)"+SubsidyValueTypeArray[(s - 1)], true)
 
                         if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
                             'input subsidy value amount'
