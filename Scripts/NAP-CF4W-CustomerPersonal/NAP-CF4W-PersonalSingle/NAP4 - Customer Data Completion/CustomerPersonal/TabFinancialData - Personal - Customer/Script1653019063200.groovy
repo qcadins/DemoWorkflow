@@ -45,23 +45,31 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
 	datesAsOf=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Date As Of_form-')
 	buttonCalculate=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Calculate')
 	buttonSave=findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Save')
+	
+	'Pengecekan jika maritalstatus married'
 	if(maritalStatus.equalsIgnoreCase("Married")){
 		monthlyInstallment = WebUI.modifyObjectProperty(monthlyInstallment,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[6]/div/input",true)
 		monthlyExpense = WebUI.modifyObjectProperty(monthlyExpense,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[7]/div/input",true)
 		datesAsOf = WebUI.modifyObjectProperty(datesAsOf,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[10]/div/input",true)
 		buttonCalculate = WebUI.modifyObjectProperty(buttonCalculate,'xpath','equals',"/html/body/ngb-modal-window/div/div/form/div[2]/div/div[11]/div/button",true)
 		
-		
+		'Pengecekan spouse monthly income pada excel terisi'
 		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(GlobalVariable.NumofColm, 9).length() >= 1){
+			'Input spouse monthly income'
 			WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_SpouseMonthlyIncome'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(GlobalVariable.NumofColm, 9))	
 		}
+		'Pengecekan isjoinincome bernilai yes atau no pada excel'
 		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+			'Jika is join income belum tercentang'
 			if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'),5,FailureHandling.OPTIONAL)){
+				'centang is join income'
 				WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'))
 			}
 		}
 		else{
+			'jika is join income sudah tercentang'
 			if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'),5,FailureHandling.OPTIONAL)){
+				'Un-centang is join income'
 				WebUI.uncheck(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'))
 			}
 		}
