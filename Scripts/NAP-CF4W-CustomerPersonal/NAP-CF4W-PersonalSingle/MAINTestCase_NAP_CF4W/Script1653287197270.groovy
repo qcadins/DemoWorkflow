@@ -45,7 +45,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 		
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/DuplicateChecking/CustomerDuplicateCheckingVerifNEW'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-PersonalSingle/DuplicateChecking/CustomerDuplicateCheckingVerif'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 		
 if(GlobalVariable.DupcheckVerif == 'Yes'){
