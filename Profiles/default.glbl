@@ -249,4 +249,9 @@
       <initValue>''</initValue>
       <name>DupcheckVerif</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>CustomerName</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
