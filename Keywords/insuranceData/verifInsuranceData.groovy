@@ -39,7 +39,7 @@ public class verifInsuranceData {
 		int count = variable.size()
 
 		int counterPaidByMF=0, counterCap = 0
-		
+
 		int countFlood = 0, countTPL = 0, countAOG = 0, countSRCC = 0, countTJHTP = 0, countKDUP = 0, countTerrorist = 0
 		if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),2,FailureHandling.OPTIONAL)){
 			countFlood = 1
@@ -146,35 +146,35 @@ public class verifInsuranceData {
 
 			'Ambil nilai dari rate additional coverage flood'
 			String textFloodRate = WebUI.getAttribute(floodRateObject,'value').replaceAll("\\s","").replace(",","")
-		
+
 
 			'Ambil nilai dari rate additional coverage tpl'
 			String textTPLRate = WebUI.getAttribute(tplRateObject,'value').replace(",","").replaceAll("\\s","")
-			
+
 
 			'Ambil nilai dari rate additional coverage act of god'
 			String textAOGRate = WebUI.getAttribute(aogRateObject,'value').replaceAll("\\s","").replace(",","")
-		
+
 
 			'Ambil nilai dari rate additional coverage srcc'
 			String textSRCCRate = WebUI.getAttribute(srccRateObject,'value').replaceAll("\\s","").replace(",","")
-			
+
 
 			'Ambil nilai dari rate additional coverage tanggung jawab hukum terhadap penumpang'
 			String textTJHTPRate = WebUI.getAttribute(tjhtpRateObject,'value').replace(",","").replaceAll("\\s","")
-			
+
 
 			'Ambil nilai dari rate additional coverage kecelakaan diri untuk penumpang'
 			String textKDUPRate = WebUI.getAttribute(kdupRateObject,'value').replace(",","").replaceAll("\\s","")
-			
+
 
 			'Ambil nilai dari rate additional coverage terrorist'
 			String textTerroristRate = WebUI.getAttribute(terroristRateObject,'value').replaceAll("\\s","").replace(",","")
-			
+
 
 			'Ambil nilai dari rate additional coverage loading'
 			String textLoadingRate = WebUI.getAttribute(loadingRateObject,'value').replaceAll("\\s","").replace(",","")
-		
+
 
 			Float floodRate = 0.00
 			'Jika additional coverage flood tercentang'
@@ -189,7 +189,7 @@ public class verifInsuranceData {
 					'Perhitungan nilai additional premi flood'
 					resultFloodPremi = Math.round(Result*floodRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float tplRate = 0.00
 			'Jika tpl tercentang'
@@ -204,8 +204,8 @@ public class verifInsuranceData {
 					tplRate = decimalFormat.parse(textTPLRate).floatValue()
 					resultTPLPremi = Math.round(Result*tplRate*(numberOfMonth/12))
 				}
-				
-				
+
+
 			}
 			Float aogRate = 0.00
 			'jika act of god tercentang'
@@ -220,7 +220,7 @@ public class verifInsuranceData {
 					'Perhitungan nilai additional premi act of god'
 					resultAOGPremi = Math.round(Result*aogRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float srccRate = 0.00
 			'jika srcc tercentang'
@@ -228,7 +228,7 @@ public class verifInsuranceData {
 				if(countSRCC ==1){
 					srccRate = Long.parseLong(textSRCCRate)
 					resultSRCCPremi = Math.round(srccRate*(numberOfMonth/12))
-					
+
 				}
 				else{
 					'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
@@ -236,7 +236,7 @@ public class verifInsuranceData {
 					'Perhitungan nilai additional premi srcc'
 					resultSRCCPremi = Math.round(Result*srccRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float tjhtpRate = 0.00
 			'jika tanggung jawab hukum terhadap penumpang tercentang'
@@ -252,7 +252,7 @@ public class verifInsuranceData {
 					tjhtpRate = decimalFormat.parse(textTJHTPRate).floatValue()
 					resultTJHTPPremi = Math.round(Result*tjhtpRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float kdupRate = 0.00
 			'jika kecelekaan diri untuk penumpang tercentang'
@@ -267,7 +267,7 @@ public class verifInsuranceData {
 					kdupRate = decimalFormat.parse(textKDUPRate).floatValue()
 					resultKDUPPremi = Math.round(Result*kdupRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float terroristRate = 0.00
 			'jika terrorist tercentang'
@@ -282,7 +282,7 @@ public class verifInsuranceData {
 					'Perhitungan nilai additional premi terrorist'
 					resultTerroristPremi = Math.round(Result*terroristRate*(numberOfMonth/12))
 				}
-				
+
 			}
 			Float loadingRate = 0.00
 			'jika rate loading tidak kosong'
@@ -290,7 +290,7 @@ public class verifInsuranceData {
 				'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
 				loadingRate = decimalFormat.parse(textLoadingRate).floatValue()
 			}
-			
+
 			'Perhitungan nilai additional premi loading'
 			BigDecimal resultLoadingPremi = Math.round(Result*loadingRate*(numberOfMonth/12))
 

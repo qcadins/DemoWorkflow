@@ -52,7 +52,23 @@ def SubsidyValueAmountArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-C
 
 def SubsidyValuePercentageArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
     GlobalVariable.NumofColm, 9).split(';')
-
+	
+	
+if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+    GlobalVariable.NumofColm, 41).equalsIgnoreCase("Yes")){	
+	for (i = 0; i < AllocationformArray.size(); i++) {
+		if(AllocationformArray[i].equalsIgnoreCase("Discount Insurance")){
+			SubsidyValueAmountArray[i]=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 57)
+		}
+		
+		String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(";")
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 7, GlobalVariable.NumofColm -
+			1, overrideSubsidyValueAmountArray)
+		
+	}
+}
+	
 WebDriver driver = DriverFactory.getWebDriver()
 
 ArrayList<String> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))

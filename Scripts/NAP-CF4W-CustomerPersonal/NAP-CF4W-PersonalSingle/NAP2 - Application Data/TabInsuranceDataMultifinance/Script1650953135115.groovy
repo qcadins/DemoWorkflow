@@ -531,8 +531,16 @@ String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('Object Reposi
 'ambil nilai diskon pada confins'
 String textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),'value').replace(",","")
 BigDecimal discountAmt = Long.parseLong(textDiscountAmt)
+
+if(totalResult[2]==1){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 56, GlobalVariable.NumofColm -
+		1, textDiscountAmt)
+}
+
+
 'Perhitungan total premi to customer after discount'
 totalPremitoCustAftDiscountResult = totalPremitoCustResult-discountAmt
+
 
 'Verif total premi to customer after discount sesuai perhitungan'
 WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format("%.2f", totalPremitoCustAftDiscountResult), false)
