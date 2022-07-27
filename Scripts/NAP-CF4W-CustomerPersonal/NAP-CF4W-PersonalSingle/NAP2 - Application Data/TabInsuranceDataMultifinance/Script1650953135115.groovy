@@ -219,8 +219,31 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalS
 
 not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/Checkbox Capitalize'))
 
-'Klik calculate insurance'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
+
+int countFlood = 0, countTPL = 0, countAOG = 0, countSRCC = 0, countTJHTP = 0, countKDUP = 0, countTerrorist = 0
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),2,FailureHandling.OPTIONAL)){
+	countFlood = 1
+}
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTPL'),2,FailureHandling.OPTIONAL)){
+	countTPL = 1
+}
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountAOG'),2,FailureHandling.OPTIONAL)){
+	countAOG = 1
+}
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountSRCC'),2,FailureHandling.OPTIONAL)){
+	countSRCC = 1
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTJHTP'),2,FailureHandling.OPTIONAL)){
+	countTJHTP = 1
+}
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountKDUP'),2,FailureHandling.OPTIONAL)){
+	countKDUP = 1
+}
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTerrorist'),2,FailureHandling.OPTIONAL)){
+	countTerrorist = 1
+}
+
 
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -232,234 +255,237 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceC
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya tahun pada insurance '
 int count = variable.size()
 
-BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0
-BigDecimal totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0
-int counterPaidByMF=0
-'Looping data insurance'
-for (int i = 1; i <= count; i++) {
-	println(count)
-	'Inisialisasi Format untuk mendapatkan nilai desimal dari nilai persen'
-	NumberFormat decimalFormat = NumberFormat.getPercentInstance()
-	
-	paidByObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
-	
-	if(WebUI.verifyOptionSelectedByLabel(paidByObject,'MULTIFINANCE',false,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
-		counterPaidByMF = 1
-	}
-	
-	rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Rate'), 'xpath', 'equals',
-			"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input", true)
-	
-	'Ambil nilai dari rate'
-	String textRate = WebUI.getAttribute(rateObject,'value').replaceAll("\\s","")
-	
-	'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi'
-	Float rate = decimalFormat.parse(textRate).floatValue()
-	
-	sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 'xpath', 'equals',
-			"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/div/input", true)
-	
-	'Ambil nilai dari persentase sum insured'
-	String textSumInsuredPercent = WebUI.getAttribute(sumInsuredPercentObject,'value').replaceAll("\\s","")
-	
-	'Mengubah nilai persen menjadi desimal'
-	Float sumInsuredPercent = decimalFormat.parse(textSumInsuredPercent).floatValue();
-	
-	'Ambil nilai coverage amount'
-	String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
-	BigDecimal Amount = Long.parseLong(textAmount)
+'Looping data insurance untuk input data'
+for(int i = 1;i<=count;i++){
+	 //Capitalize
+	 capitalizeObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Capitalized'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[1]/div/input",true)
+	 
+	 capitalizeValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 35)
+	 capitalizeValueArray = capitalizeValue.split(";",-1)
+	 
+	 if(capitalizeValue.length()>0){
+		 if(capitalizeValueArray[i-1]!=""){
+			 if(capitalizeValueArray[i-1].equalsIgnoreCase("YES")){
+				 if(WebUI.verifyElementNotChecked(capitalizeObject,5,FailureHandling.OPTIONAL)){
+					 WebUI.check(capitalizeObject)
+				 }
+			 }
+			 else if(capitalizeValueArray[i-1].equalsIgnoreCase("NO")){
+				 if(WebUI.verifyElementChecked(capitalizeObject,5,FailureHandling.OPTIONAL)){
+					 WebUI.uncheck(capitalizeObject)
+				 }
+			 }
+		 }
+	 }
+	 //Paid By
+	 paidByObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
+	 
+	 paidByValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 36)
+	 paidByValueArray = paidByValue.split(";",-1)
+	 
+	 if(paidByValue.length()>0){
+		 if(paidByValueArray[i-1]!=""){
+			 WebUI.selectOptionByLabel(paidByObject,"(?i)"+paidByValueArray[i-1],true)
+		 }
+	 }
+	 
+	 //Sum insured
+	 sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 'xpath', 'equals',
+		 "//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/div/input", true)
+	 
+	 sumInsuredPercentValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 37)
+	 sumInsuredPercentValueArray = sumInsuredPercentValue.split(";",-1)
+	 if(sumInsuredPercentValue.length()>0){
+		 if(sumInsuredPercentValueArray[i-1]!=""){
+			 WebUI.setText(sumInsuredPercentObject,sumInsuredPercentValueArray[i-1])
+		 }
+	 }
+	 
+	 //Main Coverage
+	 mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[6]/span[1]/select",true)
+	 mainCoverageValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 38)
+	 mainCoverageValueArray = mainCoverageValue.split(";",-1)
+	 if(mainCoverageValue.length()>0){
+		 if(mainCoverageValueArray[i-1]!=""){
+			 WebUI.selectOptionByLabel(mainCoverageObject,"(?i)"+mainCoverageValueArray[i-1],true)
+		 }
+	 }
+	 
+	 //AdditionalCoverage
+	  Object floodYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[6]/div/div/label/input",true)
+	  Object tplYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[6]/div/div/label/input",true)
+	  Object aogYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[5]/td[6]/div/div/label/input",true)
+	  Object srccYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[6]/td[6]/div/div/label/input",true)
+	  Object tjhtpYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[7]/td[6]/div/div/label/input",true)
+	  Object kdupYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[8]/td[6]/div/div/label/input",true)
+	  Object terroristYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[9]/td[6]/div/div/label/input",true)
 
-	numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_numberOfMonth'), 'xpath', 'equals',
-			"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[4]", true)
-	'Ambil nilai number of month'
-	String textNumberOfMonth = WebUI.getText(numberOfMonthObject)
-	
-	BigDecimal numberOfMonth = Integer.parseInt(textNumberOfMonth)
-
-	mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_MainPremiumAmt'), 'xpath', 'equals',
-			"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[9]", true)
-	
-	'Ambil nilai Main Premium Amount'
-	String textMainPremi = WebUI.getText(mainPremiObject).replace(",","").replace(".00","")
-
-	'Perhitungan Main Premium Amount'
-	BigDecimal Result = Math.round(Amount*sumInsuredPercent*rate*(numberOfMonth/12)/10)*10
-
-	'Verifikasi/memastikan nilai main premium amount pada confins sama dengan perhitungan'
-	WebUI.verifyMatch(textMainPremi,Result.toString(),false, FailureHandling.OPTIONAL)
-	
-	'Tambahkan main premium ke total main premium'
-	totalMainPremiumResult+=Result
-	
-	
-	
-	floodRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[8]/div/span/div/input",true)
-	tplRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[8]/div/span/div/input",true)
-	aogRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[5]/td[8]/div/span/div/input",true)
-	srccRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[6]/td[8]/div/span/div/input",true)
-	tjhtpRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[7]/td[8]/div/span/div/input",true)
-	kdupRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[8]/td[8]/div/span/div/input",true)
-	terroristRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[9]/td[8]/div/span/div/input",true)
-	loadingRateObject= WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Loading_CustAddPremiRate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[10]/td[8]/div/span/div/input",true)
-
-	'Ambil nilai dari rate additional coverage flood'
-	String textFloodRate = WebUI.getAttribute(floodRateObject,'value').replaceAll("\\s","")
-	
-	'Ambil nilai dari rate additional coverage tpl'
-	String textTPLRate = WebUI.getAttribute(tplRateObject,'value').replace(",","")
-	
-	'Ambil nilai dari rate additional coverage act of god'
-	String textAOGRate = WebUI.getAttribute(aogRateObject,'value').replaceAll("\\s","")
-	
-	'Ambil nilai dari rate additional coverage srcc'
-	String textSRCCRate = WebUI.getAttribute(srccRateObject,'value').replaceAll("\\s","")
-	
-	'Ambil nilai dari rate additional coverage tanggung jawab hukum terhadap penumpang'
-	String textTJHTPRate = WebUI.getAttribute(tjhtpRateObject,'value').replace(",","")
-	
-	'Ambil nilai dari rate additional coverage kecelakaan diri untuk penumpang'
-	String textKDUPRate = WebUI.getAttribute(kdupRateObject,'value').replace(",","")
-	
-	'Ambil nilai dari rate additional coverage terrorist'
-	String textTerroristRate = WebUI.getAttribute(terroristRateObject,'value').replaceAll("\\s","")
-	
-	'Ambil nilai dari rate additional coverage loading'
-	String textLoadingRate = WebUI.getAttribute(loadingRateObject,'value').replaceAll("\\s","")
-	
-	
-	floodYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[6]/div/div/label/input",true)
-	tplYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[6]/div/div/label/input",true)
-	aogYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[5]/td[6]/div/div/label/input",true)
-	srccYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[6]/td[6]/div/div/label/input",true)
-	tjhtpYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[7]/td[6]/div/div/label/input",true)
-	kdupYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[8]/td[6]/div/div/label/input",true)
-	terroristYearCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel TP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[9]/td[6]/div/div/label/input",true)
-	
-	
-	Float floodRate = 0.00
-	'Jika additional coverage flood tercentang'
-	if(WebUI.verifyElementChecked(floodYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
-		floodRate = decimalFormat.parse(textFloodRate).floatValue()
-	}
-	BigDecimal tplRate = 0
-	'Jika tpl tercentang'
-	if(WebUI.verifyElementChecked(tplYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'simpan nilai ratenya'
-		tplRate = Long.parseLong(textTPLRate)
-	}
-	Float aogRate = 0.00
-	'jika act of god tercentang'
-	if(WebUI.verifyElementChecked(aogYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
-		aogRate = decimalFormat.parse(textAOGRate).floatValue()
-	}
-	Float srccRate = 0.00
-	'jika srcc tercentang'
-	if(WebUI.verifyElementChecked(srccYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
-		srccRate = decimalFormat.parse(textSRCCRate).floatValue()
-	}
-	BigDecimal tjhtpRate = 0
-	'jika tanggung jawab hukum terhadap penumpang tercentang'
-	if(WebUI.verifyElementChecked(tjhtpYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'simpan nilai ratenya'
-		tjhtpRate = Long.parseLong(textTJHTPRate)
-	}
-	BigDecimal kdupRate = 0
-	'jika kecelekaan diri untuk penumpang tercentang'
-	if(WebUI.verifyElementChecked(kdupYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'simpan nilai ratenya'
-		kdupRate = Long.parseLong(textKDUPRate)
-	}
-	Float terroristRate = 0.00
-	'jika terrorist tercentang'
-	if(WebUI.verifyElementChecked(terroristYearCheckbox,2,FailureHandling.OPTIONAL)){
-		'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
-		terroristRate = decimalFormat.parse(textTerroristRate).floatValue()
-	}
-	Float loadingRate = 0.00
-	'jika rate loading tidak kosong'
-	if(textLoadingRate.length()>1){
-		'Mengubah nilai persen menjadi desimal dengan format yang telah diinsialisasi dan simpan nilainya'
-		loadingRate = decimalFormat.parse(textLoadingRate).floatValue()
-	}
-	
-	'Perhitungan nilai additional premi flood'
-	BigDecimal resultFloodPremi = Math.round(Result*floodRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi tpl'
-	BigDecimal resultTPLPremi = Math.round(tplRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi act of god'
-	BigDecimal resultAOGPremi = Math.round(Result*aogRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi srcc'
-	BigDecimal resultSRCCPremi = Math.round(Result*srccRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi tanggung jawab hukum terhadap penumpang'
-	BigDecimal resultTJHTPPremi = Math.round(tjhtpRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi kecelakaan diri untuk penumpang'
-	BigDecimal resultKDUPPremi = Math.round(kdupRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi terrorist'
-	BigDecimal resultTerroristPremi = Math.round(Result*terroristRate*(numberOfMonth/12))
-	'Perhitungan nilai additional premi loading'
-	BigDecimal resultLoadingPremi = Math.round(Result*loadingRate*(numberOfMonth/12))
-	
-	floodPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_FloodAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[9]",true)
-	tplPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_TPLAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[9]",true)
-	aogPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_AOGAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[5]/td[9]",true)
-	srccPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_SRCCAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[6]/td[9]",true)
-	tjhtpPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_TJHTPAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[7]/td[9]",true)
-	kdupPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_KDUPAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[8]/td[9]",true)
-	terroristPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_TerroristAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[9]/td[9]",true)
-	loadingPremiAmtObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_LoadingAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[10]/td[9]",true)
-	
-	'ambil nilai additional premi flood dari confins'
-	String textFloodPremiAmt = WebUI.getText(floodPremiAmtObject).replace(",","")
-	'ambil nilai additional premi tpl dari confins'
-	String textTPLPremiAmt = WebUI.getText(tplPremiAmtObject).replace(",","")
-	'ambil nilai additional premi act of god dari confins'
-	String textAOGPremiAmt = WebUI.getText(aogPremiAmtObject).replace(",","")
-	'ambil nilai additional premi srcc dari confins'
-	String textSRCCPremiAmt = WebUI.getText(srccPremiAmtObject).replace(",","")
-	'ambil nilai additional premi tanggung jawab hukum terhdap penumpang dari confins'
-	String textTJHTPPremiAmt = WebUI.getText(tjhtpPremiAmtObject).replace(",","")
-	'ambil nilai additional premi kecelakaan diri untuk penumpang dari confins'
-	String textKDUPPremiAmt = WebUI.getText(kdupPremiAmtObject).replace(",","")
-	'ambil nilai additional premi terrorist dari confins'
-	String textTerroristPremiAmt = WebUI.getText(terroristPremiAmtObject).replace(",","")
-	'ambil nilai additional premi loading dari confins'
-	String textLoadingPremiAmt = WebUI.getText(loadingPremiAmtObject).replace(",","")
-	
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textFloodPremiAmt, String.format("%.2f", resultFloodPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textTPLPremiAmt, String.format("%.2f", resultTPLPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textAOGPremiAmt, String.format("%.2f", resultAOGPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textSRCCPremiAmt, String.format("%.2f", resultSRCCPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textTJHTPPremiAmt, String.format("%.2f", resultTJHTPPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textKDUPPremiAmt, String.format("%.2f", resultKDUPPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textTerroristPremiAmt, String.format("%.2f", resultTerroristPremi),false)
-	'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-	WebUI.verifyMatch(textLoadingPremiAmt, String.format("%.2f", resultLoadingPremi),false)
-	
-	'tambahkan additional premi ke total additional premi'
-	totalAdditionalPremiumResult+=(resultFloodPremi+resultAOGPremi+resultTPLPremi+resultSRCCPremi+resultTJHTPPremi+resultKDUPPremi+resultTerroristPremi+resultLoadingPremi)
-	
-	'tambahkan main premi dan additional premi untuk menghitung total premi per tahunnya'
-	BigDecimal resultTotalPremiPerYear = Result+resultFloodPremi+resultAOGPremi+resultTPLPremi+resultSRCCPremi+resultTJHTPPremi+resultKDUPPremi+resultTerroristPremi+resultLoadingPremi
-	
-	totalPremiPerYearObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/td_TotalPremiPerYear'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[11]/td[9]",true)
-	
-	'ambil nilai total premi per tahun dari confins'
-	String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
-	
-	'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
-	WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
+	  floodYearValue  = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 40)
+	  floodYearValueArray = floodYearValue.split(";",-1)
+	  tplYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 41)
+	  tplYearValueArray= tplYearValue.split(";",-1)
+	  aogYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 42)
+	  aogYearValueArray= aogYearValue.split(";",-1)
+	  srccYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 43)
+	  srccYearValueArray= srccYearValue.split(";",-1)
+	  tjhtpYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 44)
+	  tjhtpYearValueArray= tjhtpYearValue.split(";",-1)
+	  kdupYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 45)
+	  kdupYearValueArray= kdupYearValue.split(";",-1)
+	  terroristYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 46)
+	  terroristYearValueArray= terroristYearValue.split(";",-1)
+	  
+	  if(floodYearValue.length()>0 && floodYearValueArray[i-1]!=""){
+		  if(floodYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(floodYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(floodYearCheckbox)
+			  }
+			 
+		  }
+		  else if(floodYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(floodYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(floodYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(tplYearValue.length()>0 && tplYearValueArray[i-1]!=""){
+		  if(tplYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(tplYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(tplYearCheckbox)
+			  }
+			 
+		  }
+		  else if(tplYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(tplYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(tplYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(aogYearValue.length()>0 && aogYearValueArray[i-1]!=""){
+		  if(aogYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(aogYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(aogYearCheckbox)
+			  }
+			 
+		  }
+		  else if(aogYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(aogYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(aogYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(srccYearValue.length()>0 && srccYearValueArray[i-1]!=""){
+		  if(srccYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(srccYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(srccYearCheckbox)
+			  }
+			 
+		  }
+		  else if(srccYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(srccYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(srccYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(tjhtpYearValue.length()>0 && tjhtpYearValueArray[i-1]!=""){
+		  if(tjhtpYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(tjhtpYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(tjhtpYearCheckbox)
+			  }
+			 
+		  }
+		  else if(tjhtpYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(tjhtpYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(tjhtpYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(kdupYearValue.length()>0 && kdupYearValueArray[i-1]!=""){
+		  if(kdupYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(kdupYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(kdupYearCheckbox)
+			  }
+			 
+		  }
+		  else if(kdupYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(kdupYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(kdupYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	  if(terroristYearValue.length()>0 && terroristYearValueArray[i-1]!=""){
+		  if(terroristYearValueArray[i-1].equalsIgnoreCase("Yes")){
+			  if(WebUI.verifyElementNotChecked(terroristYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.check(terroristYearCheckbox)
+			  }
+			 
+		  }
+		  else if(terroristYearValueArray[i-1].equalsIgnoreCase("No")){
+			  if(WebUI.verifyElementChecked(terroristYearCheckbox,5,FailureHandling.OPTIONAL)){
+				  WebUI.uncheck(terroristYearCheckbox)
+			  }
+		  }
+	  }
+	  
+	 
+	 //SumInsuredAmount
+	 if(countFlood==1&&WebUI.verifyElementChecked(floodYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtFlood = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[3]/td[7]/div/div/select",true)
+		 SumInsuredFloodValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 48)
+		 SumInsuredFloodValueArray = SumInsuredFloodValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtFlood,SumInsuredFloodValueArray[i-1])
+	 }
+	 if(countTPL==1&&WebUI.verifyElementChecked(tplYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtTPL = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTPL'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[4]/td[7]/div/div/select",true)
+		 SumInsuredTPLValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 49)
+		 SumInsuredTPLValueArray = SumInsuredTPLValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtTPL,SumInsuredTPLValueArray[i-1])
+	 }
+	 if(countAOG==1&&WebUI.verifyElementChecked(aogYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtAOG = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountAOG'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[5]/td[7]/div/div/select",true)
+		 SumInsuredAOGValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 50)
+		 SumInsuredAOGValueArray = SumInsuredAOGValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtAOG,SumInsuredAOGValueArray[i-1])
+	 }
+	 if(countSRCC==1&&WebUI.verifyElementChecked(srccYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtSRCC = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountSRCC'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[6]/td[7]/div/div/select",true)
+		 SumInsuredSRCCValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 51)
+		 SumInsuredSRCCValueArray = SumInsuredSRCCValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtSRCC,SumInsuredSRCCValueArray[i-1])
+	 }
+	 if(countTJHTP==1&&WebUI.verifyElementChecked(tjhtpYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtTJHTP = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTJHTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[7]/td[7]/div/div/select",true)
+		 SumInsuredTJHTPValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 52)
+		 SumInsuredTJHTPValueArray = SumInsuredTJHTPValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtTJHTP,SumInsuredTJHTPValueArray[i-1])
+	 }
+	 if(countKDUP==1&&WebUI.verifyElementChecked(kdupYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtKDUP = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountKDUP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[8]/td[7]/div/div/select",true)
+		 SumInsuredKDUPValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 53)
+		 SumInsuredKDUPValueArray = SumInsuredKDUPValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtKDUP,SumInsuredKDUPValueArray[i-1])
+	 }
+	 if(countTerrorist==1&&WebUI.verifyElementChecked(terroristYearCheckbox,5,FailureHandling.OPTIONAL)){
+		 modifyObjectSumInsuredAmtTerrorist = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountTerrorist'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[9]/td[7]/div/div/select",true)
+		 SumInsuredTerroristValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 54)
+		 SumInsuredTerroristValueArray = SumInsuredTerroristValue.split(";",-1)
+		 WebUI.selectOptionByIndex(modifyObjectSumInsuredAmtTerrorist,SumInsuredTerroristValueArray[i-1])
+	 }
 	
 }
+
+'Klik calculate insurance'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
+
+ArrayList<BigDecimal> totalResult
+totalResult = CustomKeywords.'insuranceData.verifInsuranceData.verifyTabInsuranceData'()
+
 
 'ambil nilai total main premi dari confins'
 String textTotalMainPremiAmt = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace(",","")
@@ -481,18 +507,18 @@ BigDecimal stampdutyFeeAmt = Long.parseLong(stampdutyFeeAmtText)
 'Perhitungan total fee'
 totalFeeResult = adminFeeAmt+stampdutyFeeAmt
 'Perhitungan total premi to customer'
-totalPremitoCustResult = totalMainPremiumResult+totalAdditionalPremiumResult+totalFeeResult
+totalPremitoCustResult = totalResult[0]+totalResult[1]+totalFeeResult
 
 'Verif total main premi sesuai perhitungan'
-WebUI.verifyMatch(textTotalMainPremiAmt,String.format("%.2f", totalMainPremiumResult),false)
+WebUI.verifyMatch(textTotalMainPremiAmt,String.format("%.2f", totalResult[0]),false)
 'Verif total additional premi sesuai perhitungan'
-WebUI.verifyMatch(textTotalAdditionalPremiAmt,String.format("%.2f", totalAdditionalPremiumResult),false)
+WebUI.verifyMatch(textTotalAdditionalPremiAmt,String.format("%.2f", totalResult[1]),false)
 'Verif total fee sesuai perhitungan'
 WebUI.verifyMatch(textTotalFeeAmt, String.format("%.2f", totalFeeResult), false)
 'Verif total premi to customer sesuai perhitungan'
 WebUI.verifyMatch(textTotalPremitoCust, String.format("%.2f", totalPremitoCustResult), false)
 
-if(counterPaidByMF==0){
+if(totalResult[2]==0){
 	'Input diskon'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 56))
 	
@@ -508,6 +534,11 @@ totalPremitoCustAftDiscountResult = totalPremitoCustResult-discountAmt
 
 'Verif total premi to customer after discount sesuai perhitungan'
 WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format("%.2f", totalPremitoCustAftDiscountResult), false)
+
+String textCapitalizeAmount = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),'value').replace(",","")
+
+'Verif total premi to customer after discount sesuai perhitungan'
+WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(), false)
 
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 

@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[7]/div/div/select</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[7]/div/div/select</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,18 +38,18 @@
       <value>SumInsuredAmt</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 10,000,000.00  15,000,000.00  20,000,000.00  25,000,000.00  30,000,000.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/table[@class=&quot;table table-responsive text-center table-hover ng-star-inserted&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-pristine ng-star-inserted ng-valid ng-touched&quot;]/td[@class=&quot;text-center&quot;]/div[@class=&quot;form-group-row ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/select[@class=&quot;form-control ng-touched ng-pristine ng-valid ng-star-inserted&quot;]</value>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[7]/div/div/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
