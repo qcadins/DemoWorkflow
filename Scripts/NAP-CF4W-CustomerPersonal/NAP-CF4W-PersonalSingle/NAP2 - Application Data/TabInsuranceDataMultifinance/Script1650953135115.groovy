@@ -244,7 +244,6 @@ if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custome
 	countTerrorist = 1
 }
 
-
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -334,6 +333,9 @@ for(int i = 1;i<=count;i++){
 	  kdupYearValueArray= kdupYearValue.split(";",-1)
 	  terroristYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 46)
 	  terroristYearValueArray= terroristYearValue.split(";",-1)
+	  if(i==1){
+		  WebUI.click(floodYearCheckbox)
+	  }
 	  
 	  if(floodYearValue.length()>0 && floodYearValueArray[i-1]!=""){
 		  if(floodYearValueArray[i-1].equalsIgnoreCase("Yes")){
