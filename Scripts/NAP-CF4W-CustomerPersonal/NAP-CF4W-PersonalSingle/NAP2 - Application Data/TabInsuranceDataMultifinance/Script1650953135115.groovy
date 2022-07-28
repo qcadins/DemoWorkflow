@@ -19,6 +19,8 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
+'Inisialisasi Driver'
+WebDriver driver = DriverFactory.getWebDriver()
 
 'Select option dropdownlist Asset Region'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'), 
@@ -87,137 +89,47 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 'Select option dropdownlist main coverage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 25), false)
 
-'Ambil inputan Additional Coverage dari Excel'
-String flood=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 27)
-String tpl = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 28)
-String actOfGod =findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 29)
-String SRCC =findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 30)
-String tanggungJawab =findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 31)
-String kecelakaanDiri = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 32)
-String teroris = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 33)
+'Mengambil nilai row keberapa dimulai data additional coverage (apply to all) pada excel'
+def addCovRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage')+3
 
+ArrayList<WebElement> variableAddCovAll = driver.findElements(By.cssSelector('#insuranceCoverage > div:nth-child(2) > div > label'))
 
-'Verifikasi input Additional Coverage'
-if(flood =="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang flood'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel ng-valid'))
+int countAddCov = variableAddCovAll.size()
+
+int countEmpty = 0
+for(int i =1;i<=countAddCov;i++){
+	modifyCheckboxAddtCov = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel ng-valid'),'xpath','equals',"//*[@id='insuranceCoverage']/div[2]/div/label["+i+"]/div/label/input",true)
+	
+	'Ambil inputan additional coverage dari excel (apply to all)'
+	String checkboxValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, addCovRow+i-countEmpty)
+	
+	if(WebUI.verifyElementVisible(modifyCheckboxAddtCov,FailureHandling.OPTIONAL)){
+		'Verifikasi input Additional Coverage'
+		if(checkboxValue =="YES"){
+			'Jika kondisi awal belum tercentang'
+			if(WebUI.verifyElementNotChecked(modifyCheckboxAddtCov,1,FailureHandling.OPTIONAL)){
+				'Centang'
+				WebUI.check(modifyCheckboxAddtCov)
+			}
+		}
+		else{
+			'Jika kondisi awal sudah tercentang'
+			if(WebUI.verifyElementChecked(modifyCheckboxAddtCov,1,FailureHandling.OPTIONAL)){
+				'Uncentang'
+				WebUI.uncheck(modifyCheckboxAddtCov)
+			}
+		}
 	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang flood'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel ng-valid'))
+	else{
+		countEmpty++
+		continue
+		
 	}
+	
 }
-
-if(tpl =="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel ng-valid ng-dirty ng-touched'),1,FailureHandling.OPTIONAL)){
-		'Centang tpl'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel ng-valid ng-dirty ng-touched'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel ng-valid ng-dirty ng-touched'),1,FailureHandling.OPTIONAL)){
-		'Uncentang tpl'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_TPL_checkboxLabel ng-valid ng-dirty ng-touched'))
-	}
-}
-
-
-
-if(actOfGod=="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang act of god'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel ng-valid'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang act of god'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Act of God_checkboxLabel ng-valid'))
-	}
-}
-
-
-
-if(SRCC=="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang SRCC'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel ng-valid'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang SRCC'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_SRCC_checkboxLabel ng-valid'))
-	}
-}
-
-
-
-if(tanggungJawab=="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang Tanggung Jawab Hukum Terhadap Penumpang'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel ng-valid'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang Tanggung Jawab Hukum Terhadap Penumpang'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Tanggung Jawab Hukum Terhadap Penumpang_checkboxLabel ng-valid'))
-	}
-}
-
-
-
-if(kecelakaanDiri=="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang Kecelakaan Diri untuk Penumpang'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel ng-valid'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang kecelakaan diri untuk penumpang'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Kecelakaan Diri Untuk Penumpang_checkboxLabel ng-valid'))
-	}
-}
-
-
-
-if(teroris =="YES"){
-	'Jika kondisi awal belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel ng-untouched ng-pristine ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Centang terrorist'
-		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel ng-untouched ng-pristine ng-valid'))
-	}
-}
-else{
-	'Jika kondisi awal sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel ng-untouched ng-pristine ng-valid'),1,FailureHandling.OPTIONAL)){
-		'Uncentang terrorist'
-		WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/input_Terrorist_checkboxLabel ng-untouched ng-pristine ng-valid'))
-	}
-}
-
 
 'Klik apply to all'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/button_Apply To All'))
-
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData/Checkbox Capitalize'))
 
 
 int countFlood = 0, countTPL = 0, countAOG = 0, countSRCC = 0, countTJHTP = 0, countKDUP = 0, countTerrorist = 0
@@ -244,8 +156,6 @@ if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custome
 	countTerrorist = 1
 }
 
-'Inisialisasi Driver'
-WebDriver driver = DriverFactory.getWebDriver()
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
