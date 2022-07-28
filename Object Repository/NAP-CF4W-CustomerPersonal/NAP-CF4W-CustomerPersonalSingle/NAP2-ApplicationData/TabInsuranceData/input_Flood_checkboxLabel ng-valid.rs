@@ -6,11 +6,15 @@
    <elementGuidId>f6eea83b-42e4-47e3-b418-322fa89c0c0d</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[2]/div/label[1]/div/label/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//input[@type='checkbox']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,18 +38,18 @@
       <value>Value</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>checkbox</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceCoverage&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-10&quot;]/label[@class=&quot;custom-control display-inline-block ng-valid ng-star-inserted ng-dirty ng-touched&quot;]/div[@class=&quot;ng-valid ng-dirty ng-touched&quot;]/label[1]/input[@class=&quot;checkboxLabel ng-valid ng-dirty ng-touched&quot;]</value>
+      <value>//*[@id=&quot;insuranceCoverage&quot;]/div[2]/div/label[1]/div/label/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
