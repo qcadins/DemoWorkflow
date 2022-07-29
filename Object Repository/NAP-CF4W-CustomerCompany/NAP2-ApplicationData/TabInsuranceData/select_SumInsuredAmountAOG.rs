@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_SumInsuredAmountAOG</name>
+   <tag></tag>
+   <elementGuidId>a9e9c985-7c0e-4b03-8cb4-e7869e24145e</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[5]/td[7]/div/div/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[5]/td[7]/div/div/select</value>
+   </webElementProperties>
+</WebElementEntity>

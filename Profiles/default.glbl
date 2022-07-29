@@ -211,7 +211,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\DataFile_NAP_CF4W_Company.xlsx'</initValue>
+      <initValue>'\\Excel\\7. DataFile_NAP_CF4W_Company.xlsx'</initValue>
       <name>PathCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -253,5 +253,30 @@
       <description></description>
       <initValue>''</initValue>
       <name>CustomerName</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\8. CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
+      <name>DataFileCustomerCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\9. CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm'</initValue>
+      <name>DataFileManagementShareholderPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\10. CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm'</initValue>
+      <name>DataFileManagementShareholderCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\11. CustomerDataCompletion-Company - Guarantor.xlsm'</initValue>
+      <name>DataFileGuarantorPersonalCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\12. CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
+      <name>DataFileGuarantorCompanyCompany</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

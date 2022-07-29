@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>SubsidyAllocation</name>
+   <tag></tag>
+   <elementGuidId>fd488179-4d72-49d6-be0b-f2e622163f49</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_Subsidy&quot;]/div[2]/table/tbody/tr/td[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;FinData_Subsidy&quot;]/div[2]/table/tbody/tr/td[3]</value>
+   </webElementProperties>
+</WebElementEntity>

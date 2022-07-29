@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_Zipcodelookup</name>
+   <tag></tag>
+   <elementGuidId>5f99a070-dd81-4fb1-82c5-d6a9f48a7e8c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='Address']/div/div/div[3]/div/div/lib-uclookupgeneric/div/div/div/span/button/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-search</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;Address&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-pristine ng-invalid ng-touched&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]/i[@class=&quot;ft-search&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='Address']/div/div/div[3]/div/div/lib-uclookupgeneric/div/div/div/span/button/i</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[3]/div/div/lib-uclookupgeneric/div/div/div/span/button/i</value>
+   </webElementXpaths>
+</WebElementEntity>

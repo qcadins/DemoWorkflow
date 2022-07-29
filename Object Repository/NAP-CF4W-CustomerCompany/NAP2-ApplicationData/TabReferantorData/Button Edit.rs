@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Button Edit</name>
+   <tag></tag>
+   <elementGuidId>0c6ede16-2085-4d15-86ca-016389e5cdca</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-edit-2 font-medium-3 mr-2</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/a[@class=&quot;success p-0&quot;]/i[@class=&quot;ft-edit-2 font-medium-3 mr-2&quot;]</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//td[7]/a/i</value>
+   </webElementXpaths>
+</WebElementEntity>

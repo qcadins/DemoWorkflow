@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>CustomerType</name>
+   <tag></tag>
+   <elementGuidId>e3ebbf8f-532b-4349-92b4-a37fa6eee52b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail/div/div/div/div[3]/lib-ucgridview/div/table/tbody/tr[1]/td[3]</value>
+   </webElementProperties>
+</WebElementEntity>

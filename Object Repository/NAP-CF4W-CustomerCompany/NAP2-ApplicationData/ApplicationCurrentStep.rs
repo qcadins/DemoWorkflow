@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ApplicationCurrentStep</name>
+   <tag></tag>
+   <elementGuidId>c2ee6444-6263-4257-918a-a6770a4b3302</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

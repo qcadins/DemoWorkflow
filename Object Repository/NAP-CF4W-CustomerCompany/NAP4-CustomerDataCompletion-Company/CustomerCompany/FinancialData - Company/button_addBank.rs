@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_addBank</name>
+   <tag></tag>
+   <elementGuidId>87ffc16d-e26d-40b1-a6e8-6c1021cc1bfb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Financial-tab&quot;]/app-financial-company/div/div/div/div/form/app-bank-section/form/span/button</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;Financial-tab&quot;]/app-financial-company/div/div/div/div/form/app-bank-section/form/span/button</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TotalInsurance</name>
+   <tag></tag>
+   <elementGuidId>cf304f08-156b-42bc-b2cc-5b80b0ed1bb1</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;totalPremi&quot;]/div[6]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;totalPremi&quot;]/div[6]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

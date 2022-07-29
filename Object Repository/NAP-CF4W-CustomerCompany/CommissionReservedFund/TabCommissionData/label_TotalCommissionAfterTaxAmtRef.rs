@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_TotalCommissionAfterTaxAmtRef</name>
+   <tag></tag>
+   <elementGuidId>6966e934-e319-4609-92e9-c54b244c6733</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[2]/div[3]/div[1]/label</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[2]/div[3]/div[1]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[2]/div[3]/div[1]/label</value>
+   </webElementProperties>
+</WebElementEntity>
