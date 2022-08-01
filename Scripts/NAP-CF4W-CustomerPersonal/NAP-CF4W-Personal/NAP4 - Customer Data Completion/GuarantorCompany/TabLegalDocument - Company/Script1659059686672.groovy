@@ -100,7 +100,12 @@ GlobalVariable.DataFilePath = filePath
 	}
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company/button_Save'))
-}
+	
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),2,FailureHandling.OPTIONAL)){
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company/button_Cancel'))
+	}
+	
+	}
 	}
 
 'click button save and continue'
