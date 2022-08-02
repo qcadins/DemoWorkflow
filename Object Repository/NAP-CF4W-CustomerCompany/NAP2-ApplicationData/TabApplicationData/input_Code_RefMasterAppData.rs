@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//input[@id='MasterCodeId']</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;MasterCodeId&quot;)</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,14 +31,14 @@
       <value>form-control search-form-control ng-untouched ng-pristine ng-valid</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -55,11 +59,11 @@
       <value>Code</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;MasterCodeId&quot;)</value>
+      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[5]/div/div/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

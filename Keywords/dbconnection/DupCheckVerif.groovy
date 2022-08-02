@@ -34,6 +34,16 @@ public class DupCheckVerif {
 	}
 
 	@Keyword
+	public checkCustomerType (Sql instance, String Appno, String CustName){
+		String Custtype
+		instance.eachRow(("USE LOS select MR_CUST_TYPE_CODE from APP_CUST a join APP b on a.APP_ID = b.APP_ID where APP_NO = '" + Appno + "' and CUST_NAME = '" + CustName + "'"), {  row ->
+
+			Custtype = (row[0])
+		})
+		return Custtype
+	}
+
+	@Keyword
 	public checkDupcheckRulePersonal1 (Sql instance, String idno, String idtype, String Mothername){
 		String Result1
 		instance.eachRow(("USE FOUNDATION SELECT count(a.CUST_ID) FROM CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID JOIN REF_MASTER c ON a.MR_ID_TYPE_CODE = c.MASTER_CODE WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND DESCR = '" + idtype + "' AND MOTHER_MAIDEN_NAME = '" + Mothername + "'"), { row ->

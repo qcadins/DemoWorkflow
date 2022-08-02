@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@id='subSecMatch']/table/tbody/tr/td[5]/a</value>
+         <value>//*[@id=&quot;subSecMatch&quot;]/table/tbody/tr[1]/td[5]/a</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id='subSecMatch']/table/tbody/tr/td[5]/a</value>
+      <value>//*[@id=&quot;subSecMatch&quot;]/table/tbody/tr[1]/td[5]/a</value>
    </webElementProperties>
 </WebElementEntity>

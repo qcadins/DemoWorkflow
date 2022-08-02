@@ -542,7 +542,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 }
                             }
                         } else if (counttd == 5) {
-                            for (id = 1; id <= countGuarantorPersonalidrow; id++) {
+	                            for (id = 1; id <= countGuarantorPersonalidrow; id++) {
                                 String newIDNoGuarantorCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
                                 ']/td[3]'
 
@@ -666,8 +666,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 }
                             } else if((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('Select SimilarData')){
                                 if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
-                                    5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
-                                    5, FailureHandling.OPTIONAL)){
+                                     FailureHandling.OPTIONAL) || WebUI.verifyElementVisible(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                                     FailureHandling.OPTIONAL)){
                                 
                                 'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                                 if (counttd == 10) {

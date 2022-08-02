@@ -279,4 +279,14 @@
       <initValue>'\\Excel\\12. CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
       <name>DataFileGuarantorCompanyCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 1)</initValue>
+      <name>CountNumofCustCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>1</initValue>
+      <name>index</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
