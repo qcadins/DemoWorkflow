@@ -89,6 +89,9 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
 
     for (GlobalVariable.index = 1; GlobalVariable.index <= count; GlobalVariable.index++) {
+		
+		
+		
         'modify object subjectname'
         modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 'xpath', 'equals', 
             ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', true)
@@ -277,7 +280,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 		
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 		
+		
+		
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		
+		
 		
     }
     

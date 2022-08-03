@@ -301,7 +301,8 @@ def StoreCDCManagementShareholderPersonalName = ''
 					WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
 						false, FailureHandling.OPTIONAL)
 				}
-			} else if ((ManagementShareholderArray[(m - 1)]).equalsIgnoreCase('Select ApplicationInProcess')) {
+			}
+		}else if ((ManagementShareholderArray[(m - 1)]).equalsIgnoreCase('Select ApplicationInProcess')) {
 				if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'),
 					5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'),
 					5, FailureHandling.OPTIONAL)) {
@@ -415,4 +416,3 @@ def StoreCDCManagementShareholderPersonalName = ''
 }
 			}
 		}
-}

@@ -715,7 +715,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 		}
 }
 
-
+println(DupcheckResult)
 if (DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')) {
     GlobalVariable.DupcheckVerif = 'Yes'
 }

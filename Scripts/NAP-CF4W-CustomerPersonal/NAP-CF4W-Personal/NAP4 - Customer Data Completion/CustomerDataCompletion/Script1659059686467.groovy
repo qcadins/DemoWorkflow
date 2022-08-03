@@ -162,8 +162,7 @@ for (int i = 1; i <= count; i++) {
 					WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'),
 						[:], FailureHandling.STOP_ON_FAILURE)
 					}
-					'Verify iscomplete == yes'
-					WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+					
                 }
 				
 				
@@ -212,8 +211,7 @@ for (int i = 1; i <= count; i++) {
 						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'),
 							[:], FailureHandling.STOP_ON_FAILURE)
 						}
-						'Verify iscomplete == yes'
-						WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+						
                 } else if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
@@ -245,8 +243,7 @@ for (int i = 1; i <= count; i++) {
 						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'),
 							[:], FailureHandling.STOP_ON_FAILURE)
 						}
-						'Verify iscomplete == yes'
-						WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+						
                     } else if ((CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)])) && (CustomerType == 'COMPANY')) {
 						
 					'click button action'
@@ -268,7 +265,7 @@ for (int i = 1; i <= count; i++) {
         }
     }
 	'Verify iscomplete == yes'
-	WebUI.verifyMatch(WebUI.getText(modifynewisComplete), 'YES', false, FailureHandling.OPTIONAL)
+	WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
 }
 
 'click button submit'
