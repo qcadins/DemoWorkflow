@@ -34,7 +34,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialData'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabUploadDocument'), 

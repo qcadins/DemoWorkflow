@@ -139,6 +139,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
     	 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 3) == 'Input Data') {
     		if(dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 4).equalsIgnoreCase('Personal')){
 			
+				ManagementShareholderStatus = ''
+				
         'check rule 1'
         if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, dataManagementShareholder.getValue(
                     GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 11), 

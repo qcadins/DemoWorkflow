@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;mat-checkbox-15&quot;]/label/span[1]</value>
+         <value>//*[@id=&quot;mat-checkbox-6&quot;]/label/span[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;mat-checkbox-15&quot;]/label/span[1]</value>
+      <value>//*[@id=&quot;mat-checkbox-6&quot;]/label/span[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

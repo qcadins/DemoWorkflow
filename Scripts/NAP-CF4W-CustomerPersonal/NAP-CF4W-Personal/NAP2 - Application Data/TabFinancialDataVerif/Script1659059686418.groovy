@@ -430,7 +430,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     } else {
         interestamountvalue = (interestamountvalue + Integer.parseInt(strInterestamount))
     }
-    
+	
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
 
@@ -462,6 +462,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
         WebUI.verifyEqual(Integer.parseInt(strOSInterestAmount), 0)
     }
 }
+
 
 'verify equal Interest amount seq 1 + os interest amount seq1 = Total Interest'
 WebUI.verifyEqual(intOSInterestAmount + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL)

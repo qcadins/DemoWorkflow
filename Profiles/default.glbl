@@ -256,7 +256,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\8. CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
+      <initValue>'\\Excel\\8. CustomerDataCompletion-Company - Customer.xlsm'</initValue>
       <name>DataFileCustomerCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -271,7 +271,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\11. CustomerDataCompletion-Company - Guarantor.xlsm'</initValue>
+      <initValue>'\\Excel\\11. CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
       <name>DataFileGuarantorPersonalCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
