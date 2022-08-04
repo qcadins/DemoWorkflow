@@ -143,12 +143,8 @@ String textRemainingAllocatedAmount = WebUI.getText(modifyRemainingAllocatedAmou
 'verif remaining allocated amount = remaining allocated amount (after calc di comision) - nilai yg dibagina di reserve fund'
 WebUI.verifyMatch(textRemainingAllocatedAmount,String.format("%.2f",GlobalVariable.RemainingAllocatedAmt-totalAmt),false)
 
-'Arraylist untuk menampung remaining info setelah calculate'
-ArrayList<WebElement> varRemainingInfoAftCal = driver.findElements(By.cssSelector("#viewRemainIncomeInfo label"))
-'Inisialisasi Variabel untuk menghitung jumlah baris pada remaining Information, dibagi 2 karena countremaininginfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
-int countRemainingInfoAftCal = varRemainingInfoAftCal.size()/2
 'Looping remaining info amount setelah calculate'
-for(int i =1;i<countRemainingInfoAftCal;i++){
+for(int i =1;i<countRemainingInfo;i++){
 	modifyRemainingInfoAmtAftCal = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),'xpath','equals','//*[@id="viewRemainIncomeInfo"]/div['+i+']/div/div[2]/label',true)
 	'Ambil nilai remaining info amount'
 	String textRemainingInfoAmtAftCal = WebUI.getText(modifyRemainingInfoAmtAftCal).replace(",","")
