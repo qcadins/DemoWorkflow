@@ -289,4 +289,19 @@
       <initValue>1</initValue>
       <name>index</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
+      <name>ComRemainingInfoAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>RemainingAllocatedAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
+      <name>AllocatedCommissionAmt</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
