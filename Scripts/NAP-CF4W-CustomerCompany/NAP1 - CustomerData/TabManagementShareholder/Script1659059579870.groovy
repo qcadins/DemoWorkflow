@@ -25,8 +25,7 @@ GlobalVariable.DataFilePath = filePath
 
 datafile = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
-if (WebUI.verifyElementClickable(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_2ManagementShareHolder'), 
-    FailureHandling.OPTIONAL)) {
+if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase('MANAGEMENT SHAREHOLDER')){
     'Loop Multiple Guarantor Data'
     for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
     1); (GlobalVariable.NumofFamily)++) {

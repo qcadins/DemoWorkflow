@@ -24,6 +24,8 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('APPLICATION DATA')){
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'), 
     10, FailureHandling.OPTIONAL)) {
     'Click Lookup Officer'
@@ -433,3 +435,4 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
+}

@@ -35,6 +35,8 @@ GlobalVariable.DataFilePath = filePath
 
 WebUI.delay(5)
 
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('ASSET & COLLATERAL DATA')){
+
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
 
@@ -858,6 +860,6 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     }
     
 }
-
+}
 WebUI.delay(5)
 

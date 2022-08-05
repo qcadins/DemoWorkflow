@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>CustomerModelCode</name>
+   <name>applicationcurrentstep</name>
    <tag></tag>
-   <elementGuidId>f391df98-14a0-4039-a7c1-7061d85a45d8</elementGuidId>
+   <elementGuidId>5f82466d-ef7e-4b1f-bd74-595ace077c18</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;NewApplication&quot;]/div/div[13]/span/div/div[2]/span/label</value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;NewApplication&quot;]/div/div[13]/span/div/div[2]/span/label</value>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;NewApplication&quot;]/div/div[13]/span/div/div[2]/span/label</value>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
    </webElementProperties>
 </WebElementEntity>

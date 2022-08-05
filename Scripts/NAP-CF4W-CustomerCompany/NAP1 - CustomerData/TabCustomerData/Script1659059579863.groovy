@@ -73,6 +73,8 @@ String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-Custo
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 2, 
     GlobalVariable.NumofColm - 1, appNo)
 
+if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase('CUSTOMER')){
+
 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     4) == 'Input Data') {
     'click radio button company'
@@ -277,6 +279,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         (GlobalVariable.countNumofCustomer)++
     }
 }
-
 println(GlobalVariable.countNumofCustomer)
+}
 
