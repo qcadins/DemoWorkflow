@@ -20,6 +20,14 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathPersonal
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -168,14 +176,7 @@ WebUI.delay(5)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'),

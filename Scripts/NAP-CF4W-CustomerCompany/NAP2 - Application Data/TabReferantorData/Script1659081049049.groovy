@@ -17,6 +17,15 @@ import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 import org.openqa.selenium.WebElement
 
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathPersonal
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
+
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
 
@@ -31,14 +40,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabRef
 'click icon pensil untuk select'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
 
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('REFERANTOR')){
 	

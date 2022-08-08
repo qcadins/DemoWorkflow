@@ -19,6 +19,8 @@ import org.openqa.selenium.Keys as Keys
 'open Browser'
 WebUI.openBrowser('')
 
+WebUI.maximizeWindow()
+
 'input web R3 LOS'
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 
