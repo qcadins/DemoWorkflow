@@ -165,8 +165,8 @@ for(int i =1;i<countRemainingInfo;i++){
 
 WebUI.delay(5)
 
-//'Klik save'
-//WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
+'Klik save'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
