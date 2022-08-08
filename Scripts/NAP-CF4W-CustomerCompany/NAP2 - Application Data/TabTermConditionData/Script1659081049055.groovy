@@ -20,6 +20,8 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import com.kms.katalon.core.testobject.SelectorMethod
 
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('TERM AND CONDITION')){
+
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -221,3 +223,4 @@ else {
 		1, GlobalVariable.StatusSuccess)
 }
 
+}

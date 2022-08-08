@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 int flagWarning =0
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.DataFileCustomerPersonalCompany
+String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
 
 GlobalVariable.DataFilePath = filePath
 
