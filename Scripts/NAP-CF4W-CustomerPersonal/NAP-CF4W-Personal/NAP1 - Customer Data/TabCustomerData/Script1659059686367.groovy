@@ -432,6 +432,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		'add name to Global variable'
 		GlobalVariable.CustomerName = custname
     
+		if (GlobalVariable.Role == 'Testing') {
+			'call test case customer data verif'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			}
+		
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 	

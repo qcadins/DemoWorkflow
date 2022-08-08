@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>textarea_Address_form-control ng-untouched ng-pristine ng-invalid</name>
+   <name>textarea_Address</name>
    <tag></tag>
    <elementGuidId>cdaf234e-6de8-43e1-b6d7-9ded9b1280a3</elementGuidId>
    <selectorCollection>

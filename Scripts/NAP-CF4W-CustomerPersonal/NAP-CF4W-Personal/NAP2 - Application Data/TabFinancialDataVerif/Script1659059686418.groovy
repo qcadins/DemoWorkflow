@@ -274,13 +274,13 @@ BigDecimal intTotalAR = Integer.parseInt(TotalARValue)
 BigDecimal intInterestAmountValue = Integer.parseInt(InterestAmountValue)
 
 'convert OSPrincipalAmount to BigDecimal'
-BigDecimal intOSPrincipalAmount = Integer.parseInt(OSPrincipalAmount)
+BigDecimal intOSPrincipalAmountSeq1 = Integer.parseInt(OSPrincipalAmount)
 
 'convert PrincipalAmountValueSeq1 to BigDecimal'
 BigDecimal intPrincipalAmountValueSeq1 = Integer.parseInt(PrincipalAmountValueSeq1)
 
 'convert OSInterestAmount to BigDecimal'
-BigDecimal intOSInterestAmount = Integer.parseInt(OSInterestAmount)
+BigDecimal intOSInterestAmountSeq1 = Integer.parseInt(OSInterestAmount)
 
 'convert InterestAmountValueSeq1 to BigDecimal'
 BigDecimal intInterestAmountValueSeq1 = Integer.parseInt(InterestAmountValueSeq1)
@@ -465,13 +465,13 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 
 
 'verify equal Interest amount seq 1 + os interest amount seq1 = Total Interest'
-WebUI.verifyEqual(intOSInterestAmount + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 = NTF'
-WebUI.verifyEqual(intOSPrincipalAmount + intPrincipalAmountValueSeq1, intNTF, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1, intNTF, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = Total AR'
-WebUI.verifyEqual(intOSPrincipalAmount + intPrincipalAmountValueSeq1 + intOSInterestAmount + intInterestAmountValueSeq1, intTotalAR, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intTotalAR, FailureHandling.OPTIONAL)
 
 'verify pincipal amount value = NTF'
 WebUI.verifyEqual(principalamountvalue, intNTF, FailureHandling.OPTIONAL)
@@ -487,6 +487,15 @@ WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL)
 
 'verify intNTF + intInterestAmountValue == AR Value'
 WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL)
+
+'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = principalamountvalue + interestamountvalue'
+WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, principalamountvalue + interestamountvalue, FailureHandling.OPTIONAL)
+
+'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = installmentamountvalue'
+WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, installmentamountvalue, FailureHandling.OPTIONAL)
+
+'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = intNTF + intInterestAmountValue'
+WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
 
 'verify rumus 1 == rumus 2'
 WebUI.verifyEqual(principalamountvalue + interestamountvalue, installmentamountvalue, FailureHandling.OPTIONAL)

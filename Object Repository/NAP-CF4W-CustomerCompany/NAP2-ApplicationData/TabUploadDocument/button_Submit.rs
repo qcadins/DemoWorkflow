@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[12]</value>
+         <value>//*[@id=&quot;upload-tab&quot;]/app-dms-iframe/div/div/div/div/div/form/div/div[2]/button[3]/i</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
