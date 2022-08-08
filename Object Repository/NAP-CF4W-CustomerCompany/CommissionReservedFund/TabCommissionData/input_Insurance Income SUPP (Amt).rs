@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Insurance Income SUPP (Amt)</name>
    <tag></tag>
-   <elementGuidId>c3ac9023-1f88-462d-9f9b-de252186e6dd</elementGuidId>
+   <elementGuidId>12b006fc-5779-4b8a-8dfb-d7f1259b9904</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@type = 'text']</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'text']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

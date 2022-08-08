@@ -3,15 +3,15 @@
    <description></description>
    <name>label_Allocate Commission Supp Emp</name>
    <tag></tag>
-   <elementGuidId>43a65af3-bea4-49f3-a049-42ec119d1baf</elementGuidId>
+   <elementGuidId>81dcaed6-e159-4234-a2e1-0e5586c98a14</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;ListAllocatedMRA ADMIN HEAD 1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='ListAllocatedMRA ADMIN HEAD 1']/div/div/div/div/div/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;ListAllocatedMRA ADMIN HEAD 1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

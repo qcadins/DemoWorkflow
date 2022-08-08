@@ -3,7 +3,7 @@
    <description></description>
    <name>label_VatAmtSupp</name>
    <tag></tag>
-   <elementGuidId>15b6ef71-16ea-4fea-85a7-dfd1aeb34f2a</elementGuidId>
+   <elementGuidId>d9d83823-3de9-42ee-9698-1bbb7f90aab4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

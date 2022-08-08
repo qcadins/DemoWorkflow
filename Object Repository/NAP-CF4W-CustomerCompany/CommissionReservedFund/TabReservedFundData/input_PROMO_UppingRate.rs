@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PROMO_UppingRate</name>
    <tag></tag>
-   <elementGuidId>7e5966fa-14d7-4035-b0c3-0f3c54a56b6f</elementGuidId>
+   <elementGuidId>2ceb80b3-a2e1-4849-9048-010da6ff3720</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

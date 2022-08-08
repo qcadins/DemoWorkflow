@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PROMO_AdminFee</name>
    <tag></tag>
-   <elementGuidId>aa5a940d-577a-45ff-b2db-e2540a6baa99</elementGuidId>
+   <elementGuidId>89a5a1d9-185d-48cc-97b8-4f17f3e320d9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

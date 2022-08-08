@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PROMO_OtherFee</name>
    <tag></tag>
-   <elementGuidId>98d06f9c-b8c1-41a6-86ab-fc22fa9043f6</elementGuidId>
+   <elementGuidId>756c1557-cb6f-45d1-8829-9dafb22601a1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

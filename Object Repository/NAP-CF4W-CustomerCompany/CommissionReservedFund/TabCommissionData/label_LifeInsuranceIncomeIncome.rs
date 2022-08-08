@@ -3,7 +3,7 @@
    <description></description>
    <name>label_LifeInsuranceIncomeIncome</name>
    <tag></tag>
-   <elementGuidId>bb8afc85-fb1e-4c55-a751-2cb25d7547f4</elementGuidId>
+   <elementGuidId>ceb781f6-793a-4882-8ad3-b9cc2f648881</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

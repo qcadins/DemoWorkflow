@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Admin Fee SUPP (Amt)</name>
    <tag></tag>
-   <elementGuidId>634cc7f0-1e54-4545-bc81-f29f908a1c6c</elementGuidId>
+   <elementGuidId>5364e9db-1378-4ee3-a27a-a386076a5db3</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;ListAllocated0002SB20211203142&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//input[@type='text']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;ListAllocated0002SB20211203142&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

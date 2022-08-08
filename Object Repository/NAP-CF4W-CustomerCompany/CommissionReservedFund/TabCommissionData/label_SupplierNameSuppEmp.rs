@@ -3,7 +3,7 @@
    <description></description>
    <name>label_SupplierNameSuppEmp</name>
    <tag></tag>
-   <elementGuidId>3ce1a97a-d1ec-4cec-aed2-6893341086b3</elementGuidId>
+   <elementGuidId>280efcc8-709c-4cdc-b16f-1bbfb6d82294</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

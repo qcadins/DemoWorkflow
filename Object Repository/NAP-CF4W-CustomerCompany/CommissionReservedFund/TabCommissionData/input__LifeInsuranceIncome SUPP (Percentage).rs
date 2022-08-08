@@ -3,7 +3,7 @@
    <description></description>
    <name>input__LifeInsuranceIncome SUPP (Percentage)</name>
    <tag></tag>
-   <elementGuidId>a0ec3784-7f87-4d58-a0e7-7e99b85d7a7c</elementGuidId>
+   <elementGuidId>ef2c92e5-f253-4534-8209-75bceb887f95</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

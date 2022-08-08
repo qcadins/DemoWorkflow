@@ -3,14 +3,18 @@
    <description></description>
    <name>label_RemainingAllocatedAmount</name>
    <tag></tag>
-   <elementGuidId>4184f478-341d-45d0-9633-07675d45260c</elementGuidId>
+   <elementGuidId>20aba9d3-a778-4a70-9057-6d8cd6c61c22</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='viewRemainIncomeInfo']/div[9]/div[2]/label</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='viewRemainIncomeInfo']/div[9]/div[2]/label</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>label-control ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 12,127,048.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;viewRemainIncomeInfo&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 form-inline-right&quot;]/label[@class=&quot;label-control ng-star-inserted&quot;]</value>
+      <value>//div[@id='viewRemainIncomeInfo']/div[9]/div[2]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

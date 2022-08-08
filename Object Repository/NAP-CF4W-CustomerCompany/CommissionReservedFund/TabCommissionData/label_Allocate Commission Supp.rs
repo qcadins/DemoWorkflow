@@ -3,15 +3,15 @@
    <description></description>
    <name>label_Allocate Commission Supp</name>
    <tag></tag>
-   <elementGuidId>06873b54-5e2c-49d6-9a9d-64c1dc82d54d</elementGuidId>
+   <elementGuidId>5b6c1100-31ac-4cc9-96c7-3a83267c146c</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;ListAllocated0002SB20211203141&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='ListAllocated0002SB20211203141']/div/div/div/div/div/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;ListAllocated0002SB20211203141&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

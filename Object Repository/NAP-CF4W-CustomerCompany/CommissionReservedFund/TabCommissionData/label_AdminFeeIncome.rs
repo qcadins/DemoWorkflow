@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AdminFeeIncome</name>
    <tag></tag>
-   <elementGuidId>287e5cef-73e0-4c77-b8ed-d968fd76b4b4</elementGuidId>
+   <elementGuidId>e343df00-75ed-4059-887f-2696235fd993</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

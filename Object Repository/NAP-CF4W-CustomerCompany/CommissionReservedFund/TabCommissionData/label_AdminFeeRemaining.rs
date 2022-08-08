@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AdminFeeRemaining</name>
    <tag></tag>
-   <elementGuidId>fc71e313-d2c0-4f45-89b8-0f89bcf27de5</elementGuidId>
+   <elementGuidId>eb27dfad-f1f2-4823-9f94-3c0f676ca076</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

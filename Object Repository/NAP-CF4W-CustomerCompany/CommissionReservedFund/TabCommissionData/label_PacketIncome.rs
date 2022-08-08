@@ -3,7 +3,7 @@
    <description></description>
    <name>label_PacketIncome</name>
    <tag></tag>
-   <elementGuidId>3938b3b3-6fcb-4a82-a4f5-8775e7eaccab</elementGuidId>
+   <elementGuidId>278d38c7-6c06-44ec-8383-0ccfde1f913e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>select_BankAccountSuppEmp</name>
    <tag></tag>
-   <elementGuidId>ef357532-4cdf-4040-97c5-57c95e08b8cb</elementGuidId>
+   <elementGuidId>1bc1fe04-b765-4adc-837d-8ffc384363e5</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[3]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/select[@class=&quot;form-control full-width adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[3]/div/div[2]/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[3]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/select[@class=&quot;form-control full-width adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

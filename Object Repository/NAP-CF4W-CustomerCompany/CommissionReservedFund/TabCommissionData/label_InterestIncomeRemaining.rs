@@ -3,7 +3,7 @@
    <description></description>
    <name>label_InterestIncomeRemaining</name>
    <tag></tag>
-   <elementGuidId>e7f96f69-6d83-44b2-9390-f6f897dc6b08</elementGuidId>
+   <elementGuidId>d23d9ce6-89a1-49e1-9340-06bbc1e59e18</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
