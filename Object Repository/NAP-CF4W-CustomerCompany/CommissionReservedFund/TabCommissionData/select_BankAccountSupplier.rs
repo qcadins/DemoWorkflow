@@ -3,7 +3,7 @@
    <description></description>
    <name>select_BankAccountSupplier</name>
    <tag></tag>
-   <elementGuidId>7de60042-42ff-42df-b700-0ac719bb1001</elementGuidId>
+   <elementGuidId>3e2f635b-891f-44a2-b374-9ce562edce3b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

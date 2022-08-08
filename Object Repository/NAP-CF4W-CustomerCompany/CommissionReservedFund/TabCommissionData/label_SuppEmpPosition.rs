@@ -3,15 +3,15 @@
    <description></description>
    <name>label_SuppEmpPosition</name>
    <tag></tag>
-   <elementGuidId>106bf1f3-672b-4e6d-8beb-3a7cf0e4a605</elementGuidId>
+   <elementGuidId>1daf5dc5-6ac1-4540-bc20-85fb7acfd8c2</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/label[@class=&quot;adInsLabel&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[2]/div[2]/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/label[@class=&quot;adInsLabel&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

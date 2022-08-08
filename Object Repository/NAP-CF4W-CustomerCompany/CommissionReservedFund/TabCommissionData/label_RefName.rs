@@ -3,15 +3,15 @@
    <description></description>
    <name>label_RefName</name>
    <tag></tag>
-   <elementGuidId>2e7da12d-76e9-4195-80d1-9247a59dbd68</elementGuidId>
+   <elementGuidId>425ae5f9-b4b3-4432-bbb6-5f16de85bbb0</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-10&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationReferantor']/div[2]/div/div/div[2]/div/div/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-10&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

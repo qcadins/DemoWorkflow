@@ -3,7 +3,7 @@
    <description></description>
    <name>i_Select</name>
    <tag></tag>
-   <elementGuidId>b456d158-a619-432e-998c-1460357a8676</elementGuidId>
+   <elementGuidId>6475bf23-5a09-4165-a2e6-01ca96021c2b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

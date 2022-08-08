@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PROMO_InsuranceIncome</name>
    <tag></tag>
-   <elementGuidId>10146ae8-3b08-4a6d-854d-326194208c8e</elementGuidId>
+   <elementGuidId>6d0f2f8e-16dd-44ed-bcbb-4baf6236e35a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

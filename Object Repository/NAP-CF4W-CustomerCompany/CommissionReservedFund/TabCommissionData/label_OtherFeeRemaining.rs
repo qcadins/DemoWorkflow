@@ -3,7 +3,7 @@
    <description></description>
    <name>label_OtherFeeRemaining</name>
    <tag></tag>
-   <elementGuidId>320168c3-fd88-439b-870c-e72c770f45fa</elementGuidId>
+   <elementGuidId>6a20f446-cbd0-411e-9e3f-23562b0a37c2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

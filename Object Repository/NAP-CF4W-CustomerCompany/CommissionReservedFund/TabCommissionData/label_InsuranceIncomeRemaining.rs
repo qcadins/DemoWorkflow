@@ -3,7 +3,7 @@
    <description></description>
    <name>label_InsuranceIncomeRemaining</name>
    <tag></tag>
-   <elementGuidId>21d20555-d9ad-4ef3-9d2d-24b54c407f43</elementGuidId>
+   <elementGuidId>020af656-4b25-444a-afa7-85410b35208d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

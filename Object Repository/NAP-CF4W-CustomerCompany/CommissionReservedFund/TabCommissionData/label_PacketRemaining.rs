@@ -3,7 +3,7 @@
    <description></description>
    <name>label_PacketRemaining</name>
    <tag></tag>
-   <elementGuidId>09ae05b4-d7af-4490-a866-5f91c10caa83</elementGuidId>
+   <elementGuidId>e6de3aa7-c374-45a8-94f4-fea64f3b9e97</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

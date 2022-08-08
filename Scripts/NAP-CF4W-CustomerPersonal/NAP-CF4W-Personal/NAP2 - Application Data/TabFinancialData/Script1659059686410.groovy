@@ -696,6 +696,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
+
 'Pengecekan jika tdp at mf tidak kosong'
 if (datafilefinancial.getValue(
 	GlobalVariable.NumofColm, 40).length() > 0) {

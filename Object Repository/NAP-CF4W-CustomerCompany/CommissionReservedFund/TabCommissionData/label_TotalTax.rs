@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalTax</name>
    <tag></tag>
-   <elementGuidId>1f79cfe0-6572-433e-94fc-d7037620f66f</elementGuidId>
+   <elementGuidId>3b9297e0-be16-42f0-882f-2baa62d43dbd</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

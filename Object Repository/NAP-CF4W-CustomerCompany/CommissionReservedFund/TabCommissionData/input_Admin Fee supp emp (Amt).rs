@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Admin Fee supp emp (Amt)</name>
    <tag></tag>
-   <elementGuidId>50c7b48b-4fba-4870-87ae-48b3a5cce017</elementGuidId>
+   <elementGuidId>d72de60b-f7c4-4bd1-957e-3619e7b73514</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//input[@formcontrolname = 'AllocationAmount' and @type = 'text']</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[8]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@formcontrolname = 'AllocationAmount' and @type = 'text']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

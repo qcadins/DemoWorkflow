@@ -3,15 +3,15 @@
    <description></description>
    <name>input__AdminFee()SuppEmp</name>
    <tag></tag>
-   <elementGuidId>70072922-b33f-435a-b47a-c9ce12bc1f61</elementGuidId>
+   <elementGuidId>be21dc62-9e02-468e-89c3-00acd6e6a3ec</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;][count(. | //input[@formcontrolname = 'AllocationPercentage']) = count(//input[@formcontrolname = 'AllocationPercentage'])]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type=''])[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;][count(. | //input[@formcontrolname = 'AllocationPercentage']) = count(//input[@formcontrolname = 'AllocationPercentage'])]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

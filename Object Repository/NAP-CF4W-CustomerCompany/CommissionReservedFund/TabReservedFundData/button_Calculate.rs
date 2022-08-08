@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Calculate</name>
    <tag></tag>
-   <elementGuidId>ab4f3f8f-e2d2-4c4c-a421-55741ddd4397</elementGuidId>
+   <elementGuidId>e2c70b80-07e3-4dbb-ac1f-bc9298cc06e4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

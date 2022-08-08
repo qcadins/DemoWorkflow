@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalCommissionAmtSupplier</name>
    <tag></tag>
-   <elementGuidId>1782951a-fc31-4f0e-9373-d2dcbb66d891</elementGuidId>
+   <elementGuidId>11c835dd-da8e-4631-b895-f24a33c38292</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

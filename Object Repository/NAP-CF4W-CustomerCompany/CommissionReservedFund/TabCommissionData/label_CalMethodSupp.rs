@@ -3,7 +3,7 @@
    <description></description>
    <name>label_CalMethodSupp</name>
    <tag></tag>
-   <elementGuidId>26ce31ca-8683-4b8c-8330-e7c11f505fdc</elementGuidId>
+   <elementGuidId>e3c5ec33-25fd-4a5e-806c-c3cacf9b4dcd</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

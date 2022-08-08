@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PROMO_InterestIncome</name>
    <tag></tag>
-   <elementGuidId>f527fcb4-99f9-4daa-9179-331a98a61ca7</elementGuidId>
+   <elementGuidId>984cb59e-dc19-4aa7-ad2d-03d1bc8df8a3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

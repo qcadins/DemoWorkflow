@@ -3,15 +3,15 @@
    <description></description>
    <name>i_deleteSuppEmp</name>
    <tag></tag>
-   <elementGuidId>ae8d9558-7389-4956-88f4-3e23b102c780</elementGuidId>
+   <elementGuidId>0e4edb08-ea65-4759-ae6f-b86d1a3079d4</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-2&quot;]/button[@class=&quot;btn btn-raised&quot;]/i[@class=&quot;ft-trash-2 font-medium-2&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div/div[2]/div/div[2]/button/i</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-2&quot;]/button[@class=&quot;btn btn-raised&quot;]/i[@class=&quot;ft-trash-2 font-medium-2&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalVat</name>
    <tag></tag>
-   <elementGuidId>13188157-cd31-4c22-b17c-bd1067d80ea5</elementGuidId>
+   <elementGuidId>d3cb1324-2d2f-43d0-b812-c37a3381609a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

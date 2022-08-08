@@ -3,7 +3,7 @@
    <description></description>
    <name>label_ExpenseAmtSupp</name>
    <tag></tag>
-   <elementGuidId>f1463daf-b7c9-49ff-b6c4-cc07c6f00308</elementGuidId>
+   <elementGuidId>b6036b05-6506-4d7b-84fe-1d3a81ca3812</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

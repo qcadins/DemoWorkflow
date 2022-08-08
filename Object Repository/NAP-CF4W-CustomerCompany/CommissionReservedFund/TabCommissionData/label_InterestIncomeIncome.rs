@@ -3,7 +3,7 @@
    <description></description>
    <name>label_InterestIncomeIncome</name>
    <tag></tag>
-   <elementGuidId>5e08e394-9f4e-4e34-a943-bc53364a264b</elementGuidId>
+   <elementGuidId>bc1a9ac7-dcd0-40be-b0ec-e277cae00827</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

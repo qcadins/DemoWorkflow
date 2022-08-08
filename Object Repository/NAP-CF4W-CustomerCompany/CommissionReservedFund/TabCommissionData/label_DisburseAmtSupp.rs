@@ -3,7 +3,7 @@
    <description></description>
    <name>label_DisburseAmtSupp</name>
    <tag></tag>
-   <elementGuidId>cf73e1f5-fc1e-4fda-8986-6e12651d07ee</elementGuidId>
+   <elementGuidId>d62b00ed-0cb5-4a65-81f7-d4e51c4cdf5b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

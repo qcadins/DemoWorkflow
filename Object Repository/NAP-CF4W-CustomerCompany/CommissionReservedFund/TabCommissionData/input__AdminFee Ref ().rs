@@ -3,15 +3,15 @@
    <description></description>
    <name>input__AdminFee Ref ()</name>
    <tag></tag>
-   <elementGuidId>8d33abb8-39de-4f8e-b824-04e1ca23b0a7</elementGuidId>
+   <elementGuidId>d8fc4a3e-befa-4955-bf57-af85126a6a24</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[2]/div[@id=&quot;ListAllocatedAGENCY_MRA_GROSS_1&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[28]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[2]/div[@id=&quot;ListAllocatedAGENCY_MRA_GROSS_1&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_SupplierName</name>
    <tag></tag>
-   <elementGuidId>55e5ce8a-358c-4d72-8408-1add0020ed38</elementGuidId>
+   <elementGuidId>e9e64466-e21b-49f3-9b54-197a7cdf6dc7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

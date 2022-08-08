@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalCommisssionAfterTaxAmtSupplier</name>
    <tag></tag>
-   <elementGuidId>760d7789-e105-42f1-975c-6b124d095c94</elementGuidId>
+   <elementGuidId>3f6227a5-4e35-40e3-ba6d-46dfb1f75d01</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

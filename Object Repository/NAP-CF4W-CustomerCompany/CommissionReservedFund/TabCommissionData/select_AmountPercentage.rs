@@ -3,7 +3,7 @@
    <description></description>
    <name>select_AmountPercentage</name>
    <tag></tag>
-   <elementGuidId>d2c6a746-e053-4aa8-b7e3-36c33b0d8693</elementGuidId>
+   <elementGuidId>944a5576-cd9b-4130-9282-983c70e4a3bf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>label_Upping Rate</name>
    <tag></tag>
-   <elementGuidId>6a518b52-8288-4751-b69b-0b4c27d56891</elementGuidId>
+   <elementGuidId>e307fa1f-e990-4732-86e0-15f004fae76a</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;viewIncomeInfo&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/label[@class=&quot;label-control&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='viewIncomeInfo']/div/div/div/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;viewIncomeInfo&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/label[@class=&quot;label-control&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

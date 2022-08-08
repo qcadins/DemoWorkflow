@@ -3,7 +3,7 @@
    <description></description>
    <name>label_VatAmtRef</name>
    <tag></tag>
-   <elementGuidId>7c3438f5-2cb8-42db-bf3d-d66ef96b297d</elementGuidId>
+   <elementGuidId>b8b6b7a4-8c5e-48fd-9482-65e1c32181cb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
