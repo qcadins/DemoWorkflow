@@ -136,6 +136,7 @@ for(int i =1;i<=countAddCov;i++){
 'Klik apply to all'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Apply To All'))
 
+
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
 
@@ -234,7 +235,8 @@ for(int i = 1;i<=count;i++){
 		 addCovYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, addCovTableRow+j)
 		 addCovYearValueArray = addCovYearValue.split(";",-1)
 		 'Supaya checkbox bisa diklik'
-		 if(i==1){
+		 if(i==1&&j==1){
+			 WebUI.click(addCovYearCheckbox)
 			 WebUI.click(addCovYearCheckbox)
 		 }
 		 'Pengecekan jika label = loading'

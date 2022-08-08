@@ -32,6 +32,7 @@ if(WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerPersonal/NAP-C
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
 
 WebUI.delay(5)
+
 'Input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -104,8 +105,10 @@ if(variableSupp.size()>0){
 	
 	'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
 	if (supplierName.equalsIgnoreCase(deleteSupp)) {
+		
 		'Click icon delete (tempat sampah)'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/i_deletesupp'))
+		
 		'Click OK pada alert'
 		WebUI.acceptAlert()
 	} else {
@@ -166,6 +169,7 @@ if(variableSupp.size()>0){
 				
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
 						(2 * i) + 4)!=""){
+					
 					'Input Amount, 2i+4, +4 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+4 = 6  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					WebUI.setText(modifyObjectCommissionAmt, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
 							(2 * i) + 4), FailureHandling.OPTIONAL)
@@ -178,6 +182,7 @@ if(variableSupp.size()>0){
 				
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
 						(2 * i) + 5)!=""){
+					
 					'Input Percentage, 2i+5, +5 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+5 = 7  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					WebUI.setText(modifyObjectCommissionPercentage, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
 							(2 * i) + 5), FailureHandling.OPTIONAL)
@@ -216,21 +221,24 @@ if(variableSupp.size()>0){
 					
 					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
 					if(textIncomeInfo==allocateCommission){
+						
 						'Variabel untuk mengambil amount income information yang sesuai'
 						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
 						
 						'Parsing string amount income information menjadi bentuk double'
-						incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
+						incomeInfoAmt =  Double.parseDouble(textIncomeInfoAmt)
 						
 						'Ambil nilai total allocate commission amount ke j-1'
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j-1)
 						
 						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
 						if(amt!=0 && pctg!=0){
+							
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(j-1,GetTotalAllocateCommissionAmt+(pctg/100*incomeInfoAmt))
 						}
 						else{
+							
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(j-1,GetTotalAllocateCommissionAmt+amt)
 						}
@@ -340,6 +348,7 @@ if(variableSuppEmp.size()>0){
 		}
 		'Pengecekan jika flag delete tidak sama dengan nol, terjadi setelah proses delete dilakukan'
 		if(flagdelSuppEmployee!=0){
+			
 			'Lanjut ke i/supplier Employee berikutnya'
 			continue;
 		}
@@ -428,6 +437,7 @@ if(variableSuppEmp.size()>0){
 					if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,(2 * j) + 3 + suppEmpRow).length()>0){
 						
 						if(value[i-1]!=""){
+							
 							'Input Percentage'
 							WebUI.setText(modifyObjectCommissionPercentage, value[i-1] , FailureHandling.OPTIONAL)
 						}
@@ -447,7 +457,7 @@ if(variableSuppEmp.size()>0){
 				BigDecimal amt = Double.parseDouble(textAmount)
 				
 				'Parsing string percentage menjadi bentuk double'
-				BigDecimal pctg = Double.parseDouble(textPercentage)
+				BigDecimal pctg =  Double.parseDouble(textPercentage)
 				
 				String textIncomeInfoAmt
 				BigDecimal incomeInfoAmt
@@ -472,17 +482,19 @@ if(variableSuppEmp.size()>0){
 							textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(",","")
 							
 							'Parsing string amount income information menjadi bentuk double'
-							incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
+							incomeInfoAmt =  Double.parseDouble(textIncomeInfoAmt)
 							
 							'Ambil nilai total allocate commission amount ke k-1'
 							GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k-1)
 							
 							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
 							if(amt!=0 && pctg!=0){
+								
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k-1,GetTotalAllocateCommissionAmt+(pctg/100*incomeInfoAmt))
 							}
 							else{
+								
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k-1,GetTotalAllocateCommissionAmt+amt)
 							}
@@ -495,6 +507,7 @@ if(variableSuppEmp.size()>0){
 				
 				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
 				if(amt!=0 && pctg!=0){
+					
 					'Verify hasil hitungan percentage dengan amount'
 					WebUI.verifyEqual(Math.round(pctg/100*incomeInfoAmt),amt, FailureHandling.OPTIONAL)
 					
@@ -502,6 +515,7 @@ if(variableSuppEmp.size()>0){
 					WebUI.verifyEqual(Math.round(amt/incomeInfoAmt*100*100)/100,Math.round(pctg*100)/100, FailureHandling.OPTIONAL)
 				}
 				else if(amt==0 || pctg==0){
+					
 					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
 					WebUI.verifyEqual(Math.round(amt),Math.round(pctg), FailureHandling.OPTIONAL)
 				}
@@ -565,8 +579,10 @@ if(variableRef.size()>0){
 				}
 			}
 		}
+		
 		'Pengecekan jika flag delete tidak sama dengan nol, terjadi setelah proses delete dilakukan'
 		if(flagdelReferantor!=0){
+			
 			'Lanjut ke i/referantor berikutnya'
 			continue;
 		}
@@ -647,6 +663,7 @@ if(variableRef.size()>0){
 					WebUI.click(modifyObjectCommissionPercentage)
 				}
 				else{
+					
 					'Mengambil nilai percentage dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,(2 * j) + 2 + refRow).split(";",-1)
 					
@@ -703,10 +720,12 @@ if(variableRef.size()>0){
 							
 							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
 							if(amt!=0 && pctg!=0){
+								
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k-1,GetTotalAllocateCommissionAmt+(pctg/100*incomeInfoAmt))
 							}
 							else{
+								
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k-1,GetTotalAllocateCommissionAmt+amt)
 							}
@@ -743,12 +762,12 @@ variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4')
 variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
-GlobalVariable.TotalCommissionAmt = 0.00
-GlobalVariable.TotalCommissionAmtAftTax = 0.00
-GlobalVariable.TotalTax = 0.00
-GlobalVariable.TotalVat = 0.00
-GlobalVariable.TotalDisburseAmt = 0.00
-GlobalVariable.TotalExpenseAmt = 0.00
+GlobalVariable.TotalCommissionAmt = 0
+GlobalVariable.TotalCommissionAmtAftTax = 0
+GlobalVariable.TotalTax = 0
+GlobalVariable.TotalVat = 0
+GlobalVariable.TotalDisburseAmt = 0
+GlobalVariable.TotalExpenseAmt = 0
 
 'Looping data Supplier'
 for (int i = 1; i<=variableSupp.size(); i++){
@@ -784,7 +803,7 @@ for (int i = 1; i<=variableSupp.size(); i++){
 		 'xpath', 'equals', newxpathExpense, true)
 	 
 	 'Menghitung total amount untuk verify summary'
-	 CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+	 CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 	
 }
 
@@ -822,7 +841,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 		'xpath', 'equals', newxpathExpense, true)
 	
 	'Menghitung total amount untuk verify summary'
-	CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+	CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
 }
 
@@ -860,7 +879,7 @@ for(int k=1; k <= variableRef.size(); k++){
 		 'xpath', 'equals', newxpathExpense, true)
 	 
 	 'Menghitung total amount yang akan digunakan untuk verify summary'
-	 CustomKeywords.'commissionData.commission.count'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
+	 CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 	
 }
 

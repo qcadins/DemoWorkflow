@@ -23,7 +23,7 @@ import internal.GlobalVariable
 
 public class commission {
 
-	public count(Object modifyObjectCommAmt, Object modifyObjectAmtAftTax, Object modifyObjectTax, Object modifyObjectVat, Object modifyObjectDisburse, Object modifyObjectExpense){
+	public calculateCommissionSummary(Object modifyObjectCommAmt, Object modifyObjectAmtAftTax, Object modifyObjectTax, Object modifyObjectVat, Object modifyObjectDisburse, Object modifyObjectExpense){
 		Double commAmt = Double.parseDouble(WebUI.getText(modifyObjectCommAmt).replace(',',''))
 		Double commAmtAftTax = Double.parseDouble(WebUI.getText(modifyObjectAmtAftTax).replace(',',''))
 		Double taxAmt = Double.parseDouble(WebUI.getText(modifyObjectTax).replace(',',''))
