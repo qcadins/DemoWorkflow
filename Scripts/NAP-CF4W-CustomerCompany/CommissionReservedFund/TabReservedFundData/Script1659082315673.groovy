@@ -24,7 +24,7 @@ import org.codehaus.groovy.ast.stmt.ContinueStatement
 String userDir = System.getProperty('user.dir')
 
 'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
+String filePath = userDir + GlobalVariable.PathCompany
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
