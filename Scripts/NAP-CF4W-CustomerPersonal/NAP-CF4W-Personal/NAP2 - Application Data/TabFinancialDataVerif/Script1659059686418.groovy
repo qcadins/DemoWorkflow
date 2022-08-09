@@ -50,31 +50,31 @@ ProvisionFeePercentage = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPer
 'get provisionfee amount value'
 strProvisionFeeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
     'value', FailureHandling.OPTIONAL).replace(',', '')
-	
-	'get installment amount value'
-	strInstallmentAmount = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Installment Amount'),
-		'value', FailureHandling.OPTIONAL).replace(',', '')
-		
-		'get attribute admin fee'
-		def AdminFeeValue = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),
-			'value', FailureHandling.OPTIONAL).split(',').join()
-			
-			'get attribute additional admin fee'
-			def AdditionalAdminFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),
-				'value', FailureHandling.OPTIONAL).split(',').join()
-				
-				'get attribute notary fee'
-				def NotaryFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),
-					'value', FailureHandling.OPTIONAL).split(',').join()
-					
-					'get attribute other fee'
-					def OtherFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),
-						'value', FailureHandling.OPTIONAL).split(',').join()
-						
-						'get attribute fiducia fee'
-						def FiduciaFeeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),
-							'value', FailureHandling.OPTIONAL).split(',').join()
-							
+
+'get installment amount value'
+strInstallmentAmount = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Installment Amount'), 
+    'value', FailureHandling.OPTIONAL).replace(',', '')
+
+'get attribute admin fee'
+def AdminFeeValue = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
+    'value', FailureHandling.OPTIONAL).split(',').join()
+
+'get attribute additional admin fee'
+def AdditionalAdminFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
+    'value', FailureHandling.OPTIONAL).split(',').join()
+
+'get attribute notary fee'
+def NotaryFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
+    'value', FailureHandling.OPTIONAL).split(',').join()
+
+'get attribute other fee'
+def OtherFeeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
+    'value', FailureHandling.OPTIONAL).split(',').join()
+
+'get attribute fiducia fee'
+def FiduciaFeeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
+    'value', FailureHandling.OPTIONAL).split(',').join()
+
 'convert Total Asset Price to BigDecimal'
 BigDecimal BDTotalAssetPrice = new BigDecimal(TotalAssetPrice)
 
@@ -93,10 +93,8 @@ BigDecimal BDTotalInsuranceCap = new BigDecimal(TotalInsuranceCap)
 'convert AdminFeeValue to BigDecimal'
 BigDecimal BDAdminFeeValue = new BigDecimal(AdminFeeValue)
 
-
 'convert AdditionalAdminFeeValue to BigDecimal'
 BigDecimal BDAdditionalAdminFeeValue = new BigDecimal(AdditionalAdminFeeValue)
-
 
 'convert NotaryFeeValue to BigDecimal'
 BigDecimal BDNotaryFeeValue = new BigDecimal(NotaryFeeValue)
@@ -112,7 +110,6 @@ BigDecimal ProvisionFeeAmount = new BigDecimal(strProvisionFeeAmount)
 
 'convert provision percentage to BigDecimal'
 BigDecimal ProvisionPercentage = new BigDecimal(ProvisionFeePercentage)
-
 
 'convert installment amount to BigDecimal'
 BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
@@ -171,7 +168,6 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
             FailureHandling.OPTIONAL)
     }
 }
-
 
 'get attribute admincapitalizevalue'
 def AdminCapitalizeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
@@ -290,8 +286,8 @@ int TotalFeeCapitalize = Integer.parseInt(WebUI.getText(findTestObject('NAP-CF4W
         '.00', '').split(',').join())
 
 'calculate total fee capitalize'
-int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeCapValue) + intNotaryFeeCapitalizeValue) + intOtherFeeCapitalize) + 
-intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
+int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeCapValue) + intNotaryFeeCapitalizeValue) + 
+intOtherFeeCapitalize) + intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
 
 'verify equal totalfeecapitalize'
 WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue)
@@ -430,7 +426,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     } else {
         interestamountvalue = (interestamountvalue + Integer.parseInt(strInterestamount))
     }
-	
+    
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
 
@@ -445,14 +441,13 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSInterestAmount), 0)
-	
-	
-	'get first row installment amount value'
-	if(InstallmentSchemecount == 1) {
-		'Verify installment amount = installment amount seq1'
-		WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
-	}
 
+    'get first row installment amount value'
+    if (InstallmentSchemecount == 1) {
+        'Verify installment amount = installment amount seq1'
+        WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+    }
+    
     'get last row value'
     if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {
         'verify value is 0'
@@ -463,7 +458,6 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     }
 }
 
-
 'verify equal Interest amount seq 1 + os interest amount seq1 = Total Interest'
 WebUI.verifyEqual(intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL)
 
@@ -471,7 +465,8 @@ WebUI.verifyEqual(intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intInter
 WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1, intNTF, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = Total AR'
-WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intTotalAR, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    intTotalAR, FailureHandling.OPTIONAL)
 
 'verify pincipal amount value = NTF'
 WebUI.verifyEqual(principalamountvalue, intNTF, FailureHandling.OPTIONAL)
@@ -489,13 +484,16 @@ WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL)
 WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = principalamountvalue + interestamountvalue'
-WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, principalamountvalue + interestamountvalue, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    principalamountvalue + interestamountvalue, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = installmentamountvalue'
-WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, installmentamountvalue, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    installmentamountvalue, FailureHandling.OPTIONAL)
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = intNTF + intInterestAmountValue'
-WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1 + intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
 
 'verify rumus 1 == rumus 2'
 WebUI.verifyEqual(principalamountvalue + interestamountvalue, installmentamountvalue, FailureHandling.OPTIONAL)
@@ -547,7 +545,8 @@ BigDecimal TDP = (((((intDPAssetAccessoryMinSubValue + totalFee) + totalInsuranc
 BDTotalInsuranceCap) - intTotalLifeInsuranceCapitalize
 
 'verify total fee = all fees'
-WebUI.verifyEqual(BDAdminFeeValue + BDAdditionalAdminFeeValue + BDNotaryFeeValue + BDOtherFeeValue + BDFiduciaFeeAmount + ProvisionFeeAmount, totalFee)
+WebUI.verifyEqual(((((BDAdminFeeValue + BDAdditionalAdminFeeValue) + BDNotaryFeeValue) + BDOtherFeeValue) + BDFiduciaFeeAmount) + 
+    ProvisionFeeAmount, totalFee)
 
 'Pengecekan jika installment type advance'
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(

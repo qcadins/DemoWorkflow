@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-invalid</name>
+   <name>input_Mother Maiden Name</name>
    <tag></tag>
    <elementGuidId>5cd78da6-829e-4389-bfd9-5b739f90cc49</elementGuidId>
    <selectorCollection>
