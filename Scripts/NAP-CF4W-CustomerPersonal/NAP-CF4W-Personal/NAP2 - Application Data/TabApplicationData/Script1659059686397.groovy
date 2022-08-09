@@ -24,6 +24,16 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+String instancename = findTestData('Login/Login').getValue(2, 8)
+String username = findTestData('Login/Login').getValue(3, 8)
+String password = findTestData('Login/Login').getValue(4, 8)
+String database = findTestData('Login/Login').getValue(5, 8)
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String url = servername+';instanceName='+instancename+';databaseName='+database
+Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('APPLICATION DATA')){
 
 	if(WebUI.verifyElementClickable(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'),FailureHandling.OPTIONAL)){
