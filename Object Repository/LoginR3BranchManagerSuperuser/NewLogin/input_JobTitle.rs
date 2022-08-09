@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_JobTitle</name>
+   <tag></tag>
+   <elementGuidId>45839ab5-a0b4-4a4d-93e2-317813ef62ea</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/div/form/div[1]/div[4]/lib-ucdropdownsearch/div/div[1]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/div[2]/div[2]/div/mat-dialog-container/app-rolepick/div/div/form/div[1]/div[4]/lib-ucdropdownsearch/div/div[1]/input</value>
+   </webElementProperties>
+</WebElementEntity>
