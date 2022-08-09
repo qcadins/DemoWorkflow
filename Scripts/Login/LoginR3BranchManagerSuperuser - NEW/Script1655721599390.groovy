@@ -42,12 +42,12 @@ WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin
 
 WebUI.sendKeys(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), Keys.chord(Keys.ENTER))
 
-WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/input_JobTitle'))
+WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/input_JobTitle'), FailureHandling.OPTIONAL)
 
 WebUI.selectOptionByLabel(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'),findTestData('Login/Login').getValue(
-        5, 2),false)
+        5, 2),false, FailureHandling.OPTIONAL)
 
-WebUI.sendKeys(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), Keys.chord(Keys.ENTER))
+WebUI.sendKeys(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), Keys.chord(Keys.ENTER), FailureHandling.OPTIONAL)
 
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/button_Choose Role'))
 

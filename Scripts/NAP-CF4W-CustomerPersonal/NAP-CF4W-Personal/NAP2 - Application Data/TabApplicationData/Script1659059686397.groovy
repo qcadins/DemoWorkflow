@@ -14,6 +14,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import groovy.sql.Sql as Sql
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -34,14 +35,19 @@ String driverclassname = findTestData('Login/Login').getValue(6, 8)
 String url = servername+';instanceName='+instancename+';databaseName='+database
 Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
 
+
+
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('APPLICATION DATA')){
 
-	if(WebUI.verifyElementClickable(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'),FailureHandling.OPTIONAL)){
-		print("clickable")
-	}
-	else{
-		print('not clickable')
-	}
+	
+String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
+println(POName)
+String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlConnection,POName)
+	
+String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'),'value')
+	
+WebUI.verifyMatch(textInterest, "(?i)"+InterestType, true)
+	
 if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'),10, FailureHandling.OPTIONAL)){
 	'Click Lookup Officer'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'))
