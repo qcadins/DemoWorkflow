@@ -14,6 +14,11 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+
+int flagWarning = 0
+
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase(
+    'FAMILY')) {
 int flagWarning =0
 String userDir = System.getProperty('user.dir')
 
@@ -29,8 +34,8 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
             GlobalVariable.NumofColm, 3)) {
             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                 GlobalVariable.NumofFamily, 3) == 'Input Data') {
-                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'),5, 
-                    FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
+                    5, FailureHandling.OPTIONAL)) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
@@ -93,17 +98,18 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
                     }
                     
                     'input employee establishment date'
@@ -132,7 +138,7 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             GlobalVariable.NumofFamily, 22))
 
                     'input mother maiden name'
-                    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-invalid'), 
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name'), 
                         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 23))
 
@@ -160,24 +166,23 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-							
-							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-								GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-							
-							continue
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'Write to Excel FAILED'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                            continue
+                        }
                     }
                     
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -194,18 +199,18 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-							
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
                     }
                     
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -222,24 +227,23 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-							
-							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-								GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-							
-							continue
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'Write to Excel FAILED'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                            continue
+                        }
                     }
                     
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -256,18 +260,18 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-							
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
                     }
                     
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -318,43 +322,43 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_SearchZipcode'))
 
                         'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-							
-							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-								GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-							
-							continue
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'Write to Excel FAILED'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                            continue
+                        }
+                        
                         'select ownership'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'), 
                             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                 GlobalVariable.NumofFamily, 44), false)
                     }
-						
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 'value', FailureHandling.OPTIONAL)
-						
-						'add name to Global variable'
-						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
                     
+                    'get customer name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
                     'verify input error'
-                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'),5, 
-                        FailureHandling.OPTIONAL)) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
@@ -365,21 +369,21 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         'Write to Excel SUCCESS'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
-						if(flagWarning>0){
-							'Write to Excel WARNING'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-								0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-						}
-						'customer added +1'
-						GlobalVariable.countNumofCustomer++
-						
-						
+
+                        if (flagWarning > 0) {
+                            'Write to Excel WARNING'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                        }
+                        
+                        'customer added +1'
+                        (GlobalVariable.countNumofCustomer)++
                     }
                 }
             } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                 GlobalVariable.NumofFamily, 3) == 'LookUp') {
-                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'),5, 
-                    FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
+                    5, FailureHandling.OPTIONAL)) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
@@ -410,206 +414,208 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 
                     'verify input error'
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-						FailureHandling.OPTIONAL)) {
-						'click select'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-					}
-					else{
-						'click X'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-						
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-						
-						'Write to Excel FAILED'
-						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-							GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-						
-						continue
-					}
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                        10, FailureHandling.OPTIONAL)) {
+                        'click select'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                    } else {
+                        'click X'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                        'click button cancel'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                        'Write to Excel FAILED'
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
+                            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                        continue
+                    }
+                    
+                    'select customer model'
+                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
+                        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 15), false)
+
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 17).length() > 1) {
+                        'click lookup button proffession name'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
+
+                        'input profession code'
+                        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession Code_professionCodeId'), 
+                            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                GlobalVariable.NumofFamily, 16))
+
+                        'click button search'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+
+                        'verify input error'
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
+                    }
+                    
+                    'input employee establishment date'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Employee Establishment Date'), 
+                        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 18))
+
+                    'select nationality'
+                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
+                        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 25), false)
+
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 25) == 'Foreigner') {
+                        'click button lookup country'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
+
+                        'input country code'
+                        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Country Code_countryCodeId'), 
+                            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                GlobalVariable.NumofFamily, 26))
+
+                        'click button search'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+
+                        'verify input error'
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'Write to Excel FAILED'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                            continue
+                        }
+                    }
+                    
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 29).length() > 1) {
+                        'click button lookup job position'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
+
+                        'input job position code'
+                        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Job Position Code_JobCodeId'), 
+                            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                GlobalVariable.NumofFamily, 28))
+
+                        'click button search'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+
+                        'verify input error'
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
+                    }
+                    
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 32).length() > 1) {
+                        'click button lookup department AML'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
+
+                        'input department AML Code'
+                        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
+                            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                GlobalVariable.NumofFamily, 31))
+
+                        'click button search'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+
+                        'verify input error'
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'Write to Excel FAILED'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+                            continue
+                        }
+                    }
+                    
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 34).length() > 1) {
+                        'click button lookup authority AML'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
+
+                        'input authority AML Code'
+                        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
+                            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                GlobalVariable.NumofFamily, 33))
+
+                        'click button search'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+
+                        'verify input error'
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
+                            10, FailureHandling.OPTIONAL)) {
+                            'click select'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
+                        } else {
+                            'click X'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
+
+                            flagWarning++
+
+                            continue
+                        }
+                    }
+                    
+                    'get customer name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
 					
-					'select customer model'
-					WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'),
-						findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-							GlobalVariable.NumofFamily, 15), false)
+					if (GlobalVariable.Role == 'Testing') {
+						'call test case Family data verif'
+						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-						GlobalVariable.NumofFamily, 17).length() > 1) {
-						'click lookup button proffession name'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
-
-						'input profession code'
-						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession Code_professionCodeId'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 16))
-
-						'click button search'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
-
-						'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
 						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-						}
-					}
-					
-					'input employee establishment date'
-					WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Employee Establishment Date'),
-						findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-							GlobalVariable.NumofFamily, 18))
-					
-					'select nationality'
-					WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'),
-						findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-							GlobalVariable.NumofFamily, 25), false)
-
-					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-						GlobalVariable.NumofFamily, 25) == 'Foreigner') {
-						'click button lookup country'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
-
-						'input country code'
-						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Country Code_countryCodeId'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 26))
-
-						'click button search'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
-
-						'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-							
-							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-								GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-							
-							continue
-							
-						}
-					}
-					
-					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-						GlobalVariable.NumofFamily, 29).length() > 1) {
-						'click button lookup job position'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
-
-						'input job position code'
-						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Job Position Code_JobCodeId'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 28))
-
-						'click button search'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
-
-						'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-							
-						}
-					}
-					
-					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-						GlobalVariable.NumofFamily, 32).length() > 1) {
-						'click button lookup department AML'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
-
-						'input department AML Code'
-						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 31))
-
-						'click button search'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
-
-						'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-							
-							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0,
-								GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-							
-							continue
-							
-						}
-					}
-					
-					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-						GlobalVariable.NumofFamily, 34).length() > 1) {
-						'click button lookup authority AML'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
-
-						'input authority AML Code'
-						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 33))
-
-						'click button search'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
-
-						'verify input error'
-						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 10,
-							FailureHandling.OPTIONAL)) {
-							'click select'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'))
-						}
-						else{
-							'click X'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-							flagWarning++
-							continue
-						}
-					}
-						
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 'value', FailureHandling.OPTIONAL)
-						
-						'add name to Global variable'
-						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
 
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
-					
-			
 
                     'verify input error'
-                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'),5, 
-                        FailureHandling.OPTIONAL)) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
@@ -620,41 +626,37 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         'Write to Excel SUCCESS'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
-						
-						
-						if(flagWarning>0){
-							'Write to Excel WARNING'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-								0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-							
-						}
+
+                        if (flagWarning > 0) {
+                            'Write to Excel WARNING'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                        }
+                        
                         'customer added +1'
-                        GlobalVariable.countNumofCustomer++
-						
-						
-					}
+                        (GlobalVariable.countNumofCustomer)++
+                    }
                 }
             }
         }
     }
-	
-	'click button save and continue'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
-	
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/th_Family Name'),5, 
-        FailureHandling.OPTIONAL)) {
-		'click back'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Back'))
-	
-		'Write to Excel FAILED'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+    
+    'click button save and continue'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
+
+    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/th_Family Name'), 
+        5, FailureHandling.OPTIONAL)) {
+        'click back'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Back'))
+
+        'Write to Excel FAILED'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+    } else {
+        'Write to Excel SUCCESS'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
     }
-	else{
-		'Write to Excel SUCCESS'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-	}
 }
 
-
+}

@@ -42,4 +42,14 @@ public class CustomerDataVerif {
 		})
 		return custoemrdata
 	}
+	
+	@Keyword
+	public FamilyDataPersonal (Sql instance, String name, String idno){
+		String custoemrdata
+		instance.eachRow(("select Cust_name AS HEADER, BIRTH_PLACE AS HEADER, MR_ID_TYPE_CODE AS HEADER, ID_EXPIRED_DT AS HEADER, MR_MARITAL_STAT_CODE AS HEADER, MOBILE_PHN_NO_1 AS HEADER, MR_CUST_MODEL_CODE AS HEADER, MR_GENDER_CODE AS HEADER, FORMAT(BIRTH_DT, 'yyyy-MM-dd') AS HEADER, ID_NO AS HEADER, TAX_ID_NO AS HEADER, MOTHER_MAIDEN_NAME AS HEADER, EMAIL_1 AS HEADER, MR_NATIONALITY_CODE AS HEADER, UPPER(COUNTRY_NAME) AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, MR_BUILDING_OWNERSHIP_CODE AS HEADER from cust a join cust_addr b on a.CUST_ID = b.CUST_ID join cust_personal c on a.cust_ID = c.CUST_ID join REF_COUNTRY d on c.WNA_COUNTRY_CODE = d.COUNTRY_CODE where a.cust_name = '"+ name + "' AND ID_NO = '"+ idno +"' AND MR_CUST_ADDR_TYPE_CODE = 'legal'"), {  row ->
+
+			custoemrdata = (row)
+		})
+		return custoemrdata
+	}
 }
