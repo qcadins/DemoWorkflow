@@ -3,7 +3,7 @@
    <description></description>
    <name>button_CancelSubsidy</name>
    <tag></tag>
-   <elementGuidId>294704ef-cb68-49b3-adaf-8735515a978d</elementGuidId>
+   <elementGuidId>f003d030-3b65-4c93-9c39-3debadd90e42</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

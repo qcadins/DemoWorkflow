@@ -3,11 +3,11 @@
    <description></description>
    <name>button_Submit</name>
    <tag></tag>
-   <elementGuidId>502d6980-04e8-4fc5-9636-42d28da4077e</elementGuidId>
+   <elementGuidId>2bd753a5-a967-4620-aa3d-76f293e2a0cf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;upload-tab&quot;]/app-dms-iframe/div/div/div/div/div/form/div/div[2]/button[3]/i</value>
+         <value>(//button[@type='button'])[12]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

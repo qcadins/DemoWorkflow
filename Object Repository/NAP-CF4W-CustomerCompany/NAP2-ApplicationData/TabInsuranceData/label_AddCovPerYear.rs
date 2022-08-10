@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AddCovPerYear</name>
    <tag></tag>
-   <elementGuidId>5b0d1e97-b472-448e-a395-d583ec7b529e</elementGuidId>
+   <elementGuidId>c844c07a-a7b9-4798-a7e8-4d3916fe1206</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

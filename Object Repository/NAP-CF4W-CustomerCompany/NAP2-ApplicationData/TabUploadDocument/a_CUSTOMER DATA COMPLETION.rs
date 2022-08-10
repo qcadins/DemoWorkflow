@@ -3,7 +3,7 @@
    <description></description>
    <name>a_CUSTOMER DATA COMPLETION</name>
    <tag></tag>
-   <elementGuidId>72a75fe7-4ec1-478b-ab09-13a317e435e5</elementGuidId>
+   <elementGuidId>5ce7ba41-b406-4a7d-ad4f-a6623a3cf93e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

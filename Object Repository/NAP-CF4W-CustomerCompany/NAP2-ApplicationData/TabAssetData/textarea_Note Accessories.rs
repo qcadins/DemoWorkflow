@@ -3,7 +3,7 @@
    <description></description>
    <name>textarea_Note Accessories</name>
    <tag></tag>
-   <elementGuidId>8a5aaec0-4ab2-412f-8639-fb50e8e8ff14</elementGuidId>
+   <elementGuidId>3934d44f-a86f-450a-8a6f-3e781ff37844</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

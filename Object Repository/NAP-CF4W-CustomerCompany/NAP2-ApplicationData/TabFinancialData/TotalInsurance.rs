@@ -3,7 +3,7 @@
    <description></description>
    <name>TotalInsurance</name>
    <tag></tag>
-   <elementGuidId>cf304f08-156b-42bc-b2cc-5b80b0ed1bb1</elementGuidId>
+   <elementGuidId>a6cc5032-c59d-4d97-b24e-20d6216e84da</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

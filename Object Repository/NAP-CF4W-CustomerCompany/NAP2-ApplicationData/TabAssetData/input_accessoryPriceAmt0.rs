@@ -3,7 +3,7 @@
    <description></description>
    <name>input_accessoryPriceAmt0</name>
    <tag></tag>
-   <elementGuidId>71417095-3922-48be-9a52-6b35438c8a52</elementGuidId>
+   <elementGuidId>e184610f-eb80-46bd-a4c8-35c10f9a04f9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

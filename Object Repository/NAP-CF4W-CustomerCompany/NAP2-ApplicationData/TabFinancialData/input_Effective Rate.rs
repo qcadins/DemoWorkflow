@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Effective Rate</name>
    <tag></tag>
-   <elementGuidId>84100985-1dc6-4e9a-a790-2553f61cd3c0</elementGuidId>
+   <elementGuidId>254749ea-bfd9-43e6-9724-2616cf545a0a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

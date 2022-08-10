@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Delete</name>
    <tag></tag>
-   <elementGuidId>8cccf6d8-a5e4-40f2-8729-e76bbd6fe8c7</elementGuidId>
+   <elementGuidId>49a49627-3802-457c-a7bf-045c3ea2ffdb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

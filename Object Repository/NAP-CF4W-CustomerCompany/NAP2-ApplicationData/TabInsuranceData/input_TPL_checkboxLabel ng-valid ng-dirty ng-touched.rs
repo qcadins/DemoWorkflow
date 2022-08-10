@@ -3,7 +3,7 @@
    <description></description>
    <name>input_TPL_checkboxLabel ng-valid ng-dirty ng-touched</name>
    <tag></tag>
-   <elementGuidId>2896eac7-7f94-4b31-bb9a-a368340880bb</elementGuidId>
+   <elementGuidId>7a769948-1dfc-45ee-93e5-65dfd632fa27</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

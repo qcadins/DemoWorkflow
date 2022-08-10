@@ -3,15 +3,15 @@
    <description></description>
    <name>button_REF MASTER APP DATA</name>
    <tag></tag>
-   <elementGuidId>45ebf1c6-e72a-4746-a2ad-848b3da8bad9</elementGuidId>
+   <elementGuidId>490baa08-915c-4c9d-9cd8-303658e2fc02</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[16]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

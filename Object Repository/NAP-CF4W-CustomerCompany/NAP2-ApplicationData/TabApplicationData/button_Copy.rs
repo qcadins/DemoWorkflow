@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Copy</name>
    <tag></tag>
-   <elementGuidId>b9f5a511-9a8e-4c6b-90ff-ef2ec7bb8063</elementGuidId>
+   <elementGuidId>e75ddba1-8a1c-400b-8865-23611f931ef9</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;mailingAddr&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[12]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;mailingAddr&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

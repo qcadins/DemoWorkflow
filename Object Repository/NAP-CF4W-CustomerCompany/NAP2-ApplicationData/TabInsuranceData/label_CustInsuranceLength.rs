@@ -3,7 +3,7 @@
    <description></description>
    <name>label_CustInsuranceLength</name>
    <tag></tag>
-   <elementGuidId>cbdfa705-5552-4967-9ec2-6ba6d23f8345</elementGuidId>
+   <elementGuidId>b59253f8-2930-43c2-9da7-a8e29fe9b64c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

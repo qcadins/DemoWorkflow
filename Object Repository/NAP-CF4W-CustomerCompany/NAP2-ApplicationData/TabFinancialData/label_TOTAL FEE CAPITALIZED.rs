@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL FEE CAPITALIZED</name>
    <tag></tag>
-   <elementGuidId>4a2c4336-e734-4e44-b9b2-220fa8617150</elementGuidId>
+   <elementGuidId>f8931cc5-8b7a-48fe-9e86-5ac62ad951f0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

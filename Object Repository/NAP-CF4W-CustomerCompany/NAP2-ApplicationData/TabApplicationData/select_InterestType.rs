@@ -3,15 +3,15 @@
    <description></description>
    <name>select_InterestType</name>
    <tag></tag>
-   <elementGuidId>1ec4a696-02fb-41aa-9ada-a0b4717bffde</elementGuidId>
+   <elementGuidId>6e1b45bd-3ba2-4aee-8be3-bb58da5e0dc5</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[2]/div/div[2]/div[1]/div[2]/select</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='applicationInfomation']/div/div[2]/div/div[2]/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[2]/div/div[2]/div[1]/div[2]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

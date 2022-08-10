@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Rate2</name>
    <tag></tag>
-   <elementGuidId>52bb581f-1875-4b38-b4db-84f29301554e</elementGuidId>
+   <elementGuidId>c8b79d80-9ca0-4e15-8306-644d79050a7f</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_WayOfRestructure</name>
    <tag></tag>
-   <elementGuidId>2cf68127-babe-4a3e-9800-02e14a57ed3c</elementGuidId>
+   <elementGuidId>20edc221-5024-4ddd-90c1-287da514ea9d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

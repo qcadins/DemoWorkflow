@@ -3,7 +3,7 @@
    <description></description>
    <name>select_FirstInstallmentType</name>
    <tag></tag>
-   <elementGuidId>ecb2a690-0a58-4ec0-8c0d-6644584104c1</elementGuidId>
+   <elementGuidId>9bd2a98c-f3c4-4ea8-946d-cd9a890544c4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

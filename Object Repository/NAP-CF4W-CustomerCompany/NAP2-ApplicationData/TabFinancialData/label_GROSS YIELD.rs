@@ -3,7 +3,7 @@
    <description></description>
    <name>label_GROSS YIELD</name>
    <tag></tag>
-   <elementGuidId>8132c6d1-cd27-45da-833d-4829b9d409d9</elementGuidId>
+   <elementGuidId>af3f8c43-e44e-495a-bb09-0a3fdc92caaf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

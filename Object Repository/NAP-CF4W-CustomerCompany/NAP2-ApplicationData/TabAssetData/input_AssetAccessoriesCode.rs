@@ -3,7 +3,7 @@
    <description></description>
    <name>input_AssetAccessoriesCode</name>
    <tag></tag>
-   <elementGuidId>ad4c5bff-3d3d-456d-a3fd-97324aedab06</elementGuidId>
+   <elementGuidId>1ae38927-6e90-40ab-abcd-0e0faeee6d54</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

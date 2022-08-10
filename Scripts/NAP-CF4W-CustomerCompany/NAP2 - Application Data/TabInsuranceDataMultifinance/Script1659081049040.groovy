@@ -106,7 +106,7 @@ for(int i =1;i<=countAddCov;i++){
 	
 	'Ambil inputan additional coverage dari excel (apply to all)'
 	String checkboxValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, addCovRow+i-countEmpty)
-	
+	println(checkboxValue)
 	'Verify jika checkbox ada (terlihat di UI)'
 	if(WebUI.verifyElementVisible(modifyCheckboxAddtCov,FailureHandling.OPTIONAL)){
 		'Verifikasi input Additional Coverage'

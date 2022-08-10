@@ -3,7 +3,7 @@
    <description></description>
    <name>div_--Select--Calculate Base on RateCalculate Base on Installment</name>
    <tag></tag>
-   <elementGuidId>82d0134c-1165-4e5f-aff5-42d83cbc8f41</elementGuidId>
+   <elementGuidId>4b1cf5ef-1c06-4bbc-8067-d8e9cf504084</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

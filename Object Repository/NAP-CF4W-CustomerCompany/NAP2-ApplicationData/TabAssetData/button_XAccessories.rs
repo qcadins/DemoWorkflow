@@ -3,14 +3,14 @@
    <description></description>
    <name>button_XAccessories</name>
    <tag></tag>
-   <elementGuidId>6579e603-0cb9-4f5a-b4fa-8234cd483f45</elementGuidId>
+   <elementGuidId>79ca75a4-20ba-428d-8046-92588da3c41c</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>/html/body/ngb-modal-window/div/div/div[1]/button/span</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

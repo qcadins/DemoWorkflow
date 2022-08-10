@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountFlood</name>
    <tag></tag>
-   <elementGuidId>dc40bcdf-5654-4130-8664-afb161a301c8</elementGuidId>
+   <elementGuidId>53faa2f1-1bef-4354-bc63-d60734ed0ee5</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

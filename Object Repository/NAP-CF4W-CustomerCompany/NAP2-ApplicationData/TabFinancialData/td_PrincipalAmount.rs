@@ -3,15 +3,15 @@
    <description></description>
    <name>td_PrincipalAmount</name>
    <tag></tag>
-   <elementGuidId>b65856b9-8a83-4152-bab1-5a299b698224</elementGuidId>
+   <elementGuidId>80a93d23-279c-454c-8051-e97443cc4d55</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[3]/table/tbody/tr[1]/td[3]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div[3]/table/tbody/tr/td[3]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[3]/table/tbody/tr[1]/td[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

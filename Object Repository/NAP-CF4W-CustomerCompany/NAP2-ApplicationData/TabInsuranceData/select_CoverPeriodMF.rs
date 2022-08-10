@@ -3,7 +3,7 @@
    <description></description>
    <name>select_CoverPeriodMF</name>
    <tag></tag>
-   <elementGuidId>605ac934-163b-48f0-a743-b6875d825066</elementGuidId>
+   <elementGuidId>f0347ce1-cf86-4548-8b3c-557e479abc64</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

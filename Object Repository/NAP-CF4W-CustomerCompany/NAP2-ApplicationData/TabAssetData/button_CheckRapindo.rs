@@ -3,7 +3,7 @@
    <description></description>
    <name>button_CheckRapindo</name>
    <tag></tag>
-   <elementGuidId>14a662ac-c31c-466c-a4bf-66c5ed2a1595</elementGuidId>
+   <elementGuidId>12a6fb6e-dd03-4ab9-8e22-713744d52568</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

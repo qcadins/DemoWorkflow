@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountSRCC</name>
    <tag></tag>
-   <elementGuidId>63005c70-ef19-44eb-8b3f-0c29b15dc1ab</elementGuidId>
+   <elementGuidId>9c813501-1b5a-4437-9b37-58c2bb86d0c6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

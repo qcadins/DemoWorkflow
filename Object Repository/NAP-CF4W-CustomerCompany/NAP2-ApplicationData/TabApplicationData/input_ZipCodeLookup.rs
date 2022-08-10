@@ -3,7 +3,7 @@
    <description></description>
    <name>input_ZipCodeLookup</name>
    <tag></tag>
-   <elementGuidId>f482bfd3-b40b-4263-8ad9-218fa1bef603</elementGuidId>
+   <elementGuidId>7dbc818e-4512-4a4f-9036-9c1daf888a4b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

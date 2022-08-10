@@ -3,7 +3,7 @@
    <description></description>
    <name>img_Upload _thumbnail thumbnail-change</name>
    <tag></tag>
-   <elementGuidId>0eb813df-b3be-4b1c-9f7b-d759e469dfd8</elementGuidId>
+   <elementGuidId>d6c25c4f-9adb-4a08-be1b-c66a7b2ea27f</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

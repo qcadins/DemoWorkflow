@@ -3,7 +3,7 @@
    <description></description>
    <name>label_NUM OF INST</name>
    <tag></tag>
-   <elementGuidId>af6cf5e7-69af-41c5-9c1b-bb85d0027581</elementGuidId>
+   <elementGuidId>375dc9fc-e10a-4bff-92a2-54973c82995a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

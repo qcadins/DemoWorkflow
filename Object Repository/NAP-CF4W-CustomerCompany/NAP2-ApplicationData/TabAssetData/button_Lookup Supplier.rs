@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Lookup Supplier</name>
    <tag></tag>
-   <elementGuidId>7d9070ba-d7db-4958-b5d1-e053cbb9985b</elementGuidId>
+   <elementGuidId>84d8b092-937a-492c-a8b1-0404a57598a3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

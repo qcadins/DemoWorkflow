@@ -3,15 +3,15 @@
    <description></description>
    <name>label_NPWPNo</name>
    <tag></tag>
-   <elementGuidId>b5e0d9b8-c3c6-4042-a5a3-b4ce9c78f809</elementGuidId>
+   <elementGuidId>54d93e75-a8c9-4ec9-b59f-66472a4608f4</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//div[@id='NpwpReferantorInfoId']/div/div/div[2]/label[2]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;NpwpReferantorInfoId&quot;]/div/div[1]/div[2]/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='NpwpReferantorInfoId']/div/div/div[2]/label[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

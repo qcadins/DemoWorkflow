@@ -3,18 +3,14 @@
    <description></description>
    <name>button_Supplier Name_btn btn-raised btn-primary</name>
    <tag></tag>
-   <elementGuidId>79b99be1-081c-4467-82ee-d01a13085040</elementGuidId>
+   <elementGuidId>03b36b4d-73a0-4391-8350-1d294f3b7eaf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[10]</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
          <value>//*[@id=&quot;supplierData&quot;]/div[1]/div[1]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -31,18 +27,18 @@
       <value>btn btn-raised btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;supplierData&quot;]/div[1]/div[1]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+      <value>id(&quot;supplierData&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4 ng-star-inserted&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -3,7 +3,7 @@
    <description></description>
    <name>span_Copy</name>
    <tag></tag>
-   <elementGuidId>2688eb72-2628-4622-a507-485e432f58ee</elementGuidId>
+   <elementGuidId>931cff3b-d47d-4ed4-8055-b442a34d5f91</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

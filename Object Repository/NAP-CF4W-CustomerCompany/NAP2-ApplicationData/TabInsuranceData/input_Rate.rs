@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Rate</name>
    <tag></tag>
-   <elementGuidId>fcb7d696-2142-4a9d-b2a6-aebc37cd18dc</elementGuidId>
+   <elementGuidId>ee2887ff-d5ea-4765-9ca8-96dd49140618</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody/tr[1]/td[8]/div/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type=''])[6]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody/tr[1]/td[8]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

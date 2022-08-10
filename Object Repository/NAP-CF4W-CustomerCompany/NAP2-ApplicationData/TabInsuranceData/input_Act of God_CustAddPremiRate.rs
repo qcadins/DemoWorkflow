@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Act of God_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>8f455e39-55aa-46f0-86f2-cb2cc182ec86</elementGuidId>
+   <elementGuidId>46858cad-213a-4532-8370-bbed3dc62c17</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

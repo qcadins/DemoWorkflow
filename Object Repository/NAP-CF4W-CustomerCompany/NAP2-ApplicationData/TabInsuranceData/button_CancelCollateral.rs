@@ -3,7 +3,7 @@
    <description></description>
    <name>button_CancelCollateral</name>
    <tag></tag>
-   <elementGuidId>54e14cca-382f-429c-b5c7-7113f698b6fb</elementGuidId>
+   <elementGuidId>9275be44-7f62-4b12-8591-5df6fb63c169</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

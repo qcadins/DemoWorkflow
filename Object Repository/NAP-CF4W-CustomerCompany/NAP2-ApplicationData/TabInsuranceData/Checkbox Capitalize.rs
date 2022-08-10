@@ -3,7 +3,7 @@
    <description></description>
    <name>Checkbox Capitalize</name>
    <tag></tag>
-   <elementGuidId>6fb710e7-14f0-45a6-91db-a4279b5031c5</elementGuidId>
+   <elementGuidId>68aab894-0cd3-4a3d-b102-004070e15bdf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

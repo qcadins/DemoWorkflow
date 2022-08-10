@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Supplier Code_supplierCode</name>
    <tag></tag>
-   <elementGuidId>1d7b69bf-9987-4cb0-a08e-08a852e51224</elementGuidId>
+   <elementGuidId>3a8dadec-02c0-4a5c-9273-68af671852b0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

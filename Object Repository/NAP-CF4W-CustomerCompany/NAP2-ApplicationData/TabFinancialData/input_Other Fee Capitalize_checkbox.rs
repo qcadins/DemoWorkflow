@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Other Fee Capitalize_checkbox</name>
    <tag></tag>
-   <elementGuidId>c9324910-0d3f-4fd4-81a0-6d4356a783b3</elementGuidId>
+   <elementGuidId>4aaec8e7-a790-4929-9a77-8394433df5ec</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

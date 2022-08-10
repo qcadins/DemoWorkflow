@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalAdditionalPremium</name>
    <tag></tag>
-   <elementGuidId>6f76400d-7cb1-4adb-a519-64277c985a23</elementGuidId>
+   <elementGuidId>c1d3e0cd-8d8c-4e4e-a766-488d0d46c59e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

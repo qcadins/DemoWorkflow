@@ -3,15 +3,15 @@
    <description></description>
    <name>select_WayOfPayment</name>
    <tag></tag>
-   <elementGuidId>9f4322af-d7c6-4fb7-90ee-c9ea76688a2a</elementGuidId>
+   <elementGuidId>d840d3f1-9104-47e0-9f33-c38b6b06592b</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[2]/div/div[2]/div[3]/div/lib-ucdropdownlist/div/select[count(. | //select[@class = 'form-control ng-untouched ng-pristine ng-star-inserted ng-invalid' and (text() = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ' or . = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ')]) = count(//select[@class = 'form-control ng-untouched ng-pristine ng-star-inserted ng-invalid' and (text() = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ' or . = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ')])]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Way of Payment'])[1]/following::select[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[2]/div/div[2]/div[3]/div/lib-ucdropdownlist/div/select[count(. | //select[@class = 'form-control ng-untouched ng-pristine ng-star-inserted ng-invalid' and (text() = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ' or . = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ')]) = count(//select[@class = 'form-control ng-untouched ng-pristine ng-star-inserted ng-invalid' and (text() = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ' or . = ' Auto Debit  Bank Transfer  Cash  PDC  Pick-Up ')])]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

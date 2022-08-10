@@ -3,7 +3,7 @@
    <description></description>
    <name>FromValueName</name>
    <tag></tag>
-   <elementGuidId>d3bdc754-3b6b-4023-bfff-4dd93877381c</elementGuidId>
+   <elementGuidId>fa76c3b1-8234-47e0-b39b-1f5f39a958e1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

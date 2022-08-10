@@ -3,7 +3,7 @@
    <description></description>
    <name>i_EditCollateralInsurance</name>
    <tag></tag>
-   <elementGuidId>d8d55242-d8cb-4bff-8411-7c8eea78c280</elementGuidId>
+   <elementGuidId>6894bf47-1c52-4b12-9531-0bb7c63da33b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

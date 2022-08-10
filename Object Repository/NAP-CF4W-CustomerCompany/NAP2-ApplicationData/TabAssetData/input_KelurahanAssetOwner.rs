@@ -3,7 +3,7 @@
    <description></description>
    <name>input_KelurahanAssetOwner</name>
    <tag></tag>
-   <elementGuidId>f1c22dec-1ded-44ee-8c67-4002b578b3de</elementGuidId>
+   <elementGuidId>4c8e8ac7-2111-40a7-ad43-c5ca49fc3b7d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Cancel</name>
    <tag></tag>
-   <elementGuidId>4e3ed13a-b6a7-4aa5-9b35-2c22cb4ae2f1</elementGuidId>
+   <elementGuidId>b3686236-64e6-40ff-b2c2-f8b3a27573b6</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[3]/button[1]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[10]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[3]/button[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Provision Fee Capitalize_checkbox</name>
    <tag></tag>
-   <elementGuidId>f1981504-d4d9-4be1-9cdf-0f7c59635ca0</elementGuidId>
+   <elementGuidId>f11c7f8b-2ab0-45d4-85bd-0de06871b49c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

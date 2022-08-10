@@ -3,7 +3,7 @@
    <description></description>
    <name>CapitalizeInsuranceAmount</name>
    <tag></tag>
-   <elementGuidId>36d4e2df-116a-4aa0-a229-e1b2c2bf1a9e</elementGuidId>
+   <elementGuidId>25909c1b-84a6-421d-8f36-d759b0f59918</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

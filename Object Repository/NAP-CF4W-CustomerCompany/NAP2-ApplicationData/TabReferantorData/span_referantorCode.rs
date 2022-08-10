@@ -3,15 +3,15 @@
    <description></description>
    <name>span_referantorCode</name>
    <tag></tag>
-   <elementGuidId>ebd287c9-be26-40a5-9cf3-ceafcce27445</elementGuidId>
+   <elementGuidId>71a67d9e-6760-4495-aa9a-bf3b9fe642f5</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[1]/span</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[1]/following::span[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[1]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

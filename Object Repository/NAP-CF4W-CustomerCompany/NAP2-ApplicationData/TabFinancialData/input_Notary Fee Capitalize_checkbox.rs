@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Notary Fee Capitalize_checkbox</name>
    <tag></tag>
-   <elementGuidId>1cdd0654-4923-4c4e-9231-839880fa467b</elementGuidId>
+   <elementGuidId>b0fa6cd2-8067-42f5-8b77-bc850d1dfc7d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>input_SumInsuredPercentage</name>
    <tag></tag>
-   <elementGuidId>1c15e369-ebf8-492a-a889-862cd307aec3</elementGuidId>
+   <elementGuidId>74927380-20e2-4f37-ab71-7673c975c671</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[2]/div[5]/table/tbody/tr[1]/td[5]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type=''])[6]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[2]/div[5]/table/tbody/tr[1]/td[5]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Discount To Insco_DiscountToInsco</name>
    <tag></tag>
-   <elementGuidId>db48878c-db1f-4572-8a64-d7868b21305e</elementGuidId>
+   <elementGuidId>4b26fedb-b80d-412c-9304-3555e8047022</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

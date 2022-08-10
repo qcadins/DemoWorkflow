@@ -3,7 +3,7 @@
    <description></description>
    <name>input_JUMLAH ASSET</name>
    <tag></tag>
-   <elementGuidId>5053a3d2-a80e-4c80-ba7f-e8c0acae42c3</elementGuidId>
+   <elementGuidId>fb1e46ea-4344-488c-9eac-b589869e1ef3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>select_FloatingPeriod</name>
    <tag></tag>
-   <elementGuidId>d4a46a79-4828-469c-8849-480cef3b8479</elementGuidId>
+   <elementGuidId>b88ee9d0-0edc-45fc-b836-96a86af1e001</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@formcontrolname = 'FloatingPeriod' and (text() = '-Select One- Annualy  Bimonthly  Monthly  Quarterly  Semi Annualy  Trimester  Weekly ' or . = '-Select One- Annualy  Bimonthly  Monthly  Quarterly  Semi Annualy  Trimester  Weekly ')]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='applicationInfomation']/div/div[2]/div[2]/div/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@formcontrolname = 'FloatingPeriod' and (text() = '-Select One- Annualy  Bimonthly  Monthly  Quarterly  Semi Annualy  Trimester  Weekly ' or . = '-Select One- Annualy  Bimonthly  Monthly  Quarterly  Semi Annualy  Trimester  Weekly ')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

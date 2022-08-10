@@ -3,7 +3,7 @@
    <description></description>
    <name>input_AccessoryDownPaymentPrcnt0</name>
    <tag></tag>
-   <elementGuidId>cc40d3ce-4d13-4709-b1de-050cf19c2d6b</elementGuidId>
+   <elementGuidId>4745614c-8733-437c-9466-7a9f196aeb3d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

@@ -14,13 +14,17 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
-int flagWarning =0
+
+int flagWarning = 0
+
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
-if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase('GUARANTOR')){
+
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase(
+    'GUARANTOR')) {
     'Loop Multiple Guarantor Data'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
@@ -79,7 +83,7 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             GlobalVariable.NumofGuarantorPersonal, 14))
 
                     'select customer model'
-                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomrModel'), 
+                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'), 
                         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 15), false)
 
@@ -164,8 +168,9 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         } else {
                             'click X'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-                        	flagWarning++
-						}
+
+                            flagWarning++
+                        }
                     }
                     
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
@@ -240,12 +245,13 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                                 GlobalVariable.NumofGuarantorPersonal, 36), false)
                     }
                     
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 'value', FailureHandling.OPTIONAL)
-						
-						'add name to Global variable'
-						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
-						
+                    'get customer name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
@@ -261,15 +267,14 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         'write to excel success'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                             0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusSuccess)
-						if(flagWarning>0){
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
-								0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
-						}
-						'customer added +1'
-						GlobalVariable.countNumofCustomer++
-						
-					
-						
+
+                        if (flagWarning > 0) {
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
+                        }
+                        
+                        'customer added +1'
+                        (GlobalVariable.countNumofCustomer)++
                     }
                 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                     GlobalVariable.NumofGuarantorPersonal, 3) == 'LookUp') {
@@ -329,7 +334,7 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 15).length() > 1) {
                             'select customer model'
-                            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomrModel'), 
+                            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'), 
                                 findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                     GlobalVariable.NumofGuarantorPersonal, 15), false)
                         }
@@ -387,20 +392,26 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             } else {
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-                            	flagWarning++
-							}
+
+                                flagWarning++
+                            }
                         }
-							
-							'get customer name'
-							custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 'value', FailureHandling.OPTIONAL)
-							
-							'add name to Global variable'
-							GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
+                        
+                        'get customer name'
+                        custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 
+                            'value', FailureHandling.OPTIONAL)
+
+                        'add name to Global variable'
+                        GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
+                        if (GlobalVariable.Role == 'Testing') {
+                            'call test case Personal data verif'
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalDataVerif'), 
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
+                        }
                         
                         'click button save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
-						
-						
 
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -414,17 +425,15 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             'write to excel success'
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusSuccess)
-									
-                        	if(flagWarning>0){
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
-									0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
-							}
-							'customer added +1'
-							GlobalVariable.countNumofCustomer++
-													
-							
-							
-						}
+
+                            if (flagWarning > 0) {
+                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
+                            }
+                            
+                            'customer added +1'
+                            (GlobalVariable.countNumofCustomer)++
+                        }
                     }
                 }
             }
@@ -542,12 +551,14 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                                 GlobalVariable.NumofGuarantorCompany, 21), false)
                     }
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 'value', FailureHandling.OPTIONAL)
-						
-						'add name to Global variable'
-						GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
-						
+                    
+                    'get customer name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
                     'Klik save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
@@ -563,15 +574,14 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                         'write to excel success'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                             0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusSuccess)
-						if(flagWarning>0){
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-								0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
-						}
-						'customer added +1'
-						GlobalVariable.countNumofCustomer++
-						
-						
-						
+
+                        if (flagWarning > 0) {
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+                        }
+                        
+                        'customer added +1'
+                        (GlobalVariable.countNumofCustomer)++
                     }
                 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                     GlobalVariable.NumofGuarantorCompany, 3) == 'LookUp') {
@@ -631,16 +641,21 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                                     GlobalVariable.NumofGuarantorCompany, 10), false)
                         }
                         
-							'get customer name'
-							custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 'value', FailureHandling.OPTIONAL)
-							
-							'add name to Global variable'
-							GlobalVariable.CustomerName = GlobalVariable.CustomerName + ';' + custname
-							
+                        'get customer name'
+                        custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
+                            'value', FailureHandling.OPTIONAL)
+
+                        'add name to Global variable'
+                        GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
+                        if (GlobalVariable.Role == 'Testing') {
+                            'call test case company data verif'
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyDataVerif'), 
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
+                        }
+                        
                         'Click save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
-						
-						
 
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -654,18 +669,15 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
                             'write to excel success'
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusSuccess)
-							
-							
-                        	if(flagWarning>0){
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
-							}
-							
-							'customer added +1'
-                            GlobalVariable.countNumofCustomer++
-							
-							
-						}
+
+                            if (flagWarning > 0) {
+                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+                            }
+                            
+                            'customer added +1'
+                            (GlobalVariable.countNumofCustomer)++
+                        }
                     }
                 }
             }
@@ -680,4 +692,4 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
     
     WebUI.delay(15)
 }
-	
+

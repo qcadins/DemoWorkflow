@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_inputKelurahan</name>
    <tag></tag>
-   <elementGuidId>bb4fe2ad-0e73-4701-94ec-5a043f3c049f</elementGuidId>
+   <elementGuidId>e5976a59-33e3-4ada-9b16-6f6ac5272ed1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

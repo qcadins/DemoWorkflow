@@ -3,7 +3,7 @@
    <description></description>
    <name>div_Company</name>
    <tag></tag>
-   <elementGuidId>32102b48-4fb4-43ee-ab62-ae2d1f03f109</elementGuidId>
+   <elementGuidId>e164e2f7-d223-4e2a-9102-c7aa9856ce8d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SRCC_checkboxLabel ng-valid</name>
    <tag></tag>
-   <elementGuidId>c89480bb-3538-4b58-8f74-ad8748cfc3f7</elementGuidId>
+   <elementGuidId>b8066a2d-9088-4a0d-8965-ab922c81b42d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

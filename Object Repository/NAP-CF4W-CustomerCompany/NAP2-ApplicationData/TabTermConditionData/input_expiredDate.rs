@@ -3,15 +3,15 @@
    <description></description>
    <name>input_expiredDate</name>
    <tag></tag>
-   <elementGuidId>9af154d0-f3db-4f1e-9efa-8dfe2a878050</elementGuidId>
+   <elementGuidId>9a31797b-b99f-469e-85d0-ed0009352382</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[8]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='date'])[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[8]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

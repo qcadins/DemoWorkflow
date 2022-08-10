@@ -3,7 +3,7 @@
    <description></description>
    <name>Label_ProvisionFeeAmount</name>
    <tag></tag>
-   <elementGuidId>57416458-3cd6-43f9-b911-e8187a5a0e4e</elementGuidId>
+   <elementGuidId>35568759-2bb4-4d71-8b61-c38dd371fa87</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

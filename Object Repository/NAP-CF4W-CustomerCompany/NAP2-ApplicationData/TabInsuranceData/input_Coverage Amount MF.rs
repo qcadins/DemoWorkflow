@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Coverage Amount MF</name>
    <tag></tag>
-   <elementGuidId>5443fb44-af02-4eed-8183-2e6184d63eca</elementGuidId>
+   <elementGuidId>838e2498-f88e-4b96-83f5-a138d40763f4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

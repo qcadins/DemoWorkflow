@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Capitalize Amount_insCpltzAmt</name>
    <tag></tag>
-   <elementGuidId>89c597f3-d8c8-4d5e-9ff3-7f112d70b9f9</elementGuidId>
+   <elementGuidId>af83fac3-774e-4893-8191-5f414ef7f218</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

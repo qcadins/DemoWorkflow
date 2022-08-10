@@ -3,7 +3,7 @@
    <description></description>
    <name>i_Zipcode_ft-search</name>
    <tag></tag>
-   <elementGuidId>f1b63a72-cc9f-41f9-a5b7-e14013b7e96b</elementGuidId>
+   <elementGuidId>90aa530d-9d02-4b21-b021-98f231b59d81</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

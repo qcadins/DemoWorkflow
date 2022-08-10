@@ -3,7 +3,7 @@
    <description></description>
    <name>ApplicationCurrentStep</name>
    <tag></tag>
-   <elementGuidId>c2ee6444-6263-4257-918a-a6770a4b3302</elementGuidId>
+   <elementGuidId>8ef6ddf6-a015-4d41-a88f-170861928309</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

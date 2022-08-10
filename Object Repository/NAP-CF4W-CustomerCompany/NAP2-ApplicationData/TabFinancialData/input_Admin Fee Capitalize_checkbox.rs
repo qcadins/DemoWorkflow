@@ -3,11 +3,11 @@
    <description></description>
    <name>input_Admin Fee Capitalize_checkbox</name>
    <tag></tag>
-   <elementGuidId>c2f9e4c5-6749-4195-9b8e-c78f1bb2ced7</elementGuidId>
+   <elementGuidId>a2d3fdf0-b0b5-49bc-bf5f-43f7342686cc</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[1]/div[1]/div/div[3]/label/input</value>
+         <value>//input[@type='checkbox']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

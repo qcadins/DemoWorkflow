@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Search Asset</name>
    <tag></tag>
-   <elementGuidId>af40c165-0a76-4351-90a0-8c348cdf5d0a</elementGuidId>
+   <elementGuidId>7c3cd417-9616-461e-96cd-dac342c97fe0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

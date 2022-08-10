@@ -3,15 +3,15 @@
    <description></description>
    <name>select_CustomerBankAccount</name>
    <tag></tag>
-   <elementGuidId>eab8294a-bc99-4b7f-b887-ab5502a022fc</elementGuidId>
+   <elementGuidId>9192a8dd-e535-4309-afb9-0cc6dcf9ba2a</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//select[@formcontrolname = 'CustBankAcc']</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='applicationInfomation']/div/div[2]/div[5]/div/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//select[@formcontrolname = 'CustBankAcc']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

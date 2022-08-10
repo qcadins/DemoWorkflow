@@ -3,15 +3,15 @@
    <description></description>
    <name>td_InstallmentAmount</name>
    <tag></tag>
-   <elementGuidId>5daa7969-c2f1-415b-bdf3-1a3079340d2c</elementGuidId>
+   <elementGuidId>badcbb95-ed77-4831-a8b4-1c5d4bd827be</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;FinData_FinData&quot;)/form[@class=&quot;ng-valid ng-dirty ng-touched&quot;]/div[@class=&quot;ng-star-inserted&quot;]/table[@class=&quot;table table-responsive-md text-center table-hover&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-star-inserted&quot;]/td[2]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div[3]/table/tbody/tr/td[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;FinData_FinData&quot;)/form[@class=&quot;ng-valid ng-dirty ng-touched&quot;]/div[@class=&quot;ng-star-inserted&quot;]/table[@class=&quot;table table-responsive-md text-center table-hover&quot;]/tbody[@class=&quot;ng-star-inserted&quot;]/tr[@class=&quot;ng-star-inserted&quot;]/td[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

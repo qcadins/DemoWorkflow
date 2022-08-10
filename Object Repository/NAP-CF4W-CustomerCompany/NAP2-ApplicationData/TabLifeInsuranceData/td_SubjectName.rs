@@ -3,15 +3,15 @@
    <description></description>
    <name>td_SubjectName</name>
    <tag></tag>
-   <elementGuidId>90073857-6580-4429-8f63-718f1d631737</elementGuidId>
+   <elementGuidId>1e899579-85f9-46b9-a8fb-d5be688ce1ab</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;gridLifeInsD&quot;]/table/tbody/tr[1]/td[1]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='gridLifeInsD']/table/tbody/tr/td</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;gridLifeInsD&quot;]/table/tbody/tr[1]/td[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

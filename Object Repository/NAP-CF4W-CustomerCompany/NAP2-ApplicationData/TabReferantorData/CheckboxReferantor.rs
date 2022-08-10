@@ -3,12 +3,11 @@
    <description></description>
    <name>CheckboxReferantor</name>
    <tag></tag>
-   <elementGuidId>8908b868-91b1-4d5c-9cf9-9a3b5f170e99</elementGuidId>
+   <elementGuidId>dd769bda-94ee-43b3-b010-9cfc14ba0b5c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]
-</value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -36,8 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]
-</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

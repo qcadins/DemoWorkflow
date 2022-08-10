@@ -3,14 +3,14 @@
    <description></description>
    <name>select_BankAccount</name>
    <tag></tag>
-   <elementGuidId>8a3d8f75-bc17-41a0-a3bb-b95290b21574</elementGuidId>
+   <elementGuidId>e911d95f-b821-4f40-8c51-449661f12f3c</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[5]/select</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[5]/select</value>
       </entry>
    </selectorCollection>

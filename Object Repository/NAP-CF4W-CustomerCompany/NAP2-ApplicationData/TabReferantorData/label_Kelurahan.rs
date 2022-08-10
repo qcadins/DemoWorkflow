@@ -3,7 +3,7 @@
    <description></description>
    <name>label_Kelurahan</name>
    <tag></tag>
-   <elementGuidId>b705dec2-b692-4dc8-bd9a-38c17e31d53d</elementGuidId>
+   <elementGuidId>b8962ca3-679d-49dd-aa37-a8d209af6d90</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_RateType</name>
    <tag></tag>
-   <elementGuidId>bdfd2342-6d26-421a-b291-75a413fb9ea9</elementGuidId>
+   <elementGuidId>93e97d42-f973-470b-8492-6019fb219d93</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

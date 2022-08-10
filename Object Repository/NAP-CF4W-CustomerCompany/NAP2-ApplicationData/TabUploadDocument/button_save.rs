@@ -3,7 +3,7 @@
    <description></description>
    <name>button_save</name>
    <tag></tag>
-   <elementGuidId>fae2926e-c7ba-4de1-8b49-42e4912da29b</elementGuidId>
+   <elementGuidId>b8f4f501-bfb8-4855-b212-21b08358aebd</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

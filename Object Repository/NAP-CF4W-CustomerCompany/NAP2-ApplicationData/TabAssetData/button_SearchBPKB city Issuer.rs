@@ -3,7 +3,7 @@
    <description></description>
    <name>button_SearchBPKB city Issuer</name>
    <tag></tag>
-   <elementGuidId>43b38d11-30d0-49af-9515-e82f00a09d72</elementGuidId>
+   <elementGuidId>0ccb0ea8-aba8-4c1d-85ae-655ec74335e7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>Button Save</name>
    <tag></tag>
-   <elementGuidId>37bcb25e-8dcb-4faa-8d00-5d9661b92016</elementGuidId>
+   <elementGuidId>e2bd2390-324f-40fb-bc15-7e7192a5a2d0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

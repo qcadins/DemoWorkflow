@@ -3,14 +3,14 @@
    <description></description>
    <name>input_TPL_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>67384715-e4f3-4c16-9680-131bad8455bf</elementGuidId>
+   <elementGuidId>55be5b6f-277f-49db-8d83-57ba942e7379</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[8]/div/span/div/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[8]/div/span/div/input</value>
       </entry>
    </selectorCollection>

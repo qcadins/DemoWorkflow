@@ -3,7 +3,7 @@
    <description></description>
    <name>select_DPSourcePaymentType</name>
    <tag></tag>
-   <elementGuidId>9fa4be24-1b2b-4b6e-af3b-ea3a896deee4</elementGuidId>
+   <elementGuidId>fb11e77b-37cf-474b-a2e3-edd42ad9fd1a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

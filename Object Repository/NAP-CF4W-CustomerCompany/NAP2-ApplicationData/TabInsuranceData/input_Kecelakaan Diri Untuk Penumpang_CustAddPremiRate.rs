@@ -3,14 +3,14 @@
    <description></description>
    <name>input_Kecelakaan Diri Untuk Penumpang_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>95c2c563-fd91-4c6d-95e2-8f4eb2a8a129</elementGuidId>
+   <elementGuidId>0e1a30f5-9282-4dcd-b7b6-b7dd87e532d4</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[8]/td[8]/div/span/div/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[8]/td[8]/div/span/div/input</value>
       </entry>
    </selectorCollection>

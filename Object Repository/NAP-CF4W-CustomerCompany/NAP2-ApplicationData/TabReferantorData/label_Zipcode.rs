@@ -3,7 +3,7 @@
    <description></description>
    <name>label_Zipcode</name>
    <tag></tag>
-   <elementGuidId>e1b24136-836f-4404-8ed9-ece969aa889f</elementGuidId>
+   <elementGuidId>76adb3d2-0a6e-42af-91f2-5ac106128799</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

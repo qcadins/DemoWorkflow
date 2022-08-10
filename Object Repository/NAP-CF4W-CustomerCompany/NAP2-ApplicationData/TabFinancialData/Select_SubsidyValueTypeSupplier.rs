@@ -3,7 +3,7 @@
    <description></description>
    <name>Select_SubsidyValueTypeSupplier</name>
    <tag></tag>
-   <elementGuidId>ae1eb04c-3734-451a-8350-0747f5b69c5e</elementGuidId>
+   <elementGuidId>7bc1a5e2-425b-4d46-b6c1-23f9e5a97cfb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

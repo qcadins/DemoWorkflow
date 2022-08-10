@@ -3,7 +3,7 @@
    <description></description>
    <name>select_Payment Type MF</name>
    <tag></tag>
-   <elementGuidId>64350821-9164-493b-adaa-03a8415eddce</elementGuidId>
+   <elementGuidId>a162c787-9f35-41ae-b86e-8ee5c70124e9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

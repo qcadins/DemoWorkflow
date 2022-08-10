@@ -3,15 +3,15 @@
    <description></description>
    <name>input_LICENSE PLATE NUMBER</name>
    <tag></tag>
-   <elementGuidId>cc15cfb2-645a-4c5f-9e8b-b408abb074a4</elementGuidId>
+   <elementGuidId>cc9b2929-ea76-49f9-b02c-d5e10fd444ca</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[1]/div[8]/div/div[3]/div/div/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[8]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[1]/div[8]/div/div[3]/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

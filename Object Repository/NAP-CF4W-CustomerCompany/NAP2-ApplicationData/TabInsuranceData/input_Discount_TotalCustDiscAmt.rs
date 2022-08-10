@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Discount_TotalCustDiscAmt</name>
    <tag></tag>
-   <elementGuidId>3664f1d4-17cb-4135-baf8-8d89f745147c</elementGuidId>
+   <elementGuidId>e0992401-b351-49b9-a050-8bdfa0a2bd68</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

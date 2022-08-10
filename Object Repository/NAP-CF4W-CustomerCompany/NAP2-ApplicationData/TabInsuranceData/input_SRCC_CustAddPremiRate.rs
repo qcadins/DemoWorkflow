@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SRCC_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>41de9670-2c22-4123-b7a7-cd2650391c24</elementGuidId>
+   <elementGuidId>7b9be2a2-47d9-41f7-80f2-7f66e3f7f42e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

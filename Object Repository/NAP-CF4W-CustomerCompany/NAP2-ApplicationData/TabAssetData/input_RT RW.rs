@@ -3,7 +3,7 @@
    <description></description>
    <name>input_RT RW</name>
    <tag></tag>
-   <elementGuidId>eee6b0fb-4cc5-4b41-a4f6-e267f7588dce</elementGuidId>
+   <elementGuidId>9c281e5a-5b5a-45b6-8e9d-8c82f4c9662d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

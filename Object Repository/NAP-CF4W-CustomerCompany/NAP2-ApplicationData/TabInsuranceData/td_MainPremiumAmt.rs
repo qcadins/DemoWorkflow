@@ -3,15 +3,15 @@
    <description></description>
    <name>td_MainPremiumAmt</name>
    <tag></tag>
-   <elementGuidId>f6d68fd3-306a-46c8-9462-f373fe9a9655</elementGuidId>
+   <elementGuidId>d9c3fcc6-d6d7-41b5-b5ff-0851e05f5e8a</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[9]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr/td[9]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[9]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

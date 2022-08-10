@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountTerrorist</name>
    <tag></tag>
-   <elementGuidId>f9c5ce8f-f208-4fc4-80fe-e536f75054cf</elementGuidId>
+   <elementGuidId>eb238d2e-7515-40e9-a910-4f00dd5ac511</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

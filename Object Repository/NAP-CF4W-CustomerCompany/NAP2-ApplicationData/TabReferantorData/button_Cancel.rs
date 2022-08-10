@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Cancel</name>
    <tag></tag>
-   <elementGuidId>035fd8c9-53ef-437e-b1df-4a410120740a</elementGuidId>
+   <elementGuidId>9d40fa08-d44b-4fb7-86b5-5a06b03572c9</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;stepperPersonal&quot;)/div[@class=&quot;bs-stepper-content&quot;]/div[@id=&quot;referantor-tab&quot;]/app-referantor-data-new[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row text-left&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/form[@class=&quot;form form-horizontal ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-actions right&quot;]/button[@class=&quot;btn btn-raised btn-warning mr-1 ng-star-inserted&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;referantor-tab&quot;]/app-referantor-data-new/div/div/div/div/form/div[2]/button[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;stepperPersonal&quot;)/div[@class=&quot;bs-stepper-content&quot;]/div[@id=&quot;referantor-tab&quot;]/app-referantor-data-new[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row text-left&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/form[@class=&quot;form form-horizontal ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-actions right&quot;]/button[@class=&quot;btn btn-raised btn-warning mr-1 ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL INTEREST</name>
    <tag></tag>
-   <elementGuidId>9bfafff9-c5fe-4a19-97b9-954ea2f2bedc</elementGuidId>
+   <elementGuidId>6a14b5f4-d761-46c7-98f0-9cb892542d30</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

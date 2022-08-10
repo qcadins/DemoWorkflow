@@ -3,7 +3,7 @@
    <description></description>
    <name>SubsidyAllocation</name>
    <tag></tag>
-   <elementGuidId>fd488179-4d72-49d6-be0b-f2e622163f49</elementGuidId>
+   <elementGuidId>3e2d09c1-f2ca-425c-9e93-1dc4354b0839</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

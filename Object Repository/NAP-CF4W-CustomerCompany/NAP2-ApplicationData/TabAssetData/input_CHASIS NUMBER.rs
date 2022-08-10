@@ -3,15 +3,15 @@
    <description></description>
    <name>input_CHASIS NUMBER</name>
    <tag></tag>
-   <elementGuidId>4a12a443-edbd-437a-ace0-dc415ef61ab7</elementGuidId>
+   <elementGuidId>b16249f2-a8d1-40dd-a9c2-d67a4367ec14</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[1]/div[8]/div/div[1]/div/div/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[6]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[1]/div[8]/div/div[1]/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

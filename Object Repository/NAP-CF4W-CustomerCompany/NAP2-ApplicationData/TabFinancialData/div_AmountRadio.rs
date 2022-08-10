@@ -3,15 +3,15 @@
    <description></description>
    <name>div_AmountRadio</name>
    <tag></tag>
-   <elementGuidId>38a1a145-1469-447a-a653-327b298dd377</elementGuidId>
+   <elementGuidId>7baad8d7-6871-434c-a273-598926c7a909</elementGuidId>
    <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[2]</value>
+      </entry>
       <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/div[2]</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[5]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[5]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[2]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

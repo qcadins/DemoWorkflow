@@ -3,7 +3,7 @@
    <description></description>
    <name>select_MainCoverageTP</name>
    <tag></tag>
-   <elementGuidId>15662164-2e4f-461f-a436-e66b87914f60</elementGuidId>
+   <elementGuidId>7aecf0ce-41fb-4b6c-bdfd-cb9f56f0e3b1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

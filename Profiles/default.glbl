@@ -304,4 +304,9 @@
       <initValue>[]</initValue>
       <name>AllocatedCommissionAmt</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
+      <name>CountofReferantorCompany</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

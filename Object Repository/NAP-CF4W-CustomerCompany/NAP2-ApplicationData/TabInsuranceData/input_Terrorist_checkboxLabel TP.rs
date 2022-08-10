@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Terrorist_checkboxLabel TP</name>
    <tag></tag>
-   <elementGuidId>a3aa99f8-1faf-4355-a5c2-8450afe29554</elementGuidId>
+   <elementGuidId>89182de0-e8dd-479c-87e8-a5ed140e56fb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

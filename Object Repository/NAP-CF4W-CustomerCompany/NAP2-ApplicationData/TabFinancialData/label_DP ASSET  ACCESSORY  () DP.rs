@@ -3,7 +3,7 @@
    <description></description>
    <name>label_DP ASSET  ACCESSORY  () DP</name>
    <tag></tag>
-   <elementGuidId>608655c7-161f-4072-ac2e-88da5730eb9e</elementGuidId>
+   <elementGuidId>8b3e93ee-2c83-4a21-9830-5989a3d4056f</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

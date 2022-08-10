@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Phone 3 area</name>
    <tag></tag>
-   <elementGuidId>429cba48-315d-49c8-9f53-ae27371b0e1e</elementGuidId>
+   <elementGuidId>c0873027-0b80-41a4-afcb-6634068bffec</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;Address&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[14]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;Address&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

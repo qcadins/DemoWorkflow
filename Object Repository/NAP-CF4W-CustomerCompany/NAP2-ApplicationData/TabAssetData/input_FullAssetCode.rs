@@ -3,14 +3,14 @@
    <description></description>
    <name>input_FullAssetCode</name>
    <tag></tag>
-   <elementGuidId>9ff366bb-2426-4232-a7cb-f2b8973248f8</elementGuidId>
+   <elementGuidId>af571c86-0df1-4cb1-bad9-775bec755ca0</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;assetCode&quot;]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

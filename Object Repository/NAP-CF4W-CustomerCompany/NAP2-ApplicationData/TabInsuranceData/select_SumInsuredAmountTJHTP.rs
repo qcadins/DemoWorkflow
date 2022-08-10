@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountTJHTP</name>
    <tag></tag>
-   <elementGuidId>9a26333a-c44a-4c2c-9f7c-fdc2d8cdad90</elementGuidId>
+   <elementGuidId>335b875c-a761-4291-afaa-874ca58446b5</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_Asset ConditionNew Used</name>
    <tag></tag>
-   <elementGuidId>50c78bcf-5525-404a-8bea-ef9d46a4d454</elementGuidId>
+   <elementGuidId>b94996b4-0da0-443d-9824-a81191e8a181</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

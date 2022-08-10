@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL AR</name>
    <tag></tag>
-   <elementGuidId>1d56eada-210d-4f61-8cf6-0e36a26db696</elementGuidId>
+   <elementGuidId>4c3625f7-7b02-4ac1-bf57-4c51448d3425</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>td_SubjectType</name>
    <tag></tag>
-   <elementGuidId>609f171c-d12d-41cb-aa87-30b1db7193b7</elementGuidId>
+   <elementGuidId>4aa9e011-12b5-439f-a253-a826e76adac4</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[3]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='gridLifeInsD']/table/tbody/tr/td[3]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

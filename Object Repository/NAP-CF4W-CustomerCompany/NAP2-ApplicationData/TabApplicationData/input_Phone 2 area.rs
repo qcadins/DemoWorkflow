@@ -3,14 +3,14 @@
    <description></description>
    <name>input_Phone 2 area</name>
    <tag></tag>
-   <elementGuidId>e3a7fe02-aa47-4874-8110-31551464b982</elementGuidId>
+   <elementGuidId>04206919-c6e7-45d6-aae7-0f7041214fdb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[2]/div/div/div/div[1]/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[2]/div/div/div/div[1]/input</value>
       </entry>
    </selectorCollection>

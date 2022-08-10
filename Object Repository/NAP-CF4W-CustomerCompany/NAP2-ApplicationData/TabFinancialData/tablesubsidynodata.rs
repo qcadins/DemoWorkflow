@@ -3,7 +3,7 @@
    <description></description>
    <name>tablesubsidynodata</name>
    <tag></tag>
-   <elementGuidId>e6b08da7-779e-43d7-8d94-5a7b36e683e2</elementGuidId>
+   <elementGuidId>77177aab-76ad-43c9-8bbc-a6fb050ff2a4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

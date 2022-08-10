@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL ASSET ACCESSORY PRICE</name>
    <tag></tag>
-   <elementGuidId>d5212a26-4155-4d9f-9307-1c1fc1c1939b</elementGuidId>
+   <elementGuidId>f09e3a0b-8ea3-433b-8f40-05c36f81d9a9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

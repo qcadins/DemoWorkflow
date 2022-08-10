@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_InputRW</name>
    <tag></tag>
-   <elementGuidId>c5ff0d15-85dd-4650-9962-bc06823e5d8d</elementGuidId>
+   <elementGuidId>84865e0c-f85f-40d2-a000-98c699e7d2f0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

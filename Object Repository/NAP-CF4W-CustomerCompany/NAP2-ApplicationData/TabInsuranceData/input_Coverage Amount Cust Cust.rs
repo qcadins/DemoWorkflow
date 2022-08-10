@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Coverage Amount Cust Cust</name>
    <tag></tag>
-   <elementGuidId>69ac2c9f-91c6-4871-bb59-52410840346d</elementGuidId>
+   <elementGuidId>5d24a22f-b4ac-441f-8bf7-870486714720</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

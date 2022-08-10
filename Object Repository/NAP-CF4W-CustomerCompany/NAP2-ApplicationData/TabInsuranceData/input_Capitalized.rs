@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Capitalized</name>
    <tag></tag>
-   <elementGuidId>4aba0eb1-f9e5-4979-8e6c-cadaddb9c7d9</elementGuidId>
+   <elementGuidId>532138fb-d842-4a55-bea2-df23fa73e054</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[1]/div/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='checkbox'])[9]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[1]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

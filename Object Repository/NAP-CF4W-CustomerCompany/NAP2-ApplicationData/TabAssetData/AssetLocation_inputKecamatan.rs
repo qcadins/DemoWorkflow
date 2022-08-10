@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_inputKecamatan</name>
    <tag></tag>
-   <elementGuidId>c20e6366-ee98-4bd0-9cf7-886b41041966</elementGuidId>
+   <elementGuidId>ed95e426-1c65-42df-a9ac-1fc5dbf8c6ce</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

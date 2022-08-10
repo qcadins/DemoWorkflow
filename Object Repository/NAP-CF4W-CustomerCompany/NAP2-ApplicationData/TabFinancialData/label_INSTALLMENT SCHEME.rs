@@ -3,7 +3,7 @@
    <description></description>
    <name>label_INSTALLMENT SCHEME</name>
    <tag></tag>
-   <elementGuidId>db6a904d-a1c8-477c-bbae-9404b16d5458</elementGuidId>
+   <elementGuidId>0aef4b07-e501-4e4c-9664-f68b0741fa4c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_-InscoBranchNameCompany</name>
    <tag></tag>
-   <elementGuidId>fb070cce-064b-4984-a9e4-992a6f85ef51</elementGuidId>
+   <elementGuidId>4a74f410-79fa-4a1c-9ec8-75a46e569f36</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
