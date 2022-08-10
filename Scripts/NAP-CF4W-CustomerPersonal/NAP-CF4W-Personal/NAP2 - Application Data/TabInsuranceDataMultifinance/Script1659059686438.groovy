@@ -19,9 +19,26 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
+import groovy.sql.Sql as Sql
+
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+String instancename = findTestData('Login/Login').getValue(2, 8)
+String username = findTestData('Login/Login').getValue(3, 8)
+String password = findTestData('Login/Login').getValue(4, 8)
+String database = findTestData('Login/Login').getValue(5, 9)
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String url = servername+';instanceName='+instancename+';databaseName='+database
+String urlFOU = servername+';instanceName='+instancename+';databaseName='+databaseFOU
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username,password,driverclassname)
 
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
+
+'Ambil text original office dari confins'
+String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 'Select option dropdownlist Asset Region'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'), 
@@ -51,9 +68,27 @@ if(coverPeriod == "Over Tenor"||coverPeriod == "Partial Tenor"){
 'Select option dropdownlist payment type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 16), false )
 
+ArrayList<String> inscoBranchName = new ArrayList<String>()
+
+Integer countInscoBranch = 0 
+
+'Ambil array string (text) insco branch name dari db'
+inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU,officeName)
+
+'Ambil nilai count insco branch name dari db'
+countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU,officeName)
+
+'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
+WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),inscoBranchName)
+
+'Ambil nilai jumlah option/pilihan insco branch name dari confins'
+Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
+
+'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
+WebUI.verifyEqual(totalInscoBranch-1, countInscoBranch)
+
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 17), false)
-
 
 insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes MF')
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 3)=="Customer - Multifinance"){
