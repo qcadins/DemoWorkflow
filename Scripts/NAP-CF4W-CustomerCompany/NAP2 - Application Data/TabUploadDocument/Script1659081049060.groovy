@@ -21,50 +21,54 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('UPLOAD DOCUMENT')){
+if (GlobalVariable.RoleCompany == 'Testing') {
+    'verify application step'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL)
+}
 
 if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
     for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
     1); (GlobalVariable.NumofUploadDocument)++) {
-        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-            GlobalVariable.NumofUploadDocument, 2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 3)) {
+        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+            2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            3)) {
             'click menu titik 3'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
 
-      		'jika menu titik 3 disabled/enabled'
-			if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'),5,FailureHandling.OPTIONAL)){
-			'click new document'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'))
-			}
-			else{
-			break
-			}
-
+            'jika menu titik 3 disabled/enabled'
+            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'), 
+                5, FailureHandling.OPTIONAL)) {
+                'click new document'
+                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'))
+            } else {
+                break
+            }
+            
             'upload file'
             CustomKeywords.'upload.uploadfile.uploadFile'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-                    GlobalVariable.NumofUploadDocument, 3))
+                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+                    3))
 
             'input document name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-                    GlobalVariable.NumofUploadDocument, 4))
+                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+                    4))
 
             'select jenis document'
             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-                    GlobalVariable.NumofUploadDocument, 5), false)
+                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+                    5), false)
 
             'input MOU Id'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-                    GlobalVariable.NumofUploadDocument, 6))
+                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+                    6))
 
             'input notes'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-                    GlobalVariable.NumofUploadDocument, 7))
+                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
+                    7))
 
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_save'))
@@ -72,13 +76,13 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
                 0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
 
-            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'),5, 
-                FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'), 
+                5, FailureHandling.OPTIONAL)) {
                 'click button close'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 
-                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                    '12.TabUploadDocument', 0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
+                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
+                    0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
             }
         }
     }
@@ -87,21 +91,19 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 
-
 'click menu Customer data completion paging'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))
 
 'input app no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 3))
+    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        3))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Search'))
 
 'verify appno'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 3), FailureHandling.OPTIONAL)
+    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        3), FailureHandling.OPTIONAL)
 
-}

@@ -24,7 +24,11 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('INSURANCE')){
+if (GlobalVariable.Role == 'Testing') {
+    'verify application step'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'INSURANCE', false, FailureHandling.OPTIONAL)
+}
 
 'Verifikasi perhitungan asset price'
 WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
@@ -85,4 +89,3 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
-}

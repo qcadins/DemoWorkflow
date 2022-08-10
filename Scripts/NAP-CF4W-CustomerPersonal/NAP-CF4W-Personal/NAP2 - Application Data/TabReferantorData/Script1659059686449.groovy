@@ -15,7 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.WebElement as WebElement
+
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -39,19 +40,28 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 'click icon pensil untuk select'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
-
-
-if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('REFERANTOR')){
+if (GlobalVariable.Role == 'Testing') {
+    'verify application step'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'REFERANTOR', false, FailureHandling.OPTIONAL)
+}
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
+
 String instancename = findTestData('Login/Login').getValue(2, 8)
+
 String username = findTestData('Login/Login').getValue(3, 8)
+
 String password = findTestData('Login/Login').getValue(4, 8)
+
 String database = findTestData('Login/Login').getValue(5, 8)
+
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
-String url = servername+';instanceName='+instancename+';databaseName='+database
-Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
     'click referantor checkbox'
@@ -115,12 +125,14 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
-			
-			String referantorCode
+
+            String referantorCode
+
             'verify lookup'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/a_Select'), 
                 5, FailureHandling.OPTIONAL)) {
-				referantorCode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_referantorCode'))
+                referantorCode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_referantorCode'))
+
                 'click select'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/a_Select'))
             } else {
@@ -137,7 +149,6 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 continue
             }
             
-			
             'select bank account'
             WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     GlobalVariable.NumofReferantor, 6), FailureHandling.OPTIONAL)
@@ -159,172 +170,236 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 
                 continue
             }
-				
-			'Ambil dan simpan nilai referantor category dari confins'
-			String refCategory = WebUI.getAttribute(modifyObjectSelectReferantorCategory,'value')
             
-			String newButtonViewDetail = '//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+modifyObjectIndex+']/td[7]/a/i'
-				 
-			'modify button view detail'
-			modifyButtonViewDetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_ViewDetail'),'xpath','equals',newButtonViewDetail,true)
-			
-			'click button view detail'
-			WebUI.click(modifyButtonViewDetail)
-			
-			'Pengecekan referantor category (customer, agency, atau mf employee)'
-			if(refCategory.equalsIgnoreCase("CUSTOMER")){
-				'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-				ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(sqlConnection, referantorCode)
-			
-				'Ambil dan simpan npwp no dari confins'
-				String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-				'Ambil dan simpan npwp name dari confins'
-				String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-				'Ambil dan simpan address dari confins'
-				String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
-				'ambil dan simpan rt dari confins'
-				String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(" ","")
-				'ambil dan simpan rw dari confins'
-				String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace("/ ","")
-				'ambil dan simpan kelurahan dari confins'
-				String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-				'ambil dan simpan kecamatan dari confins'
-				String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-				'ambil dan simpan kota dari confins'
-				String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-				'ambil dan simpan zipcode dari confins'
-				String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))	
-				
-				'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-				ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-				arrayMatch.add(WebUI.verifyMatch(textNPWPNo,referantorDetail[0],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textNPWPName,referantorDetail[1],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textAddress,referantorDetail[2],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRT,referantorDetail[3],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRW,referantorDetail[4],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKelurahan,referantorDetail[5],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKecamatan,referantorDetail[6],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textCity,referantorDetail[7],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textZipcode,referantorDetail[8],false, FailureHandling.OPTIONAL))
-				
-				'Jika nilai di confins ada yang tidak sesuai dengan db'
-				if(arrayMatch.contains(false)){
-					'write to excel WARNING'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-					modifyObjectIndex++
-					'click cancel'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-					continue
-				}
-				
-			}
-			else if(refCategory.equalsIgnoreCase("AGENCY")){
-				'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-				ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(sqlConnection, referantorCode)
-				
-				'Ambil dan simpan npwp no dari confins'
-				String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-				'Ambil dan simpan npwp name dari confins'
-				String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-				'Ambil dan simpan address dari confins'
-				String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
-				'ambil dan simpan rt dari confins'
-				String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(" ","")
-				'ambil dan simpan rw dari confins'
-				String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace("/ ","")
-				'ambil dan simpan kelurahan dari confins'
-				String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-				'ambil dan simpan kecamatan dari confins'
-				String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-				'ambil dan simpan kota dari confins'
-				String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-				'ambil dan simpan zipcode dari confins'
-				String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))	
-				
-				'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-				ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-				arrayMatch.add(WebUI.verifyMatch(textNPWPNo,referantorDetail[0],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textNPWPName,referantorDetail[1],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textAddress,referantorDetail[2],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRT,referantorDetail[3],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRW,referantorDetail[4],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKelurahan,referantorDetail[5],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKecamatan,referantorDetail[6],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textCity,referantorDetail[7],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textZipcode,referantorDetail[8],false, FailureHandling.OPTIONAL))
-				
-				'Jika nilai di confins ada yang tidak sesuai dengan db'
-				if(arrayMatch.contains(false)){
-					'write to excel WARNING'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-					modifyObjectIndex++
-					'click cancel'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-					continue
-				}
-			}
-			else{
-				'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-				ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(sqlConnection, referantorCode)
-				
-				'Ambil dan simpan npwp no dari confins'
-				String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-				'Ambil dan simpan npwp name dari confins'
-				String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-				'Ambil dan simpan address dari confins'
-				String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
-				'ambil dan simpan rt dari confins'
-				String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(" ","")
-				'ambil dan simpan rw dari confins'
-				String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace("/ ","")
-				'ambil dan simpan kelurahan dari confins'
-				String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-				'ambil dan simpan kecamatan dari confins'
-				String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-				'ambil dan simpan kota dari confins'
-				String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-				'ambil dan simpan zipcode dari confins'
-				String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))	
-				
-				'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-				ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-				arrayMatch.add(WebUI.verifyMatch(textNPWPNo,referantorDetail[0],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textNPWPName,referantorDetail[1],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textAddress,referantorDetail[2],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRT,referantorDetail[3],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textRW,referantorDetail[4],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKelurahan,referantorDetail[5],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textKecamatan,referantorDetail[6],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textCity,referantorDetail[7],false, FailureHandling.OPTIONAL))
-				arrayMatch.add(WebUI.verifyMatch(textZipcode,referantorDetail[8],false, FailureHandling.OPTIONAL))
-				
-				'Jika nilai di confins ada yang tidak sesuai dengan db'
-				if(arrayMatch.contains(false)){
-					'write to excel WARNING'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-					modifyObjectIndex++
-					'click cancel'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-					continue
-				}
-			}
-			
-			'click x'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_XViewDetail'))
-			
-			
+            'Ambil dan simpan nilai referantor category dari confins'
+            String refCategory = WebUI.getAttribute(modifyObjectSelectReferantorCategory, 'value')
+
+            String newButtonViewDetail = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[7]/a/i'
+
+            'modify button view detail'
+            modifyButtonViewDetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_ViewDetail'), 
+                'xpath', 'equals', newButtonViewDetail, true)
+
+            'click button view detail'
+            WebUI.click(modifyButtonViewDetail)
+
+            'Pengecekan referantor category (customer, agency, atau mf employee)'
+            if (refCategory.equalsIgnoreCase('CUSTOMER')) {
+                'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
+                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(
+                    sqlConnection, referantorCode)
+
+                'Ambil dan simpan npwp no dari confins'
+                String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
+
+                'Ambil dan simpan npwp name dari confins'
+                String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
+
+                'Ambil dan simpan address dari confins'
+                String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
+
+                'ambil dan simpan rt dari confins'
+                String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
+                    ' ', '')
+
+                'ambil dan simpan rw dari confins'
+                String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
+                    '/ ', '')
+
+                'ambil dan simpan kelurahan dari confins'
+                String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
+
+                'ambil dan simpan kecamatan dari confins'
+                String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
+
+                'ambil dan simpan kota dari confins'
+                String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
+
+                'ambil dan simpan zipcode dari confins'
+                String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
+
+                'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
+                ArrayList<String> arrayMatch = new ArrayList<String>()
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+
+                'Jika nilai di confins ada yang tidak sesuai dengan db'
+                if (arrayMatch.contains(false)) {
+                    'write to excel WARNING'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+
+                    modifyObjectIndex++
+
+                    'click cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
+
+                    continue
+                }
+            } else if (refCategory.equalsIgnoreCase('AGENCY')) {
+                'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
+                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(
+                    sqlConnection, referantorCode)
+
+                'Ambil dan simpan npwp no dari confins'
+                String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
+
+                'Ambil dan simpan npwp name dari confins'
+                String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
+
+                'Ambil dan simpan address dari confins'
+                String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
+
+                'ambil dan simpan rt dari confins'
+                String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
+                    ' ', '')
+
+                'ambil dan simpan rw dari confins'
+                String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
+                    '/ ', '')
+
+                'ambil dan simpan kelurahan dari confins'
+                String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
+
+                'ambil dan simpan kecamatan dari confins'
+                String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
+
+                'ambil dan simpan kota dari confins'
+                String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
+
+                'ambil dan simpan zipcode dari confins'
+                String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
+
+                'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
+                ArrayList<String> arrayMatch = new ArrayList<String>()
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+
+                'Jika nilai di confins ada yang tidak sesuai dengan db'
+                if (arrayMatch.contains(false)) {
+                    'write to excel WARNING'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+
+                    modifyObjectIndex++
+
+                    'click cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
+
+                    continue
+                }
+            } else {
+                'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
+                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
+                    sqlConnection, referantorCode)
+
+                'Ambil dan simpan npwp no dari confins'
+                String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
+
+                'Ambil dan simpan npwp name dari confins'
+                String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
+
+                'Ambil dan simpan address dari confins'
+                String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Address'))
+
+                'ambil dan simpan rt dari confins'
+                String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
+                    ' ', '')
+
+                'ambil dan simpan rw dari confins'
+                String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
+                    '/ ', '')
+
+                'ambil dan simpan kelurahan dari confins'
+                String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
+
+                'ambil dan simpan kecamatan dari confins'
+                String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
+
+                'ambil dan simpan kota dari confins'
+                String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Kota'))
+
+                'ambil dan simpan zipcode dari confins'
+                String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
+
+                'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
+                ArrayList<String> arrayMatch = new ArrayList<String>()
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+
+                'Jika nilai di confins ada yang tidak sesuai dengan db'
+                if (arrayMatch.contains(false)) {
+                    'write to excel WARNING'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+
+                    modifyObjectIndex++
+
+                    'click cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
+
+                    continue
+                }
+            }
+            
+            'click x'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_XViewDetail'))
+
             'write to excel SUCCESS'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
-			
-			
+
             modifyObjectIndex++
         }
     }
-    
 }
 
 'click button save'
@@ -335,4 +410,4 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
 }
-}
+
