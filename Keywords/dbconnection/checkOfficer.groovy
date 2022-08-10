@@ -21,14 +21,23 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 
-public class checkInterestType {
+public class checkOfficer {
 
 	@Keyword
-	public checkInterest(Sql instance,String prodname){
-		String interestType
-		instance.eachRow(("select distinct compnt_value from prod a join prod_h b on a.prod_id = b.prod_id join prod_d c on b.prod_h_id = c.prod_h_id join PROD_OFFERING d on d.PROD_ID = a.prod_id where prod_offering_name = '"+prodname+"' and ref_prod_compnt_code = 'intrsttype'"), { def row ->
-			interestType = (row[0])
+	public countOfficerLookup(Sql instance, String officeLoc){
+		Integer countData
+		instance.eachRow(("select count(*) from ref_user_role c join ref_job_title d on c.REF_JOB_TITLE_ID = d.REF_JOB_TITLE_ID join ref_office e on c.REF_OFFICE_ID = e.REF_OFFICE_ID where job_title_code = 'SALES_PERSON' and office_name = '"+officeLoc+"' and c.is_active=1 "), { def row ->
+			countData = (row[0])
 		})
-		return interestType
+		return countData
+	}
+
+	@Keyword
+	public checkSPV(Sql instance, String username){
+		String spvname
+		instance.eachRow(("select EMP_NAME from REF_USER a join REF_EMP b on a.REF_EMP_ID = b.REF_EMP_ID where REF_USER_ID = (select top 1 SPV_ID from REF_EMP a JOIN REF_USER b on a.REF_EMP_ID = b.REF_EMP_ID JOIN REF_USER_ROLE c on b.REF_USER_ID = c.REF_USER_ID JOIN REF_ROLE d on c.REF_ROLE_ID = d.REF_ROLE_ID where USERNAME = '"+username+"' and c.IS_ACTIVE = 1)"), { def row ->
+			spvname = (row[0])
+		})
+		return spvname
 	}
 }
