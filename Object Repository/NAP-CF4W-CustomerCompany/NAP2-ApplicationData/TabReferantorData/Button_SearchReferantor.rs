@@ -3,14 +3,14 @@
    <description></description>
    <name>Button_SearchReferantor</name>
    <tag></tag>
-   <elementGuidId>f63a817e-ac19-4a11-9296-79f291d19836</elementGuidId>
+   <elementGuidId>cd5f349b-f1a9-46b8-aac1-e0dde2d3024f</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;formSearch&quot;]/div/div/div[2]/div/button[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Fax number</name>
    <tag></tag>
-   <elementGuidId>e1ab183e-2ea4-429a-a85a-62a41ea56be8</elementGuidId>
+   <elementGuidId>183b714e-ccfa-41db-8af0-f20b02a44d05</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[4]/div/div/div/div[2]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[18]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[4]/div/div/div/div[2]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

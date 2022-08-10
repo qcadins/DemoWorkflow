@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AssetPrice</name>
    <tag></tag>
-   <elementGuidId>b715fbec-292f-4a8d-835c-ba530d93c993</elementGuidId>
+   <elementGuidId>df470fec-338c-449f-b189-4f9f6bb58435</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

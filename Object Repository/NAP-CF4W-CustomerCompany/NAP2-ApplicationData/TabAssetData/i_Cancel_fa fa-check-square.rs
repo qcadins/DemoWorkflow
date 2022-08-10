@@ -3,7 +3,7 @@
    <description></description>
    <name>i_Cancel_fa fa-check-square</name>
    <tag></tag>
-   <elementGuidId>523951f3-3512-46aa-bd03-b0b58c12a9c9</elementGuidId>
+   <elementGuidId>e13bdbc3-ca8e-4a65-a053-73fb58d32c98</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

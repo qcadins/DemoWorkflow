@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_inptZipcode</name>
    <tag></tag>
-   <elementGuidId>e418f7d6-0510-4e4a-9b5f-f098231cfa46</elementGuidId>
+   <elementGuidId>e40a31c7-b202-4300-b64c-36e197da0ea6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

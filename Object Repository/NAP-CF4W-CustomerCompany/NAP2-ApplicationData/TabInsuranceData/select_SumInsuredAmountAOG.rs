@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountAOG</name>
    <tag></tag>
-   <elementGuidId>a9e9c985-7c0e-4b03-8cb4-e7869e24145e</elementGuidId>
+   <elementGuidId>ba8cb61b-fe9f-4989-a77d-2f8069379370</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

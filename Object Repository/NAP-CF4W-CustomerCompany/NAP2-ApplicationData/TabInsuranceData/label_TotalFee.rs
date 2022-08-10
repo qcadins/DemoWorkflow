@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalFee</name>
    <tag></tag>
-   <elementGuidId>3d317c4d-a558-4114-8d9b-ce58dbfda03d</elementGuidId>
+   <elementGuidId>7c742d65-4c1b-4530-8207-258f356e7412</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,16 +3,16 @@
    <description></description>
    <name>td_DocumentName</name>
    <tag></tag>
-   <elementGuidId>c9844cc4-131e-4b90-b751-c9c331112824</elementGuidId>
+   <elementGuidId>18a95c65-c0a7-407f-bd6b-b192fa48629b</elementGuidId>
    <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='TC-tab']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr/td[2]</value>
+      </entry>
       <entry>
          <key>BASIC</key>
          <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[2]
 </value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//div[@id='TC-tab']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr/td[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

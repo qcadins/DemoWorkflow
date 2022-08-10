@@ -3,15 +3,15 @@
    <description></description>
    <name>input_CheckSubject</name>
    <tag></tag>
-   <elementGuidId>8ff5b186-06e1-413d-9e52-094d3c7e7937</elementGuidId>
+   <elementGuidId>d84e27e8-a591-4c30-ac98-940f68f68781</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[4]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='checkbox'])[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[4]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

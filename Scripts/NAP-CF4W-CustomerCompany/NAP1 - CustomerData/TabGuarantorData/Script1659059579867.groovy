@@ -23,7 +23,8 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase('GUARANTOR')){
+if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase(
+    'GUARANTOR')) {
     'Loop Multiple Guarantor Data'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
@@ -82,7 +83,7 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1
                             GlobalVariable.NumofGuarantorPersonal, 14))
 
                     'select customer model'
-                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomrModel'), 
+                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'), 
                         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 15), false)
 
@@ -323,7 +324,7 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 15).length() > 1) {
                             'select customer model'
-                            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomrModel'), 
+                            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'), 
                                 findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                                     GlobalVariable.NumofGuarantorPersonal, 15), false)
                         }
@@ -384,6 +385,12 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1
 
                                 flagWarning++
                             }
+                        }
+                        
+                        if (GlobalVariable.RoleCompany == 'Testing') {
+                            'call test case Personal data verif'
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalDataVerif'), 
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                         
                         'click button save'
@@ -602,6 +609,12 @@ if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1
                             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
                                 findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                                     GlobalVariable.NumofGuarantorCompany, 10), false)
+                        }
+                        
+                        if (GlobalVariable.RoleCompany == 'Testing') {
+                            'call test case company data verif'
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyDataVerif'), 
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                         
                         'Click save'

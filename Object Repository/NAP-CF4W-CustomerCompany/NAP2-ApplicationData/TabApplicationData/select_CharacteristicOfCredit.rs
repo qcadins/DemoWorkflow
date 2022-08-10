@@ -3,7 +3,7 @@
    <description></description>
    <name>select_CharacteristicOfCredit</name>
    <tag></tag>
-   <elementGuidId>f5f57484-3c15-4341-82a1-1952763973ca</elementGuidId>
+   <elementGuidId>a399c760-6e3f-499f-8d1c-11b0e919b67a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

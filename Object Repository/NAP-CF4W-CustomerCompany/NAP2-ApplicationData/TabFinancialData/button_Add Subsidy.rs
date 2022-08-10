@@ -3,11 +3,11 @@
    <description></description>
    <name>button_Add Subsidy</name>
    <tag></tag>
-   <elementGuidId>74b4f09b-fd47-428f-8f3f-5b8f0a9ec710</elementGuidId>
+   <elementGuidId>33ac4e57-d47b-4298-9e82-4a2e8b0f1f46</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;FinData_Subsidy&quot;]/div[1]/button</value>
+         <value>(//button[@type='button'])[10]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

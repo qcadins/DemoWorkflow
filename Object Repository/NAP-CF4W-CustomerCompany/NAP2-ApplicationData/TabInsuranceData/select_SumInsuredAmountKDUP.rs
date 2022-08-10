@@ -3,7 +3,7 @@
    <description></description>
    <name>select_SumInsuredAmountKDUP</name>
    <tag></tag>
-   <elementGuidId>972797e6-6fb9-43ce-9e87-52155eef6ba5</elementGuidId>
+   <elementGuidId>b64c7c8b-d9cf-4991-9336-5f8415ebb87e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

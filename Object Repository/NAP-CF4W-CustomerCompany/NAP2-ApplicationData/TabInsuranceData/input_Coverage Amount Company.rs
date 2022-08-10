@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Coverage Amount Company</name>
    <tag></tag>
-   <elementGuidId>6e592a4e-3754-41c2-b631-cc0843bf64a3</elementGuidId>
+   <elementGuidId>0e5f4b99-0519-488c-ac99-2452f5298dbf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

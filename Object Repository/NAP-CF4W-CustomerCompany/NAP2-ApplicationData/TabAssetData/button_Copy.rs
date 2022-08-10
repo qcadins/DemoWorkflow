@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Copy</name>
    <tag></tag>
-   <elementGuidId>d37780fb-7298-42f4-9370-1089c9d73ed6</elementGuidId>
+   <elementGuidId>796702cd-82fe-48c7-878c-ff9ad68ad33d</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[7]/div/div/div/span/button/span</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[17]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[7]/div/div/div/span/button/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

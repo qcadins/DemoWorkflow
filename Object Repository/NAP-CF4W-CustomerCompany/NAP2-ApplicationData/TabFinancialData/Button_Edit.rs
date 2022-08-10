@@ -3,7 +3,7 @@
    <description></description>
    <name>Button_Edit</name>
    <tag></tag>
-   <elementGuidId>fdc122f6-f923-4bb0-b1b2-bb97cb56aff7</elementGuidId>
+   <elementGuidId>bd68e0e6-a91a-4e93-aba3-5e8cc167f7a9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

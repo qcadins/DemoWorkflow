@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TotalPremiumtoCustomerAfterDiscount</name>
    <tag></tag>
-   <elementGuidId>65566d18-4cbf-4296-8469-4c952e7fe08d</elementGuidId>
+   <elementGuidId>d7213f55-90f4-462b-bbcd-3dbfd9f8ffcf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

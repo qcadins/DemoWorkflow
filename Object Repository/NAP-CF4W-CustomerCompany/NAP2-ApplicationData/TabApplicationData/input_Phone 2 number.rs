@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Phone 2 number</name>
    <tag></tag>
-   <elementGuidId>28053f4c-22bc-478a-b62d-e713bd35523b</elementGuidId>
+   <elementGuidId>0d8e518b-1c3d-4c03-a339-7c2552a724f2</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[2]/div/div/div/div[2]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[12]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[2]/div/div/div/div[2]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

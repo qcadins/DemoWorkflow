@@ -3,7 +3,7 @@
    <description></description>
    <name>SelfUsage Checkbox</name>
    <tag></tag>
-   <elementGuidId>7779c299-6e0b-406c-aa8b-a5f6eef28b1d</elementGuidId>
+   <elementGuidId>3073bfeb-1225-42e4-9df2-a230236f9bf8</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

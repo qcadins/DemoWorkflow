@@ -3,11 +3,11 @@
    <description></description>
    <name>button_Calculate Insurance</name>
    <tag></tag>
-   <elementGuidId>0151d804-9535-4c68-bbf4-83f8c92f1c0b</elementGuidId>
+   <elementGuidId>443ff149-5618-40f8-8267-fb3595414865</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[12]</value>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[4]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

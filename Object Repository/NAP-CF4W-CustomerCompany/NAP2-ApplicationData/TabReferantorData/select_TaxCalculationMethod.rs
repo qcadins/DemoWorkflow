@@ -3,15 +3,15 @@
    <description></description>
    <name>select_TaxCalculationMethod</name>
    <tag></tag>
-   <elementGuidId>9178de54-720a-4a1c-b347-ab8810843ca3</elementGuidId>
+   <elementGuidId>050a0eda-48d1-400b-9114-74d17cfc9117</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[6]/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

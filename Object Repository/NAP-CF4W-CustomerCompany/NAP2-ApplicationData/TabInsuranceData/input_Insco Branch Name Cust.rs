@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Insco Branch Name Cust</name>
    <tag></tag>
-   <elementGuidId>76e071aa-3a95-4836-8d96-f0ca11b60b6a</elementGuidId>
+   <elementGuidId>1378c3ee-78aa-47ee-ae53-eac2d5a70381</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id = 'inscoBranchName' and @type = 'text']</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//input[@id='inscoBranchName']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id = 'inscoBranchName' and @type = 'text']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

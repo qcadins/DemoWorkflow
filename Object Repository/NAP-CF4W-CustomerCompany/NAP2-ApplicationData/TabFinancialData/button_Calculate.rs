@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Calculate</name>
    <tag></tag>
-   <elementGuidId>42afacf7-feb9-40e6-8d76-34df669bb4da</elementGuidId>
+   <elementGuidId>62b77448-2029-4582-bedf-1594ea4bc3cc</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

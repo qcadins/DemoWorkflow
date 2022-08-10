@@ -3,7 +3,7 @@
    <description></description>
    <name>input_KotaAssetOwner</name>
    <tag></tag>
-   <elementGuidId>c3cd6e59-0168-4ceb-a926-9e50b5ed6bfc</elementGuidId>
+   <elementGuidId>4d8a43f5-835c-4845-ab7c-04791dcf57cc</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

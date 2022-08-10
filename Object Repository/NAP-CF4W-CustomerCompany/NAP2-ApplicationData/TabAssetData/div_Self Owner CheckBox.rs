@@ -3,15 +3,15 @@
    <description></description>
    <name>div_Self Owner CheckBox</name>
    <tag></tag>
-   <elementGuidId>bd4c842c-3ede-4bcb-8f24-17b99c5cadf9</elementGuidId>
+   <elementGuidId>df36e3b2-6377-45b4-82a7-9dcd0e6cb202</elementGuidId>
    <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[1]/mat-checkbox/label/span[1]</value>
+      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;mat-checkbox-9&quot;]/label/div</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[1]/mat-checkbox/label/span[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[1]/mat-checkbox/label/span[1]</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[1]/mat-checkbox/label/span[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

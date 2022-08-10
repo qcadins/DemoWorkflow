@@ -3,7 +3,7 @@
    <description></description>
    <name>select_AllocationFromSupplier</name>
    <tag></tag>
-   <elementGuidId>0d7ed2f2-12b1-4930-91ff-9d80ca10166d</elementGuidId>
+   <elementGuidId>1a3c04f7-1204-4331-bfb4-9062ec4e087d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

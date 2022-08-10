@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_AddressText</name>
    <tag></tag>
-   <elementGuidId>324bc36f-9881-480a-bf27-ac661a4a0180</elementGuidId>
+   <elementGuidId>9f96149e-f331-42ca-ab07-10723ae25349</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

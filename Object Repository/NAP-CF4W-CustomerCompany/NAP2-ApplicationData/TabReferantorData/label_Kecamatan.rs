@@ -3,7 +3,7 @@
    <description></description>
    <name>label_Kecamatan</name>
    <tag></tag>
-   <elementGuidId>aab3389f-cfb1-4c3b-90a8-031385ad9ab2</elementGuidId>
+   <elementGuidId>5bc64dc1-f04f-4bda-8fda-a06938bf1732</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

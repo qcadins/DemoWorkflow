@@ -3,7 +3,7 @@
    <description></description>
    <name>label_Kota</name>
    <tag></tag>
-   <elementGuidId>4ac068a9-41dd-48cf-a1c7-32f80597dc9a</elementGuidId>
+   <elementGuidId>c905b7bc-a07f-4a11-bb7f-725af4cd0737</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

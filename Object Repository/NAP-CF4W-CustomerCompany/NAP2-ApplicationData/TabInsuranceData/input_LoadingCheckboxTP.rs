@@ -3,7 +3,7 @@
    <description></description>
    <name>input_LoadingCheckboxTP</name>
    <tag></tag>
-   <elementGuidId>1ead63ee-5fa1-4af4-98f5-a296c939f282</elementGuidId>
+   <elementGuidId>b952f0a0-6e7b-42b8-9582-f9b713f9a06f</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

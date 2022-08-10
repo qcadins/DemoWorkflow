@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL LIFE INSURANCE</name>
    <tag></tag>
-   <elementGuidId>8bb03f06-af77-45f2-824c-094838fd9af9</elementGuidId>
+   <elementGuidId>b92d9d36-db3d-48ce-9bb9-e3de05149dad</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

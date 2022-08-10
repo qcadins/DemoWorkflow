@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AssetPriceInclAcc</name>
    <tag></tag>
-   <elementGuidId>23e43d37-e9db-4371-a394-0e59ad670d55</elementGuidId>
+   <elementGuidId>461ed61d-7d60-43e8-ba7b-c6f73587c8de</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

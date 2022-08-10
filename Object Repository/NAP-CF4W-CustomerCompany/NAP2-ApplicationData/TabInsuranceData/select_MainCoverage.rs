@@ -3,7 +3,7 @@
    <description></description>
    <name>select_MainCoverage</name>
    <tag></tag>
-   <elementGuidId>286c5452-7a0f-406e-b7a6-ffba39cc36f2</elementGuidId>
+   <elementGuidId>5d89991a-1433-4fce-8668-64740f132410</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='CustMainData']/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select</value>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

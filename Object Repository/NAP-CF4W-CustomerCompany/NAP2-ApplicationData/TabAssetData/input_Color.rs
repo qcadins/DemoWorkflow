@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Color</name>
    <tag></tag>
-   <elementGuidId>1dc0e364-65e4-4648-9f75-67480da7dfdb</elementGuidId>
+   <elementGuidId>3e86986f-d61f-4ec5-9dd1-c6f67c567347</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

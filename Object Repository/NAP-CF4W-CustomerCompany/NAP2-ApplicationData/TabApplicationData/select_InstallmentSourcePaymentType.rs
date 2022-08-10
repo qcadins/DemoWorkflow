@@ -3,15 +3,15 @@
    <description></description>
    <name>select_InstallmentSourcePaymentType</name>
    <tag></tag>
-   <elementGuidId>026860ef-9d24-402a-9766-a16709987219</elementGuidId>
+   <elementGuidId>564dace1-f932-49a7-9c87-45fd3bebd5e2</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//select[@class = 'form-control adInsInput ng-untouched ng-pristine ng-valid' and @formcontrolname = 'InstSrcPaymentCode' and (text() = '-Select One- GAJI  INVESTASI  JUAL ASSET  PELUNASAN HUTANG   PINJAMAN BANK  PINJAMAN NON BANK  SETORAN MODAL  TABUNGAN  USAHA ' or . = '-Select One- GAJI  INVESTASI  JUAL ASSET  PELUNASAN HUTANG   PINJAMAN BANK  PINJAMAN NON BANK  SETORAN MODAL  TABUNGAN  USAHA ')]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Installment Source Payment Type'])[1]/following::select[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//select[@class = 'form-control adInsInput ng-untouched ng-pristine ng-valid' and @formcontrolname = 'InstSrcPaymentCode' and (text() = '-Select One- GAJI  INVESTASI  JUAL ASSET  PELUNASAN HUTANG   PINJAMAN BANK  PINJAMAN NON BANK  SETORAN MODAL  TABUNGAN  USAHA ' or . = '-Select One- GAJI  INVESTASI  JUAL ASSET  PELUNASAN HUTANG   PINJAMAN BANK  PINJAMAN NON BANK  SETORAN MODAL  TABUNGAN  USAHA ')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

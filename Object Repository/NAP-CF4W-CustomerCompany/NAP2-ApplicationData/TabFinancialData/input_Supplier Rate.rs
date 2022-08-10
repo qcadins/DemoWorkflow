@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Supplier Rate</name>
    <tag></tag>
-   <elementGuidId>b342ea79-98bf-416b-b04f-1ce540f6fb0f</elementGuidId>
+   <elementGuidId>efaf7032-4361-4f1b-828f-354d115cac3e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

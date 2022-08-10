@@ -3,14 +3,14 @@
    <description></description>
    <name>i_ViewDetail</name>
    <tag></tag>
-   <elementGuidId>46b63758-5ec3-4af6-9b68-14c719f73595</elementGuidId>
+   <elementGuidId>5da5ef1e-9bdd-413c-b331-81e121155e09</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
       </entry>
    </selectorCollection>

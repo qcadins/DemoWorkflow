@@ -10,7 +10,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[10]/button[1]</value>
+         <value>//*[@id=&quot;assetData&quot;]/div[10]/button[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

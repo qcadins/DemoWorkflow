@@ -3,14 +3,14 @@
    <description></description>
    <name>input_Tanggung Jawab Hukum Terhadap Penumpang_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>36cda233-ad43-455a-8bef-cda61393c14b</elementGuidId>
+   <elementGuidId>45361b09-9228-4b72-b3c2-d30dd63f1d14</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[7]/td[8]/div/span/div/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[7]/td[8]/div/span/div/input</value>
       </entry>
    </selectorCollection>

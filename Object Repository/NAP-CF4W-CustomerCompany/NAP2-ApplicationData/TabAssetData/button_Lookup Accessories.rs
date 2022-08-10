@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Lookup Accessories</name>
    <tag></tag>
-   <elementGuidId>96efc45b-0982-4efa-9a6b-d2e28761d295</elementGuidId>
+   <elementGuidId>3958254b-52fb-4626-8982-947aeacf3faf</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-star-inserted&quot;]/td[@class=&quot;text-center ng-untouched ng-pristine ng-invalid&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[17]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-star-inserted&quot;]/td[@class=&quot;text-center ng-untouched ng-pristine ng-invalid&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

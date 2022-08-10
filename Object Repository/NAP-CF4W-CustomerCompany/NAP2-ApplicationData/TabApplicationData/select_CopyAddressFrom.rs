@@ -3,7 +3,7 @@
    <description></description>
    <name>select_CopyAddressFrom</name>
    <tag></tag>
-   <elementGuidId>91dfca34-2841-4b82-88fd-e50449b08396</elementGuidId>
+   <elementGuidId>c204ccb2-5624-447a-96ec-09df14982f35</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

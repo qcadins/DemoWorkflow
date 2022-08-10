@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SupplierCodeAccessories</name>
    <tag></tag>
-   <elementGuidId>2d98f5c1-27b4-4389-9886-dd327611d9dd</elementGuidId>
+   <elementGuidId>2479412e-d2af-4b7c-ac17-89bec2e99ea0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

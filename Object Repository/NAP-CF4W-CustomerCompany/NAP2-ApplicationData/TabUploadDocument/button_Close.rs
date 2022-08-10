@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Close</name>
    <tag></tag>
-   <elementGuidId>2e301c5a-ae4f-49bc-8362-decbb92c7b95</elementGuidId>
+   <elementGuidId>0e7d3426-465b-4fc9-8d02-60fc960215ca</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

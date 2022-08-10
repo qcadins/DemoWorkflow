@@ -3,14 +3,14 @@
    <description></description>
    <name>Button Delete</name>
    <tag></tag>
-   <elementGuidId>30af968e-fdc8-4e05-8a0a-504a9a8506ae</elementGuidId>
+   <elementGuidId>c4c2f4c5-b3d7-4331-bbe1-da1c67f910d2</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[8]/a/i</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[8]/a/i</value>
       </entry>
    </selectorCollection>

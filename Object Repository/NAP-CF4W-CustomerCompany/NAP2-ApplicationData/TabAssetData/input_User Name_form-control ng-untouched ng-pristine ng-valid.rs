@@ -3,15 +3,15 @@
    <description></description>
    <name>input_User Name_form-control ng-untouched ng-pristine ng-valid</name>
    <tag></tag>
-   <elementGuidId>91c6a871-a6c4-42a9-b340-2f415e67eb7c</elementGuidId>
+   <elementGuidId>7d717468-81b0-4695-ab29-99b3563f1950</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;userData&quot;]/div[2]/div/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[9]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;userData&quot;]/div[2]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

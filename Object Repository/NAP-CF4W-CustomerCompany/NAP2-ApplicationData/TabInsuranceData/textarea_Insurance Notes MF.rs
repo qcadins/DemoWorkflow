@@ -3,15 +3,15 @@
    <description></description>
    <name>textarea_Insurance Notes MF</name>
    <tag></tag>
-   <elementGuidId>f9fb9486-945b-4a74-83f0-3241d16ea5ae</elementGuidId>
+   <elementGuidId>23e764b8-f341-483b-9eb4-80e43e068999</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;notes&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//textarea[@id='notes']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;notes&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

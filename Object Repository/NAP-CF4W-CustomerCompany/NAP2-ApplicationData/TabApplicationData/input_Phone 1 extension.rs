@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Phone 1 extension</name>
    <tag></tag>
-   <elementGuidId>e8a06ded-feee-4be7-af0e-6b4683c53204</elementGuidId>
+   <elementGuidId>181a699a-1b2f-4cf6-9568-2f0206875890</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[1]/div/div/div/div[3]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[10]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div/div[1]/div/div/div/div[3]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

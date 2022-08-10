@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Admin Fee Capitalize_</name>
    <tag></tag>
-   <elementGuidId>3bda466e-efef-44a8-a5cb-cdbae8fe8118</elementGuidId>
+   <elementGuidId>fdb5cad7-ab39-4e4f-aac9-6ed4db0a2634</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_AssetName</name>
    <tag></tag>
-   <elementGuidId>d0d5177f-887d-4e65-bb96-9b179f520fc5</elementGuidId>
+   <elementGuidId>a45e7498-e2de-499b-a8ca-de9854ddc5b4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_ Installment Scheme</name>
    <tag></tag>
-   <elementGuidId>7f92cef5-ae2b-4c47-b169-df8f4623978d</elementGuidId>
+   <elementGuidId>de4edca6-9977-4d98-a1bb-577b81567a02</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

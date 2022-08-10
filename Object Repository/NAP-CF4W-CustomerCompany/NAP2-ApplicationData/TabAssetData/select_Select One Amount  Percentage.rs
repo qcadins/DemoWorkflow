@@ -3,7 +3,7 @@
    <description></description>
    <name>select_Select One Amount  Percentage</name>
    <tag></tag>
-   <elementGuidId>d8d587a4-bca4-43d1-9bd6-89d9c0ca8e82</elementGuidId>
+   <elementGuidId>7a8e0aca-d9d2-4ee0-b0dc-88c1147d2486</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

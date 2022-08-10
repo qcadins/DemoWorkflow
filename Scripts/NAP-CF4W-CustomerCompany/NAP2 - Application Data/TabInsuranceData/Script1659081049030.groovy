@@ -44,19 +44,19 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
     'Memanggil test case Tab Insurance Data Customer'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataCustomer'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (insuredBy == 'Customer - Multifinance') {
     'Memanggil Test Case Tab Insurance Data Customer untuk mengisi insurance information bagian customer'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataCustomer'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'Memanggil Test Case Tab Insurance Data Multifinance untuk mengisi insurance information bagian company beserta insurance coverage dan diskonnya'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (insuredBy == 'Multifinance') {
     'Memanggil test case Tab Insurance Data Multifinance'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

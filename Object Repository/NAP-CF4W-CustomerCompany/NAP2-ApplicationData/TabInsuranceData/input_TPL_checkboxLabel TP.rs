@@ -3,7 +3,7 @@
    <description></description>
    <name>input_TPL_checkboxLabel TP</name>
    <tag></tag>
-   <elementGuidId>6082f4ca-6656-4139-afd9-62c3f4f53dae</elementGuidId>
+   <elementGuidId>70360125-0f6f-4326-b451-757ad1ee4542</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

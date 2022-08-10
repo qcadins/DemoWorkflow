@@ -3,14 +3,14 @@
    <description></description>
    <name>ButtonTabInsuranceData</name>
    <tag></tag>
-   <elementGuidId>cfcbd3b3-9a43-4473-8ee7-d70f437eb7b9</elementGuidId>
+   <elementGuidId>f1f1358a-1117-4df1-9c66-06a053d1a3ec</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[1]/div[7]/button</value>
+         <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[1]/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

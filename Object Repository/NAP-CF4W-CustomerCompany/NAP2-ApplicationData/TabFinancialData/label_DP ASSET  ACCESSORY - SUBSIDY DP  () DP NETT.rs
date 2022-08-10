@@ -3,7 +3,7 @@
    <description></description>
    <name>label_DP ASSET  ACCESSORY - SUBSIDY DP  () DP NETT</name>
    <tag></tag>
-   <elementGuidId>517afd07-92f2-437d-9944-a4525857e000</elementGuidId>
+   <elementGuidId>c878ba62-ac6e-42ac-9f50-bb60fc4e3a58</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

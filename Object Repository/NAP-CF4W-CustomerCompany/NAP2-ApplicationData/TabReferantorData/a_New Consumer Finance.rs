@@ -3,7 +3,7 @@
    <description></description>
    <name>a_New Consumer Finance</name>
    <tag></tag>
-   <elementGuidId>e05dedde-4c82-425c-b5f3-78486fd0b437</elementGuidId>
+   <elementGuidId>8fa4106a-c57a-4d87-80b1-96ed2bd7c5ad</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

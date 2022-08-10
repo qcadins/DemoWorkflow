@@ -3,18 +3,14 @@
    <description></description>
    <name>input_Code_RefMasterAppData</name>
    <tag></tag>
-   <elementGuidId>531d7eb0-6581-4fdd-b9ee-7b92c16f85fe</elementGuidId>
+   <elementGuidId>1b840bde-518b-4850-8821-8d21e8e882b3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
          <value>//input[@id='MasterCodeId']</value>
       </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;MasterCodeId&quot;)</value>
-      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -31,14 +27,14 @@
       <value>form-control search-form-control ng-untouched ng-pristine ng-valid</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -59,11 +55,11 @@
       <value>Code</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[5]/div/div/input</value>
+      <value>id(&quot;MasterCodeId&quot;)</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

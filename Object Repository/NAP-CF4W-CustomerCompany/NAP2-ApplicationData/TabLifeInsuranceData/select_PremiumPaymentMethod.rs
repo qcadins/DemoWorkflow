@@ -3,7 +3,7 @@
    <description></description>
    <name>select_PremiumPaymentMethod</name>
    <tag></tag>
-   <elementGuidId>5c37a688-85d1-4544-993d-fca55abfad89</elementGuidId>
+   <elementGuidId>123573bb-3378-446f-a3e5-3c79d3caeb87</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

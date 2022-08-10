@@ -3,7 +3,7 @@
    <description></description>
    <name>checkbox_coverlifeinsurance</name>
    <tag></tag>
-   <elementGuidId>6db7b0a3-743d-4381-9f48-6eeaf11f538e</elementGuidId>
+   <elementGuidId>7153e27c-c1df-46f6-833b-b4fed944a422</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

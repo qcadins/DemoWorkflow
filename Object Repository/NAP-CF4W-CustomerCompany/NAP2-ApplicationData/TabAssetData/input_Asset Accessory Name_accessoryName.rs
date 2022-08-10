@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Asset Accessory Name_accessoryName</name>
    <tag></tag>
-   <elementGuidId>1c5ddfdf-fcda-4db1-a26d-ad8ac4faf515</elementGuidId>
+   <elementGuidId>7932d16f-f21e-4090-8183-844bb8af616a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

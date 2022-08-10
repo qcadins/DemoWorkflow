@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Flat Rate</name>
    <tag></tag>
-   <elementGuidId>daa45ca4-babe-4188-9757-337fbe0926b4</elementGuidId>
+   <elementGuidId>30bb3c64-e3bd-492f-b2fa-2296ef54efc6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

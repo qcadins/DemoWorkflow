@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_RT  RW_form-control adInsInput ng-untouched ng-pristine ng-invalid</name>
+   <name>input_RT</name>
    <tag></tag>
    <elementGuidId>459807ea-5e58-4b6f-b10f-a262a16c69ea</elementGuidId>
    <selectorCollection>

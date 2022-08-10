@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Asset Price_assetPriceAmt</name>
    <tag></tag>
-   <elementGuidId>f676831e-c4e5-4f61-9ebb-21df5861e9fe</elementGuidId>
+   <elementGuidId>6985bf7d-2f4c-4a34-8a24-e93727b2ba1d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

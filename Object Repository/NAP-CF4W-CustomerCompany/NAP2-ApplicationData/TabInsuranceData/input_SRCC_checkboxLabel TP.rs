@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SRCC_checkboxLabel TP</name>
    <tag></tag>
-   <elementGuidId>70e5913c-88b5-4ed1-8b03-000b14c3fdb8</elementGuidId>
+   <elementGuidId>c932c4d3-101a-4d7d-9c74-3e3aef0dbe80</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

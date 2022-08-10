@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>select_CustomrModel</name>
+   <name>select_CustomerModel</name>
    <tag></tag>
    <elementGuidId>88c0ce2d-5633-4083-acd4-1e2f9ecb1894</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='CustMainData']/div[2]/div[11]/div/div/lib-ucdropdownlist/div/select</value>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[11]/div/div/lib-ucdropdownlist/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

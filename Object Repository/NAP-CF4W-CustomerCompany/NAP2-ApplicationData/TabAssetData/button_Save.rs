@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Save</name>
    <tag></tag>
-   <elementGuidId>ba6b0cb7-cf0d-4b22-82c7-684cff0a25ac</elementGuidId>
+   <elementGuidId>1d957282-6254-4522-9680-008477429de2</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[10]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;assetData&quot;]/div[10]/button[2]/span</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[10]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

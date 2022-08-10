@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Economic Sector (Slik)</name>
    <tag></tag>
-   <elementGuidId>28380c0b-f14e-4765-abc7-92c76e612985</elementGuidId>
+   <elementGuidId>53b5a785-dbd7-4cfb-996b-852d40b572c1</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[6]/div/div/div[2]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Economic Sector (Slik)'])[1]/following::button[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[6]/div/div/div[2]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

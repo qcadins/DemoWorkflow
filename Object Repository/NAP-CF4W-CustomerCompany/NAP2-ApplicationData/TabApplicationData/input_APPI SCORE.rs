@@ -3,7 +3,7 @@
    <description></description>
    <name>input_APPI SCORE</name>
    <tag></tag>
-   <elementGuidId>789608de-94a3-46ef-869b-4eac290fb8b8</elementGuidId>
+   <elementGuidId>d905b1c3-670f-46d6-8e69-768ed0926590</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

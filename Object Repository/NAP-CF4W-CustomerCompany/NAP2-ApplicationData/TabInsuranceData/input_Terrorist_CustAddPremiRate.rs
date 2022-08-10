@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Terrorist_CustAddPremiRate</name>
    <tag></tag>
-   <elementGuidId>a9664924-370f-44b3-a8b1-7a329fcb02b6</elementGuidId>
+   <elementGuidId>f4e60c60-e9b5-4b9f-ae15-dbe8a1a5df42</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

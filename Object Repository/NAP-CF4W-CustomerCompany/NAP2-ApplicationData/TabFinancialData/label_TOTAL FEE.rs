@@ -3,15 +3,15 @@
    <description></description>
    <name>label_TOTAL FEE</name>
    <tag></tag>
-   <elementGuidId>2f1ed43a-f97f-4db0-9d69-4553dd68aacb</elementGuidId>
+   <elementGuidId>f100dd6a-f5ce-40c3-a5b0-9bc28b883503</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[(text() = '53,050,000.00' or . = '53,050,000.00')]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div/div[3]/div/div/div[2]/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = '53,050,000.00' or . = '53,050,000.00')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

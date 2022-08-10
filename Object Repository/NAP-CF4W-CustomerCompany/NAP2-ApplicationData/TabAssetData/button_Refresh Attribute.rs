@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Refresh Attribute</name>
    <tag></tag>
-   <elementGuidId>ef7de196-0dcb-41ab-93e1-e79f378db173</elementGuidId>
+   <elementGuidId>da2ff466-f76f-4e62-b062-0615485044b2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

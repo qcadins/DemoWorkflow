@@ -3,7 +3,7 @@
    <description></description>
    <name>select_-PaymentTypeCompany</name>
    <tag></tag>
-   <elementGuidId>40751e30-8e83-493e-89a7-3d6606b88c07</elementGuidId>
+   <elementGuidId>e96f4095-5110-47a6-9fc0-d81c127f674e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

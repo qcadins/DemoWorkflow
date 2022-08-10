@@ -3,18 +3,14 @@
    <description></description>
    <name>button_BPKB City Issuer_btn btn-raised btn-primary</name>
    <tag></tag>
-   <elementGuidId>5dcb95c2-cf65-49ae-b3c8-9ce2907c3a76</elementGuidId>
+   <elementGuidId>53334462-6c97-465c-ad42-85e31cef09d3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[12]</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;assetData&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8 ng-star-inserted&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+         <value>//*[@id=&quot;assetData&quot;]/div[1]/div[7]/div[3]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -31,18 +27,18 @@
       <value>btn btn-raised btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;assetData&quot;]/div[1]/div[7]/div[3]/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+      <value>id(&quot;assetData&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8 ng-star-inserted&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

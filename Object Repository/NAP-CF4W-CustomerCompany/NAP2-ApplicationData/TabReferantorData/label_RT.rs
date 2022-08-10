@@ -3,7 +3,7 @@
    <description></description>
    <name>label_RT</name>
    <tag></tag>
-   <elementGuidId>fe95715a-47e0-4b4c-b36a-83bf2c62fc08</elementGuidId>
+   <elementGuidId>ed97a8e2-20eb-449a-b26f-38c9f4eb9213</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>td_numberOfMonth</name>
    <tag></tag>
-   <elementGuidId>70127349-4de5-458f-b772-bee639025a82</elementGuidId>
+   <elementGuidId>202108b8-d2ad-42ae-9d30-0ceb1ed67836</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[4]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr/td[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[4]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

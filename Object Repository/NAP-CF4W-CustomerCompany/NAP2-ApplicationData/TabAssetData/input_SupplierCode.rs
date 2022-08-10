@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SupplierCode</name>
    <tag></tag>
-   <elementGuidId>4556141d-62b9-44e0-b18f-fac250970c9e</elementGuidId>
+   <elementGuidId>c529c022-45af-46db-bd54-50712327b671</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

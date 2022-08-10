@@ -3,11 +3,11 @@
    <description></description>
    <name>button_Apply To All</name>
    <tag></tag>
-   <elementGuidId>f215cf5e-c06f-4a6f-a3cd-fdf9f7f7ac48</elementGuidId>
+   <elementGuidId>1341695c-94cb-40d4-8f0e-15165b83ed64</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[11]</value>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[1]/div[2]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

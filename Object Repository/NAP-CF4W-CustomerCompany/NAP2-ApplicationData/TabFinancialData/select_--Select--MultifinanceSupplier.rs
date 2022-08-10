@@ -3,7 +3,7 @@
    <description></description>
    <name>select_--Select--MultifinanceSupplier</name>
    <tag></tag>
-   <elementGuidId>1081a6bf-86a1-4d60-819b-96efbadfde0f</elementGuidId>
+   <elementGuidId>fd505724-7657-424e-b92e-a195e8f1f37b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

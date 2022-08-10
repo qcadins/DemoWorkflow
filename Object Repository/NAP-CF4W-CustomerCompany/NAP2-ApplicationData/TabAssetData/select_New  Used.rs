@@ -3,7 +3,7 @@
    <description></description>
    <name>select_New  Used</name>
    <tag></tag>
-   <elementGuidId>ab643f5d-a02b-465a-9375-63b87b1f786b</elementGuidId>
+   <elementGuidId>e254d666-fc02-4d1f-a4ca-96d9252af0bd</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

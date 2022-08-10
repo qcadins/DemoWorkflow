@@ -3,7 +3,7 @@
    <description></description>
    <name>select_CustomerNotification</name>
    <tag></tag>
-   <elementGuidId>12e782fe-77b7-481e-ab3d-db75a1e405d2</elementGuidId>
+   <elementGuidId>d48309b4-37f1-4098-9615-a00676d1b1ed</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>

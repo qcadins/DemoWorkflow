@@ -3,7 +3,7 @@
    <description></description>
    <name>label_FIRST INSTALLMENT TYPE</name>
    <tag></tag>
-   <elementGuidId>dcc7f502-e94d-4147-a82d-a98dba774f33</elementGuidId>
+   <elementGuidId>591e5dc3-aca0-40b0-bb07-053a7e2c6961</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

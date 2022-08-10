@@ -3,14 +3,14 @@
    <description></description>
    <name>select_SumInsuredAmountTPL</name>
    <tag></tag>
-   <elementGuidId>ec996e59-7938-4711-88e3-d22112a20e9b</elementGuidId>
+   <elementGuidId>6f74d985-e186-40d4-8a4f-e875f0b3f3ab</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[7]/div/div/select</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[4]/td[7]/div/div/select</value>
       </entry>
    </selectorCollection>

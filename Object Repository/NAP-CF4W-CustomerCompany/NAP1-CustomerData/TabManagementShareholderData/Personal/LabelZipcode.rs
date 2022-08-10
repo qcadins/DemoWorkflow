@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>LabelZipcode</name>
+   <tag></tag>
+   <elementGuidId>9be56eaf-1e3d-47a1-80f7-c2d6439afdf1</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/lib-uclookupgeneric/div/div/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/lib-uclookupgeneric/div/div/label</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TDP</name>
    <tag></tag>
-   <elementGuidId>504471d7-a6b6-4178-ae50-f4d0b11954a5</elementGuidId>
+   <elementGuidId>c7c2312d-8285-4d9f-b508-230cbbf2d356</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

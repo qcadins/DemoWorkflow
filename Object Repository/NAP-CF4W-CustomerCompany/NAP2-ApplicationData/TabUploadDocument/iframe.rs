@@ -3,7 +3,7 @@
    <description></description>
    <name>iframe</name>
    <tag></tag>
-   <elementGuidId>b112ef9e-e7fb-4926-bc8e-338f53972dd4</elementGuidId>
+   <elementGuidId>1021fd3b-e49d-4c16-b108-7a02aefc86d4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

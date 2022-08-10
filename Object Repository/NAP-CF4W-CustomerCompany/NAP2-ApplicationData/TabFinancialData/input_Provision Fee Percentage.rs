@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Provision Fee Percentage</name>
    <tag></tag>
-   <elementGuidId>23be809b-f63d-4778-801c-5b7f89de12d4</elementGuidId>
+   <elementGuidId>fca7fd38-22f4-417a-b093-439e187673a8</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[2]/div[6]/div/div/div[7]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[6]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[2]/div[6]/div/div/div[7]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

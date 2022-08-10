@@ -3,15 +3,15 @@
    <description></description>
    <name>button_LookupReferantor</name>
    <tag></tag>
-   <elementGuidId>72b1322b-b9fd-4cb6-846c-a66c8beea1eb</elementGuidId>
+   <elementGuidId>efae8ac8-dfaf-45ca-b1e4-03b9ca735b34</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[2]/div/div[2]/table/tbody/tr/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[11]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[2]/div/div[2]/table/tbody/tr/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

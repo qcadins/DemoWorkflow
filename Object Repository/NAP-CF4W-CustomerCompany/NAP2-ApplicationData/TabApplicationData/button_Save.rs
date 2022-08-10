@@ -3,15 +3,15 @@
    <description></description>
    <name>button_Save</name>
    <tag></tag>
-   <elementGuidId>452c31b9-7bc5-4199-95c7-56d17f8d34b8</elementGuidId>
+   <elementGuidId>1de8c894-71cf-40ee-a888-a3de1e07d0e9</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

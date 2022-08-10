@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Additional Admin Capitalize_checkbox</name>
    <tag></tag>
-   <elementGuidId>c9a5b115-36d8-449c-9eeb-f79b8347cbb0</elementGuidId>
+   <elementGuidId>da9d6fe6-0e92-4ac7-ae4d-c99c6c4ad095</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,15 +3,15 @@
    <description></description>
    <name>input_waived</name>
    <tag></tag>
-   <elementGuidId>34bc60b4-2f8c-4fc2-9473-c39d25dadce2</elementGuidId>
+   <elementGuidId>8ebca507-0e89-42f7-a249-12a0156bc077</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[6]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='checkbox'])[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[6]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

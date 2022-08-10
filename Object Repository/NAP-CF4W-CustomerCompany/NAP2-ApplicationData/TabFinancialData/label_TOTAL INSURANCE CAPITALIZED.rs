@@ -3,7 +3,7 @@
    <description></description>
    <name>label_TOTAL INSURANCE CAPITALIZED</name>
    <tag></tag>
-   <elementGuidId>fc6ffb98-79a6-443c-a3c5-4b050a4be9d8</elementGuidId>
+   <elementGuidId>2b5af4ad-058b-438d-af61-7d7a3ae900e3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

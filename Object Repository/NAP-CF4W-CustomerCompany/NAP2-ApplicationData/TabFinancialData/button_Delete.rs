@@ -3,14 +3,14 @@
    <description></description>
    <name>button_Delete</name>
    <tag></tag>
-   <elementGuidId>b024c142-e559-49a2-86be-818c0b23561b</elementGuidId>
+   <elementGuidId>21ab32af-9f24-46c1-ac56-fc60100b5cf0</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//*[@id=&quot;FinData_Subsidy&quot;]/div[2]/table/tbody/tr/td[8]/a[2]/i</value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//*[@id=&quot;FinData_Subsidy&quot;]/div[2]/table/tbody/tr/td[8]/a[2]/i</value>
       </entry>
    </selectorCollection>

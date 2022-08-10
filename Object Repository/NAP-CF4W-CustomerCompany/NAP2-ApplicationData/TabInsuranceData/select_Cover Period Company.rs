@@ -3,7 +3,7 @@
    <description></description>
    <name>select_Cover Period Company</name>
    <tag></tag>
-   <elementGuidId>301f3751-6c23-4376-b0e6-bbbf3dcbc0cb</elementGuidId>
+   <elementGuidId>c690154a-9075-4125-8345-d3c071bae038</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

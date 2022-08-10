@@ -3,7 +3,7 @@
    <description></description>
    <name>input_MO Code</name>
    <tag></tag>
-   <elementGuidId>8a31a422-5c9d-45d6-af97-e17560dd0267</elementGuidId>
+   <elementGuidId>b31c7dce-7fd3-4dc4-954b-15f0a0ad2032</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

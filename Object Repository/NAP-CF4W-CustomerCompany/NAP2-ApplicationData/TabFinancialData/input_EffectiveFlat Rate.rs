@@ -3,7 +3,7 @@
    <description></description>
    <name>input_EffectiveFlat Rate</name>
    <tag></tag>
-   <elementGuidId>7711c44f-6418-4adc-bbf5-393aa1bfee9d</elementGuidId>
+   <elementGuidId>dbc66b43-44ba-4c89-b9d1-f5bf65d4226e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

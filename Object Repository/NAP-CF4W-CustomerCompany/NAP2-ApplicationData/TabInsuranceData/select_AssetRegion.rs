@@ -3,7 +3,7 @@
    <description></description>
    <name>select_AssetRegion</name>
    <tag></tag>
-   <elementGuidId>f9c4efdb-8b01-4649-93e4-2c4e3c5dba0b</elementGuidId>
+   <elementGuidId>00329e89-f15d-4406-8244-fb06b54e7d52</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

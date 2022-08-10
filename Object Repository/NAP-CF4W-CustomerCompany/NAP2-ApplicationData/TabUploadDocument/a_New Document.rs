@@ -3,7 +3,7 @@
    <description></description>
    <name>a_New Document</name>
    <tag></tag>
-   <elementGuidId>ace8c254-bf1a-4c8d-9c05-fb27d3bd2b41</elementGuidId>
+   <elementGuidId>202dce0c-8597-4dad-8540-65902e151405</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

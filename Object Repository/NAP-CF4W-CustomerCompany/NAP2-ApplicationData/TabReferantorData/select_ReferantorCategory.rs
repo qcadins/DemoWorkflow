@@ -3,15 +3,15 @@
    <description></description>
    <name>select_ReferantorCategory</name>
    <tag></tag>
-   <elementGuidId>586ce67c-e2da-45e9-b326-f206a3c7420d</elementGuidId>
+   <elementGuidId>0b8b0e2a-72bc-4056-9cc6-4a36013bd08c</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[2]/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

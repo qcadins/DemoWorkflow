@@ -3,15 +3,15 @@
    <description></description>
    <name>input_Fax area</name>
    <tag></tag>
-   <elementGuidId>25131a35-a4f2-49dd-a784-1b720d657929</elementGuidId>
+   <elementGuidId>c06bdf89-b5f7-4d01-b58c-7c0f15d9bb99</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>id(&quot;Address&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[17]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;Address&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

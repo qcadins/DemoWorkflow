@@ -3,15 +3,15 @@
    <description></description>
    <name>input_PromiseDate</name>
    <tag></tag>
-   <elementGuidId>328d6b30-df19-4d44-99a4-eaf1320d8d97</elementGuidId>
+   <elementGuidId>c8e2654f-8e1e-4b7c-8623-841545a398c2</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[7]/input</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//input[@type='date']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[7]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

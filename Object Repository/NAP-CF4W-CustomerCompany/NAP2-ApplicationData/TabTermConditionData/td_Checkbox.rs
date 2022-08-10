@@ -3,15 +3,15 @@
    <description></description>
    <name>td_Checkbox</name>
    <tag></tag>
-   <elementGuidId>708599e4-f661-4077-95cc-594c7df4b1f4</elementGuidId>
+   <elementGuidId>8e911d52-8ae2-4c00-9dfe-955005a3867d</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[7]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[4]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;TC-tab&quot;]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[7]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[1]/td[4]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

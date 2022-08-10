@@ -3,15 +3,15 @@
    <description></description>
    <name>td_OSInterestAmount</name>
    <tag></tag>
-   <elementGuidId>9bcd2c7b-ceaf-4e2b-bdd4-5fe975748dfe</elementGuidId>
+   <elementGuidId>26768706-885d-461b-bccd-dc2f68393dc9</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[3]/table/tbody/tr[1]/td[6]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='FinData_FinData']/form/div[3]/table/tbody/tr/td[6]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[3]/table/tbody/tr[1]/td[6]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

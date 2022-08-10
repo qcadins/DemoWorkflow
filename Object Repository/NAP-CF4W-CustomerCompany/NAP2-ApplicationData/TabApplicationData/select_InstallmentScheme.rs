@@ -3,15 +3,15 @@
    <description></description>
    <name>select_InstallmentScheme</name>
    <tag></tag>
-   <elementGuidId>db8ec160-fe17-4f9f-bba2-daa260e65c4d</elementGuidId>
+   <elementGuidId>86c4f48b-6033-41cf-9fd6-e12bb1a3fce4</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//select[@class = 'form-control adInsInput ng-untouched ng-pristine ng-invalid' and @formcontrolname = 'MrInstSchemeCode' and (text() = '-Select One- Regular Fixed   Even Principle   Irregular   Balloon   Step Up Step Down Normal ' or . = '-Select One- Regular Fixed   Even Principle   Irregular   Balloon   Step Up Step Down Normal ')]</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Installment Scheme'])[1]/following::select[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//select[@class = 'form-control adInsInput ng-untouched ng-pristine ng-invalid' and @formcontrolname = 'MrInstSchemeCode' and (text() = '-Select One- Regular Fixed   Even Principle   Irregular   Balloon   Step Up Step Down Normal ' or . = '-Select One- Regular Fixed   Even Principle   Irregular   Balloon   Step Up Step Down Normal ')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

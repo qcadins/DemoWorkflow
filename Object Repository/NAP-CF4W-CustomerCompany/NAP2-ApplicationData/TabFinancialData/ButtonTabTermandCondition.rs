@@ -3,7 +3,7 @@
    <description></description>
    <name>ButtonTabTermandCondition</name>
    <tag></tag>
-   <elementGuidId>fda27eed-8a37-402b-89e4-33f3ef39394a</elementGuidId>
+   <elementGuidId>bdd955b9-0d56-4bc4-94bc-9fbe630c8b10</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

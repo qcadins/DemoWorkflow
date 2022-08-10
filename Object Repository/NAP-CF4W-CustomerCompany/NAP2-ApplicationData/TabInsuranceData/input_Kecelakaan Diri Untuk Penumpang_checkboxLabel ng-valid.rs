@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Kecelakaan Diri Untuk Penumpang_checkboxLabel ng-valid</name>
    <tag></tag>
-   <elementGuidId>d8192e85-c1db-4cc6-8cdd-733aa335429f</elementGuidId>
+   <elementGuidId>06523d76-459a-4d32-854b-661ba44a9be7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

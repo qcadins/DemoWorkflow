@@ -3,16 +3,16 @@
    <description></description>
    <name>select_-Select One- Amount  Percentage</name>
    <tag></tag>
-   <elementGuidId>d60bc3d9-81b6-4b6f-a06a-9f8918521d51</elementGuidId>
+   <elementGuidId>f3ede84c-2cf9-48c1-a276-fcd3d656b840</elementGuidId>
    <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[5]/select</value>
+      </entry>
       <entry>
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[5]/select
 </value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[5]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_SumInsuredPercentage2</name>
    <tag></tag>
-   <elementGuidId>46d88041-7aac-4ce6-9fc6-e8814746037b</elementGuidId>
+   <elementGuidId>50882116-bd5e-495b-9ab8-192dcd76769e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

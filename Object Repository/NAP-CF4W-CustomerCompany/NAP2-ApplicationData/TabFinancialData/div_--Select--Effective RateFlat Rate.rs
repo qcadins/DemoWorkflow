@@ -3,7 +3,7 @@
    <description></description>
    <name>div_--Select--Effective RateFlat Rate</name>
    <tag></tag>
-   <elementGuidId>e472083e-d715-458b-b084-de65f790cff0</elementGuidId>
+   <elementGuidId>99e6a49b-cba4-4667-8bcc-6a5a54cb4701</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

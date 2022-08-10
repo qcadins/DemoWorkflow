@@ -3,15 +3,15 @@
    <description></description>
    <name>select_PaidBy</name>
    <tag></tag>
-   <elementGuidId>d659af5a-d78f-463a-9165-3681b402b62d</elementGuidId>
+   <elementGuidId>c74bd6d8-47fc-4016-9002-fd63c7d0ee72</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[2]/div/select</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr/td[2]/div/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[1]/tr[1]/td[2]/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

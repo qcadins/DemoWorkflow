@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetAttribute</name>
    <tag></tag>
-   <elementGuidId>7ecf29aa-71eb-4652-8ded-eba1c377b53d</elementGuidId>
+   <elementGuidId>bcf3789f-1e25-4dc0-b009-067bfff540aa</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

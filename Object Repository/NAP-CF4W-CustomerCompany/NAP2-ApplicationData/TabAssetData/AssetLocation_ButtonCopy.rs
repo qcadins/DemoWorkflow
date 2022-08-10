@@ -3,7 +3,7 @@
    <description></description>
    <name>AssetLocation_ButtonCopy</name>
    <tag></tag>
-   <elementGuidId>ee53c471-7d10-4bbf-9511-6b7b0a04bed8</elementGuidId>
+   <elementGuidId>14b1bcd4-91d8-461b-bf88-51970ebf4ecb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div</value>
+         <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,6 +21,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div</value>
+      <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div/span/button</value>
    </webElementProperties>
 </WebElementEntity>
