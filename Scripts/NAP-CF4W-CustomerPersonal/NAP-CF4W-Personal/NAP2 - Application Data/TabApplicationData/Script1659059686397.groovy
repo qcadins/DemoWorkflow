@@ -30,65 +30,140 @@ String servername = findTestData('Login/Login').getValue(1, 8)
 String instancename = findTestData('Login/Login').getValue(2, 8)
 String username = findTestData('Login/Login').getValue(3, 8)
 String password = findTestData('Login/Login').getValue(4, 8)
-String database = findTestData('Login/Login').getValue(5, 8)
+String database = findTestData('Login/Login').getValue(5, 9)
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
 String url = servername+';instanceName='+instancename+';databaseName='+database
-Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
-
+String urlFOU = servername+';instanceName='+instancename+';databaseName='+databaseFOU
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username,password,driverclassname)
 
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('APPLICATION DATA')){
 
-	
+'Ambil text product offering dari confins'
 String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
-println(POName)
-String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlConnection,POName)
+
+'Pengecekan interest type dari db product offering '
+String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlConnectionLOS,POName)
 	
+'Ambil text interest type dari confins'
 String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'),'value')
 	
+'Verif interest type pada confins dengan db'
 WebUI.verifyMatch(textInterest, "(?i)"+InterestType, true)
+
+'Ambil nilai username dari confins'
+String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(" ","").replace("|",";").split(";")
+
+String usernameLogin = userLogin[0]
+
+String spvName
+
+'Pengecekan job title pada excel cmo atau bukan'
+if(findTestData('Login/Login').getValue(5, 2).toLowerCase().contains("Credit Marketing Officer".toLowerCase())){
 	
-if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'),10, FailureHandling.OPTIONAL)){
-	'Click Lookup Officer'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'))
-	'Input MO Code'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MO Code'),
-		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 3))
+	'Ambil text label officer dari confins'
+	String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 	
-	'Input MO Office Name'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MOOfficeName'),
-		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 5))
+	'Verif username login dengan text label officer'
+	WebUI.verifyMatch(textOfficer, usernameLogin,false)
 	
-	'Click Search'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+	'Ambil nama spv dari db'
+	spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU,usernameLogin)
 	
-	'verify input error'
-	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),10,FailureHandling.OPTIONAL)){
-		'Click Select'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),
-			FailureHandling.OPTIONAL)
-	}
-	else{
-		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-	
-		'click cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-	
-		'write to excel failed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusFailed)
+	'Pengecekan jika nama spv dari db = null'
+	if(spvName == null){
 		
-		'Pengecekan jika new consumer finance belum diexpand'
-		if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
-			
-			'Klik new consumer finance'
-			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-		}
+		'Ubah hasil nama spv dari db menjadi -'
+		spvName = "-"
 	}
 	
+	'Ambil text spv dari confins'
+	String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_SPV'))
+	
+	'Verif text spv dari confins sesuai dengan nama spv dari db'
+	WebUI.verifyMatch(textSPV, "(?i)"+spvName,true)
+}
+else{
+	'Ambil text original office dari confins'
+	String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+	
+	'Pengecekan jika button lookup ada'
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'),10, FailureHandling.OPTIONAL)){
+		'Click Lookup Officer'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'))
+		
+		'Click Search'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+		
+		'Cek total data officer pada db'
+		Integer countOfficer = CustomKeywords.'dbconnection.checkOfficer.countOfficerLookup'(sqlConnectionFOU,office)
+		
+		'Ambil nilai total data officer pada lookup confins'
+		String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(" ","").replace(":",";").split(";")
+		
+		'Parsing nilai total data officer confins ke integer(angka)'
+		Integer totalDataOfficer = Integer.parseInt(textTotalDataOfficer[1])
+		
+		'Verif total data officer confins sesuai dengan db'
+		WebUI.verifyEqual(totalDataOfficer, countOfficer)
+		
+		'Input MO Code'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MO Code'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+				GlobalVariable.NumofColm, 3))
+		
+		'Input MO Head Name'
+		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MO Head Name'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+				GlobalVariable.NumofColm, 4))
+		
+		'Input MO Office Name'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MOOfficeName'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+				GlobalVariable.NumofColm, 5))
+		
+		'Click Search'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+			
+		'verify input error'
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),10,FailureHandling.OPTIONAL)){
+			
+			'Ambil nama spv pada lookup confins'
+			spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
+			
+			'Click Select'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),
+				FailureHandling.OPTIONAL)
+			
+			'Ambil nama spv pada confins'
+			String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_LookupSPV'))
+			
+			'Verif nama spv pada lookup yang diselect sama dengan yang muncul pada tab application data confins'
+			WebUI.verifyMatch(textSPV, "(?i)"+spvName,true)
+			
+		}
+		else{
+			'click X'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+		
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
+		
+			'write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 0, GlobalVariable.NumofColm -
+				1, GlobalVariable.StatusFailed)
+			
+			'Pengecekan jika new consumer finance belum diexpand'
+			if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
+				
+				'Klik new consumer finance'
+				WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+			}
+		}
+		
+	}
 }
 
 'Input MO Notes'

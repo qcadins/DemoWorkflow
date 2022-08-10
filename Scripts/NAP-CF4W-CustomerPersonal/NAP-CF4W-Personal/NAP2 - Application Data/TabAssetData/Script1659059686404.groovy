@@ -33,13 +33,53 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+String instancename = findTestData('Login/Login').getValue(2, 8)
+String username = findTestData('Login/Login').getValue(3, 8)
+String password = findTestData('Login/Login').getValue(4, 8)
+String database = findTestData('Login/Login').getValue(5, 9)
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String url = servername+';instanceName='+instancename+';databaseName='+database
+String urlFOU = servername+';instanceName='+instancename+';databaseName='+databaseFOU
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username,password,driverclassname)
+
 WebUI.delay(5)
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase(
     'ASSET & COLLATERAL DATA')) {
+	
+	String suppName
+	
+	'Ambil text product offering dari confins'
+	String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
+	
+	'Ambil text original office dari confins'
+	String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+
+	'Ambil text supplier scheme dari db'
+	String suppschm = CustomKeywords.'dbconnection.checkSupplier.checkSupplierScheme'(sqlConnectionLOS,POName)
+	
     'click button supplier lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
 
+	'click search button'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
+	
+	'Ambil nilai total count supplier data dari db'
+	Integer countSupplierData = CustomKeywords.'dbconnection.checkSupplier.countSupplierData'(sqlConnectionFOU,suppschm,office)
+	
+	'Ambil nilai total data supplier pada lookup confins'
+	String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(" ","").replace(":",";").split(";")
+	
+	'Parsing nilai total data supplier confins ke integer(angka)'
+	Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
+	
+	'Verify total count data lookup supplier pada confins sama dengan db'
+	WebUI.verifyEqual(totalDataSupplier,countSupplierData)
+	
     'input supplier code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -56,8 +96,13 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
     'verify input error'
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'), 
         5, FailureHandling.OPTIONAL)) {
-        'click select'
+	
+		'Ambil text supplier name dari lookup confins'
+		suppName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/span_suppNameLookup'))
+        
+		'click select'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'))
+		
     } else {
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
@@ -74,6 +119,21 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
         }
     }
+	
+	ArrayList<String> adminHead, salesPerson
+	
+	'Ambil array string admin head dari db'
+	adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU,suppName)
+	
+	'Ambil array string sales person dari db'
+	salesPerson = CustomKeywords.'dbconnection.checkSupplier.checkSalesPerson'(sqlConnectionFOU,suppName)
+	
+	'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), salesPerson)
+	
+	'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_AdminHead'), adminHead)
+	
     
     'select sales person'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
@@ -296,30 +356,30 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
     //WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
     //    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     //        GlobalVariable.NumofColm, 26), false)
-    String servername = findTestData('Login/Login').getValue(1, 8)
-
-    String instancename = findTestData('Login/Login').getValue(2, 8)
-
-    String username = findTestData('Login/Login').getValue(3, 8)
-
-    String password = findTestData('Login/Login').getValue(4, 8)
-
-    String database = findTestData('Login/Login').getValue(5, 8)
-
-    String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-    String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-    println(url)
-
-    'connect DB'
-    Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+//    String servername = findTestData('Login/Login').getValue(1, 8)
+//
+//    String instancename = findTestData('Login/Login').getValue(2, 8)
+//
+//    String username = findTestData('Login/Login').getValue(3, 8)
+//
+//    String password = findTestData('Login/Login').getValue(4, 8)
+//
+//    String database = findTestData('Login/Login').getValue(5, 8)
+//
+//    String driverclassname = findTestData('Login/Login').getValue(6, 8)
+//
+//    String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+//
+//    println(url)
+//
+//    'connect DB'
+//    Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
     String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 8)
 
     'count asset attribute'
-    String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlconnection, 
+    String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
         Fullassetcode)
 
     for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
@@ -349,7 +409,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 
         if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, 1, FailureHandling.OPTIONAL)) {
             'input "Attribute"'
-            WebUI.setText(modifyObjectAssetAttributeInputText, 'Attribute', FailureHandling.OPTIONAL)
+            WebUI.setText(modifyObjectAssetAttributeInputText, 'Attr', FailureHandling.OPTIONAL)
         } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeList, 1, FailureHandling.OPTIONAL)) {
             'select option index 1'
             WebUI.selectOptionByIndex(modifyObjectAssetAttributeList, 1, FailureHandling.OPTIONAL)
