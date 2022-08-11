@@ -16,17 +16,17 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-String servername = findTestData('Login/Login').getValue(1, 8)
+String servername = findTestData('Login/Login').getValue(1, 7)
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
+String instancename = findTestData('Login/Login').getValue(2, 7)
 
-String username = findTestData('Login/Login').getValue(3, 8)
+String username = findTestData('Login/Login').getValue(3, 7)
 
-String password = findTestData('Login/Login').getValue(4, 8)
+String password = findTestData('Login/Login').getValue(4, 7)
 
-String database = findTestData('Login/Login').getValue(5, 8)
+String database = findTestData('Login/Login').getValue(5, 7)
 
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String driverclassname = findTestData('Login/Login').getValue(6, 7)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
@@ -45,87 +45,73 @@ if ((resultarray[3]).equalsIgnoreCase('null')) {
     (resultarray[3]) = ''
 }
 
-'verify customer name == db'
-WebUI.verifyMatch(resultarray[0], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'declare array for confins data'
+def confinsdata = []
 
-'verify birth place == db'
-WebUI.verifyMatch(resultarray[1], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Birth Place_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add customer name to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify id type == db'
-WebUI.verifyMatch(resultarray[2], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Select IdType'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add birth place to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Birth Place_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify id expired date == db'
-WebUI.verifyMatch(resultarray[3], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Id Expired Date_form-control ng-untouched ng-pristine ng-valid ng-star-inserted'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add id type to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Select IdType'), 'value'))
 
-'verify marital status == db'
-WebUI.verifyMatch(resultarray[4], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_MaritalStatus'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add id expired date to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Id Expired Date_form-control ng-untouched ng-pristine ng-valid ng-star-inserted'), 'value'))
 
-'verify mobile phone == db'
-WebUI.verifyMatch(resultarray[5], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add marital status to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_MaritalStatus'), 'value'))
 
-'verify customer model == db'
-WebUI.verifyMatch(resultarray[6], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add mobile phone to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify gender == db'
-WebUI.verifyMatch(resultarray[7], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Gender'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add customer model to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'), 'value'))
 
-'verify birth date == db'
-WebUI.verifyMatch(resultarray[8], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Birth Date_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add gender to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Gender'), 'value'))
 
-'verify id no == db'
-WebUI.verifyMatch(resultarray[9], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Id No_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add birth date to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Birth Date_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify tax id no == db'
-WebUI.verifyMatch(resultarray[10], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add id no to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Id No_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify mother maiden name == db'
-WebUI.verifyMatch(resultarray[11], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add tax id to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify email == db'
-WebUI.verifyMatch(resultarray[12], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Email_form-control ng-untouched ng-pristine ng-valid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add mother maiden name to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify address == db'
-WebUI.verifyMatch(resultarray[13], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/textarea_Address'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add email to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Email_form-control ng-untouched ng-pristine ng-valid'), 'value'))
 
-'verify RT == db '
-WebUI.verifyMatch(resultarray[14], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RT'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add address to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/textarea_Address'), 'value'))
 
-'verify RW == db'
-WebUI.verifyMatch(resultarray[15], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RW'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add RT to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RT'), 'value'))
 
-'verify Zipcode == db'
-WebUI.verifyMatch(resultarray[16], WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelZipcode')), 
-    false, FailureHandling.OPTIONAL)
+'add RW to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RW'), 'value'))
 
-'verify kelurahan == db'
-WebUI.verifyMatch(resultarray[17], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add zipcode to array'
+confinsdata.add(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelZipcode')))
 
-'verify kecamatan == db'
-WebUI.verifyMatch(resultarray[18], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kelurahan to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 'value'))
 
-'verify kota == db'
-WebUI.verifyMatch(resultarray[19], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKota'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kecamatan to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 'value'))
 
-'verify ownership == db'
-WebUI.verifyMatch(resultarray[20], WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Ownership'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kota to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKota'), 'value'))
 
+'add ownership to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Ownership'), 'value'))
+
+for(i = 1; i <= resultarray.size(); i++){
+'verify resultarray == confinsdata'
+WebUI.verifyMatch(resultarray[i-1], confinsdata[i-1], false, FailureHandling.OPTIONAL)
+}

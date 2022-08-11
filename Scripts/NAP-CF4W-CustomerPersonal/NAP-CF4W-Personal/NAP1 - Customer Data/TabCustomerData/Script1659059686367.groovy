@@ -15,7 +15,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+
 int flagWarning = 0
+
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathPersonal
@@ -74,7 +76,11 @@ String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 2, 
     GlobalVariable.NumofColm - 1, appNo)
 
-if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')).equalsIgnoreCase('CUSTOMER')){
+if (GlobalVariable.Role == 'Testing') {
+    'verify application step'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
+        'CUSTOMER', false, FailureHandling.OPTIONAL)
+}
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 4) == 'Input Data') {
@@ -208,8 +214,9 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         } else {
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-        	flagWarning++
-		}
+
+            flagWarning++
+        }
     }
     
     'input address'
@@ -281,12 +288,13 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 35), false)
 
-	'get customer name'
-	custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 'value', FailureHandling.OPTIONAL)
-	
-	'add name to Global variable'
-	GlobalVariable.CustomerName = custname
-	
+    'get customer name'
+    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 
+        'value', FailureHandling.OPTIONAL)
+
+    'add name to Global variable'
+    GlobalVariable.CustomerName = custname
+
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -302,13 +310,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
     } else {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-		if(flagWarning>0){
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-		}
-		'customer added +1'
-		GlobalVariable.countNumofCustomer++
 
+        if (flagWarning > 0) {
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+        }
+        
+        'customer added +1'
+        (GlobalVariable.countNumofCustomer)++
     }
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 4) == 'LookUp') {
@@ -422,24 +431,26 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         } else {
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabNewApplication/Button_X'))
-        	flagWarning++
-		}
+
+            flagWarning++
+        }
     }
-		
-		'get customer name'
-		custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 'value', FailureHandling.OPTIONAL)
-		
-		'add name to Global variable'
-		GlobalVariable.CustomerName = custname
     
-		if (GlobalVariable.Role == 'Testing') {
-			'call test case customer data verif'
-			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-			}
-		
+    'get customer name'
+    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 
+        'value', FailureHandling.OPTIONAL)
+
+    'add name to Global variable'
+    GlobalVariable.CustomerName = custname
+
+    if (GlobalVariable.Role == 'Testing') {
+        'call test case customer data verif'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabCustomerDataVerif'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+    }
+    
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
-	
 
     'verify fail'
     if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -457,19 +468,16 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
         }
     } else {
-		
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-        	
-		
-		if(flagWarning>0){
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-		} 
-		'customer added +1'
-        GlobalVariable.countNumofCustomer++
-		
-		
+
+        if (flagWarning > 0) {
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+        }
+        
+        'customer added +1'
+        (GlobalVariable.countNumofCustomer)++
     }
 }
-}
+

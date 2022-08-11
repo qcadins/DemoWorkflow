@@ -24,7 +24,11 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('INSURANCE')){
+if (GlobalVariable.RoleCompany == 'Testing') {
+    'verify application step'
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'INSURANCE', false, FailureHandling.OPTIONAL)
+}
 
 'Verifikasi perhitungan asset price'
 WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
@@ -34,8 +38,8 @@ WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Ap
 WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
         ',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false)
 
-String insuredBy = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 3)
+String insuredBy = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 
+    3)
 
 'Select option dropdownlist insured by'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
@@ -44,20 +48,18 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
     'Memanggil test case Tab Insurance Data Customer'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (insuredBy == 'Customer - Multifinance') {
     'Memanggil Test Case Tab Insurance Data Customer untuk mengisi insurance information bagian customer'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataCustomer'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'Memanggil Test Case Tab Insurance Data Multifinance untuk mengisi insurance information bagian company beserta insurance coverage dan diskonnya'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), [:], 
+        FailureHandling.CONTINUE_ON_FAILURE)
 } else if (insuredBy == 'Multifinance') {
     'Memanggil test case Tab Insurance Data Multifinance'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinance'), [:], 
+        FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 WebUI.delay(3)
@@ -84,4 +86,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-}
+

@@ -42,51 +42,47 @@ resultarray = result.split(', ')
 
 println(resultarray)
 
-'verify customer name == db'
-WebUI.verifyMatch(resultarray[0], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'declare array for confins data'
+def confinsdata = []
 
-'verify tax id no == db'
-WebUI.verifyMatch(resultarray[1], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add customer name to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 'value'))
 
-'verify comapany type == db'
-WebUI.verifyMatch(resultarray[2], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add tax id to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 'value'))
 
-'verify customer model == db'
-WebUI.verifyMatch(resultarray[3], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add company type to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 'value'))
 
-'verify address == db'
-WebUI.verifyMatch(resultarray[4], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add customer model to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 'value'))
 
-'verify RT == db '
-WebUI.verifyMatch(resultarray[5], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add address to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), 'value'))
 
-'verify RW == db'
-WebUI.verifyMatch(resultarray[6], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add RT to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), 'value'))
 
-'verify Zipcode == db'
-WebUI.verifyMatch(resultarray[7], WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode')), 
-    false, FailureHandling.OPTIONAL)
+'add RW to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), 'value'))
 
-'verify kelurahan == db'
-WebUI.verifyMatch(resultarray[8], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add zipcode to array'
+confinsdata.add(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode')))
 
-'verify kecamatan == db'
-WebUI.verifyMatch(resultarray[9], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kelurahan to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 'value'))
 
-'verify kota == db'
-WebUI.verifyMatch(resultarray[10], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kecamatan to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 'value'))
 
-'verify ownership == db'
-WebUI.verifyMatch(resultarray[11], WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-        'value'), false, FailureHandling.OPTIONAL)
+'add kota to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'), 'value'))
+
+'add ownership to array'
+confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 'value'))
+
+for(i = 1; i <= resultarray.size(); i++){
+'verify resultarray == confinsdata'
+WebUI.verifyMatch(resultarray[i-1], confinsdata[i-1], false, FailureHandling.OPTIONAL)
+}
 
