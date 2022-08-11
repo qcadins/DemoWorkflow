@@ -69,9 +69,6 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
     'click referantor checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
 
-    'click referantor checkbox'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
-
     int modifyObjectIndex = 1
 
     'looping referantor'
@@ -191,7 +188,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
             'Pengecekan referantor category (customer, agency, atau mf employee)'
             if (refCategory.equalsIgnoreCase('CUSTOMER')) {
                 'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(
+                ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(
                     sqlConnection, referantorCode)
 
                 'Ambil dan simpan npwp no dari confins'
@@ -224,7 +221,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
                 String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
 
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-                ArrayList<String> arrayMatch = new ArrayList<String>()
+                ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
                 arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
 
@@ -259,7 +256,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
                 }
             } else if (refCategory.equalsIgnoreCase('AGENCY')) {
                 'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(
+                ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(
                     sqlConnection, referantorCode)
 
                 'Ambil dan simpan npwp no dari confins'
@@ -292,7 +289,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
                 String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
 
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-                ArrayList<String> arrayMatch = new ArrayList<String>()
+                ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
                 arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
 
@@ -327,7 +324,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
                 }
             } else {
                 'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
+                ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
                     sqlConnection, referantorCode)
 
                 'Ambil dan simpan npwp no dari confins'
@@ -360,7 +357,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
                 String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
 
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-                ArrayList<String> arrayMatch = new ArrayList<String>()
+                ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
                 arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
 

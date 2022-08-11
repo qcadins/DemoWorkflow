@@ -187,7 +187,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 18).length() > 1) {
+    GlobalVariable.NumofColm, 19).length() > 1) {
     'click lookup Rating Institute'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_RATING INSTITUTE_btn btn-raised btn-primary'))
 

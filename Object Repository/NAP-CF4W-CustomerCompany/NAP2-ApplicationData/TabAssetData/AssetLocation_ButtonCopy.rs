@@ -6,12 +6,12 @@
    <elementGuidId>14b1bcd4-91d8-461b-bf88-51970ebf4ecb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[9]/div[1]/div/div/div/span</value>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[9]/div[1]/div/div/div/span</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div/span/button</value>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[9]/div[1]/div/div/div/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,6 +21,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;locationData&quot;]/div[1]/div/div/div/span/button</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[9]/div[1]/div/div/div/span</value>
    </webElementProperties>
 </WebElementEntity>

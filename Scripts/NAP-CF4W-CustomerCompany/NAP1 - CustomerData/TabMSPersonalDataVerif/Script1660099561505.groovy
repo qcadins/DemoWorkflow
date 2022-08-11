@@ -110,7 +110,7 @@ confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1
 'add ownership to array'
 confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 'value'))
 
-for(i = 1; i <= resultarray.size(); i++){
+for(i = 0; i < resultarray.size(); i++){
 'verify resultarray == confinsdata'
-WebUI.verifyMatch(resultarray[i-1], confinsdata[i-1], false, FailureHandling.OPTIONAL)
+WebUI.verifyMatch(resultarray[i], confinsdata[i], false, FailureHandling.OPTIONAL)
 }

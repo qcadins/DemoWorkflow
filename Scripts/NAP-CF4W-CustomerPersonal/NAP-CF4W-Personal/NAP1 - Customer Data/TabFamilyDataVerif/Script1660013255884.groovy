@@ -126,9 +126,9 @@ confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP
 confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'), 'value'))
 
 
-for(i = 1; i <= resultarray.size(); i++){
+for(i = 0; i < resultarray.size(); i++){
 'verify resultarray == confinsdata'
-WebUI.verifyMatch(resultarray[i-1],  confinsdata[i-1], false, FailureHandling.OPTIONAL)
+WebUI.verifyMatch(resultarray[i],  confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 
 

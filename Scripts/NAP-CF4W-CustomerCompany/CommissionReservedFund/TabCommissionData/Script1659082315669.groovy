@@ -59,12 +59,12 @@ WebUI.delay(5)
 
 
 'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-String instancename = findTestData('Login/Login').getValue(2, 8)
-String username = findTestData('Login/Login').getValue(3, 8)
-String password = findTestData('Login/Login').getValue(4, 8)
-String database = findTestData('Login/Login').getValue(5, 8)
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String servername = findTestData('Login/Login').getValue(1, 7)
+String instancename = findTestData('Login/Login').getValue(2, 7)
+String username = findTestData('Login/Login').getValue(3, 7)
+String password = findTestData('Login/Login').getValue(4, 7)
+String database = findTestData('Login/Login').getValue(5, 7)
+String driverclassname = findTestData('Login/Login').getValue(6, 7)
 String url = servername+';instanceName='+instancename+';databaseName='+database
 Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
 

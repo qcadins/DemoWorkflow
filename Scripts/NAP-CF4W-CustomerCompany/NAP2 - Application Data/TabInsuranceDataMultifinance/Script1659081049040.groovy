@@ -348,8 +348,13 @@ WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format("%.2f", totalPremit
 
 String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),'value').replace(",","")
 
-'Verif total premi to customer after discount sesuai perhitungan'
-WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(), false)
+'Verif capitalize amount sesuai perhitungan'
+if(totalResult[3]!=0){
+	WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(), false)
+}
+else{
+	WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
+}
 
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 
