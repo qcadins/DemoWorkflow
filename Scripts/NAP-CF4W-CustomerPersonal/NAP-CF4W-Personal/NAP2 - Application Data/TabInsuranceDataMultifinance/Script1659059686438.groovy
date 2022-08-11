@@ -384,7 +384,7 @@ WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format("%.2f", totalPremit
 
 String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),'value').replace(",","")
 
-'Verif total premi to customer after discount sesuai perhitungan'
+'Verif capitalize amount sesuai perhitungan'
 if(totalResult[3]!=0){
 	WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(), false)
 }

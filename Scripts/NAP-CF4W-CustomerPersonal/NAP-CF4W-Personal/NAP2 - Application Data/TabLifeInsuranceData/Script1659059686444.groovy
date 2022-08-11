@@ -22,6 +22,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
+import groovy.sql.Sql as Sql
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -31,6 +32,19 @@ String filePath = userDir + GlobalVariable.PathPersonal
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
+
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+String instancename = findTestData('Login/Login').getValue(2, 8)
+String username = findTestData('Login/Login').getValue(3, 8)
+String password = findTestData('Login/Login').getValue(4, 8)
+String database = findTestData('Login/Login').getValue(5, 9)
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+String url = servername+';instanceName='+instancename+';databaseName='+database
+String urlFOU = servername+';instanceName='+instancename+';databaseName='+databaseFOU
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username,password,driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username,password,driverclassname)
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')).equalsIgnoreCase('LIFE INSURANCE')){
 
@@ -49,6 +63,28 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		'Mencentang IsCoverLifeInsurance'
 		WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
 	}
+	
+	'Ambil text original office dari confins'
+	String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+	
+	ArrayList<String> lifeInscoBranchName = new ArrayList<String>()
+	
+	Integer countLifeInscoBranch = 0
+	
+	'Ambil array string (text) life insco branch name dari db'
+	lifeInscoBranchName = CustomKeywords.'dbconnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU,officeName)
+	
+	'Ambil nilai count life insco branch name dari db'
+	countLifeInscoBranch = CustomKeywords.'dbconnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,officeName)
+	
+	'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),lifeInscoBranchName)
+	
+	'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
+	Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
+	
+	'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
+	WebUI.verifyEqual(totalLifeInscoBranch-1, countLifeInscoBranch)
 	
 	'Select DropDownList Life Insco Branch Name'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 4), false, FailureHandling.OPTIONAL)
