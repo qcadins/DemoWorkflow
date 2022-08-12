@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_TotalDataOfficer</name>
+   <tag></tag>
+   <elementGuidId>e936ca05-b7d2-45d4-9898-a59d58ffa9a1</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/div/lib-ucgridfooter/div/div[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/div/lib-ucgridfooter/div/div[3]</value>
+   </webElementProperties>
+</WebElementEntity>
