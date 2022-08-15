@@ -157,7 +157,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 29).length() > 2) {
+    GlobalVariable.NumofColm, 29).length() > 1) {
     'input aset'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASET'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -165,7 +165,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 30).length() > 2) {
+    GlobalVariable.NumofColm, 30).length() > 1) {
     'input aset lancar'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASET LANCAR'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -173,7 +173,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 31).length() > 2) {
+    GlobalVariable.NumofColm, 31).length() > 1) {
     'input kas dan setara kas'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_KAS DAN SETARA KAS'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -181,7 +181,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 32).length() > 2) {
+    GlobalVariable.NumofColm, 32).length() > 1) {
     'input piutang pembiayaan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PIUTANG USAHAPEMBIAYAAN'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -189,7 +189,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 33).length() > 2) {
+    GlobalVariable.NumofColm, 33).length() > 1) {
     'input investasi keuangan '
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_INVESTASIASET KEUANGAN LAINNYA'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -197,7 +197,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 34).length() > 2) {
+    GlobalVariable.NumofColm, 34).length() > 1) {
     'input asset lancar lainya'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET LANCAR LAINNYA'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -205,7 +205,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 35).length() > 2) {
+    GlobalVariable.NumofColm, 35).length() > 1) {
     'input asset tidak lancar'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET TIDAK LANCAR'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -213,7 +213,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 36).length() > 2) {
+    GlobalVariable.NumofColm, 36).length() > 1) {
     'input piutang usaha pembiayaan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PIUTANG USAHAPEMBIAYAAN (ASSET TIDAK LANCAR)'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -221,7 +221,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 37).length() > 2) {
+    GlobalVariable.NumofColm, 37).length() > 1) {
     'input investasi keuangan lainya'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_INVESTASIASSET KEUANGAN LAINNYA (ASSET TIDAK LANCAR)'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -229,7 +229,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 38).length() > 2) {
+    GlobalVariable.NumofColm, 38).length() > 1) {
     'input aset tidak lancar lainya'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET TIDAK LANCAR LAINNYA'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -237,7 +237,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 39).length() > 2) {
+    GlobalVariable.NumofColm, 39).length() > 1) {
     'input liabilitas'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -245,7 +245,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 40).length() > 2) {
+    GlobalVariable.NumofColm, 40).length() > 1) {
     'input liabilitas jangka pendek'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PENDEK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -253,7 +253,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 41).length() > 2) {
+    GlobalVariable.NumofColm, 41).length() > 1) {
     'input pinjaman jangka pendek'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PINJAMAN JANGKA PENDEK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -261,7 +261,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 42).length() > 2) {
+    GlobalVariable.NumofColm, 42).length() > 1) {
     'input utang usaha jangka pendek'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_UTANG USAHA JANGKA PENDEK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -269,7 +269,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 43).length() > 2) {
+    GlobalVariable.NumofColm, 43).length() > 1) {
     'input liabilitas jangka pendek lainya'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PENDEK LAINNYA'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -277,7 +277,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 44).length() > 2) {
+    GlobalVariable.NumofColm, 44).length() > 1) {
     'input liabilitas jangka panjang'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PANJANG'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -285,7 +285,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 45).length() > 2) {
+    GlobalVariable.NumofColm, 45).length() > 1) {
     'input pinjaman jangka panjang'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PINJAMAN JANGKA PANJANG'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -293,7 +293,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 46).length() > 2) {
+    GlobalVariable.NumofColm, 46).length() > 1) {
     'input utang usaha jangka panjang'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_UTANG USAHA JANGKA PANJANG'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -301,7 +301,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 47).length() > 2) {
+    GlobalVariable.NumofColm, 47).length() > 1) {
     'input liabilitas jangka panjang lainnya'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PANJANG LAINNYA'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -309,7 +309,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 48).length() > 2) {
+    GlobalVariable.NumofColm, 48).length() > 1) {
     'input ekuitas'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_EKUITAS'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -317,7 +317,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 49).length() > 2) {
+    GlobalVariable.NumofColm, 49).length() > 1) {
     'input pendapatan usaha operasional'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PENDAPATAN USAHA  OPERASIONAL'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -325,7 +325,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 50).length() > 2) {
+    GlobalVariable.NumofColm, 50).length() > 1) {
     'input beban pokok pendapatan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_BEBAN POKOK PENDAPATAN  BEBAN OPERASIONAL'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -333,7 +333,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 51).length() > 2) {
+    GlobalVariable.NumofColm, 51).length() > 1) {
     'input laba rugi bruto'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI BRUTO'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -341,7 +341,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 52).length() > 2) {
+    GlobalVariable.NumofColm, 52).length() > 1) {
     'input pendapatan lain lain'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PENDAPATAN LAIN-LAIN  NON OPERASIONAL'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -349,7 +349,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 53).length() > 2) {
+    GlobalVariable.NumofColm, 53).length() > 1) {
     'input beban lain lain'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_BEBAN LAIN-LAIN  NON OPERASIONAL'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -357,7 +357,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 54).length() > 2) {
+    GlobalVariable.NumofColm, 54).length() > 1) {
     'input laba rugi sebelum pajak'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI SEBELUM PAJAK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
@@ -365,7 +365,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 55).length() > 2) {
+    GlobalVariable.NumofColm, 55).length() > 1) {
     'input laba rugi tahun berjalan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI TAHUN BERJALAN'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(

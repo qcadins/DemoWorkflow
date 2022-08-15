@@ -764,12 +764,12 @@ variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4')
 variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
-GlobalVariable.TotalCommissionAmt = 0
-GlobalVariable.TotalCommissionAmtAftTax = 0
-GlobalVariable.TotalTax = 0
-GlobalVariable.TotalVat = 0
-GlobalVariable.TotalDisburseAmt = 0
-GlobalVariable.TotalExpenseAmt = 0
+GlobalVariable.TotalCommissionAmt = 0.00
+GlobalVariable.TotalCommissionAmtAftTax = 0.00
+GlobalVariable.TotalTax = 0.00
+GlobalVariable.TotalVat = 0.00
+GlobalVariable.TotalDisburseAmt = 0.00
+GlobalVariable.TotalExpenseAmt = 0.00
 
 'Looping data Supplier'
 for (int i = 1; i<=variableSupp.size(); i++){

@@ -571,6 +571,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
 } else {
+    if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'), 
+        2, FailureHandling.OPTIONAL)) {
+        'click self usage check box'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
+    }
+    
     'input user name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_User Name_form-control ng-untouched ng-pristine ng-valid'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 29))
@@ -686,12 +692,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         'input Kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KecamatanAssetOwner'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-                49))
+                48))
 
         'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KelurahanAssetOwner'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-                48))
+                49))
 
         'input Kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KotaAssetOwner'), 
@@ -756,11 +762,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
     'input Kecamatan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 59))
+        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 58))
 
     'input kelurahan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 58))
+        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 59))
 
     'input Kota'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'), 

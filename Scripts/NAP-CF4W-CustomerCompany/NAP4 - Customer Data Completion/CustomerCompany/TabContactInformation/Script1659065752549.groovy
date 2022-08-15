@@ -72,7 +72,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Customer
 'select job position'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/select_Select Job Position'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company - Customer').getValue(
-        GlobalVariable.NumofColm, 11), false)
+        GlobalVariable.NumofColm, 11).toUpperCase(), false)
 
 'input birth place'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Birth Place_'), 
@@ -130,12 +130,12 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 'input kecamatan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kecamatan_kecamatan'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company - Customer').getValue(
-        GlobalVariable.NumofColm, 23))
+        GlobalVariable.NumofColm, 22))
 
 'input kelurahan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kelurahan_Kelurahan'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company - Customer').getValue(
-        GlobalVariable.NumofColm, 22))
+        GlobalVariable.NumofColm, 23))
 
 'input kota'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kota_kota'), 

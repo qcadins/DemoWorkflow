@@ -48,20 +48,20 @@ GlobalVariable.DataFilePath = filePath
 		
 		
     'click button add'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/button_Add'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
     'select legal doc type'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
         LegalDocTypeArray[i - 1], false)
 
     'input doc no'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/input_Document No'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Document No'), 
         DocumentNoArray[i - 1])
 
 	
 	
     'input date issued'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/input_Issued Date'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
         DateIssuedArray[i - 1])
 
 	
@@ -70,7 +70,7 @@ GlobalVariable.DataFilePath = filePath
             GlobalVariable.NumofColm, 5).length() >0){
 		
     'input expired date'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/input_Expired Date'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
     		ExpiredDateArray[i - 1])
 	}
 	
@@ -78,7 +78,7 @@ GlobalVariable.DataFilePath = filePath
     		GlobalVariable.NumofColm, 6).length() > 0){
     	
     	'input notary name'
-    	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/input_Notary Name'), 
+    	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
     			NotaryNameArray[i - 1])
     }
 			
@@ -86,7 +86,7 @@ GlobalVariable.DataFilePath = filePath
             GlobalVariable.NumofColm, 7).length()>0){
 		
     'input notary location'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/input_Notary Location'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
         NotaryLocationArray[i - 1])
 	}
 		
@@ -94,19 +94,24 @@ GlobalVariable.DataFilePath = filePath
             GlobalVariable.NumofColm, 8).length() >0){
 		
     'input Notes'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/textarea_Notes'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
         NotesArray[i - 1])
 
 	}
     'click button save'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/button_Save'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Save'))
+	
+	if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'), 5, FailureHandling.OPTIONAL)){
+		'click button cancel'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
+	}
 }
 	}
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/button_Save  Continue'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Save  Continue'))
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company/th_Expired Date'),10,
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/th_Expired Date'),10,
 	FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))

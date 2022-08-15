@@ -699,6 +699,32 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     }
                 }
                 
+                if (datafile.getValue(GlobalVariable.NumofFamily, 34).length() > 1) {
+                    'click button lookup department AML'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_DEPARTMENT AML_btn btn-raised btn-primary'))
+
+                    'input department AML Code'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Code_MasterCodeId'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 34))
+
+                    'click button search'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
+
+                    'verify input error'
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
+                        10, FailureHandling.OPTIONAL)) {
+                        'click select'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+                    } else {
+                        'click X'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+
+                        flagWarning++
+
+                        continue
+                    }
+                }
+                
                 if (GlobalVariable.RoleCompany == 'Testing') {
                     'call test case personal data verif'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataVerif'), 
