@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkLifeInscoBranch {
-	
+
 	@Keyword
 	public checkDDLLifeInscoBranch(Sql instance, String officeName){
 		ArrayList<String> lifeInscoBranch = new ArrayList<String>()
@@ -30,7 +30,7 @@ public class checkLifeInscoBranch {
 		})
 		return lifeInscoBranch
 	}
-	
+
 	@Keyword
 	public countDDLLifeInscoBranch(Sql instance, String officeName){
 		Integer countData
