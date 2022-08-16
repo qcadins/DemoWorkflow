@@ -350,34 +350,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     }
 }
 
-//'select region'
-//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
-//    findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-//        GlobalVariable.NumofColm, 26), false)
-String servername = findTestData('Login/Login').getValue(1, 7)
-
-String instancename = findTestData('Login/Login').getValue(2, 7)
-
-String username = findTestData('Login/Login').getValue(3, 7)
-
-String password = findTestData('Login/Login').getValue(4, 7)
-
-String database = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-println(url)
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
 String Fullassetcode = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
     8)
 
 'count asset attribute'
-String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlconnection, 
+String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
     Fullassetcode)
 
 for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {

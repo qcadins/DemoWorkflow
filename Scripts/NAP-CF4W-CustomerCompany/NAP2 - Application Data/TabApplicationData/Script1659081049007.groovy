@@ -71,14 +71,14 @@ WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true)
 String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(
     ' ', '').replace('|', ';').split(';')
 
-String usernameLogin = userLogin[0]
+String usernameLogin = userLogin[0].replace('_','')
 
 String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
 if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Marketing Officer'.toLowerCase())) {
     'Ambil text label officer dari confins'
-    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer'))
+    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer')).split(' ').join()
 
     'Verif username login dengan text label officer'
     WebUI.verifyMatch(textOfficer, usernameLogin, false)
