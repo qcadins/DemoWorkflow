@@ -27,7 +27,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion
 'input kode profesi'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Profession Code_professionCodeId'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 17))
+		GlobalVariable.NumofFamily, 17))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -53,14 +53,14 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-
 	2, FailureHandling.OPTIONAL)) {
 	'check is well known company'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 19) == 'Yes') {
+		GlobalVariable.NumofFamily, 19) == 'Yes') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'),
 	2)) {
 	'check is well known company'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 19) == 'No') {
+		GlobalVariable.NumofFamily, 19) == 'No') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'))
 	}
 }
@@ -68,7 +68,7 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-
 'input nama perusahaan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Company Name'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 20))
+		GlobalVariable.NumofFamily, 20))
 
 'click button lookup industry type'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Industry Type_btn btn-raised btn-primary'))
@@ -76,7 +76,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion
 'input industry code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Industry Type Code_industryTypeCodeId'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 21))
+		GlobalVariable.NumofFamily, 21))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -101,32 +101,32 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 'input professional no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Professional No'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 23), FailureHandling.CONTINUE_ON_FAILURE)
+		GlobalVariable.NumofFamily, 23), FailureHandling.CONTINUE_ON_FAILURE)
 
 'input start working date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Start Working Date'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 24))
+		GlobalVariable.NumofFamily, 24))
 
 'input job title'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Job Title Name'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 25))
+		GlobalVariable.NumofFamily, 25))
 
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Address_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 44))
+		GlobalVariable.NumofFamily, 44))
 
 'input RT'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RT  Job Addres'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 45))
+		GlobalVariable.NumofFamily, 45))
 
 'input RW'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RW_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 46))
+		GlobalVariable.NumofFamily, 46))
 
 'click search zipcode'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Zipcode_Job Address'))
@@ -134,22 +134,22 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion
 'input zipcode'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Zip Code_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 47))
+		GlobalVariable.NumofFamily, 47))
 
 'input Kecamatan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kecamatan_Job address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 49))
+		GlobalVariable.NumofFamily, 49))
 
 'input kelurahan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kelurahan_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 48))
+		GlobalVariable.NumofFamily, 48))
 
 'input kota'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kota_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 50))
+		GlobalVariable.NumofFamily, 50))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -174,123 +174,123 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Notes_JobAddress'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 51), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 51), FailureHandling.OPTIONAL)
 
 'input phone1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Area_JobAddress'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 52), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 52), FailureHandling.OPTIONAL)
 
 'input phone1 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Number_JobAddress'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 53), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 53), FailureHandling.OPTIONAL)
 
 'input phone1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Ext_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 54), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 54), FailureHandling.OPTIONAL)
 
 'input phone2 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Area_JobAddress'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 55), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 55), FailureHandling.OPTIONAL)
 
 'input phone2 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Number_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 56), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 56), FailureHandling.OPTIONAL)
 
 'input phone2 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Ext_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 57), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 57), FailureHandling.OPTIONAL)
 
 'input phone3 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3__Area_JobAddress'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 58), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 58), FailureHandling.OPTIONAL)
 
 'input phone3 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Number_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 59), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 59), FailureHandling.OPTIONAL)
 
 'input phone3 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Ext_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 60), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 60), FailureHandling.OPTIONAL)
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Area_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 61), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 61), FailureHandling.OPTIONAL)
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Number_Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 62), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofFamily, 62), FailureHandling.OPTIONAL)
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 63).length()>0){
+		GlobalVariable.NumofFamily, 63).length()>0){
 'select ownership'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/select_OwnerShip Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 63), false)
+		GlobalVariable.NumofFamily, 63), false)
 }
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 65).length()>0){
+		GlobalVariable.NumofFamily, 65).length()>0){
 'input Previous Company Name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Previous Company Name_Previous Job Data'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 65))
+		GlobalVariable.NumofFamily, 65))
 }
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 66).length()>0){
+		GlobalVariable.NumofFamily, 66).length()>0){
 'input previous employment date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Previous Employment Date'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 66))
+		GlobalVariable.NumofFamily, 66))
 }
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 68).length()>0){
+		GlobalVariable.NumofFamily, 68).length()>0){
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Address_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 68))
+		GlobalVariable.NumofFamily, 68))
 
 'input RT'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RT__Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 69))
+		GlobalVariable.NumofFamily, 69))
 
 'input RW'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RW_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 70))
+		GlobalVariable.NumofFamily, 70))
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 71).length()>0){
+		GlobalVariable.NumofFamily, 71).length()>0){
 'click search zipcode'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Zipcode_Previous Job Address'))
 
 'input zipcode'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_ZipCode _Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 71))
+		GlobalVariable.NumofFamily, 71))
 
 'input Kecamatan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kecamatan_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 73))
+		GlobalVariable.NumofFamily, 73))
 
 'input kelurahan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kelurahan_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 72))
+		GlobalVariable.NumofFamily, 72))
 
 'input kota'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kota_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 74))
+		GlobalVariable.NumofFamily, 74))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -309,151 +309,151 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Note_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 75))
+		GlobalVariable.NumofFamily, 75))
 
 'input phone1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Area_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 76))
+		GlobalVariable.NumofFamily, 76))
 
 'input phone1 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Number_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 77))
+		GlobalVariable.NumofFamily, 77))
 
 'input phone1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Ext__Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 78))
+		GlobalVariable.NumofFamily, 78))
 
 'input phone2 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Area_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 79))
+		GlobalVariable.NumofFamily, 79))
 
 'input phone2 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Number_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 80))
+		GlobalVariable.NumofFamily, 80))
 
 'input phone2 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Ext_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 81))
+		GlobalVariable.NumofFamily, 81))
 
 'input phone3 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Area_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 82))
+		GlobalVariable.NumofFamily, 82))
 
 'input phone3 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Number_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 83))
+		GlobalVariable.NumofFamily, 83))
 
 'input phone3 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Ext_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 84))
+		GlobalVariable.NumofFamily, 84))
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Area_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 85))
+		GlobalVariable.NumofFamily, 85))
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Number_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 86))
+		GlobalVariable.NumofFamily, 86))
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 87).length()>0){
+		GlobalVariable.NumofFamily, 87).length()>0){
 'select ownership'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/select_Select OwnerShip_Previous Job Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 87), false)
+		GlobalVariable.NumofFamily, 87), false)
 }
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 89).length()>0){
+		GlobalVariable.NumofFamily, 89).length()>0){
 'input other business name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Other Business Name'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 89))
+		GlobalVariable.NumofFamily, 89))
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 90).length()>0){
+		GlobalVariable.NumofFamily, 90).length()>0){
 'input other business type'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Other Business Type'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 90))
+		GlobalVariable.NumofFamily, 90))
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 91).length()>0){
+		GlobalVariable.NumofFamily, 91).length()>0){
 'input other business industry type'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Other Business Industry Type'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 91))
+		GlobalVariable.NumofFamily, 91))
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 92).length()>0){
+		GlobalVariable.NumofFamily, 92).length()>0){
 'input other job position'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Other Job Position'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 92))
+		GlobalVariable.NumofFamily, 92))
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 93).length()>0){	
+		GlobalVariable.NumofFamily, 93).length()>0){	
 'input establishment date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Establishment Date'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 93))
+		GlobalVariable.NumofFamily, 93))
 }
 
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 95).length()>0){
+		GlobalVariable.NumofFamily, 95).length()>0){
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Address_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 95))
+		GlobalVariable.NumofFamily, 95))
 
 'input RT'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RT_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 96))
+		GlobalVariable.NumofFamily, 96))
 
 'input RW'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_RW_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 97))
+		GlobalVariable.NumofFamily, 97))
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 98).length()>0){
+		GlobalVariable.NumofFamily, 98).length()>0){
 'click search zipcode'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Zipcode_Other Business Address'))
 
 'input zipcode'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Zip Code_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 98))
+		GlobalVariable.NumofFamily, 98))
 
 'input Kecamatan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kecamatan_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 100))
+		GlobalVariable.NumofFamily, 100))
 
 'input kelurahan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kelurahan_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 99))
+		GlobalVariable.NumofFamily, 99))
 
 'input kota'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Kota_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 101))
+		GlobalVariable.NumofFamily, 101))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -472,68 +472,68 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/textarea_Notes_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 102))
+		GlobalVariable.NumofFamily, 102))
 
 'input phone1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Area_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 103))
+		GlobalVariable.NumofFamily, 103))
 
 'input phone1 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Number_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 104))
+		GlobalVariable.NumofFamily, 104))
 
 'input phone1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 1_Ext_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 105))
+		GlobalVariable.NumofFamily, 105))
 
 'input phone2 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Area_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 106))
+		GlobalVariable.NumofFamily, 106))
 
 'input phone2 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Number_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 107))
+		GlobalVariable.NumofFamily, 107))
 
 'input phone2 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 2_Ext_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 108))
+		GlobalVariable.NumofFamily, 108))
 
 'input phone3 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Area_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 109))
+		GlobalVariable.NumofFamily, 109))
 
 'input phone3 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Number_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 110))
+		GlobalVariable.NumofFamily, 110))
 
 'input phone3 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Phone 3_Ext_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 111))
+		GlobalVariable.NumofFamily, 111))
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Area_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 112))
+		GlobalVariable.NumofFamily, 112))
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/input_Fax_Number_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 113))
+		GlobalVariable.NumofFamily, 113))
 if(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 114).length()>0){
+		GlobalVariable.NumofFamily, 114).length()>0){
 'select ownership'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataProfessional - Personal/select_Select Ownership_Other Business Address'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofGuarantor, 114), false)
+		GlobalVariable.NumofFamily, 114), false)
 }
 }
 		

@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Copy</name>
    <tag></tag>
-   <elementGuidId>88464490-4dbe-4757-938b-13e06bc2185a</elementGuidId>
+   <elementGuidId>e84f9eef-da10-44ba-bd7d-3c3cbb705faf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
