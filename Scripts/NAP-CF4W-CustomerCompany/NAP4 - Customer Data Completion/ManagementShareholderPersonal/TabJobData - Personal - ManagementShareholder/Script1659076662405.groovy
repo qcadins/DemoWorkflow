@@ -18,25 +18,17 @@ import internal.GlobalVariable as GlobalVariable
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataEmployeeManagementShareholder'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'PROFESSIONAL') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataProfessionalManagementShareholder'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'NON PROFESSIONAL') {
-    
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataNonProfessionalManagementShareholder'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataNonProfessionalManagementShareholder'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataSMEManagementShareholder'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
-
-
-
-
-
-
-
 

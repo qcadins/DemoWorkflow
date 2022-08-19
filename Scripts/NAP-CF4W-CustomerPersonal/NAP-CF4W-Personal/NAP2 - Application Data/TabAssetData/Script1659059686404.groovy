@@ -132,9 +132,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     }
 }
 
-ArrayList<String> adminHead
+ArrayList<WebElement> adminHead
 
-ArrayList<String> salesPerson
+ArrayList<WebElement> salesPerson
 
 'Ambil array string admin head dari db'
 adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)

@@ -44,15 +44,15 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
-		
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'),
-			[:], FailureHandling.STOP_ON_FAILURE)
-		
-if(GlobalVariable.DupcheckVerif == 'Yes'){
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-}
 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+            [:], FailureHandling.STOP_ON_FAILURE)
+
+        if (GlobalVariable.DupcheckVerif == 'Yes') {
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'), 
+                [:], FailureHandling.STOP_ON_FAILURE)
+        }
+        
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 

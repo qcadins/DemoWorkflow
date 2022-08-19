@@ -64,8 +64,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 
     'input Appno'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), datafiledupcheck.getValue(GlobalVariable.NumofColm, 
-            2))
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), datafiledupcheck.getValue(
+            GlobalVariable.NumofColm, 2))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Search'))
@@ -81,36 +81,33 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
     def StoreCDCCustomerName = ''
 
-
-
-    
-
     'verify equal number of customer'
     WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
 
-    for (GlobalVariable.index = 1; GlobalVariable.index <= count; GlobalVariable.index++) {
-		
-		
-		
+    for (GlobalVariable.index = 1; GlobalVariable.index <= count; (GlobalVariable.index)++) {
         'modify object subjectname'
-        modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 'xpath', 'equals', 
-            ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', true)
+        modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', 
+            true)
 
         'modify object subjecttype'
-        modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 'xpath', 'equals', 
-            ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[3]', true)
+        modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[3]', 
+            true)
 
         'modify object Applicant No'
-        modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 'xpath', 'equals', 
-            ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[4]', true)
+        modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[4]', 
+            true)
 
         'modify object Customer No'
-        modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 'xpath', 'equals', 
-            ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[5]', true)
+        modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[5]', 
+            true)
 
         'modify object edit icon'
-        modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 'xpath', 
-            'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[7]/span/span/span/span/span/span/a', 
+        modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[7]/span/span/span/span/span/span/a', 
             true)
 
         'get text subject name'
@@ -179,8 +176,8 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
                             5, FailureHandling.OPTIONAL)) {
                             if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 4).equalsIgnoreCase('New')) {
-                                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 5, 
-                                    FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
+                                    5, FailureHandling.OPTIONAL)) {
                                     'click button new customer'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
@@ -277,15 +274,12 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                 }
             }
         }
-		
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-		
-		
-		
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-		
-		
-		
+        
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], 
+            FailureHandling.CONTINUE_ON_FAILURE)
+
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
     //	if (StoreCDCCustomerName != null) {
@@ -340,5 +334,4 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-
 

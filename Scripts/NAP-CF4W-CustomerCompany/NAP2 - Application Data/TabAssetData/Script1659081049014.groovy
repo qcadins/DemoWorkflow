@@ -95,21 +95,19 @@ Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
 WebUI.verifyEqual(totalDataSupplier, countSupplierData)
 
 'input supplier code'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 3))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), findTestData(
+        'NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 3))
 
 'input supplier name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-        GlobalVariable.NumofColm, 4))
+    findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 4))
 
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), 
-    5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), 5, 
+    FailureHandling.OPTIONAL)) {
     'Ambil text supplier name dari lookup confins'
     suppName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/span_suppNameLookup'))
 
@@ -132,9 +130,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     }
 }
 
-ArrayList<String> adminHead
+ArrayList<WebElement> adminHead
 
-ArrayList<String> salesPerson
+ArrayList<WebElement> salesPerson
 
 'Ambil array string admin head dari db'
 adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)

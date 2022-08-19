@@ -71,7 +71,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('Y
 
 WebDriver driver = DriverFactory.getWebDriver()
 
-ArrayList<String> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
@@ -207,7 +207,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 
 WebDriver driverr = DriverFactory.getWebDriver()
 
-ArrayList<String> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+ArrayList<WebElement> variableData = driverr.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
 int countData = variableData.size()
 
