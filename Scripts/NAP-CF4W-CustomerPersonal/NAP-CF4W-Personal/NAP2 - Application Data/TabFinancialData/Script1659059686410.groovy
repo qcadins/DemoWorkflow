@@ -408,8 +408,6 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
         if (WebUI.getText(modifyNewSubsidyAllocation, FailureHandling.OPTIONAL).equalsIgnoreCase('SUBSIDY DP')) {
             GlobalVariable.SubsidyDPValue = WebUI.getText(modifyNewSubsidyAmount, FailureHandling.CONTINUE_ON_FAILURE).replace(
                 ',', '').replace('.00', '')
-
-            println(GlobalVariable.SubsidyDPValue)
         }
     }
 }

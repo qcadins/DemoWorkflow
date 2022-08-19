@@ -416,7 +416,6 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
             GlobalVariable.SubsidyDPValue = WebUI.getText(modifyNewSubsidyAmount, FailureHandling.CONTINUE_ON_FAILURE).replace(
                 ',', '').replace('.00', '')
 
-            println(GlobalVariable.SubsidyDPValue)
         }
     }
 }

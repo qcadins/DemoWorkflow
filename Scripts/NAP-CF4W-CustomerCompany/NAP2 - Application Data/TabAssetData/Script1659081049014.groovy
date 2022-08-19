@@ -844,10 +844,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
         'value').replace(',', ''))
 
-println(GlobalVariable.AssetPrice)
-
-println(GlobalVariable.TotalAccessoriesPrice)
-
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
 

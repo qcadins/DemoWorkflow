@@ -40,8 +40,6 @@ String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompa
 
 resultarray = result.split(', ')
 
-println(resultarray)
-
 'declare array for confins data'
 def confinsdata = []
 
