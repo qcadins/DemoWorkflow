@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_FileName</name>
+   <tag></tag>
+   <elementGuidId>99923086-b8e3-448c-bd74-00969e890e4c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/app-rule-files/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/app-rule-files/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span</value>
+   </webElementProperties>
+</WebElementEntity>

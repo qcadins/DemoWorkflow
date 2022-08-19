@@ -760,12 +760,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commissi
 
 
 'Inisialisasi global variabel untuk penghitungan summary'
-GlobalVariable.TotalCommissionAmt = 0
-GlobalVariable.TotalCommissionAmtAftTax = 0
-GlobalVariable.TotalTax = 0
-GlobalVariable.TotalVat = 0
-GlobalVariable.TotalDisburseAmt = 0
-GlobalVariable.TotalExpenseAmt = 0
+GlobalVariable.TotalCommissionAmt = 0.00
+GlobalVariable.TotalCommissionAmtAftTax = 0.00
+GlobalVariable.TotalTax = 0.00
+GlobalVariable.TotalVat = 0.00
+GlobalVariable.TotalDisburseAmt = 0.00
+GlobalVariable.TotalExpenseAmt = 0.00
 
 
 'Call test case untuk verif summary dan remaining info'

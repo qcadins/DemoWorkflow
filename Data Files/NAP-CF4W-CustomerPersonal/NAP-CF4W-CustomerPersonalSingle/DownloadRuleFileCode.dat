@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataFileEntity>
    <description></description>
-   <name>DuplicateCheckingRule</name>
+   <name>DownloadRuleFileCode</name>
    <tag></tag>
-   <containsHeaders>false</containsHeaders>
+   <containsHeaders>true</containsHeaders>
    <csvSeperator></csvSeperator>
-   <dataFileGUID>b0ba7856-be13-402d-b9e3-5959c7b2928c</dataFileGUID>
-   <dataSourceUrl>Rule/CustDuplicateCheck.xls</dataSourceUrl>
+   <dataFileGUID>0c69f56a-1ae4-4b44-bbce-77df08651245</dataFileGUID>
+   <dataSourceUrl>1. LoginR3.xlsm</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
    <secureUserAccount>false</secureUserAccount>
-   <sheetName>Rl.CustDuplChk</sheetName>
+   <sheetName>DownloadRule</sheetName>
    <usingGlobalDBSetting>false</usingGlobalDBSetting>
 </DataFileEntity>
