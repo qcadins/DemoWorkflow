@@ -340,7 +340,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                     }
                 }
-            } else if (datafile.getValue(GlobalVariable.NumofFamily, 4).equalsIgnoreCase('Public')) {
+            } else {
                 'click radio public'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
 
@@ -553,7 +553,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     (GlobalVariable.countNumofCustomer)++
                 }
             }
-        } else if (datafile.getValue(GlobalVariable.NumofFamily, 3) == 'LookUp') {
+        } else {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
 

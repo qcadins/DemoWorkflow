@@ -273,8 +273,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
         Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
                 18)))
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-    17) == 'Amount') {
+} else {
     'input security deposit amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 19))
@@ -313,8 +312,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
     'verify security deposit value equal'
     WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-    15) == 'Amount') {
+} else {
     float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
 
     'verify security deposit value equal'
@@ -548,8 +546,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
                         GlobalVariable.NumofAccessories, 9)), FailureHandling.OPTIONAL)
-        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-            8) == 'Amount') {
+        } else {
             'input security deposit amount'
             WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
                     GlobalVariable.NumofAccessories, 10), FailureHandling.OPTIONAL)
@@ -598,8 +595,7 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
             'verify securitydeposit value equal'
             WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
-        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-            8) == 'Amount') {
+        } else {
             float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
             'verify securitydeposit value equal'
@@ -639,8 +635,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 'Yes') {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-    32) == 'No') {
+} else {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 33) == 
     'Personal') {
         'click radio button personal'
