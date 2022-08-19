@@ -340,7 +340,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                     }
                 }
-            } else if (datafile.getValue(GlobalVariable.NumofFamily, 4).equalsIgnoreCase('Public')) {
+            } else {
                 'click radio public'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
 
@@ -553,7 +553,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     (GlobalVariable.countNumofCustomer)++
                 }
             }
-        } else if (datafile.getValue(GlobalVariable.NumofFamily, 3) == 'LookUp') {
+        } else {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
 
@@ -696,6 +696,32 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     if (datafile.getValue(GlobalVariable.NumofFamily, 32).equalsIgnoreCase('No')) {
                         'click check box is Signer'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'))
+                    }
+                }
+                
+                if (datafile.getValue(GlobalVariable.NumofFamily, 34).length() > 1) {
+                    'click button lookup department AML'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_DEPARTMENT AML_btn btn-raised btn-primary'))
+
+                    'input department AML Code'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Code_MasterCodeId'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 34))
+
+                    'click button search'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
+
+                    'verify input error'
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
+                        10, FailureHandling.OPTIONAL)) {
+                        'click select'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+                    } else {
+                        'click X'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+
+                        flagWarning++
+
+                        continue
                     }
                 }
                 

@@ -132,9 +132,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     }
 }
 
-ArrayList<String> adminHead
+ArrayList<WebElement> adminHead
 
-ArrayList<String> salesPerson
+ArrayList<WebElement> salesPerson
 
 'Ambil array string admin head dari db'
 adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
@@ -367,28 +367,6 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     }
 }
 
-//'select region'
-//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_--Select One--  REGION1  REGION2  REGION3'), 
-//    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-//        GlobalVariable.NumofColm, 26), false)
-//    String servername = findTestData('Login/Login').getValue(1, 8)
-//
-//    String instancename = findTestData('Login/Login').getValue(2, 8)
-//
-//    String username = findTestData('Login/Login').getValue(3, 8)
-//
-//    String password = findTestData('Login/Login').getValue(4, 8)
-//
-//    String database = findTestData('Login/Login').getValue(5, 8)
-//
-//    String driverclassname = findTestData('Login/Login').getValue(6, 8)
-//
-//    String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-//
-//    println(url)
-//
-//    'connect DB'
-//    Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 8)
 

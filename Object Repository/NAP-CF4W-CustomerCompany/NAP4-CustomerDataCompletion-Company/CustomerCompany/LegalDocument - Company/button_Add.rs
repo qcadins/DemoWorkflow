@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;legal-tab&quot;)/app-legal-doc-tab[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;button-right margin-15&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+         <value>//*[@id=&quot;legal-tab&quot;]/app-legal-doc-tab/div/div[1]/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;legal-tab&quot;)/app-legal-doc-tab[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;button-right margin-15&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+      <value>//*[@id=&quot;legal-tab&quot;]/app-legal-doc-tab/div/div[1]/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

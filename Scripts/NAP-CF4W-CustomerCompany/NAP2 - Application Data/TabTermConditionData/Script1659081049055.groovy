@@ -39,13 +39,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Inisialisasi variabel'
-ArrayList<String> variable = driver.findElements(By.cssSelector('#TC-tab > app-tc-data > div > div > div > div > div > form > div > app-term-conditions > div > table > tbody tr'))
+ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > app-tc-data > div > div > div > div > div > form > div > app-term-conditions > div > table > tbody tr'))
 
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 int count = variable.size()
-
-println(count)
 
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {

@@ -71,14 +71,15 @@ WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true)
 String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(
     ' ', '').replace('|', ';').split(';')
 
-String usernameLogin = userLogin[0]
+String usernameLogin = (userLogin[0]).replace('_', '')
 
 String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
 if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Marketing Officer'.toLowerCase())) {
     'Ambil text label officer dari confins'
-    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer'))
+    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer')).split(
+        ' ').join()
 
     'Verif username login dengan text label officer'
     WebUI.verifyMatch(textOfficer, usernameLogin, false)
@@ -125,18 +126,18 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 
         'Input MO Code'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Code'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-                GlobalVariable.NumofColm, 3))
+            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 
+                3))
 
         'Input MO Head Name'
         WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Head Name'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-                GlobalVariable.NumofColm, 4))
+            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 
+                4))
 
         'Input MO Office Name'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MOOfficeName'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-                GlobalVariable.NumofColm, 5))
+            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 
+                5))
 
         'Click Search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
@@ -148,8 +149,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
 
             'Click Select'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-                FailureHandling.OPTIONAL)
+            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/a_Select'), FailureHandling.OPTIONAL)
 
             'Ambil nama spv pada confins'
             String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_LookupSPV'))

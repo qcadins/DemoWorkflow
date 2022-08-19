@@ -197,8 +197,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         
         (GlobalVariable.countNumofCustomer)++
     }
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    4) == 'LookUp') {
+} else {
     'click button lookpup Customer'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
 
@@ -285,6 +284,4 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         (GlobalVariable.countNumofCustomer)++
     }
 }
-
-println(GlobalVariable.countNumofCustomer)
 

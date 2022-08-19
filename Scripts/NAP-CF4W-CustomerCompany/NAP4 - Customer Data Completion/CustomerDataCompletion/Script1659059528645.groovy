@@ -19,9 +19,6 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-
-
-
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/a_New Consumer Finance'))
 
 'click menu Customer Data Completion'
@@ -150,12 +147,12 @@ for (int i = 1; i <= count; i++) {
 
                     if (GlobalVariable.Role == 'Data Entry') {
                         'call test case customer personal (ManagementShareholder)'
-                       WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
+                            [:], FailureHandling.CONTINUE_ON_FAILURE)
                     } else {
                         'call test case customer personal (ManagementShareholder)'
-                       WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-    [:], FailureHandling.STOP_ON_FAILURE)
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
+                            [:], FailureHandling.STOP_ON_FAILURE)
                     }
                     
                     'Verify iscomplete == yes'
@@ -167,11 +164,11 @@ for (int i = 1; i <= count; i++) {
                     if (GlobalVariable.Role == 'Data Entry') {
                         'call test case customer company (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+                            [:], FailureHandling.CONTINUE_ON_FAILURE)
                     } else {
                         'call test case customer company (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-    [:], FailureHandling.STOP_ON_FAILURE)
+                            [:], FailureHandling.STOP_ON_FAILURE)
                     }
                     
                     'Verify iscomplete == yes'
@@ -188,11 +185,11 @@ for (int i = 1; i <= count; i++) {
                         if (GlobalVariable.Role == 'Data Entry') {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
                         } else {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-    [:], FailureHandling.STOP_ON_FAILURE)
+                                [:], FailureHandling.STOP_ON_FAILURE)
                         }
                     } else if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'COMPANY')) {
                         'click button action'
@@ -201,11 +198,11 @@ for (int i = 1; i <= count; i++) {
                         if (GlobalVariable.Role == 'Data Entry') {
                             'call test case customer company (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
                         } else {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-    [:], FailureHandling.STOP_ON_FAILURE)
+                                [:], FailureHandling.STOP_ON_FAILURE)
                         }
                     }
                 }
@@ -296,7 +293,6 @@ String userDir = System.getProperty('user.dir')
 String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
-
 
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'), 
     5, FailureHandling.OPTIONAL)) {
