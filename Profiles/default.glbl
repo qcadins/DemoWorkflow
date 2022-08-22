@@ -309,4 +309,9 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
       <name>CountofReferantorCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DupcheckResult</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
