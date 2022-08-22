@@ -80,8 +80,11 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
     'Ambil text label officer dari confins'
     String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
-    'Verif username login dengan text label officer'
-    WebUI.verifyMatch(textOfficer, usernameLogin, false)
+	'Cek nama officer pada db dari username login confins'
+	String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
+    
+	'Verif username login dengan text label officer'
+    WebUI.verifyMatch(textOfficer, officerName, false)
 
     'Ambil nama spv dari db'
     spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
@@ -144,9 +147,15 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
             10, FailureHandling.OPTIONAL)) {
+		
             'Ambil nama spv pada lookup confins'
             spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
-
+			
+			'Pengecekan jika mo officer yang dipilih dari lookup spvnya kosong'
+			if(spvName ==""){
+				spvName = "-"
+			}
+			
             'Click Select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
                 FailureHandling.OPTIONAL)

@@ -40,4 +40,13 @@ public class checkOfficer {
 		})
 		return spvname
 	}
+	
+	@Keyword
+	public checkOfficerName(Sql instance, String username){
+		String officerName
+		instance.eachRow(("select emp_name from ref_user a join ref_emp b on a.REF_EMP_ID = b.REF_EMP_ID where username = '"+username+"' and a.IS_ACTIVE=1 and b.IS_ACTIVE=1"), { def row ->
+			officerName = (row[0])
+		})
+		return officerName
+	}
 }

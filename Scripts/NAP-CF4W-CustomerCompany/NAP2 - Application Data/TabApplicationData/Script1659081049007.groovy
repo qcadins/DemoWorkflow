@@ -71,18 +71,20 @@ WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true)
 String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(
     ' ', '').replace('|', ';').split(';')
 
-String usernameLogin = (userLogin[0]).replace('_', '')
+String usernameLogin = (userLogin[0])
 
 String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
 if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Marketing Officer'.toLowerCase())) {
     'Ambil text label officer dari confins'
-    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer')).split(
-        ' ').join()
+    String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
+	'Cek nama officer pada db dari username login confins'
+	String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
+	
     'Verif username login dengan text label officer'
-    WebUI.verifyMatch(textOfficer, usernameLogin, false)
+    WebUI.verifyMatch(textOfficer, officerName, false)
 
     'Ambil nama spv dari db'
     spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
@@ -145,9 +147,15 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/a_Select'), 
             10, FailureHandling.OPTIONAL)) {
-            'Ambil nama spv pada lookup confins'
+            
+			'Ambil nama spv pada lookup confins'
             spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
 
+			'Pengecekan jika mo officer yang dipilih dari lookup spvnya kosong'
+			if(spvName ==""){
+				spvName = "-"
+			}
+			
             'Click Select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/a_Select'), FailureHandling.OPTIONAL)
 
