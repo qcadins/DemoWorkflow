@@ -44,29 +44,35 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W
 'Klik rule file'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_RuleFile'))
 
-'Input file code'
-WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_FileCode'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DownloadRuleFileCode').getValue(1,1))
+Integer countFileCode = Integer.parseInt(GlobalVariable.CountFileCode)
 
-'Klik button search'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_searchRule'))
+for(int i=1;i<=countFileCode;i++){
+	
+	'Input file code'
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_FileCode'), 
+	    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DownloadRuleFileCode').getValue(1,i))
+	
+	'Klik button search'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_searchRule'))
+	
+	'Ambil filename dari web rule'
+	String filenameWithExtension = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_FileName'))
+	
+	'Menentukan nama baru file hasil download'
+	String newFileName = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DownloadRuleFileCode').getValue(2,i)
+	
+	'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
+	CustomKeywords.'dbconnection.DownloadRule.deleteFile'(newFileName)
+	
+	'Klik download'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Download'))
+	
+	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
+	WebUI.delay(5)
+	
+	'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
+	CustomKeywords.'dbconnection.DownloadRule.renameFile'(filenameWithExtension,newFileName)
 
-'Ambil filename dari web rule'
-String filenameWithExtension = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_FileName'))
-
-'Menentukan nama baru file hasil download'
-String newFileName = "CustDuplicateCheck.xls"
-
-'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
-CustomKeywords.'dbconnection.DownloadRule.deleteFile'(newFileName)
-
-'Klik download'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Download'))
-
-'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
-WebUI.delay(5)
-
-'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
-CustomKeywords.'dbconnection.DownloadRule.renameFile'(filenameWithExtension,newFileName)
 
 
+}
