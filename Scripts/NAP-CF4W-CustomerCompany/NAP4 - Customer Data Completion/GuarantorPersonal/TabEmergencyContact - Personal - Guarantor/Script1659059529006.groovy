@@ -39,9 +39,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
             GlobalVariable.NumofGuarantor, 7))
 
     if (((findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 7) != 'E-KTP') && (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 7) != 'NPWP')) && (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 7) != 'AKTA')) {
+        GlobalVariable.NumofGuarantor, 6) != 'E-KTP') && (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(
+        GlobalVariable.NumofGuarantor, 6) != 'NPWP')) && (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(
+        GlobalVariable.NumofGuarantor, 6) != 'AKTA')) {
         'input id expired date'
         WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ID Expired Date'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact - Company - GuarantorPersonal').getValue(

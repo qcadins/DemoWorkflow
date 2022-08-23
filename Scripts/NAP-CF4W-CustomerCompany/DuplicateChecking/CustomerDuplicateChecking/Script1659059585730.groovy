@@ -172,6 +172,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 }
                             }
                         }
+						
                         
                         if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
                             5, FailureHandling.OPTIONAL)) {
