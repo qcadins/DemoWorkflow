@@ -175,16 +175,6 @@ if (GuarantorArray.size() > 0) {
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
                                     false, FailureHandling.OPTIONAL)
 
-                                'get guarantor name'
-                                String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-                                if (StoreCDCGuarantorPersonalName == '') {
-                                    'store guarantor name'
-                                    StoreCDCGuarantorPersonalName = name
-                                } else {
-                                    'store guarantor name'
-                                    StoreCDCGuarantorPersonalName = ((StoreCDCGuarantorPersonalName + ';') + name)
-                                }
                                 
                                 break
                             }
@@ -220,16 +210,6 @@ if (GuarantorArray.size() > 0) {
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
                                     false, FailureHandling.OPTIONAL)
 
-                                'get guarantor name'
-                                String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-                                if (StoreCDCGuarantorCompanyName == '') {
-                                    'store guarantor name'
-                                    StoreCDCGuarantorCompanyName = name
-                                } else {
-                                    'store guarantor name'
-                                    StoreCDCGuarantorCompanyName = ((StoreCDCGuarantorCompanyName + ';') + name)
-                                }
                                 
                                 break
                             }

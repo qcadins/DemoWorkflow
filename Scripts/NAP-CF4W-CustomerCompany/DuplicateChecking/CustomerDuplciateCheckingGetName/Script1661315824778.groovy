@@ -17,19 +17,23 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
+datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
+
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.PathPersonal
-
-String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
-
-String CDCFamilyPath = userDir + GlobalVariable.DataFileFamilyPersonal
-
-String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
-
-String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
+String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
+
+String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerCompany
+
+String CDCManagementShareholderPersonalPath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
+
+String CDCManagementShareholderCompanyPath = userDir + GlobalVariable.DataFileManagementShareholderCompany
+
+String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
+
+String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
 String servername = findTestData('Login/Login').getValue(1, 8)
 
@@ -45,19 +49,19 @@ String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
-
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 2)
+String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 2)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
 
 def StoreCDCCustomerName = ''
 
-	def StoreCDCFamilyName = ''
+	def StoreCDCManagementShareholderPersonalName = ''
+
+	def StoreCDCManagementShareholderCompanyName = ''
 
 	def StoreCDCGuarantorPersonalName = ''
 
@@ -78,15 +82,29 @@ def StoreCDCCustomerName = ''
 
 			'store customer name'
 			StoreCDCCustomerName = name
-		} else if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Family')) {
-			'get Family name'
+		} else if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Share Holder')) {
+			'get ManagementShareholder name'
 			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			if (StoreCDCFamilyName == '') {
-				'store customer name'
-				StoreCDCFamilyName = name
-			} else {
-				StoreCDCFamilyName = ((StoreCDCFamilyName + ';') + name)
+			String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection,
+				DupcheckAppNo, name)
+
+			if (ManagementShareholderType.equalsIgnoreCase('COMPANY')) {
+				if (StoreCDCManagementShareholderCompanyName == '') {
+					'store ManagementShareholder name'
+					StoreCDCManagementShareholderCompanyName = name
+				} else {
+					'store ManagementShareholder name'
+					StoreCDCManagementShareholderCompanyName = ((StoreCDCManagementShareholderCompanyName + ';') + name)
+				}
+			} else if (ManagementShareholderType.equalsIgnoreCase('PERSONAL')) {
+				if (StoreCDCManagementShareholderPersonalName == '') {
+					'store ManagementShareholder name'
+					StoreCDCManagementShareholderPersonalName = name
+				} else {
+					'store ManagementShareholder name'
+					StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + ';') + name)
+				}
 			}
 		} else {
 			'get guarantor name'
@@ -120,9 +138,9 @@ def StoreCDCCustomerName = ''
 			2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 	}
 	
-	if (StoreCDCFamilyName != null) {
+	if (StoreCDCManagementShareholderPersonalName != null) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			4, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
+			4, GlobalVariable.NumofColm - 1, (StoreCDCManagementShareholderPersonalName + ';') + StoreCDCManagementShareholderCompanyName)
 	}
 	
 	if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
@@ -130,7 +148,9 @@ def StoreCDCCustomerName = ''
 			6, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 	}
 	
-	StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
+	StoreCDCManagementShareholderPersonalNameArray = StoreCDCManagementShareholderPersonalName.split(';')
+
+	StoreCDCManagementShareholderCompanyNameArray = StoreCDCManagementShareholderCompanyName.split(';')
 
 	StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
 
@@ -139,9 +159,14 @@ def StoreCDCCustomerName = ''
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm -
 		1, StoreCDCCustomerName)
 
-	for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail', 2, FamilyName,
-			StoreCDCFamilyNameArray[(FamilyName - 1)])
+	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPersonalPath, '1.CustomerDetail',
+			2, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
+	}
+	
+	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderCompanyPath, '1.CustomerDetail',
+			2, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
 	}
 	
 	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {

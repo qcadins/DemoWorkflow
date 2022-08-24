@@ -308,132 +308,14 @@ if (Integer.parseInt(DupCheckCount) == 1) {
         }
     }
     
+	'call testcase dupcheck Management Shareholder'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], 
-        FailureHandling.CONTINUE_ON_FAILURE)
+	'call testcase dupcheck Guarantor'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    def StoreCDCCustomerName = ''
-
-    def StoreCDCManagementShareholderPersonalName = ''
-
-    def StoreCDCManagementShareholderCompanyName = ''
-
-    def StoreCDCGuarantorPersonalName = ''
-
-    def StoreCDCGuarantorCompanyName = ''
-
-    for (index = 1; index <= GlobalVariable.countDupcheckRow; index++) {
-        'modify object subjectname'
-        modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
-            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[2]', true)
-
-        'modify object subjecttype'
-        modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
-            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[3]', true)
-
-        if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Customer')) {
-            'get customer name'
-            String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-            'store customer name'
-            StoreCDCCustomerName = name
-        } else if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Share Holder')) {
-            'get ManagementShareholder name'
-            String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-            String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection, 
-                DupcheckAppNo, name)
-
-            if (ManagementShareholderType.equalsIgnoreCase('COMPANY')) {
-                if (StoreCDCManagementShareholderCompanyName == '') {
-                    'store ManagementShareholder name'
-                    StoreCDCManagementShareholderCompanyName = name
-                } else {
-                    'store ManagementShareholder name'
-                    StoreCDCManagementShareholderCompanyName = ((StoreCDCManagementShareholderCompanyName + ';') + name)
-                }
-            } else if (ManagementShareholderType.equalsIgnoreCase('PERSONAL')) {
-                if (StoreCDCManagementShareholderPersonalName == '') {
-                    'store ManagementShareholder name'
-                    StoreCDCManagementShareholderPersonalName = name
-                } else {
-                    'store ManagementShareholder name'
-                    StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + ';') + name)
-                }
-            }
-        } else {
-            'get guarantor name'
-            String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-            String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection, DupcheckAppNo, 
-                name)
-
-            if (GuarantorType.equalsIgnoreCase('COMPANY')) {
-                if (StoreCDCGuarantorCompanyName == '') {
-                    'store guarantor name'
-                    StoreCDCGuarantorCompanyName = name
-                } else {
-                    'store guarantor name'
-                    StoreCDCGuarantorCompanyName = ((StoreCDCGuarantorCompanyName + ';') + name)
-                }
-            } else {
-                if (StoreCDCGuarantorPersonalName == '') {
-                    'store guarantor name'
-                    StoreCDCGuarantorPersonalName = name
-                } else {
-                    'store guarantor name'
-                    StoreCDCGuarantorPersonalName = ((StoreCDCGuarantorPersonalName + ';') + name)
-                }
-            }
-        }
-    }
-    
-    if (StoreCDCCustomerName != null) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
-            2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
-    }
-    
-    if (StoreCDCManagementShareholderPersonalName != null) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
-            4, GlobalVariable.NumofColm - 1, (StoreCDCManagementShareholderPersonalName + ';') + StoreCDCManagementShareholderCompanyName)
-    }
-    
-    if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
-            6, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
-    }
-    
-    StoreCDCManagementShareholderPersonalNameArray = StoreCDCManagementShareholderPersonalName.split(';')
-
-    StoreCDCManagementShareholderCompanyNameArray = StoreCDCManagementShareholderCompanyName.split(';')
-
-    StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
-
-    StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
-
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm - 
-        1, StoreCDCCustomerName)
-
-    for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
-            2, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
-    }
-    
-    for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
-            2, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
-    }
-    
-    for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 2, 
-            GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
-    }
-    
-    for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 2, 
-            GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
-    }
+	'call test case get and write customer name'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplciateCheckingGetName'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 'click button submit'

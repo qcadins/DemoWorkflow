@@ -455,28 +455,7 @@ if (ManagementShareholderArray.size() > 0) {
                         }
                     }
                     
-                    'get ManagementShareholder name'
-                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-                    if (counttd == 5) {
-                        if (StoreCDCManagementShareholderCompanyName == '') {
-                            'store ManagementShareholder name'
-                            StoreCDCManagementShareholderCompanyName = name
-                        } else {
-                            'store ManagementShareholder name'
-                            StoreCDCManagementShareholderCompanyName = ((StoreCDCManagementShareholderCompanyName + ';') + 
-                            name)
-                        }
-                    } else if (counttd == 10) {
-                        if (StoreCDCManagementShareholderPersonalName == '') {
-                            'store ManagementShareholder name'
-                            StoreCDCManagementShareholderPersonalName = name
-                        } else {
-                            'store ManagementShareholder name'
-                            StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + ';') + 
-                            name)
-                        }
-                    }
                 }
             }
         }

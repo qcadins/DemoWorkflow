@@ -948,4 +948,19 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
+'click button submit'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Submit'))
 
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back'),
+	10, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back'))
+
+	'write to excel if failed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+}
+
+'write to excel if success'
+CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking',
+	0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
