@@ -28,44 +28,44 @@ WebUI.maximizeWindow()
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1,3))
 
 'input username'
-WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Username'), 
+WebUI.setText(findTestObject('DownloadRule/input_Username'), 
     findTestData('Login/Login').getValue(2,3))
 
 'input Password'
-WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_password'), 
+WebUI.setText(findTestObject('DownloadRule/input_password'), 
     findTestData('Login/Login').getValue(3,3))
 
 'click button login'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_login'))
+WebUI.click(findTestObject('DownloadRule/button_login'))
 
 'Pilih role (action)'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_actionRolePick'))
+WebUI.click(findTestObject('DownloadRule/button_actionRolePick'))
 
 'Klik rule file'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_RuleFile'))
+WebUI.click(findTestObject('DownloadRule/a_RuleFile'))
 
 Integer countFileCode = Integer.parseInt(GlobalVariable.CountFileCode)
 
 for(int i=1;i<=countFileCode;i++){
 	
 	'Input file code'
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_FileCode'), 
-	    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DownloadRuleFileCode').getValue(1,i))
+	WebUI.setText(findTestObject('DownloadRule/input_FileCode'), 
+	    findTestData('DownloadRule/DownloadRuleFileCode').getValue(1,i))
 	
 	'Klik button search'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_searchRule'))
+	WebUI.click(findTestObject('DownloadRule/button_searchRule'))
 	
 	'Ambil filename dari web rule'
-	String filenameWithExtension = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_FileName'))
+	String filenameWithExtension = WebUI.getText(findTestObject('DownloadRule/span_FileName'))
 	
 	'Menentukan nama baru file hasil download'
-	String newFileName = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DownloadRuleFileCode').getValue(2,i)
+	String newFileName = findTestData('DownloadRule/DownloadRuleFileCode').getValue(2,i)
 	
 	'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
 	CustomKeywords.'dbconnection.DownloadRule.deleteFile'(newFileName)
 	
 	'Klik download'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Download'))
+	WebUI.click(findTestObject('DownloadRule/a_Download'))
 	
 	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
 	WebUI.delay(5)

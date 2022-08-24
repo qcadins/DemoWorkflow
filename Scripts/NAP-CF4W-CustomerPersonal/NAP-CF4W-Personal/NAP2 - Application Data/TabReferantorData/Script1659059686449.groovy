@@ -55,7 +55,7 @@ String username = findTestData('Login/Login').getValue(3, 8)
 
 String password = findTestData('Login/Login').getValue(4, 8)
 
-String database = findTestData('Login/Login').getValue(5, 8)
+String database = findTestData('Login/Login').getValue(5, 7)
 
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
@@ -68,6 +68,9 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
 
     int modifyObjectIndex = 1
+	
+	'Ambil text original office dari confins'
+	String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
     'looping referantor'
     for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
@@ -114,10 +117,32 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
             'select referantor category'
             WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     GlobalVariable.NumofReferantor, 3), false, FailureHandling.OPTIONAL)
-
+			
+			'Ambil dan simpan nilai referantor category dari confins'
+			String refCategory = WebUI.getAttribute(modifyObjectSelectReferantorCategory, 'value')
+			
             'click button referantor lookup'
             WebUI.click(modifyObjectButtonReferantor, FailureHandling.OPTIONAL)
-
+			
+			if(refCategory!=""){
+				'click button search'
+				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
+				
+				'Cek total data referantor pada db'
+				Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
+				
+				'Ambil nilai total data referantor pada lookup confins'
+				String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+					' ', '').replace(':', ';').split(';')
+		
+				'Parsing nilai total data referantor confins ke integer(angka)'
+				Integer totalDataReferantor = Integer.parseInt(textTotalDataReferantor[1])
+		
+				'Verif total data referantor confins sesuai dengan db'
+				WebUI.verifyEqual(totalDataReferantor, countReferantor)
+			}
+			
+			
             'input referantor name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
                 findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
@@ -149,6 +174,29 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 continue
             }
             
+			'Pengecekan terdapat opsi ddl bank account selain select one'
+			if(WebUI.getNumberOfTotalOption(modifySelectBankAccount)>1){
+				
+				'Arraylist untuk menampung ddl bank account dari db'
+				ArrayList<String> BankAccount = new ArrayList<String>()
+				
+				'Ambil array teks bank account dari db'
+				BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
+				
+				'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
+				WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)
+				
+				'Pengecekan referantor category yang dipilih customer atau agency'
+				if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
+					
+					'Ambil teks default bank account dari db'
+					String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
+					
+					'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
+					WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)
+				}
+			}
+			
             'select bank account'
             WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     GlobalVariable.NumofReferantor, 6), FailureHandling.OPTIONAL)
@@ -171,9 +219,6 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 continue
             }
             
-            'Ambil dan simpan nilai referantor category dari confins'
-            String refCategory = WebUI.getAttribute(modifyObjectSelectReferantorCategory, 'value')
-
             String newButtonViewDetail = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[7]/a/i'
 
             'modify button view detail'
@@ -221,23 +266,23 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
                 ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
 
                 'Jika nilai di confins ada yang tidak sesuai dengan db'
                 if (arrayMatch.contains(false)) {
@@ -289,23 +334,23 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
                 ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
 
                 'Jika nilai di confins ada yang tidak sesuai dengan db'
                 if (arrayMatch.contains(false)) {
@@ -357,23 +402,23 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
                 'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
                 ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, referantorDetail[0], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textNPWPName, referantorDetail[1], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textAddress, referantorDetail[2], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRT, referantorDetail[3], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textRW, referantorDetail[4], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKelurahan, referantorDetail[5], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textKecamatan, referantorDetail[6], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textCity, referantorDetail[7], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
 
-                arrayMatch.add(WebUI.verifyMatch(textZipcode, referantorDetail[8], false, FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
 
                 'Jika nilai di confins ada yang tidak sesuai dengan db'
                 if (arrayMatch.contains(false)) {
