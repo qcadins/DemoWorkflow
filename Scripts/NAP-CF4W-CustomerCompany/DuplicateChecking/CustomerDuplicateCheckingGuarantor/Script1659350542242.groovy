@@ -49,41 +49,80 @@ def GuarantorActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateCheck
 
 String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2)
 
-'modify object subjectname'
-modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
-    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', 
-    true)
 
-'modify object subjecttype'
-modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
-    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[3]', 
-    true)
 
-'modify object Applicant No'
-modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 
-    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[4]', 
-    true)
-
-'modify object Customer No'
-modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 
-    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[5]', 
-    true)
-
-'modify object edit icon'
-modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
-    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[7]/span/span/span/span/span/span/a', 
-    true)
-
-'get text subject name'
-String subjectName = WebUI.getText(modifySubjectName)
-
-'get text subject type'
-String subjectType = WebUI.getText(modifySubjectType)
-
-WebDriver driver = DriverFactory.getWebDriver()
+def modifySubjectName, modifySubjectType, modifyApplicantNo, modifyCustomerNo, modifyButtonEdit
+String subjectName, subjectType
 
 if (GuarantorArray.size() > 0) {
     for (g = 1; g <= GuarantorArray.size(); g++) {
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
+                    5, FailureHandling.OPTIONAL)){
+				
+				int i = 0
+				
+        for (GlobalVariable.index = 1; GlobalVariable.index <= GlobalVariable.countDupcheckRow; (GlobalVariable.index)++) {
+            'modify object subjecttype'
+            modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[3]', true)
+
+            'modify object edit icon'
+            modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[7]/span/span/span/span/span/span/a', true)
+
+            if ((WebUI.getText(modifySubjectType) == 'GUARANTOR') && WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.index = GlobalVariable.index
+
+                break
+            } else {
+                i++
+
+                if (i == GlobalVariable.countDupcheckRow) {
+                    GlobalVariable.index = 1
+
+                    i = 0
+
+                    break
+                }
+            }
+        }
+        
+        'modify object subjectname'
+        modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', 
+            true)
+
+        'modify object subjecttype'
+        modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[3]', 
+            true)
+
+        'modify object Applicant No'
+        modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[4]', 
+            true)
+
+        'modify object Customer No'
+        modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[5]', 
+            true)
+
+        'modify object edit icon'
+        modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
+            'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[7]/span/span/span/span/span/span/a', 
+            true)
+
+        'get text subject name'
+        subjectName = WebUI.getText(modifySubjectName)
+
+        'get text subject type'
+        subjectType = WebUI.getText(modifySubjectType)
+
+}
+        WebDriver driver = DriverFactory.getWebDriver()
+
         if (subjectName.equalsIgnoreCase(GuarantorArray[(g - 1)])) {
             if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
                 'click button edit'
@@ -199,6 +238,11 @@ if (GuarantorArray.size() > 0) {
 
                             'verify match ApplicantNo'
                             WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
+                            'click button cancel'
+                            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                            continue
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
                             5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -268,6 +312,11 @@ if (GuarantorArray.size() > 0) {
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
                                     false, FailureHandling.OPTIONAL)
                             }
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
+                            'click button cancel'
+                            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                            continue
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             if (counttd == 10) {
@@ -329,6 +378,11 @@ if (GuarantorArray.size() > 0) {
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
                                     false, FailureHandling.OPTIONAL)
                             }
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
+                            'click button cancel'
+                            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                            continue
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             if (counttd == 10) {
@@ -390,30 +444,9 @@ if (GuarantorArray.size() > 0) {
                     }
                 }
             }
-        } else {
-            'get guarantor name'
-            String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-            String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection, DupcheckAppNo, 
-                name)
-
-            if (GuarantorType.equalsIgnoreCase('COMPANY')) {
-                if (StoreCDCGuarantorCompanyName == '') {
-                    'store guarantor name'
-                    StoreCDCGuarantorCompanyName = name
-                } else {
-                    'store guarantor name'
-                    StoreCDCGuarantorCompanyName = ((StoreCDCGuarantorCompanyName + ';') + name)
-                }
-            } else {
-                if (StoreCDCGuarantorPersonalName == '') {
-                    'store guarantor name'
-                    StoreCDCGuarantorPersonalName = name
-                } else {
-                    'store guarantor name'
-                    StoreCDCGuarantorPersonalName = ((StoreCDCGuarantorPersonalName + ';') + name)
-                }
-            }
+        } 
+        if (g == GuarantorArray.size()) {
+            break
         }
     }
 }

@@ -28,26 +28,26 @@ String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathCompany
 
-//String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
-//
-//String CDCManagementShareholderPath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
-//
-//String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
-//
-//String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
+String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
+
+String CDCManagementShareholderPath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
+
+String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
+
+String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
 GlobalVariable.DataFilePath = filePath
 
-String servername = findTestData('Login/Login').getValue(1, 9)
+String servername = findTestData('Login/Login').getValue(1, 8)
 
-String instancename = findTestData('Login/Login').getValue(2, 9)
+String instancename = findTestData('Login/Login').getValue(2, 8)
 
-String username = findTestData('Login/Login').getValue(3, 9)
+String username = findTestData('Login/Login').getValue(3, 8)
 
-String password = findTestData('Login/Login').getValue(4, 9)
+String password = findTestData('Login/Login').getValue(4, 8)
 
-String database = findTestData('Login/Login').getValue(5, 9)
+String database = findTestData('Login/Login').getValue(5, 8)
 
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
@@ -77,14 +77,14 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
     ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
 
-    int count = variable.size()
+    GlobalVariable.countDupcheckRow = variable.size()
 
     def StoreCDCCustomerName = ''
 
     'verify equal number of customer'
-    WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
+    WebUI.verifyEqual(GlobalVariable.countNumofCustomer, GlobalVariable.countDupcheckRow, FailureHandling.OPTIONAL)
 
-    for (GlobalVariable.index = 1; GlobalVariable.index <= count; (GlobalVariable.index)++) {
+    for (GlobalVariable.index = 1; GlobalVariable.index <= GlobalVariable.countDupcheckRow; (GlobalVariable.index)++) {
         'modify object subjectname'
         modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
             'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]', 
@@ -172,7 +172,6 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 }
                             }
                         }
-						
                         
                         if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -184,6 +183,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+                                } else if (GlobalVariable.RoleCompany == 'Testing') {
+                                    'click button cancel'
+                                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                                    continue
                                 } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                                     5, FailureHandling.OPTIONAL)) {
                                     String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'), 
@@ -216,6 +220,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                     'verify match CustomerNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
+                                } else if (GlobalVariable.RoleCompany == 'Testing') {
+                                    'click button cancel'
+                                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                                    continue
                                 } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                                     5, FailureHandling.OPTIONAL)) {
                                     'click button new customer'
@@ -245,6 +254,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo), newApplicantNoValue, false, FailureHandling.OPTIONAL)
+                                } else if (GlobalVariable.RoleCompany == 'Testing') {
+                                    'click button cancel'
+                                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+
+                                    continue
                                 } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                                     5, FailureHandling.OPTIONAL)) {
                                     'click button new customer'
@@ -283,43 +297,43 @@ if (Integer.parseInt(DupCheckCount) == 1) {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
-    //	if (StoreCDCCustomerName != null) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-    //			2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
-    //	}
-    //	
-    //	if (StoreCDCManagementShareholderPersonalName != null) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-    //			4, GlobalVariable.NumofColm - 1, StoreCDCManagementShareholderPersonalName)
-    //	}
-    //	
-    //	if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-    //			6, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
-    //	}
-    //	StoreCDCManagementShareholderNameArray = StoreCDCManagementShareholderName.split(';')
-    //
-    //	StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
-    //
-    //	StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
-    //
-    //	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm -
-    //		1, StoreCDCCustomerName)
-    //
-    //	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderNameArray.size(); ManagementShareholderName++) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPath, '1.CustomerDetail', 2, ManagementShareholderName,
-    //			StoreCDCManagementShareholderNameArray[(ManagementShareholderName - 1)])
-    //	}
-    //	
-    //	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 2,
-    //			GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
-    //	}
-    //	
-    //	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-    //		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 2,
-    //			GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
-    //	}
+//    	if (StoreCDCCustomerName != null) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+//    			2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
+//    	}
+//    	
+//    	if (StoreCDCManagementShareholderPersonalName != null) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+//    			4, GlobalVariable.NumofColm - 1, StoreCDCManagementShareholderPersonalName)
+//    	}
+//    	
+//    	if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+//    			6, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
+//    	}
+//    	StoreCDCManagementShareholderNameArray = StoreCDCManagementShareholderName.split(';')
+//    
+//    	StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
+//    
+//    	StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
+//    
+//    	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm -
+//    		1, StoreCDCCustomerName)
+//    
+//    	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderNameArray.size(); ManagementShareholderName++) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPath, '1.CustomerDetail', 2, ManagementShareholderName,
+//    			StoreCDCManagementShareholderNameArray[(ManagementShareholderName - 1)])
+//    	}
+//    	
+//    	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 2,
+//    			GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
+//    	}
+//    	
+//    	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
+//    		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 2,
+//    			GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
+//    	}
     'click button submit'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Submit'))
 
@@ -335,4 +349,4 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-
+ 
