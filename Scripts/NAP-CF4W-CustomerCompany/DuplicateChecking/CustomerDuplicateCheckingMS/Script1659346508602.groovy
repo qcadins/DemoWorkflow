@@ -51,77 +51,87 @@ String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking'
 
 WebDriver driver = DriverFactory.getWebDriver()
 
+def modifySubjectName
 
+def modifySubjectType
 
-def modifySubjectName, modifySubjectType, modifyApplicantNo, modifyCustomerNo, modifyButtonEdit
-String subjectName, subjectType
+def modifyApplicantNo
+
+def modifyCustomerNo
+
+def modifyButtonEdit
+
+String subjectName
+
+String subjectType
 
 if (ManagementShareholderArray.size() > 0) {
     for (m = 1; m <= ManagementShareholderArray.size(); m++) {
-		if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
-                    5, FailureHandling.OPTIONAL)){
-				int i = 0
-				for (GlobalVariable.index = 1; GlobalVariable.index <= GlobalVariable.countDupcheckRow; (GlobalVariable.index)++) {
-					'modify object subjecttype'
-					modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'),
-						'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) +
-						']/td[3]', true)
-		
-					'modify object edit icon'
-					modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'),
-						'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) +
-						']/td[7]/span/span/span/span/span/span/a', true)
-		
-					if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyElementPresent(modifyButtonEdit, 5,
-						FailureHandling.OPTIONAL)) {
-						GlobalVariable.index = GlobalVariable.index
-		
-						break
-					} else {
-						i++
-		
-						if (i == GlobalVariable.countDupcheckRow) {
-							GlobalVariable.index = 1
-		
-							i = 0
-		
-							break
-						}
-					}
-				}
-				
-					
-				'modify object subjectname'
-				modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'),
-					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[2]',
-					true)
-		
-				'modify object subjecttype'
-				modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'),
-					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[3]',
-					true)
-		
-				'modify object Applicant No'
-				modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'),
-					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[4]',
-					true)
-		
-				'modify object Customer No'
-				modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'),
-					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[5]',
-					true)
-		
-				'modify object edit icon'
-				modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'),
-					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + ']/td[7]/span/span/span/span/span/span/a',
-					true)
-		
-				'get text subject name'
-				 subjectName = WebUI.getText(modifySubjectName)
-		
-				'get text subject type'
-				 subjectType = WebUI.getText(modifySubjectType)
-		}
+        if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
+            5, FailureHandling.OPTIONAL)) {
+            int i = 0
+
+            for (GlobalVariable.index = 1; GlobalVariable.index <= GlobalVariable.countDupcheckRow; (GlobalVariable.index)++) {
+                'modify object subjecttype'
+                modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+                    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                    ']/td[3]', true)
+
+                'modify object edit icon'
+                modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
+                    'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                    ']/td[7]/span/span/span/span/span/span/a', true)
+
+                if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyElementPresent(modifyButtonEdit, 
+                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.index = GlobalVariable.index
+
+                    break
+                } else {
+                    i++
+
+                    if (i == GlobalVariable.countDupcheckRow) {
+                        GlobalVariable.index = 1
+
+                        i = 0
+
+                        break
+                    }
+                }
+            }
+            
+            'modify object subjectname'
+            modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[2]', true)
+
+            'modify object subjecttype'
+            modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[3]', true)
+
+            'modify object Applicant No'
+            modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[4]', true)
+
+            'modify object Customer No'
+            modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[5]', true)
+
+            'modify object edit icon'
+            modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
+                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
+                ']/td[7]/span/span/span/span/span/span/a', true)
+
+            'get text subject name'
+            subjectName = WebUI.getText(modifySubjectName)
+
+            'get text subject type'
+            subjectType = WebUI.getText(modifySubjectType)
+        }
+        
         if (subjectName.equalsIgnoreCase(ManagementShareholderArray[(m - 1)])) {
             if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
                 'click button edit'
@@ -189,7 +199,7 @@ if (ManagementShareholderArray.size() > 0) {
                             }
                         }
                     }
-                } else{
+                } else {
                     for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
                         String newIDNoManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
                         ']/td[3]'
