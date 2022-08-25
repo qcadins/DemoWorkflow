@@ -28,15 +28,16 @@ if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
         'INSURANCE', false, FailureHandling.OPTIONAL)
+	
+	'Verifikasi perhitungan asset price'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
+			',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false)
+	
+	
+	'Verifikasi perhitungan asset price incl accessories'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
+			',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false)
 }
-
-'Verifikasi perhitungan asset price'
-WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
-        ',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false)
-
-'Verifikasi perhitungan asset price incl accessories'
-WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
-        ',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false)
 
 String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 3)
