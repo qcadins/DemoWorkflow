@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>CustomerDuplicateChecking</name>
+   <name>CustomerDuplciateCheckingGetName</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>cc253788-5ba8-408b-9d1b-1172ba87bf71</testCaseGuid>
+   <testCaseGuid>dc67e89e-ff3a-45ba-9050-615ea90ad574</testCaseGuid>
 </TestCaseEntity>

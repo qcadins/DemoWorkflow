@@ -316,6 +316,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>0</initValue>
+      <name>countDupcheckRow</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>findTestData('Login/Login').getValue(3, 15)</initValue>
       <name>CountFileCode</name>
    </GlobalVariableEntity>
