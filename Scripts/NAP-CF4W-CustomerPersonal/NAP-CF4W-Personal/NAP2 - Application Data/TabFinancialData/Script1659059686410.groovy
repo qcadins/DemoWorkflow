@@ -55,11 +55,15 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 9).split(';')
 
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+1
+
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) {
     for (i = 0; i < AllocationformArray.size(); i++) {
         if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
             (SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 57)
+                GlobalVariable.NumofColm, TotalPremium+2)
         }
         
         String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')

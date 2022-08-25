@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
+import org.openqa.selenium.Keys as Keys
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -207,9 +208,25 @@ int count = variable.size()
 def addCovTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') + 
 6
 
+'Mengambil nilai row keberapa dimulai data edit generated insurance table pada excel'
+def editGenTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
+
 'Mengambil nilai row keberapa dimulai data sum insured amount pada excel'
 def sumInsuredAmountRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') + 
 1
+
+'Mengambil nilai row keberapa data main premi rate pada excel'
+def Rate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
+2
+
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def AddRate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
+1
+
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+1
+
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {
@@ -219,7 +236,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai capitalize dari excel'
     capitalizeValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 35)
+        GlobalVariable.NumofColm, editGenTableRow+1)
 
     capitalizeValueArray = capitalizeValue.split(';', -1)
 
@@ -250,7 +267,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai paid by dari excels'
     paidByValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 36)
+        GlobalVariable.NumofColm, editGenTableRow+2)
 
     paidByValueArray = paidByValue.split(';', -1)
 
@@ -269,7 +286,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai sum insured percentage dari excel'
     sumInsuredPercentValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 37)
+        GlobalVariable.NumofColm, editGenTableRow+3)
 
     sumInsuredPercentValueArray = sumInsuredPercentValue.split(';', -1)
 
@@ -289,7 +306,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai main coverage dari excel'
     mainCoverageValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 38)
+        GlobalVariable.NumofColm, editGenTableRow+4)
 
     mainCoverageValueArray = mainCoverageValue.split(';', -1)
 
@@ -301,9 +318,37 @@ for (int i = 1; i <= count; i++) {
             WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
         }
     }
+	
+	//Main Premi Rate
+	mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
+	
+	'Pengecekan jika rate dapat terisi atau tidak'
+	if(WebUI.verifyElementNotHasAttribute(mainPremiRateObject,"disabled",2,FailureHandling.OPTIONAL)){
+		'Ambil nilai main premi rate dari excel'
+		mainPremiRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, Rate)
+		
+		mainPremiRateValueArray = mainPremiRateValue.split(';',-1)
+		
+		'Pengecekan field main premi rate di excel terisi'
+		if (mainPremiRateValue.length() > 0) {
+			'Pengecekan array pada field main premi rate tidak kosong'
+			if ((mainPremiRateValueArray[(i - 1)]) != '') {
+				
+				WebUI.click(mainPremiRateObject)
+				
+				'Input main premi rate tahun ke i-1'
+				WebUI.setText(mainPremiRateObject, mainPremiRateValueArray[(i-1)])
+				
+			}
+		}
+	}
+	
     
     int flagLoading = 0
 
+	
+	
     //AdditionalCoverage & Sum Insured Amount
     'Looping additional coverage & sum insured amount'
     for (int j = 1; j <= countAddCov; j++) {
@@ -319,7 +364,7 @@ for (int i = 1; i <= count; i++) {
 
         'Ambil nilai dari additional coverage per year num pada excel'
         addCovYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, addCovTableRow + j)
+            GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)
 
         addCovYearValueArray = addCovYearValue.split(';', -1)
 
@@ -338,15 +383,15 @@ for (int i = 1; i <= count; i++) {
         }
         
         'Pengecekan additional coverage field dan arraynya tidak kosong'
-        if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1) - flagLoading)]) != '')) {
+        if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1))]) != '')) {
             'Pengecekan nilai additional coverage dari stiap arraynya'
-            if ((addCovYearValueArray[((i - 1) - flagLoading)]).equalsIgnoreCase('Yes')) {
+            if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('Yes')) {
                 'Jika belum tercentang additional coverage'
                 if (WebUI.verifyElementNotChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
                     'centang additional coverage'
                     WebUI.check(addCovYearCheckbox)
                 }
-            } else if ((addCovYearValueArray[((i - 1) - flagLoading)]).equalsIgnoreCase('No')) {
+            } else if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('No')) {
                 'Jika sudah tercentang additional coverage'
                 if (WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
                     'Uncentang additional coverage'
@@ -371,10 +416,41 @@ for (int i = 1; i <= count; i++) {
                 GlobalVariable.NumofColm, sumInsuredAmountRow + j)
 
             SumInsuredValueArray = SumInsuredValue.split(';', -1)
-
-            'Select index sum insured amount'
-            WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1) - flagLoading)], FailureHandling.OPTIONAL)
+			
+			'Pengecekan jika sum insured amount kosong atau tidak pada excel'
+			if(SumInsuredValue.length()>0){
+				'Pengecekan jika array sum insured amount berisi nilai'
+				if(SumInsuredValueArray[i-1]!=""){
+					
+					'Select index sum insured amount'
+					WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
+				}
+			}
+           
         }
+		
+		modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+		
+		if(WebUI.verifyElementNotHasAttribute(modifyAddtRateObject,"disabled",2)){
+			'Ambil nilai additional premi rate dari excel'
+			AddtRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, AddRate + j)
+
+			AddtRateValueArray = AddtRateValue.split(';', -1)
+			
+			'Pengecekan additional premi rate pada excel kosong atau tidak'
+			if(AddtRateValue.length()>0){
+				'Pengecekan additional premi rate array tidak kosong'
+				if(AddtRateValueArray[i-1]!=""){
+					WebUI.click(modifyAddtRateObject)
+					
+					'Input Rate Additional Premi'
+					WebUI.setText(modifyAddtRateObject, AddtRateValueArray[((i - 1))])
+				}
+			}
+			
+		}
+		
     }
 }
 
@@ -438,7 +514,7 @@ if ((totalResult[2]) == 0) {
     'Input diskon'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 56))
+            GlobalVariable.NumofColm, TotalPremium+1))
 }
 
 'Ambil nilai total premi to customer after discount dari confins'
@@ -452,7 +528,7 @@ String textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPer
 BigDecimal discountAmt = Long.parseLong(textDiscountAmt)
 
 if ((totalResult[2]) == 1) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 56, 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1, 
         GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
 
