@@ -46,7 +46,6 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commis
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 3))
 
-//Unit Testing dilakukan dengan menggunakan app no '0002APP20211201243'
 'Klik Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Search'))
 
@@ -84,9 +83,11 @@ int countIncomeInfo = varIncomeInfo.size() / 2
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
 
-'Looping untuk set nilai awal 0 untuk total amount allocate commission'
-for (int i = 0; i < countIncomeInfo; i++) {
-    TotalAllocateCommissionAmt.add(0.00)
+if(GlobalVariable.Role=="Testing"){
+	'Looping untuk set nilai awal 0 untuk total amount allocate commission'
+	for (int i = 0; i < countIncomeInfo; i++) {
+		TotalAllocateCommissionAmt.add(0.00)
+	}
 }
 
 'Mengambil nilai allocation type dari excel'
@@ -210,73 +211,76 @@ if (variableSupp.size() > 0) {
                 WebUI.click(modifyObjectCommissionAmt)
             }
             
-            'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
-            String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
-
-            'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
-            String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
-
-            'Parsing string amount menjadi bentuk double'
-            BigDecimal amt = Double.parseDouble(textAmount)
-
-            'Parsing string percentage menjadi bentuk double'
-            BigDecimal pctg = Double.parseDouble(textPercentage)
-
-            String textIncomeInfoAmt
-
-            BigDecimal incomeInfoAmt
-
-            'Looping Income Information'
-            for (int j = 1; j <= countIncomeInfo; j++) {
-                newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[1]/label')
-
-                newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
-
-                modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-                    'xpath', 'equals', newxpathIncomeInfo, true)
-
-                'Varibel String untuk mengambil dan menampung income information'
-                String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
-
-                modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-                    'xpath', 'equals', newxpathIncomeInfoAmt, true)
-
-                'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-                if (textIncomeInfo == allocateCommission) {
-                    'Variabel untuk mengambil amount income information yang sesuai'
-                    textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
-
-                    'Parsing string amount income information menjadi bentuk double'
-                    incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
-
-                    'Ambil nilai total allocate commission amount ke j-1'
-                    GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
-
-                    'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-                    if ((amt != 0) && (pctg != 0)) {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-                    } else {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
-                    }
-                    
-                    'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
-                    break
-                }
-            }
+			if(GlobalVariable.Role=="Testing"){
+				'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
+				String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
+	
+				'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
+				String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
+	
+				'Parsing string amount menjadi bentuk double'
+				BigDecimal amt = Double.parseDouble(textAmount)
+	
+				'Parsing string percentage menjadi bentuk double'
+				BigDecimal pctg = Double.parseDouble(textPercentage)
+	
+				String textIncomeInfoAmt
+	
+				BigDecimal incomeInfoAmt
+	
+				'Looping Income Information'
+				for (int j = 1; j <= countIncomeInfo; j++) {
+					newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[1]/label')
+	
+					newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
+	
+					modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'),
+						'xpath', 'equals', newxpathIncomeInfo, true)
+	
+					'Varibel String untuk mengambil dan menampung income information'
+					String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
+	
+					modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),
+						'xpath', 'equals', newxpathIncomeInfoAmt, true)
+	
+					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
+					if (textIncomeInfo == allocateCommission) {
+						'Variabel untuk mengambil amount income information yang sesuai'
+						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
+	
+						'Parsing string amount income information menjadi bentuk double'
+						incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
+	
+						'Ambil nilai total allocate commission amount ke j-1'
+						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
+	
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+						if ((amt != 0) && (pctg != 0)) {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
+						}
+						
+						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
+						break
+					}
+				}
+				
+				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
+				if ((amt != 0) && (pctg != 0)) {
+					'Verify hasil hitungan percentage dengan amount'
+					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+	
+					'Verify hasil hitungan amount dengan percentage'
+					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
+				} else if ((amt == 0) || (pctg == 0)) {
+					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
+					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+				}
+			}
             
-            'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
-            if ((amt != 0) && (pctg != 0)) {
-                'Verify hasil hitungan percentage dengan amount'
-                WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
-
-                'Verify hasil hitungan amount dengan percentage'
-                WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-            } else if ((amt == 0) || (pctg == 0)) {
-                'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-                WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
-            }
         }
     }
 }
@@ -478,73 +482,76 @@ if (variableSuppEmp.size() > 0) {
                 WebUI.click(modifyObjectCommissionAmt)
             }
             
-            'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
-            String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
-
-            'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
-            String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
-
-            'Parsing string amount menjadi bentuk double'
-            BigDecimal amt = Double.parseDouble(textAmount)
-
-            'Parsing string percentage menjadi bentuk double'
-            BigDecimal pctg = Double.parseDouble(textPercentage)
-
-            String textIncomeInfoAmt
-
-            BigDecimal incomeInfoAmt
-
-            'Looping Income Information'
-            for (int k = 1; k <= countIncomeInfo; k++) {
-                newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[1]/label')
-
-                newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[2]/label')
-
-                modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-                    'xpath', 'equals', newxpathIncomeInfo, true)
-
-                'Varibel String untuk mengambil dan menampung income information'
-                String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
-
-                modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-                    'xpath', 'equals', newxpathIncomeInfoAmt, true)
-
-                'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-                if (textIncomeInfo == allocateCommission) {
-                    'Variabel untuk mengambil amount income information yang sesuai'
-                    textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
-
-                    'Parsing string amount income information menjadi bentuk double'
-                    incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
-
-                    'Ambil nilai total allocate commission amount ke k-1'
-                    GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
-
-                    'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-                    if ((amt != 0) && (pctg != 0)) {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-                    } else {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-                    }
-                    
-                    'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
-                    break
-                }
-            }
+			if(GlobalVariable.Role=="Testing"){
+				'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
+				String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
+	
+				'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
+				String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
+	
+				'Parsing string amount menjadi bentuk double'
+				BigDecimal amt = Double.parseDouble(textAmount)
+	
+				'Parsing string percentage menjadi bentuk double'
+				BigDecimal pctg = Double.parseDouble(textPercentage)
+	
+				String textIncomeInfoAmt
+	
+				BigDecimal incomeInfoAmt
+	
+				'Looping Income Information'
+				for (int k = 1; k <= countIncomeInfo; k++) {
+					newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[1]/label')
+	
+					newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[2]/label')
+	
+					modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'),
+						'xpath', 'equals', newxpathIncomeInfo, true)
+	
+					'Varibel String untuk mengambil dan menampung income information'
+					String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
+	
+					modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),
+						'xpath', 'equals', newxpathIncomeInfoAmt, true)
+	
+					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
+					if (textIncomeInfo == allocateCommission) {
+						'Variabel untuk mengambil amount income information yang sesuai'
+						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
+	
+						'Parsing string amount income information menjadi bentuk double'
+						incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
+	
+						'Ambil nilai total allocate commission amount ke k-1'
+						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
+	
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+						if ((amt != 0) && (pctg != 0)) {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
+						}
+						
+						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
+						break
+					}
+				}
+				
+				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
+				if ((amt != 0) && (pctg != 0)) {
+					'Verify hasil hitungan percentage dengan amount'
+					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+	
+					'Verify hasil hitungan amount dengan percentage'
+					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
+				} else if ((amt == 0) || (pctg == 0)) {
+					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
+					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+				}
+			}
             
-            'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
-            if ((amt != 0) && (pctg != 0)) {
-                'Verify hasil hitungan percentage dengan amount'
-                WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
-
-                'Verify hasil hitungan amount dengan percentage'
-                WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-            } else if ((amt == 0) || (pctg == 0)) {
-                'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-                WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
-            }
         }
     }
 }
@@ -717,73 +724,76 @@ if (variableRef.size() > 0) {
                 WebUI.click(modifyObjectCommissionAmt)
             }
             
-            'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
-            String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
-
-            'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
-            String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
-
-            'Parsing string amount menjadi bentuk double'
-            BigDecimal amt = Double.parseDouble(textAmount)
-
-            'Parsing string percentage menjadi bentuk double'
-            BigDecimal pctg = Double.parseDouble(textPercentage)
-
-            String textIncomeInfoAmt
-
-            BigDecimal incomeInfoAmt
-
-            'Looping Income Information'
-            for (int k = 1; k <= countIncomeInfo; k++) {
-                newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[1]/label')
-
-                newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[2]/label')
-
-                modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-                    'xpath', 'equals', newxpathIncomeInfo, true)
-
-                'Varibel String untuk mengambil dan menampung income information'
-                String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
-
-                modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-                    'xpath', 'equals', newxpathIncomeInfoAmt, true)
-
-                'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
-                if (textIncomeInfo == allocateCommission) {
-                    'Variabel untuk mengambil amount income information yang sesuai'
-                    textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
-
-                    'Parsing string amount income information menjadi bentuk double'
-                    incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
-
-                    'Ambil nilai total allocate commission amount ke k-1'
-                    GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
-
-                    'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-                    if ((amt != 0) && (pctg != 0)) {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-                    } else {
-                        'Tambahkan komponen fee allocate commission from ke arraylist'
-                        TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-                    }
-                    
-                    'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
-                    break
-                }
-            }
+			if(GlobalVariable.Role=="Testing"){
+				'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
+				String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
+	
+				'Variabel string untuk mengambil dan menampung nilai percentage dari web confins yang sudah diinput'
+				String textPercentage = WebUI.getAttribute(modifyObjectCommissionPercentage, 'value')
+	
+				'Parsing string amount menjadi bentuk double'
+				BigDecimal amt = Double.parseDouble(textAmount)
+	
+				'Parsing string percentage menjadi bentuk double'
+				BigDecimal pctg = Double.parseDouble(textPercentage)
+	
+				String textIncomeInfoAmt
+	
+				BigDecimal incomeInfoAmt
+	
+				'Looping Income Information'
+				for (int k = 1; k <= countIncomeInfo; k++) {
+					newxpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[1]/label')
+	
+					newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[2]/label')
+	
+					modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'),
+						'xpath', 'equals', newxpathIncomeInfo, true)
+	
+					'Varibel String untuk mengambil dan menampung income information'
+					String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
+	
+					modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),
+						'xpath', 'equals', newxpathIncomeInfoAmt, true)
+	
+					'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
+					if (textIncomeInfo == allocateCommission) {
+						'Variabel untuk mengambil amount income information yang sesuai'
+						textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt).replace(',', '')
+	
+						'Parsing string amount income information menjadi bentuk double'
+						incomeInfoAmt = Double.parseDouble(textIncomeInfoAmt)
+	
+						'Ambil nilai total allocate commission amount ke k-1'
+						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
+	
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+						if ((amt != 0) && (pctg != 0)) {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
+						}
+						
+						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
+						break
+					}
+				}
+				
+				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
+				if ((amt != 0) && (pctg != 0)) {
+					'Verify hasil hitungan percentage dengan amount'
+					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+	
+					'Verify hasil hitungan amount dengan percentage'
+					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
+				} else if ((amt == 0) || (pctg == 0)) {
+					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
+					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+				}
+			}
             
-            'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
-            if ((amt != 0) && (pctg != 0)) {
-                'Verify hasil hitungan percentage dengan amount'
-                WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
-
-                'Verify hasil hitungan amount dengan percentage'
-                WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-            } else if ((amt == 0) || (pctg == 0)) {
-                'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-                WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
-            }
         }
     }
 }
@@ -791,19 +801,21 @@ if (variableRef.size() > 0) {
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
-'Inisialisasi global variabel untuk penghitungan summary'
-GlobalVariable.TotalCommissionAmt = 0.00
-GlobalVariable.TotalCommissionAmtAftTax = 0.00
-GlobalVariable.TotalTax = 0.00
-GlobalVariable.TotalVat = 0.00
-GlobalVariable.TotalDisburseAmt = 0.00
-GlobalVariable.TotalExpenseAmt = 0.00
-
-'Call test case untuk verif summary dan remaining info'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionDataVerifInfo'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-GlobalVariable.AllocatedCommissionAmt = TotalAllocateCommissionAmt
+if(GlobalVariable.Role=="Testing"){
+	'Inisialisasi global variabel untuk penghitungan summary'
+	GlobalVariable.TotalCommissionAmt = 0.00
+	GlobalVariable.TotalCommissionAmtAftTax = 0.00
+	GlobalVariable.TotalTax = 0.00
+	GlobalVariable.TotalVat = 0.00
+	GlobalVariable.TotalDisburseAmt = 0.00
+	GlobalVariable.TotalExpenseAmt = 0.00
+	
+	'Call test case untuk verif summary dan remaining info'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionDataVerifInfo'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	GlobalVariable.AllocatedCommissionAmt = TotalAllocateCommissionAmt
+}
 
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Save'))

@@ -566,3 +566,14 @@ WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false)
 WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
             'value').replace(',', '')), Long.parseLong(textTDP.replace('.00', '')))
 
+if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+	'ADVANCE')) {
+	'verify interest amount "0.00" if insttalment type Advance'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
+		'0.00', false)
+} else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+	'ARREAR')) {
+	'verify interest amount NOT "0.00" if installment type arrear'
+	WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
+		'0.00', false)
+}
