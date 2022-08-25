@@ -802,13 +802,6 @@ if (variableRef.size() > 0) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
 if(GlobalVariable.Role=="Testing"){
-	'Inisialisasi global variabel untuk penghitungan summary'
-	GlobalVariable.TotalCommissionAmt = 0.00
-	GlobalVariable.TotalCommissionAmtAftTax = 0.00
-	GlobalVariable.TotalTax = 0.00
-	GlobalVariable.TotalVat = 0.00
-	GlobalVariable.TotalDisburseAmt = 0.00
-	GlobalVariable.TotalExpenseAmt = 0.00
 	
 	'Call test case untuk verif summary dan remaining info'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionDataVerifInfo'),
