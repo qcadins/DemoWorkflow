@@ -655,6 +655,9 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40).length() > 0) {
     'input tdp at mf'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
         datafilefinancial.getValue(GlobalVariable.NumofColm, 40))
+	
+	'click button calculate'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 }
 
 if(GlobalVariable.Role=="Testing"){

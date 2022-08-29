@@ -159,6 +159,30 @@ for (int i = 1; i <= count; i++) {
     def expiredDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 6).split(';', -1)
 
+	def waivedDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+			GlobalVariable.NumofColm, 7).split(';', -1)
+	
+	'Pengecekan jika waive dapat diklik'
+	if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
+		'Pengecekan jika kondisi awal waived sudah tercentang'
+		if (WebUI.verifyElementChecked(modifyObjectWaived, 1, FailureHandling.OPTIONAL)) {
+			'Uncentang waive'
+			WebUI.uncheck(modifyObjectWaived)
+		}
+			
+		'Pengecekan jika ada dokumen yang perlu diwaive'
+		if (waivedDocument.size() > 0) {
+			'Looping dokumen yang perlu diwaive'
+			for (j = 1; j <= waivedDocument.size(); j++) {
+				'Pengecekan nama dokumen sama dengan nama dokumen yang perlu diwaive pada excel'
+				if (textDocumentName.equalsIgnoreCase(waivedDocument[(j - 1)])) {
+					'Centang Waive'
+					WebUI.check(modifyObjectWaived)
+				}
+			}
+		}
+	}
+		
     'Pengecekan jika ada dokumen yang perlu diisi expired date'
     if (expiredDateDocument.size() > 0) {
         'Looping dokumen yang perlu diisi expired date'
@@ -174,29 +198,7 @@ for (int i = 1; i <= count; i++) {
         }
     }
     
-    def waivedDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
-        GlobalVariable.NumofColm, 7).split(';', -1)
-
-    'Pengecekan jika waive dapat diklik'
-    if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
-        'Pengecekan jika kondisi awal waived sudah tercentang'
-        if (WebUI.verifyElementChecked(modifyObjectWaived, 1, FailureHandling.OPTIONAL)) {
-            'Uncentang waive'
-            WebUI.uncheck(modifyObjectWaived)
-        }
-        
-        'Pengecekan jika ada dokumen yang perlu diwaive'
-        if (waivedDocument.size() > 0) {
-            'Looping dokumen yang perlu diwaive'
-            for (j = 1; j <= waivedDocument.size(); j++) {
-                'Pengecekan nama dokumen sama dengan nama dokumen yang perlu diwaive pada excel'
-                if (textDocumentName.equalsIgnoreCase(waivedDocument[(j - 1)])) {
-                    'Centang Waive'
-                    WebUI.check(modifyObjectWaived)
-                }
-            }
-        }
-    }
+    
 }
 
 'Save'

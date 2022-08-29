@@ -114,7 +114,7 @@ insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Perso
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
     'Modify properti untuk insurance notes bagian company insured by customer multifinance'
-    insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea', 
+    insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea', 
         true)
 }
 
@@ -122,8 +122,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 WebUI.setText(insuranceNotesCompany, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 18))
 
+buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+	GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
+	'Klik Generate Insurance'
+	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
+}
+
 'Klik Generate Insurance'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance'))
+WebUI.click(buttonGenerateInsurance)
 
 'Verify muncul tidaknya insurance fee setelah klik generate insurance'
 if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)) {
@@ -466,7 +473,7 @@ for (int i = 1; i <= count; i++) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 
 ArrayList<WebElement> totalResult
-String totalPremitoCustResult
+BigDecimal totalPremitoCustResult
 BigDecimal totalFeeResult
 if(GlobalVariable.Role=="Testing"){
 	
@@ -520,17 +527,29 @@ if(GlobalVariable.Role=="Testing"){
 	
 	'Verif total premi to customer sesuai perhitungan'
 	WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false)
+	
+	if(totalResult[2]==0){
+		'Input diskon'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, TotalPremium+1))
+	}
+	
 }
 
-if ((totalResult[2]) == 0 ||counterPaidByMF == 0) {
-    'Input diskon'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, TotalPremium+1))
+if (counterPaidByMF == 0) {
+	'Input diskon'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, TotalPremium+1))
 }
 
 String textDiscountAmt
 
+'ambil nilai diskon pada confins'
+textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+	'value').replace(',', '')
+	
 if(GlobalVariable.Role=="Testing"){
 	'Ambil nilai total premi to customer after discount dari confins'
 	String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomerAfterDiscount')).replace(
@@ -557,11 +576,15 @@ if(GlobalVariable.Role=="Testing"){
 	} else {
 		WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
 	}
+	if(totalResult[2]==1){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
+			GlobalVariable.NumofColm - 1, textDiscountAmt)
+	}
 }
 
 
 
-if ((totalResult[2]) == 1 ||counterPaidByMF == 1) {
+if (counterPaidByMF == 1) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1, 
         GlobalVariable.NumofColm - 1, textDiscountAmt)
 }

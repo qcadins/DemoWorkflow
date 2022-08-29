@@ -902,7 +902,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
 
-WebUI.delay(10)
+WebUI.delay(12)
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'), 
     5, FailureHandling.OPTIONAL)) {

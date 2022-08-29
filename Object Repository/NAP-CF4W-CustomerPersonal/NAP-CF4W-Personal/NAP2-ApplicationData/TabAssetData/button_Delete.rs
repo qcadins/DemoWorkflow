@@ -6,14 +6,21 @@
    <elementGuidId>27302910-ea80-407e-ab8d-f67ba319f26a</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value></value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[8]/a/i</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[8]/a/i</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[8]/a/i</value>
+   </webElementProperties>
 </WebElementEntity>

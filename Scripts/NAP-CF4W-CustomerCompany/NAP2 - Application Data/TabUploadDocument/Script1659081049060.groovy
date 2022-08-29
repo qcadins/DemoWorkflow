@@ -27,8 +27,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL)
 }
 
-if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
+if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
     1); (GlobalVariable.NumofUploadDocument)++) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.NumofUploadDocument, 
             2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 

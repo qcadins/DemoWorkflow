@@ -324,4 +324,14 @@
       <initValue>findTestData('Login/Login').getValue(3, 15)</initValue>
       <name>CountFileCode</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
+      <name>CountofAccessoriesCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(8, 1)</initValue>
+      <name>CountofUploadDocumentCompany</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
