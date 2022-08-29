@@ -31,10 +31,33 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA')
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
 
 'Ambil nilai office login dari confins'
+String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
+    ',', ';').split(';')
+
+String office = officeLogin[0]
+
 String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(',', ';').split(';')
+
 
 'click button lookup product offering'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
+
+
+'click button search'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
+
+'Cek total data product offering pada db'
+Integer countPO = CustomKeywords.'dbconnection.checkPO.countPO'(sqlConnectionLOS, office)
+
+'Ambil nilai total data product offering pada lookup confins'
+String[] textTotalDataPO = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+    ' ', '').replace(':', ';').split(';')
+
+'Parsing nilai total data PO confins ke integer(angka)'
+Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
+
+'Verif total data product offering confins sesuai dengan db'
+WebUI.verifyEqual(totalDataPO, countPO)
 
 if(GlobalVariable.Role=="Testing"){
 	'Koneksi database'
@@ -72,6 +95,7 @@ if(GlobalVariable.Role=="Testing"){
 	'Verif total data product offering confins sesuai dengan db'
 	WebUI.verifyEqual(totalDataPO, countPO)
 }
+
 
 'input product offering code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Product Offering Code_prodOfferingCode'), 
@@ -239,6 +263,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         (GlobalVariable.countNumofCustomer)++
     }
 } else {
+    'click radio button company'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
+
     'click button lookpup Customer'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
 

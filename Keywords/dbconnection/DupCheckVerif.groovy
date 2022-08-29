@@ -56,7 +56,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal1LOS (Sql instance, String idno, String idtype, String Mothername, String appno){
 		String Result1LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT a.APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND MOTHER_MAIDEN_NAME = '" + Mothername + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT a.APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND MOTHER_MAIDEN_NAME = '" + Mothername + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result1LOS = (row[0])
 		})
@@ -76,7 +76,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal2LOS (Sql instance, String idno, String idtype, String custname, String appno){
 		String Result2LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT APP_CUST_ID) FROM APP_CUST a  WITH (NOLOCK) JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND CUST_NAME = '" + custname + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT APP_CUST_ID) FROM APP_CUST a  WITH (NOLOCK) JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND CUST_NAME = '" + custname + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result2LOS = (row[0])
 		})
@@ -96,7 +96,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal3LOS (Sql instance, String idno, String idtype, String birthdate, String appno){
 		String Result3LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT a.APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT a.APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result3LOS = (row[0])
 		})
@@ -116,7 +116,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal4LOS (Sql instance, String custname, String appno){
 		String Result4LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP d ON a.APP_ID = d.APP_ID  WHERE CUST_NAME LIKE '%" + custname + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP d ON a.APP_ID = d.APP_ID  WHERE CUST_NAME LIKE '%" + custname + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result4LOS = (row[0])
 		})
@@ -136,7 +136,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal5LOS (Sql instance, String idno, String idtype, String custname, String appno){
 		String Result5LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND CUST_NAME LIKE '%" + custname + "%' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT APP_CUST_ID) FROM APP_CUST a WITH (NOLOCK) JOIN  REF_MASTER_LOS c on a.MR_ID_TYPE_CODE = c.REF_MASTER_CODE JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND REF_MASTER_NAME = '" + idtype + "' AND CUST_NAME LIKE '%" + custname + "%' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result5LOS = (row[0])
 		})
@@ -156,7 +156,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal6LOS (Sql instance, String custname, String mothername, String appno){
 		String Result6LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL'  AND CUST_NAME LIKE '%" + custname + "%' AND MOTHER_MAIDEN_NAME LIKE '%" + mothername + "%' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'PERSONAL'  AND CUST_NAME LIKE '%" + custname + "%' AND MOTHER_MAIDEN_NAME LIKE '%" + mothername + "%' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result6LOS = (row[0])
 		})
@@ -176,7 +176,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRulePersonal7LOS (Sql instance, String custname, String birthdate, String appno){
 		String Result7LOS
-		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE CUST_NAME LIKE '%" + custname + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(DISTINCT CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_PERSONAL b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE CUST_NAME LIKE '%" + custname + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result7LOS = (row[0])
 		})
@@ -196,7 +196,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRuleCompany1LOS (Sql instance, String custname, String taxidno, String appno){
 		String Result8LOS
-		instance.eachRow(("USE LOS SELECT COUNT(a.CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_COMPANY b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME LIKE '%" + custname + "%' AND TAX_ID_NO = '" + taxidno + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(a.CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP_CUST_COMPANY b ON a.APP_CUST_ID = b.APP_CUST_ID JOIN APP d ON a.APP_ID = d.APP_ID  WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME LIKE '%" + custname + "%' AND TAX_ID_NO = '" + taxidno + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result8LOS = (row[0])
 		})
@@ -216,7 +216,7 @@ public class DupCheckVerif {
 	@Keyword
 	public checkDupcheckRuleCompany2LOS (Sql instance, String custname, String appno){
 		String Result9LOS
-		instance.eachRow(("USE LOS SELECT COUNT(CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME = '" + custname + "' AND APP_NO != '"+ appno +"'"), { row ->
+		instance.eachRow(("USE LOS SELECT COUNT(CUST_NAME) FROM APP_CUST a WITH (NOLOCK) JOIN APP d ON a.APP_ID = d.APP_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME = '" + custname + "' AND APP_NO != '"+ appno +"' AND APP_CURR_STEP not in( 'CUST', 'FAM', 'SHR', 'GUAR')"), { row ->
 
 			Result9LOS = (row[0])
 		})
