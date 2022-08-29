@@ -44,7 +44,7 @@ public class checkCommissionCode {
 	@Keyword
 	public checkReferantorCode(Sql instance,String referantorName){
 		String referantorCode
-		instance.eachRow(("select CUST_NO from CUST where cust_name ='"+referantorName+"'"), { def row ->
+		instance.eachRow(("select TOP(1) CUST_NO from CUST where cust_name ='"+referantorName+"'"), { def row ->
 			referantorCode = (row[0])
 		})
 		if(referantorCode==null){

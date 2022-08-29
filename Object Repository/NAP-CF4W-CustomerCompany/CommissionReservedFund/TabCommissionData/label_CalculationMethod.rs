@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_CalculationMethod</name>
+   <tag></tag>
+   <elementGuidId>93859704-a1ff-4174-98c7-3d79fd1ab3eb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationSupplier&quot;]/div[2]/div/div[2]/div[4]/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formInformationSupplier&quot;]/div[2]/div/div[2]/div[4]/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>
