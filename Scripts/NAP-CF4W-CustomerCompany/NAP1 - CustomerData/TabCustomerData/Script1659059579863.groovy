@@ -48,8 +48,9 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA')
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
 
 'Ambil nilai office login dari confins'
-String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(',', ';').split(';')
-	
+String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
+    ',', ';').split(';')
+
 String office = officeLogin[0]
 
 'click button lookup product offering'
@@ -59,11 +60,11 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustom
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
 'Cek total data product offering pada db'
-Integer countPO = CustomKeywords.'dbconnection.checkPO.countPO'(sqlConnectionLOS,office)
+Integer countPO = CustomKeywords.'dbconnection.checkPO.countPO'(sqlConnectionLOS, office)
 
 'Ambil nilai total data product offering pada lookup confins'
 String[] textTotalDataPO = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
-	' ', '').replace(':', ';').split(';')
+    ' ', '').replace(':', ';').split(';')
 
 'Parsing nilai total data PO confins ke integer(angka)'
 Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
@@ -237,6 +238,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         (GlobalVariable.countNumofCustomer)++
     }
 } else {
+    'click radio button company'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
+
     'click button lookpup Customer'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
 

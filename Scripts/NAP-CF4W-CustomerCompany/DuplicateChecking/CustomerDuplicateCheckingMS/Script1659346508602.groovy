@@ -69,6 +69,7 @@ if (ManagementShareholderArray.size() > 0) {
     for (m = 1; m <= ManagementShareholderArray.size(); m++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
             5, FailureHandling.OPTIONAL)) {
+            'define interger i'
             int i = 0
 
             for (GlobalVariable.index = 1; GlobalVariable.index <= GlobalVariable.countDupcheckRow; (GlobalVariable.index)++) {
@@ -82,17 +83,22 @@ if (ManagementShareholderArray.size() > 0) {
                     'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.index) + 
                     ']/td[7]/span/span/span/span/span/span/a', true)
 
+                'verify subject type dan button edit ada'
                 if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyElementPresent(modifyButtonEdit, 
                     5, FailureHandling.OPTIONAL)) {
+                    'define GV Index = GV Index'
                     GlobalVariable.index = GlobalVariable.index
 
                     break
                 } else {
                     i++
 
+                    'verify i == total row dupcheck'
                     if (i == GlobalVariable.countDupcheckRow) {
+                        'set GV index = 1'
                         GlobalVariable.index = 1
 
+                        'set i = 0'
                         i = 0
 
                         break
@@ -145,111 +151,117 @@ if (ManagementShareholderArray.size() > 0) {
 
                 int counttd = variabletd.size()
 
-                if (counttd == 10) {
-                    for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
-                        String newIDNoManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
-                        ']/td[4]'
+                if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundSimilardata')), 
+                    'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
+                    if (counttd == 10) {
+                        for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
+                            String newIDNoManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
+                            id) + ']/td[4]'
 
-                        'modify object id no ManagementShareholder match'
-                        modifyIDNoManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
-                            'xpath', 'equals', newIDNoManagementShareholderPersonal, true)
+                            'modify object id no ManagementShareholder match'
+                            modifyIDNoManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
+                                'xpath', 'equals', newIDNoManagementShareholderPersonal, true)
 
-                        String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]'
+                            String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]'
 
-                        'modify object applicant No App in process'
-                        modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
-                            'xpath', 'equals', newApplicantNoObject, true)
+                            'modify object applicant No App in process'
+                            modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
+                                'xpath', 'equals', newApplicantNoObject, true)
 
-                        String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
+                            String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
-                        String NewIdNoManagementShareholderPersonalMatch = WebUI.getText(modifyIDNoManagementShareholderPersonal, 
-                            FailureHandling.OPTIONAL)
+                            String NewIdNoManagementShareholderPersonalMatch = WebUI.getText(modifyIDNoManagementShareholderPersonal, 
+                                FailureHandling.OPTIONAL)
 
-                        String IdNoManagementShareholderPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
+                            String IdNoManagementShareholderPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
 
-                        if (NewIdNoManagementShareholderPersonalMatch != null) {
-                            if (NewIdNoManagementShareholderPersonalMatch.equalsIgnoreCase(IdNoManagementShareholderPersonal)) {
-                                String newselectManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
-                                id) + ']/td[10]/a'
+                            if (NewIdNoManagementShareholderPersonalMatch != null) {
+                                if (NewIdNoManagementShareholderPersonalMatch.equalsIgnoreCase(IdNoManagementShareholderPersonal)) {
+                                    String newselectManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
+                                    id) + ']/td[10]/a'
 
-                                'modify object select managementshareholder match'
-                                modifyselectManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
-                                    'xpath', 'equals', newselectManagementShareholderPersonal, true)
+                                    'modify object select managementshareholder match'
+                                    modifyselectManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject(
+                                            'NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
+                                        'xpath', 'equals', newselectManagementShareholderPersonal, true)
 
-                                'click selct'
-                                WebUI.click(modifyselectManagementShareholderPersonal, FailureHandling.OPTIONAL)
+                                    'click selct'
+                                    WebUI.click(modifyselectManagementShareholderPersonal, FailureHandling.OPTIONAL)
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    'verify match ApplicantNo'
+                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
+                                        false, FailureHandling.OPTIONAL)
 
-                                'get ManagementShareholder name'
-                                String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+                                    'get ManagementShareholder name'
+                                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-                                if (StoreCDCManagementShareholderPersonalName == '') {
-                                    'store ManagementShareholder name'
-                                    StoreCDCManagementShareholderPersonalName = name
-                                } else {
-                                    'store ManagementShareholder name'
-                                    StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + 
-                                    ';') + name)
+                                    if (StoreCDCManagementShareholderPersonalName == '') {
+                                        'store ManagementShareholder name'
+                                        StoreCDCManagementShareholderPersonalName = name
+                                    } else {
+                                        'store ManagementShareholder name'
+                                        StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + 
+                                        ';') + name)
+                                    }
+                                    
+                                    break
                                 }
-                                
-                                break
                             }
                         }
-                    }
-                } else {
-                    for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
-                        String newIDNoManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
-                        ']/td[3]'
+                    } else {
+                        for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
+                            String newIDNoManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
+                            id) + ']/td[3]'
 
-                        'modify object id no ManagementShareholder match'
-                        modifyIDNoManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCompany'), 
-                            'xpath', 'equals', newIDNoManagementShareholderCompany, true)
+                            'modify object id no ManagementShareholder match'
+                            modifyIDNoManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCompany'), 
+                                'xpath', 'equals', newIDNoManagementShareholderCompany, true)
 
-                        String newApplicantNoAppInproccess = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]'
+                            String newApplicantNoAppInproccess = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
+                            ']/td[1]'
 
-                        'modify object applicant No App in process'
-                        modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
-                            'xpath', 'equals', newApplicantNoAppInproccess, true)
+                            'modify object applicant No App in process'
+                            modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
+                                'xpath', 'equals', newApplicantNoAppInproccess, true)
 
-                        String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
+                            String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
-                        String NewIdNoManagementShareholderCompanyMatch = WebUI.getText(modifyIDNoManagementShareholderCompany, 
-                            FailureHandling.OPTIONAL)
+                            String NewIdNoManagementShareholderCompanyMatch = WebUI.getText(modifyIDNoManagementShareholderCompany, 
+                                FailureHandling.OPTIONAL)
 
-                        String IdNoManagementShareholderCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
+                            String IdNoManagementShareholderCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
 
-                        if (NewIdNoManagementShareholderCompanyMatch != null) {
-                            if (NewIdNoManagementShareholderCompanyMatch.equalsIgnoreCase(IdNoManagementShareholderCompany)) {
-                                String newselectManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
-                                id) + ']/td[5]/a'
+                            if (NewIdNoManagementShareholderCompanyMatch != null) {
+                                if (NewIdNoManagementShareholderCompanyMatch.equalsIgnoreCase(IdNoManagementShareholderCompany)) {
+                                    String newselectManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
+                                    id) + ']/td[5]/a'
 
-                                'modify object select managementshareholder match'
-                                modifyselectManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'), 
-                                    'xpath', 'equals', newselectManagementShareholderCompany, true)
+                                    'modify object select managementshareholder match'
+                                    modifyselectManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject(
+                                            'NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'), 
+                                        'xpath', 'equals', newselectManagementShareholderCompany, true)
 
-                                'click select application in process'
-                                WebUI.click(modifyselectManagementShareholderCompany, FailureHandling.OPTIONAL)
+                                    'click select application in process'
+                                    WebUI.click(modifyselectManagementShareholderCompany, FailureHandling.OPTIONAL)
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    'verify match ApplicantNo'
+                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
+                                        false, FailureHandling.OPTIONAL)
 
-                                'get ManagementShareholder name'
-                                String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+                                    'get ManagementShareholder name'
+                                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-                                if (StoreCDCManagementShareholderCompanyName == '') {
-                                    'store ManagementShareholder name'
-                                    StoreCDCManagementShareholderCompanyName = name
-                                } else {
-                                    'store ManagementShareholder name'
-                                    StoreCDCManagementShareholderCompanyName = ((StoreCDCManagementShareholderCompanyName + 
-                                    ';') + name)
+                                    if (StoreCDCManagementShareholderCompanyName == '') {
+                                        'store ManagementShareholder name'
+                                        StoreCDCManagementShareholderCompanyName = name
+                                    } else {
+                                        'store ManagementShareholder name'
+                                        StoreCDCManagementShareholderCompanyName = ((StoreCDCManagementShareholderCompanyName + 
+                                        ';') + name)
+                                    }
+                                    
+                                    break
                                 }
-                                
-                                break
                             }
                         }
                     }
@@ -454,8 +466,6 @@ if (ManagementShareholderArray.size() > 0) {
                             }
                         }
                     }
-                    
-
                 }
             }
         }

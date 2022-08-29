@@ -395,7 +395,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
             GlobalVariable.NumofGuarantorCompany, 3) == 'Input Data') {
             'check rule company 1'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataGuarantorPersonal.getValue(
+            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataGuarantorCompany.getValue(
                         GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                         9))) > 0) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
@@ -439,7 +439,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             
             'check rule company 1 with APP_CUST'
             if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(
+                    dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(
                         GlobalVariable.NumofGuarantorCompany, 9), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                         2))) > 0) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
