@@ -55,7 +55,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 2)
+String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
@@ -66,7 +66,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), datafiledupcheck.getValue(
-            GlobalVariable.NumofColm, 2))
+            GlobalVariable.NumofColm, 12))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Search'))
@@ -80,7 +80,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 
     GlobalVariable.countDupcheckRow = variable.size()
 
-    def CustomerArray = datafiledupcheck.getValue(GlobalVariable.NumofColm, 3).split(';')
+    def CustomerArray = datafiledupcheck.getValue(GlobalVariable.NumofColm, 13).split(';')
 
     'array customer name data inputan'
     def CustomerNameArray = GlobalVariable.CustomerName.split(';')
@@ -106,8 +106,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                 'verify subject type dan button edit ada'
                 if ((WebUI.getText(modifySubjectType) == 'CUSTOMER') && WebUI.verifyElementPresent(modifyButtonEdit, 5, 
                     FailureHandling.OPTIONAL)) {
-                    'define GV Index = GV Index'
-                    GlobalVariable.index = GlobalVariable.index
+
 
                     break
                 } else {
@@ -204,7 +203,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                     
                     if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
                         5, FailureHandling.OPTIONAL)) {
-                        if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 4).equalsIgnoreCase('New')) {
+                        if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 'click button new customer'
@@ -238,7 +237,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo), newApplicantNoValue, false, FailureHandling.OPTIONAL)
                             }
-                        } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 4).equalsIgnoreCase('Select SimilarData')) {
+                        } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 String newCustomerNoValue = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'), 
@@ -272,7 +271,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo), newApplicantNoValue, false, FailureHandling.OPTIONAL)
                             }
-                        } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 4).equalsIgnoreCase('Select ApplicationInProcess')) {
+                        } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInprocessCompany'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 

@@ -21,7 +21,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-Cus
 'input appNo'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/input_Application No_AppNoId'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 3))
+        GlobalVariable.NumofColm, 13))
 
 'click butoon seacrh'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/button_Search'))
@@ -29,7 +29,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-Cus
 'verify data'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/td_0002APP20211200947'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 3), FailureHandling.CONTINUE_ON_FAILURE)
+        GlobalVariable.NumofColm, 13), FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.delay(5)
 

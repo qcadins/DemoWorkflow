@@ -67,10 +67,13 @@ def GuarantorCompanyStatus = ''
 
 for (i = 1; i <= 1; i++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        4) == 'Input Data') {
+        14) == 'Input Data') {
         'check rule company 1'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataCustomerCompany.getValue(
-                    GlobalVariable.NumofColm, 9), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 10))) > 0) {
+        if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataCustomerCompany.getValue(
+                    GlobalVariable.NumofColm, 19), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 20))) > 0) || 
+        (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnection, dataCustomerCompany.getValue(
+                    GlobalVariable.NumofColm, 19), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 20), dataCustomerCompany.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerCompanyStatus'
             CustomerCompanyStatus = ruledupcheck.getValue(2, 20)
 
@@ -90,52 +93,10 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule company 2'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataCustomerCompany.getValue(
-                    GlobalVariable.NumofGuarantorCompany, 9))) > 0) {
-            'add "REVIEW" kedalam array CustomerCompanyStatus'
-            CustomerCompanyStatus = ruledupcheck.getValue(2, 21)
-
-            'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerCompanyStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
-            break
-        }
-        
-        'check rule company 1 with APP_CUST'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnection, dataCustomerCompany.getValue(
-                    GlobalVariable.NumofColm, 9), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 10), dataCustomerCompany.getValue(
-                    GlobalVariable.NumofColm, 3))) > 0) {
-            'add "REVIEW" kedalam array CustomerCompanyStatus'
-            CustomerCompanyStatus = ruledupcheck.getValue(2, 20)
-
-            'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerCompanyStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
-            break
-        }
-        
-        'check rule company 2 with APP_CUST'
-        if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(sqlconnection, dataCustomerCompany.getValue(
-                    GlobalVariable.NumofGuarantorCompany, 9), dataCustomerCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                    3))) > 0) {
+        if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataCustomerCompany.getValue(
+                    GlobalVariable.NumofGuarantorCompany, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(
+                sqlconnection, dataCustomerCompany.getValue(GlobalVariable.NumofGuarantorCompany, 19), dataCustomerCompany.getValue(
+                    GlobalVariable.NumofGuarantorCompany, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerCompanyStatus'
             CustomerCompanyStatus = ruledupcheck.getValue(2, 21)
 
@@ -171,18 +132,21 @@ for (i = 1; i <= 1; i++) {
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
 1); (GlobalVariable.NumofFamily)++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
             3) == 'Input Data') {
-            if (dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 4).equalsIgnoreCase('Personal')) {
+            if (dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
                 ManagementShareholderStatus = ''
 
                 'check rule 1'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            25))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            35))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            35), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "LOCK" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 13)
 
@@ -202,10 +166,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 2'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            9))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            19), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "LOCK" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 14)
 
@@ -225,10 +192,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 3'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            32))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
                             GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            22))) > 0) {
+                            32), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "LOCK" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 15)
 
@@ -248,8 +218,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 4'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 16)
 
@@ -269,10 +241,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 5'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            9))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 33), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 21), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            19), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 17)
 
@@ -292,9 +267,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 6'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 25))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 35))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 35), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 18)
 
@@ -314,9 +292,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule 7'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 22))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 32))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 19), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 32), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 19)
 
@@ -334,171 +315,14 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     
                     continue
                 }
-                
-                'check rule 1 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            25), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 2))) > 0) {
-                    'add "LOCK" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 13)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 2 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            9), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 2))) > 0) {
-                    'add "LOCK" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 14)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 3 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            22), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 2))) > 0) {
-                    'add "LOCK" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 15)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 4 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 2))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 16)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 5 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 23), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 11), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            9), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 2))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 17)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 6 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 25), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            2))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 18)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule 7 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 9), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 22), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            2))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 19)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-            } else if (dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 4).equalsIgnoreCase('Company')) {
+            } else if (dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
                 'check rule company 1'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 42), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 43))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 52), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 53))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 52), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 53), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
+                            12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 20)
 
@@ -518,53 +342,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
                 
                 'check rule company 2'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 42))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 21)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule company 1 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 42), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 43), dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 
-                            2))) > 0) {
-                    'add "REVIEW" kedalam array ManagementShareholderStatus'
-                    ManagementShareholderStatus = ruledupcheck.getValue(2, 20)
-
-                    'verify apakah hasil pengecekan mengandung status REVIEW'
-                    if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
-                        'declare value result = review'
-                        DupcheckResult.add('REVIEW')
-                    } else if (ManagementShareholderStatus.equalsIgnoreCase('')) {
-                        'declare no value'
-                        DupcheckResult.add('')
-                    } else {
-                        'declare value result = lock'
-                        DupcheckResult.add('LOCK')
-                    }
-                    
-                    continue
-                }
-                
-                'check rule company 2 with APP_CUST'
-                if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(sqlconnection, 
-                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 42), dataManagementShareholder.getValue(
-                            GlobalVariable.NumofFamily, 2))) > 0) {
+                if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, 
+                        dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 52))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(
+                        sqlconnection, dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 52), dataManagementShareholder.getValue(
+                            GlobalVariable.NumofFamily, 12))) > 0)) {
                     'add "REVIEW" kedalam array ManagementShareholderStatus'
                     ManagementShareholderStatus = ruledupcheck.getValue(2, 21)
 
@@ -587,8 +368,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (ManagementShareholderStatus.equalsIgnoreCase('REVIEW')) {
             'declare value result = review'
@@ -606,14 +387,18 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
-            3) == 'Input Data') {
+            13) == 'Input Data') {
             'check rule 1'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 20))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        30))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        30), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 13)
 
@@ -633,9 +418,13 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 2'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 14)
 
@@ -655,9 +444,13 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 3'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 17))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        27))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        27), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 15)
 
@@ -677,8 +470,11 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 4'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19))) > 0) || (Integer.parseInt(
+                CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4LOS'(sqlconnection, dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 16)
 
@@ -698,9 +494,13 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 5'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 17)
 
@@ -720,9 +520,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 6'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        20))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 30), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 18)
 
@@ -742,169 +545,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check rule 7'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        17))) > 0) {
-                'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 19)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 1 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal1LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        20), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 2))) > 0) {
-                'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 13)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 2 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal2LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 2))) > 0) {
-                'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 14)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 3 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal3LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        17), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 2))) > 0) {
-                'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 15)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 4 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal4LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 2))) > 0) {
-                'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 16)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 5 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal5LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 18), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 11), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        9), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 2))) > 0) {
-                'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 17)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 6 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 20), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        2))) > 0) {
-                'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 18)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule 7 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7LOS'(sqlconnection, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 9), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 17), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        2))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, 
+                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 27))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7LOS'(
+                    sqlconnection, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 27), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 19)
 
@@ -926,8 +572,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
             'declare value result = review'
@@ -945,14 +591,17 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
-            3) == 'Input Data') {
+            13) == 'Input Data') {
             'check rule company 1'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                        9))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnection, dataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(
+                    sqlconnection, dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 19), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
                 GuarantorCompanyStatus = ruledupcheck.getValue(2, 20)
 
@@ -972,53 +621,10 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             }
             
             'check rule company 2'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataGuarantorCompany.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 8))) > 0) {
-                'add "REVIEW" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = ruledupcheck.getValue(2, 21)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorCompanyStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule company 1 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnection, 
-                    dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 9), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                        2))) > 0) {
-                'add "REVIEW" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = ruledupcheck.getValue(2, 20)
-
-                'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorCompanyStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
-                continue
-            }
-            
-            'check rule company 2 with APP_CUST'
-            if (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(sqlconnection, 
-                    dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 8), dataGuarantorCompany.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 2))) > 0) {
+            if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2'(sqlconnection, dataGuarantorCompany.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 18))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany2LOS'(
+                    sqlconnection, dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
                 GuarantorCompanyStatus = ruledupcheck.getValue(2, 21)
 
@@ -1040,8 +646,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
-        2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        3)) {
+        12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13)) {
         'verify apakah hasil pengecekan mengandung status REVIEW'
         if (GuarantorCompanyStatus.equalsIgnoreCase('REVIEW')) {
             'declare value result = review'

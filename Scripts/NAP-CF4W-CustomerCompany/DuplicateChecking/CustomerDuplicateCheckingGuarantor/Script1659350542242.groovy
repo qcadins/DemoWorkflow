@@ -41,13 +41,13 @@ def StoreCDCGuarantorPersonalName = ''
 
 def StoreCDCGuarantorCompanyName = ''
 
-def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 7).split(
+def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 17).split(
     ';')
 
 def GuarantorActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 
-    8).split(';')
+    18).split(';')
 
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2)
+String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
 
 def modifySubjectName
 
@@ -84,8 +84,7 @@ if (GuarantorArray.size() > 0) {
                 'verify subject type dan button edit ada'
                 if ((WebUI.getText(modifySubjectType) == 'GUARANTOR') && WebUI.verifyElementPresent(modifyButtonEdit, 5, 
                     FailureHandling.OPTIONAL)) {
-                    'define GV Index = GV Index'
-                    GlobalVariable.index = GlobalVariable.index
+                    
 
                     break
                 } else {

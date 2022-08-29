@@ -42,12 +42,12 @@ def StoreCDCManagementShareholderPersonalName = ''
 def StoreCDCManagementShareholderCompanyName = ''
 
 def ManagementShareholderArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 
-    5).split(';')
+    15).split(';')
 
 def ManagementShareholderActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 
-    6).split(';')
+    16).split(';')
 
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2)
+String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
 
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -86,8 +86,7 @@ if (ManagementShareholderArray.size() > 0) {
                 'verify subject type dan button edit ada'
                 if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyElementPresent(modifyButtonEdit, 
                     5, FailureHandling.OPTIONAL)) {
-                    'define GV Index = GV Index'
-                    GlobalVariable.index = GlobalVariable.index
+                    
 
                     break
                 } else {

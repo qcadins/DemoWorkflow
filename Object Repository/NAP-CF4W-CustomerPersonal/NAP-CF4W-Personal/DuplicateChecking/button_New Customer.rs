@@ -6,11 +6,11 @@
    <elementGuidId>bbde668b-09f4-46ca-98b1-d90e04abf1f6</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[2]</value>
+         <key>BASIC</key>
+         <value>//*[@class = 'btn btn-raised btn-primary mr-1 ng-star-inserted' and (text() = '  New Customer' or . = '  New Customer')]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-subj-match/div/div[1]/button[1]</value>
       </entry>
    </selectorCollection>
@@ -24,7 +24,7 @@
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
@@ -38,14 +38,14 @@
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>  New Customer</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>

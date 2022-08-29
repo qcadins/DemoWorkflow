@@ -267,12 +267,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
             GlobalVariable.NumofColm, 12), false)
 }
 
-String textInterestType = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-    GlobalVariable.NumofColm, 13)
+String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 'value', FailureHandling.OPTIONAL)
 
-'Select option dropdownlist Interest Type'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
-    textInterestType, false)
+//'Select option dropdownlist Interest Type'
+//WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
+//    textInterestType, false)
 
 scheme = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 

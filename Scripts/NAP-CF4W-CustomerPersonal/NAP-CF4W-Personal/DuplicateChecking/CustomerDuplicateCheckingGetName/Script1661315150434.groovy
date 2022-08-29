@@ -50,7 +50,7 @@ datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 2)
+String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
@@ -117,17 +117,17 @@ def StoreCDCCustomerName = ''
 	
 	if (StoreCDCCustomerName != null) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			2, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
+			12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 	}
 	
 	if (StoreCDCFamilyName != null) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			4, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
+			14, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
 	}
 	
 	if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			6, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
+			16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 	}
 	
 	StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
