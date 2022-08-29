@@ -73,6 +73,8 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_save'))
 
+			WebUI.delay(10)
+			
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
                 0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
 

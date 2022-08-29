@@ -41,6 +41,14 @@ String urlTAX = (((servername + ';instanceName=') + instancename) + ';databaseNa
 
 Sql sqlConnectionTAX = CustomKeywords.'dbconnection.connectDB.connect'(urlTAX, username, password, driverclassname)
 
+'Inisialisasi global variabel untuk penghitungan summary'
+GlobalVariable.TotalCommissionAmt = 0.00
+GlobalVariable.TotalCommissionAmtAftTax = 0.00
+GlobalVariable.TotalTax = 0.00
+GlobalVariable.TotalVat = 0.00
+GlobalVariable.TotalDisburseAmt = 0.00
+GlobalVariable.TotalExpenseAmt = 0.00
+
 variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
 
 variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))

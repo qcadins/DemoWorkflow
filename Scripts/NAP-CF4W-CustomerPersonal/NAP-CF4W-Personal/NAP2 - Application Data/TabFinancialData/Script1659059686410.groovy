@@ -55,11 +55,15 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 9).split(';')
 
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+1
+
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) {
     for (i = 0; i < AllocationformArray.size(); i++) {
         if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
             (SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 57)
+                GlobalVariable.NumofColm, TotalPremium+2)
         }
         
         String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
@@ -651,21 +655,15 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40).length() > 0) {
     'input tdp at mf'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
         datafilefinancial.getValue(GlobalVariable.NumofColm, 40))
+	
+	'click button calculate'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 }
 
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataVerif'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
-    'ADVANCE')) {
-    'verify interest amount "0.00" if insttalment type Advance'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), 
-        '0.00', false)
-} else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
-    'ARREAR')) {
-    'verify interest amount NOT "0.00" if installment type arrear'
-    WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')), 
-        '0.00', false)
+if(GlobalVariable.Role=="Testing"){
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataVerif'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
 }
 
 WebUI.delay(5)

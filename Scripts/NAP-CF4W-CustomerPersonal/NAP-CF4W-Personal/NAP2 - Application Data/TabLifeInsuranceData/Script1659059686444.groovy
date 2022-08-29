@@ -76,30 +76,32 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
     }
     
-    'Ambil text original office dari confins'
-    String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
-
-    ArrayList<WebElement> lifeInscoBranchName = new ArrayList<WebElement>()
-
-    Integer countLifeInscoBranch = 0
-
-    'Ambil array string (text) life insco branch name dari db'
-    lifeInscoBranchName = CustomKeywords.'dbconnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
-
-    'Ambil nilai count life insco branch name dari db'
-    countLifeInscoBranch = CustomKeywords.'dbconnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU, 
-        officeName)
-
-    'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
-    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
-        lifeInscoBranchName)
-
-    'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
-    Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
-
-    'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
-    WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)
-
+	if(GlobalVariable.Role=="Testing"){
+		'Ambil text original office dari confins'
+		String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+	
+		ArrayList<WebElement> lifeInscoBranchName = new ArrayList<WebElement>()
+	
+		Integer countLifeInscoBranch = 0
+	
+		'Ambil array string (text) life insco branch name dari db'
+		lifeInscoBranchName = CustomKeywords.'dbconnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
+	
+		'Ambil nilai count life insco branch name dari db'
+		countLifeInscoBranch = CustomKeywords.'dbconnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,
+			officeName)
+	
+		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
+		WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
+			lifeInscoBranchName)
+	
+		'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
+		Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
+	
+		'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
+		WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)
+	}
+    
     'Select DropDownList Life Insco Branch Name'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(

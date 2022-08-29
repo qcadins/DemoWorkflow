@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//*[@id=&quot;insuranceInformation&quot;]/div[2]/div[5]/button</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceInformation&quot;]/div[2]/div[5]/button</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,25 +31,25 @@
       <value>btn btn-raised btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Generate Insurance</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;insuranceInformation&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-actions right&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+      <value>//*[@id=&quot;insuranceInformation&quot;]/div[2]/div[5]/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

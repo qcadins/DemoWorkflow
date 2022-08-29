@@ -78,21 +78,24 @@ String suppschm = CustomKeywords.'dbconnection.checkSupplier.checkSupplierScheme
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
 
-'click search button'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
-
-'Ambil nilai total count supplier data dari db'
-Integer countSupplierData = CustomKeywords.'dbconnection.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, office)
-
-'Ambil nilai total data supplier pada lookup confins'
-String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
-    ' ', '').replace(':', ';').split(';')
-
-'Parsing nilai total data supplier confins ke integer(angka)'
-Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
-
-'Verify total count data lookup supplier pada confins sama dengan db'
-WebUI.verifyEqual(totalDataSupplier, countSupplierData)
+if(GlobalVariable.Role=="Testing"){
+	'click search button'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
+	
+	'Ambil nilai total count supplier data dari db'
+	Integer countSupplierData = CustomKeywords.'dbconnection.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, office)
+	
+	'Ambil nilai total data supplier pada lookup confins'
+	String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
+		' ', '').replace(':', ';').split(';')
+	
+	'Parsing nilai total data supplier confins ke integer(angka)'
+	Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
+	
+	'Verify total count data lookup supplier pada confins sama dengan db'
+	WebUI.verifyEqual(totalDataSupplier, countSupplierData)
+	
+}
 
 'input supplier code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), 
@@ -136,19 +139,22 @@ ArrayList<WebElement> adminHead
 
 ArrayList<WebElement> salesPerson
 
-'Ambil array string admin head dari db'
-adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
+if(GlobalVariable.Role=="Testing"){
+	'Ambil array string admin head dari db'
+	adminHead = CustomKeywords.'dbconnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
+	
+	'Ambil array string sales person dari db'
+	salesPerson = CustomKeywords.'dbconnection.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
+	
+	'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'),
+		salesPerson)
+	
+	'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_AdminHead'),
+		adminHead)
+}
 
-'Ambil array string sales person dari db'
-salesPerson = CustomKeywords.'dbconnection.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
-
-'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
-WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
-    salesPerson)
-
-'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
-WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
-    adminHead)
 
 'select sales person'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
@@ -304,37 +310,39 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 21))
 
-NumberFormat decimalFormat = NumberFormat.getPercentInstance()
-
-def AssetPrice = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
-    'value').split(',').join()
-
-def DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
-    'value').split(',').join()
-
-def DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
-    'value').replaceAll('\\s', '')
-
-BigDecimal intDownPaymentAmt = Integer.parseInt(DownPaymentAmt)
-
-BigDecimal intAssetPrice = Integer.parseInt(AssetPrice)
-
-float floatDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
-
-Number NumberDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
-
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-    GlobalVariable.NumofColm, 15) == 'Percentage') {
-    int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
-
-    'verify security deposit value equal'
-    WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
-} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-    GlobalVariable.NumofColm, 15) == 'Amount') {
-    float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
-
-    'verify security deposit value equal'
-    WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg)
+if(GlobalVariable.Role=="Testing"){
+	NumberFormat decimalFormat = NumberFormat.getPercentInstance()
+	
+	def AssetPrice = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'),
+		'value').split(',').join()
+	
+	def DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),
+		'value').split(',').join()
+	
+	def DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),
+		'value').replaceAll('\\s', '')
+	
+	BigDecimal intDownPaymentAmt = Integer.parseInt(DownPaymentAmt)
+	
+	BigDecimal intAssetPrice = Integer.parseInt(AssetPrice)
+	
+	float floatDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
+	
+	Number NumberDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
+	
+	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 15) == 'Percentage') {
+		int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
+	
+		'verify security deposit value equal'
+		WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
+	} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 15) == 'Amount') {
+		float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
+	
+		'verify security deposit value equal'
+		WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg)
+	}
 }
 
 'input license plate number'
@@ -595,38 +603,39 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
         
         modifyObjectIndex++
 
-        NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
-
-        def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
-
-        def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
-
-        def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
-
-        BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
-
-        float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
-
-        Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
-
-        BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
-
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofAccessories, 8) == 'Percentage') {
-            int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
-
-            'verify securitydeposit value equal'
-            WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
-        } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofAccessories, 8) == 'Amount') {
-            float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
-
-            'verify securitydeposit value equal'
-            WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
-        }
+		if(GlobalVariable.Role=="Testing"){
+			NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
+			
+			def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+	
+			def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
+	
+			def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
+	
+			BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
+	
+			float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
+	
+			Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
+	
+			BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
+	
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				GlobalVariable.NumofAccessories, 8) == 'Percentage') {
+				int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
+	
+				'verify securitydeposit value equal'
+				WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+			} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				GlobalVariable.NumofAccessories, 8) == 'Amount') {
+				float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
+	
+				'verify securitydeposit value equal'
+				WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+			}
+			GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
+		}
         
-        GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
-
         'write to excel success'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
             GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
@@ -875,10 +884,6 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
         'value').replace(',', ''))
 
-println(GlobalVariable.AssetPrice)
-
-println(GlobalVariable.TotalAccessoriesPrice)
-
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
 
@@ -897,7 +902,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
 
-WebUI.delay(15)
+WebUI.delay(12)
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'), 
     5, FailureHandling.OPTIONAL)) {

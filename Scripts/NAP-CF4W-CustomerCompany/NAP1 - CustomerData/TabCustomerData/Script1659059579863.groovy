@@ -24,23 +24,6 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
-
 'click menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -53,8 +36,12 @@ String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-
 
 String office = officeLogin[0]
 
+String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(',', ';').split(';')
+
+
 'click button lookup product offering'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
+
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
@@ -71,6 +58,44 @@ Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
 
 'Verif total data product offering confins sesuai dengan db'
 WebUI.verifyEqual(totalDataPO, countPO)
+
+if(GlobalVariable.Role=="Testing"){
+	'Koneksi database'
+	String servername = findTestData('Login/Login').getValue(1, 8)
+	
+	String instancename = findTestData('Login/Login').getValue(2, 8)
+	
+	String username = findTestData('Login/Login').getValue(3, 8)
+	
+	String password = findTestData('Login/Login').getValue(4, 8)
+	
+	String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+	
+	String driverclassname = findTestData('Login/Login').getValue(6, 8)
+	
+	String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
+	
+	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+	
+	String office = officeLogin[0]
+	
+	'click button search'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
+	
+	'Cek total data product offering pada db'
+	Integer countPO = CustomKeywords.'dbconnection.checkProdOffering.countProdOffering'(sqlConnectionLOS,office)
+	
+	'Ambil nilai total data product offering pada lookup confins'
+	String[] textTotalDataPO = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+		' ', '').replace(':', ';').split(';')
+	
+	'Parsing nilai total data PO confins ke integer(angka)'
+	Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
+	
+	'Verif total data product offering confins sesuai dengan db'
+	WebUI.verifyEqual(totalDataPO, countPO)
+}
+
 
 'input product offering code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Product Offering Code_prodOfferingCode'), 

@@ -7,7 +7,11 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[7]</value>
+         <value>//div[@id='my-modal']/div/div/div[3]/button</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'button' and (text() = 'Close' or . = 'Close') and @ref_element = 'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/iframe']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

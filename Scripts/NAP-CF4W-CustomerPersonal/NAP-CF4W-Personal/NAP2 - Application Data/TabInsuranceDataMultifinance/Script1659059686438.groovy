@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
+import org.openqa.selenium.Keys as Keys
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -80,25 +81,28 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 16), false)
 
-ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
+if(GlobalVariable.Role=="Testing"){
+	ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
+	
+	Integer countInscoBranch = 0
+	
+	'Ambil array string (text) insco branch name dari db'
+	inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
+	
+	'Ambil nilai count insco branch name dari db'
+	countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
+	
+	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
+		inscoBranchName)
+	
+	'Ambil nilai jumlah option/pilihan insco branch name dari confins'
+	Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
+	
+	'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
+	WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)
+}
 
-Integer countInscoBranch = 0
-
-'Ambil array string (text) insco branch name dari db'
-inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
-
-'Ambil nilai count insco branch name dari db'
-countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
-
-'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
-WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'), 
-    inscoBranchName)
-
-'Ambil nilai jumlah option/pilihan insco branch name dari confins'
-Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
-
-'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
-WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)
 
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'), 
@@ -110,7 +114,7 @@ insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Perso
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
     'Modify properti untuk insurance notes bagian company insured by customer multifinance'
-    insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea', 
+    insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea', 
         true)
 }
 
@@ -118,8 +122,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 WebUI.setText(insuranceNotesCompany, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 18))
 
+buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+	GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
+	'Klik Generate Insurance'
+	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
+}
+
 'Klik Generate Insurance'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance'))
+WebUI.click(buttonGenerateInsurance)
 
 'Verify muncul tidaknya insurance fee setelah klik generate insurance'
 if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)) {
@@ -207,9 +218,26 @@ int count = variable.size()
 def addCovTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') + 
 6
 
+'Mengambil nilai row keberapa dimulai data edit generated insurance table pada excel'
+def editGenTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
+
 'Mengambil nilai row keberapa dimulai data sum insured amount pada excel'
 def sumInsuredAmountRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') + 
 1
+
+'Mengambil nilai row keberapa data main premi rate pada excel'
+def Rate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
+2
+
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def AddRate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
+1
+
+'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
+def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+1
+
+int counterPaidByMF=0
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {
@@ -219,7 +247,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai capitalize dari excel'
     capitalizeValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 35)
+        GlobalVariable.NumofColm, editGenTableRow+1)
 
     capitalizeValueArray = capitalizeValue.split(';', -1)
 
@@ -250,7 +278,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai paid by dari excels'
     paidByValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 36)
+        GlobalVariable.NumofColm, editGenTableRow+2)
 
     paidByValueArray = paidByValue.split(';', -1)
 
@@ -262,6 +290,10 @@ for (int i = 1; i <= count; i++) {
             WebUI.selectOptionByLabel(paidByObject, '(?i)' + (paidByValueArray[(i - 1)]), true)
         }
     }
+	
+	if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
+		counterPaidByMF = 1
+	}
     
     //Sum insured (%)
     sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 
@@ -269,7 +301,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai sum insured percentage dari excel'
     sumInsuredPercentValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 37)
+        GlobalVariable.NumofColm, editGenTableRow+3)
 
     sumInsuredPercentValueArray = sumInsuredPercentValue.split(';', -1)
 
@@ -289,7 +321,7 @@ for (int i = 1; i <= count; i++) {
 
     'Ambil nilai main coverage dari excel'
     mainCoverageValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 38)
+        GlobalVariable.NumofColm, editGenTableRow+4)
 
     mainCoverageValueArray = mainCoverageValue.split(';', -1)
 
@@ -301,9 +333,37 @@ for (int i = 1; i <= count; i++) {
             WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
         }
     }
+	
+	//Main Premi Rate
+	mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
+	
+	'Pengecekan jika rate dapat terisi atau tidak'
+	if(WebUI.verifyElementNotHasAttribute(mainPremiRateObject,"disabled",2,FailureHandling.OPTIONAL)){
+		'Ambil nilai main premi rate dari excel'
+		mainPremiRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, Rate)
+		
+		mainPremiRateValueArray = mainPremiRateValue.split(';',-1)
+		
+		'Pengecekan field main premi rate di excel terisi'
+		if (mainPremiRateValue.length() > 0) {
+			'Pengecekan array pada field main premi rate tidak kosong'
+			if ((mainPremiRateValueArray[(i - 1)]) != '') {
+				
+				WebUI.click(mainPremiRateObject)
+				
+				'Input main premi rate tahun ke i-1'
+				WebUI.setText(mainPremiRateObject, mainPremiRateValueArray[(i-1)])
+				
+			}
+		}
+	}
+	
     
     int flagLoading = 0
 
+	
+	
     //AdditionalCoverage & Sum Insured Amount
     'Looping additional coverage & sum insured amount'
     for (int j = 1; j <= countAddCov; j++) {
@@ -319,7 +379,7 @@ for (int i = 1; i <= count; i++) {
 
         'Ambil nilai dari additional coverage per year num pada excel'
         addCovYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, addCovTableRow + j)
+            GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)
 
         addCovYearValueArray = addCovYearValue.split(';', -1)
 
@@ -338,15 +398,15 @@ for (int i = 1; i <= count; i++) {
         }
         
         'Pengecekan additional coverage field dan arraynya tidak kosong'
-        if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1) - flagLoading)]) != '')) {
+        if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1))]) != '')) {
             'Pengecekan nilai additional coverage dari stiap arraynya'
-            if ((addCovYearValueArray[((i - 1) - flagLoading)]).equalsIgnoreCase('Yes')) {
+            if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('Yes')) {
                 'Jika belum tercentang additional coverage'
                 if (WebUI.verifyElementNotChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
                     'centang additional coverage'
                     WebUI.check(addCovYearCheckbox)
                 }
-            } else if ((addCovYearValueArray[((i - 1) - flagLoading)]).equalsIgnoreCase('No')) {
+            } else if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('No')) {
                 'Jika sudah tercentang additional coverage'
                 if (WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
                     'Uncentang additional coverage'
@@ -371,10 +431,41 @@ for (int i = 1; i <= count; i++) {
                 GlobalVariable.NumofColm, sumInsuredAmountRow + j)
 
             SumInsuredValueArray = SumInsuredValue.split(';', -1)
-
-            'Select index sum insured amount'
-            WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1) - flagLoading)], FailureHandling.OPTIONAL)
+			
+			'Pengecekan jika sum insured amount kosong atau tidak pada excel'
+			if(SumInsuredValue.length()>0){
+				'Pengecekan jika array sum insured amount berisi nilai'
+				if(SumInsuredValueArray[i-1]!=""){
+					
+					'Select index sum insured amount'
+					WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
+				}
+			}
+           
         }
+		
+		modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+		
+		if(WebUI.verifyElementNotHasAttribute(modifyAddtRateObject,"disabled",2)){
+			'Ambil nilai additional premi rate dari excel'
+			AddtRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, AddRate + j)
+
+			AddtRateValueArray = AddtRateValue.split(';', -1)
+			
+			'Pengecekan additional premi rate pada excel kosong atau tidak'
+			if(AddtRateValue.length()>0){
+				'Pengecekan additional premi rate array tidak kosong'
+				if(AddtRateValueArray[i-1]!=""){
+					WebUI.click(modifyAddtRateObject)
+					
+					'Input Rate Additional Premi'
+					WebUI.setText(modifyAddtRateObject, AddtRateValueArray[((i - 1))])
+				}
+			}
+			
+		}
+		
     }
 }
 
@@ -382,95 +473,123 @@ for (int i = 1; i <= count; i++) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 
 ArrayList<WebElement> totalResult
-
-'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
-totalResult = CustomKeywords.'insuranceData.verifInsuranceData.verifyTabInsuranceData'()
-
-'ambil nilai total main premi dari confins'
-String textTotalMainPremiAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace(
-    ',', '')
-
-'ambil nilai total additional premi dari confins'
-String textTotalAdditionalPremiAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalAdditionalPremium')).replace(
-    ',', '')
-
-'ambil nilai total fee dari confins'
-String textTotalFeeAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace(
-    ',', '')
-
-'ambil nilai total premi to customer dari confins'
-String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
-    ',', '')
-
-'ambil nilai admin fee dari confins'
-String adminFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'), 
-    'value').replace(',', '')
-
-'Parsing adminfee ke tipe data angka (long)'
-BigDecimal adminFeeAmt = Long.parseLong(adminFeeAmtText)
-
-'ambil nilai stampduty fee dari confins'
-String stampdutyFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'), 
-    'value').replace(',', '')
-
-'Parsing stampdutyfee ke tipe data angka (long)'
-BigDecimal stampdutyFeeAmt = Long.parseLong(stampdutyFeeAmtText)
-
-'Perhitungan total fee'
-totalFeeResult = (adminFeeAmt + stampdutyFeeAmt)
-
-'Perhitungan total premi to customer'
-totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
-
-'Verif total main premi sesuai perhitungan'
-WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false)
-
-'Verif total additional premi sesuai perhitungan'
-WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false)
-
-'Verif total fee sesuai perhitungan'
-WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false)
-
-'Verif total premi to customer sesuai perhitungan'
-WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false)
-
-if ((totalResult[2]) == 0) {
-    'Input diskon'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 56))
+BigDecimal totalPremitoCustResult
+BigDecimal totalFeeResult
+if(GlobalVariable.Role=="Testing"){
+	
+	'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
+	totalResult = CustomKeywords.'insuranceData.verifInsuranceData.verifyTabInsuranceData'()
+	
+	'ambil nilai total main premi dari confins'
+	String textTotalMainPremiAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace(
+		',', '')
+	
+	'ambil nilai total additional premi dari confins'
+	String textTotalAdditionalPremiAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalAdditionalPremium')).replace(
+		',', '')
+	
+	'ambil nilai total fee dari confins'
+	String textTotalFeeAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace(
+		',', '')
+	
+	'ambil nilai total premi to customer dari confins'
+	String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
+		',', '')
+	
+	'ambil nilai admin fee dari confins'
+	String adminFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),
+		'value').replace(',', '')
+	
+	'Parsing adminfee ke tipe data angka (long)'
+	BigDecimal adminFeeAmt = Long.parseLong(adminFeeAmtText)
+	
+	'ambil nilai stampduty fee dari confins'
+	String stampdutyFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),
+		'value').replace(',', '')
+	
+	'Parsing stampdutyfee ke tipe data angka (long)'
+	BigDecimal stampdutyFeeAmt = Long.parseLong(stampdutyFeeAmtText)
+	
+	'Perhitungan total fee'
+	totalFeeResult = (adminFeeAmt + stampdutyFeeAmt)
+	
+	'Perhitungan total premi to customer'
+	totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
+	
+	'Verif total main premi sesuai perhitungan'
+	WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false)
+	
+	'Verif total additional premi sesuai perhitungan'
+	WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false)
+	
+	'Verif total fee sesuai perhitungan'
+	WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false)
+	
+	'Verif total premi to customer sesuai perhitungan'
+	WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false)
+	
+	if(totalResult[2]==0){
+		'Input diskon'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, TotalPremium+1))
+	}
+	
 }
 
-'Ambil nilai total premi to customer after discount dari confins'
-String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomerAfterDiscount')).replace(
-    ',', '')
+if (counterPaidByMF == 0) {
+	'Input diskon'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, TotalPremium+1))
+}
+
+String textDiscountAmt
 
 'ambil nilai diskon pada confins'
-String textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), 
-    'value').replace(',', '')
+textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+	'value').replace(',', '')
+	
+if(GlobalVariable.Role=="Testing"){
+	'Ambil nilai total premi to customer after discount dari confins'
+	String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomerAfterDiscount')).replace(
+		',', '')
+	
+	'ambil nilai diskon pada confins'
+	textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+		'value').replace(',', '')
+	
+	BigDecimal discountAmt = Long.parseLong(textDiscountAmt)
+	
+	'Perhitungan total premi to customer after discount'
+	totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
+	
+	'Verif total premi to customer after discount sesuai perhitungan'
+	WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false)
+	
+	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
+		'value').replace(',', '')
+	
+	'Verif capitalize amount sesuai perhitungan'
+	if ((totalResult[3]) != 0) {
+		WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)
+	} else {
+		WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
+	}
+	if(totalResult[2]==1){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
+			GlobalVariable.NumofColm - 1, textDiscountAmt)
+	}
+}
 
-BigDecimal discountAmt = Long.parseLong(textDiscountAmt)
 
-if ((totalResult[2]) == 1) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 56, 
+
+if (counterPaidByMF == 1) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1, 
         GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
 
-'Perhitungan total premi to customer after discount'
-totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 
-'Verif total premi to customer after discount sesuai perhitungan'
-WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false)
-
-String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'), 
-    'value').replace(',', '')
-
-'Verif capitalize amount sesuai perhitungan'
-if ((totalResult[3]) != 0) {
-    WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)
-} else {
-    WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
-}
 
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 

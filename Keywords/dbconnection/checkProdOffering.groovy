@@ -20,10 +20,10 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class checkPO {
-	
+public class checkProdOffering {
+
 	@Keyword
-	public countPO(Sql instance, String officeLogin){
+	public countProdOffering(Sql instance, String officeLogin){
 		Integer countData
 		instance.eachRow(("SELECT count(*) FROM dbo.V_REF_OFFICE ro WITH ( NOLOCK ) JOIN dbo.PROD_OFFERING_BRANCH_MBR pobm WITH ( NOLOCK ) ON ro.OFFICE_CODE = pobm.OFFICE_CODE INNER JOIN dbo.PROD_OFFERING po WITH ( NOLOCK ) ON pobm.PROD_OFFERING_H_ID = po.CURRENT_PROD_OFFERING_H_ID INNER JOIN dbo.PROD_OFFERING_H poh WITH ( NOLOCK ) ON poh.PROD_OFFERING_ID = po.PROD_OFFERING_ID INNER JOIN dbo.PROD_OFFERING_D pod WITH ( NOLOCK ) ON pod.PROD_OFFERING_H_ID = poh.PROD_OFFERING_H_ID INNER JOIN dbo.V_REF_LOB rlob WITH ( NOLOCK ) ON rlob.LOB_CODE = pod.COMPNT_VALUE WHERE pod.REF_PROD_COMPNT_CODE = 'LOB' AND ro.IS_ACTIVE = 1 AND poh.PROD_STAT = 'ACT' AND ro.OFFICE_NAME = '"+officeLogin+"' AND rlob.BIZ_TMPLT_CODE = 'CF4W'"), { def row ->
 			countData = (row[0])
