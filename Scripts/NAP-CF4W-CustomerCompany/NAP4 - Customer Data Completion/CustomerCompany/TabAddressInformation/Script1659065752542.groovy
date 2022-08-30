@@ -22,23 +22,23 @@ String filePath = userDir + GlobalVariable.DataFileCustomerCompany
 GlobalVariable.DataFilePath = filePath
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 2).length() > 1) {
+    GlobalVariable.NumofColm, 12).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
     'pilih address type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 2), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 12), false, FailureHandling.OPTIONAL)
 
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-        GlobalVariable.NumofColm, 3).length() > 1) {
+        GlobalVariable.NumofColm, 13).length() > 1) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_CopyAddressFrom'), 
             5, FailureHandling.OPTIONAL)) {
             'Select option dropdownlist Copy Address From '
             WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_CopyAddressFrom'), 
                 findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                    GlobalVariable.NumofColm, 3), false, FailureHandling.OPTIONAL)
+                    GlobalVariable.NumofColm, 13), false, FailureHandling.OPTIONAL)
         }
         
         'Click copy'
@@ -47,22 +47,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
         'pilih status rumah'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 22), false)
+                GlobalVariable.NumofColm, 32), false)
     } else {
         'input alamat'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/textarea_Address_'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 4))
+                GlobalVariable.NumofColm, 14))
 
         'input RT'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_RT'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 5))
+                GlobalVariable.NumofColm, 15))
 
         'input RW'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_RW'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 6))
+                GlobalVariable.NumofColm, 16))
 
         'click button search zipcode'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Zipcode_btn btn-raised btn-primary'))
@@ -70,22 +70,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
         'input zipcode'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Zip Code_ZipCode'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 7))
+                GlobalVariable.NumofColm, 17))
 
         'input kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Kecamatan_kecamatan'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 8))
+                GlobalVariable.NumofColm, 18))
 
         'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Kelurahan_Kelurahan'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 9))
+                GlobalVariable.NumofColm, 19))
 
         'input kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Kota_kota'), 
             findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-                GlobalVariable.NumofColm, 10))
+                GlobalVariable.NumofColm, 20))
 
         'click search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Search'), 
@@ -112,62 +112,62 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/C
     'input phone1 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 1_Area'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 11))
+            GlobalVariable.NumofColm, 21))
 
     'input phone1 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 1_Number'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 12))
+            GlobalVariable.NumofColm, 22))
 
     'input phone1 Extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 1_ Ext'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 13))
+            GlobalVariable.NumofColm, 23))
 
     'input phone2 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 2_Area'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 14))
+            GlobalVariable.NumofColm, 24))
 
     'input phone2 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 2_Number'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 15))
+            GlobalVariable.NumofColm, 25))
 
     'input phone2 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 2_Ext'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 16))
+            GlobalVariable.NumofColm, 26))
 
     'input phone3 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 3_Area'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 17))
+            GlobalVariable.NumofColm, 27))
 
     'input phone3 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 3_Number'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 18))
+            GlobalVariable.NumofColm, 28))
 
     'input phone3 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Phone 3_Ext'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 19))
+            GlobalVariable.NumofColm, 29))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Fax_Area'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 20))
+            GlobalVariable.NumofColm, 30))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/input_Fax_Number'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 21))
+            GlobalVariable.NumofColm, 31))
 
     'pilih status rumah'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 22), false)
+            GlobalVariable.NumofColm, 32), false)
 
     'click save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Save'))

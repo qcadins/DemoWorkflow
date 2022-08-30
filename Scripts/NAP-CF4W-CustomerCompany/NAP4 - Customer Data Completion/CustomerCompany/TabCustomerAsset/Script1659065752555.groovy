@@ -22,29 +22,29 @@ String filePath = userDir + GlobalVariable.DataFileCustomerCompany
 GlobalVariable.DataFilePath = filePath
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 2).length() > 1) {
+    GlobalVariable.NumofColm, 12).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Add'))
 
     'select tipe asset'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/select_MobilMotorRumah'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 2), false)
+            GlobalVariable.NumofColm, 12), false)
 
     'input asset description'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Description'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 3))
+            GlobalVariable.NumofColm, 13))
 
     'input asset value'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Value'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 4))
+            GlobalVariable.NumofColm, 14))
 
     'input asset quantity'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Quantity'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 5))
+            GlobalVariable.NumofColm, 15))
 
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Save'))

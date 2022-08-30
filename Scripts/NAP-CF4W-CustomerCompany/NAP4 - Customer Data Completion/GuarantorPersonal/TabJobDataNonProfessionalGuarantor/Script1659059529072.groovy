@@ -27,7 +27,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion
 'input profession code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/input_Profession Code_professionCodeId'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 27))
+        GlobalVariable.NumofGuarantor, 36))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Search'))
@@ -52,7 +52,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 'input job title'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/input_Job Title Name'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 29))
+        GlobalVariable.NumofGuarantor, 38))
 
 'klik button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Save  Continue'))

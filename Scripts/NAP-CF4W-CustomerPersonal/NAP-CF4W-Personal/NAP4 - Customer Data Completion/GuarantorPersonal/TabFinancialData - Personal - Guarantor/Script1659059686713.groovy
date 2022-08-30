@@ -26,24 +26,24 @@ GlobalVariable.DataFilePath = filePath
 String maritalStatus = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/label_MaritalStatus'))
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-    GlobalVariable.NumofGuarantor, 3).length() > 1) {
+    GlobalVariable.NumofGuarantor, 12).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'))
 
     'input monthly income'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Monthly Income_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 3))
+            GlobalVariable.NumofGuarantor, 12))
 
     'input monthly other income'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Other Income_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 4))
+            GlobalVariable.NumofGuarantor, 13))
 
     'pilih source monthly other income'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/select_BusinessOnline ShopSalaryStock Trading'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 5), false)
+            GlobalVariable.NumofGuarantor, 14), false)
 
     monthlyInstallment = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Monthly Installment Amount_')
 
@@ -71,16 +71,16 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
 
         'Pengecekan spouse monthly income pada excel terisi'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 9).length() >= 1) {
+            GlobalVariable.NumofGuarantor, 18).length() >= 1) {
             'Input spouse monthly income'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_SpouseMonthlyIncome'), 
                 findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-                    GlobalVariable.NumofGuarantor, 9))
+                    GlobalVariable.NumofGuarantor, 18))
         }
         
         'Pengecekan isjoinincome bernilai yes atau no pada excel'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 10).equalsIgnoreCase('Yes')) {
+            GlobalVariable.NumofGuarantor, 19).equalsIgnoreCase('Yes')) {
             'Jika is join income belum tercentang'
             if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'), 
                 5, FailureHandling.OPTIONAL)) {
@@ -99,15 +99,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     
     'input monthly installment'
     WebUI.setText(monthlyInstallment, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 6))
+            GlobalVariable.NumofGuarantor, 15))
 
     'input monthly expense'
     WebUI.setText(monthlyExpense, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 7))
+            GlobalVariable.NumofGuarantor, 16))
 
     'input dates as of'
     WebUI.setText(datesAsOf, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 8))
+            GlobalVariable.NumofGuarantor, 17))
 
     'click button calculate'
     WebUI.click(buttonCalculate)
@@ -117,15 +117,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-    GlobalVariable.NumofGuarantor, 12).length() > 1) {
+    GlobalVariable.NumofGuarantor, 21).length() > 1) {
     'input jumlah harta'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Jumlah Harta'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 12))
+            GlobalVariable.NumofGuarantor, 21))
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-    GlobalVariable.NumofGuarantor, 15).length() > 1) {
+    GlobalVariable.NumofGuarantor, 24).length() > 1) {
     'click button add bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
 
@@ -135,7 +135,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Bank Code_BankCode'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 14))
+            GlobalVariable.NumofGuarantor, 23))
 
     'click button search bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Search'))
@@ -158,30 +158,30 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank branch name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Bank Branch_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 16))
+            GlobalVariable.NumofGuarantor, 25))
 
     'input bank account name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Account Name_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 17))
+            GlobalVariable.NumofGuarantor, 26))
 
     'input bank account number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Account No_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 18))
+            GlobalVariable.NumofGuarantor, 27))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'), 
         2, FailureHandling.OPTIONAL)) {
         'checkbox default'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 19) == 'Yes') {
+            GlobalVariable.NumofGuarantor, 28) == 'Yes') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'))
         }
     } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'), 
         2)) {
         'checkbox default'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 19) == 'No') {
+            GlobalVariable.NumofGuarantor, 28) == 'No') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Default_ng-untouched ng-pristine ng-valid'))
         }
     }
@@ -190,14 +190,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         2, FailureHandling.OPTIONAL)) {
         'checkbox active'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 20) == 'Yes') {
+            GlobalVariable.NumofGuarantor, 29) == 'Yes') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
         }
     } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
         2)) {
         'checkbox active'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 20) == 'No') {
+            GlobalVariable.NumofGuarantor, 29) == 'No') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
         }
     }
@@ -205,7 +205,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     'input bank begining balance'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/input_Beginning Balance_'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData - Personal - Guarantor').getValue(
-            GlobalVariable.NumofGuarantor, 21))
+            GlobalVariable.NumofGuarantor, 30))
 
     'click button calculate bank'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_CalculateBank'))

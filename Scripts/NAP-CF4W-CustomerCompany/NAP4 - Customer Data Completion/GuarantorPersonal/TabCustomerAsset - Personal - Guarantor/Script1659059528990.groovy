@@ -22,29 +22,29 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
 GlobalVariable.DataFilePath = filePath
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
-    GlobalVariable.NumofGuarantor, 2).length() > 1) {
+    GlobalVariable.NumofGuarantor, 12).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
 
     'pilih asset type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/select_MobilMotorRumah'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 2), false)
+            GlobalVariable.NumofGuarantor, 12), false)
 
     'input asset description'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/input_Asset Description_'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 3))
+            GlobalVariable.NumofGuarantor, 13))
 
     'input asset value'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/input_Asset Value_'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 4))
+            GlobalVariable.NumofGuarantor, 14))
 
     'input asset quantity'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/input_Asset Quantity_'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 5))
+            GlobalVariable.NumofGuarantor, 15))
 
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save'))

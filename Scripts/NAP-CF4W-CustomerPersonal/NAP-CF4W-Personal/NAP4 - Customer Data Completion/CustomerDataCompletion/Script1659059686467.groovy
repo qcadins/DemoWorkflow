@@ -27,7 +27,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 'input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 2))
+        GlobalVariable.NumofColm, 12))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
@@ -80,15 +80,15 @@ for (int i = 1; i <= count; i++) {
 
     'tampung customer array excel'
     def CustomerArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 3).split(';')
+        GlobalVariable.NumofColm, 13).split(';')
 
     'tampung family array excel'
     def FamilyArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 5).split(';')
+        GlobalVariable.NumofColm, 15).split(';')
 
     'tampung guarantor array excel'
     def GuarantorArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 7).split(';')
+        GlobalVariable.NumofColm, 17).split(';')
 
     'verify customerarray > 0'
     if (CustomerArray.size() > 0) {
@@ -113,7 +113,7 @@ for (int i = 1; i <= count; i++) {
                 }
             } else if (isComplete == 'YES') {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 4) == 'YES') {
+                    GlobalVariable.NumofColm, 14) == 'YES') {
                     'verify if customerarray == customename'
                     if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                         'click button action'
@@ -157,7 +157,7 @@ for (int i = 1; i <= count; i++) {
                 }
             } else if (isComplete == 'YES') {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 6) == 'YES') {
+                    GlobalVariable.NumofColm, 16) == 'YES') {
                     'verify customername == family array'
                     if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                         'click button action'
@@ -212,7 +212,7 @@ for (int i = 1; i <= count; i++) {
                 }
             } else if (isComplete == 'YES') {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 8) == 'YES') {
+                    GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
                         WebUI.click(modifynewButtonAction)

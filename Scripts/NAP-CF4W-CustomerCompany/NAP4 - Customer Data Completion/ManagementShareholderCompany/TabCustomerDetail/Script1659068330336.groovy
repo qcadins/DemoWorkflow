@@ -26,27 +26,27 @@ GlobalVariable.DataFilePath = filePath
 'input establishment date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Establishment Date'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 4))
+        GlobalVariable.NumofFamily, 14))
 
 'input no of employee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_No Of Employee'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 5))
+        GlobalVariable.NumofFamily, 15))
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofGuarantor, 6).length() > 2) {
+    GlobalVariable.NumofFamily, 16).length() > 2) {
     'click button customer group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Customer Group_'))
 
     'input customer no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer No_custNoId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-            GlobalVariable.NumofGuarantor, 6))
+            GlobalVariable.NumofFamily, 16))
 
     'input customer name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer Name_custNameId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-            GlobalVariable.NumofGuarantor, 7))
+            GlobalVariable.NumofFamily, 17))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Search'))
@@ -67,14 +67,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'), 
     2, FailureHandling.OPTIONAL)) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 8) == 'Yes') {
+        GlobalVariable.NumofFamily, 18) == 'Yes') {
         'Click VIP checklist'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'), 
     2)) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 8) == 'No') {
+        GlobalVariable.NumofFamily, 18) == 'No') {
         'Click VIP checklist'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
     }
@@ -83,14 +83,14 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'), 
     2, FailureHandling.OPTIONAL)) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 9) == 'Yes') {
+        GlobalVariable.NumofFamily, 19) == 'Yes') {
         'click affiliation and multifinance'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'), 
     2)) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 9) == 'No') {
+        GlobalVariable.NumofFamily, 19) == 'No') {
         'click affiliation and multifinance'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
     }
@@ -102,7 +102,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion
 'input industry code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Industry Type Code_industryTypeCodeId'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 10))
+        GlobalVariable.NumofFamily, 20))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Search'))
@@ -121,20 +121,20 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 }
 
 'select customer model'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/select_Select One Corporate  Non Corporate'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofGuarantor, 12), false)
+        GlobalVariable.NumofFamily, 22), false)
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofGuarantor, 8) == 'Yes') {
+    GlobalVariable.NumofFamily, 18) == 'Yes') {
     'input VIP note'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/textarea_VIP Notes'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
-            GlobalVariable.NumofGuarantor, 13))
+            GlobalVariable.NumofFamily, 23))
 }
 
 'click button save and continue'
@@ -147,15 +147,15 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 } else {
     'write to excel if success'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusSuccess)
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
 
     if (flagWarning > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
-            0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
+            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
     }
 }
 

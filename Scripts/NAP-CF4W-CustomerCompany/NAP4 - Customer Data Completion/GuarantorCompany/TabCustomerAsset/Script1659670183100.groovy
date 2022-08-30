@@ -22,29 +22,29 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 GlobalVariable.DataFilePath = filePath
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-    GlobalVariable.NumofColm, 2).length() > 1) {
+    GlobalVariable.NumofGuarantor, 12).length() > 1) {
     'click button add'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Add'))
 
     'select tipe asset'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/select_MobilMotorRumah'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofColm, 2), false)
+            GlobalVariable.NumofGuarantor, 12), false)
 
     'input asset description'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Description'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofColm, 3))
+            GlobalVariable.NumofGuarantor, 13))
 
     'input asset value'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Value'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofColm, 4))
+            GlobalVariable.NumofGuarantor, 14))
 
     'input asset quantity'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/input_Asset Quantity'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofColm, 5))
+            GlobalVariable.NumofGuarantor, 15))
 
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Save'))
@@ -59,11 +59,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Back'))
 
     'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofGuarantor - 
         1, GlobalVariable.StatusFailed)
 } else {
     'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofGuarantor - 
         1, GlobalVariable.StatusSuccess)
 }
 

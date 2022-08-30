@@ -22,25 +22,25 @@ String filePath = userDir + GlobalVariable.DataFileCustomerCompany
 GlobalVariable.DataFilePath = filePath
 
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 2).split(';')
+    GlobalVariable.NumofColm, 12).split(';')
 
 def DocumentNoArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 3).split(';')
+    GlobalVariable.NumofColm, 13).split(';')
 
 def DateIssuedArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 4).split(';')
+    GlobalVariable.NumofColm, 14).split(';')
 
 def ExpiredDateArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 5).split(';')
+    GlobalVariable.NumofColm, 15).split(';')
 
 def NotaryNameArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 6).split(';')
+    GlobalVariable.NumofColm, 16).split(';')
 
 def NotaryLocationArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 7).split(';')
+    GlobalVariable.NumofColm, 17).split(';')
 
 def NotesArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 8).split(';')
+    GlobalVariable.NumofColm, 18).split(';')
 
 if (LegalDocTypeArray.size() > 0) {
     for (i = 1; i <= LegalDocTypeArray.size(); i++) {
@@ -60,28 +60,28 @@ if (LegalDocTypeArray.size() > 0) {
             DateIssuedArray[(i - 1)])
 
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 5).length() > 0) {
+            GlobalVariable.NumofColm, 15).length() > 0) {
             'input expired date'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
                 ExpiredDateArray[(i - 1)])
         }
         
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 6).length() > 0) {
+            GlobalVariable.NumofColm, 16).length() > 0) {
             'input notary name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
                 NotaryNameArray[(i - 1)])
         }
         
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 7).length() > 0) {
+            GlobalVariable.NumofColm, 17).length() > 0) {
             'input notary location'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
                 NotaryLocationArray[(i - 1)])
         }
         
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-            GlobalVariable.NumofColm, 8).length() > 0) {
+            GlobalVariable.NumofColm, 18).length() > 0) {
             'input Notes'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
                 NotesArray[(i - 1)])
