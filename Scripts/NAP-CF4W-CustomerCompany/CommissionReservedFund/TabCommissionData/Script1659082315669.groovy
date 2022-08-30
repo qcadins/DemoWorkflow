@@ -44,7 +44,7 @@ WebUI.delay(5)
 'Input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 3))
+		GlobalVariable.NumofColm, 13))
 
 'Klik Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Search'))
@@ -92,7 +92,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 
 'Mengambil nilai allocation type dari excel'
 allocationType = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-	GlobalVariable.NumofColm, 2)
+	GlobalVariable.NumofColm, 12)
 
 'Select dropdownlist allocation type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
@@ -102,6 +102,11 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/CommissionRes
 'Arraylist untuk menampung List Supplier'
 ArrayList<WebElement> variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
 
+'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
+def supRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Commission Data') +
+1
+
+
 'Pengecekan Jika terdapat minimal 1 List Supplier'
 if (variableSupp.size() > 0) {
 	'Mengambil nilai supplier name dari web confins'
@@ -109,7 +114,7 @@ if (variableSupp.size() > 0) {
 
 	'Mengambil nilai supplier name yang akan didelete dari excel'
 	String deleteSupp = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-		GlobalVariable.NumofColm, 4)
+		GlobalVariable.NumofColm, supRow+1)
 
 	'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
 	if (supplierName.equalsIgnoreCase(deleteSupp)) {
@@ -124,7 +129,7 @@ if (variableSupp.size() > 0) {
 		'Select dropdownlist bank account pada supplier'
 		WebUI.selectOptionByIndex(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_BankAccountSupplier'),
 			findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-				GlobalVariable.NumofColm, 5), FailureHandling.OPTIONAL)
+				GlobalVariable.NumofColm, supRow+2), FailureHandling.OPTIONAL)
 
 		'Query Select pada database untuk mengambil nilai supplier code'
 		supplierCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierCode'(sqlConnection, supplierName)
@@ -191,20 +196,20 @@ if (variableSupp.size() > 0) {
 			'Pengecekan allocation type jika amount'
 			if (allocationType == 'Amount') {
 				if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-					GlobalVariable.NumofColm, (2 * i) + 4) != '') {
-					'Input Amount, 2i+4, +4 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+4 = 6  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
+					GlobalVariable.NumofColm, (2 * i) + 1 + supRow) != '') {
+					'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					WebUI.setText(modifyObjectCommissionAmt, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-							GlobalVariable.NumofColm, (2 * i) + 4), FailureHandling.OPTIONAL)
+							GlobalVariable.NumofColm, (2 * i) + 1 + supRow), FailureHandling.OPTIONAL)
 				}
 				
 				'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
 				WebUI.click(modifyObjectCommissionPercentage)
 			} else {
 				if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-					GlobalVariable.NumofColm, (2 * i) + 5) != '') {
-					'Input Percentage, 2i+5, +5 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+5 = 7  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
+					GlobalVariable.NumofColm, (2 * i) + 2 + supRow) != '') {
+					'Input Percentage, 2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					WebUI.setText(modifyObjectCommissionPercentage, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-							GlobalVariable.NumofColm, (2 * i) + 5), FailureHandling.OPTIONAL)
+							GlobalVariable.NumofColm, (2 * i) + 2 + supRow), FailureHandling.OPTIONAL)
 				}
 				
 				'Klik pada inputan amount untuk merefresh/merubah nilai amount'

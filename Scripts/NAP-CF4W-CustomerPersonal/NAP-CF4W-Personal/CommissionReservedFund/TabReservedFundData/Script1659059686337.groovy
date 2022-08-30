@@ -84,27 +84,27 @@ if(GlobalVariable.Role=="Testing"){
 'Input Promo pada Interest Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 2), FailureHandling.OPTIONAL)
+        GlobalVariable.NumofColm, 12), FailureHandling.OPTIONAL)
 
 'Input Promo pada Insurance Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_InsuranceIncome'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 3), FailureHandling.OPTIONAL)
+        GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 'Input Promo pada Life Insurance Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_LifeInsuranceIncome'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 4), FailureHandling.OPTIONAL)
+        GlobalVariable.NumofColm, 14), FailureHandling.OPTIONAL)
 
 'Input Promo pada Admin Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_AdminFee'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 5), FailureHandling.OPTIONAL)
+        GlobalVariable.NumofColm, 15), FailureHandling.OPTIONAL)
 
 'Input Promo pada Provision Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_ProvisionFee'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 6), FailureHandling.OPTIONAL)
+        GlobalVariable.NumofColm, 16), FailureHandling.OPTIONAL)
 
 BigDecimal totalAmt
 
