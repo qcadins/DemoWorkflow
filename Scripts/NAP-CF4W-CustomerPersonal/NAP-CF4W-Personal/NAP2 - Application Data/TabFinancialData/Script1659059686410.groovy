@@ -41,25 +41,25 @@ if (GlobalVariable.Role == 'Testing') {
 
 def datafilefinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
-def SubsidyTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 3).split(';')
+def SubsidyTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
 
-def SubsidyfromValueArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 4).split(';')
+def SubsidyfromValueArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
 
-def AllocationformArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 5).split(';')
+def AllocationformArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
 
-def SubsidySourceArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 6).split(';')
+def SubsidySourceArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
 
-def SubsidyValueTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 7).split(';')
+def SubsidyValueTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
 
-def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 8).split(';')
+def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
 
-def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 9).split(';')
+def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
 def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) {
+if (datafilefinancial.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Yes')) {
     for (i = 0; i < AllocationformArray.size(); i++) {
         if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
             (SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -69,7 +69,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('Y
         String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
 
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
-            7, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
+            16, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
     }
 }
 
@@ -320,7 +320,7 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
             }
         } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
             'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-            if (datafilefinancial.getValue(GlobalVariable.NumofColm, 3) != '') {
+            if (datafilefinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
                 if (SubsidyTypeArray.size() > 0) {
                     'click button add subsidy'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))
@@ -416,129 +416,129 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
     }
 }
 
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 11) == 'No') {
+if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
     'input admin fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 12))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 21))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 17) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 26) == 'Yes') {
             'click admin fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 17) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 26) == 'No') {
             'click admin fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 17) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 26) == 'Yes') {
         'input admin fee capitalized '
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 18))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 27))
     }
     
     'input additional admin'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 13))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 22))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 19) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 28) == 'Yes') {
             'click additional admin capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 19) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 28) == 'No') {
             'click additional admin capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 19) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 28) == 'Yes') {
         'input additional admin capitalized'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 20))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 29))
     }
     
     'input notary fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 14))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 23))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 21) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 30) == 'Yes') {
             'click notary fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 21) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 30) == 'No') {
             'click notary fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 21) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 30) == 'Yes') {
         'input lick notary fee capitalized '
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 22))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 31))
     }
     
     'input other fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 15))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 24))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 23) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 32) == 'Yes') {
             'click other fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 23) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 32) == 'No') {
             'click other fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 23) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 32) == 'Yes') {
         'input other fee capitalized'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 24))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 33))
     }
     
     'input fiducia fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 16))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 25))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 25) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34) == 'Yes') {
             'click fiducia fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 25) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34) == 'No') {
             'click fiducia fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 25) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34) == 'Yes') {
         'input fiducia fee capitalized'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 26))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 35))
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 27) == 'Amount') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
         'click amount radio button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/div_AmountRadio'))
 
         'click amount radio button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/div_AmountRadio'))
-    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 27) == 'Percentage') {
+    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Percentage') {
         'click percentage radio button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/div_PercentageRadio'))
 
@@ -548,28 +548,28 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 11) == 'No') {
     
     'select Provision fee calculation base'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_OTR-DPOTR-DP  Ins Cptlz  Fee Cptlz(Excl Provision)'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 28), false)
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 37), false)
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 31) == 'Yes') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40) == 'Yes') {
             'click provision fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize_checkbox'))
         }
     } else {
-        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 31) == 'No') {
+        if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40) == 'No') {
             'click provision fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize_checkbox'))
         }
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 31) == 'Yes') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40) == 'Yes') {
         'input provision fee capitalized '
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 32))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 41))
     }
     
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 27) == 'Percentage') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Percentage') {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
             Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -581,8 +581,8 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 11) == 'No') {
 
         'input provision fee percentage'
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 29)), FailureHandling.OPTIONAL)
-    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 27) == 'Amount') {
+            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 38)), FailureHandling.OPTIONAL)
+    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
             Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -593,16 +593,16 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 11) == 'No') {
             Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 30)))
+            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 39)))
     }
 }
 
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34).length() > 1) {
+if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
     'select Rate type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_RateType'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 34), false, FailureHandling.OPTIONAL)
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 43), false, FailureHandling.OPTIONAL)
 
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34) == 'Effective Rate') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43) == 'Effective Rate') {
         'input effective rate'
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'), 
             Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -614,8 +614,8 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34).length() > 1) {
             Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'), 
-            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 35)), FailureHandling.OPTIONAL)
-    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34) == 'Flat Rate') {
+            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 44)), FailureHandling.OPTIONAL)
+    } else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43) == 'Flat Rate') {
         'input flat rate'
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'), 
             Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -627,20 +627,20 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 34).length() > 1) {
             Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'), 
-            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 36)), FailureHandling.OPTIONAL)
+            Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 45)), FailureHandling.OPTIONAL)
     }
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-    GlobalVariable.NumofColm, 9) == 'Arrear') {
-    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 37) == 'Yes') {
+    GlobalVariable.NumofColm, 18) == 'Arrear') {
+    if (datafilefinancial.getValue(GlobalVariable.NumofColm, 46) == 'Yes') {
         'input grace period'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Grace Period'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 38))
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 47))
 
         'select method'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'), 
-            datafilefinancial.getValue(GlobalVariable.NumofColm, 39), false)
+            datafilefinancial.getValue(GlobalVariable.NumofColm, 48), false)
     }
 }
 
@@ -651,10 +651,10 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
 'Pengecekan jika tdp at mf tidak kosong'
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 40).length() > 0) {
+if (datafilefinancial.getValue(GlobalVariable.NumofColm, 49).length() > 0) {
     'input tdp at mf'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 40))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 49))
 	
 	'click button calculate'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))

@@ -131,10 +131,10 @@ BigDecimal NTFValueFinal = Math.round(NTFValueADDCapEXCProvCap.multiply(Provisio
 
 'check if calculate based is OTR-DP'
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-	GlobalVariable.NumofColm, 28).equalsIgnoreCase('OTR-DP')) {
+	GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP')) {
 	'check if provision fee type Percentage'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 27) == 'Percentage') {
+		GlobalVariable.NumofColm, 36) == 'Percentage') {
 		'calculate NTFProvisionCalc multiply percentage'
 		BigDecimal NTFValuexPercentage = NTFforProvisionCalc.multiply(ProvisionPercentage / 100)
 
@@ -153,7 +153,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
 } else {
 	'check if provision fee type Percentage'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 27) == 'Percentage') {
+		GlobalVariable.NumofColm, 36) == 'Percentage') {
 		'convert NTFValueFinal to string'
 		String strNTFValueFinal = NTFValueFinal.toString()
 
