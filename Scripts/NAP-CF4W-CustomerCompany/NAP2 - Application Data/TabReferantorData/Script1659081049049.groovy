@@ -32,7 +32,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPL
 'input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 3))
+		GlobalVariable.NumofColm, 13))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -76,8 +76,8 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 	for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantorCompany) +
 	1); (GlobalVariable.NumofReferantor)++) {
 		if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-			GlobalVariable.NumofReferantor, 2) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 3)) {
+			GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 13)) {
 			'click button add'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Add'))
 
@@ -116,7 +116,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 
 			'select referantor category'
 			WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-					GlobalVariable.NumofReferantor, 3), false, FailureHandling.OPTIONAL)
+					GlobalVariable.NumofReferantor, 13), false, FailureHandling.OPTIONAL)
 			
 			'Ambil dan simpan nilai referantor category dari confins'
 			String refCategory = WebUI.getAttribute(modifyObjectSelectReferantorCategory, 'value')
@@ -147,7 +147,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 			'input referantor name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'),
 				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-					GlobalVariable.NumofReferantor, 4))
+					GlobalVariable.NumofReferantor, 14))
 
 			'click button search'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -203,11 +203,11 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 			
 			'select bank account'
 			WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-					GlobalVariable.NumofReferantor, 6), FailureHandling.OPTIONAL)
+					GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
 
 			'select tax calculation method'
 			WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-					GlobalVariable.NumofReferantor, 7), false, FailureHandling.OPTIONAL)
+					GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 
 			'cek inputan mandatory apakah sudah terisi semua atau belum'
 			if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||

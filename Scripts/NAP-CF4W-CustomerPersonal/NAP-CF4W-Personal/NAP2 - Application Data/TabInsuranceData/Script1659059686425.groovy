@@ -40,7 +40,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 3)
+    GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 

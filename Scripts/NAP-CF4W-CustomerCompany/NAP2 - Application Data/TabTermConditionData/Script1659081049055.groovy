@@ -47,7 +47,6 @@ int count = variable.size()
 
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {
-	println(i+"i")
 	String newxpathRequired
 
 	String newxpathcheckbox
@@ -85,7 +84,7 @@ for (int i = 1; i <= count; i++) {
 		}
 		
 		def checkNO = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-			GlobalVariable.NumofColm, 4).split(';', -1)
+			GlobalVariable.NumofColm, 14).split(';', -1)
 
 		'Pengecekan jika perlu dokumen yang required no tercentang'
 		if (checkNO.size() > 0) {
@@ -109,7 +108,7 @@ for (int i = 1; i <= count; i++) {
 		}
 		
 		def uncheckYES = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-			GlobalVariable.NumofColm, 2).split(';', -1)
+			GlobalVariable.NumofColm, 12).split(';', -1)
 
 		newxpathPromiseDate = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 		i) + ']/td[7]/input')
@@ -118,7 +117,7 @@ for (int i = 1; i <= count; i++) {
 			'xpath', 'equals', newxpathPromiseDate, true)
 
 		def PromiseDate = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-			GlobalVariable.NumofColm, 3).split(';', -1)
+			GlobalVariable.NumofColm, 13).split(';', -1)
 
 		'Pengecekan jika perlu dokumen required yes uncentang'
 		if (uncheckYES.size() > 0) {
@@ -133,7 +132,7 @@ for (int i = 1; i <= count; i++) {
 					}
 					
 					if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-						GlobalVariable.NumofColm, 3).length() > 0) {
+						GlobalVariable.NumofColm, 13).length() > 0) {
 						'Input Promise Date'
 						WebUI.setText(modifyObjectPromiseDate, PromiseDate[(j - 1)])
 					}
@@ -155,13 +154,13 @@ for (int i = 1; i <= count; i++) {
 		'xpath', 'equals', newxpathWaived, true)
 
 	def expiredDateDocument = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-		GlobalVariable.NumofColm, 5).split(';', -1)
+		GlobalVariable.NumofColm, 15).split(';', -1)
 
 	def expiredDate = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-		GlobalVariable.NumofColm, 6).split(';', -1)
+		GlobalVariable.NumofColm, 16).split(';', -1)
 
-		def waivedDocument = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
-			GlobalVariable.NumofColm, 7).split(';', -1)
+	def waivedDocument = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
+			GlobalVariable.NumofColm, 17).split(';', -1)
 	
 	'Pengecekan jika waive dapat diklik'
 	if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
@@ -183,7 +182,7 @@ for (int i = 1; i <= count; i++) {
 			}
 		}
 	}
-	
+		
 	'Pengecekan jika ada dokumen yang perlu diisi expired date'
 	if (expiredDateDocument.size() > 0) {
 		'Looping dokumen yang perlu diisi expired date'
@@ -198,6 +197,7 @@ for (int i = 1; i <= count; i++) {
 			}
 		}
 	}
+	
 	
 }
 

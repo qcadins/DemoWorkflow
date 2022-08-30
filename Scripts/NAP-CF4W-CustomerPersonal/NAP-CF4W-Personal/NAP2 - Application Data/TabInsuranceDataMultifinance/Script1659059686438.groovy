@@ -54,15 +54,15 @@ String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cus
 'Select option dropdownlist Asset Region'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 13), false)
+        GlobalVariable.NumofColm, 22), false)
 
 'Input Coverage Amount'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 14))
+        GlobalVariable.NumofColm, 23))
 
 coverPeriod = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 15)
+    GlobalVariable.NumofColm, 24)
 
 'Select option dropdownlist cover period'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'), 
@@ -73,13 +73,13 @@ if ((coverPeriod == 'Over Tenor') || (coverPeriod == 'Partial Tenor')) {
     'Input Insurance Length'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Insurance Length MF'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 19))
+            GlobalVariable.NumofColm, 28))
 }
 
 'Select option dropdownlist payment type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 16), false)
+        GlobalVariable.NumofColm, 25), false)
 
 if(GlobalVariable.Role=="Testing"){
 	ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
@@ -107,12 +107,12 @@ if(GlobalVariable.Role=="Testing"){
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 17), false)
+        GlobalVariable.NumofColm, 26), false)
 
 insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes MF')
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
+    GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
     'Modify properti untuk insurance notes bagian company insured by customer multifinance'
     insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea', 
         true)
@@ -120,11 +120,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
 'Input insurance notes'
 WebUI.setText(insuranceNotesCompany, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 18))
+        GlobalVariable.NumofColm, 27))
 
 buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-	GlobalVariable.NumofColm, 3) == 'Customer - Multifinance') {
+	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Klik Generate Insurance'
 	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
 }
@@ -144,22 +144,22 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 
 'Verifikasi/memastikan isfeeusedefault pada excel'
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 21) == 'NO') {
+    GlobalVariable.NumofColm, 30) == 'NO') {
     'Input Admin Fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 22), FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 31), FailureHandling.OPTIONAL)
 
     'Input Customer Stampduty Fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 23), FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
 'Select option dropdownlist main coverage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 25), false)
+        GlobalVariable.NumofColm, 34), false)
 
 'Mengambil nilai row keberapa dimulai data additional coverage (apply to all) pada excel'
 def addCovRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage') + 

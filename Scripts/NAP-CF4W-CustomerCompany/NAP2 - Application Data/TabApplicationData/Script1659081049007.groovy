@@ -86,7 +86,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
 		
 		'Verif username login dengan text label officer'
-		WebUI.verifyMatch(textOfficer, "(?i)"+officerName, true)
+		WebUI.verifyMatch(textOfficer, '(?i)'+officerName, true)
 	
 		'Ambil nama spv dari db'
 		spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
@@ -134,17 +134,17 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		'Input MO Code'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Code'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-				GlobalVariable.NumofColm, 3))
+				GlobalVariable.NumofColm, 12))
 
 		'Input MO Head Name'
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Head Name'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-				GlobalVariable.NumofColm, 4))
+				GlobalVariable.NumofColm, 13))
 
 		'Input MO Office Name'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MOOfficeName'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-				GlobalVariable.NumofColm, 5))
+				GlobalVariable.NumofColm, 14))
 
 		'Click Search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
@@ -199,21 +199,21 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 'Input MO Notes'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/textarea_MONotes'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 6))
+		GlobalVariable.NumofColm, 15))
 
 'Select option dropdownlist App Source'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 8), false, FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 17), false, FailureHandling.OPTIONAL)
 
 'Select option dropdownlist First Installment Type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_FirstInstallmentType'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 9), false)
+		GlobalVariable.NumofColm, 18), false)
 
 'Inisialisasi Variabel'
 String payFreq = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 10)
+	GlobalVariable.NumofColm, 19)
 
 'Select option dropdownlist Payment Frequency'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_PaymentFrequency'),
@@ -221,7 +221,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 
 'Inisialisasi Variabel'
 String tenorString = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 11)
+	GlobalVariable.NumofColm, 20)
 
 'Input tenor'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Tenor'),
@@ -260,18 +260,18 @@ if(GlobalVariable.RoleCompany=="Testing"){
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 12).length() > 0) {
+	GlobalVariable.NumofColm, 21).length() > 0) {
 	'Select option dropdownlist DPSourcePaymentType'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 12), false)
+			GlobalVariable.NumofColm, 21), false)
 }
 
 String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 'value', FailureHandling.OPTIONAL)
 
 //'Select option dropdownlist Interest Type'
 //WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
-//	textInterestType, false)
+//    textInterestType, false)
 
 scheme = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 
@@ -286,15 +286,15 @@ if (textInterestType == 'Float Rate') {
 	'Select option dropdownlist Floating Period'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_FloatingPeriod'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 14), false)
+			GlobalVariable.NumofColm, 23), false)
 }
 
 'Select option dropdownlist installment scheme'
 WebUI.selectOptionByLabel(scheme, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 15), false)
+		GlobalVariable.NumofColm, 24), false)
 
 textwop = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 16)
+	GlobalVariable.NumofColm, 25)
 
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
@@ -305,27 +305,27 @@ if (textwop == 'Auto Debit') {
 
 	'Select option dropdownlist Customer Bank Account'
 	WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 17), FailureHandling.OPTIONAL)
+			GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
 }
 
 'Select option dropdownlist Customer Notification By'
 WebUI.selectOptionByLabel(notif, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 18), false)
+		GlobalVariable.NumofColm, 27), false)
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 19).length() > 0) {
+	GlobalVariable.NumofColm, 28).length() > 0) {
 	'Select option dropdownlist Installment Source Payment'
 	WebUI.selectOptionByLabel(inssource, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 19), false)
+			GlobalVariable.NumofColm, 28), false)
 }
 
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 21).length() > 1) {
+	GlobalVariable.NumofColm, 30).length() > 1) {
 	'Select option dropdownlist Copy Address From '
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CopyAddressFrom'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 21), false)
+			GlobalVariable.NumofColm, 30), false)
 
 	'Click copy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Copy'))
@@ -333,17 +333,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 	'Input Address'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/textarea_Address'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 22))
+			GlobalVariable.NumofColm, 31))
 
 	'Input RT'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_RT'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 23))
+			GlobalVariable.NumofColm, 32))
 
 	'Input RW'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_RW'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 24))
+			GlobalVariable.NumofColm, 33))
 
 	'Click Lookup Zipcode'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Zipcode'))
@@ -351,22 +351,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 	'Input Zipcode'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_ZipCodeLookup'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 25))
+			GlobalVariable.NumofColm, 34))
 
 	'Input Kecamatan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kecamatan_kecamatan'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 26))
+			GlobalVariable.NumofColm, 35))
 
 	'Input Kelurahan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kelurahan_Kelurahan'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 27))
+			GlobalVariable.NumofColm, 36))
 
 	'Input Kota'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kota_kota'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 28))
+			GlobalVariable.NumofColm, 37))
 
 	'Click search'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
@@ -399,60 +399,60 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 'Input Phone 1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 area'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 29))
+		GlobalVariable.NumofColm, 38))
 
 'Input Phone 1 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 number'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 30))
+		GlobalVariable.NumofColm, 39))
 
 'Input Phone 1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 extension'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 31))
+		GlobalVariable.NumofColm, 40))
 
 'Input Phone 2 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 area'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 32))
+		GlobalVariable.NumofColm, 41))
 
 'Input Phone 2 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 number'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 33))
+		GlobalVariable.NumofColm, 42))
 
 'Input Phone 2 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 extension'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 34))
+		GlobalVariable.NumofColm, 43))
 
 'Input Phone 3 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 area'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 35))
+		GlobalVariable.NumofColm, 44))
 
 'Input Phone 3 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 number'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 36))
+		GlobalVariable.NumofColm, 45))
 
 'Input Phone 3 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 extension'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 37))
+		GlobalVariable.NumofColm, 46))
 
 'Input Fax Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Fax area'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 38))
+		GlobalVariable.NumofColm, 47))
 
 'Input Fax Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Fax number'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 39))
+		GlobalVariable.NumofColm, 48))
 
 String coc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 41)
+	GlobalVariable.NumofColm, 50)
 
 slikbtn = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Economic Sector (Slik)')
 
@@ -465,12 +465,12 @@ if (coc != 'Lainnya') {
 	'Input prev agreement no'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_PrevAgreementNo'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 42))
+			GlobalVariable.NumofColm, 51))
 
 	'Select option dropdownlist way of restructure '
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfRestructure'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-			GlobalVariable.NumofColm, 43), false)
+			GlobalVariable.NumofColm, 52), false)
 }
 
 'Click lookup slik'
@@ -479,7 +479,7 @@ WebUI.click(slikbtn)
 'Input Economic Sector Code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Economic Sector Code'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 44))
+		GlobalVariable.NumofColm, 53))
 
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
@@ -511,17 +511,17 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 'Select option dropdownlist Blacklist APPI'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_BlackListAppi'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 47), false)
+		GlobalVariable.NumofColm, 56), false)
 
 'Input APPI Score'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_APPI SCORE'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 48))
+		GlobalVariable.NumofColm, 57))
 
 'Input Date APP DATA'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_DATE APP DATA'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 49))
+		GlobalVariable.NumofColm, 58))
 
 'Click Lookup REF MASTER APP DATA'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_REF MASTER APP DATA'))
@@ -529,7 +529,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApp
 'Input Code REF MASTER APP DATA'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Code_RefMasterAppData'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 50))
+		GlobalVariable.NumofColm, 59))
 
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
@@ -561,7 +561,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 'Input Jumlah Asset'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_JUMLAH ASSET'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 52))
+		GlobalVariable.NumofColm, 61))
 
 WebUI.delay(3)
 

@@ -68,7 +68,7 @@ CustomKeywords.'JsExecutor.jsExecutionFunction'(jsCode)
 
 'Cek IsCoverLifeInsurance Tercentang atau tidak pada Excel'
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-    GlobalVariable.NumofColm, 3) == 'YES') {
+    GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
@@ -105,26 +105,26 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     'Select DropDownList Life Insco Branch Name'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 4), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 13), false, FailureHandling.OPTIONAL)
 
     'Select DropDownList Premium Payment Method'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 5), false)
+            GlobalVariable.NumofColm, 14), false)
 
     'Cek dan Memastikan Jika Premium Payment Method = Paid in Advance & Capitalized Mix'
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-        GlobalVariable.NumofColm, 5) == 'Paid in Advance & Capitalized Mix') {
+        GlobalVariable.NumofColm, 14) == 'Paid in Advance & Capitalized Mix') {
         'Set Nilai Persentasi Capitalized Premium'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-                GlobalVariable.NumofColm, 6))
+                GlobalVariable.NumofColm, 15))
     }
     
     'Set Notes'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/textarea_Notes'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 7))
+            GlobalVariable.NumofColm, 16))
 
     'Inisialisasi Driver'
     WebDriver driver = DriverFactory.getWebDriver()
@@ -157,15 +157,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
         'Ambil nilai dari excel untuk menentukan Subject Type Customer tercentang atau tidak'
         String isCustomer = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 9)
+            GlobalVariable.NumofColm, 18)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Guarantor tercentang atau tidak'
         String isGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 10)
+            GlobalVariable.NumofColm, 19)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Spouse tercentang atau tidak'
         String isSpouse = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 11)
+            GlobalVariable.NumofColm, 20)
 
         if (textSubject == 'CUSTOMER') {
             if (isCustomer == 'YES') {
@@ -196,7 +196,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                 }
                 
                 def checkGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-                    GlobalVariable.NumofColm, 12).split(';')
+                    GlobalVariable.NumofColm, 21).split(';')
 
                 newxpathSubjectName = (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[1]')
 
@@ -241,7 +241,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     'Set Admin Fee Amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Admin Fee Amount_CustAdminFeeAmt'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-            GlobalVariable.NumofColm, 14))
+            GlobalVariable.NumofColm, 23))
 
     NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 

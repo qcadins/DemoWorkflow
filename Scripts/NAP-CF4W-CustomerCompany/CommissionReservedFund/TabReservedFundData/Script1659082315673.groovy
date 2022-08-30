@@ -84,27 +84,27 @@ if(GlobalVariable.RoleCompany=="Testing"){
 'Input Promo pada Interest Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),
 	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 2), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 12), FailureHandling.OPTIONAL)
 
 'Input Promo pada Insurance Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InsuranceIncome'),
 	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 3), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 'Input Promo pada Life Insurance Income'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_LifeInsuranceIncome'),
 	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 4), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 14), FailureHandling.OPTIONAL)
 
 'Input Promo pada Admin Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_AdminFee'),
 	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 5), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 15), FailureHandling.OPTIONAL)
 
 'Input Promo pada Provision Fee'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_ProvisionFee'),
 	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 6), FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 16), FailureHandling.OPTIONAL)
 
 BigDecimal totalAmt
 
@@ -188,27 +188,27 @@ if(GlobalVariable.RoleCompany=="Testing"){
 
 WebUI.delay(5)
 
-//'Klik save'
-//WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
-//
-//'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
-//if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'),
-//	5, FailureHandling.OPTIONAL)) {
-//	'Klik cancel'
-//	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'))
-//
-//	'Write to Excel FAILED'
-//	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-//		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-//
-//	'Pengecekan jika new consumer finance belum diexpand'
-//	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-//		'Klik new consumer finance'
-//		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
-//	}
-//} else {
-//	'Write to Excel SUCCESS'
-//	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-//		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-//}
+'Klik save'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
+
+'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'),
+	5, FailureHandling.OPTIONAL)) {
+	'Klik cancel'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'))
+
+	'Write to Excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+	'Pengecekan jika new consumer finance belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+		'Klik new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+	}
+} else {
+	'Write to Excel SUCCESS'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+}
 
