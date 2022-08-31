@@ -75,7 +75,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 
 			WebUI.delay(10)
 			
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabUploadDocument',
 				0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
 
 			if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'),
@@ -83,7 +83,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 				'click button close'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabUploadDocument',
 					0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
 			}
 		}

@@ -68,7 +68,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Y
 		
 		String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
 
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			16, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
 	}
 }
@@ -671,7 +671,7 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Save'))
 
-CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 0, GlobalVariable.NumofColm -
+CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData', 0, GlobalVariable.NumofColm -
 	1, GlobalVariable.StatusSuccess)
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -679,7 +679,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 }
 

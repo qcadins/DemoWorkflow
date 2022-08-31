@@ -211,11 +211,11 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 
 	'write to excel failed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 } else {
 	'write to excel success'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
