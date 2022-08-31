@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>ed961ae2-8cf0-4168-96f4-cd5c395da67d</dataFileGUID>
-   <dataSourceUrl>Excel/3. CustomerDataCompletion-Personal - Customer.xlsx</dataSourceUrl>
+   <dataSourceUrl>Excel/2.1.1 CustomerDataCompletion-Personal - Customer.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>

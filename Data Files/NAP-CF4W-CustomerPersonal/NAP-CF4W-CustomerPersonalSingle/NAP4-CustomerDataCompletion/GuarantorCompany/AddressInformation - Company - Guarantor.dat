@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>6a296ff4-8810-462d-a586-3dd10a94a8e9</dataFileGUID>
-   <dataSourceUrl>Excel/6. CustomerDataCompletion-Company - Guarantor.xlsm</dataSourceUrl>
+   <dataSourceUrl>Excel/2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
