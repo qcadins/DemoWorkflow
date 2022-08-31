@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>a1e0e08c-9282-4621-8cc1-401df2bee0a8</dataFileGUID>
-   <dataSourceUrl>Excel/10. CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm</dataSourceUrl>
+   <dataSourceUrl>Excel/2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
