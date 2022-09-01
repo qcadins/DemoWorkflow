@@ -507,7 +507,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 			
-			CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily)
+			CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
 
             if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofFamily, 
                 14).equalsIgnoreCase('Company')) {
@@ -842,7 +842,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 			
-			CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily)
+			CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
 
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
                 5, FailureHandling.OPTIONAL)) {

@@ -25,25 +25,25 @@ import internal.GlobalVariable
 public class checkFailedReason {
 
 	@Keyword
-	public checkStatus (int count, TestObject object, int colm){
+	public checkStatus (int count, TestObject object, int colm, String sheetname){
 		if(count == 0 && WebUI.verifyElementPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-					0, colm - 1, GlobalVariable.StatusSuccess)
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				0, colm - 1, GlobalVariable.StatusSuccess)
 		}else if(count != 0 &&  WebUI.verifyElementNotPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-				1, colm - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					1, colm - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 		}else if(count != 0 &&  WebUI.verifyElementPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-				1, colm - 1, GlobalVariable.StatusReasonSystem)
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					1, colm - 1, GlobalVariable.StatusReasonSystem)
 		}else if(count == 0 &&  WebUI.verifyElementNotPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-				1, colm - 1, GlobalVariable.StatusReasonSaveGagal)
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					1, colm - 1, GlobalVariable.StatusReasonSaveGagal)
 		}
 	}
 }
