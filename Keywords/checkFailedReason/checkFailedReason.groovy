@@ -28,7 +28,7 @@ public class checkFailedReason {
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
 		if(count == 0 && WebUI.verifyElementPresent(object, 10, FailureHandling.OPTIONAL)){
 			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-				0, colm - 1, GlobalVariable.StatusSuccess)
+					0, colm - 1, GlobalVariable.StatusSuccess)
 		}else if(count != 0 &&  WebUI.verifyElementNotPresent(object, 10, FailureHandling.OPTIONAL)){
 			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)

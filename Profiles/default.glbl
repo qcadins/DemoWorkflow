@@ -349,4 +349,9 @@
       <initValue>'Mandatory tidak lengkap dan berhasil save'</initValue>
       <name>StatusReasonSystem</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Gagal mendapatkan lookup'</initValue>
+      <name>StatusReasonLookup</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
