@@ -103,6 +103,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'Write To Excel GlobalVariable.StatusFailed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReasonLookup'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -225,6 +229,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         'Write To Excel GlobalVariable.StatusFailed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReason'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -315,6 +323,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         'Write To Excel GlobalVariable.StatusFailed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReason'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -338,18 +350,18 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
+	CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 4)),
+		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), GlobalVariable.NumofColm, '1.TabCustomerMainData')
+	
     'verify fail'
     if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
         'CUSTOMER', false, FailureHandling.OPTIONAL)) {
         'click menu Customer main'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-        'write to excel \'GlobalVariable.StatusFailed\''
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+        
     } else {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+        
 
         if (flagWarning > 0) {
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -396,6 +408,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         'Write To Excel GlobalVariable.StatusFailed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -440,6 +456,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
             'Write To Excel GlobalVariable.StatusFailed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write To Excel GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -490,6 +510,9 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
     
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
+	
+	CustomKeywords.'checkFailedReason.checkFailedReason.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 4)),
+		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), GlobalVariable.NumofColm, '1.TabCustomerMainData')
 
     'verify fail'
     if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -497,9 +520,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
         'click menu Customer main'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-        'write to excel \'GlobalVariable.StatusFailed\''
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+       
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -507,9 +528,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
         }
     } else {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-
+        
         if (flagWarning > 0) {
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)

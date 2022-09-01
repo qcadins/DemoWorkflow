@@ -516,13 +516,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
-                    'write to excel failed'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+                    
                 } else {
-                    'write to excel success'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+               
 
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
@@ -538,13 +534,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
-                    'write to excel failed'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+                    
                 } else {
-                    'write to excel success'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+                    
 
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
@@ -596,6 +588,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write to Excel FAILED'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+					
+					'Write To Excel GlobalVariable.StatusReasonLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+						1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                     continue
                 }
@@ -769,6 +765,11 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write to Excel FAILED'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+					
+					'Write To Excel GlobalVariable.StatusReasonLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+						1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+
 
                     continue
                 }
@@ -849,13 +850,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 'click button cancel'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
-                'write to excel failed'
-                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+       
             } else {
-                'write to excel success'
-                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+               
 
                 if (flagWarning > 0) {
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
