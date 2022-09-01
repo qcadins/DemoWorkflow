@@ -334,4 +334,19 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(8, 1)</initValue>
       <name>CountofUploadDocumentCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Button Save Tidak Berfungsi'</initValue>
+      <name>StatusReasonSaveGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Mandatory tidak lengkap'</initValue>
+      <name>StatusReasonMandatoryEmpty</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Mandatory tidak lengkap dan berhasil save'</initValue>
+      <name>StatusReasonSystem</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

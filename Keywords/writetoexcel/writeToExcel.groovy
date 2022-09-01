@@ -52,7 +52,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.lang.String
 
 
-class writeToExcel {
+public class writeToExcel {
 	/**
 	 * Write to Excel
 	 */
