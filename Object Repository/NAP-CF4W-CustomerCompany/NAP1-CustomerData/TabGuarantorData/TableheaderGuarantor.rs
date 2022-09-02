@@ -7,11 +7,10 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;guarantor-tab&quot;]/app-guarantor-main-data-paging/div/div[2]/table/thead/tr/th[2]/span</value>
+         <value>//*[@id=&quot;guarantor-tab&quot;]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/thead/tr/th[3]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
