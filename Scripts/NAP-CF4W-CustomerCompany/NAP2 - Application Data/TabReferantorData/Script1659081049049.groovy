@@ -168,6 +168,10 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 				'write to excel WARNING'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+				
+				'Write To Excel GlobalVariable.StatusReasonLookup'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+					1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
 				'Click delete'
 				WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -217,6 +221,10 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
+				'Write To Excel GlobalVariable.StatusReasonLookup'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+					1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+				
 				'Click delete'
 				WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 
@@ -295,6 +303,10 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 						'write to excel WARNING'
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+						
+						'Write To Excel GlobalVariable.StatusReason'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 	
 						modifyObjectIndex++
 	
@@ -363,6 +375,11 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 						'write to excel WARNING'
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+						
+						'Write To Excel GlobalVariable.StatusReason'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
+						
 	
 						modifyObjectIndex++
 	
@@ -431,6 +448,10 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 						'write to excel WARNING'
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+						
+						'Write To Excel GlobalVariable.StatusReason'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 	
 						modifyObjectIndex++
 	

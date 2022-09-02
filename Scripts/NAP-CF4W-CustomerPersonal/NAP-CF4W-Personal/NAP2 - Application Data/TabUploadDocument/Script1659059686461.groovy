@@ -85,6 +85,10 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
 
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
                     0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
+				
+				'Write To Excel GlobalVariable.StatusReason'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+					1, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusReasonMandatoryEmpty)
             }
         }
     }

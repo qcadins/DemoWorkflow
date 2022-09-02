@@ -128,6 +128,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusFailed)
 
+	'Write To Excel GlobalVariable.StatusReasonLookup'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -195,6 +199,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusFailed)
 
+	'Write To Excel GlobalVariable.StatusReasonLookup'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -510,6 +518,10 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
 				0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+			
+			'Write To Excel GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
+				1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
 
 			'click delete'
 			WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -546,6 +558,10 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
 				0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+			
+			'Write To Excel GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
+				1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
 
 			'click delete'
 			WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -591,7 +607,11 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 			'write to excel WARNING'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
 				0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
-
+			
+			'Write To Excel GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories',
+				1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+			
 			'click delete'
 			WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 
@@ -797,6 +817,10 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write To Excel GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
 			'Pengecekan jika new consumer finance belum diexpand'
 			if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -872,6 +896,10 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
 		'Pengecekan jika new consumer finance belum diexpand'
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -904,16 +932,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 WebUI.delay(12)
 
+'check save process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 4)),
+	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), GlobalVariable.NumofColm, '7.TabAssetData')
+
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
 	5, FailureHandling.OPTIONAL)) {
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusFailed)
+  
 } else {
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
 
 	if (flagWarning > 0) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,

@@ -354,4 +354,19 @@
       <initValue>'Gagal mendapatkan lookup'</initValue>
       <name>StatusReasonLookup</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Data Tidak Sesuai DB'</initValue>
+      <name>StatusReasonTidakSesuaiDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'CalculateGagal'</initValue>
+      <name>StatusReasonCalculateGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'GenerateGagal'</initValue>
+      <name>StatusReasonGenerateGagal</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -650,6 +650,19 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFin
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
+if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'),5,FailureHandling.OPTIONAL)){
+	'click button cancel'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+	
+	break
+}
+
 'Pengecekan jika tdp at mf tidak kosong'
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 49).length() > 0) {
 	'input tdp at mf'
@@ -658,6 +671,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 49).length() > 0) {
 	
 	'click button calculate'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
+	
 }
 
 if(GlobalVariable.RoleCompany=="Testing"){
@@ -671,15 +685,17 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Save'))
 
-CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData', 0, GlobalVariable.NumofColm -
-	1, GlobalVariable.StatusSuccess)
+'check save process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 4)),
+	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), GlobalVariable.NumofColm, '9.TabFinancialData')
+
+
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 	'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
 }
 
