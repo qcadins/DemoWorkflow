@@ -733,11 +733,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 			GlobalVariable.NumofColm, 50))
 
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 51) == 'Yes') {
+		GlobalVariable.NumofColm, 52) == 'Yes') {
 		'select copy address'
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- JOB  LEGAL  MAILING  RESIDENCE'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 52), false)
+				GlobalVariable.NumofColm, 53), false)
 
 		'click button copy'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Copy'))
@@ -745,17 +745,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 		'input address'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 53))
+				GlobalVariable.NumofColm, 54))
 
 		'input RT'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_RT'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 54))
+				GlobalVariable.NumofColm, 55))
 
 		'input RW'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_RW'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 55))
+				GlobalVariable.NumofColm, 56))
 
 		'click button Zipcode'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Zipcode_btn btn-raised btn-primary'))
@@ -763,22 +763,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 		'input Zipcode'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Zipcode_form-control ng-untouched ng-pristine ng-invalid'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 56))
+				GlobalVariable.NumofColm, 57))
 
 		'input Kecamatan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KecamatanAssetOwner'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 58))
+				GlobalVariable.NumofColm, 59))
 
 		'input kelurahan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KelurahanAssetOwner'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 57))
+				GlobalVariable.NumofColm, 58))
 
 		'input Kota'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KotaAssetOwner'),
 			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 59))
+				GlobalVariable.NumofColm, 60))
 
 		'click search button'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
@@ -808,11 +808,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-	GlobalVariable.NumofColm, 61) == 'Yes') {
+	GlobalVariable.NumofColm, 52) == 'Yes') {
 	'select copy address'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation _ Copy Address'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 62), false)
+			GlobalVariable.NumofColm, 53), false)
 
 	'click button copy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
@@ -820,17 +820,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 	'input address'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_AddressText'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 63))
+			GlobalVariable.NumofColm, 54))
 
 	'input RT'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRT'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 64))
+			GlobalVariable.NumofColm, 55))
 
 	'input RW'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRW'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 65))
+			GlobalVariable.NumofColm, 56))
 
 	'click button zipcode'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonZipcode'))
@@ -838,22 +838,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 	'input Zipcode'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inptZipcode'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 66))
+			GlobalVariable.NumofColm, 57))
 
 	'input Kecamatan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 68))
+			GlobalVariable.NumofColm, 59))
 
 	'input kelurahan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 67))
+			GlobalVariable.NumofColm, 58))
 
 	'input Kota'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'),
 		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-			GlobalVariable.NumofColm, 69))
+			GlobalVariable.NumofColm, 60))
 
 	'click search button'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
@@ -894,7 +894,7 @@ WebUI.waitForAlert(3)
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-	GlobalVariable.NumofColm, 71) == 'No') {
+	GlobalVariable.NumofColm, 62) == 'No') {
 	'Menunggu Alert konfirmasi integrator muncul'
 	WebUI.waitForAlert(3)
 

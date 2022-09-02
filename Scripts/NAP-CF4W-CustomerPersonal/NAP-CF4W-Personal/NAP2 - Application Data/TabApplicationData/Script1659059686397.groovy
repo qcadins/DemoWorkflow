@@ -273,6 +273,9 @@ String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPe
 //WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
 //    textInterestType, false)
 
+//CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+//	21, GlobalVariable.NumofColm - 1, textInterestType)
+
 scheme = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 
 wop = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment')
@@ -282,7 +285,7 @@ notif = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-Applica
 inssource = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentSourcePaymentType')
 
 'Verify/Jika Interest Type = Float Rate'
-if (textInterestType == 'Float Rate') {
+if (textInterestType.equalsIgnoreCase('Float Rate')) {
     'Select option dropdownlist Floating Period'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_FloatingPeriod'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
