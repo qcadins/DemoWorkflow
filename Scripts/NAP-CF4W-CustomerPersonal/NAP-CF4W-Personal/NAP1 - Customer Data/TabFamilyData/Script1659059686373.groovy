@@ -182,6 +182,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         'Write to Excel FAILED'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+						
+						'Write to Excel reason lookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+							1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                         continue
                     }
@@ -243,6 +247,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         'Write to Excel FAILED'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+						
+						'Write to Excel reason lookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+							1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                         continue
                     }
@@ -337,6 +345,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         'Write to Excel FAILED'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+						
+						'Write to Excel reason lookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+							1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                         continue
                     }
@@ -357,20 +369,19 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
+				'check save process write to excel'
+				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 4)),
+					findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), GlobalVariable.NumofFamily, '2.TabFamilyData')
+				
                 'verify input error'
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
                     5, FailureHandling.OPTIONAL)) {
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                    'Write to Excel FAILED'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+              
                 } else {
-                    'Write to Excel SUCCESS'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
-
+                 
                     if (flagWarning > 0) {
                         'Write to Excel WARNING'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
@@ -428,6 +439,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write to Excel FAILED'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+					
+					'Write to Excel Reason Lookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+						1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                     continue
                 }
@@ -503,6 +518,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         'Write to Excel FAILED'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+						
+						'Write to Excel Reason Lookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+							1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                         continue
                     }
@@ -564,6 +583,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         'Write to Excel FAILED'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+						
+						'Write to Excel Reason Lookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData',
+							1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                         continue
                     }
@@ -612,6 +635,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
+				
+				'check save process write to excel'
+				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 4)),
+					findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), GlobalVariable.NumofFamily, '2.TabFamilyData')
 
                 'verify input error'
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
@@ -619,13 +646,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                    'Write to Excel FAILED'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+                   
                 } else {
-                    'Write to Excel SUCCESS'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
+                   
 
                     if (flagWarning > 0) {
                         'Write to Excel WARNING'
@@ -643,18 +666,4 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
-
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/th_Family Name'), 
-    5, FailureHandling.OPTIONAL)) {
-    'click back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Back'))
-
-    'Write to Excel FAILED'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-} else {
-    'Write to Excel SUCCESS'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-}
 

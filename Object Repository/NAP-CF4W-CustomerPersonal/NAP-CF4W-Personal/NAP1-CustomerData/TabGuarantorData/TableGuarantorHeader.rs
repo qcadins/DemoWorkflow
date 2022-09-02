@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>TableheaderGuarantor</name>
+   <name>TableGuarantorHeader</name>
    <tag></tag>
-   <elementGuidId>bc8ffb9e-c524-43a8-96d9-ac941b5cb1ae</elementGuidId>
+   <elementGuidId>bfe47b36-3f04-4101-a3fe-67d8c817e9e3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

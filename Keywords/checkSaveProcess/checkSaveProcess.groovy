@@ -1,4 +1,4 @@
-package checkFailedReason
+package checkSaveProcess
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -22,7 +22,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 
-public class checkFailedReason {
+public class checkSaveProcess {
 
 	@Keyword
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
