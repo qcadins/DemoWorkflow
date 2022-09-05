@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>alert_Submit</name>
+   <name>alert_Commission</name>
    <tag></tag>
-   <elementGuidId>34645eb2-956d-40ca-836e-ba466c54c8f8</elementGuidId>
+   <elementGuidId>4d8a28de-d9a9-4c11-a2db-5eeaf265c535</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@role='alert'][@aria-label='Success!']</value>
+         <value>//div[@role='alert']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@role='alert'][@aria-label='Success!']</value>
+      <value>//div[@role='alert']</value>
    </webElementProperties>
 </WebElementEntity>

@@ -3,7 +3,7 @@
    <description></description>
    <name>a_New Folder</name>
    <tag></tag>
-   <elementGuidId>8b95e8a3-f3eb-48f6-ba14-75d733ff0f4e</elementGuidId>
+   <elementGuidId>f4c72e0c-42c6-439e-9d06-babc1098e802</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

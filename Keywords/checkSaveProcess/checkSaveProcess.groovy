@@ -26,24 +26,31 @@ public class checkSaveProcess {
 
 	@Keyword
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
-		if(count == 0 && WebUI.verifyElementPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					0, colm - 1, GlobalVariable.StatusSuccess)
-		}else if(count != 0 &&  WebUI.verifyElementNotPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					1, colm - 1, GlobalVariable.StatusReasonMandatoryEmpty)
-		}else if(count != 0 &&  WebUI.verifyElementPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					1, colm - 1, GlobalVariable.StatusReasonSystem)
-		}else if(count == 0 &&  WebUI.verifyElementNotPresent(object, 10, FailureHandling.OPTIONAL)){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
-					1, colm - 1, GlobalVariable.StatusReasonSaveGagal)
+		if(WebUI.verifyElementPresent(object, 2, FailureHandling.OPTIONAL)){
+			if(count==0){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						0, colm - 1, GlobalVariable.StatusSuccess)
+			}
+			else{
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						0, colm - 1, GlobalVariable.StatusFailed)
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						1, colm - 1, GlobalVariable.StatusReasonSystem)
+			}
+		}else{
+			if(count==0){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						0, colm - 1, GlobalVariable.StatusFailed)
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						1, colm - 1, GlobalVariable.StatusReasonSaveGagal)
+			}
+			else{
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						0, colm - 1, GlobalVariable.StatusFailed)
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+						1, colm - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+			}
 		}
 	}
 }
+

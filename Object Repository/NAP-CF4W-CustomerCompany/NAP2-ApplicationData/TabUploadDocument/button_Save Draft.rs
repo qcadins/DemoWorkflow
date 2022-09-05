@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Save Draft</name>
    <tag></tag>
-   <elementGuidId>7de0251a-f1cf-4362-8207-e554e9beec65</elementGuidId>
+   <elementGuidId>8c5bb6b3-12c1-4352-b966-6f854a714095</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

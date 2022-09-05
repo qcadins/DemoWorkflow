@@ -660,7 +660,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-A
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 	
-	break
+	
 }
 
 'Pengecekan jika tdp at mf tidak kosong'

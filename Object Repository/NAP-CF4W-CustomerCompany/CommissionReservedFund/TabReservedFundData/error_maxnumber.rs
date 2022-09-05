@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>alert_Submit</name>
+   <name>error_maxnumber</name>
    <tag></tag>
-   <elementGuidId>34645eb2-956d-40ca-836e-ba466c54c8f8</elementGuidId>
+   <elementGuidId>dcbe70d6-a2a2-45f8-b3cb-f1e09bfeb8a2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@role='alert'][@aria-label='Success!']</value>
+         <value>//div[@class=&quot;invalid-feedback d-block ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@role='alert'][@aria-label='Success!']</value>
+      <value>//div[@class=&quot;invalid-feedback d-block ng-star-inserted&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

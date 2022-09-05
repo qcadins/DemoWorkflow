@@ -361,12 +361,17 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'CalculateGagal'</initValue>
+      <initValue>'Calculate Gagal'</initValue>
       <name>StatusReasonCalculateGagal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'GenerateGagal'</initValue>
+      <initValue>'Generate Gagal'</initValue>
       <name>StatusReasonGenerateGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Calculate Error: Amount/Percentage melebihi limit'</initValue>
+      <name>StatusReasonAmountOverLimit</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

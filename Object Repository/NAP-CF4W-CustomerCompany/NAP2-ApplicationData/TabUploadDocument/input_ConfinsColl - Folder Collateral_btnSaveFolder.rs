@@ -3,7 +3,7 @@
    <description></description>
    <name>input_ConfinsColl - Folder Collateral_btnSaveFolder</name>
    <tag></tag>
-   <elementGuidId>52c82bd0-9b8d-45df-afc9-0cd65f8cf290</elementGuidId>
+   <elementGuidId>5964b5e2-dc85-48d4-80e5-b41ccb41d83d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

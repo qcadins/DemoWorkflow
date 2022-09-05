@@ -3,7 +3,7 @@
    <description></description>
    <name>span_--Pilih--</name>
    <tag></tag>
-   <elementGuidId>f7465ee2-989f-4d9d-a4db-aa1b13063d8c</elementGuidId>
+   <elementGuidId>371ed9e6-4092-464e-8722-c164fa1708ca</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

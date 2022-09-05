@@ -145,7 +145,7 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonGenerateGagal)
 	
-	break
+	
 }
 
 'Verifikasi/memastikan isfeeusedefault pada excel'

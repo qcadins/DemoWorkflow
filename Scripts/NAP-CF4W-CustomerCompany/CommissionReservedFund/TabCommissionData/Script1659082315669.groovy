@@ -197,7 +197,7 @@ if (variableSupp.size() > 0) {
 			if (allocationType == 'Amount') {
 				if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 					GlobalVariable.NumofColm, (2 * i) + 1 + supRow) != '') {
-					'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
+					'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 					WebUI.setText(modifyObjectCommissionAmt, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 							GlobalVariable.NumofColm, (2 * i) + 1 + supRow), FailureHandling.OPTIONAL)
 				}
@@ -806,6 +806,34 @@ if (variableRef.size() > 0) {
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
+int flagFailed = 0
+alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/alert_Commission')
+
+'Pengecekan jika calculate error'
+if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
+	'Write to Excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+	
+	'Pengecekan error alert amount/percentage melebihi limit'
+	if(WebUI.getText(alertCalculate).toLowerCase().contains("Cannot be more than".toLowerCase())){
+		
+		'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
+	}
+	
+	'Klik cancel'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
+	
+	flagFailed = 1
+}
+
+
 if(GlobalVariable.RoleCompany=="Testing"){
 	
 	'Call test case untuk verif summary dan remaining info'
@@ -820,24 +848,22 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabC
 
 WebUI.delay(3)
 
+if(flagFailed==0){
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 4)),
+		findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt'), GlobalVariable.NumofColm, '12.TabCommissionData')
+	
+}
+
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
 	5, FailureHandling.OPTIONAL)) {
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
 
-	'Write to Excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
 		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 	}
-} else {
-	'Write to Excel SUCCESS'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
-
