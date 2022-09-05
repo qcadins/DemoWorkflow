@@ -30,6 +30,8 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+int flagFailed = 0
+
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -148,7 +150,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabR
 
 WebUI.delay(5)
 
-int flagFailed = 0
+
 if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL).toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
 	'Write to Excel FAILED'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',

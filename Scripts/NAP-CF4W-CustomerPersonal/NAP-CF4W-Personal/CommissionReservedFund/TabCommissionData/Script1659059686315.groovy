@@ -54,6 +54,8 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commissi
 
 WebUI.delay(5)
 
+int flagFailed = 0
+
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
 
@@ -806,7 +808,6 @@ if (variableRef.size() > 0) {
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
-int flagFailed = 0
 alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/alert_Commission')
 
 'Pengecekan jika calculate error'
