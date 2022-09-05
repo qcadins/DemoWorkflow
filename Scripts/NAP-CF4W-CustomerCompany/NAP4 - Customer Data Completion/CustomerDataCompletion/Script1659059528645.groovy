@@ -294,20 +294,14 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
+'Check save Process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+            GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/input_Application No_AppNoId'), 
+    GlobalVariable.NumofColm, '14.CustomerDataCompletion')
+
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'), 
     5, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
-
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-} else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 

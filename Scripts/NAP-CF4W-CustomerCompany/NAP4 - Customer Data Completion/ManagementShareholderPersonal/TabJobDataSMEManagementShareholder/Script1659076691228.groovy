@@ -47,8 +47,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/button_Back'))
 
     'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusFailed)
+
+    'write to excel reason lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
+        1, GlobalVariable.StatusReasonLookup)
 }
 
 'pilih job position'
@@ -101,8 +105,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/button_Back'))
 
     'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusFailed)
+
+    'write to excel reason lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
+        1, GlobalVariable.StatusReasonLookup)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
@@ -119,23 +127,22 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
         GlobalVariable.NumofFamily, 50))
 
 'input job title'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/input_Job Title Name_form-control ng-untouched ng-pristine ng-valid'),
-	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofFamily, 51))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/input_Job Title Name_form-control ng-untouched ng-pristine ng-valid'), 
+    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.NumofFamily, 51))
 
 'input number of employee'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/input_Number of Employee_form-control ng-untouched ng-pristine ng-valid'),
-	findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-		GlobalVariable.NumofFamily, 52))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/input_Number of Employee_form-control ng-untouched ng-pristine ng-valid'), 
+    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.NumofFamily, 52))
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-	GlobalVariable.NumofFamily, 53).length() > 0) {
-	'select investment type'
-	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/select_--Select One-- Domestic Investment  Foreign Investment'),
-		findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-			GlobalVariable.NumofFamily, 53), false)
+    GlobalVariable.NumofFamily, 53).length() > 0) {
+    'select investment type'
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/select_--Select One-- Domestic Investment  Foreign Investment'), 
+        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
+            GlobalVariable.NumofFamily, 53), false)
 }
-
 
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/textarea_Address_'), 
@@ -191,8 +198,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
 
     'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusFailed)
+
+    'write to excel reason lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
+        1, GlobalVariable.StatusReasonLookup)
 }
 
 'input note'
@@ -582,15 +593,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     5, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataSME - Personal/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
-        1, GlobalVariable.StatusFailed)
 } else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
-        1, GlobalVariable.StatusSuccess)
-
     if (flagWarning > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofFamily - 
             1, GlobalVariable.StatusWarning)

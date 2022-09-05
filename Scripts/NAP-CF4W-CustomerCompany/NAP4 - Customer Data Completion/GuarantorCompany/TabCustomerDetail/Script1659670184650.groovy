@@ -121,7 +121,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 1, 
+        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'select customer model'
@@ -140,19 +144,16 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Save  Continue'))
 
+'Check save Process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
+            GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'), 
+    GlobalVariable.NumofGuarantor, '1.CustomerDetail')
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/label_Establishment Date'), 
     5, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 } else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusSuccess)
-
     if (flagWarning > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)

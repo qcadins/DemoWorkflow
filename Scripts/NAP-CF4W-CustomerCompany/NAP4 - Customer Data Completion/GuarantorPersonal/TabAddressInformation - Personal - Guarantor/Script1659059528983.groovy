@@ -161,6 +161,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
 'click save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Save'))
 
+'Check save Process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'), 
+    GlobalVariable.NumofGuarantor, '2.AddressInformation')
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'), 
     5, FailureHandling.OPTIONAL)) {
     'Click button cancel'
@@ -174,13 +179,5 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
-        0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
-} else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
-        0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusSuccess)
 }
 

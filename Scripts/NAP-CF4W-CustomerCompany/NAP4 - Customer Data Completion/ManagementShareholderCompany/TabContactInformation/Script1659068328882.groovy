@@ -199,17 +199,14 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/button_Save  Continue'))
 
+'Check save Process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/ContactInformation - Company - ManagementShareholderCompany').getValue(
+            GlobalVariable.NumofFamily, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'), 
+    GlobalVariable.NumofFamily, '3.ContactInformation')
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/label_Name'), 
     10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.ContactInformation', 
-        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-} else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.ContactInformation', 
-        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
 }
 

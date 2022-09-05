@@ -45,8 +45,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Back'))
 
     'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofGuarantor - 
         1, GlobalVariable.StatusFailed)
+
+    'write to excel reason lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofGuarantor - 
+        1, GlobalVariable.StatusReasonLookup)
 }
 
 'input job title'
@@ -56,8 +60,4 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 
 'klik button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Save  Continue'))
-
-'write to excel if success'
-CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
-    1, GlobalVariable.StatusSuccess)
 
