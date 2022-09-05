@@ -49,6 +49,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup debtor business scale'
@@ -77,6 +81,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup counterpart category'
@@ -105,6 +113,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup sustainable financial business'
@@ -133,6 +145,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'select yes/no'
@@ -166,6 +182,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'select yes/no'
@@ -246,6 +266,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'select yes/no'
@@ -279,6 +303,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup Payment Type'
@@ -307,6 +335,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup Business Source AML'
@@ -335,6 +367,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel if failed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+
+    'write to excel reason Lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'input tanggal business period'
@@ -345,19 +381,16 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Save'))
 
+'Check save Process write to excel'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/OtherAttribute - Company - ManagementShareholderCompany').getValue(
+            GlobalVariable.NumofFamily, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
+    GlobalVariable.NumofFamily, '7.OtherAttribute')
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/label_Debtor Group'), 
     10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
-        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 } else {
-    'write to excel if success'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
-        GlobalVariable.NumofFamily - 1, GlobalVariable.StatusSuccess)
-
     if (flagWarning > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
