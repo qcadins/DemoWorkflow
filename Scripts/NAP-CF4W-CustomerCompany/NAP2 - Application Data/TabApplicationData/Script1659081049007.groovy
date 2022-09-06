@@ -251,7 +251,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		numOfInstallment = ((Math.ceil(tenor / 6)) as int)
 	} else if (payFreq == 'Annually') {
 		numOfInstallment = ((Math.ceil(tenor / 12)) as int)
-	} else {
+	} else if (payFreq == 'Weekly') {
 		numOfInstallment = (((((4) as int) * tenor) + (Math.round(tenor - 1) / 3)) + 1)
 	}
 	

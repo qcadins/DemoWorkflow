@@ -101,11 +101,11 @@ for (int i = 1; i <= count; i++) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.Role == 'Data Entry') {
+                    if (GlobalVariable.RoleCompany == 'Data Entry') {
                         'call test case customer Company'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
+                    } else if (GlobalVariable.RoleCompany == 'Testing') {
                         'call test case customer Company'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
@@ -119,11 +119,11 @@ for (int i = 1; i <= count; i++) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
+                        if (GlobalVariable.RoleCompany == 'Data Entry') {
                             'call test case customer Company'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'call test case customer Company'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
@@ -145,11 +145,11 @@ for (int i = 1; i <= count; i++) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.Role == 'Data Entry') {
+                    if (GlobalVariable.RoleCompany == 'Data Entry') {
                         'call test case customer personal (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
+                    } else if (GlobalVariable.RoleCompany == 'Testing') {
                         'call test case customer personal (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
@@ -161,11 +161,11 @@ for (int i = 1; i <= count; i++) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.Role == 'Data Entry') {
+                    if (GlobalVariable.RoleCompany == 'Data Entry') {
                         'call test case customer company (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
+                    } else if (GlobalVariable.RoleCompany == 'Testing') {
                         'call test case customer company (ManagementShareholder)'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
@@ -182,11 +182,11 @@ for (int i = 1; i <= count; i++) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
+                        if (GlobalVariable.RoleCompany == 'Data Entry') {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
@@ -195,11 +195,11 @@ for (int i = 1; i <= count; i++) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
+                        if (GlobalVariable.RoleCompany == 'Data Entry') {
                             'call test case customer company (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'call test case customer personal (ManagementShareholder)'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
@@ -221,11 +221,11 @@ for (int i = 1; i <= count; i++) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.Role == 'Data Entry') {
+                    if (GlobalVariable.RoleCompany == 'Data Entry') {
                         'call test case guarantor personal'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
+                    } else if (GlobalVariable.RoleCompany == 'Testing') {
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
@@ -236,11 +236,11 @@ for (int i = 1; i <= count; i++) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.Role == 'Data Entry') {
+                    if (GlobalVariable.RoleCompany == 'Data Entry') {
                         'call test case guarantor company'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
+                    } else if (GlobalVariable.RoleCompany == 'Testing') {
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
@@ -252,11 +252,11 @@ for (int i = 1; i <= count; i++) {
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
+                        if (GlobalVariable.RoleCompany == 'Data Entry') {
                             'call test case guarantor personal'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
                         }
@@ -267,11 +267,11 @@ for (int i = 1; i <= count; i++) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
+                        if (GlobalVariable.RoleCompany == 'Data Entry') {
                             'call test case guarantor company'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
+                        } else if (GlobalVariable.RoleCompany == 'Testing') {
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
                         }

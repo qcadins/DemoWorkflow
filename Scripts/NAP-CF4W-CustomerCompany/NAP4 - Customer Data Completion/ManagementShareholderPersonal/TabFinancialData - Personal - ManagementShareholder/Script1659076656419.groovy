@@ -87,7 +87,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
                 'centang is join income'
                 WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'))
             }
-        } else {
+        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
+            GlobalVariable.NumofFamily, 19).equalsIgnoreCase('No')) {
             'jika is join income sudah tercentang'
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/input_checkboxIsJoinIncome'), 
                 5, FailureHandling.OPTIONAL)) {

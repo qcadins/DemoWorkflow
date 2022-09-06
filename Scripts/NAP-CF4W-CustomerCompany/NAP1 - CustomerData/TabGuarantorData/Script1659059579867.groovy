@@ -276,7 +276,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                             0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                     }
                 }
-            } else {
+            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
+                13) == 'LookUp'){
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                     5, FailureHandling.OPTIONAL)) {
                     'click button Add'
@@ -571,7 +572,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                             0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                     }
                 }
-            } else {
+            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
+                13) == 'LookUp'){
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                     5, FailureHandling.OPTIONAL)) {
                     'click button Add'

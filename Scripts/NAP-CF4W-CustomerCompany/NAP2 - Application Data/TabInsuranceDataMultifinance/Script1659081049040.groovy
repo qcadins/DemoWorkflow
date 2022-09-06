@@ -196,7 +196,7 @@ for (int i = 1; i <= countAddCov; i++) {
 				'Centang'
 				WebUI.check(modifyCheckboxAddtCov)
 			}
-		} else {
+		} else if (checkboxValue == 'NO') {
 			'Jika kondisi awal sudah tercentang'
 			if (WebUI.verifyElementChecked(modifyCheckboxAddtCov, 1, FailureHandling.OPTIONAL)) {
 				'Uncentang'

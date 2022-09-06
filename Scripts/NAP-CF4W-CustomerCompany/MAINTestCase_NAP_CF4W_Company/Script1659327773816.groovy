@@ -40,8 +40,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
-} else {
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
+} else if (GlobalVariable.RoleCompany == 'Testing') {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 1); (GlobalVariable.NumofColm)++) {
         not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 

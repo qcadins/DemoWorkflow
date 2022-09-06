@@ -135,7 +135,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         13)) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
-            3) == 'Input Data') {
+            13) == 'Input Data') {
             if (dataManagementShareholder.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
                 ManagementShareholderStatus = ''
 

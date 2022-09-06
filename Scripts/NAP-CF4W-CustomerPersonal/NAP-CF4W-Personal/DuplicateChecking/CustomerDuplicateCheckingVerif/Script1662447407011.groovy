@@ -195,7 +195,7 @@ if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRu
 'check rule 6'
 if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6'(sqlconnection, dataCustomer.getValue(
             GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal6LOS'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30), dataCustomer.getValue(GlobalVariable.NumofColm, 3))) > 0)) {
+            GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30), dataCustomer.getValue(GlobalVariable.NumofColm, 13))) > 0)) {
     'add "REVIEW" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus = ruledupcheck.getValue(2, 18)
 	
@@ -218,7 +218,7 @@ if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRu
 'check rule 7'
 if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7'(sqlconnection, dataCustomer.getValue(
             GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27))) > 0) || (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRulePersonal7LOS'(sqlconnection, dataCustomer.getValue(
-            GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27), dataCustomer.getValue(GlobalVariable.NumofColm, 3))) > 0)) {
+            GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27), dataCustomer.getValue(GlobalVariable.NumofColm, 13))) > 0)) {
     'add "REVIEW" kedalam array CustomerPersonalStatus'
     CustomerPersonalStatus = ruledupcheck.getValue(2, 19)
 	

@@ -388,7 +388,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) >= 1) {
 	
 						continue
 					}
-				} else {
+				} else if (refCategory.equalsIgnoreCase('Multifinance Employee')) {
 					'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
 					ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
 						sqlConnection, referantorCode)

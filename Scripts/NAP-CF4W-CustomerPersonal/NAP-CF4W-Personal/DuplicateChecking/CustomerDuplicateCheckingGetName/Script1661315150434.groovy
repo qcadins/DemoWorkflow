@@ -136,20 +136,20 @@ def StoreCDCCustomerName = ''
 
 	StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm -
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm -
 		1, StoreCDCCustomerName)
 
 	for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail', 2, FamilyName,
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail', 12, FamilyName,
 			StoreCDCFamilyNameArray[(FamilyName - 1)])
 	}
 	
 	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 2,
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12,
 			GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 	}
 	
 	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 2,
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12,
 			GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 	}

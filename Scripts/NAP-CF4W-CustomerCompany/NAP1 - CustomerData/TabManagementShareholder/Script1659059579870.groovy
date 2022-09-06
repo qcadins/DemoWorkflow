@@ -340,7 +340,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                     }
                 }
-            } else {
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public')) {
                 'click radio public'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
 
@@ -456,7 +456,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
                         datafile.getValue(GlobalVariable.NumofFamily, 78), false)
                 }
-            } else {
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
                 'input address'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
                     datafile.getValue(GlobalVariable.NumofFamily, 71))
@@ -529,7 +529,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'customer added +1'
                     (GlobalVariable.countNumofCustomer)++
                 }
-            } else {
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public') {
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
                     5, FailureHandling.OPTIONAL)) {
                     'click button cancel'
@@ -548,7 +548,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     (GlobalVariable.countNumofCustomer)++
                 }
             }
-        } else {
+        } else if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp'){
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
 

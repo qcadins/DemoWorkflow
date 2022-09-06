@@ -150,7 +150,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
 		'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
 		WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL)
 	}
-} else {
+} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')){
 	'check if provision fee type Percentage'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 36) == 'Percentage') {
@@ -159,7 +160,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
 
 		'verify matvh NTFValueFinal and provision amount'
 		WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL)
-	} else {
+	} else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		GlobalVariable.NumofColm, 36) == 'Amount') {
 		'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
 		ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
 

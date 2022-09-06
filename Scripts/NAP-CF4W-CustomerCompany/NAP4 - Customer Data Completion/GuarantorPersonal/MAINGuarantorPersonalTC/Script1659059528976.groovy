@@ -32,7 +32,7 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail')))) {
-        if (GlobalVariable.Role == 'Data Entry') {
+        if (GlobalVariable.RoleCompany == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerDetail - Personal - Guarantor'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -53,7 +53,7 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
 
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/TabOtherAttribute - Personal - Guarantor'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-        } else {
+        } else if (GlobalVariable.RoleCompany == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerDetail - Personal - Guarantor'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 

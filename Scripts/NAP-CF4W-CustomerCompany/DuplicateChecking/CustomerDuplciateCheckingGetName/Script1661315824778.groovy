@@ -156,25 +156,25 @@ def StoreCDCCustomerName = ''
 
 	StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 2, GlobalVariable.NumofColm -
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 12, GlobalVariable.NumofColm -
 		1, StoreCDCCustomerName)
 
 	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPersonalPath, '1.CustomerDetail',
-			2, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
+			12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
 	}
 	
 	for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCManagementShareholderCompanyPath, '1.CustomerDetail',
-			2, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
+			12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
 	}
 	
 	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 2,
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12,
 			GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 	}
 	
 	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 2,
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12,
 			GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 	}

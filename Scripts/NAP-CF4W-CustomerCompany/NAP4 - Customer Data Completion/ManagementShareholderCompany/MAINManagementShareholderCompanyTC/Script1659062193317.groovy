@@ -32,7 +32,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= CountofManage
         GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany').getValue(
         GlobalVariable.NumofFamily, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/CustomerNameDetail')))) {
-        if (GlobalVariable.Role == 'Data Entry') {
+        if (GlobalVariable.RoleCompany == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -53,7 +53,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= CountofManage
 
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/TabOtherAttribute'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
-        } else {
+        } else if (GlobalVariable.RoleCompany == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/TabCustomerDetail'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 

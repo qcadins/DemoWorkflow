@@ -206,7 +206,7 @@ if (variableSupp.size() > 0) {
 				
 				'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
 				WebUI.click(modifyObjectCommissionPercentage)
-			} else {
+			} else if (allocationType == 'Percentage'){
 				if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 					GlobalVariable.NumofColm, (2 * i) + 2 + supRow) != '') {
 					'Input Percentage, 2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
@@ -472,7 +472,7 @@ if (variableSuppEmp.size() > 0) {
 				
 				'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
 				WebUI.click(modifyObjectCommissionPercentage)
-			} else {
+			} else if (allocationType == 'Percentage'){
 				'Mengambil nilai percentage dari excel, 2j+3, +3 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+3+16(suppEmpRow) = 21  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 					GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
@@ -714,7 +714,7 @@ if (variableRef.size() > 0) {
 				
 				'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
 				WebUI.click(modifyObjectCommissionPercentage)
-			} else {
+			} else if (allocationType == 'Percentage'){
 				'Mengambil nilai percentage dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 					GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
@@ -778,7 +778,7 @@ if (variableRef.size() > 0) {
 						if ((amt != 0) && (pctg != 0)) {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-						} else {
+						} else if ((amt == 0) || (pctg == 0)) {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
 						}

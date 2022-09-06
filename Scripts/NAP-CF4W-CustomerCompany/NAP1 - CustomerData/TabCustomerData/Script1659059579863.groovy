@@ -251,7 +251,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         
         (GlobalVariable.countNumofCustomer)++
     }
-} else {
+} else if(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+    14) == 'LookUp'){
     'click radio button company'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
