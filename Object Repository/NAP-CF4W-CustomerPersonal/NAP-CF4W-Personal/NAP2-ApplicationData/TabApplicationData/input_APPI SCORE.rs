@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/uc-attribute-form/div/div[2]/div/div[2]/div/div/input</value>
+         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/uc-attribute-form/div/div[2]/div/div[2]/div/div/input</value>
+      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

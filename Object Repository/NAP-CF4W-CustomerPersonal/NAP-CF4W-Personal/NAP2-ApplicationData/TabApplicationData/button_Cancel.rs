@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[7]/button[1]</value>
+         <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[7]/button[1]</value>
+      <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
