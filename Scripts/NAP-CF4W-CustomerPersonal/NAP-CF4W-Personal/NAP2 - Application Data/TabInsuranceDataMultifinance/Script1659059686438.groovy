@@ -196,7 +196,7 @@ for (int i = 1; i <= countAddCov; i++) {
                 'Centang'
                 WebUI.check(modifyCheckboxAddtCov)
             }
-        } else {
+        } else if(checkboxValue == 'NO') {
             'Jika kondisi awal sudah tercentang'
             if (WebUI.verifyElementChecked(modifyCheckboxAddtCov, 1, FailureHandling.OPTIONAL)) {
                 'Uncentang'
@@ -579,7 +579,7 @@ if(GlobalVariable.Role=="Testing"){
 	'Verif capitalize amount sesuai perhitungan'
 	if ((totalResult[3]) != 0) {
 		WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)
-	} else {
+	} else if(totalResult[3]==0) {
 		WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
 	}
 	if(totalResult[2]==1){

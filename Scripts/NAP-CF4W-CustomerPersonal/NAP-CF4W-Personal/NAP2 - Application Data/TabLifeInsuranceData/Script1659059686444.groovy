@@ -174,7 +174,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                     'Centang yang subject type Customer'
                     WebUI.check(modifyObjectCheckbox)
                 }
-            } else {
+            } else if(isCustomer=='NO'){
                 'Jika sudah tercentang'
                 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type customer'
@@ -214,7 +214,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                         }
                     }
                 }
-            } else {
+            } else if(isGuarantor=='NO') {
                 'Jika sudah tercentang'
                 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type guarantor'
@@ -228,7 +228,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                     'Centang yang subject type Spouse'
                     WebUI.check(modifyObjectCheckbox)
                 }
-            } else {
+            } else if(isSpouse=='NO'){
                 'Jika sudah tercentang'
                 if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type spouse'
@@ -249,7 +249,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         'value', FailureHandling.OPTIONAL).replaceAll('\\s', '')
 
     GlobalVariable.CapitalizePremiumPercentage = decimalFormat.parse(CapitalizePremiumPercentageValue).floatValue()
-} else {
+} else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+    GlobalVariable.NumofColm, 12) == 'NO') {
     if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
         WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
