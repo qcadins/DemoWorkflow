@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
+         <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-multi-asset-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
+      <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

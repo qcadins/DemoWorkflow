@@ -27,17 +27,15 @@ GlobalVariable.DataFilePath = filePath
 
 int countcustomer
 
-'click Menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-'click button add'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Add'))
-
 'Ambil nilai office login dari confins'
-
 String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
     ',', ';').split(';')
+	
+//if(copyyesorno)
+//click lookup copy app
 
+//
+//if(copyapp = empty)
 'click button lookup product offering'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
 
@@ -114,6 +112,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
     }
 }
+//
+
 
 'click button next'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Next'))
@@ -131,6 +131,7 @@ if (GlobalVariable.Role == 'Testing') {
         'CUSTOMER', false, FailureHandling.OPTIONAL)
 }
 
+//if(yesorempty)
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 14) == 'Input Data') {
     'input customer legal name'
@@ -512,6 +513,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
     
     'click button save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
+	//
+	
+	//if(no)
+	//calltc
+	//pisah tc save
+	//if testing verif2 
+	//verif g usa dlu coba nap1 copy - nap4 save2 dlu + calculate/generate
+	
+	
 	
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 4)),
