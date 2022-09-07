@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkSupplier {
-	
+
 	@Keyword
 	public checkAdminHead(Sql instance, String suppName){
 		ArrayList<String> adminHead = new ArrayList<String>()
@@ -29,9 +29,8 @@ public class checkSupplier {
 			adminHead.add(row[0].toUpperCase())
 		})
 		return adminHead
-		
 	}
-	
+
 	@Keyword
 	public checkSalesPerson(Sql instance, String suppName){
 		ArrayList<String> salesPerson = new ArrayList<String>()
@@ -40,7 +39,7 @@ public class checkSupplier {
 		})
 		return salesPerson
 	}
-	
+
 	@Keyword
 	public checkSupplierScheme(Sql instance, String poname){
 		String suppschm
@@ -48,9 +47,8 @@ public class checkSupplier {
 			suppschm = (row[0])
 		})
 		return suppschm
-		
 	}
-	
+
 	@Keyword
 	public countSupplierData(Sql instance, String suppschm, String officeName){
 		Integer countData
@@ -59,6 +57,4 @@ public class checkSupplier {
 		})
 		return countData
 	}
-	
-	
 }
