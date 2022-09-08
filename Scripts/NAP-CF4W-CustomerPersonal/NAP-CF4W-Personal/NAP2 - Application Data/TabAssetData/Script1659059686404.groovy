@@ -176,6 +176,25 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 'click button asset lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'))
 
+if(GlobalVariable.Role=="Testing"){
+	'click search button'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
+	
+	'Ambil nilai total count asset data dari db'
+	Integer countAssetData = CustomKeywords.'dbconnection.checkAssetData.countAssetName'(sqlConnectionLOS, sqlConnectionFOU, POName)
+	
+	'Ambil nilai total data asset pada lookup confins'
+	String[] textTotalDataAsset = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
+		' ', '').replace(':', ';').split(';')
+	
+	'Parsing nilai total data Asset confins ke integer(angka)'
+	Integer totalDataAsset = Integer.parseInt(textTotalDataAsset[1])
+	
+	'Verify total count data lookup asset pada confins sama dengan db'
+	WebUI.verifyEqual(totalDataAsset, countAssetData)
+	
+}
+
 'input asset name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_FullAssetCode'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -219,6 +238,25 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 19))
+
+if(GlobalVariable.Role=="Testing"){
+	ArrayList<WebElement> assetUsage = new ArrayList<WebElement>()
+	
+	'Ambil array string (text) asset usage dari db'
+	assetUsage = CustomKeywords.'dbconnection.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+	
+	Integer countAssetUsage = assetUsage.size()
+	
+	'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
+	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'),
+		assetUsage)
+	
+	'Ambil nilai jumlah option/pilihan asset usage dari confins'
+	Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
+	
+	'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
+	WebUI.verifyEqual(totalAssetUsage-1, countAssetUsage)
+}
 
 'select asset usage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
@@ -673,6 +711,26 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
             GlobalVariable.NumofColm, 38))
 
+	if(GlobalVariable.Role=="Testing"){
+		ArrayList<WebElement> userRelation = new ArrayList<WebElement>()
+	
+		'Ambil array string (text) user relationship dari db'
+		userRelation = CustomKeywords.'dbconnection.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
+		
+		Integer countUserRelation = userRelation.size()
+		
+		'Verif dropdownlist user relationship yang muncul pada confins sesuai dengan array string user relationship dari db'
+		WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_User Relationship'),
+			userRelation)
+		
+		'Ambil nilai jumlah option/pilihan user relationship dari confins'
+		Integer totalUserRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_User Relationship'))
+		
+		'Verif jumlah user relationship yang muncul pada confins sesuai dengan jumlah user relationship pada db'
+		WebUI.verifyEqual(totalUserRelation - 1, countUserRelation)
+	}
+	
+	
     'select user relationship'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -689,10 +747,50 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         GlobalVariable.NumofColm, 42) == 'Personal') {
         'click radio button personal'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Personal'))
+		
+		if(GlobalVariable.Role=="Testing"){
+			ArrayList<WebElement> ownerPersonalRelation = new ArrayList<WebElement>()
+			
+			'Ambil array string (text) owner relationship dari db'
+			ownerPersonalRelation = CustomKeywords.'dbconnection.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
+			
+			Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
+			
+			'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
+			WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'),
+				ownerPersonalRelation)
+			
+			'Ambil nilai jumlah option/pilihan owner relationship dari confins'
+			Integer totalOwnerPersonalRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
+			
+			'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
+			WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation)
+		}
+		
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 42) == 'Company') {
         'click radio button company'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Company'))
+		
+		if(GlobalVariable.Role=="Testing"){
+			ArrayList<WebElement> ownerCompanyRelation = new ArrayList<WebElement>()
+			
+			'Ambil array string (text) owner relationship dari db'
+			ownerCompanyRelation = CustomKeywords.'dbconnection.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
+			
+			Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
+			
+			'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
+			WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'),
+				ownerCompanyRelation)
+			
+			'Ambil nilai jumlah option/pilihan owner relationship dari confins'
+			Integer totalOwnerCompanyRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
+			
+			'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
+			WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation)
+		}
+		
     }
     
     'input owner name'
