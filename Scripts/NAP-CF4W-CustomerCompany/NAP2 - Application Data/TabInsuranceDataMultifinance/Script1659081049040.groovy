@@ -320,6 +320,7 @@ if(capinssetting=="YEARLY"){
 				} else if ((capitalizeValueArray[(i - 1)]).equalsIgnoreCase('NO')) {
 					'Jika sudah tercentang'
 					if (WebUI.verifyElementChecked(capitalizeObject, 5, FailureHandling.OPTIONAL)) {
+						
 						'Uncentang capitalize'
 						WebUI.uncheck(capitalizeObject)
 					}
@@ -414,11 +415,8 @@ if(capinssetting=="YEARLY"){
 			}
 		}
 		
-		
 		int flagLoading = 0
 	
-		
-		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
 		for (int j = 1; j <= countAddCov; j++) {
