@@ -105,7 +105,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
 ArrayList<WebElement> variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
-def supRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Commission Data') +
+def supRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Commission Data') +
 1
 
 
@@ -294,7 +294,7 @@ if (variableSupp.size() > 0) {
 
 //Supplier Employee
 'Mengambil nilai row keberapa dimulai data supplier employee commission pada excel'
-def suppEmpRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Employee Commission Data') + 
+def suppEmpRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Employee Commission Data') + 
 1
 
 'Arraylist untuk menampung List Supplier Employee'
@@ -565,7 +565,7 @@ if (variableSuppEmp.size() > 0) {
 
 //Referantor
 'Mengambil nilai row keberapa dimulai data referantor commission pada excel'
-def refRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Referantor Commission Data') + 
+def refRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Referantor Commission Data') + 
 1
 
 'Arraylist untuk menampung List Referantor'

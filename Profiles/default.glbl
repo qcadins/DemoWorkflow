@@ -374,4 +374,14 @@
       <initValue>'Calculate Error: Amount/Percentage melebihi limit'</initValue>
       <name>StatusReasonAmountOverLimit</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\InsuranceRateRule.xlsx'</initValue>
+      <name>InsFeeRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
+      <name>MainCovRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
