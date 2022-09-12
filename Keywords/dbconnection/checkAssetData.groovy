@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkAssetData {
-	
+
 	@Keyword
 	public countAssetName(Sql instanceLOS, Sql instanceFOU, String POName){
 		Integer countAsset
@@ -29,12 +29,12 @@ public class checkAssetData {
 		instanceLOS.eachRow(("select distinct compnt_value from prod_offering a join prod_offering_h b on a.PROD_OFFERING_ID = b.PROD_OFFERING_ID join prod_offering_d c on c.PROD_OFFERING_H_ID = b.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
 		})
-		instanceFOU.eachRow(("select distinct count(*) full_asset_code from asset_schm_h a join asset_schm_d b on a.asset_schm_h_id = b.asset_schm_h_id join asset_master c on b.asset_master_id = c.asset_master_id where asset_schm_code = '"+assetschmCode+"' and c.is_active =1"), { def row ->
+		instanceFOU.eachRow(("SELECT count(*) FROM dbo.ASSET_MASTER A WITH ( NOLOCK ) JOIN dbo.ASSET_TYPE B WITH ( NOLOCK ) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID JOIN dbo.ASSET_CATEGORY C WITH ( NOLOCK ) ON A.ASSET_CATEGORY_ID = C.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D D WITH ( NOLOCK ) ON A.ASSET_MASTER_ID = D.ASSET_MASTER_ID JOIN dbo.ASSET_SCHM_H E WITH ( NOLOCK ) ON D.ASSET_SCHM_H_ID = E.ASSET_SCHM_H_ID WHERE A.IS_ACTIVE = 1 AND A.ASSET_CATEGORY_ID IS NOT NULL AND A.IS_FINAL = 1 AND E.ASSET_SCHM_CODE = '"+assetschmCode+"'"), { def row ->
 			countAsset = row[0]
 		})
 		return countAsset
 	}
-	
+
 	@Keyword
 	public checkPersonalRelationshipDDL(Sql instance){
 		ArrayList<String> personalRelationDDL = new ArrayList<String>()
@@ -43,7 +43,7 @@ public class checkAssetData {
 		})
 		return personalRelationDDL
 	}
-	
+
 	@Keyword
 	public checkCompanyRelationshipDDL(Sql instance){
 		ArrayList<String> companyRelationDDL = new ArrayList<String>()
@@ -52,7 +52,7 @@ public class checkAssetData {
 		})
 		return companyRelationDDL
 	}
-	
+
 	@Keyword
 	public checkAssetUsageDDL(Sql instance){
 		ArrayList<String> assetUsage = new ArrayList<String>()

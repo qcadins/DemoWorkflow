@@ -26,12 +26,12 @@ public class checkNAP4db {
 	@Keyword
 	public checkLegaldocument(Sql instance){
 		ArrayList<String> legaldocument = new ArrayList<String>()
-		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'LEGAL_DOC_TYPE'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'LEGAL_DOC_TYPE' AND IS_ACTIVE = 1"), { def row ->
 			legaldocument.add(row[0].toUpperCase())
 		})
 		return legaldocument
 	}
-	
+
 	@Keyword
 	public countDebtorGroup(Sql instance){
 		Integer countData
@@ -40,7 +40,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countDebtorBusinessScale(Sql instance){
 		Integer countData
@@ -49,7 +49,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countCounterpartCategory(Sql instance){
 		Integer countData
@@ -58,7 +58,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countSustainableBusiness(Sql instance){
 		Integer countData
@@ -67,8 +67,8 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
-	
+
+
 	@Keyword
 	public countDebtorGroupSLIK(Sql instance){
 		Integer countData
@@ -77,7 +77,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countRatingInstitute(Sql instance){
 		Integer countData
@@ -86,7 +86,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countAffiliateMultifinanceSLIK(Sql instance){
 		Integer countData
@@ -95,7 +95,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countCSPUSLSourceAML(Sql instance){
 		Integer countData
@@ -104,7 +104,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countPaymentType(Sql instance){
 		Integer countData
@@ -113,7 +113,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countBusinessSourceAML(Sql instance){
 		Integer countData
@@ -122,7 +122,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countDepartmentAML(Sql instance){
 		Integer countData
@@ -131,7 +131,7 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countAuthorityAML(Sql instance){
 		Integer countData
@@ -140,11 +140,29 @@ public class checkNAP4db {
 		})
 		return countData
 	}
-	
+
 	@Keyword
 	public countBuildingOwnership(Sql instance){
 		Integer countData
 		instance.eachRow(("select count(*) from REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP'"), { def row ->
+			countData = (row[0])
+		})
+		return countData
+	}
+	
+	@Keyword
+	public countAttributeListCompany(Sql instance){
+		Integer countData
+		instance.eachRow(("select count(*) from REF_ATTR where ATTR_GROUP = 'CUST_COMPANY_OTH' AND IS_ACTIVE = 1"), { def row ->
+			countData = (row[0])
+		})
+		return countData
+	}
+	
+	@Keyword
+	public countAttributeListPersonal(Sql instance){
+		Integer countData
+		instance.eachRow(("select count(*) from REF_ATTR where ATTR_GROUP = 'CUST_PERSONAL_OTH' AND IS_ACTIVE = 1"), { def row ->
 			countData = (row[0])
 		})
 		return countData
