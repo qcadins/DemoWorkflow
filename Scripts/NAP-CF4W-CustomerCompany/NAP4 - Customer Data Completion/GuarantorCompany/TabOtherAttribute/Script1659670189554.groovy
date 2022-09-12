@@ -48,6 +48,12 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
+	'get count total attribute list dari db'
+	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
+
+	'verify total data attribute list == total data attribute list db'
+	WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListCompany'(sqlConnectionFOU), variable.size())
+	
 	'Click Lookup Debtor Group'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'))
 
@@ -215,12 +221,6 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	'click X'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/Button_X'))
-	
-	'get count total attribute list dari db'
-	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
-
-	'verify total data attribute list == total data attribute list db'
-	WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListCompany'(sqlConnectionFOU), variable.size())
 }
 
 
