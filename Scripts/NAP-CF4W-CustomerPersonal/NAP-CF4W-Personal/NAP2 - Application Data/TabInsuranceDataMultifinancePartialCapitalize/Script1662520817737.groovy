@@ -33,26 +33,26 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceC
 int count = variable.size()
 
 'Mengambil nilai row keberapa dimulai data additional coverage section edit generated insurance table pada excel'
-def addCovTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
+def addCovTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
 6
 
 'Mengambil nilai row keberapa dimulai data edit generated insurance table pada excel'
-def editGenTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
+def editGenTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
 
 'Mengambil nilai row keberapa dimulai data sum insured amount pada excel'
-def sumInsuredAmountRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
+def sumInsuredAmountRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
 1
 
 'Mengambil nilai row keberapa data main premi rate pada excel'
-def Rate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
+def Rate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
 2
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-def AddRate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
+def AddRate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
 1
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
 int counterPaidByMF=0
@@ -262,9 +262,9 @@ for (int i = 1; i <= count; i++) {
 	}
 }
 
-//getRow
+//excelGetRow.getRow
 'Mengambil nilai row keberapa dimulai data additional coverage section edit generated insurance table pada excel'
-def capPartialRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
+def capPartialRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
 1
 
 //centang or uncentang cap berdasarkan excel

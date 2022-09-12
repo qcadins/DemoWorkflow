@@ -51,6 +51,9 @@ WebDriver driver = DriverFactory.getWebDriver()
 'Ambil text original office dari confins'
 String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
+'Ambil appNo dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
+
 'Select option dropdownlist Asset Region'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -148,6 +151,49 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 	
 }
 
+'Ambil string opsi yang dipilih pada dropdownlist insco branch name excel'
+selectedInscoBranch = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 26)
+
+'Membaca rule excel untuk menentukan default admin fee dan customer stampduty beserta behaviournya'
+HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifInsuranceFee.verifFee'(sqlConnectionLOS, appNo,selectedInscoBranch, sqlConnectionFOU)
+
+ArrayList<String> feeBhv, defAmt
+feeBhv = result.get("Bhv")
+defAmt = result.get("Amt")
+
+if(GlobalVariable.Role=="Testing"){
+	'Ambil nilai admin fee dari confins'
+	adminFeeDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),'value')
+	
+	'Ambil nilai customer stamp duty dari confins'
+	custStampDutyDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),'value')
+	
+	'Verif nilai default admin fee yang muncul pada confins sesuai rule'
+	WebUI.verifyMatch(adminFeeDefAmt.replace(",",""),defAmt[0],false)
+	
+	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
+	WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)
+	
+	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
+	if(feeBhv[0]=="DEF"){
+		'Verif field admin fee bisa diedit'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+	}
+	else if(feeBhv[0]=="LOCK"){
+		'Verif field admin fee tidak bisa diedit'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+	}
+	if(feeBhv[1]=="DEF"){
+		'Verif field customer stampduty bisa diedit'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+	}
+	else if(feeBhv[1]=="LOCK"){
+		'Verif field customer stampduty tidak bisa diedit'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+	}
+}
+
 'Verifikasi/memastikan isfeeusedefault pada excel'
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 30) == 'NO') {
@@ -168,7 +214,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
         GlobalVariable.NumofColm, 34), false)
 
 'Mengambil nilai row keberapa dimulai data additional coverage (apply to all) pada excel'
-def addCovRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage') + 
+def addCovRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage') + 
 3
 
 ArrayList<WebElement> variableAddCovAll = driver.findElements(By.cssSelector('#insuranceCoverage > div:nth-child(2) > div > label'))
@@ -224,26 +270,26 @@ if(capinssetting=="YEARLY"){
 	int count = variable.size()
 	
 	'Mengambil nilai row keberapa dimulai data additional coverage section edit generated insurance table pada excel'
-	def addCovTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
+	def addCovTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
 	6
 	
 	'Mengambil nilai row keberapa dimulai data edit generated insurance table pada excel'
-	def editGenTableRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
+	def editGenTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
 	
 	'Mengambil nilai row keberapa dimulai data sum insured amount pada excel'
-	def sumInsuredAmountRow = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
+	def sumInsuredAmountRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
 	1
 	
 	'Mengambil nilai row keberapa data main premi rate pada excel'
-	def Rate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
+	def Rate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
 	2
 	
 	'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-	def AddRate = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
+	def AddRate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
 	1
 	
 	'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-	def TotalPremium = CustomKeywords.'getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+	def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 	1
 	
 	int counterPaidByMF=0
