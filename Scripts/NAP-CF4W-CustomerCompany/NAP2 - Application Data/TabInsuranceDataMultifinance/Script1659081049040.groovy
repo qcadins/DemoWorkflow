@@ -259,8 +259,10 @@ for (int i = 1; i <= countAddCov; i++) {
 'Klik apply to all'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Apply To All'))
 
+'Mengambil nilai setting cap insurance dari db'
 String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlConnectionFOU)
 
+'Jika cap insurance bernilai yearly'
 if(capinssetting=="YEARLY"){
 	'Inisialisasi Variabel'
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
@@ -320,7 +322,6 @@ if(capinssetting=="YEARLY"){
 				} else if ((capitalizeValueArray[(i - 1)]).equalsIgnoreCase('NO')) {
 					'Jika sudah tercentang'
 					if (WebUI.verifyElementChecked(capitalizeObject, 5, FailureHandling.OPTIONAL)) {
-						
 						'Uncentang capitalize'
 						WebUI.uncheck(capitalizeObject)
 					}
@@ -415,8 +416,11 @@ if(capinssetting=="YEARLY"){
 			}
 		}
 		
+		
 		int flagLoading = 0
 	
+		
+		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
 		for (int j = 1; j <= countAddCov; j++) {
@@ -581,6 +585,7 @@ if(capinssetting=="YEARLY"){
 		'Verif total premi to customer sesuai perhitungan'
 		WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false)
 		
+		'Jika tidak ada paid by mf'
 		if(totalResult[2]==0){
 			'Input diskon'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
@@ -590,6 +595,7 @@ if(capinssetting=="YEARLY"){
 		
 	}
 	
+	'Jika tidak ada paid by mf'
 	if (counterPaidByMF == 0) {
 		'Input diskon'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
@@ -623,21 +629,28 @@ if(capinssetting=="YEARLY"){
 		String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 			'value').replace(',', '')
 		
-		'Verif capitalize amount sesuai perhitungan'
+		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
+			'Verif capitalize amount sesuai perhitungan'
 			WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)
-		} else if(totalResult[3]==0) {
+		}
+		//Jika capitalize amount bernilai 0
+		else if(totalResult[3]==0) {
+			'Verif capitalize amount sesuai perhitungan'
 			WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
 		}
+		'Jika ada paid by mf'
 		if(totalResult[2]==1){
+			'write to excel discount amount'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 				GlobalVariable.NumofColm - 1, textDiscountAmt)
 		}
 	}
 	
 	
-	
+	'Jika ada paid by mf'
 	if (counterPaidByMF == 1) {
+		'Write to excel discount amount'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
@@ -649,6 +662,7 @@ if(capinssetting=="YEARLY"){
 	GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL)
 }
+//Jika cap insurance setting bernilai partial
 else if (capinssetting=="PARTIAL"){
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataMultifinancePartialCapitalize'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)

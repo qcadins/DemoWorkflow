@@ -62,6 +62,7 @@ public class getRow {
 			try{
 				if(row.getCell(0).getStringCellValue().equals(cellValue)){
 					row_num = i
+					break
 				}
 			}
 			catch(Exception e){

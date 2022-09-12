@@ -263,21 +263,25 @@ for (int i = 1; i <= count; i++) {
 }
 
 //excelGetRow.getRow
-'Mengambil nilai row keberapa dimulai data additional coverage section edit generated insurance table pada excel'
+'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
 1
 
-//centang or uncentang cap berdasarkan excel
+'Pengecekan excel full capitalize amount bernilai yes/no'
 if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="YES"){
+	'Jika full capitalize amount pada confins belum tercentang'
 	if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
+		'Centang full capitalize amount'
 		WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
 	
 }
 else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="NO"){
+	'Jika full capitalize amount pada confins sudah tercentang'
 	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
+		'Uncentang full capitalize amounts'
 		WebUI.uncheck(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
 }
@@ -286,11 +290,14 @@ else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsurance
 'Klik calculate insurance'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 
+'Pengecekan jika full capitalize amount pada confins tidak tercentang dan pada excel terisi nilai amountnya'
 if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)&&findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+2).length()>0){
+	'Input capitalize amount'
 	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+2))
 }
+				
 //if verif uncheck set cap amts
 //kenapa karena jika set merupakan inputan user excel tidak perlu diverif
 ArrayList<WebElement> totalResult
@@ -392,20 +399,31 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 		'value').replace(',', '')
 	
-	'Verif capitalize amount sesuai perhitungan'
+	'Verif untuk capitalize bukan 0 dan ada paid by mf'
 	if ((totalResult[3]) != 0 && totalResult[2]==1) {
+		'Verify capitalize amount sesuai perhitungan'
 		WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)
+		
+		'write to excel discount amount'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
-	} 
+	}
+	// Verif untuk capitalizze bukan 0 dan tidak ada paid by mf
 	else if((totalResult[3]) != 0 && totalResult[2]==0){
+		'Klik 2x untuk refresh capitalize amount di confins'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
+		
+		'Mengambil nilai capitalize amount dari confins'
 		textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 			'value').replace(',', '')
+			
+		'Verify capitalize amount sesuai perhitungan'
 		WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult - discountAmt).toString(), false)
 	}
+	//Verif untuk capitalize bernilai 0, ada paid by mf, dan full capitalize tercentang
 	else if((totalResult[3]) == 0 && totalResult[2]==1 && WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
+		'Verify capitalize amount sesuai perhitungan'
 		WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(),false)
 	}
 	
@@ -413,8 +431,9 @@ if(GlobalVariable.RoleCompany=="Testing"){
 }
 
 
-
+'Pengecekan jika ada paid by mf'
 if (counterPaidByMF == 1) {
+	'Write to excel discount amount'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 		GlobalVariable.NumofColm - 1, textDiscountAmt)
 }

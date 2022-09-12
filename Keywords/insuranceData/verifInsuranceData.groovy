@@ -217,6 +217,7 @@ public class verifInsuranceData {
 
 		int counterPaidByMF=0, counterCap = 0
 
+		'Jika full capitalize amount pada confins tercentang'
 		if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
 			counterCap = 1
 		}
@@ -343,9 +344,9 @@ public class verifInsuranceData {
 				totalResultAddtPremi+=resultAddtPremi
 			}
 			println("totalresultaddtpremi "+totalResultAddtPremi)
+			
 			'tambahkan additional premi ke total additional premi'
 			totalAdditionalPremiumResult+=totalResultAddtPremi
-
 
 			BigDecimal resultTotalPremiPerYear = 0
 
@@ -356,10 +357,13 @@ public class verifInsuranceData {
 
 			'ambil nilai total premi per tahun dari confins'
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
+			
 			println(textTotalPremiPerYear+","+resultTotalPremiPerYear)
+			
 			'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
 			WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
 
+			'Jika full capitalize amount pada confins tercentang dan paid by customer'
 			if(counterCap==1&&WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)CUSTOMER',true,20,FailureHandling.OPTIONAL)){
 				capitalizeAmountResult+=resultTotalPremiPerYear
 			}

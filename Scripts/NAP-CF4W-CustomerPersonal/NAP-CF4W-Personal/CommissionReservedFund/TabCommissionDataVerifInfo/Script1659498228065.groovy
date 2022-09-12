@@ -56,7 +56,7 @@ variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEm
 variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
 'Arraylist untuk menampung tax rate (wht dan vat), penalty rate, persentase taxable serta tiernya (amt from dan amt to) dari db'
-ArrayList<WebElement> taxRate = CustomKeywords.'commissionData.taxCalculation.checkTaxRateCompany'(sqlConnectionTAX)
+ArrayList<WebElement> taxRate = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxRateCompany'(sqlConnectionTAX)
 
 whtRate = (taxRate[0]).split(';')
 
@@ -115,7 +115,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
         'xpath', 'equals', newxpathCalMethod, true)
 
     'Menghitung total amount untuk verify summary'
-    CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
+    CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
@@ -143,7 +143,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
+    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
         supplierName)
 
     'Pengecekan calculation method gross atau nett'
@@ -154,7 +154,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
@@ -170,7 +170,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 
@@ -239,7 +239,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
         'xpath', 'equals', newxpathCalMethod, true)
 
     'Menghitung total amount untuk verify summary'
-    CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
+    CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
@@ -267,7 +267,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
+    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
         supplierEmployeeName)
 
     'Pengecekan calculation method pada confins gross atau nett'
@@ -278,7 +278,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
@@ -294,7 +294,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 
@@ -363,7 +363,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
         'xpath', 'equals', newxpathCalMethod, true)
 
     'Menghitung total amount yang akan digunakan untuk verify summary'
-    CustomKeywords.'commissionData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
+    CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
@@ -391,7 +391,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
+    ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX, 
         refName)
 
     'Pengecekan calculation method pada confins gross atau nett'
@@ -402,7 +402,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
@@ -418,7 +418,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
-            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
+            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateGrossTaxCompany'(Double.parseDouble(
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 
