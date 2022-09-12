@@ -243,13 +243,13 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
-	'write to excel if failed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0,
-		GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+    'write to excel if failed'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
+        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
-	'write to excel reason lookup'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1,
-		GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
+    'write to excel reason lookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+        GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 }
 
 'click lookup debtor business scale'
