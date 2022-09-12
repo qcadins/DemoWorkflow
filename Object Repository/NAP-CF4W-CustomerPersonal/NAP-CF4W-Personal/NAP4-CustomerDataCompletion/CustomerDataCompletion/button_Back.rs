@@ -6,11 +6,15 @@
    <elementGuidId>61b9c7c4-40eb-44d7-b58d-4ba8aa6ea349</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'button' and (text() = ' Back' or . = ' Back')]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail/div/div/div/div[2]/button</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
