@@ -3,7 +3,7 @@
    <description></description>
    <name>input_LABARUGI TAHUN BERJALAN</name>
    <tag></tag>
-   <elementGuidId>aee9c754-5cba-4f09-8856-7920b519e6c3</elementGuidId>
+   <elementGuidId>28592f9a-fbd9-45b9-bbd6-40f28ab1be24</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

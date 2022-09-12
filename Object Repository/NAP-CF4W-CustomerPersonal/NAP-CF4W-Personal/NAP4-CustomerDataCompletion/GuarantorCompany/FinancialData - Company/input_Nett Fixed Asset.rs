@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Nett Fixed Asset</name>
    <tag></tag>
-   <elementGuidId>25cfc2ed-8055-4e95-93f3-8773e05613eb</elementGuidId>
+   <elementGuidId>cea2e846-0ade-4eb2-a086-1e13cd16f6c7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

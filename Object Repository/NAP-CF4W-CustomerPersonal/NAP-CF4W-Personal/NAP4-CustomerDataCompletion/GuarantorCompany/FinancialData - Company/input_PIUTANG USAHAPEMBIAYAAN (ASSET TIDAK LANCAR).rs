@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PIUTANG USAHAPEMBIAYAAN (ASSET TIDAK LANCAR)</name>
    <tag></tag>
-   <elementGuidId>08fe9684-1a49-4f8d-8a0f-b377532682b4</elementGuidId>
+   <elementGuidId>730a4dfc-ae74-4826-a27b-294e35922df8</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

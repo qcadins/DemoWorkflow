@@ -3,7 +3,7 @@
    <description></description>
    <name>input_ASSET LANCAR LAINNYA</name>
    <tag></tag>
-   <elementGuidId>9cec1f83-6cb4-4aa0-aecb-348076da85e4</elementGuidId>
+   <elementGuidId>f5ceb1a3-5e98-4138-b16e-716232575c1c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

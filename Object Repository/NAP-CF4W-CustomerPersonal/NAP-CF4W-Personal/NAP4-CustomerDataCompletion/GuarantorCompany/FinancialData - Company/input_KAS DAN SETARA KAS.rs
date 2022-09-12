@@ -3,7 +3,7 @@
    <description></description>
    <name>input_KAS DAN SETARA KAS</name>
    <tag></tag>
-   <elementGuidId>8eb67223-882a-4378-9864-1ff3f714b5bc</elementGuidId>
+   <elementGuidId>bf4439e9-f798-4907-8524-38930c401d29</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

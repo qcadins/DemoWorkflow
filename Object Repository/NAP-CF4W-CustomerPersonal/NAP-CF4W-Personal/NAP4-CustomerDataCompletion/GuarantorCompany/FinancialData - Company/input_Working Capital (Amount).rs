@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Working Capital (Amount)</name>
    <tag></tag>
-   <elementGuidId>3327572a-292c-4715-8fa0-228d2b99cae1</elementGuidId>
+   <elementGuidId>6a59979d-c0b7-446d-b105-f7958868982e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

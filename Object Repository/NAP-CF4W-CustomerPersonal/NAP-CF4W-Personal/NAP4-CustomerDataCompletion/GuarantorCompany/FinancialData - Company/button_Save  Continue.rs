@@ -3,11 +3,11 @@
    <description></description>
    <name>button_Save  Continue</name>
    <tag></tag>
-   <elementGuidId>d49d5d26-b86d-43f3-be82-4322c139016f</elementGuidId>
+   <elementGuidId>8da48c47-fddc-4725-a29b-cbc9be546cce</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//button[@type='submit']</value>
+         <value>//*[@id=&quot;Financial-tab&quot;]/app-financial-company/div/div/div/div/form/div/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

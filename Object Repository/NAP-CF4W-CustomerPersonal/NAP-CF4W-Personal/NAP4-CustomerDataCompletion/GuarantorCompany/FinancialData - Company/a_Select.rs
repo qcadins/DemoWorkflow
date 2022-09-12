@@ -3,7 +3,7 @@
    <description></description>
    <name>a_Select</name>
    <tag></tag>
-   <elementGuidId>dd5b8be9-11ef-4950-8320-c19461e78ef7</elementGuidId>
+   <elementGuidId>b548fb87-865c-4ebf-a31f-33e11a9ac6cb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

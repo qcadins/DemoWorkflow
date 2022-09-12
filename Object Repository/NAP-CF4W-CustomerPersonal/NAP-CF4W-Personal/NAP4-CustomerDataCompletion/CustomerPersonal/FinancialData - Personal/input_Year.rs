@@ -3,16 +3,24 @@
    <description></description>
    <name>input_Year</name>
    <tag></tag>
-   <elementGuidId>140df9f5-e6b9-473c-95b5-f2833749202f</elementGuidId>
+   <elementGuidId>a5792eb1-c212-441d-8bc8-3d3ff05241e1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
+         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[2]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[2]/input</value>
+         <value></value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[2]/input</value>
+   </webElementProperties>
 </WebElementEntity>

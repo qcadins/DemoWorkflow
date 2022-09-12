@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Current Asset</name>
    <tag></tag>
-   <elementGuidId>9fc0fe37-cb8f-4306-a339-4db8beeb209a</elementGuidId>
+   <elementGuidId>9439e185-3eb1-468a-bf17-94dd976750a1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

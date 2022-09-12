@@ -3,7 +3,7 @@
    <description></description>
    <name>input_EKUITAS</name>
    <tag></tag>
-   <elementGuidId>fbb83646-9ddd-4df7-825e-41ac7921bbee</elementGuidId>
+   <elementGuidId>067de10c-afd6-4c4d-a34b-a02429167b03</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

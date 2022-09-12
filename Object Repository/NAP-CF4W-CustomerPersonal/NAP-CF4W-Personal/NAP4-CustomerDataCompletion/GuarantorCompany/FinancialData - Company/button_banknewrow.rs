@@ -3,11 +3,10 @@
    <description></description>
    <name>button_banknewrow</name>
    <tag></tag>
-   <elementGuidId>922f2322-7dae-4ed4-bd66-e164175db52a</elementGuidId>
+   <elementGuidId>3fc28f27-4fd3-4794-8ece-90d1b1299231</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Return Of Equity()</name>
    <tag></tag>
-   <elementGuidId>3666ca52-54d3-41f5-9556-bc0405468f16</elementGuidId>
+   <elementGuidId>4e0cc693-9887-48a0-bc69-ed80e75883d9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

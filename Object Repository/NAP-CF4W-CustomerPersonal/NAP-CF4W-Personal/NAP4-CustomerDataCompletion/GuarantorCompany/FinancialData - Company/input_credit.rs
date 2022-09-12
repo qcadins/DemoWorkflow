@@ -3,17 +3,24 @@
    <description></description>
    <name>input_credit</name>
    <tag></tag>
-   <elementGuidId>d8d121d7-1285-4b73-9e24-7a8cc0aadae3</elementGuidId>
+   <elementGuidId>e5f4d94c-ed22-4e1b-b0b1-d7dbf81cca11</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[6]/input</value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value></value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[6]/input</value>
+   </webElementProperties>
 </WebElementEntity>

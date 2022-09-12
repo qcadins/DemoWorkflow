@@ -3,7 +3,7 @@
    <description></description>
    <name>input_UTANG USAHA JANGKA PANJANG</name>
    <tag></tag>
-   <elementGuidId>d54a270b-cf93-4086-8605-fff7fc5f8a69</elementGuidId>
+   <elementGuidId>da362190-c41e-467d-acf3-c3f0a54b9048</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

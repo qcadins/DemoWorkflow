@@ -3,7 +3,7 @@
    <description></description>
    <name>button_CancelFinancialData</name>
    <tag></tag>
-   <elementGuidId>39eff40e-30b6-4a29-a13a-e1b873337a21</elementGuidId>
+   <elementGuidId>ccd00067-1ca9-4d2d-93a9-6913b0885328</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_INVESTASIASET KEUANGAN LAINNYA</name>
    <tag></tag>
-   <elementGuidId>6b5e2347-26c1-45a2-ba76-4c7d0ee0556c</elementGuidId>
+   <elementGuidId>c234204a-9c26-4768-94ef-3dd0770c1ffb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

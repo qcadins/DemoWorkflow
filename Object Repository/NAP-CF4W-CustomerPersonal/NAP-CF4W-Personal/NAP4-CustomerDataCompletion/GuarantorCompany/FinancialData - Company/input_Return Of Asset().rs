@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Return Of Asset()</name>
    <tag></tag>
-   <elementGuidId>8097980f-6d8f-4f02-bc28-52c764ff7774</elementGuidId>
+   <elementGuidId>811c77d5-29c5-491d-b578-b45bc6f765fb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

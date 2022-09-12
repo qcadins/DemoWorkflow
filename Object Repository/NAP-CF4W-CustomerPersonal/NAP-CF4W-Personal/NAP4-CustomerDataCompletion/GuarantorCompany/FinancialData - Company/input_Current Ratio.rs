@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Current Ratio</name>
    <tag></tag>
-   <elementGuidId>ac6844ee-2e43-47e0-9ab3-6430da0e6993</elementGuidId>
+   <elementGuidId>d308ae17-2936-4030-ae39-0a61fbd3541c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

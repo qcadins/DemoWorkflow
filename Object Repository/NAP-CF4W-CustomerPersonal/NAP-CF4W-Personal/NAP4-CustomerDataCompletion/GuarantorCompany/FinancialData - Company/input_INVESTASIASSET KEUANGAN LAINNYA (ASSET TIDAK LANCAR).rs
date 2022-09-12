@@ -3,7 +3,7 @@
    <description></description>
    <name>input_INVESTASIASSET KEUANGAN LAINNYA (ASSET TIDAK LANCAR)</name>
    <tag></tag>
-   <elementGuidId>1fc2a31f-d825-43ca-8ddd-65b560f89b9f</elementGuidId>
+   <elementGuidId>9dfc40fd-65af-4914-a8ee-de1dcb3e7ddb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_LABARUGI SEBELUM PAJAK</name>
    <tag></tag>
-   <elementGuidId>ab9bc486-7408-4ae3-874d-26c6935a8529</elementGuidId>
+   <elementGuidId>bebc9633-a3d2-41d2-8eb4-a17f78e55b7e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

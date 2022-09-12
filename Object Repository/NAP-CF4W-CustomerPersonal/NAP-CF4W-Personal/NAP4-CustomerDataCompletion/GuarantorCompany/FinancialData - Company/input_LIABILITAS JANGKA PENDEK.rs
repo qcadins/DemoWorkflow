@@ -3,7 +3,7 @@
    <description></description>
    <name>input_LIABILITAS JANGKA PENDEK</name>
    <tag></tag>
-   <elementGuidId>ded0d32b-e241-4273-bd07-98e6d2a8b46d</elementGuidId>
+   <elementGuidId>2de2cbba-9a2b-4092-9109-e72fbb35c012</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

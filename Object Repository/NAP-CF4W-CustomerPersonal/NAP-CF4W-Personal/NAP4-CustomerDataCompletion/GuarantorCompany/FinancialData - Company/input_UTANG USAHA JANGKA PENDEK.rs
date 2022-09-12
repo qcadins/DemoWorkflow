@@ -3,7 +3,7 @@
    <description></description>
    <name>input_UTANG USAHA JANGKA PENDEK</name>
    <tag></tag>
-   <elementGuidId>57d5fdfc-0810-4dd3-9ada-8059073dc0ce</elementGuidId>
+   <elementGuidId>048a9a1e-2b22-47d4-bc2b-d14f11a2835c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

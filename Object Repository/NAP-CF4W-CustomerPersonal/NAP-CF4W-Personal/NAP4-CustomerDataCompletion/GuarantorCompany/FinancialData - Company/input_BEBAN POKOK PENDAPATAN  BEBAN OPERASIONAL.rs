@@ -3,7 +3,7 @@
    <description></description>
    <name>input_BEBAN POKOK PENDAPATAN  BEBAN OPERASIONAL</name>
    <tag></tag>
-   <elementGuidId>83318cf5-d53d-41b8-8d9c-01ee133fc680</elementGuidId>
+   <elementGuidId>cd6a3275-95cc-403c-b385-81979f9dca81</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

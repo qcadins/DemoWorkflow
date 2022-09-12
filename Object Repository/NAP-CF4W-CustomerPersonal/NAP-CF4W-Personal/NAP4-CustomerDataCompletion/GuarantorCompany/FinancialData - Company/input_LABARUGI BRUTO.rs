@@ -3,7 +3,7 @@
    <description></description>
    <name>input_LABARUGI BRUTO</name>
    <tag></tag>
-   <elementGuidId>bbac2530-228e-41c4-85f7-08dc140ddf5f</elementGuidId>
+   <elementGuidId>c328c1c3-f812-4a07-b11d-614e42021416</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

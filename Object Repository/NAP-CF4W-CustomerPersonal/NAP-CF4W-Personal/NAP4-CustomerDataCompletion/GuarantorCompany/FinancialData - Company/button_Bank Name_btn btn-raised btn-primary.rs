@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Bank Name_btn btn-raised btn-primary</name>
    <tag></tag>
-   <elementGuidId>412ae05f-a041-4ec3-b203-838221db648a</elementGuidId>
+   <elementGuidId>d9e6a944-a096-4960-a479-24b00bf09477</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

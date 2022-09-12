@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PENDAPATAN USAHA  OPERASIONAL</name>
    <tag></tag>
-   <elementGuidId>be04484b-f197-4df4-a882-57d10153a333</elementGuidId>
+   <elementGuidId>44704f0d-a2ba-4e05-b020-abaedf0d9dd8</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

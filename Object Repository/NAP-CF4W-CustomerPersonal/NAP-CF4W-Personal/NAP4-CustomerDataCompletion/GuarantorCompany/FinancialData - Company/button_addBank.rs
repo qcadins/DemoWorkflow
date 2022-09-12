@@ -3,7 +3,7 @@
    <description></description>
    <name>button_addBank</name>
    <tag></tag>
-   <elementGuidId>05d2470f-66c5-4094-b920-24d1d8205313</elementGuidId>
+   <elementGuidId>c4950682-7693-4bf1-8e57-caf1dc02c072</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

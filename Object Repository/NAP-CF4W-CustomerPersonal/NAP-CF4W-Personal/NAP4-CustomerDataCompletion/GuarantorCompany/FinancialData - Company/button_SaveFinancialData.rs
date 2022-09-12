@@ -3,7 +3,7 @@
    <description></description>
    <name>button_SaveFinancialData</name>
    <tag></tag>
-   <elementGuidId>9974c356-db3d-4211-b8a4-b94de71ff0f2</elementGuidId>
+   <elementGuidId>52c2bf6a-d1e1-41c0-a461-5aaee70e017f</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

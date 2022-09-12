@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Beginning Balance</name>
    <tag></tag>
-   <elementGuidId>27a17a0f-2c68-47f8-845b-f3eb741cdcda</elementGuidId>
+   <elementGuidId>1e651880-9e87-4e87-93e2-ea1f784106c3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

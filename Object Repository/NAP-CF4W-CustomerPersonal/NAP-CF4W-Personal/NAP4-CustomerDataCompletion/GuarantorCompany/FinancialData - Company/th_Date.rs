@@ -3,7 +3,7 @@
    <description></description>
    <name>th_Date</name>
    <tag></tag>
-   <elementGuidId>52dd7dd5-bb72-4be1-82eb-d01fe4bf3161</elementGuidId>
+   <elementGuidId>b8f5f9f0-60c9-4fca-89b9-a47b28e53c73</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

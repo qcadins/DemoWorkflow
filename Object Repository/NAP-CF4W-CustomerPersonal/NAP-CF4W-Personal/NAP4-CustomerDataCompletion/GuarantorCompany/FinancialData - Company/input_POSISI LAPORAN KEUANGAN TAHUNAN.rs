@@ -3,7 +3,7 @@
    <description></description>
    <name>input_POSISI LAPORAN KEUANGAN TAHUNAN</name>
    <tag></tag>
-   <elementGuidId>49d83cd6-8253-4a46-a384-bdf3db433d90</elementGuidId>
+   <elementGuidId>1d75cfc5-c971-4fdf-ab32-30866f6ac4f0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

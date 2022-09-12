@@ -3,7 +3,7 @@
    <description></description>
    <name>input_PIUTANG USAHAPEMBIAYAAN</name>
    <tag></tag>
-   <elementGuidId>768f652e-7986-46ee-8712-b879a06990fd</elementGuidId>
+   <elementGuidId>978b821a-38ba-4956-98af-00739c389787</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

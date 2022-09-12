@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Current Ratio()</name>
    <tag></tag>
-   <elementGuidId>b92c82e2-f61e-4685-b9fd-e5d39c55d3a3</elementGuidId>
+   <elementGuidId>4a88ad34-c5ba-41d0-9f7f-ee39f966f9e3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

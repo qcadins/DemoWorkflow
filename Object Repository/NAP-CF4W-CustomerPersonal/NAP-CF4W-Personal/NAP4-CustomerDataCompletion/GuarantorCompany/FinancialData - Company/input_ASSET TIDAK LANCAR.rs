@@ -3,7 +3,7 @@
    <description></description>
    <name>input_ASSET TIDAK LANCAR</name>
    <tag></tag>
-   <elementGuidId>582ed536-f9c7-41f3-946e-fc8dbdd0b5e1</elementGuidId>
+   <elementGuidId>96b5d638-ffa5-463d-bdf2-b9b6428a6f41</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

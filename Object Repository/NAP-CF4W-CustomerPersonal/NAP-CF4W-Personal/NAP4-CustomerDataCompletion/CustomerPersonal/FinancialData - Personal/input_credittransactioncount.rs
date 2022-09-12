@@ -3,16 +3,24 @@
    <description></description>
    <name>input_credittransactioncount</name>
    <tag></tag>
-   <elementGuidId>4d7fb54c-703e-409a-a176-3b9610673011</elementGuidId>
+   <elementGuidId>0d47ce61-f728-4f21-b9b2-a26577d1ee4c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
+         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[5]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[5]/input</value>
+         <value></value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[5]/input</value>
+   </webElementProperties>
 </WebElementEntity>

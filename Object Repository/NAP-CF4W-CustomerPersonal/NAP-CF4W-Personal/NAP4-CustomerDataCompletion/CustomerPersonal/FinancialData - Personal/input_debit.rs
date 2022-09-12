@@ -3,16 +3,24 @@
    <description></description>
    <name>input_debit</name>
    <tag></tag>
-   <elementGuidId>70d2a728-5fd1-4544-918e-c8c12fe15d3d</elementGuidId>
+   <elementGuidId>1ab2ff97-8f33-4ff9-8f67-82c4389f2d47</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
+         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[4]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[4]/input</value>
+         <value></value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustBankAccDetailSection&quot;]/div[3]/div[1]/table/tbody[2]/tr/td[4]/input</value>
+   </webElementProperties>
 </WebElementEntity>
