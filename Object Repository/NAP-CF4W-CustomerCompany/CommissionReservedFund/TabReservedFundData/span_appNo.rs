@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>alert_Submit</name>
+   <name>span_appNo</name>
    <tag></tag>
-   <elementGuidId>34645eb2-956d-40ca-836e-ba466c54c8f8</elementGuidId>
+   <elementGuidId>71ef7c8c-a3a4-44c4-829c-604bfe865af3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@aria-label='Success!']</value>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[1]/span/div/div[2]/label/a/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@aria-label='Success!']</value>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[1]/span/div/div[2]/label/a/span</value>
    </webElementProperties>
 </WebElementEntity>
