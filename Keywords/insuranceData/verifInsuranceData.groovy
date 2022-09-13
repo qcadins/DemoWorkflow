@@ -45,7 +45,9 @@ public class verifInsuranceData {
 		'Looping data insurance untuk verify'
 		for (int i = 1; i <= count; i++) {
 			BigDecimal  totalResultAddtPremi = 0
+
 			counterCap=0
+
 			'Inisialisasi Format untuk mendapatkan nilai desimal dari nilai persen'
 			NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 
@@ -54,6 +56,7 @@ public class verifInsuranceData {
 			if(WebUI.verifyElementChecked(capitalizeObject,5,FailureHandling.OPTIONAL)){
 				counterCap=1
 			}
+
 			Object paidByObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
 
 			Object sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 'xpath', 'equals',
@@ -61,7 +64,7 @@ public class verifInsuranceData {
 
 			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[6]/span[1]/select",true)
 
-			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
+			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL) && counterPaidByMF==0){
 				counterPaidByMF = 1
 			}
 
@@ -82,10 +85,12 @@ public class verifInsuranceData {
 
 			'Ambil nilai coverage amount'
 			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
+
 			BigDecimal Amount = Long.parseLong(textAmount)
 
 			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_numberOfMonth'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[4]", true)
+
 			'Ambil nilai number of month'
 			String textNumberOfMonth = WebUI.getText(numberOfMonthObject)
 
@@ -110,13 +115,13 @@ public class verifInsuranceData {
 
 			'Mengambil dan menyimpan jumlah additional coverage'
 			int countAddCov = variableAddCovAll.size()
-			println(countAddCov+"countaddcov")
 
 			int flagLoading = 0
+
 			'Looping additional coverage'
 			for (int j = 1; j <= countAddCov; j++) {
-				println(j+"j")
 				BigDecimal resultAddtPremi=0
+
 				int countSumInsuredAmount = 0
 
 				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
@@ -139,11 +144,14 @@ public class verifInsuranceData {
 				String textAddCovRate = WebUI.getAttribute(modifyAddtRateObject,'value').replaceAll("\\s","").replace(",","")
 
 				Float AddtRate = 0.00
+
 				'Jika additional coverage tercentang'
 				if(WebUI.verifyElementChecked(addCovYearCheckbox,2,FailureHandling.OPTIONAL)){
+
 					'Pengecekan jika sum insured amount ada atau tidak'
 					if(countSumInsuredAmount==1){
 						AddtRate = Long.parseLong(textAddCovRate)
+
 						'Perhitungan nilai additional premi'
 						resultAddtPremi = Math.round(AddtRate*(numberOfMonth/12))
 					}
@@ -162,17 +170,14 @@ public class verifInsuranceData {
 				'ambil nilai additional premi dari confins'
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
 
-				println(textAddtPremiAmt+", "+resultAddtPremi)
 				'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
 				WebUI.verifyMatch(textAddtPremiAmt, String.format("%.2f", resultAddtPremi),false)
 
-
 				totalResultAddtPremi+=resultAddtPremi
 			}
-			println("totalresultaddtpremi "+totalResultAddtPremi)
+
 			'tambahkan additional premi ke total additional premi'
 			totalAdditionalPremiumResult+=totalResultAddtPremi
-
 
 			BigDecimal resultTotalPremiPerYear = 0
 
@@ -183,7 +188,7 @@ public class verifInsuranceData {
 
 			'ambil nilai total premi per tahun dari confins'
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
-			println(textTotalPremiPerYear+","+resultTotalPremiPerYear)
+
 			'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
 			WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
 
@@ -221,6 +226,7 @@ public class verifInsuranceData {
 		if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
 			counterCap = 1
 		}
+
 		'Looping data insurance untuk verify'
 		for (int i = 1; i <= count; i++) {
 			BigDecimal  totalResultAddtPremi = 0
@@ -235,7 +241,7 @@ public class verifInsuranceData {
 
 			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/span[1]/select",true)
 
-			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
+			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL) && counterPaidByMF==0){
 				counterPaidByMF = 1
 			}
 
@@ -256,10 +262,12 @@ public class verifInsuranceData {
 
 			'Ambil nilai coverage amount'
 			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
+
 			BigDecimal Amount = Long.parseLong(textAmount)
 
 			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_numberOfMonth'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]", true)
+
 			'Ambil nilai number of month'
 			String textNumberOfMonth = WebUI.getText(numberOfMonthObject)
 
@@ -284,13 +292,13 @@ public class verifInsuranceData {
 
 			'Mengambil dan menyimpan jumlah additional coverage'
 			int countAddCov = variableAddCovAll.size()
-			println(countAddCov+"countaddcov")
 
 			int flagLoading = 0
+
 			'Looping additional coverage'
 			for (int j = 1; j <= countAddCov; j++) {
-				println(j+"j")
 				BigDecimal resultAddtPremi=0
+
 				int countSumInsuredAmount = 0
 
 				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
@@ -306,18 +314,20 @@ public class verifInsuranceData {
 					countSumInsuredAmount = 1
 				}
 
-
 				Object modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
 
 				'Ambil nilai dari rate additional coverage '
 				String textAddCovRate = WebUI.getAttribute(modifyAddtRateObject,'value').replaceAll("\\s","").replace(",","")
 
 				Float AddtRate = 0.00
+
 				'Jika additional coverage tercentang'
 				if(WebUI.verifyElementChecked(addCovYearCheckbox,2,FailureHandling.OPTIONAL)){
+
 					'Pengecekan jika sum insured amount ada atau tidak'
 					if(countSumInsuredAmount==1){
 						AddtRate = Long.parseLong(textAddCovRate)
+
 						'Perhitungan nilai additional premi'
 						resultAddtPremi = Math.round(AddtRate*(numberOfMonth/12))
 					}
@@ -336,15 +346,12 @@ public class verifInsuranceData {
 				'ambil nilai additional premi dari confins'
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
 
-				println(textAddtPremiAmt+", "+resultAddtPremi)
 				'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
 				WebUI.verifyMatch(textAddtPremiAmt, String.format("%.2f", resultAddtPremi),false)
 
-
 				totalResultAddtPremi+=resultAddtPremi
 			}
-			println("totalresultaddtpremi "+totalResultAddtPremi)
-			
+
 			'tambahkan additional premi ke total additional premi'
 			totalAdditionalPremiumResult+=totalResultAddtPremi
 
@@ -357,14 +364,12 @@ public class verifInsuranceData {
 
 			'ambil nilai total premi per tahun dari confins'
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
-			
-			println(textTotalPremiPerYear+","+resultTotalPremiPerYear)
-			
+
 			'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
 			WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
 
 			'Jika full capitalize amount pada confins tercentang dan paid by customer'
-			if(counterCap==1&&WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)CUSTOMER',true,20,FailureHandling.OPTIONAL)){
+			if(counterCap==1 && WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)CUSTOMER',true,20,FailureHandling.OPTIONAL)){
 				capitalizeAmountResult+=resultTotalPremiPerYear
 			}
 

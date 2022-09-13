@@ -26,7 +26,7 @@ public class checkSaveProcess {
 
 	@Keyword
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
-		if(WebUI.verifyElementPresent(object, 2, FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)){
 			if(count==0){
 				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusSuccess)

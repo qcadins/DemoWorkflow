@@ -30,6 +30,23 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+
+String instancename = findTestData('Login/Login').getValue(2, 8)
+
+String username = findTestData('Login/Login').getValue(3, 8)
+
+String password = findTestData('Login/Login').getValue(4, 8)
+
+String database = findTestData('Login/Login').getValue(5, 9)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
 int flagFailed = 0
 
 'Inisialisasi driver'
@@ -81,77 +98,126 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		'Tambahkan data remaining info ke arraylist untuk keperluan verifikasi setelah calculate'
 		remainingInfoRsv.add(textRemainingInfoAmt)
 	}
+
 }
 
-'Input Promo pada Interest Income'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),
-	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 12), FailureHandling.OPTIONAL)
+'Ambil appNo dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/span_appNo'))
 
-'Input Promo pada Insurance Income'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InsuranceIncome'),
-	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
+'Ambil nilai string text lobcode dari db los berdasarkan appNo'
+String lobCode = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkLOBCode'(sqlConnectionLOS, appNo)
 
-'Input Promo pada Life Insurance Income'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_LifeInsuranceIncome'),
-	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 14), FailureHandling.OPTIONAL)
+'HashMap untuk menampung alloc from, alloc amount, dan alloc behaviour dari excel rule'
+HashMap<String,String> resultVerifRule = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkReserveFundBasedOnRule'(lobCode)
 
-'Input Promo pada Admin Fee'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_AdminFee'),
-	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 15), FailureHandling.OPTIONAL)
+'Arraylist untuk menampung nilai array alloc from'
+ArrayList<String> allocFrom = resultVerifRule.get("From")
 
-'Input Promo pada Provision Fee'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_ProvisionFee'),
-	findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-		GlobalVariable.NumofColm, 16), FailureHandling.OPTIONAL)
+'Arraylist untuk menampung nilai array alloc amount default'
+ArrayList<String> defAllocAmt = resultVerifRule.get("Amt")
 
-BigDecimal totalAmt
+'Arraylist untuk menampung nilai array alloc behaviour'
+ArrayList<String> allocBhv = resultVerifRule.get("Bhv")
 
-if(GlobalVariable.RoleCompany=="Testing"){
-	'Menyimpan nilai promo interestincome'
-	String textInterestIncome = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),
-		'value').replace(',', '')
+BigDecimal totalAmt = 0
+
+'Row yang menandakan dimulainya data section reserve fund amount pada excel'
+def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(filePath, '13.TabReservedFundData', 'Reserve Fund Amt')+2
+
+'Arraylist untuk menampung remaining info'
+ArrayList<WebElement> varRemainingBfrCalculate = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
+
+'Inisialisasi Variabel untuk menghitung jumlah baris pada remaining Information, dibagi 2 karena countremaininginfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
+int countRemainingInfoBfrCalculate = varRemainingBfrCalculate.size() / 2
+
+modifyRemainingAllocatedAmountBfrCalculate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingAllocatedAmt'),
+	'xpath', 'equals', ('//*[@id="viewRemainIncomeInfo"]/div[' + countRemainingInfoBfrCalculate) + ']/div[2]/label', true)
+
+'Looping data allocation reserve fund'
+for(int i = 0;i<allocFrom.size();i++){
+	xpathInputAlloc = "//input[@id='ReservedFundAmt"+i+"']"
+	inputAlloc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),'xpath','equals',xpathInputAlloc, true)
+	xpathAllocFromSection = "//*[@id='reserved-fund-tab']/reserved-fund/div/div/div/form/div/div[1]/div["+(i+1)+"]/lib-ucsubsection/div/form/div/h4"
+	allocFromSectionObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/h4_RSVAllocFrom'),'xpath','equals',xpathAllocFromSection, true)
 	
-	BigDecimal interestIncome = Double.parseDouble(textInterestIncome)
+	'Ambil nilai string text nama section allocation pada confins'
+	String textAllocFromSection = WebUI.getText(allocFromSectionObject)
 	
-	'Menyimpan nilai promo insuranceincome'
-	String textInsuranceIncome = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InsuranceIncome'),
-		'value').replace(',', '')
+	'Verify allocation from yang tampil pada confins sesuai dengan rule file'
+	WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)
 	
-	BigDecimal insuranceIncome = Double.parseDouble(textInsuranceIncome)
+	BigDecimal remainingInfoAmt
+	'Looping remaining info'
+	for(int j =1;j<=countRemainingInfoBfrCalculate;j++){
+		newxpathRemainingInfo = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[1]/label')
+		 
+		newxpathRemainingInfoAmt = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
+		
+		modifyObjectRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfo'),'xpath','equals',newxpathRemainingInfo,true)
+		
+		modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),'xpath','equals',newxpathRemainingInfoAmt, true)
+		
+		'Ambil nilai string text remaining info'
+		String textRemainingInfo = WebUI.getText(modifyObjectRemainingInfo)
+		
+		String textRemainingInfoAmt
+		
+		'Pengecekan jika text remaining info pada confins sesuai dengan nama section allocation'
+		if(textRemainingInfo == textAllocFromSection){
+			'Ambil nilai amount remaining info'
+			textRemainingInfoAmt = WebUI.getText(modifyObjectRemainingInfoAmt).replace(",","")
+			remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
+			break
+		}
+	}
+	'Ambil nilai amount dari allocation'
+	String inputAllocAmt = WebUI.getAttribute(inputAlloc, 'value')
+	'Pengecekan remaining info bernilai 0 atau tidak'
+	if(remainingInfoAmt>0){
+		'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
+		WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)
+		
+		'Pengecekan editable/tidaknya field-field allocation pada confins sesuai behaviour pada rule file'
+		if(allocBhv[i].equalsIgnoreCase("def")){
+			'Verify field bisa diisi'
+			WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)
+			
+			'Input Alloc Reserved Fund Amount'
+			WebUI.setText(inputAlloc, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
+				GlobalVariable.NumofColm, rsvAmtRow+i), FailureHandling.OPTIONAL)
+		}
+		else if(allocBhv[i].equalsIgnoreCase("lock")){
+			'Verify field tidak bisa diisi'
+			WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+		}
+		
+	}
+	else{
+		'Verify field tidak bisa diisi'
+		WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+	}
 	
-	'Menyimpan nilai promo lifeinsuranceincome'
-	String textLifeInsuranceIncome = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_LifeInsuranceIncome'),
-		'value').replace(',', '')
+	if(GlobalVariable.RoleCompany=="Testing"){
+		inputAllocAmt = WebUI.getAttribute(inputAlloc, 'value')
+		'Tambahkan amount masing-masing allocation untuk perhitungan total reserved fund amount'
+		totalAmt+=Double.parseDouble(inputAllocAmt.replace(",",""))
+	}
 	
-	BigDecimal lifeInsuranceIncome = Double.parseDouble(textLifeInsuranceIncome)
-	
-	'Menyimpan nilai promo admin fee'
-	String textAdminFee = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_AdminFee'),
-		'value').replace(',', '')
-	
-	BigDecimal adminFee = Double.parseDouble(textAdminFee)
-	
-	'Menyimpan nilai promo provision feee'
-	String textProvisionFee = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_ProvisionFee'),
-		'value').replace(',', '')
-	
-	BigDecimal provisionFee = Double.parseDouble(textProvisionFee)
-	
-	'Perhitungan Total Reserved Fund Amount'
-	totalAmt = (((interestIncome + insuranceIncome) + lifeInsuranceIncome) + adminFee) + provisionFee
 }
+
+String alert
 
 'Klik Button Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))
 
-WebUI.delay(5)
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/alert_Commission'),1,FailureHandling.OPTIONAL)){
+	alert = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL)
+}
+else if(alert==null){
+	alert = "def"
+}
 
-
-if(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL).toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
+if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
 	'Write to Excel FAILED'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)

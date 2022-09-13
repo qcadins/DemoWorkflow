@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//input[@id='ReservedFundAmt0']</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id='ReservedFundAmt0']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,18 +45,18 @@
       <value>DictRemainingIncomeForm[RsvForm.controls['ReservedFundObjs']['controls'][i]['controls'].MrReservedFundSourceName.value]</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
       <value>ReservedFundAmt0</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ReservedFundAmt0&quot;)</value>
+      <value>//*[@id='ReservedFundAmt0']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

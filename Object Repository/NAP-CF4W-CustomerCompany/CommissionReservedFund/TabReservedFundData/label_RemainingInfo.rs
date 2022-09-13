@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>alert_Submit</name>
+   <name>label_RemainingInfo</name>
    <tag></tag>
-   <elementGuidId>34645eb2-956d-40ca-836e-ba466c54c8f8</elementGuidId>
+   <elementGuidId>9b358ed5-9542-436e-8f93-55bea3a02a13</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@aria-label='Success!']</value>
+         <value>//*[@id=&quot;viewRemainIncomeInfo&quot;]/div[1]/div/div[1]/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@aria-label='Success!']</value>
+      <value>//*[@id=&quot;viewRemainIncomeInfo&quot;]/div[1]/div/div[1]/label</value>
    </webElementProperties>
 </WebElementEntity>

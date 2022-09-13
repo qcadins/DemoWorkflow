@@ -386,6 +386,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
+      <name>RSVRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>DupcheckVerifResult</name>
    </GlobalVariableEntity>

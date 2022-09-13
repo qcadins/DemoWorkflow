@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@role='alert'][@aria-label='Success!']</value>
+         <value>//div[@aria-label='Success!']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@role='alert'][@aria-label='Success!']</value>
+      <value>//div[@aria-label='Success!']</value>
    </webElementProperties>
 </WebElementEntity>
