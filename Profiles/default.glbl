@@ -384,4 +384,9 @@
       <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
       <name>MainCovRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
+      <name>RSVRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
