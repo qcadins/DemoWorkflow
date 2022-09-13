@@ -384,4 +384,19 @@
       <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
       <name>MainCovRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DupcheckVerifResult</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>NegativeverifResult</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>NegativeCustCount</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

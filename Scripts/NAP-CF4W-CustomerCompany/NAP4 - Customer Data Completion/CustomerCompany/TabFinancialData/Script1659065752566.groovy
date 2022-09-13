@@ -419,6 +419,14 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                     'Click cancel'
                     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel'))
 
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData',
+						0, financialdata - 1, GlobalVariable.StatusFailed)
+					
+					'Write To Excel GlobalVariable.StatusReasonLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData',
+						1, financialdata - 1, GlobalVariable.StatusReasonLookup)
+				
                     flagWarning++
                 }
                 
