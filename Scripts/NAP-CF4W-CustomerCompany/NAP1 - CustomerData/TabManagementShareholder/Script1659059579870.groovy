@@ -31,7 +31,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)
 }
 
-'Loop Multiple Guarantor Data'
+'Loop Multiple ManagementSharholder Data'
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
 1); (GlobalVariable.NumofFamily)++) {
     if (datafile.getValue(GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -456,59 +456,66 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
                         datafile.getValue(GlobalVariable.NumofFamily, 78), false)
                 }
-            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
-                'input address'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 71))
-
-                'input RT'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_RT'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 72))
-
-                'input RW'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_RW'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 73))
-
-                'click button lookup zipcode'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Zipcode_btn btn-raised btn-primary'))
-
-                'input zipcode'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Zip Code_ZipCode'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 74))
-
-                'input kecamatan'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kecamatan_kecamatan'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 75))
-
-                'input kelurahan'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kelurahan_Kelurahan'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 76))
-
-                'input kota'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kota_kota'), 
-                    datafile.getValue(GlobalVariable.NumofFamily, 77))
-
-                'klik button search'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Search'))
-
-                'verify input error'
-                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
-                    10, FailureHandling.OPTIONAL)) {
-                    'click select'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public')) {
+                if (datafile.getValue(GlobalVariable.NumofFamily, 70).length() > 1) {
+                    'click button copy'
+                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Copy'))
                 } else {
-                    'click X'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_X'))
+                    'input address'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 71))
 
-                    flagWarning++
+                    'input RT'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_RT'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 72))
+
+                    'input RW'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_RW'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 73))
+
+                    'click button lookup zipcode'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Zipcode_btn btn-raised btn-primary'))
+
+                    'input zipcode'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Zip Code_ZipCode'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 74))
+
+                    'input kecamatan'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kecamatan_kecamatan'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 75))
+
+                    'input kelurahan'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kelurahan_Kelurahan'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 76))
+
+                    'input kota'
+                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Kota_kota'), 
+                        datafile.getValue(GlobalVariable.NumofFamily, 77))
+
+                    'klik button search'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Search'))
+
+                    'verify input error'
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
+                        10, FailureHandling.OPTIONAL)) {
+                        'click select'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
+                    } else {
+                        'click X'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_X'))
+
+                        flagWarning++
+                    }
                 }
             }
             
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
-			
-			'Check save Process write to excel'
-			CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+
+            'Check save Process write to excel'
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
+                        4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
+                GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
 
             if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofFamily, 
                 14).equalsIgnoreCase('Company')) {
@@ -516,11 +523,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     5, FailureHandling.OPTIONAL)) {
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-
-                    
                 } else {
-               
-
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
@@ -529,16 +532,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'customer added +1'
                     (GlobalVariable.countNumofCustomer)++
                 }
-            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public') {
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
                     5, FailureHandling.OPTIONAL)) {
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
-
-                    
                 } else {
-                    
-
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
@@ -548,7 +547,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     (GlobalVariable.countNumofCustomer)++
                 }
             }
-        } else if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp'){
+        } else if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
 
@@ -589,10 +588,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write to Excel FAILED'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-					
-					'Write To Excel GlobalVariable.StatusReasonLookup'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-						1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+
+                    'Write To Excel GlobalVariable.StatusReasonLookup'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                        1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                     continue
                 }
@@ -766,11 +765,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write to Excel FAILED'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-					
-					'Write To Excel GlobalVariable.StatusReasonLookup'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-						1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
+                    'Write To Excel GlobalVariable.StatusReasonLookup'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                        1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                     continue
                 }
@@ -843,19 +841,17 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
-			
-			'Check save Process write to excel'
-			CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+
+            'Check save Process write to excel'
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
+                        4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
+                GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
 
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
                 5, FailureHandling.OPTIONAL)) {
                 'click button cancel'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-
-       
             } else {
-               
-
                 if (flagWarning > 0) {
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
@@ -870,8 +866,4 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
-
-
-
-
 

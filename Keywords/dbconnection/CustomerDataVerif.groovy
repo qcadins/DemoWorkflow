@@ -52,4 +52,14 @@ public class CustomerDataVerif {
 		})
 		return customerdata
 	}
+
+	@Keyword
+	public CheckCustomerExisting (Sql instance, String appno){
+		int checkresult
+		instance.eachRow(("USE LOS SELECT COUNT(IS_EXISTING_CUST) FROM APP_CUST a JOIN APP b on a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno + "' and IS_CUSTOMER = 1"), {  row ->
+
+			checkresult = (row[0])
+		})
+		return checkresult
+	}
 }

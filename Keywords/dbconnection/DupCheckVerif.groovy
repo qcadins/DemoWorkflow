@@ -222,5 +222,95 @@ public class DupCheckVerif {
 		})
 		return Result9LOS
 	}
+
+	@Keyword
+	public checkNegativeRulePersonal1 (Sql instance, String idno, String idtype, String Mothername){
+		String Result1
+		instance.eachRow(("USE FOUNDATION SELECT count(a.CUST_ID) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID JOIN REF_MASTER c ON a.MR_ID_TYPE_CODE = c.MASTER_CODE WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND DESCR = '" + idtype + "' AND a.MOTHER_MAIDEN_NAME = '" + Mothername + "' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result1 = (row[0])
+		})
+		return Result1
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal2 (Sql instance, String idno, String idtype, String custname){
+		String Result2
+		instance.eachRow(("USE FOUNDATION SELECT count(CUST_ID) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN REF_MASTER c ON a.MR_ID_TYPE_CODE = c.MASTER_CODE WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND DESCR = '" + idtype + "' AND CUST_NAME = '" + custname + "'"), { row ->
+
+			Result2 = (row[0])
+		})
+		return Result2
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal3 (Sql instance, String idno, String idtype, String birthdate){
+		String Result3
+		instance.eachRow(("USE FOUNDATION SELECT count(a.CUST_ID) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID JOIN REF_MASTER c ON a.MR_ID_TYPE_CODE = c.MASTER_CODE WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND DESCR = '" + idtype + "' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result3 = (row[0])
+		})
+		return Result3
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal4 (Sql instance, String custname){
+		String Result4
+		instance.eachRow(("USE FOUNDATION SELECT COUNT(DISTINCT CUST_NAME) FROM NEGATIVE_CUST WITH (NOLOCK) WHERE CUST_NAME LIKE '%" + custname + "%' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND IS_ACTIVE = 1"), { row ->
+
+			Result4 = (row[0])
+		})
+		return Result4
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal5 (Sql instance, String idno, String idtype, String custname){
+		String Result5
+		instance.eachRow(("USE FOUNDATION SELECT count(CUST_ID) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN REF_MASTER c ON a.MR_ID_TYPE_CODE = c.MASTER_CODE WHERE MR_CUST_TYPE_CODE = 'PERSONAL' AND ID_NO = '" + idno + "' AND DESCR = '" + idtype + "' AND CUST_NAME LIKE '%" + custname + "%' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result5 = (row[0])
+		})
+		return Result5
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal6 (Sql instance, String custname, String mothername){
+		String Result6
+		instance.eachRow(("USE FOUNDATION SELECT count(a.CUST_NAME) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'PERSONAL'  AND CUST_NAME LIKE '%" + custname + "%' AND a.MOTHER_MAIDEN_NAME LIKE '%" + mothername + "%' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result6 = (row[0])
+		})
+		return Result6
+	}
+
+	@Keyword
+	public checkNegativeRulePersonal7 (Sql instance, String custname, String birthdate){
+		String Result7
+		instance.eachRow(("USE FOUNDATION SELECT count(a.CUST_NAME) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_PERSONAL b ON a.CUST_ID = b.CUST_ID  WHERE CUST_NAME LIKE '%" + custname + "%' AND FORMAT(b.BIRTH_DT, 'MM/dd/yyyy') = '" + birthdate + "' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result7 = (row[0])
+		})
+		return Result7
+	}
+
+	@Keyword
+	public checkNegativeRuleCompany1 (Sql instance, String custname, String taxidno){
+		String Result8
+		instance.eachRow(("USE FOUNDATION SELECT COUNT(a.CUST_NAME) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_COMPANY b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME LIKE '%" + custname + "%' AND TAX_ID_NO = '" + taxidno + "' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result8 = (row[0])
+		})
+		return Result8
+	}
+
+	@Keyword
+	public checkNegativeRuleCompany2 (Sql instance, String custname){
+		String Result9
+		instance.eachRow(("USE FOUNDATION SELECT COUNT(a.CUST_NAME) FROM NEGATIVE_CUST a WITH (NOLOCK) JOIN CUST_COMPANY b ON a.CUST_ID = b.CUST_ID WHERE MR_CUST_TYPE_CODE = 'COMPANY' AND CUST_NAME = '" + custname + "' AND a.IS_ACTIVE = 1"), { row ->
+
+			Result9 = (row[0])
+		})
+		return Result9
+	}
 }
 
