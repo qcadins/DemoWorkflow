@@ -6,12 +6,12 @@
    <elementGuidId>49585f29-f575-44dc-9cfb-646e6ea7bbe5</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//div[@id='viewIncomeInfo']/div/div/div[2]/label</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;viewIncomeInfo&quot;]/div[1]/div/div[2]/label</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>id(&quot;viewIncomeInfo&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 form-inline-right&quot;]/label[@class=&quot;label-control ng-star-inserted&quot;]</value>
+         <key>XPATH</key>
+         <value>//div[@id='viewIncomeInfo']/div/div/div[2]/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;viewIncomeInfo&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 form-inline-right&quot;]/label[@class=&quot;label-control ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;viewIncomeInfo&quot;]/div[1]/div/div[2]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
