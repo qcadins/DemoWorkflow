@@ -67,11 +67,17 @@ String password = findTestData('Login/Login').getValue(4, 8)
 
 String database = findTestData('Login/Login').getValue(5, 7)
 
+String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
+String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
+
 Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -82,13 +88,68 @@ ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewI
 'Inisialisasi Variabel untuk menghitung jumlah baris pada Income Information, dibagi 2 karena countincomeinfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
 int countIncomeInfo = varIncomeInfo.size() / 2
 
+'Ambil appNo dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/span_appNo'))
+
+'Hashmap untuk menampung arraylist refund allocation dan refund amount dari membaca rule file'
+HashMap<String,ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(sqlConnectionLOS,appNo)
+ArrayList<String> refundFrom = result.get("From")
+ArrayList<String> refundAmt = result.get("Amt")
+
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
 
 if(GlobalVariable.Role=="Testing"){
-	'Looping untuk set nilai awal 0 untuk total amount allocate commission'
+	'Looping untuk set nilai awal 0 untuk total amount allocate commission dan verif income info berdasarkan rule file'
 	for (int i = 0; i < countIncomeInfo; i++) {
 		TotalAllocateCommissionAmt.add(0.00)
+		
+		if(i==countIncomeInfo-1){
+			break
+		}
+		
+		newxpathIncomeInfo = "//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label"
+		 
+		newxpathIncomeInfoAmt = "//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[2]/label"
+		
+		modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',newxpathIncomeInfo,true)
+		
+		modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),'xpath','equals',newxpathIncomeInfoAmt, true)
+		
+		'Varibel String untuk mengambil dan menampung income information'
+		String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
+		
+		'Verif jika income info allocation sesuai dengan rule file'
+		if(WebUI.verifyMatch(textIncomeInfo, ".*"+refundFrom[i]+".*",true)){
+			
+			BigDecimal getAmountFromAppDB = 1
+			
+			'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
+			if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
+			}
+			else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkInsValue'(sqlConnectionLOS,appNo)
+			}
+			else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkLifeInsValue'(sqlConnectionLOS,appNo)
+			}
+			else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkAdminFeeValue'(sqlConnectionLOS,appNo)
+			}
+			else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
+			}
+			else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
+				getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkOtherFeeValue'(sqlConnectionLOS,appNo)
+			}
+			
+			String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
+			
+			'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
+			WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))
+		}
+		
 	}
 }
 

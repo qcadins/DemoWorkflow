@@ -389,4 +389,9 @@
       <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
       <name>RSVRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
+      <name>MaxRefundRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

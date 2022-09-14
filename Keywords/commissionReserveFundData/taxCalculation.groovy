@@ -102,7 +102,6 @@ public class taxCalculation {
 			}
 		}
 
-		println("DPP AMOUNT"+dppAmt)
 		whtAmount = Math.ceil(dppAmt*npwpRate/100)
 		if(isVat == true){
 			vatAmount = dppAmt*vatRate/100

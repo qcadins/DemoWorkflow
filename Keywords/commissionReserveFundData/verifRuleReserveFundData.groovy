@@ -42,10 +42,8 @@ public class verifRuleReserveFundData {
 		def ruleRSV = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/ReservedFundRule')
 		Integer lobcodeRow = -1
 		lobcodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'ReservedFund', lobCode)+1
-		println(lobcodeRow)
 		int match = 0
 		for(int i=lobcodeRow;i<=ruleRSV.getRowNumbers();i++){
-			println("row "+i)
 			if(ruleRSV.getValue(1,i)!=lobCode&&ruleRSV.getValue(1,i)!=""){
 				match=0
 			}
