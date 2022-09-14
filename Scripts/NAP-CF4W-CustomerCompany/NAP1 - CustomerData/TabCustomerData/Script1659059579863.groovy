@@ -24,23 +24,6 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
-
 'click menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -102,6 +85,23 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         if (GlobalVariable.Role == 'Testing') {
+			'Koneksi database'
+			String servername = findTestData('Login/Login').getValue(1, 8)
+			
+			String instancename = findTestData('Login/Login').getValue(2, 8)
+			
+			String username = findTestData('Login/Login').getValue(3, 8)
+			
+			String password = findTestData('Login/Login').getValue(4, 8)
+			
+			String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+			
+			String driverclassname = findTestData('Login/Login').getValue(6, 8)
+			
+			String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
+			
+			Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+			
             String office = officeLogin[0]
 
             'click button search'
@@ -166,17 +166,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     'Write to excel Appno'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
         12, GlobalVariable.NumofColm - 1, appNo)
-
-    'check if customer existing 1 / 0'
-    if (CustomKeywords.'dbconnection.CustomerDataVerif.CheckCustomerExisting'(sqlConnectionLOS, appNo) == 1) {
-        'Write to excel lookup'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            13, GlobalVariable.NumofColm - 1, 'LookUp')
-    } else if (CustomKeywords.'dbconnection.CustomerDataVerif.CheckCustomerExisting'(sqlConnectionLOS, appNo) == 0) {
-        'Write to excel input data'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            13, GlobalVariable.NumofColm - 1, 'Input Data')
-    }
     
     if (GlobalVariable.RoleCompany == 'Testing') {
         'verify application step'
@@ -186,8 +175,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         14) == 'Input Data') {
-        'click radio button company'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
+        'click radio button Personal'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/Radio_Personal'))
+		
+		'click radio button company'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
         'input customer name'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
