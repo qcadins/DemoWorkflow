@@ -20,7 +20,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionD
     'call test case commision data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-    'Yes')) {
+    10).equalsIgnoreCase('Yes')) {
     'Assign directori file excel ke global variabel'
     String userDir = System.getProperty('user.dir')
 
@@ -91,7 +91,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFun
     'call test case reserved fund data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-    'Yes')) {
+    10).equalsIgnoreCase('Yes')) {
     'Assign directori file excel ke global variabel'
     String userDir = System.getProperty('user.dir')
 
@@ -100,9 +100,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFun
 
     'Assign directori file excel ke global variabel'
     GlobalVariable.DataFilePath = filePath
-	
-	'Klik Button Calculate'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))
+
+    'Klik Button Calculate'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))
 
     'Klik save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))

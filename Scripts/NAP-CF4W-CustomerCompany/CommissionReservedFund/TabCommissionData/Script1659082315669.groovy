@@ -893,7 +893,7 @@ if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
 	
 	flagFailed = 1
-}
+}else{
 
 
 if(GlobalVariable.RoleCompany=="Testing"){
@@ -907,6 +907,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
+}
 
 WebUI.delay(3)
 
