@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>CustomerDuplciateCheckingGetName</name>
+   <name>CustomerDuplicateCheckingGetName</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>dc67e89e-ff3a-45ba-9050-615ea90ad574</testCaseGuid>

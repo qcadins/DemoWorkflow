@@ -380,7 +380,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call test case get and write customer name'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplciateCheckingGetName'), [:], 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGetName'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
 }
 

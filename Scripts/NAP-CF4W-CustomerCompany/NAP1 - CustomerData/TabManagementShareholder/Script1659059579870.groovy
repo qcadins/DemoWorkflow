@@ -31,7 +31,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)
 }
 
-'Loop Multiple Guarantor Data'
+'Loop Multiple ManagementSharholder Data'
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
 1); (GlobalVariable.NumofFamily)++) {
     if (datafile.getValue(GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
