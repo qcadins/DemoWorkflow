@@ -52,5 +52,19 @@ public class checkSaveProcess {
 			}
 		}
 	}
+
+	@Keyword
+	public checkValidasi (TestObject object, int colm, String sheetname){
+		if(WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)){
+
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					0, colm - 1, GlobalVariable.StatusFailed)
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					1, colm - 1, GlobalVariable.StatusFailedValidasi)
+		}else{
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					0, colm - 1, GlobalVariable.StatusSuccess)
+		}
+	}
 }
 

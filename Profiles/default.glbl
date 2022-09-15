@@ -414,4 +414,9 @@
       <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
       <name>MaxRefundRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Validasi field invalid'</initValue>
+      <name>StatusFailedValidasi</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
