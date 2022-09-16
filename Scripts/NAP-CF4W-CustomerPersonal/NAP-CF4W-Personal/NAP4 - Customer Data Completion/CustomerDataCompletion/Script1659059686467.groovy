@@ -41,6 +41,8 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('body > app-
 
 int count = variable.size()
 
+int flagFailed=0
+
 'verify equal number of customer'
 WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
 
@@ -256,10 +258,19 @@ String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 
-'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-			GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'),
-	GlobalVariable.NumofColm, '15.CustomerDataCompletion')
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
+			GlobalVariable.NumofColm, 4))
+
+if(iscompleteMandatory==0){
+	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
+}
+
+if(flagFailed==0){
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'),
+		GlobalVariable.NumofColm, '15.CustomerDataCompletion')
+}
+
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'), 
     5, FailureHandling.OPTIONAL)) {

@@ -633,6 +633,10 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 		
 		Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 4))
 		
+		if(iscompleteMandatory==0){
+			flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '2.TabFamilyData')
+		}
+		
 		if(flagFailed==0){
 			'check save process write to excel'
 			CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
@@ -669,4 +673,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
+
+int flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '2a.TabFamilyDataMain')
+
+if(flagFailed==0){
+	'Write to Excel SUCCESS'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+}
+
 

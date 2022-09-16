@@ -272,6 +272,11 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 				
 				Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 4))
+				
+				if(iscompleteMandatory==0){
+					flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+				}
+				
 				if(flagFailed==0){
 					'check save process write to excel'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
@@ -450,6 +455,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 					
 					Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 4))
 					
+					if(iscompleteMandatory==0){
+						flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+					}
+					
 					if(flagFailed==0){
 						'check save process write to excel'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
@@ -615,6 +624,10 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 				
 				Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 4))
 				
+				if(iscompleteMandatory==0){
+					flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+				}
+				
 				if(flagFailed==0){
 					'check save process write to excel'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
@@ -723,6 +736,10 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 					
 					Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 4))
+					
+					if(iscompleteMandatory==0){
+						flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+					}
 					
 					if(flagFailed==0){
 						'check save process write to excel'

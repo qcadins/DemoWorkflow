@@ -20,7 +20,7 @@ String userDir = System.getProperty('user.dir')
 String filePath = userDir + GlobalVariable.DataFileGuarantorCompany
 
 GlobalVariable.DataFilePath = filePath
-
+int flagFailed=0
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor').getValue(
     GlobalVariable.NumofGuarantor, 12).split(';')
 
@@ -138,13 +138,19 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor').getValue(
             GlobalVariable.NumofGuarantor, 4))
-'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'), 
-    GlobalVariable.NumofGuarantor, '6.LegalDocument')
 if(iscompleteMandatory==0){
-	errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantor, '6.LegalDocument')
+	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '6.LegalDocument')
 }
+if(flagFailed==0){
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'),
+		GlobalVariable.NumofGuarantor, '6.LegalDocument')
+	if(iscompleteMandatory==0){
+		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantor, '6.LegalDocument')
+	}
+}
+
 
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company/th_Expired Date'), 

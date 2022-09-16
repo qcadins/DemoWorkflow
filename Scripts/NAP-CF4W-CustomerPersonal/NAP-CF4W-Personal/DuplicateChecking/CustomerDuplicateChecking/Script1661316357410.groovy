@@ -72,6 +72,8 @@ String subjectName
 
 String subjectType
 
+int flagFailed=0
+
 if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Customer Duplicate Checking'))
@@ -693,10 +695,19 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Submit'))
 
-'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 
-            4)), findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'), 
-    GlobalVariable.NumofColm, '4.DuplicateChecking')
+Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 
+            4))
+
+if(iscompleteMandatory==0){
+	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
+}
+
+if(flagFailed==0){
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'),
+		GlobalVariable.NumofColm, '4.DuplicateChecking')
+}
+
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back'), 
     10, FailureHandling.OPTIONAL)) {

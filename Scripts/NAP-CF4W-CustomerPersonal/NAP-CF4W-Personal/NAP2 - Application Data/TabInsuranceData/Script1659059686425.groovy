@@ -72,9 +72,13 @@ WebUI.delay(3)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
-WebUI.delay(5)
+WebUI.delay(2)
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 4))
+
+if(iscompleteMandatory==0){
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
+}
 
 if(GlobalVariable.FlagFailed==0){
 	'check save process write to excel'

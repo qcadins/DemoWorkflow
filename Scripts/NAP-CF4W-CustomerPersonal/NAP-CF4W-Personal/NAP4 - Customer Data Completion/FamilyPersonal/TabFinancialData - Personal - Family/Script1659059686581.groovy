@@ -29,6 +29,7 @@ String maritalStatus = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/N
 countcolm = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family').getColumnNumbers()
 
 for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
+	int flagFailed=0
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family').getValue(
         financialdata, 9).length() != 0) {
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family').getValue(
@@ -322,13 +323,20 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
 
 				Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family').getValue(
                             financialdata, 4))
-                'Check save Process write to excel'
-                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
-                    financialdata, '5.FinancialData')
 				if(iscompleteMandatory==0){
-					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, financialdata, '5.FinancialData')
+					flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
 				}
+				
+				if(flagFailed==0){
+					'Check save Process write to excel'
+					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'),
+						financialdata, '5.FinancialData')
+					if(iscompleteMandatory==0){
+						errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, financialdata, '5.FinancialData')
+					}
+				}
+                
 				
 
                 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 

@@ -190,6 +190,9 @@ for (Address = 2; Address <= (countcolm + 1); Address++) {
 
 			Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
 							Address, 4))
+			if(iscompleteMandatory==0){
+				flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
+			}
 			if(flagFailed==0){
 				'Check save Process write to excel'
 				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Add'),
