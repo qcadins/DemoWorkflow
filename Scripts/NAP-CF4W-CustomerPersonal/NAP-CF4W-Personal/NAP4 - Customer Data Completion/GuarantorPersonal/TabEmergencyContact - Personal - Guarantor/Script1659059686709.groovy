@@ -247,6 +247,7 @@ Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPe
 				GlobalVariable.NumofGuarantor, 4))
 
 if(iscompleteMandatory==0){
+	'cek alert'
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '4.EmergencyContact')
 }
 
@@ -256,6 +257,7 @@ if(flagFailed==0){
 		GlobalVariable.NumofGuarantor, '4.EmergencyContact')
 	if(iscompleteMandatory==0){
 		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		'cek validasi'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantor, '4.EmergencyContact')
 	}
 	

@@ -176,6 +176,7 @@ for (Address = 2; Address <= (countcolm + 1); Address++) {
 			iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/AddressInformation - Personal - Family').getValue(
                         Address, 4))
 			if(iscompleteMandatory==0){
+				'cek alert'
 				flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
 			}
 			
@@ -186,6 +187,7 @@ for (Address = 2; Address <= (countcolm + 1); Address++) {
 				
 				if(iscompleteMandatory==0){
 					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+					'cek validasi'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, Address, '2.AddressInformation')
 				}
 			}

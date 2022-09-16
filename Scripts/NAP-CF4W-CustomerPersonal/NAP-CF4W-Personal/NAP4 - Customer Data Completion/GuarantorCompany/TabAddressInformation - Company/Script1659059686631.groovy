@@ -191,6 +191,7 @@ for (Address = 2; Address <= (countcolm + 1); Address++) {
 			Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
 							Address, 4))
 			if(iscompleteMandatory==0){
+				'cek alert'
 				flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
 			}
 			if(flagFailed==0){
@@ -199,6 +200,7 @@ for (Address = 2; Address <= (countcolm + 1); Address++) {
 					Address, '2.AddressInformation')
 				if(iscompleteMandatory==0){
 					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+					'cek validasi'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, Address, '2.AddressInformation')
 				}
 			}

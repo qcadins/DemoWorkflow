@@ -323,6 +323,7 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                             financialdata, 4))
 				
 				if(iscompleteMandatory==0){
+					'cek alert'
 					flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
 				}
 				if(flagFailed==0){
@@ -331,6 +332,7 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
 						financialdata, '5.FinancialData')
 					if(iscompleteMandatory==0){
 						errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+						'cek validasi'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, financialdata, '5.FinancialData')
 					}
 				}

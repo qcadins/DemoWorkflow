@@ -479,6 +479,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 			
 			if(iscompleteMandatory==0){
 				errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+				'cek validasi'
 				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofReferantor, '5.TabReferantorData')
 			}
 			

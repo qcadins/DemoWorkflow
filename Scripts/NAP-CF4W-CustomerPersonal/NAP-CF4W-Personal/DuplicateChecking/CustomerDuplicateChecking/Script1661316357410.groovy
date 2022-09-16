@@ -699,6 +699,7 @@ Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalV
             4))
 
 if(iscompleteMandatory==0){
+	'cek alert'
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
 }
 

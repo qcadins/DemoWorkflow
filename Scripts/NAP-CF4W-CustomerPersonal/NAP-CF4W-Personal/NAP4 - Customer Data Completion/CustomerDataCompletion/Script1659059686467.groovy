@@ -262,6 +262,7 @@ Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPe
 			GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0){
+	'cek alert'
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
 }
 
