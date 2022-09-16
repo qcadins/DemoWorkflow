@@ -419,4 +419,9 @@
       <initValue>'Validasi field invalid'</initValue>
       <name>StatusFailedValidasi</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>FlagFailed</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

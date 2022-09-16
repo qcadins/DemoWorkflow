@@ -17,6 +17,8 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
+GlobalVariable.FlagFailed = 0
+
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathCompany
@@ -508,45 +510,6 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     }
                 }
             }
-            
-            'click button save'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
-
-            'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
-                        4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
-                GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
-
-            if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofFamily, 
-                14).equalsIgnoreCase('Company')) {
-                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
-                    5, FailureHandling.OPTIONAL)) {
-                    'click button cancel'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-                } else {
-                    if (flagWarning > 0) {
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-                    }
-                    
-                    'customer added +1'
-                    (GlobalVariable.countNumofCustomer)++
-                }
-            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public')) {
-                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
-                    5, FailureHandling.OPTIONAL)) {
-                    'click button cancel'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
-                } else {
-                    if (flagWarning > 0) {
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-                    }
-                    
-                    'customer added +1'
-                    (GlobalVariable.countNumofCustomer)++
-                }
-            }
         } else if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
@@ -592,6 +555,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     'Write To Excel GlobalVariable.StatusReasonLookup'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+
+					'Flagfailed +1 karena lookup gagal'
+                    (GlobalVariable.FlagFailed)++
 
                     continue
                 }
@@ -770,6 +736,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
+					'Flagfailed +1 karena lookup gagal'
+                    (GlobalVariable.FlagFailed)++
+
                     continue
                 }
                 
@@ -838,27 +807,56 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                 }
             }
-            
-            'click button save'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
+        }
+        
+		'verify flagfailed lookup -- 0 '
+        if (GlobalVariable.FlagFailed == 0) {
+        'click button save'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 
-            'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
-                        4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
+        'Check save Process write to excel'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
+                    4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
+            GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+
+        'customer added +1'
+        (GlobalVariable.countNumofCustomer)++
+
+        if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
+            'Check erro validasi'
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
                 GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+        }
+        
+            if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofFamily, 
+                14).equalsIgnoreCase('Company')) {
+                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
+                    5, FailureHandling.OPTIONAL)) {
+                    'click button cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
-            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
-                5, FailureHandling.OPTIONAL)) {
-                'click button cancel'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-            } else {
-                if (flagWarning > 0) {
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                    'customer added -1'
+                    (GlobalVariable.countNumofCustomer)--
+                } else {
+                    if (flagWarning > 0) {
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                    }
                 }
-                
-                'customer added +1'
-                (GlobalVariable.countNumofCustomer)++
+            } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Public')) {
+                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
+                    5, FailureHandling.OPTIONAL)) {
+                    'click button cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
+
+                    'customer added -1'
+                    (GlobalVariable.countNumofCustomer)--
+                } else {
+                    if (flagWarning > 0) {
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                    }
+                }
             }
         }
     }

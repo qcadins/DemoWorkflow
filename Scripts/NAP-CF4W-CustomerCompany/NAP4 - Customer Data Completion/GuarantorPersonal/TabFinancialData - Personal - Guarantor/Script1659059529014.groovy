@@ -15,6 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.FlagFailed = 0
+
 int flagWarning = 0
 
 String userDir = System.getProperty('user.dir')
@@ -164,9 +166,9 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                     'click cancel'
                     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/button_Cancel'))
 
-					'Write To Excel GlobalVariable.StatusFailed'
+					'Write To Excel GlobalVariable.StatusWarning'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData',
-						0, financialdata - 1, GlobalVariable.StatusFailed)
+						0, financialdata - 1, GlobalVariable.StatusWarning)
 					
 					'Write To Excel GlobalVariable.StatusReasonLookup'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData',
@@ -318,10 +320,20 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/button_SaveBank'))
 
+				if(GlobalVariable.FlagFailed == 0){
+					
                 'Check save Process write to excel'
                 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/FinancialData - Company - GuarantorPersonal').getValue(
                             financialdata, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
                     financialdata, '5.FinancialData')
+				
+				if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/FinancialData - Company - GuarantorPersonal').getValue(
+								financialdata, 4)) == 0){
+					'Check error validasi'
+					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
+						financialdata, '5.FinancialData')
+				}
+				}
 
                 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
                     5, FailureHandling.OPTIONAL)) {

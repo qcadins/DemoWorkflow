@@ -21,6 +21,8 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.FlagFailed = 0
+
 int flagWarning = 0
 
 String userDir = System.getProperty('user.dir')
@@ -252,6 +254,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'click lookup debtor business scale'
@@ -312,6 +317,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'click lookup sustainable financial business'
@@ -344,6 +352,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'select yes/no'
@@ -461,6 +472,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'select yes/no'
@@ -498,6 +512,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'click lookup Payment Type'
@@ -530,6 +547,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'click lookup Business Source AML'
@@ -562,6 +581,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel Reason Lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+	'FlagFailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
 }
 
 'input tanggal business period'
@@ -572,11 +593,20 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Save'))
 
+if(GlobalVariable.FlagFailed == 0){
+	
 'Check save Process write to excel'
 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company - Customer').getValue(
             GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
     GlobalVariable.NumofColm, '7.OtherAttribute')
 
+if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company - Customer').getValue(
+			GlobalVariable.NumofColm, 4)) == 0){
+'Check error validasi'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
+	GlobalVariable.NumofColm, '7.OtherAttribute')
+}
+}
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/label_Debtor Group'), 
     10, FailureHandling.OPTIONAL)) {
     'click button back'

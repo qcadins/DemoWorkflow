@@ -16,6 +16,8 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
+GlobalVariable.FlagFailed = 0
+
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -24,6 +26,7 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
+
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -191,6 +194,9 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
+			'flagfailed +1 karena gagal melakukan lookup'
+			GlobalVariable.FlagFailed++
+			
 			'Pengecekan jika new consumer finance belum diexpand'
 			if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 				'Klik new consumer finance'
@@ -399,6 +405,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 		
+		'flagfailed +1 karena gagal melakukan lookup'
+		GlobalVariable.FlagFailed++
+		
 		'Pengecekan jika new consumer finance belum diexpand'
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
@@ -516,6 +525,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 	
+	'flagfailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -570,6 +582,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 	
+	'flagfailed +1 karena gagal melakukan lookup'
+	GlobalVariable.FlagFailed++
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -589,12 +604,17 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApp
 
 WebUI.delay(5)
 
-
+if(GlobalVariable.FlagFailed == 0){
 'check save process write to excel'
 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 4)),
 	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'), GlobalVariable.NumofColm, '6.TabApplicationData')
 
-
+if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 4)) == 0){
+	
+'check error validasi'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), GlobalVariable.NumofColm, '6.TabApplicationData')
+}
+}
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 	'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
