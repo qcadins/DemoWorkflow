@@ -424,4 +424,9 @@
       <initValue>0</initValue>
       <name>FlagFailed</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Muncul Error Alert'</initValue>
+      <name>StatusFailedAlert</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
