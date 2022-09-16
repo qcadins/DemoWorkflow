@@ -51,6 +51,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'write to excel reason lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusReasonLookup)
+	
+	GlobalVariable.FlagFailed=1
 }
 
 'input job title'

@@ -75,6 +75,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
     'looping referantor'
     for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
     1); (GlobalVariable.NumofReferantor)++) {
+		
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
             GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {
@@ -172,6 +173,8 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 				'Write To Excel GlobalVariable.StatusReasonLookup'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
+				
+				
 
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -224,6 +227,8 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 				'Write To Excel GlobalVariable.StatusReasonLookup'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+				
+				
 				
                 'Click delete'
                 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
@@ -307,6 +312,8 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 						'Write To Excel GlobalVariable.StatusReason'
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
+						
+						
 	
 						modifyObjectIndex++
 	
@@ -380,7 +387,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 						
-	
+						
 						modifyObjectIndex++
 	
 						'click cancel'
@@ -454,6 +461,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 							1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 	
 						modifyObjectIndex++
+						
 	
 						'click cancel'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
@@ -464,9 +472,16 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 				
 				'click x'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_XViewDetail'))
+			
 			}
             
-
+			Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 4))
+			
+			if(iscompleteMandatory==0){
+				errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofReferantor, '5.TabReferantorData')
+			}
+			
             'write to excel SUCCESS'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
