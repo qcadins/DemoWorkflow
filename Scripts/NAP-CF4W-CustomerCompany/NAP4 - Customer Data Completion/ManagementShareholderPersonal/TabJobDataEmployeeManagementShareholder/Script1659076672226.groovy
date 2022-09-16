@@ -15,6 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.FlagFailed = 0
+
 int flagWarning = 0
 
 String userDir = System.getProperty('user.dir')
@@ -53,6 +55,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel reason lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusReasonLookup)
+
+    'flagfailed +1 karena gagal melakukan lookup'
+    (GlobalVariable.FlagFailed)++
 }
 
 'pilih job position'
@@ -132,6 +137,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel reason lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusReasonLookup)
+
+    'flagfailed +1 karena gagal melakukan lookup'
+    (GlobalVariable.FlagFailed)++
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
@@ -217,6 +225,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel reason lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusReasonLookup)
+
+    'flagfailed +1 karena gagal melakukan lookup'
+    (GlobalVariable.FlagFailed)++
 }
 
 'input note'

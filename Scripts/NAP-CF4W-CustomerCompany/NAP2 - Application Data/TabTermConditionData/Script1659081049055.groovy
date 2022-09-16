@@ -209,6 +209,12 @@ CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(
 	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), GlobalVariable.NumofColm, '10.TabTermConditionData')
 
 
+if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 4)) == 0){
+	
+'check error validasi'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), GlobalVariable.NumofColm, '10.TabTermConditionData')
+}
+
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 	'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
