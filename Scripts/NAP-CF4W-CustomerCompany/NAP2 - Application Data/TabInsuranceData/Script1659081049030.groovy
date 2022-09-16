@@ -72,6 +72,11 @@ WebUI.delay(3)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
+if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 4)) == 0) {
+'Check alert'
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
+}
+
 WebUI.delay(5)
 
 if(GlobalVariable.FlagFailed == 0){

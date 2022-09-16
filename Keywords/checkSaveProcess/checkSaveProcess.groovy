@@ -63,7 +63,7 @@ public class checkSaveProcess {
 					1, colm - 1, GlobalVariable.StatusFailedValidasi)
 		}
 	}
-	
+
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0

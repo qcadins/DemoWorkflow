@@ -575,6 +575,12 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save'))
 
+                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/FinancialData - Company - ManagementShareholderCompany').getValue(
+                        financialdata, 4)) == 0) {
+                    'Check alert'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
+                }
+                
                 if (GlobalVariable.FlagFailed == 0) {
                     'Check save Process write to excel'
                     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/FinancialData - Company - ManagementShareholderCompany').getValue(

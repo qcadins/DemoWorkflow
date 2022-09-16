@@ -142,9 +142,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     }
 }
 
-ArrayList<String> adminHead
+ArrayList<WebElement> adminHead
 
-ArrayList<String> salesPerson
+ArrayList<WebElement> salesPerson
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'Ambil array string admin head dari db'
@@ -241,7 +241,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
     findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 19))
 
 if (GlobalVariable.RoleCompany == 'Testing') {
-    ArrayList<String> assetUsage = new ArrayList<String>()
+    ArrayList<WebElement> assetUsage = new ArrayList<WebElement>()
 
     'Ambil array string (text) asset usage dari db'
     assetUsage = CustomKeywords.'dbconnection.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
@@ -700,7 +700,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 38))
 
     if (GlobalVariable.RoleCompany == 'Testing') {
-        ArrayList<String> userRelation = new ArrayList<String>()
+        ArrayList<WebElement> userRelation = new ArrayList<WebElement>()
 
         'Ambil array string (text) user relationship dari db'
         userRelation = CustomKeywords.'dbconnection.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
@@ -736,7 +736,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Personal'))
 
         if (GlobalVariable.RoleCompany == 'Testing') {
-            ArrayList<String> ownerPersonalRelation = new ArrayList<String>()
+            ArrayList<WebElement> ownerPersonalRelation = new ArrayList<WebElement>()
 
             'Ambil array string (text) owner relationship dari db'
             ownerPersonalRelation = CustomKeywords.'dbconnection.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
@@ -759,7 +759,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Company'))
 
         if (GlobalVariable.RoleCompany == 'Testing') {
-            ArrayList<String> ownerCompanyRelation = new ArrayList<String>()
+            ArrayList<WebElement> ownerCompanyRelation = new ArrayList<WebElement>()
 
             'Ambil array string (text) owner relationship dari db'
             ownerCompanyRelation = CustomKeywords.'dbconnection.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
@@ -995,6 +995,12 @@ GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObjec
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
 
+if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
+        4)) == 0) {
+    'Check alert'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '7.TabAssetData')
+}
+
 'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 WebUI.waitForAlert(3)
 
@@ -1012,19 +1018,20 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 WebUI.delay(12)
 
-if(GlobalVariable.FlagFailed == 0){
-'check save process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-            GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
-    GlobalVariable.NumofColm, '7.TabAssetData')
+if (GlobalVariable.FlagFailed == 0) {
+    'check save process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+                GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
+        GlobalVariable.NumofColm, '7.TabAssetData')
 
-if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-				GlobalVariable.NumofColm, 4)) == 0){
-	'check save process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'),
-		GlobalVariable.NumofColm, '7.TabAssetData')
+    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
+            4)) == 0) {
+        'check save process write to excel'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), 
+            GlobalVariable.NumofColm, '7.TabAssetData')
+    }
 }
-}
+
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'), 
     5, FailureHandling.OPTIONAL)) {
     'click button cancel'

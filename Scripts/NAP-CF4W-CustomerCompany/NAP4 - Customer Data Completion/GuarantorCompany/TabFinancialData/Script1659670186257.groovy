@@ -421,14 +421,14 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                     'Click cancel'
                     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel'))
 
-					'Write To Excel GlobalVariable.StatusWarning'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData',
-						0, financialdata - 1, GlobalVariable.StatusWarning)
-					
-					'Write To Excel GlobalVariable.StatusReasonLookup'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData',
-						1, financialdata - 1, GlobalVariable.StatusReasonLookup)
-					
+                    'Write To Excel GlobalVariable.StatusWarning'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
+                        0, financialdata - 1, GlobalVariable.StatusWarning)
+
+                    'Write To Excel GlobalVariable.StatusReasonLookup'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
+                        1, financialdata - 1, GlobalVariable.StatusReasonLookup)
+
                     flagWarning++
                 }
                 
@@ -494,12 +494,11 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
 
                 'Debit Transaction count array'
                 debitTransactionarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
-                		financialdata, 76).split(';', -1)
-						
+                    financialdata, 76).split(';', -1)
+
                 'debit array'
                 debitarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
                     financialdata, 77).split(';', -1)
-
 
                 'credit transaction count array'
                 creditTransactionArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
@@ -517,13 +516,11 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                     financialdata, 78).length() > 0)) || (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
                     financialdata, 79).length() > 0)) {
                     for (i = 1; i <= montharray.size(); i++) {
-						
                         'modify object from input credit'
                         modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_credit'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             i) + ']/td[6]/input', true)
-						
-						
+
                         'modify object from input credit transaction count'
                         modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_credittransactioncount'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
@@ -553,58 +550,63 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_banknewrow'))
 
                         'select month'
-                        WebUI.selectOptionByLabel(modifyNewselectMonth, montharray [i-1], false, FailureHandling.OPTIONAL)
-						
-						'input year'
-						WebUI.setText(modifyNewinputYear, yeararray[(i - 1)])
-						
-						'input debit transaction'
-						WebUI.setText(modifyNewinputDebitTransactioncount, debitTransactionarray[(i - 1)])
-						
-						'input debit balance'
-						WebUI.setText(modifyNewinputDebit, debitarray[(i - 1)])
-						
-						'input credit transaction'
-						WebUI.setText(modifyNewinputCreditTransactioncount, creditTransactionArray[(i - 1)])
-						
-						'input credit balance'
+                        WebUI.selectOptionByLabel(modifyNewselectMonth, montharray[(i - 1)], false, FailureHandling.OPTIONAL)
+
+                        'input year'
+                        WebUI.setText(modifyNewinputYear, yeararray[(i - 1)])
+
+                        'input debit transaction'
+                        WebUI.setText(modifyNewinputDebitTransactioncount, debitTransactionarray[(i - 1)])
+
+                        'input debit balance'
+                        WebUI.setText(modifyNewinputDebit, debitarray[(i - 1)])
+
+                        'input credit transaction'
+                        WebUI.setText(modifyNewinputCreditTransactioncount, creditTransactionArray[(i - 1)])
+
+                        'input credit balance'
                         WebUI.setText(modifyNewinputCredit, creditarray[(i - 1)])
                     }
                 }
-
+                
                 'click calculate bank'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_CalculateBank'))
 
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save'))
 
-				if(GlobalVariable.FlagFailed == 0){
-					
-				'Check save Process write to excel'
-				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
-							financialdata, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save  Continue'),
-					financialdata, '4.FinancialData')
-				
-				if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
-							financialdata, 4)) == 0){
-				'Check error validasi'
-				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
-					financialdata, '4.FinancialData')
-				}
-				}
-				
-				if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save  Continue'),
-					10, FailureHandling.OPTIONAL)) {
-					'click button cancel'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel Bank'))
-				}
-					
-				if (flagWarning > 0) {
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData',
-						0, financialdata - 1, GlobalVariable.StatusWarning)
-				}
-				
-				WebUI.delay(5)
+                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
+                        financialdata, 4)) == 0) {
+                    'Check alert'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
+                }
+                
+                if (GlobalVariable.FlagFailed == 0) {
+                    'Check save Process write to excel'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
+                                financialdata, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save  Continue'), 
+                        financialdata, '4.FinancialData')
+
+                    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
+                            financialdata, 4)) == 0) {
+                        'Check error validasi'
+                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
+                            financialdata, '4.FinancialData')
+                    }
+                }
+                
+                if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save  Continue'), 
+                    10, FailureHandling.OPTIONAL)) {
+                    'click button cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel Bank'))
+                }
+                
+                if (flagWarning > 0) {
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
+                        0, financialdata - 1, GlobalVariable.StatusWarning)
+                }
+                
+                WebUI.delay(5)
             }
         }
     } else {
@@ -620,3 +622,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
+

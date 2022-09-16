@@ -3,10 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
-import org.openqa.selenium.By
-import org.openqa.selenium.WebElement
-
+import org.openqa.selenium.By as By
+import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -15,7 +13,7 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
@@ -49,12 +47,12 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
     Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
-	'get count total attribute list dari db'
-	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
+    'get count total attribute list dari db'
+    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
 
-	'verify total data attribute list == total data attribute list db'
-	WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListPersonal'(sqlConnectionFOU), variable.size())
-	
+    'verify total data attribute list == total data attribute list db'
+    WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListPersonal'(sqlConnectionFOU), variable.size())
+
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'))
 
@@ -288,9 +286,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -326,9 +324,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -364,9 +362,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -402,9 +400,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -448,9 +446,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -502,9 +500,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -540,9 +538,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -578,9 +576,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -616,9 +614,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -696,9 +694,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
-		
-		'Flagfailed +1 karena gagal melakukan lookup'
-		GlobalVariable.FlagFailed++
+
+        'Flagfailed +1 karena gagal melakukan lookup'
+        (GlobalVariable.FlagFailed)++
     }
 }
 
@@ -739,19 +737,24 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/G
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
-if(GlobalVariable.FlagFailed == 0){
-	
-'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
-    GlobalVariable.NumofGuarantor, '7.OtherAttribute')
-
-if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute - Company - GuarantorPersonal').getValue(
-			GlobalVariable.NumofGuarantor, 4)) == 0){
-'Check error validasi'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
-	GlobalVariable.NumofGuarantor, '7.OtherAttribute')
+if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute - Company - GuarantorPersonal').getValue(
+        GlobalVariable.NumofGuarantor, 4)) == 0) {
+    'Check alert'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '7.OtherAttribute')
 }
+
+if (GlobalVariable.FlagFailed == 0) {
+    'Check save Process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute - Company - GuarantorPersonal').getValue(
+                GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
+        GlobalVariable.NumofGuarantor, '7.OtherAttribute')
+
+    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute - Company - GuarantorPersonal').getValue(
+            GlobalVariable.NumofGuarantor, 4)) == 0) {
+        'Check error validasi'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
+            GlobalVariable.NumofGuarantor, '7.OtherAttribute')
+    }
 }
 
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/label_Debtor Group'), 

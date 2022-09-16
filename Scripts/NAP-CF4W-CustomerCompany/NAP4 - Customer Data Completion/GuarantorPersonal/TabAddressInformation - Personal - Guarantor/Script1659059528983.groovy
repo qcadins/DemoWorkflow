@@ -26,7 +26,7 @@ GlobalVariable.DataFilePath = filePath
 'get count colm'
 countcolm = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getColumnNumbers()
 
-for (Address = 2; Address <= (countcolm + 1); (Address)++) {
+for (Address = 2; Address <= (countcolm + 1); Address++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
         Address, 9).length() != 0) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
@@ -108,17 +108,17 @@ for (Address = 2; Address <= (countcolm + 1); (Address)++) {
 
                     'click cancel'
                     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'))
-					
-					'write to excel if failed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-						0, Address - 1, GlobalVariable.StatusFailed)
 
-					'write to excel reason lookup'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-						1, Address - 1, GlobalVariable.StatusReasonLookup)
+                    'write to excel if failed'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        0, Address - 1, GlobalVariable.StatusFailed)
 
-					'Flagfailed +1 karena gagal melakukan lookup'
-					(GlobalVariable.FlagFailed)++
+                    'write to excel reason lookup'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        1, Address - 1, GlobalVariable.StatusReasonLookup)
+
+                    'Flagfailed +1 karena gagal melakukan lookup'
+                    (GlobalVariable.FlagFailed)++
                 }
                 
                 'input phone1 area'
@@ -185,23 +185,28 @@ for (Address = 2; Address <= (countcolm + 1); (Address)++) {
             'click save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Save'))
 
-			if(GlobalVariable.FlagFailed == 0){
-				
-            'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
-                        Address, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'), 
-                Address, '2.AddressInformation')
-			
-			if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
-							Address, 4)) == 0){
-				'Check error validasi'
-				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
-					Address, '2.AddressInformation')
-			}
-			}
+            if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                    Address, 4)) == 0) {
+                'Check alert'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
+            }
+            
+            if (GlobalVariable.FlagFailed == 0) {
+                'Check save Process write to excel'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                            Address, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'), 
+                    Address, '2.AddressInformation')
 
-			WebUI.delay(2)
-			
+                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                        Address, 4)) == 0) {
+                    'Check error validasi'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
+                        Address, '2.AddressInformation')
+                }
+            }
+            
+            WebUI.delay(2)
+
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'), 
                 5, FailureHandling.OPTIONAL)) {
                 'Click button cancel'

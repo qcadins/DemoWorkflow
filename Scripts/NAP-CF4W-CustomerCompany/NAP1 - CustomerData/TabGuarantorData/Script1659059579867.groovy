@@ -15,9 +15,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
-
 GlobalVariable.FlagFailed = 0
+
+int flagWarning = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -153,9 +153,9 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     'Write To Excel GlobalVariable.StatusReasonLookup'
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                         1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
-					
-					'Flagfailed +1 karena lookup gagal'
-					(GlobalVariable.FlagFailed)++
+
+                    'Flagfailed +1 karena lookup gagal'
+                    (GlobalVariable.FlagFailed)++
 
                     continue
                 }
@@ -251,9 +251,9 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         'Write To Excel GlobalVariable.StatusReasonLookup'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                             1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
-						
-						'Flagfailed +1 karena lookup gagal'
-						(GlobalVariable.FlagFailed)++
+
+                        'Flagfailed +1 karena lookup gagal'
+                        (GlobalVariable.FlagFailed)++
 
                         continue
                     }
@@ -318,9 +318,9 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         'Write To Excel GlobalVariable.StatusReasonLookup'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                             1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
-						
-						'Flagfailed +1 karena lookup gagal'
-						(GlobalVariable.FlagFailed)++
+
+                        'Flagfailed +1 karena lookup gagal'
+                        (GlobalVariable.FlagFailed)++
 
                         continue
                     }
@@ -365,9 +365,9 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3a.TabGuarantorDataPersonal', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-							'Flagfailed +1 karena lookup gagal'
-							(GlobalVariable.FlagFailed)++
-							
+                            'Flagfailed +1 karena lookup gagal'
+                            (GlobalVariable.FlagFailed)++
+
                             continue
                         }
                     }
@@ -409,38 +409,48 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
-            'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
-                GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
-
-			'customer added +1'
-			(GlobalVariable.countNumofCustomer)++
-			
             if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                     GlobalVariable.NumofGuarantorPersonal, 4)) == 0) {
-                'Check error validasi'
-                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
+                'Check alert'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+            }
+            
+            if (GlobalVariable.FlagFailed == 0) {
+                'Check save Process write to excel'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+                            GlobalVariable.NumofGuarantorPersonal, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
                     GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+
+                'customer added +1'
+                (GlobalVariable.countNumofCustomer)++
+
+                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 4)) == 0) {
+                    'Check error validasi'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
+                        GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+                }
             }
             
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
                 5, FailureHandling.OPTIONAL)) {
                 'click button cancel'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-				
-				'customer added -1'
-				(GlobalVariable.countNumofCustomer)--
+
+                'customer added -1'
+                (GlobalVariable.countNumofCustomer)--
             } else {
                 if (flagWarning > 0) {
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                         0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                 }
             }
-			
         }
     }
 }
+
+'reset flagfailed 0'
+GlobalVariable.FlagFailed = 0
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
@@ -548,9 +558,9 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                             1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-						'Flagfailed +1 karena lookup gagal'
-						(GlobalVariable.FlagFailed)++
-						
+                        'Flagfailed +1 karena lookup gagal'
+                        (GlobalVariable.FlagFailed)++
+
                         continue
                     }
                     
@@ -610,9 +620,9 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                             1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-						'Flagfailed +1 karena lookup gagal'
-						(GlobalVariable.FlagFailed)++
-						
+                        'Flagfailed +1 karena lookup gagal'
+                        (GlobalVariable.FlagFailed)++
+
                         continue
                     }
                     
@@ -631,42 +641,47 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     }
                 }
             }
-				'verify flagfailed  lookup == 0 '
-				if((GlobalVariable.FlagFailed) == 0){
-					
+            
             'Click save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
-            'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                        GlobalVariable.NumofGuarantorCompany, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
-                GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
-
-            'customer added +1'
-            (GlobalVariable.countNumofCustomer)++
-			
             if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                     GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
-                'Check error validasi'
-                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
-                    GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+                'Check alert'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
             }
             
-            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                5, FailureHandling.OPTIONAL)) {
-                'click button cancel'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-				
-				'customer added -1'
-				(GlobalVariable.countNumofCustomer)--
-            } else {
-                if (flagWarning > 0) {
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-                        0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+            'verify flagfailed  lookup == 0 '
+            if (GlobalVariable.FlagFailed == 0) {
+                'Check save Process write to excel'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+                            GlobalVariable.NumofGuarantorCompany, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
+                    GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+
+                'customer added +1'
+                (GlobalVariable.countNumofCustomer)++
+
+                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+                        GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
+                    'Check error validasi'
+                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
+                        GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+                }
+                
+                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
+                    5, FailureHandling.OPTIONAL)) {
+                    'click button cancel'
+                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
+
+                    'customer added -1'
+                    (GlobalVariable.countNumofCustomer)--
+                } else {
+                    if (flagWarning > 0) {
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+                            0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+                    }
                 }
             }
-			
-				}
         }
     }
 }

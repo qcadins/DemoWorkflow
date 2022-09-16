@@ -907,6 +907,13 @@ if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     
     'Klik save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
+	
+	if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
+            4)) == 0) {
+	'Check alert'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '12.TabCommissionData')
+}
+
 }
 
 WebUI.delay(3)
