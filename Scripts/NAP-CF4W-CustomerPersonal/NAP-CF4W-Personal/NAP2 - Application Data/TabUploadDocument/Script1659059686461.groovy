@@ -84,13 +84,14 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
-                    0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
+                    0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusWarning)
 				
 				'Write To Excel GlobalVariable.StatusReason'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 					1, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusReasonMandatoryEmpty)
             }
         }
+			
     }
 }
 
