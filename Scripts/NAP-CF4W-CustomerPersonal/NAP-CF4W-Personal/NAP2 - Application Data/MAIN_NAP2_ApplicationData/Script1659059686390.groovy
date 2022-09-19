@@ -132,6 +132,39 @@ if (GlobalVariable.Role == 'Data Entry') {
 	//dijalankan dengan copy app tab asset
 	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+					
+					
+		'input chasis number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 29))
+					
+		'input engine number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 30))
+		
+		'input license plate number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+				GlobalVariable.NumofColm, 31))
+		
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
+			5, FailureHandling.OPTIONAL)) {
+			'input serial 4'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+					GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
+		}
+		
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
+			5, FailureHandling.OPTIONAL)) {
+			'input serial 5'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+					GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
+		}
+					
 		'click button save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
 			
@@ -140,12 +173,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 			
 		'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
+		
+		'Menunggu Alert konfirmasi integrator muncul'
+		WebUI.waitForAlert(3)
+	
+		'Accept Alert Konfirmasi Integrator'
+		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 			
 		'Write to excel success'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
-		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
@@ -449,6 +488,38 @@ if (GlobalVariable.Role == 'Data Entry') {
 	//dijalankan dengan copy app tab asset
 	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+					
+		'input chasis number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 29))
+								
+		'input engine number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 30))
+					
+		'input license plate number'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'),
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+				GlobalVariable.NumofColm, 31))
+					
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
+			5, FailureHandling.OPTIONAL)) {
+			'input serial 4'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+					GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
+		}
+					
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
+			5, FailureHandling.OPTIONAL)) {
+			'input serial 5'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
+				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+					GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
+		}
+						
 		'click button save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
 			
@@ -457,12 +528,20 @@ if (GlobalVariable.Role == 'Data Entry') {
 			
 		'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
+		
+		'Menunggu Alert konfirmasi integrator muncul'
+		WebUI.waitForAlert(3)
+	
+		'Accept Alert Konfirmasi Integrator'
+		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 			
 		'Write to excel success'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		
+		WebUI.delay(5)
 			
-		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
