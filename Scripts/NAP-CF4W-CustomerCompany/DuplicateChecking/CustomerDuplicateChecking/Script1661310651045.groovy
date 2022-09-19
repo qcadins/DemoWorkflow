@@ -382,18 +382,25 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     'call test case get and write customer name'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGetName'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
+
+    'click button submit'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Submit'))
+    
+    if(Integer.parseInt(datafiledupcheck.getValue(GlobalVariable.NumofColm, 4)) == 0){
+    	'Check alert'
+    	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
+    }
+	
+    'Check save Process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafiledupcheck.getValue(GlobalVariable.NumofColm, 
+    		4)), findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), GlobalVariable.NumofColm, 
+    		'4.DuplicateChecking')
+	
+    
+    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'), 10, FailureHandling.OPTIONAL)) {
+    	'click button back'
+    	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'))
+    }
 }
 
-'click button submit'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Submit'))
-
-'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafiledupcheck.getValue(GlobalVariable.NumofColm, 
-            4)), findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), GlobalVariable.NumofColm, 
-    '4.DuplicateChecking')
-
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'), 10, FailureHandling.OPTIONAL)) {
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'))
-}
 
