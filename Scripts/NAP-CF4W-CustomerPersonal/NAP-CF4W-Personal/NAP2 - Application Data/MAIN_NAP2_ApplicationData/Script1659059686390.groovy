@@ -15,53 +15,612 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+Integer copyAppRow = 0
+
+'click menu application data'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+
+'input Appno'
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'),
+	findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13))
+
+'click button search'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+
+'click icon pensil untuk select'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
+
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathPersonal
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
+
 if (GlobalVariable.Role == 'Data Entry') {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
+    1); (GlobalVariable.NumofReferantor)++) {
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+            GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 13)) {
+				copyAppRow = GlobalVariable.NumofReferantor
+				break
+		
+        }
+	}
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+                    copyAppRow, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorData'),
+					[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+                    copyAppRow, 10).equalsIgnoreCase("Yes")){
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
+		
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		
+		'verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+					'REFERANTOR', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
+		}
+	}
+    
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		WebUI.delay(5)
+			
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
+		}
+	}
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+		
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
+			
+		'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
+		WebUI.waitForAlert(3)
+			
+		'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
+		WebUI.acceptAlert(FailureHandling.OPTIONAL)
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
+						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		}
+	}
+   
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+		
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+					
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'),3,FailureHandling.OPTIONAL)){
+			'Klik calculate insurance'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
+		}
+		'Klik save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Save'))
+			
+		WebUI.delay(5)
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		'verify fail'
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
+		}
+	}
+    
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabLifeInsuranceData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
+	
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
+		
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
+		 
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+   
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click button calculate'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
+			
+		WebUI.delay(5)
+			
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabLifeInsuranceData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	copyAppRow=0
+	
+	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
+		1); (GlobalVariable.NumofUploadDocument)++) {
+        	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+				GlobalVariable.NumofUploadDocument, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13)) {
+			copyAppRow = GlobalVariable.NumofUploadDocument
+			break
+        }
+	}
+		
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+						copyAppRow, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabUploadDocument'),
+						[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+						copyAppRow, 10).equalsIgnoreCase("Yes")){
+		'click button submit'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabUploadDocument'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
+    1); (GlobalVariable.NumofReferantor)++) {
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+            GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 13)) {
+				copyAppRow = GlobalVariable.NumofReferantor
+				break
+		
+        }
+	}
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+                    copyAppRow, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorData'),
+					[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+                    copyAppRow, 10).equalsIgnoreCase("Yes")){
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
+		
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		
+		'verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+					'REFERANTOR', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
+		}
+	}
+    
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		WebUI.delay(5)
+			
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
+		}
+	}
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+		
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
+			
+		'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
+		WebUI.waitForAlert(3)
+			
+		'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
+		WebUI.acceptAlert(FailureHandling.OPTIONAL)
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
+						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		}
+	}
+   
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+		
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+					
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'),3,FailureHandling.OPTIONAL)){
+			'Klik calculate insurance'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
+		}
+		'Klik save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Save'))
+			
+		WebUI.delay(5)
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		'verify fail'
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
+		}
+	}
+    
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabLifeInsuranceData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
+	
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
+		
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
+		 
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+   
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'click button calculate'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
+			
+		WebUI.delay(5)
+			
+		'click button save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click button cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabLifeInsuranceData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+	
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
+		'Save'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		'Verify fail'
+		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+			'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
+		}
+	}
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
-
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTermConditionData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
-
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabUploadDocument'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+	copyAppRow=0
+	
+	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
+		1); (GlobalVariable.NumofUploadDocument)++) {
+        	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+				GlobalVariable.NumofUploadDocument, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13)) {
+			copyAppRow = GlobalVariable.NumofUploadDocument
+			break
+        }
+	}
+		
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+						copyAppRow, 10).equalsIgnoreCase("No")){
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabUploadDocument'),
+						[:], FailureHandling.STOP_ON_FAILURE)
+	}
+	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+						copyAppRow, 10).equalsIgnoreCase("Yes")){
+		'click button submit'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
+			
+		'Write to excel success'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			
+		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
+			5, FailureHandling.OPTIONAL)) {
+			'Write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write to excel failed reason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+			
+			'click cancel'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
+		}
+	}
 }
 
