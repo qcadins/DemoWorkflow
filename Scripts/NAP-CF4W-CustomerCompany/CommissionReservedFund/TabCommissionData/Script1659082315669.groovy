@@ -21,39 +21,6 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
-    FailureHandling.OPTIONAL)) {
-    'click menu Consumer finance 4w'
-    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-}
-
-'Klik Commission Reserved Fund'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
-
-WebUI.delay(5)
-
-'Input Appno'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        13))
-
-'Klik Search'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Search'))
-
-'Klik Select'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_Select'))
-
-WebUI.delay(5)
-
 int flagFailed = 0
 
 'Koneksi database'
@@ -95,9 +62,9 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(
     sqlConnectionLOS, appNo)
 
-ArrayList<String> refundFrom = result.get('From')
+ArrayList<WebElement> refundFrom = result.get('From')
 
-ArrayList<String> refundAmt = result.get('Amt')
+ArrayList<WebElement> refundAmt = result.get('Amt')
 
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
@@ -907,13 +874,12 @@ if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     
     'Klik save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
-	
-	if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-            4)) == 0) {
-	'Check alert'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '12.TabCommissionData')
-}
 
+    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
+            4)) == 0) {
+        'Check alert'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '12.TabCommissionData')
+    }
 }
 
 WebUI.delay(3)

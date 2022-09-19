@@ -15,7 +15,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-Integer copyAppColm = 0
+Integer copyAppColm = 2
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -42,6 +42,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabRef
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
 
+	if((Integer.parseInt(GlobalVariable.CountofReferantorCompany) > 0)){
 	'untuk mendapatkan posisi copy app dari excel'
 	for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantorCompany) +
 		1); (GlobalVariable.NumofReferantor)++) {
@@ -53,7 +54,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 		}
 	}
-	
+	}
 		
     'dijalankan tanpa copy app tab referantor'
     if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(copyAppColm, 

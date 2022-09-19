@@ -15,13 +15,47 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathCompany
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
+
+if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
+    FailureHandling.OPTIONAL)) {
+    'click menu Consumer finance 4w'
+    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+}
+
+'Klik Commission Reserved Fund'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
+
+WebUI.delay(5)
+
+'Input Appno'
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
+    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13))
+
+'Klik Search'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Search'))
+
+'Klik Select'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_Select'))
+
+WebUI.delay(5)
+
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     'dijalankan tanpa copy app'
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('Edit')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case commision data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy
+            )
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
         'Assign directori file excel ke global variabel'
@@ -90,11 +124,12 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('Edit')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
+    } //dijalankan dengan copy
+    else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
         'Assign directori file excel ke global variabel'
         String userDir = System.getProperty('user.dir')
@@ -136,12 +171,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             }
         }
     }
-    //dijalankan dengan copy
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     'Dijalankan tanpa Copy APP'
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('Edit')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case commision data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
@@ -212,8 +246,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('Edit')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 

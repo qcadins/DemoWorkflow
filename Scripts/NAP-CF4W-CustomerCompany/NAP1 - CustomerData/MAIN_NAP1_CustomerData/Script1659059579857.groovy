@@ -24,16 +24,17 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
+'click menu customer main data'
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+
+'click add button'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
+
+'Ambil nilai office login dari confins'
+String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
+		',', ';').split(';')
+		
 if (GlobalVariable.RoleCompany == 'Data Entry') {
-    'click menu customer main data'
-    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-    'click add button'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
-
-    'Ambil nilai office login dari confins'
-    String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
-        ',', ';').split(';')
 
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -273,18 +274,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('No')) {
-	
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-		
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
-	
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
-	
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
+
+        'Write to excel Success'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            0, copyAppColm - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -311,19 +312,58 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     }
     
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+    'untuk mendapatkan posisi copy app dari excel'
+    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
+    1); (GlobalVariable.NumofGuarantorPersonal)++) {
+        if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
+            12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            13)) {
+            copyAppColm = GlobalVariable.NumofGuarantorPersonal
 
+            break
+        }
+    }
+    
+    if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 10).equalsIgnoreCase(
+        'No')) {
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+    } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 
+        10).equalsIgnoreCase('Edit')) {
+    } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 
+        10).equalsIgnoreCase('Yes')) {
+        'click button save and continue'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
+
+        'Write to excel Success'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+            0, copyAppColm - 1, GlobalVariable.StatusSuccess)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep'), 
+            5, FailureHandling.OPTIONAL)) {
+            'Write to excel failed'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+
+            'customer added -1'
+            (GlobalVariable.countNumofCustomer)--
+
+            'Write to excel failed reason'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+
+            'click menu Customer main'
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+
+            'Pengecekan jika new consumer finance belum diexpand'
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+                'Klik new consumer finance'
+                WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+            }
+        }
+    }
+    
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
-    'click menu customer main data'
-    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-    'click add button'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
-
-    'Ambil nilai office login dari confins'
-    String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
-        ',', ';').split(';')
 
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -549,61 +589,104 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     }
     
-		'untuk mendapatkan posisi copy app dari excel'
-		for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) +
-		1); (GlobalVariable.NumofFamily)++) {
-			if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily,
-				12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm,
-				13)) {
-				copyAppColm = GlobalVariable.NumofFamily
-	
-				break
-			}
-		}
-		
-		if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-			copyAppColm, 10).equalsIgnoreCase('No')) {
-		
-			'call test case management shareholder'
-			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.STOP_ON_FAILURE)
-			
-		} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-			copyAppColm, 10).equalsIgnoreCase('Edit')) {
-		
-		} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-			copyAppColm, 10).equalsIgnoreCase('Yes')) {
-		
-			'click button save'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
-	
-			'verify fail'
-			if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')),
-				'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
-				'Write to excel failed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-					0, copyAppColm - 1, GlobalVariable.StatusFailed)
-	
-				'customer added -1'
-				(GlobalVariable.countNumofCustomer)--
-	
-				'Write to excel failed reason'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-					1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
-	
-				'click menu Customer main'
-				WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-	
-				'Pengecekan jika new consumer finance belum diexpand'
-				if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-					'Klik new consumer finance'
-					WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-				}
-			}
-		}
+    'untuk mendapatkan posisi copy app dari excel'
+    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
+    1); (GlobalVariable.NumofFamily)++) {
+        if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
+            12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            13)) {
+            copyAppColm = GlobalVariable.NumofFamily
+
+            break
+        }
+    }
     
+    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+        copyAppColm, 10).equalsIgnoreCase('No')) {
+        'call test case management shareholder'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.STOP_ON_FAILURE)
+    } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+        copyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+        copyAppColm, 10).equalsIgnoreCase('Yes')) {
+        'click button save'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.STOP_ON_FAILURE)
+        'verify fail'
+        if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
+            'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
+            'Write to excel failed'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                0, copyAppColm - 1, GlobalVariable.StatusFailed)
 
+            'customer added -1'
+            (GlobalVariable.countNumofCustomer)--
+
+            'Write to excel failed reason'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+
+            'click menu Customer main'
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+
+            'Pengecekan jika new consumer finance belum diexpand'
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+                'Klik new consumer finance'
+                WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+            }
+        }
+    }
+    
+    'untuk mendapatkan posisi copy app dari excel'
+    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
+    1); (GlobalVariable.NumofGuarantorPersonal)++) {
+        if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
+            12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            13)) {
+            copyAppColm = GlobalVariable.NumofGuarantorPersonal
+
+            break
+        }
+    }
+    
+    if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 10).equalsIgnoreCase(
+        'No')) {
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.STOP_ON_FAILURE)
+    } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 
+        10).equalsIgnoreCase('Edit')) {
+    } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(copyAppColm, 
+        10).equalsIgnoreCase('Yes')) {
+        'click button save and continue'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
+
+        'Write to excel Success'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+            0, copyAppColm - 1, GlobalVariable.StatusSuccess)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep'), 
+            5, FailureHandling.OPTIONAL)) {
+            'Write to excel failed'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+
+            'customer added -1'
+            (GlobalVariable.countNumofCustomer)--
+
+            'Write to excel failed reason'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+
+            'click menu Customer main'
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+
+            'Pengecekan jika new consumer finance belum diexpand'
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+                'Klik new consumer finance'
+                WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+            }
+        }
+    }
+    
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.STOP_ON_FAILURE)
 }
 
