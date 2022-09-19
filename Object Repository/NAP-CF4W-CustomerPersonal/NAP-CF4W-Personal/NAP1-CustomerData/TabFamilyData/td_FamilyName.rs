@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>td_FamilyName</name>
+   <tag></tag>
+   <elementGuidId>3e1bdff6-68f0-4f12-92fd-20575110f1c9</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[1]/td[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[1]/td[2]</value>
+   </webElementProperties>
+</WebElementEntity>

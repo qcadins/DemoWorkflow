@@ -18,7 +18,8 @@ import internal.GlobalVariable as GlobalVariable
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     'dijalankan tanpa copy app'
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case commision data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
@@ -89,7 +90,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
@@ -138,7 +140,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     'Dijalankan tanpa Copy APP'
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case commision data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
@@ -209,7 +212,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('No')) {
+        10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 

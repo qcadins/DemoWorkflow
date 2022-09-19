@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>buttonEdit</name>
+   <tag></tag>
+   <elementGuidId>74636277-1086-4370-8c50-358f6b48a43d</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[1]/td[6]/span/span[1]/span/span/span/span/span/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[1]/td[6]/span/span[1]/span/span/span/span/span/a/i</value>
+   </webElementProperties>
+</WebElementEntity>
