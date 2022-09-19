@@ -95,9 +95,9 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(
     sqlConnectionLOS, appNo)
 
-ArrayList<WebElement> refundFrom = result.get('From')
+ArrayList<String> refundFrom = result.get('From')
 
-ArrayList<WebElement> refundAmt = result.get('Amt')
+ArrayList<String> refundAmt = result.get('Amt')
 
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()

@@ -108,7 +108,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 String lobCode = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkLOBCode'(sqlConnectionLOS, appNo)
 
 'HashMap untuk menampung alloc from, alloc amount, dan alloc behaviour dari excel rule'
-HashMap<String,String> resultVerifRule = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkReserveFundBasedOnRule'(lobCode)
+HashMap<String,ArrayList> resultVerifRule = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkReserveFundBasedOnRule'(lobCode)
 
 'Arraylist untuk menampung nilai array alloc from'
 ArrayList<String> allocFrom = resultVerifRule.get("From")

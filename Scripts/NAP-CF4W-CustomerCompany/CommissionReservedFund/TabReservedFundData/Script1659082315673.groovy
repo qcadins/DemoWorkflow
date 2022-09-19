@@ -110,13 +110,13 @@ HashMap<String, ArrayList> resultVerifRule = CustomKeywords.'commissionReserveFu
     lobCode)
 
 'Arraylist untuk menampung nilai array alloc from'
-ArrayList<WebElement> allocFrom = resultVerifRule.get('From')
+ArrayList<String> allocFrom = resultVerifRule.get('From')
 
 'Arraylist untuk menampung nilai array alloc amount default'
-ArrayList<WebElement> defAllocAmt = resultVerifRule.get('Amt')
+ArrayList<String> defAllocAmt = resultVerifRule.get('Amt')
 
 'Arraylist untuk menampung nilai array alloc behaviour'
-ArrayList<WebElement> allocBhv = resultVerifRule.get('Bhv')
+ArrayList<String> allocBhv = resultVerifRule.get('Bhv')
 
 BigDecimal totalAmt = 0
 
