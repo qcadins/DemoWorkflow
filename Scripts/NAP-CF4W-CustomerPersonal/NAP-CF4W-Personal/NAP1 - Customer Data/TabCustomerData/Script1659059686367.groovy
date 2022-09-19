@@ -559,13 +559,17 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		if(flagFailed==0){
 			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm,
 				10).equalsIgnoreCase('No')) {
+				
 				'check save process write to excel'
 				CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 						findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), GlobalVariable.NumofColm, '1.TabCustomerMainData')
+				
 				'customer added +1'
 				(GlobalVariable.countNumofCustomer)++
+				
 				if(iscompleteMandatory==0){
 					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+					
 					'cek validasi'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '1.TabCustomerMainData')
 				}
@@ -581,10 +585,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 				'verify fail'
 				if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')),
 					'CUSTOMER', false, FailureHandling.OPTIONAL)) {
+					
 					'Write to excel failed'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
+					
 					'Write to excel failed reason'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
@@ -595,12 +601,16 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 		'verify fail'
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')),
 			'CUSTOMER', false, FailureHandling.OPTIONAL)) {
+			
 			'click menu Customer main'
 			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+			
 			'customer added -1'
 			(GlobalVariable.countNumofCustomer)--
+			
 			'Pengecekan jika new consumer finance belum diexpand'
 			if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+				
 				'Klik new consumer finance'
 				WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 			}

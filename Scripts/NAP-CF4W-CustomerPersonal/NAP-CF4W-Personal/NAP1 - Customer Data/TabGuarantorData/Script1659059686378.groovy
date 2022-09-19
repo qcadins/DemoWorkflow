@@ -31,13 +31,17 @@ if (GlobalVariable.Role == 'Testing') {
 
 'Loop Multiple Guarantor Data'
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 1); (GlobalVariable.NumofGuarantorPersonal)++) {
-    int flagFailed = 0
+    
+	int flagFailed = 0
+	
 	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         GlobalVariable.NumofGuarantorPersonal, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
+        
+		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
             5, FailureHandling.OPTIONAL)) {
-            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+            
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                 GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                 'click button Add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'))
@@ -282,8 +286,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 					'check save process write to excel'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 						findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+					
 					if(iscompleteMandatory==0){
 						errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+						
 						'cek validasi'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
 					}
@@ -298,7 +304,6 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 					
                 } else {
                     
-
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                             0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
@@ -463,11 +468,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 					}
 					
 					if(flagFailed==0){
+						
 						'check save process write to excel'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 							findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+						
 						if(iscompleteMandatory==0){
 							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+							
 							'cek validasi'
 							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
 						}
@@ -634,11 +642,14 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 				}
 				
 				if(flagFailed==0){
+					
 					'check save process write to excel'
 					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 						findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+					
 					if(iscompleteMandatory==0){
 						errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+						
 						'cek validasi'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 					}
@@ -652,7 +663,6 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                  
                 } else {
                 
-
                     if (flagWarning > 0) {
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                             0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
@@ -749,11 +759,14 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 					}
 					
 					if(flagFailed==0){
+						
 						'check save process write to excel'
 						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 							findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+						
 						if(iscompleteMandatory==0){
 							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+							
 							'cek validasi'
 							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 						}
