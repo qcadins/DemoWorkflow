@@ -293,6 +293,9 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
             GlobalVariable.NumofColm, 74), false, FailureHandling.OPTIONAL)
 }
 
+'click eKYC'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Check eKYC'))
+
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobData - Personal - Customer').getValue(
     GlobalVariable.NumofColm, 76).length() > 0) {
     'input Previous Company Name'

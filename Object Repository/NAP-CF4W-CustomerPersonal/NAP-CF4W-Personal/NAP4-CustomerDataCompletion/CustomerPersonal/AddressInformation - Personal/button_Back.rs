@@ -6,12 +6,12 @@
    <elementGuidId>2e761691-ea53-441e-8d36-f94d160b2542</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail-company/div/div/div/div/div[1]/button[1]</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@class=&quot;ucSearch-Button-Right&quot;]/button[@class=&quot;btn btn-raised btn-warning mr-1&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
