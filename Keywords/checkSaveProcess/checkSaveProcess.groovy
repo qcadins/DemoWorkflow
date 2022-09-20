@@ -67,7 +67,8 @@ public class checkSaveProcess {
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0
-		if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 3, FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 3, FailureHandling.OPTIONAL) &&
+		!WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert')).equalsIgnoreCase("Success")){
 			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
 			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
