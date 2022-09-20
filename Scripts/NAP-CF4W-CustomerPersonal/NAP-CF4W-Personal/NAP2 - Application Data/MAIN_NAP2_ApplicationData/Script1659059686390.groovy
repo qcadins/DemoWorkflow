@@ -15,7 +15,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-Integer copyAppColm = 0
+Integer copyAppColm = 2
 
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
@@ -41,17 +41,21 @@ String filePath = userDir + GlobalVariable.PathPersonal
 GlobalVariable.DataFilePath = filePath
 
 if (GlobalVariable.Role == 'Data Entry') {
-	'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-	for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
-    1); (GlobalVariable.NumofReferantor)++) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 13)) {
-				copyAppColm = GlobalVariable.NumofReferantor
-				break
-		
-        }
+	
+	if((Integer.parseInt(GlobalVariable.CountofReferantor) > 0)){
+		'Looping untuk mencari nilai colm yang menunjukkan colm appno'
+		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
+		1); (GlobalVariable.NumofReferantor)++) {
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13)) {
+					copyAppColm = GlobalVariable.NumofReferantor
+					break
+			
+			}
+		}
 	}
+	
 	'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     copyAppColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
@@ -397,17 +401,21 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 
 } else {
-	'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-	for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
-	1); (GlobalVariable.NumofReferantor)++) {
-		if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-			GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 13)) {
-				copyAppColm = GlobalVariable.NumofReferantor
-				break
-		
+
+	if((Integer.parseInt(GlobalVariable.CountofReferantor) > 0)){
+		'Looping untuk mencari nilai colm yang menunjukkan colm appno'
+		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
+		1); (GlobalVariable.NumofReferantor)++) {
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13)) {
+					copyAppColm = GlobalVariable.NumofReferantor
+					break
+			
+			}
 		}
 	}
+	
 	'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 					copyAppColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
