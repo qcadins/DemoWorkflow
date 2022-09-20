@@ -29,6 +29,15 @@ countcolm = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-C
 for (Address = 2; Address <= (countcolm + 1); Address++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
         Address, 9).length() != 0) {
+	println(Address)
+println(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+            Address, 9))
+println(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+                GlobalVariable.NumofFamily, 12))
+println(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+            Address, 10))
+println(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+                GlobalVariable.NumofFamily, 13))
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
             Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
                 GlobalVariable.NumofFamily, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(

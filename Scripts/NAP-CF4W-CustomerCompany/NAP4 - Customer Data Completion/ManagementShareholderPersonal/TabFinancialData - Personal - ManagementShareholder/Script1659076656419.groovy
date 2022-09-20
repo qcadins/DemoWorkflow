@@ -334,8 +334,8 @@ for (financialdata = 2; financialdata <= (countcolm + 1); financialdata++) {
 
                     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                             financialdata, 4)) == 0) {
-                        'Check save Process write to excel'
-                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
+                        'Check validasi'
+                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
                             financialdata, '5.FinancialData')
                     }
                 }
