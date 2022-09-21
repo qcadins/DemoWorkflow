@@ -631,6 +631,15 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+            GlobalVariable.NumofFamily, 13) == 'Input Data') {
+            if (GlobalVariable.Role == 'Testing') {
+                'call test case Family data store verif'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataStoreVerif'), 
+                    [:], FailureHandling.CONTINUE_ON_FAILURE)
+            }
+        }
+        
         Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                 GlobalVariable.NumofFamily, 4))
 

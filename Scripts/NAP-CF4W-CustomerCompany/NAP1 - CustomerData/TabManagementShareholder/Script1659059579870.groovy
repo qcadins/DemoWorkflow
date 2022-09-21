@@ -556,7 +556,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-					'Flagfailed +1 karena lookup gagal'
+                    'Flagfailed +1 karena lookup gagal'
                     (GlobalVariable.FlagFailed)++
 
                     continue
@@ -736,7 +736,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                         1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-					'Flagfailed +1 karena lookup gagal'
+                    'Flagfailed +1 karena lookup gagal'
                     (GlobalVariable.FlagFailed)++
 
                     continue
@@ -811,29 +811,42 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
-		
-		if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
-		'Check alert'
-		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
-	}
-			
-		'verify flagfailed lookup -- 0 '
-        if (GlobalVariable.FlagFailed == 0) {
 
-        'Check save Process write to excel'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
-                    4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
-            GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
-
-        'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
-
-        if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
-            'Check error validasi'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
-                GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+        if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+            if (GlobalVariable.RoleCompany == 'Testing') {
+                if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
+                    'call test case company data store verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
+                    'call test case company data store verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                }
+            }
         }
         
+        if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
+            'Check alert'
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+        }
+        
+        'verify flagfailed lookup -- 0 '
+        if (GlobalVariable.FlagFailed == 0) {
+            'Check save Process write to excel'
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 
+                        4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
+                GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+
+            'customer added +1'
+            (GlobalVariable.countNumofCustomer)++
+
+            if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
+                'Check error validasi'
+                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
+                    GlobalVariable.NumofFamily, '2.TabManagementShareholderData')
+            }
+            
             if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofFamily, 
                 14).equalsIgnoreCase('Company')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
