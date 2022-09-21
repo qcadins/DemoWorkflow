@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_referantorName</name>
+   <tag></tag>
+   <elementGuidId>1c524c65-6c09-40d3-b7e3-fe0579f51a3e</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[3]/lib-uclookupgeneric/div/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[3]/lib-uclookupgeneric/div/div/input</value>
+   </webElementProperties>
+</WebElementEntity>

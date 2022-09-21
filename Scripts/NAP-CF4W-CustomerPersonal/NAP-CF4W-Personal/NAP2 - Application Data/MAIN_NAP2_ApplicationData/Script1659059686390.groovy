@@ -60,6 +60,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     copyAppColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
                     copyAppColm, 10).equalsIgnoreCase("Edit")){
+		GlobalVariable.CopyAppColm = copyAppColm
 		'call test case tab referantor'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorData'),
 					[:], FailureHandling.CONTINUE_ON_FAILURE)
