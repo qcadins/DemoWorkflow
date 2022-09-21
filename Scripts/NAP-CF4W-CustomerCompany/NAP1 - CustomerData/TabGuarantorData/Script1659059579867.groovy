@@ -409,6 +409,15 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
+            if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
+                13) == 'Input Data') {
+                if (GlobalVariable.RoleCompany == 'Testing') {
+                    'call test case company data verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalStoreDataVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                }
+            }
+            
             if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                     GlobalVariable.NumofGuarantorPersonal, 4)) == 0) {
                 'Check alert'
@@ -645,6 +654,15 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             'Click save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
+            if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
+                13) == 'Input Data') {
+                if (GlobalVariable.RoleCompany == 'Testing') {
+                    'call test case company data store verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyStoreDataVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                }
+            }
+            
             if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                     GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
                 'Check alert'
