@@ -20,37 +20,29 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifInsuranceFee {
-
-
-	@Keyword
-	public verifFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
-
-		ArrayList<String> defAmt = new ArrayList<String>()
-
-		ArrayList<String> feeBhv = new ArrayList<String>()
-
+public class verifSumInsured {
+	
+	
+	public verifySumInsuredMainCov(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName ){
+		
+		HashMap<String,ArrayList> result = new HashMap<>()
+		ArrayList<String> yearNo = new ArrayList<>()
+		
+		ArrayList<String> sumInsuredPctg = new ArrayList<>()
+		
 		String userDir = System.getProperty('user.dir')
-
-		String filePath = userDir+GlobalVariable.InsFeeRulePath
-
+		
 		String filePathAssetCat = userDir+GlobalVariable.MainCovRulePath
-
+		
 		String appId, assetCode, assetCondition, assetCategoryCode, inscoHOCode, insAssetCategory
-
-		String assetPrice
-
+		
 		instanceLOS.eachRow(("select app_id from app where app_no = '"+appNo+"'"), { def row ->
-
 			appId = row[0]
 		})
-
-		instanceLOS.eachRow(("select full_asset_code, asset_price_amt, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
+		
+		instanceLOS.eachRow(("select full_asset_code, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
 			assetCode = row[0]
-
-			assetPrice = row[1]
-
-			assetCondition = row[2]
+			assetCondition = row[1]
 		})
 
 		instanceLOS.eachRow(("select asset_category_code from ASSET_MASTER_LOS where FULL_ASSET_CODE = '"+assetCode+"'"), { def row ->
@@ -62,104 +54,69 @@ public class verifInsuranceFee {
 
 			inscoHOCode = row[0]
 		})
-
-		BigDecimal asPrice = Double.parseDouble(assetPrice)
-
-		Integer inscoHORow = -1, insAssetCategoryRow = -1
-
+		
+		Integer inscoHORow = -1
+		
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
-
+		
 		def ruleAssetCategory = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsAssetCategory')
-
+		
 		int indexAC = -1
-
+		
 		for(int i=inscoHORow;;i++){
-
+		
 			if(ruleAssetCategory.getValue(1, i)==inscoHOCode || ruleAssetCategory.getValue(1, i)==""){
-
+		
 				if(ruleAssetCategory.getValue(3, i)!="-" && ruleAssetCategory.getValue(3, i)==assetCategoryCode){
 					insAssetCategory = ruleAssetCategory.getValue(4, i)
-
+		
 					indexAC=i
-
+		
 					break
 				}
 				else if(ruleAssetCategory.getValue(3, i)=="-"){
 					insAssetCategory = ruleAssetCategory.getValue(4, i)
-
+		
 					indexAC=i
-
+		
 					break
 				}
 			}
 			else if((ruleAssetCategory.getValue(1, i)!=inscoHOCode && ruleAssetCategory.getValue(1, i)!="")
-			|| (ruleAssetCategory.getValue(1, i)=="" && ruleAssetCategory.getValue(2, i)=="")){
-
+				|| (ruleAssetCategory.getValue(1, i)=="" && ruleAssetCategory.getValue(2, i)=="")){
+		
 				break
 			}
 		}
-
-		//check admin & stampduty
-		insAssetCategoryRow = (new excelGetRow.getRowWithColumn()).getExcelRow(filePath, 'Fee', insAssetCategory,1)+1
-
-		def ruleFee = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceFeeRule')
-
-		int match=0
-
-		for(int i=insAssetCategoryRow;;i++){
-
-			if(ruleFee.getValue(2,i)==insAssetCategory || (ruleFee.getValue(2,i)=="-" && match>=1)){
-
+		
+		
+		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'SumInsured', inscoHOCode)+1
+		
+		def ruleSumInsuredRate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceSumInsuredRule')
+		
+		int match = 0
+		for(int i=inscoHORow;i<=ruleSumInsuredRate.getRowNumbers();i++){
+			if(ruleSumInsuredRate.getValue(1,i)!=inscoHOCode && ruleSumInsuredRate.getValue(1,i)!=""){
+				match=0
+			}
+			if(ruleSumInsuredRate.getValue(1,i)==inscoHOCode || (match==1 && ruleSumInsuredRate.getValue(1,i)=="")){
 				if(match==0){
-
-					match=1
+					match = 1
 				}
-
-				if(assetCondition==ruleFee.getValue(5,i) || (match==2 && ruleFee.getValue(5,i)=="-")){
-
-					match=2
-
-					if(asPrice>Double.parseDouble(ruleFee.getValue(3,i)) && asPrice<=Double.parseDouble(ruleFee.getValue(4,i))){
-
-						feeBhv.add(ruleFee.getValue(6,i))
-
-						feeBhv.add(ruleFee.getValue(9,i))
-
-						defAmt.add(ruleFee.getValue(7,i))
-
-						defAmt.add(ruleFee.getValue(10,i))
-
-						break
-					}
-					else{
-
-						continue
-					}
+				if(ruleSumInsuredRate.getValue(2,i)==insAssetCategory && ruleSumInsuredRate.getValue(3,i)==assetCondition){
+					yearNo.add(ruleSumInsuredRate.getValue(4,i))
+					sumInsuredPctg.add(ruleSumInsuredRate.getValue(5,i))
 				}
-
-				if(ruleFee.getValue(5,i+1)!="-"){
-
-					match=1
-				}
-
-				if(ruleFee.getValue(2,i+1)!="-"){
-
-					match=0
-				}
+				
 			}
-			else if(ruleFee.getValue(2,i)=="" && ruleFee.getValue(3,i)==""){
-
+			else if((ruleSumInsuredRate.getValue(1,i)=="" && ruleSumInsuredRate.getValue(2,i)=="" && ruleSumInsuredRate.getValue(3,i)=="") 
+				|| match==0){
 				break
 			}
-
+			
 		}
-
-		HashMap<String,ArrayList> result = new HashMap<>()
-
-		result.put("Bhv",feeBhv)
-
-		result.put("Amt",defAmt)
-
+		result.put("Year",yearNo)
+		result.put("Pctg",sumInsuredPctg)
 		return result
 	}
 }

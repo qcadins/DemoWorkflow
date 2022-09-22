@@ -148,7 +148,7 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonGenerateGagal)
 	
-	
+	GlobalVariable.FlagFailed=1
 }
 
 'Ambil string opsi yang dipilih pada dropdownlist insco branch name excel'
@@ -298,6 +298,41 @@ if(capinssetting=="YEARLY"){
 	
 	'Looping data tabel insurance untuk input data'
 	for (int i = 1; i <= count; i++) {
+		
+		if(GlobalVariable.RoleCompany=="Testing"){
+			'modify object sum insured percentage'
+			sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'),
+				'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[5]/div/input', true)
+			
+			'Ambil nilai sum insured percent dari confins'
+			sumInsuredPercentValue = WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %","")
+			
+			'Membaca rule excel untuk menentukan year num dan default sum insured percentage'
+			HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
+			
+			ArrayList<String> yearNo, sumInsuredPctg
+			
+			yearNo = resultSumInsured.get("Year")
+			
+			sumInsuredPctg = resultSumInsured.get("Pctg")
+			
+			//modify object year num
+			yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/td_YearNo'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]",true)
+			
+			'Looping jumlah data result yang sesuai dengan condition dari rule excel'
+			for(int j = 0;j<yearNo.size();j++){
+				
+				'Verify year num pada confins sesuai dengan year num ke-j dari rule excel'
+				if(WebUI.verifyMatch(WebUI.getText(yearNumObject),yearNo.get(j),false,FailureHandling.OPTIONAL)){
+					
+					'Verify default sum insured percentage yang tampil pada confins sesuai dengan rule'
+					WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))
+					
+					break
+				}
+			}
+		}
+		
 		//Capitalize
 		capitalizeObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalized'),
 			'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[1]/div/input', true)
@@ -416,11 +451,8 @@ if(capinssetting=="YEARLY"){
 			}
 		}
 		
-		
 		int flagLoading = 0
 	
-		
-		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
 		for (int j = 1; j <= countAddCov; j++) {
@@ -498,7 +530,6 @@ if(capinssetting=="YEARLY"){
 						WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
 					}
 				}
-			   
 			}
 			
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
@@ -520,14 +551,15 @@ if(capinssetting=="YEARLY"){
 						WebUI.setText(modifyAddtRateObject, AddtRateValueArray[((i - 1))])
 					}
 				}
-				
 			}
-			
 		}
 	}
 	
 	'Klik calculate insurance'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
+	
+	'cek alert'
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
 	
 	ArrayList<WebElement> totalResult
 	BigDecimal totalPremitoCustResult
@@ -592,7 +624,6 @@ if(capinssetting=="YEARLY"){
 				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 					GlobalVariable.NumofColm, TotalPremium+1))
 		}
-		
 	}
 	
 	'Jika tidak ada paid by mf'
@@ -647,15 +678,12 @@ if(capinssetting=="YEARLY"){
 		}
 	}
 	
-	
 	'Jika ada paid by mf'
 	if (counterPaidByMF == 1) {
 		'Write to excel discount amount'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
-	
-	
 	
 	GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 	
