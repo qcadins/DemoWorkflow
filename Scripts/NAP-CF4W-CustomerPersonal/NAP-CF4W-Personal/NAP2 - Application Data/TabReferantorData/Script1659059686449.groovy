@@ -62,7 +62,9 @@ String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cus
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 	GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("Edit")){
 	
+	//pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 	if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
+		'Pengecekan checkbox sebelumnya tidak tercentang'
 		if(WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),3,FailureHandling.OPTIONAL)){
 			'click referantor checkbox'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
@@ -73,8 +75,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
+	//Edit jika ada data pada confins dan datanya sesuai dengan excel
+	'Pengecekan ada data referantor pada confins'
 	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+	
+		'Looping confins referantor'
 		for(int i =1;i<=variable.size();i++){
 			
 			String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input"
@@ -115,19 +121,26 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				  'xpath', 'equals', newSelectBankaccount, true)
 			  
 			  Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(newSelectReferantorCategoryXpath)))
+			  'Ambil text referantor category yang dipilih pada confins'
 			  String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
+			  
+			  'Looping excel referantor'
 			  for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
 				  2); (GlobalVariable.NumofReferantor)++) {
 				  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 					  GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					  GlobalVariable.NumofColm, 13)) {
+				  	  
+				  	  'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
 					  if (textRefCategory.equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 						  GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 						  GlobalVariable.NumofReferantor, 14))) {
 							  
+					  	  'select bank account'
 						  WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 						  GlobalVariable.NumofReferantor, 16),FailureHandling.OPTIONAL)
 						  
+						  'select tax calculation'
 						  WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 						  GlobalVariable.NumofReferantor, 17),false,FailureHandling.OPTIONAL)
 					  
@@ -143,20 +156,17 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 								  1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 							  
-							  
-							  
 							  'Click delete'
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 			  
 						  }
 						  break
 					  }
-					 
-		
-				  
 				  }
+				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
 				  else{
 						  if(GlobalVariable.NumofReferantor == (Integer.parseInt(GlobalVariable.CountofReferantor)+2)){
+							  'Jika pada confins ada datanya'
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  'Click delete'
@@ -171,15 +181,16 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						  }
 				  }
 			  }
-			
 		}
-	
 	}
 	
 	
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	int countData = variableData.size()
 	int add=0
+	
+	//Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
+	'Looping excel referantor'
 	for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
 		2); (GlobalVariable.NumofReferantor)++) {
 			
@@ -187,6 +198,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13)) {
 				
+				'Looping confins referantor'
 				for(int j = 1;j<=countData;j++){
 					String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input"
 					 
@@ -228,6 +240,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					
 					String refCategory, referantorCode
 					
+					'Jika pada confins ada data referantor sebelumnya'
 					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 						'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){   
 						   if(add==1){
@@ -342,8 +355,6 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 									   1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 								   
-								   
-								   
 								   'Click delete'
 								   WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 				   
@@ -354,6 +365,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						   }
 						   
 						   Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(newSelectReferantorCategoryXpath)))
+						   
+						   'Ambil referantor category yang dipilih pada confins'
 						   String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 						   
 						   if(!findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
@@ -372,6 +385,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   break
 						   }
 					}
+					//jika pada confins tidak ada data referantor
 					else if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 							'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 						
@@ -509,15 +523,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					'write to excel SUCCESS'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
-					
-					  
-				}
-			
-			}
-				
+							  
+				}	
+			}		
 	}
-	
 }
+	
 //Jika copy app no
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 		GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){

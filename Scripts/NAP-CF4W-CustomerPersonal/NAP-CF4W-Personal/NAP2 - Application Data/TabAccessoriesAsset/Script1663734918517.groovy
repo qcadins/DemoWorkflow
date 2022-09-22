@@ -45,9 +45,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	
-	//Edit & Delete Acc
+	//Edit & Delete Acc, edit jika ada data pada excel dan confins yang sesuai, delete jika ada data pada confins tetapi tidak ada datanya pada excel
+	'Pengecekan pada confins ada data accessories sebelumnya'
 	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')),
 		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+		'Looping confins accessories'
 		for(int i =1;i<=variable.size();i++){
 			
 			String newSupplierNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[2]/lib-uclookupgeneric/div/div/input"
@@ -108,13 +110,14 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 			  modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Delete'),
 						 'xpath', 'equals', newButtonDeleteXpath, true)
 
+			  'Looping excel datafile accessories'
 			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 				  2); (GlobalVariable.NumofAccessories)++) {
 			  
 				  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
 					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 						  GlobalVariable.NumofColm, 13))) {
-					  
+					  'Pengecekan jika supplier name dan accessories name pada confins sesuai dengan excel'
 					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
 						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
 						  GlobalVariable.NumofAccessories, 16))) {
@@ -174,12 +177,10 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								  GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 						  break
 					  }
-					 
-		
-				  
 				  }
 				  else{
 						  if(GlobalVariable.NumofAccessories == (Integer.parseInt(GlobalVariable.CountofAccessories)+2)){
+							  'Jika pada confins accessories ada data seblumnya'
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  
@@ -199,23 +200,23 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						  }
 				  }
 			  }
-			
 		}
-	
 	}
 	
 	
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	int countData = variableData.size()
 	int add=0
-	//Add Acc
+	
+	//Add Acc jika ada data pada excel, tetapi data tersebut tidak ditemukan pada confins
+	'Looping excel accessories'
 	for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 		2); (GlobalVariable.NumofAccessories)++) {
 			
 			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
 					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					  GlobalVariable.NumofColm, 13))) {
-				
+				'Looping confins accessories'
 				for(int j = 1;j<=countData;j++){
 					 String newSupplierNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[2]/lib-uclookupgeneric/div/div/input"
 					 
@@ -274,7 +275,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					   'modify button delete'
 					   modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Delete'),
 								  'xpath', 'equals', newButtonDeleteXpath, true)
-					
+					'Pengecekan jika ada data accessories sebelumnya'
 					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')),
 						'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 						   if(add==1){
@@ -429,6 +430,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   break
 						   }
 					}
+						//pengecekan jika tidak ada data accesories sebelumnya
 					else if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')),
 							'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 						
@@ -601,18 +603,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 						  
 					}
-					
-					
-					  
 				}
-			
 			}
-				
 	}
-
-
-
 }
+	
 //Jika copy app no
 else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
