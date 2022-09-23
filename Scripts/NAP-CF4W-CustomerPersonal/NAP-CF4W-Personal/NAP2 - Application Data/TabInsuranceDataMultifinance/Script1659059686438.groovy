@@ -59,10 +59,14 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 22), false)
 
+String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value')
+
 'Input Coverage Amount'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'), 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 23))
+
+String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
 coverPeriod = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 24)
@@ -428,6 +432,31 @@ if(capinssetting=="YEARLY"){
 		
 		//Main Premi Rate
 		mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
+		
+		//Verif Main Premi Rate Based on Rule
+		if(GlobalVariable.Role=="Testing"){
+			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
+			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+			
+			'Ambil nilai main premi rate dari confins'
+			String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
+			
+			ArrayList<String> mainCvgType, mainPremiRate
+			mainCvgType = resultMainCvg.get("MainCvg")
+			mainPremiRate = resultMainCvg.get("MainRate")
+			
+			'Looping data main premi rate yang didapat dari rule'
+			for(int j = 0 ;j<mainPremiRate.size();j++){
+				
+				'Pengecekan jika main coverage type confins sesuai dengan main coverage type rule excel ke-j'
+				if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
+					
+					'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
+					WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+					break
+				}
+			}
+		}
 		
 		'Pengecekan jika rate dapat terisi atau tidak'
 		if(WebUI.verifyElementNotHasAttribute(mainPremiRateObject,"disabled",2,FailureHandling.OPTIONAL)){

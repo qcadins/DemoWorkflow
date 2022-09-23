@@ -434,4 +434,9 @@
       <initValue>2</initValue>
       <name>CopyAppColm</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\InsAddCvgRule.xlsx'</initValue>
+      <name>AddtCovRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

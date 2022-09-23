@@ -92,6 +92,10 @@ ArrayList<WebElement> variableAddCovAll = driver.findElements(By.cssSelector('#i
 'Mengambil dan menyimpan jumlah additional coverage'
 int countAddCov = variableAddCovAll.size()
 
+String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value')
+String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
+
+
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {
 	
@@ -193,6 +197,31 @@ for (int i = 1; i <= count; i++) {
 	
 	//Main Premi Rate
 	mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[7]/div/input",true)
+	
+	//Verif Main Premi Rate Based on Rule
+	if(GlobalVariable.RoleCompany=="Testing"){
+		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
+		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+		
+		'Ambil nilai main premi rate dari confins'
+		String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
+		
+		ArrayList<String> mainCvgType, mainPremiRate
+		mainCvgType = resultMainCvg.get("MainCvg")
+		mainPremiRate = resultMainCvg.get("MainRate")
+		
+		'Looping data main premi rate yang didapat dari rule'
+		for(int j = 0 ;j<mainPremiRate.size();j++){
+			
+			'Pengecekan jika main coverage type confins sesuai dengan main coverage type rule excel ke-j'
+			if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
+				
+				'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
+				WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+				break
+			}
+		}
+	}
 	
 	'Pengecekan jika rate dapat terisi atau tidak'
 	if(WebUI.verifyElementNotHasAttribute(mainPremiRateObject,"disabled",2,FailureHandling.OPTIONAL)){
