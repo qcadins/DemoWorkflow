@@ -816,11 +816,11 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             if (GlobalVariable.RoleCompany == 'Testing') {
                 if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
                     'call test case company data store verif'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreVerif'), 
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                 } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
                     'call test case company data store verif'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreVerif'), 
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'), 
                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                 }
             }

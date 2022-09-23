@@ -277,7 +277,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                     if (GlobalVariable.Role == 'Testing') {
                         'call test case company data store verif'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreVerif'), 
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     }
                 }
@@ -761,7 +761,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
                         if (GlobalVariable.Role == 'Testing') {
                             'call test case company data store verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataCompanyStoreVerif'), 
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataCompanyStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                     }

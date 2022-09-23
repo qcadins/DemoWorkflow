@@ -214,7 +214,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     14) == 'Input Data') {
     if (GlobalVariable.RoleCompany == 'Testing') {
         'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreVerif'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
