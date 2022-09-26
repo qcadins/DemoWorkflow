@@ -33,7 +33,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
         GlobalVariable.NumofAccessories, 12))
 
 int arraynum = 0
@@ -43,28 +43,28 @@ resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').sp
 println(resultarray)
 
 for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 1); (GlobalVariable.NumofAccessories)++) {
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 13).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 14).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 15).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 16).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 17).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 19).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 20).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
             GlobalVariable.NumofAccessories, 21).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 }
 

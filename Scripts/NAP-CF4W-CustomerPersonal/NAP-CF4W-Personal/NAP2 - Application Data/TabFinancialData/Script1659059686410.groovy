@@ -25,6 +25,7 @@ import org.openqa.selenium.WebElement as WebElement
 GlobalVariable.SubsidyDPValue = '0'
 
 int flagFailed = 0
+
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -57,14 +58,14 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') + 
 1
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Yes')) {
     for (i = 0; i < AllocationformArray.size(); i++) {
         if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
             (SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, TotalPremium+2)
+                GlobalVariable.NumofColm, TotalPremium + 2)
         }
         
         String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
@@ -651,17 +652,18 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'),5,FailureHandling.OPTIONAL)){
-	'click button cancel'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-	
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
-	
-	flagFailed=1
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'), 
+    5, FailureHandling.OPTIONAL)) {
+    'click button cancel'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
+        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+
+    flagFailed = 1
 }
 
 'Pengecekan jika tdp at mf tidak kosong'
@@ -669,16 +671,14 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 49).length() > 0) {
     'input tdp at mf'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
         datafilefinancial.getValue(GlobalVariable.NumofColm, 49))
-	
-	'click button calculate'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
-	
+
+    'click button calculate'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 }
 
-if(GlobalVariable.Role=="Testing"){
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataVerif'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-	
+if (GlobalVariable.Role == 'Testing') {
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataVerif'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 WebUI.delay(5)
@@ -686,31 +686,43 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+        GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0){
-	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '10.TabFinancialData')
+if (iscompleteMandatory == 0) {
+    'cek alert'
+    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '10.TabFinancialData')
 }
 
-if(flagFailed==0){
-	'check save process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
-		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), GlobalVariable.NumofColm, '10.TabFinancialData')
-	if(iscompleteMandatory==0){
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-		'cek validasi'
-		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '10.TabFinancialData')
-	}
+if (flagFailed == 0) {
+    'check save process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), 
+        GlobalVariable.NumofColm, '10.TabFinancialData')
+
+    if (iscompleteMandatory == 0) {
+        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+
+        'cek validasi'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '10.TabFinancialData')
+    }
 }
 
+if (GlobalVariable.Role == 'Testing') {
+    'call test case subsidy store db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabSubsidyStoreDBVerif'), 
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+    
 
+    'call test case financial datastore db verif'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'), 
+    		[:], FailureHandling.CONTINUE_ON_FAILURE)
+    
+}
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
-
 }
+
 

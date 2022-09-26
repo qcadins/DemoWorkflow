@@ -583,6 +583,12 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
 
 WebUI.delay(5)
 
+if (GlobalVariable.RoleCompany == 'Testing') {
+	'call test case store db verif application data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+}
+
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(

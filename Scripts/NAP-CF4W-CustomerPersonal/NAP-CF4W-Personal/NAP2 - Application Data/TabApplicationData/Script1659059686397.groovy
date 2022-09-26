@@ -26,6 +26,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 GlobalVariable.DataFilePath = filePath
 
 int flagFailed = 0
+
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
 
@@ -53,20 +54,19 @@ if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
         'APPLICATION DATA', false, FailureHandling.OPTIONAL)
-	
-	'Ambil text product offering dari confins'
-	String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
-	
-	'Pengecekan interest type dari db product offering '
-	String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
-	
-	'Ambil text interest type dari confins'
-	String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
-		'value')
-	
-	'Verif interest type pada confins dengan db'
-	WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true)
-	
+
+    'Ambil text product offering dari confins'
+    String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
+
+    'Pengecekan interest type dari db product offering '
+    String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
+
+    'Ambil text interest type dari confins'
+    String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
+        'value')
+
+    'Verif interest type pada confins dengan db'
+    WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true)
 }
 
 'Ambil nilai username dari confins'
@@ -79,31 +79,31 @@ String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
 if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Marketing Officer'.toLowerCase())) {
-	if(GlobalVariable.Role=="Testing"){
-		'Ambil text label officer dari confins'
-		String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
-	
-		'Cek nama officer pada db dari username login confins'
-		String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
-		
-		'Verif username login dengan text label officer'
-		WebUI.verifyMatch(textOfficer, '(?i)'+officerName, true)
-	
-		'Ambil nama spv dari db'
-		spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
-	
-		'Pengecekan jika nama spv dari db = null'
-		if (spvName == null) {
-			'Ubah hasil nama spv dari db menjadi -'
-			spvName = '-'
-		}
-		
-		'Ambil text spv dari confins'
-		String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_SPV'))
-	
-		'Verif text spv dari confins sesuai dengan nama spv dari db'
-		WebUI.verifyMatch(textSPV, '(?i)' + spvName, true)
-	}
+    if (GlobalVariable.Role == 'Testing') {
+        'Ambil text label officer dari confins'
+        String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
+
+        'Cek nama officer pada db dari username login confins'
+        String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
+
+        'Verif username login dengan text label officer'
+        WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true)
+
+        'Ambil nama spv dari db'
+        spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
+
+        'Pengecekan jika nama spv dari db = null'
+        if (spvName == null) {
+            'Ubah hasil nama spv dari db menjadi -'
+            spvName = '-'
+        }
+        
+        'Ambil text spv dari confins'
+        String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_SPV'))
+
+        'Verif text spv dari confins sesuai dengan nama spv dari db'
+        WebUI.verifyMatch(textSPV, '(?i)' + spvName, true)
+    }
 } else {
     'Ambil text original office dari confins'
     String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
@@ -114,23 +114,23 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         'Click Lookup Officer'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'))
 
-		if(GlobalVariable.Role=="Testing"){
-			'Click Search'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
-	
-			'Cek total data officer pada db'
-			Integer countOfficer = CustomKeywords.'dbconnection.checkOfficer.countOfficerLookup'(sqlConnectionFOU, office)
-	
-			'Ambil nilai total data officer pada lookup confins'
-			String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
-				' ', '').replace(':', ';').split(';')
-	
-			'Parsing nilai total data officer confins ke integer(angka)'
-			Integer totalDataOfficer = Integer.parseInt(textTotalDataOfficer[1])
-	
-			'Verif total data officer confins sesuai dengan db'
-			WebUI.verifyEqual(totalDataOfficer, countOfficer)
-		}
+        if (GlobalVariable.Role == 'Testing') {
+            'Click Search'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+
+            'Cek total data officer pada db'
+            Integer countOfficer = CustomKeywords.'dbconnection.checkOfficer.countOfficerLookup'(sqlConnectionFOU, office)
+
+            'Ambil nilai total data officer pada lookup confins'
+            String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+                ' ', '').replace(':', ';').split(';')
+
+            'Parsing nilai total data officer confins ke integer(angka)'
+            Integer totalDataOfficer = Integer.parseInt(textTotalDataOfficer[1])
+
+            'Verif total data officer confins sesuai dengan db'
+            WebUI.verifyEqual(totalDataOfficer, countOfficer)
+        }
         
         'Input MO Code'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_MO Code'), 
@@ -153,30 +153,27 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
             10, FailureHandling.OPTIONAL)) {
-		
-			if(GlobalVariable.Role=="Testing"){
-				'Ambil nama spv pada lookup confins'
-				spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
-				
-				'Pengecekan jika mo officer yang dipilih dari lookup spvnya kosong'
-				if(spvName ==""){
-					spvName = "-"
-				}
-			}
+            if (GlobalVariable.Role == 'Testing') {
+                'Ambil nama spv pada lookup confins'
+                spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))
+
+                'Pengecekan jika mo officer yang dipilih dari lookup spvnya kosong'
+                if (spvName == '') {
+                    spvName = '-'
+                }
+            }
             
-			
             'Click Select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
                 FailureHandling.OPTIONAL)
 
-			if(GlobalVariable.Role=="Testing"){
-				'Ambil nama spv pada confins'
-				String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_LookupSPV'))
-	
-				'Verif nama spv pada lookup yang diselect sama dengan yang muncul pada tab application data confins'
-				WebUI.verifyMatch(textSPV, '(?i)' + spvName, true)
-			}
-           
+            if (GlobalVariable.Role == 'Testing') {
+                'Ambil nama spv pada confins'
+                String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_LookupSPV'))
+
+                'Verif nama spv pada lookup yang diselect sama dengan yang muncul pada tab application data confins'
+                WebUI.verifyMatch(textSPV, '(?i)' + spvName, true)
+            }
         } else {
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
@@ -187,12 +184,12 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             'write to excel failed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-			
-			'Write To Excel GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-			
-			flagFailed=1
+
+            'Write To Excel GlobalVariable.StatusReasonLookup'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+                1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+            flagFailed = 1
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -234,36 +231,36 @@ String tenorString = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPe
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_Tenor'), 
     tenorString)
 
-if(GlobalVariable.Role=="Testing"){
-	'Inisialisasi Variabel'
-	double tenor = Double.parseDouble(tenorString)
-	
-	'Inisialisasi Variabel'
-	int numOfInstallment
-	
-	'Verify numofinstallment berdasarkan tenor dan payment Frequency'
-	if (payFreq == 'Monthly') {
-		numOfInstallment = ((Math.ceil(tenor / 1)) as int)
-	} else if (payFreq == 'Bimonthly') {
-		numOfInstallment = ((Math.ceil(tenor / 2)) as int)
-	} else if (payFreq == 'Quarterly') {
-		numOfInstallment = ((Math.ceil(tenor / 3)) as int)
-	} else if (payFreq == 'Trimester') {
-		numOfInstallment = ((Math.ceil(tenor / 4)) as int)
-	} else if (payFreq == 'Semi Annually') {
-		numOfInstallment = ((Math.ceil(tenor / 6)) as int)
-	} else if (payFreq == 'Annually') {
-		numOfInstallment = ((Math.ceil(tenor / 12)) as int)
-	} else if (payFreq == 'Weekly'){
-		numOfInstallment = (((((4) as int) * tenor) + (Math.round(tenor - 1) / 3)) + 1)
-	}
-	
-	'Click label numofInstallment untuk merefresh numofinstallment'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_NumOfInstallment'))
-	
-	'Verify numofinstallment sesuai perhitungan'
-	WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_NumOfInstallment'),
-		numOfInstallment.toString())
+if (GlobalVariable.Role == 'Testing') {
+    'Inisialisasi Variabel'
+    double tenor = Double.parseDouble(tenorString)
+
+    'Inisialisasi Variabel'
+    int numOfInstallment
+
+    'Verify numofinstallment berdasarkan tenor dan payment Frequency'
+    if (payFreq == 'Monthly') {
+        numOfInstallment = ((Math.ceil(tenor / 1)) as int)
+    } else if (payFreq == 'Bimonthly') {
+        numOfInstallment = ((Math.ceil(tenor / 2)) as int)
+    } else if (payFreq == 'Quarterly') {
+        numOfInstallment = ((Math.ceil(tenor / 3)) as int)
+    } else if (payFreq == 'Trimester') {
+        numOfInstallment = ((Math.ceil(tenor / 4)) as int)
+    } else if (payFreq == 'Semi Annually') {
+        numOfInstallment = ((Math.ceil(tenor / 6)) as int)
+    } else if (payFreq == 'Annually') {
+        numOfInstallment = ((Math.ceil(tenor / 12)) as int)
+    } else if (payFreq == 'Weekly') {
+        numOfInstallment = (((((4) as int) * tenor) + (Math.round(tenor - 1) / 3)) + 1)
+    }
+    
+    'Click label numofInstallment untuk merefresh numofinstallment'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_NumOfInstallment'))
+
+    'Verify numofinstallment sesuai perhitungan'
+    WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_NumOfInstallment'), 
+        numOfInstallment.toString())
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
@@ -274,15 +271,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
             GlobalVariable.NumofColm, 21), false)
 }
 
-String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 'value', FailureHandling.OPTIONAL)
+String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
+    'value', FailureHandling.OPTIONAL)
 
 //'Select option dropdownlist Interest Type'
 //WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
 //    textInterestType, false)
-
 //CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 //	21, GlobalVariable.NumofColm - 1, textInterestType)
-
 scheme = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 
 wop = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment')
@@ -398,12 +394,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write To Excel GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-		
-		flagFailed=1
-		
+        'Write To Excel GlobalVariable.StatusReasonLookup'
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+        flagFailed = 1
+
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
             'Klik new consumer finance'
@@ -517,12 +513,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-	'Write To Excel GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-	
-	flagFailed=1
-	
+    'Write To Excel GlobalVariable.StatusReasonLookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+    flagFailed = 1
+
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
@@ -573,11 +569,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-	'Write To Excel GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-	
-	flagFailed=1
+    'Write To Excel GlobalVariable.StatusReasonLookup'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+    flagFailed = 1
+
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
@@ -595,29 +592,38 @@ WebUI.delay(3)
 'click Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+        GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0){
-	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
+if(GlobalVariable.Role == 'Testing'){
+	'call test case store db application data'		
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), 
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-if(flagFailed==0){
-	'check save process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
-		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'), GlobalVariable.NumofColm, '6.TabApplicationData')
-	if(iscompleteMandatory==0){
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-		'cek validasi'
-		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '6.TabApplicationData')
-	}
+if (iscompleteMandatory == 0) {
+    'cek alert'
+    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
 }
 
+if (flagFailed == 0) {
+    'check save process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'), 
+        GlobalVariable.NumofColm, '6.TabApplicationData')
+
+    if (iscompleteMandatory == 0) {
+        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+
+        'cek validasi'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '6.TabApplicationData')
+    }
+}
 
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-    
-} 
+}
+
+

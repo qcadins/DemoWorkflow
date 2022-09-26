@@ -66,7 +66,7 @@ public class CustomerDataVerif {
 	@Keyword
 	public CustomerDataStoreDBPersonal (Sql instance, String appno){
 		String customerdata
-		instance.eachRow(("SELECT b.PROD_OFFERING_CODE AS HEADER, Cust_name AS HEADER, BIRTH_PLACE AS HEADER, MR_ID_TYPE_CODE AS HEADER, FORMAT(ID_EXPIRED_DT, 'MM/dd/yyyy') AS HEADER, MR_MARITAL_STAT_CODE AS HEADER, MOBILE_PHN_NO_1 AS HEADER, f.REF_MASTER_NAME AS HEADER, MR_GENDER_CODE AS HEADER, FORMAT(BIRTH_DT, 'MM/dd/yyyy') AS HEADER, ID_NO AS HEADER, TAX_ID_NO AS HEADER, MOTHER_MAIDEN_NAME AS HEADER, EMAIL_1 AS HEADER, e.ATTR_VALUE AS HEADER, SUBQ.ATTR_VALUE AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, g.REF_MASTER_NAME AS HEADER FROM APP_CUST a JOIN app b ON a.APP_ID = b.APP_ID JOIN APP_CUST_PERSONAL c ON a.APP_CUST_ID = c.APP_CUST_ID  JOIN APP_CUST_ADDR d ON a.APP_CUST_ID = d.APP_CUST_ID JOIN APP_CUST_ATTR_CONTENT e ON e.APP_CUST_ID = a.APP_CUST_ID JOIN REF_MASTER_LOS f ON a.MR_CUST_MODEL_CODE = f.REF_MASTER_CODE JOIN REF_MASTER_LOS g ON d.MR_HOUSE_OWNERSHIP_CODE = g.REF_MASTER_CODE, (SELECT ATTR_VALUE, a.APP_ID FROM APP_CUST_ATTR_CONTENT g JOIN APP_CUST a ON g.APP_CUST_ID = a.APP_CUST_ID JOIN app b ON a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno +"'AND IS_CUSTOMER = 1 AND g.REF_ATTR_CODE = 'AUTH_AML') as SUBQ WHERE a.APP_ID = SUBQ.APP_ID AND IS_CUSTOMER = 1 AND MR_CUST_ADDR_TYPE_CODE = 'LEGAL' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND e.REF_ATTR_CODE = 'AML_CUST_DEPARTMENT' AND f.REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND g.REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP'"), {  row ->
+		instance.eachRow(("SELECT b.PROD_OFFERING_CODE AS HEADER, Cust_name AS HEADER, BIRTH_PLACE AS HEADER, h.REF_MASTER_NAME AS HEADER, FORMAT(ID_EXPIRED_DT, 'MM/dd/yyyy') AS HEADER, MR_MARITAL_STAT_CODE AS HEADER, MOBILE_PHN_NO_1 AS HEADER, f.REF_MASTER_NAME AS HEADER, MR_GENDER_CODE AS HEADER, FORMAT(BIRTH_DT, 'MM/dd/yyyy') AS HEADER, ID_NO AS HEADER, TAX_ID_NO AS HEADER, MOTHER_MAIDEN_NAME AS HEADER, EMAIL_1 AS HEADER, e.ATTR_VALUE AS HEADER, SUBQ.ATTR_VALUE AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, g.REF_MASTER_NAME AS HEADER FROM APP_CUST a JOIN app b ON a.APP_ID = b.APP_ID JOIN APP_CUST_PERSONAL c ON a.APP_CUST_ID = c.APP_CUST_ID JOIN APP_CUST_ADDR d ON a.APP_CUST_ID = d.APP_CUST_ID JOIN APP_CUST_ATTR_CONTENT e ON e.APP_CUST_ID = a.APP_CUST_ID JOIN REF_MASTER_LOS f ON a.MR_CUST_MODEL_CODE = f.REF_MASTER_CODE JOIN REF_MASTER_LOS g ON d.MR_HOUSE_OWNERSHIP_CODE = g.REF_MASTER_CODE JOIN REF_MASTER_LOS h ON a.MR_ID_TYPE_CODE = h.REF_MASTER_CODE, (SELECT ATTR_VALUE, a.APP_ID FROM APP_CUST_ATTR_CONTENT g JOIN APP_CUST a ON g.APP_CUST_ID = a.APP_CUST_ID JOIN app b ON a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno +"'AND IS_CUSTOMER = 1 AND g.REF_ATTR_CODE = 'AUTH_AML') as SUBQ WHERE a.APP_ID = SUBQ.APP_ID AND IS_CUSTOMER = 1 AND MR_CUST_ADDR_TYPE_CODE = 'LEGAL' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND e.REF_ATTR_CODE = 'AML_CUST_DEPARTMENT' AND f.REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND g.REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND h.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
 
 			customerdata = (row)
 		})
@@ -176,10 +176,130 @@ public class CustomerDataVerif {
 	@Keyword
 	public NAP2AccessoriesStoreDB (Sql instance, String appno){
 		String accessoriesdata
+		ArrayList <String> listaccessories = new ArrayList<String>()
 		instance.eachRow(("SELECT b.SUPPL_CODE AS HEADER, b.SUPPL_NAME AS HEADER, a.ASSET_ACCESSORY_CODE AS HEADER, a.ASSET_ACCESSORY_NAME AS HEADER, CONVERT(INT, a.ACCESSORY_PRICE_AMT) AS HEADER, CONVERT(INT, a.DOWN_PAYMENT_PRCNT) AS HEADER, CONVERT(INT, a.DOWN_PAYMENT_AMT) AS HEADER, a.ACCESSORY_NOTES AS HEADER FROM APP_ASSET_ACCESSORY a JOIN APP_ASSET b ON a.APP_ASSET_ID = b.APP_ASSET_ID JOIN APP c ON b.APP_ID = c.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
 
-			accessoriesdata = (row)
+			accessoriesdata = (row[0])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[1])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[2])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[3])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[4])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[5])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[6])
+			listaccessories.add(accessoriesdata)
+			accessoriesdata = (row[7])
+			listaccessories.add(accessoriesdata)
 		})
-		return accessoriesdata
+		return listaccessories
+	}
+
+	@Keyword
+	public NAP2InsuranceCMStoreDB (Sql instance, String appno){
+		String insurancedata
+		instance.eachRow(("SELECT c.CUST_INSCO_BRANCH_NAME AS HEADER, CONVERT(INT , c.CUST_CVG_AMT) AS HEADER, c.INS_POLICY_NO AS HEADER, c.INS_POLICY_NAME AS HEADER,FORMAT(c.CUST_COVER_START_DT, 'MM/dd/yyyy') AS HEADER, FORMAT(c.END_DT, 'MM/dd/yyyy') AS HEADER, c.CUST_NOTES AS HEADER, c.INS_ASSET_REGION AS HEADER, CONVERT(INT , c.CVG_AMT) AS HEADER, f.REF_MASTER_NAME AS HEADER, c.MR_INS_PAY_METHOD_CODE AS HEADER, c.INSCO_BRANCH_NAME AS HEADER, c.NOTES AS HEADER, c.INS_LENGTH AS HEADER, CONVERT(INT, c.CUST_ADMIN_FEE_AMT) AS HEADER, CONVERT(INT, c.CUST_STAMP_DUTY_FEE) AS HEADER, d.MR_MAIN_CVG_TYPE_CODE AS HEADER, IS_CAPITALIZED AS HEADER, CONVERT(INT, TOTAL_INS_CPTLZ_AMT) AS HEADER, CONVERT(INT, e.SUM_INSURED_AMT) AS HEADER, CONVERT(INT, e.CUST_ADD_PREMI_AMT) AS HEADER, CONVERT(INT, TOTAL_CUST_FEE_AMT) AS HEADER, CONVERT(INT , a.TOTAL_CUST_DISC_AMT) AS HEADER, CONVERT(INT, TOTAL_PREMI_PAID_BY_CUST_AMT) AS HEADER FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID JOIN APP_INS_OBJ c ON b.APP_ID = c.APP_ID JOIN APP_INS_MAIN_CVG d ON d.APP_INS_OBJ_ID = c.APP_INS_OBJ_ID JOIN APP_INS_ADD_CVG e ON e.APP_INS_MAIN_CVG_ID = d.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS f ON f.REF_MASTER_CODE = c.INS_ASSET_COVER_PERIOD WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			insurancedata = (row)
+		})
+		return insurancedata
+	}
+
+
+	@Keyword
+	public NAP2InsuranceCStoreDB (Sql instance, String appno){
+		String insurancedata
+		instance.eachRow(("SELECT c.CUST_INSCO_BRANCH_NAME AS HEADER, CONVERT(INT , c.CUST_CVG_AMT) AS HEADER, c.INS_POLICY_NO AS HEADER, c.INS_POLICY_NAME AS HEADER, FORMAT(c.CUST_COVER_START_DT, 'MM/dd/yyyy') AS HEADER, FORMAT(c.END_DT, 'MM/dd/yyyy') AS HEADER, c.CUST_NOTES AS HEADER  FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID JOIN APP_INS_OBJ c ON b.APP_ID = c.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			insurancedata = (row)
+		})
+		return insurancedata
+	}
+
+	@Keyword
+	public NAP2InsuranceMStoreDB (Sql instance, String appno){
+		String insurancedata
+		instance.eachRow(("SELECT DISTINCT c.INS_ASSET_REGION AS HEADER, CONVERT(INT , c.CVG_AMT) AS HEADER, f.REF_MASTER_NAME AS HEADER, g.REF_MASTER_NAME AS HEADER, c.INSCO_BRANCH_NAME AS HEADER, c.NOTES AS HEADER, c.INS_LENGTH AS HEADER, CONVERT(INT, c.CUST_ADMIN_FEE_AMT) AS HEADER, CONVERT(INT, c.CUST_STAMP_DUTY_FEE) AS HEADER, h.REF_MASTER_NAME AS HEADER, IS_CAPITALIZED AS HEADER, CONVERT(INT, TOTAL_INS_CPTLZ_AMT) AS HEADER FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID JOIN APP_INS_OBJ c ON b.APP_ID = c.APP_ID JOIN APP_INS_MAIN_CVG d ON d.APP_INS_OBJ_ID = c.APP_INS_OBJ_ID JOIN APP_INS_ADD_CVG e ON e.APP_INS_MAIN_CVG_ID = d.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS f ON f.REF_MASTER_CODE = c.INS_ASSET_COVER_PERIOD JOIN REF_MASTER_LOS g ON g.REF_MASTER_CODE = c.PAY_PERIOD_TO_INSCO JOIN REF_MASTER_LOS h ON h.REF_MASTER_CODE = d.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND g.REF_MASTER_TYPE_CODE = 'PAY_PERIOD_TO_INSCO'"), {  row ->
+
+			insurancedata = (row)
+		})
+		return insurancedata
+	}
+	
+	
+	@Keyword
+	public NAP2InsuranceCVGStoreDB (Sql instance, String appno){
+		String insurancedata
+		instance.eachRow(("SELECT CONVERT(INT, e.SUM_INSURED_AMT) AS HEADER, CONVERT(INT, e.CUST_ADD_PREMI_AMT) AS HEADER, CONVERT(INT, TOTAL_CUST_FEE_AMT) AS HEADER, CONVERT(INT , a.TOTAL_CUST_DISC_AMT) AS HEADER, CONVERT(INT, TOTAL_PREMI_PAID_BY_CUST_AMT) AS HEADER FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID JOIN APP_INS_OBJ c ON b.APP_ID = c.APP_ID JOIN APP_INS_MAIN_CVG d ON d.APP_INS_OBJ_ID = c.APP_INS_OBJ_ID JOIN APP_INS_ADD_CVG e ON e.APP_INS_MAIN_CVG_ID = d.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS f ON f.REF_MASTER_CODE = c.INS_ASSET_COVER_PERIOD JOIN REF_MASTER_LOS g ON g.REF_MASTER_CODE = c.PAY_PERIOD_TO_INSCO JOIN REF_MASTER_LOS h ON h.REF_MASTER_CODE = d.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			insurancedata = (row)
+		})
+		return insurancedata
+	}
+
+
+	@Keyword
+	public NAP2LifeInsuranceStoreDB (Sql instance, String appno){
+		String lifeinsurancedata
+		instance.eachRow(("SELECT b.LIFE_INSCO_BRANCH_NAME AS HEADER, d.REF_MASTER_NAME AS HEADER, 100 - CONVERT(int, b.PAID_IN_ADV_PRCNT) AS HEADER, NEW_COVER_NOTES AS HEADER, IS_CUST_COVER AS HEADER, IS_GUARANTOR_COVER AS HEADER, IS_SPOUSE_COVER AS HEADER, CONVERT(INT, CUST_ADMIN_FEE_AMT) AS HEADER FROM APP_LIFE_INS_D a JOIN APP_LIFE_INS_H b ON a.APP_LIFE_INS_H_ID = b.APP_LIFE_INS_H_ID JOIN APP c ON b.APP_ID = c.APP_ID JOIN REF_MASTER_LOS d ON d.REF_MASTER_CODE = b.MR_LIFE_INS_PAID_METHOD_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			lifeinsurancedata = (row)
+		})
+		return lifeinsurancedata
+	}
+
+	@Keyword
+	public NAP2FinancialStoreDB (Sql instance, String appno){
+		String financialdata
+		instance.eachRow(("SELECT CONVERT(INT, TOTAL_FEE_AMT) AS HEADER, CONVERT(INT, TOTAL_FEE_CPTLZ_AMT) AS HEADER, c.REF_MASTER_NAME AS HEADER, EFFECTIVE_RATE_PRCNT AS HEADER, FLAT_RATE_PRCNT AS HEADER, GRACE_PERIOD AS HEADER, a.MR_GRACE_PERIOD_TYPE_CODE AS HEADER, CONVERT(INT,TDP_PAID_COY_AMT) AS HEADER FROM APP_FIN_DATA a JOIN APP b ON a.APP_ID = b.APP_ID JOIN REF_MASTER_LOS c ON c.REF_MASTER_CODE = a.MR_PROVISION_FEE_CALC_METHOD_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			financialdata = (row)
+		})
+		return financialdata
+	}
+
+
+	@Keyword
+	public NAP2SubsidyStoreDB (Sql instance, String appno){
+		String subsidy
+		ArrayList <String> listsubsidy = new ArrayList<String>()
+		instance.eachRow(("select MR_SUBSIDY_FROM_TYPE_NAME, SUBSIDY_FROM_VALUE_NAME, MR_SUBSIDY_ALLOC_NAME, MR_SUBSIDY_SOURCE_NAME, CONVERT(INT, SUBSIDY_AMT), CONVERT(INT, SUBSIDY_PRCNT) from APP_SUBSIDY a JOIN APP b ON a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			subsidy = (row[0])
+			listsubsidy.add(subsidy)
+			subsidy = (row[1])
+			listsubsidy.add(subsidy)
+			subsidy = (row[2])
+			listsubsidy.add(subsidy)
+			subsidy = (row[3])
+			listsubsidy.add(subsidy)
+			subsidy = (row[4])
+			listsubsidy.add(subsidy)
+			subsidy = (row[5])
+			listsubsidy.add(subsidy)
+		})
+		return listsubsidy
+	}
+
+	@Keyword
+	public NAP2TermConditionStoreDB (Sql instance, String appno){
+		String termandcondition
+		ArrayList <String> listTC = new ArrayList<String>()
+		instance.eachRow(("SELECT IS_CHECKED, FORMAT(PROMISED_DT, 'MM/dd/yyy'), FORMAT(EXPIRED_DT, 'MM/dd/yyyy'), IS_WAIVED FROM APP_TC a JOIN APP b ON a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			termandcondition = (row[0])
+			listTC.add(termandcondition)
+			termandcondition = (row[1])
+			listTC.add(termandcondition)
+			termandcondition = (row[2])
+			listTC.add(termandcondition)
+			termandcondition = (row[3])
+			listTC.add(termandcondition)
+		})
+		return listTC
 	}
 }

@@ -971,6 +971,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
+if(GlobalVariable.Role == 'Testing'){
+	'call test case store db referantor data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'REFERANTOR', false, FailureHandling.OPTIONAL)) {
     'click button cancel'

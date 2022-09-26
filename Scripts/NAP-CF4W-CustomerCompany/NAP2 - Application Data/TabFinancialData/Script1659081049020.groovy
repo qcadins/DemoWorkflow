@@ -703,9 +703,18 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	'call test case subsidy store db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	'call test case financial datastore db verif'		
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 }
+
 
