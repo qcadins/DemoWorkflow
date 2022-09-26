@@ -635,7 +635,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             GlobalVariable.NumofFamily, 13) == 'Input Data') {
             if (GlobalVariable.Role == 'Testing') {
                 'call test case Family data store verif'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataStoreVerif'), 
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
                     [:], FailureHandling.CONTINUE_ON_FAILURE)
             }
         }
