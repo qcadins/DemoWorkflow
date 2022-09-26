@@ -439,4 +439,9 @@
       <initValue>'\\Rule\\InsAddCvgRule.xlsx'</initValue>
       <name>AddtCovRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'2021'</initValue>
+      <name>BDYear</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
