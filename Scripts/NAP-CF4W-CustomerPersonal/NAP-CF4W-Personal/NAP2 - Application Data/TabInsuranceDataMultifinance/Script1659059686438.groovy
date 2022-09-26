@@ -302,7 +302,8 @@ if(capinssetting=="YEARLY"){
 	
 	'Looping data tabel insurance untuk input data'
 	for (int i = 1; i <= count; i++) {
-		
+		//modify object year num
+		yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_YearNo'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]",true)
 		if(GlobalVariable.Role=="Testing"){
 			'modify object sum insured percentage'
 			sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'),
@@ -319,9 +320,6 @@ if(capinssetting=="YEARLY"){
 			yearNo = resultSumInsured.get("Year")
 			
 			sumInsuredPctg = resultSumInsured.get("Pctg")
-			
-			//modify object year num
-			yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_YearNo'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]",true)
 			
 			'Looping jumlah data result yang sesuai dengan condition dari rule excel'
 			for(int j = 0;j<yearNo.size();j++){
@@ -480,11 +478,22 @@ if(capinssetting=="YEARLY"){
 			}
 		}
 		
-		int flagLoading = 0
+		int flagLoading = 0,flagLoad=0
 	
+		result = new HashMap<String,ArrayList>()
+		
+		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
+		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+		
+		ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt
+		addtCvgType = result.get("AddtCvg")
+		addtPremiRate = result.get("AddtRate")
+		sumInsuredAmt = result.get("SumInsuredAmt")
+		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
 		for (int j = 1; j <= countAddCov; j++) {
+			flagLoad=0
 			int countSumInsuredAmount = 0
 	
 			addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
@@ -511,24 +520,53 @@ if(capinssetting=="YEARLY"){
 			'Pengecekan jika label = loading'
 			if (WebUI.getText(labelAddCovPerYear).equalsIgnoreCase('LOADING')) {
 				flagLoading = 1
-	
-				continue
+				flagLoad=1
 			}
 			
-			'Pengecekan additional coverage field dan arraynya tidak kosong'
-			if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1))]) != '')) {
-				'Pengecekan nilai additional coverage dari stiap arraynya'
-				if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('Yes')) {
-					'Jika belum tercentang additional coverage'
-					if (WebUI.verifyElementNotChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
-						'centang additional coverage'
-						WebUI.check(addCovYearCheckbox)
+			if(flagLoad==0){
+				'Pengecekan additional coverage field dan arraynya tidak kosong'
+				if ((addCovYearValue.length() > 0) && ((addCovYearValueArray[((i - 1))]) != '')) {
+					'Pengecekan nilai additional coverage dari stiap arraynya'
+					if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('Yes')) {
+						'Jika belum tercentang additional coverage'
+						if (WebUI.verifyElementNotChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+							'centang additional coverage'
+							WebUI.check(addCovYearCheckbox)
+						}
+					} else if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('No')) {
+						'Jika sudah tercentang additional coverage'
+						if (WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+							'Uncentang additional coverage'
+							WebUI.uncheck(addCovYearCheckbox)
+						}
 					}
-				} else if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('No')) {
-					'Jika sudah tercentang additional coverage'
-					if (WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
-						'Uncentang additional coverage'
-						WebUI.uncheck(addCovYearCheckbox)
+				}
+				
+				modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),
+					'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[7]/div/div/select',
+					true)
+		
+				'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
+				if (WebUI.verifyElementPresent(modifySumInsuredAmount, 2, FailureHandling.OPTIONAL)) {
+					countSumInsuredAmount = 1
+				}
+				
+				'Jika sum insured amount ada dan checkbox additional coverage tercentang'
+				if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+					'Ambil nilai sum insured amount dari excel'
+					SumInsuredValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, sumInsuredAmountRow + j)
+		
+					SumInsuredValueArray = SumInsuredValue.split(';', -1)
+					
+					'Pengecekan jika sum insured amount kosong atau tidak pada excel'
+					if(SumInsuredValue.length()>0){
+						'Pengecekan jika array sum insured amount berisi nilai'
+						if(SumInsuredValueArray[i-1]!=""){
+							
+							'Select index sum insured amount'
+							WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
+						}
 					}
 				}
 			}
@@ -538,32 +576,41 @@ if(capinssetting=="YEARLY"){
 				true)
 	
 			'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-			if (WebUI.verifyElementPresent(modifySumInsuredAmount, 2, FailureHandling.OPTIONAL)) {
+			if (WebUI.verifyElementPresent(modifySumInsuredAmount, 1, FailureHandling.OPTIONAL)) {
 				countSumInsuredAmount = 1
 			}
 			
-			'Jika sum insured amount ada dan checkbox additional coverage tercentang'
-			if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
-				'Ambil nilai sum insured amount dari excel'
-				SumInsuredValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-					GlobalVariable.NumofColm, sumInsuredAmountRow + j)
-	
-				SumInsuredValueArray = SumInsuredValue.split(';', -1)
-				
-				'Pengecekan jika sum insured amount kosong atau tidak pada excel'
-				if(SumInsuredValue.length()>0){
-					'Pengecekan jika array sum insured amount berisi nilai'
-					if(SumInsuredValueArray[i-1]!=""){
-						
-						'Select index sum insured amount'
-						WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
+			modifyAddtCovName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddtCovName'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[6]/div/div/label",true)
+			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+			
+			//Verif additional premi rate based on rule
+			if(GlobalVariable.Role=="Testing"){
+				'Looping berdasarkan jumlah additional coverage type pada rule excel'
+				for(int k = 0;k<addtCvgType.size();k++){
+					'Verif additional coverage type confins sesuai dengan rule'
+					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
+						'Pengecekan jika terdapat sum insured amount'
+						if(countSumInsuredAmount == 1){
+							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
+							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
+								'Verif additional premi rate sesuai dengan nilai dari rule'
+								WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))
+								break
+							}
+						}
+						//jika tidak terdapt sum insured amount
+						else{
+							'Verif additional premi rate sesuai dengan nilai dari rule'
+							WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))
+							break
+						}
+
 					}
+					
 				}
 			}
 			
-			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
-			
-			if(WebUI.verifyElementNotHasAttribute(modifyAddtRateObject,"disabled",2)){
+			if(WebUI.verifyElementNotHasAttribute(modifyAddtRateObject,"disabled",2,FailureHandling.OPTIONAL)){
 				'Ambil nilai additional premi rate dari excel'
 				AddtRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 					GlobalVariable.NumofColm, AddRate + j)

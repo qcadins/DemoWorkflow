@@ -464,4 +464,9 @@
       <initValue>''</initValue>
       <name>Discount</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'2021'</initValue>
+      <name>BDYear</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
