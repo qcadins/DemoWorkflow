@@ -444,4 +444,9 @@
       <initValue>'2021'</initValue>
       <name>BDYear</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\TCRule.xlsx'</initValue>
+      <name>TCRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

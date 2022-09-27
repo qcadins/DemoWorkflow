@@ -23,7 +23,6 @@ import internal.GlobalVariable
 public class verifMainRate {
 
 	public verifyMainPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt){
-		covAmt = Double.parseDouble(covAmt)
 		HashMap<String,ArrayList> result = new HashMap<>()
 		ArrayList<String> maincvgType = new ArrayList<>()
 
@@ -110,7 +109,7 @@ public class verifMainRate {
 				}
 				if((ruleMainCvg.getValue(2,i)==inscoBranchCode || ruleMainCvg.getValue(2,i)=="-")
 				&& (ruleMainCvg.getValue(3,i)==region || ruleMainCvg.getValue(3,i)=="-") && (ruleMainCvg.getValue(4,i)==insAssetCategory || ruleMainCvg.getValue(4,i)=="-")
-				&& ruleMainCvg.getValue(5,i)<=covAmt && ruleMainCvg.getValue(6,i)>=covAmt){
+				&& Long.parseLong(ruleMainCvg.getValue(5,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleMainCvg.getValue(6,i))>=Long.parseLong(covAmt)){
 					maincvgType.add(ruleMainCvg.getValue(7,i))
 					mainRate.add(ruleMainCvg.getValue(10,i))
 				}

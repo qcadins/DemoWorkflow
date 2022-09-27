@@ -24,8 +24,6 @@ public class verifAddtRate {
 
 	@Keyword
 	public verifyAddtPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt, String mainCvgType, String yearNo){
-
-		covAmt = Double.parseDouble(covAmt)
 		HashMap<String,ArrayList> result = new HashMap<>()
 		ArrayList<String> sumInsuredAmt = new ArrayList<>()
 		ArrayList<String> addtPremiRate = new ArrayList<>()
@@ -135,7 +133,7 @@ public class verifAddtRate {
 					}
 					if((ruleAddtCvg.getValue(2,i)==inscoBranchCode || ruleAddtCvg.getValue(2,i)=="-")
 					&& (ruleAddtCvg.getValue(3,i)==region || ruleAddtCvg.getValue(3,i)=="-") && (ruleAddtCvg.getValue(4,i)==insAssetCategory || ruleAddtCvg.getValue(4,i)=="-" || (sameAssetCat==1 && ruleAddtCvg.getValue(4,i)==""))
-					&& ruleAddtCvg.getValue(6,i)<=covAmt && ruleAddtCvg.getValue(7,i)>=covAmt){
+					&& Long.parseLong(ruleAddtCvg.getValue(6,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleAddtCvg.getValue(7,i))>=Long.parseLong(covAmt)){
 						sameAssetCat = 1
 						if((ruleAddtCvg.getValue(10,i)!="0" && Integer.parseInt(ruleAddtCvg.getValue(9,i))<=assetAge
 						&& Integer.parseInt(ruleAddtCvg.getValue(10,i))>=assetAge)||ruleAddtCvg.getValue(10,i)=="0"){
