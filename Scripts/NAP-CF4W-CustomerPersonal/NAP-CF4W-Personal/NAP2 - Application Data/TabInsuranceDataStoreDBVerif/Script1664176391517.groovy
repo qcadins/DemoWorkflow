@@ -38,6 +38,11 @@ String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 
 int arrayindex = 0
 
+ArrayList<String> arraysuminsured = new ArrayList<>()
+
+ArrayList<String> arrayaddpremi = new ArrayList<>()
+
+
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
     String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(

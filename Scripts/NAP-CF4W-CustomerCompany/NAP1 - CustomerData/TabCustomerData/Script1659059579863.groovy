@@ -210,14 +210,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Save'))
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    14) == 'Input Data') {
-    if (GlobalVariable.RoleCompany == 'Testing') {
-        'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE)
-    }
-}
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         4)) == 0) {
@@ -264,6 +256,7 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
+		
 'verify fail'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
     'CUSTOMER', false, FailureHandling.OPTIONAL)) {
@@ -285,3 +278,12 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     }
 }
 
+
+if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+		14) == 'Input Data') {
+	if (GlobalVariable.RoleCompany == 'Testing') {
+		'call test case verif customer store data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], 
+				FailureHandling.CONTINUE_ON_FAILURE)
+	}
+}

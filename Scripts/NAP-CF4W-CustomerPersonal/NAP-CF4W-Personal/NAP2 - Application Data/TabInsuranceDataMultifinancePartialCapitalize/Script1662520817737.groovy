@@ -25,6 +25,7 @@ import org.openqa.selenium.Keys as Keys
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
 
@@ -50,6 +51,10 @@ Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, u
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
+
+ArrayList<String> arraysuminsured = new ArrayList<>()
+
+ArrayList<String> arrayaddpremi = new ArrayList<>()
 
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya tahun pada insurance '
@@ -334,8 +339,12 @@ for (int i = 1; i <= count; i++) {
 						
 						'Select index sum insured amount'
 						WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
+						
+						
 					}
 				}
+				
+
 			}
 		}
 		
@@ -573,6 +582,17 @@ if (counterPaidByMF == 1) {
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 		GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
+
+GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalMainPremium')).replace('.00', '').replace(',','')
+
+GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
+
+GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalFee')).replace('.00', '').replace(',','')
+
+GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotaltoCustomer')).replace('.00', '').replace(',','')
+
+GlobalVariable.Discount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Discount_TotalCustDiscAmt'),
+	'value', FailureHandling.OPTIONAL)
 
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 

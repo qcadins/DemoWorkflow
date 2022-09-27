@@ -30,34 +30,22 @@ GlobalVariable.DataFilePath = filePath
 
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-for (i = 1; i <= variableData.size(); i++) {
-    'modify object family name'
-    modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[2]', true)
+for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
+    for (i = 1; i <= variableData.size(); i++) {
+        'modify object family name'
+        modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+            i) + ']/td[2]', true)
 
-    'modify object button edit'
-    modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[6]/span/span[1]/span/span/span/span/span/a/i', true)
-
-    'modify object button delete'
-    modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[6]/span/span[2]/span/span/span/span/span/a/i', true)
-
-    'Loop Multiple family data'
-    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
-    1); (GlobalVariable.NumofFamily)++) {
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
             GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {
             if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
-                if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-                        GlobalVariable.NumofFamily, 19))) {
-                    if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
-                        'click button edit'
-                        WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
+                if (!(WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 19)))) {
+                    if (i == variableData.size()) {
+                        'click button add'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
                         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 13) == 'Input Data') {
@@ -695,25 +683,10 @@ for (i = 1; i <= variableData.size(); i++) {
                         }
                     }
                 } else {
-                    if (GlobalVariable.NumofFamily == (Integer.parseInt(GlobalVariable.CountAFamily) + 1)) {
-                        if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
-                            'click button Delete'
-                            WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
-
-                            'accept alert'
-                            WebUI.acceptAlert()
-
-                            i--
-                        }
-                    }
+                    break
                 }
-            } else {
-                break
             }
         }
     }
 }
-
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TCaddFamilyCopyApp'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
 

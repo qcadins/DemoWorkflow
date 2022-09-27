@@ -275,6 +275,19 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
+        'call TC copy app Guarantor Personal'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+        'call TC copy app Guarantor Company'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
+            5, FailureHandling.OPTIONAL)) {
+            'click button save and continue'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
+        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -327,6 +340,19 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
+        'call TC copy app Guarantor Personal'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+        'call TC copy app Guarantor Company'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
+            5, FailureHandling.OPTIONAL)) {
+            'click button save and continue'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
+        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -604,6 +630,21 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
+        'call TC family copy app'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyCopyApp'), 
+            [:], FailureHandling.STOP_ON_FAILURE)
+
+        'click button save and continue'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
+
+        'cek alert'
+        int flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '2a.TabFamilyDataMain')
+
+        if (flagFailed == 0) {
+            'Write to Excel SUCCESS'
+            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -656,6 +697,19 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
+        'call TC copy app Guarantor Personal'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
+            [:], FailureHandling.STOP_ON_FAILURE)
+
+        'call TC copy app Guarantor Company'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
+            [:], FailureHandling.STOP_ON_FAILURE)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
+            5, FailureHandling.OPTIONAL)) {
+            'click button save and continue'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
+        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'

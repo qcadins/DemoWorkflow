@@ -229,14 +229,24 @@ public class CustomerDataVerif {
 		})
 		return insurancedata
 	}
-	
-	
+
+
 	@Keyword
 	public NAP2InsuranceCVGStoreDB (Sql instance, String appno){
 		String insurancedata
+		ArrayList <String> listCVG = new ArrayList<String>()
 		instance.eachRow(("SELECT CONVERT(INT, e.SUM_INSURED_AMT) AS HEADER, CONVERT(INT, e.CUST_ADD_PREMI_AMT) AS HEADER, CONVERT(INT, TOTAL_CUST_FEE_AMT) AS HEADER, CONVERT(INT , a.TOTAL_CUST_DISC_AMT) AS HEADER, CONVERT(INT, TOTAL_PREMI_PAID_BY_CUST_AMT) AS HEADER FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID JOIN APP_INS_OBJ c ON b.APP_ID = c.APP_ID JOIN APP_INS_MAIN_CVG d ON d.APP_INS_OBJ_ID = c.APP_INS_OBJ_ID JOIN APP_INS_ADD_CVG e ON e.APP_INS_MAIN_CVG_ID = d.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS f ON f.REF_MASTER_CODE = c.INS_ASSET_COVER_PERIOD JOIN REF_MASTER_LOS g ON g.REF_MASTER_CODE = c.PAY_PERIOD_TO_INSCO JOIN REF_MASTER_LOS h ON h.REF_MASTER_CODE = d.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
 
-			insurancedata = (row)
+			insurancedata = (row[0])
+			listCVG.add(insurancedata)
+			insurancedata = (row[1])
+			listCVG.add(insurancedata)
+			insurancedata = (row[2])
+			listCVG.add(insurancedata)
+			insurancedata = (row[3])
+			listCVG.add(insurancedata)
+			insurancedata = (row[4])
+			listCVG.add(insurancedata)
 		})
 		return insurancedata
 	}

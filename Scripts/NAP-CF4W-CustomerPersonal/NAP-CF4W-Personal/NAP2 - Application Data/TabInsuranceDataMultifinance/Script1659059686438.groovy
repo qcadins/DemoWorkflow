@@ -306,7 +306,7 @@ if(capinssetting=="YEARLY"){
 		yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_YearNo'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]",true)
 		if(GlobalVariable.Role=="Testing"){
 			'modify object sum insured percentage'
-			sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'),
+			suredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'),
 				'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[5]/div/input', true)
 			
 			'Ambil nilai sum insured percent dari confins'
@@ -761,10 +761,11 @@ if(capinssetting=="YEARLY"){
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
 	
+	
 	GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalMainPremium')).replace('.00', '').replace(',','')
-	
+
 	GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
-	
+
 	GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotalFee')).replace('.00', '').replace(',','')
 	
 	GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TotaltoCustomer')).replace('.00', '').replace(',','')

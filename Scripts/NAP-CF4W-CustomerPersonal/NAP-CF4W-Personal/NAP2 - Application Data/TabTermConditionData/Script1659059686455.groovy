@@ -29,7 +29,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagFailed=0
+int flagFailed = 0
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
@@ -161,30 +161,30 @@ for (int i = 1; i <= count; i++) {
     def expiredDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 16).split(';', -1)
 
-	def waivedDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
-			GlobalVariable.NumofColm, 17).split(';', -1)
-	
-	'Pengecekan jika waive dapat diklik'
-	if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
-		'Pengecekan jika kondisi awal waived sudah tercentang'
-		if (WebUI.verifyElementChecked(modifyObjectWaived, 1, FailureHandling.OPTIONAL)) {
-			'Uncentang waive'
-			WebUI.uncheck(modifyObjectWaived)
-		}
-			
-		'Pengecekan jika ada dokumen yang perlu diwaive'
-		if (waivedDocument.size() > 0) {
-			'Looping dokumen yang perlu diwaive'
-			for (j = 1; j <= waivedDocument.size(); j++) {
-				'Pengecekan nama dokumen sama dengan nama dokumen yang perlu diwaive pada excel'
-				if (textDocumentName.equalsIgnoreCase(waivedDocument[(j - 1)])) {
-					'Centang Waive'
-					WebUI.check(modifyObjectWaived)
-				}
-			}
-		}
-	}
-		
+    def waivedDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+        GlobalVariable.NumofColm, 17).split(';', -1)
+
+    'Pengecekan jika waive dapat diklik'
+    if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
+        'Pengecekan jika kondisi awal waived sudah tercentang'
+        if (WebUI.verifyElementChecked(modifyObjectWaived, 1, FailureHandling.OPTIONAL)) {
+            'Uncentang waive'
+            WebUI.uncheck(modifyObjectWaived)
+        }
+        
+        'Pengecekan jika ada dokumen yang perlu diwaive'
+        if (waivedDocument.size() > 0) {
+            'Looping dokumen yang perlu diwaive'
+            for (j = 1; j <= waivedDocument.size(); j++) {
+                'Pengecekan nama dokumen sama dengan nama dokumen yang perlu diwaive pada excel'
+                if (textDocumentName.equalsIgnoreCase(waivedDocument[(j - 1)])) {
+                    'Centang Waive'
+                    WebUI.check(modifyObjectWaived)
+                }
+            }
+        }
+    }
+    
     'Pengecekan jika ada dokumen yang perlu diisi expired date'
     if (expiredDateDocument.size() > 0) {
         'Looping dokumen yang perlu diisi expired date'
@@ -199,30 +199,37 @@ for (int i = 1; i <= count; i++) {
             }
         }
     }
-    
-    
 }
 
 'Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+        GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0){
-	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '11.TabTermConditionData')
-}
-if(flagFailed==0){
-	'check save process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
-		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), GlobalVariable.NumofColm, '11.TabTermConditionData')
-	if(iscompleteMandatory==0){
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-		'cek validasi'
-		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '11.TabTermConditionData')
-	}
+if (iscompleteMandatory == 0) {
+    'cek alert'
+    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '11.TabTermConditionData')
 }
 
+if (flagFailed == 0) {
+    'check save process write to excel'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), 
+        GlobalVariable.NumofColm, '11.TabTermConditionData')
+
+    if (iscompleteMandatory == 0) {
+        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+
+        'cek validasi'
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '11.TabTermConditionData')
+    }
+}
+
+if (GlobalVariable.Role == 'Testing') {
+	'call test case store db TC'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
 
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
@@ -230,4 +237,6 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 
-} 
+   
+}
+

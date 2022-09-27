@@ -812,19 +812,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 
-        if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
-            if (GlobalVariable.RoleCompany == 'Testing') {
-                if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
-                    'call test case company data store verif'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
-                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
-                    'call test case company data store verif'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'), 
-                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                }
-            }
-        }
+       
         
         if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofFamily, 4)) == 0) {
             'Check alert'
@@ -877,10 +865,23 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     }
                 }
             }
+			
+			if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+				if (GlobalVariable.RoleCompany == 'Testing') {
+					if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
+						'call test case company data store verif'
+						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'),
+							[:], FailureHandling.CONTINUE_ON_FAILURE)
+					} else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
+						'call test case company data store verif'
+						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'),
+							[:], FailureHandling.CONTINUE_ON_FAILURE)
+					}
+				}
+			}
         }
     }
 }
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
-

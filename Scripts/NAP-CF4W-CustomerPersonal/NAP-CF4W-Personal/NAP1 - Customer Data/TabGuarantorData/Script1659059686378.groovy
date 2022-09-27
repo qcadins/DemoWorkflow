@@ -273,15 +273,6 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-                    GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
-                    if (GlobalVariable.Role == 'Testing') {
-                        'call test case company data store verif'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    }
-                }
-                
                 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                         GlobalVariable.NumofGuarantorPersonal, 4))
 
@@ -506,9 +497,19 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     }
                 }
             }
+            
+            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+                GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+                if (GlobalVariable.Role == 'Testing') {
+                    'call test case company data store verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                }
+            }
         }
     }
 }
+
 
 //GuarantorCompany
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
@@ -757,15 +758,6 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     'Click save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
-                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-                        GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                        if (GlobalVariable.Role == 'Testing') {
-                            'call test case company data store verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataCompanyStoreDBVerif'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
-                    }
-                    
                     Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                             GlobalVariable.NumofGuarantorCompany, 4))
 
@@ -805,6 +797,15 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     }
                 }
             }
+            
+            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
+                GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+                if (GlobalVariable.Role == 'Testing') {
+                    'call test case company data store verif'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataCompanyStoreDBVerif'), 
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                }
+            }
         }
     }
 }
@@ -816,4 +817,5 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 }
 
 WebUI.delay(15)
+
 
