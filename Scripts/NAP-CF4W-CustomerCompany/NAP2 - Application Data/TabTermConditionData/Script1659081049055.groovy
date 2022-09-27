@@ -19,6 +19,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
+import groovy.sql.Sql as Sql
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -28,6 +29,8 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
+
+int flagFailed = 0
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
@@ -45,6 +48,55 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 int count = variable.size()
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+
+String instancename = findTestData('Login/Login').getValue(2, 8)
+
+String username = findTestData('Login/Login').getValue(3, 8)
+
+String password = findTestData('Login/Login').getValue(4, 8)
+
+String database = findTestData('Login/Login').getValue(5, 9)
+
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+
+'Ambil text customer model dari confins'
+String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/label_custModel'))
+
+'Ambil text appNo dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/span_appNo'))
+
+'Hashmap untuk mengambil nilai tccode, tcmandatory, tc priorto dan tc is waivable berdasarkan condition-condition dari rule excel'
+HashMap<String, ArrayList> result = CustomKeywords.'tcData.verifTCData.verifyTermConditionData'(sqlConnectionLOS, sqlConnectionFOU, 
+    custModel, appNo)
+
+ArrayList<WebElement> TCCode
+
+ArrayList<WebElement> TCMandatory
+
+ArrayList<WebElement> TCPrior
+
+ArrayList<WebElement> TCWaive
+
+TCCode = result.get('TCCode')
+
+TCMandatory = result.get('TCMdt')
+
+TCPrior = result.get('TCPrior')
+
+TCWaive = result.get('TCWaive')
+
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {
     String newxpathRequired
@@ -57,11 +109,17 @@ for (int i = 1; i <= count; i++) {
     newxpathcheckbox = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
     i) + ']/td[5]/input')
 
+    newxpathpriorto = (('//*[@id=\'TC-tab\']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[3]')
+
     modifyObjectRequired = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), 
         'xpath', 'equals', newxpathRequired, true)
 
     modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/input_Checkbox'), 
         'xpath', 'equals', newxpathcheckbox, true)
+
+    modifyObjectPriorTo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/td_PriorTo'), 
+        'xpath', 'equals', newxpathpriorto, true)
 
     newxpathDocumentName = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
     i) + ']/td[2]')
@@ -69,9 +127,40 @@ for (int i = 1; i <= count; i++) {
     modifyObjectDocumentName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
         'xpath', 'equals', newxpathDocumentName, true)
 
+    newxpathWaived = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[6]/input')
+
+    modifyObjectWaived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/input_waived'), 
+        'xpath', 'equals', newxpathWaived, true)
+
     'Variabel yang digunakan untuk menyimpan isi dari nama dokumen'
     String textDocumentName = WebUI.getText(modifyObjectDocumentName)
 
+    if (GlobalVariable.RoleCompany == 'Testing') {
+        'verif document name based on rule'
+        WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU, textDocumentName), TCCode.get(
+                i - 1), false)
+
+        if (TCMandatory.get(i - 1) == 'false') {
+            'verif required based on rule'
+            WebUI.verifyElementText(modifyObjectRequired, 'NO')
+        } else if (TCMandatory.get(i - 1) == 'true') {
+            'verif required based on rule'
+            WebUI.verifyElementText(modifyObjectRequired, 'YES')
+        }
+        
+        'verif prior to based on rule'
+        WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo), TCPrior.get(i - 1), false)
+
+        if (TCWaive.get(i - 1) == 'false') {
+            'verif waive terlock based on rule'
+            WebUI.verifyElementHasAttribute(modifyObjectWaived, 'disabled', 1)
+        } else if (TCWaive.get(i - 1) == 'true') {
+            'verif waive tidak terlock/ dapat dicentang based on rule'
+            WebUI.verifyElementNotHasAttribute(modifyObjectWaived, 'disabled', 1)
+        }
+    }
+    
     'Variabel text digunakan untuk menyimpan isi dari kolom Required'
     String textRequired = WebUI.getText(modifyObjectRequired)
 
@@ -144,14 +233,8 @@ for (int i = 1; i <= count; i++) {
     newxpathExpiredDate = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
     i) + ']/td[8]/input')
 
-    newxpathWaived = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-    i) + ']/td[6]/input')
-
     modifyObjectExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/input_expiredDate'), 
         'xpath', 'equals', newxpathExpiredDate, true)
-
-    modifyObjectWaived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/input_waived'), 
-        'xpath', 'equals', newxpathWaived, true)
 
     def expiredDateDocument = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 15).split(';', -1)
@@ -220,9 +303,9 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
         GlobalVariable.NumofColm, '10.TabTermConditionData')
 }
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-	'call test case TC'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTCDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+if (GlobalVariable.Role == 'Testing') {
+    'call test case store db TC'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTCDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 'Verify input data'
@@ -231,5 +314,6 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 }
+
 
 
