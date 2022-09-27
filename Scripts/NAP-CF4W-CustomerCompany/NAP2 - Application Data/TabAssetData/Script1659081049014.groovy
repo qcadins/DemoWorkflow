@@ -789,6 +789,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 WebUI.delay(12)
 
+if (GlobalVariable.RoleCompany == 'Testing') {
+	'call test case store db verif accessories data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), [:], 
+			FailureHandling.CONTINUE_ON_FAILURE)
+	
+	'call test case store db verif asset data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+            
+}
+
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
