@@ -124,18 +124,24 @@ for (int i = 1; i <= count; i++) {
 	String textDocumentName = WebUI.getText(modifyObjectDocumentName)
 
 	if(GlobalVariable.Role=="Testing"){
+		'verif document name based on rule'
 		WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)
 		if(TCMandatory.get(i-1)=="false"){
+			'verif required based on rule'
 			WebUI.verifyElementText(modifyObjectRequired,"NO")
 		}
 		else if(TCMandatory.get(i-1)=="true"){
+			'verif required based on rule'
 			WebUI.verifyElementText(modifyObjectRequired,"YES")
 		}
+		'verif prior to based on rule'
 		WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo),TCPrior.get(i-1),false)
 		if(TCWaive.get(i-1)=="false"){
+			'verif waive terlock based on rule'
 			WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)
 		}
 		else if(TCWaive.get(i-1)=="true"){
+			'verif waive tidak terlock/ dapat dicentang based on rule'
 			WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)
 		}
 	}
