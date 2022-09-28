@@ -474,4 +474,9 @@
       <initValue>'\\Rule\\TCRule.xlsx'</initValue>
       <name>TCRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\SubsidyRule.xls'</initValue>
+      <name>SubsidyRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
