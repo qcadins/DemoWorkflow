@@ -21,6 +21,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
+import groovy.sql.Sql as Sql
 
 GlobalVariable.SubsidyDPValue = '0'
 
@@ -78,6 +79,126 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Y
 WebDriver driver = DriverFactory.getWebDriver()
 
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+
+int varsize = variable.size()
+
+//Verif default subsidy based on rule, urutan masih statis
+if(GlobalVariable.Role=="Testing"){
+	'Koneksi database'
+	String servername = findTestData('Login/Login').getValue(1, 8)
+	
+	String instancename = findTestData('Login/Login').getValue(2, 8)
+	
+	String username = findTestData('Login/Login').getValue(3, 8)
+	
+	String password = findTestData('Login/Login').getValue(4, 8)
+	
+	String database = findTestData('Login/Login').getValue(5, 9)
+	
+	String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+	
+	String driverclassname = findTestData('Login/Login').getValue(6, 8)
+	
+	String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+	
+	String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+	
+	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+	
+	Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+	
+	'Ambil appno dari confins'
+	String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
+	
+	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
+	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifSubsidy.verifySubsidyDefault'(sqlConnectionLOS, sqlConnectionFOU,appNo)
+	
+	ArrayList<String> SubsidyFromType, SubsidyFromValue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue
+	SubsidyFromType = result.get("FT")
+	SubsidyFromValue = result.get("FV")
+	SubsidyAlloc = result.get("Alloc")
+	SubsidySource = result.get("Source")
+	SubsidyValueType = result.get("Type")
+	SubsidyValue= result.get("Value")
+	
+	'Jika pada confins tidak ada data'
+	if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')),
+			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+			varsize = 0
+	}
+			
+	'Verif jumlah data subsidy yang muncul pada confins sesuai dengan rule'
+	WebUI.verifyEqual(varsize,SubsidyFromType.size())
+	
+	'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
+	if(varsize==SubsidyFromType.size() && varsize > 0){
+		'Looping data subsidi pada confins'
+		for (i = 1; i <= varsize; i++) {
+			String NewFromTypeName = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[1]'
+			 
+			'modify object from type name'
+			modifyNewFromTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', NewFromTypeName, true)
+			 
+			String NewFromValueName = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[2]'
+			 
+			'modify object from value name'
+			modifyNewFromValueName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromValueName'),
+				'xpath', 'equals', NewFromValueName, true)
+			 
+			String NewSubsidyAllocation = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[3]'
+			 
+			'modify object subsidy allocation'
+			modifyNewSubsidyAllocation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidyAllocation'),
+				'xpath', 'equals', NewSubsidyAllocation, true)
+			
+			String newSubsidyValueType = "//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[4]"
+			
+			'modify object subsidy value type'
+			modifyNewSubsidyValueType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyValueType'),'xpath','equals',newSubsidyValueType,true)
+			 
+			String NewSubsidySource = ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[5]'
+			 
+			'modify object subsidy source'
+			modifyNewSubsidySource = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidySource'),
+				'xpath', 'equals', NewSubsidySource, true)
+			
+			'modify object subsidy percentage'
+			modifyNewSubsidyPercentage = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyPercentage'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[6]",true)
+			
+			'modify object subsidy amount'
+			modifyNewSubsidyAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyAmount'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[7]",true)
+			
+			'Verif subsidy from type sesuai rule'
+			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)
+			
+			'Verif subsidy from value sesuai rule'
+			WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName),SubsidyFromValue.get(i-1),false)
+			
+			'Verif subsidy allocation sesuai rule'
+			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)
+			
+			'Verif subsidy value type sesuai rule'
+			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)
+			
+			'Verif subsidy source sesuai rule'
+			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)
+			
+			'Pengecekan value type pada confins bernilai percentage'
+			if(WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase("Percentage")){
+				
+				'Verif subsidy percentage sesuai rule'
+				WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(" %","")),Double.parseDouble(SubsidyValue.get(i-1)))
+			}
+			//Pengecekan value type pada confins bernilai amount
+			else if(WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase("Amount")){
+				
+				'Verif subsidy amount sesuai rule'
+				WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(",","")),Double.parseDouble(SubsidyValue.get(i-1)))
+			}
+		}
+	}
+}
 
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata')), 
     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
