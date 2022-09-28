@@ -537,7 +537,7 @@ for (i = 1; i <= variableData.size(); i++) {
                             }
                         }
                     } else {
-                        if (GlobalVariable.NumofGuarantor == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
+                        if (GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
                         1)) {
                             if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'click button Delete'
@@ -558,6 +558,11 @@ for (i = 1; i <= variableData.size(); i++) {
     }
 }
 
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TCAddGuarantorPersonal'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+WebUI.delay(5)
+
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorData'), [:], 
+    FailureHandling.CONTINUE_ON_FAILURE)
 

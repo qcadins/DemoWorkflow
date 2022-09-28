@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TCaddFamilyCopyApp</name>
+   <name>TabGuarantorCompanyCopyApp</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>e51c152f-3f84-4e65-9f90-547cfe18624b</testCaseGuid>
+   <testCaseGuid>52ed04d3-290c-4041-8322-978e8de0e319</testCaseGuid>
 </TestCaseEntity>

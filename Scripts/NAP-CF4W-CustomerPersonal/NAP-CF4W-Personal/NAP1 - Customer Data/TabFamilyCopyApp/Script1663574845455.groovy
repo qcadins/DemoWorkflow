@@ -714,6 +714,6 @@ for (i = 1; i <= variableData.size(); i++) {
     }
 }
 
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TCaddFamilyCopyApp'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyData'), [:], 
+    FailureHandling.CONTINUE_ON_FAILURE)
 

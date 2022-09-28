@@ -24,6 +24,23 @@ String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+
+String instancename = findTestData('Login/Login').getValue(2, 8)
+
+String username = findTestData('Login/Login').getValue(3, 8)
+
+String password = findTestData('Login/Login').getValue(4, 8)
+
+String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+
+String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -87,22 +104,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
 
             if (GlobalVariable.Role == 'Testing') {
-                'Koneksi database'
-                String servername = findTestData('Login/Login').getValue(1, 8)
-
-                String instancename = findTestData('Login/Login').getValue(2, 8)
-
-                String username = findTestData('Login/Login').getValue(3, 8)
-
-                String password = findTestData('Login/Login').getValue(4, 8)
-
-                String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-                String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-                String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-                Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+                
 
                 String office = officeLogin[0]
 
@@ -275,19 +277,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
-        'call TC copy app Guarantor Personal'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-        'call TC copy app Guarantor Company'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
-            5, FailureHandling.OPTIONAL)) {
-            'click button save and continue'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
-        }
+        'call TC family copy app'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyCopyApp'), 
+            [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -336,23 +328,14 @@ if (GlobalVariable.Role == 'Data Entry') {
     
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('No')) {
+		'call TC Guarantor Tanpa Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorData'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
-        'call TC copy app Guarantor Personal'
+        'call TC copy app Guarantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-        'call TC copy app Guarantor Company'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
-            5, FailureHandling.OPTIONAL)) {
-            'click button save and continue'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
-        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -387,6 +370,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+		'call TC verify App setelah submit'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
@@ -442,22 +426,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
 
             if (GlobalVariable.Role == 'Testing') {
-                'Koneksi database'
-                String servername = findTestData('Login/Login').getValue(1, 8)
-
-                String instancename = findTestData('Login/Login').getValue(2, 8)
-
-                String username = findTestData('Login/Login').getValue(3, 8)
-
-                String password = findTestData('Login/Login').getValue(4, 8)
-
-                String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-                String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-                String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-                Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+                
 
                 String office = officeLogin[0]
 
@@ -633,18 +602,6 @@ if (GlobalVariable.Role == 'Data Entry') {
         'call TC family copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyCopyApp'), 
             [:], FailureHandling.STOP_ON_FAILURE)
-
-        'click button save and continue'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save and continue'))
-
-        'cek alert'
-        int flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '2a.TabFamilyDataMain')
-
-        if (flagFailed == 0) {
-            'Write to Excel SUCCESS'
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabFamilyDataMain', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -693,23 +650,14 @@ if (GlobalVariable.Role == 'Data Entry') {
     
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('No')) {
+		'Call TC Guarantor tanpa Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Edit')) {
-        'call TC copy app Guarantor Personal'
+        'call TC copy app Guarantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), 
             [:], FailureHandling.STOP_ON_FAILURE)
-
-        'call TC copy app Guarantor Company'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
-            5, FailureHandling.OPTIONAL)) {
-            'click button save and continue'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
-        }
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
         copyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
@@ -744,6 +692,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	'call TC verify App setelah submit'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'), 
         [:], FailureHandling.STOP_ON_FAILURE)
 }
