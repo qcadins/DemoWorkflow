@@ -92,6 +92,7 @@ ArrayList<String> comRef = result.get("Ref")
 if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount")){
 	if(suppSource!=null){
 		for(int i = 1;i<=suppSource;i++){
+			'2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, (2 * i) + 1 + supRow)!='' && comSupp.get(i-1)!="-1"){
 					
@@ -111,6 +112,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 			for (int j = 1; j <= suppEmpSource.get(i-1); j++) {
 				value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).split(';', -1)
+				'2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+16(suppEmpRow) = 20  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).length() > 0){
 					if(value[i-1]!='' && comSuppEmp.get(count+(j-1))!="-1"){
@@ -131,6 +133,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 			for (int j = 1; j <= refSource.get(i-1); j++) {
 				 value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).split(';', -1)
+				'2j+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+1+32(refRow) = 35  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).length() > 0){
 					if(value[i-1]!='' && comRef.get(countRf+(j-1))!="-1"){
@@ -148,6 +151,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Percentage")){
 	if(suppSource!=null){
 		for(int i = 1;i<=suppSource;i++){
+			'2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
 				GlobalVariable.NumofColm, (2 * i) + 2 + supRow)!='' && comSupp.get(i-1)!="-1"){
 				'Verif percentage commmision supplier db dengan excel'
@@ -166,6 +170,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 			for (int j = 1; j <= suppEmpSource.get(i-1); j++) {
 				value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
+				'2j+3, +3 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+3+16(suppEmpRow) = 21  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).length()>0){
 					if(value[i-1]!='' && comSuppEmp.get(count+(j-1))!="-1"){
@@ -186,6 +191,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 			for (int j = 1; j <= refSource.get(i-1); j++) {
 				value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
+				'2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).length() > 0){
 					if(value[i-1]!='' && comRef.get(countRf+(j-1))!="-1"){
