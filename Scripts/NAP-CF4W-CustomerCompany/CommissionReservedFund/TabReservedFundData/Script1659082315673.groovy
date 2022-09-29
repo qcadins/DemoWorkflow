@@ -306,6 +306,12 @@ if (flagFailed == 0) {
     }
 }
 
+if(GlobalVariable.RoleCompany=="Testing"){
+	'call test case reserved fund datastore db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
     5, FailureHandling.OPTIONAL)) {

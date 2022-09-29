@@ -312,4 +312,124 @@ public class CustomerDataVerif {
 		})
 		return listTC
 	}
+
+
+	@Keyword
+	public NAP3CommissionDataStoreDB(Sql instance, String appno, String allocationType){
+		HashMap<String, ArrayList> result = new HashMap<>()
+		ArrayList<String> resultSupp = new ArrayList<String>()
+		ArrayList<String> resultSuppEmp = new ArrayList<String>()
+		ArrayList<String> resultRef = new ArrayList<String>()
+
+		if(allocationType.equalsIgnoreCase("Amount")){
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, COMMISSION_AMT, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER'"), {  row ->
+				if(row[3]==0.00){
+					resultSupp.add("-1")
+				}
+				else{
+					resultSupp.add(row[2])
+				}
+			})
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, COMMISSION_AMT, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP'"), {  row ->
+				if(row[3]==0.00){
+					resultSuppEmp.add("-1")
+				}
+				else{
+					resultSuppEmp.add(row[2])
+				}
+			})
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, COMMISSION_AMT, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'REFERANTOR'"), {  row ->
+				if(row[3]==0.00){
+					resultRef.add("-1")
+				}
+				else{
+					resultRef.add(row[2])
+				}
+			})
+		}
+		else if(allocationType.equalsIgnoreCase("Percentage")){
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, CASE WHEN (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 IS NULL THEN 0 ELSE (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 END, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER'"), {  row ->
+
+				if(row[3]==0.00){
+					resultSupp.add("-1")
+				}
+				else{
+					resultSupp.add(row[2])
+				}
+			})
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, CASE WHEN (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 IS NULL THEN 0 ELSE (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 END, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP'"), {  row ->
+
+				if(row[3]==0.00){
+					resultSuppEmp.add("-1")
+				}
+				else{
+					resultSuppEmp.add(row[2])
+				}
+			})
+			instance.eachRow(("SELECT COMMISSION_RECIPIENT_REF_NO, MR_COMMISSION_SOURCE_CODE, CASE WHEN (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 IS NULL THEN 0 ELSE (COMMISSION_AMT/NULLIF(REFUND_AMT, 0))*100 END, REFUND_AMT FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'REFERANTOR'"), {  row ->
+
+				if(row[3]==0.00){
+					resultRef.add("-1")
+				}
+				else{
+					resultRef.add(row[2])
+				}
+			})
+		}
+
+		result.put("Supp",resultSupp)
+		result.put("SuppEmp",resultSuppEmp)
+		result.put("Ref",resultRef)
+		return result
+	}
+
+
+	@Keyword
+	public countCommissionRecipientDB(Sql instance, String appno){
+		ArrayList<Integer> listcount = new ArrayList<>()
+		instance.eachRow(("SELECT 'SUPPLIER' AS HEADER, COUNT(*) AS HEADER FROM APP_COMMISSION_H WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') AND MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER' UNION SELECT 'SUPPLIER_EMP' AS HEADER, COUNT(*) AS HEADER FROM APP_COMMISSION_H WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') AND MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP' UNION SELECT 'REFERANTOR' AS HEADER, COUNT(*) AS HEADER FROM APP_COMMISSION_H WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') AND MR_COMMISSION_RECIPIENT_TYPE_CODE = 'REFERANTOR'"), {  row ->
+			listcount.add(row[1])
+		})
+		return listcount
+	}
+
+	@Keyword
+	public countCommissionSourceSupplierDB(Sql instance, String appno){
+		Integer countCS
+		instance.eachRow(("SELECT a.APP_COMMISSION_H_ID, COMMISSION_RECIPIENT_REF_NO, COUNT(*) AS HEADER FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER' GROUP BY COMMISSION_RECIPIENT_REF_NO, a.APP_COMMISSION_H_ID ORDER BY a.APP_COMMISSION_H_ID"), {  row ->
+			countCS = row[2]
+		})
+		return countCS
+	}
+
+	@Keyword
+	public countCommissionSourceSupplierEmpDB(Sql instance, String appno){
+		ArrayList<Integer> countCS = new ArrayList<>()
+		instance.eachRow(("SELECT a.APP_COMMISSION_H_ID, COMMISSION_RECIPIENT_REF_NO, COUNT(MR_COMMISSION_SOURCE_CODE) AS HEADER FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP' GROUP BY COMMISSION_RECIPIENT_REF_NO, a.APP_COMMISSION_H_ID ORDER BY a.APP_COMMISSION_H_ID"), {  row ->
+			println(row[2])
+			countCS.add(row[2])
+			
+		})
+		return countCS
+	}
+
+	@Keyword
+	public countCommissionSourceReferantorDB(Sql instance, String appno){
+		ArrayList<Integer> countCS = new ArrayList<>()
+		instance.eachRow(("SELECT a.APP_COMMISSION_H_ID, COMMISSION_RECIPIENT_REF_NO, COUNT(MR_COMMISSION_SOURCE_CODE) AS HEADER FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'REFERANTOR' GROUP BY COMMISSION_RECIPIENT_REF_NO, a.APP_COMMISSION_H_ID ORDER BY a.APP_COMMISSION_H_ID"), {  row ->
+			countCS.add(row[2])
+		})
+		return countCS
+	}
+
+
+	@Keyword
+	public NAP3ReservedFundDataStoreDB(Sql instance, String appno){
+		ArrayList<String> rsvAmt = new ArrayList<>()
+		instance.eachRow(("select reserved_fund_amt from app_reserved_fund where app_id = (select app_id from app where app_no='"+appno+"')"), {  row ->
+			rsvAmt.add(row[0])
+		})
+		return rsvAmt
+		
+	}
 }

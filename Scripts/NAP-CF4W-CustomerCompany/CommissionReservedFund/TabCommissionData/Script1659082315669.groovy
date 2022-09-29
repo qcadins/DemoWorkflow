@@ -898,6 +898,13 @@ if (flagFailed == 0) {
     }
 }
 
+if (GlobalVariable.RoleCompany == 'Testing') {
+	'call test case commission datastore db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+}
+
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
     5, FailureHandling.OPTIONAL)) {
