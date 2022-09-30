@@ -61,7 +61,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'c'</initValue>
+      <initValue>2</initValue>
       <name>NumofReferantor</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
