@@ -69,6 +69,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 int flagFailed = 0
 
+				
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                     financialdata, 10).length() != 0) {
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
@@ -161,6 +162,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                         modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
 
+						'verify date beda'
                         if (!(modifyDateNew.equalsIgnoreCase(sDate)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 
                             5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {

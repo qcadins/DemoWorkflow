@@ -165,6 +165,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						println(modifyDateNew)
 						println(sDate)
 
+						'verify date beda'
                         if (!(modifyDateNew.equalsIgnoreCase(sDate)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 
                             5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {

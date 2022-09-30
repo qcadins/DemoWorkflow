@@ -126,7 +126,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-            'verify if asset type sama'
+            'verify if asset type beda'
             if (!(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)]) || WebUI.verifyElementNotPresent(
                 modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL))) {
                 if (i == variable.size()) {

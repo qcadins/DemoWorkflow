@@ -167,6 +167,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                         modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
 
+						'verify date beda'
                         if (!(modifyDateNew.equalsIgnoreCase(sDate)) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
                             5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {

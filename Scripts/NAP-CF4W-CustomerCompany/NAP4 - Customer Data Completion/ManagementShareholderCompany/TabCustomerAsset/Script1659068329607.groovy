@@ -68,7 +68,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             for (asset = 1; asset <= assettypearray.size(); asset++) {
 				
 				if(WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)){
-                'verify if asset type sama'
+                'verify if asset type beda'
                 if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)])) {
                     'click button edit'
                     WebUI.click(modifyNewbuttonedit)
