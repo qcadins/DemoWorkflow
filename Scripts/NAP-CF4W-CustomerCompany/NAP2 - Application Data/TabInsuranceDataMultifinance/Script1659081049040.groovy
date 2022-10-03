@@ -425,6 +425,11 @@ if(capinssetting=="YEARLY"){
 			if ((mainCoverageValueArray[(i - 1)]) != '') {
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+				
+				'Select opsi main coverage'
+				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+				
+				WebUI.delay(3)
 			}
 		}
 		
@@ -435,6 +440,8 @@ if(capinssetting=="YEARLY"){
 		if(GlobalVariable.RoleCompany=="Testing"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+			
+			WebUI.click(mainPremiRateObject)
 			
 			'Ambil nilai main premi rate dari confins'
 			String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
@@ -450,7 +457,7 @@ if(capinssetting=="YEARLY"){
 				if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
 					
 					'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
-					WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+					WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)), FailureHandling.OPTIONAL)
 					break
 				}
 			}
