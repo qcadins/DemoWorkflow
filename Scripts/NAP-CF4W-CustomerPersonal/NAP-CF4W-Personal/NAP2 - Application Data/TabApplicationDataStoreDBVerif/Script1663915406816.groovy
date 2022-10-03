@@ -33,12 +33,21 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-println(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13))
-//issue null
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
-println(result)
+		
+String bankaccount
+def bankarray, confinsdatabankacc 
+		
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+	
+	 bankaccount = CustomKeywords.'dbconnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
+			 bankarray = bankaccount.split(', ')
+			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
+	}
+
 resultarray = result.split(', ')
 
 'ganti value null > "" (String kosong)'
@@ -49,6 +58,8 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
 }
 
 int arrayindex = 0
+int bankindex = 0
+int confinsindex = 0
 
 'verify application source'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
@@ -86,10 +97,18 @@ WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPerso
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-'verify Bank account'
-WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 26).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+'verify Bank Name'
+WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
+'verify Bank Acc No'
+WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+
+'verify Bank Account Name'
+WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+}
+	
 'verify customer notification'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
 		GlobalVariable.NumofColm, 27).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
