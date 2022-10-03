@@ -476,8 +476,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             break
         }
     }
-} else if (copyapp == 'No') {
-    for (Address = 2; Address <= (countcolm + 1); Address++) {
+} else if (copyapp.equalsIgnoreCase('No')) {
+    for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
             Address, 9).length() != 0) {
             if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(

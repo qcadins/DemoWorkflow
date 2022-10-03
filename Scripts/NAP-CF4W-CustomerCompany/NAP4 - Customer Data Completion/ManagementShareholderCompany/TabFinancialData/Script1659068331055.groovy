@@ -48,8 +48,8 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/FinancialData - Company - ManagementShareholderCompany').getValue(
-    copyAppColm, 7)
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
+    10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -190,7 +190,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             break
         }
     }
-} else if (copyapp == 'No') {
+} else if (copyapp.equalsIgnoreCase('No')) {
     for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/FinancialData - Company - ManagementShareholderCompany').getValue(
             financialdata, 9).length() != 0) {

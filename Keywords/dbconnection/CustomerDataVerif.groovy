@@ -408,7 +408,6 @@ public class CustomerDataVerif {
 		instance.eachRow(("SELECT a.APP_COMMISSION_H_ID, COMMISSION_RECIPIENT_REF_NO, COUNT(MR_COMMISSION_SOURCE_CODE) AS HEADER FROM APP_COMMISSION_H a JOIN APP_COMMISSION_D b ON b.APP_COMMISSION_H_ID = a.APP_COMMISSION_H_ID WHERE APP_id = (Select app_id from app where app_no = '"+appno+"') and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP' GROUP BY COMMISSION_RECIPIENT_REF_NO, a.APP_COMMISSION_H_ID ORDER BY a.APP_COMMISSION_H_ID"), {  row ->
 			println(row[2])
 			countCS.add(row[2])
-			
 		})
 		return countCS
 	}
@@ -430,6 +429,5 @@ public class CustomerDataVerif {
 			rsvAmt.add(row[0])
 		})
 		return rsvAmt
-		
 	}
 }

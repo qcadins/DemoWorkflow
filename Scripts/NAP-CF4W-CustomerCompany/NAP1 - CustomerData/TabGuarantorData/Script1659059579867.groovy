@@ -450,10 +450,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
-                    if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                        if (GlobalVariable.RoleCompany == 'Testing') {
+                    not_run: if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+                        not_run: if (GlobalVariable.RoleCompany == 'Testing') {
                             'call test case company data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataPersonalStoreDBVerif'), 
+                            not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataPersonalStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                     }
@@ -723,6 +723,5 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 //    'click button save and continue'
 //    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 //}
-
 WebUI.delay(15)
 
