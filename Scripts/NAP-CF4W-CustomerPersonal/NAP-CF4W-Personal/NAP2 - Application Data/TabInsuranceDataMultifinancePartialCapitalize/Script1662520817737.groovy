@@ -197,6 +197,11 @@ for (int i = 1; i <= count; i++) {
 		if ((mainCoverageValueArray[(i - 1)]) != '') {
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+			
+			'Select opsi main coverage'
+			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+			
+			WebUI.delay(3)
 		}
 	}
 	
@@ -207,6 +212,8 @@ for (int i = 1; i <= count; i++) {
 	if(GlobalVariable.Role=="Testing"){
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+		
+		WebUI.click(mainPremiRateObject)
 		
 		'Ambil nilai main premi rate dari confins'
 		String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")

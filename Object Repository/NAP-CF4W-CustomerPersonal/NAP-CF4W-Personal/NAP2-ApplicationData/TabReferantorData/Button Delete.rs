@@ -6,11 +6,11 @@
    <elementGuidId>5f859049-59b0-4b7a-9f71-5d525b6c97be</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[8]/a/i</value>
+         <key>BASIC</key>
+         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[9]/a/i</value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[8]/a/i</value>
       </entry>
    </selectorCollection>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[8]/a/i</value>
+      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[9]/a/i</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

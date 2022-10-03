@@ -291,11 +291,11 @@ if (flagFailed == 0) {
     }
 }
 
-if (GlobalVariable.Role == 'Testing') {
-	'call test case store db TC'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+//if (GlobalVariable.Role == 'Testing') {
+//	'call test case store db TC'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
+//		[:], FailureHandling.CONTINUE_ON_FAILURE)
+//}
 
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 

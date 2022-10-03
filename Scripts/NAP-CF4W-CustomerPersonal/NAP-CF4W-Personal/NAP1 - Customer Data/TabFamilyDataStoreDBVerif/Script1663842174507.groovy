@@ -151,25 +151,25 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 'verify jobposition'
 WebUI.verifyMatch(JobPosition.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-'verify department aml value'
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 
-    41) == '#N/A') {
-    'set department aml menjadi string kosong'
-    DepartmentAML = ''
-}
-
-'verify department aml'
-WebUI.verifyMatch(DepartmentAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-
-'verify authority aml value'
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 
-    43) == '#N/A') {
-    'set authority aml menjadi string kosong'
-    AuthorityAML = ''
-}
-
-'verify authority aml'
-WebUI.verifyMatch(AuthorityAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//'verify department aml value'
+//if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 
+//    41) == '#N/A') {
+//    'set department aml menjadi string kosong'
+//    DepartmentAML = ''
+//}
+//
+//'verify department aml'
+//WebUI.verifyMatch(DepartmentAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//
+//'verify authority aml value'
+//if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 
+//    43) == '#N/A') {
+//    'set authority aml menjadi string kosong'
+//    AuthorityAML = ''
+//}
+//
+//'verify authority aml'
+//WebUI.verifyMatch(AuthorityAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify copy address atau tidak'
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 

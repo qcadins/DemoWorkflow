@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_ViewDetail</name>
+   <name>span_Customer Type_mat-radio-outer-circle</name>
    <tag></tag>
-   <elementGuidId>3b34a207-1fdb-469c-8c1f-63d16ea82f1b</elementGuidId>
+   <elementGuidId>5ed9da1e-ee2e-4635-a402-c8c67f5ee153</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[8]/a/i</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
-         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+         <value>//mat-radio-button[@id='mat-radio-2']/label/span/span</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>i</value>
+      <value>span</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>ft-edit-2 font-medium-3 mr-2</value>
+      <value>mat-radio-outer-circle</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[8]/a/i</value>
+      <value>id(&quot;mat-radio-2&quot;)/label[@class=&quot;mat-radio-label&quot;]/span[@class=&quot;mat-radio-container&quot;]/span[@class=&quot;mat-radio-outer-circle&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+      <value>//mat-radio-button[@id='mat-radio-2']/label/span/span</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//td[7]/a/i</value>
+      <value>//label/span/span</value>
    </webElementXpaths>
 </WebElementEntity>
