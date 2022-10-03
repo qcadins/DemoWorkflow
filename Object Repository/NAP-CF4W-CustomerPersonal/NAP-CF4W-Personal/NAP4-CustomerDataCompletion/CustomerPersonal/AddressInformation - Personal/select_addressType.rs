@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//div[@id='Address']/div/div/lib-ucdropdownlist/div/select</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;Address&quot;]/div[1]/div/lib-ucdropdownlist/div/select</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>form-control ng-untouched ng-pristine ng-valid ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>Select One Legal  Mailing  Residence  Residence 2 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;address-tab&quot;)/app-cc-address-paging[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/app-cc-address-detail[1]/form[@class=&quot;form form-horizontal ng-untouched ng-pristine ng-invalid&quot;]/div[@id=&quot;Address&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/lib-ucdropdownlist[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;Address&quot;]/div[1]/div/lib-ucdropdownlist/div/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
