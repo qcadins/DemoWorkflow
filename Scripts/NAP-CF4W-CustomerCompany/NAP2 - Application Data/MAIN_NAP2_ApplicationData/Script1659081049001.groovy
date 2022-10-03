@@ -60,6 +60,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(copyAppColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(copyAppColm, 
         10).equalsIgnoreCase('Edit')) {
+	
+	GlobalVariable.CopyAppColm == copyAppColm
+	
         'call test case referantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE) 
 		
@@ -364,6 +367,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(copyAppColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(copyAppColm, 
         10).equalsIgnoreCase('Edit')) {
+	GlobalVariable.CopyAppColm == copyAppColm
+	
         'call test case referantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.STOP_ON_FAILURE) 
 		
