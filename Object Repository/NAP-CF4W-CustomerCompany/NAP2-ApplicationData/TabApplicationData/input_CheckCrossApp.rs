@@ -3,7 +3,7 @@
    <description></description>
    <name>input_CheckCrossApp</name>
    <tag></tag>
-   <elementGuidId>176bd689-6388-4d78-8557-2191998b45b1</elementGuidId>
+   <elementGuidId>734dd0aa-4b25-48d0-bf08-243a3f210b00</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

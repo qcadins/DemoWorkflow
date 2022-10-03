@@ -3,7 +3,7 @@
    <description></description>
    <name>textarea_MONotes</name>
    <tag></tag>
-   <elementGuidId>1ea31588-c31b-44f8-b522-801e950ee99b</elementGuidId>
+   <elementGuidId>595a065f-eb66-4321-a753-6c4e239e5f86</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

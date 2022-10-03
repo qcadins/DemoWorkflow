@@ -413,8 +413,8 @@ String Fullassetcode = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationDa
     17)
 
 'count asset attribute'
-String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
-    Fullassetcode)
+String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, sqlConnectionLOS,
+	Fullassetcode,POName)
 
 for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
     String newAssetAtrributeInputText = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
@@ -766,12 +766,6 @@ GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObjec
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-        4)) == 0) {
-    'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '7.TabAssetData')
-}
-
 'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 WebUI.waitForAlert(3)
 
@@ -787,18 +781,25 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
 
-WebUI.delay(12)
+WebUI.delay(2)
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-	'call test case store db verif accessories data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), [:], 
-			FailureHandling.CONTINUE_ON_FAILURE)
-	
-	'call test case store db verif asset data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
-			FailureHandling.CONTINUE_ON_FAILURE)
-            
+if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
+        4)) == 0) {
+    'Check alert'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '7.TabAssetData')
 }
+
+
+//if (GlobalVariable.RoleCompany == 'Testing') {
+//	'call test case store db verif accessories data'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), [:], 
+//			FailureHandling.CONTINUE_ON_FAILURE)
+//	
+//	'call test case store db verif asset data'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
+//			FailureHandling.CONTINUE_ON_FAILURE)
+//            
+//}
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
@@ -808,7 +809,7 @@ if (GlobalVariable.FlagFailed == 0) {
 
     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
             4)) == 0) {
-        'check save process write to excel'
+        'check validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), 
             GlobalVariable.NumofColm, '7.TabAssetData')
     }

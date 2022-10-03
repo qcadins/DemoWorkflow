@@ -3,7 +3,7 @@
    <description></description>
    <name>select_CustomerBankAccount</name>
    <tag></tag>
-   <elementGuidId>9192a8dd-e535-4309-afb9-0cc6dcf9ba2a</elementGuidId>
+   <elementGuidId>25ae85ae-ec42-4a08-9979-1a19e725e00c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

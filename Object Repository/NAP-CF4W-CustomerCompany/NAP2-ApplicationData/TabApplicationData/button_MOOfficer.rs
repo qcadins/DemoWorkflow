@@ -3,11 +3,11 @@
    <description></description>
    <name>button_MOOfficer</name>
    <tag></tag>
-   <elementGuidId>ce848691-1514-4878-90c2-754a317aa27c</elementGuidId>
+   <elementGuidId>de9fcc3d-cb07-4647-af8d-d0c47b041fb5</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;salesInfomation&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4 ng-star-inserted&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+         <value>//*[@id=&quot;salesInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;salesInfomation&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4 ng-star-inserted&quot;]/lib-uclookupgeneric[1]/div[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+      <value>//*[@id=&quot;salesInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -3,7 +3,7 @@
    <description></description>
    <name>select_InstallmentSourcePaymentType</name>
    <tag></tag>
-   <elementGuidId>564dace1-f932-49a7-9c87-45fd3bebd5e2</elementGuidId>
+   <elementGuidId>4541cdf4-0569-4b15-ba68-a77b2fc88d9c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

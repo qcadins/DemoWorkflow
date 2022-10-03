@@ -3,7 +3,7 @@
    <description></description>
    <name>select_TaxCalculationMethod</name>
    <tag></tag>
-   <elementGuidId>050a0eda-48d1-400b-9114-74d17cfc9117</elementGuidId>
+   <elementGuidId>827da6ab-4445-4451-81f4-53d3c7ea6538</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

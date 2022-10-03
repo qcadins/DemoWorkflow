@@ -3,11 +3,8 @@
    <description></description>
    <name>select_CustomerNotification</name>
    <tag></tag>
-   <elementGuidId>d48309b4-37f1-4098-9615-a00676d1b1ed</elementGuidId>
+   <elementGuidId>e5d30585-f6e9-43e7-8f9f-640e46964749</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>CSS</key>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Customer Notification By'])[1]/following::select[1]</value>
@@ -15,6 +12,9 @@
       <entry>
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[2]/div/div[2]/div[4]/div/lib-ucdropdownlist/div/select</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

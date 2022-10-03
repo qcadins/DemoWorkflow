@@ -3,7 +3,7 @@
    <description></description>
    <name>select_WayOfPayment</name>
    <tag></tag>
-   <elementGuidId>d840d3f1-9104-47e0-9f33-c38b6b06592b</elementGuidId>
+   <elementGuidId>91a13a05-03de-4774-ae49-2904b69cc572</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

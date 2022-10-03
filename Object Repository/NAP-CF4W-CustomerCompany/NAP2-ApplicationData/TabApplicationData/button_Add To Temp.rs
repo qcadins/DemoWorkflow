@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Add To Temp</name>
    <tag></tag>
-   <elementGuidId>068a87b5-1f0b-455e-90d1-e12e0698da4a</elementGuidId>
+   <elementGuidId>cad5cb41-0eab-450d-8444-0589709e8152</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>label_Address</name>
    <tag></tag>
-   <elementGuidId>7cf1cab6-d0cf-42db-9145-f2382fbc0741</elementGuidId>
+   <elementGuidId>34d7c0f2-f640-4f98-977f-013705b5aa69</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

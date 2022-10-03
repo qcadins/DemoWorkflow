@@ -3,7 +3,7 @@
    <description></description>
    <name>button_LookupReferantor</name>
    <tag></tag>
-   <elementGuidId>efae8ac8-dfaf-45ca-b1e4-03b9ca735b34</elementGuidId>
+   <elementGuidId>e84368b1-b725-40d0-b23d-ec2cf64575ad</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Economic Sector (Slik)</name>
    <tag></tag>
-   <elementGuidId>53b5a785-dbd7-4cfb-996b-852d40b572c1</elementGuidId>
+   <elementGuidId>207bc715-518a-490e-a763-11b601d7a19a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

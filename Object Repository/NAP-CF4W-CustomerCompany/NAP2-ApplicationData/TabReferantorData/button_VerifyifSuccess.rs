@@ -3,10 +3,11 @@
    <description></description>
    <name>button_VerifyifSuccess</name>
    <tag></tag>
-   <elementGuidId>2bc8b139-21df-4592-8d93-a0cc724f81e7</elementGuidId>
+   <elementGuidId>6e76b181-d73a-418e-ba75-afea2bbe537c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
+         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>

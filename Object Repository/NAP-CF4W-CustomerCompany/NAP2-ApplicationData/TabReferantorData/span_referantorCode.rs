@@ -3,7 +3,7 @@
    <description></description>
    <name>span_referantorCode</name>
    <tag></tag>
-   <elementGuidId>71a67d9e-6760-4495-aa9a-bf3b9fe642f5</elementGuidId>
+   <elementGuidId>9be2aa92-a0fa-408b-a94d-05a45ac0664d</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

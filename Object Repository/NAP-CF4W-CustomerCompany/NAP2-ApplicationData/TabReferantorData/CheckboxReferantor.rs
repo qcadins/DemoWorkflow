@@ -3,7 +3,7 @@
    <description></description>
    <name>CheckboxReferantor</name>
    <tag></tag>
-   <elementGuidId>dd769bda-94ee-43b3-b010-9cfc14ba0b5c</elementGuidId>
+   <elementGuidId>0f209f6e-800e-48d1-9d75-2f2d2db19eb9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

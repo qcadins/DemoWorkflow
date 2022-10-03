@@ -3,7 +3,7 @@
    <description></description>
    <name>input_RW</name>
    <tag></tag>
-   <elementGuidId>a37fad2b-6afc-4092-8032-aefbd01c18d9</elementGuidId>
+   <elementGuidId>6ee67cb8-6af7-4bf0-952c-33150fea6df2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

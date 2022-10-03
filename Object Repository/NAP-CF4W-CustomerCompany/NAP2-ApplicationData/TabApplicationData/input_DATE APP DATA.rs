@@ -3,7 +3,7 @@
    <description></description>
    <name>input_DATE APP DATA</name>
    <tag></tag>
-   <elementGuidId>3e4bb86d-510e-4979-8c89-9b59068d25b5</elementGuidId>
+   <elementGuidId>45da0365-5116-45ed-b7b3-a62838b23229</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

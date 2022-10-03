@@ -3,7 +3,7 @@
    <description></description>
    <name>select_ReferantorType</name>
    <tag></tag>
-   <elementGuidId>30b97555-64f0-41b5-842a-3692090fbb5f</elementGuidId>
+   <elementGuidId>a9853495-2e8f-4588-844b-bad3266d7c8b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

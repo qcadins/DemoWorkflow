@@ -3,7 +3,7 @@
    <description></description>
    <name>i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2</name>
    <tag></tag>
-   <elementGuidId>e57e0592-9752-4433-8eb7-5c240af92e36</elementGuidId>
+   <elementGuidId>ced9d793-4776-4b89-82c3-97cf886f56d4</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

@@ -3,7 +3,7 @@
    <description></description>
    <name>input_RT</name>
    <tag></tag>
-   <elementGuidId>9af25b3c-f691-4a2a-9c86-dc0f92f2a5e8</elementGuidId>
+   <elementGuidId>e8bdeea2-2f79-4212-a4eb-a4b08350ab4e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

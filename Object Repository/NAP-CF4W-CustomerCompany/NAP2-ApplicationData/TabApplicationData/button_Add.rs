@@ -3,7 +3,7 @@
    <description></description>
    <name>button_Add</name>
    <tag></tag>
-   <elementGuidId>b99b564b-d3a9-4d08-b4f2-583981ce24d6</elementGuidId>
+   <elementGuidId>23b1b5ff-4efb-42dc-9b21-7c402e67f436</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

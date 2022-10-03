@@ -3,7 +3,7 @@
    <description></description>
    <name>button_3Asset Data</name>
    <tag></tag>
-   <elementGuidId>4ac86f64-04b4-42e9-979d-39e377c82f70</elementGuidId>
+   <elementGuidId>8fbdfbbf-6120-4064-a2c0-6aaaf511475b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

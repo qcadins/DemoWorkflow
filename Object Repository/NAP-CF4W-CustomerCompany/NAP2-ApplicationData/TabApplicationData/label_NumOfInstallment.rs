@@ -3,7 +3,7 @@
    <description></description>
    <name>label_NumOfInstallment</name>
    <tag></tag>
-   <elementGuidId>95d00880-c9d4-4d21-84ff-c9dab859918c</elementGuidId>
+   <elementGuidId>44a97ca9-9d59-49b4-96df-9939c8e91f11</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

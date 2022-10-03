@@ -425,7 +425,6 @@ if(capinssetting=="YEARLY"){
 			if ((mainCoverageValueArray[(i - 1)]) != '') {
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
-				
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
 				
@@ -436,6 +435,7 @@ if(capinssetting=="YEARLY"){
 		//Main Premi Rate
 		mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
 		
+		String mainPremiVal
 		//Verif Main Premi Rate Based on Rule
 		if(GlobalVariable.RoleCompany=="Testing"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
@@ -444,7 +444,7 @@ if(capinssetting=="YEARLY"){
 			WebUI.click(mainPremiRateObject)
 			
 			'Ambil nilai main premi rate dari confins'
-			String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
+			mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
 			
 			ArrayList<String> mainCvgType, mainPremiRate
 			mainCvgType = resultMainCvg.get("MainCvg")
@@ -606,7 +606,7 @@ if(capinssetting=="YEARLY"){
 							}
 						}
 						//jika tidak terdapt sum insured amount
-						else{
+						else if(countSumInsuredAmount==0 && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)){
 							'Verif additional premi rate sesuai dengan nilai dari rule'
 							WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))
 							break
@@ -767,6 +767,18 @@ if(capinssetting=="YEARLY"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
+	
+	
+	GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace('.00', '').replace(',','')
+
+	GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
+
+	GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace('.00', '').replace(',','')
+	
+	GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace('.00', '').replace(',','')
+	
+	GlobalVariable.Discount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
+		'value', FailureHandling.OPTIONAL)
 	
 	GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 	

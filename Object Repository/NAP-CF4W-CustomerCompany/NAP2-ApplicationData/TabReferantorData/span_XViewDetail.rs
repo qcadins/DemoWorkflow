@@ -3,7 +3,7 @@
    <description></description>
    <name>span_XViewDetail</name>
    <tag></tag>
-   <elementGuidId>0c017930-24e7-41a7-be24-67338ccbde8a</elementGuidId>
+   <elementGuidId>0328351a-09f1-49e3-b7ad-d8497065b191</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

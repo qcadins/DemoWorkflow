@@ -3,14 +3,14 @@
    <description></description>
    <name>i_ViewDetail</name>
    <tag></tag>
-   <elementGuidId>5da5ef1e-9bdd-413c-b331-81e121155e09</elementGuidId>
+   <elementGuidId>3b34a207-1fdb-469c-8c1f-63d16ea82f1b</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[8]/a/i</value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
       </entry>
    </selectorCollection>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/a/i</value>
+      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[8]/a/i</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

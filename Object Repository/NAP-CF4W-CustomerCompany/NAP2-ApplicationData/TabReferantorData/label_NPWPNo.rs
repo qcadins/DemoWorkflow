@@ -3,7 +3,7 @@
    <description></description>
    <name>label_NPWPNo</name>
    <tag></tag>
-   <elementGuidId>54d93e75-a8c9-4ec9-b59f-66472a4608f4</elementGuidId>
+   <elementGuidId>3df9b6a8-6c55-40e6-b0b2-afa2c2aded0b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

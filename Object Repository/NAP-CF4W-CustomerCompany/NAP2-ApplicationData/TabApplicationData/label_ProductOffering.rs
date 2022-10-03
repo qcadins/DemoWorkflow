@@ -3,11 +3,11 @@
    <description></description>
    <name>label_ProductOffering</name>
    <tag></tag>
-   <elementGuidId>1a21e62f-ba95-4def-824f-b201b81f9a7d</elementGuidId>
+   <elementGuidId>77d0d87a-273f-446a-9aef-e70beddf8a21</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;NewApplication&quot;]/div/div[5]/span/div/div[2]/label/a</value>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[6]/span/div/div[2]/label/a</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;NewApplication&quot;]/div/div[5]/span/div/div[2]/label/a</value>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[6]/span/div/div[2]/label/a</value>
    </webElementProperties>
 </WebElementEntity>

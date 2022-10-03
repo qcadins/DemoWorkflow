@@ -3,7 +3,7 @@
    <description></description>
    <name>select_ApplicationSource</name>
    <tag></tag>
-   <elementGuidId>81adf9e3-4b94-4fc8-b988-6fc89aef12b6</elementGuidId>
+   <elementGuidId>a69a75ce-4d39-420a-8421-0501713ae010</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

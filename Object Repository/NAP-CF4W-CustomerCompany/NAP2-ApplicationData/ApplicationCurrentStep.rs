@@ -3,11 +3,11 @@
    <description></description>
    <name>ApplicationCurrentStep</name>
    <tag></tag>
-   <elementGuidId>8ef6ddf6-a015-4d41-a88f-170861928309</elementGuidId>
+   <elementGuidId>c8bbee00-35ac-49e1-ad88-55f2445073d5</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[12]/span/div/div[2]/span/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;NewApplication&quot;]/div/div[11]/span/div/div[2]/span/label</value>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[12]/span/div/div[2]/span/label</value>
    </webElementProperties>
 </WebElementEntity>

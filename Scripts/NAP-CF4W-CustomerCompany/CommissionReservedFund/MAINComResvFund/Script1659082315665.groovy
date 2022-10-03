@@ -58,15 +58,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             )
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
-        'Assign directori file excel ke global variabel'
-        String userDir = System.getProperty('user.dir')
-
-        'Assign directori file excel ke global variabel'
-        String filePath = userDir + GlobalVariable.PathCompany
-
-        'Assign directori file excel ke global variabel'
-        GlobalVariable.DataFilePath = filePath
-
+        
         if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
             FailureHandling.OPTIONAL)) {
             'click menu Consumer finance 4w'
@@ -131,14 +123,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     } //dijalankan dengan copy
     else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
-        'Assign directori file excel ke global variabel'
-        String userDir = System.getProperty('user.dir')
-
-        'Assign directori file excel ke global variabel'
-        String filePath = userDir + GlobalVariable.PathCompany
-
-        'Assign directori file excel ke global variabel'
-        GlobalVariable.DataFilePath = filePath
 
         'Klik Button Calculate'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))
@@ -180,14 +164,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
-        'Assign directori file excel ke global variabel'
-        String userDir = System.getProperty('user.dir')
-
-        'Assign directori file excel ke global variabel'
-        String filePath = userDir + GlobalVariable.PathCompany
-
-        'Assign directori file excel ke global variabel'
-        GlobalVariable.DataFilePath = filePath
 
         if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
             FailureHandling.OPTIONAL)) {
@@ -252,14 +228,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
-        'Assign directori file excel ke global variabel'
-        String userDir = System.getProperty('user.dir')
-
-        'Assign directori file excel ke global variabel'
-        String filePath = userDir + GlobalVariable.PathCompany
-
-        'Assign directori file excel ke global variabel'
-        GlobalVariable.DataFilePath = filePath
 
         'Klik Button Calculate'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))

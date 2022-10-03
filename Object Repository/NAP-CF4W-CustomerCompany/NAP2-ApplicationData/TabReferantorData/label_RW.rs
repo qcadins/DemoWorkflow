@@ -3,7 +3,7 @@
    <description></description>
    <name>label_RW</name>
    <tag></tag>
-   <elementGuidId>d0170eaa-5d20-4068-bee8-22691fa68096</elementGuidId>
+   <elementGuidId>13b17a4c-1d6c-47ac-996c-70f358e719de</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

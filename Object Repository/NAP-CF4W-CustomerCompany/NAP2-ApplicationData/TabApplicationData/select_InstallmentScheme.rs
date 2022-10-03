@@ -3,7 +3,7 @@
    <description></description>
    <name>select_InstallmentScheme</name>
    <tag></tag>
-   <elementGuidId>86c4f48b-6033-41cf-9fd6-e12bb1a3fce4</elementGuidId>
+   <elementGuidId>120783ed-e23a-4154-b670-31bda899ccf8</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

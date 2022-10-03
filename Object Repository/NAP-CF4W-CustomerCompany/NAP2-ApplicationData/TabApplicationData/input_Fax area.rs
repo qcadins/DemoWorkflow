@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Fax area</name>
    <tag></tag>
-   <elementGuidId>c06bdf89-b5f7-4d01-b58c-7c0f15d9bb99</elementGuidId>
+   <elementGuidId>21c460c4-4df5-49e7-8b90-b479a3cde74b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

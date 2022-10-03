@@ -3,7 +3,7 @@
    <description></description>
    <name>select_FloatingPeriod</name>
    <tag></tag>
-   <elementGuidId>b88ee9d0-0edc-45fc-b836-96a86af1e001</elementGuidId>
+   <elementGuidId>0aaf923d-24ce-461d-afee-e78e1ae1a7ea</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

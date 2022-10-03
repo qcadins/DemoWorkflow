@@ -3,7 +3,7 @@
    <description></description>
    <name>select_LifeInscoBranchName</name>
    <tag></tag>
-   <elementGuidId>a31d728c-0443-4191-8c45-77d259a6d312</elementGuidId>
+   <elementGuidId>c94e1de8-00b0-4f3d-aa6f-34e6fdc753c3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

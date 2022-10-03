@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[2]/mat-radio-group/mat-radio-button[1]/label/span[2]</value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[2]/mat-radio-group/mat-radio-button[1]/label/span[2]</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[1]/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
