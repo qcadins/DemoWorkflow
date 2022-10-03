@@ -95,11 +95,11 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-if (GlobalVariable.Role == 'Testing') {
-	'call test case verify store to db'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+//if (GlobalVariable.Role == 'Testing') {
+//	'call test case verify store to db'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
+//		[:], FailureHandling.CONTINUE_ON_FAILURE)
+//}
 
 'Verify input data'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 

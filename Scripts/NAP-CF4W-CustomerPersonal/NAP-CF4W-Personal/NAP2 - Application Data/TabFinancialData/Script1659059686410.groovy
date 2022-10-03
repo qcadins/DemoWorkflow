@@ -828,17 +828,17 @@ if (flagFailed == 0) {
     }
 }
 
-if (GlobalVariable.Role == 'Testing') {
-    'call test case subsidy store db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabSubsidyStoreDBVerif'), 
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-    
-
-    'call test case financial datastore db verif'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'), 
-    		[:], FailureHandling.CONTINUE_ON_FAILURE)
-    
-}
+//if (GlobalVariable.Role == 'Testing') {
+//    'call test case subsidy store db verif'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabSubsidyStoreDBVerif'), 
+//			[:], FailureHandling.CONTINUE_ON_FAILURE)
+//    
+//
+//    'call test case financial datastore db verif'
+//    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'), 
+//    		[:], FailureHandling.CONTINUE_ON_FAILURE)
+//    
+//}
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {

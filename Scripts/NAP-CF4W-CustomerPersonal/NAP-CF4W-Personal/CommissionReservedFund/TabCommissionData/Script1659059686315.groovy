@@ -904,12 +904,12 @@ if(flagFailed==0){
 	}
 }
 
-if (GlobalVariable.Role == 'Testing') {
-	'call test case commission datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-	
-}
+//if (GlobalVariable.Role == 'Testing') {
+//	'call test case commission datastore db verif'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
+//			[:], FailureHandling.CONTINUE_ON_FAILURE)
+//	
+//}
 
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 

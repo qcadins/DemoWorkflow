@@ -41,6 +41,8 @@ String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseNa
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
+String POStat
+
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -68,6 +70,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
+			POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                    GlobalVariable.NumofColm, 9))
+			
             'verify input error'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/a_Select'), 
                 10, FailureHandling.OPTIONAL)) {
@@ -98,6 +103,10 @@ if (GlobalVariable.Role == 'Data Entry') {
                     WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
                 }
             }
+			if(POStat=="DEACT"||POStat=="EXP"){
+				WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'),2,FailureHandling.OPTIONAL)
+			}
+			
         } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
             'click button lookup product offering'
@@ -183,6 +192,9 @@ if (GlobalVariable.Role == 'Data Entry') {
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
+		POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 9))
+		
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/a_Select'), 
             10, FailureHandling.OPTIONAL)) {
@@ -212,6 +224,10 @@ if (GlobalVariable.Role == 'Data Entry') {
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
         }
+		
+		if(POStat=="DEACT"||POStat=="EXP"){
+			WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'),2,FailureHandling.OPTIONAL)
+		}
         
         'click button next'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Next'))

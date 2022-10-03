@@ -293,11 +293,11 @@ if(flagFailed==0){
 	}
 }
 
-if(GlobalVariable.Role=="Testing"){
-	'call test case reserved fund datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+//if(GlobalVariable.Role=="Testing"){
+//	'call test case reserved fund datastore db verif'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
+//			[:], FailureHandling.CONTINUE_ON_FAILURE)
+//}
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
