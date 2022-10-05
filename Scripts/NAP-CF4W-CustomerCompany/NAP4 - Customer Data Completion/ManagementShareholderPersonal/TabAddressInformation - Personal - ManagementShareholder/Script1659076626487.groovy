@@ -16,6 +16,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
@@ -80,6 +81,50 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button edit'
                             WebUI.click(modifyNewbuttonedit)
 
+                            if (GlobalVariable.RoleCompany == 'Testing') {
+                                'Koneksi database'
+                                String servername = findTestData('Login/Login').getValue(1, 7)
+
+                                String instancename = findTestData('Login/Login').getValue(2, 7)
+
+                                String username = findTestData('Login/Login').getValue(3, 7)
+
+                                String password = findTestData('Login/Login').getValue(4, 7)
+
+                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
+
+                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
+                                databaseFOU
+
+                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
+                                    password, driverclassname)
+
+                                ArrayList<WebElement> AddressType
+
+                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
+                                    sqlConnectionFOU)
+
+                                def spliexaddresstype = excludeaddresstype.split(';')
+
+                                String joinexaddresstype = spliexaddresstype.join('\',\'')
+
+                                'get data array dari db'
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
+                                    joinexaddresstype)
+
+                                'verify array dari db == option list confins'
+                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType)
+
+                                'get total label from ddl'
+                                int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
+
+                                'verify total ddl confins = total ddl db'
+                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                            }
+                            
                             'pilih address type'
                             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                                 findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
@@ -287,6 +332,50 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button add'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'))
 
+                            if (GlobalVariable.RoleCompany == 'Testing') {
+                                'Koneksi database'
+                                String servername = findTestData('Login/Login').getValue(1, 7)
+
+                                String instancename = findTestData('Login/Login').getValue(2, 7)
+
+                                String username = findTestData('Login/Login').getValue(3, 7)
+
+                                String password = findTestData('Login/Login').getValue(4, 7)
+
+                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
+
+                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
+                                databaseFOU
+
+                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
+                                    password, driverclassname)
+
+                                ArrayList<WebElement> AddressType
+
+                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
+                                    sqlConnectionFOU)
+
+                                def spliexaddresstype = excludeaddresstype.split(';')
+
+                                String joinexaddresstype = spliexaddresstype.join('\',\'')
+
+                                'get data array dari db'
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
+                                    joinexaddresstype)
+
+                                'verify array dari db == option list confins'
+                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType)
+
+                                'get total label from ddl'
+                                int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
+
+                                'verify total ddl confins = total ddl db'
+                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                            }
+                            
                             'pilih address type'
                             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                                 findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
@@ -484,6 +573,46 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'))
 
+                if (GlobalVariable.RoleCompany == 'Testing') {
+                    'Koneksi database'
+                    String servername = findTestData('Login/Login').getValue(1, 7)
+
+                    String instancename = findTestData('Login/Login').getValue(2, 7)
+
+                    String username = findTestData('Login/Login').getValue(3, 7)
+
+                    String password = findTestData('Login/Login').getValue(4, 7)
+
+                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
+
+                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+
+                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+
+                    ArrayList<WebElement> AddressType
+
+                    String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(sqlConnectionFOU)
+
+                    def spliexaddresstype = excludeaddresstype.split(';')
+
+                    String joinexaddresstype = spliexaddresstype.join('\',\'')
+
+                    'get data array dari db'
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, joinexaddresstype)
+
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                        AddressType)
+
+                    'get total label from ddl'
+                    int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
+
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                }
+                
                 'pilih address type'
                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
