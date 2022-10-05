@@ -30,6 +30,9 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+'declare datafile referantor'
+datafilereferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
+
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
@@ -59,7 +62,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 //Jika copy app edit
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+if(datafilereferantor.getValue(
 	GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("Edit")){
 	
 	//pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
@@ -127,21 +130,21 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 			  'Looping excel referantor'
 			  for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
 				  2); (GlobalVariable.NumofReferantor)++) {
-				  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				  if (datafilereferantor.getValue(
 					  GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					  GlobalVariable.NumofColm, 13)) {
 				  	  
 				  	  'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
-					  if (textRefCategory.equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-						  GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+					  if (textRefCategory.equalsIgnoreCase(datafilereferantor.getValue(
+						  GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(datafilereferantor.getValue(
 						  GlobalVariable.NumofReferantor, 14))) {
 							  
 					  	  'select bank account'
-						  WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						  WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 						  GlobalVariable.NumofReferantor, 16),FailureHandling.OPTIONAL)
 						  
 						  'select tax calculation'
-						  WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						  WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 						  GlobalVariable.NumofReferantor, 17),false,FailureHandling.OPTIONAL)
 					  
 						  'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -162,6 +165,16 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						  }
 						  break
 					  }
+						  
+						  Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ modifyObjectIndex +']/td[5]/select')))
+						   if(GlobalVariable.BankAccount == ''){
+							
+							   GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+							   
+						   }else{
+						   
+							   GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+						   }
 				  }
 				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
 				  else{
@@ -181,6 +194,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						  }
 				  }
 			  }
+				  
+				  
+				  
 		}
 	}
 	
@@ -194,7 +210,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 	for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
 		2); (GlobalVariable.NumofReferantor)++) {
 			
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+			if (datafilereferantor.getValue(
 				GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13)) {
 				
@@ -245,7 +261,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){   
 						   if(add==1){
 							   'select referantor category'
-							   WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+							   WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(
 									   GlobalVariable.NumofReferantor, 13), false, FailureHandling.OPTIONAL)
 							   
 							   'Ambil dan simpan nilai referantor category dari confins'
@@ -276,7 +292,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   
 							   'input referantor name'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'),
-								   findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+								   datafilereferantor.getValue(
 									   GlobalVariable.NumofReferantor, 14))
 				   
 							   'click button search'
@@ -336,11 +352,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   }
 							   
 							   'select bank account'
-							   WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+							   WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 									   GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-				   
+							  
 							   'select tax calculation method'
-							   WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+							   WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 									   GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 				   
 							   'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -369,8 +385,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						   'Ambil referantor category yang dipilih pada confins'
 						   String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 						   
-						   if(!findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-							   GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory) || !findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						   if(!datafilereferantor.getValue(
+							   GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory) || !datafilereferantor.getValue(
 							   GlobalVariable.NumofReferantor, 14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectReferantorName,'value')) ){
 							   if(countData==j){
 								   'click button add'
@@ -393,7 +409,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Add'))
 						
 						'select referantor category'
-						WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 13), false, FailureHandling.OPTIONAL)
 						
 						'Ambil dan simpan nilai referantor category dari confins'
@@ -424,7 +440,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						
 						'input referantor name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+							datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 14))
 			
 						'click button search'
@@ -484,11 +500,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						}
 						
 						'select bank account'
-						WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-			
+						
 						'select tax calculation method'
-						WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+						WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 			
 						'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -512,7 +528,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						}
 						  
 					}
-					Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 4))
+					Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 4))
 							
 					if(iscompleteMandatory==0){
 							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -525,12 +541,22 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 							  
 				}	
-			}		
+					
+					Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ modifyObjectIndex +']/td[5]/select')))
+					if(GlobalVariable.BankAccount == ''){
+				  
+					 GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+					 
+					}else{
+				 
+					 GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+					}
+				}		
 	}
 }
 	
 //Jika copy app no
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+if(datafilereferantor.getValue(
 		GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
 	
 	if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
@@ -547,7 +573,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
 		1); (GlobalVariable.NumofReferantor)++) {
 			
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+			if (datafilereferantor.getValue(
 				GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13)) {
 				'click button add'
@@ -587,7 +613,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					'xpath', 'equals', newButtonDelete, true)
 	
 				'select referantor category'
-				WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(
 						GlobalVariable.NumofReferantor, 13), false, FailureHandling.OPTIONAL)
 				
 				'Ambil dan simpan nilai referantor category dari confins'
@@ -618,7 +644,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 				'input referantor name'
 				WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'),
-					findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+					datafilereferantor.getValue(
 						GlobalVariable.NumofReferantor, 14))
 	
 				'click button search'
@@ -680,11 +706,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 				
 				'select bank account'
-				WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 						GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-	
+				
 				'select tax calculation method'
-				WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+				WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 						GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 	
 				'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -706,7 +732,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 	
 					continue
 				}
-				
+					
 				//Testing
 				if(GlobalVariable.Role=="Testing"){
 					String newButtonViewDetail = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[8]/a/i'
@@ -946,7 +972,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 				}
 				
-				Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 4))
+				Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 4))
 				
 				if(iscompleteMandatory==0){
 					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -958,6 +984,18 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 	
+				
+				Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ modifyObjectIndex +']/td[5]/select')))
+				if(GlobalVariable.BankAccount == ''){
+				 
+					GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+					
+				}else{
+				
+					GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+				}
+				
+				
 				modifyObjectIndex++
 			}
 		}
@@ -970,6 +1008,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
+
+WebUI.delay(3)
 
 if(GlobalVariable.Role == 'Testing'){
 	'call test case store db referantor data'

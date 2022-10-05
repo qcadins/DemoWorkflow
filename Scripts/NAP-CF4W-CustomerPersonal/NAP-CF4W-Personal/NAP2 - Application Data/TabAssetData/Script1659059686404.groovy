@@ -813,15 +813,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
 WebUI.delay(2)
 
-//if(GlobalVariable.Role == 'Testing'){
-//	'call test case store db accessories data'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'),
-//			[:], FailureHandling.CONTINUE_ON_FAILURE)
-//	
-//	'call test case store db asset data'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetDataStoreDBVerif'),
-//			[:], FailureHandling.CONTINUE_ON_FAILURE)
-//}
+if(GlobalVariable.Role == 'Testing'){
+	'call test case store db accessories data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	'call test case store db asset data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAssetDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 4))
 

@@ -30,7 +30,8 @@ datafileguarantorpersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cus
 
 datafileguarantorcompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
-copyapp = datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 10)
+copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        GlobalVariable.NumofColm, 10)
 
 ArrayList<WebElement> variableData
 
@@ -41,7 +42,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'Loop Multiple Guarantor Data'
-for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
+for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     int flagFailed = 0
 
@@ -517,7 +518,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 }
 
 //GuarantorCompany
-for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
+for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
     int flagFailed = 0
 

@@ -109,25 +109,25 @@ WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Compa
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantor, 31).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-'verify department aml value'
-if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
-    GlobalVariable.NumofGuarantor, 33) == '#N/A') {
-    'set department aml value menjadi string kosong'
-    DepartmentAML = ''
-}
-
-'verify department aml'
-WebUI.verifyMatch(DepartmentAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-
-'verify authority aml value'
-if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
-    GlobalVariable.NumofGuarantor, 35) == '#N/A') {
-    'set authority aml value menjadi kosong'
-    AuthorityAML = ''
-}
-
-'verify authority aml'
-WebUI.verifyMatch(AuthorityAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//'verify department aml value'
+//if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+//    GlobalVariable.NumofGuarantor, 33) == '#N/A') {
+//    'set department aml value menjadi string kosong'
+//    DepartmentAML = ''
+//}
+//
+//'verify department aml'
+//WebUI.verifyMatch(DepartmentAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//
+//'verify authority aml value'
+//if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+//    GlobalVariable.NumofGuarantor, 35) == '#N/A') {
+//    'set authority aml value menjadi kosong'
+//    AuthorityAML = ''
+//}
+//
+//'verify authority aml'
+//WebUI.verifyMatch(AuthorityAML.toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify copy address atau tidak'
 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(

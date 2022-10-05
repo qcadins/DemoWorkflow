@@ -69,7 +69,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 						WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofFamily, 52)) ||
 						WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofFamily, 62))) {
                         break
-                    }
+					}
                 }
             }
             

@@ -479,4 +479,9 @@
       <initValue>'\\Rule\\SubsidyRule.xls'</initValue>
       <name>SubsidyRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>BankAccount</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
