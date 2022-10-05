@@ -33,6 +33,42 @@ public class checkNAP4db {
 	}
 
 	@Keyword
+	public checkAddressTypePersonal(Sql instance, String exclude){
+		ArrayList<String> AddressType = new ArrayList<String>()
+		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('personal', 'all') and IS_ACTIVE = 1 AND MASTER_CODE NOT IN ('"+ exclude +"')"), { def row ->
+			AddressType.add(row[0].toUpperCase())
+		})
+		return AddressType
+	}
+	
+	@Keyword
+	public checkAddressTypeCompany(Sql instance, String exclude){
+		ArrayList<String> AddressType = new ArrayList<String>()
+		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('company', 'all') and IS_ACTIVE = 1 AND MASTER_CODE NOT IN ('"+ exclude +"') AND DESCR NOT IN('Company')"), { def row ->
+			AddressType.add(row[0].toUpperCase())
+		})
+		return AddressType
+	}
+	
+	@Keyword
+	public excludeAddressType(Sql instance){
+		String EXAddressType
+		instance.eachRow(("select gs_value from GENERAL_SETTING where gs_code = 'FILTER_ADDR'"), { def row ->
+			EXAddressType = (row[0].toUpperCase())
+		})
+		return EXAddressType
+	}
+
+	@Keyword
+	public checkOwnership(Sql instance, String exclude){
+		ArrayList<String> Ownership = new ArrayList<String>()
+		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND IS_ACTIVE = 1"), { def row ->
+			Ownership.add(row[0].toUpperCase())
+		})
+		return Ownership
+	}
+
+	@Keyword
 	public countDebtorGroup(Sql instance){
 		Integer countData
 		instance.eachRow(("select count(*) from LBPPMS_DEBT_GRP"), { def row ->
