@@ -45,7 +45,7 @@ public class verifInsuranceFee {
 			appId = row[0]
 		})
 
-		instanceLOS.eachRow(("select full_asset_code, asset_price_amt, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
+		instanceLOS.eachRow(("select full_asset_code, asset_price_amt+TOTAL_ACCESSORY_PRICE_AMT, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
 			assetCode = row[0]
 
 			assetPrice = row[1]

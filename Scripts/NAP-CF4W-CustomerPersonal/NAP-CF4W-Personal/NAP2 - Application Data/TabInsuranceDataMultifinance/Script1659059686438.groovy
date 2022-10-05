@@ -443,7 +443,9 @@ if(capinssetting=="YEARLY"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 			
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/h4_TotalPremium'))
+			modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
+			
+			WebUI.click(modifyRandomObject)
 			
 			'Ambil nilai main premi rate dari confins'
 			mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
