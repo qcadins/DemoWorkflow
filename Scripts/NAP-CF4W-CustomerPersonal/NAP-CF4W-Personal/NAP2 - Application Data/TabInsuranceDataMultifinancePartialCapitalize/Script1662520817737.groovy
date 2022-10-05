@@ -100,6 +100,7 @@ int countAddCov = variableAddCovAll.size()
 String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value')
 String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
+String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {
@@ -213,7 +214,7 @@ for (int i = 1; i <= count; i++) {
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 		
-		WebUI.click(mainPremiRateObject)
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/h4_TotalPremium'))
 		
 		'Ambil nilai main premi rate dari confins'
 		String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
@@ -235,26 +236,34 @@ for (int i = 1; i <= count; i++) {
 		}
 	}
 	
-	'Pengecekan jika rate dapat terisi atau tidak'
-	if(WebUI.verifyElementNotHasAttribute(mainPremiRateObject,"disabled",2,FailureHandling.OPTIONAL)){
+	//Pengecekan road worthiness doc bernilai off the road
+	if(rwd=="OFF_THE_ROAD"){
 		'Ambil nilai main premi rate dari excel'
 		mainPremiRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-		GlobalVariable.NumofColm, Rate)
-		
+						GlobalVariable.NumofColm, Rate)
+						
 		mainPremiRateValueArray = mainPremiRateValue.split(';',-1)
-		
+					
+		if(GlobalVariable.Role=="Testing"){
+			'Verif rate tidak terlock'
+			WebUI.verifyElementNotHasAttribute(mainPremiRateObject, "disabled",1)
+		}
 		'Pengecekan field main premi rate di excel terisi'
 		if (mainPremiRateValue.length() > 0) {
 			'Pengecekan array pada field main premi rate tidak kosong'
 			if ((mainPremiRateValueArray[(i - 1)]) != '') {
-				
-				WebUI.click(mainPremiRateObject)
-				
-				'Input main premi rate tahun ke i-1'
-				WebUI.setText(mainPremiRateObject, mainPremiRateValueArray[(i-1)])
-				
+					WebUI.click(mainPremiRateObject)
+					'Input main premi rate tahun ke i-1'
+					WebUI.setText(mainPremiRateObject, mainPremiRateValueArray[(i-1)])
 			}
 		}
+	}
+	//Road worthiness doc bernilai on the road atau tidak ada attribute road wortiness document pada asset attribute
+	else if(rwd=="ON_THE_ROAD"||rwd==null){
+		if(GlobalVariable.Role=="Testing"){
+				'Verif rate terlock'
+				WebUI.verifyElementHasAttribute(mainPremiRateObject, "disabled",1)
+		}			
 	}
 	
 	int flagLoading = 0, flagLoad=0
@@ -394,22 +403,36 @@ for (int i = 1; i <= count; i++) {
 			}
 		}
 		
-		if(WebUI.verifyElementNotHasAttribute(modifyAddtRateObject,"disabled",2, FailureHandling.OPTIONAL)){
+		'Pengecekan road worthiness document bernilai off the road'
+		if(rwd=="OFF_THE_ROAD"){
+							
 			'Ambil nilai additional premi rate dari excel'
 			AddtRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-				GlobalVariable.NumofColm, AddRate + j)
-
+								GlobalVariable.NumofColm, AddRate + j)
+				
 			AddtRateValueArray = AddtRateValue.split(';', -1)
-			
+							
+			if(GlobalVariable.Role=="Testing"){
+				'Verif rate tidak terlock'
+				WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+			}
+							
 			'Pengecekan additional premi rate pada excel kosong atau tidak'
 			if(AddtRateValue.length()>0){
 				'Pengecekan additional premi rate array tidak kosong'
 				if(AddtRateValueArray[i-1]!=""){
 					WebUI.click(modifyAddtRateObject)
-					
+									
 					'Input Rate Additional Premi'
 					WebUI.setText(modifyAddtRateObject, AddtRateValueArray[((i - 1))])
 				}
+			}
+		}
+		//road worthiness document bernilai on the road atau tidak ada attribute road worthiness document pada asset attribute
+		else if(rwd=="ON_THE_ROAD"||rwd==null){
+			if(GlobalVariable.Role=="Testing"){
+				'verif rate terlock'
+				WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
 			}
 		}
 	}
