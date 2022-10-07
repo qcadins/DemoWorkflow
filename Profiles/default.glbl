@@ -484,4 +484,9 @@
       <initValue>''</initValue>
       <name>BankAccount</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\FinancialFeeRule.xlsx'</initValue>
+      <name>FinancialFeeRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
