@@ -486,6 +486,16 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>''</initValue>
+      <name>findDataFile</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>NumofVerifStore</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Rule\\FinancialFeeRule.xlsx'</initValue>
       <name>FinancialFeeRulePath</name>
    </GlobalVariableEntity>
