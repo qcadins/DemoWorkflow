@@ -16,6 +16,9 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed=0
+
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/JobData - Personal - Guarantor')
+
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/GuarantorPersonal/TabJobDataEmployeeGuarantor'), 
@@ -50,4 +53,13 @@ if(GlobalVariable.FlagFailed==0){
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofGuarantor, '3.JobData')
 	}
 	
+}
+
+
+if(GlobalVariable.Role == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+	
+	'call test case store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabJobDataVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }

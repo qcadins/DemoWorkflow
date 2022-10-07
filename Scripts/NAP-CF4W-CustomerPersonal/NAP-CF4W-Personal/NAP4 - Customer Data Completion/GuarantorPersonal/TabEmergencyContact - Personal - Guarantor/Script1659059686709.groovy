@@ -22,6 +22,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonal
 int flagFailed=0
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor')
+
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor').getValue(
     GlobalVariable.NumofGuarantor, 12).equalsIgnoreCase('Input Data')) {
     'input contact person name'
@@ -272,3 +274,10 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
+	if(GlobalVariable.Role == 'Testing'){
+		GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+		
+		'call test case verif store data emergency contact'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}

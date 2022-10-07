@@ -40,7 +40,7 @@ public class checkNAP4db {
 		})
 		return AddressType
 	}
-	
+
 	@Keyword
 	public checkAddressTypeCompany(Sql instance, String exclude){
 		ArrayList<String> AddressType = new ArrayList<String>()
@@ -49,7 +49,7 @@ public class checkNAP4db {
 		})
 		return AddressType
 	}
-	
+
 	@Keyword
 	public excludeAddressType(Sql instance){
 		String EXAddressType
@@ -60,7 +60,7 @@ public class checkNAP4db {
 	}
 
 	@Keyword
-	public checkOwnership(Sql instance, String exclude){
+	public checkOwnership(Sql instance){
 		ArrayList<String> Ownership = new ArrayList<String>()
 		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND IS_ACTIVE = 1"), { def row ->
 			Ownership.add(row[0].toUpperCase())

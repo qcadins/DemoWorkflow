@@ -106,7 +106,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.1 CustomerDataCompletion-Personal - Customer.xlsx'</initValue>
+      <initValue>'\\Excel\\2.1.1 CustomerDataCompletion-Personal - Customer.xlsm'</initValue>
       <name>DataFileCustomerPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -483,5 +483,15 @@
       <description></description>
       <initValue>''</initValue>
       <name>BankAccount</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>findDataFile</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>NumofVerifStore</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
