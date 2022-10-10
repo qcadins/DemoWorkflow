@@ -556,7 +556,7 @@ public class CustomerDataVerif {
 		})
 		return listfinancialdata
 	}
-	
+
 	@Keyword
 	public NAP4FinancialAttr (Sql instance, String appno, String name){
 		String financialattr
@@ -568,7 +568,7 @@ public class CustomerDataVerif {
 		})
 		return listfinancialattr
 	}
-	
+
 	@Keyword
 	public NAP4FinDataBankAcc (Sql instance, String appno, String name){
 		String bankacc
