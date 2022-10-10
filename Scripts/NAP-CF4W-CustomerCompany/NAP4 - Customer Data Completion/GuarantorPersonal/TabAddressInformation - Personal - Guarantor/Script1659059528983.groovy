@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal')
+
 int copyAppColm = 0
 
 'get count colm'
@@ -511,5 +513,13 @@ def inputaddress() {
         'Click button cancel'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'))
     }
+		
+	if(GlobalVariable.RoleCompany == 'Testing'){
+		GlobalVariable.NumofVerifStore = Address
+		
+		'call test case verify address store data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreData'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 

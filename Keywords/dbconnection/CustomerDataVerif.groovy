@@ -449,7 +449,7 @@ public class CustomerDataVerif {
 
 
 	@Keyword
-	public NAP4CustomerDetailPersonal (Sql instance, String appno, String name){
+	public NAP4CustomerDetailPersonalStoreData (Sql instance, String appno, String name){
 		String customerdetail
 		instance.eachRow(("SELECT [Custprefix] as HEADER, [no_of_dependent] as HEADER, [no_of_residence] as HEADER, [family_card_no] as HEADER, [IS_RIP] as HEADER, [IS_VIP] as HEADER, [IS_AFF_MF] as HEADER, [SALUTATION] AS HEADER, [NICKNAME] AS HEADER, [Custsuffix] AS HEADER, [NATIONALITY] AS HEADER, [Countryname] AS HEADER, [EDUCATION] AS HEADER, [RELIGION] AS HEADER, [VIPNOTES] AS HEADER FROM (SELECT [Custprefix],  [no_of_dependent], [no_of_residence], [family_card_no], [IS_RIP], [IS_VIP], [IS_AFF_MF], [NICKNAME], [Custsuffix], [Countryname], [VIPNOTES], mastername.Code, REF_MASTER_NAME FROM (select [Custprefix], [no_of_dependent], [no_of_residence], [family_card_no], [IS_RIP], [IS_VIP], [IS_AFF_MF], [NICKNAME], [Custsuffix], [Countryname], [VIPNOTES], [Code], value FROM (SELECT MR_EDUCATION_CODE AS 'EDUCATION', MR_NATIONALITY_CODE as 'NATIONALITY', MR_RELIGION_CODE as 'RELIGION', MR_SALUTATION_CODE as 'SALUTATION', acp.CUST_PREFIX_NAME as [Custprefix], acp.NO_OF_DEPENDENTS as [no_of_dependent] , acp.NO_OF_RESIDENCE as [no_of_residence], acp.FAMILY_CARD_NO as [family_card_no], acp.IS_REST_IN_PEACE as [IS_RIP], ac.IS_VIP as [IS_VIP], ac.IS_AFFILIATE_WITH_MF as [IS_AFF_MF], acp.NICK_NAME as [NICKNAME], acp.CUST_SUFFIX_NAME as [Custsuffix], rc.COUNTRY_NAME as [Countryname], ac.VIP_NOTES as [VIPNOTES] FROM APP_CUST_PERSONAL acp join app_cust ac on ac.app_cust_id = acp.APP_CUST_ID JOIN APP app ON ac.APP_ID = app.APP_ID JOIN APP_CUST_GRP acg ON acg.APP_CUST_ID = ac.APP_CUST_ID JOIN V_REF_COUNTRY rc ON rc.COUNTRY_CODE = acp.NATIONALITY_COUNTRY_CODE WHERE ac.cust_name='"+ name +"' and app_no ='"+ appno +"') as Orig unpivot (value for [Code] in ([EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION])) as piv"), {  row ->
 
@@ -460,7 +460,7 @@ public class CustomerDataVerif {
 
 
 	@Keyword
-	public NAP4AddressPersonal (Sql instance, String appno, String name, String addresstype){
+	public NAP4AddressStoreData (Sql instance, String appno, String name, String addresstype){
 		String address
 		instance.eachRow(("SELECT [CUST_ADDR_TYPE] AS HEADER, [ADDR] AS HEADER, [RT] AS HEADER, [RW] AS HEADER, [ZIPCODE] AS HEADER, [KECAMATAN] AS HEADER, [KELURAHAN] AS HEADER, [KOTA] AS HEADER, [PHN1AREA] AS HEADER, [PHN1] AS HEADER, [PHN1EXT] AS HEADER, [PHN2AREA] AS HEADER, [PHN2] AS HEADER, [PHN2EXT] AS HEADER, [PHN3AREA] AS HEADER, [PHN3] AS HEADER, [PHN3EXT] AS HEADER, [FAXAREA] AS HEADER, [FAX] AS HEADER, [BUILDING_OWNERSHIP] AS HEADER FROM (SELECT [ADDR], [RT], [RW], [ZIPCODE], [KECAMATAN], [KELURAHAN], [KOTA], [PHN1AREA], [PHN1], [PHN1EXT], [PHN2AREA], [PHN2], [PHN2EXT], [PHN3AREA], [PHN3], [PHN3EXT], [FAXAREA], [FAX], mastername.Code, REF_MASTER_NAME FROM (select [ADDR], [RT], [RW], [ZIPCODE], [KECAMATAN], [KELURAHAN], [KOTA], [PHN1AREA], [PHN1], [PHN1EXT], [PHN2AREA], [PHN2], [PHN2EXT], [PHN3AREA], [PHN3], [PHN3EXT], [FAXAREA], [FAX], [Code], value FROM (SELECT MR_CUST_ADDR_TYPE_CODE AS 'CUST_ADDR_TYPE', aca.ADDR AS [ADDR], aca.AREA_CODE_4 AS [RT], aca.AREA_CODE_3 AS [RW], aca.ZIPCODE AS [ZIPCODE], aca.AREA_CODE_1 AS [KECAMATAN], aca.AREA_CODE_2 AS [KELURAHAN], aca.CITY AS [KOTA], aca.PHN_AREA_1 AS [PHN1AREA], aca.PHN_1 AS [PHN1], aca.PHN_EXT_1 AS [PHN1EXT], aca.PHN_AREA_2 AS [PHN2AREA], aca.PHN_2 AS [PHN2], aca.PHN_EXT_2 AS [PHN2EXT], aca.PHN_AREA_3 AS [PHN3AREA], aca.PHN_3 AS [PHN3], aca.PHN_EXT_3 AS [PHN3EXT], aca.FAX_AREA AS [FAXAREA], aca.FAX AS [FAX], MR_HOUSE_OWNERSHIP_CODE AS 'BUILDING_OWNERSHIP' FROM APP_CUST_ADDR aca WITH(NOLOCK) JOIN APP_CUST ac ON aca.APP_CUST_ID = ac.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml ON rml.REF_MASTER_CODE = aca.MR_CUST_ADDR_TYPE_CODE WHERE app.APP_NO = '"+ appno +"'  AND ac.CUST_NAME = '"+ name +"' AND rml.REF_MASTER_NAME = '"+ addresstype +"') as orig unpivot (value for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP])) as piv"), {  row ->
 
@@ -470,7 +470,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4JobdataEmployeePersonal (Sql instance, String appno, String name){
+	public NAP4JobdataEmployeePersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
 		instance.eachRow(("SELECT [PROFCODE] AS HEADER, [JOB_POSITION] AS HEADER, [JOB_STAT] AS HEADER, [ISMFEMP] AS HEADER, [ISWELLKNOWNCOY] AS HEADER, [COYNAME] AS HEADER, [INDUSTRYTYPE] AS HEADER, [COY_SCALE] AS HEADER, [ESTABLISHMENTDATE] AS HEADER, [JOBTITLE] AS HEADER, [NUMOFEMP] AS HEADER FROM (SELECT [PROFCODE], [ISMFEMP], [ISWELLKNOWNCOY], [COYNAME], [INDUSTRYTYPE], [ESTABLISHMENTDATE], [JOBTITLE], [NUMOFEMP], mastername.Code, REF_MASTER_NAME FROM (select [PROFCODE], [ISMFEMP], [ISWELLKNOWNCOY], [COYNAME], [INDUSTRYTYPE], [ESTABLISHMENTDATE], [JOBTITLE], [NUMOFEMP], [Code], value FROM (SELECT MR_PROFESSION_CODE AS [PROFCODE], MR_JOB_POSITION_CODE AS 'JOB_POSITION', MR_JOB_STAT_CODE AS  'JOB_STAT', custjob.IS_MF_EMP [ISMFEMP], custjob.IS_WELLKNOWN_COY AS [ISWELLKNOWNCOY], custjob.COY_NAME AS [COYNAME], INDUSTRY_TYPE_CODE AS [INDUSTRYTYPE], MR_COY_SCALE_CODE AS 'COY_SCALE', FORMAT(custjob.EMPLOYMENT_ESTABLISHMENT_DT, 'MM/dd/yyyy') AS [ESTABLISHMENTDATE], JOB_TITLE_NAME AS [JOBTITLE], NUM_OF_EMPLOYEE AS [NUMOFEMP] FROM APP_CUST_PERSONAL_JOB_DATA custjob  JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' ) as orig unpivot(value for [Code] in ([JOB_STAT],[COY_SCALE],[JOB_POSITION]))as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([JOB_STAT],[COY_SCALE], [JOB_POSITION])) as piv"), {  row ->
 
@@ -480,7 +480,17 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4JobdataNonProfPersonal (Sql instance, String appno, String name){
+	public NAP4JobdataProfPersonalStoreData (Sql instance, String appno, String name){
+		String Jobdata
+		instance.eachRow(("SELECT MR_PROFESSION_CODE AS HEADER, MR_JOB_POSITION_CODE AS HEADER, custjob.IS_WELLKNOWN_COY AS HEADER, custjob.COY_NAME AS HEADER, INDUSTRY_TYPE_CODE AS HEADER, MR_COY_SCALE_CODE, FORMAT(custjob.EMPLOYMENT_ESTABLISHMENT_DT, 'MM/dd/yyyy') AS HEADER, JOB_TITLE_NAME AS HEADER, NUM_OF_EMPLOYEE AS HEADER, MR_INVESTMENT_TYPE_CODE FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			Jobdata = (row)
+		})
+		return Jobdata
+	}
+
+	@Keyword
+	public NAP4JobdataNonProfPersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
 		instance.eachRow(("SELECT custjob.MR_PROFESSION_CODE AS HEADER, custjob.JOB_TITLE_NAME AS HEADER FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
 
@@ -490,7 +500,17 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4JobdataAddress (Sql instance, String appno, String name){
+	public NAP4JobdataSMEPersonalStoreData (Sql instance, String appno, String name){
+		String Jobdata
+		instance.eachRow(("SELECT [PROFCODE] AS HEADER, [JOB_POSITION] AS HEADER, [ISWELLKNOWNCOY] AS HEADER, [COYNAME] AS HEADER, [INDUSTRYTYPE] AS HEADER, [COY_SCALE] AS HEADER, [ESTABLISHMENTDATE] AS HEADER, [JOBTITLE] AS HEADER, [NUMOFEMP] AS HEADER, [INVESTMENT_TYPE] AS HEADER FROM (SELECT [PROFCODE], [ISWELLKNOWNCOY], [COYNAME], [INDUSTRYTYPE], [ESTABLISHMENTDATE], [JOBTITLE], [NUMOFEMP], mastername.Code, REF_MASTER_NAME FROM (select [PROFCODE], [ISWELLKNOWNCOY], [COYNAME], [INDUSTRYTYPE], [ESTABLISHMENTDATE], [JOBTITLE], [NUMOFEMP], [Code], value FROM (SELECT MR_PROFESSION_CODE AS [PROFCODE], MR_JOB_POSITION_CODE AS 'JOB_POSITION', custjob.IS_WELLKNOWN_COY AS [ISWELLKNOWNCOY], custjob.COY_NAME AS [COYNAME], INDUSTRY_TYPE_CODE AS [INDUSTRYTYPE], MR_COY_SCALE_CODE AS 'COY_SCALE', FORMAT(custjob.EMPLOYMENT_ESTABLISHMENT_DT, 'MM/dd/yyyy') AS [ESTABLISHMENTDATE], JOB_TITLE_NAME AS [JOBTITLE], NUM_OF_EMPLOYEE AS [NUMOFEMP], MR_INVESTMENT_TYPE_CODE AS 'INVESTMENT_TYPE' FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' ) as orig unpivot (value for [Code] in ([COY_SCALE],[JOB_POSITION],[INVESTMENT_TYPE]))as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([COY_SCALE], [JOB_POSITION], [INVESTMENT_TYPE])) as piv"), {  row ->
+
+			Jobdata = (row)
+		})
+		return Jobdata
+	}
+
+	@Keyword
+	public NAP4JobdataAddressStoreData (Sql instance, String appno, String name){
 		String Jobdata
 		instance.eachRow(("SELECT ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, NOTES AS HEADER, PHN_AREA_1 AS HEADER, PHN_1 AS HEADER, PHN_EXT_1 AS HEADER, PHN_AREA_2 AS HEADER, PHN_2 AS HEADER, PHN_EXT_2 AS HEADER, PHN_AREA_3 AS HEADER, PHN_3 AS HEADER, PHN_EXT_3 AS HEADER, FAX_AREA AS HEADER, FAX AS HEADER FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_ADDR addr ON addr.APP_CUST_ID = acp.APP_CUST_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND addr.MR_CUST_ADDR_TYPE_CODE = 'JOB'"), {  row ->
 
@@ -500,7 +520,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4PrevJobAddress (Sql instance, String appno, String name){
+	public NAP4PrevJobAddressStoreData (Sql instance, String appno, String name){
 		String Jobdata
 		instance.eachRow(("SELECT PREV_COY_NAME AS HEADER, FORMAT(PREV_EMPLOYMENT_DT, 'MM/dd/yyy') AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, NOTES AS HEADER, PHN_AREA_1 AS HEADER, PHN_1 AS HEADER, PHN_EXT_1 AS HEADER, PHN_AREA_2 AS HEADER, PHN_2 AS HEADER, PHN_EXT_2 AS HEADER, PHN_AREA_3 AS HEADER, PHN_3 AS HEADER, PHN_EXT_3 AS HEADER, FAX_AREA AS HEADER, FAX AS HEADER FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_ADDR addr ON addr.APP_CUST_ID = acp.APP_CUST_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND addr.MR_CUST_ADDR_TYPE_CODE = 'PREV_JOB'"), {  row ->
 
@@ -510,7 +530,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4OtherBizAddress (Sql instance, String appno, String name){
+	public NAP4OtherBizAddressStoredata (Sql instance, String appno, String name){
 		String Jobdata
 		instance.eachRow(("SELECT OTH_BIZ_NAME AS HEADER, OTH_BIZ_TYPE AS HEADER, OTH_BIZ_INDUSTRY_TYPE_CODE AS HEADER, OTH_BIZ_JOB_POSITION AS HEADER, FORMAT(OTH_BIZ_ESTABLISHMENT_DT, 'MM/dd/yyy') AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, NOTES AS HEADER, PHN_AREA_1 AS HEADER, PHN_1 AS HEADER, PHN_EXT_1 AS HEADER, PHN_AREA_2 AS HEADER, PHN_2 AS HEADER, PHN_EXT_2 AS HEADER, PHN_AREA_3 AS HEADER, PHN_3 AS HEADER, PHN_EXT_3 AS HEADER, FAX_AREA AS HEADER, FAX AS HEADER FROM APP_CUST_PERSONAL_JOB_DATA custjob JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = custjob.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_ADDR addr ON addr.APP_CUST_ID = acp.APP_CUST_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND addr.MR_CUST_ADDR_TYPE_CODE = 'OTH_BIZ'"), {  row ->
 
@@ -520,7 +540,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4EmergencyContact (Sql instance, String appno, String name){
+	public NAP4EmergencyContactStoreData (Sql instance, String appno, String name){
 		String emergencycontact
 		instance.eachRow(("SELECT CONTACT_PERSON_NAME AS HEADER, rml.REF_MASTER_NAME AS HEADER,  emrgnc.ID_NO AS HEADER, FORMAT(emrgnc.ID_EXPIRED_DT, 'MM/dd/yyy') AS HEADER, emrgnc.MR_CUST_RELATIONSHIP_CODE AS HEADER,  emrgnc.EMAIL AS HEADER, emrgnc.MR_GENDER_CODE AS HEADER, emrgnc.BIRTH_PLACE AS HEADER, FORMAT(emrgnc.BIRTH_DT, 'MM/dd/yyyy') AS HEADER, emrgnc.MOBILE_PHN_NO_1 AS HEADER, emrgnc.MOBILE_PHN_NO_2 AS HEADER, emrgnc.ADDR AS HEADER, emrgnc.AREA_CODE_4 AS HEADER, emrgnc.AREA_CODE_3 AS HEADER, emrgnc.ZIPCODE AS HEADER, emrgnc.AREA_CODE_1 AS HEADER, emrgnc.AREA_CODE_2 AS HEADER, emrgnc.CITY AS HEADER, emrgnc.PHN_AREA_1 AS HEADER, emrgnc.PHN_1 AS HEADER, emrgnc.PHN_EXT_1 AS HEADER, emrgnc.PHN_AREA_2 AS HEADER, emrgnc.PHN_2 AS HEADER, emrgnc.PHN_EXT_2 AS HEADER, emrgnc.PHN_AREA_3 AS HEADER, emrgnc.PHN_3 AS HEADER, emrgnc.PHN_EXT_3 AS HEADER FROM APP_CUST_EMRGNC_CNTCT emrgnc JOIN APP_CUST ac ON ac.APP_CUST_ID = emrgnc.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml ON rml.REF_MASTER_CODE = emrgnc.MR_ID_TYPE_CODE WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
 
@@ -530,10 +550,10 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4FinancialData (Sql instance, String appno, String name){
+	public NAP4FinancialDataPersonalStoreData (Sql instance, String appno, String name){
 		String financialdata
 		ArrayList <String> listfinancialdata = new ArrayList<String>()
-		instance.eachRow(("SELECT MONTHLY_INCOME_AMT AS HEADER, OTHER_INCOME_AMT AS HEADER, rml.REF_MASTER_NAME AS HEADER, TOTAL_INCOME_AMT AS HEADER, MONTHLY_INSTALLMENT_AMT AS HEADER, MONTHLY_EXPENSE_AMT AS HEADER, NETT_INCOME_AMT AS HEADER, FORMAT(fin.DATE_AS_OF , 'MM/dd/yyy') AS HEADER FROM APP_CUST_PERSONAL_FIN_DATA fin WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = fin.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml ON rml.REF_MASTER_CODE = fin.MR_SOURCE_OF_INCOME_TYPE_CODE WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+		instance.eachRow(("SELECT FORMAT(MONTHLY_INCOME_AMT, 'N0') AS HEADER, FORMAT(OTHER_INCOME_AMT, 'N0') AS HEADER, rml.REF_MASTER_NAME AS HEADER, FORMAT(MONTHLY_INSTALLMENT_AMT, 'N0') AS HEADER, FORMAT(MONTHLY_EXPENSE_AMT, 'N0') AS HEADER, FORMAT(fin.DATE_AS_OF , 'MM/dd/yyy') AS HEADER FROM APP_CUST_PERSONAL_FIN_DATA fin WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON acp.APP_CUST_PERSONAL_ID = fin.APP_CUST_PERSONAL_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml ON rml.REF_MASTER_CODE = fin.MR_SOURCE_OF_INCOME_TYPE_CODE WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
 
 			financialdata = (row[0])
 			listfinancialdata.add(financialdata)
@@ -547,18 +567,12 @@ public class CustomerDataVerif {
 			listfinancialdata.add(financialdata)
 			financialdata = (row[5])
 			listfinancialdata.add(financialdata)
-			financialdata = (row[6])
-			listfinancialdata.add(financialdata)
-			financialdata = (row[7])
-			listfinancialdata.add(financialdata)
-
-
 		})
 		return listfinancialdata
 	}
-	
+
 	@Keyword
-	public NAP4FinancialAttr (Sql instance, String appno, String name){
+	public NAP4FinancialAttrStoreData (Sql instance, String appno, String name){
 		String financialattr
 		ArrayList <String> listfinancialattr = new ArrayList<String>()
 		instance.eachRow(("SELECT ATTR_VALUE AS HEADER FROM APP_CUST_FIN_DATA_ATTR_CONTENT fin WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = fin.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
@@ -568,12 +582,12 @@ public class CustomerDataVerif {
 		})
 		return listfinancialattr
 	}
-	
+
 	@Keyword
-	public NAP4FinDataBankAcc (Sql instance, String appno, String name){
+	public NAP4FinDataBankAccStoreData (Sql instance, String appno, String name){
 		String bankacc
 		ArrayList <String> listbankacc = new ArrayList<String>()
-		instance.eachRow(("SELECT bank.BANK_CODE AS HEADER, bank.BANK_BRANCH AS HEADER, bank.BANK_ACC_NAME AS HEADER, bank.BANK_ACC_NO AS HEADER, bank.IS_DEFAULT AS HEADER, bank.IS_ACTIVE AS HEADER, bank.BEG_BALANCE_AMT AS HEADER, bank.IS_BANK_STMNT AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT bs ON bank.APP_CUST_BANK_ACC_ID = bs.APP_CUST_BANK_ACC_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' GROUP BY bank.BANK_CODE, bank.BANK_BRANCH, bank.BANK_ACC_NAME, bank.BANK_ACC_NO, bank.IS_DEFAULT, bank.IS_ACTIVE, bank.BEG_BALANCE_AMT, bank.IS_BANK_STMNT"), {  row ->
+		instance.eachRow(("SELECT bank.BANK_CODE AS HEADER, bank.BANK_BRANCH AS HEADER, bank.BANK_ACC_NAME AS HEADER, bank.BANK_ACC_NO AS HEADER, bank.IS_DEFAULT AS HEADER, bank.IS_ACTIVE AS HEADER, FORMAT(bank.BEG_BALANCE_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' GROUP BY bank.BANK_CODE, bank.BANK_BRANCH, bank.BANK_ACC_NAME, bank.BANK_ACC_NO, bank.IS_DEFAULT, bank.IS_ACTIVE, bank.BEG_BALANCE_AMT"), {  row ->
 
 			bankacc = (row[0])
 			listbankacc.add(bankacc)
@@ -589,11 +603,212 @@ public class CustomerDataVerif {
 			listbankacc.add(bankacc)
 			bankacc = (row[6])
 			listbankacc.add(bankacc)
-			bankacc = (row[7])
+
+
+		})
+		return listbankacc
+	}
+
+	@Keyword
+	public NAP4FinancialCheckBankStatStoreData (Sql instance, String appno, String name, String accno){
+		String bankstat
+		instance.eachRow(("SELECT bank.IS_BANK_STMNT AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT bs ON bank.APP_CUST_BANK_ACC_ID = bs.APP_CUST_BANK_ACC_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND bank.BANK_ACC_NO = '"+ accno +"' GROUP BY bank.IS_BANK_STMNT"), {  row ->
+
+			bankstat = (row[0])
+
+		})
+		return bankstat
+	}
+
+	@Keyword
+	public NAP4BankStatDataStoreData (Sql instance, String appno, String name, String accno){
+		String bankstatdata
+		ArrayList <String> listbankstatdata = new ArrayList<String>()
+		instance.eachRow(("SELECT bs.MONTH AS HEADER ,bs.YEAR AS HEADER, bs.DEBIT_TRX_COUNT AS HEADER, FORMAT(bs.DEBIT_AMT, 'N0') AS HEADER, bs.CREDIT_TRX_COUNT AS HEADER, FORMAT(bs.CREDIT_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT bs ON bank.APP_CUST_BANK_ACC_ID = bs.APP_CUST_BANK_ACC_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND bank.BANK_ACC_NO = '"+ accno +"'"), {  row ->
+
+			bankstatdata = (row[0])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[1])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[2])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[3])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[4])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[5])
+			listbankstatdata.add(bankstatdata)
+
+
+		})
+		return listbankstatdata
+	}
+
+	@Keyword
+	public NAP4CustomerAssetDataStoreData (Sql instance, String appno, String name){
+		String customerasset
+		ArrayList <String> listcustomerasset = new ArrayList<String>()
+		instance.eachRow(("SELECT rml.REF_MASTER_NAME AS HEADER, asset.ASSET_DESCR AS HEADER, FORMAT(asset.ASSET_VALUE, 'N0') AS HEADER, asset.ASSET_QTY AS HEADER FROM APP_CUST_ASSET asset WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = asset.APP_CUST_ID JOIN  APP app ON app.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml ON rml.REF_MASTER_CODE = asset.MR_CUST_ASSET_TYPE_CODE WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			customerasset = (row[0])
+			listcustomerasset.add(customerasset)
+			customerasset = (row[1])
+			listcustomerasset.add(customerasset)
+			customerasset = (row[2])
+			listcustomerasset.add(customerasset)
+			customerasset = (row[3])
+			listcustomerasset.add(customerasset)
+		})
+		return listcustomerasset
+	}
+
+	@Keyword
+	public NAP4OtherAttrInfoStoreData (Sql instance, String appno, String name){
+		String Otherattrinfo
+		instance.eachRow(("SELECT oth.LBPPMS_DEBT_GRP_LBPP_DESCR AS HEADER, oth.LBPPMS_BIZ_SCL_LBPP_DESCR AS HEADER, oth.LBPPMS_CNTRPRT_LBPP_DESCR AS HEADER, oth.LBPPMS_BIZ_SUSTAIN_LBPP_DESCR AS HEADER FROM APP_CUST_OTHER_INFO oth WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = oth.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			Otherattrinfo = (row)
+		})
+		return Otherattrinfo
+	}
+
+	@Keyword
+	public NAP4OtherAttrStoreData (Sql instance, String appno, String name){
+		String OtherAttr
+		ArrayList <String> listOtherAttr = new ArrayList<String>()
+		instance.eachRow(("SELECT ATTR_VALUE FROM APP_CUST_ATTR_CONTENT attr WITH (NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = attr.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			OtherAttr = (row[0])
+			listOtherAttr.add(OtherAttr)
+
+		})
+		return listOtherAttr
+	}
+
+	@Keyword
+	public NAP4CustomerDetailCompanyStoreData (Sql instance, String appno, String name){
+		String customerdetail
+		instance.eachRow(("SELECT FORMAT(acc.ESTABLISHMENT_DT, 'MM/dd/yyyy') AS HEADER, acc.NUM_OF_EMP AS HEADER, 'custgroup' AS HEADER, ac.IS_VIP AS HEADER, ac.IS_AFFILIATE_WITH_MF AS HEADER, acc.INDUSTRY_TYPE_CODE AS HEADER, acc.MR_COMPANY_TYPE_CODE AS HEADER, ac.VIP_NOTES AS HEADER FROM APP_CUST ac WITH(NOLOCK) JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_COMPANY acc ON acc.APP_CUST_ID = ac.APP_CUST_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			customerdetail = (row)
+		})
+		return customerdetail
+	}
+
+	@Keyword
+	public NAP4ContactInformationStoreData (Sql instance, String appno, String name){
+		String contactinfo
+		instance.eachRow(("SELECT [ContactPersonName] AS HEADER, [JobTitle] AS HEADER, [ID_TYPE] AS HEADER, [ContactIDNo] AS HEADER, [ExpiredDate] AS HEADER, [MobilePhn1] AS HEADER, [Email1] AS HEADER, [GENDER] AS HEADER, [JOB_POSITION] AS HEADER, [BirthPlace] AS HEADER, [BirthDate] AS HEADER, [CUST_COMPANY_RELATIONSHIP] AS HEADER, [Mobilephn2] AS HEADER, [Email2] AS HEADER, [Addr] AS HEADER, [RT] AS HEADER, [RW] AS HEADER, [Zipcode] AS HEADER, [Kecamatan] AS HEADER, [Kelurahan] AS HEADER, [Kota] AS HEADER, [Phone1Area] AS HEADER, [Phone1] AS HEADER, [Phone1Ext] AS HEADER, [Phone2Area] AS HEADER, [Phone2] AS HEADER, [Phone2Ext] AS HEADER, [FaxArea] AS HEADER, [Fax] AS HEADER FROM (SELECT [ContactPersonName], [JobTitle], [ContactIDNo], [ExpiredDate], [MobilePhn1], [Email1], [BirthPlace], [BirthDate], [Mobilephn2], [Email2], [Addr], [RT], [RW], [Zipcode], [Kecamatan], [Kelurahan], [Kota], [Phone1Area], [Phone1], [Phone1Ext], [Phone2Area], [Phone2], [Phone2Ext], [FaxArea], [Fax], mastername.Code, REF_MASTER_NAME FROM (select [ContactPersonName], [JobTitle], [ContactIDNo], [ExpiredDate], [MobilePhn1], [Email1], [BirthPlace], [BirthDate], [Mobilephn2], [Email2], [Addr], [RT], [RW], [Zipcode], [Kecamatan], [Kelurahan], [Kota], [Phone1Area], [Phone1], [Phone1Ext], [Phone2Area], [Phone2], [Phone2Ext], [FaxArea], [Fax], [Code], value FROM (SELECT contact.CONTACT_PERSON_NAME as [ContactPersonName], contact.JOB_TITLE_NAME as [JobTitle], contact.MR_ID_TYPE_CODE as 'ID_TYPE', contact.ID_NO as [ContactIDNo], FORMAT(contact.ID_EXPIRED_DT, 'MM/dd/yyyy') as [ExpiredDate], contact.MOBILE_PHN_NO_1 as [MobilePhn1], contact.EMAIL_1 as [Email1], contact.MR_JOB_POSITION_CODE as 'JOB_POSITION', contact.BIRTH_PLACE as [BirthPlace], FORMAT(contact.BIRTH_DT, 'MM/dd/yyyy') as [BirthDate], contact.MR_CUST_RELATIONSHIP_CODE as 'CUST_COMPANY_RELATIONSHIP', contact.MOBILE_PHN_NO_2 as [Mobilephn2], contact.EMAIL_2 as [Email2], addr.ADDR as [Addr], addr.AREA_CODE_4 as [RT], addr.AREA_CODE_3 as [RW], addr.ZIPCODE as [Zipcode], addr.AREA_CODE_1 as [Kecamatan], addr.AREA_CODE_2 as [Kelurahan], addr.CITY as [Kota], addr.PHN_AREA_1 as [Phone1Area], addr.PHN_1 as [Phone1], addr.PHN_EXT_1 as [Phone1Ext], addr.PHN_AREA_2 as [Phone2Area], addr.PHN_2 as [Phone2], addr.PHN_EXT_2 as [Phone2Ext], addr.FAX_AREA as [FaxArea], addr.FAX as [Fax], MR_GENDER_CODE as 'GENDER' FROM APP_CUST_COMPANY_CONTACT_PERSON contact WITH(NOLOCK) JOIN APP_CUST_COMPANY acc ON acc.APP_CUST_COMPANY_ID = contact.APP_CUST_COMPANY_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acc.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_ADDR addr ON addr.APP_CUST_ID = ac.APP_CUST_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND addr.MR_CUST_ADDR_TYPE_CODE = 'COMPANY') as orig unpivot (value for [Code] in ([ID_TYPE],[CUST_COMPANY_RELATIONSHIP],[JOB_POSITION],[GENDER]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ID_TYPE],[CUST_COMPANY_RELATIONSHIP],[JOB_POSITION],[GENDER])) as piv"), {  row ->
+
+			contactinfo = (row)
+		})
+		return contactinfo
+	}
+
+	@Keyword
+	public NAP4FinancialDataCompanyStoreData (Sql instance, String appno, String name){
+		String financialdata
+		instance.eachRow(("SELECT FORMAT(GROSS_MONTHLY_INCOME_AMT, 'N0') AS HEADER, FORMAT(GROSS_MONTHLY_EXPENSE_AMT, 'N0'), FORMAT(RETURN_OF_INVESTMENT_PRCNT, 'N2') AS HEADER, FORMAT(RETURN_OF_EQUITY_PRCNT, 'N2') AS HEADER, FORMAT(RETURN_OF_ASSET_PRCNT, 'N2') AS HEADER, FORMAT(PROFIT_MARGIN_PRCNT, 'N2') AS HEADER, FORMAT(CURRENT_RATIO_PRCNT, 'N2') AS HEADER, FORMAT(DEBT_EQUITY_RATIO_PRCNT, 'N2') AS HEADER, FORMAT(INV_TURN_OVER_PRCNT, 'N2') AS HEADER, FORMAT(AR_TURN_OVER_PRCNT, 'N2') AS HEADER, FORMAT(GROWTH_PRCNT, 'N2') AS HEADER, FORMAT(WORKING_CAPITAL_AMT, 'N0') AS HEADER, FORMAT(OTH_MONTHLY_INST_AMT, 'N0') AS HEADER, FORMAT(REVENUE, 'N0') AS HEADER, FORMAT(OPR_COST, 'N0') AS HEADER, FORMAT(PROFIT_BEFORE_TAX, 'N0') AS HEADER, FORMAT(CURR_ASSET, 'N0') AS HEADER, FORMAT(NET_FIXED_ASSET, 'N0') AS HEADER, FORMAT(TOTAL_ASSET, 'N0') AS HEADER, FORMAT(CURR_LIABLTS, 'N0') AS HEADER, FORMAT(LONG_TERM_LIABLTS, 'N0') AS HEADER, FORMAT(SHAREHOLDER_EQUITY, 'N0') AS HEADER, FORMAT(CURR_RATIO, 'N0') AS HEADER, FORMAT(DATE_AS_OF, 'MM/dd/yyyy') FROM APP_CUST_COMPANY_FIN_DATA fin WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = fin.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			financialdata = (row)
+		})
+		return financialdata
+	}
+
+	@Keyword
+	public NAP4FinancialAttrCompanyStoreData (Sql instance, String appno, String name){
+		String financialattr
+		ArrayList <String> listfinancialattr = new ArrayList<String>()
+		instance.eachRow(("SELECT ATTR_VALUE AS HEADER FROM APP_CUST_FIN_DATA_ATTR_CONTENT fin WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = fin.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			financialattr = (row[0])
+			listfinancialattr.add(financialattr)
+		})
+		return listfinancialattr
+	}
+
+	@Keyword
+	public NAP4FinDataBankAccCompanyStoreData (Sql instance, String appno, String name){
+		String bankacc
+		ArrayList <String> listbankacc = new ArrayList<String>()
+		instance.eachRow(("SELECT bank.BANK_CODE AS HEADER, bank.BANK_BRANCH AS HEADER, bank.BANK_ACC_NAME AS HEADER, bank.BANK_ACC_NO AS HEADER, bank.IS_DEFAULT AS HEADER, bank.IS_ACTIVE AS HEADER, FORMAT(bank.BEG_BALANCE_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_COMPANY acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' GROUP BY bank.BANK_CODE, bank.BANK_BRANCH, bank.BANK_ACC_NAME, bank.BANK_ACC_NO, bank.IS_DEFAULT, bank.IS_ACTIVE, bank.BEG_BALANCE_AMT"), {  row ->
+
+			bankacc = (row[0])
+			listbankacc.add(bankacc)
+			bankacc = (row[1])
+			listbankacc.add(bankacc)
+			bankacc = (row[2])
+			listbankacc.add(bankacc)
+			bankacc = (row[3])
+			listbankacc.add(bankacc)
+			bankacc = (row[4])
+			listbankacc.add(bankacc)
+			bankacc = (row[5])
+			listbankacc.add(bankacc)
+			bankacc = (row[6])
 			listbankacc.add(bankacc)
 
 
 		})
 		return listbankacc
+	}
+
+	@Keyword
+	public NAP4FinancialCheckBankStatCompanyStoreData (Sql instance, String appno, String name, String accno){
+		String bankstat
+		instance.eachRow(("SELECT bank.IS_BANK_STMNT AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_COMPANY acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT bs ON bank.APP_CUST_BANK_ACC_ID = bs.APP_CUST_BANK_ACC_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND bank.BANK_ACC_NO = '"+ accno +"' GROUP BY bank.IS_BANK_STMNT"), {  row ->
+
+			bankstat = (row[0])
+
+		})
+		return bankstat
+	}
+
+	@Keyword
+	public NAP4BankStatDataCompanyStoreData (Sql instance, String appno, String name, String accno){
+		String bankstatdata
+		ArrayList <String> listbankstatdata = new ArrayList<String>()
+		instance.eachRow(("SELECT bs.MONTH AS HEADER ,bs.YEAR AS HEADER, bs.DEBIT_TRX_COUNT AS HEADER, FORMAT(bs.DEBIT_AMT, 'N0') AS HEADER, bs.CREDIT_TRX_COUNT AS HEADER, FORMAT(bs.CREDIT_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC bank WITH(NOLOCK) JOIN APP_CUST_COMPANY acp ON bank.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = bank.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT bs ON bank.APP_CUST_BANK_ACC_ID = bs.APP_CUST_BANK_ACC_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND bank.BANK_ACC_NO = '"+ accno +"'"), {  row ->
+
+			bankstatdata = (row[0])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[1])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[2])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[3])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[4])
+			listbankstatdata.add(bankstatdata)
+			bankstatdata = (row[5])
+			listbankstatdata.add(bankstatdata)
+
+
+		})
+		return listbankstatdata
+	}
+
+	@Keyword
+	public NAP4LegalDocStoreData (Sql instance, String appno, String name){
+		String legaldoc
+		ArrayList <String> listlegaldocdata = new ArrayList<String>()
+		instance.eachRow(("SELECT MR_LEGAL_DOC_TYPE_CODE AS HEADER, DOC_NO AS HEADER, FORMAT(legal.DOC_DT, 'MM/dd/yyyy') AS HEADER, FORMAT(DOC_EXPIRED_DT, 'MM/dd/yyyy') AS HEADER, NOTARY_NAME AS HEADER, NOTARY_LOCATION AS HEADER, DOC_NOTES AS HEADER FROM APP_CUST_COMPANY_LEGAL_DOC legal WITH(NOLOCK) JOIN APP_CUST_COMPANY acc ON acc.APP_CUST_COMPANY_ID = legal.APP_CUST_COMPANY_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acc.APP_CUST_ID JOIN APP app ON app.APP_ID = ac.APP_ID WHERE app.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			legaldoc = (row[0])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[1])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[2])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[3])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[4])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[5])
+			listlegaldocdata.add(legaldoc)
+			legaldoc = (row[6])
+			listlegaldocdata.add(legaldoc)
+		})
+		return listlegaldocdata
 	}
 }

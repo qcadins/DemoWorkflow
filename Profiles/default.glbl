@@ -494,4 +494,9 @@
       <initValue>0</initValue>
       <name>NumofVerifStore</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>custname</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

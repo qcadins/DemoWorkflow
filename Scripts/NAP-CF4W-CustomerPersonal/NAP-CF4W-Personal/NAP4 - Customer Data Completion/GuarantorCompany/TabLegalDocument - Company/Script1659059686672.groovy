@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor')
+
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor').getValue(
     GlobalVariable.NumofGuarantor, 12).split(';')
 
@@ -91,42 +93,43 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'click button edit'
                     WebUI.click(modifyNewbuttonedit)
 
-					if (legal == 1) {
-						if (GlobalVariable.RoleCompany == 'Testing') {
-							'Koneksi database'
-							String servername = findTestData('Login/Login').getValue(1, 7)
-		
-							String instancename = findTestData('Login/Login').getValue(2, 7)
-		
-							String username = findTestData('Login/Login').getValue(3, 7)
-		
-							String password = findTestData('Login/Login').getValue(4, 7)
-		
-							String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-		
-							String driverclassname = findTestData('Login/Login').getValue(6, 7)
-		
-							String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-		
-							Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-		
-							ArrayList<WebElement> LegalDocType
-		
-							'get data array dari db'
-							LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
-		
-							'verify array dari db == option list confins'
-							WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
-								LegalDocType)
-		
-							'get total label from ddl'
-							int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
-		
-							'verify total ddl confins = total ddl db'
-							WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
-						}
-					}
-					
+                    if (legal == 1) {
+                        if (GlobalVariable.RoleCompany == 'Testing') {
+                            'Koneksi database'
+                            String servername = findTestData('Login/Login').getValue(1, 7)
+
+                            String instancename = findTestData('Login/Login').getValue(2, 7)
+
+                            String username = findTestData('Login/Login').getValue(3, 7)
+
+                            String password = findTestData('Login/Login').getValue(4, 7)
+
+                            String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+                            String driverclassname = findTestData('Login/Login').getValue(6, 7)
+
+                            String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+
+                            Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, 
+                                driverclassname)
+
+                            ArrayList<WebElement> LegalDocType
+
+                            'get data array dari db'
+                            LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
+
+                            'verify array dari db == option list confins'
+                            WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                                LegalDocType)
+
+                            'get total label from ddl'
+                            int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
+
+                            'verify total ddl confins = total ddl db'
+                            WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                        }
+                    }
+                    
                     'select legal doc type'
                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                         LegalDocTypeArray[(legal - 1)], false)
@@ -228,42 +231,44 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
-						if (legal == 1) {
-							if (GlobalVariable.RoleCompany == 'Testing') {
-								'Koneksi database'
-								String servername = findTestData('Login/Login').getValue(1, 7)
-			
-								String instancename = findTestData('Login/Login').getValue(2, 7)
-			
-								String username = findTestData('Login/Login').getValue(3, 7)
-			
-								String password = findTestData('Login/Login').getValue(4, 7)
-			
-								String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-			
-								String driverclassname = findTestData('Login/Login').getValue(6, 7)
-			
-								String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-			
-								Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-			
-								ArrayList<WebElement> LegalDocType
-			
-								'get data array dari db'
-								LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
-			
-								'verify array dari db == option list confins'
-								WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
-									LegalDocType)
-			
-								'get total label from ddl'
-								int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
-			
-								'verify total ddl confins = total ddl db'
-								WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
-							}
-						}
-						
+                        if (legal == 1) {
+                            if (GlobalVariable.RoleCompany == 'Testing') {
+                                'Koneksi database'
+                                String servername = findTestData('Login/Login').getValue(1, 7)
+
+                                String instancename = findTestData('Login/Login').getValue(2, 7)
+
+                                String username = findTestData('Login/Login').getValue(3, 7)
+
+                                String password = findTestData('Login/Login').getValue(4, 7)
+
+                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
+
+                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
+                                databaseFOU
+
+                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
+                                    password, driverclassname)
+
+                                ArrayList<WebElement> LegalDocType
+
+                                'get data array dari db'
+                                LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
+
+                                'verify array dari db == option list confins'
+                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                                    LegalDocType)
+
+                                'get total label from ddl'
+                                int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
+
+                                'verify total ddl confins = total ddl db'
+                                WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                            }
+                        }
+                        
                         'select legal doc type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                             LegalDocTypeArray[(legal - 1)], false)
@@ -324,42 +329,42 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
-			if (legal == 1) {
-				if (GlobalVariable.RoleCompany == 'Testing') {
-					'Koneksi database'
-					String servername = findTestData('Login/Login').getValue(1, 7)
+            if (legal == 1) {
+                if (GlobalVariable.RoleCompany == 'Testing') {
+                    'Koneksi database'
+                    String servername = findTestData('Login/Login').getValue(1, 7)
 
-					String instancename = findTestData('Login/Login').getValue(2, 7)
+                    String instancename = findTestData('Login/Login').getValue(2, 7)
 
-					String username = findTestData('Login/Login').getValue(3, 7)
+                    String username = findTestData('Login/Login').getValue(3, 7)
 
-					String password = findTestData('Login/Login').getValue(4, 7)
+                    String password = findTestData('Login/Login').getValue(4, 7)
 
-					String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
 
-					String driverclassname = findTestData('Login/Login').getValue(6, 7)
+                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
 
-					String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-					Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
-					ArrayList<WebElement> LegalDocType
+                    ArrayList<WebElement> LegalDocType
 
-					'get data array dari db'
-					LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
+                    'get data array dari db'
+                    LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
 
-					'verify array dari db == option list confins'
-					WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
-						LegalDocType)
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                        LegalDocType)
 
-					'get total label from ddl'
-					int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
+                    'get total label from ddl'
+                    int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
-					'verify total ddl confins = total ddl db'
-					WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
-				}
-			}
-			
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                }
+            }
+            
             'select legal doc type'
             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                 LegalDocTypeArray[(legal - 1)], false)
@@ -531,5 +536,13 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+}
+
+if (GlobalVariable.Role == 'Testing') {
+    GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+
+    'call test case verify legal doc store data'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreData'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

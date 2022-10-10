@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal')
+
 int copyAppColm = 0
 
 'get count colm'
@@ -505,6 +507,14 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 			5, FailureHandling.OPTIONAL)) {
 			'Click button cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'))
+		}
+			
+		if(GlobalVariable.RoleCompany == 'Testing'){
+			GlobalVariable.NumofVerifStore = Address
+			
+			'call test case verify address store data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreData'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 	
 	}

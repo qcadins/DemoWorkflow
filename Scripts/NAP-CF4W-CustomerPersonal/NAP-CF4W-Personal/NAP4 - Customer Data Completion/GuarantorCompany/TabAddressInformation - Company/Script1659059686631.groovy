@@ -25,6 +25,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor')
+
 int copyAppColm = 0
 
 'get count colm'
@@ -173,7 +175,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         if (i == variable.size()) {
                             'click button add'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Add'))
-                            
+
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'Koneksi database'
                                 String servername = findTestData('Login/Login').getValue(1, 7)
@@ -507,6 +509,13 @@ def inputaddress() {
         5, FailureHandling.OPTIONAL)) {
         'click button back'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Cancel'))
+    }
+    
+    if (GlobalVariable.Role == 'Testing') {
+        GlobalVariable.NumofVerifStore = Address
+
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabAddressVerifStoreData'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
 
