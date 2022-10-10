@@ -21,7 +21,7 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkAssetRoadWorthinessDoc {
-	
+
 	@Keyword
 	public checkRWD(Sql instanceLOS, String appNo){
 		String attrVal

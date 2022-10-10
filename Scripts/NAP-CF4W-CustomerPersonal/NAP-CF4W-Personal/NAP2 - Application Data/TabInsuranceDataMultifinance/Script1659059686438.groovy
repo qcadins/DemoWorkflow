@@ -300,6 +300,7 @@ if(capinssetting=="YEARLY"){
 	
 	int counterPaidByMF=0
 	
+	'Ambil nilai string road worthiness document dari db'
 	String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
 	
 	'Looping data tabel insurance untuk input data'
