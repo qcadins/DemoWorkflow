@@ -78,6 +78,143 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Customer Duplicate Checking'))
 
+	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
+		'click button search'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
+		
+		ArrayList<String> listString = new ArrayList<String>()
+		
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		
+		'Inisialisasi variabel'
+		ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+	
+		'Klik header office'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_Office'))
+		
+		'Verify alert tidak muncul'
+		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+		
+		'Klik header office'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_Office'))
+		
+		'Verify alert tidak muncul'
+		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+		
+		'Klik header appno'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+		}
+		'verif sort appno ascending'
+		Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		WebUI.verifyEqual(isSorted,true)
+		
+		listApp = new ArrayList<String>()
+		'Klik header appno'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
+			
+			listApp.add(WebUI.getText(appNoObject))
+		}
+		'verif sort appno descending'
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listApp)
+		WebUI.verifyEqual(isSorted,true)
+		
+		'Klik header custname'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
+		listString = new ArrayList<String>()
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'verif sort custname ascending'
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		WebUI.verifyEqual(isSorted,true)
+		
+		'Klik header custname'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
+		listString = new ArrayList<String>()
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'verif sort custname descending'
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+		WebUI.verifyEqual(isSorted,true)
+		
+		'Klik header product offering name'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
+		listString = new ArrayList<String>()
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'verif sort poname ascending'
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		WebUI.verifyEqual(isSorted,true)
+		
+		'Klik header product offering anme'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
+		listString = new ArrayList<String>()
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'verif sort poname descending'
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+		WebUI.verifyEqual(isSorted,true)
+		
+		'Klik 2x header appno supaya appno descending'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+		
+		'Ambil nilai countdata dari confins'
+		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/countData')).replace(' ', '').replace(':', ';').split(';')
+		Integer countDt = Integer.parseInt(textCountData[1])
+		
+		'Jika countdata secara keseluruhan lebih besar daripada data pada page 1'
+		if(countDt>rowData.size()){
+			'Klik page 2'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'))
+			
+			'Verif page 2 active'
+			WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'),'aria-current',2)
+			
+			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+			
+			listString = new ArrayList<String>()
+			for(int i=1;i<=rowData.size();i++){
+				appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo')
+						,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
+				
+				listString.add(WebUI.getText(appNoObject))
+			}
+			'Verif appno descending pada page 2 tidak ada di page 1'
+			Boolean isPaging = CustomKeywords.'sortPaging.verifySortPaging.verifyPaging'(listApp,listString)
+			WebUI.verifyEqual(isPaging,true)
+			
+		}
+	}
+	
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'), 
         datafileDupcheck.getValue(GlobalVariable.NumofColm, 12))
