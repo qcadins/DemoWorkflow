@@ -968,7 +968,7 @@ if (flagFailed == 0) {
 	}
 }
 
-//if (GlobalVariable.RoleCompany == 'Testing') {
+//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 //	'call test case subsidy store db verif'
 //	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
 //			[:], FailureHandling.CONTINUE_ON_FAILURE)

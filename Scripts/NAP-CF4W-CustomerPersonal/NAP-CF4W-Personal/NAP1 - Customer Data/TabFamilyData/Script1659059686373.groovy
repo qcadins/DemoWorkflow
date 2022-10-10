@@ -693,7 +693,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                 
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                     GlobalVariable.NumofFamily, 13) == 'Input Data') {
-                    if (GlobalVariable.Role == 'Testing') {
+                    if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
                         'call test case Family data store verif'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)

@@ -898,7 +898,7 @@ if (flagFailed == 0) {
     }
 }
 
-if (GlobalVariable.RoleCompany == 'Testing') {
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 	'call test case commission datastore db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

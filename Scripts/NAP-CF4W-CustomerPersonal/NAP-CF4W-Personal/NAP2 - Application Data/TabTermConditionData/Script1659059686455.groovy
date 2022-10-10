@@ -291,7 +291,7 @@ if (flagFailed == 0) {
     }
 }
 
-//if (GlobalVariable.Role == 'Testing') {
+//if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
 //	'call test case store db TC'
 //	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
 //		[:], FailureHandling.CONTINUE_ON_FAILURE)

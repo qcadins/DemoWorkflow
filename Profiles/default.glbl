@@ -514,4 +514,14 @@
       <initValue>''</initValue>
       <name>custname</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 4)</initValue>
+      <name>CheckVerifStoreDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 4)</initValue>
+      <name>CheckVerifStoreDBCompany</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

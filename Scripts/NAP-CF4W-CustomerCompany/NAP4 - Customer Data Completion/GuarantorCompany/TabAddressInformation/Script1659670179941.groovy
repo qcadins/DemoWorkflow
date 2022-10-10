@@ -491,7 +491,7 @@ def inputaddress() {
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Cancel'))
     }
     
-    if (GlobalVariable.RoleCompany == 'Testing') {
+    if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
         GlobalVariable.NumofVerifStore = Address
 
         'call test case verify address store data'
