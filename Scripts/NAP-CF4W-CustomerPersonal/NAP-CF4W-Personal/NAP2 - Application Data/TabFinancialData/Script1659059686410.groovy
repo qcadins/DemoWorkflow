@@ -82,33 +82,34 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Su
 
 int varsize = variable.size()
 
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 8)
+
+String instancename = findTestData('Login/Login').getValue(2, 8)
+
+String username = findTestData('Login/Login').getValue(3, 8)
+
+String password = findTestData('Login/Login').getValue(4, 8)
+
+String database = findTestData('Login/Login').getValue(5, 9)
+
+String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 8)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
+Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+
+'Ambil appno dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
+
 //Verif default subsidy based on rule, urutan masih statis
 if(GlobalVariable.Role=="Testing"){
-	'Koneksi database'
-	String servername = findTestData('Login/Login').getValue(1, 8)
-	
-	String instancename = findTestData('Login/Login').getValue(2, 8)
-	
-	String username = findTestData('Login/Login').getValue(3, 8)
-	
-	String password = findTestData('Login/Login').getValue(4, 8)
-	
-	String database = findTestData('Login/Login').getValue(5, 9)
-	
-	String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-	
-	String driverclassname = findTestData('Login/Login').getValue(6, 8)
-	
-	String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-	
-	String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-	
-	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-	
-	Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-	
-	'Ambil appno dari confins'
-	String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
 	
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
 	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifSubsidy.verifySubsidyDefault'(sqlConnectionLOS, sqlConnectionFOU,appNo)
@@ -128,7 +129,7 @@ if(GlobalVariable.Role=="Testing"){
 	}
 			
 	'Verif jumlah data subsidy yang muncul pada confins sesuai dengan rule'
-	WebUI.verifyEqual(varsize,SubsidyFromType.size())
+	WebUI.verifyEqual(varsize,SubsidyFromType.size(),FailureHandling.OPTIONAL)
 	
 	'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
 	if(varsize==SubsidyFromType.size() && varsize > 0){
@@ -537,6 +538,145 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
                 ',', '').replace('.00', '')
         }
     }
+}
+
+//Verif fee based on rule
+if(GlobalVariable.Role=="Testing"){
+	'Ambil nilai result dari rule credit fee'
+	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifFee.verifyFinancialFee'(sqlConnectionLOS,appNo)
+	ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap
+	listFee = result.get("listFee")
+	feeType = result.get("feeType")
+	fee = result.get("fee")
+	feeBhv = result.get("feeBhv")
+	feecapType = result.get("feecapType")
+	feecap= result.get("feecap")
+	Integer counter = 0
+	
+	//Looping listfee dari result rule
+	for(int i = counter;i<listFee.size();i++){
+		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee')))==listFee.get(i)){
+			'Verify amount admin fee pada confins sesuai rule'
+			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",",""),fee.get(i),false)
+			if(feeBhv.get(i)=="DEF"){
+				'Verify admin fee tidak terlock'
+				WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'readonly',1)
+			}
+			else if(feeBhv.get(i)=="LOCK"){
+				'verify admin fee terlock'
+				WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'readonly',1)
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify admin fee capitalized amount sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+		}
+		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee2')))==listFee.get(i)){
+			'Verify amount additional admin pada confins sesuai rule'
+			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",",""),fee.get(i),false)
+			if(feeBhv.get(i)=="DEF"){
+				'verify additional admin tidak terlock'
+				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'readonly',1)
+			}
+			else if(feeBhv.get(i)=="LOCK"){
+				'verify additional admin terlock'
+				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'readonly',1)
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify additional admin capitalized amount sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+		}
+		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee3')))==listFee.get(i)){
+			'Verify notary fee pada confins sesuai rule'
+			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",",""),fee.get(i),false)
+			if(feeBhv.get(i)=="DEF"){
+				'Verify notary fee tidak terlock'
+				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'readonly',1)
+			}
+			else if(feeBhv.get(i)=="LOCK"){
+				'Verify notary fee terlock'
+				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'readonly',1)
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify notary fee capitalized amount sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+		}
+		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee4')))==listFee.get(i)){
+			'Verify other fee pada confins sesuai rule'
+			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",",""),fee.get(i),false)
+			if(feeBhv.get(i)=="DEF"){
+				'verify other fee tidak terlock'
+				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'readonly',1)
+			}
+			else if(feeBhv.get(i)=="LOCK"){
+				'verify other fee terlock'
+				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'readonly',1)
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify other fee capitalized amount sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+		}
+		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee5')))==listFee.get(i)){
+			'verify fiducia fee pada confins sesuai rule'
+			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",",""),fee.get(i),false)
+			if(feeBhv.get(i)=="DEF"){
+				'Verify fiducia fee tidak terlock'
+				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'readonly',1)
+			}
+			else if(feeBhv.get(i)=="LOCK"){
+				'Verify fiducia fee terlock'
+				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'readonly',1)
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify fiducia fee capitalized amount sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+		}
+		'Jika list fee merupakan provision'
+		if(listFee.get(i)=="PROVISION"){
+			'Pengecekan fee type amount/percentage'
+			if(feeType.get(i)=="AMT"){
+				'Verify provision fee pada confins sesuai rule'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",",""),fee.get(i),false)
+				if(feeBhv.get(i)=="DEF"){
+					'Verify provision fee amount tidak terlock'
+					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'readonly',1)
+				}
+				else if(feeBhv.get(i)=="LOCK"){
+					//Verify provision fee amt & pctg terlock
+					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'readonly',1)
+					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'readonly',1)
+				}
+			}
+			else if(feeType.get(i)=="PRCNT"){
+				'Verify provision fee pada confins sesuai rule'
+				WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","")),Double.parseDouble(fee.get(i)))
+				if(feeBhv.get(i)=="DEF"){
+					'verify provision fee percentage tidak terlock'
+					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'readonly',1)
+				}
+				else if(feeBhv.get(i)=="LOCK"){
+					//Verify provision fee amt & pctg terlock
+					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'readonly',1)
+					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'readonly',1)
+				}
+			}
+			if(feecapType.get(i)=="AMT"){
+				'Verify provision fee capitalized amount'
+				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+			}
+			
+		}
+	}
+	
 }
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {

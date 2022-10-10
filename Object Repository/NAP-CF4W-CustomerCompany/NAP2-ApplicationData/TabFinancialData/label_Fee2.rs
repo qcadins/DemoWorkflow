@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_Fee2</name>
+   <tag></tag>
+   <elementGuidId>4736ef1b-7fea-46b8-a613-2d0cec07c768</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[1]/div[2]/div/div[1]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[1]/div[2]/div/div[1]/label</value>
+   </webElementProperties>
+</WebElementEntity>

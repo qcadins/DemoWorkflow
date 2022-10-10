@@ -496,6 +496,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\FinancialFeeRule.xlsx'</initValue>
+      <name>FinancialFeeRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>custname</name>
    </GlobalVariableEntity>
