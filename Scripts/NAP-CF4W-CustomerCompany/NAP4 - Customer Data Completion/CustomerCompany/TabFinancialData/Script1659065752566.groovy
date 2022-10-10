@@ -42,6 +42,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company - Customer').getValue(
             GlobalVariable.NumofColm, 13))) {
         GlobalVariable.CopyAppColm = index
+		GlobalVariable.NumofVerifStore = index
 
         break
     }

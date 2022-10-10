@@ -26,10 +26,10 @@ public class checkAssetData {
 	public countAssetName(Sql instanceLOS, Sql instanceFOU, String POName){
 		Integer countAsset
 		String assetschmCode
-		instanceLOS.eachRow(("select distinct compnt_value from prod_offering a join prod_offering_h b on a.PROD_OFFERING_ID = b.PROD_OFFERING_ID join prod_offering_d c on c.PROD_OFFERING_H_ID = b.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
+		instanceLOS.eachRow(("select distinct compnt_value from prod_offering po WITH(NOLOCK) join prod_offering_h poHead on po.PROD_OFFERING_ID = poHead.PROD_OFFERING_ID join prod_offering_d poDetail on poDetail.PROD_OFFERING_H_ID = poHead.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
 		})
-		instanceFOU.eachRow(("SELECT count(*) FROM dbo.ASSET_MASTER A WITH ( NOLOCK ) JOIN dbo.ASSET_TYPE B WITH ( NOLOCK ) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID JOIN dbo.ASSET_CATEGORY C WITH ( NOLOCK ) ON A.ASSET_CATEGORY_ID = C.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D D WITH ( NOLOCK ) ON A.ASSET_MASTER_ID = D.ASSET_MASTER_ID JOIN dbo.ASSET_SCHM_H E WITH ( NOLOCK ) ON D.ASSET_SCHM_H_ID = E.ASSET_SCHM_H_ID WHERE A.IS_ACTIVE = 1 AND A.ASSET_CATEGORY_ID IS NOT NULL AND A.IS_FINAL = 1 AND E.ASSET_SCHM_CODE = '"+assetschmCode+"'"), { def row ->
+		instanceFOU.eachRow(("SELECT count(*) FROM dbo.ASSET_MASTER am WITH ( NOLOCK ) JOIN dbo.ASSET_TYPE at WITH ( NOLOCK ) ON am.ASSET_TYPE_ID = at.ASSET_TYPE_ID JOIN dbo.ASSET_CATEGORY ac WITH ( NOLOCK ) ON am.ASSET_CATEGORY_ID = ac.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D asDetail WITH ( NOLOCK ) ON am.ASSET_MASTER_ID = asDetail.ASSET_MASTER_ID JOIN dbo.ASSET_SCHM_H asHead WITH ( NOLOCK ) ON asDetail.ASSET_SCHM_H_ID = asHead.ASSET_SCHM_H_ID WHERE am.IS_ACTIVE = 1 AND am.ASSET_CATEGORY_ID IS NOT NULL AND am.IS_FINAL = 1 AND asHead.ASSET_SCHM_CODE = '"+assetschmCode+"'"), { def row ->
 			countAsset = row[0]
 		})
 		return countAsset
@@ -38,7 +38,7 @@ public class checkAssetData {
 	@Keyword
 	public checkPersonalRelationshipDDL(Sql instance){
 		ArrayList<String> personalRelationDDL = new ArrayList<String>()
-		instance.eachRow(("select descr from ref_master where ref_master_type_code = 'cust_personal_relationship'"), { def row ->
+		instance.eachRow(("select descr from ref_master WITH (NOLOCK) where ref_master_type_code = 'cust_personal_relationship'"), { def row ->
 			personalRelationDDL.add(row[0].toUpperCase())
 		})
 		return personalRelationDDL
@@ -47,7 +47,7 @@ public class checkAssetData {
 	@Keyword
 	public checkCompanyRelationshipDDL(Sql instance){
 		ArrayList<String> companyRelationDDL = new ArrayList<String>()
-		instance.eachRow(("select descr from ref_master where ref_master_type_code = 'cust_company_relationship'"), { def row ->
+		instance.eachRow(("select descr from ref_master WITH(NOLOCK) where ref_master_type_code = 'cust_company_relationship'"), { def row ->
 			companyRelationDDL.add(row[0].toUpperCase())
 		})
 		return companyRelationDDL
@@ -56,7 +56,7 @@ public class checkAssetData {
 	@Keyword
 	public checkAssetUsageDDL(Sql instance){
 		ArrayList<String> assetUsage = new ArrayList<String>()
-		instance.eachRow(("select descr from REF_MASTER where ref_master_type_code = 'asset_usage'"), { def row ->
+		instance.eachRow(("select descr from REF_MASTER WITH(NOLOCK) where ref_master_type_code = 'asset_usage'"), { def row ->
 			assetUsage.add(row[0].toUpperCase())
 		})
 		return assetUsage

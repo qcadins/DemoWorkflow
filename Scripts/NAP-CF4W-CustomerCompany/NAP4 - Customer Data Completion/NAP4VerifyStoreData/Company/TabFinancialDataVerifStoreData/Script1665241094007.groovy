@@ -76,7 +76,7 @@ for (i = 0; i <= (resultbankaccarray.size() - 1); i++) {
 	}
 }
 
-for (i = GlobalVariable.CopyAppColm; i < resultfinancialdataarray.size()/24 + GlobalVariable.CopyAppColm; i++) {
+for (i = GlobalVariable.NumofVerifStore; i < resultfinancialdataarray.size()/24 + GlobalVariable.NumofVerifStore; i++) {
     'verify monthly income'
     WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(i, 12).split(',').join(), resultfinancialdataarray[financialdataindex++].split(',').join(), 
         false, FailureHandling.OPTIONAL)
@@ -173,7 +173,7 @@ for (i = GlobalVariable.CopyAppColm; i < resultfinancialdataarray.size()/24 + Gl
     WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(i, 35).toUpperCase(), (resultfinancialdataarray[financialdataindex++]), 
         false, FailureHandling.OPTIONAL)
 	
-	if(i == GlobalVariable.CopyAppColm){
+	if(i == GlobalVariable.NumofVerifStore){
 		
 		int row = 38
 	for(finattr = 0; finattr < resultfinancialattrarray.size(); finattr++){
@@ -187,7 +187,7 @@ for (i = GlobalVariable.CopyAppColm; i < resultfinancialdataarray.size()/24 + Gl
 	}
 }
 
-for (i = GlobalVariable.CopyAppColm; i < (resultbankaccarray.size()/7) + GlobalVariable.CopyAppColm ; i++) {
+for (i = GlobalVariable.NumofVerifStore; i < (resultbankaccarray.size()/7) + GlobalVariable.NumofVerifStore ; i++) {
 	'verify bank code'
 	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(i, 66).toUpperCase(), (resultbankaccarray[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL)

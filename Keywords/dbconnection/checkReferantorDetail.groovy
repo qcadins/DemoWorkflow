@@ -25,7 +25,7 @@ public class checkReferantorDetail {
 	@Keyword
 	public checkCustomerReferantor(Sql instance,String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
-		instance.eachRow('select top(1) tax_id_no, cust_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode from cust a join cust_addr b on a.cust_id = b.cust_id where cust_no = \''+referantorCode+'\' and mr_cust_addr_type_code = \'legal\'', { def row ->
+		instance.eachRow('select top(1) tax_id_no, cust_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode from cust a WITH(NOLOCK) join cust_addr b on a.cust_id = b.cust_id where cust_no = \''+referantorCode+'\' and mr_cust_addr_type_code = \'legal\'', { def row ->
 			referantorDetail.add(row[0])
 			referantorDetail.add(row[1])
 			referantorDetail.add(row[2])
@@ -42,7 +42,7 @@ public class checkReferantorDetail {
 	@Keyword
 	public checkAgencyReferantor(Sql instance,String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
-		instance.eachRow('select top(1) tax_id_no, taxpayer_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode from vendor a join vendor_addr b on a.vendor_id = b.vendor_id where mr_addr_type_code = \'legal\' and vendor_code = \''+referantorCode+'\' and is_active=1 and (mr_vendor_category_code = \'AGENCY_PERSONAL\' or mr_vendor_category_code = \'AGENCY_COMPANY\')', { def row ->
+		instance.eachRow('select top(1) tax_id_no, taxpayer_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode from vendor a WITH(NOLOCK) join vendor_addr b on a.vendor_id = b.vendor_id where mr_addr_type_code = \'legal\' and vendor_code = \''+referantorCode+'\' and is_active=1 and (mr_vendor_category_code = \'AGENCY_PERSONAL\' or mr_vendor_category_code = \'AGENCY_COMPANY\')', { def row ->
 			referantorDetail.add(row[0])
 			referantorDetail.add(row[1])
 			referantorDetail.add(row[2])
@@ -59,7 +59,7 @@ public class checkReferantorDetail {
 	@Keyword
 	public checkMFEmployeeReferantor(Sql instance, String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
-		instance.eachRow('select top(1) tax_id_no, emp_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode  from ref_emp where emp_no=\''+referantorCode+'\' and is_active=1', { def row ->
+		instance.eachRow('select top(1) tax_id_no, emp_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode  from ref_emp WITH(NOLOCK) where emp_no=\''+referantorCode+'\' and is_active=1', { def row ->
 			referantorDetail.add(row[0])
 			referantorDetail.add(row[1])
 			referantorDetail.add(row[2])

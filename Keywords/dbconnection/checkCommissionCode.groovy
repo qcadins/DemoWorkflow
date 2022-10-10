@@ -25,7 +25,7 @@ public class checkCommissionCode {
 	@Keyword
 	public checkSupplierCode(Sql instance, String supplierName){
 		String supplierCode
-		instance.eachRow(('select VENDOR_CODE from VENDOR where MR_VENDOR_CATEGORY_CODE = \'SUPPLIER\' and VENDOR_NAME = \'' +
+		instance.eachRow(('select VENDOR_CODE from VENDOR WITH(NOLOCK) where MR_VENDOR_CATEGORY_CODE = \'SUPPLIER\' and VENDOR_NAME = \'' +
 				supplierName) + '\'', { def row ->
 					supplierCode = (row[0])
 				})
@@ -35,7 +35,7 @@ public class checkCommissionCode {
 	@Keyword
 	public checkSupplierEmployeeCode(Sql instance,String supplierEmployeeName, String supplierEmpPos, String supplierName){
 		String supplierEmployeeCode
-		instance.eachRow(("select vendor_emp_no from VENDOR_EMP a join VENDOR b on a.VENDOR_ID = b.VENDOR_ID where b.MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' and vendor_emp_name = '"+supplierEmployeeName+ "' and VENDOR_NAME = '"+supplierName+"'"), { def row ->
+		instance.eachRow(("select vendor_emp_no from VENDOR_EMP a WITH(NOLOCK) join VENDOR b on a.VENDOR_ID = b.VENDOR_ID where b.MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' and vendor_emp_name = '"+supplierEmployeeName+ "' and VENDOR_NAME = '"+supplierName+"'"), { def row ->
 			supplierEmployeeCode = (row[0])
 		})
 		return supplierEmployeeCode
@@ -44,16 +44,16 @@ public class checkCommissionCode {
 	@Keyword
 	public checkReferantorCode(Sql instance,String referantorName){
 		String referantorCode
-		instance.eachRow(("select TOP(1) CUST_NO from CUST where cust_name ='"+referantorName+"'"), { def row ->
+		instance.eachRow(("select TOP(1) CUST_NO from CUST WITH(NOLOCK) where cust_name ='"+referantorName+"'"), { def row ->
 			referantorCode = (row[0])
 		})
 		if(referantorCode==null){
-			instance.eachRow(("select EMP_NO from REF_EMP where emp_name ='"+referantorName+"'"), { def row ->
+			instance.eachRow(("select EMP_NO from REF_EMP WITH(NOLOCK) where emp_name ='"+referantorName+"'"), { def row ->
 				referantorCode = (row[0])
 			})
 		}
 		if(!referantorCode){
-			instance.eachRow(("select VENDOR_CODE from VENDOR where MR_VENDOR_CATEGORY_CODE in ('AGENCY_PERSONAL','AGENCY_COMPANY') AND vendor_name ='"+referantorName+"'"), { def row ->
+			instance.eachRow(("select VENDOR_CODE from VENDOR WITH(NOLOCK) where MR_VENDOR_CATEGORY_CODE in ('AGENCY_PERSONAL','AGENCY_COMPANY') AND vendor_name ='"+referantorName+"'"), { def row ->
 				referantorCode = (row[0])
 			})
 		}

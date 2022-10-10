@@ -25,7 +25,7 @@ public class checkLifeInscoBranch {
 	@Keyword
 	public checkDDLLifeInscoBranch(Sql instance, String officeName){
 		ArrayList<String> lifeInscoBranch = new ArrayList<String>()
-		instance.eachRow(("SELECT VENDOR_NAME FROM VENDOR A JOIN VENDOR_OFFICE_MBR B ON A.VENDOR_ID=B.VENDOR_ID JOIN REF_OFFICE C ON B.REF_OFFICE_ID = C.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND A.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
+		instance.eachRow(("SELECT VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vOffice ON v.VENDOR_ID = vOffice.VENDOR_ID JOIN REF_OFFICE office ON vOffice.REF_OFFICE_ID = office.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
 			lifeInscoBranch.add(row[0].toUpperCase())
 		})
 		return lifeInscoBranch
@@ -34,7 +34,7 @@ public class checkLifeInscoBranch {
 	@Keyword
 	public countDDLLifeInscoBranch(Sql instance, String officeName){
 		Integer countData
-		instance.eachRow(("SELECT count(*) VENDOR_NAME FROM VENDOR A JOIN VENDOR_OFFICE_MBR B ON A.VENDOR_ID=B.VENDOR_ID JOIN REF_OFFICE C ON B.REF_OFFICE_ID = C.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND A.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
+		instance.eachRow(("SELECT count(*) VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vOffice ON v.VENDOR_ID = vOffice.VENDOR_ID JOIN REF_OFFICE office ON vOffice.REF_OFFICE_ID = office.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
 			countData = (row[0])
 		})
 		return countData

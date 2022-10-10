@@ -25,10 +25,10 @@ public class CountRowAssetAttribute {
 	@Keyword
 	public countRowAssetAttribute (Sql instance, Sql instanceLOS, String assetcode,String POName){
 		String countRowAssetAttributeResult, assetschmCode
-		instanceLOS.eachRow(("select distinct compnt_value from prod_offering a join prod_offering_h b on a.PROD_OFFERING_ID = b.PROD_OFFERING_ID join prod_offering_d c on c.PROD_OFFERING_H_ID = b.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
+		instanceLOS.eachRow(("select distinct compnt_value from prod_offering po WITH(NOLOCK) join prod_offering_h poHead on po.PROD_OFFERING_ID = poHead.PROD_OFFERING_ID join prod_offering_d c on c.PROD_OFFERING_H_ID = poHead.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
 		})
-		instance.eachRow(("select count(REF_ATTR_ID) from ASSET_MASTER a join ASSET_ATTR b on a.ASSET_TYPE_ID = b.ASSET_TYPE_ID where a.asset_type_id= (select a.asset_type_id from asset_schm_h a join asset_schm_d b on a.asset_schm_h_id = b.asset_schm_h_id join asset_master c on b.asset_master_id = c.asset_master_id where asset_schm_code = '"+assetschmCode+"' and c.is_active =1 and full_asset_code = '"+assetcode+"') and full_asset_code = '"+assetcode+"'"), {  row ->
+		instance.eachRow(("select count(REF_ATTR_ID) from ASSET_MASTER am WITH(NOLOCK) join ASSET_ATTR attr on am.ASSET_TYPE_ID = attr.ASSET_TYPE_ID where am.asset_type_id= (select assetschmHead.asset_type_id from asset_schm_h assetschmHead join asset_schm_d assetschmDetail on assetschmHead.asset_schm_h_id = assetschmDetail.asset_schm_h_id join asset_master am on assetschmDetail.asset_master_id = am.asset_master_id where asset_schm_code = '"+assetschmCode+"' and am.is_active =1 and full_asset_code = '"+assetcode+"') and full_asset_code = '"+assetcode+"'"), {  row ->
 
 			countRowAssetAttributeResult = (row[0])
 		})

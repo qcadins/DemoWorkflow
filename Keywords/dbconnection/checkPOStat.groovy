@@ -21,11 +21,11 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkPOStat {
-	
+
 	@Keyword
 	public checkCopyAppPOStat(Sql instance, String copyappno){
 		String stat
-		instance.eachRow(("SELECT PROD_OFFERING_STAT FROM PROD_OFFERING WHERE PROD_OFFERING_code = (select prod_offering_code from app where app_no ='"+copyappno+"')"), { def row ->
+		instance.eachRow(("SELECT PROD_OFFERING_STAT FROM PROD_OFFERING WITH(NOLOCK) WHERE PROD_OFFERING_code = (select prod_offering_code from app where app_no ='"+copyappno+"')"), { def row ->
 			stat = (row[0])
 		})
 		return stat

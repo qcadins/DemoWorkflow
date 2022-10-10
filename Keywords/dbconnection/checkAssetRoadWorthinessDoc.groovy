@@ -21,11 +21,11 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkAssetRoadWorthinessDoc {
-	
+
 	@Keyword
 	public checkRWD(Sql instanceLOS, String appNo){
 		String attrVal
-		instanceLOS.eachRow(("SELECT ATTR_VALUE FROM APP_ASSET_ATTR WHERE APP_ASSET_ID = (SELECT APP_ASSET_ID FROM APP_ASSET WHERE APP_ID = (SELECT APP_ID FROM APP WHERE APP_NO = '"+appNo+"') AND ASSET_ATTR_CODE = 'ROAD_WORTHINESS_DOC')"), { def row ->
+		instanceLOS.eachRow(("SELECT ATTR_VALUE FROM APP_ASSET_ATTR WITH(NOLOCK) WHERE APP_ASSET_ID = (SELECT APP_ASSET_ID FROM APP_ASSET WHERE APP_ID = (SELECT APP_ID FROM APP WHERE APP_NO = '"+appNo+"') AND ASSET_ATTR_CODE = 'ROAD_WORTHINESS_DOC')"), { def row ->
 			attrVal = row[0]
 		})
 		return attrVal

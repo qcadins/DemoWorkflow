@@ -3,10 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
-import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
-
+import org.openqa.selenium.By as By
+import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -15,7 +13,7 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
@@ -317,13 +315,10 @@ if (textwop == 'Auto Debit') {
     'Select option dropdownlist Customer Bank Account'
     WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
             GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
-	
-	Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//select[@formcontrolname = 'CustBankAcc']")))
-	 
-	  
-	GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
-		 
-	 
+
+    Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
+
+    GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
 }
 
 'Select option dropdownlist Customer Notification By'
@@ -607,12 +602,6 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
         GlobalVariable.NumofColm, 4))
 
-if(GlobalVariable.Role == 'Testing'){
-	'call test case store db application data'		
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), 
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-
 if (iscompleteMandatory == 0) {
     'cek alert'
     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
@@ -638,4 +627,9 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 }
 
+if (GlobalVariable.Role == 'Testing') {
+    'call test case store db application data'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
+}
 

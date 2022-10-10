@@ -143,6 +143,16 @@ if(datafilereferantor.getValue(
 						  WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 						  GlobalVariable.NumofReferantor, 16),FailureHandling.OPTIONAL)
 						  
+						  Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ i +']/td[5]/select')))
+						   if(GlobalVariable.BankAccount == ''){
+							
+							   GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+							   
+						   }else{
+						   
+							   GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+						   }
+						  
 						  'select tax calculation'
 						  WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 						  GlobalVariable.NumofReferantor, 17),false,FailureHandling.OPTIONAL)
@@ -166,15 +176,7 @@ if(datafilereferantor.getValue(
 						  break
 					  }
 						  
-						  Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ modifyObjectIndex +']/td[5]/select')))
-						   if(GlobalVariable.BankAccount == ''){
-							
-							   GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
-							   
-						   }else{
-						   
-							   GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
-						   }
+						 
 				  }
 				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
 				  else{
@@ -354,6 +356,16 @@ if(datafilereferantor.getValue(
 							   'select bank account'
 							   WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 									   GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
+							   
+							   Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ j +']/td[5]/select')))
+								if(GlobalVariable.BankAccount == ''){
+							  
+								 GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+								 
+								}else{
+							 
+								 GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+								}
 							  
 							   'select tax calculation method'
 							   WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
@@ -503,6 +515,16 @@ if(datafilereferantor.getValue(
 						WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
 						
+						Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ j +']/td[5]/select')))
+						 if(GlobalVariable.BankAccount == ''){
+					   
+						  GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+						  
+						 }else{
+					  
+						  GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
+						 }
+						
 						'select tax calculation method'
 						WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
 								GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
@@ -542,15 +564,7 @@ if(datafilereferantor.getValue(
 							  
 				}	
 					
-					Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr['+ modifyObjectIndex +']/td[5]/select')))
-					if(GlobalVariable.BankAccount == ''){
-				  
-					 GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
-					 
-					}else{
-				 
-					 GlobalVariable.BankAccount = GlobalVariable.BankAccount + ' - ' + select.getFirstSelectedOption().getText()
-					}
+					
 				}		
 	}
 }
