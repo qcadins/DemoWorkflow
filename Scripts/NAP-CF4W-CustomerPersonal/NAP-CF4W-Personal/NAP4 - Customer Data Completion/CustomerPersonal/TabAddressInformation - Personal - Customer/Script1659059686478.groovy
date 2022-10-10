@@ -99,16 +99,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -190,16 +182,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -273,14 +257,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                     ArrayList<WebElement> Ownership
 
-                    String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(sqlConnectionFOU)
-
-                    def spliexaddresstype = excludeaddresstype.split(';')
-
-                    String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, joinexaddresstype)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                     'verify array dari db == option list confins'
                     WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 

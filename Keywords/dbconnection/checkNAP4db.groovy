@@ -33,18 +33,18 @@ public class checkNAP4db {
 	}
 
 	@Keyword
-	public checkAddressTypePersonal(Sql instance, String exclude){
+	public checkAddressTypePersonal(Sql instance){
 		ArrayList<String> AddressType = new ArrayList<String>()
-		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('personal', 'all') and IS_ACTIVE = 1 AND MASTER_CODE NOT IN ('"+ exclude +"')"), { def row ->
+		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('personal', 'all') and MASTER_CODE not in (SELECT value FROM (select gs_value from GENERAL_SETTING where gs_code = 'FILTER_ADDR') as excludeSetting CROSS APPLY STRING_SPLIT(excludeSetting.gs_value, ';'))"), { def row ->
 			AddressType.add(row[0].toUpperCase())
 		})
 		return AddressType
 	}
 
 	@Keyword
-	public checkAddressTypeCompany(Sql instance, String exclude){
+	public checkAddressTypeCompany(Sql instance){
 		ArrayList<String> AddressType = new ArrayList<String>()
-		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('company', 'all') and IS_ACTIVE = 1 AND MASTER_CODE NOT IN ('"+ exclude +"') AND DESCR NOT IN('Company')"), { def row ->
+		instance.eachRow(("select DESCR from REF_MASTER where REF_MASTER_TYPE_CODE = 'CUST_ADDR_TYPE' and MAPPING_CODE in ('company', 'all') and MASTER_CODE not in (SELECT value FROM (select gs_value from GENERAL_SETTING where gs_code = 'FILTER_ADDR') as excludeSetting CROSS APPLY STRING_SPLIT(excludeSetting.gs_value, ';')) AND DESCR NOT IN('Company')"), { def row ->
 			AddressType.add(row[0].toUpperCase())
 		})
 		return AddressType

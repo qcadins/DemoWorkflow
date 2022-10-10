@@ -107,16 +107,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -202,16 +194,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -285,14 +269,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                     ArrayList<WebElement> Ownership
 
-                    String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(sqlConnectionFOU)
-
-                    def spliexaddresstype = excludeaddresstype.split(';')
-
-                    String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU, joinexaddresstype)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
 
                     'verify array dari db == option list confins'
                     WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -513,13 +491,13 @@ def inputaddress() {
         'Click button cancel'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'))
     }
-		
-	if(GlobalVariable.RoleCompany == 'Testing'){
-		GlobalVariable.NumofVerifStore = Address
-		
-		'call test case verify address store data'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreData'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-	}
+    
+    if (GlobalVariable.RoleCompany == 'Testing') {
+        GlobalVariable.NumofVerifStore = Address
+
+        'call test case verify address store data'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreData'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
+    }
 }
 
