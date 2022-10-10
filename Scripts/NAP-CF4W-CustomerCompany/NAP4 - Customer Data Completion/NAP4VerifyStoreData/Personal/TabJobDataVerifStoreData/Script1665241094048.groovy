@@ -47,43 +47,47 @@ String othaddress
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
-    result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataEmployeePersonal'(sqlconnection, appno, custname).replace(
+    result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataEmployeePersonalStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddress'(sqlconnection, appno, custname).replace(
+    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddress'(sqlconnection, appno, custname).replace(
+    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddress'(sqlconnection, appno, custname).replace(
+    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'PROFESSIONAL') {
     
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataProfPersonalStoreData'(sqlconnection, appno, custname).replace(
+		'HEADER:', '').replace('[', '').replace(']', '')
 
-    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddress'(sqlconnection, appno, custname).replace(
+    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddress'(sqlconnection, appno, custname).replace(
+    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddress'(sqlconnection, appno, custname).replace(
+    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'NON PROFESSIONAL') {
-    result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataNonProfPersonal'(sqlconnection, appno, custname).replace(
+    result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataNonProfPersonalStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 } else {
     
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataSMEPersonalStoreData'(sqlconnection, appno, custname).replace(
+		'HEADER:', '').replace('[', '').replace(']', '')
 
-    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddress'(sqlconnection, appno, custname).replace(
+    jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddress'(sqlconnection, appno, custname).replace(
+    prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 
-    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddress'(sqlconnection, appno, custname).replace(
+    othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
         'HEADER:', '').replace('[', '').replace(']', '')
 }
 
@@ -193,11 +197,40 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
     WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultarray[
         arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-    'verify job title'
+    'verify Num of Employee'
     WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultarray[
         arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'PROFESSIONAL') {
+
+	'verify proffession code'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+
+	'verify is well known company'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify company name'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify industry type'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify Professional No'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify start working'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 35).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify job title'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 36).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'NON PROFESSIONAL') {
     'verify profession code'
@@ -208,11 +241,51 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
     WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 40).toUpperCase(), (resultarray[
         arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 } else {
+	'verify proffession code'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify job position'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 44).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify is well known company'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 45).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify company name'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 46).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify industry type'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 47).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify company scale'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 49).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify start working'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 50).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify job title'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 51).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify Num of Employee'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 52).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	
+	'verify Investment Type'
+	WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 53).toUpperCase(), (resultarray[
+		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 }
 
 if(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE' || WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
-'PROFESSIONAL'){
+'PROFESSIONAL' || WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
+'SMALL MEDIUM ENTERPRISE'){
 int row = 55
 for(i = 0; i < joaddressarray.size(); i++){
 'verify Job address'

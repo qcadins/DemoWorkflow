@@ -20,13 +20,15 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int copyAppColm = 0
+GlobalVariable.CopyAppColm = 0
 
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.DataFileCustomerPersonal
 
 GlobalVariable.DataFilePath = filePath
+
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer')
 
 'get count colm'
 countcolm = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getColumnNumbers()
@@ -37,8 +39,8 @@ ArrayList<WebElement> variable
 for (index = 2; index <= (countcolm + 1); index++) {
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-            GlobalVariable.NumofColm, 12))) {
-        copyAppColm = index
+            GlobalVariable.NumofColm, 13))) {
+        GlobalVariable.CopyAppColm = index
 
         break
     }
@@ -66,7 +68,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i', true)
 
-            for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+            for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 int flagFailed = 0
 
 				
@@ -74,7 +76,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     financialdata, 10).length() != 0) {
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                         financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                            GlobalVariable.NumofColm, 12))) {
+                            GlobalVariable.NumofColm, 13))) {
                         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                             financialdata, 12).length() > 0) {
                             if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
@@ -127,7 +129,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-    for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
@@ -143,7 +145,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                     financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                        GlobalVariable.NumofColm, 12))) {
+                        GlobalVariable.NumofColm, 13))) {
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                         financialdata, 12).length() > 0) {
                         'convert date confins dan excel agar sama'
@@ -185,14 +187,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
-    for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
             financialdata, 10).length() != 0) {
             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                 financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                    GlobalVariable.NumofColm, 12))) {
+                    GlobalVariable.NumofColm, 13))) {
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
                     financialdata, 12).length() > 0) {
                     'click button add'
@@ -215,6 +217,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
+	
+	if (GlobalVariable.Role == 'Testing') {
+		'call test case verify store data financial'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreData'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 
 def inputfinancialdata() {
     int flagWarning = 0

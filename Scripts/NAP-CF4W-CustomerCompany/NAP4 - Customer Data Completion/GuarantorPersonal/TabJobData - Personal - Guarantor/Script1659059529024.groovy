@@ -15,6 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal')
+
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/TabJobDataEmployeeGuarantor'), 
@@ -32,14 +34,12 @@ if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 4)) == 0) {
-'Check alert'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.JobData')
+        GlobalVariable.NumofGuarantor, 4)) == 0) {
+    'Check alert'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.JobData')
 }
 
-	
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
@@ -52,5 +52,13 @@ if (GlobalVariable.FlagFailed == 0) {
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofGuarantor, '3.JobData')
     }
+}
+
+if(GlobalVariable.RoleCompany == 'Testing'){
+GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+	
+'call test case verify job data store data'	
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabJobDataVerifStoreData'), 
+    [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

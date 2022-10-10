@@ -25,6 +25,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany')
+
 'input establishment date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Establishment Date'), 
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
@@ -180,3 +182,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     }
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+			
+	'call test case verify customer detail store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerDetailVerifStoreData'),
+	[:], FailureHandling.CONTINUE_ON_FAILURE)
+}

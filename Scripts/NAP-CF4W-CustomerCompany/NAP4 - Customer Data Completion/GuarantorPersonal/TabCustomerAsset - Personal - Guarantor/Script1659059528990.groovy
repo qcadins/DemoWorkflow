@@ -29,6 +29,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal')
+
 def assettypearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset - Company - GuarantorPersonal').getValue(
     GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
@@ -236,3 +238,11 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Back'))
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+				
+	'call test case verify customer asset store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabCustomerAssetVerifStoreData'),
+	[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+		

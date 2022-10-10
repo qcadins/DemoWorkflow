@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/AddressInformation - Company - ManagementShareholderCompany')
+
 int copyAppColm = 0
 
 'get count colm'
@@ -81,64 +83,54 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button edit'
                             WebUI.click(modifyNewbuttonedit)
 
-                            if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                                            if (GlobalVariable.RoleCompany == 'Testing') {
+                    'Koneksi database'
+                    String servername = findTestData('Login/Login').getValue(1, 7)
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                    String instancename = findTestData('Login/Login').getValue(2, 7)
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
+                    String username = findTestData('Login/Login').getValue(3, 7)
 
-                                String password = findTestData('Login/Login').getValue(4, 7)
+                    String password = findTestData('Login/Login').getValue(4, 7)
 
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
 
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
+                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
 
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
+                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
+                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
-                                ArrayList<WebElement> AddressType
+                    ArrayList<WebElement> AddressType
 
-                                ArrayList<WebElement> Ownership
+                    ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
+                    'get data array dari db'
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
-                                def spliexaddresstype = excludeaddresstype.split(';')
+                    'get data array dari db'
+                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
 
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
+                        AddressType)
 
-                                'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                    'get total label from ddl'
+                    int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
 
-                                'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
 
-                                'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
-                                    AddressType)
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
+                        Ownership)
 
-                                'get total label from ddl'
-                                int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
+                    'get total label from ddl'
+                    int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'))
 
-                                'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
-
-                                'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
-                                    Ownership)
-
-                                'get total label from ddl'
-                                int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'))
-
-                                'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalowneship - 1, Ownership.size())
-                            }
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalowneship - 1, Ownership.size())
+                }
                             
                             inputaddress()
 
@@ -176,64 +168,54 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button add'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
-                            if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                                            if (GlobalVariable.RoleCompany == 'Testing') {
+                    'Koneksi database'
+                    String servername = findTestData('Login/Login').getValue(1, 7)
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                    String instancename = findTestData('Login/Login').getValue(2, 7)
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
+                    String username = findTestData('Login/Login').getValue(3, 7)
 
-                                String password = findTestData('Login/Login').getValue(4, 7)
+                    String password = findTestData('Login/Login').getValue(4, 7)
 
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
 
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
+                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
 
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
+                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
+                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
-                                ArrayList<WebElement> AddressType
+                    ArrayList<WebElement> AddressType
 
-                                ArrayList<WebElement> Ownership
+                    ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
+                    'get data array dari db'
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
-                                def spliexaddresstype = excludeaddresstype.split(';')
+                    'get data array dari db'
+                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
 
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
+                        AddressType)
 
-                                'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                    'get total label from ddl'
+                    int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
 
-                                'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
 
-                                'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
-                                    AddressType)
+                    'verify array dari db == option list confins'
+                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
+                        Ownership)
 
-                                'get total label from ddl'
-                                int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
+                    'get total label from ddl'
+                    int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'))
 
-                                'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
-
-                                'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'), 
-                                    Ownership)
-
-                                'get total label from ddl'
-                                int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'))
-
-                                'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalowneship - 1, Ownership.size())
-                            }
+                    'verify total ddl confins = total ddl db'
+                    WebUI.verifyEqual(totalowneship - 1, Ownership.size())
+                }
                             
                             inptuaddress()
 
@@ -261,7 +243,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
-                if (GlobalVariable.RoleCompany == 'Testing') {
+                               if (GlobalVariable.RoleCompany == 'Testing') {
                     'Koneksi database'
                     String servername = findTestData('Login/Login').getValue(1, 7)
 
@@ -283,14 +265,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                     ArrayList<WebElement> Ownership
 
-                    String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(sqlConnectionFOU)
-
-                    def spliexaddresstype = excludeaddresstype.split(';')
-
-                    String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, joinexaddresstype)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
                     'get data array dari db'
                     Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -509,6 +485,14 @@ def inputaddress() {
         5, FailureHandling.OPTIONAL)) {
         'click button back'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Cancel'))
+    }
+    
+    if (GlobalVariable.RoleCompany == 'Testing') {
+        GlobalVariable.NumofVerifStore = Address
+
+        'call test case verify address store data'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabAddressVerifStoreData'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
 

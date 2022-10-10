@@ -16,8 +16,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-
-import groovy.sql.Sql
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
@@ -29,6 +28,8 @@ String userDir = System.getProperty('user.dir')
 String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
 
 GlobalVariable.DataFilePath = filePath
+
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal')
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'Koneksi database'
@@ -735,15 +736,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
+	GlobalVariable.custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
+		
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 4)) == 0) {
-'Check alert'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '7.OtherAttribute')
+        GlobalVariable.NumofFamily, 4)) == 0) {
+    'Check alert'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '7.OtherAttribute')
 }
-	
+
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
@@ -767,5 +770,13 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
     }
+}
+
+if(GlobalVariable.RoleCompany == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+	
+	'call test case verify other attr store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabOtherAttributeVerifStoreData'), 
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

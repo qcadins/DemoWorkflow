@@ -23,14 +23,16 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal')
+
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal').getValue(
     GlobalVariable.NumofFamily, 12).equalsIgnoreCase('Input Data')) {
     'input contact person name'
     WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal').getValue(
             GlobalVariable.NumofFamily, 15))
-	
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/label_Contact Person Name'))
+
+    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/label_Contact Person Name'))
 
     'select id type'
     WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/select_ID Type'), 
@@ -272,5 +274,13 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     5, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+}
+
+if(GlobalVariable.RoleCompany == 'Testing'){
+GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+		
+'call test case verify emergency contact store data'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreData'), 
+    [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

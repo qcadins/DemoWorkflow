@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/OtherAttribute - Personal - Guarantor')
+
 if (GlobalVariable.Role == 'Testing') {
     'Koneksi database'
     String servername = findTestData('Login/Login').getValue(1, 7)
@@ -712,6 +714,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
     }
 }
 
+	GlobalVariable.custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
+		
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
@@ -745,3 +749,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     }
 }
 
+if (GlobalVariable.Role == 'Testing') {
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+
+	'call test case verify store data other attr'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabOtherAttributeVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+}

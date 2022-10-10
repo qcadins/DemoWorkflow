@@ -25,7 +25,9 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
 GlobalVariable.DataFilePath = filePath
 
-int copyAppColm = 0
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany')
+
+GlobalVariable.CopyAppColm = 0
 
 'get count colm'
 countcolm = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getColumnNumbers()
@@ -37,7 +39,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
             GlobalVariable.NumofGuarantor, 13))) {
-        copyAppColm = index
+        GlobalVariable.CopyAppColm = index
 
         break
     }
@@ -65,7 +67,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i', true)
 
-            for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+            for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 GlobalVariable.FlagFailed = 0
 
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
@@ -127,7 +129,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-    for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
@@ -187,7 +189,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
-    for (financialdata = copyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
             financialdata, 9).length() != 0) {
             if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
@@ -216,6 +218,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+}
+	
+if (GlobalVariable.RoleCompany == 'Testing') {
+	'call test case verify financial data store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabFinancialDataVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def inputdatafinancial() {

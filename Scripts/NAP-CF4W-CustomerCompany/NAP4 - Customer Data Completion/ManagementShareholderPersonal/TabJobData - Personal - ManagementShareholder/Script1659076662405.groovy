@@ -15,6 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal')
+
 if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) == 
 'EMPLOYEE') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobDataEmployeeManagementShareholder'), 
@@ -52,3 +54,12 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+		
+	'call test case verify job data store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabJobDataVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+	
+	

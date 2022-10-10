@@ -509,4 +509,9 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 4)</initValue>
       <name>CheckSortPagingCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>custname</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

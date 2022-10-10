@@ -25,6 +25,8 @@ String filePath = userDir + GlobalVariable.DataFileCustomerCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer')
+
 int copyAppColm = 0
 
 'get count colm'
@@ -103,16 +105,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -198,16 +192,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 ArrayList<WebElement> Ownership
 
-                                String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(
-                                    sqlConnectionFOU)
-
-                                def spliexaddresstype = excludeaddresstype.split(';')
-
-                                String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, 
-                                    joinexaddresstype)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -281,14 +267,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                     ArrayList<WebElement> Ownership
 
-                    String excludeaddresstype = CustomKeywords.'dbconnection.checkNAP4db.excludeAddressType'(sqlConnectionFOU)
-
-                    def spliexaddresstype = excludeaddresstype.split(';')
-
-                    String joinexaddresstype = spliexaddresstype.join('\',\'')
-
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU, joinexaddresstype)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
 
                     'get data array dari db'
                     Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -507,6 +487,14 @@ def inputaddress() {
         5, FailureHandling.OPTIONAL)) {
         'click button back'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Cancel'))
+    }
+    
+    if (GlobalVariable.RoleCompany == 'Testing') {
+        GlobalVariable.NumofVerifStore = Address
+
+        'call test case verify address store data'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabAddressVerifStoreData'), 
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
 

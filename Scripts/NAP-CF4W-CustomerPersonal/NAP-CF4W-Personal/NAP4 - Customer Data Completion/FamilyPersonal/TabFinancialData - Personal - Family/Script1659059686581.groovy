@@ -100,8 +100,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     WebUI.click(modifyNewbuttonedit)
 
                                     inputfinancialdata()
-									
-									
 
                                     break
                                 } else {
@@ -173,8 +171,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'))
 
                                 inputfinancialdata()
-								
-								
 
                                 break
                             }
@@ -204,8 +200,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'))
 
                     inputfinancialdata()
-					
-					
                 }
             }
         } else {
@@ -222,15 +216,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
-	
-	if(GlobalVariable.Role == 'Testing'){
-		 
-		'call test case verify store data financial'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreData'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-	}
 
-	
+if (GlobalVariable.Role == 'Testing') {
+    'call test case verify store data financial'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreData'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+
 
 def inputfinancialdata() {
     int flagWarning = 0

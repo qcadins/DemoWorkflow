@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderCompany
 
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany')
+
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
     GlobalVariable.NumofFamily, 12).split(';')
 
@@ -533,3 +535,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+		
+	'Call test case verify legal doc store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreData'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
