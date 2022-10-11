@@ -30,6 +30,9 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+'arraylist referantor name yang gagal'
+ArrayList <String> referantorfaileddelete = new ArrayList<>()
+
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
 	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -146,19 +149,43 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 					  
 						  'cek inputan mandatory apakah sudah terisi semua atau belum'
 						  if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||
-						  WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
-							  modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
+								  WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
+										  modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
 							  'write to excel WARNING'
 							  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								  0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-			  
+									  0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+							  
 							  'Write To Excel GlobalVariable.StatusReasonLookup'
 							  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								  1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+									  1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+							  
+							  'get referantor name'
+							  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+							  
+							  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 							  
 							  'Click delete'
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-			  
+							  
+							  if(i == variable.size()){
+								  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
+									  continue
+								  }else{
+									  'add cust name failed kedalam array'
+									  referantorfaileddelete.add(referantornamebefore)
+								  }
+							  }else{
+								  'get cust name sebelum delete'
+								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+										  
+										  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+											  continue	
+										  }else{
+											  'add cust name failed kedalam array'
+											  referantorfaileddelete.add(referantornamebefore)
+										  }
+							  }
+							  i--
 						  }
 						  break
 					  }
@@ -169,11 +196,35 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							  'Jika pada confins ada datanya'
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
-								  'Click delete'
-								  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								  
-								  i--
+							  		
+							  	'get referantor name'
+								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+							  
+								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								
+								'Click delete'
+								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+								
+								if(i == variable.size()){
+									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
+										continue
+									}else{
+									'add cust name failed kedalam array'
+									referantorfaileddelete.add(referantornamebefore)
+									}
+								}else{
+								'get cust name sebelum delete'
+								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+								
+								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+									continue	
+								}else{
+									'add cust name failed kedalam array'
+									referantorfaileddelete.add(referantornamebefore)
+								}
+								}
+								
+								i--
 							  }
 							  else{
 								  break
@@ -184,7 +235,16 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 		}
 	}
 	
-	
+		if(referantorfaileddelete.size() > 0){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+				'5.TabReferantorData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+			
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
+			
+			GlobalVariable.FlagWarning++
+		}
+		
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	int countData = variableData.size()
 	int add=0
@@ -301,11 +361,15 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 											1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 											   
-											   
-							   
 									'Click delete'
 									WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-							   
+									
+									if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+										'Write To Excel GlobalVariable.StatusReasonLookup'
+										CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+												1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+									}
+									
 									continue
 								}
 								
@@ -357,7 +421,14 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 								   
 								   'Click delete'
 								   WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-				   
+								   
+								   
+								   if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+									   'Write To Excel GlobalVariable.StatusReasonLookup'
+									   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+											   1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+								   }
+								   
 								   continue
 							   }
 							   
@@ -449,11 +520,19 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							 'Write To Excel GlobalVariable.StatusReasonLookup'
 							 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 									 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
-										
-										
-						
+							
+							 'get referantor name'
+							 referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+						   
 							 'Click delete'
 							 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+							 
+							 
+							 if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+								 'Write To Excel GlobalVariable.StatusReasonLookup'
+								 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+										 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+							 }
 						
 							 continue
 						 }
@@ -503,10 +582,44 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 							
-							
-							
 							'Click delete'
 							WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+							
+							
+							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+								'Write To Excel GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+										1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+							}
+							
+							'get referantor name'
+								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+							  
+								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								
+								'Click delete'
+								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+								
+								if(j == variable.size()){
+									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
+										continue
+									}else{
+									'add cust name failed kedalam array'
+									referantorfaileddelete.add(referantornamebefore)
+									}
+								}else{
+								'get cust name sebelum delete'
+								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+								
+								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+									continue	
+								}else{
+									'add cust name failed kedalam array'
+									referantorfaileddelete.add(referantornamebefore)
+								}
+								}
+								
+								j--
 			
 							continue
 						}
@@ -645,10 +758,15 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 					
-					
-	
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+					
+					
+					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+						'Write To Excel GlobalVariable.StatusReasonLookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+					}
 	
 					continue
 				}
@@ -699,11 +817,16 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 					
-					
-					
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-	
+					
+					
+					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+						'Write To Excel GlobalVariable.StatusReasonLookup'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+					}
+					
 					continue
 				}
 				
@@ -724,55 +847,7 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(
 							sqlConnection, referantorCode)
 		
-						'Ambil dan simpan npwp no dari confins'
-						String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-		
-						'Ambil dan simpan npwp name dari confins'
-						String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-		
-						'Ambil dan simpan address dari confins'
-						String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Address'))
-		
-						'ambil dan simpan rt dari confins'
-						String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
-							' ', '')
-		
-						'ambil dan simpan rw dari confins'
-						String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
-							'/ ', '')
-		
-						'ambil dan simpan kelurahan dari confins'
-						String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-		
-						'ambil dan simpan kecamatan dari confins'
-						String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-		
-						'ambil dan simpan kota dari confins'
-						String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-		
-						'ambil dan simpan zipcode dari confins'
-						String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
-		
-						'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-						ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
+						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
 		
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
@@ -798,55 +873,7 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(
 							sqlConnection, referantorCode)
 		
-						'Ambil dan simpan npwp no dari confins'
-						String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-		
-						'Ambil dan simpan npwp name dari confins'
-						String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-		
-						'Ambil dan simpan address dari confins'
-						String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Address'))
-		
-						'ambil dan simpan rt dari confins'
-						String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
-							' ', '')
-		
-						'ambil dan simpan rw dari confins'
-						String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
-							'/ ', '')
-		
-						'ambil dan simpan kelurahan dari confins'
-						String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-		
-						'ambil dan simpan kecamatan dari confins'
-						String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-		
-						'ambil dan simpan kota dari confins'
-						String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-		
-						'ambil dan simpan zipcode dari confins'
-						String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
-		
-						'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-						ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
+						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
 		
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
@@ -871,56 +898,9 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
 							sqlConnection, referantorCode)
 		
-						'Ambil dan simpan npwp no dari confins'
-						String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
-		
-						'Ambil dan simpan npwp name dari confins'
-						String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
-		
-						'Ambil dan simpan address dari confins'
-						String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Address'))
-		
-						'ambil dan simpan rt dari confins'
-						String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
-							' ', '')
-		
-						'ambil dan simpan rw dari confins'
-						String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
-							'/ ', '')
-		
-						'ambil dan simpan kelurahan dari confins'
-						String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
-		
-						'ambil dan simpan kecamatan dari confins'
-						String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
-		
-						'ambil dan simpan kota dari confins'
-						String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kota'))
-		
-						'ambil dan simpan zipcode dari confins'
-						String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
-		
-						'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
-						ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
-		
-						arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
-		
+						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
+						
+						
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
 							'write to excel WARNING'
@@ -946,13 +926,6 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 				
 				}
 				
-				Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 4))
-				
-				if(iscompleteMandatory==0){
-					errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData/div_errorvalidation')
-					'cek validasi'
-					CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofReferantor, '5.TabReferantorData')
-				}
 				
 				'write to excel SUCCESS'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
@@ -971,10 +944,11 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
-if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
-	'call test case store db referantor data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.CopyAppColm, 4))
+
+if(iscompleteMandatory==0){
+	'cek alert'
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.CopyAppColm, '5.TabReferantorData')	
 }
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -983,3 +957,64 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
 }
 
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes" && GlobalVariable.FlagFailed == 0){
+	'call test case store db referantor data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+public adddatatoarraylist(ArrayList<String> referantorDetail){
+	
+	
+	'Ambil dan simpan npwp no dari confins'
+	String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))
+
+	'Ambil dan simpan npwp name dari confins'
+	String textNPWPName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_NPWPName'))
+
+	'Ambil dan simpan address dari confins'
+	String textAddress = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Address'))
+
+	'ambil dan simpan rt dari confins'
+	String textRT = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RT')).replace(
+		' ', '')
+
+	'ambil dan simpan rw dari confins'
+	String textRW = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_RW')).replace(
+		'/ ', '')
+
+	'ambil dan simpan kelurahan dari confins'
+	String textKelurahan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kelurahan'))
+
+	'ambil dan simpan kecamatan dari confins'
+	String textKecamatan = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kecamatan'))
+
+	'ambil dan simpan kota dari confins'
+	String textCity = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Kota'))
+
+	'ambil dan simpan zipcode dari confins'
+	String textZipcode = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_Zipcode'))
+
+	'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
+	ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
+
+	arrayMatch.add(WebUI.verifyMatch(textNPWPNo, "(?i)"+referantorDetail[0], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textNPWPName, "(?i)"+referantorDetail[1], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textAddress, "(?i)"+referantorDetail[2], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textRT, "(?i)"+referantorDetail[3], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textRW, "(?i)"+referantorDetail[4], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textKelurahan, "(?i)"+referantorDetail[5], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textKecamatan, "(?i)"+referantorDetail[6], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textCity, "(?i)"+referantorDetail[7], true, FailureHandling.OPTIONAL))
+
+	arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
+	
+	return arrayMatch
+}

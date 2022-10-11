@@ -278,6 +278,6 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 		GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 		
 		'call test case verif store data emergency contact'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreData'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreDataDB'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}

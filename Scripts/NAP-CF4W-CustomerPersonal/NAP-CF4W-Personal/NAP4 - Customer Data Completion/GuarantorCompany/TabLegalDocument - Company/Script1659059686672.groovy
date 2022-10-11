@@ -542,7 +542,7 @@ if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes")
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'call test case verify legal doc store data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreData'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

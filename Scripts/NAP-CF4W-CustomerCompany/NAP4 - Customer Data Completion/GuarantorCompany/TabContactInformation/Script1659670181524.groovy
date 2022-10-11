@@ -233,7 +233,7 @@ if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBC
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'call test case verify contact info store data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreData'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

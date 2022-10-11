@@ -6,13 +6,21 @@
    <elementGuidId>d11e3d4c-77f4-4ad9-a0da-5880e1366ea7</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value></value>
       </entry>
       <entry>
-         <key>XPATH</key>
+         <key>BASIC</key>
          <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[6]/div/input</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[6]/div/input</value>
+   </webElementProperties>
 </WebElementEntity>

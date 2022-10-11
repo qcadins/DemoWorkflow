@@ -776,7 +776,7 @@ if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCo
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 	
 	'call test case verify other attr store data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabOtherAttributeVerifStoreData'), 
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabOtherAttributeVerifStoreDataDB'), 
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

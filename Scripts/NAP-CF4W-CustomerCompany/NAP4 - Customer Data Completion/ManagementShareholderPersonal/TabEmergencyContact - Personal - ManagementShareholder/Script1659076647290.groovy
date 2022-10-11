@@ -280,7 +280,7 @@ if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCo
 GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 		
 'call test case verify emergency contact store data'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreData'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreDataDB'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

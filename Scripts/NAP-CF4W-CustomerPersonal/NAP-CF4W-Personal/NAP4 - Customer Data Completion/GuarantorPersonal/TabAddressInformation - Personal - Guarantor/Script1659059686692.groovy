@@ -450,7 +450,7 @@ def inputaddress() {
         GlobalVariable.NumofVerifStore = Address
 
         'call test case verif store data db address'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreData'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreDataDB'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
