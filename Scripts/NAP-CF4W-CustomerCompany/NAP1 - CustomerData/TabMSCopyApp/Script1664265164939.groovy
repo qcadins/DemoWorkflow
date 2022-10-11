@@ -37,6 +37,11 @@ for (i = 1; i <= variableData.size(); i++) {
     modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
         'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
         i) + ']/td[2]', true)
+	
+	'modify object is Active'
+	modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+		'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+		i) + ']/td[5]', true)
 
     'modify object MS type'
     modifyNewMSTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -904,7 +909,7 @@ for (i = 1; i <= variableData.size(); i++) {
                     }
 					break
                 } else {
-				if(GlobalVariable.NumofColm == (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 1)){
+				if(GlobalVariable.NumofFamily == (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 1)){
                     'click button edit'
                     WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
@@ -926,9 +931,17 @@ for (i = 1; i <= variableData.size(); i++) {
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'))
                         }
                     }
-                    
+										
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
+					
+					'verify status MS is active = No'
+					if(WebUI.verifyMatch(WebUI.getText(modifyNewisActive), 'NO', false)){
+						break
+					}else{
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+						'2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedDelete + customertype)
+					}
 					
 					break
 				}

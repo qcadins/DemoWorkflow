@@ -36,7 +36,7 @@ datafileguarantorcompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerD
 
 copyapp = datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 10)
 
-ArrayList<WebElement> variableData
+ArrayList<String> variableData
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
@@ -452,8 +452,9 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
-                    not_run: if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
-                        not_run: if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+                    if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+                        not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
+                        'Yes')) {
                             'call test case company data verif'
                             not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataPersonalStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -708,7 +709,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     }
                     
                     if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                        if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+                        if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             'call test case company data store verif'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataCompanyStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -725,5 +726,6 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-Cus
     'click button save and continue'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 }
+
 WebUI.delay(15)
 

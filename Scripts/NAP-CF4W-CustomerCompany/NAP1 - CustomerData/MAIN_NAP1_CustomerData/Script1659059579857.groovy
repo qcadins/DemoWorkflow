@@ -29,9 +29,9 @@ String filePath = userDir + GlobalVariable.PathCompany
 GlobalVariable.DataFilePath = filePath
 
 'click menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+not_run: WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingCompany == 'Yes')) {
+not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingCompany == 'Yes')) {
     ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'
@@ -187,7 +187,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
 }
 
 'click add button'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
+not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Add'))
 
 'Ambil nilai office login dari confins'
 String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
@@ -424,7 +424,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
-            copyAppColm = GlobalVariable.NumofFamily
+            GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
 
             break
         }
@@ -445,21 +445,21 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         'Write to excel Success'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-            0, copyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
             (GlobalVariable.countNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+                1, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'click menu Customer main'
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -478,7 +478,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
-            copyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
@@ -506,14 +506,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
             (GlobalVariable.countNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+                1, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'click menu Customer main'
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -758,7 +758,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
-            copyAppColm = GlobalVariable.NumofFamily
+            GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
 
             break
         }
@@ -782,14 +782,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
             (GlobalVariable.countNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+                1, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'click menu Customer main'
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -808,7 +808,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
-            copyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
@@ -829,20 +829,20 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         'Write to excel Success'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            0, copyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
 
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep'), 
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-                0, copyAppColm - 1, GlobalVariable.StatusFailed)
+                0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
             (GlobalVariable.countNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-                1, copyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
+                1, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'click menu Customer main'
             WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
