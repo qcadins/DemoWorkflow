@@ -24,9 +24,11 @@ int flagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
-String filePath = userDir + GlobalVariable.PathPersonal
+String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
+
+ArrayList <String> custnamefaileddelete = new ArrayList<>()
 
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
@@ -302,12 +304,38 @@ for (i = 1; i <= variableData.size(); i++) {
                         if (GlobalVariable.NumofGuarantorCompany == (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
                         1)) {
                             if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
+								'get cust name sebelum delete'
+								CustNameBefore = WebUI.getText(modifyNewGuarantorName)
+								
+								variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+								
                                 'click button Delete'
                                 WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
                                 'accept alert'
                                 WebUI.acceptAlert()
-
+								
+								
+								if(i == variableData.size()){
+									if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
+										continue
+									}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+									}
+									
+								}else{
+								'get cust name sebelum delete'
+								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
+								
+								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
+									continue	
+								}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+								}
+								}
+								
                                 i--
                             }
                         }
@@ -320,5 +348,13 @@ for (i = 1; i <= variableData.size(); i++) {
     }
 }
 
-
+if(custnamefaileddelete.size() > 0){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3b.TabGuarantorDataCompany', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3b.TabGuarantorDataCompany', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
+	GlobalVariable.FlagWarning++
+}
 

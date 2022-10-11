@@ -527,6 +527,11 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>'Failed Delete'</initValue>
-      <name>StatusFailedDelete</name>
+      <name>ReasonFailedDelete</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>FlagWarning</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

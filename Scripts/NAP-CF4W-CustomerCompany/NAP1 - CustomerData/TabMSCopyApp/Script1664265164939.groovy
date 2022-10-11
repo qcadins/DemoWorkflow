@@ -940,7 +940,7 @@ for (i = 1; i <= variableData.size(); i++) {
 						break
 					}else{
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-						'2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailedDelete + customertype)
+						'2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + customertype)
 					}
 					
 					break

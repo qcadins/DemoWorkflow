@@ -446,7 +446,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         'customer added -1'
                         (GlobalVariable.countNumofCustomer)--
                     } else {
-                        if (flagWarning > 0) {
+                        if (flagWarning > 0 || GlobalVariable.FlagWarning > 0) {
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                         }
@@ -701,7 +701,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                             'customer added -1'
                             (GlobalVariable.countNumofCustomer)--
                         } else {
-                            if (flagWarning > 0) {
+                            if (flagWarning > 0 || GlobalVariable.FlagWarning > 0) {
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                             }

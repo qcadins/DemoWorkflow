@@ -491,11 +491,14 @@ for (i = 1; i <= variableData.size(); i++) {
 								'get cust name sebelum delete'
 								CustNameBefore = WebUI.getText(modifyNewGuarantorName)
 								
+								variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+								
                                 'click button Delete'
                                 WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
                                 'accept alert'
                                 WebUI.acceptAlert()
+								
 								
 								if(i == variableData.size()){
 									if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
@@ -527,6 +530,16 @@ for (i = 1; i <= variableData.size(); i++) {
             }
         }
     }
+}
+
+if(custnamefaileddelete.size() > 0){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3a.TabGuarantorDataPersonal', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3a.TabGuarantorDataPersonal', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
+	GlobalVariable.FlagWarning++
 }
 
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
