@@ -34,7 +34,8 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-        GlobalVariable.NumofGuarantor, 12)).replace('HEADER:', '').replace('[', '').replace(']', '')
+        GlobalVariable.NumofGuarantor, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+        GlobalVariable.NumofGuarantor, 18)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 

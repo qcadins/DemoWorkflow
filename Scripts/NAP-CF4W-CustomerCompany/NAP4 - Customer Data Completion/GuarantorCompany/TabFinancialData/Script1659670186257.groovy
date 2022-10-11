@@ -104,18 +104,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     inputdatafinancial()
 									
 									break
-                                } else {
-                                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
-                                        financialdata + 1, 9).length() == 0) {
-                                        'click button delete'
-                                        WebUI.click(modifyNewbuttondelete)
-
-                                        'accept alert'
-                                        WebUI.acceptAlert(FailureHandling.OPTIONAL)
-
-                                        i--
-                                    }
-                                }
+                                } 
+//								else {
+//                                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
+//                                        financialdata + 1, 9).length() == 0) {
+//                                        'click button delete'
+//                                        WebUI.click(modifyNewbuttondelete)
+//
+//                                        'accept alert'
+//                                        WebUI.acceptAlert(FailureHandling.OPTIONAL)
+//
+//                                        i--
+//                                    }
+//                                }
                             } else {
                                 break
                             }

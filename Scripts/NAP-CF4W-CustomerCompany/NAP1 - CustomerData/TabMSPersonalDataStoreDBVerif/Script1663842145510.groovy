@@ -54,7 +54,8 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBPersonal'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofFamily, 12)).replace('HEADER:', '').replace('[', '').replace(']', '')
+        GlobalVariable.NumofFamily, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+        GlobalVariable.NumofFamily, 19)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 
