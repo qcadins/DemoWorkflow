@@ -135,6 +135,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     Ownership)
                             }
                             
+							'call function input address'
                             inputaddress()
 
                             break
@@ -223,7 +224,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     Ownership)
                             }
                             
-                            inptuaddress()
+							'call function input address'
+                            inputaddress()
 
                             break
                         }
@@ -299,6 +301,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         Ownership)
                 }
                 
+				'call function input address'
                 inputaddress()
 
                 break
