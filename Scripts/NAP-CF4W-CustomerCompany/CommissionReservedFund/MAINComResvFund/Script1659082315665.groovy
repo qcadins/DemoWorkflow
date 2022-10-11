@@ -41,7 +41,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabC
 WebUI.delay(5)
 
 //Verify sort & paging
-if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingPersonalCompany=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'Klik Search'
@@ -59,14 +59,11 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	'Verify alert tidak muncul'
 	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
 	
-	'Klik header office'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_Office'))
+	'Klik header appNo'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_appNo'))
 	
 	'Verify alert tidak muncul'
 	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
-	
-	'Klik header appNo'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_appNo'))
 	
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/appNo')
@@ -75,7 +72,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 		listString.add(WebUI.getText(appNoObject))
 	}
 	'Verif sort appno ascending'
-	Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+	Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	listApp = new ArrayList<String>()
@@ -94,6 +91,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	
 	'Klik header custname'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_custName'))
+	
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/custName')
@@ -103,7 +104,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 		
 	}
 	'Verif sort custname ascending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header custname'
@@ -122,6 +123,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	
 	'Klik header product offering name'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_POName'))
+	
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/POName')
@@ -131,7 +136,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 		
 	}
 	'Verif sort po name ascending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header product offering name'

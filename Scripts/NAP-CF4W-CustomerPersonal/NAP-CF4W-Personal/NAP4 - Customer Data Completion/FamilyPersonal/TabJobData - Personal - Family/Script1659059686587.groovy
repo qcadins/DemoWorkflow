@@ -59,7 +59,7 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 	
 	'call test case store data'	

@@ -64,7 +64,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 	
-	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
+	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingPersonalCompany=="Yes"){
 		'click button search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
 		
@@ -82,14 +82,12 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 		'Verify alert tidak muncul'
 		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
 		
-		'Klik header office'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_Office'))
+		'Klik header appno'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
 		
 		'Verify alert tidak muncul'
 		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
 		
-		'Klik header appno'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
@@ -97,7 +95,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			listString.add(WebUI.getText(appNoObject))
 		}
 		'verif sort appno ascending'
-		Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		listApp = new ArrayList<String>()
@@ -115,6 +113,10 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 		
 		'Klik header custname'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
+		
+		'Verify alert tidak muncul'
+		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+		
 		listString = new ArrayList<String>()
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName')
@@ -124,7 +126,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort custname ascending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header custname'
@@ -143,6 +145,10 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 		
 		'Klik header product offering name'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
+		
+		'Verify alert tidak muncul'
+		WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+		
 		listString = new ArrayList<String>()
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName')
@@ -152,7 +158,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort poname ascending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header product offering anme'

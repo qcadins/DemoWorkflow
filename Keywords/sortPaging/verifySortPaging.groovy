@@ -23,7 +23,7 @@ import internal.GlobalVariable
 public class verifySortPaging {
 	// empty string: guaranteed to be less than or equal to any other
 	@Keyword
-	public verifySort(ArrayList<String> listString){
+	public verifySortAscending(ArrayList<String> listString){
 		//asc
 		String prev = ""
 		for (final String current: listString) {
@@ -63,15 +63,15 @@ public class verifySortPaging {
 		ArrayList<String> commonData = new ArrayList<>()
 		// Find common elements
 		for (String temp : dataPageOne) {
-  
+
 			// Check if element is present in page 2 or not
 			if (dataPageTwo.contains(temp)) {
-  
+
 				//If present, add it to commonData
 				commonData.add(temp);
 			}
 		}
-  
+
 		if(commonData.size()==0){
 			return true
 		}

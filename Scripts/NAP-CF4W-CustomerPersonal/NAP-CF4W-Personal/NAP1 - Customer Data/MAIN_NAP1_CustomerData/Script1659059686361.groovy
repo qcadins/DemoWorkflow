@@ -50,7 +50,7 @@ String POStat
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	'click button search'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
@@ -66,13 +66,12 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
 	'Verif tidak ada alert yang muncul'
 	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
 	
-	'Klik header office'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_Office'))
-	'Verif tidak ada alert yang muncul'
-	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
-	
 	'Klik header appno'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
+	
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo')
 				,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span/a",true)
@@ -80,7 +79,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
 		listString.add(WebUI.getText(appNoObject))
 	}
 	'Verif sort appno ascending'
-	Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+	Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	listApp = new ArrayList<String>()
@@ -100,6 +99,10 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
 	'Klik header custname 2x supaya descending'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
+	
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/custName')
@@ -114,6 +117,10 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
 	
 	'Klik header poname'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
+	
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName')
@@ -123,7 +130,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPaging=="Yes"){
 
 	}
 	'verif sort poname ascending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header poname'

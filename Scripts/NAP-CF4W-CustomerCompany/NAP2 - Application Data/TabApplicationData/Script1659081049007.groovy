@@ -583,7 +583,7 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
 
 WebUI.delay(5)
 
-//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
 //	'call test case store db verif application data'
 //	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), [:],
 //			FailureHandling.CONTINUE_ON_FAILURE)

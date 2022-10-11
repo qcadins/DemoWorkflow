@@ -813,7 +813,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
 WebUI.delay(2)
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
 	'call test case store db accessories data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

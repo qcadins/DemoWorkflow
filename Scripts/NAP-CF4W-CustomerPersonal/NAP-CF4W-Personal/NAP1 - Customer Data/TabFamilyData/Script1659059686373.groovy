@@ -681,7 +681,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
                 } else {
-                    if (flagWarning > 0) {
+                    if (flagWarning > 0 || GlobalVariable.FlagWarning>0) {
                         'Write to Excel WARNING'
                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
@@ -693,7 +693,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                 
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                     GlobalVariable.NumofFamily, 13) == 'Input Data') {
-                    if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
+                    if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
                         'call test case Family data store verif'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)

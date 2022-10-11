@@ -627,7 +627,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
 		'call test case store db application data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)

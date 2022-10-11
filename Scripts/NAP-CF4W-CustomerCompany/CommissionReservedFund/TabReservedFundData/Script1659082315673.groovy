@@ -306,7 +306,7 @@ if (flagFailed == 0) {
     }
 }
 
-if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
 	'call test case reserved fund datastore db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

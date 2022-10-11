@@ -28,6 +28,8 @@ String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+ArrayList<String> custnamefaileddelete = new ArrayList<>()
+
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
 for (i = 1; i <= variableData.size(); i++) {
@@ -697,12 +699,40 @@ for (i = 1; i <= variableData.size(); i++) {
                 } else {
                     if (GlobalVariable.NumofFamily == (Integer.parseInt(GlobalVariable.CountAFamily) + 1)) {
                         if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
+							
+							'get cust name sebelum delete'
+							CustNameBefore = WebUI.getText(modifyNewFamilyName)
+							
+							variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+							
                             'click button Delete'
                             WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
                             'accept alert'
                             WebUI.acceptAlert()
-
+							
+							if(i == variableData.size()){
+								if(WebUI.verifyElementNotPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)){
+									continue
+								}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+								}
+								
+							}
+							else{
+								'get cust name sebelum delete'
+								CustNameAfter = WebUI.getText(modifyNewFamilyName)
+								
+								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
+									continue
+								}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+								}
+							}
+							
+							
                             i--
                         }
                     }
@@ -712,6 +742,16 @@ for (i = 1; i <= variableData.size(); i++) {
             }
         }
     }
+}
+
+if(custnamefaileddelete.size() > 0){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
+	GlobalVariable.FlagWarning++
 }
 
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyData'), [:], 

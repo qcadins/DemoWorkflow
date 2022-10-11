@@ -54,7 +54,7 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 		
 	'call test case verify job data store data'
