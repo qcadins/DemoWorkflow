@@ -226,7 +226,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     }
 }
 
-if(GlobalVariable.RoleCompany == 'Testing'){
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
 GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 		
 'call test case verify customer detail store data'

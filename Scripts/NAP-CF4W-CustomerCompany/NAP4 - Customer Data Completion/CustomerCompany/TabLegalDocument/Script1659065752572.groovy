@@ -538,7 +538,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
-if(GlobalVariable.RoleCompany == 'Testing'){
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
 	
 	'Call test case verify legal doc store data'		

@@ -303,7 +303,7 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
         GlobalVariable.NumofColm, '10.TabTermConditionData')
 }
 
-//if (GlobalVariable.Role == 'Testing') {
+//if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 //    'call test case store db TC'
 //    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTCDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 //}

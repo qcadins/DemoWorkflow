@@ -88,7 +88,15 @@ if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 'check error validasi'
 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), GlobalVariable.NumofColm, '8.TabInsuranceData')
 }
+
 }
+
+//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+//	'call test case verify store to db'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
+//		[:], FailureHandling.CONTINUE_ON_FAILURE)
+//}
+
 'Verify input data'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
 	5, FailureHandling.OPTIONAL)) {
