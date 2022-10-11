@@ -26,7 +26,7 @@ public class checkOfficer {
 	@Keyword
 	public countOfficerLookup(Sql instance, String officeLoc){
 		Integer countData
-		instance.eachRow(("select count(*) from ref_user_role c join ref_job_title d on c.REF_JOB_TITLE_ID = d.REF_JOB_TITLE_ID join ref_office e on c.REF_OFFICE_ID = e.REF_OFFICE_ID where job_title_code = 'SALES_PERSON' and office_name = '"+officeLoc+"' and c.is_active=1 "), { def row ->
+		instance.eachRow(("select count(*) from ref_user_role userrole WITH(NOLOCK) join ref_job_title jobtitle on userrole.REF_JOB_TITLE_ID = jobtitle.REF_JOB_TITLE_ID join ref_office office on  userrole.REF_OFFICE_ID = office.REF_OFFICE_ID where job_title_code = 'SALES_PERSON' and office_name = '"+officeLoc+"' and userrole.is_active=1"), { def row ->
 			countData = (row[0])
 		})
 		return countData
@@ -35,16 +35,16 @@ public class checkOfficer {
 	@Keyword
 	public checkSPV(Sql instance, String username){
 		String spvname
-		instance.eachRow(("select EMP_NAME from REF_USER a join REF_EMP b on a.REF_EMP_ID = b.REF_EMP_ID where REF_USER_ID = (select top 1 SPV_ID from REF_EMP a JOIN REF_USER b on a.REF_EMP_ID = b.REF_EMP_ID JOIN REF_USER_ROLE c on b.REF_USER_ID = c.REF_USER_ID JOIN REF_ROLE d on c.REF_ROLE_ID = d.REF_ROLE_ID where USERNAME = '"+username+"' and c.IS_ACTIVE = 1)"), { def row ->
+		instance.eachRow(("select EMP_NAME from REF_USER refuser WITH(NOLOCK) join REF_EMP emp on refuser.REF_EMP_ID = emp.REF_EMP_ID where REF_USER_ID = (select top 1 SPV_ID from REF_EMP emp JOIN REF_USER refuser on emp.REF_EMP_ID = refuser.REF_EMP_ID JOIN REF_USER_ROLE userrole on refuser.REF_USER_ID = userrole.REF_USER_ID JOIN REF_ROLE d on userrole.REF_ROLE_ID = d.REF_ROLE_ID where USERNAME = '"+username+"' and userrole.IS_ACTIVE = 1)"), { def row ->
 			spvname = (row[0])
 		})
 		return spvname
 	}
-	
+
 	@Keyword
 	public checkOfficerName(Sql instance, String username){
 		String officerName
-		instance.eachRow(("select emp_name from ref_user a join ref_emp b on a.REF_EMP_ID = b.REF_EMP_ID where username = '"+username+"' and a.IS_ACTIVE=1 and b.IS_ACTIVE=1"), { def row ->
+		instance.eachRow(("select emp_name from ref_user refuser WITH(NOLOCK) join ref_emp refemp on refuser.REF_EMP_ID = refemp.REF_EMP_ID where username = '"+username+"' and refuser.IS_ACTIVE=1 and refemp.IS_ACTIVE=1"), { def row ->
 			officerName = (row[0])
 		})
 		return officerName

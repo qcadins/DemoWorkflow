@@ -26,7 +26,7 @@ public class checkInterestType {
 	@Keyword
 	public checkInterest(Sql instance,String prodname){
 		String interestType
-		instance.eachRow(("select distinct compnt_value from prod a join prod_h b on a.prod_id = b.prod_id join prod_d c on b.prod_h_id = c.prod_h_id join PROD_OFFERING d on d.PROD_ID = a.prod_id where prod_offering_name = '"+prodname+"' and ref_prod_compnt_code = 'intrsttype'"), { def row ->
+		instance.eachRow(("select distinct compnt_value from prod prod WITH(NOLOCK) join prod_h prodHead on prod.prod_id = prodHead.prod_id join prod_d prodDetail on prodHead.prod_h_id = prodDetail.prod_h_id join PROD_OFFERING d on d.PROD_ID = prod.prod_id where prod_offering_name = '"+prodname+"' and ref_prod_compnt_code = 'intrsttype'"), { def row ->
 			interestType = (row[0])
 		})
 		return interestType
