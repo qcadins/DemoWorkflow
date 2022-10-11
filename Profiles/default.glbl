@@ -502,7 +502,7 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(2, 4)</initValue>
-      <name>CheckSortPaging</name>
+      <name>CheckSortPagingPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -517,7 +517,7 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 4)</initValue>
-      <name>CheckVerifStoreDB</name>
+      <name>CheckVerifStoreDBPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

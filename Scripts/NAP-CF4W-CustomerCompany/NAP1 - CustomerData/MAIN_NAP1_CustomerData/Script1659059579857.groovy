@@ -31,7 +31,7 @@ GlobalVariable.DataFilePath = filePath
 'click menu customer main data'
 not_run: WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingCompany == 'Yes')) {
+not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingPersonalCompany == 'Yes')) {
     ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'
@@ -50,16 +50,12 @@ not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckS
     WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
         2)
 
-    'Klik header office'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_Office'))
-
-    'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-        2)
-
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
 
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
             'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -69,7 +65,7 @@ not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckS
     }
     
     'Verif sort appno ascending'
-    Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+    Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -96,6 +92,9 @@ not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckS
 
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
 
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
     listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
@@ -114,6 +113,9 @@ not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckS
     'Klik header poname'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
 
+	'Verify alert tidak muncul'
+	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	
     listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
@@ -125,7 +127,7 @@ not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckS
     }
     
     'verif sort poname ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySort'(listString)
+    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 

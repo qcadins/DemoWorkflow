@@ -1025,7 +1025,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 WebUI.delay(3)
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
 	'call test case store db referantor data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

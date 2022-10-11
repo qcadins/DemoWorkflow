@@ -944,11 +944,18 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
+<<<<<<< HEAD
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.CopyAppColm, 4))
 
 if(iscompleteMandatory==0){
 	'cek alert'
 	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.CopyAppColm, '5.TabReferantorData')	
+=======
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
+	'call test case store db referantor data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+>>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
 }
 
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),

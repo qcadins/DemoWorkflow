@@ -238,7 +238,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Back'))
 }
 
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
+if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 
     'call test case verify store data customer asset'

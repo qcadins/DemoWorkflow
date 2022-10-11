@@ -95,7 +95,7 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-//if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
+//if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
 //	'call test case verify store to db'
 //	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
 //		[:], FailureHandling.CONTINUE_ON_FAILURE)

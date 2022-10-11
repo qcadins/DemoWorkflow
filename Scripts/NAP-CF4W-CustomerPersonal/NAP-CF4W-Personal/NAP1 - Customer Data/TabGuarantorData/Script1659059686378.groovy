@@ -315,7 +315,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                         } else {
-                            if (flagWarning > 0) {
+                            if (flagWarning > 0 || GlobalVariable.FlagWarning>0) {
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                             }
@@ -493,7 +493,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                             } else {
-                                if (flagWarning > 0) {
+                                if (flagWarning > 0 || GlobalVariable.FlagWarning>0) {
                                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                                 }
@@ -505,7 +505,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                     }
                     
                     if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
-                        if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
+                        if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
                             'call test case company data store verif'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -688,7 +688,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                         } else {
-                            if (flagWarning > 0) {
+                            if (flagWarning > 0 || GlobalVariable.FlagWarning>0) {
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                             }
@@ -799,7 +799,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                             } else {
-                                if (flagWarning > 0) {
+                                if (flagWarning > 0 || GlobalVariable.FlagWarning>0) {
                                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                                 }
@@ -811,7 +811,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                     }
                     
                     if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                        if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDB=="Yes") {
+                        if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
                             'call test case company data store verif'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataCompanyStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
