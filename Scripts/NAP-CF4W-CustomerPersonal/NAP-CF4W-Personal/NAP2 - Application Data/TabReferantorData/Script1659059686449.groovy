@@ -162,27 +162,27 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  'get referantor name'
 							  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 							  
-							  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-							  
 							  'Click delete'
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							  
 							  if(i == variable.size()){
 								  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-									  continue
+									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								  }else{
 									  'add cust name failed kedalam array'
 									  referantorfaileddelete.add(referantornamebefore)
+									  continue
 								  }
 							  }else{
 								  'get cust name sebelum delete'
 								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 										  
 										  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-											  continue
+											  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										  }else{
 											  'add cust name failed kedalam array'
 											  referantorfaileddelete.add(referantornamebefore)
+											  continue
 										  }
 							  }
 							  i--
@@ -197,31 +197,31 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 									  
-								  'get referantor name'
+								 'get referantor name'
 								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 							  
-								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								
 								'Click delete'
 								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								
 								if(i == variable.size()){
 									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-										continue
+										variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 									}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
+										'add cust name failed kedalam array'
+										referantorfaileddelete.add(referantornamebefore)
+										continue
 									}
 								}else{
-								'get cust name sebelum delete'
-								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+									'get cust name sebelum delete'
+									referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 								
-								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-									continue
-								}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
-								}
+									if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+										variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+									}else{
+										'add cust name failed kedalam array'
+										referantorfaileddelete.add(referantornamebefore)
+										continue
+									}
 								}
 								
 								i--

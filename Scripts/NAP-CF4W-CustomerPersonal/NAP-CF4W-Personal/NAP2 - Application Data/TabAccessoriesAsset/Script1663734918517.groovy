@@ -168,8 +168,6 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  
 							 'get referantor name'
 							 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-                        			
-							 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 							
 							 'Click delete'
 							 WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -179,20 +177,22 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 
 							 if(i == variable.size()){
 								 if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									 continue
+									 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								 }else{
 									'add cust name failed kedalam array'
 									accessoriesnamefaileddelete.add(accessoriesnamebefore)
+									continue
 								 }
 							 }else{
 									'get cust name sebelum delete'
 									accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											continue
+											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
 											'add cust name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
+											continue
 										}
 							 }
 							 i--
@@ -214,8 +214,6 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								  
 							  	 'get referantor name'
 								 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-									  
-								 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 							  	  
 								 'Click delete'
 								  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -225,20 +223,22 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								  
 								  if(i == variable.size()){
 										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-											continue
+												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
 											'add cust name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
+											continue
 										}
 								  }else{
 										'get cust name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											continue
+												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
 											'add cust name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
+											continue
 										}
 								  }
 								  i--

@@ -309,8 +309,6 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						'get subsidy allocation'
 						subsidyallocationnamebefore = WebUI.getText(modifyNewSubsidyAllocation)
 								
-						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-								
 						'click button delete'
 						WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 								
@@ -318,11 +316,11 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 								
 						if(i == variable.size()){
 								if(WebUI.verifyElementNotPresent(modifyNewSubsidyAllocation, 5, FailureHandling.OPTIONAL)){
-										i--
-										continue
+										variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 								}else{
 										'add cust name failed kedalam array'
 										subsidyfaileddelete.add(subsidyallocationnamebefore)
+										continue
 								}
 									
 						}else{
@@ -330,10 +328,11 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 								subsidyallocationnameAfter = WebUI.getText(modifyNewSubsidyAllocation)
 											
 								if(WebUI.verifyNotMatch(subsidyallocationnameAfter, subsidyallocationnamebefore, false, FailureHandling.OPTIONAL)){
-										continue
+										variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 								}else{
 										'add cust name failed kedalam array'
 										subsidyfaileddelete.add(subsidyallocationnamebefore)
+										continue
 								}
 						}
 						

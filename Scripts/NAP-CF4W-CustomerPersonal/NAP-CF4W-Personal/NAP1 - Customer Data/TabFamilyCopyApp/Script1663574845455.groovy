@@ -703,8 +703,6 @@ for (i = 1; i <= variableData.size(); i++) {
 							'get cust name sebelum delete'
 							CustNameBefore = WebUI.getText(modifyNewFamilyName)
 							
-							variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-							
                             'click button Delete'
                             WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
@@ -713,10 +711,11 @@ for (i = 1; i <= variableData.size(); i++) {
 							
 							if(i == variableData.size()){
 								if(WebUI.verifyElementNotPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)){
-									continue
+									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 								}else{
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
+									continue
 								}
 								
 							}
@@ -725,10 +724,11 @@ for (i = 1; i <= variableData.size(); i++) {
 								CustNameAfter = WebUI.getText(modifyNewFamilyName)
 								
 								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
-									continue
+									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 								}else{
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
+									continue
 								}
 							}
 							

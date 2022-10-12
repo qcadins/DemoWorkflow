@@ -357,8 +357,6 @@ for (i = 1; i <= variableData.size(); i++) {
 								'get cust name sebelum delete'
 								CustNameBefore = WebUI.getText(modifyNewGuarantorName)
 								
-								variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-								
                                 'click button Delete'
                                 WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
@@ -367,10 +365,11 @@ for (i = 1; i <= variableData.size(); i++) {
 								
 								if(i == variableData.size()){
 									if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
-										continue
+										variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 									}else{
 										'add cust name failed kedalam array'
 										custnamefaileddelete.add(CustNameBefore)
+										continue
 									}
 									
 								}
@@ -379,10 +378,11 @@ for (i = 1; i <= variableData.size(); i++) {
 									CustNameAfter = WebUI.getText(modifyNewGuarantorName)
 									
 									if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
-										continue
+										variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 									}else{
 										'add cust name failed kedalam array'
 										custnamefaileddelete.add(CustNameBefore)
+										continue
 									}
 								}
 
