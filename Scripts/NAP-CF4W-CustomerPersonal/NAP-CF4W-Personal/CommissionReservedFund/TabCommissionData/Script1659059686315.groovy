@@ -895,6 +895,16 @@ if (variableRef.size() > 0) {
     }
 }
 
+if(commissiondelete.size() > 0){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'13.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'13.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
+	
+	GlobalVariable.FlagWarning++
+}
+
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Calculate'))
 

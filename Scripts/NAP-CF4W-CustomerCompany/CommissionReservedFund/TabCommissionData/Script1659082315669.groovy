@@ -69,6 +69,8 @@ ArrayList<WebElement> refundAmt = result.get('Amt')
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
 
+ArrayList <String> commissiondelete = new ArrayList<>()
+
 if (GlobalVariable.RoleCompany == 'Testing') {
     'Looping untuk set nilai awal 0 untuk total amount allocate commission dan verif income info berdasarkan rule file'
     for (int i = 0; i < countIncomeInfo; i++) {
@@ -152,11 +154,18 @@ if (variableSupp.size() > 0) {
 
     'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
     if (supplierName.equalsIgnoreCase(deleteSupp)) {
+		'Get supplier name'
+		supplierDelete = WebUI.getText(supplierName)
+		
         'Click icon delete (tempat sampah)'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_deletesupp'))
 
         'Click OK pada alert'
         WebUI.acceptAlert()
+		
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
+			commissiondelete.add(supplierDelete)
+		}
     } else {
         String supplierCode
 
@@ -388,6 +397,8 @@ if (variableSuppEmp.size() > 0) {
 
                     modifyDelSuppEmp = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_deleteSuppEmp'), 
                         'xpath', 'equals', newxpathDelSuppEmp, true)
+					
+					supplierEmpDelete = supplierEmployeeName
 
                     'Klik icon delete pada supplier employee tersebut (tempat sampah)'
                     WebUI.click(modifyDelSuppEmp)
@@ -395,8 +406,29 @@ if (variableSuppEmp.size() > 0) {
                     'Klik OK pada alert yang muncul'
                     WebUI.acceptAlert()
 
-                    'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
-                    variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
+                    if(i == variableSuppEmp.size()){
+						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, 5, FailureHandling.OPTIONAL)){
+								'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
+								variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
+						}else{
+								'add cust name failed kedalam array'
+								commissiondelete.add(supplierEmpDelete)
+								continue
+						}
+							
+					}else{
+							'get cust name setelah delete'
+							supplierEmpNameAfter = WebUI.getText(modifyObjectSuppEmpName)
+										
+							if(WebUI.verifyNotMatch(supplierEmpNameAfter, supplierEmpDelete, false, FailureHandling.OPTIONAL)){
+									'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
+									variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
+							}else{
+									'add cust name failed kedalam array'
+									commissiondelete.add(supplierEmpDelete)
+									continue
+							}
+					}
 
                     i = (i - 1)
 
@@ -642,8 +674,29 @@ if (variableRef.size() > 0) {
                     'Klik OK pada alert yang muncul'
                     WebUI.acceptAlert()
 
-                    'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
-                    variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
+                    if(i == variableRef.size()){
+							if(WebUI.verifyElementNotPresent(modifyObjectRefName, 5, FailureHandling.OPTIONAL)){
+								'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
+								variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
+							}else{
+								'add cust name failed kedalam array'
+								commissiondelete.add(refName)
+								continue
+							}
+							
+					}else{
+							'get cust name setelah delete'
+							refNameAfter = WebUI.getText(modifyObjectRefName)
+										
+							if(WebUI.verifyNotMatch(refNameAfter, refName, false, FailureHandling.OPTIONAL)){
+									'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
+									variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
+							}else{
+									'add cust name failed kedalam array'
+									commissiondelete.add(refName)
+									continue
+							}
+					}
 
                     i = (i - 1)
 
@@ -837,6 +890,16 @@ if (variableRef.size() > 0) {
     }
 }
 
+if(commissiondelete.size() > 0){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'12.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'12.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
+	
+	GlobalVariable.FlagWarning++
+}
+
 'Klik Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
@@ -898,7 +961,7 @@ if (flagFailed == 0) {
     }
 }
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 	'call test case commission datastore db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
