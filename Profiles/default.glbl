@@ -534,4 +534,9 @@
       <initValue>0</initValue>
       <name>FlagWarning</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\AssetRegionRule.xlsx'</initValue>
+      <name>AssetRegRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

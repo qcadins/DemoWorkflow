@@ -54,6 +54,15 @@ String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cus
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
 
+if(GlobalVariable.RoleCompany=="Testing"){
+	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
+	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
+	
+//	'Verif default asset region based on rule'
+//	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)
+	
+}
+
 'Select option dropdownlist Asset Region'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),
 	findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
