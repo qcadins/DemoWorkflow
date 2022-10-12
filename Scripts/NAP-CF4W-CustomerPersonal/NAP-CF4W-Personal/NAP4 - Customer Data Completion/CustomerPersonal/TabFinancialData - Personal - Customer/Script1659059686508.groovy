@@ -35,6 +35,8 @@ countcolm = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSin
 
 ArrayList<WebElement> variable
 
+ArrayList <String> financialdatedelete = new ArrayList<>()
+
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
@@ -112,6 +114,28 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                         'accept alert'
                                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
+										
+										if(i == variable.size()){
+											if(WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)){
+												variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+											}else{
+												'add cust name failed kedalam array'
+												financialdatedelete.add(modifyDateNew)
+												continue
+											}
+											
+										}else{
+											'get cust name sebelum delete'
+											modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
+													
+											if(WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)){
+												variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+											}else{
+												'add cust name failed kedalam array'
+												financialdatedelete.add(modifyDateNew)
+												continue
+											}
+										}
 
                                         i--
                                     }
@@ -128,6 +152,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
+		
+	if(financialdatedelete.size() > 0){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+					'5.FinancialData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+			
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+					'5.FinancialData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialdatedelete)
+			
+			GlobalVariable.FlagWarning++
+	}
+	
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
