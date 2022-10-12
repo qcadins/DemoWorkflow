@@ -163,7 +163,7 @@ if (variableSupp.size() > 0) {
         'Click OK pada alert'
         WebUI.acceptAlert()
 		
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
 			commissiondelete.add(supplierDelete)
 		}
     } else {
