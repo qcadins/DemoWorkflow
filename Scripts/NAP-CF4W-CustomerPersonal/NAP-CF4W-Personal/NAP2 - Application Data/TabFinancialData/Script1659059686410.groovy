@@ -309,35 +309,35 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						'get subsidy allocation'
 						subsidyallocationnamebefore = WebUI.getText(modifyNewSubsidyAllocation)
 								
-								variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
+						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 								
-								'click button delete'
-								WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
+						'click button delete'
+						WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 								
-								WebUI.acceptAlert(FailureHandling.OPTIONAL)
+						WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								
-								if(i == variable.size()){
-									if(WebUI.verifyElementNotPresent(modifyNewSubsidyAllocation, 5, FailureHandling.OPTIONAL)){
+						if(i == variable.size()){
+								if(WebUI.verifyElementNotPresent(modifyNewSubsidyAllocation, 5, FailureHandling.OPTIONAL)){
 										i--
 										continue
-									}else{
-										'add cust name failed kedalam array'
-										subsidyfaileddelete.add(subsidyallocationnamebefore)
-									}
-									
 								}else{
-									'get cust name sebelum delete'
-									subsidyallocationnameAfter = WebUI.getText(modifyNewSubsidyAllocation)
-											
-									if(WebUI.verifyNotMatch(subsidyallocationnameAfter, subsidyallocationnamebefore, false, FailureHandling.OPTIONAL)){
-										continue
-									}else{
 										'add cust name failed kedalam array'
 										subsidyfaileddelete.add(subsidyallocationnamebefore)
-									}
 								}
+									
+						}else{
+								'get cust name sebelum delete'
+								subsidyallocationnameAfter = WebUI.getText(modifyNewSubsidyAllocation)
+											
+								if(WebUI.verifyNotMatch(subsidyallocationnameAfter, subsidyallocationnamebefore, false, FailureHandling.OPTIONAL)){
+										continue
+								}else{
+										'add cust name failed kedalam array'
+										subsidyfaileddelete.add(subsidyallocationnamebefore)
+								}
+						}
 						
-								i--
+						i--
 					} else {
 						break
 					}
