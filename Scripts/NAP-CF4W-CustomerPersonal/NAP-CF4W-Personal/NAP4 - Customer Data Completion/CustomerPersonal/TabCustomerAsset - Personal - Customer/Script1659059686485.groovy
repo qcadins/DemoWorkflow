@@ -29,6 +29,8 @@ String filePath = userDir + GlobalVariable.DataFileCustomerPersonal
 
 GlobalVariable.DataFilePath = filePath
 
+ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer').getValue(
@@ -59,6 +61,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
 
+			'modify object customer asset desc'
+			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
+			
             'modify object button edit'
             modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[6]/a/i', true)
@@ -104,11 +110,45 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         break
                     } else {
                         if (asset == assettypearray.size()) {
+							
+							'get asset type sebelum delete'
+							assettypebefore = WebUI.getText(modifyNewcustomeassetType)
+
+							'get asset desc sebelum delete'
+							assetdescbefore = WebUI.getText(modifyNewcustomeassetDesc)
+							
                             'click button delete'
                             WebUI.click(modifyNewbuttondelete)
 
                             'acceptalert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
+							
+							if (i == variable.size()) {
+								if (WebUI.verifyElementNotPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
+									'count ulang table pada confins'
+									variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
+								} else {
+								   'add asset type failed kedalam array'
+									assettypefaileddelete.add(assettypebefore + assetdescbefore)
+								}
+							} else {
+								'get asset type setelah delete'
+								assettypeafter = WebUI.getText(modifyNewcustomeassetType)
+
+								'get asset desc setelah delete'
+								assetdescAfter = WebUI.getText(modifyNewcustomeassetDesc)
+
+								if (WebUI.verifyNotMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) &&
+								WebUI.verifyNotMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
+									'count ulang table pada confins'
+									variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
+								} else {
+									'add asset type failed kedalam array'
+									assettypefaileddelete.add(assettypebefore + assetdescbefore)
+
+									continue
+								}
+							}
 
                             i--
                         }
@@ -119,6 +159,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
         }
     }
+		
+	if (assettypefaileddelete.size() > 0) {
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+	
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+	
+			(GlobalVariable.FlagWarning)++
+	}
     
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
