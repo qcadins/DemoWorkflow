@@ -29,6 +29,8 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderCompany
 
 GlobalVariable.DataFilePath = filePath
 
+ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
@@ -58,6 +60,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'modify object customer asset type'
             modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
+
+            'modify object customer asset desc'
+            modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
+                'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
 
             'modify object button edit'
             modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
@@ -104,12 +110,45 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         break
                     } else {
                         if (asset == assettypearray.size()) {
+                            'get asset type sebelum delete'
+                            assettypebefore = WebUI.getText(modifyNewcustomeassetType)
+
+                            'get asset desc sebelum delete'
+                            assetdescbefore = WebUI.getText(modifyNewcustomeassetDesc)
+
                             'click button delete'
                             WebUI.click(modifyNewbuttondelete)
 
                             'acceptalert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
+                            if (i == variable.size()) {
+                                if (WebUI.verifyElementNotPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                                } else {
+                                    'add asset type failed kedalam array'
+                                    assettypefaileddelete.add(assettypebefore + assetdescbefore)
+                                }
+                            } else {
+                                'get asset type setelah delete'
+                                assettypeafter = WebUI.getText(modifyNewcustomeassetType)
+
+                                'get asset desc setelah delete'
+                                assetdescAfter = WebUI.getText(modifyNewcustomeassetDesc)
+
+                                if (WebUI.verifyNotMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
+                                WebUI.verifyNotMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                                } else {
+                                    'add asset type failed kedalam array'
+                                    assettypefaileddelete.add(assettypebefore + assetdescbefore)
+
+                                    continue
+                                }
+                            }
+                            
                             i--
                         }
                     }
@@ -118,6 +157,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 }
             }
         }
+    }
+    
+    if (assettypefaileddelete.size() > 0) {
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
+            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
+            1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+
+        (GlobalVariable.FlagWarning)++
     }
     
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
@@ -238,7 +287,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Back'))
 }
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
 
     'Call test case verify customer asset store data'

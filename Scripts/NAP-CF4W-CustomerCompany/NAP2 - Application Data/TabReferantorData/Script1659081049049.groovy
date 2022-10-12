@@ -162,14 +162,13 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							  'get referantor name'
 							  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 							  
-							  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-							  
 							  'Click delete'
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							  
 							  if(i == variable.size()){
 								  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-									  continue
+									  'count ulang table pada confins'
+									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								  }else{
 									  'add cust name failed kedalam array'
 									  referantorfaileddelete.add(referantornamebefore)
@@ -179,10 +178,13 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 										  
 										  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-											  continue	
+											  'count ulang table pada confins'
+											  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))	
 										  }else{
 											  'add cust name failed kedalam array'
 											  referantorfaileddelete.add(referantornamebefore)
+											  
+											  continue
 										  }
 							  }
 							  i--
@@ -197,34 +199,36 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 							  		
-							  	'get referantor name'
-								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-							  
-								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								
-								'Click delete'
-								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-								
-								if(i == variable.size()){
-									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-										continue
-									}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
-									}
-								}else{
-								'get cust name sebelum delete'
-								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-								
-								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-									continue	
-								}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
-								}
-								}
-								
-								i--
+								  'get referantor name'
+								  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+										  
+										  'Click delete'
+										  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+										  
+										  if(i == variable.size()){
+											  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
+												  'count ulang table pada confins'
+												  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+											  }else{
+												  'add cust name failed kedalam array'
+												  referantorfaileddelete.add(referantornamebefore)
+											  }
+										  }else{
+											  'get cust name sebelum delete'
+											  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+													  
+													  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+														  'count ulang table pada confins'
+														  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))	
+													  }else{
+														  'add cust name failed kedalam array'
+														  referantorfaileddelete.add(referantornamebefore)
+														  
+														  continue
+													  }
+										  }
+								  
+								  i--
 							  }
 							  else{
 								  break
@@ -594,15 +598,14 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 							
 							'get referantor name'
 								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-							  
-								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								
 								'Click delete'
 								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								
 								if(j == variable.size()){
 									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-										continue
+										'count ulang table pada confins'
+										variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 									}else{
 									'add cust name failed kedalam array'
 									referantorfaileddelete.add(referantornamebefore)
@@ -612,7 +615,8 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData
 								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 								
 								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-									continue	
+									'count ulang table pada confins'
+									variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))	
 								}else{
 									'add cust name failed kedalam array'
 									referantorfaileddelete.add(referantornamebefore)
