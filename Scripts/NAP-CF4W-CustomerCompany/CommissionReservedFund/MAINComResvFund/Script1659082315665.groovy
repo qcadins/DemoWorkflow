@@ -41,7 +41,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabC
 WebUI.delay(5)
 
 //Verify sort & paging
-if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingPersonalCompany=="Yes"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'Klik Search'

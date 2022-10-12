@@ -24,6 +24,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
+//Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	

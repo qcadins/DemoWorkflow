@@ -34,7 +34,8 @@ GlobalVariable.DataFilePath = filePath
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
 
-if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingPersonalCompany=="Yes"){
+//Verify sort & paging
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'click button search'

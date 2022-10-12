@@ -50,6 +50,7 @@ String POStat
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
+//Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	'click button search'

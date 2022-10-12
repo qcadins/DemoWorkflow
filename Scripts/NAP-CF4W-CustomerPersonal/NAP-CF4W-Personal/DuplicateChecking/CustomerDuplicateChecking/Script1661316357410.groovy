@@ -78,6 +78,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Customer Duplicate Checking'))
 
+	//Verify sort & paging
 	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
 		'click button search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))

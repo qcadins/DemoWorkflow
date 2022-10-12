@@ -31,7 +31,8 @@ GlobalVariable.DataFilePath = filePath
 'click menu customer main data'
 not_run: WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
-not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingPersonalCompany == 'Yes')) {
+//Verify sort & paging
+not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingCompany == 'Yes')) {
     ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'

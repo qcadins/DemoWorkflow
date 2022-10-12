@@ -26,6 +26,7 @@ GlobalVariable.CopyAppColm=2
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+//Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
 	ArrayList<String> listString = new ArrayList<String>()
 	

@@ -60,11 +60,13 @@ String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
 
+
 if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 	
-	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingPersonalCompany=="Yes"){
+	//Verify sort & paging
+	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
 		'click button search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
 		
