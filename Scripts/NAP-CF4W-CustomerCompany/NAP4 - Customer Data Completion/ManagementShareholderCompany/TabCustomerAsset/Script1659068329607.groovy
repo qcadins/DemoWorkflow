@@ -125,7 +125,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (i == variable.size()) {
                                 if (WebUI.verifyElementNotPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
                                     'count ulang table pada confins'
-                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                                 } else {
                                     'add asset type failed kedalam array'
                                     assettypefaileddelete.add(assettypebefore + assetdescbefore)
@@ -140,7 +140,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyNotMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
                                 WebUI.verifyNotMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
                                     'count ulang table pada confins'
-                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                                    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                                 } else {
                                     'add asset type failed kedalam array'
                                     assettypefaileddelete.add(assettypebefore + assetdescbefore)
