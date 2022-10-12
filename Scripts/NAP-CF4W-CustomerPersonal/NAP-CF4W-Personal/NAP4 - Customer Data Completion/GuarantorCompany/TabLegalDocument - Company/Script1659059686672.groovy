@@ -27,6 +27,8 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompany
 
 GlobalVariable.DataFilePath = filePath
 
+ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor')
 
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor').getValue(
@@ -182,12 +184,45 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     break
                 } else {
                     if (legal == LegalDocTypeArray.size()) {
+                        'get legal doc type sebelum delete'
+                        legaldoctypebefore = WebUI.getText(modifyNewLegalDocType)
+
+                        'get legal doc no sebelum delete'
+                        legaldocnobefore = WebUI.getText(modifyNewDocNo)
+
                         'click button delete'
                         WebUI.click(modifyNewbuttondelete)
 
                         'acceptalert'
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
+                        if (i == variable.size()) {
+                            if (WebUI.verifyElementNotPresent(modifyNewLegalDocType, 5, FailureHandling.OPTIONAL)) {
+                                'count ulang table pada confins'
+                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                            } else {
+                                'add legal failed kedalam array'
+                                legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
+                            }
+                        } else {
+                            'get legal doc type setelah delete'
+                            legaldoctypeafter = WebUI.getText(modifyNewLegalDocType)
+
+                            'get legal doc no setelah delete'
+                            legaldocnoAfter = WebUI.getText(modifyNewDocNo)
+
+                            if (WebUI.verifyNotMatch(legaldoctypeafter, legaldoctypebefore, false, FailureHandling.OPTIONAL) && 
+                            WebUI.verifyNotMatch(legaldocnoAfter, legaldocnobefore, false, FailureHandling.OPTIONAL)) {
+                                'count ulang table pada confins'
+                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                            } else {
+                                'add legal failed kedalam array'
+                                legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
+
+                                continue
+                            }
+                        }
+                        
                         i--
                     }
                 }
@@ -195,6 +230,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 break
             }
         }
+    }
+    
+    if (legaltypefaileddelete.size() > 0) {
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+            0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+            1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+
+        (GlobalVariable.FlagWarning)++
     }
     
     if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/buttonedit'), 
@@ -538,7 +583,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'call test case verify legal doc store data'

@@ -167,8 +167,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             'get referantor name'
                         	accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-                        			
-                        	variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 							
                             'Click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -178,7 +176,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 							if(i == variable.size()){
 								if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									continue
+									'count ulang table pada confins'		
+									variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								}else{
 									'add cust name failed kedalam array'
 									accessoriesnamefaileddelete.add(accessoriesnamebefore)
@@ -188,7 +187,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 								accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											continue
+											'count ulang table pada confins'		
+											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
 											'add cust name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
@@ -213,9 +213,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                         	'get referantor name'
                         	accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-                        			
-                        	variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-							
+                        	
                             'Click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 
@@ -224,7 +222,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
 							if(i == variable.size()){
 								if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									continue
+									'count ulang table pada confins'		
+									variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								}else{
 									'add cust name failed kedalam array'
 									accessoriesnamefaileddelete.add(accessoriesnamebefore)
@@ -234,7 +233,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 								accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											continue
+											'count ulang table pada confins'		
+											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
 											'add cust name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
