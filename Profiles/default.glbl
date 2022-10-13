@@ -536,11 +536,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Rule\\AssetRegionRule.xlsx'</initValue>
-      <name>AssetRegRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>'Failed Verify Rule'</initValue>
       <name>ReasonFailedVerifyRule</name>
    </GlobalVariableEntity>
@@ -553,5 +548,10 @@
       <description></description>
       <initValue>'Failed Verify Data DDL'</initValue>
       <name>ReasonFailedDDL</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Store DB'</initValue>
+      <name>ReasonFailedStoredDB</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

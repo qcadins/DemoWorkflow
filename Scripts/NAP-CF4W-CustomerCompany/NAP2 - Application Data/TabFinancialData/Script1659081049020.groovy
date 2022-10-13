@@ -147,7 +147,15 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     }
     
     'Verif jumlah data subsidy yang muncul pada confins sesuai dengan rule'
-    WebUI.verifyEqual(varsize, SubsidyFromType.size())
+    if(WebUI.verifyEqual(varsize, SubsidyFromType.size()) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+		'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	}
 
     'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
     if ((varsize == SubsidyFromType.size()) && (varsize > 0)) {
@@ -182,33 +190,91 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 'xpath', 'equals', ('//*[@id=\'FinData_Subsidy\']/div[2]/table/tbody/tr[' + i) + ']/td[7]', true)
 
             'Verif subsidy from type sesuai rule'
-            WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(
-                        modifyNewFromTypeName)), SubsidyFromType.get(i - 1), false)
+            if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(
+                        modifyNewFromTypeName)), SubsidyFromType.get(i - 1), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             'Verif subsidy from value sesuai rule'
-            WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName), SubsidyFromValue.get(i - 1), false)
+            if(WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName), SubsidyFromValue.get(i - 1), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             'Verif subsidy allocation sesuai rule'
-            WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(
-                        modifyNewSubsidyAllocation)), SubsidyAlloc.get(i - 1), false)
+            if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(
+                        modifyNewSubsidyAllocation)), SubsidyAlloc.get(i - 1), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             'Verif subsidy value type sesuai rule'
-            WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(
-                        modifyNewSubsidyValueType)), SubsidyValueType.get(i - 1), false)
+            if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(
+                        modifyNewSubsidyValueType)), SubsidyValueType.get(i - 1), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             'Verif subsidy source sesuai rule'
-            WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(
-                        modifyNewSubsidySource)), SubsidySource.get(i - 1), false)
+            if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(
+                        modifyNewSubsidySource)), SubsidySource.get(i - 1), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             'Pengecekan value type pada confins bernilai percentage'
             if (WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase('Percentage')) {
                 'Verif subsidy percentage sesuai rule'
-                WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(' %', '')), Double.parseDouble(
-                        SubsidyValue.get(i - 1))) //Pengecekan value type pada confins bernilai amount
+                if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(' %', '')), Double.parseDouble(
+                        SubsidyValue.get(i - 1))) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
+						
+				 //Pengecekan value type pada confins bernilai amount
             } else if (WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase('Amount')) {
                 'Verif subsidy amount sesuai rule'
-                WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(',', '')), Double.parseDouble(
-                        SubsidyValue.get(i - 1)))
+                if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(',', '')), Double.parseDouble(
+                        SubsidyValue.get(i - 1))) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
     }
@@ -599,8 +665,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee'))) == 
         listFee.get(i)) {
             'Verify amount admin fee pada confins sesuai rule'
-            WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'value').replace(',', ''), fee.get(i), false)
+            if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
+                    'value').replace(',', ''), fee.get(i), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             if (feeBhv.get(i) == 'DEF') {
                 'Verify admin fee tidak terlock'
@@ -614,8 +688,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             
             if (feecapType.get(i) == 'AMT') {
                 'Verify admin fee capitalized amount sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
+                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
         
@@ -623,8 +705,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee2'))) == 
         listFee.get(i)) {
             'Verify amount additional admin pada confins sesuai rule'
-            WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'value').replace(',', ''), fee.get(i), false)
+            if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
+                    'value').replace(',', ''), fee.get(i), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             if (feeBhv.get(i) == 'DEF') {
                 'verify additional admin tidak terlock'
@@ -638,8 +728,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             
             if (feecapType.get(i) == 'AMT') {
                 'Verify additional admin capitalized amount sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
+                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
         
@@ -647,8 +745,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee3'))) == 
         listFee.get(i)) {
             'Verify notary fee pada confins sesuai rule'
-            WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'value').replace(',', ''), fee.get(i), false)
+            if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
+                    'value').replace(',', ''), fee.get(i), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             if (feeBhv.get(i) == 'DEF') {
                 'Verify notary fee tidak terlock'
@@ -662,8 +768,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             
             if (feecapType.get(i) == 'AMT') {
                 'Verify notary fee capitalized amount sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
+                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
         
@@ -686,8 +800,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             
             if (feecapType.get(i) == 'AMT') {
                 'Verify other fee capitalized amount sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
+                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
         
@@ -695,8 +817,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee5'))) == 
         listFee.get(i)) {
             'verify fiducia fee pada confins sesuai rule'
-            WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'value').replace(',', ''), fee.get(i), false)
+            if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
+                    'value').replace(',', ''), fee.get(i), false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			}
 
             if (feeBhv.get(i) == 'DEF') {
                 'Verify fiducia fee tidak terlock'
@@ -710,8 +840,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             
             if (feecapType.get(i) == 'AMT') {
                 'Verify fiducia fee capitalized amount sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
+                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
             }
         }
         
@@ -720,8 +858,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'Pengecekan fee type amount/percentage'
             if (feeType.get(i) == 'AMT') {
                 'Verify provision fee pada confins sesuai rule'
-                WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'value').replace(',', ''), fee.get(i), false)
+                if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+                        'value').replace(',', ''), fee.get(i), false) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
 
                 if (feeBhv.get(i) == 'DEF') {
                     'Verify provision fee amount tidak terlock'
@@ -737,8 +883,16 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 //Verify provision fee amt & pctg terlock
             } else if (feeType.get(i) == 'PRCNT') {
                 'Verify provision fee pada confins sesuai rule'
-                WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                            'value').replace(' %', '')), Double.parseDouble(fee.get(i)))
+                if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
+                            'value').replace(' %', '')), Double.parseDouble(fee.get(i))) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				}
 
                 if (feeBhv.get(i) == 'DEF') {
                     'verify provision fee percentage tidak terlock'

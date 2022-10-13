@@ -157,11 +157,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
         salesPerson) == false){
 		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
     }
 
@@ -169,11 +169,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
         adminHead) == false){
 		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
     }
 }
@@ -268,11 +268,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
         assetUsage) == false){
 		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
     }
 
@@ -282,11 +282,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
     if(WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false){
 		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
     }
 }
@@ -514,11 +514,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
             userRelation) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 	    }
 
@@ -528,11 +528,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         'Verif jumlah user relationship yang muncul pada confins sesuai dengan jumlah user relationship pada db'
         if(WebUI.verifyEqual(totalUserRelation - 1, countUserRelation) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 	    }
     }
@@ -566,11 +566,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
                 ownerPersonalRelation) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		    }
 
@@ -597,11 +597,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
             		ownerCompanyRelation) == false){
             	'Write To Excel GlobalVariable.StatusFailed'
-            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
             			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
             	
             	'Write To Excel GlobalVariable.ReasonFailedDDL'
-            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
             			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
             }
 
@@ -611,11 +611,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
             if(WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		    }
         }
