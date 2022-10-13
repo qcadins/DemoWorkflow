@@ -149,12 +149,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     'Verif jumlah data subsidy yang muncul pada confins sesuai dengan rule'
     if(WebUI.verifyEqual(varsize, SubsidyFromType.size()) == false){
 		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
 		'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+		
+		flagFailed++
 	}
 
     'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
@@ -193,59 +195,69 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(
                         modifyNewFromTypeName)), SubsidyFromType.get(i - 1), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             'Verif subsidy from value sesuai rule'
             if(WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName), SubsidyFromValue.get(i - 1), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             'Verif subsidy allocation sesuai rule'
             if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(
                         modifyNewSubsidyAllocation)), SubsidyAlloc.get(i - 1), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             'Verif subsidy value type sesuai rule'
             if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(
                         modifyNewSubsidyValueType)), SubsidyValueType.get(i - 1), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             'Verif subsidy source sesuai rule'
             if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(
                         modifyNewSubsidySource)), SubsidySource.get(i - 1), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             'Pengecekan value type pada confins bernilai percentage'
@@ -254,12 +266,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(' %', '')), Double.parseDouble(
                         SubsidyValue.get(i - 1))) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
 						
 				 //Pengecekan value type pada confins bernilai amount
@@ -268,12 +282,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(',', '')), Double.parseDouble(
                         SubsidyValue.get(i - 1))) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
             }
         }
@@ -668,12 +684,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
                     'value').replace(',', ''), fee.get(i), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             if (feeBhv.get(i) == 'DEF') {
@@ -691,12 +709,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
                         'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
             }
         }
@@ -708,12 +728,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
                     'value').replace(',', ''), fee.get(i), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             if (feeBhv.get(i) == 'DEF') {
@@ -731,11 +753,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
                         'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 				}
             }
@@ -748,12 +770,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
                     'value').replace(',', ''), fee.get(i), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             if (feeBhv.get(i) == 'DEF') {
@@ -771,12 +795,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
                         'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
             }
         }
@@ -803,12 +829,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
                         'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
             }
         }
@@ -820,12 +848,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
                     'value').replace(',', ''), fee.get(i), false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
 			}
 
             if (feeBhv.get(i) == 'DEF') {
@@ -843,12 +873,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
                         'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
             }
         }
@@ -861,12 +893,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
                         'value').replace(',', ''), fee.get(i), false) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
 
                 if (feeBhv.get(i) == 'DEF') {
@@ -886,12 +920,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
                             'value').replace(' %', '')), Double.parseDouble(fee.get(i))) == false){
 					'Write To Excel GlobalVariable.StatusFailed'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					
+					flagFailed++
 				}
 
                 if (feeBhv.get(i) == 'DEF') {

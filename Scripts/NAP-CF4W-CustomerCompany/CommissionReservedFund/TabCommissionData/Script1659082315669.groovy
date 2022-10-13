@@ -130,6 +130,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
             }
         }
     }

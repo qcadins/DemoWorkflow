@@ -31,6 +31,8 @@ GlobalVariable.DataFilePath = filePath
 
 ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
 
+ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
@@ -106,6 +108,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+                            faileddata.add(assettypearray[(asset - 1)])
+
                             flagWarning++
                         }
                         
@@ -129,7 +133,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     'count ulang table pada confins'
                                     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                                 } else {
-                                   'add asset type failed kedalam array'
+                                    'add asset type failed kedalam array'
                                     assettypefaileddelete.add(assettypebefore + assetdescbefore)
                                 }
                             } else {
@@ -210,6 +214,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'click button cancel'
                         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+                        faileddata.add(assettypearray[(asset - 1)])
+
                         flagWarning++
                     }
                 }
@@ -249,6 +255,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button cancel'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+                faileddata.add(assettypearray[(asset - 1)])
+
                 flagWarning++
             }
         }
@@ -281,6 +289,9 @@ if (GlobalVariable.FlagFailed == 0) {
 if (flagWarning > 0) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
+
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
+        1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/th_Customer Asset Type'), 

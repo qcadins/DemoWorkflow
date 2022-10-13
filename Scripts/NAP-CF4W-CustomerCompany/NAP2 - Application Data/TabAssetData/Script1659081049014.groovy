@@ -163,6 +163,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		GlobalVariable.FlagFailed++
     }
 
     'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
@@ -175,6 +177,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		GlobalVariable.FlagFailed++
     }
 }
 
@@ -274,6 +278,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		'Write To Excel GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		GlobalVariable.FlagFailed++
     }
 
     'Ambil nilai jumlah option/pilihan asset usage dari confins'
@@ -520,6 +526,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 			'Write To Excel GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+			
+			GlobalVariable.FlagFailed++
 	    }
 
         'Ambil nilai jumlah option/pilihan user relationship dari confins'
@@ -572,6 +580,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 				'Write To Excel GlobalVariable.ReasonFailedDDL'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				
+				GlobalVariable.FlagFailed++
 		    }
 
             'Ambil nilai jumlah option/pilihan owner relationship dari confins'
@@ -603,6 +613,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             	'Write To Excel GlobalVariable.ReasonFailedDDL'
             	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
             			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				
+				GlobalVariable.FlagFailed++
             }
 
             'Ambil nilai jumlah option/pilihan owner relationship dari confins'
