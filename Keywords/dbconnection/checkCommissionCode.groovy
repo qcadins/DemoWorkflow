@@ -35,7 +35,7 @@ public class checkCommissionCode {
 	@Keyword
 	public checkSupplierEmployeeCode(Sql instance,String supplierEmployeeName, String supplierEmpPos, String supplierName){
 		String supplierEmployeeCode
-		instance.eachRow(("select vendor_emp_no from VENDOR_EMP a WITH(NOLOCK) join VENDOR b on a.VENDOR_ID = b.VENDOR_ID where b.MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' and vendor_emp_name = '"+supplierEmployeeName+ "' and VENDOR_NAME = '"+supplierName+"'"), { def row ->
+		instance.eachRow(("select vendor_emp_no from VENDOR_EMP ve WITH(NOLOCK) join VENDOR v WITH(NOLOCK) on ve.VENDOR_ID = v.VENDOR_ID where v.MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' and vendor_emp_name = '"+supplierEmployeeName+ "' and VENDOR_NAME = '"+supplierName+"'"), { def row ->
 			supplierEmployeeCode = (row[0])
 		})
 		return supplierEmployeeCode

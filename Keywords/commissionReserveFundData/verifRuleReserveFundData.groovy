@@ -25,7 +25,7 @@ public class verifRuleReserveFundData {
 	@Keyword
 	public checkLOBCode(Sql instanceLOS, String appNo){
 		String lobCode
-		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WHERE APP_NO='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
 			lobCode = row[0]
 		})
 		return lobCode

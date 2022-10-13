@@ -26,12 +26,12 @@ public class checkReferantor {
 	public countReferantorLookup(Sql instance, String refCategory, String originOfficeName){
 		Integer countData
 		if(refCategory.equalsIgnoreCase("Customer")){
-			instance.eachRow("select count(*) from cust a WITH(NOLOCK) join cust_addr b on a.cust_id = b.cust_id where mr_cust_addr_type_code = 'legal'", { def row ->
+			instance.eachRow("select count(*) from cust c WITH(NOLOCK) join cust_addr ca WITH(NOLOCK) on c.cust_id = ca.cust_id where mr_cust_addr_type_code = 'legal'", { def row ->
 				countData = row[0]
 			})
 		}
 		else if(refCategory.equalsIgnoreCase("Agency")){
-			instance.eachRow("select count(*) from vendor a WITH(NOLOCK) join vendor_addr b on a.vendor_id = b.vendor_id join vendor_office_mbr c on a.vendor_id = c.vendor_id join ref_office d on c.ref_office_id = d.ref_office_id where mr_addr_type_code = 'legal'  and a.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+originOfficeName+"'", { def row ->
+			instance.eachRow("select count(*) from vendor v WITH(NOLOCK) join vendor_addr va WITH(NOLOCK) on v.vendor_id = va.vendor_id join vendor_office_mbr vom WITH(NOLOCK) on v.vendor_id = vom.vendor_id join ref_office ro WITH(NOLOCK) on ro.ref_office_id = vom.ref_office_id where mr_addr_type_code = 'legal'  and v.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+originOfficeName+"'", { def row ->
 				countData = row[0]
 			})
 		}
@@ -47,12 +47,12 @@ public class checkReferantor {
 	public checkBankAccountDDL(Sql instance, String refCategory, String officeName, String refCode){
 		ArrayList<String> BankAccount = new ArrayList<String>()
 		if(refCategory.equalsIgnoreCase("Customer")){
-			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_acc_name+' - '+bank_acc_No from cust a WITH(NOLOCK) join cust_addr b on a.cust_id = b.cust_id join cust_bank_acc c on a.cust_id = c.cust_id join ref_bank d on c.ref_bank_id = d.ref_bank_id where mr_cust_addr_type_code = 'legal' and c.is_active = 1 and cust_no = '"+refCode+"'", { def row ->
+			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_acc_name+' - '+bank_acc_No from cust c WITH(NOLOCK) join cust_addr ca WITH(NOLOCK) on c.cust_id = ca.cust_id join cust_bank_acc cba WITH(NOLOCK) on c.cust_id = cba.cust_id join ref_bank rb WITH(NOLOCK) on cba.ref_bank_id = rb.ref_bank_id where mr_cust_addr_type_code = 'legal' and cba.is_active = 1 and cust_no = '"+refCode+"'", { def row ->
 				BankAccount.add(row[0])
 			})
 		}
 		else if(refCategory.equalsIgnoreCase("Agency")){
-			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_account_name+' - '+bank_account_No from vendor a WITH(NOLOCK) join vendor_addr b on a.vendor_id = b.vendor_id join vendor_office_mbr c on a.vendor_id = c.vendor_id join ref_office d on c.ref_office_id = d.ref_office_id join vendor_bank_acc e on a.vendor_id = e.vendor_id join ref_bank f on e.ref_bank_id = f.ref_bank_id where mr_addr_type_code = 'legal'  and a.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+officeName+"' and e.is_active = 1 and vendor_code = '"+refCode+"'", { def row ->
+			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_account_name+' - '+bank_account_No from vendor v WITH(NOLOCK) join vendor_addr va WITH(NOLOCK) on v.vendor_id = va.vendor_id join vendor_office_mbr vom WITH(NOLOCK) on v.vendor_id = vom.vendor_id join ref_office ro WITH(NOLOCK) on vom.ref_office_id = ro.ref_office_id join vendor_bank_acc vbc WITH(NOLOCK) on v.vendor_id = vbc.vendor_id join ref_bank rb WITH(NOLOCK) on vbc.ref_bank_id = rb.ref_bank_id where mr_addr_type_code = 'legal'  and v.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+officeName+"' and vbc.is_active = 1 and vendor_code = '"+refCode+"'", { def row ->
 				BankAccount.add(row[0])
 			})
 		}
