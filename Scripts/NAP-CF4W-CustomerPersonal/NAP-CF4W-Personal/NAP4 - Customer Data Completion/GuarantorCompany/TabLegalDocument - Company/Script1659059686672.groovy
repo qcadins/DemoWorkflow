@@ -121,14 +121,32 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
 
                             'verify array dari db == option list confins'
-                            WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
-                                LegalDocType)
+                            if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                                LegalDocType)==false){
+								'write to excel if failed'
+								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+									0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+								'write to excel reasonfailedddl'
+								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+									1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+								
+								flagFailed=1
+                            }
 
                             'get total label from ddl'
                             int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
                             'verify total ddl confins = total ddl db'
-                            WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                            if(WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())==false){
+								'write to excel if failed'
+								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+									0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+								'write to excel reasonfailedddl'
+								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+									1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+								
+								flagFailed=1
+							}
                         }
                     }
                     
@@ -303,14 +321,32 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
-                                    LegalDocType)
+                                if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                                    LegalDocType)==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+										0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+										1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+                                }
 
                                 'get total label from ddl'
                                 int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
                                 'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                                if(WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+										0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+										1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+								}
                             }
                         }
                         
@@ -399,14 +435,32 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
-                        LegalDocType)
+                    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                        LegalDocType)==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+                    }
 
                     'get total label from ddl'
                     int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
                     'verify total ddl confins = total ddl db'
-                    WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                    if(WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+					}
                 }
             }
             
@@ -491,14 +545,32 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlConnectionFOU)
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
-                        LegalDocType)
+                    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                        LegalDocType)==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+                    }
 
                     'get total label from ddl'
                     int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
                     'verify total ddl confins = total ddl db'
-                    WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())
+                    if(WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size())==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+					}
                 }
             }
             

@@ -106,11 +106,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
 
                                 'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                                if(WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+								}
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                                    AddressType)
+                                if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType)==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+                                }
 
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -119,11 +137,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
 
                                 'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalownership - 1, Ownership.size())
+                                if(WebUI.verifyEqual(totalownership - 1, Ownership.size())==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+								}
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                                    Ownership)
+                                if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                                    Ownership)==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+                                }
                             }
                             
 							'call function input address'
@@ -190,11 +226,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
 
                                 'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                                if(WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+								}
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                                    AddressType)
+                                if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType)==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+                                }
 
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -203,11 +257,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
 
                                 'verify total ddl confins = total ddl db'
-                                WebUI.verifyEqual(totalownership - 1, Ownership.size())
+                                if(WebUI.verifyEqual(totalownership - 1, Ownership.size())==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+								}
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                                    Ownership)
+                                if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                                    Ownership)==false){
+									'write to excel if failed'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										0, Address - 1, GlobalVariable.StatusFailed)
+									'write to excel reasonfailedddl'
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+										1, Address - 1, GlobalVariable.ReasonFailedDDL)
+									
+									flagFailed=1
+                                }
                             }
                             
 							'call function input address'
@@ -266,11 +338,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
 
                     'verify total ddl confins = total ddl db'
-                    WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
+                    if(WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							0, Address - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							1, Address - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+					}
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                        AddressType)
+                    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                        AddressType)==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							0, Address - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							1, Address - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+                    }
 
                     'get data array dari db'
                     Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
@@ -279,11 +369,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
 
                     'verify total ddl confins = total ddl db'
-                    WebUI.verifyEqual(totalownership - 1, Ownership.size())
+                    if(WebUI.verifyEqual(totalownership - 1, Ownership.size())==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							0, Address - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							1, Address - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+					}
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                        Ownership)
+                    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                        Ownership)==false){
+						'write to excel if failed'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							0, Address - 1, GlobalVariable.StatusFailed)
+						'write to excel reasonfailedddl'
+						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
+							1, Address - 1, GlobalVariable.ReasonFailedDDL)
+						
+						flagFailed=1
+                    }
                 }
                 
 				'call function input address'
