@@ -50,8 +50,20 @@ ArrayList<String> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3
         GlobalVariable.NumofColm, 13))
 
 for(int i=0;i<resultDB.size();i++){
+	
 	'verif reserved fund amt db dengan excel'
-	WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
-				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))
+	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
+				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))==false){
+			'Write to Excel FAILED'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+			
+			GlobalVariable.FlagFailed=1
+			
+	}
 }
 

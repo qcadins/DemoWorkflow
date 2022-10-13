@@ -30,6 +30,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.FlagFailed=0
 int flagFailed = 0
 
 'Koneksi database'
@@ -125,7 +126,17 @@ if(GlobalVariable.Role=="Testing"){
 			String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
 			
 			'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
-			WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))
+			if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
+				'Write to Excel FAILED'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+				
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed=1
+			}
 		}
 		
 	}
@@ -956,7 +967,7 @@ if(iscompleteMandatory==0){
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '13.TabCommissionData')
 }
 
-if(flagFailed==0){
+if(flagFailed==0 && GlobalVariable.FlagFailed==0){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt'), GlobalVariable.NumofColm, '13.TabCommissionData')

@@ -47,6 +47,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
+GlobalVariable.FlagFailed=0
 int flagFailed = 0
 
 'Inisialisasi driver'
@@ -144,7 +145,17 @@ for(int i = 0;i<allocFrom.size();i++){
 	String textAllocFromSection = WebUI.getText(allocFromSectionObject)
 	
 	'Verify allocation from yang tampil pada confins sesuai dengan rule file'
-	WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)
+	if(WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)==false){
+		'Write to Excel FAILED'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+		
+		flagFailed=1
+	}
 	
 	BigDecimal remainingInfoAmt
 	'Looping remaining info'
@@ -175,12 +186,31 @@ for(int i = 0;i<allocFrom.size();i++){
 	'Pengecekan remaining info bernilai 0 atau tidak'
 	if(remainingInfoAmt>0){
 		'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
-		WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)
+		if(WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)==false){
+			'Write to Excel FAILED'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			
+			flagFailed=1
+		}
 		
 		'Pengecekan editable/tidaknya field-field allocation pada confins sesuai behaviour pada rule file'
 		if(allocBhv[i].equalsIgnoreCase("def")){
 			'Verify field bisa diisi'
-			WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)
+			if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)==false){
+				'Write to Excel FAILED'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+				
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				flagFailed=1
+			}
 			
 			'Input Alloc Reserved Fund Amount'
 			WebUI.setText(inputAlloc, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
@@ -188,7 +218,16 @@ for(int i = 0;i<allocFrom.size();i++){
 		}
 		else if(allocBhv[i].equalsIgnoreCase("lock")){
 			'Verify field tidak bisa diisi'
-			WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+			if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)==false){
+				'Write to Excel FAILED'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+				
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				flagFailed=1
+			}
 		}
 		
 	}
@@ -282,7 +321,7 @@ if(iscompleteMandatory==0){
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
 }
 
-if(flagFailed==0){
+if(flagFailed==0 && GlobalVariable.FlagFailed==0){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/alert_Submit'), GlobalVariable.NumofColm, '14.TabReservedFundData')
