@@ -42,6 +42,8 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 String appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)
 
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
@@ -97,8 +99,8 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
                     GlobalVariable.NumofColm, (2 * i) + 1 + supRow)!='' && comSupp.get(i-1)!="-1"){
 					
 					'Verif amount commmision supplier db dengan excel'
-					WebUI.verifyEqual(Double.parseDouble(comSupp.get(i-1).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-							GlobalVariable.NumofColm, (2 * i) + 1 + supRow)))
+					arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(comSupp.get(i-1).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+							GlobalVariable.NumofColm, (2 * i) + 1 + supRow))))
 			}
 			
 		}
@@ -117,7 +119,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).length() > 0){
 					if(value[i-1]!='' && comSuppEmp.get(count+(j-1))!="-1"){
 						'Verif amount commmision supplier employee db dengan excel'
-						WebUI.verifyEqual(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString()),Double.parseDouble(value[i-1]))
+						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString()),Double.parseDouble(value[i-1])))
 					}
 				}
 				
@@ -138,7 +140,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).length() > 0){
 					if(value[i-1]!='' && comRef.get(countRf+(j-1))!="-1"){
 						'Verif amount commmision referantor db dengan excel'
-						WebUI.verifyEqual(Double.parseDouble(comRef.get(countRf+(j-1)).toString()),Double.parseDouble(value[i-1]))
+						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(comRef.get(countRf+(j-1)).toString()),Double.parseDouble(value[i-1])))
 					}
 				}
 				
@@ -155,8 +157,8 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 			if(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
 				GlobalVariable.NumofColm, (2 * i) + 2 + supRow)!='' && comSupp.get(i-1)!="-1"){
 				'Verif percentage commmision supplier db dengan excel'
-				WebUI.verifyEqual(Math.round(Double.parseDouble(comSupp.get(i-1).toString())*100)/100,Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-					GlobalVariable.NumofColm, (2 * i) + 2 + supRow)))
+				arrayMatch.add(WebUI.verifyEqual(Math.round(Double.parseDouble(comSupp.get(i-1).toString())*100)/100,Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+					GlobalVariable.NumofColm, (2 * i) + 2 + supRow))))
 			}
 			
 		}
@@ -175,7 +177,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).length()>0){
 					if(value[i-1]!='' && comSuppEmp.get(count+(j-1))!="-1"){
 						'Verif percentage commmision supplier employee db dengan excel'
-						WebUI.verifyEqual(Math.round(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1]))
+						arrayMatch.add(WebUI.verifyEqual(Math.round(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1])))
 					}
 				}
 				
@@ -196,13 +198,24 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).length() > 0){
 					if(value[i-1]!='' && comRef.get(countRf+(j-1))!="-1"){
 						'Verif percentage commmision referantor db dengan excel'
-						WebUI.verifyEqual(Math.round(Double.parseDouble(comRef.get(countRf+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1]))
+						arrayMatch.add(WebUI.verifyEqual(Math.round(Double.parseDouble(comRef.get(countRf+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1])))
 					}
 				}
 				
 			}
 		}
 	}
+}
+
+'jika nilai di confins tidak sesuai dengan db'
+if(arrayMatch.contains(false)){
+	'Write To Excel GlobalVariable.StatusFailed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 
 

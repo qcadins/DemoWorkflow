@@ -40,6 +40,8 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
@@ -51,7 +53,17 @@ ArrayList<String> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3
 
 for(int i=0;i<resultDB.size();i++){
 	'verif reserved fund amt db dengan excel'
-	WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))
+	arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
+				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",",""))))
 }
 
+'jika nilai di confins tidak sesuai dengan db'
+if(arrayMatch.contains(false)){
+	'Write To Excel GlobalVariable.StatusFailed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+}

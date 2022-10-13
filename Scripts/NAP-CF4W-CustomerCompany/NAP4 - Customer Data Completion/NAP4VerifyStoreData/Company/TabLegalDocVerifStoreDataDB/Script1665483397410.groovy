@@ -30,6 +30,8 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
@@ -70,31 +72,41 @@ def notesarray = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifS
 for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarrayexcel++){
 	
 	'verify document type'
-	WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify document no'
-	WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify date issued'
-	WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify expired date'
-	WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify notary name'
-	WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
 	
 	'verify notary location'
-	WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
 	
 	'verify notes'
-	WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
-			false, FailureHandling.OPTIONAL)
+	arrayMatch(WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
 }
 
+'jika nilai di confins tidak sesuai dengan db'
+if(arrayMatch.contains(false)){
+	'Write To Excel GlobalVariable.StatusFailed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+			0, GlobalVariable.NumofVerifStore - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
+			1, GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
+}
