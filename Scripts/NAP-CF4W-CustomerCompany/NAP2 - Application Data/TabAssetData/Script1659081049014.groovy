@@ -154,12 +154,28 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     salesPerson = CustomKeywords.'dbconnection.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
 
     'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
-    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
-        salesPerson)
+    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
+        salesPerson) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+    }
 
     'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
-    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
-        adminHead)
+    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
+        adminHead) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+    }
 }
 
 'select sales person'
@@ -249,14 +265,30 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     Integer countAssetUsage = assetUsage.size()
 
     'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
-    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
-        assetUsage)
+    if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
+        assetUsage) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+    }
 
     'Ambil nilai jumlah option/pilihan asset usage dari confins'
     Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
 
     'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
-    WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage)
+    if(WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+    }
 }
 
 'select asset usage'
@@ -479,14 +511,30 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         Integer countUserRelation = userRelation.size()
 
         'Verif dropdownlist user relationship yang muncul pada confins sesuai dengan array string user relationship dari db'
-        WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
-            userRelation)
+        if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
+            userRelation) == false){
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write To Excel GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+	    }
 
         'Ambil nilai jumlah option/pilihan user relationship dari confins'
         Integer totalUserRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_User Relationship'))
 
         'Verif jumlah user relationship yang muncul pada confins sesuai dengan jumlah user relationship pada db'
-        WebUI.verifyEqual(totalUserRelation - 1, countUserRelation)
+        if(WebUI.verifyEqual(totalUserRelation - 1, countUserRelation) == false){
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write To Excel GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+	    }
     }
     
     'select user relationship'
@@ -515,8 +563,16 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
 
             'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
-            WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
-                ownerPersonalRelation)
+            if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
+                ownerPersonalRelation) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+				'Write To Excel GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		    }
 
             'Ambil nilai jumlah option/pilihan owner relationship dari confins'
             Integer totalOwnerPersonalRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
@@ -538,14 +594,30 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
 
             'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
-            WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
-                ownerCompanyRelation)
+            if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
+            		ownerCompanyRelation) == false){
+            	'Write To Excel GlobalVariable.StatusFailed'
+            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+            			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+            	
+            	'Write To Excel GlobalVariable.ReasonFailedDDL'
+            	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+            			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+            }
 
             'Ambil nilai jumlah option/pilihan owner relationship dari confins'
             Integer totalOwnerCompanyRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
 
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
-            WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation)
+            if(WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+				'Write To Excel GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		    }
         }
     }
     

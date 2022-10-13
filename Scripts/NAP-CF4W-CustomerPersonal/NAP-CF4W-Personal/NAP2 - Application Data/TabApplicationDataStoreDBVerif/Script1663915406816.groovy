@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.text.SimpleDateFormat
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -33,20 +36,25 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
+String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/labelCustomerName'))
+
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
+        GlobalVariable.NumofColm, 13), custname).replace('HEADER:', '').replace('[', '').replace(']', '')
 		
-String bankaccount
-def bankarray, confinsdatabankacc 
+ArrayList<String> resultattr = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13))
 		
-	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-	
-	 bankaccount = CustomKeywords.'dbconnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
-			 bankarray = bankaccount.split(', ')
-			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
-	}
+//String bankaccount
+//def bankarray, confinsdatabankacc 
+//		
+//	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+//        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+//	
+//	 bankaccount = CustomKeywords.'dbconnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+//		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
+//			 bankarray = bankaccount.split(', ')
+//			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
+//	}
 
 resultarray = result.split(', ')
 
@@ -57,9 +65,13 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
 	}
 }
 
+println(resultarray)
+println(resultattr)
+
 int arrayindex = 0
-int bankindex = 0
-int confinsindex = 0
+//int bankindex = 0
+//int confinsindex = 0
+int attrindex = 0
 
 'verify application source'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
@@ -97,17 +109,17 @@ WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPerso
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-'verify Bank Name'
-WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-
-'verify Bank Acc No'
-WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-
-'verify Bank Account Name'
-WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-}
+//if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+//	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+//'verify Bank Name'
+//WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//
+//'verify Bank Acc No'
+//WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//
+//'verify Bank Account Name'
+//WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+//}
 	
 'verify customer notification'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
@@ -242,21 +254,34 @@ WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPerso
 
 'verify Blacklist APPI'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 56).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 56).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify APPI score'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 57).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 57).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+
+'convert date confins dan excel agar sama'
+SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+
+Date parsedDate = null
+
+String sentDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+		GlobalVariable.NumofColm, 58)
+
+parsedDate = sdf.parse(sentDate)
+
+sdf = new SimpleDateFormat('yyyy-MM-dd')
+
+String sDate = sdf.format(parsedDate)
 
 'verify Date app data'
-WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 58).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+WebUI.verifyMatch(sDate, (resultattr[attrindex++]), false, FailureHandling.OPTIONAL)
 
 'verify app data code'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 59).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 59).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify jumlah asset'
 WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-		GlobalVariable.NumofColm, 61).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+		GlobalVariable.NumofColm, 61).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 

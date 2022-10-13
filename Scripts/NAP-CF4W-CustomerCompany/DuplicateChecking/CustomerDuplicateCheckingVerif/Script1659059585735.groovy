@@ -77,9 +77,9 @@ for (i = 1; i <= 1; i++) {
         'check rule company 1'
         if ((Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1'(sqlconnectionFOU, dataCustomerCompany.getValue(
                     GlobalVariable.NumofColm, 19), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 20))) > 0) || 
-        (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnectionLOS, dataCustomerCompany.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 20), dataCustomerCompany.getValue(
-                    GlobalVariable.NumofColm, 13))) > 0)) {
+	        (Integer.parseInt(CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheckRuleCompany1LOS'(sqlconnectionLOS, dataCustomerCompany.getValue(
+	                    GlobalVariable.NumofColm, 19), dataCustomerCompany.getValue(GlobalVariable.NumofColm, 20), dataCustomerCompany.getValue(
+	                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerCompanyStatus'
             CustomerCompanyStatus = ruledupcheck.getValue(2, 20)
 

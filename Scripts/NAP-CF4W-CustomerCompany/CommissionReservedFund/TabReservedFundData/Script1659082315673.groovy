@@ -150,7 +150,15 @@ for (int i = 0; i < allocFrom.size(); i++) {
     String textAllocFromSection = WebUI.getText(allocFromSectionObject)
 
     'Verify allocation from yang tampil pada confins sesuai dengan rule file'
-    WebUI.verifyMatch(textAllocFromSection, ('.*' + (allocFrom[i]).replace('_', ' ')) + '.*', true)
+    if(WebUI.verifyMatch(textAllocFromSection, ('.*' + (allocFrom[i]).replace('_', ' ')) + '.*', true) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+		'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	}
 
     BigDecimal remainingInfoAmt
 
@@ -306,7 +314,7 @@ if (flagFailed == 0) {
     }
 }
 
-if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
 	'call test case reserved fund datastore db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

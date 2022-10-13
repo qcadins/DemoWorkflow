@@ -285,7 +285,15 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
 
                 'Verif total data product offering confins sesuai dengan db'
-                WebUI.verifyEqual(totalDataPO, countPO)
+                if(WebUI.verifyEqual(totalDataPO, countPO) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+				}
             }
             
             'input product offering code'
@@ -619,7 +627,15 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
 
                 'Verif total data product offering confins sesuai dengan db'
-                WebUI.verifyEqual(totalDataPO, countPO)
+                if(WebUI.verifyEqual(totalDataPO, countPO) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+					'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+				}
             }
             
             'input product offering code'

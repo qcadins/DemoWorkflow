@@ -534,4 +534,19 @@
       <initValue>0</initValue>
       <name>FlagWarning</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Rule'</initValue>
+      <name>ReasonFailedVerifyRule</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Data Lookup Tidak Sesuai DB'</initValue>
+      <name>ReasonFailedDataLookup</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Data DDL'</initValue>
+      <name>ReasonFailedDDL</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
