@@ -293,6 +293,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 					'Write To Excel GlobalVariable.ReasonFailedDataLookup'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+					
 				}
             }
             

@@ -117,9 +117,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                                    AddressType)
+                                if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType) == false) {
+                                    'Write To Excel GlobalVariable.StatusFailed'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
+                                    'Write To Excel GlobalVariable.ReasonFailedDDL'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                                    (GlobalVariable.FlagFailed)++
+                                }
+                                
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
 
@@ -130,11 +140,21 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 WebUI.verifyEqual(totalowneship - 1, Ownership.size())
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                                    Ownership)
+                                if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                                    Ownership) == false) {
+                                    'Write To Excel GlobalVariable.StatusFailed'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
+
+                                    'Write To Excel GlobalVariable.ReasonFailedDDL'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                                    (GlobalVariable.FlagFailed)++
+                                }
                             }
                             
-							'call function input address'
+                            'call function input address'
                             inputaddress()
 
                             break
@@ -205,9 +225,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                                    AddressType)
+                                if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    AddressType) == false) {
+                                    'Write To Excel GlobalVariable.StatusFailed'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
+                                    'Write To Excel GlobalVariable.ReasonFailedDDL'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                                    (GlobalVariable.FlagFailed)++
+                                }
+                                
                                 'get data array dari db'
                                 Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
 
@@ -218,11 +248,21 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 WebUI.verifyEqual(totalowneship - 1, Ownership.size())
 
                                 'verify array dari db == option list confins'
-                                WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                                    Ownership)
+                                if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                                    Ownership) == false) {
+                                    'Write To Excel GlobalVariable.StatusFailed'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
+
+                                    'Write To Excel GlobalVariable.ReasonFailedDDL'
+                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                                    (GlobalVariable.FlagFailed)++
+                                }
                             }
                             
-							'call function input address'
+                            'call function input address'
                             inputaddress()
 
                             break
@@ -281,9 +321,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                        AddressType)
+                    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                        AddressType) == false) {
+                        'Write To Excel GlobalVariable.StatusFailed'
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                            0, Address - 1, GlobalVariable.StatusFailed)
 
+                        'Write To Excel GlobalVariable.ReasonFailedDDL'
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                            1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                        (GlobalVariable.FlagFailed)++
+                    }
+                    
                     'get data array dari db'
                     Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
 
@@ -294,11 +344,21 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     WebUI.verifyEqual(totalowneship - 1, Ownership.size())
 
                     'verify array dari db == option list confins'
-                    WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-                        Ownership)
+                    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                        Ownership) == false) {
+                        'Write To Excel GlobalVariable.StatusFailed'
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                            0, Address - 1, GlobalVariable.StatusFailed)
+
+                        'Write To Excel GlobalVariable.ReasonFailedDDL'
+                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                            1, Address - 1, GlobalVariable.ReasonFailedDDL)
+
+                        (GlobalVariable.FlagFailed)++
+                    }
                 }
                 
-				'call function input address'
+                'call function input address'
                 inputaddress()
 
                 break
@@ -493,7 +553,7 @@ def inputaddress() {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Cancel'))
     }
     
-    if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
+    if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonalCompany == 'Yes')) {
         GlobalVariable.NumofVerifStore = Address
 
         'call test case verify address store data'

@@ -554,4 +554,9 @@
       <initValue>'Failed Store DB'</initValue>
       <name>ReasonFailedStoredDB</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Input Data'</initValue>
+      <name>ReasonFailedInputData</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

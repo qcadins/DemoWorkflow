@@ -138,8 +138,18 @@ for (int i = 1; i <= count; i++) {
 
     if (GlobalVariable.RoleCompany == 'Testing') {
         'verif document name based on rule'
-        WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU, textDocumentName), TCCode.get(
-                i - 1), false)
+        if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU, textDocumentName), TCCode.get(
+                i - 1), false) == false){
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			
+			flagFailed++
+		}
 
         if (TCMandatory.get(i - 1) == 'false') {
             'verif required based on rule'
@@ -150,7 +160,17 @@ for (int i = 1; i <= count; i++) {
         }
         
         'verif prior to based on rule'
-        WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo), TCPrior.get(i - 1), false)
+        if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo), TCPrior.get(i - 1), false) == false){
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			
+			flagFailed++
+		}
 
         if (TCWaive.get(i - 1) == 'false') {
             'verif waive terlock based on rule'
