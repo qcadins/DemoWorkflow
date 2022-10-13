@@ -51,7 +51,7 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
         (resultarray[i]) = 'No'
     }
 }
-
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 int arrayindex = 0
 
 def assettypearray = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
@@ -66,19 +66,31 @@ def assetqtyarray = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVer
 for(assetarrayexcel = 0 ; assetarrayexcel < resultarray.size()/4 ; assetarrayexcel++){
 	
 	'verify asset type'
-	WebUI.verifyMatch(assettypearray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch(assettypearray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify asset desc'
-	WebUI.verifyMatch(assetdescriptionarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch(assetdescriptionarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify asset value'
-	WebUI.verifyMatch(assetvaluearray[assetarrayexcel].split(',').join(), (resultarray[arrayindex++]).split(',').join(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch(assetvaluearray[assetarrayexcel].split(',').join(), (resultarray[arrayindex++]).split(',').join(), 
+			false, FailureHandling.OPTIONAL))
 	
 	'verify asset qty'
-	WebUI.verifyMatch(assetqtyarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
-			false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch(assetqtyarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+			false, FailureHandling.OPTIONAL))
+}
+
+'Jika nilai di confins ada yang tidak sesuai dengan db'
+if (arrayMatch.contains(false)) {
+	'write to excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset',
+		0, GlobalVariable.NumofVerifStore - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset',
+		1, GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
+
 }
 
