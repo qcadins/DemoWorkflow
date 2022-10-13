@@ -30,7 +30,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.FlagFailed=0
+
 int flagFailed = 0
 
 'Koneksi database'
@@ -967,7 +967,7 @@ if(iscompleteMandatory==0){
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '13.TabCommissionData')
 }
 
-if(flagFailed==0 && GlobalVariable.FlagFailed==0){
+if(flagFailed==0){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt'), GlobalVariable.NumofColm, '13.TabCommissionData')

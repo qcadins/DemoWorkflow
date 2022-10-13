@@ -62,7 +62,6 @@ for(int i=0;i<resultDB.size();i++){
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 			
-			GlobalVariable.FlagFailed=1
 			
 	}
 }

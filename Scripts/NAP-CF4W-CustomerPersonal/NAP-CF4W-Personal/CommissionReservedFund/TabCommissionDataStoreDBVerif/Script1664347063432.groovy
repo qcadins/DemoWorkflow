@@ -107,7 +107,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 							1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 						
-						GlobalVariable.FlagFailed=1
+					
 					}
 			}
 			
@@ -136,7 +136,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-							GlobalVariable.FlagFailed=1
+					
 						}
 					}
 				}
@@ -167,7 +167,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-							GlobalVariable.FlagFailed=1
+					
 						}
 					}
 				}
@@ -195,7 +195,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 					
-					GlobalVariable.FlagFailed=1
+					
 				}
 			}
 			
@@ -224,7 +224,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-							GlobalVariable.FlagFailed=1
+						
 						}
 					}
 				}
@@ -255,7 +255,7 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-							GlobalVariable.FlagFailed=1
+							
 						}
 					}
 				}

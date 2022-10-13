@@ -227,8 +227,8 @@ if (GlobalVariable.Role == 'Data Entry') {
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                     1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-                'Flagfailed =1 karena lookup gagal'
-                flagFailed = 1
+                'GlobalVariable.FlagFailed =1 karena lookup gagal'
+                GlobalVariable.FlagFailed = 1
 
                 'Pengecekan jika new consumer finance belum diexpand'
                 if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), 
@@ -265,7 +265,17 @@ if (GlobalVariable.Role == 'Data Entry') {
                 Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
 
                 'Verif total data product offering confins sesuai dengan db'
-                WebUI.verifyEqual(totalDataPO, countPO)
+                if(WebUI.verifyEqual(totalDataPO, countPO)==false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+					'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+					
+					GlobalVariable.FlagFailed=1
+				}
             }
             
             'input product offering code'
@@ -296,7 +306,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                     1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-                flagFailed = 1
+                GlobalVariable.FlagFailed = 1
 
                 'Pengecekan jika new consumer finance belum diexpand'
                 if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), 
@@ -348,9 +358,6 @@ if (GlobalVariable.Role == 'Data Entry') {
             'Write To Excel GlobalVariable.StatusReasonLookup'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-            'Flagfailed=1 karena lookup gagal'
-            flagFailed = 1
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -562,8 +569,8 @@ if (GlobalVariable.Role == 'Data Entry') {
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                     1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-                'Flagfailed =1 karena lookup gagal'
-                flagFailed = 1
+                'GlobalVariable.FlagFailed =1 karena lookup gagal'
+                GlobalVariable.FlagFailed = 1
 
                 'Pengecekan jika new consumer finance belum diexpand'
                 if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), 
@@ -596,7 +603,18 @@ if (GlobalVariable.Role == 'Data Entry') {
                 Integer totalDataPO = Integer.parseInt(textTotalDataPO[1])
 
                 'Verif total data product offering confins sesuai dengan db'
-                WebUI.verifyEqual(totalDataPO, countPO)
+                if(WebUI.verifyEqual(totalDataPO, countPO)==false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+					'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+					
+					GlobalVariable.FlagFailed=1
+					
+				}
             }
             
             'input product offering code'
@@ -627,7 +645,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                     1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-                flagFailed = 1
+                GlobalVariable.FlagFailed = 1
 
                 'Pengecekan jika new consumer finance belum diexpand'
                 if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), 
@@ -676,9 +694,6 @@ if (GlobalVariable.Role == 'Data Entry') {
             'Write To Excel GlobalVariable.StatusReasonLookup'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-            'Flagfailed=1 karena lookup gagal'
-            flagFailed = 1
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -744,6 +759,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
         'call test case tab family data'

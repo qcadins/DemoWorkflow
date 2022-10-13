@@ -47,7 +47,6 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-GlobalVariable.FlagFailed=0
 int flagFailed = 0
 
 'Inisialisasi driver'
@@ -321,7 +320,7 @@ if(iscompleteMandatory==0){
 	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
 }
 
-if(flagFailed==0 && GlobalVariable.FlagFailed==0){
+if(flagFailed==0 ){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/alert_Submit'), GlobalVariable.NumofColm, '14.TabReservedFundData')

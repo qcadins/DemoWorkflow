@@ -401,15 +401,6 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-    GlobalVariable.NumofColm, 14) == 'Input Data') {
-    if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal == "Yes") {
-        'call test case customer data store verif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabCustomerDataStoreDBVerif'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
-}
-
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 4))
 
@@ -418,7 +409,7 @@ if (iscompleteMandatory == 0) {
     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '1.TabCustomerMainData')
 }
 
-if (flagFailed == 0) {
+if (flagFailed == 0 && GlobalVariable.FlagFailed==0) {
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
         'check save process write to excel'
@@ -477,3 +468,13 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     }
 }
 
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 14) == 'Input Data') {
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal == "Yes") {
+		'call test case customer data store verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabCustomerDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+}
+
+GlobalVariable.FlagFailed=0
