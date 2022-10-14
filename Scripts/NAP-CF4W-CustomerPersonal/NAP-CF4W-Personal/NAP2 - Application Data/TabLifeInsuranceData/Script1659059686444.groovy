@@ -93,14 +93,34 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			officeName)
 	
 		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
-		WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
-			lifeInscoBranchName)
+		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
+			lifeInscoBranchName)==false){
+			'write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
+			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write To Excel GlobalVariable.StatusReason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+			flagFailed=1
+		}
 	
 		'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
 		Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
 	
 		'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
-		WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)
+		if(WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)==false){
+			'write to excel failed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
+			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+			'Write To Excel GlobalVariable.StatusReason'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+			flagFailed=1
+		}
 	}
     
     'Select DropDownList Life Insco Branch Name'

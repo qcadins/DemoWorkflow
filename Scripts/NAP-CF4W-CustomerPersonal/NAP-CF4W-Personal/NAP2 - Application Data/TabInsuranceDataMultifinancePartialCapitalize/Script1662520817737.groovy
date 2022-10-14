@@ -133,7 +133,9 @@ for (int i = 1; i <= count; i++) {
 			if(WebUI.verifyMatch(WebUI.getText(yearNumObject),yearNo.get(j),false,FailureHandling.OPTIONAL)){
 				
 				'Verify default sum insured percentage yang tampil pada confins sesuai dengan rule'
-				WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))
+				if(WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))==false){
+					writeFailedReasonVerifyRule()
+				}
 				
 				break
 			}
@@ -233,7 +235,9 @@ for (int i = 1; i <= count; i++) {
 			if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
 				
 				'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
-				WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+				if(WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))==false){
+					writeFailedReasonVerifyRule()
+				}
 				break
 			}
 		}
@@ -390,14 +394,18 @@ for (int i = 1; i <= count; i++) {
 						'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
 						if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 							'Verif additional premi rate sesuai dengan nilai dari rule'
-							WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))
+							if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
+								writeFailedReasonVerifyRule()
+							}
 							break
 						}
 					}
 					//jika tidak terdapt sum insured amount
 					else{
 						'Verif additional premi rate sesuai dengan nilai dari rule'
-						WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))
+						if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))==false){
+							writeFailedReasonVerifyRule()
+						}
 						break
 					}
 
@@ -631,3 +639,15 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerP
 
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 	'value', FailureHandling.OPTIONAL)
+
+public writeFailedReasonVerifyRule(){
+	'write to excel failed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReason'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	GlobalVariable.FlagFailed=1
+}
