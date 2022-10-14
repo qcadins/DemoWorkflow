@@ -39,7 +39,7 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 WebUI.delay(7)
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 		GlobalVariable.CopyAppColm, 12))
-
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
 println(result)
 int arrayindex = 0
@@ -53,21 +53,32 @@ println(bankaccount)
 println(resultarray)
 
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 1); (GlobalVariable.NumofReferantor)++) {
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 13).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+            GlobalVariable.NumofReferantor, 13).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+            GlobalVariable.NumofReferantor, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+    arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
-	WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
-	WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 17).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+            GlobalVariable.NumofReferantor, 17).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+'Jika nilai di confins ada yang tidak sesuai dengan db'
+if (arrayMatch.contains(false)) {
+	'write to excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedStoredDB)
+
+}
 
 
