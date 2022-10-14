@@ -31,6 +31,8 @@ GlobalVariable.DataFilePath = filePath
 
 ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
 
+ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerAsset - Personal - Guarantor')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerAsset - Personal - Guarantor').getValue(
@@ -103,7 +105,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             5, FailureHandling.OPTIONAL)) {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
-
+							faileddata.add(assettypearray[(asset - 1)])
                             flagWarning++
                         }
                         
@@ -208,7 +210,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         5, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
-
+						faileddata.add(assettypearray[(asset - 1)])
                         flagWarning++
                     }
                 }
@@ -247,7 +249,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 5, FailureHandling.OPTIONAL)) {
                 'click button cancel'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
-
+				faileddata.add(assettypearray[(asset - 1)])
                 flagWarning++
             }
         }
@@ -281,7 +283,7 @@ if (flagWarning > 0) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 0, GlobalVariable.NumofGuarantor - 
         1, GlobalVariable.StatusWarning)
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 1, GlobalVariable.NumofGuarantor -
-		1, GlobalVariable.ReasonFailedInputData)
+		1, GlobalVariable.ReasonFailedInputData+faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/th_Customer Asset Type'), 

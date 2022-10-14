@@ -31,6 +31,8 @@ GlobalVariable.DataFilePath = filePath
 
 ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
 
+ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
+
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor')
 
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor').getValue(
@@ -199,6 +201,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         5, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
+						faileddata.add(LegalDocTypeArray[(legal - 1)])
 						flagWarning++
 					}
                     
@@ -397,6 +400,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             5, FailureHandling.OPTIONAL)) {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
+							faileddata.add(LegalDocTypeArray[(legal - 1)])
 							flagWarning++
 						}
                         
@@ -513,9 +517,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
             if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'), 
                 5, FailureHandling.OPTIONAL)) {
-				flagWarning++
                 'click button cancel'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
+				faileddata.add(LegalDocTypeArray[(legal - 1)])
 				flagWarning++
 			}
         }
@@ -627,6 +631,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 5, FailureHandling.OPTIONAL)) {
                 'click button cancel'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
+				faileddata.add(LegalDocTypeArray[(legal - 1)])
 				flagWarning++
 			}
         }
@@ -661,7 +666,7 @@ if (flagWarning > 0) {
 		1, GlobalVariable.StatusWarning)
 
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm -
-		1, GlobalVariable.ReasonFailedInputData)
+		1, GlobalVariable.ReasonFailedInputData+faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/th_Expired Date'), 
