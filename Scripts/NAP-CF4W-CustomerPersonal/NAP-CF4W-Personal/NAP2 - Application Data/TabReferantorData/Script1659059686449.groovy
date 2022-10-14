@@ -59,7 +59,7 @@ Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil text original office dari confins'
-String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 //Jika copy app edit
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
@@ -80,7 +80,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 
 	//Edit jika ada data pada confins dan datanya sesuai dengan excel
 	'Pengecekan ada data referantor pada confins'
-	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
+	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 	
 		'Looping confins referantor'
@@ -89,7 +89,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 			String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input"
 			
 			'modify input referantor name'
-			modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
+			modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
 			
 			String newButtonReferantorXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
 			 ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
@@ -194,7 +194,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				  else{
 						  if(GlobalVariable.NumofReferantor == (Integer.parseInt(GlobalVariable.CountofReferantor)+2)){
 							  'Jika pada confins ada datanya'
-							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
+							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 									  
 								 'get referantor name'
@@ -263,7 +263,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input"
 					 
 					'modify input referantor name'
-					modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
+					modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
 					 
 					String newButtonReferantorXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
 					  ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
@@ -301,7 +301,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					String refCategory, referantorCode
 					
 					'Jika pada confins ada data referantor sebelumnya'
-					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
+					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 						'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 						   if(add==1){
 							   'select referantor category'
@@ -323,14 +323,16 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 									   Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 									   
 									   'Ambil nilai total data referantor pada lookup confins'
-									   String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+									   String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
 										   ' ', '').replace(':', ';').split(';')
 							   
 									   'Parsing nilai total data referantor confins ke integer(angka)'
 									   Integer totalDataReferantor = Integer.parseInt(textTotalDataReferantor[1])
 							   
 									   'Verif total data referantor confins sesuai dengan db'
-									   WebUI.verifyEqual(totalDataReferantor, countReferantor)
+									   if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+										   writeReasonFailedLookup()
+									   }
 								   }
 							   }
 							   
@@ -365,9 +367,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 									WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 									
 									if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-										'Write To Excel GlobalVariable.StatusReasonLookup'
-										CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-												1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+										
 									}
 									
 									continue
@@ -385,7 +385,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 									   BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 									   
 									   'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
-									   WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)
+									   if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+										   writeReasonFailedDDL()
+									   }
 									   
 									   'Pengecekan referantor category yang dipilih customer atau agency'
 									   if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
@@ -394,7 +396,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 										   String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 										   
 										   'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
-										   WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)
+										   if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+											   writeReasonFailedDDL()
+										   }
 									   }
 								   }
 							   }
@@ -424,9 +428,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								   
 								   
 								   if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-									   'Write To Excel GlobalVariable.StatusReasonLookup'
-									   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-											   1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+									   writeReasonFailedDelete()
 								   }
 								   
 								   continue
@@ -457,7 +459,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						   }
 					}
 					//jika pada confins tidak ada data referantor
-					else if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
+					else if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata')),
 							'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 						
 						'click button add'
@@ -482,14 +484,16 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 								
 								'Ambil nilai total data referantor pada lookup confins'
-								String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+								String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
 									' ', '').replace(':', ';').split(';')
 						
 								'Parsing nilai total data referantor confins ke integer(angka)'
 								Integer totalDataReferantor = Integer.parseInt(textTotalDataReferantor[1])
 						
 								'Verif total data referantor confins sesuai dengan db'
-								WebUI.verifyEqual(totalDataReferantor, countReferantor)
+								if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+									writeReasonFailedLookup()
+								}
 							}
 						}
 						
@@ -529,9 +533,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							 
 							 
 							 if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-								 'Write To Excel GlobalVariable.StatusReasonLookup'
-								 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-										 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+								 writeReasonFailedDelete()
 							 }
 						
 							 continue
@@ -548,7 +550,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 								
 								'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
-								WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)
+								if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+									writeReasonFailedDDL()
+								}
 								
 								'Pengecekan referantor category yang dipilih customer atau agency'
 								if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
@@ -557,7 +561,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 									String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 									
 									'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
-									WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)
+									if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+										writeReasonFailedDDL()
+									}
 								}
 							}
 						}
@@ -587,9 +593,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							
 							
 							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.StatusReasonLookup'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-										1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+								writeReasonFailedDelete()
 							}
 							
 							'get referantor name'
@@ -628,7 +632,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 4))
 							
 					if(iscompleteMandatory==0){
-							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 							'cek validasi'
 							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofReferantor, '5.TabReferantorData')
 					}
@@ -718,14 +722,16 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 						
 						'Ambil nilai total data referantor pada lookup confins'
-						String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
+						String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
 							' ', '').replace(':', ';').split(';')
 				
 						'Parsing nilai total data referantor confins ke integer(angka)'
 						Integer totalDataReferantor = Integer.parseInt(textTotalDataReferantor[1])
 				
 						'Verif total data referantor confins sesuai dengan db'
-						WebUI.verifyEqual(totalDataReferantor, countReferantor)
+						if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+							writeReasonFailedLookup()
+						}
 					}
 				}
 				
@@ -763,9 +769,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					
 					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-						'Write To Excel GlobalVariable.StatusReasonLookup'
-						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+						writeReasonFailedDelete()
 					}
 	
 					continue
@@ -782,7 +786,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 						
 						'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
-						WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)
+						if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+							writeReasonFailedDDL()
+						}
 						
 						'Pengecekan referantor category yang dipilih customer atau agency'
 						if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
@@ -791,7 +797,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 							
 							'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
-							WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)
+							if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+								writeReasonFailedDDL()
+							}
 						}
 					}
 				}
@@ -822,9 +830,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					
 					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-						'Write To Excel GlobalVariable.StatusReasonLookup'
-						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+						writeReasonFailedDelete()
 					}
 					
 					continue
@@ -851,21 +857,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
-							'write to excel WARNING'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-							
-							'Write To Excel GlobalVariable.StatusReason'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
-							
-							
-		
+							writeToExcelTidakSesuaiDB()
 							modifyObjectIndex++
-		
-							'click cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-		
 							continue
 						}
 					} else if (refCategory.equalsIgnoreCase('AGENCY')) {
@@ -877,20 +870,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
-							'write to excel WARNING'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-							
-							'Write To Excel GlobalVariable.StatusReason'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
-							
-							
+							writeToExcelTidakSesuaiDB()
 							modifyObjectIndex++
-		
-							'click cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-		
 							continue
 						}
 					} else if(refCategory.equalsIgnoreCase('MULTIFINANCE EMPLOYEE')){
@@ -903,20 +884,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						
 						'Jika nilai di confins ada yang tidak sesuai dengan db'
 						if (arrayMatch.contains(false)) {
-							'write to excel WARNING'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
-							
-							'Write To Excel GlobalVariable.StatusReason'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-								1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
-		
+							writeToExcelTidakSesuaiDB()
 							modifyObjectIndex++
-							
-		
-							'click cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
-		
 							continue
 						}
 					}
@@ -1018,4 +987,47 @@ public adddatatoarraylist(ArrayList<String> referantorDetail){
 	arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
 	
 	return arrayMatch
+}
+
+public writeReasonFailedDelete(){
+	'Write To Excel GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+			1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
+}
+
+public writeReasonFailedLookup(){
+	'Write To Excel GlobalVariable.StatusFailed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
+
+	'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDataLookup)
+	
+	GlobalVariable.FlagFailed=1
+}
+
+public writeReasonFailedDDL(){
+	'Write To Excel GlobalVariable.StatusFailed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
+
+	'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDDL)
+	
+	GlobalVariable.FlagFailed=1
+}
+public writeToExcelTidakSesuaiDB(){
+	'write to excel WARNING'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
+	
+	'Write To Excel GlobalVariable.StatusReason'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
+
+	'click cancel'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
+
 }

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@role='alert']</value>
+         <value>//div[@id='toast-container']/div/div[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@role='alert']</value>
+      <value>//div[@id='toast-container']/div/div[1]</value>
    </webElementProperties>
 </WebElementEntity>
