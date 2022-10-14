@@ -96,7 +96,17 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
 
     'Verify total count data lookup supplier pada confins sama dengan db'
-    WebUI.verifyEqual(totalDataSupplier, countSupplierData)
+    if(WebUI.verifyEqual(totalDataSupplier, countSupplierData)==false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+		
+		flagFailed=1
+	}
 }
 
 'input supplier code'
@@ -213,7 +223,17 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     Integer totalDataAsset = Integer.parseInt(textTotalDataAsset[1])
 
     'Verify total count data lookup asset pada confins sama dengan db'
-    WebUI.verifyEqual(totalDataAsset, countAssetData)
+    if(WebUI.verifyEqual(totalDataAsset, countAssetData)==false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+		
+		flagFailed=1
+	}
 }
 
 'input asset name'

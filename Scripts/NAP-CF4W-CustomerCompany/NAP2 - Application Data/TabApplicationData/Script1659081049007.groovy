@@ -303,14 +303,14 @@ textwop = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplica
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
 
-'Verify/Jika Way of Payment = Auto Debit'
-if (textwop == 'Auto Debit') {
-    bankacc = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
-
-    'Select option dropdownlist Customer Bank Account'
-    WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
-            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
-}
+//'Verify/Jika Way of Payment = Auto Debit'
+//if (textwop == 'Auto Debit') {
+//    bankacc = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
+//
+//    'Select option dropdownlist Customer Bank Account'
+//    WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
+//            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
+//}
 
 'Select option dropdownlist Customer Notification By'
 WebUI.selectOptionByLabel(notif, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
@@ -583,11 +583,11 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
 
 WebUI.delay(5)
 
-//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
-//	'call test case store db verif application data'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), [:],
-//			FailureHandling.CONTINUE_ON_FAILURE)
-//}
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+	'call test case store db verif application data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+}
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'

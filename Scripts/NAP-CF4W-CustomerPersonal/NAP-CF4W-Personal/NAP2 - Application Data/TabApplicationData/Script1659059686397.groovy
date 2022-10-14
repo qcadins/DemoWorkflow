@@ -308,18 +308,18 @@ textwop = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingl
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
 
-'Verify/Jika Way of Payment = Auto Debit'
-if (textwop == 'Auto Debit') {
-    bankacc = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
-
-    'Select option dropdownlist Customer Bank Account'
-    WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
-
-    Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
-
-    GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
-}
+//'Verify/Jika Way of Payment = Auto Debit'
+//if (textwop == 'Auto Debit') {
+//    bankacc = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
+//
+//    'Select option dropdownlist Customer Bank Account'
+//    WebUI.selectOptionByIndex(bankacc, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+//            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
+//
+//    Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
+//
+//    GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+//}
 
 'Select option dropdownlist Customer Notification By'
 WebUI.selectOptionByLabel(notif, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(

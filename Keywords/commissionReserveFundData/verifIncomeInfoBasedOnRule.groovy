@@ -25,7 +25,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public verifIncomeInfoAmtRuleBased(Sql instanceLOS, String appNo){
 		String lobCode
-		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WHERE APP_NO='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE WITH(NOLOCK) from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
 			lobCode = row[0]
 		})
 		HashMap<String,ArrayList> result = new HashMap<>()
@@ -68,7 +68,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkAdminFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE a join app b on a.app_id = b.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -77,7 +77,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkProvisionFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE a join app b on a.app_id = b.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -86,7 +86,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkDiffRateAmtValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select DIFF_RATE_AMT from app_fin_data a join app b on a.app_id = b.app_id where app_no = '"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select DIFF_RATE_AMT from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on afd.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -95,7 +95,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkOtherFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE a join app b on a.app_id = b.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -104,7 +104,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkInsValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select total_ins_cust_amt, total_ins_insco_amt from app_fin_data a join app b on a.app_id = b.app_id where APP_NO='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select total_ins_cust_amt, total_ins_insco_amt from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on afd.app_id = a.app_id where APP_NO='"+appNo+"'"), { def row ->
 			value = row[0]-row[1]
 		})
 		if(value<0){
@@ -116,7 +116,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkLifeInsValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select TOTAL_LIFE_INS_CUST_AMT, [TOTAL_LIFE_INS_INSCO_AMT ] from app_fin_data a join app b on a.app_id = b.app_id where APP_NO='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select TOTAL_LIFE_INS_CUST_AMT, [TOTAL_LIFE_INS_INSCO_AMT ] from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = afd.app_id where APP_NO='"+appNo+"'"), { def row ->
 			value = row[0]-row[1]
 		})
 		if(value<0){
