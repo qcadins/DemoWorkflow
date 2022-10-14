@@ -138,62 +138,48 @@ if(GlobalVariable.Role=="Testing"){
 		'Looping data subsidi pada confins'
 		for (i = 1; i <= varsize; i++) {
 			 
-			'modify object from type name'
-			modifyNewFromTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
-			 
-			 
-			'modify object from value name'
-			modifyNewFromValueName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromValueName'),
-				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
-			 
-			 
-			'modify object subsidy allocation'
-			modifyNewSubsidyAllocation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidyAllocation'),
-				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[3]', true)
-			
-			
-			'modify object subsidy value type'
-			modifyNewSubsidyValueType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyValueType'),
-				'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[4]",true)
-			 
-			 
-			'modify object subsidy source'
-			modifyNewSubsidySource = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidySource'),
-				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[5]', true)
-			
-			'modify object subsidy percentage'
-			modifyNewSubsidyPercentage = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyPercentage'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[6]",true)
-			
-			'modify object subsidy amount'
-			modifyNewSubsidyAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyAmount'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[7]",true)
+			modifySubsidy()
 			
 			'Verif subsidy from type sesuai rule'
-			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			
 			'Verif subsidy from value sesuai rule'
-			WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName),SubsidyFromValue.get(i-1),false)
+			if(WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName),SubsidyFromValue.get(i-1),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			
 			'Verif subsidy allocation sesuai rule'
-			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			
 			'Verif subsidy value type sesuai rule'
-			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			
 			'Verif subsidy source sesuai rule'
-			WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			
 			'Pengecekan value type pada confins bernilai percentage'
 			if(WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase("Percentage")){
 				
 				'Verif subsidy percentage sesuai rule'
-				WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(" %","")),Double.parseDouble(SubsidyValue.get(i-1)))
+				if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(" %","")),Double.parseDouble(SubsidyValue.get(i-1)))==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 			//Pengecekan value type pada confins bernilai amount
 			else if(WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase("Amount")){
 				
 				'Verif subsidy amount sesuai rule'
-				WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(",","")),Double.parseDouble(SubsidyValue.get(i-1)))
+				if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(",","")),Double.parseDouble(SubsidyValue.get(i-1)))==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 	}
@@ -203,22 +189,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 	'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 	for (i = 1; i <= variable.size(); i++) {
 
-		'modify object from type name'
-		modifyNewFromTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
-
-
-		'modify object from value name'
-		modifyNewFromValueName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromValueName'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
-
-		'modify object subsidy allocation'
-		modifyNewSubsidyAllocation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidyAllocation'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[3]', true)
-
-		'modify object subsidy source'
-		modifyNewSubsidySource = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidySource'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[5]', true)
+		modifySubsidy()
 
 		'modify object button edit'
 		modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Button_Edit'),
@@ -265,8 +236,6 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 					subsidyvalue = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
 						'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div['+ i++ +']/div/input', true)
 					
-				
-
 					'select subsidy allocation from '
 					WebUI.selectOptionByLabel(subsidyallocationfrom,
 						AllocationformArray[(subsidyarray - 1)], false)
@@ -395,53 +364,11 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 						'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
 
 					if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
-						'select subsidy from value'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
-							'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
 
-						'select subsidy allocation from '
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
+						selectSubsidySupplier()
+						
 					} else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
-						'select subsidy allocation from'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
+						selectSubsidyMF()
 					}
 					
 					'click button save subsidy'
@@ -469,53 +396,9 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 						'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
 
 					if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
-						'select subsidy from value'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
-							'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
-
-						'select subsidy allocation from '
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								'(?i)' + (SubsidyValueAmountArray[(s - 1)]))
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								'(?i)' + (SubsidyValuePercentageArray[(s - 1)]))
-						}
+						selectSubsidySupplier()
 					} else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
-						'select subsidy allocation from'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
+						selectSubsidyMF()
 					}
 					
 					'click button save subsidy'
@@ -573,7 +456,9 @@ if(GlobalVariable.Role=="Testing"){
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
 		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee')))==listFee.get(i)){
 			'Verify amount admin fee pada confins sesuai rule'
-			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",",""),fee.get(i),false)
+			if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",",""),fee.get(i),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			if(feeBhv.get(i)=="DEF"){
 				'Verify admin fee tidak terlock'
 				WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'readonly',1)
@@ -584,13 +469,17 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify admin fee capitalized amount sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
 		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee2')))==listFee.get(i)){
 			'Verify amount additional admin pada confins sesuai rule'
-			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",",""),fee.get(i),false)
+			if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",",""),fee.get(i),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			if(feeBhv.get(i)=="DEF"){
 				'verify additional admin tidak terlock'
 				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'readonly',1)
@@ -601,13 +490,17 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify additional admin capitalized amount sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
 		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee3')))==listFee.get(i)){
 			'Verify notary fee pada confins sesuai rule'
-			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",",""),fee.get(i),false)
+			if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",",""),fee.get(i),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			if(feeBhv.get(i)=="DEF"){
 				'Verify notary fee tidak terlock'
 				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'readonly',1)
@@ -618,13 +511,17 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify notary fee capitalized amount sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
 		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee4')))==listFee.get(i)){
 			'Verify other fee pada confins sesuai rule'
-			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",",""),fee.get(i),false)
+			if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",",""),fee.get(i),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			if(feeBhv.get(i)=="DEF"){
 				'verify other fee tidak terlock'
 				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'readonly',1)
@@ -635,13 +532,17 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify other fee capitalized amount sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
 		if(CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlConnectionLOS,WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_Fee5')))==listFee.get(i)){
 			'verify fiducia fee pada confins sesuai rule'
-			WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",",""),fee.get(i),false)
+			if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",",""),fee.get(i),false)==false){
+				writeReasonFailedVerifRule()
+			}
 			if(feeBhv.get(i)=="DEF"){
 				'Verify fiducia fee tidak terlock'
 				WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'readonly',1)
@@ -652,7 +553,9 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify fiducia fee capitalized amount sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 		}
 		'Jika list fee merupakan provision'
@@ -660,7 +563,9 @@ if(GlobalVariable.Role=="Testing"){
 			'Pengecekan fee type amount/percentage'
 			if(feeType.get(i)=="AMT"){
 				'Verify provision fee pada confins sesuai rule'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",",""),fee.get(i),false)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",",""),fee.get(i),false)==false){
+					writeReasonFailedVerifRule()
+				}
 				if(feeBhv.get(i)=="DEF"){
 					'Verify provision fee amount tidak terlock'
 					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'readonly',1)
@@ -673,7 +578,9 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			else if(feeType.get(i)=="PRCNT"){
 				'Verify provision fee pada confins sesuai rule'
-				WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","")),Double.parseDouble(fee.get(i)))
+				if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","")),Double.parseDouble(fee.get(i)))==false){
+					writeReasonFailedVerifRule()
+				}
 				if(feeBhv.get(i)=="DEF"){
 					'verify provision fee percentage tidak terlock'
 					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'readonly',1)
@@ -686,7 +593,9 @@ if(GlobalVariable.Role=="Testing"){
 			}
 			if(feecapType.get(i)=="AMT"){
 				'Verify provision fee capitalized amount'
-				WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)
+				if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'),'value').replace(",",""),feecap.get(i),false,FailureHandling.OPTIONAL)==false){
+					writeReasonFailedVerifRule()
+				}
 			}
 			
 		}
@@ -848,27 +757,15 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 	}
 	
 	if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Percentage') {
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
-			Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
-			Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
-			Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+		
+		sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'))
 
 		'input provision fee percentage'
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 			Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 38)), FailureHandling.OPTIONAL)
 	} else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-			Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-			Keys.chord(Keys.DELETE), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-			Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+		sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'))
 
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 			Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 39)))
@@ -882,27 +779,14 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 
 	if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43) == 'Effective Rate') {
 		'input effective rate'
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),
-			Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),
-			Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),
-			Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+		sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'))
 
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),
 			Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 44)), FailureHandling.OPTIONAL)
 	} else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43) == 'Flat Rate') {
+	
 		'input flat rate'
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
-			Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
-			Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
-
-		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
-			Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+		sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'))
 
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
 			Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 45)), FailureHandling.OPTIONAL)
@@ -1001,4 +885,106 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 }
 
+public writeReasonFailedVerifRule(){
+	'write to excel failed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReason'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	flagFailed=1
+}
 
+public modifySubsidy(){
+	'modify object from type name'
+	modifyNewFromTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+		'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
+	 
+	'modify object from value name'
+	modifyNewFromValueName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromValueName'),
+		'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
+	 
+	'modify object subsidy allocation'
+	modifyNewSubsidyAllocation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidyAllocation'),
+		'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[3]', true)
+	
+	'modify object subsidy value type'
+	modifyNewSubsidyValueType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyValueType'),
+		'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[4]",true)
+	 
+	'modify object subsidy source'
+	modifyNewSubsidySource = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/SubsidySource'),
+		'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[5]', true)
+	
+	'modify object subsidy percentage'
+	modifyNewSubsidyPercentage = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyPercentage'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[6]",true)
+	
+	'modify object subsidy amount'
+	modifyNewSubsidyAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_SubsidyAmount'),'xpath','equals',"//*[@id='FinData_Subsidy']/div[2]/table/tbody/tr["+i+"]/td[7]",true)
+}
+
+public sendKeys(TestObject object){
+	WebUI.sendKeys(object,
+		Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
+
+	WebUI.sendKeys(object,
+		Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
+
+	WebUI.sendKeys(object,
+		Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
+}
+
+public selectSubsidySupplier(){
+	
+	'select subsidy from value'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
+		'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
+	
+	'select subsidy allocation from '
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
+		'(?i)' + (AllocationformArray[(s - 1)]), true)
+
+	'select subsidy source'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
+		'(?i)' + (SubsidySourceArray[(s - 1)]), true)
+
+	'select subsidy value type'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
+		'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
+
+	if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
+		'input subsidy value amount'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
+			SubsidyValueAmountArray[(s - 1)])
+	} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
+		'input subsidy value percentage'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
+			SubsidyValuePercentageArray[(s - 1)])
+	}
+}
+
+public selectSubsidyMF(){
+	'select subsidy allocation from'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
+		'(?i)' + (AllocationformArray[(s - 1)]), true)
+
+	'select subsidy source'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
+		'(?i)' + (SubsidySourceArray[(s - 1)]), true)
+
+	'select subsidy value type'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
+		'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
+
+	if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
+		'input subsidy value amount'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
+			SubsidyValueAmountArray[(s - 1)])
+	} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
+		'input subsidy value percentage'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
+			SubsidyValuePercentageArray[(s - 1)])
+	}
+}
