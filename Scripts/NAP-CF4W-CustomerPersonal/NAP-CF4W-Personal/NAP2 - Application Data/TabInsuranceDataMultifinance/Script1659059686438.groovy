@@ -59,7 +59,9 @@ if(GlobalVariable.Role=="Testing"){
 	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
 	
 //	'Verif default asset region based on rule'
-//	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)
+//	if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
+//		writeFailedReasonVerifyRule()
+//	}
 
 }
 
@@ -109,14 +111,34 @@ if(GlobalVariable.Role=="Testing"){
 	countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
 	
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
-	WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
-		inscoBranchName)
+	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
+		inscoBranchName)==false){
+		'write to excel failed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReason'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		GlobalVariable.FlagFailed=1
+	}
 	
 	'Ambil nilai jumlah option/pilihan insco branch name dari confins'
 	Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
 	
 	'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
-	WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)
+	if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
+		'write to excel failed'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.StatusReason'
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		GlobalVariable.FlagFailed=1
+	}
 }
 
 
@@ -183,27 +205,39 @@ if(GlobalVariable.Role=="Testing"){
 	custStampDutyDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),'value')
 	
 	'Verif nilai default admin fee yang muncul pada confins sesuai rule'
-	WebUI.verifyMatch(adminFeeDefAmt.replace(",",""),defAmt[0],false)
+	if(WebUI.verifyMatch(adminFeeDefAmt.replace(",",""),defAmt[0],false)==false){
+		writeFailedReasonVerifyRule()
+	}
 	
 	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
-	WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)
+	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
+		writeFailedReasonVerifyRule()
+	}
 	
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
 		'Verif field admin fee bisa diedit'
-		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)==false){
+			writeFailedReasonVerifyRule()
+		}
 	}
 	else if(feeBhv[0]=="LOCK"){
 		'Verif field admin fee tidak bisa diedit'
-		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)==false){
+			writeFailedReasonVerifyRule()
+		}
 	}
 	if(feeBhv[1]=="DEF"){
 		'Verif field customer stampduty bisa diedit'
-		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)==false){
+			writeFailedReasonVerifyRule()
+		}
 	}
 	else if(feeBhv[1]=="LOCK"){
 		'Verif field customer stampduty tidak bisa diedit'
-		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled",2,FailureHandling.OPTIONAL)==false){
+			writeFailedReasonVerifyRule()
+		}
 	}
 }
 
@@ -340,7 +374,9 @@ if(capinssetting=="YEARLY"){
 				if(WebUI.verifyMatch(WebUI.getText(yearNumObject),yearNo.get(j),false,FailureHandling.OPTIONAL)){
 					
 					'Verify default sum insured percentage yang tampil pada confins sesuai dengan rule'
-					WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))
+					if(WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))==false){
+						writeFailedReasonVerifyRule()
+					}
 					
 					break
 				}
@@ -471,7 +507,9 @@ if(capinssetting=="YEARLY"){
 				if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
 					
 					'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
-					WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+					if(WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))==false){
+						writeFailedReasonVerifyRule()
+					}
 					break
 				}
 			}
@@ -624,14 +662,18 @@ if(capinssetting=="YEARLY"){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
 							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 								'Verif additional premi rate sesuai dengan nilai dari rule'
-								WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))
+								if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
+									writeFailedReasonVerifyRule()
+								}
 								break
 							}
 						}
 						//jika tidak terdapt sum insured amount
 						else if(countSumInsuredAmount==0 && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)){
 							'Verif additional premi rate sesuai dengan nilai dari rule'
-							WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))
+							if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))==false){
+								writeFailedReasonVerifyRule()
+							}
 							break
 						}
 
@@ -827,5 +869,16 @@ else if (capinssetting=="PARTIAL"){
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
+public writeFailedReasonVerifyRule(){
+	'write to excel failed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReason'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	GlobalVariable.FlagFailed=1
+}
 
 
