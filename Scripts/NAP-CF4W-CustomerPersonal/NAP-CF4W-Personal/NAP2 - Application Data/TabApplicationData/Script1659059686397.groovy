@@ -132,7 +132,15 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             Integer totalDataOfficer = Integer.parseInt(textTotalDataOfficer[1])
 
             'Verif total data officer confins sesuai dengan db'
-            WebUI.verifyEqual(totalDataOfficer, countOfficer)
+            if(WebUI.verifyEqual(totalDataOfficer, countOfficer)==false){
+				'write to excel failed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+				'Write To Excel GlobalVariable.ReasonFailedDataLookup'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+			}
         }
         
         'Input MO Code'
