@@ -140,6 +140,8 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 				'Write To Excel GlobalVariable.ReasonFailedDataLookup'
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+				
+				flagFailed=1
 			}
         }
         
