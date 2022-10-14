@@ -125,24 +125,42 @@ for (int i = 1; i <= count; i++) {
 
 	if(GlobalVariable.Role=="Testing"){
 		'verif document name based on rule'
-		WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)
+		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
+			writeToExcelFailedVerifRule()
+			flagFailed=1
+		}
 		if(TCMandatory.get(i-1)=="false"){
 			'verif required based on rule'
-			WebUI.verifyElementText(modifyObjectRequired,"NO")
+			if(WebUI.verifyElementText(modifyObjectRequired,"NO")==false){
+				writeToExcelFailedVerifRule()
+				flagFailed=1
+			}
 		}
 		else if(TCMandatory.get(i-1)=="true"){
 			'verif required based on rule'
-			WebUI.verifyElementText(modifyObjectRequired,"YES")
+			if(WebUI.verifyElementText(modifyObjectRequired,"YES")==false){
+				writeToExcelFailedVerifRule()
+				flagFailed=1
+			}
 		}
 		'verif prior to based on rule'
-		WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo),TCPrior.get(i-1),false)
+		if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo),TCPrior.get(i-1),false)==false){
+			writeToExcelFailedVerifRule()
+			flagFailed=1
+		}
 		if(TCWaive.get(i-1)=="false"){
 			'verif waive terlock based on rule'
-			WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)
+			if(WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)==false){
+				writeToExcelFailedVerifRule()
+				flagFailed=1
+			}
 		}
 		else if(TCWaive.get(i-1)=="true"){
 			'verif waive tidak terlock/ dapat dicentang based on rule'
-			WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)
+			if(WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)==false){
+				writeToExcelFailedVerifRule()
+				flagFailed=1
+			}
 		}
 	}
 
@@ -304,5 +322,16 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 
    
+}
+	
+public writeToExcelFailedVerifRule(){
+	'write to excel failed'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.StatusReason'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
 }
 
