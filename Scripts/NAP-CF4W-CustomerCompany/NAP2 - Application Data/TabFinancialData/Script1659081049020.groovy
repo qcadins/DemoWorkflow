@@ -1165,6 +1165,10 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'), 
             Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 45)), FailureHandling.OPTIONAL)
     }
+	
+	GlobalVariable.Effectiverate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'), 'value', FailureHandling.OPTIONAL)
+	
+	GlobalVariable.Flatrate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'), 'value', FailureHandling.OPTIONAL)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 
@@ -1240,17 +1244,18 @@ if (flagFailed == 0) {
     }
 }
 
-//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
-//	'call test case subsidy store db verif'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
-//			[:], FailureHandling.CONTINUE_ON_FAILURE)
-//	
-//
-//	'call test case financial datastore db verif'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),
-//			[:], FailureHandling.CONTINUE_ON_FAILURE)
-//	
-//}
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+	'call test case subsidy store db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+
+	'call test case financial datastore db verif'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+}
+
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
     'click button cancel'

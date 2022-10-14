@@ -791,6 +791,10 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
 			Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 45)), FailureHandling.OPTIONAL)
 	}
+	
+	GlobalVariable.Effectiverate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'), 'value', FailureHandling.OPTIONAL)
+	
+	GlobalVariable.Flatrate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'), 'value', FailureHandling.OPTIONAL)
 }
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(

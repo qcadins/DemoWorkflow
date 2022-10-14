@@ -559,4 +559,14 @@
       <initValue>'Failed Input Data'</initValue>
       <name>ReasonFailedInputData</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Effectiverate</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Flatrate</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
