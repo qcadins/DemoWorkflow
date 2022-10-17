@@ -241,7 +241,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP2InsuranceCStoreDB (Sql instance, String appno){
+	public NAP2InsuranceCustStoreDB (Sql instance, String appno){
 		String insurancedata
 		ArrayList<String> insurancelist = new ArrayList<>()
 		instance.eachRow(("SELECT aio.CUST_INSCO_BRANCH_NAME AS HEADER, CONVERT(INT , aio.CUST_CVG_AMT) AS HEADER, aio.INS_POLICY_NO AS HEADER, aio.INS_POLICY_NAME AS HEADER, FORMAT(aio.CUST_COVER_START_DT, 'MM/dd/yyyy') AS HEADER, FORMAT(aio.END_DT, 'MM/dd/yyyy') AS HEADER, aio.CUST_NOTES AS HEADER FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
@@ -253,7 +253,7 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP2InsuranceMStoreDB (Sql instance, String appno){
+	public NAP2InsuranceMFStoreDB (Sql instance, String appno){
 		String insurancedata
 		instance.eachRow(("SELECT aio.INS_ASSET_REGION AS HEADER, CONVERT(INT , aio.CVG_AMT) AS HEADER, rml.REF_MASTER_NAME AS HEADER, SUBQ.REF_MASTER_NAME AS HEADER, aio.INSCO_BRANCH_NAME AS HEADER, aio.NOTES, INS_LENGTH AS HEADER, CAST(CUST_ADMIN_FEE_AMT as int) AS HEADER, CAST(CUST_STAMP_DUTY_FEE as INT) AS HEADER FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aio.INS_ASSET_COVER_PERIOD, (SELECT rml.REF_MASTER_NAME, APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON aio.APP_ID = a.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aio.PAY_PERIOD_TO_INSCO) as SUBQ WHERE a.APP_NO = '"+ appno +"' AND a.APP_NO = SUBQ.APP_NO"), {  row ->
 

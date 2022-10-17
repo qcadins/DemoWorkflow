@@ -46,7 +46,7 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
-    String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
     resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
@@ -68,11 +68,11 @@ if (insuredBy == 'Customer') {
                 GlobalVariable.NumofColm, index).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
 } else if (insuredBy == 'Customer - Multifinance') {
-    String resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCStoreDB'(sqlconnection, 
+    String resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, 
         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
-    String resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMStoreDB'(sqlconnection, findTestData(
+    String resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, findTestData(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
@@ -439,7 +439,7 @@ if (insuredBy == 'Customer') {
         }
     }
 } else if (insuredBy == 'Multifinance') {
-    String resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMStoreDB'(sqlconnection, findTestData(
+    String resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, findTestData(
             'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
