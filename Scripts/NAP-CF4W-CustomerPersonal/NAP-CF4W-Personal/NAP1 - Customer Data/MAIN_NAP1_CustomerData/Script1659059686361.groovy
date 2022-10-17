@@ -114,6 +114,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 	}
 	'verif sort custname descending'
 	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+	
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header poname'
