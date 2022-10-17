@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkStep {
-	
+
 	@Keyword
 	public checkAppCurrStep(Sql instanceLOS, String appNo){
 		String appStep
@@ -30,7 +30,7 @@ public class checkStep {
 		})
 		return appStep
 	}
-	
+
 	@Keyword
 	public checkCustCheckStep(Sql instanceLOS, String appNo){
 		String custCheckStep
