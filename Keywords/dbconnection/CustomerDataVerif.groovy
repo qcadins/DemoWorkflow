@@ -243,7 +243,7 @@ public class CustomerDataVerif {
 	@Keyword
 	public NAP2InsuranceCStoreDB (Sql instance, String appno){
 		String insurancedata
-		ArrayList<String> insurancelist = new ArrayList<>() 
+		ArrayList<String> insurancelist = new ArrayList<>()
 		instance.eachRow(("SELECT aio.CUST_INSCO_BRANCH_NAME AS HEADER, CONVERT(INT , aio.CUST_CVG_AMT) AS HEADER, aio.INS_POLICY_NO AS HEADER, aio.INS_POLICY_NAME AS HEADER, FORMAT(aio.CUST_COVER_START_DT, 'MM/dd/yyyy') AS HEADER, FORMAT(aio.END_DT, 'MM/dd/yyyy') AS HEADER, aio.CUST_NOTES AS HEADER FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
 
 			insurancedata = row
@@ -258,7 +258,7 @@ public class CustomerDataVerif {
 		instance.eachRow(("SELECT aio.INS_ASSET_REGION AS HEADER, CONVERT(INT , aio.CVG_AMT) AS HEADER, rml.REF_MASTER_NAME AS HEADER, SUBQ.REF_MASTER_NAME AS HEADER, aio.INSCO_BRANCH_NAME AS HEADER, aio.NOTES, INS_LENGTH AS HEADER, CAST(CUST_ADMIN_FEE_AMT as int) AS HEADER, CAST(CUST_STAMP_DUTY_FEE as INT) AS HEADER FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aio.INS_ASSET_COVER_PERIOD, (SELECT rml.REF_MASTER_NAME, APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON aio.APP_ID = a.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aio.PAY_PERIOD_TO_INSCO) as SUBQ WHERE a.APP_NO = '"+ appno +"' AND a.APP_NO = SUBQ.APP_NO"), {  row ->
 
 			insurancedata = (row)
-			
+
 		})
 		return insurancedata
 	}
@@ -280,11 +280,49 @@ public class CustomerDataVerif {
 	public NAP2InsuranceAddCVGtoreDB (Sql instance, String appno){
 		String insurancedata
 		ArrayList<String> insurancelist = new ArrayList<>()
-		instance.eachRow(("SELECT rml.REF_MASTER_NAME FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+		instance.eachRow(("SELECT rml.REF_MASTER_NAME FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' GROUP BY rml.REF_MASTER_NAME"), {  row ->
 
 			insurancedata = (row[0])
 			insurancelist.add(insurancedata)
-			
+
+		})
+		return insurancelist
+	}
+
+
+	@Keyword
+	public NAP2InsuranceMultiMainCVGtoreDB (Sql instance, String appno){
+		String insurancedata
+		ArrayList<String> insurancelist = new ArrayList<>()
+		instance.eachRow(("SELECT [YEAR] as HEADER, IS_CAPITALIZED AS HEADER, [PAID] AS HEADER,  [SUMINSURED] AS HEADER, [MAINCVG] AS HEADER FROM (SELECT [YEAR], test.Code, REF_MASTER_NAME, IS_CAPITALIZED,  [SUMINSURED] FROM (select [YEAR], [Code], value, IS_CAPITALIZED,  [SUMINSURED] from (SELECT YEAR_NO AS [YEAR], IS_CAPITALIZED , MR_INS_PAID_BY_CODE as [PAID], FORMAT(aimc.SUM_INSURED_PRCNT, 'N0') as [SUMINSURED], MR_MAIN_CVG_TYPE_CODE as [MAINCVG] FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as Orig unpivot(value for [Code] in ([PAID],[MAINCVG]) )as unpiv) as test JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = test.value) AS A PIVOT (MAX(A.REF_MASTER_NAME) for [Code] in ([PAID],[MAINCVG])) as piv"), {  row ->
+
+			insurancedata = (row[0])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[1])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[2])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[3])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[4])
+			insurancelist.add(insurancedata)
+		})
+		return insurancelist
+	}
+
+	@Keyword
+	public NAP2InsuranceMultiAddCVGtoreDB (Sql instance, String appno){
+		String insurancedata
+		ArrayList<String> insurancelist = new ArrayList<>()
+		instance.eachRow(("SELECT YEAR_NO ,rml.REF_MASTER_NAME, CASE WHEN(rml.REF_MASTER_NAME = 'TPL' OR rml.REF_MASTER_NAME = 'Tanggung Jawab Hukum Terhadap Penumpang' OR rml.REF_MASTER_NAME = 'Kecelakaan Diri Untuk Penumpang') THEN CUST_ADD_PREMI_AMT ELSE FORMAT(CUST_ADD_PREMI_RATE, 'N4') END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' ORDER BY YEAR_NO"), {  row ->
+
+			insurancedata = (row[0])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[1])
+			insurancelist.add(insurancedata)
+			insurancedata = (row[2])
+			insurancelist.add(insurancedata)
+
 		})
 		return insurancelist
 	}
