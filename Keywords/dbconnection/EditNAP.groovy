@@ -42,7 +42,7 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public FamilyDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -62,7 +62,7 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public GuarantorDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -82,7 +82,7 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public GuarantorDataCompany (Sql instance, String appno){
 		String customerdata
@@ -92,11 +92,10 @@ public class EditNAP {
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
 			customerdata = (row[1])
-	
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public ShareholderDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -116,7 +115,7 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public ShareholderDataCompany (Sql instance, String appno){
 		String customerdata
@@ -126,9 +125,7 @@ public class EditNAP {
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
 			customerdata = (row[1])
-	
 		})
 		return listcustdata
 	}
-
 }
