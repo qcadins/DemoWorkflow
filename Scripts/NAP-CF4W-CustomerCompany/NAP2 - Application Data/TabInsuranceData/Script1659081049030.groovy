@@ -91,11 +91,11 @@ CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject(
 
 }
 
-//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
-//	'call test case verify store to db'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
-//		[:], FailureHandling.CONTINUE_ON_FAILURE)
-//}
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+	'call test case verify store to db'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+}
 
 'Verify input data'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),

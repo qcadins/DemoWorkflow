@@ -33,7 +33,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
 int arrayindexdb = 0
@@ -57,31 +57,44 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
 println(resultarray)
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
 	
 'verify subsidy from value type'
-WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+    FailureHandling.OPTIONAL))
 
 'verify subsidy from value'
-WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), 
-    false, FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
 
 'verify allocation from'
-WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+    FailureHandling.OPTIONAL))
 
 'veirfy subsidy source'
-WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+    FailureHandling.OPTIONAL))
 
 'verify subsidy amount'
-WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
-    FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
+    FailureHandling.OPTIONAL))
 
 'verify subsidy percentage'
-WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
-    FailureHandling.OPTIONAL)
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
+    FailureHandling.OPTIONAL))
+
+}
+
+'Jika nilai di confins ada yang tidak sesuai dengan db'
+if (arrayMatch.contains(false)) {
+	'write to excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 
 }

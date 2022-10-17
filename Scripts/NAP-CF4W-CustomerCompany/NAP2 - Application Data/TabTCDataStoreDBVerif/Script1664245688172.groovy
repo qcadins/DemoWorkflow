@@ -33,72 +33,86 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
-//resultarray = result.split(', ')
-resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
-
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-    if ((resultarray[i]).equalsIgnoreCase('null')) {
-        (resultarray[i]) = ''
-    } else if ((resultarray[i]).equalsIgnoreCase('true')) {
-        (resultarray[i]) = '1'
-    } else if ((resultarray[i]).equalsIgnoreCase('false')) {
-        (resultarray[i]) = '0'
-    }
+for (i = 0; i < result.size() ; i++) {
+    if(result[i] == null){
+		result[i] = ''
+	} 
 }
-
-println(resultarray)
 
 int arrayindex = 0
 
-for (i = 1; i <= resultarray.size()/4; i++) {
-    modifyObjectRequired = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), 
-        'xpath', 'equals', ('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[4]', true)
+int flagWarning = 0
 
-    modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_Checkbox'), 
-        'xpath', 'equals', ('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[5]/input', true)
+datafiletermcondition = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
 
-    modifyObjectPromiseDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
-        'xpath', 'equals', ('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[7]/input', true)
+def YesUncheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
-    modifyObjectExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_expiredDate'), 
-        'xpath', 'equals', ('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[8]/input', true)
+def PromiseDateArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
-    modifyObjectWaived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_waived'), 
-        'xpath', 'equals', ('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[6]/input', true)
+def RequiredNoCheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
-    if ((resultarray[arrayindex]).equalsIgnoreCase('1')) {
-        'verify checkbox checked'
-        WebUI.verifyElementChecked(modifyObjectCheckbox, 5, FailureHandling.OPTIONAL)
-		arrayindex++
-    } else if ((resultarray[arrayindex]).equalsIgnoreCase('0')) {
-        'verify checkbox unchecked'
-        WebUI.verifyElementNotChecked(modifyObjectCheckbox, 5, FailureHandling.OPTIONAL)
-		arrayindex++
-    }
-    
-    WebUI.verifyMatch(WebUI.getText(modifyObjectPromiseDate), resultarray[arrayindex++], false, FailureHandling.OPTIONAL)
+def ExpiredDocArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
-    WebUI.verifyMatch(WebUI.getText(modifyObjectExpiredDate), resultarray[arrayindex++], false, FailureHandling.OPTIONAL)
+def ExpiredDateArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
-    if ((resultarray[arrayindex]).equalsIgnoreCase('1')) {
-        'verify checkbox checked'
-        WebUI.verifyElementChecked(modifyObjectWaived, 5, FailureHandling.OPTIONAL)
-		arrayindex++
-    } else if ((resultarray[arrayindex]).equalsIgnoreCase('0')) {
-        'verify checkbox unchecked'
-        WebUI.verifyElementNotChecked(modifyObjectWaived, 5, FailureHandling.OPTIONAL)
-		arrayindex++
-    }
-    
-    continue
+def WaivedCheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+
+for(index = 0 ; index < result.size()/9 ; index++){
+	TCdoc = result[arrayindex++]
+	
+	docRequired = result[arrayindex++]
+	
+	isChecked = result[arrayindex++]
+	
+	PromiseDate = result[arrayindex++] 
+	
+	ExpiredDate = result[arrayindex++]
+	
+	WaivedChecked = result[arrayindex++]
+	
+	if(docRequired.equalsIgnoreCase('false')){
+		if(isChecked.equalsIgnoreCase('true')){
+			if(!(RequiredNoCheckArray.contains(TCdoc))){
+				flagWarning++
+			}
+		}
+	}else if(docRequired.equalsIgnoreCase('true')){
+		if(isChecked.equalsIgnoreCase('false')){
+			if(!(YesUncheckArray.contains(TCdoc))){
+				flagWarning++
+			}
+		}
+	}
+	
+	if(PromiseDate != ''){
+		if(!(PromiseDateArray.contains(PromiseDate))){
+			flagWarning++
+		}
+	}
+	
+	if(ExpiredDate != ''){
+		if(!(ExpiredDateArray.contains(ExpiredDate)) && !(ExpiredDocArray.contains(TCdoc))){
+			flagWarning++
+		}
+	}
+	
+	if(WaivedChecked.equalsIgnoreCase('true')){
+		if(!(WaivedCheckArray.contains(TCdoc))){
+			flagWarning++
+		}
+	}
 }
 
+if(flagWarning > 0){
+	'write to excel FAILED'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+}

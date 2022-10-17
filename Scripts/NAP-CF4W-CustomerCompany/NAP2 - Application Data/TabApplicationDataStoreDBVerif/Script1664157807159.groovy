@@ -72,6 +72,7 @@ int arrayindex = 0
 //int bankindex = 0
 //int confinsindex = 0
 int attrindex = 0
+
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'verify application source'
