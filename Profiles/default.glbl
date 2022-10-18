@@ -574,4 +574,9 @@
       <initValue>'\\Rule\\AssetRegionRule.xlsx'</initValue>
       <name>AssetRegRulePath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>confinsdata</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

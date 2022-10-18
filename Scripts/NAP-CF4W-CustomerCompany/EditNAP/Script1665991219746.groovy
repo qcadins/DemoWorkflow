@@ -46,8 +46,6 @@ String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseNa
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-
 String appNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8)
 
@@ -83,7 +81,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -103,7 +101,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -116,7 +114,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -255,7 +253,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (appStep == 'CUST') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
 
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -280,7 +278,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -303,7 +301,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
@@ -322,7 +320,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
-        getCustdata(sqlConnectionFOU, appNo, appStep)
+        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -462,30 +460,32 @@ def inputAppNo() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 }
 
-def getCustdata(sql sqlConnectionFOU, String appNo, String appStep) {
+def getCustdata(sql sqlConnectionLOS, String appNo, String appStep) {
     if (appStep == 'SHR') {
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionFOU, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionLOS, appNo)
 
         int index = 0
+		
+		String custname = custdata[index++]
 
         'Write to Cust Name'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            18, GlobalVariable.NumofColm - 1, custdata[index++])
+            18, GlobalVariable.NumofColm - 1, custname)
 
         'Write to tab duplicate checking Cust Name'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-            12, GlobalVariable.NumofColm - 1, custdata[index++])
+            12, GlobalVariable.NumofColm - 1, custname)
 
         'Write to Tax ID'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
     } else if (appStep == 'GUAR') {
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionFOU, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionLOS, appNo)
 
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlConnectionFOU, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlConnectionLOS, 
             appNo)
 
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlConnectionFOU, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlConnectionLOS, 
             appNo)
 
         int index = 0
@@ -585,18 +585,18 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep) {
         }
     } else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionFOU, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlConnectionLOS, appNo)
 
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlConnectionFOU, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlConnectionLOS, 
             appNo)
 
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlConnectionFOU, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlConnectionLOS, 
             appNo)
 
-        ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlConnectionFOU, 
+        ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlConnectionLOS, 
             appNo)
 
-        ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlConnectionFOU, 
+        ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlConnectionLOS, 
             appNo)
 
         int index = 0
