@@ -39,7 +39,7 @@ public class verifRuleReserveFundData {
 		ArrayList<String> allocationBhv = new ArrayList<>()
 		String userDir = System.getProperty('user.dir')
 		String filePath = userDir+GlobalVariable.RSVRulePath
-		def ruleRSV = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/ReservedFundRule')
+		def ruleRSV = findTestData('DownloadRule/ReservedFundRule')
 		Integer lobcodeRow = -1
 		lobcodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'ReservedFund', lobCode)+1
 		int match = 0

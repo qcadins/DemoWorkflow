@@ -59,7 +59,7 @@ public class verifSumInsured {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
-		def ruleAssetCategory = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsAssetCategory')
+		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
 		int indexAC = -1
 
@@ -92,7 +92,7 @@ public class verifSumInsured {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'SumInsured', inscoHOCode)+1
 
-		def ruleSumInsuredRate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceSumInsuredRule')
+		def ruleSumInsuredRate = findTestData('DownloadRule/InsuranceSumInsuredRule')
 
 		int match = 0
 		for(int i=inscoHORow;i<=ruleSumInsuredRate.getRowNumbers();i++){

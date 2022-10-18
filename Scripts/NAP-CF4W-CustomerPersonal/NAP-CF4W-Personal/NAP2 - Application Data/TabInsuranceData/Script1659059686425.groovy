@@ -76,7 +76,7 @@ WebUI.delay(2)
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
     'cek alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '8.TabInsuranceData')

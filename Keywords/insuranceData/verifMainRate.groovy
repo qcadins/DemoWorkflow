@@ -63,7 +63,7 @@ public class verifMainRate {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
-		def ruleAssetCategory = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsAssetCategory')
+		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
 		int indexAC = -1
 
@@ -96,7 +96,7 @@ public class verifMainRate {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePath, 'MainCvg', inscoHOCode)+1
 
-		def ruleMainCvg = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceMainCvgRule')
+		def ruleMainCvg = findTestData('DownloadRule/InsuranceMainCvgRule')
 
 		int match = 0
 		for(int i = inscoHORow;i<=ruleMainCvg.getRowNumbers();i++){

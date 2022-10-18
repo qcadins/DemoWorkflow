@@ -71,7 +71,7 @@ public class verifAddtRate {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
-		def ruleAssetCategory = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsAssetCategory')
+		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
 		int indexAC = -1
 
@@ -105,7 +105,7 @@ public class verifAddtRate {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePath, 'RuleAddCvg', inscoHOCode)+1
 
-		def ruleAddtCvg = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceAddtCvgRule')
+		def ruleAddtCvg = findTestData('DownloadRule/InsuranceAddtCvgRule')
 		Integer assetAge = Integer.parseInt(GlobalVariable.BDYear)-Integer.parseInt(year)+(Integer.parseInt(yearNo)-1)
 
 		int match = 0 , sameAssetCat = 0

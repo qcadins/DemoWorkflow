@@ -46,8 +46,6 @@ String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseNa
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-
 String appNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8)
 
@@ -84,13 +82,13 @@ if(GlobalVariable.Role=="Data Entry"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 		
-		getCustdata(sqlConnectionFOU, appNo, appStep)
+		getCustdata(sqlConnectionLOS, appNo, appStep)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -109,13 +107,13 @@ if(GlobalVariable.Role=="Data Entry"){
 	
 		inputAppNo(appNo)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 		
-		getCustdata(sqlConnectionFOU, appNo, appStep)
+		getCustdata(sqlConnectionLOS, appNo, appStep)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -129,10 +127,10 @@ if(GlobalVariable.Role=="Data Entry"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/CustomerDataCompletion'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	} else if (appStep == 'NAPD' || appStep == 'REF' || appStep == 'APP' || appStep == 'ASSET' || appStep == 'INS' || appStep == 'LFI' || appStep == 'FIN' || appStep == 'TC') {
-		getCustdata(sqlConnectionFOU, appNo, appStep)
-	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
+//		getCustdata(sqlConnectionLOS, appNo, appStep)
+//	
+//		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'),
+//			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		if ((appStep == 'NAPD') || (appStep == 'REF')) {
 			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'),
@@ -347,13 +345,13 @@ else if(GlobalVariable.Role=="Testing"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabFamilyCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 		
-		getCustdata(sqlConnectionFOU, appNo, appStep)
+		getCustdata(sqlConnectionLOS, appNo, appStep)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
 			FailureHandling.STOP_ON_FAILURE)
@@ -377,13 +375,13 @@ else if(GlobalVariable.Role=="Testing"){
 	
 		inputAppNo(appNo)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/VerifyApplicant'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 		
-		getCustdata(sqlConnectionFOU, appNo, appStep)
+		getCustdata(sqlConnectionLOS, appNo, appStep)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
 			FailureHandling.STOP_ON_FAILURE)
@@ -402,10 +400,10 @@ else if(GlobalVariable.Role=="Testing"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/CustomerDataCompletion'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	} else if (appStep == 'NAPD' || appStep == 'REF' || appStep == 'APP' || appStep == 'ASSET' || appStep == 'INS' || appStep == 'LFI' || appStep == 'FIN' || appStep == 'TC') {
-		getCustdata(sqlConnectionFOU, appNo, appStep)
-	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
-			FailureHandling.STOP_ON_FAILURE)
+//		getCustdata(sqlConnectionLOS, appNo, appStep)
+//	
+//		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+//			FailureHandling.STOP_ON_FAILURE)
 		
 		if(GlobalVariable.DupcheckVerif == 'Yes'){
 			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'),
@@ -608,15 +606,16 @@ def inputAppNo(String appNo) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 }
 
-def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
+def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep){
 	if(appStep == 'FAM'){
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 		
 		int index = 0
 		
+		String custname = custdata[index++]
 		'Write to Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 18,
-			GlobalVariable.NumofColm - 1, custdata[index++])
+			GlobalVariable.NumofColm - 1, custname)
 		
 		'Write to ID Type'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 20,
@@ -636,18 +635,19 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 		
 		'Write to tab duplicate checking Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12,
-				GlobalVariable.NumofColm - 1, custdata[index++])
+				GlobalVariable.NumofColm - 1, custname)
 	}else if(appStep == 'GUAR'){
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 				
-		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
 		
 		
 		int index = 0
 				
+		String custname = custdata[index++]
 		'Write to Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 18,
-			GlobalVariable.NumofColm - 1, custdata[index++])
+			GlobalVariable.NumofColm - 1, custname)
 		
 		'Write to ID Type'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 20,
@@ -667,7 +667,7 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 		
 		'Write to tab duplicate checking Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12,
-				GlobalVariable.NumofColm - 1, custdata[index++])
+				GlobalVariable.NumofColm - 1, custname)
 		
 		index = 0
 		
@@ -685,20 +685,21 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 	
 		for(int colm = GlobalVariable.CopyAppColm; colm < famData.size()/5 ; colm++){
 			
+			custname = famData[index++]
 			'Write to tab Family cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18,
-					colm - 1, famData[index++])
+					colm - 1, custname)
 			
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 				16).length() > 0){
 			'Write to dupcheck fam name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
 					colm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-				16) + ';' + famData[index++])
+				16) + ';' + custname )
 			}else{
 			'Write to dupcheck fam name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
-					colm - 1, famData[index++])
+					colm - 1, custname )
 			}
 			
 			'Write to tab fam data id type'
@@ -722,19 +723,20 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 	}else if ((appStep == 'NAPD') || (appStep == 'REF') || (appStep == 'APP') || (appStep == 'ASSET') || (appStep ==
 		'INS') || (appStep == 'FIN') || (appStep == 'TC')) {
 
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlConnectionFOU, appNo)
+		ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlConnectionFOU, appNo)
+		ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlConnectionLOS, appNo)
 		
 		int index = 0
 		
+		String custname = custdata[index++]
 		'Write to Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 18,
-				GlobalVariable.NumofColm - 1, custdata[index++])
+				GlobalVariable.NumofColm - 1, custname)
 			
 		'Write to ID Type'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 20,
@@ -754,7 +756,7 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 
 		'Write to tab duplicate checking Cust Name'
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12,
-				GlobalVariable.NumofColm - 1, custdata[index++])
+				GlobalVariable.NumofColm - 1, custname)
 		
 		index = 0
 
@@ -772,20 +774,21 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 	
 		for(int colm = GlobalVariable.CopyAppColm; colm < famData.size()/5 ; colm++){
 			
+			custname = famData[index++]
 			'Write to tab Family cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18,
-					colm - 1, famData[index++])
+					colm - 1, custname )
 			
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 				16).length() > 0){
 			'Write to dupcheck fam name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
 					colm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-				16) + ';' + famData[index++])
+				16) + ';' + custname )
 			}else{
 			'Write to dupcheck fam name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
-					colm - 1, famData[index++])
+					colm - 1, custname )
 			}
 			
 			'Write to tab fam data id type'
@@ -811,7 +814,7 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 		'untuk mendapatkan posisi copy app dari excel'
 		for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) +
 		1); (GlobalVariable.NumofGuarantorPersonal)++) {
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal,
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.NumofGuarantorPersonal,
 				12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm,
 				13)) {
 				GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
@@ -822,20 +825,21 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 
 		for(int colm = GlobalVariable.CopyAppColm; colm < guarPersonalData.size()/5 ; colm++){
 			
+			custname = guarPersonalData[index++]
 			'Write guarantor personal cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 17,
-				colm - 1, guarPersonalData[index++])
+				colm - 1, custname )
 			
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 				19).length() > 0){
 			'Write to dupcheck cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18,
 					colm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-				19) + ';' + guarPersonalData[index++])
+				19) + ';' + custname )
 			}else{
 			'Write to dupcheck cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18,
-					colm - 1, guarPersonalData[index++])
+					colm - 1, custname )
 			}
 			
 			'Write guarantor personal data id type'
@@ -861,7 +865,7 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 		'untuk mendapatkan posisi copy app dari excel'
 		for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) +
 		1); (GlobalVariable.NumofGuarantorCompany)++) {
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany,
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany,
 				12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm,
 				13)) {
 				GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
@@ -872,20 +876,21 @@ def getCustdata(sql sqlConnectionFOU, String appNo, String appStep){
 
 		for(int colm = GlobalVariable.CopyAppColm; colm < guarCompanyData.size()/2; colm++){
 			
+			custname = guarCompanyData[index++]
 			'Write to tab guarantor company cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 17,
-				colm - 1, guarCompanyData[index++])
+				colm - 1, custname )
 			
 			if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 				19).length() > 0){
 			'Write to dupcheck cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18,
 					colm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-				19) + ';' + guarCompanyData[index++])
+				19) + ';' + custname )
 			}else{
 			'Write to dupcheck cust name'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18,
-					colm - 1, guarCompanyData[index++])
+					colm - 1, custname )
 			}
 			
 			'Write to tab guarantor company data id no'

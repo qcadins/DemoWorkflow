@@ -54,7 +54,7 @@ dataGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Custome
 dataGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
 'variable data file Dupcheckrule'
-ruledupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateCheckingRule')
+ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
 
 'declare variable untuk dupcheckresult'
 def DupcheckResult = []

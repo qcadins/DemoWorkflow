@@ -38,7 +38,7 @@ public class verifAssetRegion {
 		Integer startRow = -1
 		startRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'InsRegion', "AppAsset.TaxCityIssuer == @val")+2
 
-		def ruleAssetRegion = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/AssetRegionRule')
+		def ruleAssetRegion = findTestData('DownloadRule/AssetRegionRule')
 
 		int matchLOB = 0, matchCustType = 0, matchCustModel = 0, matchNationalityCode = 0, matchMaritalStat = 0
 

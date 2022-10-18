@@ -68,11 +68,12 @@ for(int i=1;i<=countFileCode;i++){
 	WebUI.click(findTestObject('DownloadRule/a_Download'))
 	
 	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
-	WebUI.delay(5)
+	WebUI.delay(10)
 	
 	'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
 	CustomKeywords.'dbconnection.DownloadRule.renameFile'(filenameWithExtension,newFileName)
 
-
+	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
+	WebUI.delay(2)
 
 }

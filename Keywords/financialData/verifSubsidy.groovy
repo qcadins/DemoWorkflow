@@ -59,7 +59,7 @@ public class verifSubsidy {
 		Integer startRow = 15
 		//		startRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'Rl.SubsidyMF', "App.MrOrderInfoCode == @val")+2
 
-		def ruleSubsidyMF = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/SubsidyRuleMF')
+		def ruleSubsidyMF = findTestData('DownloadRule/SubsidyRuleMF')
 
 		int matchOrderInfo = 0, matchAppSource = 0, matchIsAffiliate = 0, matchLobCode = 0
 
@@ -106,7 +106,7 @@ public class verifSubsidy {
 		startRow = 14
 		//		startRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'Rl.SubsidyInsco', "AppInsObj.InscoBranchCode == @val")+2
 
-		def ruleSubsidyInsco = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/SubsidyRuleInsco')
+		def ruleSubsidyInsco = findTestData('DownloadRule/SubsidyRuleInsco')
 
 		int matchInsco = 0
 		matchLobCode = 0
@@ -140,7 +140,7 @@ public class verifSubsidy {
 		startRow = 14
 		//		startRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'Rl.SubsidySuppl', "AppAsset.RsvField1 == @val")+2
 
-		def ruleSubsidySuppl = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/SubsidyRuleSuppl')
+		def ruleSubsidySuppl = findTestData('DownloadRule/SubsidyRuleSuppl')
 
 		int matchrsvfield = 0, matchsupplcode = 0
 		matchLobCode = 0

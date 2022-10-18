@@ -69,7 +69,7 @@ public class verifInsuranceFee {
 
 		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
-		def ruleAssetCategory = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsAssetCategory')
+		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
 		int indexAC = -1
 
@@ -102,7 +102,7 @@ public class verifInsuranceFee {
 		//check admin & stampduty
 		insAssetCategoryRow = (new excelGetRow.getRowWithColumn()).getExcelRow(filePath, 'Fee', insAssetCategory,1)+1
 
-		def ruleFee = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/InsuranceFeeRule')
+		def ruleFee = findTestData('DownloadRule/InsuranceFeeRule')
 
 		int match=0
 

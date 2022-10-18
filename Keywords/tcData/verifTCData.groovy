@@ -58,7 +58,7 @@ public class verifTCData {
 		Integer lobCodeRow = -1
 		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'TC', lobCode)+1
 
-		def ruleTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TCRule')
+		def ruleTC = findTestData('DownloadRule/TCRule')
 
 		int matchLOB = 0, matchCustType = 0, matchCustModel = 0, matchNationalityCode = 0, matchMaritalStat = 0
 

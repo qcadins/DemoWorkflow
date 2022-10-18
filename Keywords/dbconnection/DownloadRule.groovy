@@ -56,6 +56,7 @@ public class DownloadRule {
 		File file = new File(System.getProperty('user.dir') + "\\Rule\\"+filename);
 		File rename = new File(System.getProperty('user.dir') + "\\Rule\\"+newname);
 		file.renameTo(rename)
+		println(newname)
 
 	}
 }
