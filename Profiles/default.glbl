@@ -569,4 +569,9 @@
       <initValue>''</initValue>
       <name>Flatrate</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>confinsdata</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

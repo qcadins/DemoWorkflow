@@ -95,3 +95,7 @@ for (i = 0; i < resultarray.size(); i++) {
     WebUI.verifyMatch(resultarray[i], confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 
+GlobalVariable.confinsdata = confinsdata
+
+println(GlobalVariable.confinsdata)
+println(GlobalVariable.confinsdata[1])

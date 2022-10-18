@@ -36,25 +36,25 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer')
 
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 12).split(';')
+    GlobalVariable.NumofColm, 12).split(';', -1)
 
 def DocumentNoArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 13).split(';')
+    GlobalVariable.NumofColm, 13).split(';', -1)
 
 def DateIssuedArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 14).split(';')
+    GlobalVariable.NumofColm, 14).split(';', -1)
 
 def ExpiredDateArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 15).split(';')
+    GlobalVariable.NumofColm, 15).split(';', -1)
 
 def NotaryNameArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 16).split(';')
+    GlobalVariable.NumofColm, 16).split(';', -1)
 
 def NotaryLocationArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 17).split(';')
+    GlobalVariable.NumofColm, 17).split(';', -1)
 
 def NotesArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer').getValue(
-    GlobalVariable.NumofColm, 18).split(';')
+    GlobalVariable.NumofColm, 18).split(';', -1)
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
