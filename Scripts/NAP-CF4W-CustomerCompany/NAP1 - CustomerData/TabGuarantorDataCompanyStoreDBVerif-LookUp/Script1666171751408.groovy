@@ -35,9 +35,10 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBCompany'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofFamily, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofFamily, 50)).replace('HEADER:', '').replace('[', '').replace(']', '')
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnection, findTestData(
+        'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantor, 
+        12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantor, 
+        16)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 
@@ -46,21 +47,17 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
     if ((resultarray[i]).equalsIgnoreCase('null')) {
         (resultarray[i]) = ''
     }
-    
-    if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
-        (resultarray[i]) = 'Yes'
-    } else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
-        (resultarray[i]) = 'No'
-    }
 }
-
-println(resultarray)
 
 int arrayindex = 0
 
 int confinsindex = 0
 
-'verify shareholder name'
+'verify relationship'
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+        false, FailureHandling.OPTIONAL))
+
+'verify guarantor name'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
@@ -68,37 +65,27 @@ arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).to
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
-'verify position slik'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+        false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify share percent'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify is active'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify is owner'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+        false, FailureHandling.OPTIONAL))
 
 'verify address'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
-'verify RT'
+'verify Rt'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
-'verify RW'
+'verify rw'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
-'verify Zipcode'
+'verify zipcode'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
@@ -121,11 +108,11 @@ arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).to
 'jika nilai di confins tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-        0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+        0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-        1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedStoredDB)
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+        1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

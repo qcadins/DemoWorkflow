@@ -30,14 +30,14 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
-
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataStoreDBCompanyLOOKUP'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 17)).replace('HEADER:', '').replace('[', '').replace(']', '')
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLOOKUP'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+        GlobalVariable.NumofGuarantor, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+        GlobalVariable.NumofGuarantor, 16)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 
@@ -51,51 +51,80 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
 int arrayindex = 0
 int confinsindex = 0
 
-'verify customer name'
+'verify relationship'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify guarantor name'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify birth place'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify id type'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify id expired date'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify marital status'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify mobile phone'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify customer model'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify gender'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify birth date'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify id no'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-
-'verify customer model'
+'verify mother maiden name'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify address'
+'verify email'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify RT'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify address'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify RW'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify rt'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify Zipcode'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify rw'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify zipcode'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify keluraham'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify kecamatan'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify kota'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify kelurahan'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify company type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify kota'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'veirfy ownership'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    'verify ownership'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
 	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
+			0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
+			1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-
