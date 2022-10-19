@@ -104,8 +104,7 @@ arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).to
         false, FailureHandling.OPTIONAL))
 
 'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyEqual((Math.round(Double.parseDouble(GlobalVariable.confinsdata[confinsindex++]))), Math.round(Double.parseDouble((resultarray[arrayindex++]))), FailureHandling.OPTIONAL))
 
 'verify kelurahan'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 

@@ -351,6 +351,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'),
 										'value'))
 								
+								'add gender to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
+										'value'))
+								
 								'add ownership to array'
 								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
 										'value'))
@@ -432,7 +436,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
-					if(GlobalVariable.RoleCompany == 'Testing'){
+					if(GlobalVariable.RoleCompany == 'Testing' && datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp'){
 						'call function get data guar personal'
 						getDataGuarPersonal()
 						
@@ -457,6 +461,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 						 
 						 'add cust model to array'
 						 GlobalVariable.confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
+						 
+						 'add gender to array'
+						 GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
+								 'value'))
 						 
 						 'add ownership to array'
 						 GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
@@ -503,14 +511,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
-                    if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+                    if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                          if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
                         'Yes')) {
                             'call test case company data verif'
                              WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataPersonalStoreDBVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
-                    }else if(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
+                    }else if(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
 					if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
 						'Yes')) {
 							'call test case company data verif'
@@ -740,7 +748,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         }
                     }
 					
-					if(GlobalVariable.RoleCompany == 'Testing'){
+					if(GlobalVariable.RoleCompany == 'Testing' && datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp'){
 						'call function get data guarantor company'
 						getDataGuarCompany()
 						
@@ -853,10 +861,6 @@ def getDataGuarPersonal(){
 	
 	'add mobile phone to array'
 	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Mobile Phone'),
-			'value'))
-	
-	'add gender to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
 			'value'))
 	
 	'add birth date to array'
