@@ -305,7 +305,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
     'input admin fee'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-        datafilefinancial.getValue(GlobalVariable.NumofColm, 21))
+        datafilefinancial.getValue(GlobalVariable.NumofColm, 21),FailureHandling.OPTIONAL)
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'), 
         2, FailureHandling.OPTIONAL)) {
