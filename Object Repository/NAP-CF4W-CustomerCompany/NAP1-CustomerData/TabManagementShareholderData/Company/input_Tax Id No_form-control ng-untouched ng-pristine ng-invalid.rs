@@ -6,6 +6,10 @@
    <elementGuidId>13fa9b64-08a4-4ed3-bc13-11b504966798</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'text']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[3]</value>
       </entry>

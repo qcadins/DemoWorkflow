@@ -192,7 +192,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
             }
         }
     }
-    
+		
+    if (GlobalVariable.RoleCompany == 'Testing') {
+    	'call test case verif customer data'
+    	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+    }
+		
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         21).length() > 0) {
         'select company type'
@@ -201,15 +206,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
                 21), false)
     }
     
-    if (GlobalVariable.RoleCompany == 'Testing') {
-        'call test case verif customer data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
 }
+
+'call function get confins data'
+getConfinsdata()
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Save'))
-
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         4)) == 0) {
@@ -256,7 +259,6 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-		
 'verify fail'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
     'CUSTOMER', false, FailureHandling.OPTIONAL)) {
@@ -278,12 +280,70 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     }
 }
 
-
 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-		14) == 'Input Data') {
-	if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+    14) == 'Input Data') {
+    if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+        'call test case verif customer store data'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+    }
+}else{
+	if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
 		'call test case verif customer store data'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], 
-				FailureHandling.CONTINUE_ON_FAILURE)
-	}
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif-LookUp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
+}
+
+public getConfinsdata(){
+	'declare array for confins data'
+	def confinsdata = []
+	
+	'add customer name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add tax id to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add company type to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'),
+			'value'))
+	
+	'add customer model to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'),
+			'value'))
+	
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'),
+			'value'))
+	
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'),
+			'value'))
+	
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'),
+			'value'))
+	
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode'), 'value'))
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'),
+			'value'))
+	
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKecamatan'),
+			'value'))
+	
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'),
+			'value'))
+	
+	'add ownership to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
+			'value'))
+	
+	GlobalVariable.confinsdata = confinsdata
+}
+

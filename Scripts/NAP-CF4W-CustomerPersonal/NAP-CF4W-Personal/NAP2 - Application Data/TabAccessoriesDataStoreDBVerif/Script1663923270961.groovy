@@ -33,49 +33,46 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
         GlobalVariable.NumofColm, 12))
 
+println(result)
+
 int arraynum = 0
-
-resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
-
-println(resultarray)
 
 for (GlobalVariable.NumofColm = 2; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 1); (GlobalVariable.NumofColm)++) {
 	
 	'verify supplier code'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 13).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify supplier name'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 14).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 14).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories code'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 15).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 15).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories name'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 16).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 16).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories price'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 17).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 17).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify DP Percent'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 19).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 19).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify DP Amount'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 20).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 20).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify notes'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 21).toUpperCase(), (resultarray[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofColm, 21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 }
 
-println(resultarray)
 

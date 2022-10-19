@@ -5,6 +5,8 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.support.ui.Select
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -652,6 +654,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             continue
                         }
+						
+						if (GlobalVariable.RoleCompany == 'Testing') {
+							'call test case personal data verif'
+							WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataVerif'),
+								[:], FailureHandling.CONTINUE_ON_FAILURE)
+						}
                         
                         'input share'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
@@ -725,11 +733,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
-                        if (GlobalVariable.RoleCompany == 'Testing') {
-                            'call test case personal data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataVerif'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
+                        
                     } else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -800,6 +804,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             continue
                         }
+						
+						if (GlobalVariable.RoleCompany == 'Testing') {
+							'call test case company data verif'
+							WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataVerif'),
+								[:], FailureHandling.CONTINUE_ON_FAILURE)
+						}
                         
                         'select company type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'), 
@@ -837,11 +847,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
-                        if (GlobalVariable.RoleCompany == 'Testing') {
-                            'call test case company data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataVerif'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
+							'call function ge3t confins data'
+							getConfinsdata()
                     }
                 }
                 
@@ -901,7 +908,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     }
                     
                     if (datafile.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
-                        if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
+                        if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
                             if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
                                 'call test case company data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
@@ -922,3 +929,192 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
+public getConfinsdata(def datafile){
+	'declare array for confins data'
+	def confinsdata = []
+	
+	if(datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')){
+	'add customer name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add tax id to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add Position SLIK to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/label_positionSLIK'),
+			'value'))
+	
+	Select selectcustomertype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div/div[2]/div/div/lib-ucdropdownlist/div/select')))
+	
+	'add company type to array'
+	confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
+	
+	Select selectcustomermodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
+	
+	'add customer model to array'
+	confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
+	
+	'add share to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
+			'value').replace('%',''))
+	
+	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'), 2, FailureHandling.OPTIONAL)){
+	'add is active to array'
+	confinsdata.add('Yes')
+	}else{
+	'add is active to array'
+	confinsdata.add('No')
+	}
+	
+	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'), 2, FailureHandling.OPTIONAL)){
+		
+	'add is owner to array'
+	confinsdata.add('Yes')
+	}else{
+	'add is active to array'
+	confinsdata.add('No')
+	}
+	
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RT'),
+			'value'))
+	
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RW'),
+			'value'))
+	
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelZipcode'), 'value'))
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelKelurahan'),
+			'value'))
+	
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelKecamatan'),
+			'value'))
+	
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelKota'),
+			'value'))
+	
+	Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+	
+	'add ownership to array'
+	confinsdata.add(selectownership.getFirstSelectedOption().getText())
+	}else if(datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')){
+	'add customer name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add birth place to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add id type to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One AKTA  E-KTP  KARTU TANDA MAHASISWA  KITAS  NPWP  SIM'),
+			'value'))
+	
+	'add id expired date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id Expired Date_form-control ng-untouched ng-pristine ng-valid'),
+			'value'))
+	
+	'add marital status to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Married  Single  Widow'),
+			'value'))
+	
+	'add mobile phone to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add customer model to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Employee  Non Professional  Professional  Small Medium Enterprise'),
+			'value'))
+	
+	'add gender to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Female  Male'),
+			'value'))
+	
+	'add birth date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add id no to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id No_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add tax id to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'),
+			'value'))
+	
+	'add mother maiden name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add email to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Email_form-control ng-untouched ng-pristine ng-valid'),
+			'value'))
+	
+	'add share to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
+			'value').replace('%',''))
+	
+	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 2, FailureHandling.OPTIONAL)){
+	'add is active to array'
+	confinsdata.add('Yes')
+	}else{
+	'add is active to array'
+	confinsdata.add('No')
+	}
+	
+	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 2, FailureHandling.OPTIONAL)){
+		
+	'add is owner to array'
+	confinsdata.add('Yes')
+	}else{
+	'add is owner to array'
+	confinsdata.add('No')
+	}
+	
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RT'),
+			'value'))
+	
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RW'),
+			'value'))
+	
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/LabelZipcode'), 'value'))
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/LabelKelurahan'),
+			'value'))
+	
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/LabelKecamatan'),
+			'value'))
+	
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/LabelKota'),
+			'value'))
+	
+	'add ownership to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
+			'value'))
+	
+	}
+	
+	
+	println(confinsdata)
+}

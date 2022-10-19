@@ -37,7 +37,7 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBCompany'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofFamily, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofFamily, 52)).replace('HEADER:', '').replace('[', '').replace(']', '')
+        GlobalVariable.NumofFamily, 50)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 
@@ -53,6 +53,8 @@ for (i = 0; i <= (resultarray.size() - 1); i++) {
         (resultarray[i]) = 'No'
     }
 }
+
+println(resultarray)
 
 int arrayindex = 0
 

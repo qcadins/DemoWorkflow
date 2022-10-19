@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/lib-uclookupgeneric/div/div/label</value>
+         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/lib-uclookupgeneric/div/div/label</value>
+      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
    </webElementProperties>
 </WebElementEntity>
