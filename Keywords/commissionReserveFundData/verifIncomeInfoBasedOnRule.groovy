@@ -25,7 +25,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public verifIncomeInfoAmtRuleBased(Sql instanceLOS, String appNo){
 		String lobCode
-		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE WITH(NOLOCK) from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
 			lobCode = row[0]
 		})
 		HashMap<String,ArrayList> result = new HashMap<>()
