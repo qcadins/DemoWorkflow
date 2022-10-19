@@ -45,12 +45,17 @@ String password = findTestData('Login/Login').getValue(4, 8)
 
 String database = findTestData('Login/Login').getValue(5, 8)
 
+String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
 
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
 String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
@@ -110,7 +115,7 @@ def StoreCDCCustomerName = ''
 			'get guarantor name'
 			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection, DupcheckAppNo,
+			String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo,
 				name)
 
 			if (GuarantorType.equalsIgnoreCase('COMPANY')) {

@@ -80,60 +80,64 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             break
         }
         
-        newxpathIncomeInfo = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[1]/label')
-
-        newxpathIncomeInfoAmt = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label')
-
-        modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-            'xpath', 'equals', newxpathIncomeInfo, true)
-
-        modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-            'xpath', 'equals', newxpathIncomeInfoAmt, true)
-
-        'Varibel String untuk mengambil dan menampung income information'
-        String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
-
-        'Verif jika income info allocation sesuai dengan rule file'
-        if (WebUI.verifyMatch(textIncomeInfo, ('.*' + (refundFrom[i])) + '.*', true)) {
-            BigDecimal getAmountFromAppDB = 1
-
-            'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
-            if (textIncomeInfo.equalsIgnoreCase('Upping Rate')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkDiffRateAmtValue'(
-                    sqlConnectionLOS, appNo)
-            } else if (textIncomeInfo.equalsIgnoreCase('Insurance Income')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkInsValue'(
-                    sqlConnectionLOS, appNo)
-            } else if (textIncomeInfo.equalsIgnoreCase('Life Insurance Income')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkLifeInsValue'(
-                    sqlConnectionLOS, appNo)
-            } else if (textIncomeInfo.equalsIgnoreCase('Admin Fee')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkAdminFeeValue'(
-                    sqlConnectionLOS, appNo)
-            } else if (textIncomeInfo.equalsIgnoreCase('Provision Fee')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkProvisionFeeValue'(
-                    sqlConnectionLOS, appNo)
-            } else if (textIncomeInfo.equalsIgnoreCase('Other Fee')) {
-                getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkOtherFeeValue'(
-                    sqlConnectionLOS, appNo)
-            }
-            
-            String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
-
-            'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
-            if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(',', ''))), Math.round(getAmountFromAppDB * 
-                    Double.parseDouble(refundAmt[i])) == false){
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-		
-				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+		if(GlobalVariable.CheckRuleCompany=="Yes"){
+			newxpathIncomeInfo = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[1]/label')
+			 
+			newxpathIncomeInfoAmt = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label')
+			 
+			modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Upping Rate'),
+						 'xpath', 'equals', newxpathIncomeInfo, true)
+			 
+			modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),
+						 'xpath', 'equals', newxpathIncomeInfoAmt, true)
+			 
+			'Varibel String untuk mengambil dan menampung income information'
+			String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
+			 
+			'Verif jika income info allocation sesuai dengan rule file'
+			if (WebUI.verifyMatch(textIncomeInfo, ('.*' + (refundFrom[i])) + '.*', true)) {
 				
-				flagFailed++
-            }
-        }
+				BigDecimal getAmountFromAppDB = 1
+			 
+				'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
+				if (textIncomeInfo.equalsIgnoreCase('Upping Rate')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkDiffRateAmtValue'(
+									 sqlConnectionLOS, appNo)
+				} else if (textIncomeInfo.equalsIgnoreCase('Insurance Income')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkInsValue'(
+									 sqlConnectionLOS, appNo)
+				} else if (textIncomeInfo.equalsIgnoreCase('Life Insurance Income')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkLifeInsValue'(
+									 sqlConnectionLOS, appNo)
+				} else if (textIncomeInfo.equalsIgnoreCase('Admin Fee')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkAdminFeeValue'(
+									 sqlConnectionLOS, appNo)
+				} else if (textIncomeInfo.equalsIgnoreCase('Provision Fee')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkProvisionFeeValue'(
+									 sqlConnectionLOS, appNo)
+				} else if (textIncomeInfo.equalsIgnoreCase('Other Fee')) {
+								 getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkOtherFeeValue'(
+									 sqlConnectionLOS, appNo)
+				}
+						 
+				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
+			 
+				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
+				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(',', ''))), Math.round(getAmountFromAppDB *
+								 Double.parseDouble(refundAmt[i])) == false){
+					'Write To Excel GlobalVariable.StatusFailed'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+									 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+						 
+					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+									 1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+								 
+					flagFailed++
+				}
+			}
+		}
+        
     }
 }
 

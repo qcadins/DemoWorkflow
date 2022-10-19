@@ -40,39 +40,39 @@ println(result)
 
 int arraynum = 0
 
-for (GlobalVariable.NumofColm = 2; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 1); (GlobalVariable.NumofColm)++) {
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 1); (GlobalVariable.NumofAccessories)++) {
 	
 	'verify supplier code'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify supplier name'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 14).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 14).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories code'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 15).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 15).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories name'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 16).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 16).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify accessories price'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 17).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 17).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify DP Percent'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 19).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 19).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify DP Amount'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 20).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 20).replace(',',''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 
 	'verify notes'
     WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-            GlobalVariable.NumofColm, 21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+            GlobalVariable.NumofAccessories, 21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
 }
 
 

@@ -352,7 +352,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 		}
 	}
-   
+	println(GlobalVariable.NumofColm)
 	'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -715,6 +715,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 	
+	println("num of colm:"+GlobalVariable.NumofColm)
 	'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(

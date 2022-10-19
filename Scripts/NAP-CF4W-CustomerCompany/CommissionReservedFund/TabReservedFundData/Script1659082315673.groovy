@@ -149,18 +149,21 @@ for (int i = 0; i < allocFrom.size(); i++) {
     'Ambil nilai string text nama section allocation pada confins'
     String textAllocFromSection = WebUI.getText(allocFromSectionObject)
 
-    'Verify allocation from yang tampil pada confins sesuai dengan rule file'
-    if(WebUI.verifyMatch(textAllocFromSection, ('.*' + (allocFrom[i]).replace('_', ' ')) + '.*', true) == false){
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-		'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-		
-		flagFailed++
+	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+		'Verify allocation from yang tampil pada confins sesuai dengan rule file'
+		if(WebUI.verifyMatch(textAllocFromSection, ('.*' + (allocFrom[i]).replace('_', ' ')) + '.*', true) == false){
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	
+			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+			
+			flagFailed++
+		}
 	}
+    
 
     BigDecimal remainingInfoAmt
 
@@ -197,50 +200,62 @@ for (int i = 0; i < allocFrom.size(); i++) {
 
     'Pengecekan remaining info bernilai 0 atau tidak'
     if (remainingInfoAmt > 0) {
-        'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
-        if(WebUI.verifyMatch(inputAllocAmt.replace(',', ''), defAllocAmt[i], false) == false){
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-			
-			flagFailed++
+		
+		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+			'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
+			if(WebUI.verifyMatch(inputAllocAmt.replace(',', ''), defAllocAmt[i], false) == false){
+				'Write To Excel GlobalVariable.StatusFailed'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		
+				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				
+				flagFailed++
+			}
 		}
+        
 
         'Pengecekan editable/tidaknya field-field allocation pada confins sesuai behaviour pada rule file'
         if ((allocBhv[i]).equalsIgnoreCase('def')) {
-            'Verify field bisa diisi'
-           if(WebUI.verifyElementNotHasAttribute(inputAlloc, 'readonly', 2) == false){
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
-			flagFailed++
-		   }
+			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+				'Verify field bisa diisi'
+				if(WebUI.verifyElementNotHasAttribute(inputAlloc, 'readonly', 2) == false){
+				 'Write To Excel GlobalVariable.StatusFailed'
+				 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		 
+				 'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					 1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				 
+				 flagFailed++
+				}
+			}
+            
 
             'Input Alloc Reserved Fund Amount'
             WebUI.setText(inputAlloc, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
                     GlobalVariable.NumofColm, rsvAmtRow + i), FailureHandling.OPTIONAL)
         } else if ((allocBhv[i]).equalsIgnoreCase('lock')) {
-            'Verify field tidak bisa diisi'
-          if(WebUI.verifyElementHasAttribute(inputAlloc, 'readonly', 2) == false){
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-			
-			flagFailed++
-		  }
+			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+				'Verify field tidak bisa diisi'
+				if(WebUI.verifyElementHasAttribute(inputAlloc, 'readonly', 2) == false){
+				  'Write To Excel GlobalVariable.StatusFailed'
+				  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					  0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+		  
+				  'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
+				  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					  1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+				  
+				  flagFailed++
+				
+				}
+            
+			}
         }
     } else {
         'Verify field tidak bisa diisi'

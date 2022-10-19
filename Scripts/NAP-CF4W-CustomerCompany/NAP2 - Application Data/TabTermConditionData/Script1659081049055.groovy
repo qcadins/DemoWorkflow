@@ -136,7 +136,7 @@ for (int i = 1; i <= count; i++) {
     'Variabel yang digunakan untuk menyimpan isi dari nama dokumen'
     String textDocumentName = WebUI.getText(modifyObjectDocumentName)
 
-    if (GlobalVariable.RoleCompany == 'Testing') {
+    if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckRuleCompany=="Yes") {
         'verif document name based on rule'
         if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU, textDocumentName), TCCode.get(
                 i - 1), false) == false){

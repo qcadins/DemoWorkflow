@@ -54,7 +54,7 @@ String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cus
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
 
-if(GlobalVariable.RoleCompany=="Testing"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
 	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
 	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
 	
@@ -175,7 +175,7 @@ ArrayList<String> feeBhv, defAmt
 feeBhv = result.get("Bhv")
 defAmt = result.get("Amt")
 
-if(GlobalVariable.RoleCompany=="Testing"){
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
 	'Ambil nilai admin fee dari confins'
 	adminFeeDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),'value')
 	
@@ -316,7 +316,7 @@ if(capinssetting=="YEARLY"){
 	for (int i = 1; i <= count; i++) {
 		//modify object year num
 		yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/td_YearNo'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]",true)
-		if(GlobalVariable.RoleCompany=="Testing"){
+		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
 			'modify object sum insured percentage'
 			sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'),
 				'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[5]/div/input', true)
@@ -449,7 +449,7 @@ if(capinssetting=="YEARLY"){
 		
 		String mainPremiVal
 		//Verif Main Premi Rate Based on Rule
-		if(GlobalVariable.RoleCompany=="Testing"){
+		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 			
@@ -613,7 +613,7 @@ if(capinssetting=="YEARLY"){
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 			
 			//Verif additional premi rate based on rule
-			if(GlobalVariable.RoleCompany=="Testing"){
+			if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
 				'Looping berdasarkan jumlah additional coverage type pada rule excel'
 				for(int k = 0;k<addtCvgType.size();k++){
 					'Verif additional coverage type confins sesuai dengan rule'
