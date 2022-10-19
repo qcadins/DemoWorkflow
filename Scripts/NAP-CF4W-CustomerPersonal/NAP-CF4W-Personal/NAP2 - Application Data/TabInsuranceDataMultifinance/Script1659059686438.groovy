@@ -691,8 +691,12 @@ if(capinssetting=="YEARLY"){
 				AddtRateValueArray = AddtRateValue.split(';', -1)
 							
 				if(GlobalVariable.Role=="Testing"){
-					'Verif rate tidak terlock'
-					WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+					
+					if(flagLoad==0){
+						'Verif rate tidak terlock'
+						WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+					}
+					
 				}
 							
 				'Pengecekan additional premi rate pada excel kosong atau tidak'
@@ -709,8 +713,12 @@ if(capinssetting=="YEARLY"){
 			//Road worthiness document berniali on the road atau tidak ada attribute road worthiness document pada asset
 			else if(rwd=="ON_THE_ROAD"||rwd==null){
 				if(GlobalVariable.Role=="Testing"){
-					'Verif rate terlock'
-					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+					
+					if(flagLoad==0){
+						'Verif rate terlock'
+						WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+					}
+					
 				}
 			}
 		}

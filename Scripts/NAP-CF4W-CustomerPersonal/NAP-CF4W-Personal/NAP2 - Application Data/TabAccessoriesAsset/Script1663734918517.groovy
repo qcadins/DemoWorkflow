@@ -482,7 +482,10 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					   
 								   continue
 							   }
-							   
+								 def AccPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+								BigDecimal BDAccPrice = Integer.parseInt(AccPrice)
+								GlobalVariable.TotalAccessoriesPrice += BDAccPrice.doubleValue()
+								
 							   'write to excel success'
 							   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 									   GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)

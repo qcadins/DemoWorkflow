@@ -424,8 +424,11 @@ for (int i = 1; i <= count; i++) {
 			AddtRateValueArray = AddtRateValue.split(';', -1)
 							
 			if(GlobalVariable.Role=="Testing"){
-				'Verif rate tidak terlock'
-				WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+				if(flagLoad==0){
+					'Verif rate tidak terlock'
+					WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+				}
+				
 			}
 							
 			'Pengecekan additional premi rate pada excel kosong atau tidak'
@@ -442,8 +445,11 @@ for (int i = 1; i <= count; i++) {
 		//road worthiness document bernilai on the road atau tidak ada attribute road worthiness document pada asset attribute
 		else if(rwd=="ON_THE_ROAD"||rwd==null){
 			if(GlobalVariable.Role=="Testing"){
-				'verif rate terlock'
-				WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+				if(flagLoad==0){
+					'verif rate terlock'
+					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+				}
+				
 			}
 		}
 	}
