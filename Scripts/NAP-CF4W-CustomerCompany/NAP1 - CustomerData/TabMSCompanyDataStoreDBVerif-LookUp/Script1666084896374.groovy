@@ -35,7 +35,7 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBCompany'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBCompanyLOOKUP'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofFamily, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofFamily, 50)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
@@ -69,22 +69,23 @@ arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).to
         false, FailureHandling.OPTIONAL))
 
 'verify position slik'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(),
+	false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify share percent'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is active'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is owner'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify address'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
