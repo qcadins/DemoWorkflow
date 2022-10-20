@@ -18,19 +18,19 @@ import groovy.sql.Sql as Sql
 
 'get value porfession'
 String Profession = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-    GlobalVariable.NumofFamily, 26)
+    GlobalVariable.NumofFamily, 27)
 
 'get value posittion slik'
 String PositionSLIK = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-    GlobalVariable.NumofFamily, 28)
+    GlobalVariable.NumofFamily, 29)
 
 'get value job position'
 String JobPosition = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-    GlobalVariable.NumofFamily, 37)
+    GlobalVariable.NumofFamily, 38)
 
 'get value department aml'
 String DepartmentAML = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-    GlobalVariable.NumofFamily, 44)
+    GlobalVariable.NumofFamily, 45)
 
 'get value authority aml'
 String AuthorityAML = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
@@ -200,7 +200,7 @@ arrayMatch.add(WebUI.verifyMatch(AuthorityAML.toUpperCase(), (resultarray[arrayi
 
 'verify is addres copy atau tidak'
 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
-    71).length() > 0) {
+    70).length() > 0) {
     'verify address copy dari customer'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             24).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -269,10 +269,10 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManageme
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
 	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholder',
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 			0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholder',
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 			1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedStoredDB)
 }

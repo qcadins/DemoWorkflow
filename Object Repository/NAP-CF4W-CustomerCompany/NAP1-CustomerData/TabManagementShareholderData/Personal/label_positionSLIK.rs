@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>LabelZipcode</name>
+   <name>label_positionSLIK</name>
    <tag></tag>
-   <elementGuidId>daf990df-44b0-4132-a96f-6529cab408ea</elementGuidId>
+   <elementGuidId>525f9b3f-5974-4114-b469-427c6b6f2849</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[3]/div[1]/div/div/lib-uclookupgeneric/div/div/input</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[4]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +21,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+      <value>//*[@id=&quot;CustMainData&quot;]/div[3]/div[1]/div/div/lib-uclookupgeneric/div/div/input</value>
    </webElementProperties>
 </WebElementEntity>

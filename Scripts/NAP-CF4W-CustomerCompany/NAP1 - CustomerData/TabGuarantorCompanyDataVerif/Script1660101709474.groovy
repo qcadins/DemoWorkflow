@@ -35,63 +35,26 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompany'(sqlconnection, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-        'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
+        'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value')).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
 
-'declare array for confins data'
-def confinsdata = []
-
-'add customer name to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-        'value'))
-
-'add tax id to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value'))
-
-'add company type to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-        'value'))
-
-'add customer model to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'), 
-        'value'))
-
-'add address to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/textarea_Address'), 
-        'value'))
-
-'add RT to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_RT'), 
-        'value'))
-
-'add RW to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_RW'), 
-        'value'))
-
-'add zipcode to array'
-confinsdata.add(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelZipcode')))
-
-'add kelurahan to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelKelurahan'), 
-        'value'))
-
-'add kecamatan to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelKecamatan'), 
-        'value'))
-
-'add kota to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelKota'), 
-        'value'))
-
-'add ownership to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'), 
-        'value'))
+'ganti value null > "" (String kosong)'
+for (i = 0; i <= (resultarray.size() - 1); i++) {
+	if ((resultarray[i]).equalsIgnoreCase('null')) {
+		(resultarray[i]) = ''
+	}
+	
+	if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
+		(resultarray[i]) = 'Yes'
+	} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
+		(resultarray[i]) = 'No'
+	}
+}
 
 for (i = 0; i < resultarray.size(); i++) {
     'verify resultarray = confinsdata'
-    WebUI.verifyMatch(resultarray[i], confinsdata[i], false, FailureHandling.OPTIONAL)
+    WebUI.verifyMatch(resultarray[i], GlobalVariable.confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 

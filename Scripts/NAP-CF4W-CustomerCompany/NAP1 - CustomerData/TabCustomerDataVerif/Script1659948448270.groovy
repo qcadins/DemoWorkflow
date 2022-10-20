@@ -40,56 +40,11 @@ String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompa
 resultarray = result.split(', ')
 
 'declare array for confins data'
-def confinsdata = []
 
-'add customer name to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value'))
-
-'add tax id to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value'))
-
-'add company type to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
-        'value'))
-
-'add customer model to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 
-        'value'))
-
-'add address to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), 
-        'value'))
-
-'add RT to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), 
-        'value'))
-
-'add RW to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), 
-        'value'))
-
-'add zipcode to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode'), 'value'))
-
-'add kelurahan to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 
-        'value'))
-
-'add kecamatan to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 
-        'value'))
-
-'add kota to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'), 
-        'value'))
-
-'add ownership to array'
-confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-        'value'))
 
 for (i = 0; i < resultarray.size(); i++) {
     'verify resultarray == confinsdata'
-    WebUI.verifyMatch(resultarray[i], confinsdata[i], false, FailureHandling.OPTIONAL)
+    WebUI.verifyMatch(resultarray[i], GlobalVariable.confinsdata[i], false, FailureHandling.OPTIONAL)
 }
+
+

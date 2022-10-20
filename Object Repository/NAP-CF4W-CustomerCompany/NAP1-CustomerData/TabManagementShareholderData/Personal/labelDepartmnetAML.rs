@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>LabelZipcode</name>
+   <name>labelDepartmnetAML</name>
    <tag></tag>
-   <elementGuidId>daf990df-44b0-4132-a96f-6529cab408ea</elementGuidId>
+   <elementGuidId>08e78cce-62be-45c2-b39d-7e907949f19c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+         <value>//*[@id=&quot;CustAttrSection&quot;]/div/div[1]/div/div/div/lib-uclookupgeneric/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+      <value>//*[@id=&quot;CustAttrSection&quot;]/div/div[1]/div/div/div/lib-uclookupgeneric/div/div/input</value>
    </webElementProperties>
 </WebElementEntity>
