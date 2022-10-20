@@ -52,6 +52,9 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA')
 
 //Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
+	'Verif reset'
+	CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+	
 	ArrayList<String> listString = new ArrayList<String>()
 	'click button search'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))

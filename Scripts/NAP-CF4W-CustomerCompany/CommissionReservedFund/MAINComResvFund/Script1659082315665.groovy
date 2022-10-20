@@ -42,6 +42,9 @@ WebUI.delay(5)
 
 //Verify sort & paging
 if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
+	'Verif reset'
+	CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+	
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'Klik Search'

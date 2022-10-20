@@ -67,6 +67,9 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 	
 	//Verify sort & paging
 	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
+		'Verif reset'
+		CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+		
 		'click button search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
 		

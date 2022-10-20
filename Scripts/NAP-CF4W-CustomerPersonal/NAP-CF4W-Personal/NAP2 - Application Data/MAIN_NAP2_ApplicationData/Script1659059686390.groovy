@@ -28,6 +28,9 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 //Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
+	'Verif reset'
+	CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+	
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'click button search'
