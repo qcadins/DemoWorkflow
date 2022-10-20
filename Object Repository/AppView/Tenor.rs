@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Tenor</name>
+   <tag></tag>
+   <elementGuidId>aaf45bc3-5a6f-4724-a439-c88cebd99da2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[7]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[7]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -589,4 +589,14 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 4)</initValue>
       <name>CheckRuleCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 4)</initValue>
+      <name>CheckAppViewPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 4)</initValue>
+      <name>CheckAppViewCompany</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
