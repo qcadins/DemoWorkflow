@@ -50,18 +50,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 } 
 else {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
-		not_run: if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 8)!=""){
 				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/EditNAP'),
 					[:], FailureHandling.STOP_ON_FAILURE)
 			}
-		not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
+		 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        not_run: if (GlobalVariable.DupcheckVerif == 'Yes') {
+         if (GlobalVariable.DupcheckVerif == 'Yes') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/CustomerDuplicateChecking'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
@@ -72,7 +72,7 @@ else {
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/MAINComResvFund'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     }
 }
