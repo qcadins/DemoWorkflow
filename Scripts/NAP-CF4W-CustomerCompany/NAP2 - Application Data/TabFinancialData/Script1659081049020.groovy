@@ -77,7 +77,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 def datafilefinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRulePersonal == 'Yes')) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) {
 	'Ambil nilai result dari rule credit fee'
 	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
@@ -569,7 +569,7 @@ if (flagFailed == 0 && GlobalVariable.FlagFailed==0) {
 	}
 }
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 	'call test case subsidy store db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
