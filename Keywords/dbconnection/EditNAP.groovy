@@ -27,7 +27,7 @@ public class EditNAP {
 	public CustomerDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
-		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
+		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
 
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
@@ -100,7 +100,7 @@ public class EditNAP {
 	public ShareholderDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
-		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
+		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
 
 			customerdata = (row[0])
 			listcustdata.add(customerdata)

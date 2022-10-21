@@ -29,7 +29,7 @@ public class checkAssetData {
 		instanceLOS.eachRow(("select distinct compnt_value from prod_offering po WITH(NOLOCK) join prod_offering_h poh WITH(NOLOCK) on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID join prod_offering_d pod WITH(NOLOCK) on pod.PROD_OFFERING_H_ID = poh.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
 		})
-		instanceFOU.eachRow(("SELECT count(*) FROM dbo.ASSET_MASTER am WITH ( NOLOCK ) JOIN dbo.ASSET_TYPE at WITH ( NOLOCK ) ON am.ASSET_TYPE_ID = at.ASSET_TYPE_ID JOIN dbo.ASSET_CATEGORY ac WITH ( NOLOCK ) ON am.ASSET_CATEGORY_ID = ac.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D asDetail WITH ( NOLOCK ) ON am.ASSET_MASTER_ID = asDetail.ASSET_MASTER_ID JOIN dbo.ASSET_SCHM_H asHead WITH ( NOLOCK ) ON asDetail.ASSET_SCHM_H_ID = asHead.ASSET_SCHM_H_ID WHERE am.IS_ACTIVE = 1 AND am.ASSET_CATEGORY_ID IS NOT NULL AND am.IS_FINAL = 1 AND asHead.ASSET_SCHM_CODE = '"+assetschmCode+"'"), { def row ->
+		instanceFOU.eachRow(("SELECT count(*) FROM dbo.ASSET_MASTER am WITH ( NOLOCK ) JOIN dbo.ASSET_TYPE at WITH ( NOLOCK ) ON am.ASSET_TYPE_ID = at.ASSET_TYPE_ID JOIN dbo.ASSET_CATEGORY ac WITH ( NOLOCK ) ON am.ASSET_CATEGORY_ID = ac.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D asDetail WITH ( NOLOCK ) ON am.ASSET_MASTER_ID = asDetail.ASSET_MASTER_ID JOIN dbo.ASSET_SCHM_H asHead WITH ( NOLOCK ) ON asDetail.ASSET_SCHM_H_ID = asHead.ASSET_SCHM_H_ID WHERE am.IS_ACTIVE = 1 AND am.ASSET_CATEGORY_ID IS NOT NULL AND am.IS_FINAL = 1 AND asHead.ASSET_SCHM_CODE = '"+assetschmCode+"' AND am.IS_ACTIVE = '1'"), { def row ->
 			countAsset = row[0]
 		})
 		return countAsset
