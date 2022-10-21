@@ -277,7 +277,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                     ']/td[7]/span/span/span/span/span/span/a', true)
 
                 'verify subject type dan button edit ada'
-                if ((WebUI.getText(modifySubjectType) == 'CUSTOMER') && WebUI.verifyElementPresent(modifyButtonEdit, 5, 
+                if ((WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL) == 'CUSTOMER') && WebUI.verifyElementPresent(modifyButtonEdit, 5, 
                     FailureHandling.OPTIONAL)) {
                     break
                 } else {
@@ -322,10 +322,10 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                 ']/td[7]/span/span/span/span/span/span/a', true)
 
             'get text subject name'
-            subjectName = WebUI.getText(modifySubjectName)
+            subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
             'get text subject type'
-            subjectType = WebUI.getText(modifySubjectType)
+            subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
             'verify name == data inputan'
             WebUI.verifyMatch(subjectName, CustomerNameArray[(i - 1)], false, FailureHandling.OPTIONAL)
@@ -365,11 +365,11 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                             modifyCustomerNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                 'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
-                            String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject)
+                            String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject, FailureHandling.OPTIONAL)
 
                             String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer, FailureHandling.OPTIONAL)
 
-                            String IdNoCustomer = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'))
+                            String IdNoCustomer = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'), FailureHandling.OPTIONAL)
 
                             if (NewIdNoCustomerMatch != null) {
                                 if (NewIdNoCustomerMatch.equalsIgnoreCase(IdNoCustomer)) {
@@ -382,7 +382,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
                                     'verify match CustomerNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
+                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), newCustomerNoValue, false, FailureHandling.OPTIONAL)
 
                                     break
                                 }
@@ -390,7 +390,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                     }
                     
-                    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess'),FailureHandling.OPTIONAL), 
+                    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess')), 
                         'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                         ArrayList<WebElement> applicationinprocessrow = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
 
@@ -420,7 +420,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                     WebUI.click(modifyselectCustomerPersonal, FailureHandling.OPTIONAL)
 
                                     'verify match ApplicantNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
+                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL).toString(), newApplicantNoValue.toString(), 
                                         false, FailureHandling.OPTIONAL)
 
                                     break
@@ -438,7 +438,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'))
 
                                 'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), '', false, FailureHandling.OPTIONAL)
                             } else if (GlobalVariable.Role == 'Testing') {
                                 'click button cancel'
                                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
@@ -453,7 +453,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
                                 'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
+                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), newCustomerNoValue, false, FailureHandling.OPTIONAL)
                             } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
@@ -463,7 +463,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                                 'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo), newApplicantNoValue, false, FailureHandling.OPTIONAL)
+                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), newApplicantNoValue, false, FailureHandling.OPTIONAL)
                             }
                         } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
@@ -487,7 +487,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'))
 
                                 'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), '', false, FailureHandling.OPTIONAL)
                             } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
@@ -497,7 +497,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                                 'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo), newApplicantNoValue, false, FailureHandling.OPTIONAL)
+                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), newApplicantNoValue, false, FailureHandling.OPTIONAL)
                             }
                         } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
@@ -607,10 +607,10 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                     ']/td[7]/span/span/span/span/span/span/a', true)
 
                 'get text subject name'
-                subjectName = WebUI.getText(modifySubjectName)
+                subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
                 'get text subject type'
-                subjectType = WebUI.getText(modifySubjectType)
+                subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
             }
             
             if (subjectName.equalsIgnoreCase(FamilyArray[(f - 1)])) {

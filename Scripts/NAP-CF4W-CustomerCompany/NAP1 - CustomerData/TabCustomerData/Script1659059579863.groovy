@@ -231,7 +231,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     }
 }
 
-if (GlobalVariable.RoleCompany == 'Testing') {
+if (GlobalVariable.RoleCompany == 'Testing' && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+    14) == 'LookUp') {
 	'call function get data cust'
 	getDataCust()
 	

@@ -911,136 +911,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         }
                     }
                     
-                    if (GlobalVariable.RoleCompany == 'Testing') {
-                        if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
-                            'call function MS get Data'
-                            getDataMS(datafile)
-
-                            'add Position SLIK to array'
-                            GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/label_positionSLIK'), 
-                                    'value'))
-
-                            Select selectcustomertype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div/div[2]/div/div/lib-ucdropdownlist/div/select')))
-
-                            'add company type to array'
-                            GlobalVariable.confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
-
-                            Select selectcustomermodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
-
-                            'add customer model to array'
-                            GlobalVariable.confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
-
-                            'add share to array'
-                            GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
-                                    'value').replace('%', ''))
-
-                            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                                2, FailureHandling.OPTIONAL)) {
-                                'add is active to array'
-                                GlobalVariable.confinsdata.add('Yes')
-                            } else {
-                                'add is active to array'
-                                GlobalVariable.confinsdata.add('No')
-                            }
-                            
-                            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                                2, FailureHandling.OPTIONAL)) {
-                                'add is owner to array'
-                                GlobalVariable.confinsdata.add('Yes')
-                            } else {
-                                'add is owner to array'
-                                GlobalVariable.confinsdata.add('No')
-                            }
-                            
-                            Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
-
-                            'add ownership to array'
-                            GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
-                        }else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
-                        'call function MS get data'
-                        getDataMS(datafile)
-
-                        Select selectIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[3]/div/div/lib-ucdropdownlist/div/select')))
-
-                        'add ID TYPE array'
-                        GlobalVariable.confinsdata.add(selectIdType.getFirstSelectedOption().getText())
-
-                        Select selectmaritalstatus = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[7]/div/div/lib-ucdropdownlist/div/select')))
-
-                        'add marital status array'
-                        GlobalVariable.confinsdata.add(selectmaritalstatus.getFirstSelectedOption().getText())
-
-                        Select selectGender = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select')))
-
-                        Select selectcustmodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[11]/div[1]/div/lib-ucdropdownlist/div/select')))
-
-                        'add customer model array'
-                        GlobalVariable.confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
-
-                        'add proffesion to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelProffesion'), 
-                                'value'))
-
-                        'add position SLIK to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/label_positionSLIK'), 
-                                'value'))
-
-                        'add establishment date to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'), 
-                                'value'))
-
-                        'add Gender array'
-                        GlobalVariable.confinsdata.add(selectGender.getFirstSelectedOption().getText())
-
-                        'add job position array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelJobposition'), 
-                                'value'))
-
-                        'add share to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
-                                'value').replace(' %', ''))
-
-                        if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
-                            'add is active to array'
-                            GlobalVariable.confinsdata.add('Yes')
-                        } else {
-                            'add is active to array'
-                            GlobalVariable.confinsdata.add('No')
-                        }
-                        
-                        if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
-                            'add is owner to array'
-                            GlobalVariable.confinsdata.add('Yes')
-                        } else {
-                            'add is owner to array'
-                            GlobalVariable.confinsdata.add('No')
-                        }
-                        
-                        if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
-                            'add is signer to array'
-                            GlobalVariable.confinsdata.add('Yes')
-                        } else {
-                            'add is signer to array'
-                            GlobalVariable.confinsdata.add('No')
-                        }
-                        
-                        'add department aml to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelDepartmnetAML'), 
-                                'value'))
-
-                        'add authority aml to array'
-                        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelAuthorityAML'), 
-                                'value'))
-
-                        Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
-
-                        'add ownership to array'
-                        GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
-                    }
-                }
+                    getData(datafile)
 					}
                 
                 'click button save'
@@ -1242,3 +1113,135 @@ def getDataMS(def datafile) {
     GlobalVariable.confinsdata = confinsdata
 }
 
+def getData(def datafile){
+	if (GlobalVariable.RoleCompany == 'Testing' && datafile.getValue(GlobalVariable.NumofFamily, 13).equalsIgnoreCase('LookUp')) {
+		if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Company')) {
+			'call function MS get Data'
+			getDataMS(datafile)
+
+			'add Position SLIK to array'
+			GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/label_positionSLIK'),
+					'value'))
+
+			Select selectcustomertype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div/div[2]/div/div/lib-ucdropdownlist/div/select')))
+
+			'add company type to array'
+			GlobalVariable.confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
+
+			Select selectcustomermodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
+
+			'add customer model to array'
+			GlobalVariable.confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
+
+			'add share to array'
+			GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
+					'value').replace('%', ''))
+
+			if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'),
+				2, FailureHandling.OPTIONAL)) {
+				'add is active to array'
+				GlobalVariable.confinsdata.add('Yes')
+			} else {
+				'add is active to array'
+				GlobalVariable.confinsdata.add('No')
+			}
+			
+			if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'),
+				2, FailureHandling.OPTIONAL)) {
+				'add is owner to array'
+				GlobalVariable.confinsdata.add('Yes')
+			} else {
+				'add is owner to array'
+				GlobalVariable.confinsdata.add('No')
+			}
+			
+			Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+
+			'add ownership to array'
+			GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+		}else if (datafile.getValue(GlobalVariable.NumofFamily, 14).equalsIgnoreCase('Personal')) {
+		'call function MS get data'
+		getDataMS(datafile)
+
+		Select selectIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[3]/div/div/lib-ucdropdownlist/div/select')))
+
+		'add ID TYPE array'
+		GlobalVariable.confinsdata.add(selectIdType.getFirstSelectedOption().getText())
+
+		Select selectmaritalstatus = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[7]/div/div/lib-ucdropdownlist/div/select')))
+
+		'add marital status array'
+		GlobalVariable.confinsdata.add(selectmaritalstatus.getFirstSelectedOption().getText())
+
+		Select selectGender = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select')))
+
+		Select selectcustmodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[11]/div[1]/div/lib-ucdropdownlist/div/select')))
+
+		'add customer model array'
+		GlobalVariable.confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
+
+		'add proffesion to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelProffesion'),
+				'value'))
+
+		'add position SLIK to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/label_positionSLIK'),
+				'value'))
+
+		'add establishment date to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'),
+				'value'))
+
+		'add Gender array'
+		GlobalVariable.confinsdata.add(selectGender.getFirstSelectedOption().getText())
+
+		'add job position array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelJobposition'),
+				'value'))
+
+		'add share to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
+				'value').replace(' %', ''))
+
+		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
+			2, FailureHandling.OPTIONAL)) {
+			'add is active to array'
+			GlobalVariable.confinsdata.add('Yes')
+		} else {
+			'add is active to array'
+			GlobalVariable.confinsdata.add('No')
+		}
+		
+		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
+			2, FailureHandling.OPTIONAL)) {
+			'add is owner to array'
+			GlobalVariable.confinsdata.add('Yes')
+		} else {
+			'add is owner to array'
+			GlobalVariable.confinsdata.add('No')
+		}
+		
+		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'),
+			2, FailureHandling.OPTIONAL)) {
+			'add is signer to array'
+			GlobalVariable.confinsdata.add('Yes')
+		} else {
+			'add is signer to array'
+			GlobalVariable.confinsdata.add('No')
+		}
+		
+		'add department aml to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelDepartmnetAML'),
+				'value'))
+
+		'add authority aml to array'
+		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelAuthorityAML'),
+				'value'))
+
+		Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+
+		'add ownership to array'
+		GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+	}
+}
+}

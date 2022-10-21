@@ -91,7 +91,7 @@ def StoreCDCCustomerName = ''
 			'get ManagementShareholder name'
 			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnection,
+			String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS,
 				DupcheckAppNo, name)
 
 			if (ManagementShareholderType.equalsIgnoreCase('COMPANY')) {

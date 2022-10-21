@@ -36,8 +36,8 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBCompanyLOOKUP'(sqlconnection, findTestData(
-        'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantor, 
-        12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantor, 
+        'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
+        12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
         16)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 resultarray = result.split(', ')
@@ -109,10 +109,10 @@ arrayMatch.add(WebUI.verifyMatch((GlobalVariable.confinsdata[confinsindex++]).to
 if (arrayMatch.contains(false)) {
     'Write To Excel GlobalVariable.StatusFailed'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
+        0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedStoredDB)
+        1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 
