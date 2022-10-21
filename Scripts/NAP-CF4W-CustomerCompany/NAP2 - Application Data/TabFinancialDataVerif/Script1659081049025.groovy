@@ -143,15 +143,16 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
 
 		'verify match strNTFValueXPercentage and strProvisionAmount'
 		WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL)
-	} else {
+	} else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		GlobalVariable.NumofColm, 36) == 'Amount'){
 		'calculate Provisionfeeamount divide NTFforprovisioncalc'
 		BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
 
 		'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
 		WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL)
 	}
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-	GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')){
+} else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
 	'check if provision fee type Percentage'
 	if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 36) == 'Percentage') {
@@ -161,7 +162,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
 		'verify matvh NTFValueFinal and provision amount'
 		WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL)
 	} else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 36) == 'Amount') {
+		GlobalVariable.NumofColm, 36) == 'Amount'){
 		'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
 		ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
 
@@ -359,6 +360,8 @@ int principalamountvalue
 'declare interestamountvalue'
 int interestamountvalue
 
+String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
+int gracePeriodNum = Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),'value'))
 'loop for tabel amortisasi '
 for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallment.size(); InstallmentSchemecount++) {
 	String NewInstallmentAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) +
@@ -432,9 +435,12 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 	'verify value not minus(-)'
 	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
 
-	'verify value not minus(-)'
-	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strPrincipalamount), 0)
-
+	'Jika grace period method bukan rollover atau jika rollover & seqno>graceperiodnum'
+	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")|| InstallmentSchemecount>gracePeriodNum){
+		'verify value not minus(-)'
+		WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strPrincipalamount), 0)
+	}
+	
 	'verify value not minus(-)'
 	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInterestamount), 0)
 

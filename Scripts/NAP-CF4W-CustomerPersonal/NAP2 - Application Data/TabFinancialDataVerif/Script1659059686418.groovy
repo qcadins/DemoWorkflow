@@ -360,6 +360,8 @@ int principalamountvalue
 'declare interestamountvalue'
 int interestamountvalue
 
+String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
+int gracePeriodNum = Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),'value'))
 'loop for tabel amortisasi '
 for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallment.size(); InstallmentSchemecount++) {
     String NewInstallmentAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
@@ -433,9 +435,12 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
 
-    'verify value not minus(-)'
-    WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strPrincipalamount), 0)
-
+	'Jika grace period method bukan rollover atau jika rollover & seqno>graceperiodnum'
+	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")|| InstallmentSchemecount>gracePeriodNum){
+		'verify value not minus(-)'
+		WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strPrincipalamount), 0)
+	}
+    
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInterestamount), 0)
 
