@@ -41,7 +41,7 @@ ArrayList <String> financialdatedelete = new ArrayList<>()
 for (index = 2; index <= (countcolm + 1); index++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 13))) {
+            GlobalVariable.NumofMS, 13))) {
         GlobalVariable.CopyAppColm = index
 		GlobalVariable.NumofVerifStore = index
 
@@ -78,7 +78,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     financialdata, 10).length() != 0) {
                     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                         financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                            GlobalVariable.NumofFamily, 13))) {
+                            GlobalVariable.NumofMS, 13))) {
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                             financialdata, 13).length() > 0) {
                             if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
@@ -181,7 +181,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                     financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                        GlobalVariable.NumofFamily, 13))) {
+                        GlobalVariable.NumofMS, 13))) {
                     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                         financialdata, 13).length() > 0) {
                         'convert date confins dan excel agar sama'
@@ -230,7 +230,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             financialdata, 10).length() != 0) {
             if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                 financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                    GlobalVariable.NumofFamily, 13))) {
+                    GlobalVariable.NumofMS, 13))) {
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                     financialdata, 13).length() > 0) {
                     'click button add'
