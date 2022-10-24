@@ -518,8 +518,4 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
-if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckAppViewCompany == 'Yes'){
-	'call test case verify app view'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/VerifyAppView'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-}
 

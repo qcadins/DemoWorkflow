@@ -39,9 +39,6 @@ String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompa
 
 resultarray = result.split(', ')
 
-'declare array for confins data'
-
-
 for (i = 0; i < resultarray.size(); i++) {
     'verify resultarray == confinsdata'
     WebUI.verifyMatch(resultarray[i], GlobalVariable.confinsdata[i], false, FailureHandling.OPTIONAL)

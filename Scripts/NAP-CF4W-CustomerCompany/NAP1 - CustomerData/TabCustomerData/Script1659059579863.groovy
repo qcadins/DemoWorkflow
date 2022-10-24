@@ -202,6 +202,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         }
     }
     
+	'check if role testing untuk get data customer digunakan untuk data verif'
     if (GlobalVariable.RoleCompany == 'Testing') {
 		'call function get data cust'
         getDataCust()
@@ -231,6 +232,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     }
 }
 
+	'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
 if (GlobalVariable.RoleCompany == 'Testing' && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp') {
 	'call function get data cust'
@@ -327,7 +329,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         'call test case verif customer store data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
-} else {
+} else (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+    14) == 'LookUp'){
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
         'call test case verif customer store data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerStoreDBVerif-LookUp'), 

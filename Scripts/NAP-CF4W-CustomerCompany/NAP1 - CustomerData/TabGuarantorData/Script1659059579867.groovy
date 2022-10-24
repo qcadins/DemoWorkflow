@@ -335,6 +335,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                                 continue
                             }
 							
+							'check if role testing untuk get data customer digunakan untuk data verif'
 							if (GlobalVariable.RoleCompany == 'Testing') {
 								'call function get data guarantor'
 								getDataGuarPersonal()
@@ -436,6 +437,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
+					'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
 					if(GlobalVariable.RoleCompany == 'Testing' && datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp'){
 						'call function get data guar personal'
 						getDataGuarPersonal()
@@ -719,6 +721,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                                 continue
                             }
                             
+							'check if role testing untuk get data customer digunakan untuk data verif'
 							if (GlobalVariable.RoleCompany == 'Testing') {
 								'call function get data guarantor company'
 								getDataGuarCompany()
@@ -748,6 +751,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         }
                     }
 					
+					'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
 					if(GlobalVariable.RoleCompany == 'Testing' && datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp'){
 						'call function get data guarantor company'
 						getDataGuarCompany()

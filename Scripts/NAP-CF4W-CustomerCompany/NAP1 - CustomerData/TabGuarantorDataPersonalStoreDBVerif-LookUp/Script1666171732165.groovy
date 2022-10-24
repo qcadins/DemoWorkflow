@@ -35,7 +35,7 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLOOKUP'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantorPersonal, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantorPersonal, 16)).replace('HEADER:', '').replace('[', '').replace(']', '')
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_ApplicationStatus</name>
+   <tag></tag>
+   <elementGuidId>8cee73df-505a-4228-a06e-b75457f08283</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[11]/div/div/div/div/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[11]/div/div/div/div/select</value>
+   </webElementProperties>
+</WebElementEntity>

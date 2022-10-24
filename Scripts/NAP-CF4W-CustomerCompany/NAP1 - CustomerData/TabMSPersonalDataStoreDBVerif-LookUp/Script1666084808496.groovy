@@ -35,7 +35,7 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBPersonalLOOKUP'(sqlconnection, findTestData(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnection, findTestData(
         'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
         12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofFamily, 
         17)).replace('HEADER:', '').replace('[', '').replace(']', '')
