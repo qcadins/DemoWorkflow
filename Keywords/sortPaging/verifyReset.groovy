@@ -36,4 +36,34 @@ public class verifyReset {
 		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),"ALL",false,2)
 		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),'value'),"",false)
 	}
+
+	@Keyword
+	public resetPagingAppInquiry(){
+
+		WebUI.setText(findTestObject('Object Repository/AppView/input_AppNo'),"0002APP20210800615_1")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_CustNo'),"0002CUST20210802912	")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_CustName'),"CALVIN CEN")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_AgreementNo'),"0002AGR20210803930")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_POname'),"CF4W_ACP_AUG")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_appDate'),"12/01/2021")
+		WebUI.setText(findTestObject('Object Repository/AppView/input_appDateKurangDari'),"12/15/2021")
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_currentAppStep'),"Approval",false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_currentAgreementStep'),"CANCEL",false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_ApplicationStatus'),"Cancel",false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_ContractStatus'),"Cancel",false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_CustomerCheckingStep'),"Customer Data Completion Done",false)
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_AppNo'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_CustNo'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_CustName'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_AgreementNo'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_POname'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_appDate'), 'value'),"", false)
+		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/AppView/input_appDateKurangDari'), 'value'),"", false)
+		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/AppView/select_currentAppStep'),"ALL",false,2)
+		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/AppView/select_currentAgreementStep'),"ALL",false,2)
+		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/AppView/select_ApplicationStatus'),"ALL",false,2)
+		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/AppView/select_ContractStatus'),"ALL",false,2)
+		WebUI.verifyOptionSelectedByLabel(findTestObject('Object Repository/AppView/select_CustomerCheckingStep'),"ALL",false,2)
+	}
 }

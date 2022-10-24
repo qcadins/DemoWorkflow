@@ -498,8 +498,3 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckAppViewPersonal == 'Yes'){
-	'call test case verify app view'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/VerifyAppView'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-

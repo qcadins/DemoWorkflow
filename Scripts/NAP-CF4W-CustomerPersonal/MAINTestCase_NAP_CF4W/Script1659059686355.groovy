@@ -46,13 +46,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
 } else {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
-        not_run: if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
         }
         
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -62,14 +61,18 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.STOP_ON_FAILURE)
         }
         
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
 
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
+
+        if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+            'call test case verify app view'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/VerifyAppView'), [:], FailureHandling.STOP_ON_FAILURE)
+        }
     }
 }
 

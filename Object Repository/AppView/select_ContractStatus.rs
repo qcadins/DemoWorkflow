@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_ContractStatus</name>
+   <tag></tag>
+   <elementGuidId>df83d76c-4257-4eb4-8769-ca4980809972</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[12]/div/div/div/div/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[12]/div/div/div/div/select</value>
+   </webElementProperties>
+</WebElementEntity>

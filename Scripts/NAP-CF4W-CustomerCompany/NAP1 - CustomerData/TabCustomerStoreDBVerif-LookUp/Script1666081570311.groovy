@@ -35,7 +35,7 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataStoreDBCompanyLOOKUP'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 17)).replace('HEADER:', '').replace('[', '').replace(']', '')
 

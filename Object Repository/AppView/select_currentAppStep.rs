@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_currentAppStep</name>
+   <tag></tag>
+   <elementGuidId>0e59a3b5-fa36-45d5-9bb1-4dff7e391efa</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[9]/div/div/div/div/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formSearch&quot;]/div/div/div[1]/div[9]/div/div/div/div/select</value>
+   </webElementProperties>
+</WebElementEntity>
