@@ -260,7 +260,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer').getValue(
-        GlobalVariable.NumofColm, 4)) == 0) {
+        GlobalVariable.NumofColm, 4)) == 0 && GlobalVariable.FlagFailed==0) {
     'Check alert'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.CustomerAsset')
 }

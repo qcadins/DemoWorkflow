@@ -670,7 +670,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                         GlobalVariable.NumofFamily, 4))
 
-                if (iscompleteMandatory == 0) {
+                if (iscompleteMandatory == 0 && flagFailed==0) {
                     'cek alert'
                     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, 
                         '2.TabFamilyData')

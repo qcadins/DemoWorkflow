@@ -188,7 +188,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                                         GlobalVariable.NumofGuarantorCompany, 4))
 
-                                if (iscompleteMandatory == 0) {
+                                if (iscompleteMandatory == 0 && flagFailed==0) {
                                     'cek alert'
                                     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                         '3b.TabGuarantorDataCompany')

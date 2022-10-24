@@ -530,7 +530,7 @@ def inputaddress() {
 
     iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(Address, 4))
 
-    if (iscompleteMandatory == 0) {
+    if (iscompleteMandatory == 0 && flagFailed==0) {
         'cek alert'
         flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
     }

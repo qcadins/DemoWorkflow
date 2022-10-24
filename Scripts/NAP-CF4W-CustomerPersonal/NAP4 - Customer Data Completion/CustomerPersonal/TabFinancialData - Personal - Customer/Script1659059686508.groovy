@@ -774,10 +774,10 @@ def inputBank(String copyapp, ArrayList<WebElement> variable){
 		Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal - Customer').getValue(
 				financialdata, 4))
 
-		if (iscompleteMandatory == 0) {
-			'cek alert'
-			flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
-		}
+		if (iscompleteMandatory == 0 && flagFailed==0) {
+            'cek alert'
+            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
+        }
 		
 		if (flagFailed == 0) {
 			'Check save Process write to excel'

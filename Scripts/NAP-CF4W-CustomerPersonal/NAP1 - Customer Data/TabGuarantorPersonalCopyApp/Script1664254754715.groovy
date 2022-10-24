@@ -303,7 +303,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                         GlobalVariable.NumofGuarantorPersonal, 4))
 
-                                if (iscompleteMandatory == 0) {
+                                if (iscompleteMandatory == 0 && flagFailed==0) {
                                     'cek alert'
                                     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                         '3a.TabGuarantorDataPersonal')
@@ -491,7 +491,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                     Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                             GlobalVariable.NumofGuarantorPersonal, 4))
 
-                                    if (iscompleteMandatory == 0) {
+                                    if (iscompleteMandatory == 0 && flagFailed==0) {
                                         'cek alert'
                                         flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                             '3a.TabGuarantorDataPersonal')

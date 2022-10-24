@@ -291,7 +291,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                         Integer iscompleteMandatory = Integer.parseInt(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                 4))
 
-                        if (iscompleteMandatory == 0) {
+                        if (iscompleteMandatory == 0 && flagFailed==0) {
                             'cek alert'
                             flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                 '3a.TabGuarantorDataPersonal')
@@ -479,7 +479,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                             Integer iscompleteMandatory = Integer.parseInt(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                     4))
 
-                            if (iscompleteMandatory == 0) {
+                            if (iscompleteMandatory == 0 && flagFailed==0) {
                                 'cek alert'
                                 flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                     '3a.TabGuarantorDataPersonal')
@@ -681,7 +681,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                         Integer iscompleteMandatory = Integer.parseInt(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                 4))
 
-                        if (iscompleteMandatory == 0) {
+                        if (iscompleteMandatory == 0 && flagFailed==0) {
                             'cek alert'
                             flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                 '3b.TabGuarantorDataCompany')
@@ -833,7 +833,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                             Integer iscompleteMandatory = Integer.parseInt(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                     4))
 
-                            if (iscompleteMandatory == 0) {
+                            if (iscompleteMandatory == 0 && flagFailed==0) {
                                 'cek alert'
                                 flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                     '3b.TabGuarantorDataCompany')
