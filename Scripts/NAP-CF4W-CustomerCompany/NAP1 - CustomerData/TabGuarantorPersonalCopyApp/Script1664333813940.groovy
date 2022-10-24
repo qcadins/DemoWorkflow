@@ -438,9 +438,9 @@ for (i = 1; i <= variableData.size(); i++) {
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
                             if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
-                                    GlobalVariable.NumofGuarantorPersonal, 4)) == 0) {
+                                    GlobalVariable.NumofGuarantorPersonal, 4)) == 0 && GlobalVariable.FlagFailed==0) {
                                 'Check alert'
-                                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
+                                GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                     '3a.TabGuarantorDataPersonal')
                             }
                             
