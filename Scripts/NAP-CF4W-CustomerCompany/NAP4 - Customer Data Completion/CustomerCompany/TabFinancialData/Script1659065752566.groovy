@@ -766,9 +766,9 @@ def inputdatafinancial() {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save'))
 
         if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-                financialdata, 4)) == 0) {
+                financialdata, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
             'Check alert'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
+            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
         }
         
         if (GlobalVariable.FlagFailed == 0) {

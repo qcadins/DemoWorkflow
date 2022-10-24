@@ -267,9 +267,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company - Customer').getValue(
-        GlobalVariable.NumofColm, 4)) == 0) {
+        GlobalVariable.NumofColm, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.CustomerAsset')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
