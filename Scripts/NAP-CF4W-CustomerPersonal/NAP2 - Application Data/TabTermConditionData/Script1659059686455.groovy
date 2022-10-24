@@ -291,7 +291,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0) {
+if (iscompleteMandatory == 0 && flagFailed==0) {
     'cek alert'
     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '11.TabTermConditionData')
 }

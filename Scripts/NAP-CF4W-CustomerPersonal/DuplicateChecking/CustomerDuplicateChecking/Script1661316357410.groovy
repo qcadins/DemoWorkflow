@@ -845,7 +845,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 	Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm,
 				4))
 	
-	if(iscompleteMandatory==0){
+	if(iscompleteMandatory==0 && flagFailed==0){
 		'cek alert'
 		flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
 	}

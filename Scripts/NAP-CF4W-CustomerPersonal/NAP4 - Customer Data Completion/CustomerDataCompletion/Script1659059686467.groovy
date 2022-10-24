@@ -473,7 +473,7 @@ GlobalVariable.DataFilePath = filePath
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0) {
+if (iscompleteMandatory == 0 && flagFailed==0) {
     'cek alert'
     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
 }

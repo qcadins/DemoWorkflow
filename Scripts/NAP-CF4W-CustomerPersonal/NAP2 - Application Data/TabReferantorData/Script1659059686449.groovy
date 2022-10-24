@@ -925,7 +925,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.CopyAppColm, 4))
 
-if (iscompleteMandatory == 0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.CopyAppColm, 
         '5.TabReferantorData')

@@ -174,7 +174,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 
 Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0) {
+if (iscompleteMandatory == 0 && flagFailed==0) {
     'cek alert'
     flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '1.CustomerDetail')
 }

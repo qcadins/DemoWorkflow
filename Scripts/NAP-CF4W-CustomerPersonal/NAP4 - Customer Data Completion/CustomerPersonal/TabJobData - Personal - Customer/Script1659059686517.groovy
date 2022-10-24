@@ -37,7 +37,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 }
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobData - Personal - Customer').getValue(GlobalVariable.NumofColm, 4))
-if(iscompleteMandatory==0){
+if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
 	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '3.JobData')
 }
