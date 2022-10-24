@@ -38,9 +38,9 @@ countcolm = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-C
 for (index = 2; index <= (countcolm + 1); index++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
         index, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+            GlobalVariable.NumofMS, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 13))) {
+            GlobalVariable.NumofMS, 13))) {
         copyAppColm = index
 
         break
@@ -74,9 +74,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 Address, 9).length() != 0) {
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                     Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                        GlobalVariable.NumofFamily, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+                        GlobalVariable.NumofMS, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                     Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                        GlobalVariable.NumofFamily, 13))) {
+                        GlobalVariable.NumofMS, 13))) {
                     if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                             Address, 12))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
@@ -182,9 +182,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                     Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                        GlobalVariable.NumofFamily, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+                        GlobalVariable.NumofMS, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                     Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                        GlobalVariable.NumofFamily, 13))) {
+                        GlobalVariable.NumofMS, 13))) {
                     if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                             Address, 12)))) {
                         if (i == variable.size()) {
@@ -283,9 +283,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             Address, 9).length() != 0) {
             if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                 Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                    GlobalVariable.NumofFamily, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
+                    GlobalVariable.NumofMS, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                 Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
-                    GlobalVariable.NumofFamily, 13))) {
+                    GlobalVariable.NumofMS, 13))) {
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'))
 

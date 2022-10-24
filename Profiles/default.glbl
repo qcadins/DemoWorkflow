@@ -599,4 +599,9 @@
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 4)</initValue>
       <name>CheckAppViewCompany</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofMS</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -36,16 +36,16 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofFamily, 13).split(';', -1)
+    GlobalVariable.NumofMS, 13).split(';', -1)
 
 def assetdescriptionarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofFamily, 14).split(';', -1)
+    GlobalVariable.NumofMS, 14).split(';', -1)
 
 def assetvaluearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofFamily, 15).split(';', -1)
+    GlobalVariable.NumofMS, 15).split(';', -1)
 
 def assetquantityarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofFamily, 16).split(';', -1)
+    GlobalVariable.NumofMS, 16).split(';', -1)
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
@@ -165,10 +165,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (assettypefaileddelete.size() > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
 
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -224,7 +224,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofFamily, 12) == 'Yes') {
+        GlobalVariable.NumofMS, 12) == 'Yes') {
         for (asset = 1; asset <= assettypearray.size(); asset++) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
@@ -265,22 +265,22 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofFamily, 4)) == 0) {
+        GlobalVariable.NumofMS, 4)) == 0) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '6.CustomerAsset')
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '6.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofFamily, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'), 
-        GlobalVariable.NumofFamily, '5.CustomerAsset')
+                GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'), 
+        GlobalVariable.NumofMS, '5.CustomerAsset')
 
     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerAsset - Company - ManagementShareholderCompany').getValue(
-            GlobalVariable.NumofFamily, 4)) == 0) {
+            GlobalVariable.NumofMS, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
-            GlobalVariable.NumofFamily, '5.CustomerAsset')
+            GlobalVariable.NumofMS, '5.CustomerAsset')
     }
 }
 
@@ -299,7 +299,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 }
 
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+    GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
 
     'Call test case verify customer asset store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerAssetVerifStoreDataDB'), 

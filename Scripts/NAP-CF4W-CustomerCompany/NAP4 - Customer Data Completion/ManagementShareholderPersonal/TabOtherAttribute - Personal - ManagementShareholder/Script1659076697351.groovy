@@ -273,14 +273,14 @@ if (arrayMatch.contains(false)) {
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 13).length() > 1) {
+    GlobalVariable.NumofMS, 13).length() > 1) {
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'))
 
     'input code Debtor'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Debtor Group Code_LbppmsDebtGrpCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 12))
+            GlobalVariable.NumofMS, 12))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -299,11 +299,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -311,14 +311,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 15).length() > 1) {
+    GlobalVariable.NumofMS, 15).length() > 1) {
     'click lookup debtor business scale'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Business Scale'))
 
     'input code debtor business scale'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Debtor Group Code_LbppmsBizSclCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 14))
+            GlobalVariable.NumofMS, 14))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -337,11 +337,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -349,14 +349,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 17).length() > 1) {
+    GlobalVariable.NumofMS, 17).length() > 1) {
     'click lookup counterpart category'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Counterpart Category_btn btn-raised btn-primary'))
 
     'input Counterpart Code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_LBPP Code_LbppCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 16))
+            GlobalVariable.NumofMS, 16))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -375,11 +375,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -387,14 +387,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 19).length() > 1) {
+    GlobalVariable.NumofMS, 19).length() > 1) {
     'click lookup sustainable financial business'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Sustainable Financial Business'))
 
     'input LBPP Code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_LBPP Code_LbppCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 18))
+            GlobalVariable.NumofMS, 18))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -413,11 +413,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -425,22 +425,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 21).length() > 1) {
+    GlobalVariable.NumofMS, 21).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NO  YES Split Treasure'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 21), false)
+            GlobalVariable.NumofMS, 21), false)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 23).length() > 1) {
+    GlobalVariable.NumofMS, 23).length() > 1) {
     'click button lookup Debtor Group SLIK'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_DEBTOR GROUP SLIK'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 22))
+            GlobalVariable.NumofMS, 22))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -459,11 +459,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -471,30 +471,30 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 24).length() > 1) {
+    GlobalVariable.NumofMS, 24).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NO  YES Violate BMPK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 24), false)
+            GlobalVariable.NumofMS, 24), false)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 25).length() > 1) {
+    GlobalVariable.NumofMS, 25).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NOYES Exceed BMPK'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 25), false)
+            GlobalVariable.NumofMS, 25), false)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 27).length() > 1) {
+    GlobalVariable.NumofMS, 27).length() > 1) {
     'click lookup Affiliate with multifinance SLIK'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_AFFILIATE WITH MULTIFINANCE SLIK_btn btn-raised btn-primary'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 26))
+            GlobalVariable.NumofMS, 26))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -513,11 +513,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -525,14 +525,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 29).length() > 1) {
+    GlobalVariable.NumofMS, 29).length() > 1) {
     'click lookup department AML'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_DEPARTMENT AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 28))
+            GlobalVariable.NumofMS, 28))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -551,11 +551,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -563,14 +563,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 31).length() > 1) {
+    GlobalVariable.NumofMS, 31).length() > 1) {
     'click lookup CSP/USL'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_CSPUSL SOURCE AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 30))
+            GlobalVariable.NumofMS, 30))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -589,11 +589,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -601,14 +601,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 33).length() > 1) {
+    GlobalVariable.NumofMS, 33).length() > 1) {
     'click payment type lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_PAYMENT TYPE AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 32))
+            GlobalVariable.NumofMS, 32))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -627,11 +627,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -639,22 +639,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 34).length() > 1) {
+    GlobalVariable.NumofMS, 34).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_-Select One- NO  YES KYC Report'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 34), false)
+            GlobalVariable.NumofMS, 34), false)
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 36).length() > 1) {
+    GlobalVariable.NumofMS, 36).length() > 1) {
     'click authority AML lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Authority AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 35))
+            GlobalVariable.NumofMS, 35))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -673,22 +673,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 37).length() > 1) {
+    GlobalVariable.NumofMS, 37).length() > 1) {
     'input attend date'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_ATTEND_'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 37))
+            GlobalVariable.NumofMS, 37))
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 30).length() > 1) {
+    GlobalVariable.NumofMS, 30).length() > 1) {
     'click business source AML Lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_BUSINESS SOURCE AML_btn btn-raised btn-primary'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 38))
+            GlobalVariable.NumofMS, 38))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -707,11 +707,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 
         'write to excel if failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
         (GlobalVariable.FlagFailed)++
@@ -719,22 +719,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 40).length() > 1) {
+    GlobalVariable.NumofMS, 40).length() > 1) {
     'input Business Period AML'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_BUSINESS PERIOD AML'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 40))
+            GlobalVariable.NumofMS, 40))
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-    GlobalVariable.NumofFamily, 42).length()) {
+    GlobalVariable.NumofMS, 42).length()) {
     'click building lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_BUILDING_'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 41))
+            GlobalVariable.NumofMS, 41))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Search'))
@@ -758,22 +758,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-        GlobalVariable.NumofFamily, 4)) == 0) {
+        GlobalVariable.NumofMS, 4)) == 0) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '7.OtherAttribute')
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '7.OtherAttribute')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-                GlobalVariable.NumofFamily, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
-        GlobalVariable.NumofFamily, '7.OtherAttribute')
+                GlobalVariable.NumofMS, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
+        GlobalVariable.NumofMS, '7.OtherAttribute')
 
     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofFamily, 4)) == 0) {
+            GlobalVariable.NumofMS, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
-            GlobalVariable.NumofFamily, '7.OtherAttribute')
+            GlobalVariable.NumofMS, '7.OtherAttribute')
     }
 }
 
@@ -784,12 +784,12 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 } else {
     if (flagWarning > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
     }
 }
 
 if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
-	GlobalVariable.NumofVerifStore = GlobalVariable.NumofFamily
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
 	
 	'call test case verify other attr store data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabOtherAttributeVerifStoreDataDB'), 
