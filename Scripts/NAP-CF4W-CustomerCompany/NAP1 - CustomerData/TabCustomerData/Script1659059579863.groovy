@@ -359,8 +359,7 @@ def getDataCust() {
             'value'))
 
     'add zipcode to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode'), 
-            'value'))
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode'),'value'))
 
     'add kelurahan to array'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 

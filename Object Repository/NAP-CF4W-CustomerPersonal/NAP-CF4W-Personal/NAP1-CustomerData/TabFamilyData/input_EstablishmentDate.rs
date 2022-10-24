@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>LabelZipcode</name>
+   <name>input_EstablishmentDate</name>
    <tag></tag>
-   <elementGuidId>984b45a3-6b94-47f5-809c-14a86849f6b5</elementGuidId>
+   <elementGuidId>71e3fe5c-8c29-43d2-acae-b78f42494155</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[11]/div[3]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;Address&quot;]/div/div[2]/div[1]/div[1]/div/input</value>
+      <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[11]/div[3]/div/input</value>
    </webElementProperties>
 </WebElementEntity>

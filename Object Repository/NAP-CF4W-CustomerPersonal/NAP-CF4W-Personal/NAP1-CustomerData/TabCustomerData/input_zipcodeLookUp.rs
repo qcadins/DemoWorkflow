@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>LabelZipcode</name>
+   <name>input_zipcodeLookUp</name>
    <tag></tag>
-   <elementGuidId>984b45a3-6b94-47f5-809c-14a86849f6b5</elementGuidId>
+   <elementGuidId>368f7f87-ed69-4226-b3dd-2057b5a3d958</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
