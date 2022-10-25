@@ -37,6 +37,13 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("INSURANCE") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
+
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyFinancial'),
 	[:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -77,7 +84,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 def datafilefinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry == "Yes") {
 	'Ambil nilai result dari rule credit fee'
 	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 

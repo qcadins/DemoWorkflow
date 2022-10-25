@@ -32,6 +32,12 @@ GlobalVariable.DataFilePath = filePath
 
 int flagFailed = 0
 
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
@@ -123,7 +129,7 @@ for (int i = 1; i <= count; i++) {
 	'Variabel yang digunakan untuk menyimpan isi dari nama dokumen'
 	String textDocumentName = WebUI.getText(modifyObjectDocumentName)
 
-	if(GlobalVariable.Role=="Testing" &&  GlobalVariable.CheckRulePersonal=="Yes"){
+	if(GlobalVariable.Role=="Testing" &&  GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'verif document name based on rule'
 		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
 			writeToExcelFailedVerifRule()

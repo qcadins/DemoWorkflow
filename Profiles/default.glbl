@@ -604,4 +604,9 @@
       <initValue>2</initValue>
       <name>NumofMS</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Yes'</initValue>
+      <name>FirstTimeEntry</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

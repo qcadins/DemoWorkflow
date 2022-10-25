@@ -102,6 +102,18 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/span_appNo'))
 
+
+//String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+//Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
+String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
+
+println(appLastStep)
+if(!appLastStep.equalsIgnoreCase("COM") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
+
 'Ambil nilai string text lobcode dari db los berdasarkan appNo'
 String lobCode = CustomKeywords.'commissionReserveFundData.verifRuleReserveFundData.checkLOBCode'(sqlConnectionLOS, appNo)
 
@@ -149,7 +161,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
     'Ambil nilai string text nama section allocation pada confins'
     String textAllocFromSection = WebUI.getText(allocFromSectionObject)
 
-	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Verify allocation from yang tampil pada confins sesuai dengan rule file'
 		if(WebUI.verifyMatch(textAllocFromSection, ('.*' + (allocFrom[i]).replace('_', ' ')) + '.*', true) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
@@ -201,7 +213,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
     'Pengecekan remaining info bernilai 0 atau tidak'
     if (remainingInfoAmt > 0) {
 		
-		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
 			if(WebUI.verifyMatch(inputAllocAmt.replace(',', ''), defAllocAmt[i], false) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
@@ -220,7 +232,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
         'Pengecekan editable/tidaknya field-field allocation pada confins sesuai behaviour pada rule file'
         if ((allocBhv[i]).equalsIgnoreCase('def')) {
 			
-			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field bisa diisi'
 				if(WebUI.verifyElementNotHasAttribute(inputAlloc, 'readonly', 2) == false){
 				 'Write To Excel GlobalVariable.StatusFailed'
@@ -240,7 +252,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
             WebUI.setText(inputAlloc, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
                     GlobalVariable.NumofColm, rsvAmtRow + i), FailureHandling.OPTIONAL)
         } else if ((allocBhv[i]).equalsIgnoreCase('lock')) {
-			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes"){
+			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field tidak bisa diisi'
 				if(WebUI.verifyElementHasAttribute(inputAlloc, 'readonly', 2) == false){
 				  'Write To Excel GlobalVariable.StatusFailed'

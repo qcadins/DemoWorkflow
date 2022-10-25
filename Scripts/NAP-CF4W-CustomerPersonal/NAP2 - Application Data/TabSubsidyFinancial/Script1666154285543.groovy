@@ -92,7 +92,7 @@ Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, u
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
 
 //Verif default subsidy based on rule, urutan masih statis
-if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes"){
+if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
 	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifSubsidy.verifySubsidyDefault'(sqlConnectionLOS, sqlConnectionFOU,appNo)

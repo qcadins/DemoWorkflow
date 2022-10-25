@@ -58,6 +58,16 @@ int countIncomeInfo = varIncomeInfo.size() / 2
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/span_appNo'))
 
+//String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+//Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
+String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
+
+println(appLastStep)
+if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
 'Hashmap untuk menampung arraylist refund allocation dan refund amount dari membaca rule file'
 HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(
     sqlConnectionLOS, appNo)
@@ -80,7 +90,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             break
         }
         
-		if(GlobalVariable.CheckRuleCompany=="Yes"){
+		if(GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			newxpathIncomeInfo = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[1]/label')
 			 
 			newxpathIncomeInfoAmt = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label')

@@ -26,6 +26,12 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
 	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
