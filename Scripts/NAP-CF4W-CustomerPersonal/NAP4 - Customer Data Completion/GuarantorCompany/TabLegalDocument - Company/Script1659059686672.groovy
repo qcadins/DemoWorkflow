@@ -134,7 +134,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 									1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 								
-								flagFailed=1
+								GlobalVariable.FlagFailed=1
                             }
 
                             'get total label from ddl'
@@ -149,7 +149,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 									1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 								
-								flagFailed=1
+								GlobalVariable.FlagFailed=1
 							}
                         }
                     }
@@ -336,7 +336,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 										1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
                                 }
 
                                 'get total label from ddl'
@@ -351,7 +351,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 										1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
 								}
                             }
                         }
@@ -452,7 +452,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
                     }
 
                     'get total label from ddl'
@@ -467,7 +467,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
 					}
                 }
             }
@@ -564,7 +564,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
                     }
 
                     'get total label from ddl'
@@ -579,7 +579,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
 							1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
 					}
                 }
             }

@@ -31,7 +31,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagFailed=0
+ GlobalVariable.FlagFailed=0
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
 
@@ -109,7 +109,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 	
 		'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
@@ -125,7 +125,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 	}
     
@@ -293,12 +293,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0 && flagFailed==0){
+if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '9.TabLifeInsuranceData')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '9.TabLifeInsuranceData')
 }
 
-if(flagFailed==0){
+if(GlobalVariable.FlagFailed==0){
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'), GlobalVariable.NumofColm, '9.TabLifeInsuranceData')

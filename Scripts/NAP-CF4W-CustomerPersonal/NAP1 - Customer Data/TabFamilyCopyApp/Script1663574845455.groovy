@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -211,7 +211,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -278,7 +278,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -379,7 +379,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -447,7 +447,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                    flagFailed = 1
+                                    GlobalVariable.FlagFailed = 1
 
                                     continue
                                 }
@@ -528,7 +528,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -595,7 +595,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -650,13 +650,13 @@ for (i = 1; i <= variableData.size(); i++) {
                         Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                 GlobalVariable.NumofFamily, 4))
 
-                        if (iscompleteMandatory == 0 && flagFailed==0) {
+                        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                             'cek alert'
-                            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, 
+                            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, 
                                 '2.TabFamilyData')
                         }
                         
-                        if (flagFailed == 0) {
+                        if (GlobalVariable.FlagFailed == 0) {
                             'check save process write to excel'
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                     'NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), 

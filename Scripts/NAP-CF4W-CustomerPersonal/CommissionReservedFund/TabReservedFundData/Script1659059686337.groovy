@@ -47,7 +47,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -164,7 +164,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 	}
 	
@@ -209,7 +209,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 			
 			
@@ -228,7 +228,7 @@ for(int i = 0;i<allocFrom.size();i++){
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-					flagFailed=1
+					GlobalVariable.FlagFailed=1
 				}
 				
 				
@@ -250,7 +250,7 @@ for(int i = 0;i<allocFrom.size();i++){
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-					flagFailed=1
+					GlobalVariable.FlagFailed=1
 				}
 				
 			}
@@ -296,7 +296,7 @@ if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verify
 	'Klik cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 	
-	flagFailed = 1
+	GlobalVariable.FlagFailed = 1
 }
 
 if(GlobalVariable.Role=="Testing"){
@@ -344,12 +344,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commissi
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0 && flagFailed==0){
+if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
 }
 
-if(flagFailed==0 ){
+if(GlobalVariable.FlagFailed==0 ){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/alert_Submit'), GlobalVariable.NumofColm, '14.TabReservedFundData')

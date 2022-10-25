@@ -21,7 +21,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -267,7 +267,7 @@ if (arrayMatch.contains(false)) {
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute',
 		1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedDataLookup)
 	
-	flagFailed=1
+	GlobalVariable.FlagFailed=1
 
 }
 
@@ -305,7 +305,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -342,7 +342,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -379,7 +379,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -416,7 +416,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -461,7 +461,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -514,7 +514,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -551,7 +551,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -588,7 +588,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -625,7 +625,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -704,7 +704,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
 }
 
@@ -750,12 +750,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/OtherAttribute - Personal - Family').getValue(
         GlobalVariable.NumofFamily, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '7.OtherAttribute')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, '7.OtherAttribute')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
         GlobalVariable.NumofFamily, '7.OtherAttribute')

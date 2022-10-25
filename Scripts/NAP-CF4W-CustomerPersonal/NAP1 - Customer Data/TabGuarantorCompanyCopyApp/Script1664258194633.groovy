@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -164,7 +164,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -188,13 +188,13 @@ for (i = 1; i <= variableData.size(); i++) {
                                 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
                                         GlobalVariable.NumofGuarantorCompany, 4))
 
-                                if (iscompleteMandatory == 0 && flagFailed==0) {
+                                if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                                     'cek alert'
-                                    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
+                                    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                         '3b.TabGuarantorDataCompany')
                                 }
                                 
-                                if (flagFailed == 0) {
+                                if (GlobalVariable.FlagFailed == 0) {
                                     'check save process write to excel'
                                     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, 
                                         findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
@@ -270,7 +270,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
 
-                                        flagFailed = 1
+                                        GlobalVariable.FlagFailed = 1
 
                                         continue
                                     }
@@ -304,11 +304,11 @@ for (i = 1; i <= variableData.size(); i++) {
 
                                     if (iscompleteMandatory == 0) {
                                         'cek alert'
-                                        flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
+                                        GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                             '3b.TabGuarantorDataCompany')
                                     }
                                     
-                                    if (flagFailed == 0) {
+                                    if (GlobalVariable.FlagFailed == 0) {
                                         'check save process write to excel'
                                         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, 
                                             findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
