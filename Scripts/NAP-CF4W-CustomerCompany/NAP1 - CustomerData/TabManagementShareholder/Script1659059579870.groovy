@@ -987,11 +987,11 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                     } else {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                                'call test case MS Company Personal data store verif'
+                                'call test case MS Company  data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-                                'call test case MS Company data store verif'
+                                'call test case MS personal data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
