@@ -26,7 +26,6 @@ import groovy.sql.Sql as Sql
 GlobalVariable.SubsidyDPValue = '0'
 
 GlobalVariable.FlagFailed=0
-int flagFailed = 0
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -532,7 +531,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 
-	flagFailed = 1
+	GlobalVariable.FlagFailed = 1
 }
 
 'Pengecekan jika tdp at mf tidak kosong'
@@ -558,12 +557,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFin
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
 	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '9.TabFinancialData')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '9.TabFinancialData')
 }
 
-if (flagFailed == 0 && GlobalVariable.FlagFailed==0) {
+if (GlobalVariable.FlagFailed == 0) {
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'),
 		GlobalVariable.NumofColm, '9.TabFinancialData')

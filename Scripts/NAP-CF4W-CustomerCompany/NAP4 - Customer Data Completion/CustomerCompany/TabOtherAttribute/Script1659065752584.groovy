@@ -236,7 +236,7 @@ if (arrayMatch.contains(false)) {
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute',
 		1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDataLookup)
 	
-	flagFailed=1
+	GlobalVariable.FlagFailed=1
 
 }
 

@@ -30,7 +30,7 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -154,7 +154,7 @@ for (int i = 1; i <= count; i++) {
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
-			flagFailed++
+			GlobalVariable.FlagFailed++
 		}
 
         if (TCMandatory.get(i - 1) == 'false') {
@@ -175,7 +175,7 @@ for (int i = 1; i <= count; i++) {
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
-			flagFailed++
+			GlobalVariable.FlagFailed++
 		}
 
         if (TCWaive.get(i - 1) == 'false') {
@@ -312,12 +312,12 @@ for (int i = 1; i <= count; i++) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 
-        4)) == 0 && flagFailed==0) {
+        4)) == 0 && GlobalVariable.FlagFailed==0) {
     'Check alert'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '10.TabTermConditionData')
 }
 
-if(flagFailed==0){
+if(GlobalVariable.FlagFailed==0){
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(
 	            GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), 
