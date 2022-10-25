@@ -545,7 +545,7 @@ def inputfinancialdata() {
         Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData - Company - ManagementShareholderPersonal').getValue(
                 financialdata, 4))
 
-        if (iscompleteMandatory == 0) {
+        if (iscompleteMandatory == 0 && flagFailed==0) {
             'cek alert'
             flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
         }

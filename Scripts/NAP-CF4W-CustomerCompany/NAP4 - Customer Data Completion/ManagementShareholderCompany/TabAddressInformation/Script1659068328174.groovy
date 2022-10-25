@@ -532,9 +532,9 @@ def inputaddress() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Save'))
 
     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/AddressInformation - Company - ManagementShareholderCompany').getValue(
-            Address, 4)) == 0) {
+            Address, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
         'Check alert'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
+        GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
     }
     
     if (GlobalVariable.FlagFailed == 0) {

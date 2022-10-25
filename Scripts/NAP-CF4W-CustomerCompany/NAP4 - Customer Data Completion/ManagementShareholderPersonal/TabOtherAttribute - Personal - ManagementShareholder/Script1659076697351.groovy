@@ -758,9 +758,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
-        GlobalVariable.NumofMS, 4)) == 0) {
+        GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '7.OtherAttribute')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '7.OtherAttribute')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
