@@ -49,7 +49,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
     //Edit & Delete Acc, edit jika ada data pada confins dan excel datafile, delete jika ada data pada confins tetapi tidak ada data pada excel
     'Pengecekan pada confins accessories ada datanya'
-    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')), 
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
         'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
         'Looping data accessories confins'
         for (int i = 1; i <= variable.size(); i++) {
@@ -209,7 +209,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                     if (GlobalVariable.NumofAccessories == (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
                     2)) {
                         'Jika pada confins ada data accessories'
-                        if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')), 
+                        if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
                             'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                         	'get referantor name'
                         	accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
@@ -337,7 +337,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                     'xpath', 'equals', newButtonDeleteXpath, true)
 
                 'Jika pada confins ada data accessories'
-                if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')), 
+                if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
                     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     if (add == 1) {
                         'click lookup supplier'
@@ -510,7 +510,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                         break
                     }
                     //'Jika pada confins tidak ada data accessories'
-                } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata')), 
+                } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
                     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Add'))

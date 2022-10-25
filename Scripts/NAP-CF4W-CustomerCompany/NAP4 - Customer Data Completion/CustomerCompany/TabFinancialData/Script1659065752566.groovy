@@ -55,7 +55,7 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/label_nodataavailable')), 
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/label_nodataavailable'),FailureHandling.OPTIONAL), 
         'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
         for (i = 1; i <= variable.size(); i++) {
             'modify object Date'
@@ -766,9 +766,9 @@ def inputdatafinancial() {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Save'))
 
         if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer').getValue(
-                financialdata, 4)) == 0) {
+                financialdata, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
             'Check alert'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
+            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
         }
         
         if (GlobalVariable.FlagFailed == 0) {

@@ -920,9 +920,9 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 
-                if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofMS, 4)) == 0) {
+                if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed==0) {
                     'Check alert'
-                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '2.TabManagementShareholderData')
+                    GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                 }
                 
                 'verify flagfailed lookup == 0 '

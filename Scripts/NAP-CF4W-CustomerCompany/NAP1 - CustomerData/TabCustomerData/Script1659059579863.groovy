@@ -258,9 +258,9 @@ if (GlobalVariable.RoleCompany == 'Testing' && findTestData('NAP-CF4W-CustomerCo
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Save'))
 
 if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-        4)) == 0) {
+        4)) == 0 && GlobalVariable.FlagFailed==0) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '1.TabCustomerMainData')
+    GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '1.TabCustomerMainData')
 }
 
 if (GlobalVariable.FlagFailed == 0) {

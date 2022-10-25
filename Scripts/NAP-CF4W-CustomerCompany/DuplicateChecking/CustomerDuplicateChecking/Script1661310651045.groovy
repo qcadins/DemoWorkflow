@@ -324,7 +324,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
                         }
                     }
                     
-                    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/label_NoDataFoundSimilardata')), 
+                    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/label_NoDataFoundSimilardata'), FailureHandling.OPTIONAL), 
                         'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                         ArrayList<WebElement> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 

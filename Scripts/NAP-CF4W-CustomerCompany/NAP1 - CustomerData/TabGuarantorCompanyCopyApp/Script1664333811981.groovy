@@ -252,9 +252,9 @@ for (i = 1; i <= variableData.size(); i++) {
 							
 							
 							if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-									GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
+									GlobalVariable.NumofGuarantorCompany, 4)) == 0 && GlobalVariable.FlagFailed==0) {
 								'Check alert'
-								CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+								GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 							}
 							
 							'verify flagfailed  lookup == 0 '
