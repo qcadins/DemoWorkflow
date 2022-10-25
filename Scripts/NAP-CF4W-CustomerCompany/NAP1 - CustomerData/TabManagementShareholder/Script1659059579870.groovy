@@ -599,6 +599,7 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             continue
                         }
                         
+						'check if role testing maka get data MS untuk data verif'
                         if (GlobalVariable.RoleCompany == 'Testing') {
                             'call function MS Personal get data'
                             getDataMS(datafile)
@@ -828,6 +829,7 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             continue
                         }
                         
+						'check if role testing maka get data MS untuk data verif'
 						if (GlobalVariable.RoleCompany == 'Testing') {
 							'call function get data'
 							getDataMS(datafile)
@@ -911,6 +913,7 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                     }
                     
+					'call function untuk get data MS yang sudah di input untuk verif Store DB'
                     getData(datafile)
 					}
                 
@@ -922,7 +925,7 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                     GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                 }
                 
-                'verify flagfailed lookup -- 0 '
+                'verify flagfailed lookup == 0 '
                 if (GlobalVariable.FlagFailed == 0) {
                     'Check save Process write to excel'
                     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafile.getValue(GlobalVariable.NumofMS, 
@@ -972,11 +975,11 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                     if (datafile.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                                'call test case company data store verif'
+                                'call test case MS Company data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-                                'call test case company data store verif'
+                                'call test case MS Personal data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
@@ -984,11 +987,11 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                     } else {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                                'call test case company data store verif'
+                                'call test case MS Company  data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-                                'call test case company data store verif'
+                                'call test case MS personal data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
@@ -1114,6 +1117,7 @@ def getDataMS(def datafile) {
 }
 
 def getData(def datafile){
+	'check if role testing dan input dengan lookup maka get data dari confins untuk verif store DB'
 	if (GlobalVariable.RoleCompany == 'Testing' && datafile.getValue(GlobalVariable.NumofMS, 13).equalsIgnoreCase('LookUp')) {
 		if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
 			'call function MS get Data'
