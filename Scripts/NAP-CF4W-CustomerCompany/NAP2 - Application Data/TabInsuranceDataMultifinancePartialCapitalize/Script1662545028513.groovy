@@ -295,7 +295,7 @@ for (int i = 1; i <= count; i++) {
 			'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[5]/div/div/label',
 			true)
 		
-		if(GlobalVariable.RoleCompany=="Testing"){
+		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == 'Yes' && GlobalVariable.FirstTimeEntry == 'Yes'){
 			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
 			WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
 			
