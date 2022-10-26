@@ -23,7 +23,7 @@ import org.openqa.selenium.WebElement as WebElement
 import groovy.sql.Sql as Sql
 
 int flagWarning = 0
-int flagFailed=0
+ GlobalVariable.FlagFailed=0
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
 
@@ -57,6 +57,12 @@ Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, user
 Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 WebUI.delay(5)
+
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("APPLICATION DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
@@ -102,7 +108,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 	
 }
@@ -142,7 +148,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 	
-	flagFailed=1
+	GlobalVariable.FlagFailed=1
 	
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -173,7 +179,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 	
 	'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
@@ -187,7 +193,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 }
 
@@ -232,7 +238,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 	
 }
@@ -264,7 +270,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 	
-	flagFailed=1
+	GlobalVariable.FlagFailed=1
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
@@ -301,7 +307,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 	
 	'Ambil nilai jumlah option/pilihan asset usage dari confins'
@@ -317,7 +323,7 @@ if(GlobalVariable.Role=="Testing"){
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 	}
 }
 
@@ -565,7 +571,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 			
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 		
 		'Ambil nilai jumlah option/pilihan user relationship dari confins'
@@ -581,7 +587,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 			
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 	}
 	
@@ -622,7 +628,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 			
 			'Ambil nilai jumlah option/pilihan owner relationship dari confins'
@@ -638,7 +644,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 		
@@ -666,7 +672,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 			
 			'Ambil nilai jumlah option/pilihan owner relationship dari confins'
@@ -682,7 +688,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 		
@@ -817,7 +823,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 			
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -900,7 +906,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 		
-		flagFailed=1
+		GlobalVariable.FlagFailed=1
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -935,12 +941,12 @@ WebUI.delay(2)
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0 && flagFailed==0){
+if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '7.TabAssetData')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '7.TabAssetData')
 }
 
-if(flagFailed==0){
+if(GlobalVariable.FlagFailed==0){
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), GlobalVariable.NumofColm, '7.TabAssetData')

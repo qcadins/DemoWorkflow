@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -131,7 +131,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'select customer model'
@@ -153,12 +153,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail - Company - Guarantor').getValue(
         GlobalVariable.NumofGuarantor, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '1.CustomerDetail')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '1.CustomerDetail')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Add'), 
         GlobalVariable.NumofGuarantor, '1.CustomerDetail')

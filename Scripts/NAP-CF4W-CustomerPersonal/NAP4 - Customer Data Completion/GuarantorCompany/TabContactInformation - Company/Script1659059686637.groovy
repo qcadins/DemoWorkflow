@@ -23,7 +23,7 @@ GlobalVariable.DataFilePath = filePath
 
 GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation - Company - Guarantor')
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 'input name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation - Company/input_Name_'), 
@@ -203,12 +203,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation - Company - Guarantor').getValue(
         GlobalVariable.NumofGuarantor, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.ContactInformation')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.ContactInformation')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData - Company/button_Add'), 
         GlobalVariable.NumofGuarantor, '3.ContactInformation')

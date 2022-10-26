@@ -31,7 +31,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 GlobalVariable.DataFilePath = filePath
 
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -73,7 +73,6 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
 String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
 
-println(appLastStep)
 if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
@@ -147,7 +146,7 @@ if(GlobalVariable.Role=="Testing"){
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					
-					flagFailed=1
+					GlobalVariable.FlagFailed=1
 				}
 			}
 		}
@@ -956,7 +955,7 @@ if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/button_Cancel'))
 	
-	flagFailed = 1
+	GlobalVariable.FlagFailed = 1
 }
 
 
@@ -976,12 +975,12 @@ WebUI.delay(2)
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 4))
 
-if(iscompleteMandatory==0 && flagFailed==0){
+if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
-	flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '13.TabCommissionData')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '13.TabCommissionData')
 }
 
-if(flagFailed==0){
+if(GlobalVariable.FlagFailed==0){
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
 		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt'), GlobalVariable.NumofColm, '13.TabCommissionData')

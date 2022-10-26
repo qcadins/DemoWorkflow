@@ -21,7 +21,7 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
-int flagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -63,7 +63,6 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
 String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
 
-println(appLastStep)
 if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
@@ -143,7 +142,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 									 1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 								 
-					flagFailed++
+					GlobalVariable.FlagFailed++
 				}
 			}
 		}
@@ -949,7 +948,7 @@ if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     'Klik cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 } else {
     if (GlobalVariable.RoleCompany == 'Testing') {
         'Call test case untuk verif summary dan remaining info'
@@ -963,7 +962,7 @@ if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
 
     if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-            4)) == 0 && flagFailed==0) {
+            4)) == 0 && GlobalVariable.FlagFailed==0) {
         'Check alert'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '12.TabCommissionData')
     }
@@ -971,7 +970,7 @@ if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
 
 WebUI.delay(3)
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
                 GlobalVariable.NumofColm, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt'), 

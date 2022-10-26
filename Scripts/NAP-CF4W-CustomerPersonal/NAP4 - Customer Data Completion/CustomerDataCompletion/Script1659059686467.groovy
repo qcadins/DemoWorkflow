@@ -253,7 +253,7 @@ ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root
 
 int count = variable.size()
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 'verify equal number of customer'
 WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
@@ -473,12 +473,12 @@ GlobalVariable.DataFilePath = filePath
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
         GlobalVariable.NumofColm, '15.CustomerDataCompletion')

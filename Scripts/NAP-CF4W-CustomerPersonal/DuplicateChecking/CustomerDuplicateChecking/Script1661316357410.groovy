@@ -72,7 +72,7 @@ String subjectName
 
 String subjectType
 
-int flagFailed=0
+ GlobalVariable.FlagFailed=0
 
 if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'
@@ -845,12 +845,12 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 	Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm,
 				4))
 	
-	if(iscompleteMandatory==0 && flagFailed==0){
+	if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 		'cek alert'
-		flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
+		GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
 	}
 	
-	if(flagFailed==0){
+	if(GlobalVariable.FlagFailed==0){
 		'Check save Process write to excel'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'),
 			GlobalVariable.NumofColm, '4.DuplicateChecking')

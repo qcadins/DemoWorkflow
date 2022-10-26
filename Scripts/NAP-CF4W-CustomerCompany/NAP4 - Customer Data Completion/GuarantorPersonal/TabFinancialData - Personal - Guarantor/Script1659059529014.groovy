@@ -814,12 +814,12 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 
         Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(financialdata, 4))
 
-        if ((iscompleteMandatory == 0) && (flagFailed == 0)) {
+        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
             'cek alert'
-            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
+            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
         }
         
-        if (flagFailed == 0) {
+        if (GlobalVariable.FlagFailed == 0) {
             'Check save Process write to excel'
             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
                 financialdata, '5.FinancialData')

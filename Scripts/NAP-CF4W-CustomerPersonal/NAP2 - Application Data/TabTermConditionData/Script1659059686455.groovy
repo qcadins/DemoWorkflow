@@ -30,7 +30,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -133,39 +133,39 @@ for (int i = 1; i <= count; i++) {
 		'verif document name based on rule'
 		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
 			writeToExcelFailedVerifRule()
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 		if(TCMandatory.get(i-1)=="false"){
 			'verif required based on rule'
 			if(WebUI.verifyElementText(modifyObjectRequired,"NO")==false){
 				writeToExcelFailedVerifRule()
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 		else if(TCMandatory.get(i-1)=="true"){
 			'verif required based on rule'
 			if(WebUI.verifyElementText(modifyObjectRequired,"YES")==false){
 				writeToExcelFailedVerifRule()
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 		'verif prior to based on rule'
 		if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo),TCPrior.get(i-1),false)==false){
 			writeToExcelFailedVerifRule()
-			flagFailed=1
+			GlobalVariable.FlagFailed=1
 		}
 		if(TCWaive.get(i-1)=="false"){
 			'verif waive terlock based on rule'
 			if(WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)==false){
 				writeToExcelFailedVerifRule()
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 		else if(TCWaive.get(i-1)=="true"){
 			'verif waive tidak terlock/ dapat dicentang based on rule'
 			if(WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)==false){
 				writeToExcelFailedVerifRule()
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
 		}
 	}
@@ -297,12 +297,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '11.TabTermConditionData')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '11.TabTermConditionData')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), 
         GlobalVariable.NumofColm, '11.TabTermConditionData')

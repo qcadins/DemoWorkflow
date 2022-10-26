@@ -75,7 +75,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i', true)
 
             for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-                int flagFailed = 0
+                GlobalVariable.FlagFailed = 0
 
                 if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
@@ -166,7 +166,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
             for (i = 1; i <= variable.size(); i++) {
@@ -218,7 +218,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
             if (GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
@@ -262,7 +262,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
             for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-                int flagFailed = 0
+                GlobalVariable.FlagFailed = 0
 
                 if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
@@ -277,7 +277,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     'click button edit'
                                     WebUI.click(modifyNewbuttonedit)
 
-                                    inputBank(copyapp, variable, flagFailed)
+                                    inputBank(copyapp, variable, GlobalVariable.FlagFailed)
 
                                     break
                                 } else {
@@ -339,7 +339,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
             if (variable.size() > 0) {
@@ -374,7 +374,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     'click button add bank'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
 
-                                    inputBank(copyapp, variable, flagFailed)
+                                    inputBank(copyapp, variable, GlobalVariable.FlagFailed)
                                 }
                             } else if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
                                 break
@@ -386,7 +386,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button add bank'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
 
-                inputBank(copyapp, variable, flagFailed)
+                inputBank(copyapp, variable, GlobalVariable.FlagFailed)
             }
         } else {
             break
@@ -394,7 +394,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
             if (GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
@@ -403,7 +403,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'click button add bank'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
 
-                    inputBank(copyapp, variable, flagFailed)
+                    inputBank(copyapp, variable, GlobalVariable.FlagFailed)
                 }
             }
         } else {
@@ -692,7 +692,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                 'add data yang ada di excel dan belom ada di confins'
                 variablebankstatement = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr'))
 
-                flagFailed = 0
+                GlobalVariable.FlagFailed = 0
 
                 if (variablebankstatement.size() > 0) {
                     for (BSindex = 1; BSindex <= variablebankstatement.size(); BSindex++) {
@@ -813,12 +813,12 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 
         Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(financialdata, 4))
 
-        if ((iscompleteMandatory == 0) && (flagFailed == 0)) {
+        if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
             'cek alert'
-            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
+            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
         }
         
-        if (flagFailed == 0) {
+        if (GlobalVariable.FlagFailed == 0) {
             'Check save Process write to excel'
             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_SaveFinancial'), 
                 financialdata, '5.FinancialData')

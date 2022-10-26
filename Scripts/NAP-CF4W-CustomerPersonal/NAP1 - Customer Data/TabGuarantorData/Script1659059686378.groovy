@@ -46,7 +46,7 @@ if (GlobalVariable.Role == 'Testing') {
 'Loop Multiple Guarantor Data'
 for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
-    int flagFailed = 0
+     GlobalVariable.FlagFailed = 0
 
     if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
@@ -181,7 +181,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '3a.TabGuarantorDataPersonal', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-                            flagFailed = 1
+                            GlobalVariable.FlagFailed = 1
 
                             continue
                         }
@@ -268,7 +268,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3a.TabGuarantorDataPersonal', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-                                flagFailed = 1
+                                GlobalVariable.FlagFailed = 1
 
                                 continue
                             }
@@ -291,13 +291,13 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                         Integer iscompleteMandatory = Integer.parseInt(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                 4))
 
-                        if (iscompleteMandatory == 0 && flagFailed==0) {
+                        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                             'cek alert'
-                            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
+                            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                 '3a.TabGuarantorDataPersonal')
                         }
                         
-                        if (flagFailed == 0) {
+                        if (GlobalVariable.FlagFailed == 0) {
                             'check save process write to excel'
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                     'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
@@ -376,7 +376,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3a.TabGuarantorDataPersonal', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-                                flagFailed = 1
+                                GlobalVariable.FlagFailed = 1
 
                                 continue
                             }
@@ -428,7 +428,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                                     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '3a.TabGuarantorDataPersonal', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
 
-                                    flagFailed = 1
+                                    GlobalVariable.FlagFailed = 1
 
                                     continue
                                 }
@@ -479,13 +479,13 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                             Integer iscompleteMandatory = Integer.parseInt(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                     4))
 
-                            if (iscompleteMandatory == 0 && flagFailed==0) {
+                            if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                                 'cek alert'
-                                flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
+                                GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
                                     '3a.TabGuarantorDataPersonal')
                             }
                             
-                            if (flagFailed == 0) {
+                            if (GlobalVariable.FlagFailed == 0) {
                                 'check save process write to excel'
                                 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                         'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
@@ -539,7 +539,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
 //GuarantorCompany
 for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
-    int flagFailed = 0
+     GlobalVariable.FlagFailed = 0
 
     if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
@@ -658,7 +658,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
 
-                                flagFailed = 1
+                                GlobalVariable.FlagFailed = 1
 
                                 continue
                             }
@@ -681,13 +681,13 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                         Integer iscompleteMandatory = Integer.parseInt(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                 4))
 
-                        if (iscompleteMandatory == 0 && flagFailed==0) {
+                        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                             'cek alert'
-                            flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
+                            GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                 '3b.TabGuarantorDataCompany')
                         }
                         
-                        if (flagFailed == 0) {
+                        if (GlobalVariable.FlagFailed == 0) {
                             'check save process write to excel'
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                     'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
@@ -762,7 +762,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                                 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
 
-                                flagFailed = 1
+                                GlobalVariable.FlagFailed = 1
 
                                 continue
                             }
@@ -833,13 +833,13 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                             Integer iscompleteMandatory = Integer.parseInt(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                     4))
 
-                            if (iscompleteMandatory == 0 && flagFailed==0) {
+                            if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
                                 'cek alert'
-                                flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
+                                GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
                                     '3b.TabGuarantorDataCompany')
                             }
                             
-                            if (flagFailed == 0) {
+                            if (GlobalVariable.FlagFailed == 0) {
                                 'check save process write to excel'
                                 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                         'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 

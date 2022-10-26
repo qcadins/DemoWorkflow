@@ -68,7 +68,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
         for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-            int flagFailed = 0
+             GlobalVariable.FlagFailed = 0
 
             if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
                 Address, 9).length() != 0) {
@@ -170,7 +170,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/AddressInformation - Company - ManagementShareholderPersonal').getValue(
             Address, 9).length() != 0) {

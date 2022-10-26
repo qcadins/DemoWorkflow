@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 

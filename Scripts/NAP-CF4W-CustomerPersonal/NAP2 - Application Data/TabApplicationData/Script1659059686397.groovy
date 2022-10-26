@@ -28,7 +28,7 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 'Koneksi database'
 String servername = findTestData('Login/Login').getValue(1, 8)
@@ -52,6 +52,12 @@ String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseNa
 Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
@@ -141,7 +147,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
 				
-				flagFailed=1
+				GlobalVariable.FlagFailed=1
 			}
         }
         
@@ -202,7 +208,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-            flagFailed = 1
+            GlobalVariable.FlagFailed = 1
 
             'Pengecekan jika new consumer finance belum diexpand'
             if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -415,7 +421,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
 
         'Pengecekan jika new consumer finance belum diexpand'
         if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -534,7 +540,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -590,7 +596,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -612,12 +618,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'), 
         GlobalVariable.NumofColm, '6.TabApplicationData')

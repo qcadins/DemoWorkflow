@@ -19,7 +19,7 @@ String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.DataFileCustomerPersonal
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.DataFilePath = filePath
 
@@ -181,7 +181,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
-        flagFailed = 1
+        GlobalVariable.FlagFailed = 1
     }
     
     'select customer relationship'
@@ -252,12 +252,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact - Personal - Customer').getValue(
         GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.EmergencyContact')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.EmergencyContact')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'), 
         GlobalVariable.NumofColm, '4.EmergencyContact')

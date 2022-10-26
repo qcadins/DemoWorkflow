@@ -135,7 +135,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
             for (i = 1; i <= variable.size(); i++) {

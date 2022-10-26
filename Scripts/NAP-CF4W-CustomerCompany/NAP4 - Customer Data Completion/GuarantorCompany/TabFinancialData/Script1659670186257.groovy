@@ -132,7 +132,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
-        int flagFailed = 0
+        GlobalVariable.FlagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany').getValue(
             financialdata, 10).length() != 0) {

@@ -66,7 +66,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
         for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-            int flagFailed = 0
+             GlobalVariable.FlagFailed = 0
 
             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
                 Address, 9).length() != 0) {
@@ -120,7 +120,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
 								}
 
                                 'verify array dari db == option list confins'
@@ -133,7 +133,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
                                 }
 
                                 'get data array dari db'
@@ -151,7 +151,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
 								}
 
                                 'verify array dari db == option list confins'
@@ -164,7 +164,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
                                 }
                             }
                             
@@ -184,7 +184,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-        int flagFailed = 0
+         GlobalVariable.FlagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
             Address, 9).length() != 0) {
@@ -244,7 +244,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
 								}
 
                                 'verify array dari db == option list confins'
@@ -257,7 +257,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
                                 }
 
                                 'get data array dari db'
@@ -275,7 +275,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
 								}
 
                                 'verify array dari db == option list confins'
@@ -288,7 +288,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 										1, Address - 1, GlobalVariable.ReasonFailedDDL)
 									
-									flagFailed=1
+									GlobalVariable.FlagFailed=1
                                 }
                             }
                             
@@ -309,7 +309,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
     for (Address = 2; Address <= (countcolm + 1); Address++) {
-        int flagFailed = 0
+         GlobalVariable.FlagFailed = 0
 
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
             Address, 9).length() != 0) {
@@ -358,7 +358,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 							1, Address - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
 					}
 
                     'verify array dari db == option list confins'
@@ -371,7 +371,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 							1, Address - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
                     }
 
                     'get data array dari db'
@@ -389,7 +389,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 							1, Address - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
 					}
 
                     'verify array dari db == option list confins'
@@ -402,7 +402,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
 							1, Address - 1, GlobalVariable.ReasonFailedDDL)
 						
-						flagFailed=1
+						GlobalVariable.FlagFailed=1
                     }
                 }
                 
@@ -506,7 +506,7 @@ def inputaddress() {
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusReasonLookup)
 
-            flagFailed = 1
+            GlobalVariable.FlagFailed = 1
         }
     }
     
@@ -576,12 +576,12 @@ def inputaddress() {
     Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor').getValue(
             Address, 4))
 
-    if (iscompleteMandatory == 0 && flagFailed==0) {
+    if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
         'cek alert'
-        flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
+        GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
     }
     
-    if (flagFailed == 0) {
+    if (GlobalVariable.FlagFailed == 0) {
         'Check save Process write to excel'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Add'), 
             Address, '2.AddressInformation')

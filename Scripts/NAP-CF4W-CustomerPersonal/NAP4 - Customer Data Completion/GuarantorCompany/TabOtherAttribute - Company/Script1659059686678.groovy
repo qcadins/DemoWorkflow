@@ -21,7 +21,7 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-int flagFailed = 0
+ GlobalVariable.FlagFailed = 0
 
 String userDir = System.getProperty('user.dir')
 
@@ -235,7 +235,7 @@ if (arrayMatch.contains(false)) {
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute',
 		1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDataLookup)
 	
-	flagFailed=1
+	GlobalVariable.FlagFailed=1
 
 }
 
@@ -270,7 +270,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'click lookup debtor business scale'
@@ -304,7 +304,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'click lookup counterpart category'
@@ -338,7 +338,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'click lookup sustainable financial business'
@@ -372,7 +372,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'select yes/no'
@@ -411,7 +411,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'select yes/no'
@@ -497,7 +497,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'select yes/no'
@@ -536,7 +536,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'click lookup Payment Type'
@@ -570,7 +570,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'click lookup Business Source AML'
@@ -604,7 +604,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
-    flagFailed = 1
+    GlobalVariable.FlagFailed = 1
 }
 
 'input tanggal business period'
@@ -620,12 +620,12 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company - Guarantor').getValue(
         GlobalVariable.NumofGuarantor, 4))
 
-if (iscompleteMandatory == 0 && flagFailed==0) {
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    flagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '7.OtherAttribute')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '7.OtherAttribute')
 }
 
-if (flagFailed == 0) {
+if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
         GlobalVariable.NumofGuarantor, '7.OtherAttribute')

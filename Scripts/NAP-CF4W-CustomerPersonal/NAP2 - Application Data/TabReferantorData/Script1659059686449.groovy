@@ -33,6 +33,12 @@ GlobalVariable.DataFilePath = filePath
 'arraylist referantor name yang gagal'
 ArrayList<String> referantorfaileddelete = new ArrayList<String>()
 
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(!appLastStep.equalsIgnoreCase("GUARANTOR") && !appLastStep.equalsIgnoreCase("NAP DETAIL") && GlobalVariable.FirstTimeEntry=="Yes"){
+	GlobalVariable.FirstTimeEntry = "No"
+}
+
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
