@@ -33,12 +33,14 @@ datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCom
 
 GlobalVariable.CopyAppColm = 0
 
-int financialdata
-
 'get count colm'
 countcolm = GlobalVariable.findDataFile.getColumnNumbers()
 
 ArrayList<WebElement> variable
+
+ArrayList<WebElement> financialdatedelete = new ArrayList<WebElement>()
+
+ArrayList<WebElement> bankaccdelete = new ArrayList<WebElement>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
@@ -116,6 +118,29 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     'accept alert'
                                     WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
+                                    if (i == variable.size()) {
+                                        if (WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            financialdatedelete.add(modifyDateNew)
+
+                                            continue
+                                        }
+                                    } else {
+                                        'get cust name sesudah delete'
+                                        modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
+
+                                        if (WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            financialdatedelete.add(modifyDateNew)
+
+                                            continue
+                                        }
+                                    }
+                                    
                                     i--
                                 }
                             }
@@ -130,12 +155,22 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
+    if (financialdatedelete.size() > 0) {
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
+            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
+            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialdatedelete)
+
+        (GlobalVariable.FlagWarning)++
+    }
+    
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         GlobalVariable.FlagFailed = 0
 
-        if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
+        if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
             for (i = 1; i <= variable.size(); i++) {
                 'modify object Date'
                 modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
@@ -148,7 +183,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                         GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                     datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
-                    if (datafilecustdetail.getValue(financialdata, 12).length() > 0) {
+                    if (GlobalVariable.findDataFile.getValue(financialdata, 12).length() > 0) {
                         'convert date confins dan excel agar sama'
                         SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
@@ -205,172 +240,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 }
 
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 37).length() > 1) {
+variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div label'))
+
+int row = 37
+
+for (i = 1; i <= variable.size(); i++) {
+    'modify object input fin attr'
+    modifyinputFinAttr = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+        'xpath', 'equals', ('//*[@id="AttributeList"]/div/div[' + i) + ']/div/div/input', true)
+
     'input posisi laporan'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_POSISI LAPORAN KEUANGAN TAHUNAN'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 37))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 38).length() > 1) {
-    'input aset'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASET'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 38))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 39).length() > 1) {
-    'input aset lancar'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASET LANCAR'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 39))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 40).length() > 1) {
-    'input kas dan setara kas'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_KAS DAN SETARA KAS'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 40))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 41).length() > 1) {
-    'input piutang pembiayaan'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PIUTANG USAHAPEMBIAYAAN'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 41))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 42).length() > 1) {
-    'input investasi keuangan '
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_INVESTASIASET KEUANGAN LAINNYA'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 42))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 43).length() > 1) {
-    'input asset lancar lainya'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET LANCAR LAINNYA'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 43))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 44).length() > 1) {
-    'input asset tidak lancar'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET TIDAK LANCAR'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 44))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 45).length() > 1) {
-    'input piutang usaha pembiayaan'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PIUTANG USAHAPEMBIAYAAN (ASSET TIDAK LANCAR)'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 45))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 46).length() > 1) {
-    'input investasi keuangan lainya'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_INVESTASIASSET KEUANGAN LAINNYA (ASSET TIDAK LANCAR)'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 46))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 47).length() > 1) {
-    'input aset tidak lancar lainya'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_ASSET TIDAK LANCAR LAINNYA'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 47))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 48).length() > 1) {
-    'input liabilitas'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 48))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 49).length() > 1) {
-    'input liabilitas jangka pendek'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PENDEK'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 49))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 50).length() > 1) {
-    'input pinjaman jangka pendek'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PINJAMAN JANGKA PENDEK'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 50))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 51).length() > 1) {
-    'input utang usaha jangka pendek'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_UTANG USAHA JANGKA PENDEK'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 51))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 52).length() > 1) {
-    'input liabilitas jangka pendek lainya'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PENDEK LAINNYA'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 52))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 53).length() > 1) {
-    'input liabilitas jangka panjang'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PANJANG'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 53))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 54).length() > 1) {
-    'input pinjaman jangka panjang'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PINJAMAN JANGKA PANJANG'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 54))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 55).length() > 1) {
-    'input utang usaha jangka panjang'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_UTANG USAHA JANGKA PANJANG'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 55))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 56).length() > 1) {
-    'input liabilitas jangka panjang lainnya'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LIABILITAS JANGKA PANJANG LAINNYA'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 56))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 57).length() > 1) {
-    'input ekuitas'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_EKUITAS'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 57))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 58).length() > 1) {
-    'input pendapatan usaha operasional'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PENDAPATAN USAHA  OPERASIONAL'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 58))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 59).length() > 1) {
-    'input beban pokok pendapatan'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_BEBAN POKOK PENDAPATAN  BEBAN OPERASIONAL'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 59))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 60).length() > 1) {
-    'input laba rugi bruto'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI BRUTO'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 60))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 61).length() > 1) {
-    'input pendapatan lain lain'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_PENDAPATAN LAIN-LAIN  NON OPERASIONAL'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 61))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 62).length() > 1) {
-    'input beban lain lain'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_BEBAN LAIN-LAIN  NON OPERASIONAL'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 62))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 63).length() > 1) {
-    'input laba rugi sebelum pajak'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI SEBELUM PAJAK'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 63))
-}
-
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 64).length() > 1) {
-    'input laba rugi tahun berjalan'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_LABARUGI TAHUN BERJALAN'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, 64))
+    WebUI.setText(modifyinputFinAttr, GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, row++))
 }
 
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -395,7 +275,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 int flagFailed = 0
 
-                if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
+                if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
@@ -473,7 +353,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
-        if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
+        if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
             if (variable.size() > 0) {
                 for (i = 1; i <= variable.size(); i++) {
                     'modify button edit'
@@ -505,7 +385,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 10, FailureHandling.OPTIONAL)) {
                                 if (i == variable.size()) {
                                     'click button add bank'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
+                                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_addBank'))
 
                                     inputBank(copyapp, variable, flagFailed)
                                 }
@@ -517,7 +397,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 }
             } else {
                 'click button add bank'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
+                WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_addBank'))
 
                 inputBank(copyapp, variable, flagFailed)
             }
@@ -535,7 +415,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     GlobalVariable.NumofColm, 13))) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 67).length() > 0) {
                     'click button add bank'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
+                    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_addBank'))
 
                     inputBank(copyapp, variable, flagFailed)
                 }

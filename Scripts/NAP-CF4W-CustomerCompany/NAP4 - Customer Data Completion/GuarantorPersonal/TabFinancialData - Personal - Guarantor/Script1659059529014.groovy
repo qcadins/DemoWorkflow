@@ -40,6 +40,8 @@ ArrayList<WebElement> financialdatedelete = new ArrayList<WebElement>()
 
 ArrayList<WebElement> bankaccdelete = new ArrayList<WebElement>()
 
+
+
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
     if (GlobalVariable.findDataFile.getValue(index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
@@ -53,8 +55,8 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
-    GlobalVariable.NumofGuarantor, 10)
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofGuarantor, 
+    10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -80,72 +82,70 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantor, 13))) {
-                        
-                            if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                                'convert date confins dan excel agar sama'
-                                SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+                        if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
+                            'convert date confins dan excel agar sama'
+                            SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
-                                Date parsedDate = null
+                            Date parsedDate = null
 
-                                String sentDate = GlobalVariable.findDataFile.getValue(financialdata, 17)
+                            String sentDate = GlobalVariable.findDataFile.getValue(financialdata, 17)
 
-								String sDate
-								
-								if(sentDate != ''){
+                            String sDate
+
+                            if (sentDate != '') {
                                 parsedDate = sdf.parse(sentDate)
 
                                 sdf = new SimpleDateFormat('dd MMM YYYY')
 
                                 sDate = sdf.format(parsedDate)
-								}
-							
-                                modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                                if (modifyDateNew.equalsIgnoreCase(sDate)) {
-                                    'click button edit'
-                                    WebUI.click(modifyNewbuttonedit)
-
-                                    inputfinancialdata()
-
-                                    break
-                                } else {
-                                    if (GlobalVariable.findDataFile.getValue(financialdata + 1, 10).length() == 0) {
-                                        'click button delete'
-                                        WebUI.click(modifyNewbuttondelete)
-
-                                        'accept alert'
-                                        WebUI.acceptAlert(FailureHandling.OPTIONAL)
-
-                                        if (i == variable.size()) {
-                                            if (WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                financialdatedelete.add(modifyDateNew)
-
-                                                continue
-                                            }
-                                        } else {
-                                            'get cust name sesudah delete'
-                                            modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                                            if (WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                financialdatedelete.add(modifyDateNew)
-
-                                                continue
-                                            }
-                                        }
-                                        
-                                        i--
-                                    }
-                                }
-                            } else {
-                                break
                             }
-                        
+                            
+                            modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
+
+                            if (modifyDateNew.equalsIgnoreCase(sDate)) {
+                                'click button edit'
+                                WebUI.click(modifyNewbuttonedit)
+
+                                inputfinancialdata()
+
+                                break
+                            } else {
+                                if (GlobalVariable.findDataFile.getValue(financialdata + 1, 10).length() == 0) {
+                                    'click button delete'
+                                    WebUI.click(modifyNewbuttondelete)
+
+                                    'accept alert'
+                                    WebUI.acceptAlert(FailureHandling.OPTIONAL)
+
+                                    if (i == variable.size()) {
+                                        if (WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            financialdatedelete.add(modifyDateNew)
+
+                                            continue
+                                        }
+                                    } else {
+                                        'get cust name sesudah delete'
+                                        modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
+
+                                        if (WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            financialdatedelete.add(modifyDateNew)
+
+                                            continue
+                                        }
+                                    }
+                                    
+                                    i--
+                                }
+                            }
+                        } else {
+                            break
+                        }
                     }
                 } else {
                     break
@@ -424,8 +424,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
     'call test case verify store data financial'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreDataDB'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreDataDB'), 
+    [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def inputfinancialdata() {
@@ -814,7 +814,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 
         Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(financialdata, 4))
 
-        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
+        if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
             'cek alert'
             GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '5.FinancialData')
         }
