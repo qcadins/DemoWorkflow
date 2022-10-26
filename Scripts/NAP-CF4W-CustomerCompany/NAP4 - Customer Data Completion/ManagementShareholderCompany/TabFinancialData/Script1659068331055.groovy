@@ -38,9 +38,9 @@ countcolm = GlobalVariable.findDataFile.getColumnNumbers()
 
 ArrayList<WebElement> variable
 
-ArrayList<WebElement> financialdatedelete = new ArrayList<WebElement>()
+ArrayList<WebElement> financialDateDelete = new ArrayList<WebElement>()
 
-ArrayList<WebElement> bankaccdelete = new ArrayList<WebElement>()
+ArrayList<WebElement> bankAccDelete = new ArrayList<WebElement>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
@@ -58,6 +58,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofMS, 
     10)
 
+'Check if Edit Untuk financial data'
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
@@ -107,7 +108,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'click button edit'
                                 WebUI.click(modifyNewbuttonedit)
 
-                                inputdatafinancial()
+                                inputFinancialData()
 
                                 break
                             } else {
@@ -123,7 +124,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                             variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
                                         } else {
                                             'add cust name failed kedalam array'
-                                            financialdatedelete.add(modifyDateNew)
+                                            financialDateDelete.add(modifyDateNew)
 
                                             continue
                                         }
@@ -135,7 +136,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                             variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
                                         } else {
                                             'add cust name failed kedalam array'
-                                            financialdatedelete.add(modifyDateNew)
+                                            financialDateDelete.add(modifyDateNew)
 
                                             continue
                                         }
@@ -155,12 +156,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
-    if (financialdatedelete.size() > 0) {
+    if (financialDateDelete.size() > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.FinancialData', 
-            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialdatedelete)
+            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -206,7 +207,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'click button add'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'))
 
-                                inputdatafinancial()
+                                inputFinancialData()
 
                                 break
                             }
@@ -231,7 +232,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'))
 
-                    inputdatafinancial()
+                    inputFinancialData()
                 }
             }
         } else {
@@ -253,6 +254,7 @@ for (i = 1; i <= variable.size(); i++) {
     WebUI.setText(modifyinputFinAttr, GlobalVariable.findDataFile.getValue(GlobalVariable.CopyAppColm, row++))
 }
 
+'Check if Edit Untuk Bank Account dan Bank Statement'
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
@@ -305,7 +307,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                                 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
                                             } else {
                                                 'add cust name failed kedalam array'
-                                                bankaccdelete.add(BankDetail)
+                                                bankAccDelete.add(BankDetail)
 
                                                 continue
                                             }
@@ -317,7 +319,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                                 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
                                             } else {
                                                 'add cust name failed kedalam array'
-                                                bankaccdelete.add(BankDetail)
+                                                bankAccDelete.add(BankDetail)
 
                                                 continue
                                             }
@@ -338,12 +340,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
-    if (bankaccdelete.size() > 0) {
+    if (bankAccDelete.size() > 0) {
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
-            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialdatedelete)
+            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -441,7 +443,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-def inputdatafinancial() {
+def inputFinancialData() {
     int flagWarning = 0
 
     'input gross monthly income amount'
@@ -702,7 +704,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                         for (int excelindex = 0; excelindex < montharray.size(); excelindex++) {
                             if ((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
                                 year)) {
-                                inputbankstatement(excelindex + 1)
+                                inputBankStatement(excelindex + 1)
 
                                 break
                             } else {
@@ -826,7 +828,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[8]/a/i', true)
 
-                                    inputbankstatement(excelindex + 1)
+                                    inputBankStatement(excelindex + 1)
                                 }
                             } else if ((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
                                 year)) {
@@ -835,13 +837,13 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                         }
                     }
                 } else {
-                    inputbankstatementdarikosong()
+                    inputBankStatementFromEmpty()
 
                     break
                 }
             }
         } else if (copyapp.equalsIgnoreCase('No')) {
-            inputbankstatementdarikosong()
+            inputBankStatementFromEmpty()
         }
         
         'click calculate bank'
@@ -884,7 +886,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
     }
 }
 
-def inputbankstatement(int index) {
+def inputBankStatement(int index) {
     'select month'
     WebUI.selectOptionByLabel(modifyNewselectMonth, montharray[(index - 1)], false, FailureHandling.OPTIONAL)
 
@@ -904,7 +906,7 @@ def inputbankstatement(int index) {
     WebUI.setText(modifyNewinputCredit, creditarray[(index - 1)])
 }
 
-def inputbankstatementdarikosong() {
+def inputBankStatementFromEmpty() {
     'Month array'
     montharray = GlobalVariable.findDataFile.getValue(financialdata, 74).split(';', -1)
 
@@ -961,7 +963,7 @@ def inputbankstatementdarikosong() {
             'click add new button'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_banknewrow'))
 
-            inputbankstatement(BSindex)
+            inputBankStatement(BSindex)
         }
     }
 }
