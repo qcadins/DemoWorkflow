@@ -710,10 +710,10 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4FinancialDataPersonalStoreData (Sql instance, String appno, String name){
+	public NAP4FinancialDataPersonalStoreData (Sql instance, String appno, String name, String date){
 		String financialdata
 		ArrayList <String> listfinancialdata = new ArrayList<String>()
-		instance.eachRow(("SELECT FORMAT(MONTHLY_INCOME_AMT, 'N0') AS HEADER, FORMAT(OTHER_INCOME_AMT, 'N0') AS HEADER, rml.REF_MASTER_NAME AS HEADER, FORMAT(MONTHLY_INSTALLMENT_AMT, 'N0') AS HEADER, FORMAT(MONTHLY_EXPENSE_AMT, 'N0') AS HEADER, FORMAT(acpfd.DATE_AS_OF , 'MM/dd/yyy') AS HEADER FROM APP_CUST_PERSONAL_FIN_DATA acpfd WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_PERSONAL_ID = acpfd.APP_CUST_PERSONAL_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = acpfd.MR_SOURCE_OF_INCOME_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+		instance.eachRow(("SELECT FORMAT(MONTHLY_INCOME_AMT, 'N0') AS HEADER, FORMAT(OTHER_INCOME_AMT, 'N0') AS HEADER, rml.REF_MASTER_NAME AS HEADER, FORMAT(MONTHLY_INSTALLMENT_AMT, 'N0') AS HEADER, FORMAT(MONTHLY_EXPENSE_AMT, 'N0') AS HEADER, FORMAT(acpfd.DATE_AS_OF , 'MM/dd/yyy') AS HEADER FROM APP_CUST_PERSONAL_FIN_DATA acpfd WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_PERSONAL_ID = acpfd.APP_CUST_PERSONAL_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = acpfd.MR_SOURCE_OF_INCOME_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND FORMAT(acpfd.DATE_AS_OF , 'MM/dd/yyy') = '"+ date +"'"), {  row ->
 
 			financialdata = (row[0])
 			listfinancialdata.add(financialdata)
@@ -744,10 +744,10 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
-	public NAP4FinDataBankAccStoreData (Sql instance, String appno, String name){
+	public NAP4FinDataBankAccStoreData (Sql instance, String appno, String name, String bankno){
 		String bankacc
 		ArrayList <String> listbankacc = new ArrayList<String>()
-		instance.eachRow(("SELECT acba.BANK_CODE AS HEADER, acba.BANK_BRANCH AS HEADER, acba.BANK_ACC_NAME AS HEADER, acba.BANK_ACC_NO AS HEADER, acba.IS_DEFAULT AS HEADER, acba.IS_ACTIVE AS HEADER, FORMAT(acba.BEG_BALANCE_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' GROUP BY acba.BANK_CODE, acba.BANK_BRANCH, acba.BANK_ACC_NAME, acba.BANK_ACC_NO, acba.IS_DEFAULT, acba.IS_ACTIVE, acba.BEG_BALANCE_AMT"), {  row ->
+		instance.eachRow(("SELECT acba.BANK_CODE AS HEADER, acba.BANK_BRANCH AS HEADER, acba.BANK_ACC_NAME AS HEADER, acba.BANK_ACC_NO AS HEADER, acba.IS_DEFAULT AS HEADER, acba.IS_ACTIVE AS HEADER, FORMAT(acba.BEG_BALANCE_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND acba.BANK_ACC_NO = '"+ bankno +"' GROUP BY acba.BANK_CODE, acba.BANK_BRANCH, acba.BANK_ACC_NAME, acba.BANK_ACC_NO, acba.IS_DEFAULT, acba.IS_ACTIVE, acba.BEG_BALANCE_AMT"), {  row ->
 
 			bankacc = (row[0])
 			listbankacc.add(bankacc)
@@ -784,7 +784,7 @@ public class CustomerDataVerif {
 	public NAP4BankStatDataStoreData (Sql instance, String appno, String name, String accno){
 		String bankstatdata
 		ArrayList <String> listbankstatdata = new ArrayList<String>()
-		instance.eachRow(("SELECT acbs.MONTH AS HEADER ,acbs.YEAR AS HEADER, acbs.DEBIT_TRX_COUNT AS HEADER, FORMAT(acbs.DEBIT_AMT, 'N0') AS HEADER, acbs.CREDIT_TRX_COUNT AS HEADER, FORMAT(acbs.CREDIT_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT acbs WITH(NOLOCK) ON acba.APP_CUST_BANK_ACC_ID = acbs.APP_CUST_BANK_ACC_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND acba.BANK_ACC_NO = '"+ accno +"'"), {  row ->
+		instance.eachRow(("SELECT acbs.MONTH AS HEADER ,acbs.YEAR AS HEADER, acbs.DEBIT_TRX_COUNT AS HEADER, FORMAT(acbs.DEBIT_AMT, 'N0') AS HEADER, acbs.CREDIT_TRX_COUNT AS HEADER, FORMAT(acbs.CREDIT_AMT, 'N0') AS HEADER FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT acbs WITH(NOLOCK) ON acba.APP_CUST_BANK_ACC_ID = acbs.APP_CUST_BANK_ACC_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND acba.BANK_ACC_NO = '"+ accno +"' ORDER BY YEAR"), {  row ->
 
 			bankstatdata = (row[0])
 			listbankstatdata.add(bankstatdata)
