@@ -575,7 +575,9 @@ if(capinssetting=="YEARLY"){
 			
 			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' && GlobalVariable.FirstTimeEntry == 'Yes'){
 				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-				WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)==false){
+					writeFailedReasonVerifyRule()
+				}
 				
 			}
 			
