@@ -553,17 +553,18 @@ if(capinssetting=="YEARLY"){
 		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
 		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 		
-		ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt
+		ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg
 		addtCvgType = result.get("AddtCvg")
 		addtPremiRate = result.get("AddtRate")
 		sumInsuredAmt = result.get("SumInsuredAmt")
+		addtCvg = result.get("AddCvgList")
 		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
 		for (int j = 1; j <= countAddCov; j++) {
 			flagLoad=0
 			int countSumInsuredAmount = 0
-	
+			
 			addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
 				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/label/input',
 				true)
@@ -571,7 +572,13 @@ if(capinssetting=="YEARLY"){
 			labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
 				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/label',
 				true)
-	
+			
+			if(GlobalVariable.Role=="Testing"){
+				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
+				WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+				
+			}
+			
 			'Ambil nilai dari additional coverage per year num pada excel'
 			addCovYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)

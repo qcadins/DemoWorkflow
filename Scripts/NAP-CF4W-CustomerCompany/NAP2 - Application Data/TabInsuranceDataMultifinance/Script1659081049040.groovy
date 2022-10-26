@@ -518,6 +518,7 @@ if(capinssetting=="YEARLY"){
 		addtCvgType = result.get("AddtCvg")
 		addtPremiRate = result.get("AddtRate")
 		sumInsuredAmt = result.get("SumInsuredAmt")
+		addtCvg = result.get("AddCvgList")
 		
 		//AdditionalCoverage & Sum Insured Amount
 		'Looping additional coverage & sum insured amount'
@@ -533,6 +534,12 @@ if(capinssetting=="YEARLY"){
 				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/label',
 				true)
 	
+			if(GlobalVariable.RoleCompany=="Testing"){
+				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
+				WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+				
+			}
+			
 			'Ambil nilai dari additional coverage per year num pada excel'
 			addCovYearValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)

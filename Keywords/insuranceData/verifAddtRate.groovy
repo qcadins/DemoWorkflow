@@ -30,6 +30,8 @@ public class verifAddtRate {
 
 		ArrayList<String> addtCvgType = new ArrayList<>()
 
+		ArrayList<String> addtCvg = new ArrayList<>()
+
 		String userDir = System.getProperty('user.dir')
 
 		String filePathAssetCat = userDir+GlobalVariable.MainCovRulePath
@@ -110,6 +112,8 @@ public class verifAddtRate {
 
 		int match = 0 , sameAssetCat = 0
 
+		String tempAddtCvg = ""
+
 		for(int i = inscoHORow;i<=ruleAddtCvg.getRowNumbers();i++){
 			if(ruleAddtCvg.getValue(1,i)!=inscoHOCode && ruleAddtCvg.getValue(1,i)!=""){
 				match=0
@@ -135,6 +139,10 @@ public class verifAddtRate {
 					&& (ruleAddtCvg.getValue(3,i)==region || ruleAddtCvg.getValue(3,i)=="-") && (ruleAddtCvg.getValue(4,i)==insAssetCategory || ruleAddtCvg.getValue(4,i)=="-" || (sameAssetCat==1 && ruleAddtCvg.getValue(4,i)==""))
 					&& Long.parseLong(ruleAddtCvg.getValue(6,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleAddtCvg.getValue(7,i))>=Long.parseLong(covAmt)){
 						sameAssetCat = 1
+						if(ruleAddtCvg.getValue(8,i)!=tempAddtCvg){
+							addtCvg.add(ruleAddtCvg.getValue(8,i))
+							tempAddtCvg = ruleAddtCvg.getValue(8,i)
+						}
 						if((ruleAddtCvg.getValue(10,i)!="0" && Integer.parseInt(ruleAddtCvg.getValue(9,i))<=assetAge
 						&& Integer.parseInt(ruleAddtCvg.getValue(10,i))>=assetAge)||ruleAddtCvg.getValue(10,i)=="0"){
 							if(ruleAddtCvg.getValue(11,i)=="PRCNT"){
@@ -164,6 +172,7 @@ public class verifAddtRate {
 		result.put("AddtCvg",addtCvgType)
 		result.put("AddtRate",addtPremiRate)
 		result.put("SumInsuredAmt",sumInsuredAmt)
+		result.put("AddCvgList",addtCvg)
 		return result
 	}
 

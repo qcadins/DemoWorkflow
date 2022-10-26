@@ -279,6 +279,7 @@ for (int i = 1; i <= count; i++) {
 	addtCvgType = result.get("AddtCvg")
 	addtPremiRate = result.get("AddtRate")
 	sumInsuredAmt = result.get("SumInsuredAmt")
+	addtCvg = result.get("AddCvgList")
 	
 	//AdditionalCoverage & Sum Insured Amount
 	'Looping additional coverage & sum insured amount'
@@ -293,7 +294,13 @@ for (int i = 1; i <= count; i++) {
 		labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
 			'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[5]/div/div/label',
 			true)
-
+		
+		if(GlobalVariable.RoleCompany=="Testing"){
+			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
+			WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+			
+		}
+		
 		'Ambil nilai dari additional coverage per year num pada excel'
 		addCovYearValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)
@@ -611,6 +618,14 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	}
 }
 
+if (counterPaidByMF == 0 && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
+	'value', FailureHandling.OPTIONAL)!='0' && GlobalVariable.RoleCompany == "Data Entry") {
+	'Klik 2x untuk refresh capitalize amount di confins'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
+	
+}
+	
 'Pengecekan jika ada paid by mf'
 if (counterPaidByMF == 1) {
 	'Write to excel discount amount'
@@ -618,15 +633,15 @@ if (counterPaidByMF == 1) {
 		GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
 
-GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TotalMainPremium')).replace('.00', '').replace(',','')
+GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace('.00', '').replace(',','')
 
-GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
+GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
 
-GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TotalFee')).replace('.00', '').replace(',','')
+GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace('.00', '').replace(',','')
 
-GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TotaltoCustomer')).replace('.00', '').replace(',','')
+GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace('.00', '').replace(',','')
 
-GlobalVariable.Discount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Discount_TotalCustDiscAmt'),
+GlobalVariable.Discount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
 	'value', FailureHandling.OPTIONAL)
 
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
