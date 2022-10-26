@@ -7,8 +7,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
-import org.openqa.selenium.support.ui.Select
-
+import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -43,8 +42,8 @@ ArrayList<WebElement> variable
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (GlobalVariable.findDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-            GlobalVariable.NumofColm, 13))) {
+    if (GlobalVariable.findDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm, 
+            13))) {
         GlobalVariable.CopyAppColm = index
 
         GlobalVariable.NumofVerifStore = index
@@ -81,8 +80,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(
-                            GlobalVariable.NumofColm, 13))) {
+                        datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
                             'convert date confins dan excel agar sama'
                             SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
@@ -149,10 +147,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                         GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                    datafilecustdetail.getValue(
-                        GlobalVariable.NumofColm, 13))) {
-                    if (datafilecustdetail.getValue(
-                        financialdata, 12).length() > 0) {
+                    datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
+                    if (datafilecustdetail.getValue(financialdata, 12).length() > 0) {
                         'convert date confins dan excel agar sama'
                         SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
@@ -193,9 +189,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 } else if (copyapp == 'No') {
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
-            if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                    GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                datafilecustdetail.getValue(
+            if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm, 
+                    12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
                     GlobalVariable.NumofColm, 13))) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 12).length() > 0) {
                     'click button add'
@@ -403,8 +398,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 10).length() != 0) {
                     if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(
-                            GlobalVariable.NumofColm, 13))) {
+                        datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
                         if (GlobalVariable.findDataFile.getValue(financialdata, 67).length() > 0) {
                             if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
                                 bankdetailexcel = ((((((('- ' + GlobalVariable.findDataFile.getValue(financialdata, 67)) + 
@@ -500,8 +494,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                     if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(
-                            GlobalVariable.NumofColm, 13))) {
+                        datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
                         if (GlobalVariable.findDataFile.getValue(financialdata, 67).length() > 0) {
                             bankdetailexcel = ((((((('- ' + GlobalVariable.findDataFile.getValue(financialdata, 67)) + ' - ') + 
                             GlobalVariable.findDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.findDataFile.getValue(
@@ -537,9 +530,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         int flagFailed = 0
 
         if (GlobalVariable.findDataFile.getValue(financialdata, 9).length() != 0) {
-            if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                    GlobalVariable.NumofColm, 12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                datafilecustdetail.getValue(
+            if (GlobalVariable.findDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm, 
+                    12)) && GlobalVariable.findDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
                     GlobalVariable.NumofColm, 13))) {
                 if (GlobalVariable.findDataFile.getValue(financialdata, 67).length() > 0) {
                     'click button add bank'

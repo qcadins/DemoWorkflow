@@ -510,7 +510,7 @@ def inputfinancialdata() {
     WebUI.click(buttonSave)
 }
 
-def inputBank(String copyapp, ArrayList<WebElement> variable, GlobalVariable.FlagFailed) {
+def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
     int flagWarning = 0
 
     if (GlobalVariable.findDataFile.getValue(financialdata, 24).length() > 1) {
