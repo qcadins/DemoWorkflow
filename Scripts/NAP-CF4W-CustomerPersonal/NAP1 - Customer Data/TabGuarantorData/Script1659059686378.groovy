@@ -469,6 +469,10 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
 							//Ambil nilai dari confins untuk verif store db lookup
 							if (GlobalVariable.Role == 'Testing') {
 								getDataGuarPersonal()
+								def confinsdata = GlobalVariable.confinsdata
+								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+									'value'))
+								GlobalVariable.confinsdata = confinsdata
 								
 							}
 							

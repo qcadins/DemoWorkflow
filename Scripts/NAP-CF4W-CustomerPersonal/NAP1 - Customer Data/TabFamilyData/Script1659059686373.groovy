@@ -655,6 +655,9 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
 						if (GlobalVariable.Role == 'Testing') {
 								getDataCust()
 								def confinsdata = GlobalVariable.confinsdata
+								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
+										'value'))
+								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'),'value'))
