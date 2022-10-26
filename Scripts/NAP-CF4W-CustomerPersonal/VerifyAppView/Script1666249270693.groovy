@@ -40,9 +40,9 @@ appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 WebUI.click(findTestObject('AppView/MENU APP INQUIRY'))
 
 //Verify sort & paging
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPagingCompany == 'Yes')) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
     'Verif reset'
-    CustomKeywords.'sortPaging.verifyReset.resetPagingAppInquiry'()
+    CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
 
     ArrayList<Boolean> listString = new ArrayList<Boolean>()
 
@@ -71,7 +71,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort appno ascending'
-    Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -89,7 +89,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort appno descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listApp)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -113,7 +113,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort custname descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -137,7 +137,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort cust no descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -157,7 +157,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort custname descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -179,7 +179,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort poname ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -197,7 +197,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort poname descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -219,7 +219,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort appdate ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -237,7 +237,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort appdate descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -259,7 +259,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort NAP Submitted ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -277,7 +277,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort NAP Submitted descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -301,7 +301,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort agreement step descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -325,7 +325,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort contract status descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -347,7 +347,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort application step ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -365,7 +365,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort application step descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -387,7 +387,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'verif sort application status ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -405,7 +405,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort application status descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -427,7 +427,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     }
     
     'Verif sort customer checking step descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -458,7 +458,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
         }
         
         'Verif appno yang ada di page 2 tidak ada di page 1'
-        Boolean isPaging = CustomKeywords.'sortPaging.verifySortPaging.verifyPaging'(listApp, listString)
+        Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
         WebUI.verifyEqual(isPaging, true)
     }

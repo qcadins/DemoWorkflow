@@ -25,18 +25,10 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 //Verify sort & paging
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersonal == 'Yes')) {
+if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
 	//	verif reset nap4
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),"0002APP20211204858")
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),"KADEHARA KAZUHA")
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),"CF4W MRA")
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),"0002CUST20211224975")
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
-	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false)
-	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false)
-	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false)
-	WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),'value'),"",false)
-
+	CustomKeywords.'paging.verifyPaging.resetPagingCustDataCompletion'()
+	
     ArrayList<String> listString = new ArrayList<String>()
 
     'click search'
@@ -71,7 +63,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort appno ascending'
-    Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -89,7 +81,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort appno descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listApp)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -113,7 +105,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'Verif sort custno descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -135,7 +127,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort custname ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -153,7 +145,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort custname descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -175,7 +167,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort poname ascending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -193,7 +185,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     }
     
     'verif sort poname descending'
-    isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
     WebUI.verifyEqual(isSorted, true)
 
@@ -230,7 +222,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
         }
         
         'Verif appno pada page 2 tidak ada di page 1'
-        Boolean isPaging = CustomKeywords.'sortPaging.verifySortPaging.verifyPaging'(listApp, listString)
+        Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
         WebUI.verifyEqual(isPaging, true)
     }
