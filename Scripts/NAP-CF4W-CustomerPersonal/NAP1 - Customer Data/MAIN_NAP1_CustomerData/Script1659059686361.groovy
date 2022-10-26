@@ -51,9 +51,9 @@ String POStat
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
 //Verify sort & paging
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Yes"){
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	'Verif reset'
-	CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+	CustomKeywords.'paging.verifyPaging.resetPaging'()
 	
 	ArrayList<String> listString = new ArrayList<String>()
 	'click button search'
@@ -83,7 +83,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 		listString.add(WebUI.getText(appNoObject))
 	}
 	'Verif sort appno ascending'
-	Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+	Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	listApp = new ArrayList<String>()
@@ -97,7 +97,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 		
 	}
 	'verif sort appno descending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listApp)
+	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header custname 2x supaya descending'
@@ -116,7 +116,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 
 	}
 	'verif sort custname descending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
 	WebUI.verifyEqual(isSorted,true)
 	
@@ -135,7 +135,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 
 	}
 	'verif sort poname ascending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+	isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik header poname'
@@ -149,7 +149,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 	
 	}
 	'Verif sort poname descending'
-	isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	WebUI.verifyEqual(isSorted,true)
 	
 	'Klik 2x header appno supaya urutan descending'
@@ -178,7 +178,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckSortPagingPersonal=="Ye
 			listString.add(WebUI.getText(appNoObject))
 		}
 		'Verif appno yang ada di page 2 tidak ada di page 1'
-		Boolean isPaging = CustomKeywords.'sortPaging.verifySortPaging.verifyPaging'(listApp,listString)
+		Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
 		WebUI.verifyEqual(isPaging,true)
 		
 	}

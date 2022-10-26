@@ -502,12 +502,12 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(2, 4)</initValue>
-      <name>CheckSortPagingPersonal</name>
+      <name>CheckPagingPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 4)</initValue>
-      <name>CheckSortPagingCompany</name>
+      <name>CheckPagingCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

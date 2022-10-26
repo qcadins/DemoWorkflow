@@ -66,9 +66,9 @@ if (Integer.parseInt(DupCheckCount) == 1) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 	
 	//Verify sort & paging
-	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompany=="Yes"){
+	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="Yes"){
 		'Verif reset'
-		CustomKeywords.'sortPaging.verifyReset.resetPaging'()
+		CustomKeywords.'paging.verifyPaging.resetPaging'()
 		
 		'click button search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
@@ -100,7 +100,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			listString.add(WebUI.getText(appNoObject))
 		}
 		'verif sort appno ascending'
-		Boolean isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		listApp = new ArrayList<String>()
@@ -113,7 +113,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			listApp.add(WebUI.getText(appNoObject))
 		}
 		'verif sort appno descending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listApp)
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header custname'
@@ -131,7 +131,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort custname ascending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header custname'
@@ -145,7 +145,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort custname descending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header product offering name'
@@ -163,7 +163,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort poname ascending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortAscending'(listString)
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik header product offering anme'
@@ -177,7 +177,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 			
 		}
 		'verif sort poname descending'
-		isSorted = CustomKeywords.'sortPaging.verifySortPaging.verifySortDescending'(listString)
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 		WebUI.verifyEqual(isSorted,true)
 		
 		'Klik 2x header appno supaya appno descending'
@@ -206,7 +206,7 @@ if (Integer.parseInt(DupCheckCount) == 1) {
 				listString.add(WebUI.getText(appNoObject))
 			}
 			'Verif appno descending pada page 2 tidak ada di page 1'
-			Boolean isPaging = CustomKeywords.'sortPaging.verifySortPaging.verifyPaging'(listApp,listString)
+			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
 			WebUI.verifyEqual(isPaging,true)
 			
 		}
