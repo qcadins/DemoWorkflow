@@ -59,7 +59,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_AppNo'))
 
     'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     for (int i = 1; i <= rowData.size(); i++) {
@@ -99,7 +99,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_AgreementNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -123,7 +123,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_CustNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -165,7 +165,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_ProdOfferingName'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -205,7 +205,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_Appdate'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -245,7 +245,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_NAPSubmitted'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -287,7 +287,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_AgreementStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -311,7 +311,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_ContractStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -333,7 +333,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -373,7 +373,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -413,7 +413,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckSortPaging
     WebUI.click(findTestObject('Object Repository/AppView/span_CustomerCheckingStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
         2)
 
     listString = new ArrayList<Boolean>()
@@ -477,7 +477,7 @@ WebUI.click(findTestObject('AppView/hyperlink_APPNO'))
 WebUI.switchToWindowIndex('1')
 
 'verify alert'
-WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
     5, FailureHandling.OPTIONAL)
 
 'delay 5 detik'

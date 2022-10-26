@@ -20,7 +20,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-GlobalVariable.FlagFailed = 0
+
 
 int flagWarning = 0
 
@@ -49,6 +49,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 'Loop Multiple Guarantor Data'
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
+
+GlobalVariable.FlagFailed = 0
+
     if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
@@ -453,23 +456,28 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 						Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 						 
 						 'add relationship to array'
-						 GlobalVariable.confinsdata.add(selectrelationship.getFirstSelectedOption().getText())
-						 
-						 'add id type to array'
-						 GlobalVariable.confinsdata.add(selectidtype.getFirstSelectedOption().getText())
-						 
-						 'add marital status to array'
-						 GlobalVariable.confinsdata.add(selectmaritalstatus.getFirstSelectedOption().getText())
-						 
-						 'add cust model to array'
-						 GlobalVariable.confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
-						 
-						 'add gender to array'
-						 GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
+						 GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'),
 								 'value'))
 						 
-						 'add ownership to array'
-						 GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+						 'add id type to array'
+						 GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_IDType'),
+								 'value'))
+						 
+						 'add marital status to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_MaritalStatus'),
+										'value'))
+								
+								'add customer model to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'),
+										'value'))
+								
+								'add gender to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
+										'value'))
+								
+								'add ownership to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
+										'value'))
 					}
 					
                     'click button save'
@@ -535,11 +543,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
 }
 
-'reset flagfailed 0'
-GlobalVariable.FlagFailed = 0
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
+
+GlobalVariable.FlagFailed = 0
+
     if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
@@ -756,25 +765,22 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 						'call function get data guarantor company'
 						getDataGuarCompany()
 						
-						Select selectrelationship = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[1]/div/div/lib-ucdropdownlist/div/select')))
-						
-						Select selectcompanytype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[3]/div/div/lib-ucdropdownlist/div/select')))
-						
-						Select selectcustmodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
-						
-						Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
-						 
+					
 						 'add relationship to array'
-						 GlobalVariable.confinsdata.add(selectrelationship.getFirstSelectedOption().getText())
+						GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+										'value'))
 						 
 						 'add company type to array'
-						 GlobalVariable.confinsdata.add(selectcompanytype.getFirstSelectedOption().getText())
-						 
-						 'add cust model to array'
-						 GlobalVariable.confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
-						 
-						 'add ownership to array'
-						 GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
+										'value'))
+								
+								'add customer model to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'),
+										'value'))
+								
+								'add ownership to array'
+								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'),
+										'value'))
 					}
                     
                     'Click save'

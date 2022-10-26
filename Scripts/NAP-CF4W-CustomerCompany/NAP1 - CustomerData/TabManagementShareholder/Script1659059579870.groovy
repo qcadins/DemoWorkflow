@@ -21,8 +21,6 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-GlobalVariable.FlagFailed = 0
-
 String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathCompany
@@ -44,6 +42,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 'Loop Multiple ManagementSharholder Data'
 for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
 1); (GlobalVariable.NumofMS)++) {
+
+GlobalVariable.FlagFailed = 0
+
     if (datafile.getValue(GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
         if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/td_MSName'), 
@@ -925,6 +926,36 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                     GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                 }
                 
+				if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(
+					GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
+						5, FailureHandling.OPTIONAL)) {
+						'click button cancel'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
+
+						'customer added -1'
+						(GlobalVariable.countNumofCustomer)--
+					} else {
+						if (flagWarning > 0) {
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+						}
+					}
+				} else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
+					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'),
+						5, FailureHandling.OPTIONAL)) {
+						'click button cancel'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
+
+						'customer added -1'
+						(GlobalVariable.countNumofCustomer)--
+					} else {
+						if (flagWarning > 0) {
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+						}
+					}
+				}
                 'verify flagfailed lookup == 0 '
                 if (GlobalVariable.FlagFailed == 0) {
                     'Check save Process write to excel'
@@ -939,37 +970,6 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         'Check error validasi'
                         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
                             GlobalVariable.NumofMS, '2.TabManagementShareholderData')
-                    }
-                    
-                    if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(
-                        GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
-                            5, FailureHandling.OPTIONAL)) {
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-
-                            'customer added -1'
-                            (GlobalVariable.countNumofCustomer)--
-                        } else {
-                            if (flagWarning > 0) {
-                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                    '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-                            }
-                        }
-                    } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
-                            5, FailureHandling.OPTIONAL)) {
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
-
-                            'customer added -1'
-                            (GlobalVariable.countNumofCustomer)--
-                        } else {
-                            if (flagWarning > 0) {
-                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                    '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-                            }
-                        }
                     }
                     
                     if (datafile.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
@@ -998,6 +998,37 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                     }
                 }
+				
+				if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(
+					GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
+						5, FailureHandling.OPTIONAL)) {
+						'click button cancel'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
+
+						'customer added -1'
+						(GlobalVariable.countNumofCustomer)--
+					} else {
+						if (flagWarning > 0) {
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+						}
+					}
+				} else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
+					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'),
+						5, FailureHandling.OPTIONAL)) {
+						'click button cancel'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
+
+						'customer added -1'
+						(GlobalVariable.countNumofCustomer)--
+					} else {
+						if (flagWarning > 0) {
+							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+						}
+					}
+				}
             }
         break
 		}
@@ -1006,6 +1037,15 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
+
+'cek alert'
+GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '2a.TabManagementShareholderMain')
+
+if (GlobalVariable.FlagFailed == 0) {
+   'Write to Excel SUCCESS'
+   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabManagementShareholderMain',
+	   0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+}
 
 def getDataMS(def datafile) {
     'declare array for confins data'

@@ -55,7 +55,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     'Verif reset'
     CustomKeywords.'sortPaging.verifyReset.resetPaging'()
 
-    ArrayList<String> listString = new ArrayList<String>()
+    ArrayList<WebElement> listString = new ArrayList<WebElement>()
 
     'click button search'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
@@ -64,21 +64,19 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     WebDriver driver = DriverFactory.getWebDriver()
 
     'Inisialisasi variabel'
-    ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+    ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
     'Klik header office'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_Office'))
 
     'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
@@ -93,7 +91,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
 
     WebUI.verifyEqual(isSorted, true)
 
-    listApp = new ArrayList<String>()
+    listApp = new ArrayList<WebElement>()
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
@@ -117,10 +115,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/custName'), 
@@ -139,10 +136,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'), 
@@ -160,7 +156,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
     'Klik header poname'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
 
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'), 
@@ -197,7 +193,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckSortPagingPersona
 
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
@@ -288,8 +284,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             }
             
             if ((POStat == 'DEACT') || (POStat == 'EXP')) {
-                WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-                    2, FailureHandling.OPTIONAL)
+                WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
             }
         } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             10).equalsIgnoreCase('No')) {
@@ -415,8 +410,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
         
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
-            WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-                2, FailureHandling.OPTIONAL)
+            WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
         }
         
         'click button next'
@@ -638,8 +632,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             }
             
             if ((POStat == 'DEACT') || (POStat == 'EXP')) {
-                WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-                    2, FailureHandling.OPTIONAL)
+                WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
             }
         } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             10).equalsIgnoreCase('No')) {
@@ -765,8 +758,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
         
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
-            WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 
-                2, FailureHandling.OPTIONAL)
+            WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
         }
         
         'click button next'

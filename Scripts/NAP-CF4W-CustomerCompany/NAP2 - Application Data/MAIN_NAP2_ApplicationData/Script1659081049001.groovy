@@ -53,13 +53,13 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	'Klik header office'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_Office'))
 	'Verif tidak ada alert yang muncul'
-	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 	
 	'Klik header appno'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_appNo'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 	
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo')
@@ -88,7 +88,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_custName'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
@@ -120,7 +120,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckSortPagingCompan
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_POName'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_erroralert'), 2)
+	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
