@@ -24,7 +24,7 @@ import internal.GlobalVariable
 public class TripleVerifyMatch {
 	@Keyword
 	public verifyMatch (String excel, String UI, String DB){
-		
+
 		WebUI.verifyMatch(excel, UI, false)
 		WebUI.verifyMatch(excel, DB, false)
 		WebUI.verifyMatch(UI, DB, false)
