@@ -35,7 +35,7 @@ ArrayList<String> referantorfaileddelete = new ArrayList<String>()
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
-if(!appLastStep.equalsIgnoreCase("GUARANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
+if(!appLastStep.equalsIgnoreCase("GUARANTOR") && !appLastStep.equalsIgnoreCase("NAP DETAIL") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 
