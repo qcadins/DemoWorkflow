@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+         <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+      <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -426,11 +426,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Muncul Error Alert'</initValue>
-      <name>StatusFailedAlert</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>2</initValue>
       <name>CopyAppColm</name>
    </GlobalVariableEntity>

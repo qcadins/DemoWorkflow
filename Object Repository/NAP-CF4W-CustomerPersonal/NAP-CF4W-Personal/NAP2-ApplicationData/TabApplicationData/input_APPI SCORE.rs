@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
+         <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[2]/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
+      <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[2]/div/div/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
