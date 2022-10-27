@@ -165,7 +165,7 @@ if (insuredBy == 'Customer') {
         GlobalVariable.NumofColm, 36).length() == 0) {
 	
         resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
         'verify main coverage'
@@ -183,7 +183,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
             String resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(sqlconnection, 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             resultAddCVGarray = resultAddCVG.replace('[', '').replace(']', '').split(', ')
@@ -218,7 +218,7 @@ if (insuredBy == 'Customer') {
         }
     } else {
         ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
-            sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
         println(resultMultiMainCVG)
@@ -292,7 +292,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
             ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             'ganti value null > "" (String kosong)'
@@ -443,7 +443,7 @@ if (insuredBy == 'Customer') {
     }
 } else if (insuredBy == 'Multifinance') {
     String resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, findTestData(
-            'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)).replace('HEADER:', '').replace('[', '').replace(']', '')
 
     resultMFInsurancearray = resultMFinsurance.split(', ')
@@ -507,7 +507,7 @@ if (insuredBy == 'Customer') {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 36).length() == 0) {
         String resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
         'verify main coverage'
@@ -525,7 +525,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
             String resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(sqlconnection, 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             resultAddCVGarray = resultAddCVG.replace('[', '').replace(']', '').split(', ')
@@ -560,7 +560,7 @@ if (insuredBy == 'Customer') {
         }
     } else {
         ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
-            sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
         println(resultMultiMainCVG)
@@ -634,7 +634,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
             ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             'ganti value null > "" (String kosong)'
