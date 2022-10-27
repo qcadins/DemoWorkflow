@@ -6,12 +6,12 @@
    <elementGuidId>b9a63dbd-9211-424c-8eb1-22b805eb88ca</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[16]</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+         <key>XPATH</key>
+         <value>(//button[@type='button'])[16]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+      <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[4]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

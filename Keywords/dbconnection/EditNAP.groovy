@@ -92,6 +92,21 @@ public class EditNAP {
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
 			customerdata = (row[1])
+			listcustdata.add(customerdata)
+		})
+		return listcustdata
+	}
+	
+	@Keyword
+	public CustomerDataCompany (Sql instance, String appno){
+		String customerdata
+		ArrayList<String> listcustdata = new ArrayList<>()
+		instance.eachRow(("Select CUST_NAME, TAX_ID_NO FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1"), {  row ->
+
+			customerdata = (row[0])
+			listcustdata.add(customerdata)
+			customerdata = (row[1])
+			listcustdata.add(customerdata)
 		})
 		return listcustdata
 	}
@@ -125,6 +140,7 @@ public class EditNAP {
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
 			customerdata = (row[1])
+			listcustdata.add(customerdata)
 		})
 		return listcustdata
 	}

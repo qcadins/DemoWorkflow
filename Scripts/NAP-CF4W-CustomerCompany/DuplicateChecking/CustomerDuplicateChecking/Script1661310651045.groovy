@@ -48,9 +48,13 @@ String password = findTestData('Login/Login').getValue(4, 8)
 
 String database = findTestData('Login/Login').getValue(5, 8)
 
+String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+
 String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
 
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
@@ -60,6 +64,9 @@ String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
 
+String DupCheckStatus = CustomKeywords.'dbconnection.DupCheckVerif.checkDupCheckStatus'(sqlConnectionLOS, appNo)
+
+println(DupCheckStatus)
 
 if (Integer.parseInt(DupCheckCount) == 1) {
     'click menu duplicate Checking'

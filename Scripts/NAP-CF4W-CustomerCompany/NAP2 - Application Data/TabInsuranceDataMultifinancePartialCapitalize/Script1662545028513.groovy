@@ -133,7 +133,9 @@ for (int i = 1; i <= count; i++) {
 			if(WebUI.verifyMatch(WebUI.getText(yearNumObject),yearNo.get(j),false,FailureHandling.OPTIONAL)){
 				
 				'Verify default sum insured percentage yang tampil pada confins sesuai dengan rule'
-				WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))
+				if(WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))==false){
+					writeFailedReasonVerifyRule()
+				}
 				
 				break
 			}
@@ -211,11 +213,12 @@ for (int i = 1; i <= count; i++) {
 	mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[7]/div/input",true)
 	
 	//Verif Main Premi Rate Based on Rule
-	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+	if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 		
-		modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
+		modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
+			
 		WebUI.click(modifyRandomObject)
 		
 		'Ambil nilai main premi rate dari confins'
@@ -232,7 +235,9 @@ for (int i = 1; i <= count; i++) {
 			if(WebUI.getAttribute(mainCoverageObject,'value').equalsIgnoreCase(mainCvgType.get(j))){
 				
 				'Verif main premi rate yang tampil pada confins sesuai dengan rule excel'
-				WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))
+				if(WebUI.verifyEqual(Double.parseDouble(mainPremiVal),Double.parseDouble(mainPremiRate.get(j)))==false){
+					writeFailedReasonVerifyRule()
+				}
 				break
 			}
 		}
@@ -265,45 +270,21 @@ for (int i = 1; i <= count; i++) {
 		if(GlobalVariable.RoleCompany=="Testing"){
 				'Verif rate terlock'
 				WebUI.verifyElementHasAttribute(mainPremiRateObject, "disabled",1)
-		}
+		}			
 	}
 	
 	int flagLoading = 0, flagLoad=0
 	
 	result = new HashMap<String,ArrayList>()
 	
-	ArrayList<WebElement> variableAddCov = driver.findElements(By.cssSelector("#insuranceCoverage > div.ng-untouched.ng-pristine.ng-invalid > table > tbody:nth-child("+(i+1)+") > tr > td.text-left > div[formarrayname=AppInsAddCvgs]"))
-	
-	countAddCov = variableAddCov.size()
+	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
+	result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 	
 	ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt
-	
-	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
-		
-		addtCvgType = result.get("AddtCvg")
-		addtPremiRate = result.get("AddtRate")
-		sumInsuredAmt = result.get("SumInsuredAmt")
-		addtCvg = result.get("AddCvgList")
-		
-		for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){
-			labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
-				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (addCovIndex + 2)) + ']/td[5]/div/div/label',
-				true)
-			
-			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-			if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
-				writeFailedReasonVerifyRule()
-				break
-			}
-		}
-		
-		if(GlobalVariable.FlagFailed == 1){
-			break
-		}
-		
-	}
+	addtCvgType = result.get("AddtCvg")
+	addtPremiRate = result.get("AddtRate")
+	sumInsuredAmt = result.get("SumInsuredAmt")
+	addtCvg = result.get("AddCvgList")
 	
 	//AdditionalCoverage & Sum Insured Amount
 	'Looping additional coverage & sum insured amount'
@@ -318,6 +299,12 @@ for (int i = 1; i <= count; i++) {
 		labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
 			'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[5]/div/div/label',
 			true)
+		
+		if(GlobalVariable.RoleCompany=="Testing"){
+			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
+			WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+	
+		}
 		
 		'Ambil nilai dari additional coverage per year num pada excel'
 		addCovYearValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -404,7 +391,7 @@ for (int i = 1; i <= count; i++) {
 		modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
 		
 		//Verif additional premi rate based on rule
-		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Looping berdasarkan jumlah additional coverage type pada rule excel'
 			for(int k = 0;k<addtCvgType.size();k++){
 				'Verif additional coverage type confins sesuai dengan rule'
@@ -414,14 +401,18 @@ for (int i = 1; i <= count; i++) {
 						'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
 						if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 							'Verif additional premi rate sesuai dengan nilai dari rule'
-							WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))
+							if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
+								writeFailedReasonVerifyRule()
+							}
 							break
 						}
 					}
 					//jika tidak terdapt sum insured amount
 					else{
 						'Verif additional premi rate sesuai dengan nilai dari rule'
-						WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))
+						if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","")),Double.parseDouble(addtPremiRate.get(k)))==false){
+							writeFailedReasonVerifyRule()
+						}
 						break
 					}
 
@@ -440,8 +431,11 @@ for (int i = 1; i <= count; i++) {
 			AddtRateValueArray = AddtRateValue.split(';', -1)
 							
 			if(GlobalVariable.RoleCompany=="Testing"){
-				'Verif rate tidak terlock'
-				WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+				if(flagLoad==0){
+					'Verif rate tidak terlock'
+					WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+				}
+				
 			}
 							
 			'Pengecekan additional premi rate pada excel kosong atau tidak'
@@ -458,8 +452,11 @@ for (int i = 1; i <= count; i++) {
 		//road worthiness document bernilai on the road atau tidak ada attribute road worthiness document pada asset attribute
 		else if(rwd=="ON_THE_ROAD"||rwd==null){
 			if(GlobalVariable.RoleCompany=="Testing"){
-				'verif rate terlock'
-				WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+				if(flagLoad==0){
+					'verif rate terlock'
+					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+				}
+				
 			}
 		}
 	}
@@ -496,7 +493,6 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabIns
 if(GlobalVariable.FlagFailed==0){
 	'cek alert'
 	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
-	
 }
 
 'Pengecekan jika full capitalize amount pada confins tidak tercentang dan pada excel terisi nilai amountnya'
@@ -603,7 +599,6 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	'Verif total premi to customer after discount sesuai perhitungan'
 	WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false)
 	
-		
 	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 		'value').replace(',', '')
 	
@@ -637,13 +632,13 @@ if(GlobalVariable.RoleCompany=="Testing"){
 }
 
 if (counterPaidByMF == 0 && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
-	'value', FailureHandling.OPTIONAL)!='0' && GlobalVariable.RoleCompany == "Data Entry") {
+	'value', FailureHandling.OPTIONAL)!='0' && GlobalVariable.RoleCompany=="Data Entry") {
 	'Klik 2x untuk refresh capitalize amount di confins'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	
 }
-	
+
 'Pengecekan jika ada paid by mf'
 if (counterPaidByMF == 1) {
 	'Write to excel discount amount'
@@ -667,14 +662,14 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerC
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 	'value', FailureHandling.OPTIONAL)
 
-def writeFailedReasonVerifyRule() {
+public writeFailedReasonVerifyRule(){
 	'write to excel failed'
 	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
 		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
+	
 	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1,
-		GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
-
-	GlobalVariable.FlagFailed = 1
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	GlobalVariable.FlagFailed=1
 }
