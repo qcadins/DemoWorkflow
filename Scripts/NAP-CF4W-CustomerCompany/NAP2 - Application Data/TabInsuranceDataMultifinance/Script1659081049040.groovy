@@ -49,10 +49,10 @@ Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, u
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil text original office dari confins'
-String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 'Ambil appNo dari confins'
-String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
+String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
 
 if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) && (GlobalVariable.FirstTimeEntry == 
 'Yes')) {
@@ -363,7 +363,7 @@ if (capinssetting == 'YEARLY') {
     'Looping data tabel insurance untuk input data'
     for (int i = 1; i <= count; i++) {
         //modify object year num
-        yearNumObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_YearNo'), 
+        yearNumObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/td_YearNo'), 
             'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[3]', true)
 
         if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) && (GlobalVariable.FirstTimeEntry == 
@@ -516,7 +516,7 @@ if (capinssetting == 'YEARLY') {
             HashMap<String, ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(
                 sqlConnectionLOS, sqlConnectionFOU, appNo, selectedInscoBranch, selectedRegion, covAmt)
 
-            modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/testobject'), 
+            modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/testobject'), 
                 'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[2]/td[5]', true)
 
             WebUI.click(modifyRandomObject)
@@ -616,7 +616,7 @@ if (capinssetting == 'YEARLY') {
                 'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + 
                 ']/td[6]/div/div/label/input', true)
 
-            labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'), 
+            labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'), 
                 'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + 
                 ']/td[6]/div/div/label', true)
 
@@ -702,11 +702,11 @@ if (capinssetting == 'YEARLY') {
                 countSumInsuredAmount = 1
             }
             
-            modifyAddtCovName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddtCovName'), 
+            modifyAddtCovName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddtCovName'), 
                 'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + 
                 ']/td[6]/div/div/label', true)
 
-            modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'), 
+            modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'), 
                 'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + 
                 ']/td[8]/div/span/div/input', true)
 

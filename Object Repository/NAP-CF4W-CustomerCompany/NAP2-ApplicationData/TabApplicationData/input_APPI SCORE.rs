@@ -6,12 +6,12 @@
    <elementGuidId>dd858195-a0cb-4e08-8487-4e08bfdffd88</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//input[@type='text'])[21]</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[2]/div/div/input</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
+         <key>XPATH</key>
+         <value>(//input[@type='text'])[21]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div[2]/div/div/input</value>
+      <value>//*[@id=&quot;RefAttrContentAppAttrContentObjs&quot;]/div[2]/div/div[2]/div/div/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

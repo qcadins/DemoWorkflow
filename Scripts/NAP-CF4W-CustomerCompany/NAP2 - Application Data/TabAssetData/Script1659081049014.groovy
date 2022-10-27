@@ -481,13 +481,13 @@ String countAssetAtrtibute = CustomKeywords.'dbconnection.CountRowAssetAttribute
 	Fullassetcode,POName)
 
 for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
-    String newAssetAtrributeInputText = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
+    String newAssetAtrributeInputText = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
 
-    String newAssetAtrributeList = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/select'
+    String newAssetAtrributeList = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select'
 
-    String newAssetAtrributeInputDate = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]'
+    String newAssetAtrributeInputDate = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]'
 
-    String newAssetAtrributeInputNumber = ('//*[@id="RefAttrContent"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]'
+    String newAssetAtrributeInputNumber = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]'
 
     'modify Asset Attribute Input Text'
     modifyObjectAssetAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
