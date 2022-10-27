@@ -170,7 +170,7 @@ for (int i = 1; i <= count; i++) {
 		'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[4]/div/input', true)
 
 	'Ambil nilai sum insured percentage dari excel'
-	sumInsuredPercentValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+	sumInsuredPercentValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 		GlobalVariable.NumofColm, editGenTableRow+3)
 
 	sumInsuredPercentValueArray = sumInsuredPercentValue.split(';', -1)
@@ -190,7 +190,7 @@ for (int i = 1; i <= count; i++) {
 		true)
 
 	'Ambil nilai main coverage dari excel'
-	mainCoverageValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+	mainCoverageValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 		GlobalVariable.NumofColm, editGenTableRow+4)
 
 	mainCoverageValueArray = mainCoverageValue.split(';', -1)
@@ -246,7 +246,7 @@ for (int i = 1; i <= count; i++) {
 	//Pengecekan road worthiness doc bernilai off the road
 	if(rwd=="OFF_THE_ROAD"){
 		'Ambil nilai main premi rate dari excel'
-		mainPremiRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		mainPremiRateValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 						GlobalVariable.NumofColm, Rate)
 						
 		mainPremiRateValueArray = mainPremiRateValue.split(';',-1)
@@ -307,7 +307,7 @@ for (int i = 1; i <= count; i++) {
 		}
 		
 		'Ambil nilai dari additional coverage per year num pada excel'
-		addCovYearValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		addCovYearValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)
 
 		addCovYearValueArray = addCovYearValue.split(';', -1)
@@ -357,7 +357,7 @@ for (int i = 1; i <= count; i++) {
 			'Jika sum insured amount ada dan checkbox additional coverage tercentang'
 			if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
 				'Ambil nilai sum insured amount dari excel'
-				SumInsuredValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				SumInsuredValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 					GlobalVariable.NumofColm, sumInsuredAmountRow + j)
 	
 				SumInsuredValueArray = SumInsuredValue.split(';', -1)
@@ -425,7 +425,7 @@ for (int i = 1; i <= count; i++) {
 		if(rwd=="OFF_THE_ROAD"){
 							
 			'Ambil nilai additional premi rate dari excel'
-			AddtRateValue = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			AddtRateValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 								GlobalVariable.NumofColm, AddRate + j)
 				
 			AddtRateValueArray = AddtRateValue.split(';', -1)
@@ -468,7 +468,7 @@ def capPartialRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariab
 1
 
 'Pengecekan excel full capitalize amount bernilai yes/no'
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="YES"){
 	'Jika full capitalize amount pada confins belum tercentang'
 	if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
@@ -477,7 +477,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 	}
 	
 }
-else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="NO"){
 	'Jika full capitalize amount pada confins sudah tercentang'
 	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
@@ -496,10 +496,10 @@ if(GlobalVariable.FlagFailed==0){
 }
 
 'Pengecekan jika full capitalize amount pada confins tidak tercentang dan pada excel terisi nilai amountnya'
-if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)&&findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)&&findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+2).length()>0){
 	'Input capitalize amount'
-	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+2))
 }
 				
@@ -564,7 +564,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	if(totalResult[2]==0){
 		'Input diskon'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
-			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, TotalPremium+1))
 	}
 }
@@ -572,7 +572,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 if (counterPaidByMF == 0) {
 	'Input diskon'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
-		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, TotalPremium+1))
 }
 
