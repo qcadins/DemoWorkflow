@@ -312,15 +312,22 @@ public class DupCheckVerif {
 		})
 		return Result9
 	}
-	
+
 	@Keyword
 	public checkDupCheckStatus (Sql instance, String appno){
-		String Result9
+		String Result
+		Boolean DupCheckStatus
 		instance.eachRow(("SELECT CUST_CHECKING_STEP FROM APP WITH(NOLOCK) WHERE APP_NO = '"+ appno + "'"), { row ->
 
-			Result9 = (row[0])
+			Result = (row[0])
+			
+			if (Result == 'NULL' || Result == 'CDC_AUTO' || Result == 'CDC'){
+				DupCheckStatus = true
+			}else{
+				DupCheckStatus = false
+			}
 		})
-		return Result9
+		return DupCheckStatus
 	}
 }
 
