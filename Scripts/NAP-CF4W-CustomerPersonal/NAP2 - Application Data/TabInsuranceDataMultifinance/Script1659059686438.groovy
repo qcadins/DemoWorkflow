@@ -573,9 +573,11 @@ if(capinssetting=="YEARLY"){
 				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/label',
 				true)
 			
-			if(GlobalVariable.Role=="Testing"){
+			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' && GlobalVariable.FirstTimeEntry == 'Yes'){
 				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-				WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)==false){
+					writeFailedReasonVerifyRule()
+				}
 				
 			}
 			
