@@ -49,7 +49,7 @@ Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, u
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil text original office dari confins'
-String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
@@ -944,7 +944,7 @@ if (capinssetting == 'YEARLY') {
 
     GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 
-    GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'), 
+    GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'), 
         'value', FailureHandling.OPTIONAL) //Jika cap insurance setting bernilai partial
 } else if (capinssetting == 'PARTIAL') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceDataMultifinancePartialCapitalize'), 

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='totalPremi']/div/label[2]</value>
+         <value>//*[@id=&quot;totalPremi&quot;]/div[1]/label[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

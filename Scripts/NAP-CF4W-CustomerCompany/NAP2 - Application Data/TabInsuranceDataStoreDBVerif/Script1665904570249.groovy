@@ -110,10 +110,12 @@ if (insuredBy == 'Customer') {
     for (index = 14; index < (resultCustomerInsurancearray.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, index).toUpperCase(), (resultCustomerInsurancearray[arrayindex++]).toUpperCase(), 
+                GlobalVariable.NumofColm, index).toUpperCase().replace(',',''), (resultCustomerInsurancearray[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
     }
     
+	arrayindex = 0
+	
     'verify asset region'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
@@ -162,7 +164,7 @@ if (insuredBy == 'Customer') {
         if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 36).length() == 0) {
 	
-        String resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
+        resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 

@@ -6,46 +6,46 @@
    <elementGuidId>23e764b8-f341-483b-9eb4-80e43e068999</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//textarea[@id='notes']</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;notes&quot;][count(. | //textarea[@class = 'form-control ng-touched ng-pristine ng-valid' and @formcontrolname = 'Notes' and @id = 'notes' and @rows = '5']) = count(//textarea[@class = 'form-control ng-touched ng-pristine ng-valid' and @formcontrolname = 'Notes' and @id = 'notes' and @rows = '5'])]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;notes&quot;]</value>
+         <key>XPATH</key>
+         <value>//textarea[@id='notes']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
       <value>textarea</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-touched ng-pristine ng-valid</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
       <value>Notes</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
       <value>notes</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>rows</name>
       <type>Main</type>
