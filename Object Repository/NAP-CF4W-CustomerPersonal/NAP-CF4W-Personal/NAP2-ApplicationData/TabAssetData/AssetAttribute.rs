@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div/div/div/select</value>
+         <value>//*[@id=&quot;RefAttrContentAppAssetAttrObjs&quot;]/div[2]/div/div/div/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;RefAttrContent&quot;]/div[2]/div/div/div/div/select</value>
+      <value>//*[@id=&quot;RefAttrContentAppAssetAttrObjs&quot;]/div[2]/div/div/div/div/select</value>
    </webElementProperties>
 </WebElementEntity>

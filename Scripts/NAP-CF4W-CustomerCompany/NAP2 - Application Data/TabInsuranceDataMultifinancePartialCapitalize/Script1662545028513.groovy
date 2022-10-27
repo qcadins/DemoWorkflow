@@ -272,14 +272,38 @@ for (int i = 1; i <= count; i++) {
 	
 	result = new HashMap<String,ArrayList>()
 	
-	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-	result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+	ArrayList<WebElement> variableAddCov = driver.findElements(By.cssSelector("#insuranceCoverage > div.ng-untouched.ng-pristine.ng-invalid > table > tbody:nth-child("+(i+1)+") > tr > td.text-left > div[formarrayname=AppInsAddCvgs]"))
+	
+	countAddCov = variableAddCov.size()
 	
 	ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt
-	addtCvgType = result.get("AddtCvg")
-	addtPremiRate = result.get("AddtRate")
-	sumInsuredAmt = result.get("SumInsuredAmt")
-	addtCvg = result.get("AddCvgList")
+	
+	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
+		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+		
+		addtCvgType = result.get("AddtCvg")
+		addtPremiRate = result.get("AddtRate")
+		sumInsuredAmt = result.get("SumInsuredAmt")
+		addtCvg = result.get("AddCvgList")
+		
+		for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){
+			labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
+				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (addCovIndex + 2)) + ']/td[5]/div/div/label',
+				true)
+			
+			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
+			if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
+				writeFailedReasonVerifyRule()
+				break
+			}
+		}
+		
+		if(GlobalVariable.FlagFailed == 1){
+			break
+		}
+		
+	}
 	
 	//AdditionalCoverage & Sum Insured Amount
 	'Looping additional coverage & sum insured amount'
@@ -294,14 +318,6 @@ for (int i = 1; i <= count; i++) {
 		labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
 			'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[5]/div/div/label',
 			true)
-		
-		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == 'Yes' && GlobalVariable.FirstTimeEntry == 'Yes'){
-			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-			if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(j-1), false)==false){
-				writeFailedReasonVerifyRule()
-			}
-			
-		}
 		
 		'Ambil nilai dari additional coverage per year num pada excel'
 		addCovYearValue = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
