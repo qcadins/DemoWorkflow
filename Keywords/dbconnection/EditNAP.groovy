@@ -162,14 +162,14 @@ public class EditNAP {
 
 		return arrayFamilyData
 	}
-	
+
 	@Keyword
 	public GetMSDataforEditNAP (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("SELECT CUST_NAME AS HEADER, MR_CUST_TYPE_CODE AS HEADER, SHARE_PRCNT AS HEADER, IS_ACTIVE AS HEADER, IS_OWNER AS HEADER, IS_SIGNER AS HEADER FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY_MGMNT_SHRHOLDER accms WITH(NOLOCK) ON accms.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = '1'"), {  row ->
 
-			customerdata = (row)			
+			customerdata = (row)
 			if(customerdata!=null){
 				customerdata = customerdata.replace('HEADER:', '').replace('[', '').replace(']', '')
 				listcustdata.add(customerdata)

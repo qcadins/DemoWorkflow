@@ -53,7 +53,7 @@ if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP
 	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 	
 	ArrayList<String> listFam = new ArrayList<>()
-	listFam = CustomKeywords.'dbconnection.CustomerDataVerif.GetFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	listFam = CustomKeywords.'dbconnection.EditNAP.GetFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 8))
 	ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	for(int familydt=1 ;familydt<=variableData.size();familydt++){
@@ -465,21 +465,12 @@ for (i = 1; i <= variableData.size(); i++) {
                                             GlobalVariable.NumofFamily, 54), false)
                                 }
                                 
-                                'get customer name'
-                                custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    'value', FailureHandling.OPTIONAL)
-
-                                'add name to Global variable'
-                                GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+                             
                             }
                         } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 13) == 'LookUp') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
-                                'select customer relation'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
-                                    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-                                        GlobalVariable.NumofFamily, 18), false)
 
                                 'click customer lookup'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Family Legal Name_btn btn-raised btn-primary'))
@@ -526,7 +517,20 @@ for (i = 1; i <= variableData.size(); i++) {
 
                                     continue
                                 }
+								
+								if (GlobalVariable.Role == 'Testing') {
+									
+									getDataCust()
+									'call test case Family data verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
                                 
+								'select customer relation'
+								WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
+									findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+										GlobalVariable.NumofFamily, 18), false)
+								
                                 'select customer model'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
                                     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -704,21 +708,23 @@ for (i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                'get customer name'
-                                custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    'value', FailureHandling.OPTIONAL)
-
-                                'add name to Global variable'
-                                GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-
-                                if (GlobalVariable.Role == 'Testing') {
-                                    'call test case Family data verif'
-                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'), 
-                                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                }
                             }
                         }
                         
+						//Ambil nilai dari confins untuk verif store db lookup
+						if (GlobalVariable.Role == 'Testing' && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+									GlobalVariable.NumofFamily, 13) == 'LookUp')) {
+								getDataCust()
+								def confinsdata = GlobalVariable.confinsdata
+								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
+											'value'))
+								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
+								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
+								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'),'value'))
+								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'),'value'))
+								GlobalVariable.confinsdata = confinsdata
+						}
+							
                         'click button save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
@@ -736,6 +742,9 @@ for (i = 1; i <= variableData.size(); i++) {
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                     'NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), 
                                 GlobalVariable.NumofFamily, '2.TabFamilyData')
+							
+							'customer added +1'
+							(GlobalVariable.countNumofCustomer)++
 
                             if (iscompleteMandatory == 0) {
                                 errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -746,21 +755,19 @@ for (i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
-                        'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
-                            5, FailureHandling.OPTIONAL)) {
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-                        } else {
-                            if (flagWarning > 0) {
-                                'Write to Excel WARNING'
-                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                    '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-                            }
-                            
-                            'customer added +1'
-                            (GlobalVariable.countNumofCustomer)++
-                        }
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'),
+										5, FailureHandling.OPTIONAL)) {
+								'click button cancel'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+		
+								'customer added -1'
+								(GlobalVariable.countNumofCustomer)--
+						} else {
+								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+											CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+												'2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+								}
+						}
                         
                         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 13) == 'Input Data') {
@@ -770,6 +777,17 @@ for (i = 1; i <= variableData.size(); i++) {
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         }
+						
+						else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+								GlobalVariable.NumofFamily, 13) == 'LookUp') {
+								if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal ==
+								'Yes')) {
+									'call test case family lookup store data verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
+						}
+						break
                     }
                 } else {
                     if (GlobalVariable.NumofFamily == (Integer.parseInt(GlobalVariable.CountAFamily) + 1)) {
@@ -831,4 +849,107 @@ if(custnamefaileddelete.size() > 0){
 
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyData'), [:], 
     FailureHandling.CONTINUE_ON_FAILURE)
+
+def getDataCust(){
+	
+	def confinsdata = []
+	'add customer name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add birth place to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add id type to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'),
+			'value'))
+	
+	'add id expired date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'),
+			'value'))
+	
+	'add marital status to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'),
+			'value'))
+	
+	'add mobile phone to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add customer model to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'),
+			'value'))
+	
+	'add gender to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Gender'),
+			'value'))
+	
+	'add birth date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add id no to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add tax id to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'),
+			'value'))
+	
+	'add mother maiden name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name'),
+			'value'))
+	
+	'add email to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Email_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+	
+	'add nationality to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'),
+			'value'))
+	
+	'check if nationality = Local or Foreigner'
+	if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'),
+		'value').equalsIgnoreCase('LOCAL')) {
+		'add country to array'
+		confinsdata.add(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountry')))
+	} else {
+		'add country to array'
+		confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountryLookup'),
+				'value'))
+	}
+	
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/textarea_Address'),
+			'value'))
+	
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RT'),
+			'value'))
+	
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RW'),
+			'value'))
+	
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelZipcode'),'value'))
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKelurahan'),
+			'value'))
+	
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKecamatan'),
+			'value'))
+	
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKota'),
+			'value'))
+	
+	'add ownership to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'),
+			'value'))
+	GlobalVariable.confinsdata = confinsdata
+}
 

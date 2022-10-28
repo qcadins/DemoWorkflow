@@ -54,7 +54,7 @@ if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP
 	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 	
 	ArrayList<String> listGuar = new ArrayList<>()
-	listGuar = CustomKeywords.'dbconnection.CustomerDataVerif.GetGuarantorDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	listGuar = CustomKeywords.'dbconnection.EditNAP.GetGuarantorDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 8))
 	ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	for(int guardt=1 ;guardt<=variableData.size();guardt++){
@@ -355,66 +355,13 @@ for (i = 1; i <= variableData.size(); i++) {
                                         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                             GlobalVariable.NumofGuarantorPersonal, 46), false)
                                 }
-                                
-                                'get customer name'
-                                custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 
-                                    'value', FailureHandling.OPTIONAL)
-
-                                'add name to Global variable'
-                                GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-
-                                'click button save'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
-
-                                Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-                                        GlobalVariable.NumofGuarantorPersonal, 4))
-
-                                if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
-                                    'cek alert'
-                                    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
-                                        '3a.TabGuarantorDataPersonal')
-                                }
-                                
-                                if (GlobalVariable.FlagFailed == 0) {
-                                    'check save process write to excel'
-                                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, 
-                                        findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
-                                        GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
-
-                                    if (iscompleteMandatory == 0) {
-                                        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-
-                                        'cek validasi'
-                                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, 
-                                            GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
-                                    }
-                                }
-                                
-                                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                                    5, FailureHandling.OPTIONAL)) {
-                                    'click button cancel'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-                                } else {
-                                    if (flagWarning > 0) {
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                            '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, 
-                                            GlobalVariable.StatusWarning)
-                                    }
-                                    
-                                    'customer added +1'
-                                    (GlobalVariable.countNumofCustomer)++
-                                }
+         
                             } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                 GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                                     5, FailureHandling.OPTIONAL)) {
                                     'click radio personal'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
-
-                                    'select guarantor relationship'
-                                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'), 
-                                        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-                                            GlobalVariable.NumofGuarantorPersonal, 18), false)
 
                                     'click guarantor lookup'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Guarantor Legal Name_btn btn-raised btn-primary'))
@@ -463,6 +410,22 @@ for (i = 1; i <= variableData.size(); i++) {
 
                                         continue
                                     }
+									
+									'check if role testing untuk get data customer digunakan untuk data verif'
+									if (GlobalVariable.Role == 'Testing') {
+										'call function get data guarantor'
+										getDataGuarPersonal()
+
+										'call test case Personal data verif'
+										WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalDataVerif'),
+											[:], FailureHandling.CONTINUE_ON_FAILURE)
+									}
+									
+									'select guarantor relationship'
+									WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'),
+										findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+											GlobalVariable.NumofGuarantorPersonal, 18), false)
+									
                                     
                                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                         GlobalVariable.NumofGuarantorPersonal, 25).length() > 1) {
@@ -537,77 +500,87 @@ for (i = 1; i <= variableData.size(); i++) {
                                             flagWarning++
                                         }
                                     }
-                                    
-                                    'get customer name'
-                                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 
-                                        'value', FailureHandling.OPTIONAL)
-
-                                    'add name to Global variable'
-                                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-
-                                    if (GlobalVariable.Role == 'Testing') {
-                                        'call test case Personal data verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalDataVerif'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    }
-                                    
-                                    'click button save'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
-
-                                    Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-                                            GlobalVariable.NumofGuarantorPersonal, 4))
-
-                                    if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
-                                        'cek alert'
-                                        GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorPersonal, 
-                                            '3a.TabGuarantorDataPersonal')
-                                    }
-                                    
-                                    if (GlobalVariable.FlagFailed == 0) {
-                                        'check save process write to excel'
-                                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, 
-                                            findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
-                                            GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
-
-                                        if (iscompleteMandatory == 0) {
-                                            errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-
-                                            'cek validasi'
-                                            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, 
-                                                GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
-                                        }
-                                    }
-                                    
-                                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                                        5, FailureHandling.OPTIONAL)) {
-                                        'click button cancel'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-                                    } else {
-                                        if (flagWarning > 0) {
-                                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                                '3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 
-                                                1, GlobalVariable.StatusWarning)
-                                        }
-                                        
-                                        'customer added +1'
-                                        (GlobalVariable.countNumofCustomer)++
-                                    }
+									
                                 }
                             }
+							
+							'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
+								if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+									GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp')) {
+									'call function get data guar personal'
+									getDataGuarPersonal()
+	
+									'add relationship to array'
+									GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'),
+											'value'))
+							}
+									
+							'click button save'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
+		
+							if ((Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+											GlobalVariable.NumofGuarantorPersonal, 4)) == 0) && (GlobalVariable.FlagFailed == 0)) {
+									'Check alert'
+									GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(
+											GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+							}
+									
+							if (GlobalVariable.FlagFailed == 0) {
+									'Check save Process write to excel'
+									CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(
+													'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+													GlobalVariable.NumofGuarantorPersonal, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'),
+											GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+		
+									'customer added +1'
+									(GlobalVariable.countNumofCustomer)++
+		
+									if (Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+												GlobalVariable.NumofGuarantorPersonal, 4)) == 0) {
+										'Check error validasi'
+										CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/errorvalidasi'),
+												GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
+									}
+							}
+									
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'),
+										5, FailureHandling.OPTIONAL)) {
+									'click button cancel'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
+		
+									'customer added -1'
+									(GlobalVariable.countNumofCustomer)--
+							} else {
+									if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+											CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+												'3a.TabGuarantorDataPersonal', 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
+									}
+							}
                             
                             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                 GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
-                                if (GlobalVariable.Role == 'Testing') {
+                                if (GlobalVariable.Role == 'Testing' && (GlobalVariable.CheckVerifStoreDBPersonal ==
+									'Yes')) {
                                     'call test case company data store verif'
                                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
                                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                                 }
                             }
+							else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+									GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
+									if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal ==
+									'Yes')) {
+										'call test case Guarantor personal data verif'
+										WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif-LookUp'),
+											[:], FailureHandling.CONTINUE_ON_FAILURE)
+									}
+							}
 							break
                         }
                     } else {
-                        if (GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
-                        1)) {
+                        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+                            GlobalVariable.NumofGuarantorPersonal + 1, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                            GlobalVariable.NumofColm, 13)) {
                             if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
 								
 								'get cust name sebelum delete'
@@ -651,54 +624,49 @@ for (i = 1; i <= variableData.size(); i++) {
                 break
             }
         }
-		else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-				GlobalVariable.NumofGuarantorPersonal, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-				GlobalVariable.NumofColm, 13) && GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) +
-							1)){
-				if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
-							
-							'get cust name sebelum delete'
-							CustNameBefore = WebUI.getText(modifyNewGuarantorName)
-							
-							'click button Delete'
-							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
-
-							'accept alert'
-							WebUI.acceptAlert()
-							
-							if(i == variableData.size()){
-								if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
-									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-								}else{
-									'add cust name failed kedalam array'
-									custnamefaileddelete.add(CustNameBefore)
-									continue
-								}
-								
-							}
-							else{
-								'get cust name sebelum delete'
-								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
-								
-								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
-									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-								}else{
-									'add cust name failed kedalam array'
-									custnamefaileddelete.add(CustNameBefore)
-									continue
-								}
-							}
-
-							i--
-				}
-			
-		}
+//		else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+//				GlobalVariable.NumofGuarantorPersonal, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+//				GlobalVariable.NumofColm, 13) && GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) +
+//							1)){
+//				if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
+//							
+//							'get cust name sebelum delete'
+//							CustNameBefore = WebUI.getText(modifyNewGuarantorName)
+//							
+//							'click button Delete'
+//							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
+//
+//							'accept alert'
+//							WebUI.acceptAlert()
+//							
+//							if(i == variableData.size()){
+//								if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
+//									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+//								}else{
+//									'add cust name failed kedalam array'
+//									custnamefaileddelete.add(CustNameBefore)
+//									continue
+//								}
+//								
+//							}
+//							else{
+//								'get cust name sebelum delete'
+//								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
+//								
+//								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
+//									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+//								}else{
+//									'add cust name failed kedalam array'
+//									custnamefaileddelete.add(CustNameBefore)
+//									continue
+//								}
+//							}
+//
+//							i--
+//				}
+//			
+//		}
     }
-	
-	
-	
-	
-	
 	
 }
 
@@ -720,3 +688,93 @@ WebUI.delay(5)
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorData'), [:], 
     FailureHandling.CONTINUE_ON_FAILURE)
 
+def getDataGuarPersonal() {
+	'declare array for confins data'
+	def confinsdata = []
+
+	'add customer name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'),
+			'value'))
+
+	'add birth place to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Birth Place'),
+			'value'))
+
+	'add id expired date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Id Expired Date'),
+			'value'))
+
+	'add mobile phone to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Mobile Phone'),
+			'value'))
+
+	'add birth date to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+
+	'add id no to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Id No'),
+			'value'))
+
+	'add tax id to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Tax Id No'),
+			'value'))
+
+	'add mother maiden name to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Mother Maiden Name'),
+			'value'))
+
+	'add email to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Email'),
+			'value'))
+
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'),
+			'value'))
+
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RT'),
+			'value'))
+
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RW'),
+			'value'))
+
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/LabelZipcode'),
+			'value'))
+
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/LabelKelurahan'),
+			'value'))
+
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/LabelKecamatan'),
+			'value'))
+
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/LabelKota'),
+			'value'))
+
+	'add id type to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_IDType'),
+			'value'))
+
+	'add marital status to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_MaritalStatus'),
+			'value'))
+
+	'add customer model to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'),
+			'value'))
+
+	'add gender to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Select One Female  Male'),
+			'value'))
+
+	'add ownership to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
+			'value'))
+
+	GlobalVariable.confinsdata = confinsdata
+}
