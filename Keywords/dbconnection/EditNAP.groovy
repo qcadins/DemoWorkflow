@@ -144,8 +144,8 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
-	
+
+
 	@Keyword
 	public getLatestDataShareholder (Sql instance, String appno){
 		String customerdata
@@ -167,8 +167,8 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
-	
+
+
 	@Keyword
 	public getLatestDataGuarantor (Sql instance, String appno){
 		String customerdata

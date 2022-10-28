@@ -3,6 +3,10 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -11,6 +15,7 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
@@ -275,6 +280,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (appStep == 'SHR') {
+	
+		'get cust data untuk dupcheck verif'
 		getCustdata(sqlConnectionLOS, appNo, appStep)
 	
         'click Menu customer main data'
@@ -282,12 +289,13 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         inputAppNo()
 
+		'verify latest data confins = DB'
+		getLatestData(sqlConnectionLOS, appNo, appStep)
+		
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
-
-        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -305,6 +313,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (appStep == 'GUAR') {
+		'get cust data untuk dupcheck verif'
 		getCustdata(sqlConnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
@@ -312,10 +321,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         inputAppNo()
 
+		'verify latest data confins = DB'
+		getLatestData(sqlConnectionLOS, appNo, appStep)
+		
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
-
-        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -828,4 +838,105 @@ def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep) {
             18, GlobalVariable.NumofColm - 1, GuarName)
     }
 }
+
+def getLatestData(Sql sqlConnectionLOS, String appNo, String appStep){
+	if (appStep == 'SHR') {
+		
+		ArrayList<String> MSdata = CustomKeywords.'dbconnection.EditNAP.getLatestDataShareholder'(sqlConnectionLOS, appNo)
+		ArrayList<String> MSdataConfins = new ArrayList<>()
+		
+		'ganti value null > "" (String kosong)'
+		for (i = 0; i <= (MSdata.size() - 1); i++) {
+			if ((MSdata[i]).equalsIgnoreCase('null')) {
+				(MSdata[i]) = ''
+			}
+			
+			if ((MSdata[i]).equalsIgnoreCase('TRUE')) {
+				(MSdata[i]) = 'YES'
+			} else if ((MSdata[i]).equalsIgnoreCase('FALSE')) {
+				(MSdata[i]) = 'NO'
+			}
+		}
+		
+		ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+		
+		for (int i = 1; i <= variableData.size(); i++) {
+			'modify object MS name'
+			modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[2]', true)
+			
+			'modify object MS type'
+			modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[3]', true)
+			
+			'modify object MS share'
+			modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[4]', true)
+			
+			'modify object is Active'
+			modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[5]', true)
+		
+			'modify object is Owner'
+			modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[6]', true)
+			
+			'modify object is Signer'
+			modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[7]', true)
+			
+			MSdataConfins.add(WebUI.getText(modifyNewMSName))
+			MSdataConfins.add(WebUI.getText(modifyNewMSType))
+			MSdataConfins.add(WebUI.getText(modifyNewMSShare).replace('  %', ''))
+			MSdataConfins.add(WebUI.getText(modifyNewisActive))
+			MSdataConfins.add(WebUI.getText(modifyNewisOwner))
+			MSdataConfins.add(WebUI.getText(modifyNewisSigner))
+		}
+		
+		for(int MSindex = 0 ; MSindex < MSdata.size(); MSindex++){
+			
+			WebUI.verifyMatch(MSdata[MSindex], MSdataConfins[MSindex], false, FailureHandling.OPTIONAL)
+		}
+		
+	}else if (appStep == 'GUAR'){
+	ArrayList<String> GUARdata = CustomKeywords.'dbconnection.EditNAP.getLatestDataGuarantor'(sqlConnectionLOS, appNo)
+	
+	ArrayList<String> GUARdataConfins = new ArrayList<>()
+	
+	ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+	
+	for (i = 1; i <= variableData.size(); i++) {
+		'modify object guarantor name'
+		modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[2]', true)
+	
+		'modify object guarantor name'
+		modifyNewGuarantorTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[3]', true)
+		
+		'modify object guarantor name'
+		modifyNewGuarantorRelationship = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[4]', true)
+		
+		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorName))
+		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorTypeName))
+		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorRelationship))
+	}
+	
+	for(int GUARindex = 0 ; GUARindex < GUARdata.size(); GUARindex++){
+		
+		WebUI.verifyMatch(GUARdata[GUARindex], GUARdataConfins[GUARindex], false, FailureHandling.OPTIONAL)
+	}
+	}
+}
+
 
