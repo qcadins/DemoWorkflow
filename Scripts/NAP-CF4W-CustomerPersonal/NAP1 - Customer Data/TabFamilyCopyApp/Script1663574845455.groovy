@@ -790,7 +790,9 @@ for (i = 1; i <= variableData.size(); i++) {
 						break
                     }
                 } else {
-                    if (GlobalVariable.NumofFamily == (Integer.parseInt(GlobalVariable.CountAFamily) + 1)) {
+                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily + 1, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                            GlobalVariable.NumofColm, 13)) {
                         if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
 							
 							'get cust name sebelum delete'
