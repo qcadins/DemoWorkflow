@@ -110,22 +110,6 @@ public class CustomerDataVerif {
 
 	}
 
-	@Keyword
-	public GetFamilyDataforEditNAP(Sql instance, String appno){
-		ArrayList<String> arrayFamilyData = new ArrayList<String>()
-		String familydata
-		instance.eachRow(("SELECT CUST_NAME AS HEADER, [CUST_TYPE] AS HEADER,[RELATIONSHIP] AS HEADER ,[CUST_MODEL] AS HEADER FROM (SELECT CUST_NAME, mastername.Code, REF_MASTER_NAME,app_cust_id FROM (select cust_name, [Code], value,app_cust_id FROM (select cust_name, mr_cust_type_code AS [CUST_TYPE], (CASE WHEN MR_CUST_RELATIONSHIP_CODE = '' THEN 'SELF' ELSE MR_CUST_RELATIONSHIP_CODE END) as [RELATIONSHIP], MR_CUST_MODEL_CODE AS [CUST_MODEL],app_cust_id from app_cust ac with(nolock) join app a with(nolock) on ac.app_id = a.app_id where app_no ='"+appno+"' and (is_customer=1 or is_family=1)) as Orig unpivot (value for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL]))as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' and rf.REF_MASTER_TYPE_CODE IN('CUST_PERSONAL_RELATIONSHIP','CUST_TYPE','CUST_MODEL')) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL])) as piv order by [RELATIONSHIP],app_cust_id"), {  row ->
-			familydata = (row)
-			println("family"+familydata)
-			if(familydata!=null){
-				familydata = familydata.replace('HEADER:', '').replace('[', '').replace(']', '')
-				arrayFamilyData.add(familydata)
-			}
-		})
-
-
-		return arrayFamilyData
-	}
 
 	@Keyword
 	public GuarantorDataStoreDBPersonal (Sql instance, String appno, String name){
@@ -165,22 +149,6 @@ public class CustomerDataVerif {
 		return guarantordata
 	}
 
-	@Keyword
-	public GetGuarantorDataforEditNAP(Sql instance, String appno){
-		ArrayList<String> arrayGuarantorData = new ArrayList<String>()
-		String guardata
-		instance.eachRow(("SELECT CUST_NAME as HEADER, MR_CUST_TYPE_CODE as HEADER, MR_CUST_RELATIONSHIP_CODE as HEADER FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"' AND IS_GUARANTOR = '1' order by app_cust_id"), {  row ->
-			guardata = (row)
-			println("guar"+guardata)
-			if(guardata!=null){
-				guardata = guardata.replace('HEADER:', '').replace('[', '').replace(']', '')
-				arrayGuarantorData.add(guardata)
-			}
-		})
-
-
-		return arrayGuarantorData
-	}
 
 	@Keyword
 	public CustomerDataStoreDBCompany (Sql instance, String appno, String name){

@@ -30,33 +30,33 @@ String filePath = userDir + GlobalVariable.PathCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
-String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    8)
-
-String appStep = CustomKeywords.'editNAP.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
-
-String custStep = CustomKeywords.'editNAP.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
+//'Koneksi database'
+//String servername = findTestData('Login/Login').getValue(1, 8)
+//
+//String instancename = findTestData('Login/Login').getValue(2, 8)
+//
+//String username = findTestData('Login/Login').getValue(3, 8)
+//
+//String password = findTestData('Login/Login').getValue(4, 8)
+//
+//String database = findTestData('Login/Login').getValue(5, 9)
+//
+//String databaseFOU = findTestData('Login/Login').getValue(5, 7)
+//
+//String driverclassname = findTestData('Login/Login').getValue(6, 8)
+//
+//String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+//
+//String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
+//
+//Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+//
+//String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+//    8)
+//
+//String appStep = CustomKeywords.'editNAP.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
+//
+//String custStep = CustomKeywords.'editNAP.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
 
 'Write to excel Appno'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
@@ -89,8 +89,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
-        getCustdata(sqlConnectionLOS, appNo, appStep)
-
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
@@ -111,8 +109,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
-
-        getCustdata(sqlConnectionLOS, appNo, appStep)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -289,8 +285,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         inputAppNo()
 
-		'verify latest data confins = DB'
-		getLatestData(sqlConnectionLOS, appNo, appStep)
 		
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
@@ -321,8 +315,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         inputAppNo()
 
-		'verify latest data confins = DB'
-		getLatestData(sqlConnectionLOS, appNo, appStep)
 		
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -839,104 +831,102 @@ def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep) {
     }
 }
 
-def getLatestData(Sql sqlConnectionLOS, String appNo, String appStep){
-	if (appStep == 'SHR') {
-		
-		ArrayList<String> MSdata = CustomKeywords.'dbconnection.EditNAP.getLatestDataShareholder'(sqlConnectionLOS, appNo)
-		ArrayList<String> MSdataConfins = new ArrayList<>()
+
+if(GlobalVariable.RoleCompany == "Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 8).length()>1){
+
+'Koneksi database'
+String servername = findTestData('Login/Login').getValue(1, 9)
+
+String instancename = findTestData('Login/Login').getValue(2, 9)
+
+String username = findTestData('Login/Login').getValue(3, 9)
+
+String password = findTestData('Login/Login').getValue(4, 9)
+
+String database = findTestData('Login/Login').getValue(5, 9)
+
+String driverclassname = findTestData('Login/Login').getValue(6, 9)
+
+String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+	
+ArrayList<Boolean> listMS = new ArrayList<Boolean>()
+
+ArrayList<Boolean> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+
+	listMS = CustomKeywords.'dbconnection.EditNAP.GetMSDataforEditNAP'(sqlConnectionLOS, findTestData(
+			'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm,
+			8))
+	ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
+	
+	for (int msdt = 1; msdt <= variableData.size(); msdt++) {
+		String result = listMS.get(msdt - 1)
+
+		resultarray = result.split(', ')
 		
 		'ganti value null > "" (String kosong)'
-		for (i = 0; i <= (MSdata.size() - 1); i++) {
-			if ((MSdata[i]).equalsIgnoreCase('null')) {
-				(MSdata[i]) = ''
+		for (i = 0; i <= (resultarray.size() - 1); i++) {
+			if ((resultarray[i]).equalsIgnoreCase('null')) {
+				(resultarray[i]) = ''
 			}
 			
-			if ((MSdata[i]).equalsIgnoreCase('TRUE')) {
-				(MSdata[i]) = 'YES'
-			} else if ((MSdata[i]).equalsIgnoreCase('FALSE')) {
-				(MSdata[i]) = 'NO'
+			if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
+				(resultarray[i]) = 'YES'
+			} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
+				(resultarray[i]) = 'NO'
 			}
 		}
 		
-		ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-		
-		for (int i = 1; i <= variableData.size(); i++) {
-			'modify object MS name'
-			modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[2]', true)
-			
-			'modify object MS type'
-			modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[3]', true)
-			
-			'modify object MS share'
-			modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[4]', true)
-			
-			'modify object is Active'
-			modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[5]', true)
-		
-			'modify object is Owner'
-			modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[6]', true)
-			
-			'modify object is Signer'
-			modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-				'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-				i) + ']/td[7]', true)
-			
-			MSdataConfins.add(WebUI.getText(modifyNewMSName))
-			MSdataConfins.add(WebUI.getText(modifyNewMSType))
-			MSdataConfins.add(WebUI.getText(modifyNewMSShare).replace('  %', ''))
-			MSdataConfins.add(WebUI.getText(modifyNewisActive))
-			MSdataConfins.add(WebUI.getText(modifyNewisOwner))
-			MSdataConfins.add(WebUI.getText(modifyNewisSigner))
-		}
-		
-		for(int MSindex = 0 ; MSindex < MSdata.size(); MSindex++){
-			
-			WebUI.verifyMatch(MSdata[MSindex], MSdataConfins[MSindex], false, FailureHandling.OPTIONAL)
-		}
-		
-	}else if (appStep == 'GUAR'){
-	ArrayList<String> GUARdata = CustomKeywords.'dbconnection.EditNAP.getLatestDataGuarantor'(sqlConnectionLOS, appNo)
-	
-	ArrayList<String> GUARdataConfins = new ArrayList<>()
-	
-	ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-	
-	for (i = 1; i <= variableData.size(); i++) {
-		'modify object guarantor name'
-		modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+		'modify object MS name'
+		modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[2]', true)
-	
-		'modify object guarantor name'
-		modifyNewGuarantorTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+		
+		'modify object MS type'
+		modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[3]', true)
 		
-		'modify object guarantor name'
-		modifyNewGuarantorRelationship = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+		'modify object MS share'
+		modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[4]', true)
 		
-		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorName))
-		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorTypeName))
-		GUARdataConfins.add(WebUI.getText(modifyNewGuarantorRelationship))
-	}
+		'modify object is Active'
+		modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[5]', true)
 	
-	for(int GUARindex = 0 ; GUARindex < GUARdata.size(); GUARindex++){
+		'modify object is Owner'
+		modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[6]', true)
 		
-		WebUI.verifyMatch(GUARdata[GUARindex], GUARdataConfins[GUARindex], false, FailureHandling.OPTIONAL)
+		'modify object is Signer'
+		modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[7]', true)
+		
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSName), '(?i)' + (resultarray[0]), true))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSType), '(?i)' + (resultarray[0]), true))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSShare).replace('  %', ''), '(?i)' + (resultarray[0]), true))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisActive), '(?i)' + (resultarray[0]), true))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner), '(?i)' + (resultarray[0]), true))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner), '(?i)' + (resultarray[0]), true))
 	}
-	}
+
+
+
+if(arrayMatch.contains(false)){
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'2.TabManagementShareholderData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
+	
+	GlobalVariable.FlagWarning++
 }
 
-
+}
