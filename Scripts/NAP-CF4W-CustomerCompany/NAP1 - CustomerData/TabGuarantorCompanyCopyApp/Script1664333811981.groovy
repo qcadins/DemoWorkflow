@@ -290,20 +290,22 @@ for (i = 1; i <= variableData.size(); i++) {
                                         GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
                                 }
                                 
-                                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                                    5, FailureHandling.OPTIONAL)) {
-                                    'click button cancel'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-
-                                    'customer added -1'
-                                    (GlobalVariable.countNumofCustomer)--
-                                } else {
-                                    if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
-                                            '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
-                                    }
-                                }
+                                
                             }
+							
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'),
+								5, FailureHandling.OPTIONAL)) {
+								'click button cancel'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
+
+								'customer added -1'
+								(GlobalVariable.countNumofCustomer)--
+							} else {
+								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+										'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+								}
+							}
                             
                             if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                                 GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
