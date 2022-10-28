@@ -71,6 +71,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'SHR') {
+	
+		getCustdata(sqlConnectionLOS, appNo, appStep)
+	
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -93,6 +96,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'GUAR') {
+	
+		getCustdata(sqlConnectionLOS, appNo, appStep)
+		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -269,6 +275,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (appStep == 'SHR') {
+		getCustdata(sqlConnectionLOS, appNo, appStep)
+	
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -297,6 +305,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } else if (appStep == 'GUAR') {
+		getCustdata(sqlConnectionLOS, appNo, appStep)
+		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 

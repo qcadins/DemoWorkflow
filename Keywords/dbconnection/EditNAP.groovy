@@ -96,7 +96,7 @@ public class EditNAP {
 		})
 		return listcustdata
 	}
-	
+
 	@Keyword
 	public CustomerDataCompany (Sql instance, String appno){
 		String customerdata
@@ -140,6 +140,46 @@ public class EditNAP {
 			customerdata = (row[0])
 			listcustdata.add(customerdata)
 			customerdata = (row[1])
+			listcustdata.add(customerdata)
+		})
+		return listcustdata
+	}
+	
+	
+	@Keyword
+	public getLatestDataShareholder (Sql instance, String appno){
+		String customerdata
+		ArrayList<String> listcustdata = new ArrayList<>()
+		instance.eachRow(("SELECT CUST_NAME, MR_CUST_TYPE_CODE, SHARE_PRCNT, IS_ACTIVE, IS_OWNER, IS_SIGNER FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY_MGMNT_SHRHOLDER accms WITH(NOLOCK) ON accms.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = '1'"), {  row ->
+
+			customerdata = (row[0])
+			listcustdata.add(customerdata)
+			customerdata = (row[1])
+			listcustdata.add(customerdata)
+			customerdata = (row[2])
+			listcustdata.add(customerdata)
+			customerdata = (row[3])
+			listcustdata.add(customerdata)
+			customerdata = (row[4])
+			listcustdata.add(customerdata)
+			customerdata = (row[5])
+			listcustdata.add(customerdata)
+		})
+		return listcustdata
+	}
+	
+	
+	@Keyword
+	public getLatestDataGuarantor (Sql instance, String appno){
+		String customerdata
+		ArrayList<String> listcustdata = new ArrayList<>()
+		instance.eachRow(("SELECT CUST_NAME, MR_CUST_TYPE_CODE, MR_CUST_RELATIONSHIP_CODE FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID  WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = '1'"), {  row ->
+
+			customerdata = (row[0])
+			listcustdata.add(customerdata)
+			customerdata = (row[1])
+			listcustdata.add(customerdata)
+			customerdata = (row[2])
 			listcustdata.add(customerdata)
 		})
 		return listcustdata
