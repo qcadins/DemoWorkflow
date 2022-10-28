@@ -82,7 +82,7 @@ if(GlobalVariable.Role=="Data Entry"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'),
@@ -107,7 +107,7 @@ if(GlobalVariable.Role=="Data Entry"){
 	
 		inputAppNo(appNo)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'),
@@ -345,7 +345,7 @@ else if(GlobalVariable.Role=="Testing"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'),
@@ -375,7 +375,7 @@ else if(GlobalVariable.Role=="Testing"){
 	
 		inputAppNo(appNo)
 	
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1 - Customer Data/TabGuarantorDataPersonalCopyApp'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'),

@@ -7,11 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-<<<<<<< HEAD
          <value>//div[@id='totalPremi']/div[1]/label[2]</value>
-=======
-         <value>//div[@id=&quot;totalPremi&quot;]/div/label[2]</value>
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

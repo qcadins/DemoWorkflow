@@ -17,6 +17,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import groovy.sql.Sql as Sql
 
 int flagWarning = 0
 
@@ -32,6 +33,71 @@ ArrayList <String> custnamefaileddelete = new ArrayList<>()
 
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
+
+if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 8).length()>1){
+	'Koneksi database'
+	String servername = findTestData('Login/Login').getValue(1, 8)
+	
+	String instancename = findTestData('Login/Login').getValue(2, 8)
+	
+	String username = findTestData('Login/Login').getValue(3, 8)
+	
+	String password = findTestData('Login/Login').getValue(4, 8)
+	
+	String databaseLOS = findTestData('Login/Login').getValue(5, 9)
+	
+	String driverclassname = findTestData('Login/Login').getValue(6, 8)
+	
+	String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
+	
+	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+	
+	ArrayList<String> listGuar = new ArrayList<>()
+	listGuar = CustomKeywords.'dbconnection.CustomerDataVerif.GetGuarantorDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 8))
+	ArrayList<Boolean> arrayMatch = new ArrayList<>()
+	for(int guardt=1 ;guardt<=variableData.size();guardt++){
+		String result = listGuar.get(guardt-1)
+		resultarray = result.split(', ')
+		'modify object guarantor name'
+		modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			guardt) + ']/td[2]', true)
+		
+		modifyNewGuarantorType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			guardt) + ']/td[3]', true)
+		
+		modifyNewGuarantorRelation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+			'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			guardt) + ']/td[4]', true)
+		
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName),"(?i)"+resultarray[0],true))
+		
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType),"(?i)"+resultarray[1],true))
+		
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation),"(?i)"+resultarray[2],true))
+		
+	}
+	
+	if(arrayMatch.contains(false)){
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3a.TabGuarantorDataPersonal', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+	
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		'3a.TabGuarantorDataPersonal', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
+		
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'3b.TabGuarantorDataCompany', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+		
+		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+			'3b.TabGuarantorDataCompany', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
+	
+		GlobalVariable.FlagWarning++
+	}
+
+}
 for (i = 1; i <= variableData.size(); i++) {
     'modify object guarantor name'
     modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -537,6 +603,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                                 }
                             }
+							break
                         }
                     } else {
                         if (GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
@@ -584,7 +651,55 @@ for (i = 1; i <= variableData.size(); i++) {
                 break
             }
         }
+		else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+				GlobalVariable.NumofGuarantorPersonal, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13) && GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) +
+							1)){
+				if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
+							
+							'get cust name sebelum delete'
+							CustNameBefore = WebUI.getText(modifyNewGuarantorName)
+							
+							'click button Delete'
+							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
+
+							'accept alert'
+							WebUI.acceptAlert()
+							
+							if(i == variableData.size()){
+								if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
+									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+								}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+									continue
+								}
+								
+							}
+							else{
+								'get cust name sebelum delete'
+								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
+								
+								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
+									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+								}else{
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+									continue
+								}
+							}
+
+							i--
+				}
+			
+		}
     }
+	
+	
+	
+	
+	
+	
 }
 
 if(custnamefaileddelete.size() > 0){

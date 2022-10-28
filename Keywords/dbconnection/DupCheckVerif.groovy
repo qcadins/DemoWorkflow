@@ -320,7 +320,7 @@ public class DupCheckVerif {
 		instance.eachRow(("SELECT CUST_CHECKING_STEP FROM APP WITH(NOLOCK) WHERE APP_NO = '"+ appno + "'"), { row ->
 
 			Result = (row[0])
-			
+
 			if (Result == 'NULL' || Result == 'CDC_AUTO' || Result == 'CDC'){
 				DupCheckStatus = true
 			}else{

@@ -111,6 +111,23 @@ public class CustomerDataVerif {
 	}
 
 	@Keyword
+	public GetFamilyDataforEditNAP(Sql instance, String appno){
+		ArrayList<String> arrayFamilyData = new ArrayList<String>()
+		String familydata
+		instance.eachRow(("SELECT CUST_NAME AS HEADER, [CUST_TYPE] AS HEADER,[RELATIONSHIP] AS HEADER ,[CUST_MODEL] AS HEADER FROM (SELECT CUST_NAME, mastername.Code, REF_MASTER_NAME,app_cust_id FROM (select cust_name, [Code], value,app_cust_id FROM (select cust_name, mr_cust_type_code AS [CUST_TYPE], (CASE WHEN MR_CUST_RELATIONSHIP_CODE = '' THEN 'SELF' ELSE MR_CUST_RELATIONSHIP_CODE END) as [RELATIONSHIP], MR_CUST_MODEL_CODE AS [CUST_MODEL],app_cust_id from app_cust ac with(nolock) join app a with(nolock) on ac.app_id = a.app_id where app_no ='"+appno+"' and (is_customer=1 or is_family=1)) as Orig unpivot (value for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL]))as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' and rf.REF_MASTER_TYPE_CODE IN('CUST_PERSONAL_RELATIONSHIP','CUST_TYPE','CUST_MODEL')) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL])) as piv order by [RELATIONSHIP],app_cust_id"), {  row ->
+			familydata = (row)
+			println("family"+familydata)
+			if(familydata!=null){
+				familydata = familydata.replace('HEADER:', '').replace('[', '').replace(']', '')
+				arrayFamilyData.add(familydata)
+			}
+		})
+
+
+		return arrayFamilyData
+	}
+
+	@Keyword
 	public GuarantorDataStoreDBPersonal (Sql instance, String appno, String name){
 		String guarantordata
 		//		instance.eachRow(("SELECT MR_CUST_RELATIONSHIP_CODE AS HEADER ,Cust_name AS HEADER, BIRTH_PLACE AS HEADER, f.REF_MASTER_NAME AS HEADER, FORMAT(ID_EXPIRED_DT, 'MM/dd/yyyy') AS HEADER, MR_MARITAL_STAT_CODE AS HEADER, MOBILE_PHN_NO_1 AS HEADER, g.REF_MASTER_NAME AS HEADER, MR_GENDER_CODE AS HEADER, FORMAT(BIRTH_DT, 'MM/dd/yyyy') AS HEADER, ID_NO AS HEADER, TAX_ID_NO AS HEADER, MOTHER_MAIDEN_NAME AS HEADER, EMAIL_1 AS HEADER, e.ATTR_VALUE AS HEADER, SUBQ.ATTR_VALUE AS HEADER, ADDR AS HEADER, AREA_CODE_4 AS HEADER, AREA_CODE_3 AS HEADER, ZIPCODE AS HEADER, AREA_CODE_2 AS HEADER, AREA_CODE_1 AS HEADER, CITY AS HEADER, h.REF_MASTER_NAME AS HEADER FROM APP_CUST a JOIN app b ON a.APP_ID = b.APP_ID JOIN APP_CUST_PERSONAL c ON a.APP_CUST_ID = c.APP_CUST_ID JOIN APP_CUST_ADDR d ON a.APP_CUST_ID = d.APP_CUST_ID JOIN APP_CUST_ATTR_CONTENT e ON e.APP_CUST_ID = a.APP_CUST_ID JOIN REF_MASTER_LOS f ON a.MR_ID_TYPE_CODE = f.REF_MASTER_CODE JOIN REF_MASTER_LOS g ON a.MR_CUST_MODEL_CODE = g.REF_MASTER_CODE JOIN REF_MASTER_LOS h ON d.MR_HOUSE_OWNERSHIP_CODE = h.REF_MASTER_CODE, (SELECT ATTR_VALUE, a.APP_ID FROM APP_CUST_ATTR_CONTENT g JOIN APP_CUST a ON g.APP_CUST_ID = a.APP_CUST_ID JOIN app b ON a.APP_ID = b.APP_ID WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = 1 AND g.REF_ATTR_CODE = 'AUTH_AML') as SUBQ WHERE APP_NO = '" + appno +"' AND IS_GUARANTOR = 1 AND MR_CUST_ADDR_TYPE_CODE = 'LEGAL' AND MR_CUST_TYPE_CODE = 'PERSONAL' AND e.REF_ATTR_CODE = 'AML_CUST_DEPARTMENT' AND f.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND g.REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND h.REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP'"), {  row ->
@@ -146,6 +163,23 @@ public class CustomerDataVerif {
 			guarantordata = (row)
 		})
 		return guarantordata
+	}
+
+	@Keyword
+	public GetGuarantorDataforEditNAP(Sql instance, String appno){
+		ArrayList<String> arrayGuarantorData = new ArrayList<String>()
+		String guardata
+		instance.eachRow(("SELECT CUST_NAME as HEADER, MR_CUST_TYPE_CODE as HEADER, MR_CUST_RELATIONSHIP_CODE as HEADER FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"' AND IS_GUARANTOR = '1' order by app_cust_id"), {  row ->
+			guardata = (row)
+			println("guar"+guardata)
+			if(guardata!=null){
+				guardata = guardata.replace('HEADER:', '').replace('[', '').replace(']', '')
+				arrayGuarantorData.add(guardata)
+			}
+		})
+
+
+		return arrayGuarantorData
 	}
 
 	@Keyword

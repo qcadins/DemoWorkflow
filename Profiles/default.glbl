@@ -604,4 +604,9 @@
       <initValue>'Yes'</initValue>
       <name>FirstTimeEntry</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Load data tidak sesuai'</initValue>
+      <name>ReasonFailedLoadData</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
