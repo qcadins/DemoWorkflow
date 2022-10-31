@@ -61,4 +61,50 @@ public class checkAssetData {
 		})
 		return assetUsage
 	}
+
+	@Keyword
+	public checkSelfOwnerPersonal(){
+		Boolean ismatch = false
+		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'),'aria-checked')==false){
+			ismatch = true
+		}
+
+		return ismatch
+	}
+
+	@Keyword
+	public checkSelfUsagePersonal(){
+		Boolean ismatch = false
+		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'),'aria-checked')==false){
+			ismatch = true
+		}
+
+
+		return ismatch
+	}
+
+	@Keyword
+	public checkSelfOwnerCompany(){
+		Boolean ismatch = false
+		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+    GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'),'aria-checked')==false){
+			ismatch = true
+		}
+
+		return ismatch
+	}
+
+	@Keyword
+	public checkSelfUsageCompany(){
+		Boolean ismatch = false
+		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'),'aria-checked')==false){
+			ismatch = true
+		}
+
+
+		return ismatch
+	}
 }

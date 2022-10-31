@@ -524,8 +524,7 @@ for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesAsset'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 37) == 
-'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage CheckBox'),'aria-checked')==false) {
+if (CustomKeywords.'dbconnection.checkAssetData.checkSelfUsageCompany'()==true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
@@ -577,8 +576,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         false)
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 41) == 
-'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'),'aria-checked')==false) {
+if (CustomKeywords.'dbconnection.checkAssetData.checkSelfOwnerCompany'()==true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
@@ -900,16 +898,6 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
 }
 
 
-//if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes") {
-//	'call test case store db verif accessories data'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), [:], 
-//			FailureHandling.CONTINUE_ON_FAILURE)
-//	
-//	'call test case store db verif asset data'
-//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
-//			FailureHandling.CONTINUE_ON_FAILURE)
-//            
-//}
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
@@ -935,6 +923,18 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
             GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
 }
+
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+	'call test case store db verif accessories data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+	
+	'call test case store db verif asset data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+			
+}
+
 
 WebUI.delay(10)
 
