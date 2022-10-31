@@ -38,16 +38,17 @@ String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 
 int arrayindex = 0
 
-ArrayList<String> arraysuminsured = new ArrayList<String>()
+ArrayList<Boolean> arraysuminsured = new ArrayList<Boolean>()
 
-ArrayList<String> arrayaddpremi = new ArrayList<String>()
+ArrayList<Boolean> arrayaddpremi = new ArrayList<Boolean>()
 
-ArrayList<String> arrayMatch = new ArrayList<String>()
+ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
-    String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 13))
+    String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, findTestData(
+            'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+            13))
 
     resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
 
@@ -65,7 +66,7 @@ if (insuredBy == 'Customer') {
     for (index = 14; index < (resultarray.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, index).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+                    GlobalVariable.NumofColm, index).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
 } else if (insuredBy == 'Customer - Multifinance') {
     String resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, 
@@ -110,62 +111,70 @@ if (insuredBy == 'Customer') {
     for (index = 14; index < (resultCustomerInsurancearray.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, index).toUpperCase().replace(',',''), (resultCustomerInsurancearray[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
+                    GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurancearray[arrayindex++]).toUpperCase(), 
+                false, FailureHandling.OPTIONAL))
     }
     
-	arrayindex = 0
-	
+    arrayindex = 0
+
     'verify asset region'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify coverage amount'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify cover period'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify payment type'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify insco branch name'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify insurance note'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
-    'verify insurance length'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
+    if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
+        'verify insurance length'
+        arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+                    GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+                false, FailureHandling.OPTIONAL))
+    } else if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
+        'skip verify length insurance'
+        resultMFInsurancearray[arrayindex++]
+    }
+    
     'verify admin fee'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
     'verify customer stampduty fee'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+                GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
 
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 36).length() == 0) {
-	
-        resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, findTestData(
+                'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
         'verify main coverage'
@@ -217,7 +226,7 @@ if (insuredBy == 'Customer') {
             }
         }
     } else {
-        ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+        ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
             sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -291,7 +300,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -489,14 +498,20 @@ if (insuredBy == 'Customer') {
                 GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
-//    'verify insurance length'
-//    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-//                GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-//            false, FailureHandling.OPTIONAL))
-
-	'skip verify length insurance'
-	resultMFInsurancearray[arrayindex++]
-	
+    if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
+        'verify insurance length'
+        arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+                    GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+                false, FailureHandling.OPTIONAL))
+    } else if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+        GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
+        'skip verify length insurance'
+        resultMFInsurancearray[arrayindex++]
+    }
+    
     'verify admin fee'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
                 GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
@@ -562,7 +577,7 @@ if (insuredBy == 'Customer') {
             }
         }
     } else {
-        ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+        ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
             sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -636,7 +651,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -790,12 +805,12 @@ if (insuredBy == 'Customer') {
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+    'write to excel FAILED'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
+        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
+    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1, 
+        GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
+

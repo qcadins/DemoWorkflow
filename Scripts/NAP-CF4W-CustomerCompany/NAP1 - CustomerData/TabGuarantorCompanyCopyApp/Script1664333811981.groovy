@@ -329,7 +329,7 @@ for (i = 1; i <= variableData.size(); i++) {
                         }
                     } else {
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                            GlobalVariable.NumofGuarantorCompany + 1, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                            GlobalVariable.NumofGuarantorCompany + 1, 12) != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                             GlobalVariable.NumofColm, 13)) {
                             if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'get cust name sebelum delete'

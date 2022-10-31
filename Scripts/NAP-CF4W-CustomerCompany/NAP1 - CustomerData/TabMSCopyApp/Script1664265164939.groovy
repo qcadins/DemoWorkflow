@@ -5,6 +5,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -16,6 +17,7 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
@@ -32,108 +34,6 @@ datafile = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabM
 
 ArrayList<Boolean> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-
-if(GlobalVariable.RoleCompany == "Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-	GlobalVariable.NumofColm, 8).length()>1){
-
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-	
-ArrayList<Boolean> listMS = new ArrayList<Boolean>()
-
-    listMS = CustomKeywords.'dbconnection.EditNAP.GetMSDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-            8))
-	ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-	
-	for (int msdt = 1; msdt <= variableData.size(); msdt++) {
-		String result = listMS.get(msdt - 1)
-
-		resultarray = result.split(', ')
-		
-		println(resultarray)
-		
-		'ganti value null > "" (String kosong)'
-		for (i = 0; i <= (resultarray.size() - 1); i++) {
-			if ((resultarray[i]).equalsIgnoreCase('null')) {
-				(resultarray[i]) = ''
-			}
-			
-			if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
-				(resultarray[i]) = 'YES'
-			} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
-				(resultarray[i]) = 'NO'
-			}
-		}
-		
-		
-		
-		'modify object MS name'
-		modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[2]', true)
-		
-		'modify object MS type'
-		modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[3]', true)
-		
-		'modify object MS share'
-		modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[4]', true)
-		
-		'modify object is Active'
-		modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[5]', true)
-	
-		'modify object is Owner'
-		modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[6]', true)
-		
-		'modify object is Signer'
-		modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			msdt) + ']/td[7]', true)
-		
-		
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSName), '(?i)' + (resultarray[0]), true))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSType), '(?i)' + (resultarray[1]), true))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSShare).replace('  %', ''), '(?i)' + (resultarray[2]), true))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisActive), '(?i)' + (resultarray[3]), true))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner), '(?i)' + (resultarray[4]), true))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner), '(?i)' + (resultarray[5]), true))
-	}
-
-
-
-if(arrayMatch.contains(false)){
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-		'2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-	
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-		'2.TabManagementShareholderData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
-	
-	GlobalVariable.FlagWarning++
-}
-
-}
-	
 for (i = 1; i <= variableData.size(); i++) {
     'modify object MS name'
     modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -163,10 +63,13 @@ for (i = 1; i <= variableData.size(); i++) {
         if (datafile.getValue(GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {
             if (WebUI.verifyElementPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
-                if (((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) && 
-                WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 14))) || (WebUI.getText(
-                    modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 52)) && WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(
-                    datafile.getValue(GlobalVariable.NumofMS, 14)))) || (WebUI.getText(modifyNewMSName).equalsIgnoreCase(
+                if ((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) && 
+                WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 14))) || (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 17)) && 
+                WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 14))) || (WebUI.getText(modifyNewMSName).equalsIgnoreCase(
+                    datafile.getValue(GlobalVariable.NumofMS, 52)) && WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(
+                    datafile.getValue(GlobalVariable.NumofMS, 14))) || (WebUI.getText(modifyNewMSName).equalsIgnoreCase(
+                    datafile.getValue(GlobalVariable.NumofMS, 50)) && WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(
+                    datafile.getValue(GlobalVariable.NumofMS, 14))) || (WebUI.getText(modifyNewMSName).equalsIgnoreCase(
                     datafile.getValue(GlobalVariable.NumofMS, 62)) && WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(
                     datafile.getValue(GlobalVariable.NumofMS, 14)))) {
                     if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
