@@ -144,7 +144,7 @@ if (GuarantorArray.size() > 0) {
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
 
                 'if role == testing'
-                if (GlobalVariable.Role == 'Testing') {
+                if (GlobalVariable.RoleCompany == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative'
                     if ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 'REVIEW') && ((GlobalVariable.NegativeverifResult[
                     GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 

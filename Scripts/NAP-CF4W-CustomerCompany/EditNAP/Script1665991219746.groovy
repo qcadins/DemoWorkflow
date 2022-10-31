@@ -305,10 +305,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 				'ganti value null > "" (String kosong)'
 				for (i = 0; i <= (resultarray.size() - 1); i++) {
-					if ((resultarray[i]).equalsIgnoreCase('null')) {
-						(resultarray[i]) = ''
-					}
-					
 					if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
 						(resultarray[i]) = 'YES'
 					} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {

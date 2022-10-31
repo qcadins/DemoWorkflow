@@ -62,13 +62,20 @@ GlobalVariable.FlagFailed = 0
                 'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[2]', true)
 
+			println(WebUI.getText(modifyNewMSName))
+			println(datafile.getValue(GlobalVariable.NumofMS, 62))
+			println(datafile.getValue(GlobalVariable.NumofMS, 19))
+			println(datafile.getValue(GlobalVariable.NumofMS, 17))
+			println(datafile.getValue(GlobalVariable.NumofMS, 52))
+			println(datafile.getValue(GlobalVariable.NumofMS, 50))
+			
             'verify if copy app edit'
             if (copyapp.equalsIgnoreCase('Edit')) {
                 if (WebUI.verifyElementNotPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
                     copyapp == 'No'
                 } else if (WebUI.verifyElementPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
-                    if ((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) || 
-                    WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 52))) || 
+                    if (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) || WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 17)) || 
+                    WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 52)) || WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 50)) || 
                     WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 62))) {
                         break
                     }
@@ -1029,8 +1036,8 @@ GlobalVariable.FlagFailed = 0
 						}
 					}
 				}
+				break
             }
-        break
 		}
     }
 }

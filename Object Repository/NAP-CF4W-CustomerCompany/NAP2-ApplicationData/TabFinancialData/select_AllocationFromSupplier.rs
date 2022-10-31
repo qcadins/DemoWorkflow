@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[2]/div/select</value>
+         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[3]/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,6 +21,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[2]/div/select</value>
+      <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[3]/div/select</value>
    </webElementProperties>
 </WebElementEntity>

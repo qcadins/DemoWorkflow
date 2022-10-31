@@ -349,7 +349,7 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 						'select subsidy from value'
 						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
 							'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
-						
+				
 						'select subsidy allocation from '
 						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
 							'(?i)' + (AllocationformArray[(s - 1)]), true)
