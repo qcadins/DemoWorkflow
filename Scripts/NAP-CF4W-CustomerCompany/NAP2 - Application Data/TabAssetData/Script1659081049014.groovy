@@ -525,7 +525,7 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Dat
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 37) == 
-'Yes') {
+'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage CheckBox'),'aria-checked')==false) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
@@ -578,7 +578,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 41) == 
-'Yes') {
+'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'),'aria-checked')==false) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 

@@ -135,6 +135,10 @@ for (i = 1; i <= variableData.size(); i++) {
 
                             if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
                                 GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+							
+								'click radio company'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
+	
                                 'click radio personal'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 
