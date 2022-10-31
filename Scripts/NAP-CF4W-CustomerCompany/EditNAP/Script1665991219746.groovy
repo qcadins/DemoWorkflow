@@ -285,7 +285,92 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         inputAppNo()
 
+		if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 8).length() > 1)) {
+		ArrayList<Boolean> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 		
+			ArrayList<Boolean> listMS = new ArrayList<Boolean>()
+		
+			listMS = CustomKeywords.'dbconnection.EditNAP.GetMSDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+					GlobalVariable.NumofColm, 8))
+		
+			ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
+		
+			for (int msdt = 1; msdt <= variableData.size(); msdt++) {
+				String result = listMS.get(msdt - 1)
+		
+				resultarray = result.split(', ')
+		
+				println(resultarray)
+		
+				'ganti value null > "" (String kosong)'
+				for (i = 0; i <= (resultarray.size() - 1); i++) {
+					if ((resultarray[i]).equalsIgnoreCase('null')) {
+						(resultarray[i]) = ''
+					}
+					
+					if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
+						(resultarray[i]) = 'YES'
+					} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
+						(resultarray[i]) = 'NO'
+					}
+				}
+				
+				'modify object MS name'
+				modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[2]', true)
+		
+				'modify object MS type'
+				modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[3]', true)
+		
+				'modify object MS share'
+				modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[4]', true)
+		
+				'modify object is Active'
+				modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[5]', true)
+		
+				'modify object is Owner'
+				modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[6]', true)
+		
+				'modify object is Signer'
+				modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					msdt) + ']/td[7]', true)
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSName), '(?i)' + (resultarray[0]), true))
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSType), '(?i)' + (resultarray[1]), true))
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSShare).replace('  %', ''), '(?i)' + (resultarray[2]),
+						true))
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisActive), '(?i)' + (resultarray[3]), true))
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner), '(?i)' + (resultarray[4]), true))
+		
+				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner), '(?i)' + (resultarray[5]), true))
+			}
+			
+			if (arrayMatch.contains(false)) {
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+					0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+		
+				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
+		
+				(GlobalVariable.FlagWarning)++
+			}
+		}
+			
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
@@ -482,7 +567,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 def inputAppNo() {
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
     'click button search'

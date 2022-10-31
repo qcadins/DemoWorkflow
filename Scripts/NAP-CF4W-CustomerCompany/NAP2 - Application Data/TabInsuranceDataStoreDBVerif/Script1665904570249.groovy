@@ -146,11 +146,19 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
+    if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Partial Tenor' || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Over Tenor'){
     'verify insurance length'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
+                GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
+	}else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Annualy' || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Full Tenor'){
+	'skip verify length insurance'
+	resultMFInsurancearray[arrayindex++]
+	}
     'verify admin fee'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
@@ -489,13 +497,19 @@ if (insuredBy == 'Customer') {
                 GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
-//    'verify insurance length'
-//    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-//                GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
-//            false, FailureHandling.OPTIONAL))
-
+	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Partial Tenor' || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Over Tenor'){
+    'verify insurance length'
+    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFInsurancearray[arrayindex++]).toUpperCase(), 
+            false, FailureHandling.OPTIONAL))
+	}else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Annualy' || findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 24) == 'Full Tenor'){
 	'skip verify length insurance'
 	resultMFInsurancearray[arrayindex++]
+	}
 	
     'verify admin fee'
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
