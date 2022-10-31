@@ -55,7 +55,7 @@ public class checkSaveProcess {
 
 	@Keyword
 	public checkValidasi (TestObject object, int colm, String sheetname){
-		if(WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(object, 5, FailureHandling.OPTIONAL)){
 
 			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)

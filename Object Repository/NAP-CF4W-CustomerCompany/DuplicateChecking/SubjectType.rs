@@ -11,6 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
+         <value>//*[@id=&quot;ListSubjId&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -37,7 +38,7 @@
       <value>CUSTOMER</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
