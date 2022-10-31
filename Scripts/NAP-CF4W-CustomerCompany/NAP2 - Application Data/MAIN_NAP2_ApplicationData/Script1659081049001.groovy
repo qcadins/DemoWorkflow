@@ -32,7 +32,7 @@ String filePath = userDir + GlobalVariable.PathCompany
 GlobalVariable.DataFilePath = filePath
 
 'click menu application data'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
+ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 //Verify sort & paging
 not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
