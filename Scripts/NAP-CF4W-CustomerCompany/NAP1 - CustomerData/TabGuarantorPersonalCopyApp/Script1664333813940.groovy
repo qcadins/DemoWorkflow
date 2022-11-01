@@ -141,6 +141,10 @@ for (i = 1; i <= variableData.size(); i++) {
 
                             if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                                 GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+							
+								'click radio company'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
+								
                                 'click radio personal'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 
@@ -366,6 +370,10 @@ for (i = 1; i <= variableData.size(); i++) {
                                 GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                                     5, FailureHandling.OPTIONAL)) {
+								
+									'click radio company'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
+								
                                     'click radio personal'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 

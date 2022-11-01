@@ -13,7 +13,7 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
@@ -32,7 +32,6 @@ String database = findTestData('Login/Login').getValue(5, 9)
 String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
 
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
@@ -63,8 +62,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_AppNo'))
 
     'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appno'), 'xpath', 'equals', 
@@ -103,8 +101,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_AgreementNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -127,8 +124,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_CustNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -169,8 +165,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_ProdOfferingName'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -209,8 +204,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_Appdate'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -249,8 +243,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_NAPSubmitted'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -291,8 +284,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_AgreementStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -315,8 +307,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_ContractStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -337,8 +328,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -377,8 +367,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -417,8 +406,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/AppView/span_CustomerCheckingStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2)
+    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
     listString = new ArrayList<Boolean>()
 
@@ -481,8 +469,7 @@ WebUI.click(findTestObject('AppView/hyperlink_APPNO'))
 WebUI.switchToWindowIndex('1')
 
 'verify alert'
-WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-    5, FailureHandling.OPTIONAL)
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
 
 'delay 5 detik'
 WebUI.delay(5)
@@ -508,15 +495,28 @@ CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.ge
 CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(4, 1).toUpperCase(), 
     WebUI.getText(findTestObject('Object Repository/AppView/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase())
 
-'verify customer no'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Label Cust No')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase())
+if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    GlobalVariable.NumofColm, 14) == 'LookUp') {
+    'verify customer no'
+    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Label Cust No')).toString().toUpperCase(), 
+        (result[index++]).toString().toUpperCase())
 
-'verify customer name'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Name')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase())
+    'verify customer name'
+    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Name')).toString().toUpperCase(), 
+        (result[index++]).toString().toUpperCase())
+} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    GlobalVariable.NumofColm, 14) == 'Input Data') {
+
+	'Skip'
+	result[index++]
+	
+    'verify customer name'
+    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Name')).toString().toUpperCase(), 
+        (result[index++]).toString().toUpperCase())
+}
 
 'verify product offering'
 WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Product Offering Name')).toString().toUpperCase(), 

@@ -303,7 +303,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 				println(resultarray)
 		
-				'ganti value null > "" (String kosong)'
+				'ganti value TRUE/FALSE > YES/NO (String kosong)'
 				for (i = 0; i <= (resultarray.size() - 1); i++) {
 					if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
 						(resultarray[i]) = 'YES'
