@@ -281,7 +281,7 @@ for (int i = 1; i <= count; i++) {
 	
 	countAddCov = variableAddCov.size()
 	
-	ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt
+	ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg
 	
 	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
@@ -293,7 +293,7 @@ for (int i = 1; i <= count; i++) {
 		addtCvg = result.get("AddCvgList")
 		
 		for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){
-			labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
+			labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
 				'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (addCovIndex + 2)) + ']/td[5]/div/div/label',
 				true)
 			
