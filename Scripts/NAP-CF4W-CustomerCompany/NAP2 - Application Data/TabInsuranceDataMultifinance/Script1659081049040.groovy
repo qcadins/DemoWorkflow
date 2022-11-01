@@ -584,7 +584,7 @@ if (capinssetting == 'YEARLY') {
 
         result = new HashMap<String, ArrayList>()
 		
-		ArrayList<WebElement> variableAddCov = driver.findElements(By.cssSelector("#insuranceCoverage > div.ng-untouched.ng-pristine.ng-invalid > table > tbody:nth-child("+(i+1)+") > tr > td.text-left > div[formarrayname=AppInsAddCvgs]"))
+		ArrayList<WebElement> variableAddCov = driver.findElements(By.cssSelector("#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table > tbody:nth-child("+(i+1)+") > tr > td.text-left > div > div > label"))
 		
 		countAddCov = variableAddCov.size()
 		
