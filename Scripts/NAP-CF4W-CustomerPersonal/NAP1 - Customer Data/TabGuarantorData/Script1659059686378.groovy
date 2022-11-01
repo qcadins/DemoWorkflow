@@ -74,7 +74,8 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                     copyapp == 'No'
                 } else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                            19))) {
+                            19)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                            16)) {
                         break
                     }
                 }
@@ -568,7 +569,8 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                     copyapp = 'No'
                 } else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                            18))) {
+                            18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                            16))) {
                         break
                     }
                 }

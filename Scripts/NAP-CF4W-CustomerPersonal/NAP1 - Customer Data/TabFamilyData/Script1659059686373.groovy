@@ -53,7 +53,8 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
 				GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
                 if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
                     if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-                            GlobalVariable.NumofFamily, 19))) {
+                            GlobalVariable.NumofFamily, 19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 16))) {
                         break
                     }
                 }
