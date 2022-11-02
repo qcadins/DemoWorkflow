@@ -52,7 +52,7 @@ int arrayindex = 0
 
 for(arrayindex = 0; arrayindex < result.size() ; arrayindex++){
 'verify contact person name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[arrayindex].toUpperCase(), (result[arrayindex]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[arrayindex].toUpperCase(), (result[arrayindex]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
