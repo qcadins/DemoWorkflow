@@ -38,15 +38,13 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompany'(sqlconnection, WebUI.getAttribute(findTestObject(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompany'(sqlconnection, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value')).replace('HEADER:', '').replace('[', '').replace(']', '')
-
-resultarray = result.split(', ')
+        'value'))
 
 
-for (i = 0; i < resultarray.size(); i++) {
-    'verify resultarray = confinsdata'
-    WebUI.verifyMatch(resultarray[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
+for (i = 0; i < result.size(); i++) {
+    'verify result = confinsdata'
+    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }

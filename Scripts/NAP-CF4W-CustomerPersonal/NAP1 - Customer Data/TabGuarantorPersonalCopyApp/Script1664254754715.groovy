@@ -128,7 +128,8 @@ for (i = 1; i <= variableData.size(); i++) {
             if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
                 if (WebUI.getText(modifyNewGuarantorTypeName).equalsIgnoreCase('Personal')) {
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-                            GlobalVariable.NumofGuarantorPersonal, 19))) {
+                            GlobalVariable.NumofGuarantorPersonal, 19)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+                            GlobalVariable.NumofGuarantorPersonal, 16))) {
                         if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
                             'click button edit'
                             WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
@@ -628,48 +629,6 @@ for (i = 1; i <= variableData.size(); i++) {
                 break
             }
         }
-//		else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-//				GlobalVariable.NumofGuarantorPersonal, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-//				GlobalVariable.NumofColm, 13) && GlobalVariable.NumofGuarantorPersonal == (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) +
-//							1)){
-//				if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
-//							
-//							'get cust name sebelum delete'
-//							CustNameBefore = WebUI.getText(modifyNewGuarantorName)
-//							
-//							'click button Delete'
-//							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
-//
-//							'accept alert'
-//							WebUI.acceptAlert()
-//							
-//							if(i == variableData.size()){
-//								if(WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)){
-//									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-//								}else{
-//									'add cust name failed kedalam array'
-//									custnamefaileddelete.add(CustNameBefore)
-//									continue
-//								}
-//								
-//							}
-//							else{
-//								'get cust name sebelum delete'
-//								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
-//								
-//								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
-//									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-//								}else{
-//									'add cust name failed kedalam array'
-//									custnamefaileddelete.add(CustNameBefore)
-//									continue
-//								}
-//							}
-//
-//							i--
-//				}
-//			
-//		}
     }
 	
 }

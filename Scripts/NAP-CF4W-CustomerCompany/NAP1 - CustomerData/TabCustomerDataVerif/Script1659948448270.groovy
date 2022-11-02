@@ -33,15 +33,13 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompany'(sqlconnection, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataCompany'(sqlconnection, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        'value')).replace('HEADER:', '').replace('[', '').replace(']', '')
+        'value'))
 
-resultarray = result.split(', ')
-
-for (i = 0; i < resultarray.size(); i++) {
-    'verify resultarray == confinsdata'
-    WebUI.verifyMatch(resultarray[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
+for (i = 0; i < result.size(); i++) {
+    'verify result == confinsdata'
+    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 
 

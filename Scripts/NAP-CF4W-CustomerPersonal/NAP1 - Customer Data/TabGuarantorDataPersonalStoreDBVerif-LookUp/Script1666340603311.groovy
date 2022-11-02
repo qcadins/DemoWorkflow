@@ -35,22 +35,20 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
 		GlobalVariable.NumofGuarantorPersonal, 12), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-		GlobalVariable.NumofGuarantorPersonal, 16)).replace('HEADER:', '').replace('[', '').replace(']', '')
-
-resultarray = result.split(', ')
+		GlobalVariable.NumofGuarantorPersonal, 16))
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
 	}
 }
 
-for (i = 0; i < resultarray.size(); i++) {
-	'verify resultarray == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(resultarray[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
+for (i = 0; i < result.size(); i++) {
+	'verify result == confinsdata'
+	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
 	
 }
 

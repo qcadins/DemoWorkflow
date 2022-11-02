@@ -33,24 +33,23 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnection, WebUI.getAttribute(findTestObject(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnection, WebUI.getAttribute(findTestObject(
             'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Select IdType'), 
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'), 
-        'value')).replace('HEADER:', '').replace('[', '').replace(']', '')
+        'value'))
 
-resultarray = result.split(', ')
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
 	}
 }
 
 
-for (i = 0; i < resultarray.size(); i++) {
-    'verify resultarray == confinsdata'
-    WebUI.verifyMatch(resultarray[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
+for (i = 0; i < result.size(); i++) {
+    'verify result == confinsdata'
+    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 

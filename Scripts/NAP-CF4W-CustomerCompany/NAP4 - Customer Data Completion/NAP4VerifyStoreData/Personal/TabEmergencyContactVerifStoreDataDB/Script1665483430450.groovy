@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.sql.DriverManager
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -32,12 +35,14 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
+	
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
 ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4EmergencyContactStoreData'(sqlconnection, appno, custname)
+
+println(result)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
@@ -170,4 +175,7 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 1, 
         GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
 }
+
+CustomKeywords.'dbconnection.connectDB.ConnectDB'()
+
 

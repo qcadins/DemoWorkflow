@@ -100,7 +100,7 @@ public class checkNAP4db {
 	@Keyword
 	public countDebtorGroupSLIK(Sql instance){
 		Integer countData
-		instance.eachRow(("select count(*) from REF_MASTER WHERE WITH(NOLOCK) REF_MASTER_TYPE_CODE = 'SLIK_GOL_DEB' AND IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("select count(*) from REF_MASTER WITH(NOLOCK) WHERE REF_MASTER_TYPE_CODE = 'SLIK_GOL_DEB' AND IS_ACTIVE = 1"), { def row ->
 			countData = (row[0])
 		})
 		return countData
@@ -172,7 +172,7 @@ public class checkNAP4db {
 	@Keyword
 	public countBuildingOwnership(Sql instance){
 		Integer countData
-		instance.eachRow(("select count(*) from REF_MASTER WHERE WITH(NOLOCK) REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("select count(*) from REF_MASTER WITH(NOLOCK) WHERE REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND IS_ACTIVE = 1"), { def row ->
 			countData = (row[0])
 		})
 		return countData

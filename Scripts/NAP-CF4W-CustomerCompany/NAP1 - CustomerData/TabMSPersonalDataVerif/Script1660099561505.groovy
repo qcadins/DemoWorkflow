@@ -33,28 +33,27 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnection, WebUI.getAttribute(findTestObject(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnection, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One AKTA  E-KTP  KARTU TANDA MAHASISWA  KITAS  NPWP  SIM'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Employee  Non Professional  Professional  Small Medium Enterprise'), 
-        'value')).replace('HEADER:', '').replace('[', '').replace(']', '')
+        'value'))
 
-resultarray = result.split(', ')
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
 	}
 	
-	if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
-		(resultarray[i]) = 'Yes'
-	} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
-		(resultarray[i]) = 'No'
+	if ((result[i]).equalsIgnoreCase('TRUE')) {
+		(result[i]) = 'Yes'
+	} else if ((result[i]).equalsIgnoreCase('FALSE')) {
+		(result[i]) = 'No'
 	}
 }
 
-for (i = 0; i < resultarray.size(); i++) {
-    'verify resultarray == confinsdata'
-    WebUI.verifyMatch(resultarray[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
+for (i = 0; i < result.size(); i++) {
+    'verify result == confinsdata'
+    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }

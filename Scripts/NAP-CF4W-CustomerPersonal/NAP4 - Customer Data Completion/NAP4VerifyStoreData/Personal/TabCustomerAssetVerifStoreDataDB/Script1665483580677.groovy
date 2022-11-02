@@ -37,18 +37,18 @@ String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4CustomerAssetDataStoreData'(sqlconnection, appno, custname)
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4CustomerAssetDataStoreData'(sqlconnection, appno, custname)
 
-resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
+println(result)
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-    if ((resultarray[i]).equalsIgnoreCase('null')) {
-        (resultarray[i]) = ''
-    } else if ((resultarray[i]).equalsIgnoreCase('true')) {
-        (resultarray[i]) = 'Yes'
-    } else if ((resultarray[i]).equalsIgnoreCase('false')) {
-        (resultarray[i]) = 'No'
+for (i = 0; i <= (result.size() - 1); i++) {
+    if ((result[i]).equalsIgnoreCase('null')) {
+        (result[i]) = ''
+    } else if ((result[i]).equalsIgnoreCase('true')) {
+        (result[i]) = 'Yes'
+    } else if ((result[i]).equalsIgnoreCase('false')) {
+        (result[i]) = 'No'
     }
 }
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
