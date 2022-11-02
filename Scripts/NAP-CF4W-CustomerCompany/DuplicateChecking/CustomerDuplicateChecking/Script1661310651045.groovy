@@ -64,7 +64,7 @@ if (DupCheckStatus == true) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 
     //Verify sort & paging
-    not_run: if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
+    if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
         'Verif reset'
         CustomKeywords.'paging.verifyPaging.resetPaging'()
 
@@ -264,7 +264,7 @@ if (DupCheckStatus == true) {
 
     //		WebUI.verifyMatch(subjectName, CustomerNameArray[i-1], false, FailureHandling.OPTIONAL)
     'verify name == data inputan'
-    not_run: if (CustomerArray.size() > 0) {
+    if (CustomerArray.size() > 0) {
         for (c = 1; c <= CustomerArray.size(); c++) {
             'define interger i'
             int i = 0
@@ -558,8 +558,8 @@ if (DupCheckStatus == true) {
     }
     
     'call testcase dupcheck Guarantor'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], 
+        FailureHandling.CONTINUE_ON_FAILURE)
 
     'call testcase dupcheck Management Shareholder'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)

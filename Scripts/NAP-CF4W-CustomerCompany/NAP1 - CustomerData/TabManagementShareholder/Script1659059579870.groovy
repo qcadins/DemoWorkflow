@@ -61,13 +61,6 @@ GlobalVariable.FlagFailed = 0
             modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[2]', true)
-
-			println(WebUI.getText(modifyNewMSName))
-			println(datafile.getValue(GlobalVariable.NumofMS, 62))
-			println(datafile.getValue(GlobalVariable.NumofMS, 19))
-			println(datafile.getValue(GlobalVariable.NumofMS, 17))
-			println(datafile.getValue(GlobalVariable.NumofMS, 52))
-			println(datafile.getValue(GlobalVariable.NumofMS, 50))
 			
             'verify if copy app edit'
             if (copyapp.equalsIgnoreCase('Edit')) {

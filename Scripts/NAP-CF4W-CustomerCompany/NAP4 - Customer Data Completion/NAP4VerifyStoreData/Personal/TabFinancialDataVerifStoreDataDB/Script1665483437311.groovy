@@ -93,7 +93,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
         arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(index, 17).toUpperCase(), resultfinancialdataarray[
                 financialdataindex++], false, FailureHandling.OPTIONAL))
 
-        if (i == GlobalVariable.NumofVerifStore) {
+        if (index == GlobalVariable.NumofVerifStore) {
             'verify Jumlah harta'
             arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(index, 21).split(',').join(), resultfinancialattrarray, 
                     false, FailureHandling.OPTIONAL))

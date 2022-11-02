@@ -704,11 +704,46 @@ public class CustomerDataVerif {
 	@Keyword
 	public NAP4EmergencyContactStoreData (Sql instance, String appno, String name){
 		String emergencycontact
-		instance.eachRow(("SELECT CONTACT_PERSON_NAME AS HEADER, rml.REF_MASTER_NAME AS HEADER,  acec.ID_NO AS HEADER, FORMAT(acec.ID_EXPIRED_DT, 'MM/dd/yyy') AS HEADER, acec.MR_CUST_RELATIONSHIP_CODE AS HEADER,  acec.EMAIL AS HEADER, acec.MR_GENDER_CODE AS HEADER, acec.BIRTH_PLACE AS HEADER, FORMAT(acec.BIRTH_DT, 'MM/dd/yyyy') AS HEADER, acec.MOBILE_PHN_NO_1 AS HEADER, acec.MOBILE_PHN_NO_2 AS HEADER, acec.ADDR AS HEADER, acec.AREA_CODE_4 AS HEADER, acec.AREA_CODE_3 AS HEADER, acec.ZIPCODE AS HEADER, acec.AREA_CODE_1 AS HEADER, acec.AREA_CODE_2 AS HEADER, acec.CITY AS HEADER, acec.PHN_AREA_1 AS HEADER, acec.PHN_1 AS HEADER, acec.PHN_EXT_1 AS HEADER, acec.PHN_AREA_2 AS HEADER, acec.PHN_2 AS HEADER, acec.PHN_EXT_2 AS HEADER, acec.PHN_AREA_3 AS HEADER, acec.PHN_3 AS HEADER, acec.PHN_EXT_3 AS HEADER FROM APP_CUST_EMRGNC_CNTCT acec WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acec.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = acec.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
+		ArrayList <String> listemergencycontact = new ArrayList<String>()
+		int i
+		instance.eachRow(("SELECT CONTACT_PERSON_NAME AS HEADER,  rml.REF_MASTER_NAME AS HEADER,   acec.ID_NO AS HEADER,  FORMAT(acec.ID_EXPIRED_DT, 'MM/dd/yyy'), acec.MR_CUST_RELATIONSHIP_CODE, acec.EMAIL AS HEADER,  acec.MR_GENDER_CODE AS HEADER,  acec.BIRTH_PLACE AS HEADER,  FORMAT(acec.BIRTH_DT, 'MM/dd/yyyy') AS HEADER,  acec.MOBILE_PHN_NO_1 AS HEADER,  acec.MOBILE_PHN_NO_2 AS HEADER,  acec.ADDR AS HEADER,  acec.AREA_CODE_4 AS HEADER,  acec.AREA_CODE_3 AS HEADER,  acec.ZIPCODE AS HEADER,  acec.AREA_CODE_1 AS HEADER,  acec.AREA_CODE_2 AS HEADER,  acec.CITY AS HEADER,  acec.PHN_AREA_1 AS HEADER,  acec.PHN_1 AS HEADER,  acec.PHN_EXT_1 AS HEADER,  acec.PHN_AREA_2 AS HEADER,  acec.PHN_2 AS HEADER,  acec.PHN_EXT_2 AS HEADER,  acec.PHN_AREA_3 AS HEADER,  acec.PHN_3 AS HEADER,  acec.PHN_EXT_3 FROM APP_CUST_EMRGNC_CNTCT acec WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acec.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = acec.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
 
-			emergencycontact = (row)
+			for(i = 0 ; i < 27 ; i++){
+				emergencycontact = (row[i])
+				listemergencycontact.add(emergencycontact)
+			}
 		})
-		return emergencycontact
+		return listemergencycontact
+	}
+
+	@Keyword
+	public NAP4EmergencyContactStoreDataLookUp (Sql instance, String appno, String name){
+		String emergencycontact
+		ArrayList <String> listemergencycontact = new ArrayList<String>()
+		int i
+		instance.eachRow(("SELECT acec.CONTACT_PERSON_NAME , acec.MR_ID_TYPE_CODE , acec.ID_NO , acec.ID_EXPIRED_DT , acec.MOBILE_PHN_NO_1 , acec.EMAIL , acec.MR_GENDER_CODE, acec.BIRTH_PLACE , FORMAT(acec.BIRTH_DT, 'yyyy-MM-dd') , acec.MOBILE_PHN_NO_2, acec.ADDR , acec.AREA_CODE_4 , acec.AREA_CODE_3 , acec.ZIPCODE , acec.AREA_CODE_2 , acec.AREA_CODE_1 , acec.CITY,  acec.PHN_AREA_1 , acec.PHN_1 ,  acec.PHN_EXT_1 ,  acec.PHN_AREA_2 ,  acec.PHN_2 ,  acec.PHN_EXT_2 ,  acec.PHN_AREA_3 ,  acec.PHN_3 ,  acec.PHN_EXT_3, acec.MR_CUST_RELATIONSHIP_CODE FROM APP_CUST_EMRGNC_CNTCT acec WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acec.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+
+			for(i = 0 ; i < 27 ; i++){
+				emergencycontact = (row[i])
+				listemergencycontact.add(emergencycontact)
+			}
+		})
+		return listemergencycontact
+	}
+
+	@Keyword
+	public NAP4EmergencyContactDataVerif (Sql instance, String name, String idno){
+		String emergencycontact
+		ArrayList <String> listemergencycontact = new ArrayList<String>()
+		int i
+		instance.eachRow(("SELECT Cust_name , MR_ID_TYPE_CODE , ID_NO , ID_EXPIRED_DT , MOBILE_PHN_NO_1 , EMAIL_1 , MR_GENDER_CODE, BIRTH_PLACE , FORMAT(BIRTH_DT, 'yyyy-MM-dd') , MOBILE_PHN_NO_2, ADDR , AREA_CODE_4 , AREA_CODE_3 , ZIPCODE , AREA_CODE_2 , AREA_CODE_1 , CITY,  PHN_AREA_1 , PHN_1 ,  PHN_EXT_1 ,  PHN_AREA_2 ,  PHN_2 ,  PHN_EXT_2 ,  PHN_AREA_3 ,  PHN_3 ,  PHN_EXT_3 from CUST c WITH(NOLOCK) join cust_addr addr WITH(NOLOCK) on c.CUST_ID = addr.CUST_ID JOIN cust_personal cp WITH(NOLOCK) on c.cust_ID = cp.CUST_ID where c.cust_name = '"+ name +"' and ID_NO = '"+ idno +"' AND MR_CUST_ADDR_TYPE_CODE = 'legal'"), {  row ->
+
+			for(i = 0 ; i < 26 ; i++){
+				emergencycontact = (row[i])
+				listemergencycontact.add(emergencycontact)
+			}
+		})
+		return listemergencycontact
 	}
 
 	@Keyword
