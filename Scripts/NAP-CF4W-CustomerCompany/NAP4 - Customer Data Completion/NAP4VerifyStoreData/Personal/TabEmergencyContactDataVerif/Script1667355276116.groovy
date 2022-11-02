@@ -48,14 +48,14 @@ for (i = 0; i <= (result.size() - 1); i++) {
 }
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (GlobalVariable.confinsdata.size() - 1); i++) {
-    if ((GlobalVariable.confinsdata[i]) == null) {
-        (GlobalVariable.confinsdata[i]) = ''
+for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
+    if ((GlobalVariable.Confinsdata[i]) == null) {
+        (GlobalVariable.Confinsdata[i]) = ''
     }
 }
 
 for (i = 0; i < result.size(); i++) {
-    'verify resultarray == confinsdata'
-    WebUI.verifyMatch(result[i], GlobalVariable.confinsdata[i], false, FailureHandling.OPTIONAL)
+    'verify resultarray == Confinsdata'
+    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 
