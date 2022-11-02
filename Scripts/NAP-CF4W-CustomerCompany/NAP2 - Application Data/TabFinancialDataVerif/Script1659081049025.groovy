@@ -352,13 +352,13 @@ WebDriver driver = DriverFactory.getWebDriver()
 ArrayList<WebElement> counttdInstallment = driver.findElements(By.cssSelector('#FinData_FinData > form > div.ng-star-inserted > table > tbody tr'))
 
 'declare installmentamountvalue'
-int installmentamountvalue
+int installmentamountvalue = 0
 
 'declare principalamountvalue'
-int principalamountvalue
+int principalamountvalue = 0
 
 'declare interestamountvalue'
-int interestamountvalue
+int interestamountvalue = 0
 
 String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
 int gracePeriodNum = Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),'value'))
@@ -412,25 +412,15 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 		'.00', '')
 
 	'count total of installment amount'
-	if (installmentamountvalue == null) {
-		installmentamountvalue = Integer.parseInt(strInstallmentamount)
-	} else {
-		installmentamountvalue = (installmentamountvalue + Integer.parseInt(strInstallmentamount))
-	}
+	installmentamountvalue += Integer.parseInt(strInstallmentamount)
+	
 	
 	'count total of principal amount'
-	if (principalamountvalue == null) {
-		principalamountvalue = Integer.parseInt(strPrincipalamount)
-	} else {
-		principalamountvalue = (principalamountvalue + Integer.parseInt(strPrincipalamount))
-	}
+	principalamountvalue += Integer.parseInt(strPrincipalamount)
+	
 	
 	'count total of interest amount'
-	if (interestamountvalue == null) {
-		interestamountvalue = Integer.parseInt(strInterestamount)
-	} else {
-		interestamountvalue = (interestamountvalue + Integer.parseInt(strInterestamount))
-	}
+	interestamountvalue += Integer.parseInt(strInterestamount)
 	
 	'verify value not minus(-)'
 	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
@@ -450,11 +440,20 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 	'verify value not minus(-)'
 	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSInterestAmount), 0)
 
-	'get first row installment amount value'
-	if (InstallmentSchemecount == 1) {
-		'Verify installment amount = installment amount seq1'
-		WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+		'get first row installment amount value'
+		if (InstallmentSchemecount == 1) {
+			'Verify installment amount = installment amount seq1'
+			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+		}
 	}
+	else if((gracePeriodMethod.equalsIgnoreCase("ROLLOVER")||gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY"))&&gracePeriodNum!=0){
+		if(InstallmentSchemecount==gracePeriodNum+1){
+			'Verify installment amount = installment amount seq graceperiod+1'
+			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+		}
+	}
+	
 	
 	'get last row value'
 	if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {

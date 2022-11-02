@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_CheckboxReferantor</name>
+   <tag></tag>
+   <elementGuidId>5be09484-7170-4d94-a33e-2d6b45e61991</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]/input</value>
+   </webElementProperties>
+</WebElementEntity>

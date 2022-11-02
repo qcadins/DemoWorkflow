@@ -331,7 +331,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
             datafilefinancial.getValue(GlobalVariable.NumofColm, 27))
     }
-    
+	
     'input additional admin'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
         datafilefinancial.getValue(GlobalVariable.NumofColm, 22))
@@ -473,6 +473,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
             Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 39)))
     }
+
 }
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
@@ -512,6 +513,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'), 
             datafilefinancial.getValue(GlobalVariable.NumofColm, 48), false)
     }
+	else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 46) == 'No') {
+		'input grace period'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),
+			"0")
+
+		'select method'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),
+			"-Select One-", false)
+	}
 }
 
 'click button calculate'

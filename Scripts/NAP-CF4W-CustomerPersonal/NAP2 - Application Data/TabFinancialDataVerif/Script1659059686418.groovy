@@ -450,11 +450,19 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSInterestAmount), 0)
 
-    'get first row installment amount value'
-    if (InstallmentSchemecount == 1) {
-        'Verify installment amount = installment amount seq1'
-        WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
-    }
+    if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+		'get first row installment amount value'
+		if (InstallmentSchemecount == 1) {
+			'Verify installment amount = installment amount seq1'
+			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+		}
+	}
+	else if((gracePeriodMethod.equalsIgnoreCase("ROLLOVER")||gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY"))&&gracePeriodNum!=0){
+		if(InstallmentSchemecount==gracePeriodNum+1){
+			'Verify installment amount = installment amount seq graceperiod+1'
+			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+		}
+	}
     
     'get last row value'
     if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {

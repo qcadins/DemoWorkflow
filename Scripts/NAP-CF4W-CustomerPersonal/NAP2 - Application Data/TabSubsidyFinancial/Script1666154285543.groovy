@@ -45,7 +45,7 @@ def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.Numo
 def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Yes')) {
+if (datafilefinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
 	for (i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
 			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
