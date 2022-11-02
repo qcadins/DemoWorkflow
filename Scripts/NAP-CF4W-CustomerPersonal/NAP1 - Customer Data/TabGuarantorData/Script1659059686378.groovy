@@ -324,7 +324,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                             }
                             
                             'customer added +1'
-                            (GlobalVariable.countNumofCustomer)++
+                            (GlobalVariable.CountNumofCustomer)++
                         }
                     } else if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
@@ -470,10 +470,10 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
 							//Ambil nilai dari confins untuk verif store db lookup
 							if (GlobalVariable.Role == 'Testing') {
 								getDataGuarPersonal()
-								def confinsdata = GlobalVariable.confinsdata
+								def confinsdata = GlobalVariable.Confinsdata
 								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
 									'value'))
-								GlobalVariable.confinsdata = confinsdata
+								GlobalVariable.Confinsdata = confinsdata
 								
 							}
 							
@@ -516,7 +516,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.CopyAppColm; GlobalV
                                 }
                                 
                                 'customer added +1'
-                                (GlobalVariable.countNumofCustomer)++
+                                (GlobalVariable.CountNumofCustomer)++
                             }
                         }
                     }
@@ -719,7 +719,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                             }
                             
                             'customer added +1'
-                            (GlobalVariable.countNumofCustomer)++
+                            (GlobalVariable.CountNumofCustomer)++
                         }
                     } else if (datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
@@ -778,15 +778,15 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
 								getDataGuarCompany()
 								
 								'add company type to array'
-								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
+								GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
 										'value'))
 								
 								'add customer model to array'
-								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'),
+								GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'),
 										'value'))
 								
 								'add ownership to array'
-								GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'),
+								GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'),
 										'value'))
 								
 								'call test case company data verif'
@@ -821,16 +821,16 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
 								Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 								 
 								 'add relationship to array'
-								 GlobalVariable.confinsdata.add(selectrelationship.getFirstSelectedOption().getText())
+								 GlobalVariable.Confinsdata.add(selectrelationship.getFirstSelectedOption().getText())
 								 
 								 'add company type to array'
-								 GlobalVariable.confinsdata.add(selectcompanytype.getFirstSelectedOption().getText())
+								 GlobalVariable.Confinsdata.add(selectcompanytype.getFirstSelectedOption().getText())
 								 
 								 'add cust model to array'
-								 GlobalVariable.confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
+								 GlobalVariable.Confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
 								 
 								 'add ownership to array'
-								 GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+								 GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
 							}
                             
                             'Click save'
@@ -871,7 +871,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.CopyAppColm; GlobalVa
                                 }
                                 
                                 'customer added +1'
-                                (GlobalVariable.countNumofCustomer)++
+                                (GlobalVariable.CountNumofCustomer)++
                             }
                         }
                     }
@@ -991,7 +991,7 @@ def getDataGuarPersonal(){
 	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
 			'value'))
 	
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
 
 def getDataGuarCompany(){
@@ -1035,5 +1035,5 @@ def getDataGuarCompany(){
 			'value'))
 	
 	
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }

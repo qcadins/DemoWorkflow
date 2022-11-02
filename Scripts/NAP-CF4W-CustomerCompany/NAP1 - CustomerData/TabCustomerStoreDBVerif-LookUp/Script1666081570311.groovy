@@ -52,41 +52,41 @@ int arrayindex = 0
 int confinsindex = 0
 
 'verify customer name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify address'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify RT'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify RW'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Zipcode'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify keluraham'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kota'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'veirfy ownership'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){

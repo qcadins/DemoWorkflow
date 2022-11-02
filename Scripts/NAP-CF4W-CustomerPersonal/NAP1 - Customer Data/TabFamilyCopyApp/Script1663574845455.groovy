@@ -715,13 +715,13 @@ for (i = 1; i <= variableData.size(); i++) {
 						if (GlobalVariable.Role == 'Testing' && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
 									GlobalVariable.NumofFamily, 13) == 'LookUp')) {
 								getDataCust()
-								def confinsdata = GlobalVariable.confinsdata
+								def confinsdata = GlobalVariable.Confinsdata
 								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
 											'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'),'value'))
-								GlobalVariable.confinsdata = confinsdata
+								GlobalVariable.Confinsdata = confinsdata
 						}
 							
                         'click button save'
@@ -743,7 +743,7 @@ for (i = 1; i <= variableData.size(); i++) {
                                 GlobalVariable.NumofFamily, '2.TabFamilyData')
 							
 							'customer added +1'
-							(GlobalVariable.countNumofCustomer)++
+							(GlobalVariable.CountNumofCustomer)++
 
                             if (iscompleteMandatory == 0) {
                                 errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -760,7 +760,7 @@ for (i = 1; i <= variableData.size(); i++) {
 								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 		
 								'customer added -1'
-								(GlobalVariable.countNumofCustomer)--
+								(GlobalVariable.CountNumofCustomer)--
 						} else {
 								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
 											CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
@@ -951,6 +951,6 @@ def getDataCust(){
 	'add ownership to array'
 	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'),
 			'value'))
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
 

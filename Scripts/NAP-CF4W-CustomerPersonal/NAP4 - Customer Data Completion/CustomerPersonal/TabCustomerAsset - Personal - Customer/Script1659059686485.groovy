@@ -33,7 +33,7 @@ ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
 
 ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer')
 
 def assettypearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset - Personal - Customer').getValue(
     GlobalVariable.NumofColm, 13).split(';', -1)

@@ -208,15 +208,15 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         getDataCust()
 
         'add company type to array'
-        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
+        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
                 'value'))
 		
 		'add customer model to array'
-		GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 
+		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 
             'value'))
 
         'add ownership to array'
-        GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
                 'value'))
 
         'call test case verif customer data'
@@ -245,13 +245,13 @@ if (GlobalVariable.RoleCompany == 'Testing' && findTestData('NAP-CF4W-CustomerCo
 	Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 	
 	'add customer type to array'
-	GlobalVariable.confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
+	GlobalVariable.Confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
 	
 	'add customer model to array'
-	GlobalVariable.confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
+	GlobalVariable.Confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
 	
 	'add ownership to array'
-	GlobalVariable.confinsdata.add(selectownership.getFirstSelectedOption().getText())
+	GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
 }
 
 'click button save'
@@ -272,7 +272,7 @@ if (GlobalVariable.FlagFailed == 0) {
             GlobalVariable.NumofColm, '1.TabCustomerMainData')
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 4)) == 0) {
@@ -286,7 +286,7 @@ if (GlobalVariable.FlagFailed == 0) {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -309,7 +309,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
     'customer added -1'
-    (GlobalVariable.countNumofCustomer)--
+    (GlobalVariable.CountNumofCustomer)--
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -376,6 +376,6 @@ def getDataCust() {
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'), 
             'value'))
 
-    GlobalVariable.confinsdata = confinsdata
+    GlobalVariable.Confinsdata = confinsdata
 }
 

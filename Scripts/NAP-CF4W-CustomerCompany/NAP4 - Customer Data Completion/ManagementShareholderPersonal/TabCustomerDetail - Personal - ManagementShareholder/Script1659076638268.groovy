@@ -25,7 +25,7 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
 
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal')
 
 'input gelar nama depan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/input_Gelar Depan Nama'), 

@@ -433,7 +433,7 @@ if (GlobalVariable.FlagFailed == 0) {
             GlobalVariable.NumofColm, '1.TabCustomerMainData')
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         if (iscompleteMandatory == 0) {
             errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -447,7 +447,7 @@ if (GlobalVariable.FlagFailed == 0) {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -470,7 +470,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
     'customer added -1'
-    (GlobalVariable.countNumofCustomer)--
+    (GlobalVariable.CountNumofCustomer)--
 
     'Pengecekan jika new consumer finance belum diexpand'
     if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -591,7 +591,7 @@ def getDataCust() {
 	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Ownership'), 
 	        'value'))
 
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
 
 

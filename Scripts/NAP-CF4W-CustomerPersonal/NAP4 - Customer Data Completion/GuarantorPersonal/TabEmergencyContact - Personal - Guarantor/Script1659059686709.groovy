@@ -22,7 +22,7 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonal
  GlobalVariable.FlagFailed=0
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor')
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor').getValue(
     GlobalVariable.NumofGuarantor, 12).equalsIgnoreCase('Input Data')) {

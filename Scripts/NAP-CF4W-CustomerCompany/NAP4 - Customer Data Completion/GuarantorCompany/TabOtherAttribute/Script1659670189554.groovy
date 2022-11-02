@@ -29,7 +29,7 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/OtherAttribute - Company - GuarantorCompany')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/OtherAttribute - Company - GuarantorCompany')
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
@@ -608,7 +608,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
     findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/OtherAttribute - Company - GuarantorCompany').getValue(
         GlobalVariable.NumofGuarantor, 39))
 
-GlobalVariable.custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
+GlobalVariable.Custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Save'))

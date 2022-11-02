@@ -25,34 +25,34 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorPersonal
 
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail - Personal - Guarantor')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail - Personal - Guarantor')
 
 'input gelar nama depan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Gelar Depan Nama'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 14))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14))
 
 'input num of dependents'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Num Of Dependents'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 15))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15))
 
 'input num of residence'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Num Of Residence (Last 3 Years)'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 16))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16))
 
 'input family card num'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Family Card No'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 17))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17))
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Rest In Peace'), 
     2, FailureHandling.OPTIONAL)) {
     'check RIP'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 18) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18) == 'Yes') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Rest In Peace'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Rest In Peace'), 
     2)) {
     'check RIP'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 18) == 'No') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18) == 'No') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Rest In Peace'))
     }
 }
@@ -60,13 +60,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_VIP_'), 
     2, FailureHandling.OPTIONAL)) {
     'check VIP'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 19) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 19) == 'Yes') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_VIP_'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_VIP_'), 
     2)) {
     'check VIP'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 19) == 'No') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 19) == 'No') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_VIP_'))
     }
 }
@@ -74,22 +74,22 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Affiliation with multifinance checkbox'), 
     2, FailureHandling.OPTIONAL)) {
     'Check Affiliation'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 20) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 20) == 'Yes') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Affiliation with multifinance checkbox'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Affiliation with multifinance checkbox'), 
     2)) {
     'Check Affiliation'
-    if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 20) == 'No') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 20) == 'No') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Affiliation with multifinance checkbox'))
     }
 }
 
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 21).length() > 2) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 21).length() > 2) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Customer Group'))
 
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Customer Name_custNameId'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 21))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 21))
 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Search'))
 
@@ -108,26 +108,26 @@ if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 21).leng
 
 'pilih salutation'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/select_MrMrsMs'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 22), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 22), false)
 
 'Input Nickname'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Nick Name_'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 23))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 23))
 
 'input gelar nama belakang'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Gelar Belakang Nama'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 24))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 24))
 
 'pilih local/foreigner'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/select_ForeignerLocal'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 25), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 25), false)
 
 'pilih country jika foreigner'
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 25) == 'Foreigner') {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 25) == 'Foreigner') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Country'))
 
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Country Code_countryCodeId'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 26))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 26))
 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_SearchCountry'))
 
@@ -157,22 +157,22 @@ if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 25) == '
 
 'pilih pendidikan'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/select_S1S2S3SDSMASMP'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 28), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 28), false)
 
 'pilih religion'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/select_AGAMA'), 
-    GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 29), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 29), false)
 
 'input VIP Notes'
-if (GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 30).length() > 1) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 30).length() > 1) {
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/textarea_VIP Notes'), 
-        GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 30))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 30))
 }
 
 'click save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Save  Continue'))
 
-Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofGuarantor, 4))
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'

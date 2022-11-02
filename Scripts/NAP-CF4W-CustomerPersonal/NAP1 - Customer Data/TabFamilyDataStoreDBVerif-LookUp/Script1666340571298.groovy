@@ -152,7 +152,7 @@ def confinsdata = []
 
 for (i = 0; i < resultarray.size(); i++) {
 	'verify resultarray == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(resultarray[i], "(?i)"+GlobalVariable.confinsdata[i], true, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(resultarray[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
 	
 }
 

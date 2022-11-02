@@ -92,6 +92,6 @@ resultarray = result.split(', ')
 
 for (i = 0; i < resultarray.size(); i++) {
     'verify resultarray == confinsdata'
-    WebUI.verifyMatch(resultarray[i], GlobalVariable.confinsdata[i], false, FailureHandling.OPTIONAL)
+    WebUI.verifyMatch(resultarray[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 

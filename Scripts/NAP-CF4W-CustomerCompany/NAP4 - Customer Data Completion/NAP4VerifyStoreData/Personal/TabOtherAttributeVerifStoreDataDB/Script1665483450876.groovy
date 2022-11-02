@@ -37,10 +37,10 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
 String resultotherattrinfo = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherAttrInfoStoreData'(sqlconnection, appno,
-	GlobalVariable.custname).replace('HEADER:', '').replace('[', '').replace(']', '')
+	GlobalVariable.Custname).replace('HEADER:', '').replace('[', '').replace(']', '')
 
 String resultotherattrlist = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherAttrStoreData'(sqlconnection, appno,
-	GlobalVariable.custname)
+	GlobalVariable.Custname)
 
 resultotherattrinfoarray = resultotherattrinfo.split(', ')
 
@@ -53,58 +53,58 @@ int arrayindexinfo = 0
 int arrayindexlist = 0
 
 'verify debtor group'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfoarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfoarray[
 	arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify debtor business scale'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultotherattrinfoarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultotherattrinfoarray[
 	arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify counterpart scale'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultotherattrinfoarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultotherattrinfoarray[
 	arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify sustainable financial business'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultotherattrinfoarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultotherattrinfoarray[
 	arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is split treasure'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is debtor group slik'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is violate BMPK'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify is exceed BMPK'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify AFF with MF slik'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Department AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify CSP/USL Source AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Payment Type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify KYC report AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-String authorityaml = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 35)
+String authorityaml = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35)
 
 if (authorityaml.equalsIgnoreCase('#N/A')) {
 	authorityaml = ''
@@ -118,7 +118,7 @@ SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
 Date parsedDate = null
 
-String sentDate = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 37)
+String sentDate = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 37)
 
 parsedDate = sdf.parse(sentDate)
 
@@ -130,14 +130,14 @@ String sDate = sdf.format(parsedDate)
 arrayMatch.add(WebUI.verifyMatch(sDate, (resultotherattrlistarray[arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Business source AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 sdf = new SimpleDateFormat('MM/dd/yyyy')
 
 parsedDate = null
 
-sentDate = GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 40)
+sentDate = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40)
 
 parsedDate = sdf.parse(sentDate)
 
@@ -149,7 +149,7 @@ sDate = sdf.format(parsedDate)
 arrayMatch.add(WebUI.verifyMatch(sDate, (resultotherattrlistarray[arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Building'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findDataFile.getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), (resultotherattrlistarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), (resultotherattrlistarray[
 	arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

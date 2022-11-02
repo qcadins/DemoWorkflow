@@ -655,14 +655,14 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
 						//Ambil nilai dari confins untuk verif store db lookup
 						if (GlobalVariable.Role == 'Testing') {
 								getDataCust()
-								def confinsdata = GlobalVariable.confinsdata
+								def confinsdata = GlobalVariable.Confinsdata
 								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
 										'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'),'value'))
 								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'),'value'))
-								GlobalVariable.confinsdata = confinsdata
+								GlobalVariable.Confinsdata = confinsdata
 						}
   				
                     }
@@ -707,7 +707,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                     }
                     
                     'customer added +1'
-                    (GlobalVariable.countNumofCustomer)++
+                    (GlobalVariable.CountNumofCustomer)++
                 }
                 
                 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -843,6 +843,6 @@ def getDataCust(){
 	'add ownership to array'
 	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'),
 			'value'))
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
 

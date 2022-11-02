@@ -424,7 +424,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -434,7 +434,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -492,7 +492,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -550,7 +550,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -781,7 +781,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'customer added +1'
-        (GlobalVariable.countNumofCustomer)++
+        (GlobalVariable.CountNumofCustomer)++
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/ApplicationCurrentStep')), 
@@ -791,7 +791,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -851,7 +851,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
@@ -909,7 +909,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'customer added -1'
-            (GlobalVariable.countNumofCustomer)--
+            (GlobalVariable.CountNumofCustomer)--
 
             'Write to excel failed reason'
             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 

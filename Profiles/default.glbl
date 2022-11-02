@@ -6,23 +6,93 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>DataFilePath</name>
+      <initValue>'\\Rule\\InsAddCvgRule.xlsx'</initValue>
+      <name>AddtCovRulePath</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(1, 1)</initValue>
-      <name>CountNumofCust</name>
+      <initValue>[]</initValue>
+      <name>AllocatedCommissionAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>AssetPrice</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\AssetRegionRule.xlsx'</initValue>
+      <name>AssetRegRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>BankAccount</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'2021'</initValue>
+      <name>BDYear</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>CapitalizePremiumPercentage</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 4)</initValue>
+      <name>CheckAppViewCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 4)</initValue>
+      <name>CheckAppViewPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 4)</initValue>
+      <name>CheckPagingCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(2, 4)</initValue>
+      <name>CheckPagingPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 4)</initValue>
+      <name>CheckRuleCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(4, 4)</initValue>
+      <name>CheckRulePersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 4)</initValue>
+      <name>CheckVerifStoreDBCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 4)</initValue>
+      <name>CheckVerifStoreDBPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
+      <name>ComRemainingInfoAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Confinsdata</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>2</initValue>
-      <name>NumofColm</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'a'</initValue>
-      <name>isFound</name>
+      <name>CopyAppColm</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -31,13 +101,13 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>NumofFamily</name>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(4, 1)</initValue>
+      <name>CountAGuarantorCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>NumofGuarantorPersonal</name>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 1)</initValue>
+      <name>CountAGuarantorCompanyCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -46,33 +116,38 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(4, 1)</initValue>
-      <name>CountAGuarantorCompany</name>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 1)</initValue>
+      <name>CountAGuarantorPersonalCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1 DataFile_NAP_CF4W.xlsx'</initValue>
-      <name>PathPersonal</name>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 1)</initValue>
+      <name>CountAManagementShareholder</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>NumofGuarantorCompany</name>
+      <initValue>0</initValue>
+      <name>CountDupcheckRow</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>NumofReferantor</name>
+      <initValue>findTestData('Login/Login').getValue(3, 15)</initValue>
+      <name>CountFileCode</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
-      <name>CountofReferantor</name>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(1, 1)</initValue>
+      <name>CountNumofCust</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'d'</initValue>
-      <name>NumofAccessories</name>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 1)</initValue>
+      <name>CountNumofCustCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>CountNumofCustomer</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -81,28 +156,43 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
+      <name>CountofAccessoriesCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
+      <name>CountofReferantor</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
+      <name>CountofReferantorCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
       <name>CountofUploadDocument</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'e'</initValue>
-      <name>NumofUploadDocument</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'q'</initValue>
-      <name>DupcheckAppNo</name>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
+      <name>CountofUploadDocumentCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>''</initValue>
-      <name>DupCheckCount</name>
+      <name>Custname</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm'</initValue>
-      <name>DataFileGuarantorCompany</name>
+      <initValue>''</initValue>
+      <name>CustomerName</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm'</initValue>
+      <name>DataFileCustomerCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -116,18 +206,98 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Excel\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm'</initValue>
+      <name>DataFileGuarantorCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
+      <name>DataFileGuarantorCompanyCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Excel\\2.1.3 CustomerDataCompletion-Personal - GuarantorPersonal.xlsm'</initValue>
       <name>DataFileGuarantorPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>NumofGuarantor</name>
+      <initValue>'\\Excel\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
+      <name>DataFileGuarantorPersonalCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'0.00'</initValue>
-      <name>TotalInsurance</name>
+      <initValue>'\\Excel\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm'</initValue>
+      <name>DataFileManagementShareholderCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm'</initValue>
+      <name>DataFileManagementShareholderPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DataFilePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Discount</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DupcheckVerif</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>DupcheckVerifResult</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Effectiverate</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\FinancialFeeRule.xlsx'</initValue>
+      <name>FinancialFeeRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>FindDataFile</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Yes'</initValue>
+      <name>FirstTimeEntry</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>FlagFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>FlagWarning</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>Flatrate</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>1</initValue>
+      <name>Index</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\InsuranceRateRule.xlsx'</initValue>
+      <name>InsFeeRulePath</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -136,8 +306,228 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
+      <name>MainCovRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
+      <name>MaxRefundRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>0</initValue>
-      <name>CapitalizePremiumPercentage</name>
+      <name>NegativeCustCount</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>NegativeverifResult</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'d'</initValue>
+      <name>NumofAccessories</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofColm</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofFamily</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofGuarantor</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofGuarantorCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofGuarantorPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofMS</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofReferantor</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'e'</initValue>
+      <name>NumofUploadDocument</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>NumofVerifStore</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\2.2 DataFile_NAP_CF4W_Company.xlsx'</initValue>
+      <name>PathCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\2.1 DataFile_NAP_CF4W.xlsx'</initValue>
+      <name>PathPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Data Lookup Tidak Sesuai DB'</initValue>
+      <name>ReasonFailedDataLookup</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Data DDL'</initValue>
+      <name>ReasonFailedDDL</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Delete'</initValue>
+      <name>ReasonFailedDelete</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Input Data'</initValue>
+      <name>ReasonFailedInputData</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Load data tidak sesuai'</initValue>
+      <name>ReasonFailedLoadData</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Store DB'</initValue>
+      <name>ReasonFailedStoredDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Rule'</initValue>
+      <name>ReasonFailedVerifyRule</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>RemainingAllocatedAmt</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(1, 4)</initValue>
+      <name>Role</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 4)</initValue>
+      <name>RoleCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
+      <name>RSVRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'FAILED'</initValue>
+      <name>StatusFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Copy App'</initValue>
+      <name>StatusFailedCopyApp</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Validasi field invalid'</initValue>
+      <name>StatusFailedValidasi</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Calculate Error: Amount/Percentage melebihi limit'</initValue>
+      <name>StatusReasonAmountOverLimit</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Calculate Gagal'</initValue>
+      <name>StatusReasonCalculateGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Generate Gagal'</initValue>
+      <name>StatusReasonGenerateGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Gagal mendapatkan lookup'</initValue>
+      <name>StatusReasonLookup</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Mandatory tidak lengkap'</initValue>
+      <name>StatusReasonMandatoryEmpty</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Button Save Tidak Berfungsi'</initValue>
+      <name>StatusReasonSaveGagal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Mandatory tidak lengkap dan berhasil save'</initValue>
+      <name>StatusReasonSystem</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Data Tidak Sesuai DB'</initValue>
+      <name>StatusReasonTidakSesuaiDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'SUCCESS'</initValue>
+      <name>StatusSuccess</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'WARNING'</initValue>
+      <name>StatusWarning</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'0'</initValue>
+      <name>SubsidyDPValue</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\SubsidyRule.xls'</initValue>
+      <name>SubsidyRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\TCRule.xlsx'</initValue>
+      <name>TCRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0.00</initValue>
+      <name>TotalAccessoriesPrice</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>TotalAdditionalPremium</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -152,16 +542,6 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>0.00</initValue>
-      <name>TotalTax</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0.00</initValue>
-      <name>TotalVat</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0.00</initValue>
       <name>TotalDisburseAmt</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -171,268 +551,13 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'WARNING'</initValue>
-      <name>StatusWarning</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'FAILED'</initValue>
-      <name>StatusFailed</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'SUCCESS'</initValue>
-      <name>StatusSuccess</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(1, 4)</initValue>
-      <name>Role</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0.00</initValue>
-      <name>AssetPrice</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0.00</initValue>
-      <name>TotalAccessoriesPrice</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>''</initValue>
-      <name>countRowPersonal</name>
+      <name>TotalFee</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>countColmPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2 DataFile_NAP_CF4W_Company.xlsx'</initValue>
-      <name>PathCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 1)</initValue>
-      <name>CountAManagementShareholder</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 1)</initValue>
-      <name>CountAGuarantorPersonalCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 1)</initValue>
-      <name>CountAGuarantorCompanyCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'0'</initValue>
-      <name>SubsidyDPValue</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 4)</initValue>
-      <name>RoleCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>countNumofCustomer</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>DupcheckVerif</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>CustomerName</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm'</initValue>
-      <name>DataFileCustomerCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm'</initValue>
-      <name>DataFileManagementShareholderPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm'</initValue>
-      <name>DataFileManagementShareholderCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
-      <name>DataFileGuarantorPersonalCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Excel\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
-      <name>DataFileGuarantorCompanyCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 1)</initValue>
-      <name>CountNumofCustCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>1</initValue>
-      <name>index</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>ComRemainingInfoAmt</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>RemainingAllocatedAmt</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>AllocatedCommissionAmt</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
-      <name>CountofReferantorCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>DupcheckResult</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>countDupcheckRow</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('Login/Login').getValue(3, 15)</initValue>
-      <name>CountFileCode</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
-      <name>CountofAccessoriesCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
-      <name>CountofUploadDocumentCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Button Save Tidak Berfungsi'</initValue>
-      <name>StatusReasonSaveGagal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Mandatory tidak lengkap'</initValue>
-      <name>StatusReasonMandatoryEmpty</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Mandatory tidak lengkap dan berhasil save'</initValue>
-      <name>StatusReasonSystem</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Gagal mendapatkan lookup'</initValue>
-      <name>StatusReasonLookup</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Data Tidak Sesuai DB'</initValue>
-      <name>StatusReasonTidakSesuaiDB</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Calculate Gagal'</initValue>
-      <name>StatusReasonCalculateGagal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Generate Gagal'</initValue>
-      <name>StatusReasonGenerateGagal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Calculate Error: Amount/Percentage melebihi limit'</initValue>
-      <name>StatusReasonAmountOverLimit</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\InsuranceRateRule.xlsx'</initValue>
-      <name>InsFeeRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
-      <name>MainCovRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
-      <name>RSVRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>DupcheckVerifResult</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>NegativeverifResult</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>NegativeCustCount</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Copy App'</initValue>
-      <name>StatusFailedCopyApp</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
-      <name>MaxRefundRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Validasi field invalid'</initValue>
-      <name>StatusFailedValidasi</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>FlagFailed</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>2</initValue>
-      <name>CopyAppColm</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\InsAddCvgRule.xlsx'</initValue>
-      <name>AddtCovRulePath</name>
+      <initValue>'0.00'</initValue>
+      <name>TotalInsurance</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -442,171 +567,16 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>''</initValue>
-      <name>TotalAdditionalPremium</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>TotalFee</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
       <name>TotalPremiumtoCust</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>Discount</name>
+      <initValue>0.00</initValue>
+      <name>TotalTax</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'2021'</initValue>
-      <name>BDYear</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\TCRule.xlsx'</initValue>
-      <name>TCRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\SubsidyRule.xls'</initValue>
-      <name>SubsidyRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>BankAccount</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>findDataFile</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>NumofVerifStore</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\FinancialFeeRule.xlsx'</initValue>
-      <name>FinancialFeeRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(2, 4)</initValue>
-      <name>CheckPagingPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 4)</initValue>
-      <name>CheckPagingCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>custname</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 4)</initValue>
-      <name>CheckVerifStoreDBPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 4)</initValue>
-      <name>CheckVerifStoreDBCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Delete'</initValue>
-      <name>ReasonFailedDelete</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>FlagWarning</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Verify Rule'</initValue>
-      <name>ReasonFailedVerifyRule</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Data Lookup Tidak Sesuai DB'</initValue>
-      <name>ReasonFailedDataLookup</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Verify Data DDL'</initValue>
-      <name>ReasonFailedDDL</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Store DB'</initValue>
-      <name>ReasonFailedStoredDB</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Input Data'</initValue>
-      <name>ReasonFailedInputData</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>Effectiverate</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>Flatrate</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\AssetRegionRule.xlsx'</initValue>
-      <name>AssetRegRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>confinsdata</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(4, 4)</initValue>
-      <name>CheckRulePersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 4)</initValue>
-      <name>CheckRuleCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(5, 4)</initValue>
-      <name>CheckAppViewPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(5, 4)</initValue>
-      <name>CheckAppViewCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>2</initValue>
-      <name>NumofMS</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Yes'</initValue>
-      <name>FirstTimeEntry</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Load data tidak sesuai'</initValue>
-      <name>ReasonFailedLoadData</name>
+      <initValue>0.00</initValue>
+      <name>TotalVat</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

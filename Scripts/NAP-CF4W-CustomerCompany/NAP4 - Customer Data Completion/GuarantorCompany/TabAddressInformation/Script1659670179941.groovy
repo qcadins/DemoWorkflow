@@ -27,7 +27,7 @@ String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/AddressInformation - Company - GuarantorCompany')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/AddressInformation - Company - GuarantorCompany')
 
 int copyAppColm = 0
 

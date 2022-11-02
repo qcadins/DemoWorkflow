@@ -23,7 +23,7 @@ String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
 
 GlobalVariable.DataFilePath = filePath
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal')
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal').getValue(
     GlobalVariable.NumofMS, 12).equalsIgnoreCase('Input Data')) {

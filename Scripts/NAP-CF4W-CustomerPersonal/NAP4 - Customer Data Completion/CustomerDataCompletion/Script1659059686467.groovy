@@ -248,7 +248,7 @@ int count = variable.size()
  GlobalVariable.FlagFailed = 0
 
 'verify equal number of customer'
-WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL)
 
 for (int i = 1; i <= count; i++) {
     String newCustomerName = ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]'

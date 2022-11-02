@@ -247,7 +247,7 @@ ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root
 int count = variable.size()
 
 'verify equal number of customer'
-WebUI.verifyEqual(GlobalVariable.countNumofCustomer, count, FailureHandling.OPTIONAL)
+WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL)
 
 for (int i = 1; i <= count; i++) {
     String newCustomerName = ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]'

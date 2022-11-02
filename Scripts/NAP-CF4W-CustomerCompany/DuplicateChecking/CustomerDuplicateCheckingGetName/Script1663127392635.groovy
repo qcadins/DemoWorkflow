@@ -72,7 +72,7 @@ def StoreCDCCustomerName = ''
 
 	def StoreCDCGuarantorCompanyName = ''
 
-	for (index = 1; index <= GlobalVariable.countDupcheckRow; index++) {
+	for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 		'modify object subjectname'
 		modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'),
 			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[2]', true)

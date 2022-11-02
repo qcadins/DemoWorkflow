@@ -33,7 +33,7 @@ ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
 
 ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
-GlobalVariable.findDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument - Company - GuarantorCompany')
+GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument - Company - GuarantorCompany')
 
 def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument - Company - GuarantorCompany').getValue(
     GlobalVariable.NumofGuarantor, 12).split(';')

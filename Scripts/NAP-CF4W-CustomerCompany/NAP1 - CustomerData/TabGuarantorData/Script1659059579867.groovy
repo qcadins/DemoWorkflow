@@ -434,7 +434,7 @@ GlobalVariable.FlagFailed = 0
 						
 						
 						 'add relationship to array'
-						 GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'),
+						 GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_GuarantorRelationship'),
 								 'value'))
 						 
 					}
@@ -456,7 +456,7 @@ GlobalVariable.FlagFailed = 0
                             GlobalVariable.NumofGuarantorPersonal, '3a.TabGuarantorDataPersonal')
 
                         'customer added +1'
-                        (GlobalVariable.countNumofCustomer)++
+                        (GlobalVariable.CountNumofCustomer)++
 
                         if (Integer.parseInt(datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 4)) == 
                         0) {
@@ -472,7 +472,7 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
                         'customer added -1'
-                        (GlobalVariable.countNumofCustomer)--
+                        (GlobalVariable.CountNumofCustomer)--
                     } else {
                         if (flagWarning > 0 || GlobalVariable.FlagWarning > 0) {
                             CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
@@ -719,7 +719,7 @@ GlobalVariable.FlagFailed = 0
 						
 					
 						 'add relationship to array'
-						GlobalVariable.confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+						GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
 										'value'))
 						 
 						
@@ -743,7 +743,7 @@ GlobalVariable.FlagFailed = 0
                             GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 
                         'customer added +1'
-                        (GlobalVariable.countNumofCustomer)++
+                        (GlobalVariable.CountNumofCustomer)++
 
                         if (Integer.parseInt(datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 4)) == 
                         0) {
@@ -761,7 +761,7 @@ GlobalVariable.FlagFailed = 0
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
 						'customer added -1'
-						(GlobalVariable.countNumofCustomer)--
+						(GlobalVariable.CountNumofCustomer)--
 					} else {
 						if (flagWarning > 0 || GlobalVariable.FlagWarning > 0) {
 							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
@@ -885,7 +885,7 @@ def getDataGuarPersonal(){
 	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
 			'value'))
 	
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
 
 def getDataGuarCompany(){
@@ -940,5 +940,5 @@ def getDataGuarCompany(){
 	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'),
 			'value'))
 	
-	GlobalVariable.confinsdata = confinsdata
+	GlobalVariable.Confinsdata = confinsdata
 }
