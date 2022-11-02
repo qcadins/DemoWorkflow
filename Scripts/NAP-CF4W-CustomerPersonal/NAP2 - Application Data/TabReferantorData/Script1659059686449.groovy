@@ -74,8 +74,8 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
     //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
     if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
         'Pengecekan checkbox sebelumnya tidak tercentang'
-        if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'), 
-            'aria-checked')==false) {
+        if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'), 
+            'aria-checked')=="false") {
             'click referantor checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
         }
@@ -666,12 +666,12 @@ if(datafilereferantor.getValue(
 		GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
 	
 	if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
-		
-		if(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),'aria-checked')==false){
-			'click referantor checkbox'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
-		
-		}
+        'Pengecekan checkbox sebelumnya tidak tercentang'
+        if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'), 
+            'aria-checked')=="false") {
+            'click referantor checkbox'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
+        }
 		
 		int modifyObjectIndex = 1
 		
