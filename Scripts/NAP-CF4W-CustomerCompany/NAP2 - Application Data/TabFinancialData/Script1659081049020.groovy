@@ -512,6 +512,16 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),
 			datafilefinancial.getValue(GlobalVariable.NumofColm, 48), false)
 	}
+	else if (datafilefinancial.getValue(GlobalVariable.NumofColm, 46) == 'No') {
+		'input grace period'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),
+			"0")
+
+		'select method'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),
+			"-Select One-", false)
+	}
+	
 }
 
 'click button calculate'
