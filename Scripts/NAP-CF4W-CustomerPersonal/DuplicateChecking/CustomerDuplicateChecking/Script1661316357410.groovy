@@ -223,7 +223,49 @@ if (DupCheckStatus == true) {
 			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
 			WebUI.verifyEqual(isPaging,true)
 			
+			'Klik button prev'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Prev'))
+			
+			'Verify page 1 active'
+			WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/pageOne'),
+				'aria-current', 2)
+			
+			listApp = listString
+					
+			listString = new ArrayList<String>()
+			
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
+					
+			'Verif appno yang ada di page 1 tidak ada di page 2'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			
+			WebUI.verifyEqual(isPaging, true)
+			
+			'Klik button next'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Next'))
+			
+			'Verify page 2 active'
+			WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'),
+				'aria-current', 2)
+			
+			listApp = listString
+			
+			listString = new ArrayList<String>()
+			
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
+					
+			'Verif appno yang ada di page 2 tidak ada di page 1'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			
+			WebUI.verifyEqual(isPaging, true)
+			
+			
 		}
+		
+		'Klik button page 1'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/pageOne'))
+		
+		WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.DupcheckCountDataInPage'(),true)
 	}
 	
     'input Appno'

@@ -29,23 +29,14 @@ String filePath = userDir + GlobalVariable.PathPersonal
 GlobalVariable.DataFilePath = filePath
 
 'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
 
 String POStat
+
+'Inisialisasi driver'
+WebDriver driver = DriverFactory.getWebDriver()
 
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -59,9 +50,6 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
     'click button search'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
-
-    'Inisialisasi driver'
-    WebDriver driver = DriverFactory.getWebDriver()
 
     'Inisialisasi variabel'
     ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -191,24 +179,62 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'), 
             'aria-current', 2)
 
-        rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
-
         listString = new ArrayList<String>()
 
-        for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
-                'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-                i) + ']/td[4]/span', true)
-
-            listString.add(WebUI.getText(appNoObject))
-        }
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
         
         'Verif appno yang ada di page 2 tidak ada di page 1'
         Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
         WebUI.verifyEqual(isPaging, true)
+		
+		'Klik button prev'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Prev'))
+		
+		'Verify page 1 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'),
+			'aria-current', 2)
+		
+		listApp = listString
+				
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+				
+		'Verif appno yang ada di page 1 tidak ada di page 2'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
+		
+		'Klik button next'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Next'))
+		
+		'Verify page 2 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'),
+			'aria-current', 2)
+		
+		listApp = listString
+		
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+				
+		'Verif appno yang ada di page 2 tidak ada di page 1'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
+		
+		
     }
+	
+	'Klik button page 1'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'))
+	
+	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP1CountDataInPage'(),true)
+	
 }
+
+
 
 'Ambil nilai office login dari confins'
 String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
@@ -921,10 +947,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             }
         }
     }
-    
-    WebUI.delay(3)
 
     'call TC verify App setelah submit'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'), [:], FailureHandling.STOP_ON_FAILURE)
 }
+
+
 

@@ -169,7 +169,47 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
 		WebUI.verifyEqual(isPaging,true)
 		
+		'Klik button prev'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/button_Prev'))
+		
+		'Verify page 1 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/pageOne'),
+			'aria-current', 2)
+		
+		listApp = listString
+				
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
+				
+		'Verif appno yang ada di page 1 tidak ada di page 2'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
+		
+		'Klik button next'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/button_Next'))
+		
+		'Verify page 2 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/nextPage'),
+			'aria-current', 2)
+		
+		listApp = listString
+		
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
+				
+		'Verif appno yang ada di page 2 tidak ada di page 1'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
 	}
+	
+	'Klik button page 1'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/pageOne'))
+	
+	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP2CountDataInPage'(),true)
 }
 
 'input Appno'
