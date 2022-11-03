@@ -185,7 +185,7 @@ public class verifyPaging {
 		return listString
 
 	}
-	
+
 	@Keyword
 	public addAppNoForPagingComRsv(ArrayList<String> listString){
 
@@ -204,7 +204,7 @@ public class verifyPaging {
 		return listString
 
 	}
-	
+
 	@Keyword
 	public addAppNoForPagingDupcheck(ArrayList<String> listString){
 
@@ -223,7 +223,7 @@ public class verifyPaging {
 		return listString
 
 	}
-	
+
 	@Keyword
 	public addAppNoForPagingNAP4(ArrayList<String> listString){
 
@@ -236,6 +236,25 @@ public class verifyPaging {
 			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingAppView(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_AppNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[1]/span', true)
 
 			listString.add(WebUI.getText(appNoObject))
 		}
@@ -296,7 +315,7 @@ public class verifyPaging {
 
 		return isCount
 	}
-	
+
 	@Keyword
 	public ComRsvCountDataInPage(){
 		'Inisialisasi driver'
@@ -323,7 +342,7 @@ public class verifyPaging {
 
 		return isCount
 	}
-	
+
 	@Keyword
 	public DupcheckCountDataInPage(){
 		'Inisialisasi driver'
@@ -350,7 +369,7 @@ public class verifyPaging {
 
 		return isCount
 	}
-	
+
 	@Keyword
 	public NAP4CountDataInPage(){
 		'Inisialisasi driver'
@@ -370,6 +389,33 @@ public class verifyPaging {
 		}
 		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public AppViewCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
 			isCount = false
