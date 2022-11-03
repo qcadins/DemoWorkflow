@@ -155,21 +155,56 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		
 		'verif page 2 active'
 		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/nextPage'),'aria-current',2)
-		
-		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
-		
+				
 		listString = new ArrayList<String>()
-		for(int i=1;i<=rowData.size();i++){
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo')
-					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
-			
-			listString.add(WebUI.getText(appNoObject))
-		}
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
+		
 		'Verif appno pada page 2 tidak ada di page 1'
 		Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
 		WebUI.verifyEqual(isPaging,true)
 		
+		'Klik button prev'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/button_Prev'))
+		
+		'Verify page 1 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/pageOne'),
+			'aria-current', 2)
+		
+		listApp = listString
+				
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
+				
+		'Verif appno yang ada di page 1 tidak ada di page 2'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
+		
+		'Klik button next'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/button_Next'))
+		
+		'Verify page 2 active'
+		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/nextPage'),
+			'aria-current', 2)
+		
+		listApp = listString
+		
+		listString = new ArrayList<String>()
+		
+		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
+				
+		'Verif appno yang ada di page 2 tidak ada di page 1'
+		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+		
+		WebUI.verifyEqual(isPaging, true)
 	}
+	
+	'Klik button page 1'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/pageOne'))
+	
+	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP2CountDataInPage'(),true)
 }
 
 'input Appno'
@@ -177,8 +212,18 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 	findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 13))
 
-'click button search'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+for(int i = 1;i<=8;i++){
+	'click button search'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'),1,FailureHandling.OPTIONAL)){
+		break
+	}
+	else{
+		WebUI.delay(14)
+	
+	}
+
+}
 
 'click icon pensil untuk select'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))

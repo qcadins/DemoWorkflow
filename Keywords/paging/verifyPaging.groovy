@@ -1,10 +1,16 @@
 package paging
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.By as By
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.util.ArrayList
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -140,5 +146,281 @@ public class verifyPaging {
 		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false)
 		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false)
 		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),'value'),"",false)
+	}
+
+	@Keyword
+	public addAppNoForPaging(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingNAP2(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingComRsv(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingDupcheck(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingNAP4(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public addAppNoForPagingAppView(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_AppNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[1]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
+	@Keyword
+	public NAP1CountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public NAP2CountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public ComRsvCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public DupcheckCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public NAP4CountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	@Keyword
+	public AppViewCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/AppView/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
 	}
 }
