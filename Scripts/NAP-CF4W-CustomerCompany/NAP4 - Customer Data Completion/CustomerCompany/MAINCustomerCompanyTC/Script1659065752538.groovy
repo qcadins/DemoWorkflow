@@ -15,27 +15,27 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabCustomerDetail'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabCustomerDetail'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabAddressInformation'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabAddressInformation'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabManagementShareholder'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabManagementShareholder'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabContactInformation'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabContactInformation'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabFinancialData'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabCustomerAsset'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabCustomerAsset'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabLegalDocument'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabLegalDocument'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabOtherAttribute'), 
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/TabOtherAttribute'), 
     [:], FailureHandling.CONTINUE_ON_FAILURE)
 

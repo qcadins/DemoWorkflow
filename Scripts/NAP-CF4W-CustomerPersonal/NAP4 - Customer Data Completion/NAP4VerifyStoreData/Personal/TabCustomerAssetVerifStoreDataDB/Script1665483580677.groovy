@@ -39,17 +39,15 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4CustomerAssetDataStoreData'(sqlconnection, appno, custname)
 
-println(result)
-
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('null')) {
-        (result[i]) = ''
-    } else if ((result[i]).equalsIgnoreCase('true')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('false')) {
-        (result[i]) = 'No'
-    }
+	if ((result[i]).equalsIgnoreCase('null')) {
+		(result[i]) = ''
+	} else if ((result[i]).equalsIgnoreCase('true')) {
+		(result[i]) = 'Yes'
+	} else if ((result[i]).equalsIgnoreCase('false')) {
+		(result[i]) = 'No'
+	}
 }
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 int arrayindex = 0
@@ -63,22 +61,22 @@ def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofV
 def assetqtyarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
 
 
-for(assetarrayexcel = 0 ; assetarrayexcel < resultarray.size()/4 ; assetarrayexcel++){
+for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++){
 	
 	'verify asset type'
-	arrayMatch.add(WebUI.verifyMatch(assettypearray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(assettypearray[assetarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify asset desc'
-	arrayMatch.add(WebUI.verifyMatch(assetdescriptionarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(assetdescriptionarray[assetarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify asset value'
-	arrayMatch.add(WebUI.verifyMatch(assetvaluearray[assetarrayexcel].split(',').join(), (resultarray[arrayindex++]).split(',').join(), 
+	arrayMatch.add(WebUI.verifyMatch(assetvaluearray[assetarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify asset qty'
-	arrayMatch.add(WebUI.verifyMatch(assetqtyarray[assetarrayexcel].toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(assetqtyarray[assetarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 }
 

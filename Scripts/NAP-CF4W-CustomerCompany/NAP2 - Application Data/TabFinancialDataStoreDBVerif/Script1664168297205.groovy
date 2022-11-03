@@ -33,15 +33,15 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        GlobalVariable.NumofColm, 13))
 
-resultarray = result.split(', ')
+
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
 	}
 }
 
@@ -56,7 +56,7 @@ arrayMatch.add(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4W-Custome
 		GlobalVariable.NumofColm, 23).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 24).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 25).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 39).replace(',','')), Integer.parseInt((resultarray[arrayindex++])), FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 39).replace(',','')), Integer.parseInt((result[arrayindex++])), FailureHandling.OPTIONAL))
 
 'verify total capitalize amt'
 arrayMatch.add(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
@@ -65,31 +65,31 @@ arrayMatch.add(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4W-Custome
 		GlobalVariable.NumofColm, 31).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 33).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
 		GlobalVariable.NumofColm, 35).replace(',','')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 41).replace(',','')), Integer.parseInt((resultarray[arrayindex++])), FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 41).replace(',','')), Integer.parseInt((result[arrayindex++])), FailureHandling.OPTIONAL))
 
 'verify provision fee calculation base'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 37).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify effective rate'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 44).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify flat rate'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 45).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify grace period'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 47).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify grace period type'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 48).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify TDP paid at MF'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-		GlobalVariable.NumofColm, 49).replace(',',''), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 49).replace(',',''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {

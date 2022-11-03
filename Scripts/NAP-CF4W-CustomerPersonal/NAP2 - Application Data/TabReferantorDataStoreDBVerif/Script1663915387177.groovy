@@ -37,36 +37,37 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 //GlobalVariable.NumofReferantor = 2
 
 WebUI.delay(7)
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
 		GlobalVariable.CopyAppColm, 12))
+
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
 println(result)
 int arrayindex = 0
 int bankindex = 0
 
-resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
+
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 
 println(bankaccount)
-println(resultarray)
+println(result)
 
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 1); (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 13).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+            GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+            GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
-	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
-	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-            GlobalVariable.NumofReferantor, 17).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+            GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

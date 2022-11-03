@@ -6,12 +6,12 @@
    <elementGuidId>0f209f6e-800e-48d1-9d75-2f2d2db19eb9</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;mat-checkbox-4&quot;]/label/div</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type=&quot;checkbox&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[1]/div/mat-checkbox/label/span[1]</value>
+      <value>//*[@type=&quot;checkbox&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

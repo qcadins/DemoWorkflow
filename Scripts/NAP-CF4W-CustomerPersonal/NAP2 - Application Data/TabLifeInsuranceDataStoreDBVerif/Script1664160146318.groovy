@@ -33,19 +33,19 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        GlobalVariable.NumofColm, 13))
 
-resultarray = result.split(', ')
+
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
-	}else if((resultarray[i]) == 'true'){
-	(resultarray[i]) = 'Yes'
-	}else if((resultarray[i]) == 'false'){
-	(resultarray[i]) = 'No'
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
+	}else if((result[i]) == 'true'){
+	(result[i]) = 'Yes'
+	}else if((result[i]) == 'false'){
+	(result[i]) = 'No'
 	}
 }
 
@@ -55,35 +55,35 @@ int arrayindex = 0
 
 'verify insco branch name'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 13).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify premium payment method'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify premium percentage'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 15).replace('%',''), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 15).replace('%',''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify notes'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 16).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 16).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject customer'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 18).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject guarantor'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 19).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject spouse'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 20).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify admin fee'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
-		GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultarray[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

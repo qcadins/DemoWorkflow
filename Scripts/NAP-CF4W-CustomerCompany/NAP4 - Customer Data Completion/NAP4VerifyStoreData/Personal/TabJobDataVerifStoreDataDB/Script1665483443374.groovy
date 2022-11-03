@@ -37,70 +37,60 @@ String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
-String result
+ArrayList<String> result = new ArrayList<>()
 
-String jobaddress
+ArrayList<String> jobaddress = new ArrayList<>()
 
-String prevjobaddress
+ArrayList<String> prevjobaddress = new ArrayList<>()
 
-String othaddress
+ArrayList<String> othaddress = new ArrayList<>()
+
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'EMPLOYEE') {
-	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataEmployeePersonalStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataEmployeePersonalStoreData'(sqlconnection, appno, custname)
 
-	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname)
 
-	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname)
 
-	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname)
+	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'PROFESSIONAL') {
 	
-	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataProfPersonalStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataProfPersonalStoreData'(sqlconnection, appno, custname)
 
-	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname)
 
-	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname)
 
-	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname)
+	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'NON PROFESSIONAL') {
-	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataNonProfPersonalStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataNonProfPersonalStoreData'(sqlconnection, appno, custname)
 } else {
 	
-	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataSMEPersonalStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataSMEPersonalStoreData'(sqlconnection, appno, custname)
 
-	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	jobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnection, appno, custname)
 
-	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	prevjobaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnection, appno, custname)
 
-	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname).replace(
-		'HEADER:', '').replace('[', '').replace(']', '')
+	othaddress = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnection, appno, custname)
 }
 
-resultarray = result.split(', ')
+
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-	if ((resultarray[i]).equalsIgnoreCase('null')) {
-		(resultarray[i]) = ''
-	} else if ((resultarray[i]).equalsIgnoreCase('true')) {
-		(resultarray[i]) = 'Yes'
-	} else if ((resultarray[i]).equalsIgnoreCase('false')) {
-		(resultarray[i]) = 'No'
+for (i = 0; i <= (result.size() - 1); i++) {
+	if ((result[i]) == null) {
+		(result[i]) = ''
+	} else if ((result[i]).equalsIgnoreCase('true')) {
+		(result[i]) = 'Yes'
+	} else if ((result[i]).equalsIgnoreCase('false')) {
+		(result[i]) = 'No'
 	}
 }
 
@@ -108,42 +98,36 @@ if(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP
 	'EMPLOYEE' || WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 	'PROFESSIONAL'){
 	
-	joaddressarray = jobaddress.split(', ')
-	
-	prevjobaddressarray = prevjobaddress.split(', ')
-	
-	othaddressarray = othaddress.split(', ')
-	
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (joaddressarray.size() - 1); i++) {
-	if ((joaddressarray[i]).equalsIgnoreCase('null')) {
-		(joaddressarray[i]) = ''
-	} else if ((joaddressarray[i]).equalsIgnoreCase('true')) {
-		(joaddressarray[i]) = 'Yes'
-	} else if ((joaddressarray[i]).equalsIgnoreCase('false')) {
-		(joaddressarray[i]) = 'No'
+for (i = 0; i <= (jobaddress.size() - 1); i++) {
+	if ((jobaddress[i]) == null) {
+		(jobaddress[i]) = ''
+	} else if ((jobaddress[i]).equalsIgnoreCase('true')) {
+		(jobaddress[i]) = 'Yes'
+	} else if ((jobaddress[i]).equalsIgnoreCase('false')) {
+		(jobaddress[i]) = 'No'
 	}
 }
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (prevjobaddressarray.size() - 1); i++) {
-	if ((prevjobaddressarray[i]).equalsIgnoreCase('null')) {
-		(prevjobaddressarray[i]) = ''
-	} else if ((prevjobaddressarray[i]).equalsIgnoreCase('true')) {
-		(prevjobaddressarray[i]) = 'Yes'
-	} else if ((prevjobaddressarray[i]).equalsIgnoreCase('false')) {
-		(prevjobaddressarray[i]) = 'No'
+for (i = 0; i <= (prevjobaddress.size() - 1); i++) {
+	if ((prevjobaddress[i]) == null) {
+		(prevjobaddress[i]) = ''
+	} else if ((prevjobaddress[i]).equalsIgnoreCase('true')) {
+		(prevjobaddress[i]) = 'Yes'
+	} else if ((prevjobaddress[i]).equalsIgnoreCase('false')) {
+		(prevjobaddress[i]) = 'No'
 	}
 }
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (othaddressarray.size() - 1); i++) {
-	if ((othaddressarray[i]).equalsIgnoreCase('null')) {
-		(othaddressarray[i]) = ''
-	} else if ((othaddressarray[i]).equalsIgnoreCase('true')) {
-		(othaddressarray[i]) = 'Yes'
-	} else if ((othaddressarray[i]).equalsIgnoreCase('false')) {
-		(othaddressarray[i]) = 'No'
+for (i = 0; i <= (othaddress.size() - 1); i++) {
+	if ((othaddress[i]) == null) {
+		(othaddress[i]) = ''
+	} else if ((othaddress[i]).equalsIgnoreCase('true')) {
+		(othaddress[i]) = 'Yes'
+	} else if ((othaddress[i]).equalsIgnoreCase('false')) {
+		(othaddress[i]) = 'No'
 	}
 }
 }
@@ -158,127 +142,127 @@ int OtherAddressindex = 0
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'EMPLOYEE') {
 	'verify proffession code'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify job position'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify job status'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify is internal employee'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify is well known company'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify company name'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify industry type'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify company scale'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify start working'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify job title'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify Num of Employee'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'PROFESSIONAL') {
 
 	'verify proffession code'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify is well known company'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify company name'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify industry type'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify Professional No'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify start working'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify job title'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 36).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 36).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'NON PROFESSIONAL') {
 	'verify profession code'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify job title'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
 	'verify proffession code'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify job position'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 44).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 44).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify is well known company'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 45).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 45).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify company name'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 46).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 46).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify industry type'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 47).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 47).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify company scale'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 49).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 49).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify start working'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 50).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 50).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify job title'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 51).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 51).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify Num of Employee'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 52).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 52).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify Investment Type'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 53).toUpperCase(), (resultarray[
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 53).toUpperCase(), (result[
 		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
@@ -287,51 +271,51 @@ if(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP
 'PROFESSIONAL' || WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'SMALL MEDIUM ENTERPRISE'){
 int row = 55
-for(i = 0; i < joaddressarray.size(); i++){
+for(i = 0; i < jobaddress.size(); i++){
 'verify Job address'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (joaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (jobaddress[
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify Previous company name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 76).toUpperCase(), (prevjobaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 76).toUpperCase(), (prevjobaddress[
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Previous employment date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 77).toUpperCase(), (prevjobaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 77).toUpperCase(), (prevjobaddress[
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 row = 79
-for(i = 2; i < prevjobaddressarray.size(); i++){
+for(i = 2; i < prevjobaddress.size(); i++){
 'verify Job address'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (prevjobaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (prevjobaddress[
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify Other business'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 100).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 100).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Other business type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 101).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 101).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Other business industry type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 102).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 102).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Other job position'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 103).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 103).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify establishment date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 104).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 104).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 row = 106
-for(i = 5 ; i < othaddressarray.size(); i++){
+for(i = 5 ; i < othaddress.size(); i++){
 'verify Other Job address'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (othaddressarray[
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (othaddress[
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 }

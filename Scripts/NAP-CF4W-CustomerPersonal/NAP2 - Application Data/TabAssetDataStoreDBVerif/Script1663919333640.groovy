@@ -33,159 +33,155 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String resultsupplierinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
-
-String resultassetinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+ArrayList<String> resultsupplierinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 13))
 
-resultarrayassetinformation = resultassetinformation.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
-
-resultarraysupplierinformation = resultsupplierinformation.split(', ')
+ArrayList<String> resultassetinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13))
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarrayassetinformation.size() - 1); i++) {
-	if ((resultarrayassetinformation[i]).equalsIgnoreCase('null')) {
-		(resultarrayassetinformation[i]) = ''
-	}else if ((resultarrayassetinformation[i]).equalsIgnoreCase(',')) {
-		(resultarrayassetinformation[i]) = ', '
+for (i = 0; i <= (resultassetinformation.size() - 1); i++) {
+	if ((resultassetinformation[i]) == null) {
+		(resultassetinformation[i]) = ''
+	}else if ((resultassetinformation[i]).equalsIgnoreCase(',')) {
+		(resultassetinformation[i]) = ', '
 	}
 }
 
-println(resultarrayassetinformation)
+println(resultassetinformation)
 
 int arraysuppinfoindex = 0
 int arrayassetinfoindex = 0
 
 'verify supplier code'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 12).toUpperCase(), (resultarraysupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 12).toUpperCase(), (resultsupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify supplier name'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 13).toUpperCase(), (resultarraysupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 13).toUpperCase(), (resultsupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify sales person'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 14).toUpperCase(), (resultarraysupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 14).toUpperCase(), (resultsupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify admin head'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 15).toUpperCase(), (resultarraysupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 15).toUpperCase(), (resultsupplierinformation[arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset code'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 17).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 17).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset condition'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 18).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 18).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset price'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 19).replace(',',''), (resultarrayassetinformation[arrayassetinfoindex++]), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 19).replace(',',''), (resultassetinformation[arrayassetinfoindex++]), false, FailureHandling.OPTIONAL))
 
 'verify asset usage'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 20).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 20).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify color'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 21).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 21).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify BPKB ISSUER'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 22).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).replace(',', ', ').toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 22).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).replace(',', ', ').toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify BPKB ISSUE DATE'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 23).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 23).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify note'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 24).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 24).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify manufacturing year'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 25).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 25).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify DP percent'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 27).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 27).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify DP Amount'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 28).replace(',',''), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 28).replace(',',''), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify chasis number'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 29).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 29).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify engine number'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 30).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 30).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify license plate'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 31).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 31).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify serial no 4'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 32).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 32).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify serial no 5'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 33).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 33).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset region'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 35).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 35).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify user name'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 38).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify user relation'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 39).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 
 'verify owner type'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 42).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify owner name'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 43).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 43).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify owner relation'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 44).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 44).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 42).equalsIgnoreCase('Personal')){
 'verify owner profession'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 46).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 'verify owner profession'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 47).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 47).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 		
 'verify owner id type'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 48).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 48).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify owner id no'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 49).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 49).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify owner mobile no'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 50).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 50).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify copy address'
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -193,61 +189,61 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 	
 'verify address'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 38).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Rt'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 39).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify RW'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 40).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 40).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Zipcode'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 41).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 41).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kecamatan'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 42).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kelurahan'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 43).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 43).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kota'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 44).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 44).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 
 'verify address'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 54).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify rt'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 55).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify rw'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 56).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify zipcode'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 57).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kecamatan'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 58).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 
 'verify kelurahan'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 59).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify kota'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 60).toUpperCase(), (resultarrayassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

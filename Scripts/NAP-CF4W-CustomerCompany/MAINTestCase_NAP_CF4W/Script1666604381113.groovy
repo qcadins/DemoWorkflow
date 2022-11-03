@@ -43,8 +43,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
     1); (GlobalVariable.NumofColm)++) {
-        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)

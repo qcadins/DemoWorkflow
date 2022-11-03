@@ -55,7 +55,7 @@ for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
 }
 
 for (i = 0; i < result.size(); i++) {
-    'verify resultarray == confinsdata'
+    'verify resultarray == Confinsdata'
     WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
 }
 

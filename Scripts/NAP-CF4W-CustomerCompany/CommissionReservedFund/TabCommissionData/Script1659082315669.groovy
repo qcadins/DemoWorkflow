@@ -133,7 +133,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			 
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(',', ''))), Math.round(getAmountFromAppDB *
-								 Double.parseDouble(refundAmt[i])) == false){
+								 Double.parseDouble(refundAmt[i])) == false)){
 					'Write To Excel GlobalVariable.StatusFailed'
 					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 									 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)

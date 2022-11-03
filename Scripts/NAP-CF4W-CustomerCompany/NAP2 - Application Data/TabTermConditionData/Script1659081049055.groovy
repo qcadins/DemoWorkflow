@@ -330,10 +330,7 @@ if(GlobalVariable.FlagFailed==0){
 	        GlobalVariable.NumofColm, '10.TabTermConditionData')
 	}
 }
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
-    'call test case store db TC'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTCDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+
 
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
@@ -342,5 +339,8 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 }
 
-
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+		'call test case store db TC'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTCDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 

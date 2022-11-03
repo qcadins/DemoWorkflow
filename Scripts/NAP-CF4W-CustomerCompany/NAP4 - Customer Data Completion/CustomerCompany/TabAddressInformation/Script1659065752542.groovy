@@ -563,7 +563,3 @@ def inputaddress() {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
-
-GlobalVariable.StatusFailedAlert = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert')).toUpperCase()
-
-println(GlobalVariable.StatusFailedAlert)

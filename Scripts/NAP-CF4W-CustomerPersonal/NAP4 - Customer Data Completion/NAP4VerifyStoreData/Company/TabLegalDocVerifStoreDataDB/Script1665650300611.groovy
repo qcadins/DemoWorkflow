@@ -72,31 +72,31 @@ def notesarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifS
 for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarrayexcel++){
 	
 	'verify document type'
-	arrayMatch(WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
 			false, FailureHandling.OPTIONAL))
 	
 	'verify document no'
-	arrayMatch(WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
 			false, FailureHandling.OPTIONAL))
 	
 	'verify date issued'
-	arrayMatch(WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(), 
+	arrayMatch.add(WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(), 
 			false, FailureHandling.OPTIONAL))
 	
 	'verify expired date'
-	arrayMatch(WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notary name'
-	arrayMatch(WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notary location'
-	arrayMatch(WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notes'
-	arrayMatch(WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 }
 

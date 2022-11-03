@@ -39,85 +39,84 @@ String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4ContactInformationStoreData'(sqlconnection, appno, custname).replace(
-    'HEADER:', '').replace('[', '').replace(']', '')
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4ContactInformationStoreData'(sqlconnection, appno, custname)
 
-resultarray = result.split(', ')
+println(result)
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-    if ((resultarray[i]).equalsIgnoreCase('null')) {
-        (resultarray[i]) = ''
-    } else if ((resultarray[i]).equalsIgnoreCase('true')) {
-        (resultarray[i]) = 'Yes'
-    } else if ((resultarray[i]).equalsIgnoreCase('false')) {
-        (resultarray[i]) = 'No'
+for (i = 0; i <= (result.size() - 1); i++) {
+    if ((result[i]) == null) {
+        (result[i]) = ''
+    } else if ((result[i]).equalsIgnoreCase('true')) {
+        (result[i]) = 'Yes'
+    } else if ((result[i]).equalsIgnoreCase('false')) {
+        (result[i]) = 'No'
     }
 }
 
 int arrayindex = 0
 
 'verify contact person name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify job title'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(),
 	false, FailureHandling.OPTIONAL))
 
 'verify ID Type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify ID No'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify ID expired date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify Mobile Phone 1'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify email 1'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify gender'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify job position'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(),
 	false, FailureHandling.OPTIONAL))
 
 'verify birth place'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify birth date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify Customer Relationship'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify mobile 2'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify email 2'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(),
 	false, FailureHandling.OPTIONAL))
 
 int row = 27
 
-for (i = 14; i < resultarray.size(); i++) {
+for (i = 14; i < result.size(); i++) {
     'verify Address'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (resultarray[
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (result[
         i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 

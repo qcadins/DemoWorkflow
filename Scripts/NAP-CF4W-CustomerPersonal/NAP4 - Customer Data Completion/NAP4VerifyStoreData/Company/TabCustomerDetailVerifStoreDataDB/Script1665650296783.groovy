@@ -39,54 +39,52 @@ String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4CustomerDetailCompanyStoreData'(sqlconnection, appno, custname).replace(
-    'HEADER:', '').replace('[', '').replace(']', '')
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4CustomerDetailCompanyStoreData'(sqlconnection, appno, custname)
 
-resultarray = result.split(', ')
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultarray.size() - 1); i++) {
-    if ((resultarray[i]).equalsIgnoreCase('null')) {
-        (resultarray[i]) = ''
-    } else if ((resultarray[i]).equalsIgnoreCase('true')) {
-        (resultarray[i]) = 'Yes'
-    } else if ((resultarray[i]).equalsIgnoreCase('false')) {
-        (resultarray[i]) = 'No'
+for (i = 0; i <= (result.size() - 1); i++) {
+    if ((result[i]) == null) {
+        (result[i]) = ''
+    } else if ((result[i]).equalsIgnoreCase('true')) {
+        (result[i]) = 'Yes'
+    } else if ((result[i]).equalsIgnoreCase('false')) {
+        (result[i]) = 'No'
     }
 }
 
 int arrayindex = 0
 
 'verify Establishment Date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify No of Employee'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify Customer Group'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify is VIP'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify is AFF with MF'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify industry type code'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify Vip Notes'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (resultarray[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'jika nilai di confins tidak sesuai dengan db'

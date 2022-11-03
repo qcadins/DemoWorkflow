@@ -44,58 +44,56 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 17).length() != 0) {
-        String resultfinancialdata = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
+        ArrayList<String> resultfinancialdata = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
             sqlconnection, appno, custname, GlobalVariable.FindDataFile.getValue(index, 17))
 
-        String resultfinancialattr = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinancialAttrStoreData'(sqlconnection, 
+        ArrayList<String> resultfinancialattr = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinancialAttrStoreData'(sqlconnection, 
             appno, custname)
 
         int financialdataindex = 0
 
         int financialattr = 0
 
-        resultfinancialdataarray = resultfinancialdata.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
-
-        resultfinancialattrarray = resultfinancialattr.replace('HEADER:', '').replace('[', '').replace(']', '')
+        r
 
         'ganti value null > "" (String kosong)'
-        for (i = 0; i <= (resultfinancialdataarray.size() - 1); i++) {
-            if ((resultfinancialdataarray[i]).equalsIgnoreCase('null')) {
-                (resultfinancialdataarray[i]) = ''
-            } else if ((resultfinancialdataarray[i]).equalsIgnoreCase('true')) {
-                (resultfinancialdataarray[i]) = 'Yes'
-            } else if ((resultfinancialdataarray[i]).equalsIgnoreCase('false')) {
-                (resultfinancialdataarray[i]) = 'No'
+        for (i = 0; i <= (resultfinancialdata.size() - 1); i++) {
+            if ((resultfinancialdata[i]) == null) {
+                (resultfinancialdata[i]) = ''
+            } else if ((resultfinancialdata[i]).equalsIgnoreCase('true')) {
+                (resultfinancialdata[i]) = 'Yes'
+            } else if ((resultfinancialdata[i]).equalsIgnoreCase('false')) {
+                (resultfinancialdata[i]) = 'No'
             }
         }
         
         'verify monthly income'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 12).split(',').join(), (resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 12).split(',').join(), (resultfinancialdata[
                 financialdataindex++]).split(',').join(), false, FailureHandling.OPTIONAL))
 
         'verify other income'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 13).split(',').join(), (resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 13).split(',').join(), (resultfinancialdata[
                 financialdataindex++]).split(',').join(), false, FailureHandling.OPTIONAL))
 
         'verify source other income'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 14).split(',').join(), (resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 14).split(',').join(), (resultfinancialdata[
                 financialdataindex++]).split(',').join(), false, FailureHandling.OPTIONAL))
 
         'verify monthly installment'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 15).split(',').join(), (resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 15).split(',').join(), (resultfinancialdata[
                 financialdataindex++]).split(',').join(), false, FailureHandling.OPTIONAL))
 
         'verify monthly expense'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 16).split(',').join(), (resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 16).split(',').join(), (resultfinancialdata[
                 financialdataindex++]).split(',').join(), false, FailureHandling.OPTIONAL))
 
         'verify date as of'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 17).toUpperCase(), resultfinancialdataarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 17).toUpperCase(), resultfinancialdata[
                 financialdataindex++], false, FailureHandling.OPTIONAL))
 
-        if (i == GlobalVariable.NumofVerifStore) {
+        if (index == GlobalVariable.NumofVerifStore) {
             'verify Jumlah harta'
-            arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattrarray, 
+            arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattr, 
                     false, FailureHandling.OPTIONAL))
         }
     } else {
@@ -104,51 +102,51 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 }
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
-    if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 27).length() != 0) {
-        String resultbankacc = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnection, 
+    if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 27) != 0) {
+        ArrayList<String> resultbankacc = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnection, 
             appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 
         int bankacc = 0
 
-        resultbankaccarray = resultbankacc.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
+        
 
         'ganti value null > "" (String kosong)'
-        for (i = 0; i <= (resultbankaccarray.size() - 1); i++) {
-            if ((resultbankaccarray[i]).equalsIgnoreCase('null')) {
-                (resultbankaccarray[i]) = ''
-            } else if ((resultbankaccarray[i]).equalsIgnoreCase('true')) {
-                (resultbankaccarray[i]) = 'Yes'
-            } else if ((resultbankaccarray[i]).equalsIgnoreCase('false')) {
-                (resultbankaccarray[i]) = 'No'
+        for (i = 0; i <= (resultbankacc.size() - 1); i++) {
+            if ((resultbankacc[i]) == null) {
+                (resultbankacc[i]) = ''
+            } else if ((resultbankacc[i]).equalsIgnoreCase('true')) {
+                (resultbankacc[i]) = 'Yes'
+            } else if ((resultbankacc[i]).equalsIgnoreCase('false')) {
+                (resultbankacc[i]) = 'No'
             }
         }
         
         'verify bank code'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 23).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 23).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify bank branch'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 25).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 25).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify bank name'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 26).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 26).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify bank acc no'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 27).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 27).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify is default'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 28).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 28).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify is active'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 29).toUpperCase(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 29).toUpperCase(), (resultbankacc[
                 bankacc++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
         'verify begining balance'
-        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 30).split(',').join(), (resultbankaccarray[
+        arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 30).split(',').join(), (resultbankacc[
                 bankacc++]).split(',').join().toUpperCase(), false, FailureHandling.OPTIONAL))
 
         String bankstat = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4FinancialCheckBankStatStoreData'(sqlconnection, 
@@ -170,44 +168,42 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
             def creditarray = GlobalVariable.FindDataFile.getValue(index, 36).split(';', -1)
 
-            String resultbankstatdata = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4BankStatDataStoreData'(sqlconnection, 
+            ArrayList<String> resultbankstatdata = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4BankStatDataStoreData'(sqlconnection, 
                 appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 
-            resultbankstatdataarray = resultbankstatdata.replace('HEADER:', '').replace('[', '').replace(']', '').split(
-                ', ')
-
+            
             'ganti value null > "" (String kosong)'
-            for (i = 0; i <= (resultbankstatdataarray.size() - 1); i++) {
-                if ((resultbankstatdataarray[i]).equalsIgnoreCase('0')) {
-                    (resultbankstatdataarray[i]) = ''
+            for (i = 0; i <= (resultbankstatdata.size() - 1); i++) {
+                if ((resultbankstatdata[i]).equalsIgnoreCase('0')) {
+                    (resultbankstatdata[i]) = ''
                 }
             }
             
             int bankstatdb = 0
 
-            for (bankstatexcel = 0; bankstatexcel < (resultbankstatdataarray.size() / 6); bankstatexcel++) {
+            for (bankstatexcel = 0; bankstatexcel < (resultbankstatdata.size() / 6); bankstatexcel++) {
                 'verify month'
-                arrayMatch.add(WebUI.verifyMatch((montharray[bankstatexcel]).toUpperCase(), (resultbankstatdataarray[bankstatdb++]).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch((montharray[bankstatexcel]).toUpperCase(), (resultbankstatdata[bankstatdb++]).toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify year'
-                arrayMatch.add(WebUI.verifyMatch(yeararray[bankstatexcel], (resultbankstatdataarray[bankstatdb++]).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(yeararray[bankstatexcel], (resultbankstatdata[bankstatdb++]).toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify debit transaction'
-                arrayMatch.add(WebUI.verifyMatch(debittrscarray[bankstatexcel], (resultbankstatdataarray[bankstatdb++]).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(debittrscarray[bankstatexcel], (resultbankstatdata[bankstatdb++]).toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify debit'
-                arrayMatch.add(WebUI.verifyMatch((debitarray[bankstatexcel]).split(',').join(), (resultbankstatdataarray[
+                arrayMatch.add(WebUI.verifyMatch((debitarray[bankstatexcel]).split(',').join(), (resultbankstatdata[
                         bankstatdb++]).toUpperCase().split(',').join(), false, FailureHandling.OPTIONAL))
 
                 'verify credit transaction'
-                arrayMatch.add(WebUI.verifyMatch(credittrscarray[bankstatexcel], (resultbankstatdataarray[bankstatdb++]).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(credittrscarray[bankstatexcel], (resultbankstatdata[bankstatdb++]).toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify credit'
-                arrayMatch.add(WebUI.verifyMatch((creditarray[bankstatexcel]).split(',').join(), (resultbankstatdataarray[
+                arrayMatch.add(WebUI.verifyMatch((creditarray[bankstatexcel]).split(',').join(), (resultbankstatdata[
                         bankstatdb++]).split(',').join(), false, FailureHandling.OPTIONAL))
             }
         }

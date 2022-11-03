@@ -33,12 +33,10 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-String result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
 int arrayindexdb = 0
-
-resultarray = result.replace('HEADER:', '').replace('[', '').replace(']', '').split(', ')
 
 def datafilefinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
@@ -56,33 +54,33 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
-println(resultarray)
+println(result)
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
 	
 'verify subsidy from value type'
-arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
     FailureHandling.OPTIONAL))
 
 'verify subsidy from value'
-arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
 
 'verify allocation from'
-arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
     FailureHandling.OPTIONAL))
 
 'veirfy subsidy source'
-arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (resultarray[arrayindexdb++]).toUpperCase(), false, 
+arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
     FailureHandling.OPTIONAL))
 
 'verify subsidy amount'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]), 
     FailureHandling.OPTIONAL))
 
 'verify subsidy percentage'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (resultarray[arrayindexdb++]), 
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]), 
     FailureHandling.OPTIONAL))
 
 }
