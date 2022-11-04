@@ -553,12 +553,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'Edit')) {
         'call test case tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan copy app upload document
-            ) //dijalankan copy app referantor
-        //dijalankan copy app Application data
-        //dijalankan copy app Asset data
-        //dijalankan copy app insurance data
-        //dijalankan copy app financial data
-        //dijalankan copy app Term and condition
+            ) 
         //dijalankan copy app upload document
     } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(copyAppColm, 10).equalsIgnoreCase(
         'Yes')) {
@@ -582,6 +577,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
         }
+		verifyMatch()
     }
 } else {
     'untuk mendapatkan posisi copy app dari excel'
@@ -877,6 +873,31 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
         }
+		verifyMatch()
     }
+}
+
+public verifyMatch(){
+	'Koneksi database'
+	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
+	
+	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
+	
+	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Company'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 13))
+		
+	if(isMatch==true){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				9, GlobalVariable.NumofColm - 1, "Yes")
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				9, GlobalVariable.NumofColm - 1, "Yes")
+	}
+	else if(isMatch==false){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+				9, GlobalVariable.NumofColm - 1, "Edit")
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				9, GlobalVariable.NumofColm - 1, "Edit")
+	}
 }
 

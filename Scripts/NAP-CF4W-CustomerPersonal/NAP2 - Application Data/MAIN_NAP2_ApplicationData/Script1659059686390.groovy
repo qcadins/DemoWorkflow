@@ -596,6 +596,8 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
+			
+			verifyMatch()
 	}
 
 } else {
@@ -746,7 +748,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
-		WebUI.delay(5)
+		WebUI.delay(10)
 			
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
 			5, FailureHandling.OPTIONAL)) {
@@ -967,6 +969,32 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
+			
+		verifyMatch()
+		
 	}
 }
 
+public verifyMatch(){
+	'Koneksi database'
+	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
+	
+	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
+	
+	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	GlobalVariable.NumofColm, 13))
+		
+	if(isMatch==true){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+				9, GlobalVariable.NumofColm - 1, "Yes")
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				9, GlobalVariable.NumofColm - 1, "Yes")
+	}
+	else if(isMatch==false){
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+				9, GlobalVariable.NumofColm - 1, "Edit")
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				9, GlobalVariable.NumofColm - 1, "Edit")
+	}
+}

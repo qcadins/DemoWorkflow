@@ -1337,4 +1337,22 @@ public class CustomerDataVerif {
 		})
 		return listappdata
 	}
+	
+	@Keyword
+	public checkTotalInsurance(Sql instance, String appno){
+		String insurancedata
+		ArrayList <String> listCVG = new ArrayList<String>()
+		instance.eachRow(("SELECT a.TOTAL_CUST_MAIN_PREMI_AMT , a.TOTAL_CUST_ADD_PREMI_AMT , TOTAL_CUST_FEE_AMT, a.TOTAL_CUST_DISC_AMT , TOTAL_CUST_PREMI_AMT FROM APP_INS a JOIN APP b ON a.APP_ID = b.APP_ID  WHERE APP_NO = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				insurancedata = (row[i])
+				listCVG.add(insurancedata)
+			}
+		})
+		return listCVG
+	}
 }
