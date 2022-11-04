@@ -34,12 +34,12 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 //for test purposes
-//GlobalVariable.NumofReferantor = 2
+//GlobalVariable.CopyAppColm = 2
 
-WebUI.delay(7)
+custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
 ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
-		GlobalVariable.CopyAppColm, 12))
+		GlobalVariable.CopyAppColm, 12), custname)
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
 int arrayindex = 0
@@ -51,7 +51,7 @@ def bankaccount = GlobalVariable.BankAccount.split(' - ')
 println(bankaccount)
 println(result)
 
-for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 1); (GlobalVariable.NumofReferantor)++) {
+for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(
             GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 

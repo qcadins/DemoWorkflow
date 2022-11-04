@@ -199,6 +199,38 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				  
 							 continue
 						  }
+							  if(GlobalVariable.Role=="Testing"){
+								  NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
+								  
+								  def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+						  
+								  def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
+						  
+								  def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
+						  
+								  BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
+						  
+								  float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
+						  
+								  Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
+						  
+								  BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
+						  
+								  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+									  GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+									  int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
+						  
+									  'verify securitydeposit value equal'
+									  WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+								  } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+									  GlobalVariable.NumofAccessories, 18) == 'Amount') {
+									  float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
+						  
+									  'verify securitydeposit value equal'
+									  WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+								  }
+								  GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
+							  }
 							  
 						  'write to excel success'
 						  CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0,

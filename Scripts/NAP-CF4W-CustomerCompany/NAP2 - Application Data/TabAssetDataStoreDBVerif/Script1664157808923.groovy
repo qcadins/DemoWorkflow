@@ -110,14 +110,25 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-App
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 26).equalsIgnoreCase('Percentage')){
 'verify DP percent'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 27).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+'skip amount'
+arrayassetinfoindex++
+
+}else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 26).equalsIgnoreCase('Amount')){
+
+'skip percentage'
+arrayassetinfoindex++
+
 'verify DP Amount'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 28).replace(',',''), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+}
 'verify chasis number'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 29).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -142,6 +153,8 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-App
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 35).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		GlobalVariable.NumofColm, 37).equalsIgnoreCase('No')){
 'verify user name'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -149,8 +162,10 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-App
 'verify user relation'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
-
+if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+			GlobalVariable.NumofColm, 41).equalsIgnoreCase('No')){
 'verify owner type'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -186,6 +201,8 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-App
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 50).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+}
+			
 'verify copy address'
 if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')){

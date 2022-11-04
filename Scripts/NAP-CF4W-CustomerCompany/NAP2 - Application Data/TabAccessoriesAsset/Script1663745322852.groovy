@@ -40,17 +40,17 @@ GlobalVariable.TotalAccessoriesPrice = 0.00
 WebDriver driver = DriverFactory.getWebDriver()
 
 'arraylist referantor name yang gagal'
-ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
+ArrayList<Boolean> accessoriesnamefaileddelete = new ArrayList<Boolean>()
 
 'Jika copy app edit'
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase(
     'Edit')) {
-    ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+    ArrayList<Boolean> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
     //Edit & Delete Acc, edit jika ada data pada confins dan excel datafile, delete jika ada data pada confins tetapi tidak ada data pada excel
     'Pengecekan pada confins accessories ada datanya'
-    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
-        'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'), 
+            FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
         'Looping data accessories confins'
         for (int i = 1; i <= variable.size(); i++) {
             String newSupplierNameXpath = ('//*[@id=\'accessoriesData\']/div[2]/table/tbody/tr[' + i) + ']/td[2]/lib-uclookupgeneric/div/div/input'
@@ -116,8 +116,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             'Looping excel datafile'
             for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
             2); (GlobalVariable.NumofAccessories)++) {
-                
-				if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
+                if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
                     12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                         GlobalVariable.NumofColm, 13))) {
                     'Pengecekan assessories name dan supplier name pada confins sesuai dengan datafile excel'
@@ -166,37 +165,73 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                                 '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'get referantor name'
-                        	accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-							
+                            accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+
                             'Click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 
                             'click ok pada alert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
-							if(i == variable.size()){
-								if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									'count ulang table pada confins'		
-									variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								}else{
-									'add cust name failed kedalam array'
-									accessoriesnamefaileddelete.add(accessoriesnamebefore)
-								}
-							}else{
-								'get cust name sebelum delete'
-								accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-										
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											'count ulang table pada confins'		
-											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
-											'add cust name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-										}
-							}
-							i--
+                            if (i == variable.size()) {
+                                if (WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    accessoriesnamefaileddelete.add(accessoriesnamebefore)
+                                }
+                            } else {
+                                'get cust name sebelum delete'
+                                accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+
+                                if (WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    accessoriesnamefaileddelete.add(accessoriesnamebefore)
+                                }
+                            }
+                            
+                            i--
 
                             continue
+                        }
+                        
+                        if (GlobalVariable.Role == 'Testing') {
+                            NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
+
+                            def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+
+                            def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll(
+                                '\\s', '')
+
+                            def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
+
+                            BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
+
+                            float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
+
+                            Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
+
+                            BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
+
+                            if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+                                GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+                                int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
+
+                                'verify securitydeposit value equal'
+                                WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                            } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+                                GlobalVariable.NumofAccessories, 18) == 'Amount') {
+                                float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
+
+                                'verify securitydeposit value equal'
+                                WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                            }
+                            
+                            GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
                         }
                         
                         'write to excel success'
@@ -209,39 +244,39 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                     if (GlobalVariable.NumofAccessories == (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
                     2)) {
                         'Jika pada confins ada data accessories'
-                        if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
-                            'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-                        	'get referantor name'
-                        	accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-                        	
+                        if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'), 
+                                FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+                            'get referantor name'
+                            accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+
                             'Click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 
                             'click ok pada alert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
-							if(i == variable.size()){
-								if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									'count ulang table pada confins'		
-									variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								}else{
-									'add cust name failed kedalam array'
-									accessoriesnamefaileddelete.add(accessoriesnamebefore)
-								}
-							}else{
-								'get cust name sebelum delete'
-								accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-										
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											'count ulang table pada confins'		
-											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
-											'add cust name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-										}
-							}
-							i--
-							
+                            if (i == variable.size()) {
+                                if (WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    accessoriesnamefaileddelete.add(accessoriesnamebefore)
+                                }
+                            } else {
+                                'get cust name sebelum delete'
+                                accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+
+                                if (WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)) {
+                                    'count ulang table pada confins'
+                                    variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    accessoriesnamefaileddelete.add(accessoriesnamebefore)
+                                }
+                            }
+                            
+                            i--
                         } else {
                             break
                         }
@@ -251,17 +286,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         }
     }
     
-    if(accessoriesnamefaileddelete.size() > 0){
-    	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-    			'7a.Accessories', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-    	
-    	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-			 '7a.Accessories', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
-    	
-    	GlobalVariable.FlagWarning++
+    if (accessoriesnamefaileddelete.size() > 0) {
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
+            GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 1, 
+            GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+
+        (GlobalVariable.FlagWarning)++
     }
-		
-    ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+    
+    ArrayList<Boolean> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
     int countData = variableData.size()
 
@@ -337,8 +372,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                     'xpath', 'equals', newButtonDeleteXpath, true)
 
                 'Jika pada confins ada data accessories'
-                if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
-                    'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'), 
+                        FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     if (add == 1) {
                         'click lookup supplier'
                         WebUI.click(modifyObjectButtonSupplier, FailureHandling.OPTIONAL)
@@ -377,12 +412,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             'click ok pada alert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
-							
+                            if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                                'Write To Excel GlobalVariable.ReasonFailedDelete'
+                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            }
+                            
                             continue
                         }
                         
@@ -423,12 +458,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             'click ok pada alert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
-							
+                            if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                                'Write To Excel GlobalVariable.ReasonFailedDelete'
+                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            }
+                            
                             continue
                         }
                         
@@ -477,13 +512,49 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             'click ok pada alert'
                             WebUI.acceptAlert(FailureHandling.OPTIONAL)
-							
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
+
+                            if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                                'Write To Excel GlobalVariable.ReasonFailedDelete'
+                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            }
+                            
                             continue
+                        }
+                        
+                        if (GlobalVariable.RoleCompany == 'Testing') {
+                            NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
+
+                            def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+
+                            def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll(
+                                '\\s', '')
+
+                            def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
+
+                            BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
+
+                            float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
+
+                            Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
+
+                            BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
+
+                            if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
+                                18) == 'Percentage') {
+                                int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
+
+                                'verify securitydeposit value equal'
+                                WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
+                                GlobalVariable.NumofAccessories, 18) == 'Amount') {
+                                float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
+
+                                'verify securitydeposit value equal'
+                                WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                            }
+                            
+                            GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
                         }
                         
                         'write to excel success'
@@ -506,12 +577,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             add = 1
                         }
-                    } else {
+                    } //'Jika pada confins tidak ada data accessories'
+                    else {
                         break
                     }
-                    //'Jika pada confins tidak ada data accessories'
-                } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL), 
-                    'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+                } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'), 
+                        FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Add'))
 
@@ -551,13 +622,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         'click ok pada alert'
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
-						
-						if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
 
+                        if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                            'Write To Excel GlobalVariable.ReasonFailedDelete'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                        }
+                        
                         continue
                     }
                     
@@ -597,13 +668,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         'click ok pada alert'
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
-						
-						if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
 
+                        if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                            'Write To Excel GlobalVariable.ReasonFailedDelete'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                        }
+                        
                         continue
                     }
                     
@@ -652,13 +723,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         'click ok pada alert'
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
-						
-						if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-								'Write To Excel GlobalVariable.ReasonFailedDelete'
-								CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-							}
 
+                        if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                            'Write To Excel GlobalVariable.ReasonFailedDelete'
+                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                        }
+                        
                         continue
                     }
                     
@@ -703,8 +774,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                 }
             }
         }
-    }
-    //Jika copy app no
+    } //Jika copy app no
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
     10).equalsIgnoreCase('No')) {
     for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
@@ -803,13 +873,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                 'click ok pada alert'
                 WebUI.acceptAlert(FailureHandling.OPTIONAL)
-				
-                if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-                	'Write To Excel GlobalVariable.ReasonFailedDelete'
-                	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-                			'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-                }
 
+                if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                    'Write To Excel GlobalVariable.ReasonFailedDelete'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                        1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                }
+                
                 continue
             }
             
@@ -849,13 +919,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                 'click ok pada alert'
                 WebUI.acceptAlert(FailureHandling.OPTIONAL)
-				
-                if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-                	'Write To Excel GlobalVariable.ReasonFailedDelete'
-                	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-                			'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-                }
 
+                if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                    'Write To Excel GlobalVariable.ReasonFailedDelete'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                        1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                }
+                
                 continue
             }
             
@@ -904,13 +974,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                 'click ok pada alert'
                 WebUI.acceptAlert(FailureHandling.OPTIONAL)
-				
-                if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
-                	'Write To Excel GlobalVariable.ReasonFailedDelete'
-                	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-                			'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
-                }
 
+                if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
+                    'Write To Excel GlobalVariable.ReasonFailedDelete'
+                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                        1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                }
+                
                 continue
             }
             
@@ -956,5 +1026,4 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
         }
     }
 }
-
 
