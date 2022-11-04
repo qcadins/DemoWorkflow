@@ -66,10 +66,10 @@ if (GlobalVariable.Role == 'Data Entry') {
 
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
 
-        if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+        not_run: if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
             'call test case verify app view'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/VerifyAppView'), [:], FailureHandling.STOP_ON_FAILURE)
         }
