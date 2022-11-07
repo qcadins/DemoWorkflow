@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>CustomerModel</name>
+   <tag></tag>
+   <elementGuidId>194c9e65-fefd-48bf-9709-a474367173ee</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[2]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[2]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

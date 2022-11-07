@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>IndustryType</name>
+   <tag></tag>
+   <elementGuidId>70bfcd8f-73a3-4b12-b24e-74b5ad00a544</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[3]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[3]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

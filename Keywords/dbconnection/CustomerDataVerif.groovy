@@ -1320,24 +1320,7 @@ public class CustomerDataVerif {
 		return listlegaldocdata
 	}
 
-	@Keyword
-	public checkAppViewDataDB (Sql instance, String appno){
-		String appdata
-		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT APP_NO, ORI_OFFICE_NAME, CUST_NO, CUST_NAME, PROD_OFFERING_NAME, TENOR, FULL_ASSET_NAME, rml.REF_MASTER_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_ASSET aa WITH(NOLOCK) ON aa.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_CUST_MODEL_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1' AND rml.IS_ACTIVE = '1'"), {  row ->
 
-			ResultSetMetaData rsmd = row.getMetaData()
-			colmcount = rsmd.getColumnCount()
-
-
-			for(i = 0 ; i < colmcount ; i++){
-				appdata = (row[i])
-				listappdata.add(appdata)
-			}
-		})
-		return listappdata
-	}
-	
 	@Keyword
 	public checkTotalInsurance(Sql instance, String appno){
 		String insurancedata

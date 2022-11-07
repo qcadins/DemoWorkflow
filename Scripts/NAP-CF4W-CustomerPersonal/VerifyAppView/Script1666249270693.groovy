@@ -40,7 +40,7 @@ appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
     GlobalVariable.NumofColm, 13)
 
 'click menu app inquiry'
-WebUI.click(findTestObject('AppView/MENU APP INQUIRY'))
+WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 
 //Verify sort & paging
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
@@ -59,7 +59,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     ArrayList<Boolean> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
     'Klik header appno'
-    WebUI.click(findTestObject('Object Repository/AppView/span_AppNo'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
 
     'Verif tidak ada alert yang muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -96,9 +96,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header agreement no 2x'
-    WebUI.click(findTestObject('Object Repository/AppView/span_AgreementNo'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
 
-    WebUI.click(findTestObject('Object Repository/AppView/span_AgreementNo'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -106,7 +106,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_AgreementNo'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementNo'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[2]/span', true)
 
@@ -119,9 +119,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header customer no'
-    WebUI.click(findTestObject('Object Repository/AppView/span_CustNo'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
 
-    WebUI.click(findTestObject('Object Repository/AppView/span_CustNo'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -129,7 +129,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_CustNo'), 'xpath', 'equals', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustNo'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[3]/span', true)
 
@@ -142,14 +142,14 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header customer name'
-    WebUI.click(findTestObject('Object Repository/AppView/span_CustName'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
 
-    WebUI.click(findTestObject('Object Repository/AppView/span_CustName'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_CustName'), 'xpath', 'equals', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustName'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[4]/span', true)
 
@@ -162,7 +162,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header PO Name'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ProdOfferingName'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -170,7 +170,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ProdOfferingName'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[5]/span', true)
 
@@ -183,12 +183,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header poname'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ProdOfferingName'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ProdOfferingName'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[5]/span', true)
 
@@ -201,7 +201,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header app date'
-    WebUI.click(findTestObject('Object Repository/AppView/span_Appdate'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -209,7 +209,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appdate'), 'xpath', 'equals', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[6]/span', true)
 
@@ -222,12 +222,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header appdate'
-    WebUI.click(findTestObject('Object Repository/AppView/span_Appdate'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appdate'), 'xpath', 'equals', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[6]/span', true)
 
@@ -240,7 +240,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header NAP Submitted'
-    WebUI.click(findTestObject('Object Repository/AppView/span_NAPSubmitted'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -248,7 +248,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_NAPSubmitted'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
@@ -261,12 +261,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header NAP Submitted'
-    WebUI.click(findTestObject('Object Repository/AppView/span_NAPSubmitted'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_NAPSubmitted'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
@@ -279,9 +279,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header agreement step'
-    WebUI.click(findTestObject('Object Repository/AppView/span_AgreementStep'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_AgreementStep'))
 
-    WebUI.click(findTestObject('Object Repository/AppView/span_AgreementStep'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_AgreementStep'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -289,7 +289,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_AgreementStep'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[8]/span', true)
 
@@ -302,9 +302,9 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header contract status'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ContractStatus'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ContractStatus'))
 
-    WebUI.click(findTestObject('Object Repository/AppView/span_ContractStatus'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ContractStatus'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -312,7 +312,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ContractStatus'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ContractStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[9]/span', true)
 
@@ -325,7 +325,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header application step'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStep'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -333,7 +333,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ApplicationStep'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[10]/span', true)
 
@@ -346,12 +346,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header application step'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStep'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ApplicationStep'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[10]/span', true)
 
@@ -364,7 +364,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header application status'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStatus'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -372,7 +372,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ApplicationStatus'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[11]/span', true)
 
@@ -385,12 +385,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header application status'
-    WebUI.click(findTestObject('Object Repository/AppView/span_ApplicationStatus'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_ApplicationStatus'), 'xpath', 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[11]/span', true)
 
@@ -403,7 +403,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Klik header customer checking step'
-    WebUI.click(findTestObject('Object Repository/AppView/span_CustomerCheckingStep'))
+    WebUI.click(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'))
 
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
@@ -411,7 +411,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_CustomerCheckingStep'), 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'), 
             'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[12]/span', true)
 
@@ -424,7 +424,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.verifyEqual(isSorted, true)
 
     'Ambil count data dari confins'
-    String[] textCountData = WebUI.getText(findTestObject('Object Repository/AppView/countdata')).replace(' ', '').replace(
+    String[] textCountData = WebUI.getText(findTestObject('AppView/MainInformation/countdata')).replace(' ', '').replace(
         ':', ';').split(';')
 
     Integer countDt = Integer.parseInt(textCountData[1])
@@ -432,10 +432,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Jika count data secara keseluruhan dari confins lebih besar daripada data di page 1'
     if (countDt > rowData.size()) {
         'Klik page 2'
-        WebUI.click(findTestObject('Object Repository/AppView/nextPage'))
+        WebUI.click(findTestObject('AppView/MainInformation/nextPage'))
 
         'Verify page 2 active'
-        WebUI.verifyElementHasAttribute(findTestObject('Object Repository/AppView/nextPage'), 'aria-current', 2)
+        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2)
 
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
@@ -455,10 +455,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         WebUI.verifyEqual(isPaging, true)
 		
 		'Klik button prev'
-		WebUI.click(findTestObject('Object Repository/AppView/button_Prev'))
+		WebUI.click(findTestObject('AppView/MainInformation/button_Prev'))
 		
 		'Verify page 1 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/AppView/pageOne'),
+		WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'),
 			'aria-current', 2)
 		
 		listApp = listString
@@ -473,10 +473,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 		WebUI.verifyEqual(isPaging, true)
 		
 		'Klik button next'
-		WebUI.click(findTestObject('Object Repository/AppView/button_Next'))
+		WebUI.click(findTestObject('AppView/MainInformation/button_Next'))
 		
 		'Verify page 2 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/AppView/nextPage'),
+		WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'),
 			'aria-current', 2)
 		
 		listApp = listString
@@ -492,19 +492,19 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     }
 	
 	'Klik button page 1'
-	WebUI.click(findTestObject('Object Repository/AppView/pageOne'))
+	WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 	
 	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(),true)
 }
 
 'input app no'
-WebUI.setText(findTestObject('AppView/input_AppNo'), appno)
+WebUI.setText(findTestObject('AppView/MainInformation/input_AppNo'), appno)
 
 'click button search'
-WebUI.click(findTestObject('AppView/button_Search'))
+WebUI.click(findTestObject('AppView/MainInformation/button_Search'))
 
 'click hyperlink'
-WebUI.click(findTestObject('AppView/hyperlink_APPNO'))
+WebUI.click(findTestObject('AppView/MainInformation/hyperlink_APPNO'))
 
 'swicth window ke tab baru'
 WebUI.switchToWindowIndex('1')
@@ -517,7 +517,7 @@ WebUI.delay(5)
 
 ArrayList<Boolean> result = new ArrayList<Boolean>()
 
-result = CustomKeywords.'dbconnection.CustomerDataVerif.checkAppViewDataDB'(sqlconnection, appno)
+result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {
@@ -529,23 +529,23 @@ for (i = 0; i < result.size(); i++) {
 int index = 0
 
 'verify app no'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject('Object Repository/AppView/Label App No')).toString().toUpperCase(), 
+CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject('AppView/MainInformation/Label App No')).toString().toUpperCase(), 
     (result[index++]).toString().toUpperCase())
 
 'verify office'
 CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(4, 1).toUpperCase(), 
-    WebUI.getText(findTestObject('Object Repository/AppView/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase())
+    WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase())
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 14) == 'LookUp') {
     'verify customer no'
     CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Label Cust No')).toString().toUpperCase(), 
+            GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Cust No')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase())
 
     'verify customer name'
     CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Name')).toString().toUpperCase(), 
+            GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase())
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 14) == 'Input Data') {
@@ -555,26 +555,26 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
 	
     'verify customer name'
     CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Name')).toString().toUpperCase(), 
+            GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase())
 }
 
 'verify product offering'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Product Offering Name')).toString().toUpperCase(), 
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Product Offering Name')).toString().toUpperCase(), 
     (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify tenor'
 CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
-        GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Tenor')).toString().toUpperCase(), 
+        GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Tenor')).toString().toUpperCase(), 
     (result[index++]).toString().toUpperCase())
 
 'verify asset name'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset Name')).toString().toUpperCase(), (result[
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Asset Name')).toString().toUpperCase(), (result[
     index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
 
 'verify customer model'
 CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 25).toUpperCase(), WebUI.getText(findTestObject('Object Repository/AppView/Customer Model')).toString().toUpperCase(), 
+        GlobalVariable.NumofColm, 25).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Model')).toString().toUpperCase(), 
     (result[index++]).toString().toUpperCase())
 
 'close window index 1'

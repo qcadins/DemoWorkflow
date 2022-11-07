@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>AffiliationMF</name>
+   <tag></tag>
+   <elementGuidId>0ea4e094-0517-47d6-9c9c-6e93e4912841</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[7]/span/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[7]/span/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>NumofEmployee</name>
+   <tag></tag>
+   <elementGuidId>b909b87a-f5c9-45e8-9a98-cea94e32850f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[5]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustCompanyMainDataId&quot;]/div/div[5]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>
