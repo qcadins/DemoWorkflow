@@ -28,9 +28,9 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-ArrayList<Boolean> custnamefaileddelete = new ArrayList<Boolean>()
+ArrayList<String> custnamefaileddelete = new ArrayList<String>()
 
-ArrayList<Boolean> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
 for (i = 1; i <= variableData.size(); i++) {
     'modify object guarantor name'
