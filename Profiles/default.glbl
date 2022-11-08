@@ -579,4 +579,9 @@
       <initValue>0.00</initValue>
       <name>TotalVat</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Rule\\FinancialRate.xlsx'</initValue>
+      <name>FinancialRateRulePath</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

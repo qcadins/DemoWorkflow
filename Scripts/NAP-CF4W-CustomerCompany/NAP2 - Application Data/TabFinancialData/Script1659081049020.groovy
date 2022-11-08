@@ -475,6 +475,30 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 	}
 }
 
+if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == 'Yes' && GlobalVariable.FirstTimeEntry == "Yes"){
+	
+	ArrayList<String> result = new ArrayList<String>()
+	
+	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
+	result = CustomKeywords.'financialData.verifRate.verifyFinancialRate'(sqlConnectionLOS, appNo)
+	
+	'Verify default effective rate'
+	WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))
+	
+	'Verify default supplier rate'
+	WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))
+	
+	'Verify def/lock effective rate'
+	if(result.get(2)=="LOCK"){
+		'Verify effective rate terlock'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)
+	}
+	else if(result.get(2)=="DEF"){
+		'Verify effetcive rate tidak terlock/dapat diinput'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)
+	}
+}
+
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 	'select Rate type'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_RateType'),
@@ -499,6 +523,12 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 
 	GlobalVariable.Flatrate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
 		'value', FailureHandling.OPTIONAL)
+}
+
+'Pengecekan supplier rate tidak terlock'
+if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'disabled',1,FailureHandling.OPTIONAL)){
+	'Input supplier rate'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),datafilefinancial.getValue(GlobalVariable.NumofColm, 50))
 }
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
