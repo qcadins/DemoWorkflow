@@ -600,7 +600,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
-			
+			'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah'
 			verifyMatch()
 	}
 
@@ -973,31 +973,37 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
-			
+		'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah'
 		verifyMatch()
 		
 	}
 }
 
+'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database)'
 public verifyMatch(){
 	'Koneksi database'
 	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
 	
 	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
 	
+	'verify tab insurance, life insurance & financial, cek apakah ada nilai yang berubah, bernilai true jika tidak ada nilai yang berubah, false jika ada salah satu nilai yang berubah'
 	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 13))
 		
 	if(isMatch==true){
+			'Write to excel sheet commission copy app yes'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 				9, GlobalVariable.NumofColm - 1, "Yes")
+			'Write to excel sheet reserved fund copy app yes'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				9, GlobalVariable.NumofColm - 1, "Yes")
 	}
 	else if(isMatch==false){
+			'Write to excel sheet commission copy app edit'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 				9, GlobalVariable.NumofColm - 1, "Edit")
+			'Write to excel sheet reserved fund copy app edit'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				9, GlobalVariable.NumofColm - 1, "Edit")
 	}
