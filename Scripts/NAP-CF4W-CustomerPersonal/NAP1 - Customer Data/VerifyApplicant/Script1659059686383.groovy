@@ -23,15 +23,17 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-C
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
+'Looping delay untuk handling copy app selama +- 2 menit'
 for(int i = 1;i<=8;i++){
 	'click button search'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/button_Search'))
 	
-	
+	'Pengecekan ada/tidak adanya button action pencil yang muncul'
 	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'),1,FailureHandling.OPTIONAL)){
 		break
 	}
 	else{
+		'delay 14 detik'
 		WebUI.delay(14)
 	
 	}
