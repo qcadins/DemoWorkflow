@@ -194,8 +194,11 @@ if (GuarantorArray.size() > 0) {
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
-                                    'verify match GuarantorNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false)
+									if(GlobalVariable.RoleCompany == "Testing"){
+										'verify match GuarantorNo'
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false))
+									}
+                                    
 
                                     break
                                 }
@@ -225,8 +228,11 @@ if (GuarantorArray.size() > 0) {
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
-                                    'verify match GuarantorNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false)
+									if(GlobalVariable.RoleCompany == "Testing"){
+										'verify match GuarantorNo'
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false))
+									}
+                                    
 
                                     break
                                 }
@@ -267,9 +273,12 @@ if (GuarantorArray.size() > 0) {
                                     'click selct'
                                     WebUI.click(modifyselectGuarantorPersonal, FailureHandling.OPTIONAL)
 
-                                    'verify match ApplicantNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false)
+									if(GlobalVariable.RoleCompany == "Testing"){
+										'verify match ApplicantNo'
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+											false))
+									}
+                                    
 
                                     break
                                 }
@@ -301,9 +310,12 @@ if (GuarantorArray.size() > 0) {
                                     'click select application in process'
                                     WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
 
-                                    'verify match ApplicantNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false)
+									if(GlobalVariable.RoleCompany == "Testing"){
+										'verify match ApplicantNo'
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+											false))
+									}
+                                    
 
                                     break
                                 }
@@ -320,8 +332,11 @@ if (GuarantorArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                            'verify match ApplicantNo'
-                            WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+							if(GlobalVariable.RoleCompany == "Testing"){
+								'verify match ApplicantNo'
+								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+							}
+                            
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
@@ -337,18 +352,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -358,18 +379,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
                                 'click select applcation in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             }
                         }
                     } else if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('Select SimilarData')) {
@@ -383,18 +410,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -407,14 +440,20 @@ if (GuarantorArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								}
+                                
                             } else {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								}
+                                
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -424,18 +463,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             }
                         }
                     } else {
@@ -449,18 +494,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										false))
+								}
+                                
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -473,14 +524,20 @@ if (GuarantorArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								}
+                                
                             } else {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                                'verify match ApplicantNo'
-                                WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false, FailureHandling.OPTIONAL)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match ApplicantNo'
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								}
+                                
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -490,18 +547,24 @@ if (GuarantorArray.size() > 0) {
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
-                                'verify match CustomerNo'
-                                WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false)
+								if(GlobalVariable.RoleCompany == "Testing"){
+									'verify match CustomerNo'
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
+										false))
+								}
+                                
                             }
                         }
                     }
@@ -516,4 +579,17 @@ if (GuarantorArray.size() > 0) {
         
     }
 }
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}
+
 
