@@ -24,7 +24,7 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class EditNAP {
-	
+
 	int colmcount
 	int i
 
