@@ -312,19 +312,31 @@ for(OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++){
 ArrayList<String> resultOtherAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkOtherAttrData'(sqlconnection, appno)
 
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Period AML')).toUpperCase(), resultOtherAttrList[12].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Period AML')).toUpperCase(), resultOtherAttrList[11].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Source AML')).toUpperCase(), resultOtherAttrList[11].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Source AML')).toUpperCase(), resultOtherAttrList[10].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/CSP USL Source')).toUpperCase(), resultOtherAttrList[9].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/CSP USL Source')).toUpperCase(), resultOtherAttrList[6].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Payment Type')).toUpperCase(), resultOtherAttrList[10].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Department AML')).toUpperCase(), resultOtherAttrList[5].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/KYC Report AMl')).toUpperCase(), resultOtherAttrList[8].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Department AML2')).toUpperCase(), resultOtherAttrList[5].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Exceed BMPK')).toUpperCase(), resultOtherAttrList[2].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Payment Type')).toUpperCase(), resultOtherAttrList[7].toUpperCase(), false)
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Violate BMPK')).toUpperCase(), resultOtherAttrList[3].toUpperCase(), false)
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/KYC Report AML')).toUpperCase(), resultOtherAttrList[8].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Attend')).toUpperCase(), resultOtherAttrList[9].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Aff With MF SLIK')).toUpperCase(), resultOtherAttrList[4].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Debtor Group SLIK')).toUpperCase(), resultOtherAttrList[1].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Exceed BMPK')).toUpperCase(), resultOtherAttrList[3].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Is Split Treasure')).toUpperCase(), resultOtherAttrList[0].toUpperCase(), false)
+
+WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Violate BMPK')).toUpperCase(), resultOtherAttrList[2].toUpperCase(), false)
 
 
 //

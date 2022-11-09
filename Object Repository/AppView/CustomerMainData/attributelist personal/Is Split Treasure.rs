@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Exceed BMPK</name>
+   <name>Is Split Treasure</name>
    <tag></tag>
-   <elementGuidId>00821dd6-de90-4715-aead-26661770c25e</elementGuidId>
+   <elementGuidId>98b6abd0-2912-4fd8-8561-8717dfb666a2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

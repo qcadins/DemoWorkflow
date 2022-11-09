@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Exceed BMPK</name>
+   <name>Attend</name>
    <tag></tag>
-   <elementGuidId>00821dd6-de90-4715-aead-26661770c25e</elementGuidId>
+   <elementGuidId>24f8d937-2886-4f2d-a275-37de9b3cec8c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[12]/label[2]/span</value>
+         <value>//*[@id=&quot;attrList&quot;]/div[8]/label[2]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[12]/label[2]/span</value>
+      <value>//*[@id=&quot;attrList&quot;]/div[8]/label[2]/span</value>
    </webElementProperties>
 </WebElementEntity>

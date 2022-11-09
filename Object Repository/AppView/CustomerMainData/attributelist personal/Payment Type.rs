@@ -3,11 +3,11 @@
    <description></description>
    <name>Payment Type</name>
    <tag></tag>
-   <elementGuidId>5e60f016-d893-49bd-bfc1-28576f3b2d58</elementGuidId>
+   <elementGuidId>c3c594b2-9e52-427e-91fd-3a81f5a185c7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[4]/label[2]/span</value>
+         <value>//*[@id=&quot;attrList&quot;]/div[6]/label[2]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[4]/label[2]/span</value>
+      <value>//*[@id=&quot;attrList&quot;]/div[6]/label[2]/span</value>
    </webElementProperties>
 </WebElementEntity>
