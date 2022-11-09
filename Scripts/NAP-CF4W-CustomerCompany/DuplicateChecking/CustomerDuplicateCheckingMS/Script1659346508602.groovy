@@ -196,7 +196,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                     'verify match ManagementShareholderNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newManagementShareholderNoValue, 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -230,7 +230,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                     'verify match ManagementShareholderNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newManagementShareholderNoValue, 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -283,7 +283,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     'get ManagementShareholder name'
                                     String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
@@ -339,7 +339,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -375,7 +375,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -384,7 +384,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'), 
                             5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
@@ -398,7 +398,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -407,7 +407,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     } else if ((ManagementShareholderActionArray[(m - 1)]).equalsIgnoreCase('Select SimilarData')) {
@@ -423,7 +423,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -432,7 +432,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -466,7 +466,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -475,7 +475,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     } else if ((ManagementShareholderActionArray[(m - 1)]).equalsIgnoreCase('Select ApplicationInProcess')) {
@@ -491,7 +491,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -500,7 +500,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -534,7 +534,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (counttd == 5) {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -543,7 +543,7 @@ if (ManagementShareholderArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     }

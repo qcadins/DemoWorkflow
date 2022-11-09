@@ -167,7 +167,7 @@ if (GuarantorArray.size() > 0) {
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
                                     'verify match GuarantorNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false, FailureHandling.OPTIONAL)
+                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false)
 
                                     break
                                 }
@@ -198,7 +198,7 @@ if (GuarantorArray.size() > 0) {
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
                                     'verify match GuarantorNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false, FailureHandling.OPTIONAL)
+                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false)
 
                                     break
                                 }
@@ -242,7 +242,7 @@ if (GuarantorArray.size() > 0) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -276,7 +276,7 @@ if (GuarantorArray.size() > 0) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -312,7 +312,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -321,7 +321,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -333,7 +333,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -342,7 +342,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     } else if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('Select SimilarData')) {
@@ -358,7 +358,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -367,7 +367,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
@@ -399,7 +399,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -408,7 +408,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     } else {
@@ -424,7 +424,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
@@ -433,7 +433,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
@@ -465,7 +465,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else {
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
@@ -474,7 +474,7 @@ if (GuarantorArray.size() > 0) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(), 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     }

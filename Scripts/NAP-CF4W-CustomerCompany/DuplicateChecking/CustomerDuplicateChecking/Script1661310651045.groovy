@@ -420,7 +420,7 @@ if (DupCheckStatus == true) {
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
                                     'verify match CustomerNo'
-                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false, FailureHandling.OPTIONAL)
+                                    WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false)
 
                                     break
                                 }
@@ -460,7 +460,7 @@ if (DupCheckStatus == true) {
 
                                     'verify match ApplicantNo'
                                     WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(), 
-                                        false, FailureHandling.OPTIONAL)
+                                        false)
 
                                     break
                                 }
@@ -493,7 +493,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), newCustomerNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
@@ -504,7 +504,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), newApplicantNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
@@ -517,7 +517,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), newCustomerNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (GlobalVariable.RoleCompany == 'Testing') {
                                 'click button cancel'
                                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
@@ -541,7 +541,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), newApplicantNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         } else if (datafiledupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInprocessCompany'), 
@@ -554,7 +554,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match ApplicantNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), newApplicantNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             } else if (GlobalVariable.RoleCompany == 'Testing') {
                                 'click button cancel'
                                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
@@ -578,7 +578,7 @@ if (DupCheckStatus == true) {
 
                                 'verify match CustomerNo'
                                 WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), newCustomerNoValue, 
-                                    false, FailureHandling.OPTIONAL)
+                                    false)
                             }
                         }
                     }
