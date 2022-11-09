@@ -3,11 +3,11 @@
    <description></description>
    <name>Violate BMPK</name>
    <tag></tag>
-   <elementGuidId>e0250f99-2a89-43b4-bc29-208e5315d347</elementGuidId>
+   <elementGuidId>f2f97c75-90c1-4266-aea1-0cc72f3d8e2a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[7]/label[2]/span</value>
+         <value>//*[@id=&quot;attrList&quot;]/div[13]/label[2]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[7]/label[2]/span</value>
+      <value>//*[@id=&quot;attrList&quot;]/div[13]/label[2]/span</value>
    </webElementProperties>
 </WebElementEntity>

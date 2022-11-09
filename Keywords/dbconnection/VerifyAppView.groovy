@@ -65,7 +65,7 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
-	
+
 	@Keyword
 	public checkCustomerMainDataPersonal (Sql instance, String appno){
 		String appdata
@@ -119,7 +119,7 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
-	
+
 	@Keyword
 	public checkFamData (Sql instance, String appno){
 		String appdata
@@ -155,8 +155,8 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
-	
-	
+
+
 	@Keyword
 	public checkEmergencyContactData (Sql instance, String appno){
 		String appdata
@@ -192,7 +192,7 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
-	
+
 	@Keyword
 	public checkFinancialDataPersonal (Sql instance, String appno){
 		String appdata

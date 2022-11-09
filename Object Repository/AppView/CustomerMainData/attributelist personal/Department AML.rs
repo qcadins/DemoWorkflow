@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>KYC Report AMl</name>
+   <name>Department AML</name>
    <tag></tag>
-   <elementGuidId>3f62ba58-77db-41a9-9bdc-b4d41f252875</elementGuidId>
+   <elementGuidId>5e60f016-d893-49bd-bfc1-28576f3b2d58</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[5]/label[2]/span</value>
+         <value>//*[@id=&quot;attrList&quot;]/div[4]/label[2]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[5]/label[2]/span</value>
+      <value>//*[@id=&quot;attrList&quot;]/div[4]/label[2]/span</value>
    </webElementProperties>
 </WebElementEntity>
