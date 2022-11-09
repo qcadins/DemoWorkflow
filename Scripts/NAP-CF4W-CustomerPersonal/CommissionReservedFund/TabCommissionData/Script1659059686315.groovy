@@ -348,13 +348,17 @@ if (variableSupp.size() > 0) {
 				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
 				if ((amt != 0) && (pctg != 0)) {
 					'Verify hasil hitungan percentage dengan amount'
-					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
 	
 					'Verify hasil hitungan amount dengan percentage'
-					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-				} else if ((amt == 0) || (pctg == 0)) {
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
+				} else if ((amt == 0) || (pctg == 0) && allocateCommission!="PACKET") {
 					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(amt), Math.round(pctg)), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
 				}
 			}
             
@@ -642,13 +646,19 @@ if (variableSuppEmp.size() > 0) {
 				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
 				if ((amt != 0) && (pctg != 0)) {
 					'Verify hasil hitungan percentage dengan amount'
-					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
 	
 					'Verify hasil hitungan amount dengan percentage'
-					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-				} else if ((amt == 0) || (pctg == 0)) {
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100),'13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
+				} else if ((amt == 0) || (pctg == 0) && allocateCommission!="PACKET") {
 					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(amt), Math.round(pctg)), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
 				}
 			}
             
@@ -905,13 +915,19 @@ if (variableRef.size() > 0) {
 				'Pengecekan jika amount dan percentage keduanya bernilai 0 atau tidak'
 				if ((amt != 0) && (pctg != 0)) {
 					'Verify hasil hitungan percentage dengan amount'
-					WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt, FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round((pctg / 100) * incomeInfoAmt), amt),'13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
 	
 					'Verify hasil hitungan amount dengan percentage'
-					WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100, FailureHandling.OPTIONAL)
-				} else if ((amt == 0) || (pctg == 0)) {
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(((amt / incomeInfoAmt) * 100) * 100) / 100, Math.round(pctg * 100) / 100), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
+				} else if ((amt == 0) || (pctg == 0) && allocateCommission!="PACKET") {
 					'Verify amount dan percentage keduanya bernilai sama yaitu nol'
-					WebUI.verifyEqual(Math.round(amt), Math.round(pctg), FailureHandling.OPTIONAL)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(amt), Math.round(pctg)), '13.TabCommissionData',
+						GlobalVariable.NumofColm)
+					
 				}
 			}
             
@@ -1010,3 +1026,17 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
     }
 } 
+	
+	
+	
+public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					0, numofcolm-1, GlobalVariable.StatusFailed)
+
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+			GlobalVariable.FlagFailed=1
+	}
+}

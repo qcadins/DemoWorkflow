@@ -86,7 +86,7 @@ public class verifIncomeInfoBasedOnRule {
 	@Keyword
 	public checkDiffRateAmtValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select DIFF_RATE_AMT from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on afd.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select CASE WHEN DIFF_RATE_AMT<0 THEN 0 ELSE DIFF_RATE_AMT END from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on afd.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value

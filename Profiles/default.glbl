@@ -266,6 +266,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\FinancialRate.xlsx'</initValue>
+      <name>FinancialRateRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>FindDataFile</name>
    </GlobalVariableEntity>
@@ -413,6 +418,11 @@
       <description></description>
       <initValue>'Failed Store DB'</initValue>
       <name>ReasonFailedStoredDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Match / Equal'</initValue>
+      <name>ReasonFailedVerifyEqualOrMatch</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -578,10 +588,5 @@
       <description></description>
       <initValue>0.00</initValue>
       <name>TotalVat</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Rule\\FinancialRate.xlsx'</initValue>
-      <name>FinancialRateRulePath</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
