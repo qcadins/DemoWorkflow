@@ -19,6 +19,15 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathAppInquiryCompany
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
+
 String servername = findTestData('Login/Login').getValue(1, 9)
 
 String instancename = findTestData('Login/Login').getValue(2, 9)
@@ -46,40 +55,39 @@ int index = 0
 println(resultCustomerMainData)
 
 'verify cust name'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
-    (resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
+    (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify industry type'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/IndustryType')).toString().toUpperCase(),
-	(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/IndustryType')).toString().toUpperCase(),
+	(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify num of employee'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NumofEmployee')).toString().toUpperCase(),
-	(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NumofEmployee')).toString().toUpperCase(),
+	(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify affiliation MF'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/AffiliationMF')).toString().toUpperCase(),
-	(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/AffiliationMF')).toString().toUpperCase(),
+	(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify is VIP'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/isVIP')).toString().toUpperCase(),
-	(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/isVIP')).toString().toUpperCase(),
+	(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify Cust model'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerModel')).toString().toUpperCase(), (resultCustomerMainData[
-                                                                                                                                                              index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerModel')).toString().toUpperCase(), (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify company type'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CompanyType')).toString().toUpperCase(),
-		(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CompanyType')).toString().toUpperCase(),
+		(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify NPWP'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NPWP')).toString().toUpperCase(),
-		(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NPWP')).toString().toUpperCase(),
+		(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify Establishment date'
-WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/EstablishmentDate')).toString().toUpperCase(),
-		(resultCustomerMainData[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/EstablishmentDate')).toString().toUpperCase(),
+		(resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 
 'verify Address'
@@ -112,15 +120,15 @@ for(addrindex = 1; addrindex <= variableData.size(); addrindex++){
 	modifyNewPhone2 = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="CustAddress"]/table/tbody/tr[' + addrindex) + ']/td[5]', true)
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewAddressType).toUpperCase(), resultAddress[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddressType).toUpperCase(), resultAddress[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewAddress).toUpperCase(), resultAddress[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddress).toUpperCase(), resultAddress[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewBuildingOwnership).toUpperCase(), resultAddress[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBuildingOwnership).toUpperCase(), resultAddress[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewPhone1).toUpperCase(), resultAddress[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPhone1).toUpperCase(), resultAddress[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewPhone2).toUpperCase(), resultAddress[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPhone2).toUpperCase(), resultAddress[index++].toUpperCase(), false))
 	
 }
 
@@ -159,17 +167,17 @@ for(MSindex = 1; MSindex <= variableData.size(); MSindex++){
 		'xpath', 'equals', ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[7]', true)
 	
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewMSName).toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMSName).toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewMSType).toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMSType).toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewShare).replace(' %', '').toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewShare).replace(' %', '').toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewisActive).toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisActive).toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewisOwner).toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner).toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewisSigner).toUpperCase(), resultMS[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner).toUpperCase(), resultMS[index++].toUpperCase(), false))
 	
 }
 
@@ -183,7 +191,7 @@ for(cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++){
 	modifyNewcontactpersonobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="AppCustComapnyContactPersonId"]/div/div[' + cpIndex) + ']/span/div/div[2]', true)
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewcontactpersonobject).toUpperCase(), resultCP[cpIndex - 1].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewcontactpersonobject).toUpperCase(), resultCP[cpIndex - 1].toUpperCase(), false))
 	
 }
 
@@ -201,7 +209,7 @@ for(finIndex = 1; finIndex <= variableData.size(); finIndex++){
 	modifyNewfinancialDataDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + finIndex) + ']/td[1]', true)
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataDate).toUpperCase(), resultFindata[finIndex - 1].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataDate).toUpperCase(), resultFindata[finIndex - 1].toUpperCase(), false))
 	
 }
 
@@ -215,7 +223,7 @@ for(finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++){
 	modifyNewfinancialDataAttr = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="FinAttrInfoId"]/div[' + finIndex) + ']/label[2]', true)
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace(".00",'').toUpperCase(), resultFindataattr[finIndex - 1].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace(".00",'').toUpperCase(), resultFindataattr[finIndex - 1].toUpperCase(), false))
 	
 }
 
@@ -237,11 +245,11 @@ for(int bankIndex = 0; bankIndex < resultBankAcc.size()/3; bankIndex++){
 	modifyNewBeginningBalance = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="BankAccInfo' + bankIndex) + '"]/div[2]/table/tbody/tr[1]/td[7]', true)
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewBankDetail).toUpperCase(), resultBankAcc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBankDetail).toUpperCase(), resultBankAcc[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewBankBranch).toUpperCase(), resultBankAcc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBankBranch).toUpperCase(), resultBankAcc[index++].toUpperCase(), false))
 	
-	WebUI.verifyMatch(WebUI.getText(modifyNewBeginningBalance).replace(".00",'').toUpperCase(), resultBankAcc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBeginningBalance).replace(".00",'').toUpperCase(), resultBankAcc[index++].toUpperCase(), false))
 }
 
 'count bank statement table'
@@ -292,19 +300,19 @@ for(int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++){
 			modifyNewBalanceAmount = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 				'xpath', 'equals', ('//*[@id="BankAccInfo'+ bankIndex +'"]/div[2]/table/tbody/tr[' + (bankstatIndex+1) + ']/td[7]'), true)
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewMonth).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMonth).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewYear).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewYear).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewDebitTransaction).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDebitTransaction).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewDebit).replace('.00','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDebit).replace('.00','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewCreditTransaction).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCreditTransaction).toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewCredit).replace('.00','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCredit).replace('.00','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 			
-			WebUI.verifyMatch(WebUI.getText(modifyNewBalanceAmount).replace(',','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false)
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBalanceAmount).replace(',','').toUpperCase(), resultBankAccStatement[index++].toUpperCase(), false))
 		}
 		println(resultBankAccStatement)
 	}
@@ -341,15 +349,15 @@ for(Legalindex = 1; Legalindex <= variableData.size(); Legalindex++){
 		'xpath', 'equals', ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[5]', true)
 
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocType).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocType).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false))
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocNo).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocNo).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false))
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewIssueDate).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewIssueDate).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false))
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewExpiredDate).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewExpiredDate).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false))
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewNotaryName).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotaryName).toUpperCase(), resultLegalDoc[index++].toUpperCase(), false))
 }
 
 
@@ -366,7 +374,7 @@ if(WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/M
 		modifyNewcustGroupName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 			'xpath', 'equals', ('//*[@id="CustGrp"]/table/tbody/tr[' + custGroupindex) + ']/td[2]', true)
 		
-		WebUI.verifyMatch(WebUI.getText(modifyNewcustGroupName).toUpperCase(), resultCustGroup[custGroupindex - 1].toUpperCase(), false)
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewcustGroupName).toUpperCase(), resultCustGroup[custGroupindex - 1].toUpperCase(), false))
 	}
 }
 
@@ -380,7 +388,7 @@ for(OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++){
 	modifyNewothinfoobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'),
 		'xpath', 'equals', ('//*[@id="otherInfo"]/div[' + OthIndex) + ']/label[2]', true)
 
-	WebUI.verifyMatch(WebUI.getText(modifyNewothinfoobject).toUpperCase(), resultOtherInfo[OthIndex - 1].toUpperCase(), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewothinfoobject).toUpperCase(), resultOtherInfo[OthIndex - 1].toUpperCase(), false))
 
 }
 
@@ -388,20 +396,31 @@ for(OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++){
 ArrayList<String> resultOtherAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkOtherAttrData'(sqlconnection, appno)
 
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), resultOtherAttrList[12].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), resultOtherAttrList[12].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Source AML')).toUpperCase(), resultOtherAttrList[11].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Source AML')).toUpperCase(), resultOtherAttrList[11].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CSP USL Source')).toUpperCase(), resultOtherAttrList[9].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CSP USL Source')).toUpperCase(), resultOtherAttrList[9].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Payment Type')).toUpperCase(), resultOtherAttrList[10].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Payment Type')).toUpperCase(), resultOtherAttrList[10].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/KYC Report AMl')).toUpperCase(), resultOtherAttrList[8].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/KYC Report AMl')).toUpperCase(), resultOtherAttrList[8].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Exceed BMPK')).toUpperCase(), resultOtherAttrList[2].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Exceed BMPK')).toUpperCase(), resultOtherAttrList[2].toUpperCase(), false))
 
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), resultOtherAttrList[3].toUpperCase(), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), resultOtherAttrList[3].toUpperCase(), false))
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+}
+}
 
 
 WebUI.switchToWindowIndex('1')

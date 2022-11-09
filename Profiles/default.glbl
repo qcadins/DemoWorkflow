@@ -381,6 +381,16 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Excel\\4.2 ApplicationInquiryPersonal.xlsx'</initValue>
+      <name>PathAppInquiryCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Excel\\4.1 ApplicationInquiryPersonal.xlsx'</initValue>
+      <name>PathAppInquiryPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Excel\\2.2 DataFile_NAP_CF4W_Company.xlsx'</initValue>
       <name>PathCompany</name>
    </GlobalVariableEntity>

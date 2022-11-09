@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TabGuarantor</name>
+   <tag></tag>
+   <elementGuidId>873e543b-ce04-47ad-b4e0-7a68ac5514e5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/mat-tab-header/div/div/div/div[2]/div</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/mat-tab-header/div/div/div/div[2]/div</value>
+   </webElementProperties>
+</WebElementEntity>
