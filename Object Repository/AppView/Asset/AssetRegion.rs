@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>AssetRegion</name>
+   <tag></tag>
+   <elementGuidId>eaef0ed5-40ce-478f-9ed9-227532b8144f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetAttr&quot;]/div[1]/div[1]/div/div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;assetAttr&quot;]/div[1]/div[1]/div/div[2]</value>
+   </webElementProperties>
+</WebElementEntity>

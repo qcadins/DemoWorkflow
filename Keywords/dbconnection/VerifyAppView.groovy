@@ -364,7 +364,144 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
-	
+
+	public checkAssetSupplierInfo (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT SUPPL_NAME , SUBQ.SUPPL_EMP_NAME , se.SUPPL_EMP_NAME FROM APP_ASSET_SUPPL_EMP se WITH(NOLOCK) JOIN APP_ASSET aaw WITH(NOLOCK) ON aaw.APP_ASSET_ID = se.APP_ASSET_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aaw.APP_ID, (SELECT a.APP_NO, SUPPL_EMP_NAME FROM APP_ASSET_SUPPL_EMP se WITH(NOLOCK) JOIN APP_ASSET aaw WITH(NOLOCK) ON aaw.APP_ASSET_ID = se.APP_ASSET_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aaw.APP_ID WHERE MR_SUPPL_EMP_POSITION_CODE = 'SALES_PERSON') as SUBQ WHERE SUBQ.APP_NO = a.APP_NO AND a.APP_NO = '"+ appno +"' AND se.MR_SUPPL_EMP_POSITION_CODE = 'ADMIN_HEAD'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetInformation (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT [ASSETNAME], ASSET_CATEGORY_NAME, [ASSETPRICE], CAST([DPPERCENT] as varchar(25)) + ' % | ' + CAST([DPAMOUNT] as varchar(25)), [ASSETCONDITION], [ASSET_USAGE], [MANYEAR], CASE WHEN [SERIALNO1] IS NULL THEN '' ELSE [SERIALNO1] END, CASE WHEN [SERIALNO2] IS NULL THEN '' ELSE [SERIALNO2] END, CASE WHEN [SERIALNO3] IS NULL THEN '' ELSE [SERIALNO3] END, CASE WHEN [SERIALNO4] IS NULL THEN '' ELSE [SERIALNO4] END,[ASSETCOLOR] , [BPKBISSUEDATE], [BPKB], [ASSETNOTES] FROM (SELECT [ASSETNAME], [ASSETCONDITION], [ASSETPRICE], [ASSETCOLOR], [BPKB], [BPKBISSUEDATE], [ASSETNOTES], [MANYEAR], [DPPERCENT], [DPAMOUNT], [SERIALNO1], [SERIALNO2], [SERIALNO3], [SERIALNO4], ASSET_CATEGORY_NAME, mastername.Code, REF_MASTER_NAME FROM ( select [ASSETNAME], [ASSETCONDITION], [ASSETPRICE], [ASSETCOLOR], [BPKB], [BPKBISSUEDATE], [ASSETNOTES], [MANYEAR], [DPPERCENT], [DPAMOUNT], [SERIALNO1], [SERIALNO2], [SERIALNO3], [SERIALNO4], ASSET_CATEGORY_NAME, [Code], value FROM ( SELECT  aa.FULL_ASSET_NAME AS [ASSETNAME], ASSET_CATEGORY_NAME, MR_ASSET_CONDITION_CODE AS [ASSETCONDITION], ASSET_PRICE_AMT AS [ASSETPRICE], aa.MR_ASSET_USAGE_CODE AS 'ASSET_USAGE', aa.COLOR AS [ASSETCOLOR], aa.TAX_CITY_ISSUER AS [BPKB], FORMAT(aa.TAX_ISSUE_DT, 'yyyy-MM-dd') AS [BPKBISSUEDATE], aa.ASSET_NOTES AS [ASSETNOTES], aa.MANUFACTURING_YEAR AS [MANYEAR], DOWN_PAYMENT_PRCNT AS [DPPERCENT], DOWN_PAYMENT_AMT AS [DPAMOUNT], aa.SERIAL_NO_1 AS [SERIALNO1], aa.SERIAL_NO_2 AS [SERIALNO2], aa.SERIAL_NO_3 AS [SERIALNO3], aa.SERIAL_NO_4 AS [SERIALNO4] FROM APP_ASSET aa WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON aa.APP_ID = a.APP_ID JOIN V_ASSET_CATEGORY vac WITH(NOLOCK) ON vac.ASSET_CATEGORY_CODE = aa.ASSET_CATEGORY_CODE WHERE APP_NO = '"+ appno +"') as Orig unpivot (value for [Code] in ([ASSET_USAGE]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref  PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ASSET_USAGE],[CUST_PERSONAL_RELATIONSHIP],[ID_TYPE])) as piv"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetAttr (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT ATTR_VALUE FROM APP_ASSET_ATTR aaa WITH(NOLOCK) JOIN APP_ASSET aa WITH(NOLOCK) ON aaa.APP_ASSET_ID = aa.APP_ASSET_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aa.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetAccessories (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT aaa.SUPPL_NAME, ASSET_ACCESSORY_NAME, aaa.ACCESSORY_PRICE_AMT, aaa.DOWN_PAYMENT_PRCNT, aaa.DOWN_PAYMENT_AMT, aaa.ACCESSORY_NOTES FROM APP_ASSET_ACCESSORY aaa WITH(NOLOCK) JOIN APP_ASSET aa WITH(NOLOCK) ON aaa.APP_ASSET_ID = aa.APP_ASSET_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aa.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetUser (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT USER_NAME, REF_MASTER_NAME FROM APP_COLLATERAL_REGISTRATION acr WITH(NOLOCK) JOIN APP_COLLATERAL ac WITH(NOLOCK) ON ac.APP_COLLATERAL_ID = acr.APP_COLLATERAL_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_USER_RELATIONSHIP_CODE WHERE APP_NO = '"+ appno +"' AND REF_MASTER_TYPE_CODE = 'CUST_PERSONAL_RELATIONSHIP'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetOwner (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT OWNER_NAME, OWNER_ADDR, REF_MASTER_NAME, OWNER_AREA_CODE_4 + ' / ' + OWNER_AREA_CODE_3, MR_ID_TYPE_CODE, OWNER_AREA_CODE_2, OWNER_ID_NO, OWNER_AREA_CODE_1, OWNER_MOBILE_PHN_NO, OWNER_CITY, OWNER_PROFESSION_CODE, OWNER_ZIPCODE FROM APP_COLLATERAL_REGISTRATION acr WITH(NOLOCK) JOIN APP_COLLATERAL ac WITH(NOLOCK) ON ac.APP_COLLATERAL_ID = acr.APP_COLLATERAL_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_OWNER_RELATIONSHIP_CODE WHERE APP_NO = '"+appno+"' GROUP BY OWNER_NAME, OWNER_ADDR, REF_MASTER_NAME, OWNER_AREA_CODE_4 + ' / ' + OWNER_AREA_CODE_3, MR_ID_TYPE_CODE, OWNER_AREA_CODE_2, OWNER_ID_NO, OWNER_AREA_CODE_1, OWNER_MOBILE_PHN_NO, OWNER_CITY, OWNER_PROFESSION_CODE, OWNER_ZIPCODE"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkAssetLocation (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT TOP 1 LOCATION_ADDR, LOCATION_AREA_CODE_4 + ' / ' + LOCATION_AREA_CODE_3, LOCATION_AREA_CODE_2, LOCATION_AREA_CODE_1, LOCATION_CITY, LOCATION_ZIPCODE FROM APP_COLLATERAL_REGISTRATION acr WITH(NOLOCK) JOIN APP_COLLATERAL ac WITH(NOLOCK) ON ac.APP_COLLATERAL_ID = acr.APP_COLLATERAL_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_USER_RELATIONSHIP_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+
+	public checkAssetCollateral (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT CASE WHEN ac.APP_COLLATERAL_NO IS NULL THEN '' ELSE ac.APP_COLLATERAL_NO END, ac.FULL_ASSET_NAME, vat.ASSET_TYPE_NAME, aa.ASSET_PRICE_AMT, CASE WHEN ac.SERIAL_NO_1 IS NULL THEN '' ELSE ac.SERIAL_NO_1 END, CASE WHEN ac.SERIAL_NO_2 IS NULL THEN '' ELSE ac.SERIAL_NO_2 END,  CASE WHEN ac.SERIAL_NO_3 IS NULL THEN '' ELSE ac.SERIAL_NO_3 END, OWNER_NAME FROM APP_COLLATERAL_REGISTRATION acr WITH(NOLOCK) JOIN APP_COLLATERAL ac WITH(NOLOCK) ON ac.APP_COLLATERAL_ID = acr.APP_COLLATERAL_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_USER_RELATIONSHIP_CODE JOIN APP_ASSET aa WITH(NOLOCK) ON aa.APP_ASSET_ID = ac.APP_ASSET_ID JOIN V_ASSET_TYPE vat WITH(NOLOCK) ON vat.ASSET_TYPE_CODE = ac.ASSET_TYPE_CODE WHERE APP_NO = '"+appno+"' GROUP BY ac.APP_COLLATERAL_NO, ac.FULL_ASSET_NAME, vat.ASSET_TYPE_NAME, aa.ASSET_PRICE_AMT, ac.SERIAL_NO_1, ac.SERIAL_NO_2, ac.SERIAL_NO_3, OWNER_NAME"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
 	public checkTermandCondition (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
