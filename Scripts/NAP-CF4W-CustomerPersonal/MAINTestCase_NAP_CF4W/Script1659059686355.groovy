@@ -71,7 +71,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 
         not_run: if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
             'call test case verify app view'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/AppViewMainInformationVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
         }
     }
 }
