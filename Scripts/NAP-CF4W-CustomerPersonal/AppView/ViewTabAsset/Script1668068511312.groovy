@@ -360,10 +360,10 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 1, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

@@ -599,14 +599,14 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabTC'), 
 'close window index 1'
 WebUI.closeWindowIndex('1')
 
-WebUI.switchToWindowIndex('1')
+WebUI.switchToWindowIndex('2')
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 1, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

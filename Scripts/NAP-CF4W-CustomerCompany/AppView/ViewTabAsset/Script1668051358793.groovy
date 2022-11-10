@@ -114,9 +114,13 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LicensePlate')).toUpperCase(), (resultAssetInfo[index++]).toUpperCase(),
 		false))
 
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/LetterNo'), 5, FailureHandling.OPTIONAL)){
 'verify Letter No'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LetterNo')).toUpperCase(), (resultAssetInfo[index++]).toUpperCase(),
 		false))
+}else{
+index++
+}
 
 'verify Color'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Color')).toUpperCase(), (resultAssetInfo[index++]).toUpperCase(),
@@ -134,41 +138,41 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetNote')).toUpperCase(), (resultAssetInfo[index++]).toUpperCase(),
 		false))
 
-'get arraylist asset attr list'
-ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
-
-index = 0
-
-'verify Asset Region'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
-
-'verify Warna Body'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
-
-'verify Color'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
-
-'verify Oli Exp Date'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
-
-'verify Setoran per hari'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
-
-'verify Road Worthiness'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-		false))
+//'get arraylist asset attr list'
+//ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
+//
+//index = 0
+//
+//'verify Asset Region'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
+//
+//'verify Warna Body'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
+//
+//'verify Color'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
+//
+//'verify Oli Exp Date'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
+//
+//'verify Setoran per hari'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
+//
+//'verify Road Worthiness'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+//		false))
 
 
 'get arraylist asset Accessories'
 ArrayList<String> resultAssetAccessories = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAccessories'(sqlconnection, appno)
 
 'count Asset Accessories table'
-variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#viewAppTcInfo > lib-ucgridview > div > table > tbody tr'))
+variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#assetAcc > lib-ucgridview > div > table > tbody tr'))
 
 index = 0
 
@@ -210,7 +214,7 @@ for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
 			false))
 	
 	'verify DP Percent'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDPPercent).replace(' %','').toUpperCase(), (resultAssetAccessories[index++]).toUpperCase(),
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDPPercent).replace(' ','').replace('%', '').toUpperCase(), (resultAssetAccessories[index++]).toUpperCase(),
 			false))
 	
 	'verify DP Amount'
@@ -356,10 +360,10 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 1, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
