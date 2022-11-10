@@ -20,7 +20,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
-GlobalVariable.CopyAppColm = 0
+GlobalVariable.CopyAppColm = 1
 
 String userDir = System.getProperty('user.dir')
 

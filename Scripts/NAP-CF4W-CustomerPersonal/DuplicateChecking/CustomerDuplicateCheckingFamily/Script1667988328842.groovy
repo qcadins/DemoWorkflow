@@ -43,7 +43,7 @@ String subjectType
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
-if (FamilyArray.size() > 0) {
+if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length()>0) {
 	for (f = 1; f <= FamilyArray.size(); f++) {
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'),
 			5, FailureHandling.OPTIONAL)) {
