@@ -290,7 +290,7 @@ int count = variable.size()
  GlobalVariable.FlagFailed = 0
 
 'verify equal number of customer'
-WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
 
 for (int i = 1; i <= count; i++) {
     String newCustomerName = ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]'
@@ -492,7 +492,7 @@ for (int i = 1; i <= count; i++) {
     }
     
     'Verify iscomplete == yes'
-    WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
 }
 
 'click button submit'
@@ -532,3 +532,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}

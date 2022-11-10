@@ -288,7 +288,7 @@ ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root
 int count = variable.size()
 
 'verify equal number of customer'
-WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
 
 for (int i = 1; i <= count; i++) {
     String newCustomerName = ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]'
@@ -402,7 +402,7 @@ for (int i = 1; i <= count; i++) {
                     }
                     
                     'Verify iscomplete == yes'
-                    WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 } else if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
@@ -418,7 +418,7 @@ for (int i = 1; i <= count; i++) {
                     }
                     
                     'Verify iscomplete == yes'
-                    WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 }
             } else if (isComplete == 'YES') {
                 if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
@@ -477,7 +477,7 @@ for (int i = 1; i <= count; i++) {
                     }
                     
                     'Verify iscomplete == yes'
-                    WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
@@ -508,7 +508,7 @@ for (int i = 1; i <= count; i++) {
                         }
                         
                         'Verify iscomplete == yes'
-                        WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL)
+                        checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                     } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
@@ -528,7 +528,7 @@ for (int i = 1; i <= count; i++) {
     }
     
     'Verify iscomplete == yes'
-    WebUI.verifyMatch(WebUI.getText(modifynewisComplete), 'YES', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifynewisComplete), 'YES', false, FailureHandling.OPTIONAL))
 }
 
 'click button submit'
@@ -551,4 +551,15 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '14.CustomerDataCompletion',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+	
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '14.CustomerDataCompletion',
+					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+	
+			GlobalVariable.FlagFailed=1
+		}
+}
 
