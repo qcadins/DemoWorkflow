@@ -518,6 +518,23 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
+
+	public checkReferantor (Sql instance, String appno){
+		String refdata
+		ArrayList <String> listrefdata = new ArrayList<String>()
+		instance.eachRow(("SELECT CASE WHEN MR_REFERANTOR_TYPE = 'AGENCY_PERSONAL' OR MR_REFERANTOR_TYPE = 'AGENCY_COMPANY' THEN 'AGENCY' WHEN MR_REFERANTOR_TYPE = 'CUSTOMER_PERSONAL' OR MR_REFERANTOR_TYPE = 'CUSTOMER_COMPANY' THEN 'CUSTOMER' ELSE 'MULTIFINANCE EMPLOYEE' END AS [REFERANTOR_CATEGORY], RTRIM(ar.REFERANTOR_NAME) as [REFERANTOR_NAME], ref_master_name as [MR_REFERANTOR_TYPE], d.BANK_NAME + ' - ' + ar.BANK_ACC_NAME + ' - ' + ar.BANK_ACC_NO AS 'BANK_ACCOUNT', ar.MR_TAX_CALC_METHOD, CASE WHEN IS_USE_VAT = '0' THEN 'NO' WHEN IS_USE_VAT = '1' THEN 'YES' END AS [IS_USE_VAT] FROM APP a WITH(NOLOCK) JOIN APP_REFERANTOR ar WITH(NOLOCK) ON a.APP_ID = ar.APP_ID JOIN REF_BANK_LOS d WITH(NOLOCK) ON ar.REF_BANK_CODE = d.BANK_CODE JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.ref_master_code = mr_referantor_type WHERE APP_NO = '"+appno+"' AND REF_MASTER_TYPE_CODE = 'REFERANTOR_TYPE' ORDER BY APP_REFERANTOR_ID"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				refdata = (row[i])
+				listrefdata.add(refdata)
+			}
+		})
+		return listrefdata
+	}
 }
 
 

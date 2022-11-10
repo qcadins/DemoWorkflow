@@ -590,6 +590,9 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabCustom
 'call test case view tab guarantor'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabGuarantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'call test case view tab referantor'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabReferantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
 'call test case view tab asset'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
