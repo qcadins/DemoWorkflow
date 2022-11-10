@@ -161,7 +161,7 @@ public class VerifyAppView {
 	public checkEmergencyContactData (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT ace.CONTACT_PERSON_NAME, ace.MR_GENDER_CODE, rml.REF_MASTER_NAME, ace.BIRTH_PLACE, ace.ID_NO,  FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy'), CASE WHEN FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy') END, ace.MR_CUST_RELATIONSHIP_CODE, CASE WHEN ace.MOBILE_PHN_NO_1 IS NULL THEN '-' ELSE ace.MOBILE_PHN_NO_1 END, CASE WHEN ace.MOBILE_PHN_NO_2 IS NULL THEN '-' ELSE ace.MOBILE_PHN_NO_2 END, ace.EMAIL, CASE WHEN ace.PHN_1 IS NULL THEN '-' ELSE ace.PHN_1 END, CASE WHEN ace.PHN_2 IS NULL THEN '-' ELSE ace.PHN_2 END, CASE WHEN ace.PHN_3 IS NULL THEN '-' ELSE ace.PHN_3 END  FROM APP_CUST_PERSONAL acp JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_EMRGNC_CNTCT ace WITH(NOLOCK) ON ace.APP_CUST_ID = acp.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = ace.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
+		instance.eachRow(("SELECT ace.CONTACT_PERSON_NAME, ace.MR_GENDER_CODE, rml.REF_MASTER_NAME, CASE WHEN ace.BIRTH_PLACE NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.BIRTH_PLACE END , ace.ID_NO,  CASE WHEN FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') NOT LIKE '%[a-zA-Z0-9]%' OR FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') END, CASE WHEN FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy') END, ace.MR_CUST_RELATIONSHIP_CODE, CASE WHEN ace.MOBILE_PHN_NO_1 IS NULL THEN '-' ELSE ace.MOBILE_PHN_NO_1 END, CASE WHEN ace.MOBILE_PHN_NO_2 IS NULL THEN '-' ELSE ace.MOBILE_PHN_NO_2 END, ace.EMAIL, CASE WHEN ace.PHN_1 IS NULL THEN '-' ELSE ace.PHN_1 END, CASE WHEN ace.PHN_2 IS NULL THEN '-' ELSE ace.PHN_2 END, CASE WHEN ace.PHN_3 IS NULL THEN '-' ELSE ace.PHN_3 END  FROM APP_CUST_PERSONAL acp JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_EMRGNC_CNTCT ace WITH(NOLOCK) ON ace.APP_CUST_ID = acp.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = ace.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -346,4 +346,41 @@ public class VerifyAppView {
 		})
 		return listappdata
 	}
+
+
+	public checkGuarantor (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT CUST_NAME, MR_CUST_TYPE_CODE, REF_MASTER_NAME, CASE WHEN acccp.MOBILE_PHN_NO_1 IS NULL THEN '' ELSE acccp.MOBILE_PHN_NO_1 END FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_CUST_RELATIONSHIP_CODE JOIN APP_CUST_COMPANY acc WITH(NOLOCK) ON acc.APP_CUST_ID = ac.APP_CUST_ID LEFT JOIN APP_CUST_COMPANY_CONTACT_PERSON acccp WITH(NOLOCK) ON acccp.APP_CUST_COMPANY_ID = acc.APP_CUST_COMPANY_ID WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = '1' AND REF_MASTER_TYPE_CODE = 'CUST_COMPANY_RELATIONSHIP' UNION SELECT CUST_NAME, MR_CUST_TYPE_CODE, REF_MASTER_NAME, MOBILE_PHN_NO_1 FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_CUST_RELATIONSHIP_CODE WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = '1' AND REF_MASTER_TYPE_CODE = 'CUST_RELATIONSHIP' order by MR_CUST_TYPE_CODE"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+	
+	public checkTermandCondition (Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT rtl.TC_NAME, PRIOR_TO, CASE WHEN CAST(IS_CHECKED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_CHECKED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_CHECKED as varchar(25)) END, CASE WHEN CAST(IS_WAIVED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_WAIVED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_WAIVED as varchar(25)) END, CASE WHEN FORMAT(PROMISED_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(PROMISED_DT, 'dd-MMM-yyyy') END, CASE WHEN FORMAT(EXPIRED_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(EXPIRED_DT, 'dd-MMM-yyyy') END, CASE WHEN at.NOTES IS NULL THEN '' ELSE at.NOTES END FROM APP_TC at WITH(NOLOCK)JOIN APP a WITH(NOLOCK) ON a.APP_ID = at.APP_ID RIGHT JOIN REF_TC_LOS rtl WITH(NOLOCK) ON rtl.TC_CODE = at.TC_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
 }
+
+

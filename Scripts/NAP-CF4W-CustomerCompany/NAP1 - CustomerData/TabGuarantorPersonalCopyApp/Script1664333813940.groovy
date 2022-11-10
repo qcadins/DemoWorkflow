@@ -53,7 +53,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-Custome
 
     Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
-    ArrayList<Boolean> listGuar = new ArrayList<Boolean>()
+    ArrayList<String> listGuar = new ArrayList<String>()
 
     listGuar = CustomKeywords.'dbconnection.EditNAP.GetGuarantorDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             8))

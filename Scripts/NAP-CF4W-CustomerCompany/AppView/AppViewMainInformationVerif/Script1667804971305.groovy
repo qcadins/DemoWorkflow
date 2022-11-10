@@ -19,6 +19,15 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
+'Assign directori file excel ke global variabel'
+String userDir = System.getProperty('user.dir')
+
+'Assign directori file excel ke global variabel'
+String filePath = userDir + GlobalVariable.PathAppInquiryCompany
+
+'Assign directori file excel ke global variabel'
+GlobalVariable.DataFilePath = filePath
+
 String servername = findTestData('Login/Login').getValue(1, 9)
 
 String instancename = findTestData('Login/Login').getValue(2, 9)
@@ -106,8 +115,8 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementNo'), 'xpath', 
-            'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementNo'), 'xpath', 'equals', 
+            ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[2]/span', true)
 
         listString.add(WebUI.getText(appNoObject))
@@ -248,8 +257,8 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 
-            'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
+            ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
         listString.add(WebUI.getText(appNoObject))
@@ -266,8 +275,8 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 
-            'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
+            ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
         listString.add(WebUI.getText(appNoObject))
@@ -411,8 +420,8 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     listString = new ArrayList<Boolean>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
+        appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'), 'xpath', 
+            'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[12]/span', true)
 
         listString.add(WebUI.getText(appNoObject))
@@ -453,51 +462,46 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
         WebUI.verifyEqual(isPaging, true)
-		
-		'Klik button prev'
-		WebUI.click(findTestObject('AppView/MainInformation/button_Prev'))
-		
-		'Verify page 1 active'
-		WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'),
-			'aria-current', 2)
-		
-		listApp = listString
-				
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
-				
-		'Verif appno yang ada di page 1 tidak ada di page 2'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		WebUI.verifyEqual(isPaging, true)
-		
-		'Klik button next'
-		WebUI.click(findTestObject('AppView/MainInformation/button_Next'))
-		
-		'Verify page 2 active'
-		WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'),
-			'aria-current', 2)
-		
-		listApp = listString
-		
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
-				
-		'Verif appno yang ada di page 2 tidak ada di page 1'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		WebUI.verifyEqual(isPaging, true)
-		
-		
+
+        'Klik button prev'
+        WebUI.click(findTestObject('AppView/MainInformation/button_Prev'))
+
+        'Verify page 1 active'
+        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 2)
+
+        listApp = listString
+
+        listString = new ArrayList<Boolean>()
+
+        listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
+
+        'Verif appno yang ada di page 1 tidak ada di page 2'
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+
+        WebUI.verifyEqual(isPaging, true)
+
+        'Klik button next'
+        WebUI.click(findTestObject('AppView/MainInformation/button_Next'))
+
+        'Verify page 2 active'
+        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2)
+
+        listApp = listString
+
+        listString = new ArrayList<Boolean>()
+
+        listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
+
+        'Verif appno yang ada di page 2 tidak ada di page 1'
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+
+        WebUI.verifyEqual(isPaging, true)
     }
-	
-	
-	'Klik button page 1'
-	WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
-	
-	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(),true)
+    
+    'Klik button page 1'
+    WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
+
+    WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true)
 }
 
 'input app no'
@@ -534,55 +538,68 @@ int index = 0
 println(result)
 
 'verify app no'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject('AppView/MainInformation/Label App No')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase())
+checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject('AppView/MainInformation/Label App No')).toString().toUpperCase(), 
+    (result[index++]).toString().toUpperCase()))
 
 'verify office'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(4, 1).toUpperCase(), 
-    WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase())
+checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(4, 1).toUpperCase(), 
+    WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase()))
 
 if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp') {
     'verify customer no'
-    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Cust No')).toString().toUpperCase(), 
-        (result[index++]).toString().toUpperCase())
+        (result[index++]).toString().toUpperCase()))
 
     'verify customer name'
-    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
-        (result[index++]).toString().toUpperCase())
+        (result[index++]).toString().toUpperCase()))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'Input Data') {
     'skip'
     result[index++]
 
     'verify customer name'
-    CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
-        (result[index++]).toString().toUpperCase())
+        (result[index++]).toString().toUpperCase()))
 }
 
 'verify product offering'
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Product Offering Name')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Product Offering Name')).toString().toUpperCase(), 
+    (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tenor'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
         GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Tenor')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase())
+    (result[index++]).toString().toUpperCase()))
 
 'verify asset name'
-WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Asset Name')).toString().toUpperCase(), (result[
-    index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/MainInformation/Asset Name')).toString().toUpperCase(), (result[
+    index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 22).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Model')).toString().toUpperCase(), 
-    (result[index++]).toString().toUpperCase())
+    (result[index++]).toString().toUpperCase()))
+
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/AppViewCustomerVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 'close window index 1'
 WebUI.closeWindowIndex('1')
 
-WebUI.switchToWindowIndex('0')
+WebUI.switchToWindowIndex('1')
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+}
+}
