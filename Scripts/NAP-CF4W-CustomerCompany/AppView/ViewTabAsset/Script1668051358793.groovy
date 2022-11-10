@@ -138,34 +138,58 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetNote')).toUpperCase(), (resultAssetInfo[index++]).toUpperCase(),
 		false))
 
-//'get arraylist asset attr list'
-//ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
-//
-//index = 0
-//
-//'verify Asset Region'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
-//
-//'verify Warna Body'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
-//
-//'verify Color'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
-//
-//'verify Oli Exp Date'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
-//
-//'verify Setoran per hari'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
-//
-//'verify Road Worthiness'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
-//		false))
+'get arraylist asset attr list'
+ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
+
+index = 0
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), 5, FailureHandling.OPTIONAL)){
+'verify Asset Region'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), 5, FailureHandling.OPTIONAL)){
+'verify Warna Body'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), 5, FailureHandling.OPTIONAL)){
+'verify Color'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), 5, FailureHandling.OPTIONAL)){
+'verify Oli Exp Date'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), 5, FailureHandling.OPTIONAL)){
+'verify Setoran per hari'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
+
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), 5, FailureHandling.OPTIONAL)){
+'verify Road Worthiness'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), (resultAssetAttrList[index++]).toUpperCase(),
+		false))
+}else{
+index++
+}
 
 
 'get arraylist asset Accessories'
