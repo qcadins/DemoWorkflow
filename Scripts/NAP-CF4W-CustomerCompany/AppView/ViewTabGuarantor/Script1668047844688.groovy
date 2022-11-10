@@ -49,6 +49,8 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 'click tab guarantor'
 WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
 
+'verify alert'
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 

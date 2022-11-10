@@ -599,7 +599,7 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabTC'), 
 'close window index 1'
 WebUI.closeWindowIndex('1')
 
-WebUI.switchToWindowIndex('2')
+WebUI.switchToWindowIndex('0')
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
