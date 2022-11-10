@@ -54,6 +54,18 @@ for (i = 0; i <= (result.size() - 1); i++) {
 
 for (i = 0; i < result.size(); i++) {
     'verify result = confinsdata'
-    WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
+}
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
+				0, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
+				1, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
 }
 
