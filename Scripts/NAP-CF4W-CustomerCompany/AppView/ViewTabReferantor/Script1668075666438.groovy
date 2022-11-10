@@ -49,6 +49,9 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 'Klik tab referantor'
 WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'))
 
+'Verif tidak ada alert yang muncul'
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'verify Referantor'
