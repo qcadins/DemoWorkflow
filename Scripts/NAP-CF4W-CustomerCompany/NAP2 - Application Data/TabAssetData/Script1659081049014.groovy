@@ -68,8 +68,8 @@ if(!appLastStep.equalsIgnoreCase("APPLICATION DATA") && GlobalVariable.FirstTime
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL))
 }
 
 String suppName
@@ -436,13 +436,13 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
 
         'verify security deposit value equal'
-        WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt))
     } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
         24) == 'Amount') {
         float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
 
         'verify security deposit value equal'
-        WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg))
     }
 }
 
@@ -626,7 +626,7 @@ if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompan
             Integer totalOwnerPersonalRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
 
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
-            WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation)
+            checkVerifyEqualOrMatch(WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation))
         }
     } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
         42) == 'Company') {
@@ -951,4 +951,16 @@ if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBC
 
 
 WebUI.delay(10)
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7.TabAssetData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7.TabAssetData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}
 

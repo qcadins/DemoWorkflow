@@ -222,13 +222,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                                 int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                                 'verify securitydeposit value equal'
-                                WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                                checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
                             } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
                                 GlobalVariable.NumofAccessories, 18) == 'Amount') {
                                 float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                                 'verify securitydeposit value equal'
-                                WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                                checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
                             }
                             
                             GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
@@ -545,13 +545,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                                 int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                                 'verify securitydeposit value equal'
-                                WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                                checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
                             } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
                                 GlobalVariable.NumofAccessories, 18) == 'Amount') {
                                 float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                                 'verify securitydeposit value equal'
-                                WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                                checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
                             }
                             
                             GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
@@ -756,13 +756,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                             'verify securitydeposit value equal'
-                            WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                            checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
                         } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
                             18) == 'Amount') {
                             float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                             'verify securitydeposit value equal'
-                            WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                            checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
                         }
                         
                         GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
@@ -1008,13 +1008,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                     int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                     'verify securitydeposit value equal'
-                    WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt)
+                    checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
                 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
                     18) == 'Amount') {
                     float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                     'verify securitydeposit value equal'
-                    WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg)
+                    checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
                 }
                 
                 GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
@@ -1025,5 +1025,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
         }
     }
+}
+	
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7a.Accessories',
+						0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
+		
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7a.Accessories',
+						1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		
+			GlobalVariable.FlagFailed=1
+	}
 }
 

@@ -34,17 +34,17 @@ if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.Fi
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'INSURANCE', false, FailureHandling.OPTIONAL)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'INSURANCE', false, FailureHandling.OPTIONAL))
 	
 	'Verifikasi perhitungan asset price'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
-			',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
+			',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false))
 	
 	
 	'Verifikasi perhitungan asset price incl accessories'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
-			',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
+			',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
 }
 
 String insuredBy = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -111,5 +111,17 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
 
  
+}
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+	
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+	
+			GlobalVariable.FlagFailed=1
+		}
 }
 

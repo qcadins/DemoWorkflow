@@ -41,8 +41,8 @@ if(!appLastStep.equalsIgnoreCase("GUARANTOR") && !appLastStep.equalsIgnoreCase("
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'REFERANTOR', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'REFERANTOR', false, FailureHandling.OPTIONAL))
 }
 
 datafilereferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
@@ -1050,5 +1050,17 @@ def getTextBankAccount(String newSelectBankaccount) {
         'Ambil text bank account yang dipilih pada confins'
         GlobalVariable.BankAccount = ((GlobalVariable.BankAccount + ' - ') + selectBankAcc.getFirstSelectedOption().getText())
     }
+}
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
 }
 

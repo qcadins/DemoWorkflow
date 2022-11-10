@@ -63,8 +63,8 @@ if(!appLastStep.equalsIgnoreCase("INSURANCE") && GlobalVariable.FirstTimeEntry==
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'LIFE INSURANCE', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'LIFE INSURANCE', false, FailureHandling.OPTIONAL))
 }
 
 'Untuk Hapus cdk-visually-hidden pada tag input, sehingga katalon dapat membaca tag input dengan benar'
@@ -323,4 +323,16 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 
    
 } 
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+	
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+	
+			GlobalVariable.FlagFailed=1
+		}
+}
 

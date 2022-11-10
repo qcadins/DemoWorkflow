@@ -23,8 +23,8 @@ GlobalVariable.DataFilePath = filePath
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL))
 }
 
 if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
@@ -113,3 +113,14 @@ WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicatio
 	findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabUploadDocument',
+				0, GlobalVariable.NumofUploadDocument-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabUploadDocument',
+				1, GlobalVariable.NumofUploadDocument-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}

@@ -142,14 +142,14 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         String strNTFValuexPercentage = NTFValuexPercentage.toString()
 
         'verify match strNTFValueXPercentage and strProvisionAmount'
-        WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
     } else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
         'calculate Provisionfeeamount divide NTFforprovisioncalc'
         BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
 
         'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
-        WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL))
     }
 } else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
     GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
@@ -160,15 +160,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         String strNTFValueFinal = NTFValueFinal.toString()
 
         'verify matvh NTFValueFinal and provision amount'
-        WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
     } else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
         'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
         ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
 
         'verify matvh provisionfeemaountdivideNTFValueexcludeprovisionfeecap and provision percentage'
-        WebUI.verifyMatch(ProvisionFeeAmountDivideNTFValueExcProv.toString(), (ProvisionPercentage / 100).toString(), false, 
-            FailureHandling.OPTIONAL)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(ProvisionFeeAmountDivideNTFValueExcProv.toString(), (ProvisionPercentage / 100).toString(), false, 
+            FailureHandling.OPTIONAL))
     }
 }
 
@@ -293,14 +293,14 @@ int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeCa
 intOtherFeeCapitalize) + intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
 
 'verify equal totalfeecapitalize'
-WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue))
 
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
 'verify equal DPAssetAccessory minus subsidy DP = DPAssetAccessoryMinSubsidyDP'
-WebUI.verifyEqual(intDPAssetAccessoryValue - Integer.parseInt(GlobalVariable.SubsidyDPValue), intDPAssetAccessoryMinSubValue, 
-    FailureHandling.CONTINUE_ON_FAILURE)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intDPAssetAccessoryValue - Integer.parseInt(GlobalVariable.SubsidyDPValue), intDPAssetAccessoryMinSubValue, 
+    FailureHandling.CONTINUE_ON_FAILURE))
 
 'Get value Total insurance value'
 String TotalInsuranceValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE'))
@@ -313,10 +313,10 @@ def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('NAP-CF4W-Custo
 BigDecimal intTotalInsurancevalue = new BigDecimal(TotalInsuranceCapitalizeValue.replace(',', ''))
 
 'verify match Total insurance(from tab insruance) and total insurance (from tab financial)'
-WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false))
 
 'verify match Insurance capitalize amount (from tab insurance) and total insurance capitalize (from tab financial)'
-WebUI.verifyMatch(GlobalVariable.InsuranceCapitalizeAmount, TotalInsuranceCapitalizeValue, false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.InsuranceCapitalizeAmount, TotalInsuranceCapitalizeValue, false))
 
 'get total life insurance value'
 def TotalLifeInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE')).replace(
@@ -339,11 +339,11 @@ Number CapitalizePremiumPercentage = GlobalVariable.CapitalizePremiumPercentage
 int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * CapitalizePremiumPercentage)
 
 'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
-WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
 
 'verify NTF Value'
-WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize, 
-    intNTF, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize, 
+    intNTF, FailureHandling.OPTIONAL))
 
 'import webdriver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -454,71 +454,71 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 		'get first row installment amount value'
 		if (InstallmentSchemecount == 1) {
 			'Verify installment amount = installment amount seq1'
-			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount)))
 		}
 	}
 	else if((gracePeriodMethod.equalsIgnoreCase("ROLLOVER")||gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY"))&&gracePeriodNum!=0){
 		if(InstallmentSchemecount==gracePeriodNum+1){
 			'Verify installment amount = installment amount seq graceperiod+1'
-			WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount)))
 		}
 	}
     
     'get last row value'
     if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {
         'verify value is 0'
-        WebUI.verifyEqual(Integer.parseInt(strOSPrincipalAmount), 0)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(strOSPrincipalAmount), 0))
 
         'verify value is 0'
-        WebUI.verifyEqual(Integer.parseInt(strOSInterestAmount), 0)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(strOSInterestAmount), 0))
     }
 }
 
 'verify equal Interest amount seq 1 + os interest amount seq1 = Total Interest'
-WebUI.verifyEqual(intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intOSInterestAmountSeq1 + intInterestAmountValueSeq1, intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 = NTF'
-WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1, intNTF, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1, intNTF, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = Total AR'
-WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
-    intTotalAR, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    intTotalAR, FailureHandling.OPTIONAL))
 
 'verify pincipal amount value = NTF'
-WebUI.verifyEqual(principalamountvalue, intNTF, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue, intNTF, FailureHandling.OPTIONAL))
 
 'verity interest amount value - total interest'
-WebUI.verifyEqual(interestamountvalue, intInterestAmountValue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(interestamountvalue, intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'verify PrincipalAmount+InteresetAmount == AR Value'
-WebUI.verifyEqual(principalamountvalue + interestamountvalue, intTotalAR, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue + interestamountvalue, intTotalAR, FailureHandling.OPTIONAL))
 
 'verify installmentamountvalue == AR Value'
-WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL))
 
 'verify intNTF + intInterestAmountValue == AR Value'
-WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = principalamountvalue + interestamountvalue'
-WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
-    principalamountvalue + interestamountvalue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    principalamountvalue + interestamountvalue, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = installmentamountvalue'
-WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
-    installmentamountvalue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    installmentamountvalue, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = intNTF + intInterestAmountValue'
-WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
-    intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
+    intNTF + intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'verify rumus 1 == rumus 2'
-WebUI.verifyEqual(principalamountvalue + interestamountvalue, installmentamountvalue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue + interestamountvalue, installmentamountvalue, FailureHandling.OPTIONAL))
 
 'verify rumus 1 == rumus 3'
-WebUI.verifyEqual(principalamountvalue + interestamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue + interestamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'verify rumus 2 == rumus 3'
-WebUI.verifyEqual(installmentamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(installmentamountvalue, intNTF + intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'Ambil dan simpan nilai asset price dari confins tab financial data'
 String textAssetPrice = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL ASSET PRICE')).replace(
@@ -533,14 +533,14 @@ String textAssetPriceInclAccessory = WebUI.getText(findTestObject('NAP-CF4W-Cust
     ',', '')
 
 'Verifikasi perhitungan asset price'
-WebUI.verifyMatch(textAssetPrice, String.format('%.2f', GlobalVariable.AssetPrice), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPrice, String.format('%.2f', GlobalVariable.AssetPrice), false))
 
 'Verifikasi perhitungan asset price incl accessories'
-WebUI.verifyMatch(textAssetPriceInclAccessory, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), 
-    false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPriceInclAccessory, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), 
+    false))
 
 'Verifikasi perhitungan asset accessory price'
-WebUI.verifyMatch(textAssetAccessoryPrice, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetAccessoryPrice, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice), false))
 
 'Ambil nilai tdp dan simpan dari confins financial data'
 String textTDP = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TDP')).replace(
@@ -561,8 +561,8 @@ BigDecimal TDP = (((((intDPAssetAccessoryMinSubValue + totalFee) + totalInsuranc
 BDTotalInsuranceCap) - intTotalLifeInsuranceCapitalize
 
 'verify total fee = all fees'
-WebUI.verifyEqual(((((BDAdminFeeValue + BDAdditionalAdminFeeValue) + BDNotaryFeeValue) + BDOtherFeeValue) + BDFiduciaFeeAmount) + 
-    ProvisionFeeAmount, totalFee)
+checkVerifyEqualOrMatch(WebUI.verifyEqual(((((BDAdminFeeValue + BDAdditionalAdminFeeValue) + BDNotaryFeeValue) + BDOtherFeeValue) + BDFiduciaFeeAmount) + 
+    ProvisionFeeAmount, totalFee))
 
 'Pengecekan jika installment type advance'
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
@@ -576,7 +576,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 }
 
 'Verifikasi tdp pada confins sesuai perhitungan'
-WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false)
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false))
 
 'Verifikasi tdp paid at mf <= tdp'
 WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
@@ -585,11 +585,23 @@ WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('NA
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
 	'ADVANCE')) {
 	'verify interest amount "0.00" if insttalment type Advance'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
-		'0.00', false)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
+		'0.00', false))
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
 	'ARREAR')) {
 	'verify interest amount NOT "0.00" if installment type arrear'
-	WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
-		'0.00', false)
+	checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount')),
+		'0.00', false))
+}
+	
+public checkVerifyEqualOrMatch(Boolean isMatch){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+	
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+	
+			GlobalVariable.FlagFailed=1
+		}
 }

@@ -40,8 +40,8 @@ if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEn
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'TERM AND CONDITION', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'TERM AND CONDITION', false, FailureHandling.OPTIONAL))
 }
 
 'Inisialisasi driver'
@@ -341,3 +341,14 @@ public writeToExcelFailedVerifRule(){
 	
 }
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}

@@ -68,8 +68,8 @@ if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && (GlobalVariable.First
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL))
 }
 
 String suppName
@@ -452,13 +452,13 @@ if (GlobalVariable.Role == 'Testing') {
         int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
 
         'verify security deposit value equal'
-        WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt))
     } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
         GlobalVariable.NumofColm, 24) == 'Amount') {
         float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
 
         'verify security deposit value equal'
-        WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg)
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg))
     }
 }
 
@@ -990,4 +990,16 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 }
 
 WebUI.delay(10)
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7.TabAssetData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '7.TabAssetData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}
 

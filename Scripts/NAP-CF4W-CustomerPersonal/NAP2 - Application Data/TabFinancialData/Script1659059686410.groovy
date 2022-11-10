@@ -76,8 +76,8 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'FINANCIAL DATA', false, FailureHandling.OPTIONAL)
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'FINANCIAL DATA', false, FailureHandling.OPTIONAL))
 }
 
 def datafilefinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
@@ -484,19 +484,27 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' &
 	result = CustomKeywords.'financialData.verifRate.verifyFinancialRate'(sqlConnectionLOS, appNo)
 	
 	'Verify default effective rate'
-	WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))
+	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))==false){
+		writeReasonFailedVerifRule()
+	}
 	
 	'Verify default supplier rate'
-	WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))
+	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))==false){
+		writeReasonFailedVerifRule()
+	}
 	
 	'Verify def/lock effective rate'
 	if(result.get(2)=="LOCK"){
 		'Verify effective rate terlock'
-		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+			writeReasonFailedVerifRule()
+		}
 	}
 	else if(result.get(2)=="DEF"){
 		'Verify effetcive rate tidak terlock/dapat diinput'
-		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+			writeReasonFailedVerifRule()
+		}
 	}
 }
 
@@ -655,3 +663,14 @@ def sendKeys(TestObject object) {
     WebUI.sendKeys(object, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 }
 
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabFinancialData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
+}

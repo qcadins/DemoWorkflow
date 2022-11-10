@@ -849,16 +849,16 @@ if (capinssetting == 'YEARLY') {
         totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
 
         'Verif total main premi sesuai perhitungan'
-        WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
 
         'Verif total additional premi sesuai perhitungan'
-        WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
 
         'Verif total fee sesuai perhitungan'
-        WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false))
 
         'Verif total premi to customer sesuai perhitungan'
-        WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
 
         'Jika tidak ada paid by mf'
         if ((totalResult[2]) == 0) {
@@ -898,7 +898,7 @@ if (capinssetting == 'YEARLY') {
         totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 
         'Verif total premi to customer after discount sesuai perhitungan'
-        WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false)
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
 
         String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'), 
             'value').replace(',', '')
@@ -906,10 +906,10 @@ if (capinssetting == 'YEARLY') {
         'Jika capitalize amount tidak bernilai 0'
         if ((totalResult[3]) != 0) {
             'Verif capitalize amount sesuai perhitungan'
-            WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false) //Jika capitalize amount bernilai 0
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false)) //Jika capitalize amount bernilai 0
         } else if ((totalResult[3]) == 0) {
             'Verif capitalize amount sesuai perhitungan'
-            WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false)
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false))
         }
         
         'Jika ada paid by mf'
@@ -961,5 +961,17 @@ def writeFailedReasonVerifyRule() {
         GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 
     GlobalVariable.FlagFailed = 1
+}
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
 }
 
