@@ -13,6 +13,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import org.openqa.selenium.WebElement as WebElement
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
@@ -400,10 +401,10 @@ else if(GlobalVariable.Role=="Testing"){
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	} else if (appStep == 'NAPD' || appStep == 'REF' || appStep == 'APP' || appStep == 'ASSET' || appStep == 'INS' || appStep == 'LFI' || appStep == 'FIN' || appStep == 'TC') {
-//		getCustdata(sqlConnectionLOS, appNo, appStep)
-//	
-//		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
-//			FailureHandling.STOP_ON_FAILURE)
+		getCustdata(sqlConnectionLOS, appNo, appStep)
+	
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+			FailureHandling.STOP_ON_FAILURE)
 		
 		if(GlobalVariable.DupcheckVerif == 'Yes'){
 			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'),
