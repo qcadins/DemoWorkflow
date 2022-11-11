@@ -71,7 +71,6 @@ if(resultLIData.get(0)=="-"){
 	'verify cover life insurance'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/LifeInsurance/CoverLifeInsurance')).toUpperCase(),
 			"NO", false))
-	
 }
 else{
 	'verify cover life insurance'
@@ -139,10 +138,6 @@ if(resultLIObject.size()>0 && resultLIObject !=null && variableData.size()>0){
 	}
 	
 	
-}
-else if(resultLIObject==null){
-	'Verify tabel life insurance object tidak ada'
-	checkVerifyEqualOrMatch(WebUI.verifyElementNotPresent(findTestObject('AppView/LifeInsurance/ModifyObj'),2))
 }
 
 
