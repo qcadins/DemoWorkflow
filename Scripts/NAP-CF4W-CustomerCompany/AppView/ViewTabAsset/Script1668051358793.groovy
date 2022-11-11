@@ -28,6 +28,8 @@ String filePath = userDir + GlobalVariable.PathAppInquiryCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.FlagWarning = 0
+
 String servername = findTestData('Login/Login').getValue(1, 9)
 
 String instancename = findTestData('Login/Login').getValue(2, 9)
