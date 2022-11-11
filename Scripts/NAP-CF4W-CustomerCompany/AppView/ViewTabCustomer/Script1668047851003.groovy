@@ -475,7 +475,11 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), 
         (resultOtherAttrList[3]).toUpperCase(), false))
 
-WebUI.switchToWindowIndex('1')
+
+if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
+		1, GlobalVariable.StatusSuccess)
+}
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
@@ -486,9 +490,6 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
-    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
-            1, GlobalVariable.StatusSuccess)
     }
 }
 
