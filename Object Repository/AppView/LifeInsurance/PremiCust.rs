@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>PremiCust</name>
+   <tag></tag>
+   <elementGuidId>19808ce5-680a-4173-89fc-753dc9c4ee64</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AppLifeInsId&quot;]/div/div[3]/span/div/div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AppLifeInsId&quot;]/div/div[3]/span/div/div[2]</value>
+   </webElementProperties>
+</WebElementEntity>

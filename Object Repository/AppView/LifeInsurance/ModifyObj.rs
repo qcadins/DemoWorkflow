@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ModifyObj</name>
+   <tag></tag>
+   <elementGuidId>b2e69734-121b-4119-a4e3-53f880ea61a3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;mat-tab-content-0-6&quot;]/div/app-life-insurance/lib-ucgridview/div/table/tbody/tr[1]/td[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;mat-tab-content-0-6&quot;]/div/app-life-insurance/lib-ucgridview/div/table/tbody/tr[1]/td[1]</value>
+   </webElementProperties>
+</WebElementEntity>

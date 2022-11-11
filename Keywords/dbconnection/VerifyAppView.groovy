@@ -586,6 +586,50 @@ public class VerifyAppView {
 		})
 		return listattrdata
 	}
+	
+	public checkLifeInsurance(Sql instance, String appno){
+		String lifeinsdata
+		ArrayList <String> listlifeinsdata = new ArrayList<String>()
+		instance.eachRow(("SELECT CASE WHEN alih.LIFE_INSCO_BRANCH_NAME IS NULL THEN '-' ELSE alih.LIFE_INSCO_BRANCH_NAME END AS [LIFEINSCONAME], CASE WHEN CONVERT(NVARCHAR,total_premi_to_cust) IS NULL OR CONVERT(NVARCHAR,total_premi_to_cust) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_to_cust) END AS [CUSTPREMI], CASE WHEN CONVERT(NVARCHAR,total_premi_from_insco) IS NULL OR CONVERT(NVARCHAR,total_premi_from_insco) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_from_insco) END AS [INSCOPREMI] , CASE WHEN CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) END AS [CUSTADMFEE], CASE WHEN CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) END AS [INSCOADMFEE], CASE WHEN CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) IS NULL OR CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) END AS [CPTLZPREMI] FROM APP_LIFE_INS_H alih WITH(NOLOCK) right JOIN APP a WITH(NOLOCK) ON alih.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				lifeinsdata = (row[i])
+				listlifeinsdata.add(lifeinsdata)
+			}
+		})
+		return listlifeinsdata
+		
+		
+		
+	}
+	
+	public checkLifeInsuranceObject(Sql instance, String appno){
+		String lifeinsdata
+		ArrayList <String> listlifeinsdata = new ArrayList<String>()
+		instance.eachRow(("select insured_name, age, mr_cust_type_code from APP_LIFE_INS_D alid with(nolock) join app_life_ins_h alih with(nolock) on alih.APP_LIFE_INS_H_ID = alid.APP_LIFE_INS_H_ID join app a with(nolock) on a.app_id = alih.APP_ID where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				lifeinsdata = (row[i])
+				listlifeinsdata.add(lifeinsdata)
+			}
+		})
+		return listlifeinsdata
+		
+		
+		
+	}
+	
+	
+	
+	
 }
 
 
