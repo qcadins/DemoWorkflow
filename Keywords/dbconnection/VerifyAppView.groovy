@@ -535,6 +535,57 @@ public class VerifyAppView {
 		})
 		return listrefdata
 	}
+
+	public checkMOInfo (Sql instance, String appno){
+		String modata
+		ArrayList <String> listmodata = new ArrayList<String>()
+		instance.eachRow(("SELECT CASE WHEN [SPV] IS NULL THEN '-' ELSE [SPV] END,[OFFICER] , CASE WHEN SALES_NOTES IS NULL THEN '-' ELSE SALES_NOTES END, CASE WHEN ref_master_name IS NULL THEN '-' ELSE ref_master_name END as [SALES_RECOM] FROM (SELECT sales_notes, MR_SALES_RECOMMEND_CODE, mastername.Code, rel.emp_name FROM ( select sales_notes, MR_SALES_RECOMMEND_CODE, [Code], value FROM ( select sales_head_no as [SPV], sales_officer_no as [OFFICER], sales_notes, MR_SALES_RECOMMEND_CODE from app a WHERE APP_NO = '"+appno+"') as Orig unpivot (value for [Code] in ([SPV],[OFFICER]) )as unpiv) as mastername left JOIN REF_USER_LOS rul WITH(NOLOCK) ON rul.emp_no = mastername.value left join ref_emp_los rel with(nolock) on rel.emp_no = rul.emp_no) AS ref PIVOT(MAX(ref.emp_name) for [Code] in ([SPV],[OFFICER])) as piv left join ref_master_los rm with(nolock) on piv.MR_SALES_RECOMMEND_CODE = rm.REF_MASTER_CODE and rm.ref_master_type_code = 'SLS_RECOM'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				modata = (row[i])
+				listmodata.add(modata)
+			}
+		})
+		return listmodata
+	}
+
+	public checkAppInfoAndRestructuringData(Sql instance, String appno){
+		String appdata
+		ArrayList <String> listappdata = new ArrayList<String>()
+		instance.eachRow(("SELECT [APPSRCNAME] , [FIRST_INST_TYPE] , [PAYMENTFREQ] , [TENOR] ,[NUM_OF_INST], [INTRSTTYPE] , CASE WHEN [FLOATINGPERIOD] ='' THEN '-' ELSE [FLOATINGPERIOD] END , [INST_SCHM] , [WOP] , [CUST_NOTIF_OPT] , [CHARACTERISTIC_OF_CREDIT] , CASE WHEN [PREVAGGRMT] IS NULL THEN '-' ELSE [PREVAGGRMT] END , CASE WHEN [WAY_OF_RESTRUCTURE] IS NULL THEN '-' ELSE [WAY_OF_RESTRUCTURE] END , [SLIKECO], CASE WHEN [MOU_NO] IS NULL THEN '-' ELSE [MOU_NO] END FROM (SELECT [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST],[FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], mastername.Code, REF_MASTER_NAME FROM ( select [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST], [FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], [Code], value FROM ( SELECT ras.APP_SRC_NAME AS [APPSRCNAME], MR_FIRST_INST_TYPE_CODE AS 'FIRST_INST_TYPE', PAY_FREQ_CODE AS [PAYMENTFREQ], TENOR AS [TENOR],NUM_OF_INST AS [NUM_OF_INST], CAST(acpfd.INTEREST_TYPE as nvarchar(50)) AS 'INTRSTTYPE', FLOATING_PERIOD_CODE AS [FLOATINGPERIOD], MR_INST_SCHEME_CODE AS 'INST_SCHM', MR_WOP_CODE AS 'WOP', MR_CUST_NOTIFY_OPT_CODE AS 'CUST_NOTIF_OPT', MR_CHARACTERISTIC_OF_CREDIT_CODE AS 'CHARACTERISTIC_OF_CREDIT', agr.PREV_AGRMNT_NO AS [PREVAGGRMT], MR_WAY_OF_RESTRUCTURE_CODE AS 'WAY_OF_RESTRUCTURE', agr.MR_SLIK_SEC_ECO_CODE AS [SLIKECO], mou_cust_no as [MOU_NO] FROM APP a WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_GOVERMENT_REGULATION agr WITH(NOLOCK) ON agr.APP_ID = a.APP_ID JOIN APP_FIN_DATA acpfd WITH(NOLOCK) ON acpfd.APP_ID = ac.APP_ID JOIN REF_APP_SRC ras WITH(NOLOCK) ON ras.APP_SRC_CODE = a.MR_APP_SOURCE_CODE left JOIN MOU_CUST mc with(nolock) on mc.mou_cust_id = a.mou_cust_id WHERE APP_NO = '"+appno+"') as Orig unpivot (value for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' AND rf.REF_MASTER_TYPE_CODE IN ('FIRST_INST_TYPE','WOP','INTRSTTYPE','INST_SCHM','CUST_NOTIF_OPT','CHARACTERISTIC_OF_CREDIT','WAY_OF_RESTRUCTURE','SLIK_SEC_ECO')) AS ref PIVOT(MAX(ref.REF_MASTER_NAME) for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO])) as piv"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				listappdata.add(appdata)
+			}
+		})
+		return listappdata
+	}
+
+	public checkApplicationAttribute(Sql instance, String appno){
+		String attrdata
+		ArrayList <String> listattrdata = new ArrayList<String>()
+		instance.eachRow(("SELECT ATTR_VALUE FROM APP_ATTR_CONTENT aac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON a.APP_ID = aac.APP_ID WHERE APP_NO = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				attrdata = (row[i])
+				listattrdata.add(attrdata)
+			}
+		})
+		return listattrdata
+	}
 }
 
 

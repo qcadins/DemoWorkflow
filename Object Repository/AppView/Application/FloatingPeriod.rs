@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>FloatingPeriod</name>
+   <tag></tag>
+   <elementGuidId>8f61817c-caeb-4c24-8dfe-141a7cf83ccf</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[6]/span/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[6]/span/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>COC</name>
+   <tag></tag>
+   <elementGuidId>2ede01e0-7a86-4a1e-a62d-9c0f0184405b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;RestructuringDataId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;RestructuringDataId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

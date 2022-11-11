@@ -381,7 +381,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\4.2 ApplicationInquiryPersonal.xlsx'</initValue>
+      <initValue>'\\Excel\\4.2 ApplicationInquiryCompany.xlsx'</initValue>
       <name>PathAppInquiryCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
