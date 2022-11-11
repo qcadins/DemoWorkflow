@@ -28,6 +28,8 @@ String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+GlobalVariable.FlagWarning = 0
+
 String servername = findTestData('Login/Login').getValue(1, 9)
 
 String instancename = findTestData('Login/Login').getValue(2, 9)
@@ -48,9 +50,11 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 'click tab Asset'
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
 
-'verify alert'
-WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
-
+'Verif tidak ada alert yang muncul'
+if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
+	GlobalVariable.FlagWarning = 1
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'6. Asset')
+}
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
@@ -381,6 +385,11 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
             false))
 }
 
+if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm -
+		1, GlobalVariable.StatusSuccess)
+}
+
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
@@ -390,9 +399,6 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
-    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
-            1, GlobalVariable.StatusSuccess)
     }
 }
 
