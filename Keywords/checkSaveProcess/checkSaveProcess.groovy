@@ -80,5 +80,15 @@ public class checkSaveProcess {
 		}
 		return flagFailed
 	}
+	
+	@Keyword
+	public writeWarningAppView(int colm, String sheetname){
+		String AlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label')
+		
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				0, colm - 1, GlobalVariable.StatusWarning)
+		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				1, colm - 1, AlertReason)
+	}
 }
 
