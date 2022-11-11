@@ -90,31 +90,31 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     modifyNewNotes = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
 
-	'verify document name'
+    'verify document name'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDocumentName).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify prior to'
+    'verify prior to'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPriorTo).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify checked'
+    'verify checked'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCheck).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify Waived'
+    'verify Waived'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewWaived).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify promised date'
+    'verify promised date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPromiseDate).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify expired date'
+    'verify expired date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewExpiredDate).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify notes'
+    'verify notes'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotes).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 }
@@ -128,6 +128,9 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
+    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusSuccess)
     }
 }
 

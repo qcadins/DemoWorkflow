@@ -56,7 +56,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif reset'
     CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
 
-    ArrayList<Boolean> listString = new ArrayList<Boolean>()
+    ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
@@ -65,7 +65,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebDriver driver = DriverFactory.getWebDriver()
 
     'Inisialisasi variabel'
-    ArrayList<Boolean> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+    ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
     'Klik header appno'
     WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
@@ -86,7 +86,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
     WebUI.verifyEqual(isSorted, true)
 
-    listApp = new ArrayList<Boolean>()
+    listApp = new ArrayList<String>()
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/AppView/span_Appno'))
@@ -112,7 +112,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementNo'), 'xpath', 'equals', 
@@ -135,7 +135,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustNo'), 'xpath', 'equals', 
@@ -155,7 +155,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
     WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustName'), 'xpath', 'equals', 
@@ -176,7 +176,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
@@ -194,7 +194,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik header poname'
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
@@ -215,7 +215,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
@@ -233,7 +233,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik header appdate'
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
@@ -254,7 +254,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
@@ -272,7 +272,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik header NAP Submitted'
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
@@ -295,7 +295,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementStep'), 'xpath', 
@@ -318,7 +318,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ContractStatus'), 'xpath', 
@@ -339,7 +339,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
@@ -357,7 +357,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik header application step'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
@@ -378,7 +378,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
@@ -396,7 +396,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik header application status'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
@@ -417,7 +417,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verify alert tidak muncul'
     WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
 
-    listString = new ArrayList<Boolean>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'), 'xpath', 
@@ -448,7 +448,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
-        listString = new ArrayList<Boolean>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_appNo'), 'xpath', 'equals', 
@@ -471,7 +471,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
         listApp = listString
 
-        listString = new ArrayList<Boolean>()
+        listString = new ArrayList<String>()
 
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
 
@@ -488,7 +488,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
         listApp = listString
 
-        listString = new ArrayList<Boolean>()
+        listString = new ArrayList<String>()
 
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
 
@@ -522,7 +522,7 @@ WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erro
 'delay 5 detik'
 WebUI.delay(5)
 
-ArrayList<Boolean> result = new ArrayList<Boolean>()
+ArrayList<String> result = new ArrayList<String>()
 
 result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
 
@@ -613,6 +613,9 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
+    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusSuccess)
     }
 }
 

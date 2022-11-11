@@ -18,7 +18,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.WebElement as WebElement
 
 'Assign directori file excel ke global variabel'
 String userDir = System.getProperty('user.dir')
@@ -63,75 +63,79 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewRe
 Refindex = 1
 
 for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
-	
-		'modify object ref category'
-		modifyNewRefCat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[2]", true)
+    'modify object ref category'
+    modifyNewRefCat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[2]', true)
 
-		'modify object ref name'
-		modifyNewRefName = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[3]", true)
+    'modify object ref name'
+    modifyNewRefName = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[3]', true)
 
-		'modify object ref type'
-		modifyNewRefType = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[4]", true)
+    'modify object ref type'
+    modifyNewRefType = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[4]', true)
 
-		'modify object bank acc'
-		modifyNewBankAcc = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[5]", true)
-		
-		'modify object tax calc method'
-		modifyNewTaxCalc = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[6]", true)
-		
-		'modify object vat'
-		modifyNewVat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals',
-			"//*[@id='ViewReferantor']/div/table/tbody/tr["+Refindex+"]/td[7]", true)
+    'modify object bank acc'
+    modifyNewBankAcc = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[5]', true)
 
-		'verify referantor category'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefCat).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
-		
-		dbindex++
+    'modify object tax calc method'
+    modifyNewTaxCalc = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[6]', true)
 
-		'verify referantor name'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefName).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
+    'modify object vat'
+    modifyNewVat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
+        Refindex) + ']/td[7]', true)
 
-		dbindex++
+    'verify referantor category'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefCat).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
 
-		'verify referantor type'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefType).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
+    dbindex++
 
-		dbindex++
+    'verify referantor name'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefName).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
 
-		'verify bank account'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBankAcc).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
+    dbindex++
 
-		dbindex++
-		
-		'verify tax calculation method'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewTaxCalc).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
-		
-		dbindex++
-				
-		'verify vat'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewVat).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), false))
-		
-		Refindex++
-		
-		
+    'verify referantor type'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRefType).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
+
+    dbindex++
+
+    'verify bank account'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBankAcc).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
+
+    dbindex++
+
+    'verify tax calculation method'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewTaxCalc).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
+
+    dbindex++
+
+    'verify vat'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewVat).toUpperCase(), (resultReferantor[dbindex]).toUpperCase(), 
+            false))
+
+    Refindex++
 }
 
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusFailed)
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 1, GlobalVariable.NumofColm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
+        GlobalVariable.FlagFailed = 1
+    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusSuccess)
+    }
 }
-
 
