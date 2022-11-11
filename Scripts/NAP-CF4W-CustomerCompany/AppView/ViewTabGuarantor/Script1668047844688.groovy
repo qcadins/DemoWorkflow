@@ -48,7 +48,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'click tab guarantor'
-WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
+WebUI.click(findTestObject('Object Repository/AppView/Guarantor/TabGuarantor'))
 
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
