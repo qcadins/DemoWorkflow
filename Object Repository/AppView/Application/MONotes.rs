@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>MONotes</name>
+   <tag></tag>
+   <elementGuidId>b9f011aa-d1c0-411f-bb83-11ed6678db7d</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[4]/span/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[4]/span/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>

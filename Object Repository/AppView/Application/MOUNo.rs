@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>MOUNo</name>
+   <tag></tag>
+   <elementGuidId>908b5568-2fbc-44d5-ab31-88b5ddcfbe35</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[11]/span/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[11]/span/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>

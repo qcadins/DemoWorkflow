@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Officer</name>
+   <tag></tag>
+   <elementGuidId>9c4296c2-7b74-49c7-be87-7d6f8395fe63</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

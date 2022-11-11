@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>NumofInst</name>
+   <tag></tag>
+   <elementGuidId>5a53a23b-2eed-499b-a029-2c3f1e172050</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[7]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[7]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

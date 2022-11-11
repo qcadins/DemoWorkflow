@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>PaymentFreq</name>
+   <tag></tag>
+   <elementGuidId>a7d364a2-1638-4c04-bbe9-5a85f8188609</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[5]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[5]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>
