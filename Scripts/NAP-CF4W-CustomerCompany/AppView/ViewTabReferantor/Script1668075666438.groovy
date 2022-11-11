@@ -29,6 +29,8 @@ String filePath = userDir + GlobalVariable.PathAppInquiryCompany
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
+int flagWarning = 0 
+
 String servername = findTestData('Login/Login').getValue(1, 9)
 
 String instancename = findTestData('Login/Login').getValue(2, 9)
@@ -124,7 +126,7 @@ for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
     Refindex++
 }
 
-if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+if ((flagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
 	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
@@ -138,6 +140,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
-    }
+    } 
 }
+
 
