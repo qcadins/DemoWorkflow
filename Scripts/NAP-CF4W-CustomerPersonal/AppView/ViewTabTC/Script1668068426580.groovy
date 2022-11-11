@@ -48,10 +48,13 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 'click tab TC'
 WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
 
+'verify alert'
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
+
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist term and condition from db'
-ArrayList<Boolean> resultTC = CustomKeywords.'dbconnection.VerifyAppView.checkTermandCondition'(sqlconnection, appno)
+ArrayList<String> resultTC = CustomKeywords.'dbconnection.VerifyAppView.checkTermandCondition'(sqlconnection, appno)
 
 'count TC table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#viewAppTcInfo > lib-ucgridview > div > table > tbody tr'))
@@ -87,31 +90,31 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     modifyNewNotes = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
 
-	'verify Document name'
+    'verify Document name'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDocumentName).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify Prior to'
+    'verify Prior to'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPriorTo).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify checked'
+    'verify checked'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCheck).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify waived'
+    'verify waived'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewWaived).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify promise date'
+    'verify promise date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPromiseDate).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify expired date'
+    'verify expired date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewExpiredDate).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
-	'verify notes'
+    'verify notes'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotes).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 }
@@ -125,6 +128,9 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
+    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusSuccess)
     }
 }
 

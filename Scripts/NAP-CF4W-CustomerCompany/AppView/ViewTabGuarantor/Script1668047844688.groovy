@@ -45,10 +45,11 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-
 'click tab guarantor'
 WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
 
+'verify alert'
+WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
@@ -80,40 +81,45 @@ for (dbindex = 0; dbindex < resultGuar.size(); dbindex++) {
 
         if (WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false, 
             FailureHandling.OPTIONAL)) {
-		
-			'verify guarantor name'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false))
-		
-            dbindex++
-
-			'verify guarantor type'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarType).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false))
+            'verify guarantor name'
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
+                    false))
 
             dbindex++
 
-			'verify guarantor relationship'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRelationship).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false))
+            'verify guarantor type'
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarType).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
+                    false))
 
             dbindex++
 
-			'verify guarantor mobile phone'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMobilePhone).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false))
+            'verify guarantor relationship'
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRelationship).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
+                    false))
+
+            dbindex++
+
+            'verify guarantor mobile phone'
+            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMobilePhone).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
+                    false))
 
             break
         }
     }
 }
 
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusFailed)
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 1, GlobalVariable.NumofColm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-}
+        GlobalVariable.FlagFailed = 1
+    } else if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusSuccess)
+    }
 }
 
