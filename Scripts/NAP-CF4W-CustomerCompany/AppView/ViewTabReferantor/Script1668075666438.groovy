@@ -52,11 +52,15 @@ Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, usernam
 WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'))
 
 'Verif tidak ada alert yang muncul'
-WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
+	GlobalVariable.FlagWarning = 1
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'4. Referantor')
+}
+
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
-'verify Referantor'
+'get referantor data arraylist from db'
 ArrayList<String> resultReferantor = CustomKeywords.'dbconnection.VerifyAppView.checkReferantor'(sqlconnection, appno)
 
 'count ref table'
