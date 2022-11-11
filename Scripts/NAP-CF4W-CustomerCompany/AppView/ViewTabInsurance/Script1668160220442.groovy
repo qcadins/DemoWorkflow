@@ -47,70 +47,40 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-'click tab guarantor'
-WebUI.click(findTestObject('Object Repository/AppView/Guarantor/TabGuarantor'))
+'click tab Insurance'
+WebUI.click(findTestObject('Object Repository/AppView/Insurance/InsuranceTab'))
 
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'3. Guarantor')
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'TC')
 }
+
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
-'get arraylist guarantor from db'
-ArrayList<String> resultGuar = CustomKeywords.'dbconnection.VerifyAppView.checkGuarantor'(sqlconnection, appno)
+'get insured by from db'
+String resultInsuredBy = CustomKeywords.'dbconnection.VerifyAppView.checkInsuredBy'(sqlconnection, appno)
 
-'count guarantor table'
-variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))
+println(resultInsuredBy)
 
+if(resultInsuredBy.equalsIgnoreCase('Customer')){
+	'get arraylist Insurance Customer from db'
+	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceCustomer'(sqlconnection, appno)
+	
+}else if(resultInsuredBy.equalsIgnoreCase('Multifinance')){
+
+'get arraylist Insurance Multifinance from db'
+ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceMultifinance'(sqlconnection, appno)
+
+'get arraylist Insurance summary from db'
+ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceSummary'(sqlconnection, appno)
+
+}else if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance')){
+
+}
 index = 0
 
-for (dbindex = 0; dbindex < resultGuar.size(); dbindex++) {
-    for (Guarindex = 1; Guarindex <= variableData.size(); Guarindex++) {
-        'modify object guar Name'
-        modifyNewGuarName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-            ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[1]', true)
 
-        'modify object Guar Type'
-        modifyNewGuarType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-            ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[2]', true)
-
-        'modify object relationship'
-        modifyNewRelationship = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
-            'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[3]', true)
-
-        'modify object Mobile Phone'
-        modifyNewMobilePhone = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
-            'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[4]', true)
-
-        if (WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false, 
-            FailureHandling.OPTIONAL)) {
-            'verify guarantor name'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor type'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarType).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor relationship'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRelationship).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor mobile phone'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMobilePhone).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            break
-        }
-    }
-}
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
 	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '3. Guarantor', 0, GlobalVariable.NumofColm -
