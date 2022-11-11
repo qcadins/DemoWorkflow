@@ -518,9 +518,11 @@ WebUI.click(findTestObject('AppView/MainInformation/hyperlink_APPNO'))
 'swicth window ke tab baru'
 WebUI.switchToWindowIndex('1')
 
-'verify alert'
-WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 5, FailureHandling.OPTIONAL)
-
+'Verif tidak ada alert yang muncul'
+if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
+	GlobalVariable.FlagWarning = 1
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'1. Customer')
+}
 'delay 5 detik'
 WebUI.delay(5)
 
