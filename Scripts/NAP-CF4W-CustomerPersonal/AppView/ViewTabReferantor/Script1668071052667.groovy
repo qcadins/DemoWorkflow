@@ -29,7 +29,7 @@ String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 String servername = findTestData('Login/Login').getValue(1, 9)
 
@@ -53,7 +53,7 @@ WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'
 
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
-	flagWarning = 1
+	GlobalVariable.FlagWarning = 1
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'4. Referantor')
 }
 
@@ -129,7 +129,7 @@ for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
     Refindex++
 }
 
-if ((flagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
 	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
