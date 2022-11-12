@@ -609,6 +609,9 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabLifeIn
 'call test case view tab Term condition'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabTC'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'call test case view tab Term condition'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabReservedFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
 'close window index 1'
 WebUI.closeWindowIndex('1')
 

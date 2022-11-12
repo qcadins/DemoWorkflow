@@ -591,8 +591,7 @@ public class VerifyAppView {
 	public checkLifeInsurance(Sql instance, String appno){
 		String lifeinsdata
 		ArrayList <String> listlifeinsdata = new ArrayList<String>()
-		instance.eachRow(("SELECT CASE WHEN alih.LIFE_INSCO_BRANCH_NAME IS NULL THEN '-' ELSE alih.LIFE_INSCO_BRANCH_NAME END AS [LIFEINSCONAME], CASE WHEN CONVERT(NVARCHAR,total_premi_to_cust) IS NULL OR CONVERT(NVARCHAR,total_premi_to_cust) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_to_cust) END AS [CUSTPREMI], CASE WHEN CONVERT(NVARCHAR,total_premi_from_insco) IS NULL OR CONVERT(NVARCHAR,total_premi_from_insco) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_from_insco) END AS [INSCOPREMI] , CASE WHEN CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) END AS [CUSTADMFEE], CASE WHEN CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) END AS [INSCOADMFEE], CASE WHEN CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) IS NULL OR CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) END AS [CPTLZPREMI] FROM APP_LIFE_INS_H alih WITH(NOLOCK) right JOIN APP a WITH(NOLOCK) ON alih.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"'"), {
-			row ->
+		instance.eachRow(("SELECT CASE WHEN alih.LIFE_INSCO_BRANCH_NAME IS NULL THEN '-' ELSE alih.LIFE_INSCO_BRANCH_NAME END AS [LIFEINSCONAME], CASE WHEN CONVERT(NVARCHAR,total_premi_to_cust) IS NULL OR CONVERT(NVARCHAR,total_premi_to_cust) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_to_cust) END AS [CUSTPREMI], CASE WHEN CONVERT(NVARCHAR,total_premi_from_insco) IS NULL OR CONVERT(NVARCHAR,total_premi_from_insco) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR,total_premi_from_insco) END AS [INSCOPREMI] , CASE WHEN CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, CUST_ADMIN_FEE_AMT) END AS [CUSTADMFEE], CASE WHEN CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) IS NULL OR CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, INSCO_ADMIN_FEE_AMT) END AS [INSCOADMFEE], CASE WHEN CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) IS NULL OR CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) = '0.00' THEN '-' ELSE CONVERT(NVARCHAR, TOTAL_LIFE_INS_CPTLZ_AMT) END AS [CPTLZPREMI] FROM APP_LIFE_INS_H alih WITH(NOLOCK) right JOIN APP a WITH(NOLOCK) ON alih.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"'"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -609,8 +608,7 @@ public class VerifyAppView {
 	public checkLifeInsuranceObject(Sql instance, String appno){
 		String lifeinsdata
 		ArrayList <String> listlifeinsdata = new ArrayList<String>()
-		instance.eachRow(("select insured_name, age, mr_cust_type_code from APP_LIFE_INS_D alid with(nolock) join app_life_ins_h alih with(nolock) on alih.APP_LIFE_INS_H_ID = alid.APP_LIFE_INS_H_ID join app a with(nolock) on a.app_id = alih.APP_ID where app_no = '"+appno+"'"), {
-			row ->
+		instance.eachRow(("select insured_name, age, mr_cust_type_code from APP_LIFE_INS_D alid with(nolock) join app_life_ins_h alih with(nolock) on alih.APP_LIFE_INS_H_ID = alid.APP_LIFE_INS_H_ID join app a with(nolock) on a.app_id = alih.APP_ID where app_no = '"+appno+"'"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -629,8 +627,7 @@ public class VerifyAppView {
 
 	public checkInsuredBy(Sql instance, String appno){
 		String insuredby
-		instance.eachRow(("SELECT rml.REF_MASTER_NAME as 'INSURED_BY' FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), {
-			row ->
+		instance.eachRow(("SELECT rml.REF_MASTER_NAME as 'INSURED_BY' FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), { row ->
 
 
 			insuredby = (row[0])
@@ -642,8 +639,7 @@ public class VerifyAppView {
 	public checkInsuranceCustomer(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT rml.REF_MASTER_NAME as 'INSURED_BY', INS_POLICY_NO, CUST_INSCO_BRANCH_NAME, INS_POLICY_NAME, CUST_CVG_AMT, FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy'), CUST_NOTES, FORMAT(END_DT, 'dd-MMM-yyyy') FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), {
-			row ->
+		instance.eachRow(("SELECT rml.REF_MASTER_NAME as 'INSURED_BY', INS_POLICY_NO, CUST_INSCO_BRANCH_NAME, INS_POLICY_NAME, CUST_CVG_AMT, FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy'), CUST_NOTES, FORMAT(END_DT, 'dd-MMM-yyyy') FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -660,8 +656,7 @@ public class VerifyAppView {
 	public checkInsuranceMultifinance(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT [INSURED_BY], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [PAY_PERIOD_TO_INSCO], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, REF_MASTER_NAME FROM (select [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', CONVERT(INT , aio.CVG_AMT) as [cvgAMT], INS_LENGTH as [INSLENGTH], CAST(CUST_ADMIN_FEE_AMT as int) as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {
-			row ->
+		instance.eachRow(("SELECT [INSURED_BY], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [PAY_PERIOD_TO_INSCO], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, REF_MASTER_NAME FROM (select [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', CONVERT(INT , aio.CVG_AMT) as [cvgAMT], INS_LENGTH as [INSLENGTH], CAST(CUST_ADMIN_FEE_AMT as int) as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -678,8 +673,7 @@ public class VerifyAppView {
 	public checkInsuranceHybrid(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [PAY_PERIOD_TO_INSCO], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, REF_MASTER_NAME FROM (select [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', CONVERT(INT , aio.CVG_AMT) as [cvgAMT], INS_LENGTH as [INSLENGTH], CAST(CUST_ADMIN_FEE_AMT as int) as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION], INS_POLICY_NO as [POLICYNO], CUST_INSCO_BRANCH_NAME as [BRANCHNAME], INS_POLICY_NAME as [POLICYNAME], CUST_CVG_AMT as [CUSTCVGAMT], FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy') as [STARTDATE], CUST_NOTES as [NOTE], FORMAT(END_DT, 'dd-MMM-yyyy') as [ENDDATE] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {
-			row ->
+		instance.eachRow(("SELECT [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [PAY_PERIOD_TO_INSCO], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, REF_MASTER_NAME FROM (select [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', CONVERT(INT , aio.CVG_AMT) as [cvgAMT], INS_LENGTH as [INSLENGTH], CAST(CUST_ADMIN_FEE_AMT as int) as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION], INS_POLICY_NO as [POLICYNO], CUST_INSCO_BRANCH_NAME as [BRANCHNAME], INS_POLICY_NAME as [POLICYNAME], CUST_CVG_AMT as [CUSTCVGAMT], FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy') as [STARTDATE], CUST_NOTES as [NOTE], FORMAT(END_DT, 'dd-MMM-yyyy') as [ENDDATE] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -696,8 +690,7 @@ public class VerifyAppView {
 	public checkInsuranceSummary(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT TOTAL_CUST_MAIN_PREMI_AMT, aio.TOTAL_CUST_ADD_PREMI_AMT, CUST_ADMIN_FEE_AMT + CUST_STAMP_DUTY_FEE, aio.[TOTAL_INS_CUST_AMT ], aio.TOTAL_CUST_DISC_AMT, aio.[TOTAL_INS_CUST_AMT ]-aio.TOTAL_CUST_DISC_AMT, INS_CPLTZ_AMT, TOTAL_INSCO_MAIN_PREMI_AMT, aio.TOTAL_INSCO_ADD_PREMI_AMT, INSCO_ADMIN_FEE_AMT+INSCO_STAMP_DUTY_FEE, TOTAL_INS_INSCO_AMT FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), {
-			row ->
+		instance.eachRow(("SELECT TOTAL_CUST_MAIN_PREMI_AMT, aio.TOTAL_CUST_ADD_PREMI_AMT, CUST_ADMIN_FEE_AMT + CUST_STAMP_DUTY_FEE, aio.[TOTAL_INS_CUST_AMT ], aio.TOTAL_CUST_DISC_AMT, aio.[TOTAL_INS_CUST_AMT ]-aio.TOTAL_CUST_DISC_AMT, INS_CPLTZ_AMT, TOTAL_INSCO_MAIN_PREMI_AMT, aio.TOTAL_INSCO_ADD_PREMI_AMT, INSCO_ADMIN_FEE_AMT+INSCO_STAMP_DUTY_FEE, TOTAL_INS_INSCO_AMT FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), { row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -710,7 +703,33 @@ public class VerifyAppView {
 		})
 		return listinsurance
 	}
-	
+
+	public checkReservedFund(Sql instance, String appno){
+		ArrayList<String> totalrsv = new ArrayList<String>()
+		String rsvdata
+		HashMap <String,ArrayList> result = new HashMap<>()
+		ArrayList <String> listrsv = new ArrayList<String>()
+		instance.eachRow(("select MR_RESERVED_FUND_SOURCE_CODE, MR_RESERVED_FUND_CODE, RESERVED_FUND_AMT from APP_RESERVED_FUND arf with(nolock) join app a with(nolock) on arf.app_id = a.app_id where app_no = '"+appno+"' "), { row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				rsvdata = (row[i])
+				listrsv.add(rsvdata)
+			}
+		})
+
+		instance.eachRow(("select reserved_fund_allocated_amt from app_fin_data afd with(nolock) join app a with(nolock) on afd.app_id = a.app_id where app_no = '"+appno+"'"), { row ->
+			totalrsv.add(row[0])
+		})
+
+		result.put("RSVList",listrsv)
+		result.put("TotalRSVAmt",totalrsv)
+
+		return result
+	}
 }
 
 
