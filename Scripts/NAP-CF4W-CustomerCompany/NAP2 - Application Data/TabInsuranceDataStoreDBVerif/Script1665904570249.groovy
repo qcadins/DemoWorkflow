@@ -60,6 +60,7 @@ if (insuredBy == 'Customer') {
         }
     }
     
+	'index 14 karena mengikuti row di data file / excel'
     for (index = 14; index < (result.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
