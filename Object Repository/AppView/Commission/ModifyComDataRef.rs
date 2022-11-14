@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ModifyComDataRef</name>
+   <tag></tag>
+   <elementGuidId>80854ba0-4f0a-4ae8-a8b0-985486763c6d</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationReferantor&quot;]/div/div[1]/div[1]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formInformationReferantor&quot;]/div/div[1]/div[1]/label</value>
+   </webElementProperties>
+</WebElementEntity>

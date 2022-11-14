@@ -732,14 +732,14 @@ public class VerifyAppView {
 
 		return result
 	}
-	
+
 	public checkFinancial(Sql instance, String appno){
 		String findt
 		ArrayList<String> listSubsidy = new ArrayList<String>()
 		ArrayList<String> listFee = new ArrayList<String>()
 		ArrayList<String> listFinancialData = new ArrayList<String>()
 		ArrayList<String> installmentTable = new ArrayList<String>()
-		
+
 		HashMap <String,ArrayList> result = new HashMap<>()
 		instance.eachRow(("select MR_SUBSIDY_FROM_TYPE_NAME, CASE WHEN SUBSIDY_FROM_VALUE_NAME IS NULL THEN '' ELSE SUBSIDY_FROM_VALUE_NAME END AS [SUBSIDY_FROM_VALUE_NAME], MR_SUBSIDY_ALLOC_NAME, MR_SUBSIDY_SOURCE_NAME, MR_SUBSIDY_VALUE_TYPE_NAME, CASE WHEN MR_SUBSIDY_VALUE_TYPE_NAME = 'Amount' THEN SUBSIDY_AMT ELSE SUBSIDY_PRCNT END AS [SUBSIDY_VALUE] from APP_SUBSIDY asub with(nolock) JOIN APP a with(nolock) ON a.APP_ID = asub.APP_ID WHERE APP_NO = '"+appno+"'"), { row ->
 
@@ -752,49 +752,164 @@ public class VerifyAppView {
 				listSubsidy.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("select app_fee_amt, CPTLZ_AMT from app_fee af with(nolock) join app a with(nolock) on af.app_id = a.app_id where app_no = '"+appno+"'"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				listFee.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("SELECT TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, CASE WHEN GRACE_PERIOD = 0 OR GRACE_PERIOD_CODE IS NULL THEN '-' ELSE GRACE_PERIOD_CODE +' / '+CONVERT(VARCHAR,GRACE_PERIOD)+' INSTALLMENT' END AS [GRACE_PERIOD], ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST, MR_FIRST_INST_TYPE_CODE FROM (SELECT TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST,GRACE_PERIOD, mastername.Code, REF_MASTER_NAME FROM ( select TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST,GRACE_PERIOD, [Code], value FROM ( select TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, GRACE_PERIOD, MR_GRACE_PERIOD_TYPE_CODE AS [GRACE_PERIOD_CODE], ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, MR_FIRST_INST_TYPE_CODE, NUM_OF_INST from app_fin_data afd with(nolock) join app a with(nolock) on a.APP_ID = afd.APP_ID where app_no = '"+appno+"') as Orig unpivot (value for [Code] in ([MR_FIRST_INST_TYPE_CODE],[GRACE_PERIOD_CODE]) )as unpiv) as mastername LEFT JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value AND rf.REF_MASTER_TYPE_CODE IN ('FIRST_INST_TYPE','GRACE_PERIOD_TYPE')) AS ref PIVOT(MAX(ref.REF_MASTER_NAME) for [Code] in ([MR_FIRST_INST_TYPE_CODE],[GRACE_PERIOD_CODE])) as piv"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				listFinancialData.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("select inst_seq_no, inst_amt,PRINCIPAL_AMT,INTEREST_AMT,OS_PRINCIPAL_AMT,OS_INTEREST_AMT from APP_INST_SCHDL ais with(nolock) join app a with(nolock) on ais.app_id = a.app_id where app_no = '"+appno+"'"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				installmentTable.add(findt)
 			}
 		})
 
-		
+
 		result.put("Subsidy",listSubsidy)
 		result.put("Fee",listFee)
 		result.put("FinData",listFinancialData)
 		result.put("InstTable",installmentTable)
 		return result
+	}
+
+	public checkCommissionData(Sql instance, String appno, Sql instanceFOU){
+
+
+		String comdt
+		ArrayList<String> listComSupp = new ArrayList<String>()
+		ArrayList<String> listComSuppEmp = new ArrayList<String>()
+		ArrayList<String> listComRef = new ArrayList<String>()
+		//		ArrayList<String> AllocComSupp = new ArrayList<String>()
+		//		ArrayList<String> AllocComSuppEmp = new ArrayList<String>()
+		//		ArrayList<String> AllocComRef = new ArrayList<String>()
+
+		HashMap <String,ArrayList> result = new HashMap<>()
+		//Check Supplier
+		instance.eachRow(("SELECT APP_COMMISSION_H_ID,vendor_name, TOTAL_COMMISSION_AMT,TOTAL_COMMISSION_AFTER_TAX_AMT, TOTAL_DISBURSE_AMT, TOTAL_EXPENSE_AMT, TAX_AMT+PENALTY_AMT, VAT_AMT, MR_TAX_CALC_METHOD_CODE, BANK_CODE+' - '+BANK_ACC_NO+' - '+BANK_ACC_NAME AS [BANK_ACCOUNT] FROM app_COMMISSION_h ach WITH(NOLOCK) join vendor_los v with(nolock) on v.VENDOR_CODE = ach.COMMISSION_RECIPIENT_REF_NO join app a with(nolock) on a.app_id = ach.app_id where app_no = '"+appno+"' and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER'"), { row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				//				if(i==0){
+				//					AllocComSupp.add(checkCommissionAllocation(instanceFOU, row[0]))
+				//				}
+				comdt = (row[i])
+				listComSupp.add(comdt)
+			}
+		})
+		//Check Supplier Employee
+		instance.eachRow(("SELECT APP_COMMISSION_H_ID,vendor_emp_name, vendor_name, RESERVED_FIELD_2, TOTAL_COMMISSION_AMT,TOTAL_COMMISSION_AFTER_TAX_AMT, TOTAL_DISBURSE_AMT, TOTAL_EXPENSE_AMT, TAX_AMT+PENALTY_AMT, VAT_AMT, MR_TAX_CALC_METHOD_CODE, BANK_CODE+' - '+BANK_ACC_NO+' - '+BANK_ACC_NAME AS [BANK_ACCOUNT] FROM app_COMMISSION_h ach with(nolock) join vendor_emp_los ve with(nolock) on ve.vendor_emp_no = ach.COMMISSION_RECIPIENT_REF_NO join vendor_los v with(nolock) on v.vendor_code = ve.vendor_code join app a with(nolock) on a.app_id = ach.app_id where app_no = '"+appno+"' and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'SUPPLIER_EMP'"), { row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				//				if(i==0){
+				//					AllocComSuppEmp.add(checkCommissionAllocation(instanceFOU, row[0]))
+				//				}
+				comdt = (row[i])
+				listComSuppEmp.add(comdt)
+			}
+		})
+
+		//Check Referantor
+		instance.eachRow(("SELECT APP_COMMISSION_H_ID,COMMISSION_RECIPIENT_REF_NO, TOTAL_COMMISSION_AMT,TOTAL_COMMISSION_AFTER_TAX_AMT, TOTAL_DISBURSE_AMT, TOTAL_EXPENSE_AMT, TAX_AMT+PENALTY_AMT, VAT_AMT, MR_TAX_CALC_METHOD_CODE, BANK_CODE+' - '+BANK_ACC_NO+' - '+BANK_ACC_NAME AS [BANK_ACCOUNT] FROM app_COMMISSION_h ach with(nolock) join app a with(nolock) on a.APP_ID = ach.APP_ID where app_no = '"+appno+"' and MR_COMMISSION_RECIPIENT_TYPE_CODE = 'REFERANTOR'"), { row ->
+			String Newcomdt
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				comdt = (row[i])
+				//				if(i==0){
+				//					AllocComRef.add(checkCommissionAllocation(instanceFOU, row[0]))
+				//				}
+				if(i==1){
+					Newcomdt = new dbconnection.checkCommissionCode().checkReferantorName(instanceFOU, comdt)
+					listComRef.add(Newcomdt)
+				}
+				else{
+					listComRef.add(comdt)
+				}
+
+
+			}
+		})
+
+
+
+		result.put("ComSupp",listComSupp)
+		result.put("ComSuppEmp",listComSuppEmp)
+		result.put("ComRef",listComRef)
+		//		result.put("AllocSupp",AllocComSupp)
+		//		result.put("AllocSuppEmp",AllocComSuppEmp)
+		//		result.put("AllocRef",AllocComRef)
+		return result
+
+
+
+
+
+
+	}
+
+	public checkCommissionAllocation(Sql instance, String comid){
+		//Check Referantor
+		ArrayList<String> resultAlloc = new ArrayList<>()
+		String comAlloc
+		instance.eachRow(("select COMMISSION_AMT from APP_COMMISSION_D where app_commission_h_id = '"+comid+"'"), { row ->
+			comAlloc = row[0]
+			resultAlloc.add(comAlloc)
+
+		})
+		return resultAlloc
+
+	}
+
+	public checkSummaryCommission(Sql instance, String appno){
+		String comdt
+		ArrayList<String> resultSum = new ArrayList<>()
+		instance.eachRow(("select SUM(TOTAL_COMMISSION_AMT) as [TOTAL_COMMISSION_AMT],SUM(TOTAL_COMMISSION_AFTER_TAX_AMT) as [TOTAL_TAX_BASE_AMT], SUM(TOTAL_DISBURSE_AMT) as [TOTAL_DISBURSE_AMT], SUM(TOTAL_EXPENSE_AMT) as [TOTAL_EXPENSE_AMT], SUM(TAX_AMT)+SUM(PENALTY_AMT) as [TOTAL_TAX_AMT], SUM(VAT_AMT) as [TOTAL_VAT_AMT] from app_COMMISSION_h ach with(nolock) join app a with(nolock) on a.app_id = ach.app_id where app_no = '"+appno+"'"), { row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				comdt = (row[i])
+				resultSum.add(comdt)
+			}
+		})
+
+		return resultSum
 	}
 }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ModifyAllocateSupplierEmp</name>
+   <tag></tag>
+   <elementGuidId>715f1c8b-8669-4a77-861c-5696ca7f991f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div/div[1]/div[3]/div[1]/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div/div[1]/div[3]/div[1]/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -59,4 +59,23 @@ public class checkCommissionCode {
 		}
 		return referantorCode
 	}
+	
+	@Keyword
+	public checkReferantorName(Sql instance,String referantorCode){
+		String referantorName
+		instance.eachRow(("select TOP(1) CUST_NAME from CUST WITH(NOLOCK) where cust_no ='"+referantorCode+"'"), { def row ->
+			referantorName = (row[0])
+		})
+		if(referantorName==null){
+			instance.eachRow(("select EMP_NAME from REF_EMP WITH(NOLOCK) where emp_no ='"+referantorCode+"'"), { def row ->
+				referantorName = (row[0])
+			})
+		}
+		if(!referantorName){
+			instance.eachRow(("select VENDOR_NAME from VENDOR WITH(NOLOCK) where MR_VENDOR_CATEGORY_CODE in ('AGENCY_PERSONAL','AGENCY_COMPANY') AND vendor_code ='"+referantorCode+"' AND IS_ACTIVE = '1'"), { def row ->
+				referantorName = (row[0])
+			})
+		}
+		return referantorName
+	}
 }

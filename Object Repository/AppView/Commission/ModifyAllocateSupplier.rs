@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ModifyAllocateSupplier</name>
+   <tag></tag>
+   <elementGuidId>0d765564-2328-4c34-bd10-322d5f3b68e6</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;formInformationSupplier&quot;]/div/div/div[3]/div[1]/div/div[2]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;formInformationSupplier&quot;]/div/div/div[3]/div[1]/div/div[2]/label</value>
+   </webElementProperties>
+</WebElementEntity>
