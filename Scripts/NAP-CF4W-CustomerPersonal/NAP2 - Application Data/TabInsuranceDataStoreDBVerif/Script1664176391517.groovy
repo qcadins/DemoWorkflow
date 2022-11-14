@@ -99,7 +99,9 @@ if (insuredBy == 'Customer') {
         }
     }
     
+	'index 14 karena mengikuti row di data file / excel'
     for (index = 14; index <= (resultCustomerInsurance.size() + 13); index++) {
+		'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
         if (index-13 != resultCustomerInsurance.size()) {
             'verify insco branch name'
             arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(

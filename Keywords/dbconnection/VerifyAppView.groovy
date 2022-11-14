@@ -672,7 +672,7 @@ public class VerifyAppView {
 		return listinsurance
 	}
 
-	public checkInsuranceHybrid(Sql instance, String appno){
+	public checkInsuranceCustMf(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
 		instance.eachRow(("SELECT [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, REF_MASTER_NAME FROM (select [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', aio.CVG_AMT as [cvgAMT], INS_LENGTH as [INSLENGTH], CUST_ADMIN_FEE_AMT as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION], INS_POLICY_NO as [POLICYNO], CUST_INSCO_BRANCH_NAME as [BRANCHNAME], INS_POLICY_NAME as [POLICYNAME], CUST_CVG_AMT as [CUSTCVGAMT], FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy') as [STARTDATE], CUST_NOTES as [NOTE], FORMAT(START_DT, 'dd-MMM-yyyy') as [ENDDATE] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf on rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
@@ -689,7 +689,7 @@ public class VerifyAppView {
 		return listinsurance
 	}
 
-	public checkInsuranceCoverage(Sql instance, String appno){
+	public checkInsuranceMainCoverage(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
 		instance.eachRow(("SELECT rml.REF_MASTER_NAME, TOTAL_CUST_MAIN_PREMI_AMT, aio.TOTAL_CUST_ADD_PREMI_AMT, TOTAL_INSCO_MAIN_PREMI_AMT, aio.TOTAL_INSCO_ADD_PREMI_AMT, SUBQ.REF_MASTER_NAME, CASE WHEN CAST(IS_CAPITALIZED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_CAPITALIZED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_CAPITALIZED as varchar(25)) END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE, (SELECT rml.REF_MASTER_NAME, a.APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aio.INS_ASSET_PAID_BY WHERE rml.REF_MASTER_TYPE_CODE = 'INS_PAID_BY') as SUBQ WHERE a.APP_NO = '"+ appno +"' AND SUBQ.APP_NO = a.APP_NO"), {  row ->
@@ -705,7 +705,7 @@ public class VerifyAppView {
 		})
 		return listinsurance
 	}
-	
+
 	public checkAdditionalCoverage(Sql instance, String appno, int yearno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -722,7 +722,7 @@ public class VerifyAppView {
 		})
 		return listinsurance
 	}
-	
+
 	public checkInsuranceSummary(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -766,14 +766,14 @@ public class VerifyAppView {
 
 		return result
 	}
-	
+
 	public checkFinancial(Sql instance, String appno){
 		String findt
 		ArrayList<String> listSubsidy = new ArrayList<String>()
 		ArrayList<String> listFee = new ArrayList<String>()
 		ArrayList<String> listFinancialData = new ArrayList<String>()
 		ArrayList<String> installmentTable = new ArrayList<String>()
-		
+
 		HashMap <String,ArrayList> result = new HashMap<>()
 		instance.eachRow(("select MR_SUBSIDY_FROM_TYPE_NAME, CASE WHEN SUBSIDY_FROM_VALUE_NAME IS NULL THEN '' ELSE SUBSIDY_FROM_VALUE_NAME END AS [SUBSIDY_FROM_VALUE_NAME], MR_SUBSIDY_ALLOC_NAME, MR_SUBSIDY_SOURCE_NAME, MR_SUBSIDY_VALUE_TYPE_NAME, CASE WHEN MR_SUBSIDY_VALUE_TYPE_NAME = 'Amount' THEN SUBSIDY_AMT ELSE SUBSIDY_PRCNT END AS [SUBSIDY_VALUE] from APP_SUBSIDY asub with(nolock) JOIN APP a with(nolock) ON a.APP_ID = asub.APP_ID WHERE APP_NO = '"+appno+"'"), { row ->
 
@@ -786,44 +786,44 @@ public class VerifyAppView {
 				listSubsidy.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("select app_fee_amt, CPTLZ_AMT from app_fee af with(nolock) join app a with(nolock) on af.app_id = a.app_id where app_no = '"+appno+"'"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				listFee.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("SELECT TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, CASE WHEN GRACE_PERIOD = 0 OR GRACE_PERIOD_CODE IS NULL THEN '-' ELSE GRACE_PERIOD_CODE +' / '+CONVERT(VARCHAR,GRACE_PERIOD)+' INSTALLMENT' END AS [GRACE_PERIOD], ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST, MR_FIRST_INST_TYPE_CODE FROM (SELECT TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST,GRACE_PERIOD, mastername.Code, REF_MASTER_NAME FROM ( select TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, NUM_OF_INST,GRACE_PERIOD, [Code], value FROM ( select TOTAL_ASSET_PRICE_AMT, TOTAL_FEE_AMT, TOTAL_FEE_CPTLZ_AMT, TOTAL_INS_CUST_AMT, INS_CPTLZ_AMT, TOTAL_LIFE_INS_CUST_AMT, LIFE_INS_CPTLZ_AMT, DOWN_PAYMENT_GROSS_AMT, DOWN_PAYMENT_NETT_AMT, TOTAL_DOWN_PAYMENT_NETT_AMT, TDP_PAID_COY_AMT, NTF_AMT, effective_rate_prcnt, STD_EFFECTIVE_RATE_PRCNT, FLAT_RATE_PRCNT, INST_AMT, GRACE_PERIOD, MR_GRACE_PERIOD_TYPE_CODE AS [GRACE_PERIOD_CODE], ROUNDING_AMT, TOTAL_INTEREST_AMT, DIFF_RATE_AMT, TOTAL_AR, GROSS_YIELD_PRCNT, LTV, MR_FIRST_INST_TYPE_CODE, NUM_OF_INST from app_fin_data afd with(nolock) join app a with(nolock) on a.APP_ID = afd.APP_ID where app_no = '"+appno+"') as Orig unpivot (value for [Code] in ([MR_FIRST_INST_TYPE_CODE],[GRACE_PERIOD_CODE]) )as unpiv) as mastername LEFT JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value AND rf.REF_MASTER_TYPE_CODE IN ('FIRST_INST_TYPE','GRACE_PERIOD_TYPE')) AS ref PIVOT(MAX(ref.REF_MASTER_NAME) for [Code] in ([MR_FIRST_INST_TYPE_CODE],[GRACE_PERIOD_CODE])) as piv"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				listFinancialData.add(findt)
 			}
 		})
-		
+
 		instance.eachRow(("select inst_seq_no, inst_amt,PRINCIPAL_AMT,INTEREST_AMT,OS_PRINCIPAL_AMT,OS_INTEREST_AMT from APP_INST_SCHDL ais with(nolock) join app a with(nolock) on ais.app_id = a.app_id where app_no = '"+appno+"'"), { row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-			
-			
+
+
 			for(i = 0 ; i < colmcount ; i++){
 				findt = (row[i])
 				installmentTable.add(findt)
 			}
 		})
 
-		
+
 		result.put("Subsidy",listSubsidy)
 		result.put("Fee",listFee)
 		result.put("FinData",listFinancialData)
