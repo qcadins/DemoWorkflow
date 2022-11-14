@@ -605,6 +605,9 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabApplica
 'call test case view tab Asset'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'call test case view tab Financial'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabFinancial'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
 'call test case view tab Term condition'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabTC'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 

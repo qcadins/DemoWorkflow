@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TotalAR</name>
+   <tag></tag>
+   <elementGuidId>0a2a4f39-8a9e-47cd-873f-c878c4abbe05</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;mat-tab-content-0-7&quot;]/div/view-financial/div/div[6]/div[3]/div/div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;mat-tab-content-0-7&quot;]/div/view-financial/div/div[6]/div[3]/div/div[2]</value>
+   </webElementProperties>
+</WebElementEntity>
