@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TotalLifeInsuranceCap</name>
+   <tag></tag>
+   <elementGuidId>957dc53d-4c0b-4284-bbc5-f17ca76b6c99</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;financialData&quot;]/div/div[8]/div/div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;financialData&quot;]/div/div[8]/div/div[2]</value>
+   </webElementProperties>
+</WebElementEntity>
