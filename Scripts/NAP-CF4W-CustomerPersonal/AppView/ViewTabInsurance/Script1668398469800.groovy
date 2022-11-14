@@ -23,7 +23,7 @@ import internal.GlobalVariable as GlobalVariable
 String userDir = System.getProperty('user.dir')
 
 'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
+String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
 
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
