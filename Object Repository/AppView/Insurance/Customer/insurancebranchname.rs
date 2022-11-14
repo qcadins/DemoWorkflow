@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>insurancebranchname</name>
+   <tag></tag>
+   <elementGuidId>aae927a6-7ffb-4cd8-8f59-d92ff7f6d00f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceObject&quot;]/div/div[1]/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;insuranceObject&quot;]/div/div[1]/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

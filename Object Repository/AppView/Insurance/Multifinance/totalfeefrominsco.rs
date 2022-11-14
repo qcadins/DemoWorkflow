@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>totalfeefrominsco</name>
+   <tag></tag>
+   <elementGuidId>6d15c7af-e3d2-469f-b0a1-f1c18286bb10</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;summary&quot;]/div/div[2]/div[3]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;summary&quot;]/div/div[2]/div[3]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

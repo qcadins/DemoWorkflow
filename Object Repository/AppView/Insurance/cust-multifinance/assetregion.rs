@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>assetregion</name>
+   <tag></tag>
+   <elementGuidId>6f69919f-5a07-4885-a410-80a5f9aaf9f0</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceObject&quot;]/div[2]/div[1]/div[5]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;insuranceObject&quot;]/div[2]/div[1]/div[5]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

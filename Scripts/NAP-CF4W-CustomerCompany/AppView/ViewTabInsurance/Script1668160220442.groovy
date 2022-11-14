@@ -67,6 +67,40 @@ if(resultInsuredBy.equalsIgnoreCase('Customer')){
 	'get arraylist Insurance Customer from db'
 	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceCustomer'(sqlconnection, appno)
 	
+	index = 0
+	
+	'verify insured by'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/insuredby')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify policy no'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/policyno')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify insurance branch name'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/insurancebranchname')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify policy name'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/policyname')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify cvg amount'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/cvgamount')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify start date'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/startdate')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify insurance note'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/insurancenote')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
+	'verify end date'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Customer/enddate')).toUpperCase(),
+			(resultInsuranceCustomer[index++]).toUpperCase(), false))
+	
 }else if(resultInsuredBy.equalsIgnoreCase('Multifinance')){
 
 'get arraylist Insurance Multifinance from db'
@@ -75,8 +109,210 @@ ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'dbconnection.Ver
 'get arraylist Insurance summary from db'
 ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceSummary'(sqlconnection, appno)
 
+index = 0
+
+'verify insured by'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/Insuredby')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify isnurance paid by'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/insurancepaidby')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify insurance company'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/insurancecompany')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify payment type'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/paymenttype')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify cover period'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/coverperiod')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify coverage amount'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/coverageamount')).replace(',','').toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify insurance length'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/insurancelength')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify insurance admin fee'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/insuranceadminfee')).replace(',','').toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify isnurance note'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/insurancenote')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+'verify asset region'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/assetregion')).toUpperCase(),
+		(resultInsuranceMultifinance[index++]).toUpperCase(), false))
+
+index = 0
+
+'verify TOTAL MAIN PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalmainpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL ADDITIONAL PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totaladditionalpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL FEE TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalfeetocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify DISCOUNT AMOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/discountamount')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI TO CUSTOMER AFTER DISCOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalpremitocustafterdisc')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify CAPITALIZE AMOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/capitalizeamount')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL MAIN PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalmainpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL ADDITIONAL PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totaladditionalpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL FEE FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalfeefrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/Multifinance/totalpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+
 }else if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance')){
 
+'get arraylist Insurance Cust-Multifinance from db'
+ArrayList<String> resultInsuranceHybrid = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceHybrid'(sqlconnection, appno)
+
+'get arraylist Insurance summary from db'
+ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceSummary'(sqlconnection, appno)
+
+index = 0
+
+'verify policy no'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/policyno')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify insurance branch name'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/insurancebranch')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify policy name'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/policyname')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify cvg amount'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/custcvgamount')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify start date'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/startdate')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify insurance note'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/custnotes')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify end date'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/enddate')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify isnurance paid by'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/insurancepaidby')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify insurance company'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/insurancecompany')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify cover period'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/coverperiod')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify coverage amount'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/mfcvgamount')).replace(',','').toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify insurance length'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/insurancelength')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify insurance admin fee'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/insuranceadminfee')).replace(',','').toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify isnurance note'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/mfnotes')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+'verify asset region'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/assetregion')).toUpperCase(),
+		(resultInsuranceHybrid[index++]).toUpperCase(), false))
+
+index = 0
+
+'verify TOTAL MAIN PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalmainpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL ADDITIONAL PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totaladditionalpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL FEE TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalfeetocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI TO CUSTOMER'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalpremitocustomer')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify DISCOUNT AMOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/discountamount')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI TO CUSTOMER AFTER DISCOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalpremitocustafterdisc')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify CAPITALIZE AMOUNT'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/capitalizeamount')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL MAIN PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalmainpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL ADDITIONAL PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totaladditionalpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL FEE FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalfeefrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
+
+'verify TOTAL PREMI FROM INSCO'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/totalpremifrominsco')).replace(',','').toUpperCase(),
+		(resultInsuranceSummary[index++]).toUpperCase(), false))
 }
 index = 0
 

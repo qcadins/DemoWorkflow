@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>totalpremitocustomer</name>
+   <tag></tag>
+   <elementGuidId>4fcc643d-9e8f-468a-90c7-0fff9ba8fa3e</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;summary&quot;]/div/div[1]/div[4]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;summary&quot;]/div/div[1]/div[4]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>
