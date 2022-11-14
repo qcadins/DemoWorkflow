@@ -60,6 +60,7 @@ if (insuredBy == 'Customer') {
         }
     }
     
+	'index 14 karena mengikuti row di data file / excel'
     for (index = 14; index < (result.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -96,12 +97,36 @@ if (insuredBy == 'Customer') {
         }
     }
     
-    for (index = 14; index < (resultCustomerInsurance.size() + 14); index++) {
-        'verify insco branch name'
-        arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-                    GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(), 
-                false, FailureHandling.OPTIONAL))
-    }
+	'index 14 karena mengikuti row di data file / excel'
+	for (index = 14; index <= (resultCustomerInsurance.size() + 13); index++) {
+		'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
+		if (index-13 != resultCustomerInsurance.size()) {
+			'verify insco branch name'
+			arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+						GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(),
+					false, FailureHandling.OPTIONAL))
+		} else if (index-13 == resultCustomerInsurance.size()) {
+			String enddate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 19)
+
+			Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
+
+			String inslength = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/insurancelength'),
+				'value')
+
+			Calendar cal = Calendar.getInstance()
+
+			cal.setTime(enddate_Formated)
+
+			cal.add(Calendar.MONTH, Integer.parseInt(inslength))
+
+			DateFormat dateFormat = new SimpleDateFormat('MM/dd/yyyy')
+
+			String enddateFinal = dateFormat.format(cal.getTime())
+
+			arrayMatch.add(WebUI.verifyMatch(enddateFinal, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		}
+	}
     
     arrayindex = 0
 
@@ -436,7 +461,7 @@ if (insuredBy == 'Customer') {
             }
         }
     }
-} else if (insuredBy == 'Multifinance') {
+}else if (insuredBy == 'Multifinance') {
     ArrayList<String> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13))

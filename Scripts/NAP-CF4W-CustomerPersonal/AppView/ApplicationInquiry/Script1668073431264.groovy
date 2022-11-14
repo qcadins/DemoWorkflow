@@ -519,10 +519,12 @@ WebUI.click(findTestObject('AppView/MainInformation/hyperlink_APPNO'))
 WebUI.switchToWindowIndex('1')
 
 'Verif tidak ada alert yang muncul'
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
-	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'1. Customer')
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+    GlobalVariable.FlagWarning = 1
+
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '1. Customer')
 }
+
 'delay 5 detik'
 WebUI.delay(5)
 
@@ -603,6 +605,9 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabApplic
 'call test case view tab asset'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'call test case view tab insurance'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabInsurance'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
 'call test case view tab life insurance'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabLifeInsurance'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -624,8 +629,8 @@ WebUI.closeWindowIndex('1')
 WebUI.switchToWindowIndex('0')
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
+    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
