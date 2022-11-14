@@ -506,7 +506,7 @@ public class CustomerDataVerif {
 	public NAP2InsuranceCustMFStoreDB (Sql instance, String appno){
 		String insurancedata
 		ArrayList<String> insurancelist = new ArrayList<>()
-		instance.eachRow(("SELECT aio.CUST_INSCO_BRANCH_NAME , CONVERT(INT , aio.CUST_CVG_AMT) , aio.INS_POLICY_NO , aio.INS_POLICY_NAME , FORMAT(aio.CUST_COVER_START_DT, 'MM/dd/yyyy') , FORMAT(aio.START_DT, 'MM/dd/yyyy') , aio.CUST_NOTES  FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
+		instance.eachRow(("SELECT aio.CUST_INSCO_BRANCH_NAME , CONVERT(INT , aio.CUST_CVG_AMT) , aio.INS_POLICY_NO , aio.INS_POLICY_NAME , FORMAT(aio.CUST_COVER_START_DT, 'MM/dd/yyyy') , FORMAT(aio.START_DT, 'MM/dd/yyyy'), aio.CUST_NOTES, FORMAT(aio.END_DT, 'MM/dd/yyyy')  FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE APP_NO = '"+ appno +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
