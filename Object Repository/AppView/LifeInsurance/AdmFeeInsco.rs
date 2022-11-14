@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>AppSrc</name>
+   <name>AdmFeeInsco</name>
    <tag></tag>
-   <elementGuidId>bb9a2f66-daad-4978-aa6b-d88b6e2ffa38</elementGuidId>
+   <elementGuidId>634be8ae-1bb9-476f-aa61-4eec22f270a6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+         <value>//*[@id=&quot;AppLifeInsId&quot;]/div/div[6]/span/div/div[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+      <value>//*[@id=&quot;AppLifeInsId&quot;]/div/div[6]/span/div/div[2]</value>
    </webElementProperties>
 </WebElementEntity>

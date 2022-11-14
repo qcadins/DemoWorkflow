@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>AppSrc</name>
+   <name>ModifyObj</name>
    <tag></tag>
-   <elementGuidId>bb9a2f66-daad-4978-aa6b-d88b6e2ffa38</elementGuidId>
+   <elementGuidId>b2e69734-121b-4119-a4e3-53f880ea61a3</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+         <value>//*[@id=&quot;mat-tab-content-0-6&quot;]/div/app-life-insurance/lib-ucgridview/div/table/tbody/tr[1]/td[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+      <value>//*[@id=&quot;mat-tab-content-0-6&quot;]/div/app-life-insurance/lib-ucgridview/div/table/tbody/tr[1]/td[1]</value>
    </webElementProperties>
 </WebElementEntity>

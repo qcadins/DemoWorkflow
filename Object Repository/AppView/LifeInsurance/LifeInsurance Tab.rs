@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>AppSrc</name>
+   <name>LifeInsurance Tab</name>
    <tag></tag>
-   <elementGuidId>bb9a2f66-daad-4978-aa6b-d88b6e2ffa38</elementGuidId>
+   <elementGuidId>91f0e0a1-cee9-46a0-b956-9aa307dbe5ed</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+         <value>//*[@id=&quot;mat-tab-label-0-6&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+      <value>//*[@id=&quot;mat-tab-label-0-6&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

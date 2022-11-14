@@ -603,8 +603,14 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabApplic
 'call test case view tab asset'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'call test case view tab life insurance'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabLifeInsurance'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
 'call test case view tab Term condition'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabTC'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+
+'call test case view tab Term condition'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabReservedFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 'close window index 1'
 WebUI.closeWindowIndex('1')

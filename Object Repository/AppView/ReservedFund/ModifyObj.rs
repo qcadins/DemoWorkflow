@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>AppSrc</name>
+   <name>ModifyObj</name>
    <tag></tag>
-   <elementGuidId>bb9a2f66-daad-4978-aa6b-d88b6e2ffa38</elementGuidId>
+   <elementGuidId>ec8ff3af-5675-468a-8598-62dba47ec3f7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+         <value>//*[@id=&quot;reservedFund&quot;]/div/table/tbody/tr[1]/td[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AppsInfoId&quot;]/div/div[1]/span/div/div[2]</value>
+      <value>//*[@id=&quot;reservedFund&quot;]/div/table/tbody/tr[1]/td[1]</value>
    </webElementProperties>
 </WebElementEntity>
