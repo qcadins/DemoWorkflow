@@ -215,6 +215,10 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/assetregion')).toUpperCase(),
 		(resultInsuranceCustMF[index++]).toUpperCase(), false))
 
+}else if(resultInsuredBy.equalsIgnoreCase('Off System')){
+'verify Insured by'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/OffSystem')).toUpperCase(),
+		(resultInsuredBy).toUpperCase(), false))
 }
 
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
@@ -261,7 +265,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 			('//*[@id="coverage"]/lib-ucgridview/div/table/tbody/tr[' + cvgindex) + ']/td[9]', true)
 		
 		'verify Main cvg'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainCvg).toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainCvg).toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 		
 		ArrayList<String> addtionalcvg = WebUI.getText(modifyNewAddCvg).split(', ')
 		
@@ -273,22 +277,22 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 		
 		
 		'verify Main premi to cust'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoCust).replace(',','').toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoCust).replace(',','').toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 		
 		'verify add premi to cust'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddPremitoCust).replace(',','').toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddPremitoCust).replace(',','').toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 	
 		'verify Main premi to insco'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoInsco).replace(',','').toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoInsco).replace(',','').toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 	
 		'verify add premi to insco'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddPremitoInsco).replace(',','').toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewAddPremitoInsco).replace(',','').toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 		
 		'verify paid by'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPaidBy).toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPaidBy).toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 		
 		'verify capitalized'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisCapitalized).toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisCapitalized).toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
 	}
 	
 	'get arraylist Insurance summary from db'
