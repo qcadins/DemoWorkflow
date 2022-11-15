@@ -140,6 +140,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             31), false)
+	
+	'get customer name'
+	custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+		'value', FailureHandling.OPTIONAL)
+
+	'add name to Global variable'
+	GlobalVariable.CustomerName = custname
+	
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp') {
     'double check untuk copy app data'
@@ -201,6 +209,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
             }
         }
     }
+		
+		'get customer name'
+		custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+			'value', FailureHandling.OPTIONAL)
+		
+		'add name to Global variable'
+		GlobalVariable.CustomerName = custname
     
 	'check if role testing untuk get data customer digunakan untuk data verif'
     if (GlobalVariable.RoleCompany == 'Testing') {

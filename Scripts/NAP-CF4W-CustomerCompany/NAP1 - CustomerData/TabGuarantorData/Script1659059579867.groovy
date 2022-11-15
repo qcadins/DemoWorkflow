@@ -439,6 +439,13 @@ GlobalVariable.FlagFailed = 0
 						 
 					}
 					
+					'get customer name'
+					custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'),
+						'value', FailureHandling.OPTIONAL)
+
+					'add name to Global variable'
+					GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+					
                     'click button save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
@@ -558,7 +565,7 @@ GlobalVariable.FlagFailed = 0
                         'input guarantor name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
                             datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 18))
-
+						
                         'input tax id'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 19))
@@ -725,6 +732,13 @@ GlobalVariable.FlagFailed = 0
 						
 					}
                     
+					'get customer name'
+					custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'),
+						'value', FailureHandling.OPTIONAL)
+
+					'add name to Global variable'
+					GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+					
                     'Click save'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 

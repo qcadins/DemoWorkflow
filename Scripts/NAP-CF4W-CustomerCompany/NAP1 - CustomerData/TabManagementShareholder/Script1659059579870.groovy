@@ -87,7 +87,7 @@ GlobalVariable.FlagFailed = 0
                         'input shareholder name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 19))
-
+						
                         'input birth place'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 20))
@@ -192,11 +192,14 @@ GlobalVariable.FlagFailed = 0
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Email_form-control ng-untouched ng-pristine ng-valid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 36))
 
+						'klik button job position'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Job Position_btn btn-raised btn-primary'))
 
+						'input job position code'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Job Position Code_JobCodeId'), 
                             datafile.getValue(GlobalVariable.NumofMS, 37))
 
+						'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
@@ -308,6 +311,13 @@ GlobalVariable.FlagFailed = 0
                                 continue
                             }
                         }
+						
+						'get customer name'
+						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+							'value', FailureHandling.OPTIONAL)
+						'add name to Global variable'
+						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+						
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -380,6 +390,13 @@ GlobalVariable.FlagFailed = 0
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         }
+							
+							'get customer name'
+							custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+								'value', FailureHandling.OPTIONAL)
+							'add name to Global variable'
+							GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+							
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
                         'click radio public'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
@@ -600,6 +617,13 @@ GlobalVariable.FlagFailed = 0
                             continue
                         }
                         
+						'get customer name'
+						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+							'value', FailureHandling.OPTIONAL)
+						'add name to Global variable'
+						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+						
+						
 						'check if role testing maka get data MS untuk data verif'
                         if (GlobalVariable.RoleCompany == 'Testing') {
                             'call function MS Personal get data'
@@ -782,6 +806,8 @@ GlobalVariable.FlagFailed = 0
                                 continue
                             }
                         }
+						
+						
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -830,6 +856,12 @@ GlobalVariable.FlagFailed = 0
                             continue
                         }
                         
+						'get customer name'
+						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+							'value', FailureHandling.OPTIONAL)
+						'add name to Global variable'
+						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+						
 						'check if role testing maka get data MS untuk data verif'
 						if (GlobalVariable.RoleCompany == 'Testing') {
 							'call function get data'

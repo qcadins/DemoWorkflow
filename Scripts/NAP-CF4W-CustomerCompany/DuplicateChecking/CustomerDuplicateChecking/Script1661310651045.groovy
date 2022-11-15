@@ -88,7 +88,6 @@ if (DupCheckStatus == true) {
 
     GlobalVariable.NegativeCustCount = 0
 
-    //		WebUI.verifyMatch(subjectName, CustomerNameArray[i-1], false, FailureHandling.OPTIONAL)
     'verify name == data inputan'
     if (CustomerArray.size() > 0) {
         for (c = 1; c <= CustomerArray.size(); c++) {
@@ -157,6 +156,12 @@ if (DupCheckStatus == true) {
             'get text subject type'
             String subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
+			if(GlobalVariable.RoleCompany == "Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 8).length()==0){
+						'verify name == data inputan'
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(subjectName, CustomerNameArray[(i - 1)], false))
+					}
+				
             if (subjectName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                 'click button edit'
                 if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
