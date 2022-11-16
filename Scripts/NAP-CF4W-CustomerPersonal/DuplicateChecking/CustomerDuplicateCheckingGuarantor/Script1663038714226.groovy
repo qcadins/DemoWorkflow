@@ -43,7 +43,7 @@ String subjectType
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
-if (GuarantorArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).split(';', -1).length()>0) {
+if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length()>0) {
     for (g = 1; g <= GuarantorArray.size(); g++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
             5, FailureHandling.OPTIONAL)) {
@@ -117,7 +117,7 @@ if (GuarantorArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofC
 			if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
-						checkVerifyEqualOrMatch(WebUI.verifyMatch(subjectName, CustomerNameArray[(i - 1)], false))
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(subjectName, CustomerNameArray[i], false))
 			}
         }
         
@@ -729,4 +729,5 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		GlobalVariable.FlagFailed=1
 	}
 }
+
 
