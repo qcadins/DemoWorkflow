@@ -50,6 +50,7 @@ def ManagementShareholderNegativeArray = findTestData('NAP-CF4W-CustomerCompany/
 
 String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
 
+'delcare web driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'array customer name data inputan'
@@ -62,7 +63,7 @@ def modifySubjectName, modifySubjectType, modifyApplicantNo, modifyCustomerNo, m
 String subjectName, subjectType
 
 if (ManagementShareholderArray.size() > 0) {
-    for (m = 1; m <= ManagementShareholderArray.size(); m++) {
+    for (int m = 1; m <= ManagementShareholderArray.size(); m++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
             5, FailureHandling.OPTIONAL)) {
             'define interger i'
@@ -123,7 +124,7 @@ if (ManagementShareholderArray.size() > 0) {
 			if(GlobalVariable.RoleCompany=="Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
-						checkVerifyEqualOrMatch(CustomerNameArray.contains(subjectName))
+						checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
 			}
         }
         
@@ -158,7 +159,7 @@ if (ManagementShareholderArray.size() > 0) {
                     int countidnorow = variableidno.size()
 
                     if (counttd == 10) {
-                        for (id = 1; id <= countidnorow; id++) {
+                        for (int id = 1; id <= countidnorow; id++) {
                             'modify object id no managementsharholder match'
                             modifyIDNoManagementShareholder = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
                                 'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]', true)

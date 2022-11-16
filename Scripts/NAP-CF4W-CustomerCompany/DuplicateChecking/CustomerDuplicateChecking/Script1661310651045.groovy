@@ -159,7 +159,7 @@ if (DupCheckStatus == true) {
 			if(GlobalVariable.RoleCompany == "Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
-						checkVerifyEqualOrMatch(CustomerNameArray.contains(subjectName))
+						checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
 					}
 				
             if (subjectName.equalsIgnoreCase(CustomerArray[(c - 1)])) {

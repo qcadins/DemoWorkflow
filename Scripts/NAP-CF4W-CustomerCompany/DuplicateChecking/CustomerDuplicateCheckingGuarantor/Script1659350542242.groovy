@@ -37,8 +37,6 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-def StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
-
 def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 19).split(
     ';', -1)
 
@@ -63,7 +61,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
 if (GuarantorArray.size() > 0) {
-    for (g = 1; g <= GuarantorArray.size(); g++) {
+    for (int g = 1; g <= GuarantorArray.size(); g++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
             5, FailureHandling.OPTIONAL)) {
             'define interger i'
@@ -125,7 +123,7 @@ if (GuarantorArray.size() > 0) {
 			if(GlobalVariable.RoleCompany=="Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
-						checkVerifyEqualOrMatch(CustomerNameArray.contains(subjectName))
+						checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
 			}
 				
         }
@@ -160,7 +158,7 @@ if (GuarantorArray.size() > 0) {
 
                     int countidnorow = variableidno.size()
 
-                    for (id = 1; id <= countidnorow; id++) {
+                    for (int id = 1; id <= countidnorow; id++) {
                         if (counttd == 10) {
                             'modify object id no Guarantor match'
                             modifyIDNoGuarantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
