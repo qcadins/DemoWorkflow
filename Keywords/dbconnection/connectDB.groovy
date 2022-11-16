@@ -31,25 +31,25 @@ import internal.GlobalVariable
 
 public class connectDB {
 	private static Connection connection = null;
-	
+
 	@Keyword
 	public connect(String url, String username, String password, String dcname){
 		return Sql.newInstance(url,username,password,dcname)
 	}
-	
+
 	@Keyword
 	def ConnectDB(){
 		String conn = "jdbc:sqlserver://r3db-server.ad-ins.com;instanceName=r3;databaseName=LOS" //’sqlserver’ tergantung jenis database yang digunakan, dalam hal ini karena menggunakan SQLServer
-		
-				
-		
+
+
+
 		if(connection != null && !connection.isClosed()){
 			connection.close()
 		}
-		
-	   def connection = DriverManager.getConnection(conn, "sa", "SQLServer2017") //parameter yang digunakan -> url, username, password
 
-	   return connection
+		def connection = DriverManager.getConnection(conn, "sa", "SQLServer2017") //parameter yang digunakan -> url, username, password
+
+		return connection
 	}
 }
 

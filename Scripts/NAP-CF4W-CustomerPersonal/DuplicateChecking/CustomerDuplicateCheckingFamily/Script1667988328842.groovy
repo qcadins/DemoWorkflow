@@ -26,25 +26,17 @@ def FamilyActionArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 17).
 
 def FamilyNegativeArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
-def modifySubjectName
-
-def modifySubjectType
-
-String modifyApplicantNo
-
-String modifyCustomerNo
-
-def modifyButtonEdit
-
-String subjectName
-
-String subjectType
-
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
+'declare modify object variable'
+def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
+
+'declare subjectname variable'
+String subjectName, newApplicantNoValue, newMSNameAppInProcess, newMSName, newCustomerNoValue
+
 if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length()>0) {
-	for (f = 1; f <= FamilyArray.size(); f++) {
+	for (int f = 1; f <= FamilyArray.size(); f++) {
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'),
 			5, FailureHandling.OPTIONAL)) {
 			'define interger i'
@@ -85,29 +77,7 @@ if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm
 			modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectName'),
 				'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
 				']/td[2]', true)
-			
-			subjectName = WebUI.getText(modifySubjectName)
-
-			'modify object subjecttype'
-			modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
-				'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
-				']/td[3]', true)
-
-//			'modify object Applicant No'
-//			modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNo'),
-//				'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
-//				']/td[4]', true)
-//
-//			'modify object Customer No'
-//			modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNo'),
-//				'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
-//				']/td[5]', true)
-
-			'modify object edit icon'
-			modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/i_-_font-medium-3 ft-edit-2'),
-				'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
-				']/td[7]/span/span/span/span/span/span/a', true)
-
+		
 			'get text subject name'
 			subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
@@ -148,7 +118,7 @@ if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm
 
 					int countidnorow = variableidno.size()
 
-					for (id = 1; id <= countidnorow; id++) {
+					for (int id = 1; id <= countidnorow; id++) {
 						'modify object id no family match'
 						modifyIDNoFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
 							'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]', true)
@@ -201,7 +171,7 @@ if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm
 
 					int countfamilyidrow = variablefamilyidno.size()
 
-					for (id = 1; id <= countfamilyidrow; id++) {
+					for (int id = 1; id <= countfamilyidrow; id++) {
 						'modify object id no family match'
 						modifyIDNoFamily = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoPersonal'),
 							'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[4]', true)
