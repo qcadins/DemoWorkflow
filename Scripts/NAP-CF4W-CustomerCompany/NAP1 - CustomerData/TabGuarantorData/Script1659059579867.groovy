@@ -809,6 +809,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 }
 
+	println(GlobalVariable.CustomerName)
+	
 WebUI.delay(15)
 
 def getDataGuarPersonal(){

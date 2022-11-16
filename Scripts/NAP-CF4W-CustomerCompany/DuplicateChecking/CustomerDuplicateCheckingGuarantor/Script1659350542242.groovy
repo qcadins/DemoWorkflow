@@ -309,7 +309,7 @@ if (GuarantorArray.size() > 0) {
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -360,7 +360,7 @@ if (GuarantorArray.size() > 0) {
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -380,9 +380,12 @@ if (GuarantorArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+							'call function looping applicant no'
+							modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 							}
                             
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
@@ -450,7 +453,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -469,7 +472,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -535,7 +538,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             } else {
@@ -547,7 +550,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             }
@@ -568,7 +571,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -587,7 +590,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -613,7 +616,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -632,7 +635,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -653,7 +656,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             } else {
@@ -665,7 +668,7 @@ if (GuarantorArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             }

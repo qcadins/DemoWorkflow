@@ -312,12 +312,12 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click selct'
                                     WebUI.click(modifyselectManagementShareholderPersonal, FailureHandling.OPTIONAL)
 
-									'call gunction looping subject applicant no'
+									'call function looping subject applicant no'
 									modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -373,7 +373,7 @@ if (ManagementShareholderArray.size() > 0) {
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -393,9 +393,12 @@ if (ManagementShareholderArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+							'call function looping subeject applicant no'
+							modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 							}
                             
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
@@ -465,7 +468,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -484,7 +487,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -549,7 +552,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             } else if (counttd == 5) {
@@ -561,7 +564,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             }
@@ -584,7 +587,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -603,7 +606,7 @@ if (ManagementShareholderArray.size() > 0) {
 
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -629,7 +632,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -648,7 +651,7 @@ if (ManagementShareholderArray.size() > 0) {
 
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
+									checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
 										false))
 								}
                                 
@@ -669,7 +672,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             } else if (counttd == 5) {
@@ -681,7 +684,7 @@ if (ManagementShareholderArray.size() > 0) {
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
 								}
                                 
                             }
