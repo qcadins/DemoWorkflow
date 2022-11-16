@@ -58,9 +58,6 @@ ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewI
 'Arraylist untuk menampung remaining info commission'
 ArrayList<WebElement> remainingInfoCom = new ArrayList<WebElement>()
 
-'Arraylist untuk nilai yang dibagikan dari tab commission'
-ArrayList<WebElement> AllocatedCommissionAmt = new ArrayList<WebElement>()
-
 'Arraylist untuk menampung remaining info reserved fund sebelum calculate'
 ArrayList<WebElement> remainingInfoRsv = new ArrayList<WebElement>()
 
@@ -68,37 +65,22 @@ if(GlobalVariable.Role=="Testing"){
 	
 	remainingInfoCom = GlobalVariable.ComRemainingInfoAmt
 	
-	AllocatedCommissionAmt = GlobalVariable.AllocatedCommissionAmt
-	
 	'Inisialisasi Variabel untuk menghitung jumlah baris pada Income Information, dibagi 2 karena countincomeinfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
 	int countIncomeInfo = varIncomeInfo.size() / 2
 	
 	'Looping income info'
 	for (int i = 1; i < countIncomeInfo; i++) {
-		modifyIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_IncomeInfoAmt'),
-			'xpath', 'equals', ('//*[@id="viewIncomeInfo"]/div[' + i) + ']/div/div[2]/label', true)
-	
-		'Ambil nilai income info amount dari confins'
-		String textincomeInfoAmt = WebUI.getText(modifyIncomeInfoAmt).replace(',', '')
-	
-		'verif remaining info tab commission data dengan section income info tab reserve fund'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textincomeInfoAmt, String.format('%.2f', remainingInfoCom[(i - 1)]), false), '14.TabReservedFundData',
-			GlobalVariable.NumofColm)
 		
-	
 		modifyRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),
 			'xpath', 'equals', ('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label', true)
 	
 		'Ambil nilai remaining info amount dari confins'
 		String textRemainingInfoAmt = WebUI.getText(modifyRemainingInfoAmt).replace(',', '')
 	
-		'Verifikasi untuk section remaining info di tab reserve fund, setelah save tab commission data maka akan hitung remaining info tab commission - nilai yg sudah dibagikan'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(textRemainingInfoAmt)), Math.round((remainingInfoCom[(i - 1)]) - (Math.round(
-					(AllocatedCommissionAmt[(i - 1)]) * 100) / 100))), '14.TabReservedFundData',
+		'cek remaining info after calculate tab commission = remaining info reserved fund'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingInfoAmt,String.format('%.2f', remainingInfoCom[(i - 1)]),false), '14.TabReservedFundData',
 			GlobalVariable.NumofColm)
-		
-	
-		//	WebUI.verifyMatch(textRemainingInfoAmt,String.format("%.2f",remainingInfoCom[i-1]-Math.round(AllocatedCommissionAmt[i-1]*100)/100),false)
+
 		'Tambahkan data remaining info ke arraylist untuk keperluan verifikasi setelah calculate'
 		remainingInfoRsv.add(textRemainingInfoAmt)
 	}
