@@ -54,7 +54,7 @@ WebUI.click(findTestObject('Object Repository/AppView/Financial/Financial Tab'))
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'7. Financial')
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'8. Financial')
 }
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
@@ -311,16 +311,16 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Financial', 0, GlobalVariable.NumofColm -
+	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Financial', 0, GlobalVariable.NumofColm -
+		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Financial', 1, GlobalVariable.NumofColm -
+		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1

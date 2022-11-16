@@ -215,6 +215,10 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/cust-multifinance/assetregion')).toUpperCase(),
 		(resultInsuranceHybrid[index++]).toUpperCase(), false))
 
+}else if(resultInsuredBy.equalsIgnoreCase('Off System')){
+'verify Insured by'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Insurance/OffSystem')).toUpperCase(),
+		(resultInsuredBy).toUpperCase(), false))
 }
 
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
