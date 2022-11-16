@@ -118,6 +118,7 @@ if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm
 				GlobalVariable.NumofColm, 8).length()==0){
 					'verify name == data inputan'
 					checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
+
 			}
 		}
 		

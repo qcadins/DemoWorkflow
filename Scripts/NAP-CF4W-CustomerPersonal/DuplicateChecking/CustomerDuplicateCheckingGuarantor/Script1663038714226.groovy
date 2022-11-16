@@ -104,8 +104,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length()>0) {
             'get text subject type'
             subjectType = WebUI.getText(modifySubjectType)
 			
-			if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-				GlobalVariable.NumofColm, 8).length()==0){
+			if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
 						checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
 			}
