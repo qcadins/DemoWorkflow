@@ -529,11 +529,33 @@ int countIncomeInfo = varIncomeInfo.size() / 2
 
 GlobalVariable.ComRemainingInfoAmt = []
 
+'Arraylist untuk nilai yang dibagikan'
+ArrayList<WebElement> AllocatedCommissionAmt = new ArrayList<WebElement>()
+
+AllocatedCommissionAmt = GlobalVariable.AllocatedCommissionAmt
+
 for (int i = 1; i < countRemainingInfo; i++) {
+	xpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + i) + ']/div/div[2]/label')
+	
     xpathRemainingInfo = (('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label')
+	
+	modifyIncomeInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'),
+		'xpath', 'equals', xpathIncomeInfo, true)
 
     modifyRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'), 
         'xpath', 'equals', xpathRemainingInfo, true)
+	
+	'Ambil nilai income info amount dari confins'
+	String textIncomeInfoAmt = WebUI.getText(modifyIncomeInfo).replace(',', '')
+	
+	'Ambil nilai remaining info amount dari confins'
+	String textRemainingInfoAmt = WebUI.getText(modifyRemainingInfo).replace(',', '')
+	
+	
+	'Verifikasi untuk section remaining info after calculate,  income info tab commission - nilai yg sudah dibagikan'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(textRemainingInfoAmt)), Math.round(Double.parseDouble(textIncomeInfoAmt) - (Math.round(
+						(AllocatedCommissionAmt[(i - 1)]) * 100) / 100))), '13.TabCommissionData',
+				GlobalVariable.NumofColm)
 
     'Menambahkan data remaining info amount ke arraylist'
     remainingInfoAmt.add(Double.parseDouble(WebUI.getText(modifyRemainingInfo).replace(',', '')))

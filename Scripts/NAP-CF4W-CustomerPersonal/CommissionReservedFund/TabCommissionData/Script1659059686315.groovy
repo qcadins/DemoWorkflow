@@ -89,22 +89,40 @@ ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
 ArrayList <String> commissiondelete = new ArrayList<>()
 
 if(GlobalVariable.Role=="Testing"){
+	
 	'Looping untuk set nilai awal 0 untuk total amount allocate commission dan verif income info berdasarkan rule file'
 	for (int i = 0; i < countIncomeInfo; i++) {
 		TotalAllocateCommissionAmt.add(0.00)
-		
+	
 		if(i==countIncomeInfo-1){
+			modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+			
+			modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+			
+			'cek max allocated amount = remaining allocated amount before calculate'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
+				GlobalVariable.NumofColm)
+			
 			break
 		}
+		
+		
+		newxpathIncomeInfoAmt = "//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[2]/label"
+		
+		newxpathRemainingInfoAmt = "//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div/div[2]/label"
+		 
+		modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),'xpath','equals',newxpathIncomeInfoAmt, true)
+		 
+		modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'),'xpath','equals',newxpathRemainingInfoAmt, true)
+		
+		'cek income info = remaining info before calculate'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectIncomeInfoAmt),WebUI.getText(modifyObjectRemainingInfoAmt),false),'13.TabCommissionData',
+						GlobalVariable.NumofColm)
 		
 		if(GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			newxpathIncomeInfo = "//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label"
 			 
-			newxpathIncomeInfoAmt = "//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[2]/label"
-			
 			modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',newxpathIncomeInfo,true)
-			
-			modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'),'xpath','equals',newxpathIncomeInfoAmt, true)
 			
 			'Varibel String untuk mengambil dan menampung income information'
 			String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
@@ -151,9 +169,10 @@ if(GlobalVariable.Role=="Testing"){
 			}
 		}
 		
-		
 	}
+	
 }
+
 
 'Mengambil nilai allocation type dari excel'
 allocationType = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
@@ -976,12 +995,13 @@ if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
 
 
 if(GlobalVariable.Role=="Testing"){
+
+	GlobalVariable.AllocatedCommissionAmt = TotalAllocateCommissionAmt
 	
 	'Call test case untuk verif summary dan remaining info'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionDataVerifInfo'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
-	GlobalVariable.AllocatedCommissionAmt = TotalAllocateCommissionAmt
 }
 
 'Klik save'
