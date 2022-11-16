@@ -37,9 +37,7 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
-def StoreCDCManagementShareholderPersonalName = ''
-
-def StoreCDCManagementShareholderCompanyName = ''
+def StoreCDCManagementShareholderPersonalName = '', StoreCDCManagementShareholderCompanyName = ''
 
 def ManagementShareholderArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 
     16).split(';', -1)
@@ -54,19 +52,14 @@ String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking'
 
 WebDriver driver = DriverFactory.getWebDriver()
 
-def modifySubjectName
+'array customer name data inputan'
+def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
-def modifySubjectType
+'declare modify obj variables'
+def modifySubjectName, modifySubjectType, modifyApplicantNo, modifyCustomerNo, modifyButtonEdit
 
-def modifyApplicantNo
-
-def modifyCustomerNo
-
-def modifyButtonEdit
-
-String subjectName
-
-String subjectType
+'declare subject string'
+String subjectName, subjectType
 
 if (ManagementShareholderArray.size() > 0) {
     for (m = 1; m <= ManagementShareholderArray.size(); m++) {
@@ -116,16 +109,6 @@ if (ManagementShareholderArray.size() > 0) {
                 'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
                 ']/td[3]', true)
 
-            'modify object Applicant No'
-            modifyApplicantNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNo'), 
-                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
-                ']/td[4]', true)
-
-            'modify object Customer No'
-            modifyCustomerNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNo'), 
-                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
-                ']/td[5]', true)
-
             'modify object edit icon'
             modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
                 'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
@@ -136,6 +119,12 @@ if (ManagementShareholderArray.size() > 0) {
 
             'get text subject type'
             subjectType = WebUI.getText(modifySubjectType)
+			
+			if(GlobalVariable.RoleCompany=="Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 8).length()==0){
+						'verify name == data inputan'
+						checkVerifyEqualOrMatch(CustomerNameArray.contains(subjectName))
+			}
         }
         
         if (subjectName.equalsIgnoreCase(ManagementShareholderArray[(m - 1)])) {
@@ -176,14 +165,25 @@ if (ManagementShareholderArray.size() > 0) {
 
                             'modify object ManagementShareholder No'
                             modifyManagementShareholderNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
-                                'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)
+                                'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)\
+							
+							'modify object MS Name'
+							modifyMSNameObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'),
+								'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[2]', true)
 
+							'get text MS no value'
                             String newManagementShareholderNoValue = WebUI.getText(modifyManagementShareholderNoObject)
 
+							'get text new id no MS'
                             String NewIdNoManagementShareholderMatch = WebUI.getText(modifyIDNoManagementShareholder, FailureHandling.OPTIONAL)
 
+							'get text id no MS'
                             String IdNoManagementShareholder = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'))
 
+							'get text MS name'
+							String newMSName = WebUI.getText(modifyMSNameObject)
+							
+							'check if id No MS not match'
                             if (NewIdNoManagementShareholderMatch != null) {
                                 if (NewIdNoManagementShareholderMatch.equalsIgnoreCase(IdNoManagementShareholder)) {
                                     'modify object id no family match'
@@ -194,6 +194,9 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
+									'call function looping subject cust no'
+									modifyCustomerNo = loopingSubjectCustNo(newMSName)
+									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ManagementShareholderNo'
 										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newManagementShareholderNoValue,
@@ -206,7 +209,7 @@ if (ManagementShareholderArray.size() > 0) {
                             }
                         }
                     } else {
-                        for (id = 1; id <= countidnorow; id++) {
+                        for (int id = 1; id <= countidnorow; id++) {
                             'modify object id no managementsharholder match'
                             modifyIDNoManagementShareholder = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
                                 'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[3]', true)
@@ -215,12 +218,23 @@ if (ManagementShareholderArray.size() > 0) {
                             modifyManagementShareholderNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                 'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
+                            'modify object MS Name'
+							modifyMSNameObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'),
+								'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[2]', true)
+
+							'get text MS no value'
                             String newManagementShareholderNoValue = WebUI.getText(modifyManagementShareholderNoObject)
 
+							'get text new id no MS'
                             String NewIdNoManagementShareholderMatch = WebUI.getText(modifyIDNoManagementShareholder, FailureHandling.OPTIONAL)
 
+							'get text id no MS'
                             String IdNoManagementShareholder = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'))
 
+							'get text MS name'
+							String newMSName = WebUI.getText(modifyMSNameObject)
+							
+							'check if id No MS not match'
                             if (NewIdNoManagementShareholderMatch != null) {
                                 if (NewIdNoManagementShareholderMatch.equalsIgnoreCase(IdNoManagementShareholder)) {
                                     'modify object id no family match'
@@ -231,6 +245,9 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
 
+									'call function looping subject cust no'
+									modifyCustomerNo = loopingSubjectCustNo(newMSName)
+									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ManagementShareholderNo'
 										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newManagementShareholderNoValue,
@@ -253,27 +270,35 @@ if (ManagementShareholderArray.size() > 0) {
                     int countManagementShareholderPersonalidrow = variableManagementShareholderPersonalidno.size()
 
                     if (counttd == 10) {
-                        for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
-                            String newIDNoManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
-                            id) + ']/td[4]'
+                        for (int id = 1; id <= countManagementShareholderPersonalidrow; id++) {
+                           
 
                             'modify object id no ManagementShareholder match'
                             modifyIDNoManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
-                                'xpath', 'equals', newIDNoManagementShareholderPersonal, true)
+                                'xpath', 'equals', '//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[4]', true)
 
-                            String newApplicantNoObject = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]'
 
                             'modify object applicant No App in process'
                             modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
-                                'xpath', 'equals', newApplicantNoObject, true)
+                                'xpath', 'equals', '//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[1]', true)
 
+							'modify object applicant Name App in process'
+							modifyMSNameAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'),
+								'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[2]', true)
+							
+							'get data new applicant value'
                             String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
+							'get text new id no'
                             String NewIdNoManagementShareholderPersonalMatch = WebUI.getText(modifyIDNoManagementShareholderPersonal, 
                                 FailureHandling.OPTIONAL)
 
+							'get text MS shareholder ID No'
                             String IdNoManagementShareholderPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
-
+							
+							'get text MS name'
+							String newMSNameAppInProcess = WebUI.getText(modifyMSNameAppInProcess)
+							
                             if (NewIdNoManagementShareholderPersonalMatch != null) {
                                 if (NewIdNoManagementShareholderPersonalMatch.equalsIgnoreCase(IdNoManagementShareholderPersonal)) {
                                     String newselectManagementShareholderPersonal = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
@@ -287,52 +312,49 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click selct'
                                     WebUI.click(modifyselectManagementShareholderPersonal, FailureHandling.OPTIONAL)
 
+									'call gunction looping subject applicant no'
+									modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
+									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
 										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
-
-                                    'get ManagementShareholder name'
-                                    String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-                                    if (StoreCDCManagementShareholderPersonalName == '') {
-                                        'store ManagementShareholder name'
-                                        StoreCDCManagementShareholderPersonalName = name
-                                    } else {
-                                        'store ManagementShareholder name'
-                                        StoreCDCManagementShareholderPersonalName = ((StoreCDCManagementShareholderPersonalName + 
-                                        ';') + name)
-                                    }
-                                    
                                     break
                                 }
                             }
                         }
                     } else {
-                        for (id = 1; id <= countManagementShareholderPersonalidrow; id++) {
-                            String newIDNoManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
-                            id) + ']/td[3]'
+                        for (int id = 1; id <= countManagementShareholderPersonalidrow; id++) {
 
                             'modify object id no ManagementShareholder match'
                             modifyIDNoManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCompany'), 
-                                'xpath', 'equals', newIDNoManagementShareholderCompany, true)
-
-                            String newApplicantNoAppInproccess = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + 
-                            ']/td[1]'
+                                'xpath', 'equals', '//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[3]', true)
 
                             'modify object applicant No App in process'
                             modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
-                                'xpath', 'equals', newApplicantNoAppInproccess, true)
+                                'xpath', 'equals', '//*[@id="subSecAppProcess"]/table/tbody/tr[' + id + ']/td[1]', true)
 
+							'modify object applicant Name App in process'
+							modifyMSNameAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'),
+								'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[2]', true)
+							
+							'get text applicant no value'
                             String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
+							'get text id no MS company'
                             String NewIdNoManagementShareholderCompanyMatch = WebUI.getText(modifyIDNoManagementShareholderCompany, 
                                 FailureHandling.OPTIONAL)
 
+							'get text id no MS'
                             String IdNoManagementShareholderCompany = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'))
 
+
+							'get text MS name'
+							String newMSName = WebUI.getText(modifyMSNameAppInProcess)
+							
+							'check if id No MS not match'
                             if (NewIdNoManagementShareholderCompanyMatch != null) {
                                 if (NewIdNoManagementShareholderCompanyMatch.equalsIgnoreCase(IdNoManagementShareholderCompany)) {
                                     String newselectManagementShareholderCompany = ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + 
@@ -346,6 +368,9 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select application in process'
                                     WebUI.click(modifyselectManagementShareholderCompany, FailureHandling.OPTIONAL)
 
+									'call function looping subject applicant no'
+									modifyApplicantNo = loopingSubjectApplicantNo(newMSName)
+									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
 										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
@@ -383,11 +408,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+								'get new customer no value'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
+								'get MS name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
+								
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
@@ -395,11 +427,18 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+                                'get new customer no value'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
+
+								'get MS name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
@@ -412,11 +451,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+								'get text applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
+
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
 
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
@@ -424,11 +470,18 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+								'get text applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
+
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
 
                                 'click select applcation in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
@@ -443,11 +496,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+                                'get text new customer no'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
+
+								'get text MS name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
@@ -455,11 +515,17 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+								'get text new customer no'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
-                                'click select match similar data'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
+								'get text MS name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
 
+                                'click select match similar data'
+                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
+
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
@@ -478,6 +544,9 @@ if (ManagementShareholderArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
@@ -487,6 +556,9 @@ if (ManagementShareholderArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
@@ -498,11 +570,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+                                'get new applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
+
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
 
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
@@ -510,10 +589,17 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+                                'get new applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
+
                                 'click select application in process'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
+                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
 
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
@@ -529,11 +615,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+                                'get new applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
+								
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
 
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), newApplicantNoValue.toString(),
@@ -541,10 +634,17 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+                                'get new applicant no value'
                                 String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
+								'get new MS name'
+								newMSNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
+								
                                 'click select application in process'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
+                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'))
+
+								'call function looping subject applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(newMSNameAppInProcess)
 
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
@@ -564,6 +664,9 @@ if (ManagementShareholderArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+								'call function looping applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
@@ -573,6 +676,9 @@ if (ManagementShareholderArray.size() > 0) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+								'call function looping applicant no'
+								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
 									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
@@ -584,11 +690,18 @@ if (ManagementShareholderArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
+                                'get new customer no value'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
+
+								'get new customer name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
 
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
 
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
+								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
 									checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoNoValue.toString(),
@@ -596,10 +709,17 @@ if (ManagementShareholderArray.size() > 0) {
 								}
                                 
                             } else if (counttd == 5) {
+                                 'get new customer no value'
                                 String newCustomerNoNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'))
 
+								'get new customer name'
+								newMSName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameSimilarData'))
+
                                 'click select match similar data'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
+                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'))
+
+								'call function looping subject cust no'
+								modifyCustomerNo = loopingSubjectCustNo(newMSName)
 
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match CustomerNo'
@@ -615,11 +735,72 @@ if (ManagementShareholderArray.size() > 0) {
         }
         
         (GlobalVariable.NegativeCustCount)++
+		
         if (m == ManagementShareholderArray.size()) {
             break
         }
         
     }
+}
+
+public loopingSubjectApplicantNo(String newMSNameAppInProcess){
+	String applicantNo
+	Object modifyAppliNo
+	for (int z = 1; z <= GlobalVariable.CountDupcheckRow; (z)++) {
+		'modify object subjecttype'
+		Object modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[3]', true)
+		
+		'modify object subject name'
+		Object modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[2]', true)
+
+		'verify subject type dan button edit ada'
+		if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyMatch(newMSNameAppInProcess, WebUI.getText(modifySubjectName),false,
+			FailureHandling.OPTIONAL)) {
+			'modify object applicant no'
+			modifyAppliNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[4]', true)
+			
+			
+			
+			break
+		}
+	}
+	applicantNo = WebUI.getText(modifyAppliNo)
+	return applicantNo
+}
+
+public loopingSubjectCustNo(String newMSName){
+	String custNo
+	Object modifyCustNo
+	for (int z = 1; z <= GlobalVariable.CountDupcheckRow; (z)++) {
+		'modify object subjecttype'
+		Object modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[3]', true)
+		
+		'modify object subject name'
+		Object modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[2]', true)
+
+		'verify subject type dan button edit ada'
+		if ((WebUI.getText(modifySubjectType) == 'SHARE HOLDER') && WebUI.verifyMatch(newMSName, WebUI.getText(modifySubjectName),false,
+			FailureHandling.OPTIONAL)) {
+			'modify object custno'
+			modifyCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + z) +
+			']/td[5]', true)
+			
+			break
+		}
+	}
+	custNo = WebUI.getText(modifyCustNo)
+	return custNo
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

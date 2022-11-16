@@ -60,18 +60,18 @@ ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
 def DupcheckResult = []
 
 'array untuk menampung hasil status customer personal'
-def CustomerCompanyStatus = ''
+def CustomerCompanyStatus, ManagementShareholderStatus, GuarantorPersonalStatus, GuarantorCompanyStatus  = ''
+//
+//'array untuk menampung hasil status Family personal'
+//def ManagementShareholderStatus = ''
+//
+//'array untuk menampung hasil status Guarantor Personal'
+//def GuarantorPersonalStatus = ''
+//
+//'array untuk menampung hasil status Guarantor Company'
+//def GuarantorCompanyStatus = ''
 
-'array untuk menampung hasil status Family personal'
-def ManagementShareholderStatus = ''
-
-'array untuk menampung hasil status Guarantor Personal'
-def GuarantorPersonalStatus = ''
-
-'array untuk menampung hasil status Guarantor Company'
-def GuarantorCompanyStatus = ''
-
-for (i = 1; i <= 1; i++) {
+for (int i = 1; i <= 1; i++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         14) == 'Input Data') {
         'check rule company 1'

@@ -90,7 +90,7 @@ if (DupCheckStatus == true) {
 
     'verify name == data inputan'
     if (CustomerArray.size() > 0) {
-        for (c = 1; c <= CustomerArray.size(); c++) {
+        for (int c = 1; c <= CustomerArray.size(); c++) {
             'define interger i'
             int i = 0
 
@@ -159,7 +159,7 @@ if (DupCheckStatus == true) {
 			if(GlobalVariable.RoleCompany == "Testing" && findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 						'verify name == data inputan'
-						checkVerifyEqualOrMatch(WebUI.verifyMatch(subjectName, CustomerNameArray[(i - 1)], false))
+						checkVerifyEqualOrMatch(CustomerNameArray.contains(subjectName))
 					}
 				
             if (subjectName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
@@ -188,7 +188,7 @@ if (DupCheckStatus == true) {
 
                         int countidnorow = variableidno.size()
 
-                        for (id = 1; id <= countidnorow; id++) {
+                        for (int id = 1; id <= countidnorow; id++) {
                             'modify object id no customer match'
                             modifyIDNoCustomer = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
                                 'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]', true)
@@ -230,7 +230,7 @@ if (DupCheckStatus == true) {
                             FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                         ArrayList<Boolean> applicationinprocessrow = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
 
-                        for (id = 1; id <= applicationinprocessrow.size(); id++) {
+                        for (int id = 1; id <= applicationinprocessrow.size(); id++) {
                             'modify object id no customer match'
                             modifyIDNoCustomerPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
                                 'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[4]', true)
@@ -419,10 +419,11 @@ if (DupCheckStatus == true) {
         }
     }
     
-    'call testcase dupcheck Guarantor'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], 
-        FailureHandling.CONTINUE_ON_FAILURE)
-
+    
+	'call testcase dupcheck Guarantor'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:],
+		FailureHandling.CONTINUE_ON_FAILURE)
+	
     'call testcase dupcheck Management Shareholder'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingMS'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
