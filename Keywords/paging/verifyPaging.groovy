@@ -90,6 +90,7 @@ public class verifyPaging {
 
 	@Keyword
 	public resetPaging(){
+		ArrayList<Boolean> arrayMatch = new ArrayList<>()
 		//Reset paging nap1, nap2, comresfund, dupcheck
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),"AppNo")
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),"CustName")
@@ -97,16 +98,17 @@ public class verifyPaging {
 		WebUI.selectOptionByIndex(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),1)
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),"ClaimBy")
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),0,2)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),'value'),"",false)
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),0,2))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),'value'),"",false))
+		return arrayMatch
 	}
 
 	@Keyword
 	public resetPagingAppInquiry(){
-
+		ArrayList<Boolean> arrayMatch = new ArrayList<>()
 		WebUI.setText(findTestObject('AppView/MainInformation/input_AppNo'),"AppNo")
 		WebUI.setText(findTestObject('AppView/MainInformation/input_CustNo'),"CustNo")
 		WebUI.setText(findTestObject('AppView/MainInformation/input_CustName'),"CustName")
@@ -121,31 +123,36 @@ public class verifyPaging {
 		WebUI.selectOptionByIndex(findTestObject('AppView/MainInformation/select_CustomerCheckingStep'),1)
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
 
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_AppNo'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_CustNo'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_CustName'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_AgreementNo'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_POname'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_appDate'), 'value'),"", false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_appDateKurangDari'), 'value'),"", false)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_currentAppStep'),0,2)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_currentAgreementStep'),0,2)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_ApplicationStatus'),0,2)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_ContractStatus'),0,2)
-		WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_CustomerCheckingStep'),0,2)
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_AppNo'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_CustNo'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_CustName'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_AgreementNo'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_POname'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_appDate'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_appDateKurangDari'), 'value'),"", false))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_currentAppStep'),0,2))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_currentAgreementStep'),0,2))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_ApplicationStatus'),0,2))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_ContractStatus'),0,2))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('AppView/MainInformation/select_CustomerCheckingStep'),0,2))
+
+		return arrayMatch
 	}
 
 	@Keyword
 	public resetPagingCustDataCompletion(){
+
+		ArrayList<Boolean> arrayMatch = new ArrayList<>()
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),"AppNo")
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),"CustName")
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),"POName")
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),"CustNo")
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false)
-		WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),'value'),"",false)
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),'value'),"",false))
+		return arrayMatch
 	}
 
 	@Keyword
@@ -423,4 +430,7 @@ public class verifyPaging {
 
 		return isCount
 	}
+
+
+
 }

@@ -55,8 +55,9 @@ WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 
 //Verify sort & paging
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
+	ArrayList<Boolean> resultReset,checkVerifySort,checkVerifyFooter = new ArrayList<>()
     'Verif reset'
-    CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
+    resultReset = CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
 
     ArrayList<String> listString = new ArrayList<String>()
 
@@ -73,7 +74,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
 
     'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appno'), 'xpath', 'equals', 
@@ -86,7 +87,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort appno ascending'
     Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     listApp = new ArrayList<String>()
 
@@ -104,7 +105,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort appno descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header agreement no 2x'
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
@@ -112,7 +113,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -127,7 +128,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort custname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer no'
     WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
@@ -135,7 +136,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -150,7 +151,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort cust no descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer name'
     WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
@@ -170,13 +171,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort custname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header PO Name'
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -191,7 +192,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort poname ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header poname'
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
@@ -209,13 +210,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort poname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header app date'
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -230,7 +231,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort appdate ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header appdate'
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
@@ -248,13 +249,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort appdate descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header NAP Submitted'
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -269,7 +270,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort NAP Submitted ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header NAP Submitted'
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
@@ -287,7 +288,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort NAP Submitted descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header agreement step'
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementStep'))
@@ -295,7 +296,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -310,7 +311,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort agreement step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header contract status'
     WebUI.click(findTestObject('AppView/MainInformation/span_ContractStatus'))
@@ -318,7 +319,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('AppView/MainInformation/span_ContractStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -333,13 +334,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort contract status descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application step'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -354,7 +355,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort application step ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application step'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
@@ -372,13 +373,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort application step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application status'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -393,7 +394,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'verif sort application status ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application status'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
@@ -411,13 +412,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort application status descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer checking step'
     WebUI.click(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'))
 
     'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -432,7 +433,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Verif sort customer checking step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    WebUI.verifyEqual(isSorted, true)
+    checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Ambil count data dari confins'
     String[] textCountData = WebUI.getText(findTestObject('AppView/MainInformation/countdata')).replace(' ', '').replace(
@@ -446,7 +447,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         WebUI.click(findTestObject('AppView/MainInformation/nextPage'))
 
         'Verify page 2 active'
-        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2)
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2))
 
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
@@ -463,13 +464,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         'Verif appno yang ada di page 2 tidak ada di page 1'
         Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-        WebUI.verifyEqual(isPaging, true)
+        checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
         'Klik button prev'
         WebUI.click(findTestObject('AppView/MainInformation/button_Prev'))
 
         'Verify page 1 active'
-        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 2)
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 2))
 
         listApp = listString
 
@@ -480,13 +481,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         'Verif appno yang ada di page 1 tidak ada di page 2'
         isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-        WebUI.verifyEqual(isPaging, true)
+        checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
         'Klik button next'
         WebUI.click(findTestObject('AppView/MainInformation/button_Next'))
 
         'Verify page 2 active'
-        WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2)
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2))
 
         listApp = listString
 
@@ -497,13 +498,47 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         'Verif appno yang ada di page 2 tidak ada di page 1'
         isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-        WebUI.verifyEqual(isPaging, true)
+        checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
     }
     
     'Klik button page 1'
     WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 
-    WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true)
+    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true))
+	
+	if(resultReset.contains(false)){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+		
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+";\n"))
+		
+				GlobalVariable.FlagWarning=1
+	}
+			
+	if(checkVerifySort.contains(false) ){
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+			
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+";\n"))
+			
+					GlobalVariable.FlagWarning=1
+	}
+			
+	if(checkVerifyFooter.contains(false)){
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+			
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+			    GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+";\n"))
+			
+	
+					GlobalVariable.FlagWarning=1
+	}
 }
 
 'input app no'
@@ -644,4 +679,3 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
         GlobalVariable.FlagFailed = 1
     }
 }
-

@@ -416,6 +416,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Failed Verify Footer'</initValue>
+      <name>ReasonFailedFooter</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Failed Input Data'</initValue>
       <name>ReasonFailedInputData</name>
    </GlobalVariableEntity>
@@ -423,6 +428,16 @@
       <description></description>
       <initValue>'Load data tidak sesuai'</initValue>
       <name>ReasonFailedLoadData</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Reset'</initValue>
+      <name>ReasonFailedReset</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Sort'</initValue>
+      <name>ReasonFailedSort</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

@@ -42,9 +42,10 @@ WebUI.delay(5)
 
 //Verify sort & paging
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
+	ArrayList<Boolean> resultReset,checkVerifySort,checkVerifyFooter = new ArrayList<>()
 	
 	'Verif reset'
-	CustomKeywords.'paging.verifyPaging.resetPaging'()
+	resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 	
 	ArrayList<String> listString = new ArrayList<String>()
 	
@@ -61,13 +62,13 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_Office'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+	checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 	'Klik header appNo'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_appNo'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+	checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 	for(int i=1;i<=rowData.size();i++){
 		appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/appNo')
@@ -77,7 +78,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort appno ascending'
 	Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	listApp = new ArrayList<String>()
 	'Klik header appNo'
@@ -91,13 +92,13 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort appno descending'
 	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	'Klik header custname'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_custName'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+	checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
@@ -109,7 +110,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort custname ascending'
 	isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	'Klik header custname'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_custName'))
@@ -123,13 +124,13 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort custname descending'
 	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	'Klik header product offering name'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_POName'))
 	
 	'Verify alert tidak muncul'
-	WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
+	checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 	listString = new ArrayList<String>()
 	for(int i=1;i<=rowData.size();i++){
@@ -141,7 +142,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort po name ascending'
 	isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	'Klik header product offering name'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_POName'))
@@ -155,7 +156,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	}
 	'Verif sort po name descending'
 	isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
-	WebUI.verifyEqual(isSorted,true)
+	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 	
 	'Klik header appno 2x supaya urutan descending'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/span_appNo'))
@@ -171,7 +172,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/nextPage'))
 		
 		'Verif page 2 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/nextPage'),'aria-current',2)
+		checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/nextPage'),'aria-current',2))
 		
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		
@@ -184,14 +185,14 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		}
 		'Verif appno page 2 descending tidak ada di page 1'
 		Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
-		WebUI.verifyEqual(isPaging,true)
+		checkVerifyFooter.add(WebUI.verifyEqual(isPaging,true))
 		
 		'Klik button prev'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/button_Prev'))
 		
 		'Verify page 1 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/pageOne'),
-			'aria-current', 2)
+		checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/pageOne'),
+			'aria-current', 2))
 		
 		listApp = listString
 				
@@ -202,14 +203,14 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		'Verif appno yang ada di page 1 tidak ada di page 2'
 		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 		
-		WebUI.verifyEqual(isPaging, true)
+		checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		
 		'Klik button next'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/button_Next'))
 		
 		'Verify page 2 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/nextPage'),
-			'aria-current', 2)
+		checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/nextPage'),
+			'aria-current', 2))
 		
 		listApp = listString
 		
@@ -220,14 +221,51 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 		'Verif appno yang ada di page 2 tidak ada di page 1'
 		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 		
-		WebUI.verifyEqual(isPaging, true)
+		checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		
 	}
 	
 	'Klik button page 1'
 	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/pageOne'))
 	
-	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComRsvCountDataInPage'(),true)
+	checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComRsvCountDataInPage'(),true))
+	
+	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 1)){
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+	
+			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"Comresfund"+";\n")
+	
+			GlobalVariable.FlagWarning=1
+	}
+	
+	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 1)){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+		
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"Comresfund"+";\n"))
+		
+			GlobalVariable.FlagWarning=1
+	}
+		
+	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 1)){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+		
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"Comresfund"+";\n"))
+		
+
+			GlobalVariable.FlagWarning=1
+	}
 }
 
 'Input Appno'
@@ -423,4 +461,5 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 }
+
 
