@@ -117,7 +117,7 @@ if (FamilyArray.size() > 0 && datafileDupcheck.getValue(GlobalVariable.NumofColm
 			if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 8).length()==0){
 					'verify name == data inputan'
-					checkVerifyEqualOrMatch(WebUI.verifyMatch(subjectName, CustomerNameArray[(i)], false))
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName),true))
 			}
 		}
 		
