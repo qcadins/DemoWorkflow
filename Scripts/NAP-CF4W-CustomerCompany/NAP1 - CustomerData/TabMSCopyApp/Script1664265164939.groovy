@@ -58,7 +58,7 @@ for (i = 1; i <= variableData.size(); i++) {
     customertype = WebUI.getText(modifyNewMSTypeName)
 
     'Loop Multiple guarantor data'
-    for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
+    for (GlobalVariable.NumofMS ; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
     1); (GlobalVariable.NumofMS)++) {
         if (datafile.getValue(GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {

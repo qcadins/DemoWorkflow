@@ -40,17 +40,17 @@ String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 
 int arrayindex = 0
 
-ArrayList<String> arraysuminsured = new ArrayList<String>()
+ArrayList<Boolean> arraysuminsured = new ArrayList<Boolean>()
 
-ArrayList<String> arrayaddpremi = new ArrayList<String>()
+ArrayList<Boolean> arrayaddpremi = new ArrayList<Boolean>()
 
-ArrayList<String> arrayMatch = new ArrayList<String>()
+ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
-    ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, findTestData(
-            'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-            13))
+    ArrayList<Boolean> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnection, 
+        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 13))
 
     'ganti value null > "" (String kosong)'
     for (i = 0; i <= (result.size() - 1); i++) {
@@ -63,18 +63,18 @@ if (insuredBy == 'Customer') {
         }
     }
     
-	'index 14 karena mengikuti row di data file / excel'
+    'index 14 karena mengikuti row di data file / excel'
     for (index = 14; index < (result.size() + 14); index++) {
         'verify insco branch name'
         arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
                     GlobalVariable.NumofColm, index).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
 } else if (insuredBy == 'Customer - Multifinance') {
-    ArrayList<String> resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
+    ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
         sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
-    ArrayList<String> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
+    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
@@ -100,15 +100,15 @@ if (insuredBy == 'Customer') {
         }
     }
     
-	'index 14 karena mengikuti row di data file / excel'
+    'index 14 karena mengikuti row di data file / excel'
     for (index = 14; index <= (resultCustomerInsurance.size() + 13); index++) {
-		'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
-        if (index-13 != resultCustomerInsurance.size()) {
+        'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
+        if ((index - 13) != resultCustomerInsurance.size()) {
             'verify insco branch name'
             arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
                         GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(), 
                     false, FailureHandling.OPTIONAL))
-        } else if (index-13 == resultCustomerInsurance.size()) {
+        } else if ((index - 13) == resultCustomerInsurance.size()) {
             String enddate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
                 GlobalVariable.NumofColm, 19)
 
@@ -127,7 +127,8 @@ if (insuredBy == 'Customer') {
 
             String enddateFinal = dateFormat.format(cal.getTime())
 
-            arrayMatch.add(WebUI.verifyMatch(enddateFinal, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+            arrayMatch.add(WebUI.verifyMatch(enddateFinal, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, 
+                    FailureHandling.OPTIONAL))
         }
     }
     
@@ -189,7 +190,7 @@ if (insuredBy == 'Customer') {
 
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 36).length() == 0) {
-        ArrayList<String> resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
+        ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -207,8 +208,8 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(sqlconnection, 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
+                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             for (index = 0; index < resultAddCVG.size(); index++) {
@@ -240,7 +241,7 @@ if (insuredBy == 'Customer') {
             }
         }
     } else {
-        ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+        ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
             sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -314,7 +315,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -463,9 +464,28 @@ if (insuredBy == 'Customer') {
                 }
             }
         }
+        
+        'cek jika ada main premi rate'
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+            GlobalVariable.NumofColm, 69).length() > 0) {
+            'get arraylist main premi rate dari DB'
+            ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
+                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                    GlobalVariable.NumofColm, 13))
+
+            'get arraylist main premi rate dari excel'
+            def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 69).split(';', -1)
+
+            'looping untuk verify mainpremirate db = excel'
+            for (mainpremirate = 0; mainpremirate < mainpremirateArray.size(); mainpremirate++) {
+                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(mainpremirateArray[mainpremirate]), Math.round(Double.parseDouble(
+                                resultMainPremiRate[mainpremirate])), FailureHandling.OPTIONAL))
+            }
+        }
     }
 } else if (insuredBy == 'Multifinance') {
-    ArrayList<String> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
+    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
@@ -554,8 +574,8 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(sqlconnection, 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
+                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             for (index = 0; index < resultAddCVG.size(); index++) {
@@ -587,7 +607,7 @@ if (insuredBy == 'Customer') {
             }
         }
     } else {
-        ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+        ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
             sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -661,7 +681,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<String> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -808,6 +828,25 @@ if (insuredBy == 'Customer') {
                                     addpremirate), FailureHandling.OPTIONAL))
                     }
                 }
+            }
+        }
+        
+        'cek jika ada main premi rate'
+        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+            GlobalVariable.NumofColm, 69).length() > 0) {
+            'get arraylist main premi rate dari DB'
+            ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
+                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                    GlobalVariable.NumofColm, 13))
+
+            'get arraylist main premi rate dari excel'
+            def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+                GlobalVariable.NumofColm, 69).split(';', -1)
+
+            'looping untuk verify mainpremirate db = excel'
+            for (mainpremirate = 0; mainpremirate < mainpremirateArray.size(); mainpremirate++) {
+                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(mainpremirateArray[mainpremirate]), Math.round(Double.parseDouble(
+                                resultMainPremiRate[mainpremirate])), FailureHandling.OPTIONAL))
             }
         }
     }
