@@ -296,10 +296,11 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofColm, '1.TabCustomerMainData')
         }
     } else {
-        'Write to excel success'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
-
+		if(GlobalVariable.FlagWarning==0){
+			'Write to excel success'
+			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+		}
         'customer added +1'
         (GlobalVariable.CountNumofCustomer)++
 

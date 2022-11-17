@@ -39,197 +39,7 @@ String POStat
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
 //Verify sort & paging
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
-    'Verif reset'
-    CustomKeywords.'paging.verifyPaging.resetPaging'()
-
-    ArrayList<Boolean> listString = new ArrayList<Boolean>()
-
-    'click button search'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
-
-    'Inisialisasi driver'
-    WebDriver driver = DriverFactory.getWebDriver()
-
-    'Inisialisasi variabel'
-    ArrayList<Boolean> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
-
-    'Klik header office'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_Office'))
-
-    'Verif tidak ada alert yang muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
-
-    'Klik header appno'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
-
-    'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
-
-    for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[4]/span/a', true)
-
-        listString.add(WebUI.getText(appNoObject))
-    }
-    
-    'Verif sort appno ascending'
-    Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
-
-    WebUI.verifyEqual(isSorted, true)
-
-    listApp = new ArrayList<Boolean>()
-
-    'Klik header appno'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
-
-    for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[4]/span/a', true)
-
-        listApp.add(WebUI.getText(appNoObject))
-    }
-    
-    'verif sort appno descending'
-    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
-
-    WebUI.verifyEqual(isSorted, true)
-
-    'Klik header custname 2x supaya descending'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
-
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
-
-    'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
-
-    listString = new ArrayList<Boolean>()
-
-    for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/custName'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[5]/span', true)
-
-        listString.add(WebUI.getText(appNoObject))
-    }
-    
-    'verif sort custname descending'
-    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
-
-    WebUI.verifyEqual(isSorted, true)
-
-    'Klik header poname'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
-
-    'Verify alert tidak muncul'
-    WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)
-
-    listString = new ArrayList<Boolean>()
-
-    for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[6]/span', true)
-
-        listString.add(WebUI.getText(appNoObject))
-    }
-    
-    'verif sort poname ascending'
-    isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
-
-    WebUI.verifyEqual(isSorted, true)
-
-    'Klik header poname'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
-
-    listString = new ArrayList<Boolean>()
-
-    for (int i = 1; i <= rowData.size(); i++) {
-        appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'), 
-            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[6]/span', true)
-
-        listString.add(WebUI.getText(appNoObject))
-    }
-    
-    'Verif sort poname descending'
-    isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
-
-    WebUI.verifyEqual(isSorted, true)
-
-    'Klik 2x header appno supaya urutan descending'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
-
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
-
-    'Ambil count data dari confins'
-    String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/countData')).replace(
-        ' ', '').replace(':', ';').split(';')
-
-    Integer countDt = Integer.parseInt(textCountData[1])
-
-    'Jika count data secara keseluruhan dari confins lebih besar daripada data di page 1'
-    if (countDt > rowData.size()) {
-        'Klik page 2'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'))
-
-        'Verify page 2 active'
-        WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'), 
-            'aria-current', 2)
-
-        listString = new ArrayList<String>()
-
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
-        
-        'Verif appno yang ada di page 2 tidak ada di page 1'
-        Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-
-        WebUI.verifyEqual(isPaging, true)
-		
-		'Klik button prev'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Prev'))
-		
-		'Verify page 1 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'),
-			'aria-current', 2)
-		
-		listApp = listString
-				
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
-				
-		'Verif appno yang ada di page 1 tidak ada di page 2'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		WebUI.verifyEqual(isPaging, true)
-		
-		'Klik button next'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Next'))
-		
-		'Verify page 2 active'
-		WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'),
-			'aria-current', 2)
-		
-		listApp = listString
-		
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
-				
-		'Verif appno yang ada di page 2 tidak ada di page 1'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		WebUI.verifyEqual(isPaging, true)
-    }
-	
-	'Klik button page 1'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'))
-	
-	WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP1CountDataInPage'(),true)
-}
+pagingTesting()
 
 'Ambil nilai office login dari confins'
 String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
@@ -941,4 +751,240 @@ if (GlobalVariable.Role == 'Data Entry') {
     
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.STOP_ON_FAILURE)
 }
+
+public pagingTesting(){
+	driver = DriverFactory.getWebDriver()
+	if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
+		ArrayList<Boolean> resultReset = new ArrayList<>()
+		ArrayList<Boolean> checkVerifySort = new ArrayList<>()
+		ArrayList<Boolean> checkVerifyFooter = new ArrayList<>()
+		
+		'Verif reset'
+		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
+	
+		ArrayList<String> listString = new ArrayList<String>()
+
+		'click button search'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
+	
+		'Inisialisasi variabel'
+		ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+	
+		'Klik header office'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_Office'))
+	
+		'Verif tidak ada alert yang muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+	
+		'Klik header appno'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
+	
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+	
+		for (int i = 1; i <= rowData.size(); i++) {
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'),
+				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[4]/span/a', true)
+	
+			listString.add(WebUI.getText(appNoObject))
+		}
+		
+		'Verif sort appno ascending'
+		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+	
+		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
+	
+		listApp = new ArrayList<String>()
+	
+		'Klik header appno'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
+	
+		for (int i = 1; i <= rowData.size(); i++) {
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'),
+				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[4]/span/a', true)
+	
+			listApp.add(WebUI.getText(appNoObject))
+		}
+		
+		'verif sort appno descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
+	
+		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
+	
+		'Klik header custname 2x supaya descending'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
+	
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_custName'))
+	
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+	
+		listString = new ArrayList<String>()
+	
+		for (int i = 1; i <= rowData.size(); i++) {
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/custName'),
+				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[5]/span', true)
+	
+			listString.add(WebUI.getText(appNoObject))
+		}
+		
+		'verif sort custname descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+	
+		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
+	
+		'Klik header poname'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
+	
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+	
+		listString = new ArrayList<String>()
+	
+		for (int i = 1; i <= rowData.size(); i++) {
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'),
+				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[6]/span', true)
+	
+			listString.add(WebUI.getText(appNoObject))
+		}
+		
+		'verif sort poname ascending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+	
+		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
+	
+		'Klik header poname'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_POName'))
+	
+		listString = new ArrayList<String>()
+	
+		for (int i = 1; i <= rowData.size(); i++) {
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/POName'),
+				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+				i) + ']/td[6]/span', true)
+	
+			listString.add(WebUI.getText(appNoObject))
+		}
+		
+		'Verif sort poname descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+	
+		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
+	
+		'Klik 2x header appno supaya urutan descending'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
+	
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/span_applicationNo'))
+	
+		'Ambil count data dari confins'
+		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/countData')).replace(
+			' ', '').replace(':', ';').split(';')
+	
+		Integer countDt = Integer.parseInt(textCountData[1])
+	
+		'Jika count data secara keseluruhan dari confins lebih besar daripada data di page 1'
+		if (countDt > rowData.size()) {
+			'Klik page 2'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'))
+	
+			'Verify page 2 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'),
+				'aria-current', 2))
+	
+			listString = new ArrayList<String>()
+	
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+			
+			'Verif appno yang ada di page 2 tidak ada di page 1'
+			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+	
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+			
+			'Klik button prev'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Prev'))
+			
+			'Verify page 1 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'),
+				'aria-current', 2))
+			
+			listApp = listString
+					
+			listString = new ArrayList<String>()
+			
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+					
+			'Verif appno yang ada di page 1 tidak ada di page 2'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+			
+			'Klik button next'
+			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Next'))
+			
+			'Verify page 2 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/nextPage'),
+				'aria-current', 2))
+			
+			listApp = listString
+			
+			listString = new ArrayList<String>()
+			
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+					
+			'Verif appno yang ada di page 2 tidak ada di page 1'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+			
+			
+		}
+		
+		'Klik button page 1'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/pageOne'))
+		
+		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP1CountDataInPage'(),true))
+		
+		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 1)){
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+		
+				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+"NAP1"+";\n"))
+		
+				GlobalVariable.FlagWarning=1
+		}
+			
+		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 1)){
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+			
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"NAP1"+";\n"))
+			
+					GlobalVariable.FlagWarning=1
+		}
+			
+		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 1)){
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
+			
+					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"NAP1"+";\n"))
+			
+	
+					GlobalVariable.FlagWarning=1
+		}
+	}
+}
+
 
