@@ -6,12 +6,12 @@
    <elementGuidId>bee82a55-f382-4c69-a3b5-f5eb0e6eaef2</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label/div[1]/div[1]</value>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label/span[1]/span[1]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[5]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label</value>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label/div[1]/div[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[5]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[2]/label/span[1]/span[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

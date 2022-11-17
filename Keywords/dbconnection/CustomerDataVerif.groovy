@@ -670,6 +670,24 @@ public class CustomerDataVerif {
 		return listfinancialdata
 	}
 
+	@Keyword
+	public NAP2FinancialFeeStoreDB (Sql instance, String appno){
+		String financialfeedata
+		ArrayList <String> listfinancialfeedata = new ArrayList<String>()
+		instance.eachRow(("SELECT CONVERT(INT,app_fee_amt), CONVERT(INT,app_fee_prcnt),CASE WHEN is_cptlz = 1 THEN 'Yes' ELSE 'No' END AS IS_CPTLZ, CONVERT(INT,cptlz_amt) FROM APP_FEE af with(nolock) join app a with(nolock) on af.app_id = a.app_id where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				financialfeedata = (row[i])
+				listfinancialfeedata.add(financialfeedata)
+			}
+		})
+		return listfinancialfeedata
+	}
+
 
 	@Keyword
 	public NAP2SubsidyStoreDB (Sql instance, String appno){
