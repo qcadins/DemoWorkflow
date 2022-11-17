@@ -235,6 +235,10 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
                 GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
+else{
+	arrayindex+=2
+}
+	
 
 'verify TDP paid at MF'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
