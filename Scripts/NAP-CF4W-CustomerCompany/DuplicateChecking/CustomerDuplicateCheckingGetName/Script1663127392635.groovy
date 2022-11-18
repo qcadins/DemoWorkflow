@@ -64,13 +64,8 @@ String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'
 
 def StoreCDCCustomerName = ''
 
-	def StoreCDCManagementShareholderPersonalName = ''
-
-	def StoreCDCManagementShareholderCompanyName = ''
-
-	def StoreCDCGuarantorPersonalName = ''
-
-	def StoreCDCGuarantorCompanyName = ''
+	'declare variable untuk Store nama customer'
+	def StoreCDCManagementShareholderPersonalName = '', StoreCDCManagementShareholderCompanyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
 
 	for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 		'modify object subjectname'

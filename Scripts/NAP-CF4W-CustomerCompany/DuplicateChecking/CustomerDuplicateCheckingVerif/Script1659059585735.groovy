@@ -59,8 +59,8 @@ ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
 'declare variable untuk dupcheckresult'
 def DupcheckResult = []
 
-'array untuk menampung hasil status customer personal'
-def CustomerCompanyStatus, ManagementShareholderStatus, GuarantorPersonalStatus, GuarantorCompanyStatus  = ''
+'array untuk menampung hasil status dupcheck'
+def CustomerCompanyStatus = '', ManagementShareholderStatus = '', GuarantorPersonalStatus = '', GuarantorCompanyStatus = ''
 
 for (int i = 1; i <= 1; i++) {
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
@@ -111,7 +111,7 @@ for (int i = 1; i <= 1; i++) {
             
             break
         }
-    }else {
+    } else {
         'declare no value'
         DupcheckResult.add('')
     }
@@ -305,7 +305,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             'declare no value'
             DupcheckResult.add('')
         }
-    } 
+    }
 }
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
@@ -367,7 +367,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             'declare no value'
             DupcheckResult.add('')
         }
-    } 
+    }
 }
 
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
@@ -609,7 +609,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             'declare no value'
             DupcheckResult.add('')
         }
-    } 
+    }
 }
 
 def NegativeResult = []

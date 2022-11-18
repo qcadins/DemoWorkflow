@@ -47,11 +47,11 @@ String insuredBy = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/T
 
 int arrayindex = 0
 
-ArrayList<Boolean> arraysuminsured = new ArrayList<Boolean>()
+ArrayList<String> arraysuminsured = new ArrayList<Boolean>()
 
-ArrayList<Boolean> arrayaddpremi = new ArrayList<Boolean>()
+ArrayList<String> arrayaddpremi = new ArrayList<Boolean>()
 
-ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
+ArrayList<String> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
