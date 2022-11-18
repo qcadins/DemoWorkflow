@@ -42,14 +42,14 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Family
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
+for (int i = 0; i <= (result.size() - 1); i++) {
     if ((result[i]) == null || (result[i]).equalsIgnoreCase('IDN')) {
         (result[i]) = ''
     }
 }
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
+for (int i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
 	if ((GlobalVariable.Confinsdata[i]) == null || (GlobalVariable.Confinsdata[i]).equalsIgnoreCase('IDN')) {
 		(GlobalVariable.Confinsdata[i]) = ''
 	}
@@ -58,7 +58,7 @@ for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
 'declare array for confins data'
 def confinsdata = []
 
-for (i = 0; i < result.size(); i++) {
+for (int i = 0; i < result.size(); i++) {
 	'verify result == confinsdata'
 	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
 	

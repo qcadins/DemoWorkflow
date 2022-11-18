@@ -37,7 +37,7 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Custom
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'))
 
-for (i = 0; i < result.size(); i++) {
+for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
 }

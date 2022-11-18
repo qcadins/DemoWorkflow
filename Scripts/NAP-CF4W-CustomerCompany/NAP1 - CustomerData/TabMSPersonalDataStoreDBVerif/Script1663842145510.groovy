@@ -60,7 +60,7 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.MSData
         GlobalVariable.NumofMS, 19))
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
+for (int i = 0; i <= (result.size() - 1); i++) {
     if ((result[i]) == null) {
         (result[i]) = ''
     }
@@ -86,9 +86,17 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-Cus
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 
         21).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+	GlobalVariable.NumofMS, 21).equalsIgnoreCase('E-KTP') || findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+	GlobalVariable.NumofMS, 21).equalsIgnoreCase('AKTA') || findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+	GlobalVariable.NumofMS, 21).equalsIgnoreCase('NPWP')){
+'skip id expired date'
+arrayindex++
+}else{
 'verify id expired date'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 
         22).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
 'verify marital status'
 arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 
