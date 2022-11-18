@@ -218,7 +218,7 @@ if (DupCheckStatus == true) {
                                     'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[10]/a', 
                                     true)
 
-                                'click selct'
+                                'click select'
                                 WebUI.click(modifyselectCustomerPersonal, FailureHandling.OPTIONAL)
 
                                 if (GlobalVariable.Role == 'Testing') {

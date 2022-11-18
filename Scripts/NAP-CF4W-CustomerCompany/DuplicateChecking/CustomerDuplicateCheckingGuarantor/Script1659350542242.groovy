@@ -252,10 +252,10 @@ if (GuarantorArray.size() > 0) {
                     'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                     ArrayList<WebElement> variableGuarantorPersonalidno = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
 
-                    int countGuarantoridrow = variableGuarantorPersonalidno.size()
+                    
 
                     if (counttd == 10) {
-                        for (int id = 1; id <= countGuarantoridrow; id++) {
+                        for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
                             'modify object id no guarantor match'
                             modifyIDNoGuarantorPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
                                 'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[4]', true)
@@ -306,7 +306,7 @@ if (GuarantorArray.size() > 0) {
                             }
                         }
                     } else {
-                        for (int id = 1; id <= countGuarantoridrow; id++) {
+                        for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
                             'modify object id no Guarantor match'
                             modifyIDNoGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCompany'), 
                                 'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[3]', true)
@@ -530,7 +530,7 @@ if (GuarantorArray.size() > 0) {
 								'get new applicant no value'
                                 newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-								'get new guarnam'
+								'get new guarantor name'
 								newGuarNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
 								
                                 'click select application in process'

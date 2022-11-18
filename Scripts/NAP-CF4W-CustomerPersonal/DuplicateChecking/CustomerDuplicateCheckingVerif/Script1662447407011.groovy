@@ -59,17 +59,8 @@ ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
 'declare variable untuk dupcheckresult'
 def DupcheckResult = []
 
-'array untuk menampung hasil status customer personal'
-def CustomerPersonalStatus = ''
-
-'array untuk menampung hasil status Family personal'
-def FamilyPersonalStatus = ''
-
-'array untuk menampung hasil status Guarantor Personal'
-def GuarantorPersonalStatus = ''
-
-'array untuk menampung hasil status Guarantor Company'
-def GuarantorCompanyStatus = ''
+'array untuk menampung hasil status dupcheck'
+def CustomerPersonalStatus = '', FamilyPersonalStatus = '', GuarantorPersonalStatus = '', GuarantorCompanyStatus = ''
 
 for (i = 1; i <= 1; i++) {
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(

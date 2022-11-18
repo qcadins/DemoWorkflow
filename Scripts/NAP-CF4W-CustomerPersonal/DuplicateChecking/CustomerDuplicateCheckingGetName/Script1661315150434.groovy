@@ -60,13 +60,8 @@ String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnection, DupcheckAppNo)
 
-def StoreCDCCustomerName = ''
-
-	def StoreCDCFamilyName = ''
-
-	def StoreCDCGuarantorPersonalName = ''
-
-	def StoreCDCGuarantorCompanyName = ''
+	'declare variable untuk Store nama customer'
+	def StoreCDCCustomerName = '', StoreCDCFamilyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
 
 	for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 		'modify object subjectname'

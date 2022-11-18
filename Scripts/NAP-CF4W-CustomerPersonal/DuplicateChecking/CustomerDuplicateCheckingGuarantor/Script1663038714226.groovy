@@ -30,7 +30,7 @@ def GuarantorArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).spl
 'get guarantor array action dupcheck dari excel'
 def GuarantorActionArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 20).split(';', -1)
 
-'get guarantor arrat negative action dari excel'
+'get guarantor array negative action dari excel'
 def GuarantorNegativeArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 21).split(';', -1)
 
 'array customer name data inputan'
@@ -236,10 +236,8 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length()>0) {
                     ArrayList<WebElement> variableGuarantorPersonalidno = DriverFactory.getWebDriver().findElements(By.cssSelector(
                             '#subSecAppProcess > table > tbody tr'))
 
-                    int countGuarantorPersonalidrow = variableGuarantorPersonalidno.size()
-
                     if (counttd == 10) {
-                        for (int id = 1; id <= countGuarantorPersonalidrow; id++) {
+                        for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
                             'modify object id no guarantor match'
                             modifyIDNoGuarantorPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoPersonal'), 
                                 'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[4]', true)
@@ -290,7 +288,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length()>0) {
                             }
                         }
                     } else {
-                        for (int id = 1; id <= countGuarantorPersonalidrow; id++) {
+                        for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
                             'modify object id no Guarantor match'
                             modifyIDNoGuarantorCompany = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/IDNoCompany'), 
                                 'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[3]', true)
@@ -503,7 +501,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length()>0) {
 								'get new applicant no value'
                                 newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'))
 
-								'get new guarnam'
+								'get new guarantor name'
 								newGuarNameAppInProcess = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/tr_CustNameAppInProcess'))
 								
                                 'click select application in process'
