@@ -40,7 +40,7 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Custom
 		GlobalVariable.NumofColm, 17))
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
+for (int i = 0; i <= (result.size() - 1); i++) {
 	if ((result[i]) == null) {
 		(result[i]) = ''
 	}
@@ -110,7 +110,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUp
 'verify building ownership'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-//for (i = 0; i < result.size(); i++) {
+//for (int i = 0; i < result.size(); i++) {
 //	'verify result == confinsdata'
 //	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[i].toUpperCase(), (result[i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 //}

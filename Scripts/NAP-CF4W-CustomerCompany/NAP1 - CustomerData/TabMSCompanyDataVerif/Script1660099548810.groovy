@@ -44,7 +44,7 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Custom
         'value'))
 
 
-for (i = 0; i < result.size(); i++) {
+for (int i = 0; i < result.size(); i++) {
     'verify result = confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
 }

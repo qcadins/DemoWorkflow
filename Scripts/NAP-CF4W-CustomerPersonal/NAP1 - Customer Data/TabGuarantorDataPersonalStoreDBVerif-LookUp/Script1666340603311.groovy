@@ -40,13 +40,13 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Guaran
 		GlobalVariable.NumofGuarantorPersonal, 16))
 
 'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
+for (int i = 0; i <= (result.size() - 1); i++) {
 	if ((result[i]) == null) {
 		(result[i]) = ''
 	}
 }
 
-for (i = 0; i < result.size(); i++) {
+for (int i = 0; i < result.size(); i++) {
 	'verify result == confinsdata'
 	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
 	

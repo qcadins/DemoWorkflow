@@ -45,7 +45,7 @@ if ((result[3]) == null) {
 'declare array for confins data'
 def confinsdata = []
 
-for (i = 0; i < result.size(); i++) {
+for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
 }

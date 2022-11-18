@@ -20,8 +20,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-
-
 int flagWarning = 0
 
 String userDir = System.getProperty('user.dir')
@@ -29,8 +27,6 @@ String userDir = System.getProperty('user.dir')
 String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
-
-GlobalVariable.NumofGuarantorPersonal = 2
 
 datafileguarantorpersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
 
@@ -65,7 +61,7 @@ GlobalVariable.FlagFailed = 0
         
 		println(variableData.size())
 		
-        for (i = 1; i <= variableData.size(); i++) {
+        for (int i = 1; i <= variableData.size(); i++) {
             'modify object guarantor name'
             modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
@@ -528,7 +524,7 @@ GlobalVariable.FlagFailed = 0
             variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
         }
         
-        for (i = 1; i <= variableData.size(); i++) {
+        for (int i = 1; i <= variableData.size(); i++) {
             'modify object guarantor name'
             modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
@@ -655,8 +651,6 @@ GlobalVariable.FlagFailed = 0
                             'click radio company'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
 
-                            
-
                             'click guarantor lookup'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Guarantor Legal Name_btn btn-raised btn-primary'))
 
@@ -724,12 +718,9 @@ GlobalVariable.FlagFailed = 0
 						'call function get data guarantor company'
 						getDataGuarCompany()
 						
-					
 						 'add relationship to array'
 						GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
 										'value'))
-						 
-						
 					}
                     
 					'get customer name'
@@ -749,7 +740,7 @@ GlobalVariable.FlagFailed = 0
                             '3b.TabGuarantorDataCompany')
                     }
                     
-                    'verify flagfailed  lookup == 0 '
+                    'verify flagfailed  lookup == 0'
                     if (GlobalVariable.FlagFailed == 0) {
                         'Check save Process write to excel'
                         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileguarantorcompany.getValue(
@@ -808,10 +799,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-Cus
     'click button save and continue'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 }
-
-	println(GlobalVariable.CustomerName)
 	
-WebUI.delay(15)
+WebUI.delay(10)
 
 def getDataGuarPersonal(){
 	'declare array for confins data'
