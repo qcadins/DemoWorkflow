@@ -115,9 +115,7 @@ if (insuredBy == 'Customer') {
 
             Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
 
-            String inslength = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/insurancelength'), 
-                'value')
-
+            String inslength = GlobalVariable.InsuranceLength
             Calendar cal = Calendar.getInstance()
 
             cal.setTime(enddate_Formated)
@@ -465,6 +463,7 @@ if (insuredBy == 'Customer') {
 //                                    addpremirate), FailureHandling.OPTIONAL))
 //                    }
                 }
+				'verify additional premi rate db = confins'
 				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
             }
         }
@@ -477,16 +476,17 @@ if (insuredBy == 'Customer') {
 			ArrayList<String> MainRate = GlobalVariable.MainPremiRate
             'get arraylist main premi rate dari DB'
             ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
             'get arraylist main premi rate dari excel'
             def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
                 GlobalVariable.NumofColm, 69).split(';', -1)
 
-            'looping untuk verify mainpremirate db = excel'
-            for (mainpremirate = 0; mainpremirate < mainpremirateArray.size(); mainpremirate++) {
-                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(MainRate[mainpremirate]), Double.parseDouble(
+            'looping untuk verify mainpremirate db = confins'
+            for (int mainpremirate = 0; mainpremirate < MainRate.size(); mainpremirate++) {
+				'verify main rate pada db = confins'
+                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(MainRate.get(mainpremirate)), Double.parseDouble(
                                 resultMainPremiRate[mainpremirate])))
             }
         }
@@ -854,7 +854,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnection){
 //									addpremirate), FailureHandling.OPTIONAL))
 //					}
 				}
-				
+				'verify additional rate pada db = confins'
 				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
 				
 				
@@ -874,8 +874,9 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnection){
 			def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, 69).split(';', -1)
 
-			'looping untuk verify mainpremirate db = excel'
+			'looping untuk verify mainpremirate db = confins'
 			for (int mainpremirate = 0; mainpremirate < resultMainPremiRate.size(); mainpremirate++) {
+				'verify main rate pada db = confins'
 				arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(MainRate.get(mainpremirate)), Double.parseDouble(
 								resultMainPremiRate[mainpremirate])))
 			}

@@ -624,4 +624,9 @@
       <initValue>[]</initValue>
       <name>AdditionalPremiRate</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>InsuranceLength</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
