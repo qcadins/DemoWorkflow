@@ -311,16 +311,17 @@ if (insuredBy == 'Customer') {
 		int indexdb = 0
 
 		for (int index = 0; index < (resultMultiMainCVG.size() / 5); index++) {
+			
 			indexdb++
 			
 			if (capinssetting.equalsIgnoreCase('YEARLY')) {
-			if ((capitalizedarray[index]).length() > 0) {
-				arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
-						false, FailureHandling.OPTIONAL))
-			}
+				if ((capitalizedarray[index]).length() > 0) {
+					arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+							false, FailureHandling.OPTIONAL))
+				}
 			} else if (capinssetting.equalsIgnoreCase('PARTIAL')) {
-			'skip is capitalized'
-			indexdb++
+				'skip is capitalized'
+				indexdb++
 			}
 			
 			indexdb++
@@ -348,17 +349,18 @@ if (insuredBy == 'Customer') {
 		}
 		
 		if(capinssetting.equalsIgnoreCase('PARTIAL')){
-		if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm,
-			84).equalsIgnoreCase('NO')) {
-			'call keyword NAP2InsurancePartialCaptilizeStoreDB'
-			ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
-				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-					GlobalVariable.NumofColm, 13))
-
-			arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-						GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
-					FailureHandling.OPTIONAL))
-		}
+			if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm,
+				84).equalsIgnoreCase('NO')) {
+				
+				'call keyword NAP2InsurancePartialCaptilizeStoreDB'
+				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
+					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+						GlobalVariable.NumofColm, 13))
+	
+				arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+							GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
+						FailureHandling.OPTIONAL))
+			}
 		}
         
         if ((((((((findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 
@@ -713,13 +715,13 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
 			indexdb++
 			
 			if (capinssetting.equalsIgnoreCase('YEARLY')) {
-			if ((capitalizedarray[index]).length() > 0) {
-				arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
-						false, FailureHandling.OPTIONAL))
-			}
+				if ((capitalizedarray[index]).length() > 0) {
+					arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+							false, FailureHandling.OPTIONAL))
+				}
 			} else if (capinssetting.equalsIgnoreCase('PARTIAL')) {
-			'skip is capitalized'
-			indexdb++
+				'skip is capitalized'
+				indexdb++
 			}
 			
 			indexdb++
@@ -747,17 +749,18 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
 		}
 		
 		if(capinssetting.equalsIgnoreCase('PARTIAL')){
-		if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm,
-			84).equalsIgnoreCase('NO')) {
-			'call keyword NAP2InsurancePartialCaptilizeStoreDB'
-			ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
-				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-					GlobalVariable.NumofColm, 13))
-
-			arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
-						GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
-					FailureHandling.OPTIONAL))
-		}
+			if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm,
+				84).equalsIgnoreCase('NO')) {
+				
+				'call keyword NAP2InsurancePartialCaptilizeStoreDB'
+				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
+					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+						GlobalVariable.NumofColm, 13))
+	
+				arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+							GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
+						FailureHandling.OPTIONAL))
+			}
 		}
         
         if ((((((((findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 
