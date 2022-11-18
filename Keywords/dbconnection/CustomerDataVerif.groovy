@@ -595,7 +595,7 @@ public class CustomerDataVerif {
 		})
 		return insurancelist
 	}
-	
+
 	@Keyword
 	public NAP2InsuranceMultiMainCVGtoreDB (Sql instance, String appno){
 		String insurancedata
@@ -618,8 +618,8 @@ public class CustomerDataVerif {
 	public NAP2InsuranceMultiAddCVGtoreDB (Sql instance, String appno){
 		String insurancedata
 		ArrayList<String> insurancelist = new ArrayList<>()
-		instance.eachRow(("SELECT YEAR_NO ,rml.REF_MASTER_NAME, CASE WHEN(rml.REF_MASTER_NAME = 'TPL' OR rml.REF_MASTER_NAME = 'Tanggung Jawab Hukum Terhadap Penumpang' OR rml.REF_MASTER_NAME = 'Kecelakaan Diri Untuk Penumpang') THEN CUST_ADD_PREMI_AMT ELSE FORMAT(CUST_ADD_PREMI_RATE, 'N4') END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' ORDER BY YEAR_NO"), {  row ->
-
+		instance.eachRow(("SELECT YEAR_NO ,rml.REF_MASTER_NAME, CASE WHEN(rml.REF_MASTER_NAME = 'TPL' OR rml.REF_MASTER_NAME = 'Tanggung Jawab Hukum Terhadap Penumpang' OR rml.REF_MASTER_NAME = 'Kecelakaan Diri Untuk Penumpang') THEN CUST_ADD_PREMI_AMT ELSE CUST_ADD_PREMI_RATE END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' ORDER BY YEAR_NO,APP_INS_ADD_CVG_ID"), {  row ->
+			//SELECT YEAR_NO ,rml.REF_MASTER_NAME, CASE WHEN(rml.REF_MASTER_NAME = 'TPL' OR rml.REF_MASTER_NAME = 'Tanggung Jawab Hukum Terhadap Penumpang' OR rml.REF_MASTER_NAME = 'Kecelakaan Diri Untuk Penumpang') THEN CUST_ADD_PREMI_AMT ELSE FORMAT(CUST_ADD_PREMI_RATE, 'N4') END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' ORDER BY YEAR_NO
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
 

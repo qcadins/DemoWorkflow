@@ -17,6 +17,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.WebElement
 
 String servername = findTestData('Login/Login').getValue(1, 9)
 
@@ -318,6 +319,8 @@ if (insuredBy == 'Customer') {
             ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
+			
+			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
 
             'ganti value null > "" (String kosong)'
             for (i = 0; i <= (resultAddCVG.size() - 1); i++) {
@@ -394,80 +397,84 @@ if (insuredBy == 'Customer') {
                         arrayMatch.add(WebUI.verifyMatch((floodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((floodratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
+//                    if ((floodratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate), 
+//                                FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('TPL')) {
                     if ((tplarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((tplarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((tplratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
+//                    if ((tplratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate), 
+//                                FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('Act of God')) {
                     if ((actofgodarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((actofgodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((actofgodratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
+//                    if ((actofgodratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate), 
+//                                FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('SRCC')) {
                     if ((srccarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((srccarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((srccratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
+//                    if ((srccratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate), 
+//                                FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
                     if ((TJHTParray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((TJHTParray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((TJHTPratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
+//                    if ((TJHTPratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate), 
+//                                FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
                     if ((Kecelakaanarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((Kecelakaanarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
+//                    if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
+//                                    addpremirate), FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('Terrorist')) {
                     if ((terroristarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((terroristarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((terroristratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
+//                    if ((terroristratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
+//                                    addpremirate), FailureHandling.OPTIONAL))
+//                    }
                 } else if (addcvg.equalsIgnoreCase('Theft & Robbery')) {
                     if ((Theftrobberyarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((Theftrobberyarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-                    if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
+//                    if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
+//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
+//                                    addpremirate), FailureHandling.OPTIONAL))
+//                    }
                 }
+				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
             }
         }
+			
         
         'cek jika ada main premi rate'
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 69).length() > 0) {
+		
+			ArrayList<String> MainRate = GlobalVariable.MainPremiRate
             'get arraylist main premi rate dari DB'
             ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
                 sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -479,377 +486,13 @@ if (insuredBy == 'Customer') {
 
             'looping untuk verify mainpremirate db = excel'
             for (mainpremirate = 0; mainpremirate < mainpremirateArray.size(); mainpremirate++) {
-                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(mainpremirateArray[mainpremirate]), Math.round(Double.parseDouble(
-                                resultMainPremiRate[mainpremirate])), FailureHandling.OPTIONAL))
+                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(MainRate[mainpremirate]), Double.parseDouble(
+                                resultMainPremiRate[mainpremirate])))
             }
         }
     }
 } else if (insuredBy == 'Multifinance') {
-    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection, 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 13))
-
-    'ganti value null > "" (String kosong)'
-    for (i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-        if ((resultMFinsurance[i]) == null) {
-            (resultMFinsurance[i]) = ''
-        } else if ((resultMFinsurance[i]) == 'true') {
-            (resultMFinsurance[i]) = 'Yes'
-        } else if ((resultMFinsurance[i]) == 'false') {
-            (resultMFinsurance[i]) = 'No'
-        }
-    }
-    
-    'verify asset region'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify coverage amount'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify cover period'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify payment type'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify insco branch name'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify insurance note'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
-        'verify insurance length'
-        arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                    GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-                false, FailureHandling.OPTIONAL))
-    } else if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
-        'skip verify length insurance'
-        resultMFinsurance[arrayindex++]
-    }
-    
-    'verify admin fee'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    'verify customer stampduty fee'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(), 
-            false, FailureHandling.OPTIONAL))
-
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-        GlobalVariable.NumofColm, 36).length() == 0) {
-        String resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection, 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                GlobalVariable.NumofColm, 13))
-
-        'verify main coverage'
-        arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                    GlobalVariable.NumofColm, 34).toUpperCase().replace(',', ''), resultMainCVG.replace('[', '').replace(
-                    ']', '').toUpperCase(), false, FailureHandling.OPTIONAL))
-
-        if (((((((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 37).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 38).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 39).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 40).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
-            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                    GlobalVariable.NumofColm, 13))
-
-            for (index = 0; index < resultAddCVG.size(); index++) {
-                if ((resultAddCVG[index]).equalsIgnoreCase('Flood')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 36), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('TPL')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 37), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('Act of God')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 38), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('SRCC')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 39), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 40), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 41), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('Terrorist')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 42), 'YES', false, FailureHandling.OPTIONAL))
-                } else if ((resultAddCVG[index]).equalsIgnoreCase('Theft & Robbery')) {
-                    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                                GlobalVariable.NumofColm, 43), 'YES', false, FailureHandling.OPTIONAL))
-                }
-            }
-        }
-    } else {
-        ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
-            sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                GlobalVariable.NumofColm, 13))
-
-        println(resultMultiMainCVG)
-
-        'ganti value null > "" (String kosong)'
-        for (i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-            if ((resultMultiMainCVG[i]) == null) {
-                (resultMultiMainCVG[i]) = ''
-            } else if ((resultMultiMainCVG[i]) == 'true') {
-                (resultMultiMainCVG[i]) = 'Yes'
-            } else if ((resultMultiMainCVG[i]) == 'false') {
-                (resultMultiMainCVG[i]) = 'No'
-            }
-        }
-        
-        println(resultMultiMainCVG)
-
-        def capitalizedarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 45).split(';', -1)
-
-        def paidbyarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 46).split(';', -1)
-
-        def suminsuredarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 47).split(';', -1)
-
-        def maincvgarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 48).split(';', -1)
-
-        int indexdb = 0
-
-        for (index = 0; index < (resultMultiMainCVG.size() / 5); index++) {
-            indexdb++
-
-            if ((capitalizedarray[index]).length() > 0) {
-                arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(), 
-                        false, FailureHandling.OPTIONAL))
-            }
-            
-            indexdb++
-
-            if ((paidbyarray[index]).length() > 0) {
-                arrayMatch.add(WebUI.verifyMatch((paidbyarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(), 
-                        false, FailureHandling.OPTIONAL))
-            }
-            
-            indexdb++
-
-            if ((suminsuredarray[index]).length() > 0) {
-                arrayMatch.add(WebUI.verifyMatch((suminsuredarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(), 
-                        false, FailureHandling.OPTIONAL))
-            }
-            
-            indexdb++
-
-            if ((maincvgarray[index]).length() > 0) {
-                arrayMatch.add(WebUI.verifyMatch((maincvgarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(), 
-                        false, FailureHandling.OPTIONAL))
-            }
-            
-            indexdb++
-        }
-        
-        if ((((((((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 50).length() > 0) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 51).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 52).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 53).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 54).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                    GlobalVariable.NumofColm, 13))
-
-            'ganti value null > "" (String kosong)'
-            for (i = 0; i <= (resultAddCVG.size() - 1); i++) {
-                if ((resultAddCVG[i]) == null) {
-                    (resultAddCVG[i]) = ''
-                } else if ((resultAddCVG[i]) == 'true') {
-                    (resultAddCVG[i]) = 'Yes'
-                } else if ((resultAddCVG[i]) == 'false') {
-                    (resultAddCVG[i]) = 'No'
-                }
-            }
-            
-            println(resultAddCVG)
-
-            def floodarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 50).split(';', -1)
-
-            def tplarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 51).split(';', -1)
-
-            def actofgodarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 52).split(';', -1)
-
-            def srccarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 53).split(';', -1)
-
-            def TJHTParray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 54).split(';', -1)
-
-            def Kecelakaanarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 55).split(';', -1)
-
-            def terroristarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 56).split(';', -1)
-
-            def Theftrobberyarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 57).split(';', -1)
-
-            def floodratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 71).split(';', -1)
-
-            def tplratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 72).split(';', -1)
-
-            def actofgodratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 73).split(';', -1)
-
-            def srccratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 74).split(';', -1)
-
-            def TJHTPratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 75).split(';', -1)
-
-            def Kecelakaanratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 76).split(';', -1)
-
-            def terroristratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 77).split(';', -1)
-
-            def Theftrobberyratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 78).split(';', -1)
-
-            indexdb = 0
-
-            for (index = 0; index < (resultAddCVG.size() / 3); index++) {
-                year = Integer.parseInt(resultAddCVG[indexdb++])
-
-                addcvg = (resultAddCVG[indexdb++])
-
-                addpremirate = Double.parseDouble(resultAddCVG[indexdb++])
-
-                if (addcvg.equalsIgnoreCase('Flood')) {
-                    if ((floodarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((floodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((floodratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('TPL')) {
-                    if ((tplarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((tplarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((tplratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('Act of God')) {
-                    if ((actofgodarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((actofgodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((actofgodratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('SRCC')) {
-                    if ((srccarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((srccarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((srccratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
-                    if ((TJHTParray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((TJHTParray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((TJHTPratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate), 
-                                FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
-                    if ((Kecelakaanarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((Kecelakaanarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('Terrorist')) {
-                    if ((terroristarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((terroristarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((terroristratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
-                } else if (addcvg.equalsIgnoreCase('Theft & Robbery')) {
-                    if ((Theftrobberyarray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyMatch((Theftrobberyarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
-                    }
-                    
-                    if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
-                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
-                                    addpremirate), FailureHandling.OPTIONAL))
-                    }
-                }
-            }
-        }
-        
-        'cek jika ada main premi rate'
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-            GlobalVariable.NumofColm, 69).length() > 0) {
-            'get arraylist main premi rate dari DB'
-            ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
-                sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-                    GlobalVariable.NumofColm, 13))
-
-            'get arraylist main premi rate dari excel'
-            def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-                GlobalVariable.NumofColm, 69).split(';', -1)
-
-            'looping untuk verify mainpremirate db = excel'
-            for (mainpremirate = 0; mainpremirate < mainpremirateArray.size(); mainpremirate++) {
-                arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(mainpremirateArray[mainpremirate]), Math.round(Double.parseDouble(
-                                resultMainPremiRate[mainpremirate])), FailureHandling.OPTIONAL))
-            }
-        }
-    }
+    insuredMF(arrayMatch,sqlconnection)
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
@@ -863,3 +506,379 @@ if (arrayMatch.contains(false)) {
         GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 
+public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnection){
+	arrayindex = 0
+	
+	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnection,
+		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 13))
+
+	'ganti value null > "" (String kosong)'
+	for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
+		if ((resultMFinsurance[i]) == null) {
+			(resultMFinsurance[i]) = ''
+		} else if ((resultMFinsurance[i]) == 'true') {
+			(resultMFinsurance[i]) = 'Yes'
+		} else if ((resultMFinsurance[i]) == 'false') {
+			(resultMFinsurance[i]) = 'No'
+		}
+	}
+	
+	'verify asset region'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify coverage amount'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify cover period'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify payment type'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify insco branch name'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify insurance note'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
+		'verify insurance length'
+		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+					GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+				false, FailureHandling.OPTIONAL))
+	} else if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
+		'skip verify length insurance'
+		resultMFinsurance[arrayindex++]
+	}
+	
+	'verify admin fee'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	'verify customer stampduty fee'
+	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+
+	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+		GlobalVariable.NumofColm, 36).length() == 0) {
+		String resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnection,
+			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13))
+
+		'verify main coverage'
+		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+					GlobalVariable.NumofColm, 34).toUpperCase().replace(',', ''), resultMainCVG.replace('[', '').replace(
+					']', '').toUpperCase(), false, FailureHandling.OPTIONAL))
+
+		if (((((((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 37).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 38).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 39).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 40).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
+			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
+				sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+					GlobalVariable.NumofColm, 13))
+
+			for (int index = 0; index < resultAddCVG.size(); index++) {
+				if ((resultAddCVG[index]).equalsIgnoreCase('Flood')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 36), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('TPL')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 37), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('Act of God')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 38), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('SRCC')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 39), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 40), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 41), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('Terrorist')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 42), 'YES', false, FailureHandling.OPTIONAL))
+				} else if ((resultAddCVG[index]).equalsIgnoreCase('Theft & Robbery')) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+								GlobalVariable.NumofColm, 43), 'YES', false, FailureHandling.OPTIONAL))
+				}
+			}
+		}
+	} else {
+		ArrayList<Boolean> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+			sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				GlobalVariable.NumofColm, 13))
+
+		println(resultMultiMainCVG)
+
+		'ganti value null > "" (String kosong)'
+		for (i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
+			if ((resultMultiMainCVG[i]) == null) {
+				(resultMultiMainCVG[i]) = ''
+			} else if ((resultMultiMainCVG[i]) == 'true') {
+				(resultMultiMainCVG[i]) = 'Yes'
+			} else if ((resultMultiMainCVG[i]) == 'false') {
+				(resultMultiMainCVG[i]) = 'No'
+			}
+		}
+		
+		println(resultMultiMainCVG)
+
+		def capitalizedarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 45).split(';', -1)
+
+		def paidbyarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 46).split(';', -1)
+
+		def suminsuredarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 47).split(';', -1)
+
+		def maincvgarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 48).split(';', -1)
+
+		int indexdb = 0
+
+		for (int index = 0; index < (resultMultiMainCVG.size() / 5); index++) {
+			indexdb++
+
+			if ((capitalizedarray[index]).length() > 0) {
+				arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+						false, FailureHandling.OPTIONAL))
+			}
+			
+			indexdb++
+
+			if ((paidbyarray[index]).length() > 0) {
+				arrayMatch.add(WebUI.verifyMatch((paidbyarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+						false, FailureHandling.OPTIONAL))
+			}
+			
+			indexdb++
+
+			if ((suminsuredarray[index]).length() > 0) {
+				arrayMatch.add(WebUI.verifyMatch((suminsuredarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+						false, FailureHandling.OPTIONAL))
+			}
+			
+			indexdb++
+
+			if ((maincvgarray[index]).length() > 0) {
+				arrayMatch.add(WebUI.verifyMatch((maincvgarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
+						false, FailureHandling.OPTIONAL))
+			}
+			
+			indexdb++
+		}
+		
+		if ((((((((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 50).length() > 0) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 51).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 52).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 53).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 54).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 57).length() > 0)) {
+			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+				sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+					GlobalVariable.NumofColm, 13))
+			
+			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
+
+			'ganti value null > "" (String kosong)'
+			for (i = 0; i <= (resultAddCVG.size() - 1); i++) {
+				if ((resultAddCVG[i]) == null) {
+					(resultAddCVG[i]) = ''
+				} else if ((resultAddCVG[i]) == 'true') {
+					(resultAddCVG[i]) = 'Yes'
+				} else if ((resultAddCVG[i]) == 'false') {
+					(resultAddCVG[i]) = 'No'
+				}
+			}
+			
+			println(resultAddCVG)
+
+			def floodarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 50).split(';', -1)
+
+			def tplarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 51).split(';', -1)
+
+			def actofgodarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 52).split(';', -1)
+
+			def srccarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 53).split(';', -1)
+
+			def TJHTParray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 54).split(';', -1)
+
+			def Kecelakaanarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 55).split(';', -1)
+
+			def terroristarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 56).split(';', -1)
+
+			def Theftrobberyarray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 57).split(';', -1)
+
+			def floodratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 71).split(';', -1)
+
+			def tplratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 72).split(';', -1)
+
+			def actofgodratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 73).split(';', -1)
+
+			def srccratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 74).split(';', -1)
+
+			def TJHTPratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 75).split(';', -1)
+
+			def Kecelakaanratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 76).split(';', -1)
+
+			def terroristratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 77).split(';', -1)
+
+			def Theftrobberyratearray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 78).split(';', -1)
+
+			indexdb = 0
+
+			for (index = 0; index < (resultAddCVG.size() / 3); index++) {
+				int year = Integer.parseInt(resultAddCVG[indexdb++])
+
+				addcvg = (resultAddCVG[indexdb++])
+
+				addpremirate = Double.parseDouble(resultAddCVG[indexdb++])
+
+				if (addcvg.equalsIgnoreCase('Flood')) {
+					if ((floodarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((floodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((floodratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate),
+//								FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('TPL')) {
+					if ((tplarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((tplarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((tplratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate),
+//								FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('Act of God')) {
+					if ((actofgodarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((actofgodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((actofgodratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate),
+//								FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('SRCC')) {
+					if ((srccarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((srccarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((srccratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate),
+//								FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
+					if ((TJHTParray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((TJHTParray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((TJHTPratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate),
+//								FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
+					if ((Kecelakaanarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((Kecelakaanarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
+//									addpremirate), FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('Terrorist')) {
+					if ((terroristarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((terroristarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((terroristratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
+//									addpremirate), FailureHandling.OPTIONAL))
+//					}
+				} else if (addcvg.equalsIgnoreCase('Theft & Robbery')) {
+					if ((Theftrobberyarray[(year - 1)]).length() > 0) {
+						arrayMatch.add(WebUI.verifyMatch((Theftrobberyarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
+					}
+					
+//					if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
+//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
+//									addpremirate), FailureHandling.OPTIONAL))
+//					}
+				}
+				
+				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
+				
+				
+			}
+		}
+		
+		'cek jika ada main premi rate'
+		if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			GlobalVariable.NumofColm, 69).length() > 0) {
+			ArrayList<String> MainRate = GlobalVariable.MainPremiRate
+			'get arraylist main premi rate dari DB'
+			ArrayList<String> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
+				sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+					GlobalVariable.NumofColm, 13))
+
+			'get arraylist main premi rate dari excel'
+			def mainpremirateArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+				GlobalVariable.NumofColm, 69).split(';', -1)
+
+			'looping untuk verify mainpremirate db = excel'
+			for (int mainpremirate = 0; mainpremirate < resultMainPremiRate.size(); mainpremirate++) {
+				arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(MainRate.get(mainpremirate)), Double.parseDouble(
+								resultMainPremiRate[mainpremirate])))
+			}
+		}
+	}
+}
