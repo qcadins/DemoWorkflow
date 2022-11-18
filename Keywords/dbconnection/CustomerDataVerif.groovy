@@ -613,6 +613,24 @@ public class CustomerDataVerif {
 		})
 		return insurancelist
 	}
+	
+	@Keyword
+	public NAP2InsurancePartialCaptilizeStoreDB (Sql instance, String appno){
+		String insurancedata
+		ArrayList<String> insurancelist = new ArrayList<>()
+		instance.eachRow(("SELECT INS_CPLTZ_AMT FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				insurancedata = (row[i])
+				insurancelist.add(insurancedata)
+			}
+		})
+		return insurancelist
+	}
 
 	@Keyword
 	public NAP2InsuranceMultiAddCVGtoreDB (Sql instance, String appno){
