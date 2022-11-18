@@ -28,7 +28,7 @@ String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
 
-ArrayList<String> custnamefaileddelete = new ArrayList<String>()
+ArrayList<String> custnamefaileddelete = new ArrayList<>()
 
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
