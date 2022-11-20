@@ -40,7 +40,7 @@ dataGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
 
 'declare variable untuk dupcheckresult'
-def DupcheckResult = []
+ArrayList<String> DupcheckResult = new ArrayList<>()
 
 'array untuk menampung hasil status dupcheck'
 def CustomerPersonalStatus = '', FamilyPersonalStatus = '', GuarantorPersonalStatus = '', GuarantorCompanyStatus = ''
@@ -59,17 +59,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 13)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -84,17 +75,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 14)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -109,17 +91,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 15)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -132,17 +105,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 16)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -157,17 +121,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 17)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -181,17 +136,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 18)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
         
@@ -205,17 +151,8 @@ for (i = 1; i <= 1; i++) {
             CustomerPersonalStatus = ruledupcheck.getValue(2, 19)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
-            if (CustomerPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                'declare value result = review'
-                DupcheckResult.add('REVIEW')
-            } else if (CustomerPersonalStatus.equalsIgnoreCase('')) {
-                'declare no value'
-                DupcheckResult.add('')
-            } else {
-                'declare value result = lock'
-                DupcheckResult.add('LOCK')
-            }
-            
+            checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
+
             break
         }
     } else {
@@ -241,17 +178,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -266,17 +194,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -291,17 +210,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -314,17 +224,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -339,17 +240,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -363,17 +255,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -387,17 +270,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 FamilyPersonalStatus = ruledupcheck.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (FamilyPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (FamilyPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
+
                 continue
             }
         } else {
@@ -426,17 +300,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -452,17 +317,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -478,17 +334,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -502,17 +349,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -528,17 +366,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -553,17 +382,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
             
@@ -578,17 +398,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 GuarantorPersonalStatus = ruledupcheck.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorPersonalStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorPersonalStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
+
                 continue
             }
         } else {
@@ -616,17 +427,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                 GuarantorCompanyStatus = ruledupcheck.getValue(2, 20)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorCompanyStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
+
                 continue
             }
             
@@ -640,17 +442,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                 GuarantorCompanyStatus = ruledupcheck.getValue(2, 21)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
-                if (GuarantorCompanyStatus.equalsIgnoreCase('REVIEW')) {
-                    'declare value result = review'
-                    DupcheckResult.add('REVIEW')
-                } else if (GuarantorCompanyStatus.equalsIgnoreCase('')) {
-                    'declare no value'
-                    DupcheckResult.add('')
-                } else {
-                    'declare value result = lock'
-                    DupcheckResult.add('LOCK')
-                }
-                
+                checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
+
                 continue
             }
         } else {
@@ -958,5 +751,19 @@ println(GlobalVariable.NegativeverifResult)
 
 if ((DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')) || NegativeResult.contains('NEGATIVE')) {
     GlobalVariable.DupcheckVerif = 'Yes'
+}
+
+def checkStatusDupcheck(String Status, ArrayList<WebElement> DupcheckResult) {
+    'verify apakah hasil pengecekan mengandung status REVIEW'
+    if (Status.equalsIgnoreCase('REVIEW')) {
+        'declare value result = review'
+        DupcheckResult.add('REVIEW')
+    } else if (Status.equalsIgnoreCase('')) {
+        'declare no value'
+        DupcheckResult.add('')
+    } else {
+        'declare value result = lock'
+        DupcheckResult.add('LOCK')
+    }
 }
 

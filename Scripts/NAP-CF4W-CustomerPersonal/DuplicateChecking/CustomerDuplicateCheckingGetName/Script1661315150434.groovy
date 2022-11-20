@@ -17,19 +17,15 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
-String userDir = System.getProperty('user.dir')
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-String filePath = userDir + GlobalVariable.PathPersonal
+String CDCCustomerPersonal = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 
-String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
+String CDCFamilyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 
-String CDCFamilyPath = userDir + GlobalVariable.DataFileFamilyPersonal
+String CDCGuarantorPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 
-String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
-
-String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
-
-GlobalVariable.DataFilePath = filePath
+String CDCGuarantorCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
 
 'connect DB Camunda SIT'
 Sql sqlconnectionCamundaSIT = CustomKeywords.'dbconnection.connectDB.connectCAMUNDASIT'()

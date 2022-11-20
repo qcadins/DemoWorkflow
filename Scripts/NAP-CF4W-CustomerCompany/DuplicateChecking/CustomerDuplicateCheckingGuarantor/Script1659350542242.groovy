@@ -128,9 +128,7 @@ if (GuarantorArray.size() > 0) {
                     'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                     ArrayList<WebElement> variableidno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
-                    int countidnorow = variableidno.size()
-
-                    for (int id = 1; id <= countidnorow; id++) {
+                    for (int id = 1; id <= variableidno.size(); id++) {
                         if (counttd == 10) {
                             'modify object id no Guarantor match'
                             modifyIDNoGuarantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
@@ -166,16 +164,12 @@ if (GuarantorArray.size() > 0) {
 
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
-
-									'call function looping subject cust no'
-									modifyCustomerNo = loopingSubjectCustNo(newGuarName)
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match GuarantorNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false))
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, false))
 									}
                                     
-
                                     break
                                 }
                             }
@@ -214,16 +208,12 @@ if (GuarantorArray.size() > 0) {
 
                                     'click select match similar data'
                                     WebUI.click(modifynewSelect, FailureHandling.OPTIONAL)
-
-									'call function looping subject cust no'
-									modifyCustomerNo = loopingSubjectCustNo(newGuarName)
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match GuarantorNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newGuarantorNoValue, false))
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, false))
 									}
                                     
-
                                     break
                                 }
                             }
@@ -234,8 +224,6 @@ if (GuarantorArray.size() > 0) {
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess'),FailureHandling.OPTIONAL), 
                     'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                     ArrayList<WebElement> variableGuarantorPersonalidno = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
-
-                    
 
                     if (counttd == 10) {
                         for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
@@ -273,13 +261,10 @@ if (GuarantorArray.size() > 0) {
 
                                     'click selct'
                                     WebUI.click(modifyselectGuarantorPersonal, FailureHandling.OPTIONAL)
-
-									'call gunction looping subject applicant no'
-									modifyApplicantNo = loopingSubjectApplicantNo(newGuarNameAppInProcess)
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -324,13 +309,10 @@ if (GuarantorArray.size() > 0) {
 
                                     'click select application in process'
                                     WebUI.click(modifyselectGuarantorCompany, FailureHandling.OPTIONAL)
-
-									'call function looping subject applicant no'
-									modifyApplicantNo = loopingSubjectApplicantNo(newGuarNameAppInProcess)
 									
 									if(GlobalVariable.RoleCompany == "Testing"){
 										'verify match ApplicantNo'
-										checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
+										checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), newApplicantNoValue.toString(),
 											false))
 									}
                                     
@@ -349,13 +331,10 @@ if (GuarantorArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
-
-							'call function looping applicant no'
-							modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
 							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+								checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
 							}
                             
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
@@ -388,17 +367,11 @@ if (GuarantorArray.size() > 0) {
 								
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
-
-							
-                                
                             }
-							
-							'call function looping subject cust no'
-							modifyCustomerNo = loopingSubjectCustNo(newGuarName)
 							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match CustomerNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), newCustomerNoValue.toString(),
 									false))
 							}
                         } else {
@@ -429,12 +402,9 @@ if (GuarantorArray.size() > 0) {
                                 
                             }
 							
-							'call function looping subject applicant no'
-							modifyApplicantNo = loopingSubjectApplicantNo(newGuarNameAppInProcess)
-							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), newApplicantNoValue.toString(),
 									false))
 							}
                         }
@@ -465,16 +435,11 @@ if (GuarantorArray.size() > 0) {
                                 'click select match similar data'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'))
 
-                                
                             }
-							
-							
-							'call function looping cubject cust no'
-							modifyCustomerNo = loopingSubjectCustNo(newGuarName)
 							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match CustomerNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), newCustomerNoValue.toString(),
 									false))
 							}
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
@@ -487,13 +452,10 @@ if (GuarantorArray.size() > 0) {
                             
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
-
-								'call function looping subject applicant no'
-								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
 								}
                             } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -518,16 +480,11 @@ if (GuarantorArray.size() > 0) {
 								
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
-
-								
                             }
-							
-							'call function looping subject applicant no'
-							modifyApplicantNo = loopingSubjectApplicantNo(newGuarNameAppInProcess)
 							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), newApplicantNoValue.toString(),
 									false))
 							}
                         }
@@ -555,16 +512,11 @@ if (GuarantorArray.size() > 0) {
 								
                                 'click select application in process'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'))
-
-								
                             }
-							
-							'call function looping applicant no'
-							modifyApplicantNo = loopingSubjectApplicantNo(newGuarNameAppInProcess)
 							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match ApplicantNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), newApplicantNoValue.toString(),
 									false))
 							}
 							
@@ -577,13 +529,10 @@ if (GuarantorArray.size() > 0) {
                             5, FailureHandling.OPTIONAL)) {
                                 'click button new customer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
-
-								'call function looping applicant no'
-								modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
 								
 								if(GlobalVariable.RoleCompany == "Testing"){
 									'verify match ApplicantNo'
-									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+									checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
 								}
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -609,12 +558,9 @@ if (GuarantorArray.size() > 0) {
                                 
                             }
 							
-							'call function looping subject cust no'
-							modifyCustomerNo = loopingSubjectCustNo(newGuarName)
-							
 							if(GlobalVariable.RoleCompany == "Testing"){
 								'verify match CustomerNo'
-								checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo).toString(), newCustomerNoValue.toString(),
+								checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), newCustomerNoValue.toString(),
 									false))
 							}
                         }

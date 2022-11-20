@@ -17,13 +17,9 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + "\\1. LoginR3.xlsm"
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+println(GlobalVariable.DataFilePath)
 
 'open Browser'
 WebUI.openBrowser('')

@@ -20,25 +20,16 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.PathPersonal
-
-GlobalVariable.DataFilePath = filePath
-
-String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
-
-String CDCFamilyPath = userDir + GlobalVariable.DataFileFamilyPersonal
-
-String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonal
-
-String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
-
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
+'declare data file dupcheck'
+datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+
+'get app no from data file dupcheck'
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 Boolean DupCheckStatus = CustomKeywords.'dbconnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
@@ -49,6 +40,7 @@ if (DupCheckStatus == true) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/a_Customer Duplicate Checking'))
 
+	'call paging testing function'
     pagingTesting()
 
     'input Appno'
@@ -138,9 +130,7 @@ if (DupCheckStatus == true) {
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                     ArrayList<WebElement> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
-                    int countidnorow = variableidno.size()
-
-                    for (int id = 1; id <= countidnorow; id++) {
+                    for (int id = 1; id <= variableidno.size(); id++) {
                         'modify object id no customer match'
                         modifyIDNoCustomer = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
                             'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[4]', true)

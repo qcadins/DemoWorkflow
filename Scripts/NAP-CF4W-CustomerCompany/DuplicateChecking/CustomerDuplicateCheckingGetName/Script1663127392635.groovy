@@ -17,29 +17,25 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
-String userDir = System.getProperty('user.dir')
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-String filePath = userDir + GlobalVariable.PathCompany
+String CDCCustomerPersonal = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
-GlobalVariable.DataFilePath = filePath
+String CDCManagementShareholderPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 
-datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
+String CDCManagementShareholderCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 
-String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerCompany
+String CDCGuarantorPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
 
-String CDCManagementShareholderPersonalPath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
-
-String CDCManagementShareholderCompanyPath = userDir + GlobalVariable.DataFileManagementShareholderCompany
-
-String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
-
-String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
+String CDCGuarantorCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 'connect DB Camunda SIT'
 Sql sqlconnectionCamundaSIT = CustomKeywords.'dbconnection.connectDB.connectCAMUNDASIT'()
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+
+datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
 
 String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
