@@ -13,8 +13,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-
-import groovy.sql.Sql
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
@@ -40,96 +39,97 @@ String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
-	'declare variable untuk Store nama customer'
-	def StoreCDCCustomerName = '', StoreCDCFamilyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
+'declare variable untuk Store nama customer'
+def StoreCDCCustomerName = '', StoreCDCFamilyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
 
-	for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
-		'modify object subjectname'
-		modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'),
-			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[2]', true)
+for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
+    'modify object subjectname'
+    modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
+        'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[2]', true)
 
-		'modify object subjecttype'
-		modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'),
-			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[3]', true)
+    'modify object subjecttype'
+    modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectType'), 
+        'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + index) + ']/td[3]', true)
 
-		if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Customer')) {
-			'get customer name'
-			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+    if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Customer')) {
+        'get customer name'
+        String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			'store customer name'
-			StoreCDCCustomerName = name
-		} else if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Family')) {
-			'get Family name'
-			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+        'store customer name'
+        StoreCDCCustomerName = name
+    } else if (WebUI.getText(modifySubjectType).equalsIgnoreCase('Family')) {
+        'get Family name'
+        String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			if (StoreCDCFamilyName == '') {
-				'store customer name'
-				StoreCDCFamilyName = name
-			} else {
-				StoreCDCFamilyName = ((StoreCDCFamilyName + ';') + name)
-			}
-		} else {
-			'get guarantor name'
-			String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+        if (StoreCDCFamilyName == '') {
+            'store customer name'
+            StoreCDCFamilyName = name
+        } else {
+            StoreCDCFamilyName = ((StoreCDCFamilyName + ';') + name)
+        }
+    } else {
+        'get guarantor name'
+        String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-			String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo,
-				name)
+        String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
+            name)
 
-			if (GuarantorType.equalsIgnoreCase('COMPANY')) {
-				if (StoreCDCGuarantorCompanyName == '') {
-					'store guarantor name'
-					StoreCDCGuarantorCompanyName = name
-				} else {
-					'store guarantor name'
-					StoreCDCGuarantorCompanyName = ((StoreCDCGuarantorCompanyName + ';') + name)
-				}
-			} else {
-				if (StoreCDCGuarantorPersonalName == '') {
-					'store guarantor name'
-					StoreCDCGuarantorPersonalName = name
-				} else {
-					'store guarantor name'
-					StoreCDCGuarantorPersonalName = ((StoreCDCGuarantorPersonalName + ';') + name)
-				}
-			}
-		}
-	}
-	
-	if (StoreCDCCustomerName != null) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
-	}
-	
-	if (StoreCDCFamilyName != null) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			14, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
-	}
-	
-	if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-			16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
-	}
-	
-	StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
+        if (GuarantorType.equalsIgnoreCase('COMPANY')) {
+            if (StoreCDCGuarantorCompanyName == '') {
+                'store guarantor name'
+                StoreCDCGuarantorCompanyName = name
+            } else {
+                'store guarantor name'
+                StoreCDCGuarantorCompanyName = ((StoreCDCGuarantorCompanyName + ';') + name)
+            }
+        } else {
+            if (StoreCDCGuarantorPersonalName == '') {
+                'store guarantor name'
+                StoreCDCGuarantorPersonalName = name
+            } else {
+                'store guarantor name'
+                StoreCDCGuarantorPersonalName = ((StoreCDCGuarantorPersonalName + ';') + name)
+            }
+        }
+    }
+}
 
-	StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
+if (StoreCDCCustomerName != null) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+        12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
+}
 
-	StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
+if (StoreCDCFamilyName != null) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+        14, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
+}
 
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm -
-		1, StoreCDCCustomerName)
+if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+        16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
+}
 
-	for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail', 12, FamilyName,
-			StoreCDCFamilyNameArray[(FamilyName - 1)])
-	}
-	
-	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12,
-			GuarantorName, StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
-	}
-	
-	for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12,
-			GuarantorName, StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
-	}
+StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
+
+StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
+
+StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
+
+CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm - 
+    1, StoreCDCCustomerName)
+
+for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCFamilyPath, '1.CustomerDetail', 12, FamilyName, StoreCDCFamilyNameArray[
+        (FamilyName - 1)])
+}
+
+for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
+        StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
+}
+
+for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
+        StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
+}
+
