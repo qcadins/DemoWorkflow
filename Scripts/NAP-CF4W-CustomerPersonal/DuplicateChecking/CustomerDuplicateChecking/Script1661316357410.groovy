@@ -24,6 +24,8 @@ String userDir = System.getProperty('user.dir')
 
 String filePath = userDir + GlobalVariable.PathPersonal
 
+GlobalVariable.DataFilePath = filePath
+
 String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerPersonal
 
 String CDCFamilyPath = userDir + GlobalVariable.DataFileFamilyPersonal
@@ -32,26 +34,10 @@ String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPers
 
 String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompany
 
-GlobalVariable.DataFilePath = filePath
-
 datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-'connect DB'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 

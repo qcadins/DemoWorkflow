@@ -22,11 +22,11 @@ import internal.GlobalVariable as GlobalVariable
 
 String userDir = System.getProperty('user.dir')
 
-datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
-
 String filePath = userDir + GlobalVariable.PathCompany
 
 GlobalVariable.DataFilePath = filePath
+
+datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
 
 String CDCCustomerPersonal = userDir + GlobalVariable.DataFileCustomerCompany
 
@@ -38,22 +38,8 @@ String CDCGuarantorPersonalPath = userDir + GlobalVariable.DataFileGuarantorPers
 
 String CDCGuarantorCompanyPath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-'connect DB'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
@@ -687,3 +673,4 @@ def pagingTesting() {
 		}
     }
 }
+
