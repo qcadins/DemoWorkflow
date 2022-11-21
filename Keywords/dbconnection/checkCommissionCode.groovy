@@ -59,7 +59,7 @@ public class checkCommissionCode {
 		}
 		return referantorCode
 	}
-	
+
 	@Keyword
 	public checkReferantorName(Sql instance,String referantorCode){
 		String referantorName
