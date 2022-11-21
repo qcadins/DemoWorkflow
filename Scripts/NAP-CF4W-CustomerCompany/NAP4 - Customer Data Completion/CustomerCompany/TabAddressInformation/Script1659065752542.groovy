@@ -25,6 +25,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPat
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer')
 
+'declare copyappcolm variable'
 int copyAppColm = 0
 
 'get count colm'
@@ -49,6 +50,7 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 ArrayList<WebElement> variable
 
 if (copyapp.equalsIgnoreCase('Edit')) {
+	'count table addres row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (i = 1; i <= variable.size(); i++) {
@@ -81,9 +83,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								'connect DB FOU'
 								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                ArrayList<WebElement> AddressType
+                                ArrayList<String> AddressType
 
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
                                 AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
@@ -146,6 +148,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
+	'count table address row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
@@ -173,9 +176,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								'connect DB FOU'
 								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                ArrayList<WebElement> AddressType
+                                ArrayList<String> AddressType
 
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
                                 AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
@@ -255,9 +258,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'connect DB FOU'
 					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                    ArrayList<WebElement> AddressType
+                    ArrayList<String> AddressType
 
-                    ArrayList<WebElement> Ownership
+                    ArrayList<String> Ownership
 
                     'get data array dari db'
                     AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)

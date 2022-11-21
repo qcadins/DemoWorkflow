@@ -80,29 +80,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             GlobalVariable.NumofColm, 13))) {
                         
                             if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                                'convert date confins dan excel agar sama'
-                                SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                                Date parsedDate = null
-
-                                String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 17)
-
-								String sDate
-								
-								if(sentDate != ''){
-                                parsedDate = sdf.parse(sentDate)
-
-                                sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                                sDate = sdf.format(parsedDate)
-								}
-								
-                                modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                                if (modifyDateNew.equalsIgnoreCase(sDate)) {
+                                
+								'check if date sama'
+                                if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17)))) {
                                     'click button edit'
                                     WebUI.click(modifyNewbuttonedit)
 
+									'call function input financial data'
                                     inputFinancialData()
 
                                     break
@@ -153,15 +137,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (financialDateDelete.size() > 0) {
+		'write to excel status warning'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
+		'write to excel reason failed'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
+		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
     
+	'count table financial data row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
@@ -180,23 +168,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
                         GlobalVariable.NumofColm, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-                        'convert date confins dan excel agar sama'
-                        SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                        Date parsedDate = null
-
-                        String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 17)
-
-                        parsedDate = sdf.parse(sentDate)
-
-                        sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                        String sDate = sdf.format(parsedDate)
-
-                        modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
+                        
                         'verify date beda'
-                        if (!(modifyDateNew.equalsIgnoreCase(sDate))) {
+                        if (!(WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17))))) {
                             if (i == variable.size()) {
                                 'click button add'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_Add'))
@@ -930,3 +904,23 @@ def inputBankStatementFromEmpty() {
     }
 }
 
+def convertDate(String date){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+
+	Date parsedDate = null
+
+	String sentDate = date
+
+	String sDate
+
+	if (sentDate != '') {
+		parsedDate = sdf.parse(sentDate)
+
+		sdf = new SimpleDateFormat('dd MMM YYYY')
+
+		sDate = sdf.format(parsedDate)
+	}
+	
+	return sDate
+}

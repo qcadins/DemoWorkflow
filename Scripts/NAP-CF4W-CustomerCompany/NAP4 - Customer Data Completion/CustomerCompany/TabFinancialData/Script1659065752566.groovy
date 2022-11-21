@@ -24,10 +24,13 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
+'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company - Customer')
 
+'declare datafilecustdetail variable'
 datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company - Customer')
 
+'declare copyappcolm = 0'
 GlobalVariable.CopyAppColm = 0
 
 'get count colm'
@@ -35,16 +38,20 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<WebElement> variable
 
-ArrayList<WebElement> financialDateDelete = new ArrayList<WebElement>()
+'declare financialDateDelete arraylist'
+ArrayList<String> financialDateDelete = new ArrayList<>()
 
-ArrayList<WebElement> bankAccDelete = new ArrayList<WebElement>()
+'declare bankAccDelete arraylist'
+ArrayList<String> bankAccDelete = new ArrayList<>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm, 
             13))) {
+		'declare copyappcolm = index'
         GlobalVariable.CopyAppColm = index
 
+		'declare numofverif store = index'
         GlobalVariable.NumofVerifStore = index
 
         break
@@ -82,29 +89,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                            'convert date confins dan excel agar sama'
-                            SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                            Date parsedDate = null
-
-                            String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 35)
-
-                            String sDate
-
-                            if (sentDate != '') {
-                                parsedDate = sdf.parse(sentDate)
-
-                                sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                                sDate = sdf.format(parsedDate)
-                            }
                             
-                            modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                            if (modifyDateNew.equalsIgnoreCase(sDate)) {
+                            if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
                                 'click button edit'
                                 WebUI.click(modifyNewbuttonedit)
 
+								'call function input data financial'
                                 inputDataFinancial()
 
                                 break
@@ -182,23 +172,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                     datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-                        'convert date confins dan excel agar sama'
-                        SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                        Date parsedDate = null
-
-                        String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 35)
-
-                        parsedDate = sdf.parse(sentDate)
-
-                        sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                        String sDate = sdf.format(parsedDate)
-
-                        modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
+                        
                         'verify date beda'
-                        if (!(modifyDateNew.equalsIgnoreCase(sDate)) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
+                        if (!(WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
                             5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {
                                 'click button add'
@@ -208,8 +184,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 break
                             }
-                        } else if (WebUI.getText(modifyNewDate).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(financialdata, 
-                                35))) {
+                        } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
                             break
                         }
                     }
@@ -965,3 +940,23 @@ def inputBankStatementFromEmpty() {
     }
 }
 
+def convertDate(String date){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+
+	Date parsedDate = null
+
+	String sentDate = date
+
+	String sDate
+
+	if (sentDate != '') {
+		parsedDate = sdf.parse(sentDate)
+
+		sdf = new SimpleDateFormat('dd MMM YYYY')
+
+		sDate = sdf.format(parsedDate)
+	}
+	
+	return sDate
+}

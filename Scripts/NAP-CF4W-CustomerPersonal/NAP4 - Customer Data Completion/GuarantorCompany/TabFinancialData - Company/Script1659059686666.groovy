@@ -82,29 +82,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                            'convert date confins dan excel agar sama'
-                            SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                            Date parsedDate = null
-
-                            String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 35)
-
-                            String sDate
-
-                            if (sentDate != '') {
-                                parsedDate = sdf.parse(sentDate)
-
-                                sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                                sDate = sdf.format(parsedDate)
-                            }
-                            
-                            modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                            if (modifyDateNew.equalsIgnoreCase(sDate)) {
+                            'check if date sama'
+                            if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
                                 'click button edit'
                                 WebUI.click(modifyNewbuttonedit)
 
+								'call function input financial data'
                                 inputFinancialData()
 
                                 break
@@ -182,23 +165,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                     datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-                        'convert date confins dan excel agar sama'
-                        SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-                        Date parsedDate = null
-
-                        String sentDate = GlobalVariable.FindDataFile.getValue(financialdata, 35)
-
-                        parsedDate = sdf.parse(sentDate)
-
-                        sdf = new SimpleDateFormat('dd MMM YYYY')
-
-                        String sDate = sdf.format(parsedDate)
-
-                        modifyDateNew = WebUI.getText(modifyNewDate).replace('-', ' ')
-
                         'verify date beda'
-                        if (!(modifyDateNew.equalsIgnoreCase(sDate)) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
+                        if (!(WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
                             5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {
                                 'click button add'
@@ -208,8 +176,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                 break
                             }
-                        } else if (WebUI.getText(modifyNewDate).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(financialdata, 
-                                35))) {
+                        } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
                             break
                         }
                     }
@@ -967,3 +934,23 @@ def inputBankStatementFromEmpty() {
     }
 }
 
+def convertDate(String date){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+
+	Date parsedDate = null
+
+	String sentDate = date
+
+	String sDate
+
+	if (sentDate != '') {
+		parsedDate = sdf.parse(sentDate)
+
+		sdf = new SimpleDateFormat('dd MMM YYYY')
+
+		sDate = sdf.format(parsedDate)
+	}
+	
+	return sDate
+}

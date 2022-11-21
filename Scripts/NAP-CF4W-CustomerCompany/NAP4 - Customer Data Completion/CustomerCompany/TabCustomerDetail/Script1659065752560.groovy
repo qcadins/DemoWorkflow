@@ -17,11 +17,12 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
+'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company - Customer')
 
 'input establishment date'
@@ -56,7 +57,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).length() 
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/Button_X'))
 
-        flagWarning++
+		'flagwarning +1'
+        GlobalVariable.FlagWarning++
     }
 }
 
@@ -142,6 +144,7 @@ if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofC
         '1.CustomerDetail')
 }
 
+'check if flagfailed = 0'
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
@@ -155,22 +158,26 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
+'check iflabel estahblishment date is present'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/label_Establishment Date'), 
     5, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 } else {
-    if (flagWarning > 0) {
+	'check if flagwarning = 0'
+    if (GlobalVariable.FlagWarning > 0) {
+		'write to excel status warning'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
 }
 
+'check if role = testing & store Db = yes'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+	'declare numofverif = numof colm'
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
 
     'call test case verify customer detail store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerDetailVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
-
