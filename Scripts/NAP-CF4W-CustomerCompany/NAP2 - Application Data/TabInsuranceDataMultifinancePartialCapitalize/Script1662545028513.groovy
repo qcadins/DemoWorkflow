@@ -25,29 +25,11 @@ import org.openqa.selenium.Keys as Keys
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+'connect DB FOU'
+Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
@@ -101,7 +83,7 @@ String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerComp
 String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
 'Ambil nilai string road worthiness document dari db'
-String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
+String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {
@@ -118,7 +100,7 @@ for (int i = 1; i <= count; i++) {
 		sumInsuredPercentValue = WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %","")
 		
 		'Membaca rule excel untuk menentukan year num dan default sum insured percentage'
-		HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
+		HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch)
 		
 		ArrayList<String> yearNo, sumInsuredPctg
 		
@@ -215,7 +197,7 @@ for (int i = 1; i <= count; i++) {
 	//Verif Main Premi Rate Based on Rule
 	if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
-		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 		
 		modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
@@ -285,7 +267,7 @@ for (int i = 1; i <= count; i++) {
 	
 	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+		result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 		
 		addtCvgType = result.get("AddtCvg")
 		addtPremiRate = result.get("AddtRate")
@@ -298,7 +280,7 @@ for (int i = 1; i <= count; i++) {
 				true)
 			
 			'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-			if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlconnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
 				writeFailedReasonVerifyRule()
 				break
 			}
@@ -413,7 +395,7 @@ for (int i = 1; i <= count; i++) {
 			'Looping berdasarkan jumlah additional coverage type pada rule excel'
 			for(int k = 0;k<addtCvgType.size();k++){
 				'Verif additional coverage type confins sesuai dengan rule'
-				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlconnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
 					'Pengecekan jika terdapat sum insured amount'
 					if(countSumInsuredAmount == 1){
 						'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
