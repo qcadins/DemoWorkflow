@@ -428,4 +428,3 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
         GlobalVariable.FlagFailed = 1
     }
 }
-

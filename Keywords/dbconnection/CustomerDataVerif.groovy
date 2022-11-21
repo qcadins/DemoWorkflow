@@ -30,6 +30,7 @@ public class CustomerDataVerif {
 	int colmcount
 	int i
 
+	//get customer data personal
 	@Keyword
 	public CustomerDataPersonal (Sql instance, String name, String idtype, String custmodel){
 		String customerdata
@@ -48,6 +49,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get customer data company
 	@Keyword
 	public CustomerDataCompany (Sql instance, String name, String idno){
 		String customerdata
@@ -66,6 +68,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get family data personal
 	@Keyword
 	public FamilyDataPersonal (Sql instance, String name, String idno){
 		String customerdata
@@ -94,6 +97,7 @@ public class CustomerDataVerif {
 	//		return checkresult
 	//	}
 
+	//get customer data personal store db
 	@Keyword
 	public CustomerDataStoreDBPersonal (Sql instance, String appno){
 		String customerdata
@@ -113,6 +117,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get customer data personal store db lookup
 	@Keyword
 	public CustomerDataStoreDBPersonalLookUp (Sql instance, String appno, String name){
 		String customerdata
@@ -130,6 +135,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get family data personal store db
 	@Keyword
 	public FamilyDataStoreDBPersonal (Sql instance, String appno, String name){
 		String familydata
@@ -148,6 +154,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get family data personal store db lookup
 	@Keyword
 	public FamilyDataStoreDBPersonalLookUp (Sql instance, String appno, String name, String proffesionname){
 		String familydata
@@ -171,7 +178,7 @@ public class CustomerDataVerif {
 
 	}
 
-
+	//get guarantor data personal store db
 	@Keyword
 	public GuarantorDataStoreDBPersonal (Sql instance, String appno, String name){
 		String guarantordata
@@ -190,6 +197,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get guarantor data personal store db lookup
 	@Keyword
 	public GuarantorDataStoreDBPersonalLookUp (Sql instance, String appno, String name){
 		String guarantordata
@@ -209,6 +217,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get guarantor data company store db
 	@Keyword
 	public GuarantorDataStoreDBCompany (Sql instance, String appno, String name){
 		String guarantordata
@@ -226,6 +235,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get guarantor data company store db lookup
 	@Keyword
 	public GuarantorDataStoreDBCompanyLookUp (Sql instance, String appno, String name){
 		String guarantordata
@@ -243,7 +253,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
-
+	//get customer data company store db
 	@Keyword
 	public CustomerDataStoreDBCompany (Sql instance, String appno, String name){
 		String customerdata
@@ -262,6 +272,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get customer data company store db lookup
 	@Keyword
 	public CustomerDataStoreDBCompanyLookUp (Sql instance, String appno, String name){
 		String customerdata
@@ -280,6 +291,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get MS data company store db
 	@Keyword
 	public MSDataStoreDBCompany (Sql instance, String appno, String name){
 		String MSdata
@@ -298,6 +310,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get MS data company store db lookup
 	@Keyword
 	public MSDataStoreDBCompanyLookUp (Sql instance, String appno, String name){
 		String MSdata
@@ -316,6 +329,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
+	//get MS data personal store db
 	@Keyword
 	public MSDataStoreDBPersonal (Sql instance, String appno, String name){
 		String MSdata
@@ -335,6 +349,7 @@ public class CustomerDataVerif {
 	}
 
 
+	//get MS data personal store db lookup
 	@Keyword
 	public MSDataStoreDBPersonalLookUp (Sql instance, String appno, String name){
 		String MSdata
@@ -353,7 +368,7 @@ public class CustomerDataVerif {
 		return listcustomerdata
 	}
 
-
+	//get tab referantor data store db
 	@Keyword
 	public NAP2TabReferantorStoreDB (Sql instance, String appno, String name){
 		String referantordata
@@ -373,7 +388,7 @@ public class CustomerDataVerif {
 		return listreferantor
 	}
 
-
+	//get tab application data store db
 	@Keyword
 	public NAP2TabApplicationStoreDB (Sql instance, String appno, String name){
 		String applicationdata
@@ -392,6 +407,7 @@ public class CustomerDataVerif {
 		return listapplicationdata
 	}
 
+	//get tab application bank acc data store db
 	@Keyword
 	public BankAccountTabApplicationDataStoreDB (Sql instance, String appno){
 		String BankAccountTabApplication
@@ -410,6 +426,7 @@ public class CustomerDataVerif {
 		return listbankacctabapplication
 	}
 
+	//get tab application attribute data store db
 	@Keyword
 	public NAP2TabApplicationAttrStoreDB (Sql instance, String appno){
 		String applicationdata
@@ -429,6 +446,7 @@ public class CustomerDataVerif {
 		return listapplicationattr
 	}
 
+	//get tab asset supplier info data store db
 	@Keyword
 	public NAP2TabAssetSupplierInfoStoreDB (Sql instance, String appno){
 		String assetdata
@@ -447,6 +465,7 @@ public class CustomerDataVerif {
 		return listassetsupp
 	}
 
+	//get tab asset data store db
 	@Keyword
 	public NAP2TabAssetStoreDB (Sql instance, String appno){
 		String assetinfo
@@ -466,6 +485,7 @@ public class CustomerDataVerif {
 		return listassetinfo
 	}
 
+	//get tab asset accessories data store db
 	@Keyword
 	public NAP2AccessoriesStoreDB (Sql instance, String appno){
 		String accessoriesdata
@@ -484,6 +504,7 @@ public class CustomerDataVerif {
 		return listaccessories
 	}
 
+	//get tab insurance data store db
 	@Keyword
 	public NAP2InsuranceCustStoreDB (Sql instance, String appno){
 		String insurancedata
@@ -502,6 +523,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get tab insurance custMF data store db
 	@Keyword
 	public NAP2InsuranceCustMFStoreDB (Sql instance, String appno){
 		String insurancedata
@@ -520,6 +542,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get tab insurance MF data store db
 	@Keyword
 	public NAP2InsuranceMFStoreDB (Sql instance, String appno){
 		String insurancedata

@@ -24,6 +24,7 @@ import internal.GlobalVariable
 
 public class checkSaveProcess {
 
+	//check status untuk write to excel success / failed + reason failed
 	@Keyword
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
 		if(WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)){
@@ -53,6 +54,7 @@ public class checkSaveProcess {
 		}
 	}
 
+	//check validasi untuk write to excel jika failed
 	@Keyword
 	public checkValidasi (TestObject object, int colm, String sheetname){
 		if(WebUI.verifyElementPresent(object, 5, FailureHandling.OPTIONAL)){
@@ -64,6 +66,7 @@ public class checkSaveProcess {
 		}
 	}
 
+	//check alert pojok kanan atas jika failed akan write to excel failed + reason failed
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0
@@ -81,6 +84,7 @@ public class checkSaveProcess {
 		return flagFailed
 	}
 
+	//writeWarningAppView untuk write to excel jika tampilan app view muncul alert
 	@Keyword
 	public writeWarningAppView(int colm, String sheetname){
 		String AlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label')
