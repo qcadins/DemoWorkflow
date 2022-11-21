@@ -19,33 +19,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'declare variable appno'
 appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
@@ -56,14 +36,18 @@ WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 
 'Verify sort & paging'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
-	'declare arraylist resultset, checkVerifySort, checkVerifyFooter'
-	ArrayList<Boolean> resultReset,checkVerifySort,checkVerifyFooter = new ArrayList<>()
-	
+    'declare arraylist resultset, checkVerifySort, checkVerifyFooter'
+    ArrayList<WebElement> resultReset
+
+    ArrayList<WebElement> checkVerifySort
+
+    ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
+
     'Verif reset'
     resultReset = CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
 
-	'declare arraylist liststring'
-    ArrayList<String> listString = new ArrayList<String>()
+    'declare arraylist liststring'
+    ArrayList<WebElement> listString = new ArrayList<WebElement>()
 
     'click button search'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
@@ -72,7 +56,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebDriver driver = DriverFactory.getWebDriver()
 
     'Inisialisasi variabel'
-    ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+    ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
     'Klik header appno'
     WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
@@ -80,121 +64,124 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'Verif tidak ada alert yang muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appno'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[1]/span/a', true)
 
-		'add appno to arraylist liststring'
+        'add appno to arraylist liststring'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort appno ascending'
     Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-	'add result to arraylist checkVerify sort'
+    'add result to arraylist checkVerify sort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
-	'declare arraylist listApp'
-    listApp = new ArrayList<String>()
+    'declare arraylist listApp'
+    listApp = new ArrayList<WebElement>()
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/AppView/span_Appno'))
 
-	'looping row data confins'
+    'looping row data confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_Appno'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[1]/span/a', true)
 
-		'add appno to arraylist listapp'
+        'add appno to arraylist listapp'
         listApp.add(WebUI.getText(appNoObject))
     }
     
     'verif sort appno descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 
-	'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header agreement no 2x'
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
+
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
 
     'Verify alert tidak muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'reset arraylist listString'
-    listString = new ArrayList<String>()
+    'reset arraylist listString'
+    listString = new ArrayList<WebElement>()
 
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementNo'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[2]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort custname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-	'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer no 2x'
     WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
+
     WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
 
     'Verify alert tidak muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'reset arraylist listString'
-    listString = new ArrayList<String>()
+    'reset arraylist listString'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustNo'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[3]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort cust no descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-	'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer name 2x'
     WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
+
     WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
 
-	'reset listString arraylist'
-    listString = new ArrayList<String>()
+    'reset listString arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustName'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[4]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort custname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-	'add result verify to checkVerifySort'
+    'add result verify to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header PO Name'
@@ -203,47 +190,47 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'Verify alert tidak muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'reset liststring arraylist'
-    listString = new ArrayList<String>()
+    'reset liststring arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[5]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort poname ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-	'add result verify to checkVerifySort'
+    'add result verify to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header poname'
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
-	'reset listring arraylist'
-    listString = new ArrayList<String>()
+    'reset listring arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ProdOfferingName'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[5]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort poname descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-	'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header app date'
@@ -252,47 +239,47 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'Verify alert tidak muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'reset listString arraylist'
-    listString = new ArrayList<String>()
+    'reset listString arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[6]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort appdate ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-	'add verify result to checkverifysort'
+    'add verify result to checkverifysort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header appdate'
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
-	'reset listString arraylist'
-    listString = new ArrayList<String>()
+    'reset listString arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify object appno'
+        'modify object appno'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_Appdate'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[6]/span', true)
 
-		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort appdate descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-	'add result verify to checkVerifySort'
+    'add result verify to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header NAP Submitted'
@@ -301,47 +288,47 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'Verify alert tidak muncul'
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-	'reset liststring arraylist'
-    listString = new ArrayList<String>()
+    'reset liststring arraylist'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-		'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
-		'add appnoto listString'
+        'add appnoto listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort NAP Submitted ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-	'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header NAP Submitted'
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
-	'reset arraylist listString'
-    listString = new ArrayList<String>()
+    'reset arraylist listString'
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_NAPSubmitted'), 'xpath', 'equals', 
             ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[7]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort NAP Submitted descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header agreement step'
@@ -353,23 +340,23 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_AgreementStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[8]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort agreement step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header contract status'
@@ -381,23 +368,23 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ContractStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[9]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort contract status descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application step'
@@ -407,46 +394,46 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[10]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort application step ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application step'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[10]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort application step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application status'
@@ -456,46 +443,46 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[11]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'verif sort application status ascending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header application status'
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_ApplicationStatus'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[11]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort application status descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Klik header customer checking step'
@@ -505,23 +492,23 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<String>()
+    listString = new ArrayList<WebElement>()
 
-	'looping rowdata confins'
+    'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
-    	'modify appno object'
+        'modify appno object'
         appNoObject = WebUI.modifyObjectProperty(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'), 'xpath', 
             'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[12]/span', true)
 
-        		'add appno to listString'
+        'add appno to listString'
         listString.add(WebUI.getText(appNoObject))
     }
     
     'Verif sort customer checking step descending'
     isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
-    		'add verify result to checkVerifySort'
+    'add verify result to checkVerifySort'
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'Ambil count data dari confins'
@@ -537,41 +524,43 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         WebUI.click(findTestObject('AppView/MainInformation/nextPage'))
 
         'Verify page 2 active'
-        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2))
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
+                2))
 
-		'count row data'
+        'count row data'
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
-		'reset listString arraylist'
-        listString = new ArrayList<String>()
+        'reset listString arraylist'
+        listString = new ArrayList<WebElement>()
 
-		'looping rowdata confins'
+        'looping rowdata confins'
         for (int i = 1; i <= rowData.size(); i++) {
-        	'modify appno object'
+            'modify appno object'
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/span_appNo'), 'xpath', 'equals', 
                 ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[1]/span/a', true)
 
-            		'add appno to listString'
+            'add appno to listString'
             listString.add(WebUI.getText(appNoObject))
         }
         
         'Verif appno yang ada di page 2 tidak ada di page 1'
         Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-        		'add verify result to checkVerifySort'
+        'add verify result to checkVerifySort'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
         'Klik button prev'
         WebUI.click(findTestObject('AppView/MainInformation/button_Prev'))
 
         'Verify page 1 active'
-        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 2))
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 
+                2))
 
         listApp = listString
 
         'reset arraylist listString'
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         'call addAppNoForPagingAppView keyword'
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
@@ -579,75 +568,78 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         'Verif appno yang ada di page 1 tidak ada di page 2'
         isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-		'add verify result to checkVerifyFooter'
+        'add verify result to checkVerifyFooter'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
         'Klik button next'
         WebUI.click(findTestObject('AppView/MainInformation/button_Next'))
 
         'Verify page 2 active'
-        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 2))
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
+                2))
 
         listApp = listString
 
-		'reset arraylist ListString'
-        listString = new ArrayList<String>()
+        'reset arraylist ListString'
+        listString = new ArrayList<WebElement>()
 
-		'call addAppNoForPagingAppView keyword'
+        'call addAppNoForPagingAppView keyword'
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
 
         'Verif appno yang ada di page 2 tidak ada di page 1'
         isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
-		'add verify result to checkVerifyFooter'
+        'add verify result to checkVerifyFooter'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
     }
     
     'Klik button page 1'
     WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 
-	'add verify result to checkVerifyFooter'
+    'add verify result to checkVerifyFooter'
     checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true))
-	
-	'check if resultReset contain false'
-	if(resultReset.contains(false)){
-				'write status warning to excel'
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-		
-				'write reason failed reset to excel'
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(
-						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+";\n"))
-		
-				GlobalVariable.FlagWarning=1
-	}
-			
-	'check if checkVerifySort contain false'
-	if(checkVerifySort.contains(false) ){
-					'write status warning to excel'
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-					'write reason failed sort to excel'
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(
-				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+";\n"))
-			
-					GlobalVariable.FlagWarning=1
-	}
-	'check if checkVerifyFooter contain false'
-	if(checkVerifyFooter.contains(false)){
-					'write status warning to excel'
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-					'write reason failed footer to excel'
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
-							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(
-			    GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+";\n"))
-			
-	
-					GlobalVariable.FlagWarning=1
-	}
+
+    'check if resultReset contain false'
+    if (resultReset.contains(false)) {
+        'write status warning to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusWarning)
+
+        'write reason failed reset to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
+                '-', '') + (GlobalVariable.ReasonFailedReset + ';\n'))
+
+        GlobalVariable.FlagWarning = 1
+    }
+    
+    'check if checkVerifySort contain false'
+    if (checkVerifySort.contains(false)) {
+        'write status warning to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusWarning)
+
+        'write reason failed sort to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
+                '-', '') + (GlobalVariable.ReasonFailedSort + ';\n'))
+
+        GlobalVariable.FlagWarning = 1
+    }
+    
+    'check if checkVerifyFooter contain false'
+    if (checkVerifyFooter.contains(false)) {
+        'write status warning to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusWarning)
+
+        'write reason failed footer to excel'
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
+                '-', '') + (GlobalVariable.ReasonFailedFooter + ';\n'))
+
+        GlobalVariable.FlagWarning = 1
+    }
 }
 
 'input app no'
@@ -666,6 +658,7 @@ WebUI.switchToWindowIndex('1')
 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
     GlobalVariable.FlagWarning = 1
 
+	'write Status Warning'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '1. Customer')
 }
 
@@ -673,10 +666,10 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 WebUI.delay(5)
 
 'declare result arraylist'
-ArrayList<String> result = new ArrayList<String>()
+ArrayList<WebElement> result = new ArrayList<WebElement>()
 
 'call checkAppViewDataDB keyword'
-result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
+result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnectionLOS, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {
@@ -788,4 +781,3 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
         GlobalVariable.FlagFailed = 1
     }
 }
-

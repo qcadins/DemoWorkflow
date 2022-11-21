@@ -24,22 +24,8 @@ import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String databaseTAX = findTestData('Login/Login').getValue(5, 10)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String urlTAX = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseTAX
-
-Sql sqlConnectionTAX = CustomKeywords.'dbconnection.connectDB.connect'(urlTAX, username, password, driverclassname)
+'connect DB TAX'
+Sql sqlconnectionTAX = CustomKeywords.'dbconnection.connectDB.connectTAX'()
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00
@@ -56,7 +42,7 @@ variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEm
 variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
 'Arraylist untuk menampung tax rate (wht dan vat), penalty rate, persentase taxable serta tiernya (amt from dan amt to) dari db'
-ArrayList<WebElement> taxRate = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxRateCompany'(sqlConnectionTAX)
+ArrayList<WebElement> taxRate = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxRateCompany'(sqlconnectionTAX)
 
 whtRate = (taxRate[0]).split(';')
 
@@ -143,7 +129,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
 		supplierName)
 
 	'Pengecekan calculation method gross atau nett'
@@ -275,7 +261,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
 		supplierEmployeeName)
 
 	'Pengecekan calculation method pada confins gross atau nett'
@@ -407,7 +393,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
 		refName)
 
 	'Pengecekan calculation method pada confins gross atau nett'

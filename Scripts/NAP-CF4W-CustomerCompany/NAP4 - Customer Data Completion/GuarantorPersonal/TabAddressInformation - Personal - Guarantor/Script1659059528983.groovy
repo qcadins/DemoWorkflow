@@ -21,24 +21,21 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal')
 
 int copyAppColm = 0
 
 'get count colm'
-countcolm = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getColumnNumbers()
+countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+    if (GlobalVariable.FindDataFile.getValue(
         index, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(
         index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
             GlobalVariable.NumofGuarantor, 13))) {
         copyAppColm = index
@@ -70,14 +67,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
              GlobalVariable.FlagFailed = 0
 
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            if (GlobalVariable.FindDataFile.getValue(
                 Address, 9).length() != 0) {
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                if (GlobalVariable.FindDataFile.getValue(
                     Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(
                     Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
                         GlobalVariable.NumofGuarantor, 13))) {
-                    if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                    if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
                             Address, 12))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
                             'click button edit'
@@ -172,7 +169,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
         GlobalVariable.FlagFailed = 0
 
-        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+        if (GlobalVariable.FindDataFile.getValue(
             Address, 9).length() != 0) {
             for (i = 1; i <= variable.size(); i++) {
                 'modify object address type'
@@ -180,12 +177,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                     i) + ']/td[1]', true)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                if (GlobalVariable.FindDataFile.getValue(
                     Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(
                     Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
                         GlobalVariable.NumofGuarantor, 13))) {
-                    if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                    if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
                             Address, 12)))) {
                         if (i == variable.size()) {
                             'click button add'
@@ -267,7 +264,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                             break
                         }
-                    } else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                    } else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
                             Address, 12))) {
                         break
                     }
@@ -279,11 +276,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+        if (GlobalVariable.FindDataFile.getValue(
             Address, 9).length() != 0) {
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            if (GlobalVariable.FindDataFile.getValue(
                 Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
-                    GlobalVariable.NumofGuarantor, 12)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                    GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(
                 Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail - Company - GuarantorPersonal').getValue(
                     GlobalVariable.NumofGuarantor, 13))) {
                 'click button add'
@@ -381,16 +378,16 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 def inputaddress() {
     'pilih address type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             Address, 12), false, FailureHandling.OPTIONAL)
 
-    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+    if (GlobalVariable.FindDataFile.getValue(
         Address, 13).length() > 1) {
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Legal  Residence  Job'), 
             5, FailureHandling.OPTIONAL)) {
             'pilih address type untuk di copy'
             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Legal  Residence  Job'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+                GlobalVariable.FindDataFile.getValue(
                     Address, 13), false, FailureHandling.OPTIONAL)
         }
         
@@ -399,22 +396,22 @@ def inputaddress() {
 
         'pilih status rumah'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 32), false)
     } else {
         'input alamat'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/Address text'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 14))
 
         'input RT'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_RT'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 15))
 
         'input RW'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_RW'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 16))
 
         'click button search zipcode'
@@ -422,19 +419,19 @@ def inputaddress() {
 
         'input zipcode'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Zip Code_ZipCode'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 17))
 
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Kecamatan_kecamatan'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 18))
 
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Kelurahan_Kelurahan'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 19))
 
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Kota_kota'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 20))
 
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Search'))
@@ -465,69 +462,69 @@ def inputaddress() {
         
         'input phone1 area'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 1_area'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 21))
 
         'input phone1 number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 1_Number'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 22))
 
         'input phone1 extension'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 1_ext'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 23))
 
         'input phone2 area'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 2_Area'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 24))
 
         'input phone2 number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 2_Number'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 25))
 
         'input phone2 extension'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 2_Ext'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 26))
 
         'input phone3 area'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 3_Area'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 27))
 
         'input phone3 number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 3_Number'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 28))
 
         'input phone3 extension'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Phone 3_ext'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 29))
 
         'input fax'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Fax_Area'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 30))
 
         'input fax'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/input_Fax_Number'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 31))
 
         'pilih status rumah'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-            findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+            GlobalVariable.FindDataFile.getValue(
                 Address, 32), false)
     }
     
     'click save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Save'))
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
             Address, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
         'Check alert'
         GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(Address, '2.AddressInformation')
@@ -535,11 +532,11 @@ def inputaddress() {
     
     if (GlobalVariable.FlagFailed == 0) {
         'Check save Process write to excel'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
                     Address, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'), 
             Address, '2.AddressInformation')
 
-        if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation - Company - GuarantorPersonal').getValue(
+        if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
                 Address, 4)) == 0) {
             'Check error validasi'
             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 

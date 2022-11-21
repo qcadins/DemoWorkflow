@@ -22,14 +22,8 @@ import groovy.sql.Sql as Sql
 
 Integer copyAppColm = 2
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
@@ -57,14 +51,12 @@ for(int i = 1;i<=8;i++){
 		WebUI.delay(14)
 	
 	}
-
-
-
 }
 
 'click icon pensil untuk select'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
+'check if role company data entry / testing'
 if (GlobalVariable.RoleCompany == 'Data Entry') {
 	if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) > 0) {
 		'untuk mendapatkan posisi copy app dari excel'
@@ -508,6 +500,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
+		'delat 5 detik'
 		WebUI.delay(5)
 
 		'Write to excel success'
@@ -547,6 +540,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		'Klik save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
+		'delay 5 detik'
 		WebUI.delay(5)
 
 		'Write to excel success'
@@ -580,6 +574,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		'click button calculate'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
+		'delay 5 detik'
 		WebUI.delay(5)
 
 		'click button save'

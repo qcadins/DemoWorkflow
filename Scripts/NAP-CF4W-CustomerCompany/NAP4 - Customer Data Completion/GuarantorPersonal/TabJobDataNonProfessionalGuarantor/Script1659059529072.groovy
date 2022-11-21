@@ -17,19 +17,12 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
-
-GlobalVariable.DataFilePath = filePath
-
 'klik button lookup profession'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Profession Name_btn btn-raised btn-primary'))
 
 'input profession code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/input_Profession Code_professionCodeId'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 38))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 38))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Search'))
@@ -53,15 +46,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'write to excel reason lookup'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofGuarantor - 
         1, GlobalVariable.StatusReasonLookup)
-	
-	'Flagfailed +1 karena gagal melakukan lookup'
-	GlobalVariable.FlagFailed++
+
+    'Flagfailed +1 karena gagal melakukan lookup'
+    (GlobalVariable.FlagFailed)++
 }
 
 'input job title'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/input_Job Title Name'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 40))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 40))
 
 'klik button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataNonProfessional - Personal/button_Save  Continue'))

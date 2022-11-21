@@ -19,46 +19,29 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'click tab Asset'
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
 
 'Verif tidak ada alert yang muncul'
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
-	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'6. Asset')
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+    GlobalVariable.FlagWarning = 1
+
+    'write status warning'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '6. Asset')
 }
+
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
-ArrayList<String> resultAssetSuppInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnection, 
+ArrayList<WebElement> resultAssetSuppInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnectionLOS, 
     appno)
 
 index = 0
@@ -76,7 +59,8 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetSuppInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset info'
-ArrayList<String> resultAssetInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetInformation'(sqlconnection, appno)
+ArrayList<WebElement> resultAssetInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetInformation'(sqlconnectionLOS, 
+    appno)
 
 index = 0
 
@@ -145,7 +129,8 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset attr list'
-ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
+ArrayList<WebElement> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnectionLOS, 
+    appno)
 
 index = 0
 
@@ -198,7 +183,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
 }
 
 'get arraylist asset Accessories'
-ArrayList<String> resultAssetAccessories = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAccessories'(sqlconnection, 
+ArrayList<WebElement> resultAssetAccessories = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAccessories'(sqlconnectionLOS, 
     appno)
 
 'count Asset Accessories table'
@@ -257,7 +242,7 @@ for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
 }
 
 'get arraylist asset user from db'
-ArrayList<String> resultAssetUser = CustomKeywords.'dbconnection.VerifyAppView.checkAssetUser'(sqlconnection, appno)
+ArrayList<WebElement> resultAssetUser = CustomKeywords.'dbconnection.VerifyAppView.checkAssetUser'(sqlconnectionLOS, appno)
 
 index = 0
 
@@ -270,7 +255,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetUser[index++]).toUpperCase(), false))
 
 'get arraylist asset owner from db'
-ArrayList<String> resultAssetOwner = CustomKeywords.'dbconnection.VerifyAppView.checkAssetOwner'(sqlconnection, appno)
+ArrayList<WebElement> resultAssetOwner = CustomKeywords.'dbconnection.VerifyAppView.checkAssetOwner'(sqlconnectionLOS, appno)
 
 'count Asset owner div section'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#owner div'))
@@ -296,7 +281,8 @@ for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerinde
 }
 
 'get arraylist asset owner from db'
-ArrayList<String> resultAssetLocation = CustomKeywords.'dbconnection.VerifyAppView.checkAssetLocation'(sqlconnection, appno)
+ArrayList<WebElement> resultAssetLocation = CustomKeywords.'dbconnection.VerifyAppView.checkAssetLocation'(sqlconnectionLOS, 
+    appno)
 
 index = 0
 
@@ -311,7 +297,7 @@ for (Locindex = 1; Locindex < resultAssetLocation.size(); Locindex++) {
 }
 
 'get arraylist asset collateral'
-ArrayList<String> resultAssetCollateral = CustomKeywords.'dbconnection.VerifyAppView.checkAssetCollateral'(sqlconnection, 
+ArrayList<WebElement> resultAssetCollateral = CustomKeywords.'dbconnection.VerifyAppView.checkAssetCollateral'(sqlconnectionLOS, 
     appno)
 
 'count Asset collateral table'
@@ -386,8 +372,8 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
+    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {

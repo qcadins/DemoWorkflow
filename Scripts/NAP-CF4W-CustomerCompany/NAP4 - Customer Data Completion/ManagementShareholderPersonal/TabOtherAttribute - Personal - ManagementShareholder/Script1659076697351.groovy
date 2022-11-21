@@ -23,11 +23,8 @@ GlobalVariable.FlagFailed = 0
 
 int flagWarning = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileManagementShareholderPersonal
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal')
 
@@ -272,14 +269,14 @@ if (arrayMatch.contains(false)) {
 
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 13).length() > 1) {
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'))
 
     'input code Debtor'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Debtor Group Code_LbppmsDebtGrpCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 12))
 
     'click button search'
@@ -310,14 +307,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 15).length() > 1) {
     'click lookup debtor business scale'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Business Scale'))
 
     'input code debtor business scale'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Debtor Group Code_LbppmsBizSclCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 14))
 
     'click button search'
@@ -348,14 +345,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 17).length() > 1) {
     'click lookup counterpart category'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Counterpart Category_btn btn-raised btn-primary'))
 
     'input Counterpart Code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_LBPP Code_LbppCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 16))
 
     'click button search'
@@ -386,14 +383,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 19).length() > 1) {
     'click lookup sustainable financial business'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Sustainable Financial Business'))
 
     'input LBPP Code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_LBPP Code_LbppCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 18))
 
     'click search'
@@ -424,22 +421,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 21).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NO  YES Split Treasure'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 21), false)
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 23).length() > 1) {
     'click button lookup Debtor Group SLIK'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_DEBTOR GROUP SLIK'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 22))
 
     'click search'
@@ -470,30 +467,30 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 24).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NO  YES Violate BMPK'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 24), false)
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 25).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_NOYES Exceed BMPK'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 25), false)
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 27).length() > 1) {
     'click lookup Affiliate with multifinance SLIK'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_AFFILIATE WITH MULTIFINANCE SLIK_btn btn-raised btn-primary'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 26))
 
     'click search'
@@ -524,14 +521,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 29).length() > 1) {
     'click lookup department AML'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_DEPARTMENT AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 28))
 
     'click search'
@@ -562,14 +559,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 31).length() > 1) {
     'click lookup CSP/USL'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_CSPUSL SOURCE AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 30))
 
     'click search'
@@ -600,14 +597,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 33).length() > 1) {
     'click payment type lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_PAYMENT TYPE AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 32))
 
     'click search'
@@ -638,22 +635,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 34).length() > 1) {
     'pilih yes/no'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/select_-Select One- NO  YES KYC Report'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 34), false)
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 36).length() > 1) {
     'click authority AML lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Authority AML'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 35))
 
     'click search'
@@ -672,22 +669,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 37).length() > 1) {
     'input attend date'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_ATTEND_'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 37))
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 30).length() > 1) {
     'click business source AML Lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_BUSINESS SOURCE AML_btn btn-raised btn-primary'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 38))
 
     'click search'
@@ -718,22 +715,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
     }
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 40).length() > 1) {
     'input Business Period AML'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_BUSINESS PERIOD AML'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 40))
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (GlobalVariable.FindDataFile.getValue(
     GlobalVariable.NumofMS, 42).length()) {
     'click building lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_BUILDING_'))
 
     'input code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/input_Code_MasterCodeId'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+        GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 41))
 
     'click search'
@@ -757,7 +754,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/M
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_saveOtherAttribute'))
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
         GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '7.OtherAttribute')
@@ -765,11 +762,11 @@ if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCom
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
                 GlobalVariable.NumofMS, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/CustomerType'), 
         GlobalVariable.NumofMS, '7.OtherAttribute')
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal').getValue(
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
             GlobalVariable.NumofMS, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 

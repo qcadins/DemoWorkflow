@@ -21,14 +21,8 @@ import org.openqa.selenium.By as By
 import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 GlobalVariable.FlagFailed = 0
 
@@ -54,28 +48,11 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 int count = variable.size()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+'connect DB FOU'
+Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
 'Ambil text customer model dari confins'
 String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/label_custModel'))
@@ -84,7 +61,7 @@ String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cust
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/span_appNo'))
 
 'Hashmap untuk mengambil nilai tccode, tcmandatory, tc priorto dan tc is waivable berdasarkan condition-condition dari rule excel'
-HashMap<String, ArrayList> result = CustomKeywords.'tcData.verifTCData.verifyTermConditionData'(sqlConnectionLOS, sqlConnectionFOU, 
+HashMap<String, ArrayList> result = CustomKeywords.'tcData.verifTCData.verifyTermConditionData'(sqlconnectionLOS, sqlconnectionFOU, 
     custModel, appNo)
 
 ArrayList<WebElement> TCCode
@@ -144,7 +121,7 @@ for (int i = 1; i <= count; i++) {
 
     if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes") {
         'verif document name based on rule'
-        if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU, textDocumentName), TCCode.get(
+        if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlconnectionFOU, textDocumentName), TCCode.get(
                 i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',

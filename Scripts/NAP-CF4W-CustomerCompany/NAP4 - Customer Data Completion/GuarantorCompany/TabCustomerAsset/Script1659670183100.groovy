@@ -23,11 +23,8 @@ int flagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileGuarantorCompanyCompany
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
 
@@ -35,17 +32,13 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany')
 
-def assettypearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-    GlobalVariable.NumofGuarantor, 13).split(';', -1)
+def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
-def assetdescriptionarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-    GlobalVariable.NumofGuarantor, 14).split(';', -1)
+def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 
-def assetvaluearray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-    GlobalVariable.NumofGuarantor, 15).split(';', -1)
+def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 
-def assetquantityarray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-    GlobalVariable.NumofGuarantor, 16).split(';', -1)
+def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
@@ -223,8 +216,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
-    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-        GlobalVariable.NumofGuarantor, 12) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12) == 'Yes') {
         for (asset = 1; asset <= assettypearray.size(); asset++) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
@@ -264,20 +256,20 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-        GlobalVariable.NumofGuarantor, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed == 
+0)) {
     'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '6.CustomerAsset')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, 
+        '6.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
                 GlobalVariable.NumofGuarantor, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'), 
         GlobalVariable.NumofGuarantor, '5.CustomerAsset')
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofGuarantor, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofGuarantor, '5.CustomerAsset')

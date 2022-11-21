@@ -16,54 +16,36 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(filePath, '13.TabReservedFundData', 'Reserve Fund Amt')+2
+def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
+2
 
-ArrayList<String> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13))
+ArrayList<WebElement> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
+    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+        13))
 
-for(int i=0;i<resultDB.size();i++){
-	'verif reserved fund amt db dengan excel'
-	arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",",""))))
+for (int i = 0; i < resultDB.size(); i++) {
+    'verif reserved fund amt db dengan excel'
+    arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()), Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
+                    GlobalVariable.NumofColm, rsvAmtRow + i).replace(',', ''))))
 }
 
 'jika nilai di confins tidak sesuai dengan db'
-if(arrayMatch.contains(false)){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+if (arrayMatch.contains(false)) {
+    'Write To Excel GlobalVariable.StatusFailed'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+        1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
+

@@ -23,11 +23,8 @@ GlobalVariable.FlagFailed = 0
 
 int flagWarning = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileManagementShareholderCompany
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 
 ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
 
@@ -35,26 +32,19 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany')
 
-def LegalDocTypeArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 12).split(';')
+def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 12).split(';')
 
-def DocumentNoArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 13).split(';')
+def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 13).split(';')
 
-def DateIssuedArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 14).split(';')
+def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 14).split(';')
 
-def ExpiredDateArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 15).split(';')
+def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).split(';')
 
-def NotaryNameArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 16).split(';')
+def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).split(';')
 
-def NotaryLocationArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 17).split(';')
+def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17).split(';')
 
-def NotesArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-    GlobalVariable.NumofMS, 18).split(';')
+def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18).split(';')
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
@@ -158,29 +148,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
                         DateIssuedArray[(legal - 1)])
 
-                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                        GlobalVariable.NumofMS, 15).length() > 0) {
+                    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).length() > 0) {
                         'input expired date'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
                             ExpiredDateArray[(legal - 1)])
                     }
                     
-                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                        GlobalVariable.NumofMS, 16).length() > 0) {
+                    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).length() > 0) {
                         'input notary name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
                             NotaryNameArray[(legal - 1)])
                     }
                     
-                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                        GlobalVariable.NumofMS, 17).length() > 0) {
+                    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17).length() > 0) {
                         'input notary location'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
                             NotaryLocationArray[(legal - 1)])
                     }
                     
-                    if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                        GlobalVariable.NumofMS, 18).length() > 0) {
+                    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18).length() > 0) {
                         'input Notes'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
                             NotesArray[(legal - 1)])
@@ -354,29 +340,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
                             DateIssuedArray[(legal - 1)])
 
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                            GlobalVariable.NumofMS, 15).length() > 0) {
+                        if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).length() > 0) {
                             'input expired date'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
                                 ExpiredDateArray[(legal - 1)])
                         }
                         
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                            GlobalVariable.NumofMS, 16).length() > 0) {
+                        if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).length() > 0) {
                             'input notary name'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
                                 NotaryNameArray[(legal - 1)])
                         }
                         
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                            GlobalVariable.NumofMS, 17).length() > 0) {
+                        if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17).length() > 0) {
                             'input notary location'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
                                 NotaryLocationArray[(legal - 1)])
                         }
                         
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                            GlobalVariable.NumofMS, 18).length() > 0) {
+                        if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18).length() > 0) {
                             'input Notes'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
                                 NotesArray[(legal - 1)])
@@ -464,29 +446,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
                 DateIssuedArray[(legal - 1)])
 
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 15).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).length() > 0) {
                 'input expired date'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
                     ExpiredDateArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 16).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).length() > 0) {
                 'input notary name'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
                     NotaryNameArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 17).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17).length() > 0) {
                 'input notary location'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
                     NotaryLocationArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 18).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18).length() > 0) {
                 'input Notes'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
                     NotesArray[(legal - 1)])
@@ -570,29 +548,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
                 DateIssuedArray[(legal - 1)])
 
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 15).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).length() > 0) {
                 'input expired date'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
                     ExpiredDateArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 16).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).length() > 0) {
                 'input notary name'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
                     NotaryNameArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 17).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17).length() > 0) {
                 'input notary location'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
                     NotaryLocationArray[(legal - 1)])
             }
             
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-                GlobalVariable.NumofMS, 18).length() > 0) {
+            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18).length() > 0) {
                 'input Notes'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
                     NotesArray[(legal - 1)])
@@ -617,20 +591,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Save  Continue'))
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-        GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0) && (GlobalVariable.FlagFailed == 
+0)) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '6.LegalDocument')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
                 GlobalVariable.NumofMS, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'), 
         GlobalVariable.NumofMS, '6.LegalDocument')
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/LegalDocument - Company - ManagementShareholderCompany').getValue(
-            GlobalVariable.NumofMS, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/errorvalidasi'), 
             GlobalVariable.NumofMS, '6.LegalDocument')

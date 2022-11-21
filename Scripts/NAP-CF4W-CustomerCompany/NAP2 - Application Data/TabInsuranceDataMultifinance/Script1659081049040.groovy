@@ -22,28 +22,11 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.openqa.selenium.Keys as Keys
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+'connect DB FOU'
+Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -56,7 +39,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
-	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
+	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlconnectionLOS, appNo)
 	
 //	'Verif default asset region based on rule'
 //	if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
@@ -105,10 +88,10 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	Integer countInscoBranch = 0
 	
 	'Ambil array string (text) insco branch name dari db'
-	inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
+	inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlconnectionFOU, officeName)
 	
 	'Ambil nilai count insco branch name dari db'
-	countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
+	countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlconnectionFOU, officeName)
 	
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
@@ -195,7 +178,7 @@ selectedInscoBranch = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationDat
 		GlobalVariable.NumofColm, 26)
 
 'Membaca rule excel untuk menentukan default admin fee dan customer stampduty beserta behaviournya'
-HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifInsuranceFee.verifFee'(sqlConnectionLOS, appNo,selectedInscoBranch, sqlConnectionFOU)
+HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifInsuranceFee.verifFee'(sqlconnectionLOS, appNo,selectedInscoBranch, sqlconnectionFOU)
 
 ArrayList<String> feeBhv, defAmt
 feeBhv = result.get("Bhv")
@@ -311,7 +294,7 @@ for (int i = 1; i <= countAddCov; i++) {
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Apply To All'))
 
 'Mengambil nilai setting cap insurance dari db'
-String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlConnectionFOU)
+String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
 'Jika cap insurance bernilai yearly'
 if(capinssetting=="YEARLY"){
@@ -348,7 +331,7 @@ if(capinssetting=="YEARLY"){
 	int counterPaidByMF=0
 	
 	'Ambil nilai string road worthiness document dari db'
-	String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
+	String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
 	
 	'Looping data tabel insurance untuk input data'
 	for (int i = 1; i <= count; i++) {
@@ -363,7 +346,7 @@ if(capinssetting=="YEARLY"){
 			sumInsuredPercentValue = WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %","")
 			
 			'Membaca rule excel untuk menentukan year num dan default sum insured percentage'
-			HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
+			HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch)
 			
 			ArrayList<String> yearNo, sumInsuredPctg
 			
@@ -491,7 +474,7 @@ if(capinssetting=="YEARLY"){
 		//Verif Main Premi Rate Based on Rule
 		if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
-			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 			
 			modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
@@ -562,7 +545,7 @@ if(capinssetting=="YEARLY"){
 		
 		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-			result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+			result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlconnectionLOS, sqlconnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 			
 			addtCvgType = result.get("AddtCvg")
 			addtPremiRate = result.get("AddtRate")
@@ -575,7 +558,7 @@ if(capinssetting=="YEARLY"){
 					true)
 				
 				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlconnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
 					writeFailedReasonVerifyRule()
 					break
 				}
@@ -686,7 +669,7 @@ if(capinssetting=="YEARLY"){
 				'Looping berdasarkan jumlah additional coverage type pada rule excel'
 				for(int k = 0;k<addtCvgType.size();k++){
 					'Verif additional coverage type confins sesuai dengan rule'
-					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
+					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlconnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
 						'Pengecekan jika terdapat sum insured amount'
 						if(countSumInsuredAmount == 1){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'

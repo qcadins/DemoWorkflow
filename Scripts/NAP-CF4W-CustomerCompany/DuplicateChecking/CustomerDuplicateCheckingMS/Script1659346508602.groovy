@@ -20,15 +20,19 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
+'get MS Array'
 def ManagementShareholderArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 	16).split(';', -1)
 
+'get MS Action array'
 def ManagementShareholderActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 	17).split(';', -1)
 
+'get MS Negative Action Array'
 def ManagementShareholderNegativeArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 	18).split(';', -1)
 
+'get appno dari datafile dupcheck'
 String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
 
 'delcare web driver'
@@ -43,6 +47,7 @@ def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 'declare subjectname variable'
 String subjectName, newApplicantNoValue, newMSNameAppInProcess, newMSName, newCustomerNoValue
 
+'check if MS Array > 0'
 if (ManagementShareholderArray.size() > 0) {
     for (int m = 1; m <= ManagementShareholderArray.size(); m++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
@@ -92,6 +97,7 @@ if (ManagementShareholderArray.size() > 0) {
             'get text subject type'
             subjectType = WebUI.getText(modifySubjectType)
 
+			'check if role == testing & tidak edit NAP'
             if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 8).length() == 0)) {
                 'verify name == data inputan'
@@ -99,6 +105,7 @@ if (ManagementShareholderArray.size() > 0) {
             }
         }
         
+		'verif if subjectname == MSArray'
         if (subjectName.equalsIgnoreCase(ManagementShareholderArray[(m - 1)])) {
             if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
                 'click button edit'
@@ -256,7 +263,9 @@ if (ManagementShareholderArray.size() > 0) {
                             'get text MS name'
                             newMSNameAppInProcess = WebUI.getText(modifyMSNameAppInProcess)
 
+							'chcek if NewIdNoManagementShareholderPersonalMatch not null'
                             if (NewIdNoManagementShareholderPersonalMatch != null) {
+								'chcek if NewIdNoManagementShareholderPersonalMatch == IdNoManagementShareholderPersonal'
                                 if (NewIdNoManagementShareholderPersonalMatch.equalsIgnoreCase(IdNoManagementShareholderPersonal)) {
                                     'modify object select managementshareholder match'
                                     modifyselectManagementShareholderPersonal = WebUI.modifyObjectProperty(findTestObject(
@@ -267,6 +276,7 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select'
                                     WebUI.click(modifyselectManagementShareholderPersonal, FailureHandling.OPTIONAL)
 
+									'check if role == testing'
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match ApplicantNo'
                                         checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newMSNameAppInProcess).toString(), 
@@ -304,8 +314,9 @@ if (ManagementShareholderArray.size() > 0) {
                             'get text MS name'
                             newMSName = WebUI.getText(modifyMSNameAppInProcess)
 
-                            'check if id No MS not match'
+                            'check if NewIdNoManagementShareholderCompanyMatch not null'
                             if (NewIdNoManagementShareholderCompanyMatch != null) {
+								'check if NewIdNoManagementShareholderCompanyMatch == IdNoManagementShareholderCompany'
                                 if (NewIdNoManagementShareholderCompanyMatch.equalsIgnoreCase(IdNoManagementShareholderCompany)) {
                                     'modify object select managementshareholder match'
                                     modifyselectManagementShareholderCompany = WebUI.modifyObjectProperty(findTestObject(
@@ -316,12 +327,9 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select application in process'
                                     WebUI.click(modifyselectManagementShareholderCompany, FailureHandling.OPTIONAL)
 
-                                    'call function looping subject applicant no'
-                                    modifyApplicantNo = loopingSubjectApplicantNo(newMSName)
-
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match ApplicantNo'
-                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(modifyApplicantNo.toString(), newApplicantNoValue.toString(), 
+                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newMSName).toString(), newApplicantNoValue.toString(), 
                                                 false))
                                     }
                                     
@@ -340,12 +348,9 @@ if (ManagementShareholderArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                            'call function looping subeject applicant no'
-                            modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
-
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -451,12 +456,9 @@ if (ManagementShareholderArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                            'call function looping subject applicant no'
-                            modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
-
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'), 
                             5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
@@ -528,12 +530,9 @@ if (ManagementShareholderArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
-                            'call function looping applicant no'
-                            modifyApplicantNo = loopingSubjectApplicantNo(subjectName)
-
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(modifyApplicantNo, '', false))
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
                             5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
