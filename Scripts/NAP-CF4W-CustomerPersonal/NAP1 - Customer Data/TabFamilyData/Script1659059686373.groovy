@@ -20,11 +20,8 @@ import internal.GlobalVariable as GlobalVariable
 
 int flagWarning = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.PathPersonal
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'

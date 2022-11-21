@@ -24,11 +24,8 @@ int flagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.PathCompany
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 ArrayList<String> custnamefaileddelete = new ArrayList<>()
 

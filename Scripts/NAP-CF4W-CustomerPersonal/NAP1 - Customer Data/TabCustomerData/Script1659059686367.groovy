@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 
 int flagWarning = 0
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 int countcustomer
 

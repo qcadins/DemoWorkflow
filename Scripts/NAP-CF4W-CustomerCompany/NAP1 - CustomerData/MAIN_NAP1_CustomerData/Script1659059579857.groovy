@@ -20,21 +20,13 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
-GlobalVariable.CopyAppColm = 0
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-String userDir = System.getProperty('user.dir')
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-String filePath = userDir + GlobalVariable.PathCompany
-
-GlobalVariable.DataFilePath = filePath
-
-'Koneksi database'
-String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(
-    2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
-
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), 
-    findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
-
+'delcare POStat'
 String POStat
 
 'click Menu customer main data'
@@ -82,7 +74,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
-            POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+            POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 9))
 
             'verify input error'
@@ -131,7 +123,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
                 'Cek total data product offering pada db'
-                Integer countPO = CustomKeywords.'dbconnection.checkProdOffering.countProdOffering'(sqlConnectionLOS, office)
+                Integer countPO = CustomKeywords.'dbconnection.checkProdOffering.countProdOffering'(sqlconnectionLOS, office)
 
                 'Ambil nilai total data product offering pada lookup confins'
                 String[] textTotalDataPO = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -212,7 +204,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
-        POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
@@ -430,7 +422,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
-            POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+            POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 9))
 
             'verify input error'
@@ -479,7 +471,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
                 'Cek total data product offering pada db'
-                Integer countPO = CustomKeywords.'dbconnection.checkProdOffering.countProdOffering'(sqlConnectionLOS, office)
+                Integer countPO = CustomKeywords.'dbconnection.checkProdOffering.countProdOffering'(sqlconnectionLOS, office)
 
                 'Ambil nilai total data product offering pada lookup confins'
                 String[] textTotalDataPO = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -560,7 +552,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
-        POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        POStat = CustomKeywords.'dbconnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
