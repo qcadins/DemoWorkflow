@@ -41,9 +41,9 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Family
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-'ganti value null > "" (String kosong)'
+'ganti value yang bernilai "IDN" > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]) == null || (result[i]).equalsIgnoreCase('IDN')) {
+    if ((result[i]).equalsIgnoreCase('IDN')) {
         (result[i]) = ''
     }
 }

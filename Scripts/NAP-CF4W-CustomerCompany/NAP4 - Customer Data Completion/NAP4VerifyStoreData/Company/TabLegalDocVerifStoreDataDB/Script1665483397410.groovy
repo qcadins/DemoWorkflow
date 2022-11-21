@@ -29,9 +29,10 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4Le
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]) == null) {
-        (result[i]) = ''
-    } else if ((result[i]).equalsIgnoreCase('true')) {
+//    if ((result[i]) == null) {
+//        (result[i]) = ''
+//    } else 
+	if ((result[i]).equalsIgnoreCase('true')) {
         (result[i]) = 'Yes'
     } else if ((result[i]).equalsIgnoreCase('false')) {
         (result[i]) = 'No'

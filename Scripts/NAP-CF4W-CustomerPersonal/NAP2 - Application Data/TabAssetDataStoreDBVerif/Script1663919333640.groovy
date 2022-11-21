@@ -45,9 +45,11 @@ ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (resultassetinformation.size() - 1); i++) {
-    if ((resultassetinformation[i]) == null) {
-        (resultassetinformation[i]) = ''
-    } else if ((resultassetinformation[i]).equalsIgnoreCase(',')) {
+//    if ((resultassetinformation[i]) == null) {
+//        (resultassetinformation[i]) = ''
+//    } 
+//	else 
+	if ((resultassetinformation[i]).equalsIgnoreCase(',')) {
         (resultassetinformation[i]) = ', '
     }
 }

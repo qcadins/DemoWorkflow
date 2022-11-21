@@ -44,9 +44,10 @@ if (insuredBy == 'Customer') {
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (result.size() - 1); i++) {
-        if ((result[i]) == null) {
-            (result[i]) = ''
-        } else if ((result[i]) == 'true') {
+//        if ((result[i]) == null) {
+//            (result[i]) = ''
+//        } else 
+		if ((result[i]) == 'true') {
             (result[i]) = 'Yes'
         } else if ((result[i]) == 'false') {
             (result[i]) = 'No'
@@ -101,9 +102,10 @@ if (insuredBy == 'Customer') {
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultCustomerInsurance.size() - 1); i++) {
-        if ((resultCustomerInsurance[i]) == null) {
-            (resultCustomerInsurance[i]) = ''
-        } else if ((resultCustomerInsurance[i]) == 'true') {
+//        if ((resultCustomerInsurance[i]) == null) {
+//            (resultCustomerInsurance[i]) = ''
+//        } else 
+		if ((resultCustomerInsurance[i]) == 'true') {
             (resultCustomerInsurance[i]) = 'Yes'
         } else if ((resultCustomerInsurance[i]) == 'false') {
             (resultCustomerInsurance[i]) = 'No'
@@ -112,9 +114,10 @@ if (insuredBy == 'Customer') {
     
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-        if ((resultMFinsurance[i]) == null) {
-            (resultMFinsurance[i]) = ''
-        } else if ((resultMFinsurance[i]) == 'true') {
+//        if ((resultMFinsurance[i]) == null) {
+//            (resultMFinsurance[i]) = ''
+//        } else 
+		if ((resultMFinsurance[i]) == 'true') {
             (resultMFinsurance[i]) = 'Yes'
         } else if ((resultMFinsurance[i]) == 'false') {
             (resultMFinsurance[i]) = 'No'
@@ -270,9 +273,10 @@ if (insuredBy == 'Customer') {
 
 		'ganti value null > "" (String kosong)'
 		for (int i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-			if ((resultMultiMainCVG[i]) == null) {
-				(resultMultiMainCVG[i]) = ''
-			} else if ((resultMultiMainCVG[i]) == 'true') {
+//			if ((resultMultiMainCVG[i]) == null) {
+//				(resultMultiMainCVG[i]) = ''
+//			} else 
+			if ((resultMultiMainCVG[i]) == 'true') {
 				(resultMultiMainCVG[i]) = 'Yes'
 			} else if ((resultMultiMainCVG[i]) == 'false') {
 				(resultMultiMainCVG[i]) = 'No'
@@ -363,9 +367,10 @@ if (insuredBy == 'Customer') {
 
             'ganti value null > "" (String kosong)'
             for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-                if ((resultAddCVG[i]) == null) {
-                    (resultAddCVG[i]) = ''
-                } else if ((resultAddCVG[i]) == 'true') {
+//                if ((resultAddCVG[i]) == null) {
+//                    (resultAddCVG[i]) = ''
+//                } else 
+				if ((resultAddCVG[i]) == 'true') {
                     (resultAddCVG[i]) = 'Yes'
                 } else if ((resultAddCVG[i]) == 'false') {
                     (resultAddCVG[i]) = 'No'
@@ -546,9 +551,10 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-        if ((resultMFinsurance[i]) == null) {
-            (resultMFinsurance[i]) = ''
-        } else if ((resultMFinsurance[i]) == 'true') {
+//        if ((resultMFinsurance[i]) == null) {
+//            (resultMFinsurance[i]) = ''
+//        } else 
+		if ((resultMFinsurance[i]) == 'true') {
             (resultMFinsurance[i]) = 'Yes'
         } else if ((resultMFinsurance[i]) == 'false') {
             (resultMFinsurance[i]) = 'No'
@@ -671,9 +677,10 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
 
 		'ganti value null > "" (String kosong)'
 		for (i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-			if ((resultMultiMainCVG[i]) == null) {
-				(resultMultiMainCVG[i]) = ''
-			} else if ((resultMultiMainCVG[i]) == 'true') {
+//			if ((resultMultiMainCVG[i]) == null) {
+//				(resultMultiMainCVG[i]) = ''
+//			} else 
+			if ((resultMultiMainCVG[i]) == 'true') {
 				(resultMultiMainCVG[i]) = 'Yes'
 			} else if ((resultMultiMainCVG[i]) == 'false') {
 				(resultMultiMainCVG[i]) = 'No'
@@ -763,9 +770,10 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
 
             'ganti value null > "" (String kosong)'
             for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-                if ((resultAddCVG[i]) == null) {
-                    (resultAddCVG[i]) = ''
-                } else if ((resultAddCVG[i]) == 'true') {
+//                if ((resultAddCVG[i]) == null) {
+//                    (resultAddCVG[i]) = ''
+//                } else 
+				if ((resultAddCVG[i]) == 'true') {
                     (resultAddCVG[i]) = 'Yes'
                 } else if ((resultAddCVG[i]) == 'false') {
                     (resultAddCVG[i]) = 'No'

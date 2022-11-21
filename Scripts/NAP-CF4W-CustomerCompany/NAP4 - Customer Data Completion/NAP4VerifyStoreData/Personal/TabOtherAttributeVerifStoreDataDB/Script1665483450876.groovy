@@ -30,9 +30,10 @@ ArrayList<String> resultotherattrlist = CustomKeywords.'dbconnection.CustomerDat
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (resultotherattrinfo.size() - 1); i++) {
-	if ((resultotherattrinfo[i]) == null) {
-		(resultotherattrinfo[i]) = ''
-	} else if ((resultotherattrinfo[i]).equalsIgnoreCase('true')) {
+//	if ((resultotherattrinfo[i]) == null) {
+//		(resultotherattrinfo[i]) = ''
+//	} else 
+	if ((resultotherattrinfo[i]).equalsIgnoreCase('true')) {
 		(resultotherattrinfo[i]) = 'Yes'
 	} else if ((resultotherattrinfo[i]).equalsIgnoreCase('false')) {
 		(resultotherattrinfo[i]) = 'No'
@@ -41,9 +42,10 @@ for (i = 0; i <= (resultotherattrinfo.size() - 1); i++) {
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (resultotherattrlist.size() - 1); i++) {
-	if ((resultotherattrlist[i]) == null) {
-		(resultotherattrlist[i]) = ''
-	} else if ((resultotherattrlist[i]).equalsIgnoreCase('true')) {
+//	if ((resultotherattrlist[i]) == null) {
+//		(resultotherattrlist[i]) = ''
+//	} else 
+	if ((resultotherattrlist[i]).equalsIgnoreCase('true')) {
 		(resultotherattrlist[i]) = 'Yes'
 	} else if ((resultotherattrlist[i]).equalsIgnoreCase('false')) {
 		(resultotherattrlist[i]) = 'No'

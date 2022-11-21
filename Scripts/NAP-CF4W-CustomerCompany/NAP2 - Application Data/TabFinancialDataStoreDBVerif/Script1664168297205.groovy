@@ -24,15 +24,15 @@ ArrayList<Boolean> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2F
 ArrayList<String> resultFee = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm,
 	13))
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]) == null) {
-        (result[i]) = ''
-    }
-	if ((resultFee[i]).equalsIgnoreCase('null')) {
-		(resultFee[i]) = ''
-	}
-}
+//'ganti value null > "" (String kosong)'
+//for (i = 0; i <= (result.size() - 1); i++) {
+//    if ((result[i]) == null) {
+//        (result[i]) = ''
+//    }
+//	if ((resultFee[i]).equalsIgnoreCase('null')) {
+//		(resultFee[i]) = ''
+//	}
+//}
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
