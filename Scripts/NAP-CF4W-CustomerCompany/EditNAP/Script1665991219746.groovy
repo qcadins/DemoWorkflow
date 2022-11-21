@@ -33,9 +33,9 @@ Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     8)
 
-String appStep = CustomKeywords.'editNAP.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
+String appStep = CustomKeywords.'dbconnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
 
-String custStep = CustomKeywords.'editNAP.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
+String custStep = CustomKeywords.'dbconnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
 
 'Write to excel Appno'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 

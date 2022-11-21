@@ -50,9 +50,9 @@ Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, user
 String appNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8)
 
-String appStep = CustomKeywords.'editNAP.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
+String appStep = CustomKeywords.'dbconnection.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
 
-String custStep = CustomKeywords.'editNAP.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
+String custStep = CustomKeywords.'dbconnection.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
 
 'Write to excel Appno'
 CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 

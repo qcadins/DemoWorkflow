@@ -79,7 +79,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 
 
 'Hashmap untuk menampung arraylist refund allocation dan refund amount dari membaca rule file'
-HashMap<String,ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(sqlConnectionLOS,appNo)
+HashMap<String,ArrayList> result = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.verifyIncomeInfoAmtRuleBased'(sqlConnectionLOS,appNo)
 ArrayList<String> refundFrom = result.get("From")
 ArrayList<String> refundAmt = result.get("Amt")
 
@@ -134,22 +134,22 @@ if(GlobalVariable.Role=="Testing"){
 				
 				'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
 				if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkInsValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkLifeInsValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkAdminFeeValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkOtherFeeValue'(sqlConnectionLOS,appNo)
+					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
 				}
 				
 				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)

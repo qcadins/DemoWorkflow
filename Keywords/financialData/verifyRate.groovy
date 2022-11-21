@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class verifRate {
+public class verifyRate {
 
 
 	@Keyword

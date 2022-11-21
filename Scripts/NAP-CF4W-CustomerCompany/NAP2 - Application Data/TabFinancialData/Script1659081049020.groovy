@@ -59,7 +59,7 @@ def datafilefinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationD
 //Verif fee based on rule
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry == "Yes") {
 	'Ambil nilai result dari rule credit fee'
-	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifFee.verifyFinancialFee'(sqlconnectionLOS, appNo)
+	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlconnectionLOS, appNo)
 
 	ArrayList<String> listFee
 
@@ -90,7 +90,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 	//Looping listfee dari result rule
 	for (int i = counter; i < listFee.size(); i++) {
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-		if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee'))) ==
+		if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee'))) ==
 		listFee.get(i)) {
 			'Verify amount admin fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),
@@ -121,7 +121,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 		}
 		
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-		if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee2'))) ==
+		if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee2'))) ==
 		listFee.get(i)) {
 			'Verify amount additional admin pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),
@@ -151,7 +151,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 		}
 		
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-		if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee3'))) ==
+		if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee3'))) ==
 		listFee.get(i)) {
 			'Verify notary fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),
@@ -182,7 +182,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 		}
 		
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-		if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee4'))) ==
+		if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee4'))) ==
 		listFee.get(i)) {
 			'Verify other fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),
@@ -212,7 +212,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 		}
 		
 		'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-		if (CustomKeywords.'financialData.verifFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee5'))) ==
+		if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlconnectionLOS, WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_Fee5'))) ==
 		listFee.get(i)) {
 			'verify fiducia fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),
@@ -480,7 +480,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == '
 	ArrayList<String> result = new ArrayList<String>()
 	
 	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-	result = CustomKeywords.'financialData.verifRate.verifyFinancialRate'(sqlconnectionLOS, appNo)
+	result = CustomKeywords.'financialData.verifyRate.verifyFinancialRate'(sqlconnectionLOS, appNo)
 	
 	'Verify default effective rate'
 	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))==false){

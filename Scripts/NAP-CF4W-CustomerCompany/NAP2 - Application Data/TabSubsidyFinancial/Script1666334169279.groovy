@@ -78,7 +78,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
-	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifSubsidy.verifySubsidyDefault'(sqlconnectionLOS, sqlconnectionFOU,appNo)
+	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifySubsidy.verifySubsidyDefault'(sqlconnectionLOS, sqlconnectionFOU,appNo)
 	
 	ArrayList<String> SubsidyFromType, SubsidyFromValue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue
 	SubsidyFromType = result.get("FT")
@@ -105,7 +105,7 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 			modifySubsidy()
 			
 			'Verif subsidy from type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
@@ -115,17 +115,17 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 			}
 			
 			'Verif subsidy allocation sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyAllocCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy value type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyValueTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy source sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidySourceCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
