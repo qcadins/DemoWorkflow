@@ -84,31 +84,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             WebUI.click(modifyNewbuttonedit)
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                               
+								'connect DB FOU'
+								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                                ArrayList<String> AddressType
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
-
-                                String password = findTestData('Login/Login').getValue(4, 7)
-
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
-
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
-
-                                ArrayList<WebElement> AddressType
-
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -131,7 +116,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 }
                                 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
@@ -192,31 +177,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'))
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                                
+								'connect DB FOU'
+								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                                ArrayList<String> AddressType
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
-
-                                String password = findTestData('Login/Login').getValue(4, 7)
-
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
-
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
-
-                                ArrayList<WebElement> AddressType
-
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -239,7 +209,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 }
                                 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
@@ -290,29 +260,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Add'))
 
                 if (GlobalVariable.RoleCompany == 'Testing') {
-                    'Koneksi database'
-                    String servername = findTestData('Login/Login').getValue(1, 7)
 
-                    String instancename = findTestData('Login/Login').getValue(2, 7)
+					'connect DB FOU'
+					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                    String username = findTestData('Login/Login').getValue(3, 7)
+                    ArrayList<String> AddressType
 
-                    String password = findTestData('Login/Login').getValue(4, 7)
-
-                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-
-                    ArrayList<WebElement> AddressType
-
-                    ArrayList<WebElement> Ownership
+                    ArrayList<String> Ownership
 
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlConnectionFOU)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -335,7 +292,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     }
                     
                     'get data array dari db'
-                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalowneship = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))

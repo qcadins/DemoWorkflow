@@ -23,11 +23,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.CopyAppColm = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileFamilyPersonal
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData - Personal - Family')
 

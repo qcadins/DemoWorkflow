@@ -21,6 +21,7 @@ import org.openqa.selenium.JavascriptExecutor
 import com.kms.katalon.core.webui.driver.DriverFactory
 public class JsExecutor {
 
+	//JS Executor Function
 	@Keyword
 	public jsExecutionFunction(String jsCode){
 		def driver = DriverFactory.getWebDriver()

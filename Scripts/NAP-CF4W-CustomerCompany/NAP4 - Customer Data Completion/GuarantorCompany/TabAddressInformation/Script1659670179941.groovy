@@ -81,34 +81,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             WebUI.click(modifyNewbuttonedit)
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                                
+								'connect DB FOU'
+								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                                ArrayList<String> AddressType
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
-
-                                String password = findTestData('Login/Login').getValue(4, 7)
-
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
-
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
-
-                                ArrayList<WebElement> AddressType
-
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
 
@@ -190,34 +175,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
-                                'Koneksi database'
-                                String servername = findTestData('Login/Login').getValue(1, 7)
+                                
+								'connect DB FOU'
+								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                                String instancename = findTestData('Login/Login').getValue(2, 7)
+                                ArrayList<String> AddressType
 
-                                String username = findTestData('Login/Login').getValue(3, 7)
-
-                                String password = findTestData('Login/Login').getValue(4, 7)
-
-                                String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                                String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                                String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + 
-                                databaseFOU
-
-                                Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, 
-                                    password, driverclassname)
-
-                                ArrayList<WebElement> AddressType
-
-                                ArrayList<WebElement> Ownership
+                                ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
+                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
 
@@ -289,32 +259,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
                 if (GlobalVariable.RoleCompany == 'Testing') {
-                    'Koneksi database'
-                    String servername = findTestData('Login/Login').getValue(1, 7)
 
-                    String instancename = findTestData('Login/Login').getValue(2, 7)
+					'connect DB FOU'
+					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-                    String username = findTestData('Login/Login').getValue(3, 7)
+                    ArrayList<String> AddressType
 
-                    String password = findTestData('Login/Login').getValue(4, 7)
-
-                    String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-                    String driverclassname = findTestData('Login/Login').getValue(6, 7)
-
-                    String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-                    Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
-
-                    ArrayList<WebElement> AddressType
-
-                    ArrayList<WebElement> Ownership
+                    ArrayList<String> Ownership
 
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlConnectionFOU)
+                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                     'get data array dari db'
-                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlConnectionFOU)
+                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
 
