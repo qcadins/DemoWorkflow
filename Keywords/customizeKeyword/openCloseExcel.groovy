@@ -1,4 +1,4 @@
-package opencloseExcel
+package customizeKeyword
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -56,12 +56,12 @@ import org.junit.After
 import java.lang.String
 
 
-class opencloseExcel {
+class openCloseExcel {
 	/**
 	 * Open Close Excel
 	 */
 	@Keyword
-	def Open_File(String FilePath) {
+	def openCloseFile(String FilePath) {
 
 		File file = new File(FilePath)
 
