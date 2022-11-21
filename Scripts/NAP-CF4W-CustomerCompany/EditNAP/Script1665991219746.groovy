@@ -684,28 +684,32 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             15, GlobalVariable.NumofColm - 1, MsName)
     } else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
+		'get customer company data'
         ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
 
+		'get MS Personal Data'
         ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
             appNo)
 
+		'get MS Company Data'
         ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
             appNo)
 
+		'get Guarantor personal Data'
         ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlconnectionLOS, 
             appNo)
 
+		'get Guarantor Company data'
         ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlconnectionLOS, 
             appNo)
 
-        int index = 0
-		
-		int lastcolm = 0
+		'declare index, lastcolm variable'
+        int index = 0, lastcolm = 0
 
-        String MsName = ''
+		'declare MsName, Guarname Variable'
+        String MsName = '', GuarName = ''
 
-        String GuarName = ''
-
+		'declare Custname variable'
         String custname = custdata[index++]
 
         'Write to tab customer main data Cust Name'
@@ -732,6 +736,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
         }
         
+		'declare index variable'
         index = 0
 
         for (int colm = GlobalVariable.CopyAppColm; colm < ((shrPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
@@ -772,7 +777,10 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             lastcolm = colm
         }
         
+		'declare index variable'
         index = 0
+		
+		'lastcolm + 1'
 		lastcolm++
 		
         for (int colm = lastcolm; colm < ((shrCompanyData.size() / 2) + lastcolm); colm++) {
