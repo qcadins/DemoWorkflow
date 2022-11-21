@@ -19,36 +19,17 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
+'get text appno'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'Verif Customer Main Data'
-ArrayList<String> resultCustomerMainData = CustomKeywords.'dbconnection.VerifyAppView.checkCustomerMainDataCompany'(sqlconnection, 
+ArrayList<String> resultCustomerMainData = CustomKeywords.'dbconnection.VerifyAppView.checkCustomerMainDataCompany'(sqlconnectionLOS, 
     appno)
 
 int index = 0
@@ -92,7 +73,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'get arraylist from db'
-ArrayList<String> resultAddress = CustomKeywords.'dbconnection.VerifyAppView.checkAddrData'(sqlconnection, appno)
+ArrayList<String> resultAddress = CustomKeywords.'dbconnection.VerifyAppView.checkAddrData'(sqlconnectionLOS, appno)
 
 'count address table'
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
@@ -142,7 +123,7 @@ for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
 }
 
 'get arraylist MS from db'
-ArrayList<String> resultMS = CustomKeywords.'dbconnection.VerifyAppView.checkMSData'(sqlconnection, appno)
+ArrayList<String> resultMS = CustomKeywords.'dbconnection.VerifyAppView.checkMSData'(sqlconnectionLOS, appno)
 
 'count MS table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustShareholder > table > tbody tr'))
@@ -200,7 +181,7 @@ for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
 }
 
 'get arraylist contact person from db'
-ArrayList<String> resultCP = CustomKeywords.'dbconnection.VerifyAppView.checkContactPersonData'(sqlconnection, appno)
+ArrayList<String> resultCP = CustomKeywords.'dbconnection.VerifyAppView.checkContactPersonData'(sqlconnectionLOS, appno)
 
 for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
     'modify object contact person'
@@ -213,7 +194,7 @@ for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
 }
 
 'get arraylist financial data from db'
-ArrayList<String> resultFindata = CustomKeywords.'dbconnection.VerifyAppView.checkFinancialData'(sqlconnection, appno)
+ArrayList<String> resultFindata = CustomKeywords.'dbconnection.VerifyAppView.checkFinancialData'(sqlconnectionLOS, appno)
 
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -229,7 +210,7 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 }
 
 'get arraylist fin data attr from db'
-ArrayList<String> resultFindataattr = CustomKeywords.'dbconnection.VerifyAppView.checkFinancialAttrData'(sqlconnection, 
+ArrayList<String> resultFindataattr = CustomKeywords.'dbconnection.VerifyAppView.checkFinancialAttrData'(sqlconnectionLOS, 
     appno)
 
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
@@ -243,7 +224,7 @@ for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
 }
 
 'get arraylist bank acc from db'
-ArrayList<String> resultBankAcc = CustomKeywords.'dbconnection.VerifyAppView.checkBankAcc'(sqlconnection, appno)
+ArrayList<String> resultBankAcc = CustomKeywords.'dbconnection.VerifyAppView.checkBankAcc'(sqlconnectionLOS, appno)
 
 index = 0
 
@@ -288,7 +269,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
         bankDetail = WebUI.getText(modifyNewBankDetail).split(' - ')
 
         'verify Bank Acc Statement'
-        ArrayList<String> resultBankAccStatement = CustomKeywords.'dbconnection.VerifyAppView.checkBankStatData'(sqlconnection, 
+        ArrayList<String> resultBankAccStatement = CustomKeywords.'dbconnection.VerifyAppView.checkBankStatData'(sqlconnectionLOS, 
             appno, bankDetail[1])
 
         index = 0
@@ -363,7 +344,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
 }
 
 'get arraylist legal doc from db'
-ArrayList<String> resultLegalDoc = CustomKeywords.'dbconnection.VerifyAppView.checkLegalDocData'(sqlconnection, appno)
+ArrayList<String> resultLegalDoc = CustomKeywords.'dbconnection.VerifyAppView.checkLegalDocData'(sqlconnectionLOS, appno)
 
 'count legal doc table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustLegalDoc > table > tbody tr'))
@@ -418,7 +399,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     'count customer group table'
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
-    ArrayList<String> resultCustGroup = CustomKeywords.'dbconnection.VerifyAppView.checkCustGroupData'(sqlconnection, appno)
+    ArrayList<String> resultCustGroup = CustomKeywords.'dbconnection.VerifyAppView.checkCustGroupData'(sqlconnectionLOS, appno)
 
     for (custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
         'modify object cust group name'
@@ -432,7 +413,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 }
 
 'get arraylist other info from db'
-ArrayList<String> resultOtherInfo = CustomKeywords.'dbconnection.VerifyAppView.checkOtherInfoData'(sqlconnection, appno)
+ArrayList<String> resultOtherInfo = CustomKeywords.'dbconnection.VerifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno)
 
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
     'modify object other info'
@@ -445,7 +426,7 @@ for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
 }
 
 'get arraylist other attr list from db'
-ArrayList<String> resultOtherAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkOtherAttrData'(sqlconnection, appno)
+ArrayList<String> resultOtherAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkOtherAttrData'(sqlconnectionLOS, appno)
 
 'verify Business period AML'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), 

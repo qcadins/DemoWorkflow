@@ -20,15 +20,19 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.By as By
 
+'declare guarantor array'
 def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 19).split(
 	';', -1)
 
+'declare guarantor action array'
 def GuarantorActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 	20).split(';', -1)
 
+'declare guarantor negative action array'
 def GuarantorNegativeArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
 	21).split(';', -1)
 
+'get app no from data file dupcheck'
 String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
 
 'declare web driver'
@@ -43,6 +47,7 @@ def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 'declare subjectname variable'
 String subjectName, newCustomerNoValue, newApplicantNoValue, newGuarNameAppInProcess, newGuarName
 
+'check if guarantor array size > 0'
 if (GuarantorArray.size() > 0) {
     for (int g = 1; g <= GuarantorArray.size(); g++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
@@ -92,6 +97,7 @@ if (GuarantorArray.size() > 0) {
             'get text subject type'
             subjectType = WebUI.getText(modifySubjectType)
 
+			'check if role = testing & bukan edit NAP'
             if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 8).length() == 0)) {
                 'verify name == data inputan'
@@ -99,7 +105,9 @@ if (GuarantorArray.size() > 0) {
             }
         }
         
+		'verif subjectname == guarantorarray'
         if (subjectName.equalsIgnoreCase(GuarantorArray[(g - 1)])) {
+			'verify button edit present'
             if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
@@ -119,15 +127,22 @@ if (GuarantorArray.size() > 0) {
                     }
                 }
                 
+				'count table th application in process'
                 ArrayList<WebElement> variabletd = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
 
+				'declare variable counttd'
                 int counttd = variabletd.size()
 
+				'verif if table is no data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
+					
+					'count similar data table tr'
                     ArrayList<WebElement> variableidno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
+					'looping simillar data row'
                     for (int id = 1; id <= variableidno.size(); id++) {
+						'check if counttd = 10 (Personal)'
                         if (counttd == 10) {
                             'modify object id no Guarantor match'
                             modifyIDNoGuarantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
@@ -222,10 +237,14 @@ if (GuarantorArray.size() > 0) {
                     }
                 }
                 
+				'check if table no data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
+					
+					'count application in process row'
                     ArrayList<WebElement> variableGuarantorPersonalidno = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
 
+					'check if counttd = 10 (Personal)'
                     if (counttd == 10) {
                         for (int id = 1; id <= variableGuarantorPersonalidno.size(); id++) {
                             'modify object id no guarantor match'
@@ -323,14 +342,17 @@ if (GuarantorArray.size() > 0) {
                     }
                 }
                 
+				'check if subjecttype header stil present'
                 if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
                     5, FailureHandling.OPTIONAL)) {
+					'verify guarantor action array == new'
                     if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('New')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+							'check if role testing'
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 

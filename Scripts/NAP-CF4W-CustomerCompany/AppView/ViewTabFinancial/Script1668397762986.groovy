@@ -20,33 +20,13 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab financial'
 WebUI.click(findTestObject('Object Repository/AppView/Financial/Financial Tab'))
@@ -57,10 +37,11 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'8. Financial')
 }
 
+'get text appno'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultFin = CustomKeywords.'dbconnection.VerifyAppView.checkFinancial'(sqlconnection, appno)
+HashMap<String,ArrayList> resultFin = CustomKeywords.'dbconnection.VerifyAppView.checkFinancial'(sqlconnectionLOS, appno)
 ArrayList<String> listSubsidy = resultFin.get("Subsidy")
 ArrayList<String> listFee = resultFin.get("Fee")
 ArrayList<String> listFinancialData = resultFin.get("FinData")

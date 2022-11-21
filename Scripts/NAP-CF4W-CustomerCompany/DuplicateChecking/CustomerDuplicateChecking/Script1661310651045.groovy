@@ -38,6 +38,7 @@ String subjectName
 'declare modify object variable'
 def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
+'check dupcheck status'
 Boolean DupCheckStatus = CustomKeywords.'dbconnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 if (DupCheckStatus == true) {
@@ -59,8 +60,10 @@ if (DupCheckStatus == true) {
 
     WebDriver driver = DriverFactory.getWebDriver()
 
+	'count dupcheck row confins'
     ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
 
+	'declare dupcheck row variable'
     GlobalVariable.CountDupcheckRow = variable.size()
 
     'array customer name data inputan'
@@ -69,6 +72,7 @@ if (DupCheckStatus == true) {
     'get customer name dari datafile dupcheck'
     custnamedupcheck = datafiledupcheck.getValue(GlobalVariable.NumofColm, 13)
 
+	'negative count = 0'
     GlobalVariable.NegativeCustCount = 0
 
     'verify name == data inputan'
@@ -128,6 +132,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
+					'coun similar data row'
                     ArrayList<WebElement> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
                     for (int id = 1; id <= variableidno.size(); id++) {
@@ -139,10 +144,13 @@ if (DupCheckStatus == true) {
                         modifyCustomerNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                             'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
+						'get text custoner no value'
                         String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject, FailureHandling.OPTIONAL)
 
+						'get text id no customer match'
                         String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer, FailureHandling.OPTIONAL)
 
+						'get text id no customer'
                         String IdNoCustomer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'), 
                             FailureHandling.OPTIONAL)
 
@@ -181,10 +189,13 @@ if (DupCheckStatus == true) {
                         modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                             'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
+						'get applicant no value'
                         String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
+						'get id no customer personal match'
                         String NewIdNoCustomerPersonalMatch = WebUI.getText(modifyIDNoCustomerPersonal, FailureHandling.OPTIONAL)
 
+						'get text id no cust personal'
                         String IdNoCustomerPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/IdNoCustomer'), 
                             FailureHandling.OPTIONAL)
 

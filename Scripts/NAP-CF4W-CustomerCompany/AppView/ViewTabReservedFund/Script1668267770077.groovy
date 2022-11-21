@@ -20,51 +20,34 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab reserved fund'
 WebUI.click(findTestObject('Object Repository/AppView/ReservedFund/RSV Tab'))
 
 'Verif tidak ada alert yang muncul'
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
-	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'11. ReservedFund')
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+    GlobalVariable.FlagWarning = 1
+
+    'write status warning'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '11. ReservedFund')
 }
 
+'get text appno'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
-
 'get referantor data arraylist from db'
-HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbconnection.VerifyAppView.checkReservedFund'(sqlconnection, appno)
-ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
-ArrayList<String> listRSV = resultRSV.get("RSVList")
+HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbconnection.VerifyAppView.checkReservedFund'(sqlconnectionLOS, appno)
 
+ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
+
+ArrayList<String> listRSV = resultRSV.get("RSVList")
 
 'count rsv table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#reservedFund > div > table > tbody > tr'))
@@ -72,54 +55,55 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#reserv
 Rsvindex = 1
 
 for (dbindex = 0; dbindex < listRSV.size(); dbindex++) {
-	'modify object rsv source'
-	modifyNewRsvSrc = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', "//*[@id='reservedFund']/div/table/tbody/tr["+Rsvindex+"]/td[2]", true)
+    'modify object rsv source'
+    modifyNewRsvSrc = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'reservedFund\']/div/table/tbody/tr[' + 
+        Rsvindex) + ']/td[2]', true)
 
-	'modify object rsv allocation'
-	modifyNewRsvAlloc = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', "//*[@id='reservedFund']/div/table/tbody/tr["+Rsvindex+"]/td[3]", true)
+    'modify object rsv allocation'
+    modifyNewRsvAlloc = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', 
+        ('//*[@id=\'reservedFund\']/div/table/tbody/tr[' + Rsvindex) + ']/td[3]', true)
 
-	'modify object rsv amt'
-	modifyNewRsvAmt = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', "//*[@id='reservedFund']/div/table/tbody/tr["+Rsvindex+"]/td[4]", true)
+    'modify object rsv amt'
+    modifyNewRsvAmt = WebUI.modifyObjectProperty(findTestObject('AppView/ReservedFund/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'reservedFund\']/div/table/tbody/tr[' + 
+        Rsvindex) + ']/td[4]', true)
 
-	'verify reserved fund source'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvSrc).toUpperCase(), (listRSV[dbindex]).toUpperCase(),
-			false))
+    'verify reserved fund source'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvSrc).toUpperCase(), (listRSV[dbindex]).toUpperCase(), 
+            false))
 
-	dbindex++
+    dbindex++
 
-	'verify reserved fund allocation'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvAlloc).toUpperCase(), (listRSV[dbindex]).toUpperCase(),
-			false))
+    'verify reserved fund allocation'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvAlloc).toUpperCase(), (listRSV[dbindex]).toUpperCase(), 
+            false))
 
-	dbindex++
+    dbindex++
 
-	'verify reserved fund amount'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvAmt).toUpperCase().replace(",",""), (listRSV[dbindex]).toUpperCase(),
-			false))
+    'verify reserved fund amount'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRsvAmt).toUpperCase().replace(',', ''), (listRSV[dbindex]).toUpperCase(), 
+            false))
 
-	Rsvindex++
+    Rsvindex++
 }
 
-
 'verify total reserved fund amount'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/ReservedFund/TotalRsvFundAmt')).replace(",",""), (totalRSV[0].toString()),
-		false))
-
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/ReservedFund/TotalRsvFundAmt')).replace(
+            ',', ''), (totalRSV[0]).toString(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
+    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
-	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusFailed)
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusFailed)
 
-		new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 1, GlobalVariable.NumofColm -
-			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. ReservedFund', 1, GlobalVariable.NumofColm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		GlobalVariable.FlagFailed = 1
-	}
+        GlobalVariable.FlagFailed = 1
+    }
 }
 

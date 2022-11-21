@@ -19,47 +19,29 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 'click tab TC'
 WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
 
 'Verif tidak ada alert yang muncul'
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
-	GlobalVariable.FlagWarning = 1
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'9. Term and Condition')
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+    GlobalVariable.FlagWarning = 1
+
+    'write status warning'
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '9. Term and Condition')
 }
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist term and condition from db'
-ArrayList<String> resultTC = CustomKeywords.'dbconnection.VerifyAppView.checkTermandCondition'(sqlconnection, appno)
+ArrayList<String> resultTC = CustomKeywords.'dbconnection.VerifyAppView.checkTermandCondition'(sqlconnectionLOS, appno)
 
 'count TC table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#viewAppTcInfo > lib-ucgridview > div > table > tbody tr'))
@@ -125,8 +107,8 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
+    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {

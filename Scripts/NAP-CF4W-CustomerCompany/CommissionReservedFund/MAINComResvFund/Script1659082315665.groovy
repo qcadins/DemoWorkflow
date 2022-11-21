@@ -20,14 +20,8 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
     FailureHandling.OPTIONAL)) {

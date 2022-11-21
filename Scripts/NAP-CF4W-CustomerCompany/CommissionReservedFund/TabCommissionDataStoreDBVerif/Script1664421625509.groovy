@@ -16,28 +16,11 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathCompany
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
 String appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)
@@ -45,7 +28,6 @@ String appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
 
 def commissionData = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 

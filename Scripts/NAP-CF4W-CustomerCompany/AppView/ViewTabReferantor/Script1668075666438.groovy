@@ -20,48 +20,29 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryCompany
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-GlobalVariable.FlagWarning = 0 
-
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
-
+GlobalVariable.FlagWarning = 0
+ 
 'Klik tab referantor'
 WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'))
 
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	
+	'write status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'4. Referantor')
 }
-
 
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
-ArrayList<String> resultReferantor = CustomKeywords.'dbconnection.VerifyAppView.checkReferantor'(sqlconnection, appno)
+ArrayList<String> resultReferantor = CustomKeywords.'dbconnection.VerifyAppView.checkReferantor'(sqlconnectionLOS, appno)
 
 'count ref table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewReferantor > div > table > tbody > tr'))
