@@ -56,7 +56,7 @@ public class verifTCData {
 		String filePath = userDir+GlobalVariable.TCRulePath
 
 		Integer lobCodeRow = -1
-		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'TC', lobCode)+1
+		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'TC', lobCode)+1
 
 		def ruleTC = findTestData('DownloadRule/TCRule')
 

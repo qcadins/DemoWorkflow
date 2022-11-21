@@ -52,7 +52,7 @@ public class verifyRate {
 		String filePath = userDir+GlobalVariable.FinancialRateRulePath
 
 		Integer lobCodeRow = -1
-		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'CreditRate', lobCode)+1
+		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'CreditRate', lobCode)+1
 
 		def ruleRate = findTestData('DownloadRule/FinancialRateRule')
 

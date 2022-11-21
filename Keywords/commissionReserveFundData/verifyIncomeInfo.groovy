@@ -35,7 +35,7 @@ public class verifyIncomeInfo {
 		String filePath = userDir+GlobalVariable.MaxRefundRulePath
 		def ruleIncomeInfo = findTestData('DownloadRule/RefundComponentRule')
 		Integer lobcodeRow = -1
-		lobcodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'RefundComponent', lobCode)+1
+		lobcodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'RefundComponent', lobCode)+1
 		int match = 0
 		for(int i=lobcodeRow;i<=ruleIncomeInfo.getRowNumbers();i++){
 			if(ruleIncomeInfo.getValue(1,i)!=lobCode&&ruleIncomeInfo.getValue(1,i)!=""){

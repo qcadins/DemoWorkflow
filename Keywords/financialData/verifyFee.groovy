@@ -50,7 +50,7 @@ public class verifyFee {
 		String filePath = userDir+GlobalVariable.FinancialFeeRulePath
 
 		Integer lobCodeRow = -1
-		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'CreditFee', lobCode)+1
+		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'CreditFee', lobCode)+1
 
 		def ruleFee = findTestData('DownloadRule/FinancialFeeRule')
 

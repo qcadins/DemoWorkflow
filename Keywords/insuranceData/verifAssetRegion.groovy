@@ -36,7 +36,7 @@ public class verifAssetRegion {
 		String filePath = userDir+GlobalVariable.AssetRegRulePath
 
 		Integer startRow = -1
-		startRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'InsRegion', "AppAsset.TaxCityIssuer == @val")+2
+		startRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'InsRegion', "AppAsset.TaxCityIssuer == @val")+2
 
 		def ruleAssetRegion = findTestData('DownloadRule/AssetRegionRule')
 

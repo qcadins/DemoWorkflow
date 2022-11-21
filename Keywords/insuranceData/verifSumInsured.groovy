@@ -57,7 +57,7 @@ public class verifSumInsured {
 
 		Integer inscoHORow = -1
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
 		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
@@ -90,7 +90,7 @@ public class verifSumInsured {
 		}
 
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'SumInsured', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'SumInsured', inscoHOCode)+1
 
 		def ruleSumInsuredRate = findTestData('DownloadRule/InsuranceSumInsuredRule')
 
