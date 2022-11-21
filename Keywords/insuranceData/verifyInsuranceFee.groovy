@@ -20,11 +20,11 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifInsuranceFee {
+public class verifyInsuranceFee {
 
 
 	@Keyword
-	public verifFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
+	public verifyFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
 
 		ArrayList<String> defAmt = new ArrayList<String>()
 

@@ -24,10 +24,10 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import com.kms.katalon.core.annotation.Keyword
 
-public class verifInsuranceData {
+public class verifyInsuranceData {
 
 	@Keyword
-	public verifyTabInsuranceData(){
+	public verifyInsuranceCvgResult(){
 		BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0, totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0, capitalizeAmountResult=0
 
 		'Inisialisasi Driver'
@@ -207,7 +207,7 @@ public class verifInsuranceData {
 	}
 
 	@Keyword
-	public verifyTabInsuranceDataCapPartial(){
+	public verifyInsuranceCvgResultPartialCap(){
 		BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0, totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0, capitalizeAmountResult=0
 
 		'Inisialisasi Driver'
