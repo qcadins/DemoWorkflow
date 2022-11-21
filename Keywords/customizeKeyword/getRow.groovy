@@ -1,4 +1,4 @@
-package excelGetRow
+package customizeKeyword
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -76,6 +76,34 @@ public class getRow {
 
 	}
 
+	
+	@Keyword
+	public int getRowWithColumn(String filePath, String sheetName, String cellValue, Integer col) {
+		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
+
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheet(sheetName); //getSheet -> sheet num n (start from index 0)
+		XSSFRow row = null;
+		int row_num=-1;
+		for(int i=0; i <= sheet.getLastRowNum(); i++)
+		{
+			row = sheet.getRow(i)
+			try{
+				if(row.getCell(col).getStringCellValue().equals(cellValue)){
+					row_num = i
+					break
+				}
+			}
+			catch(Exception e){
+
+			}
+
+		}
+
+		return row_num
+
+
+	}
 
 
 }

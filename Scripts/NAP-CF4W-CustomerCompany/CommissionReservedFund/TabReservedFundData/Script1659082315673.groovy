@@ -94,7 +94,7 @@ ArrayList<WebElement> allocBhv = resultVerifRule.get('Bhv')
 BigDecimal totalAmt = 0
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(filePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
+def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(filePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
 2
 
 'Arraylist untuk menampung remaining info'
