@@ -23,11 +23,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.CopyAppColm = 0
 
-String userDir = System.getProperty('user.dir')
-
-String filePath = userDir + GlobalVariable.DataFileGuarantorPersonalCompany
-
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/FinancialData - Company - GuarantorPersonal')
 
@@ -39,8 +36,6 @@ ArrayList<WebElement> variable
 ArrayList<WebElement> financialDateDelete = new ArrayList<WebElement>()
 
 ArrayList<WebElement> bankAccDelete = new ArrayList<WebElement>()
-
-
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
@@ -244,7 +239,6 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, 21).length(
         GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, 21))
 }
 
-
 'Check if Edit Untuk Bank Account dan Bank Statement'
 if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
@@ -428,7 +422,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
     'call test case verify store data financial'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabFinancialDataVerifStoreDataDB'), 
-    [:], FailureHandling.CONTINUE_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def inputFinancialData() {
