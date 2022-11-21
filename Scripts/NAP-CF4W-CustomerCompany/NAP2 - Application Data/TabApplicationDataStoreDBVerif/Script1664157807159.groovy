@@ -42,12 +42,12 @@ ArrayList<String> resultattr = CustomKeywords.'dbconnection.CustomerDataVerif.NA
 //			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
 //	}
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-	if ((result[i]) == null) {
-		(result[i]) = ''
-	}
-}
+//'ganti value null > "" (String kosong)'
+//for (i = 0; i <= (result.size() - 1); i++) {
+//	if ((result[i]) == null) {
+//		(result[i]) = ''
+//	}
+//}
 
 int arrayindex = 0
 //int bankindex = 0

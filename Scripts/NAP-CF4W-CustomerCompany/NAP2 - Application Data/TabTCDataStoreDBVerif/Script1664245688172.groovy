@@ -22,12 +22,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i < result.size() ; i++) {
-    if(result[i] == null){
-		result[i] = ''
-	} 
-}
+//'ganti value null > "" (String kosong)'
+//for (i = 0; i < result.size() ; i++) {
+//    if(result[i] == null){
+//		result[i] = ''
+//	} 
+//}
 
 int arrayindex = 0
 

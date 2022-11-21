@@ -60,12 +60,12 @@ ArrayList<String> resultattr = CustomKeywords.'dbconnection.CustomerDataVerif.NA
 
 
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-	if ((result[i]) == null) {
-		(result[i]) = ''
-	}
-}
+//'ganti value null > "" (String kosong)'
+//for (i = 0; i <= (result.size() - 1); i++) {
+//	if ((result[i]) == null) {
+//		(result[i]) = ''
+//	}
+//}
 
 println(result)
 println(resultattr)

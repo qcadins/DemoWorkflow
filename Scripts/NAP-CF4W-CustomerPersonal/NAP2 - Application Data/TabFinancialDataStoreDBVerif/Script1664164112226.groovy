@@ -45,12 +45,12 @@ ArrayList<String> resultFee = CustomKeywords.'dbconnection.CustomerDataVerif.NAP
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('null')) {
-        (result[i]) = ''
-    }
-	if ((resultFee[i]).equalsIgnoreCase('null')) {
-		(resultFee[i]) = ''
-	}
+//    if ((result[i]).equalsIgnoreCase('null')) {
+//        (result[i]) = ''
+//    }
+//	if ((resultFee[i]).equalsIgnoreCase('null')) {
+//		(resultFee[i]) = ''
+//	}
 	
 	
 }
