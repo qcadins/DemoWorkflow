@@ -21,7 +21,7 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkAppLastStep {
-	
+
 	@Keyword
 	public checkLastStep(Sql instanceLOS, String appno){
 		String applaststep = ""
@@ -30,9 +30,4 @@ public class checkAppLastStep {
 		})
 		return applaststep
 	}
-	
-	
-	
-	
-	
 }
