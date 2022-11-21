@@ -24,9 +24,9 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Family
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'))
 
-if ((result[3]) == null) {
-    (result[3]) = ''
-}
+//if ((result[3]) == null) {
+//    (result[3]) = ''
+//}
 
 'declare array for confins data'
 def confinsdata = []

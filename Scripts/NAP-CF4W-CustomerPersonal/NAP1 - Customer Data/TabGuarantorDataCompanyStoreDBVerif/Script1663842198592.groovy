@@ -23,12 +23,12 @@ ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.Guaran
         GlobalVariable.CopyAppColm, 12), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
         GlobalVariable.CopyAppColm, 18))
 
-'ganti value null > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]) == null) {
-        (result[i]) = ''
-    }
-}
+//'ganti value null > "" (String kosong)'
+//for (int i = 0; i <= (result.size() - 1); i++) {
+//    if ((result[i]) == null) {
+//        (result[i]) = ''
+//    }
+//}
 
 int arrayindex = 0
 
