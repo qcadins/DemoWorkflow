@@ -17,10 +17,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'call custom keyword NAP2AccessoriesStoreDB'
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnectionLOS, findTestData(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnectionLOS, findTestData(
         'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 13))
 
 'declare arraynum'

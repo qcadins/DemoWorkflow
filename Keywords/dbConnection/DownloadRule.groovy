@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -17,17 +17,46 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import groovy.sql.Sql as Sql
-import internal.GlobalVariable
+import com.kms.katalon.core.configuration.RunConfiguration
 
-public class checkPOStat {
+import internal.GlobalVariable
+import java.io.File
+import java.nio.file.*;
+import java.io.IOException;
+public class DownloadRule {
+	@Keyword
+	def setDownloadPath() {
+
+		HashMap<Object, String> chromePrefs = new HashMap<Object, String>();
+
+
+		chromePrefs.put("download.default_directory",System.getProperty('user.dir') + "\\Rule")
+
+		RunConfiguration.setWebDriverPreferencesProperty("prefs", chromePrefs)
+	}
 
 	@Keyword
-	public checkCopyAppPOStat(Sql instance, String copyappno){
-		String stat
-		instance.eachRow(("SELECT PROD_OFFERING_STAT FROM PROD_OFFERING WITH(NOLOCK) WHERE PROD_OFFERING_code = (select prod_offering_code from app where app_no ='"+copyappno+"')"), { def row ->
-			stat = (row[0])
-		})
-		return stat
+	def deleteFile(String filename){
+		File dir = new File(System.getProperty('user.dir') + "\\Rule");
+
+		//Getting the list of all the files in the specific directory
+		File[] fList = dir.listFiles();
+
+		for (File f : fList) {
+			//checking the extension of the file with endsWith method.
+			if (f.getName().equals(filename)) {
+				f.delete();
+
+			}
+		}
+	}
+
+	@Keyword
+	def renameFile(String filename, String newname){
+		File file = new File(System.getProperty('user.dir') + "\\Rule\\"+filename);
+		File rename = new File(System.getProperty('user.dir') + "\\Rule\\"+newname);
+		file.renameTo(rename)
+		println(newname)
+
 	}
 }

@@ -45,14 +45,14 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 String appNo = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8)
 
-String appStep = CustomKeywords.'dbconnection.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
+String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlConnectionLOS, appNo)
 
-String custStep = CustomKeywords.'dbconnection.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
+String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlConnectionLOS, appNo)
 
 'Write to excel Appno'
 CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
@@ -609,7 +609,7 @@ def inputAppNo(String appNo) {
 
 def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep){
 	if(appStep == 'FAM'){
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 		
 		int index = 0
 		
@@ -638,9 +638,9 @@ def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep){
 		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12,
 				GlobalVariable.NumofColm - 1, custname)
 	}else if(appStep == 'GUAR'){
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 				
-		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> famData = CustomKeywords.'dbConnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
 		
 		
 		int index = 0
@@ -724,13 +724,13 @@ def getCustdata(Sql sqlConnectionLOS, String appNo, String appStep){
 	}else if ((appStep == 'NAPD') || (appStep == 'REF') || (appStep == 'APP') || (appStep == 'ASSET') || (appStep ==
 		'INS') || (appStep == 'FIN') || (appStep == 'TC')) {
 
-		ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> famData = CustomKeywords.'dbconnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> famData = CustomKeywords.'dbConnection.EditNAP.FamilyDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlConnectionLOS, appNo)
+		ArrayList<String> guarPersonalData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataPersonal'(sqlConnectionLOS, appNo)
 		
-		ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlConnectionLOS, appNo)
+		ArrayList<String> guarCompanyData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataCompany'(sqlConnectionLOS, appNo)
 		
 		int index = 0
 		

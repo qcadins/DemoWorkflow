@@ -24,7 +24,7 @@ GlobalVariable.FlagFailed = 0
 int flagWarning = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute - Company - ManagementShareholderPersonal')
 
@@ -32,13 +32,13 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 if (GlobalVariable.Role == 'Testing') {
 	'connect DB FOU'
-	Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+	Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 	'get count total attribute list dari db'
 	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
 
 	'verify total data attribute list == total data attribute list db'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListPersonal'(sqlconnectionFOU), variable.size()))
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countAttributeListPersonal'(sqlconnectionFOU), variable.size()))
 	
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'))
@@ -51,7 +51,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countDebtorGroup'(sqlconnectionFOU), Integer.parseInt(totaldata)))
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countDebtorGroup'(sqlconnectionFOU), Integer.parseInt(totaldata)))
 
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/Button_X'))
@@ -67,7 +67,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countDebtorBusinessScale'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countDebtorBusinessScale'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -84,7 +84,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countCounterpartCategory'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countCounterpartCategory'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -101,7 +101,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countSustainableBusiness'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countSustainableBusiness'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -118,7 +118,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countDebtorGroupSLIK'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countDebtorGroupSLIK'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -135,7 +135,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAffiliateMultifinanceSLIK'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countAffiliateMultifinanceSLIK'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -152,7 +152,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countDepartmentAML'(sqlconnectionFOU), Integer.parseInt(totaldata)))
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countDepartmentAML'(sqlconnectionFOU), Integer.parseInt(totaldata)))
 
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/Button_X'))
@@ -168,7 +168,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countCSPUSLSourceAML'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countCSPUSLSourceAML'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -185,7 +185,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countPaymentType'(sqlconnectionFOU), Integer.parseInt(totaldata)))
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countPaymentType'(sqlconnectionFOU), Integer.parseInt(totaldata)))
 
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/Button_X'))
@@ -201,7 +201,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAuthorityAML'(sqlconnectionFOU), Integer.parseInt(totaldata)))
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countAuthorityAML'(sqlconnectionFOU), Integer.parseInt(totaldata)))
 
     'click X'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/Button_X'))
@@ -217,7 +217,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countBusinessSourceAML'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countBusinessSourceAML'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'
@@ -234,7 +234,7 @@ if (GlobalVariable.Role == 'Testing') {
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
-    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countBuildingOwnership'(sqlconnectionFOU), Integer.parseInt(
+    arrayMatch.add(WebUI.verifyEqual(CustomKeywords.'dbConnection.checkNAP4db.countBuildingOwnership'(sqlconnectionFOU), Integer.parseInt(
             totaldata)))
 
     'click X'

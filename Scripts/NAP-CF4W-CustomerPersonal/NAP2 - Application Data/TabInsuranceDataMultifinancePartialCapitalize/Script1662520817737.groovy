@@ -45,9 +45,9 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
@@ -101,7 +101,7 @@ String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerComp
 String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
 'Ambil nilai string road worthiness document dari db'
-String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
+String rwd = CustomKeywords.'dbConnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {

@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -20,12 +20,21 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class checkProdOffering {
+public class checkLifeInscoBranch {
 
 	@Keyword
-	public countProdOffering(Sql instance, String officeLogin){
+	public checkDDLLifeInscoBranch(Sql instance, String officeName){
+		ArrayList<String> lifeInscoBranch = new ArrayList<String>()
+		instance.eachRow(("SELECT VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vom WITH(NOLOCK) ON v.VENDOR_ID = vom.VENDOR_ID JOIN REF_OFFICE ro WITH(NOLOCK) ON vom.REF_OFFICE_ID = ro.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
+			lifeInscoBranch.add(row[0].toUpperCase())
+		})
+		return lifeInscoBranch
+	}
+
+	@Keyword
+	public countDDLLifeInscoBranch(Sql instance, String officeName){
 		Integer countData
-		instance.eachRow(("SELECT count(*) FROM dbo.V_REF_OFFICE ro WITH ( NOLOCK ) JOIN dbo.PROD_OFFERING_BRANCH_MBR pobm WITH ( NOLOCK ) ON ro.OFFICE_CODE = pobm.OFFICE_CODE INNER JOIN dbo.PROD_OFFERING po WITH ( NOLOCK ) ON pobm.PROD_OFFERING_H_ID = po.CURRENT_PROD_OFFERING_H_ID INNER JOIN dbo.PROD_OFFERING_H poh WITH ( NOLOCK ) ON poh.PROD_OFFERING_ID = po.PROD_OFFERING_ID INNER JOIN dbo.PROD_OFFERING_D pod WITH ( NOLOCK ) ON pod.PROD_OFFERING_H_ID = poh.PROD_OFFERING_H_ID INNER JOIN dbo.V_REF_LOB rlob WITH ( NOLOCK ) ON rlob.LOB_CODE = pod.COMPNT_VALUE WHERE pod.REF_PROD_COMPNT_CODE = 'LOB' AND ro.IS_ACTIVE = 1 AND poh.PROD_STAT = 'ACT' AND ro.OFFICE_NAME = '"+officeLogin+"' AND rlob.BIZ_TMPLT_CODE = 'CF4W'"), { def row ->
+		instance.eachRow(("SELECT count(*) VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vOffice ON v.VENDOR_ID = vOffice.VENDOR_ID JOIN REF_OFFICE office ON vOffice.REF_OFFICE_ID = office.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'LIFE_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
 			countData = (row[0])
 		})
 		return countData

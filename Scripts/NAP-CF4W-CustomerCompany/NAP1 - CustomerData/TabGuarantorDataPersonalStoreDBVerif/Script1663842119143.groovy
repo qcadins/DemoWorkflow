@@ -23,11 +23,11 @@ String AuthorityAML = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-C
     GlobalVariable.NumofGuarantorPersonal, 35)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantorPersonal, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
         GlobalVariable.NumofGuarantorPersonal, 19))
 

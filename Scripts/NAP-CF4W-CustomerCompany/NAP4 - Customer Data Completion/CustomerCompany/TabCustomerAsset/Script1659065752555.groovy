@@ -24,7 +24,7 @@ GlobalVariable.FlagWarning = 0
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 ArrayList<String> assettypefaileddelete = new ArrayList<>()
 

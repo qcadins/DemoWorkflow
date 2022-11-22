@@ -17,11 +17,11 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, findTestData(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, findTestData(
         'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 
         12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 
         17))

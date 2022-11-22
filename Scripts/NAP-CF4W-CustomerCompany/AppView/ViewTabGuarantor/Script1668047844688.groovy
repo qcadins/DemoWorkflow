@@ -20,10 +20,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -40,7 +40,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist guarantor from db'
-ArrayList<String> resultGuar = CustomKeywords.'dbconnection.VerifyAppView.checkGuarantor'(sqlconnectionLOS, appno)
+ArrayList<String> resultGuar = CustomKeywords.'dbConnection.VerifyAppView.checkGuarantor'(sqlconnectionLOS, appno)
 
 'count guarantor table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))

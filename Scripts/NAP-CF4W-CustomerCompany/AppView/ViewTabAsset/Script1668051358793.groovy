@@ -20,10 +20,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -41,7 +41,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
-ArrayList<WebElement> resultAssetSuppInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetSuppInfo = CustomKeywords.'dbConnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnectionLOS, 
     appno)
 
 index = 0
@@ -59,7 +59,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetSuppInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset info'
-ArrayList<WebElement> resultAssetInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetInformation'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetInfo = CustomKeywords.'dbConnection.VerifyAppView.checkAssetInformation'(sqlconnectionLOS, 
     appno)
 
 index = 0
@@ -129,7 +129,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset attr list'
-ArrayList<WebElement> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetAttrList = CustomKeywords.'dbConnection.VerifyAppView.checkAssetAttr'(sqlconnectionLOS, 
     appno)
 
 index = 0
@@ -183,7 +183,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
 }
 
 'get arraylist asset Accessories'
-ArrayList<WebElement> resultAssetAccessories = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAccessories'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetAccessories = CustomKeywords.'dbConnection.VerifyAppView.checkAssetAccessories'(sqlconnectionLOS, 
     appno)
 
 'count Asset Accessories table'
@@ -242,7 +242,7 @@ for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
 }
 
 'get arraylist asset user from db'
-ArrayList<WebElement> resultAssetUser = CustomKeywords.'dbconnection.VerifyAppView.checkAssetUser'(sqlconnectionLOS, appno)
+ArrayList<WebElement> resultAssetUser = CustomKeywords.'dbConnection.VerifyAppView.checkAssetUser'(sqlconnectionLOS, appno)
 
 index = 0
 
@@ -255,7 +255,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetUser[index++]).toUpperCase(), false))
 
 'get arraylist asset owner from db'
-ArrayList<WebElement> resultAssetOwner = CustomKeywords.'dbconnection.VerifyAppView.checkAssetOwner'(sqlconnectionLOS, appno)
+ArrayList<WebElement> resultAssetOwner = CustomKeywords.'dbConnection.VerifyAppView.checkAssetOwner'(sqlconnectionLOS, appno)
 
 'count Asset owner div section'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#owner div'))
@@ -281,7 +281,7 @@ for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerinde
 }
 
 'get arraylist asset owner from db'
-ArrayList<WebElement> resultAssetLocation = CustomKeywords.'dbconnection.VerifyAppView.checkAssetLocation'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetLocation = CustomKeywords.'dbConnection.VerifyAppView.checkAssetLocation'(sqlconnectionLOS, 
     appno)
 
 index = 0
@@ -297,7 +297,7 @@ for (Locindex = 1; Locindex < resultAssetLocation.size(); Locindex++) {
 }
 
 'get arraylist asset collateral'
-ArrayList<WebElement> resultAssetCollateral = CustomKeywords.'dbconnection.VerifyAppView.checkAssetCollateral'(sqlconnectionLOS, 
+ArrayList<WebElement> resultAssetCollateral = CustomKeywords.'dbConnection.VerifyAppView.checkAssetCollateral'(sqlconnectionLOS, 
     appno)
 
 'count Asset collateral table'

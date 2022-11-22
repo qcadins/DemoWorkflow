@@ -23,7 +23,7 @@ import groovy.sql.Sql as Sql
 Integer copyAppColm = 2
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
@@ -680,10 +680,10 @@ public verifyMatch(){
 	'Koneksi database'
 	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
 	
-	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
 	
 	'verify tab insurance & financial, cek apakah ada nilai yang berubah, bernilai true jika tidak ada nilai yang berubah, false jika ada salah satu nilai yang berubah'
-	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Company'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	Boolean isMatch = CustomKeywords.'dbConnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Company'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 13))
 		

@@ -65,9 +65,9 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 WebDriver driver = DriverFactory.getWebDriver()
 

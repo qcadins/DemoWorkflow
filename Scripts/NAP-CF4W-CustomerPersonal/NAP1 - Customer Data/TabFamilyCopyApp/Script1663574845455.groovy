@@ -24,7 +24,7 @@ int flagWarning = 0
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 ArrayList<String> custnamefaileddelete = new ArrayList<>()
 
@@ -47,10 +47,10 @@ if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP
 	
 	String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
 	
-	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 	
 	ArrayList<String> listFam = new ArrayList<>()
-	listFam = CustomKeywords.'dbconnection.EditNAP.GetFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	listFam = CustomKeywords.'dbConnection.EditNAP.GetFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 8))
 	ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	for(int familydt=1 ;familydt<=variableData.size();familydt++){

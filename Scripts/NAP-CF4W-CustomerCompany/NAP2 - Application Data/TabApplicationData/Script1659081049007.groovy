@@ -19,13 +19,13 @@ import groovy.sql.Sql as Sql
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -42,7 +42,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
 
     'Pengecekan interest type dari db product offering '
-    String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlconnectionLOS, POName)
+    String InterestType = CustomKeywords.'dbConnection.checkInterestType.checkInterest'(sqlconnectionLOS, POName)
 
     'Ambil text interest type dari confins'
     String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
@@ -67,13 +67,13 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
         'Cek nama officer pada db dari username login confins'
-        String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlconnectionFOU, usernameLogin)
+        String officerName = CustomKeywords.'dbConnection.checkOfficer.checkOfficerName'(sqlconnectionFOU, usernameLogin)
 
         'Verif username login dengan text label officer'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true))
 
         'Ambil nama spv dari db'
-        spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlconnectionFOU, usernameLogin)
+        spvName = CustomKeywords.'dbConnection.checkOfficer.checkSPV'(sqlconnectionFOU, usernameLogin)
 
         'Pengecekan jika nama spv dari db = null'
         if (spvName == null) {
@@ -102,7 +102,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
             'Cek total data officer pada db'
-            Integer countOfficer = CustomKeywords.'dbconnection.checkOfficer.countOfficerLookup'(sqlconnectionFOU, office)
+            Integer countOfficer = CustomKeywords.'dbConnection.checkOfficer.countOfficerLookup'(sqlconnectionFOU, office)
 
             'Ambil nilai total data officer pada lookup confins'
             String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(

@@ -21,10 +21,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare data file dupcheck'
 datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
@@ -39,7 +39,7 @@ String subjectName
 def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
 'check dupcheck status'
-Boolean DupCheckStatus = CustomKeywords.'dbconnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
+Boolean DupCheckStatus = CustomKeywords.'dbConnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 if (DupCheckStatus == true) {
     'click menu duplicate Checking'

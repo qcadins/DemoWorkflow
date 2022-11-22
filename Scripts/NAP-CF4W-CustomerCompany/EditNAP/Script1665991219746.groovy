@@ -22,20 +22,20 @@ import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     8)
 
-String appStep = CustomKeywords.'dbconnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
+String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
 
-String custStep = CustomKeywords.'dbconnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
+String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
 
 'Write to excel Appno'
 CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
@@ -270,7 +270,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 			ArrayList<Boolean> listMS = new ArrayList<Boolean>()
 		
-			listMS = CustomKeywords.'dbconnection.EditNAP.GetMSDataforEditNAP'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			listMS = CustomKeywords.'dbConnection.EditNAP.GetMSDataforEditNAP'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 8))
 		
 			ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
@@ -554,7 +554,7 @@ def inputAppNo() {
 
 def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
     if (appStep == 'SHR') {
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
 
         int index = 0
 
@@ -572,12 +572,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
     } else if (appStep == 'GUAR') {
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
 
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
             appNo)
 
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
             appNo)
 
         String MsName = ''
@@ -685,22 +685,22 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
     } else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
 		'get customer company data'
-        ArrayList<String> custdata = CustomKeywords.'dbconnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
 
 		'get MS Personal Data'
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
             appNo)
 
 		'get MS Company Data'
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbconnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
             appNo)
 
 		'get Guarantor personal Data'
-        ArrayList<String> guarPersonalData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> guarPersonalData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataPersonal'(sqlconnectionLOS, 
             appNo)
 
 		'get Guarantor Company data'
-        ArrayList<String> guarCompanyData = CustomKeywords.'dbconnection.EditNAP.GuarantorDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> guarCompanyData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataCompany'(sqlconnectionLOS, 
             appNo)
 
 		'declare index, lastcolm variable'

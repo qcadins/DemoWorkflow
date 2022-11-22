@@ -43,12 +43,12 @@ String appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonal
         GlobalVariable.NumofColm, 13)
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 def commissionData = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
 
 'Mencari jumlah supplier, supplier employee, dan referantor yang muncul dalam commission'
-ArrayList<Integer> countData = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionRecipientDB'(sqlconnection, appno)
+ArrayList<Integer> countData = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionRecipientDB'(sqlconnection, appno)
 
 int suppsize = countData.get(0)
 int suppempsize = countData.get(1)
@@ -60,15 +60,15 @@ ArrayList<Integer> refSource = new ArrayList<Integer>()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 if(suppsize>0){
 	'Mencari jumlah commission source dari masing-masing supplier'
-	suppSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceSupplierDB'(sqlconnection, appno)
+	suppSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceSupplierDB'(sqlconnection, appno)
 }
 if(suppempsize>0){
 	'Mencari jumlah commission source dari masing-masing supplier employee'
-	suppEmpSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceSupplierEmpDB'(sqlconnection, appno)
+	suppEmpSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceSupplierEmpDB'(sqlconnection, appno)
 }
 if(refsize>0){
 	'Mencari jumlah commission source dari masing-masing referantor'
-	refSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceReferantorDB'(sqlconnection, appno)
+	refSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceReferantorDB'(sqlconnection, appno)
 }
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
@@ -84,7 +84,7 @@ def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable
 1
 
 'Mencari nilai commission amount dari setiap commission source dari supplier, supplier employee, dan referantor'
-HashMap<String,ArrayList> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,commissionData.getValue(GlobalVariable.NumofColm,12))
+HashMap<String,ArrayList> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,commissionData.getValue(GlobalVariable.NumofColm,12))
 ArrayList<String> comSupp = result.get("Supp")
 ArrayList<String> comSuppEmp = result.get("SuppEmp")
 ArrayList<String> comRef = result.get("Ref")

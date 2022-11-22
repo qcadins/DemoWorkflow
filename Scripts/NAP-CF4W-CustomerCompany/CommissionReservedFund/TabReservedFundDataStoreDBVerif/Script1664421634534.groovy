@@ -17,10 +17,10 @@ import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
@@ -28,7 +28,7 @@ ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
 2
 
-ArrayList<WebElement> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
+ArrayList<WebElement> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
     findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         13))
 

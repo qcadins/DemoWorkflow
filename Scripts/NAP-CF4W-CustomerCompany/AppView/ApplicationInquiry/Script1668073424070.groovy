@@ -20,10 +20,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -669,7 +669,7 @@ WebUI.delay(5)
 ArrayList<WebElement> result = new ArrayList<WebElement>()
 
 'call checkAppViewDataDB keyword'
-result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnectionLOS, appno)
+result = CustomKeywords.'dbConnection.VerifyAppView.checkAppViewDataDB'(sqlconnectionLOS, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {

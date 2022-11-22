@@ -28,7 +28,7 @@ GlobalVariable.SubsidyDPValue = '0'
 GlobalVariable.FlagFailed=0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -41,7 +41,7 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Dat
 	[:], FailureHandling.CONTINUE_ON_FAILURE)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 WebDriver driver = DriverFactory.getWebDriver()
 

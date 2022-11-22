@@ -17,7 +17,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
@@ -25,7 +25,7 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 String addresstype = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12)
 
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP4AddressStoreData'(sqlconnectionLOS, appno, custname, addresstype)
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4AddressStoreData'(sqlconnectionLOS, appno, custname, addresstype)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 

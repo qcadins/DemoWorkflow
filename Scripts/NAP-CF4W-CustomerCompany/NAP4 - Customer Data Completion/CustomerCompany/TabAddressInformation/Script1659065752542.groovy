@@ -20,7 +20,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company - Customer')
@@ -81,17 +81,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
 
@@ -174,17 +174,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
 
@@ -256,17 +256,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
 
 					'connect DB FOU'
-					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+					Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<String> AddressType
 
                     ArrayList<String> Ownership
 
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                    AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                     'get data array dari db'
-                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                    Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
 

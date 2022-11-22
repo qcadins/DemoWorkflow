@@ -23,10 +23,10 @@ import groovy.sql.Sql as Sql
 import org.openqa.selenium.Keys as Keys
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -88,10 +88,10 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	Integer countInscoBranch = 0
 	
 	'Ambil array string (text) insco branch name dari db'
-	inscoBranchName = CustomKeywords.'dbconnection.checkInscoBranch.checkDDLInscoBranch'(sqlconnectionFOU, officeName)
+	inscoBranchName = CustomKeywords.'dbConnection.checkInscoBranch.checkDDLInscoBranch'(sqlconnectionFOU, officeName)
 	
 	'Ambil nilai count insco branch name dari db'
-	countInscoBranch = CustomKeywords.'dbconnection.checkInscoBranch.countDDLInscoBranch'(sqlconnectionFOU, officeName)
+	countInscoBranch = CustomKeywords.'dbConnection.checkInscoBranch.countDDLInscoBranch'(sqlconnectionFOU, officeName)
 	
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
@@ -331,7 +331,7 @@ if(capinssetting=="YEARLY"){
 	int counterPaidByMF=0
 	
 	'Ambil nilai string road worthiness document dari db'
-	String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
+	String rwd = CustomKeywords.'dbConnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
 	
 	'Looping data tabel insurance untuk input data'
 	for (int i = 1; i <= count; i++) {

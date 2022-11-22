@@ -45,7 +45,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'click tab guarantor'
 WebUI.click(findTestObject('Object Repository/AppView/Guarantor/TabGuarantor'))
@@ -59,7 +59,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist guarantor from db'
-ArrayList<String> resultGuar = CustomKeywords.'dbconnection.VerifyAppView.checkGuarantor'(sqlconnection, appno)
+ArrayList<String> resultGuar = CustomKeywords.'dbConnection.VerifyAppView.checkGuarantor'(sqlconnection, appno)
 
 'count guarantor table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))

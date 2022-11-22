@@ -24,7 +24,7 @@ int flagWarning = 0
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 ArrayList<String> custnamefaileddelete = new ArrayList<>()
 
@@ -47,11 +47,11 @@ if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPerson
 
     String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
 
-    Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
     ArrayList<Boolean> listGuar = new ArrayList<Boolean>()
 
-    listGuar = CustomKeywords.'dbconnection.EditNAP.GetGuarantorDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    listGuar = CustomKeywords.'dbConnection.EditNAP.GetGuarantorDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 8))
 
     ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()

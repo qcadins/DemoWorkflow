@@ -17,9 +17,9 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.FamilyDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
             'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'))

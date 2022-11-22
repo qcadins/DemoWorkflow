@@ -25,7 +25,7 @@ import groovy.sql.Sql as Sql
 int modifyObjectIndex = 1
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 GlobalVariable.AssetPrice = 0.00
 

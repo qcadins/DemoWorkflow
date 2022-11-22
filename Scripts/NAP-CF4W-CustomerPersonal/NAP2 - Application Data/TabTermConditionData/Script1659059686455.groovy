@@ -73,9 +73,9 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 'Ambil text customer model dari confins'
 String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/label_custModel'))

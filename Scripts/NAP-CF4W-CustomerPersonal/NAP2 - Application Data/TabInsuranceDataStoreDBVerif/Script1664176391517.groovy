@@ -38,9 +38,9 @@ String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseNa
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
 'connect DB'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 12)
@@ -55,7 +55,7 @@ ArrayList<String> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
-    ArrayList<Boolean> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
+    ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
@@ -78,11 +78,11 @@ if (insuredBy == 'Customer') {
                     GlobalVariable.NumofColm, index).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
 } else if (insuredBy == 'Customer - Multifinance') {
-    ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
+    ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
         sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
-    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
+    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13))
 
@@ -198,7 +198,7 @@ if (insuredBy == 'Customer') {
 
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
         GlobalVariable.NumofColm, 36).length() == 0) {
-        ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS, 
+        ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS, 
             findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13))
 
@@ -216,7 +216,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
-            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
                 sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -252,7 +252,7 @@ if (insuredBy == 'Customer') {
         'Mengambil nilai setting cap insurance dari db'
         String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
-		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
 
@@ -325,7 +325,7 @@ if (insuredBy == 'Customer') {
 				84).equalsIgnoreCase('NO')) {
 				
 				'call keyword NAP2InsurancePartialCaptilizeStoreDB'
-				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
+				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
 					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 						GlobalVariable.NumofColm, 13))
 	
@@ -344,7 +344,7 @@ if (insuredBy == 'Customer') {
             GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
             GlobalVariable.NumofColm, 57).length() > 0)) {
-            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+            ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
                 sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 			
@@ -506,7 +506,7 @@ if (insuredBy == 'Customer') {
 		
 			ArrayList<String> MainRate = GlobalVariable.MainPremiRate
             'get arraylist main premi rate dari DB'
-            ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
+            ArrayList<Boolean> resultMainPremiRate = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
                 sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13))
 
@@ -540,7 +540,7 @@ if (arrayMatch.contains(false)) {
 public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
 	arrayindex = 0
 	
-	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
+	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
 
@@ -612,7 +612,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 		GlobalVariable.NumofColm, 36).length() == 0) {
-		String resultMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
+		String resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
 
@@ -630,7 +630,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
-			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
+			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 
@@ -666,7 +666,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 		'Mengambil nilai setting cap insurance dari db'
         String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
-		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
+		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
 
@@ -739,7 +739,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				84).equalsIgnoreCase('NO')) {
 				
 				'call keyword NAP2InsurancePartialCaptilizeStoreDB'
-				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
+				ArrayList<String> resultPartialCaptilized = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsurancePartialCaptilizeStoreDB'(
 					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 						GlobalVariable.NumofColm, 13))
 	
@@ -758,7 +758,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			GlobalVariable.NumofColm, 55).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, 56).length() > 0)) || (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 			GlobalVariable.NumofColm, 57).length() > 0)) {
-			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
+			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 			
@@ -920,7 +920,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			GlobalVariable.NumofColm, 69).length() > 0) {
 			ArrayList<String> MainRate = GlobalVariable.MainPremiRate
 			'get arraylist main premi rate dari DB'
-			ArrayList<String> resultMainPremiRate = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
+			ArrayList<String> resultMainPremiRate = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 

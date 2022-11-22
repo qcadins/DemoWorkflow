@@ -51,9 +51,9 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -92,10 +92,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 		Integer countLifeInscoBranch = 0
 	
 		'Ambil array string (text) life insco branch name dari db'
-		lifeInscoBranchName = CustomKeywords.'dbconnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
+		lifeInscoBranchName = CustomKeywords.'dbConnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
 	
 		'Ambil nilai count life insco branch name dari db'
-		countLifeInscoBranch = CustomKeywords.'dbconnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,
+		countLifeInscoBranch = CustomKeywords.'dbConnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,
 			officeName)
 	
 		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'

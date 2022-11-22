@@ -46,7 +46,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab financial'
 WebUI.click(findTestObject('Object Repository/AppView/Financial/Financial Tab'))
@@ -60,7 +60,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultFin = CustomKeywords.'dbconnection.VerifyAppView.checkFinancial'(sqlconnection, appno)
+HashMap<String,ArrayList> resultFin = CustomKeywords.'dbConnection.VerifyAppView.checkFinancial'(sqlconnection, appno)
 ArrayList<String> listSubsidy = resultFin.get("Subsidy")
 ArrayList<String> listFee = resultFin.get("Fee")
 ArrayList<String> listFinancialData = resultFin.get("FinData")

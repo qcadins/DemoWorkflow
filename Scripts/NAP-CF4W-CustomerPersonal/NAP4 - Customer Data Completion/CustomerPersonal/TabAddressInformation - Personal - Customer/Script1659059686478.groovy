@@ -20,7 +20,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal - Customer')
 
@@ -75,14 +75,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -113,7 +113,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 }
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
@@ -180,14 +180,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -218,7 +218,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 }
 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
@@ -279,14 +279,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
 
 					'connect DB FOU'
-					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+					Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<String> AddressType
 
                     ArrayList<String> Ownership
 
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
+                    AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypePersonal'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'))
@@ -317,7 +317,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     }
 
                     'get data array dari db'
-                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                    Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalownership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))

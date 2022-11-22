@@ -16,28 +16,28 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-String CDCCustomerPersonal = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
+String CDCCustomerPersonal = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 
-String CDCFamilyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
+String CDCFamilyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 
-String CDCGuarantorPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
+String CDCGuarantorPersonalPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 
-String CDCGuarantorCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
+String CDCGuarantorCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
 
 'connect DB Camunda SIT'
-Sql sqlconnectionCamundaSIT = CustomKeywords.'dbconnection.connectDB.connectCAMUNDASIT'()
+Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMUNDASIT'()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
 
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
-String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
+String DupCheckCount = CustomKeywords.'dbConnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
 'declare variable untuk Store nama customer'
 def StoreCDCCustomerName = '', StoreCDCFamilyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
@@ -71,7 +71,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         'get guarantor name'
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-        String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
+        String GuarantorType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
             name)
 
         if (GuarantorType.equalsIgnoreCase('COMPANY')) {

@@ -24,7 +24,7 @@ GlobalVariable.FlagFailed = 0
 int flagWarning = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
 
@@ -93,12 +93,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         if (GlobalVariable.RoleCompany == 'Testing') {
                             
 							'connect DB FOU'
-							Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+							Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                             ArrayList<WebElement> LegalDocType
 
                             'get data array dari db'
-                            LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                            LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
 
                             'verify array dari db == option list confins'
                             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -269,12 +269,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         if (legal == 1) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
 	                            'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<WebElement> LegalDocType
 
                                 'get data array dari db'
-                                LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                                LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -365,12 +365,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
 
 					'connect DB FOU'
-					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+					Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<WebElement> LegalDocType
 
                     'get data array dari db'
-                    LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                    LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -454,12 +454,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
 
 					'connect DB FOU'
-					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+					Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<WebElement> LegalDocType
 
                     'get data array dari db'
-                    LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                    LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 

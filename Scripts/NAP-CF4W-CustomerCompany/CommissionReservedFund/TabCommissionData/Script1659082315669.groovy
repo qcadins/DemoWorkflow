@@ -22,13 +22,13 @@ import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagFailed = 0
 
@@ -46,7 +46,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 //String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
-String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
+String appLastStep = CustomKeywords.'dbConnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
 
 if (!(appLastStep.equalsIgnoreCase('UPL_DOC')) && (GlobalVariable.FirstTimeEntry == 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
@@ -201,7 +201,7 @@ if (variableSupp.size() > 0) {
                 supRow + 2), FailureHandling.OPTIONAL)
 
         'Query Select pada database untuk mengambil nilai supplier code'
-        supplierCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, supplierName)
+        supplierCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         ArrayList<WebElement> variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
@@ -487,7 +487,7 @@ if (variableSuppEmp.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccSuppEmp[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai supplier employee no'
-        supplierEmployeeCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlconnectionFOU, 
+        supplierEmployeeCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlconnectionFOU, 
             supplierEmployeeName, supplierEmpPos, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
@@ -758,7 +758,7 @@ if (variableRef.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccRef[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai referantor code/nomor'
-        refCode = CustomKeywords.'dbconnection.checkCommissionCode.checkReferantorCode'(sqlconnectionFOU, refName)
+        refCode = CustomKeywords.'dbConnection.checkCommissionCode.checkReferantorCode'(sqlconnectionFOU, refName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + refCode) + ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))

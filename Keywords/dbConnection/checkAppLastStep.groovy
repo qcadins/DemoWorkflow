@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -17,46 +17,17 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.kms.katalon.core.configuration.RunConfiguration
-
+import groovy.sql.Sql
 import internal.GlobalVariable
-import java.io.File
-import java.nio.file.*;
-import java.io.IOException;
-public class DownloadRule {
-	@Keyword
-	def setDownloadPath() {
 
-		HashMap<Object, String> chromePrefs = new HashMap<Object, String>();
-
-
-		chromePrefs.put("download.default_directory",System.getProperty('user.dir') + "\\Rule")
-
-		RunConfiguration.setWebDriverPreferencesProperty("prefs", chromePrefs)
-	}
+public class checkAppLastStep {
 
 	@Keyword
-	def deleteFile(String filename){
-		File dir = new File(System.getProperty('user.dir') + "\\Rule");
-
-		//Getting the list of all the files in the specific directory
-		File[] fList = dir.listFiles();
-
-		for (File f : fList) {
-			//checking the extension of the file with endsWith method.
-			if (f.getName().equals(filename)) {
-				f.delete();
-
-			}
-		}
-	}
-
-	@Keyword
-	def renameFile(String filename, String newname){
-		File file = new File(System.getProperty('user.dir') + "\\Rule\\"+filename);
-		File rename = new File(System.getProperty('user.dir') + "\\Rule\\"+newname);
-		file.renameTo(rename)
-		println(newname)
-
+	public checkLastStep(Sql instanceLOS, String appno){
+		String applaststep = ""
+		instanceLOS.eachRow(("select app_last_step from APP where app_no = '"+appno+"'"), {  row ->
+			applaststep=row[0]
+		})
+		return applaststep
 	}
 }

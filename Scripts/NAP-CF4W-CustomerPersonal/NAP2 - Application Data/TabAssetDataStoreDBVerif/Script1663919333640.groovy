@@ -31,13 +31,13 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-ArrayList<Boolean> resultsupplierinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
+ArrayList<Boolean> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
     sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
-ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbconnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, 
+ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, 
     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 

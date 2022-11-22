@@ -22,10 +22,10 @@ import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagFailed = 0
 
@@ -69,7 +69,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 //String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
-String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlconnectionLOS, appNo)
+String appLastStep = CustomKeywords.'dbConnection.checkAppLastStep.checkLastStep'(sqlconnectionLOS, appNo)
 
 if (!(appLastStep.equalsIgnoreCase('COM')) && (GlobalVariable.FirstTimeEntry == 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'

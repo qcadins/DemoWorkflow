@@ -37,11 +37,11 @@ String AuthorityAML = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-C
     GlobalVariable.NumofMS, 46)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-ArrayList<String> result = CustomKeywords.'dbconnection.CustomerDataVerif.MSDataStoreDBPersonal'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonal'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofMS, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofMS, 19))
 

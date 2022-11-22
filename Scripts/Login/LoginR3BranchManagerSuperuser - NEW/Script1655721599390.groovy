@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
 
 println(GlobalVariable.DataFilePath)
 

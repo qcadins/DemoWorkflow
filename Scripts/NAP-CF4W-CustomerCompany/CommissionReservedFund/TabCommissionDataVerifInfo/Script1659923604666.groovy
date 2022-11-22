@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 WebDriver driver = DriverFactory.getWebDriver()
 
 'connect DB TAX'
-Sql sqlconnectionTAX = CustomKeywords.'dbconnection.connectDB.connectTAX'()
+Sql sqlconnectionTAX = CustomKeywords.'dbConnection.connectDB.connectTAX'()
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00

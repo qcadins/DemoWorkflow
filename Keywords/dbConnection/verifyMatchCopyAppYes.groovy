@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -35,8 +35,8 @@ public class verifyMatchCopyAppYes {
 		if(insuredBy.get(0).equalsIgnoreCase(insuredBy.get(1))){
 			if(insuredBy.get(0)=="CU"){
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -45,8 +45,8 @@ public class verifyMatchCopyAppYes {
 				}
 			}
 			else if(insuredBy.get(0)=="CUCO"){
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -55,8 +55,8 @@ public class verifyMatchCopyAppYes {
 				}
 
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -64,8 +64,8 @@ public class verifyMatchCopyAppYes {
 					}
 				}
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -74,8 +74,8 @@ public class verifyMatchCopyAppYes {
 				}
 			}
 			else if(insuredBy.get(0)=="CO"){
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -83,8 +83,8 @@ public class verifyMatchCopyAppYes {
 					}
 				}
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -97,8 +97,8 @@ public class verifyMatchCopyAppYes {
 			isMatch=false
 		}
 
-		copyappdata = (new dbconnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, copyAppNo)
-		appdata = (new dbconnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, appNo)
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, appNo)
 		for(int i = 0;i<copyappdata.size();i++){
 			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 				isMatch = false
@@ -106,8 +106,8 @@ public class verifyMatchCopyAppYes {
 			}
 		}
 
-		copyappdata = (new dbconnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
-		appdata = (new dbconnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
 		for(int i = 0;i<copyappdata.size();i++){
 			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 				isMatch = false
@@ -115,8 +115,8 @@ public class verifyMatchCopyAppYes {
 			}
 		}
 
-		copyappdata = (new dbconnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
-		appdata = (new dbconnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
 		for(int i = 0;i<copyappdata.size();i++){
 			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 				isMatch = false
@@ -141,8 +141,8 @@ public class verifyMatchCopyAppYes {
 		if(insuredBy.get(0).equalsIgnoreCase(insuredBy.get(1))){
 			if(insuredBy.get(0)=="CU"){
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -151,8 +151,8 @@ public class verifyMatchCopyAppYes {
 				}
 			}
 			else if(insuredBy.get(0)=="CUCO"){
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -161,8 +161,8 @@ public class verifyMatchCopyAppYes {
 				}
 
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -170,8 +170,8 @@ public class verifyMatchCopyAppYes {
 					}
 				}
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -180,8 +180,8 @@ public class verifyMatchCopyAppYes {
 				}
 			}
 			else if(insuredBy.get(0)=="CO"){
-				copyappdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -189,8 +189,8 @@ public class verifyMatchCopyAppYes {
 					}
 				}
 
-				copyappdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
-				appdata = (new dbconnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
 				for(int i = 0;i<copyappdata.size();i++){
 					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 						isMatch = false
@@ -204,8 +204,8 @@ public class verifyMatchCopyAppYes {
 		}
 
 
-		copyappdata = (new dbconnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
-		appdata = (new dbconnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
 		for(int i = 0;i<copyappdata.size();i++){
 			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 				isMatch = false
@@ -213,8 +213,8 @@ public class verifyMatchCopyAppYes {
 			}
 		}
 
-		copyappdata = (new dbconnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
-		appdata = (new dbconnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
 		for(int i = 0;i<copyappdata.size();i++){
 			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
 				isMatch = false

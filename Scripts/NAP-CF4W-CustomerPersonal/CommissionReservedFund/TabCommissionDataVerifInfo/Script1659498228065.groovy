@@ -39,7 +39,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String urlTAX = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseTAX
 
-Sql sqlConnectionTAX = CustomKeywords.'dbconnection.connectDB.connect'(urlTAX, username, password, driverclassname)
+Sql sqlConnectionTAX = CustomKeywords.'dbConnection.connectDB.connect'(urlTAX, username, password, driverclassname)
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00

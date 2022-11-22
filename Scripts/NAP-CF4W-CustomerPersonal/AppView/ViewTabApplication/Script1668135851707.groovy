@@ -46,7 +46,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab application'
 WebUI.click(findTestObject('Object Repository/AppView/Application/Application Tab'))
@@ -60,13 +60,13 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get mo data arraylist from db'
-ArrayList<String> resultMO = CustomKeywords.'dbconnection.VerifyAppView.checkMOInfo'(sqlconnection, appno)
+ArrayList<String> resultMO = CustomKeywords.'dbConnection.VerifyAppView.checkMOInfo'(sqlconnection, appno)
 
 'get app & restructuring data arraylist from db'
-ArrayList<String> resultAppRestr = CustomKeywords.'dbconnection.VerifyAppView.checkAppInfoAndRestructuringData'(sqlconnection, appno)
+ArrayList<String> resultAppRestr = CustomKeywords.'dbConnection.VerifyAppView.checkAppInfoAndRestructuringData'(sqlconnection, appno)
 
 'get app attribute data arraylist from db'
-ArrayList<String> resultAttr = CustomKeywords.'dbconnection.VerifyAppView.checkApplicationAttribute'(sqlconnection, appno)
+ArrayList<String> resultAttr = CustomKeywords.'dbConnection.VerifyAppView.checkApplicationAttribute'(sqlconnection, appno)
 
 int index = 0
 

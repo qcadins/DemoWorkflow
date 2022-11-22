@@ -22,7 +22,7 @@ import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 GlobalVariable.FlagFailed = 0
 
@@ -49,10 +49,10 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 int count = variable.size()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil text customer model dari confins'
 String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/label_custModel'))

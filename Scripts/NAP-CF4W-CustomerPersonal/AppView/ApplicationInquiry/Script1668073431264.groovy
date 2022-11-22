@@ -45,7 +45,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 13)
@@ -565,7 +565,7 @@ WebUI.delay(5)
 
 ArrayList<String> result = new ArrayList<String>()
 
-result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
+result = CustomKeywords.'dbConnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {

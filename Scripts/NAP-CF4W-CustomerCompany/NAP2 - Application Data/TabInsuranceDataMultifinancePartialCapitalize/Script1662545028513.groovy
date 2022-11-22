@@ -26,10 +26,10 @@ import org.openqa.selenium.Keys as Keys
 WebDriver driver = DriverFactory.getWebDriver()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
@@ -83,7 +83,7 @@ String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerComp
 String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
 'Ambil nilai string road worthiness document dari db'
-String rwd = CustomKeywords.'dbconnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
+String rwd = CustomKeywords.'dbConnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlconnectionLOS,appNo)
 
 'Looping data tabel insurance untuk input data'
 for (int i = 1; i <= count; i++) {

@@ -17,28 +17,28 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path company'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'get data file path CDC customer company'
-String CDCCustomerCompany = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+String CDCCustomerCompany = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 'get data file path CDC MS Personal'
-String CDCManagementShareholderPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+String CDCManagementShareholderPersonalPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 
 'get data file path CDC MS Company'
-String CDCManagementShareholderCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+String CDCManagementShareholderCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 
 'get data file path CDC Guarantor Personal'
-String CDCGuarantorPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+String CDCGuarantorPersonalPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
 
 'get data file path CDC Guarantor company'
-String CDCGuarantorCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+String CDCGuarantorCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 'connect DB Camunda SIT'
-Sql sqlconnectionCamundaSIT = CustomKeywords.'dbconnection.connectDB.connectCAMUNDASIT'()
+Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMUNDASIT'()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare data file dupcheck variable'
 datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
@@ -47,7 +47,7 @@ datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
 String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
-String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
+String DupCheckCount = CustomKeywords.'dbConnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
 'declare variable untuk Store nama customer'
 def StoreCDCCustomerName = '', StoreCDCManagementShareholderPersonalName = '', StoreCDCManagementShareholderCompanyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
@@ -73,7 +73,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
 		'get MS Customer type'
-        String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, 
+        String ManagementShareholderType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, 
             DupcheckAppNo, name)
 
 		'check if MS is Company / Personal'
@@ -99,7 +99,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
 		'get guarantor customer type'
-        String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
+        String GuarantorType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
             name)
 
 		'check if guarantor is company / Personal'

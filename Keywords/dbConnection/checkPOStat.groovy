@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -20,15 +20,14 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-
-public class checkInterestType {
+public class checkPOStat {
 
 	@Keyword
-	public checkInterest(Sql instance,String prodname){
-		String interestType
-		instance.eachRow(("select distinct compnt_value from prod p WITH(NOLOCK) join prod_h ph WITH(NOLOCK) on p.prod_id = ph.prod_id join prod_d pd WITH(NOLOCK) on ph.prod_h_id = pd.prod_h_id join PROD_OFFERING po on po.PROD_ID = p.prod_id where prod_offering_name = '"+prodname+"' and ref_prod_compnt_code = 'intrsttype'"), { def row ->
-			interestType = (row[0])
+	public checkCopyAppPOStat(Sql instance, String copyappno){
+		String stat
+		instance.eachRow(("SELECT PROD_OFFERING_STAT FROM PROD_OFFERING WITH(NOLOCK) WHERE PROD_OFFERING_code = (select prod_offering_code from app where app_no ='"+copyappno+"')"), { def row ->
+			stat = (row[0])
 		})
-		return interestType
+		return stat
 	}
 }

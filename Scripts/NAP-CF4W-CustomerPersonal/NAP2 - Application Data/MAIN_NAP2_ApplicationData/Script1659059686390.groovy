@@ -806,10 +806,10 @@ public verifyMatch(){
 	'Koneksi database'
 	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
 	
-	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
 	
 	'verify tab insurance, life insurance & financial, cek apakah ada nilai yang berubah, bernilai true jika tidak ada nilai yang berubah, false jika ada salah satu nilai yang berubah'
-	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	Boolean isMatch = CustomKeywords.'dbConnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 13))
 		
