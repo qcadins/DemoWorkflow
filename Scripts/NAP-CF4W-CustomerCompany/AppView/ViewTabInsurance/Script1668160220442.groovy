@@ -20,10 +20,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -41,13 +41,13 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get insured by from db'
-String resultInsuredBy = CustomKeywords.'dbconnection.VerifyAppView.checkInsuredBy'(sqlconnectionLOS, appno)
+String resultInsuredBy = CustomKeywords.'dbConnection.VerifyAppView.checkInsuredBy'(sqlconnectionLOS, appno)
 
 println(resultInsuredBy)
 
 if(resultInsuredBy.equalsIgnoreCase('Customer')){
 	'get arraylist Insurance Customer from db'
-	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceCustomer'(sqlconnectionLOS, appno)
+	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceCustomer'(sqlconnectionLOS, appno)
 	
 	index = 0
 	
@@ -86,7 +86,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer')){
 }else if(resultInsuredBy.equalsIgnoreCase('Multifinance')){
 
 'get arraylist Insurance Multifinance from db'
-ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceMultifinance'(sqlconnectionLOS, appno)
+ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceMultifinance'(sqlconnectionLOS, appno)
 
 index = 0
 
@@ -133,7 +133,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 }else if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance')){
 
 'get arraylist Insurance Cust-Multifinance from db'
-ArrayList<String> resultInsuranceCustMF = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceCustMf'(sqlconnectionLOS, appno)
+ArrayList<String> resultInsuranceCustMF = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceCustMf'(sqlconnectionLOS, appno)
 
 index = 0
 
@@ -206,7 +206,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
 	
 	'get arraylist Insurance cvg from db'
-	ArrayList<String> resultInsuranceMainCoverage = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceMainCoverage'(sqlconnectionLOS, appno)
+	ArrayList<String> resultInsuranceMainCoverage = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceMainCoverage'(sqlconnectionLOS, appno)
 	
 	'count insurance cvg table'
 	variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#coverage > lib-ucgridview > div > table > tbody tr'))
@@ -253,7 +253,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 		
 		
 		'get arraylist Insurance add cvg from db'
-		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'dbconnection.VerifyAppView.checkAdditionalCoverage'(sqlconnectionLOS, appno, cvgindex)
+		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'dbConnection.VerifyAppView.checkAdditionalCoverage'(sqlconnectionLOS, appno, cvgindex)
 		
 		checkVerifyEqualOrMatch(addtionalcvg.containsAll(resultAddtionalCoverage))
 		
@@ -278,7 +278,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 	}
 	
 	'get arraylist Insurance summary from db'
-	ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbconnection.VerifyAppView.checkInsuranceSummary'(sqlconnectionLOS, appno)
+	ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceSummary'(sqlconnectionLOS, appno)
 	
 	index = 0
 	
@@ -330,16 +330,16 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. Insurance', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. Insurance', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

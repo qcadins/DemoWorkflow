@@ -22,7 +22,7 @@ import internal.GlobalVariable as GlobalVariable
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 'declare finddatafile GV'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/AddressInformation - Company - GuarantorCompany')
@@ -83,7 +83,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'connect DB FOU'
-                                Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+                                Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<WebElement> AddressType
 
@@ -174,7 +174,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'connect DB FOU'
-                                Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+                                Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 								'declare address type arraylist'
                                 ArrayList<String> AddressType
@@ -256,7 +256,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (GlobalVariable.RoleCompany == 'Testing') {
                     'connect DB FOU'
-                    Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+                    Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<String> AddressType
 

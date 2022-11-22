@@ -18,7 +18,7 @@ import internal.GlobalVariable as GlobalVariable
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/EmergencyContact - Personal - Guarantor')
 
@@ -186,11 +186,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).equa
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         'Flagfailed +1 karena gagal melakukan lookup'

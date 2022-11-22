@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
     FailureHandling.OPTIONAL)) {
@@ -226,10 +226,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 	
 	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 1)){
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 	
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"Comresfund"+";\n")
 	
@@ -238,10 +238,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 	
 	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 1)){
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"Comresfund"+";\n"))
 		
@@ -250,10 +250,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 		
 	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 1)){
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"Comresfund"+";\n"))
 		
@@ -317,18 +317,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
 
         'Write to excel success'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Write to excel failed reason'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'Klik cancel'
@@ -358,18 +358,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
         'Write to excel success'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Write to excel failed reason'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'Klik cancel'
@@ -423,18 +423,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
 
         'Write to excel success'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Write to excel failed reason'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'Klik cancel'
@@ -463,18 +463,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
         'Write to excel success'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
         'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
             5, FailureHandling.OPTIONAL)) {
             'Write to excel failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Write to excel failed reason'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 
             'Klik cancel'

@@ -24,7 +24,7 @@ GlobalVariable.FlagFailed = 0
 GlobalVariable.FlagWarning = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
 
@@ -194,11 +194,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (legaltypefaileddelete.size() > 0) {
 		'write to excel status warning'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed delete'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 
         (GlobalVariable.GlobalVariable.FlagWarning)++
@@ -451,11 +451,11 @@ if (GlobalVariable.FlagFailed == 0) {
 
 if (GlobalVariable.FlagWarning > 0) {
 	'write to excel status warning'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
 	'write to excel failed reason'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
@@ -506,11 +506,11 @@ def verifLegalDocType(int legal){
 			'verify total ddl confins = total ddl db'
 			if (WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size()) == false){
 				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 					'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
 
 				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 					'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
 				(GlobalVariable.FlagFailed)++

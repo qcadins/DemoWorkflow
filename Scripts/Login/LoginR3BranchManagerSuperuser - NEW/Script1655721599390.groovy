@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
 
 println(GlobalVariable.DataFilePath)
 
@@ -59,7 +59,7 @@ if(WebUI.verifyElementPresent(findTestObject('Object Repository/LoginR3BranchMan
 else{
 	
 	'write to excel job title'
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 'Login',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Login',
 		2, 4, WebUI.getText(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/label_JobTitleRole')))
 }
 

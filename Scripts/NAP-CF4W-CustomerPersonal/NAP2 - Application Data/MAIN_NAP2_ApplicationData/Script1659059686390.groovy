@@ -95,18 +95,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 		
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
 		'verify fail'
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 					'REFERANTOR', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 		
 			'click button cancel'
@@ -128,7 +128,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		WebUI.delay(5)
@@ -137,11 +137,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -209,17 +209,17 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click button cancel'
@@ -250,18 +250,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.delay(5)
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		'verify fail'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -284,7 +284,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 	
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
 		'Verify fail'
@@ -292,11 +292,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
 		
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 		
 			'click cancel'
@@ -326,17 +326,17 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click button cancel'
@@ -360,18 +360,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		'Verify fail'
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -406,17 +406,17 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -458,18 +458,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 		
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
 		'verify fail'
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 					'REFERANTOR', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 		
 			'click button cancel'
@@ -491,7 +491,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		WebUI.delay(5)
@@ -500,11 +500,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -571,7 +571,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.acceptAlert(FailureHandling.OPTIONAL)
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
 		WebUI.delay(10)
@@ -579,11 +579,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.TabAssetData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click button cancel'
@@ -623,18 +623,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.delay(5)
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		'verify fail'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -657,7 +657,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 	
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 		
 		'Verify fail'
@@ -665,11 +665,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
 		
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 		
 			'click cancel'
@@ -699,17 +699,17 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click button cancel'
@@ -733,18 +733,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		'Verify fail'
 		if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
 			'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -779,17 +779,17 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 			
 		'Write to excel success'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
 			5, FailureHandling.OPTIONAL)) {
 			'Write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write to excel failed reason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
@@ -806,27 +806,27 @@ public verifyMatch(){
 	'Koneksi database'
 	String urlLOS = (((findTestData('Login/Login').getValue(1, 8) + ';instanceName=') + findTestData('Login/Login').getValue(2, 8)) + ';databaseName=') + findTestData('Login/Login').getValue(5, 9)
 	
-	Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, findTestData('Login/Login').getValue(3, 8), findTestData('Login/Login').getValue(4, 8), findTestData('Login/Login').getValue(6, 8))
 	
 	'verify tab insurance, life insurance & financial, cek apakah ada nilai yang berubah, bernilai true jika tidak ada nilai yang berubah, false jika ada salah satu nilai yang berubah'
-	Boolean isMatch = CustomKeywords.'dbconnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	Boolean isMatch = CustomKeywords.'dbConnection.verifyMatchCopyAppYes.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 9),findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 	GlobalVariable.NumofColm, 13))
 		
 	if(isMatch==true){
 			'Write to excel sheet commission copy app yes'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 				9, GlobalVariable.NumofColm - 1, "Yes")
 			'Write to excel sheet reserved fund copy app yes'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				9, GlobalVariable.NumofColm - 1, "Yes")
 	}
 	else if(isMatch==false){
 			'Write to excel sheet commission copy app edit'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 				9, GlobalVariable.NumofColm - 1, "Edit")
 			'Write to excel sheet reserved fund copy app edit'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				9, GlobalVariable.NumofColm - 1, "Edit")
 	}
 }
@@ -1016,10 +1016,10 @@ public pagingTesting(){
 		
 		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 1)){
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 						GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"NAP2"+";\n")
 		
@@ -1028,10 +1028,10 @@ public pagingTesting(){
 		
 		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 1)){
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"NAP2"+";\n"))
 			
@@ -1040,10 +1040,10 @@ public pagingTesting(){
 			
 		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 1)){
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"NAP2"+";\n"))
 			

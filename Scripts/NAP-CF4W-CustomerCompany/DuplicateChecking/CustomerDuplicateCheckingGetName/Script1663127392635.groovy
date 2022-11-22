@@ -17,28 +17,28 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path company'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'get data file path CDC customer company'
-String CDCCustomerCompany = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+String CDCCustomerCompany = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 'get data file path CDC MS Personal'
-String CDCManagementShareholderPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+String CDCManagementShareholderPersonalPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 
 'get data file path CDC MS Company'
-String CDCManagementShareholderCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+String CDCManagementShareholderCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 
 'get data file path CDC Guarantor Personal'
-String CDCGuarantorPersonalPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+String CDCGuarantorPersonalPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
 
 'get data file path CDC Guarantor company'
-String CDCGuarantorCompanyPath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+String CDCGuarantorCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 'connect DB Camunda SIT'
-Sql sqlconnectionCamundaSIT = CustomKeywords.'dbconnection.connectDB.connectCAMUNDASIT'()
+Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMUNDASIT'()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare data file dupcheck variable'
 datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
@@ -47,7 +47,7 @@ datafiledupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
 String DupcheckAppNo = datafiledupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
-String DupCheckCount = CustomKeywords.'dbconnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
+String DupCheckCount = CustomKeywords.'dbConnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
 'declare variable untuk Store nama customer'
 def StoreCDCCustomerName = '', StoreCDCManagementShareholderPersonalName = '', StoreCDCManagementShareholderCompanyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
@@ -73,7 +73,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
 		'get MS Customer type'
-        String ManagementShareholderType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, 
+        String ManagementShareholderType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, 
             DupcheckAppNo, name)
 
 		'check if MS is Company / Personal'
@@ -99,7 +99,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
 		'get guarantor customer type'
-        String GuarantorType = CustomKeywords.'dbconnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
+        String GuarantorType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
             name)
 
 		'check if guarantor is company / Personal'
@@ -125,19 +125,19 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 
 'check if storeCDCCustomerName is null'
 if (StoreCDCCustomerName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 }
 
 'check if StoreCDCManagementShareholderPersonalName is null'
 if (StoreCDCManagementShareholderPersonalName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         14, GlobalVariable.NumofColm - 1, (StoreCDCManagementShareholderPersonalName + ';') + StoreCDCManagementShareholderCompanyName)
 }
 
 'check if StoreCDCGuarantorPersonalName and StoreCDCGuarantorCompanyName is null'
 if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 }
 
@@ -154,29 +154,29 @@ StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
 StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
 'write customer name to Excel CDC Customer Company'
-CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(CDCCustomerCompany, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
+CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCCustomerCompany, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
     1, StoreCDCCustomerName)
 
 'looping untuk write MS Personal Name ke Excel CDC MS Personal'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write MS Company Name ke Excel CDC MS Company'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write Guarantor Personal Name ke Excel CDC Guarantor Personal'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 }
 
 'looping untuk write Guarantor Company Name ke Excel CDC Guarantor Company'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 }

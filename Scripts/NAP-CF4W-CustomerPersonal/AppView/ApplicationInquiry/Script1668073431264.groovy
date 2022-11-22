@@ -45,7 +45,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 13)
@@ -507,10 +507,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppInquiryCountDataInPage'(), true))
 	
 	if(resultReset.contains(false)){
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+";\n"))
 		
@@ -518,10 +518,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 	}
 			
 	if(checkVerifySort.contains(false) ){
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+";\n"))
 			
@@ -529,10 +529,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 	}
 			
 	if(checkVerifyFooter.contains(false)){
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 			    GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+";\n"))
 			
@@ -565,7 +565,7 @@ WebUI.delay(5)
 
 ArrayList<String> result = new ArrayList<String>()
 
-result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
+result = CustomKeywords.'dbConnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {
@@ -664,16 +664,16 @@ WebUI.closeWindowIndex('1')
 WebUI.switchToWindowIndex('0')
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

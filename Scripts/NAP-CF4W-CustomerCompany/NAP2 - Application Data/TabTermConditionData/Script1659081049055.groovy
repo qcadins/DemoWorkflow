@@ -22,7 +22,7 @@ import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 GlobalVariable.FlagFailed = 0
 
@@ -49,10 +49,10 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 int count = variable.size()
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil text customer model dari confins'
 String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/label_custModel'))
@@ -124,11 +124,11 @@ for (int i = 1; i <= count; i++) {
         if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlconnectionFOU, textDocumentName), TCCode.get(
                 i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed++
@@ -145,11 +145,11 @@ for (int i = 1; i <= count; i++) {
         'verif prior to based on rule'
         if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo), TCPrior.get(i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed++
@@ -322,10 +322,10 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 			GlobalVariable.FlagFailed=1

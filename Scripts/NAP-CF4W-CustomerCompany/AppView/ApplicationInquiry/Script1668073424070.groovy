@@ -20,10 +20,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -602,11 +602,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if resultReset contain false'
     if (resultReset.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed reset to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedReset + ';\n'))
 
@@ -616,11 +616,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if checkVerifySort contain false'
     if (checkVerifySort.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed sort to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedSort + ';\n'))
 
@@ -630,11 +630,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if checkVerifyFooter contain false'
     if (checkVerifyFooter.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed footer to excel'
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedFooter + ';\n'))
 
@@ -669,7 +669,7 @@ WebUI.delay(5)
 ArrayList<WebElement> result = new ArrayList<WebElement>()
 
 'call checkAppViewDataDB keyword'
-result = CustomKeywords.'dbconnection.VerifyAppView.checkAppViewDataDB'(sqlconnectionLOS, appno)
+result = CustomKeywords.'dbConnection.VerifyAppView.checkAppViewDataDB'(sqlconnectionLOS, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {
@@ -766,16 +766,16 @@ WebUI.closeWindowIndex('1')
 WebUI.switchToWindowIndex('0')
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

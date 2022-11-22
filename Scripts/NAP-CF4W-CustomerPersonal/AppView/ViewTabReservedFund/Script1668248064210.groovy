@@ -46,7 +46,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab reserved fund'
 WebUI.click(findTestObject('Object Repository/AppView/ReservedFund/RSV Tab'))
@@ -61,7 +61,7 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 
 
 'get referantor data arraylist from db'
-HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbconnection.VerifyAppView.checkReservedFund'(sqlconnection, appno)
+HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbConnection.VerifyAppView.checkReservedFund'(sqlconnection, appno)
 ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
 ArrayList<String> listRSV = resultRSV.get("RSVList")
 
@@ -107,16 +107,16 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '12. ReservedFund', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '12. ReservedFund', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '12. ReservedFund', 0, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '12. ReservedFund', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '12. ReservedFund', 1, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '12. ReservedFund', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1

@@ -21,10 +21,10 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -41,7 +41,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultFin = CustomKeywords.'dbconnection.VerifyAppView.checkFinancial'(sqlconnectionLOS, appno)
+HashMap<String,ArrayList> resultFin = CustomKeywords.'dbConnection.VerifyAppView.checkFinancial'(sqlconnectionLOS, appno)
 ArrayList<String> listSubsidy = resultFin.get("Subsidy")
 ArrayList<String> listFee = resultFin.get("Fee")
 ArrayList<String> listFinancialData = resultFin.get("FinData")
@@ -292,16 +292,16 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '8. Financial', 1, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '8. Financial', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1

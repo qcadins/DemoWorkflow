@@ -17,10 +17,10 @@ import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 String appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)
@@ -32,7 +32,7 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 def commissionData = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 
 'Mencari jumlah supplier, supplier employee, dan referantor yang muncul dalam commission'
-ArrayList<Integer> countData = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionRecipientDB'(sqlconnection, appno)
+ArrayList<Integer> countData = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionRecipientDB'(sqlconnection, appno)
 
 int suppsize = countData.get(0)
 int suppempsize = countData.get(1)
@@ -44,15 +44,15 @@ ArrayList<Integer> refSource = new ArrayList<Integer>()
 
 if(suppsize>0){
 	'Mencari jumlah commission source dari masing-masing supplier'
-	suppSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceSupplierDB'(sqlconnection, appno)
+	suppSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceSupplierDB'(sqlconnection, appno)
 }
 if(suppempsize>0){
 	'Mencari jumlah commission source dari masing-masing supplier employee'
-	suppEmpSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceSupplierEmpDB'(sqlconnection, appno)
+	suppEmpSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceSupplierEmpDB'(sqlconnection, appno)
 }
 if(refsize>0){
 	'Mencari jumlah commission source dari masing-masing referantor'
-	refSource = CustomKeywords.'dbconnection.CustomerDataVerif.countCommissionSourceReferantorDB'(sqlconnection, appno)
+	refSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceReferantorDB'(sqlconnection, appno)
 }
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
@@ -68,7 +68,7 @@ def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable
 1
 
 'Mencari nilai commission amount dari setiap commission source dari supplier, supplier employee, dan referantor'
-HashMap<String,ArrayList> result = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,commissionData.getValue(GlobalVariable.NumofColm,12))
+HashMap<String,ArrayList> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,commissionData.getValue(GlobalVariable.NumofColm,12))
 ArrayList<String> comSupp = result.get("Supp")
 ArrayList<String> comSuppEmp = result.get("SuppEmp")
 ArrayList<String> comRef = result.get("Ref")
@@ -192,11 +192,11 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
 	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

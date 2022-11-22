@@ -24,7 +24,7 @@ GlobalVariable.FlagFailed = 0
 GlobalVariable.FlagWarning = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
 'declare legal type failed delete array list'
 ArrayList<String> legaltypefaileddelete = new ArrayList<>()

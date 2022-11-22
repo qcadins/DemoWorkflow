@@ -20,7 +20,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company - Guarantor')
 
@@ -78,14 +78,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 								
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
@@ -93,11 +93,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -107,18 +107,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                                     AddressType) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
                                 }
                                 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalOwnership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'))
@@ -126,11 +126,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -140,11 +140,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                                     Ownership) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -189,14 +189,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 
 								'connect DB FOU'
-								Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+								Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                                 ArrayList<String> AddressType
 
                                 ArrayList<String> Ownership
 
                                 'get data array dari db'
-                                AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                                AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
@@ -204,11 +204,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -218,18 +218,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                                     AddressType) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
                                 }
                                 
                                 'get data array dari db'
-                                Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                                Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                                 'get total label from ddl'
                                 int totalOwnership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'))
@@ -237,11 +237,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -251,11 +251,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                                     Ownership) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -292,14 +292,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
 
 					'connect DB FOU'
-					Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+					Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
                     ArrayList<String> AddressType
 
                     ArrayList<String> Ownership
 
                     'get data array dari db'
-                    AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+                    AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
@@ -307,11 +307,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'verify total ddl confins = total ddl db'
                     if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -321,18 +321,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                         AddressType) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
                     }
                     
                     'get data array dari db'
-                    Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+                    Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
 
                     'get total label from ddl'
                     int totalOwnership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'))
@@ -340,11 +340,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'verify total ddl confins = total ddl db'
                     if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -354,11 +354,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                         Ownership) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -447,11 +447,11 @@ def inputaddress() {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Cancel'))
 
             'write to excel if failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusFailed)
 
             'write to excel reason lookup'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusReasonLookup)
 
             GlobalVariable.FlagFailed = 1

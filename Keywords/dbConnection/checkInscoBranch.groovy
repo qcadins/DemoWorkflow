@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -20,23 +20,25 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class checkStep {
+
+public class checkInscoBranch {
 
 	@Keyword
-	public checkAppCurrStep(Sql instanceLOS, String appNo){
-		String appStep
-		instanceLOS.eachRow(("select app_curr_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
-			appStep = row[0]
+	public checkDDLInscoBranch(Sql instance, String officeName){
+		ArrayList<String> inscoBranch = new ArrayList<String>()
+		instance.eachRow(("SELECT VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vom ON v.VENDOR_ID=vom.VENDOR_ID JOIN REF_OFFICE ro ON ro.REF_OFFICE_ID = vom.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
+			inscoBranch.add(row[0].toUpperCase())
 		})
-		return appStep
+		return inscoBranch
 	}
 
+
 	@Keyword
-	public checkCustCheckStep(Sql instanceLOS, String appNo){
-		String custCheckStep
-		instanceLOS.eachRow(("select cust_checking_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
-			custCheckStep = row[0]
+	public countDDLInscoBranch(Sql instance, String officeName){
+		Integer countData
+		instance.eachRow(("SELECT count(*) vendor_name FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vom ON v.VENDOR_ID=vom.VENDOR_ID JOIN REF_OFFICE ro ON vom.REF_OFFICE_ID = ro.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
+			countData = (row[0])
 		})
-		return custCheckStep
+		return countData
 	}
 }

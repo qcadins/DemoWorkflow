@@ -46,7 +46,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab referantor'
 WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'))
@@ -60,7 +60,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
-ArrayList<String> resultReferantor = CustomKeywords.'dbconnection.VerifyAppView.checkReferantor'(sqlconnection, appno)
+ArrayList<String> resultReferantor = CustomKeywords.'dbConnection.VerifyAppView.checkReferantor'(sqlconnection, appno)
 
 'count ref table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewReferantor > div > table > tbody > tr'))
@@ -130,16 +130,16 @@ for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4. Referantor', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4. Referantor', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

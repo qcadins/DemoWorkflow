@@ -25,7 +25,7 @@ import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 WebDriver driver = DriverFactory.getWebDriver()
 
 'connect DB TAX'
-Sql sqlconnectionTAX = CustomKeywords.'dbconnection.connectDB.connectTAX'()
+Sql sqlconnectionTAX = CustomKeywords.'dbConnection.connectDB.connectTAX'()
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00
@@ -573,10 +573,10 @@ GlobalVariable.RemainingAllocatedAmt = remainingAllocatedAmount
 
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				0, numofcolm-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

@@ -25,7 +25,7 @@ int flagWarning = 0
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 datafile = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
@@ -578,11 +578,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Cancel'))
 
                                     'Write to Excel FAILED'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                                     'Flagfailed +1 karena lookup gagal'
@@ -808,11 +808,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
 
                                     'Write to Excel FAILED'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                                     'Flagfailed +1 karena lookup gagal'
@@ -929,7 +929,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 (GlobalVariable.CountNumofCustomer)--
                             } else {
                                 if (flagWarning > 0) {
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                                 }
                             }
@@ -943,7 +943,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 (GlobalVariable.CountNumofCustomer)--
                             } else {
                                 if (flagWarning > 0) {
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                                 }
                             }
@@ -1005,7 +1005,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 (GlobalVariable.CountNumofCustomer)--
                             } else {
                                 if (flagWarning > 0) {
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                                 }
                             }
@@ -1019,7 +1019,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 (GlobalVariable.CountNumofCustomer)--
                             } else {
                                 if (flagWarning > 0) {
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                                 }
                             }
@@ -1059,7 +1059,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         if (WebUI.verifyMatch(WebUI.getText(modifyNewisActive), 'NO', false)) {
                             break
                         } else {
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '2.TabManagementShareholderData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + 
                                 customertype)
                         }

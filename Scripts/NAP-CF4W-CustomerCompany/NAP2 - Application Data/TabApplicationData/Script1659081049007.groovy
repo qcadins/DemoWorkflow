@@ -19,13 +19,13 @@ import groovy.sql.Sql as Sql
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -42,7 +42,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
 
     'Pengecekan interest type dari db product offering '
-    String InterestType = CustomKeywords.'dbconnection.checkInterestType.checkInterest'(sqlconnectionLOS, POName)
+    String InterestType = CustomKeywords.'dbConnection.checkInterestType.checkInterest'(sqlconnectionLOS, POName)
 
     'Ambil text interest type dari confins'
     String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
@@ -67,13 +67,13 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
         'Cek nama officer pada db dari username login confins'
-        String officerName = CustomKeywords.'dbconnection.checkOfficer.checkOfficerName'(sqlconnectionFOU, usernameLogin)
+        String officerName = CustomKeywords.'dbConnection.checkOfficer.checkOfficerName'(sqlconnectionFOU, usernameLogin)
 
         'Verif username login dengan text label officer'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true))
 
         'Ambil nama spv dari db'
-        spvName = CustomKeywords.'dbconnection.checkOfficer.checkSPV'(sqlconnectionFOU, usernameLogin)
+        spvName = CustomKeywords.'dbConnection.checkOfficer.checkSPV'(sqlconnectionFOU, usernameLogin)
 
         'Pengecekan jika nama spv dari db = null'
         if (spvName == null) {
@@ -102,7 +102,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
             'Cek total data officer pada db'
-            Integer countOfficer = CustomKeywords.'dbconnection.checkOfficer.countOfficerLookup'(sqlconnectionFOU, office)
+            Integer countOfficer = CustomKeywords.'dbConnection.checkOfficer.countOfficerLookup'(sqlconnectionFOU, office)
 
             'Ambil nilai total data officer pada lookup confins'
             String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -164,11 +164,11 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 
             'write to excel failed'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
             'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
                 1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
             'flagfailed +1 karena gagal melakukan lookup'
@@ -258,7 +258,7 @@ String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCo
 //'Select option dropdownlist Interest Type'
 //WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
 //    textInterestType, false)
-//CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+//CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 //	21, GlobalVariable.NumofColm - 1, textInterestType)
 scheme = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 
@@ -367,11 +367,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 
         'write to excel failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
         'Write To Excel GlobalVariable.StatusReasonLookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
         'flagfailed +1 karena gagal melakukan lookup'
@@ -478,11 +478,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 
     'write to excel failed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
     'flagfailed +1 karena gagal melakukan lookup'
@@ -532,11 +532,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 
     'write to excel failed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
 
     'flagfailed +1 karena gagal melakukan lookup'
@@ -595,10 +595,10 @@ if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBC
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '6.TabApplicationData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '6.TabApplicationData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '6.TabApplicationData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

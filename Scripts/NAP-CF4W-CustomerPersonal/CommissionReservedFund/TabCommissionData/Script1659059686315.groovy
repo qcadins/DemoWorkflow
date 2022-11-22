@@ -52,9 +52,9 @@ String url = (((servername + ';instanceName=') + instancename) + ';databaseName=
 
 String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
 
-Sql sqlConnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
-Sql sqlConnectionLOS = CustomKeywords.'dbconnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -71,7 +71,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 //String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
-String appLastStep = CustomKeywords.'dbconnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
+String appLastStep = CustomKeywords.'dbConnection.checkAppLastStep.checkLastStep'(sqlConnectionLOS, appNo)
 
 if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
@@ -157,11 +157,11 @@ if(GlobalVariable.Role=="Testing"){
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 					'Write to Excel FAILED'
-					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
@@ -223,7 +223,7 @@ if (variableSupp.size() > 0) {
                 GlobalVariable.NumofColm, supRow+2), FailureHandling.OPTIONAL)
 
         'Query Select pada database untuk mengambil nilai supplier code'
-        supplierCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierCode'(sqlConnection, supplierName)
+        supplierCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierCode'(sqlConnection, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         ArrayList<WebElement> variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
@@ -510,7 +510,7 @@ if (variableSuppEmp.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccSuppEmp[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai supplier employee no'
-        supplierEmployeeCode = CustomKeywords.'dbconnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlConnection, 
+        supplierEmployeeCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlConnection, 
             supplierEmployeeName, supplierEmpPos, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
@@ -784,7 +784,7 @@ if (variableRef.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccRef[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai referantor code/nomor'
-        refCode = CustomKeywords.'dbconnection.checkCommissionCode.checkReferantorCode'(sqlConnection, refName)
+        refCode = CustomKeywords.'dbConnection.checkCommissionCode.checkReferantorCode'(sqlConnection, refName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + refCode) + ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
@@ -955,10 +955,10 @@ if (variableRef.size() > 0) {
 }
 
 if(commissiondelete.size() > 0){
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
@@ -972,18 +972,18 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
 'Pengecekan jika calculate error'
 if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
 	'Write to Excel FAILED'
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 	
 	'Pengecekan error alert amount/percentage melebihi limit'
 	if(WebUI.getText(alertCalculate).toLowerCase().contains("Cannot be more than".toLowerCase())){
 		
 		'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
 	}
 	
@@ -1051,10 +1051,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					0, numofcolm-1, GlobalVariable.StatusFailed)
 
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1

@@ -45,7 +45,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'click tab Asset'
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
@@ -58,7 +58,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
-ArrayList<String> resultAssetSuppInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnection, 
+ArrayList<String> resultAssetSuppInfo = CustomKeywords.'dbConnection.VerifyAppView.checkAssetSupplierInfo'(sqlconnection, 
     appno)
 
 index = 0
@@ -76,7 +76,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetSuppInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset info'
-ArrayList<String> resultAssetInfo = CustomKeywords.'dbconnection.VerifyAppView.checkAssetInformation'(sqlconnection, appno)
+ArrayList<String> resultAssetInfo = CustomKeywords.'dbConnection.VerifyAppView.checkAssetInformation'(sqlconnection, appno)
 
 index = 0
 
@@ -145,7 +145,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetInfo[index++]).toUpperCase(), false))
 
 'get arraylist asset attr list'
-ArrayList<String> resultAssetAttrList = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
+ArrayList<String> resultAssetAttrList = CustomKeywords.'dbConnection.VerifyAppView.checkAssetAttr'(sqlconnection, appno)
 
 index = 0
 
@@ -198,7 +198,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
 }
 
 'get arraylist asset Accessories'
-ArrayList<String> resultAssetAccessories = CustomKeywords.'dbconnection.VerifyAppView.checkAssetAccessories'(sqlconnection, 
+ArrayList<String> resultAssetAccessories = CustomKeywords.'dbConnection.VerifyAppView.checkAssetAccessories'(sqlconnection, 
     appno)
 
 'count Asset Accessories table'
@@ -257,7 +257,7 @@ for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
 }
 
 'get arraylist asset user from db'
-ArrayList<String> resultAssetUser = CustomKeywords.'dbconnection.VerifyAppView.checkAssetUser'(sqlconnection, appno)
+ArrayList<String> resultAssetUser = CustomKeywords.'dbConnection.VerifyAppView.checkAssetUser'(sqlconnection, appno)
 
 index = 0
 
@@ -270,7 +270,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetUser[index++]).toUpperCase(), false))
 
 'get arraylist asset owner from db'
-ArrayList<String> resultAssetOwner = CustomKeywords.'dbconnection.VerifyAppView.checkAssetOwner'(sqlconnection, appno)
+ArrayList<String> resultAssetOwner = CustomKeywords.'dbConnection.VerifyAppView.checkAssetOwner'(sqlconnection, appno)
 
 'count Asset owner div section'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#owner div'))
@@ -296,7 +296,7 @@ for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerinde
 }
 
 'get arraylist asset owner from db'
-ArrayList<String> resultAssetLocation = CustomKeywords.'dbconnection.VerifyAppView.checkAssetLocation'(sqlconnection, appno)
+ArrayList<String> resultAssetLocation = CustomKeywords.'dbConnection.VerifyAppView.checkAssetLocation'(sqlconnection, appno)
 
 index = 0
 
@@ -311,7 +311,7 @@ for (Locindex = 1; Locindex < resultAssetLocation.size(); Locindex++) {
 }
 
 'get arraylist asset collateral'
-ArrayList<String> resultAssetCollateral = CustomKeywords.'dbconnection.VerifyAppView.checkAssetCollateral'(sqlconnection, 
+ArrayList<String> resultAssetCollateral = CustomKeywords.'dbConnection.VerifyAppView.checkAssetCollateral'(sqlconnection, 
     appno)
 
 'count Asset collateral table'
@@ -386,16 +386,16 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

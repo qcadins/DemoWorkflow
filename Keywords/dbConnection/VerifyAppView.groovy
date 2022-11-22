@@ -1,4 +1,4 @@
-package dbconnection
+package dbConnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -887,7 +887,7 @@ public class VerifyAppView {
 				//					AllocComRef.add(checkCommissionAllocation(instanceFOU, row[0]))
 				//				}
 				if(i==1){
-					Newcomdt = new dbconnection.checkCommissionCode().checkReferantorName(instanceFOU, comdt)
+					Newcomdt = new dbConnection.checkCommissionCode().checkReferantorName(instanceFOU, comdt)
 					listComRef.add(Newcomdt)
 				}
 				else{

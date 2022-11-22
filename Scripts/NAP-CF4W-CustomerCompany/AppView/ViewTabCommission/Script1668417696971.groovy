@@ -21,13 +21,13 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 GlobalVariable.FlagWarning = 0
 
@@ -44,7 +44,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionData'(sqlconnectionLOS, appno, sqlconnectionFOU)
+HashMap<String,ArrayList> resultCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionData'(sqlconnectionLOS, appno, sqlconnectionFOU)
 
 ArrayList<String> ComSupp = resultCom.get("ComSupp")
 
@@ -52,7 +52,7 @@ ArrayList<String> ComSuppEmp = resultCom.get("ComSuppEmp")
 
 ArrayList<String> ComRef = resultCom.get("ComRef")
 
-ArrayList<String> listSumm = CustomKeywords.'dbconnection.VerifyAppView.checkSummaryCommission'(sqlconnectionLOS, appno)
+ArrayList<String> listSumm = CustomKeywords.'dbConnection.VerifyAppView.checkSummaryCommission'(sqlconnectionLOS, appno)
 
 ArrayList<String> AllocCom = new ArrayList<>()
 
@@ -61,7 +61,7 @@ Suppindex = 1
 
 for (dbindex = 0; dbindex < ComSupp.size(); dbindex++) {
     if ((dbindex % 10) == 0) {
-        AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSupp[dbindex])
+        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSupp[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'
@@ -172,7 +172,7 @@ SuppEmpindex = 1
 
 for (dbindex = 0; dbindex < ComSuppEmp.size(); dbindex++) {
     if ((dbindex % 12) == 0) {
-        AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSuppEmp[dbindex])
+        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSuppEmp[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'
@@ -303,7 +303,7 @@ Refindex = 1
 
 for (dbindex = 0; dbindex < ComRef.size(); dbindex++) {
     if ((dbindex % 10) == 0) {
-        AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComRef[dbindex])
+        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComRef[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'
@@ -421,16 +421,16 @@ for (dbindex = 0; dbindex < listSumm.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '10. Commission', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

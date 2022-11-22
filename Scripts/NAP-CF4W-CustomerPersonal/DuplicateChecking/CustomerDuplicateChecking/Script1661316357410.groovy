@@ -21,10 +21,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare data file dupcheck'
 datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
@@ -32,7 +32,7 @@ datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'get app no from data file dupcheck'
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
-Boolean DupCheckStatus = CustomKeywords.'dbconnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
+Boolean DupCheckStatus = CustomKeywords.'dbConnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 GlobalVariable.FlagFailed = 0
 
@@ -377,10 +377,10 @@ if (DupCheckStatus == true) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
@@ -613,10 +613,10 @@ def pagingTesting() {
 
         if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
                 GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
 
@@ -625,10 +625,10 @@ def pagingTesting() {
         
         if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
                 GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
 
@@ -637,10 +637,10 @@ def pagingTesting() {
         
         if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
+            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
                 GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + 
                 ';\n'))

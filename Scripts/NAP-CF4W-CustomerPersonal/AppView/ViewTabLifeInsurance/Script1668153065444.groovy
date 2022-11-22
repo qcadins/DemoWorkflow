@@ -46,7 +46,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'Klik tab life insurance'
 WebUI.click(findTestObject('Object Repository/AppView/LifeInsurance/LifeInsurance Tab'))
@@ -60,10 +60,10 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get life insurance data arraylist from db'
-ArrayList<String> resultLIData = CustomKeywords.'dbconnection.VerifyAppView.checkLifeInsurance'(sqlconnection, appno)
+ArrayList<String> resultLIData = CustomKeywords.'dbConnection.VerifyAppView.checkLifeInsurance'(sqlconnection, appno)
 
 'get life insurance data arraylist from db'
-ArrayList<String> resultLIObject = CustomKeywords.'dbconnection.VerifyAppView.checkLifeInsuranceObject'(sqlconnection, appno)
+ArrayList<String> resultLIObject = CustomKeywords.'dbConnection.VerifyAppView.checkLifeInsuranceObject'(sqlconnection, appno)
 
 int index = 0
 
@@ -142,16 +142,16 @@ if(resultLIObject.size()>0 && resultLIObject !=null && variableData.size()>0){
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7. LifeInsurance', 1, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7. LifeInsurance', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1

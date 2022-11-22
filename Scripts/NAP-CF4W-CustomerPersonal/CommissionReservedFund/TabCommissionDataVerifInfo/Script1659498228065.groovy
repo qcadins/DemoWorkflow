@@ -39,7 +39,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
 String urlTAX = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseTAX
 
-Sql sqlConnectionTAX = CustomKeywords.'dbconnection.connectDB.connect'(urlTAX, username, password, driverclassname)
+Sql sqlConnectionTAX = CustomKeywords.'dbConnection.connectDB.connect'(urlTAX, username, password, driverclassname)
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00
@@ -587,10 +587,10 @@ GlobalVariable.RemainingAllocatedAmt = remainingAllocatedAmount
 
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				0, numofcolm-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

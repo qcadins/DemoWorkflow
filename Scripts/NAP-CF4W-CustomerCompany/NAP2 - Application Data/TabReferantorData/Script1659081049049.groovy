@@ -22,7 +22,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'arraylist referantor name yang gagal'
 ArrayList<String> referantorfaileddelete = new ArrayList<String>()
@@ -42,10 +42,10 @@ if (GlobalVariable.Role == 'Testing') {
 datafilereferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -138,11 +138,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                             modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'get referantor name'
@@ -224,10 +224,10 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
     }
     
     if (referantorfaileddelete.size() > 0) {
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 
         (GlobalVariable.FlagWarning)++
@@ -307,7 +307,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 
                                 'Cek total data referantor pada db'
-                                Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(
+                                Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(
                                     sqlconnectionFOU, refCategory, officeName)
 
                                 'Ambil nilai total data referantor pada lookup confins'
@@ -343,11 +343,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                             'Click delete'
@@ -366,7 +366,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                                 ArrayList<String> BankAccount = new ArrayList<String>()
 
                                 'Ambil array teks bank account dari db'
-                                BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, 
+                                BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, 
                                     refCategory, officeName, referantorCode)
 
                                 'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
@@ -377,7 +377,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                                 'Pengecekan referantor category yang dipilih customer atau agency'
                                 if (refCategory.equalsIgnoreCase('Customer') || refCategory.equalsIgnoreCase('Agency')) {
                                     'Ambil teks default bank account dari db'
-                                    String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(
+                                    String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(
                                         sqlconnectionFOU, refCategory, officeName, referantorCode)
 
                                     'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
@@ -405,11 +405,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                             modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'Click delete'
@@ -468,7 +468,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 
                             'Cek total data referantor pada db'
-                            Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(
+                            Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(
                                 sqlconnectionFOU, refCategory, officeName)
 
                             'Ambil nilai total data referantor pada lookup confins'
@@ -504,11 +504,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                         'write to excel WARNING'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                         'get referantor name'
@@ -531,7 +531,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             ArrayList<String> BankAccount = new ArrayList<String>()
 
                             'Ambil array teks bank account dari db'
-                            BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, 
+                            BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, 
                                 refCategory, officeName, referantorCode)
 
                             'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
@@ -542,7 +542,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             'Pengecekan referantor category yang dipilih customer atau agency'
                             if (refCategory.equalsIgnoreCase('Customer') || refCategory.equalsIgnoreCase('Agency')) {
                                 'Ambil teks default bank account dari db'
-                                String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(
+                                String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(
                                     sqlconnectionFOU, refCategory, officeName, referantorCode)
 
                                 'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
@@ -570,11 +570,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                         modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                         'write to excel WARNING'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                         'Click delete'
@@ -629,7 +629,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 }
                 
                 'write to excel SUCCESS'
-                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                     0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
             }
         }
@@ -706,7 +706,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 
                         'Cek total data referantor pada db'
-                        Integer countReferantor = CustomKeywords.'dbconnection.checkReferantor.countReferantorLookup'(sqlconnectionFOU, 
+                        Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(sqlconnectionFOU, 
                             refCategory, officeName)
 
                         'Ambil nilai total data referantor pada lookup confins'
@@ -744,11 +744,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                     'write to excel WARNING'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                     'Click delete'
@@ -768,7 +768,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         ArrayList<String> BankAccount = new ArrayList<String>()
 
                         'Ambil array teks bank account dari db'
-                        BankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, refCategory, 
+                        BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlconnectionFOU, refCategory, 
                             officeName, referantorCode)
 
                         'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
@@ -779,7 +779,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         'Pengecekan referantor category yang dipilih customer atau agency'
                         if (refCategory.equalsIgnoreCase('Customer') || refCategory.equalsIgnoreCase('Agency')) {
                             'Ambil teks default bank account dari db'
-                            String defaultBankAccount = CustomKeywords.'dbconnection.checkReferantor.checkBankAccountDefault'(
+                            String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(
                                 sqlconnectionFOU, refCategory, officeName, referantorCode)
 
                             'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
@@ -807,11 +807,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                     modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                     'write to excel WARNING'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                     'Click delete'
@@ -839,7 +839,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     'Pengecekan referantor category (customer, agency, atau mf employee)'
                     if (refCategory.equalsIgnoreCase('CUSTOMER')) {
                         'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                        ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkCustomerReferantor'(
+                        ArrayList<String> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkCustomerReferantor'(
                             sqlconnectionFOU, referantorCode)
 
                         ArrayList<String> arrayMatch = adddatatoarraylist(referantorDetail)
@@ -854,7 +854,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         }
                     } else if (refCategory.equalsIgnoreCase('AGENCY')) {
                         'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                        ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkAgencyReferantor'(
+                        ArrayList<String> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkAgencyReferantor'(
                             sqlconnectionFOU, referantorCode)
 
                         ArrayList<String> arrayMatch = adddatatoarraylist(referantorDetail)
@@ -869,7 +869,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         }
                     } else if (refCategory.equalsIgnoreCase('MULTIFINANCE EMPLOYEE')) {
                         'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-                        ArrayList<String> referantorDetail = CustomKeywords.'dbconnection.checkReferantorDetail.checkMFEmployeeReferantor'(
+                        ArrayList<String> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkMFEmployeeReferantor'(
                             sqlconnectionFOU, referantorCode)
 
                         ArrayList<String> arrayMatch = adddatatoarraylist(referantorDetail)
@@ -889,7 +889,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 }
                 
                 'write to excel SUCCESS'
-                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                     0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 
                 modifyObjectIndex++
@@ -980,17 +980,17 @@ def adddatatoarraylist(ArrayList<String> referantorDetail) {
 
 def writeReasonFailedDelete() {
     'Write To Excel GlobalVariable.ReasonFailedDelete'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
 }
 
 def writeReasonFailedLookup() {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
@@ -998,11 +998,11 @@ def writeReasonFailedLookup() {
 
 def writeReasonFailedDDL() {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDDL)
 
     GlobalVariable.FlagFailed = 1
@@ -1010,11 +1010,11 @@ def writeReasonFailedDDL() {
 
 def writeToExcelTidakSesuaiDB() {
     'write to excel WARNING'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
     'Write To Excel GlobalVariable.StatusReason'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 
     'click cancel'
@@ -1037,10 +1037,10 @@ def getTextBankAccount(String newSelectBankaccount) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

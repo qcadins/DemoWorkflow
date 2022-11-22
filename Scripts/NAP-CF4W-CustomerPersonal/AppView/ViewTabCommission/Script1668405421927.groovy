@@ -50,10 +50,10 @@ String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseNa
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbconnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
 
 'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
 
 'Klik tab commission'
 WebUI.click(findTestObject('Object Repository/AppView/Commission/Commission Tab'))
@@ -67,11 +67,11 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionData'(sqlconnection, appno, sqlconnectionFOU)
+HashMap<String,ArrayList> resultCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionData'(sqlconnection, appno, sqlconnectionFOU)
 ArrayList<String> ComSupp = resultCom.get("ComSupp")
 ArrayList<String> ComSuppEmp = resultCom.get("ComSuppEmp")
 ArrayList<String> ComRef = resultCom.get("ComRef")
-ArrayList<String> listSumm = CustomKeywords.'dbconnection.VerifyAppView.checkSummaryCommission'(sqlconnection, appno)
+ArrayList<String> listSumm = CustomKeywords.'dbConnection.VerifyAppView.checkSummaryCommission'(sqlconnection, appno)
 ArrayList<String> AllocCom = new ArrayList<>()
 
 //Check Section Supplier Commission
@@ -80,7 +80,7 @@ Suppindex = 1
 for (dbindex = 0; dbindex < ComSupp.size(); dbindex++) {
 	
 	if(dbindex%10==0){
-		AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComSupp[dbindex])
+		AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComSupp[dbindex])
 		for(int i=0;i<AllocCom.size();i++){
 			'modify object commission data'
 			modifyNewAllocCom = WebUI.modifyObjectProperty(findTestObject('AppView/Commission/ModifyAllocateSupplier'), 'xpath', 'equals', "//*[@id='formInformationSupplier']/div/div["+Suppindex+"]/div[3]/div["+(i+1)+"]/div/div[2]/label", true)
@@ -181,7 +181,7 @@ SuppEmpindex = 1
 for (dbindex = 0; dbindex < ComSuppEmp.size(); dbindex++) {
 	
 	if(dbindex%12==0){
-		AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComSuppEmp[dbindex])
+		AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComSuppEmp[dbindex])
 		for(int i=0;i<AllocCom.size();i++){
 			'modify object commission data'
 			modifyNewAllocCom = WebUI.modifyObjectProperty(findTestObject('AppView/Commission/ModifyAllocateSupplierEmp'), 'xpath', 'equals', "//*[@id='formInformationSupplierEmployee']/div/div["+SuppEmpindex+"]/div[3]/div["+(i+1)+"]/div/div[2]/label", true)
@@ -300,7 +300,7 @@ Refindex = 1
 for (dbindex = 0; dbindex < ComRef.size(); dbindex++) {
 	
 	if(dbindex%10==0){
-		AllocCom = CustomKeywords.'dbconnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComRef[dbindex])
+		AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnection,ComRef[dbindex])
 		for(int i=0;i<AllocCom.size();i++){
 			'modify object commission data'
 			modifyNewAllocCom = WebUI.modifyObjectProperty(findTestObject('AppView/Commission/ModifyAllocateRef'), 'xpath', 'equals', "//*[@id='formInformationReferantor']/div/div["+Refindex+"]/div[3]/div["+(i+1)+"]/div/div[2]/label", true)
@@ -409,16 +409,16 @@ for (dbindex = 0; dbindex < listSumm.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 1, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1
