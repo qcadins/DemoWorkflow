@@ -34,8 +34,6 @@ ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView
 
 int index = 0
 
-println(resultCustomerMainData)
-
 'verify cust name'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
@@ -80,6 +78,7 @@ ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cs
 
 index = 0
 
+'looping address appview'
 for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
     'modify object address type'
     modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -130,6 +129,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustSh
 
 index = 0
 
+'looping MS Appview'
 for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
     'modify object MS Name'
     modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -183,6 +183,7 @@ for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
 'get arraylist contact person from db'
 ArrayList<String> resultCP = CustomKeywords.'appView.verifyAppView.checkContactPersonData'(sqlconnectionLOS, appno)
 
+'looping contact person appview'
 for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
     'modify object contact person'
     modifyNewcontactpersonobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -199,6 +200,7 @@ ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFin
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
+'looping financial appview'
 for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
     'modify object financial data date'
     modifyNewfinancialDataDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -213,6 +215,7 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnectionLOS, 
     appno)
 
+'looping financial atr appview'
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
     'modify object financial data attr'
     modifyNewfinancialDataAttr = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -228,6 +231,7 @@ ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBan
 
 index = 0
 
+'looping bankacc appview'
 for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
     'modify object bank name - bank acc no - acc name'
     modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -257,6 +261,7 @@ for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
 'count bank statement table'
 variableDataBank = DriverFactory.getWebDriver().findElements(By.cssSelector('#BankAccount > div lib-ucsubsection'))
 
+'looping bank statement app view'
 for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
     variableDataBankStatement = DriverFactory.getWebDriver().findElements(By.cssSelector(('#BankAccInfo' + bankIndex) + 
             '> div:nth-child(2) > table > tbody tr'))
@@ -338,8 +343,6 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
             checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBalanceAmount).replace(',', '').toUpperCase(), 
                     (resultBankAccStatement[index++]).toUpperCase(), false))
         }
-        
-        println(resultBankAccStatement)
     }
 }
 
@@ -351,6 +354,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustLe
 
 index = 0
 
+'looping legal index appview'
 for (Legalindex = 1; Legalindex <= variableData.size(); Legalindex++) {
     'modify object Legal Doc Type'
     modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -415,6 +419,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 'get arraylist other info from db'
 ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno)
 
+'looping other attribute appview'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
     'modify object other info'
     modifyNewothinfoobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -458,19 +463,21 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
+	'write to excel success'
+	new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
+		'write to excel failed'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
+		'write to excel reason failed verify equal or match'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-
