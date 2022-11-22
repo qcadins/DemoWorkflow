@@ -157,11 +157,11 @@ if(GlobalVariable.Role=="Testing"){
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 					'Write to Excel FAILED'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
@@ -955,10 +955,10 @@ if (variableRef.size() > 0) {
 }
 
 if(commissiondelete.size() > 0){
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
@@ -972,18 +972,18 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP
 'Pengecekan jika calculate error'
 if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
 	'Write to Excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 	
 	'Pengecekan error alert amount/percentage melebihi limit'
 	if(WebUI.getText(alertCalculate).toLowerCase().contains("Cannot be more than".toLowerCase())){
 		
 		'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
 	}
 	
@@ -1051,10 +1051,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, numofcolm-1, GlobalVariable.StatusFailed)
 
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1

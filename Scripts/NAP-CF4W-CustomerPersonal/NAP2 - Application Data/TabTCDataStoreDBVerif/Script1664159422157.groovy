@@ -109,10 +109,10 @@ for(index = 0 ; index < result.size()/9 ; index++){
 
 if(flagWarning > 0){
 	'write to excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }

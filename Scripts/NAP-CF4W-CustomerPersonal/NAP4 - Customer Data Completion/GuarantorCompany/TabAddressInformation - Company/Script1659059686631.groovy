@@ -93,11 +93,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -107,11 +107,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                                     AddressType) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -126,11 +126,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -140,11 +140,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                                     Ownership) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -204,11 +204,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -218,11 +218,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                                     AddressType) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -237,11 +237,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'verify total ddl confins = total ddl db'
                                 if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -251,11 +251,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                                     Ownership) == false) {
                                     'write to excel if failed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
                                     'write to excel reasonfailedddl'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                                     GlobalVariable.FlagFailed = 1
@@ -307,11 +307,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'verify total ddl confins = total ddl db'
                     if (WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size()) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -321,11 +321,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
                         AddressType) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -340,11 +340,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'verify total ddl confins = total ddl db'
                     if (WebUI.verifyEqual(totalOwnership - 1, Ownership.size()) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -354,11 +354,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'), 
                         Ownership) == false) {
                         'write to excel if failed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             0, Address - 1, GlobalVariable.StatusFailed)
 
                         'write to excel reasonfailedddl'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                             1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
                         GlobalVariable.FlagFailed = 1
@@ -447,11 +447,11 @@ def inputaddress() {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Cancel'))
 
             'write to excel if failed'
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusFailed)
 
             'write to excel reason lookup'
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusReasonLookup)
 
             GlobalVariable.FlagFailed = 1

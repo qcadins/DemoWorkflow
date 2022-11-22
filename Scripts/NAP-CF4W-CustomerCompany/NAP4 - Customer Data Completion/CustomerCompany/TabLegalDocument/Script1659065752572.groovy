@@ -104,11 +104,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                                 LegalDocType) == false) {
                                 'Write To Excel GlobalVariable.StatusFailed'
-                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
 
                                 'Write To Excel GlobalVariable.ReasonFailedDDL'
-                                CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                     '6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
                                 (GlobalVariable.FlagFailed)++
@@ -223,10 +223,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (legaltypefaileddelete.size() > 0) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 
         (GlobalVariable.FlagWarning)++
@@ -280,11 +280,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                                     LegalDocType) == false) {
                                     'Write To Excel GlobalVariable.StatusFailed'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
 
                                     'Write To Excel GlobalVariable.ReasonFailedDDL'
-                                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                         '6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
                                     (GlobalVariable.FlagFailed)++
@@ -376,11 +376,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                         LegalDocType) == false) {
                         'Write To Excel GlobalVariable.StatusFailed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
                             0, legal - 1, GlobalVariable.StatusFailed)
 
                         'Write To Excel GlobalVariable.ReasonFailedDDL'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
                             1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
                         (GlobalVariable.FlagFailed)++
@@ -465,11 +465,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
                         LegalDocType) == false) {
                         'Write To Excel GlobalVariable.StatusFailed'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
                             0, legal - 1, GlobalVariable.StatusFailed)
 
                         'Write To Excel GlobalVariable.ReasonFailedDDL'
-                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
                             1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
                         (GlobalVariable.FlagFailed)++
@@ -559,10 +559,10 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (flagWarning > 0) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 

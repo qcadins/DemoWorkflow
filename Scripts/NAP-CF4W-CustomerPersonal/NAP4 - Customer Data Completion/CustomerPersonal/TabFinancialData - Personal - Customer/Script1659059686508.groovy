@@ -138,11 +138,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (financialDateDelete.size() > 0) {
 		'write to excel status warning'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		'flagwarning +1'
@@ -301,10 +301,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (bankAccDelete.size() > 0) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
@@ -510,11 +510,11 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData - Company/button_Cancel'))
 
             'Write To Excel GlobalVariable.StatusWarning'
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
                 0, financialdata - 1, GlobalVariable.StatusWarning)
 
             'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
                 1, financialdata - 1, GlobalVariable.StatusReasonLookup)
 
             flagWarning++
@@ -814,7 +814,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
         }
         
         if (flagWarning > 0) {
-            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
                 0, financialdata - 1, GlobalVariable.StatusWarning)
         }
         

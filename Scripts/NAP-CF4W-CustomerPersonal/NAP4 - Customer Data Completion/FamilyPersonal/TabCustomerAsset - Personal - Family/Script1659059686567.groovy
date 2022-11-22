@@ -157,10 +157,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (assettypefaileddelete.size() > 0) {
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 
             0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 
             1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
         (GlobalVariable.FlagWarning)++
@@ -276,10 +276,10 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (flagWarning > 0) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 0, GlobalVariable.NumofFamily - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 0, GlobalVariable.NumofFamily - 
         1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 1, GlobalVariable.NumofFamily - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.CustomerAsset', 1, GlobalVariable.NumofFamily - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 

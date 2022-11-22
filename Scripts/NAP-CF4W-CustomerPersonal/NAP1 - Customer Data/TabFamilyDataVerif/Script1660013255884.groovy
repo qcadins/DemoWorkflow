@@ -38,10 +38,10 @@ for (int i = 0; i < result.size(); i++) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabFamilyData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabFamilyData',
 				0, GlobalVariable.NumofFamily-1, GlobalVariable.StatusFailed)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabFamilyData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabFamilyData',
 				1, GlobalVariable.NumofFamily-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

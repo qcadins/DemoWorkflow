@@ -186,11 +186,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).equa
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         'Flagfailed +1 karena gagal melakukan lookup'
