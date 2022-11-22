@@ -1,4 +1,5 @@
 package customizeKeyword
+
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -57,7 +58,7 @@ public class writeToExcel {
 	 * Write to Excel
 	 */
 	@Keyword
-	def writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
+	public writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
 
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
