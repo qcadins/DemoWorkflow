@@ -30,7 +30,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'Loop Multiple family data'
-for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
+for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
      GlobalVariable.FlagFailed = 0
 
     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -389,13 +389,6 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                                 findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                     GlobalVariable.NumofFamily, 54), false)
                         }
-                        
-                        'get customer name'
-                        custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                            'value', FailureHandling.OPTIONAL)
-
-                        'add name to Global variable'
-                        GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
                     }
                 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                     GlobalVariable.NumofFamily, 13) == 'LookUp') {
@@ -455,12 +448,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                             continue
                         }
 						
-						'get customer name'
-						def custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-							'value', FailureHandling.OPTIONAL)
-					
-						'add name to Global variable'
-						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+						
 						
 						//Ambil nilai dari confins untuk diverif dengan db lookup
 						if (GlobalVariable.Role == 'Testing') {
@@ -664,6 +652,13 @@ for (GlobalVariable.NumofFamily = GlobalVariable.CopyAppColm; GlobalVariable.Num
                     }
                 }
                 
+				'get customer name'
+				def custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+					'value', FailureHandling.OPTIONAL)
+				
+				'add name to Global variable'
+				GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 

@@ -26,6 +26,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare flagwarning = 0'
 GlobalVariable.FlagWarning = 0
 
 'Klik tab application'
@@ -39,6 +40,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
     CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '5. Application')
 }
 
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get mo data arraylist from db'
@@ -52,6 +54,7 @@ ArrayList<WebElement> resultAppRestr = CustomKeywords.'appView.verifyAppView.che
 ArrayList<WebElement> resultAttr = CustomKeywords.'appView.verifyAppView.checkApplicationAttribute'(sqlconnectionLOS, 
     appno)
 
+'declare index = 0'
 int index = 0
 
 'verify mo spv'
@@ -70,6 +73,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Application/MORecomm')).toUpperCase(), 
         (resultMO[index++]).toUpperCase(), false))
 
+'reset index = 0'
 index = 0
 
 'verify App source'
@@ -132,6 +136,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Application/MOUNo')).toUpperCase(), 
         (resultAppRestr[index++]).toUpperCase(), false))
 
+'reset index = 0'
 index = 0
 
 'verify blacklist appi'
@@ -154,20 +159,24 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Application/JumlahAsset')).toUpperCase(), 
         (resultAttr[index++]).toUpperCase(), false))
 
+'check if flagwarning = 0 & flagfailed = 0'
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
+	'check if ismatch = false & flagfailed = 0'
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
+		'write to excel status failed'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 1, GlobalVariable.NumofColm - 
+		'write to excel reason verify equal or match'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
+		'flagfailed = 1'
         GlobalVariable.FlagFailed = 1
     }
 }
-

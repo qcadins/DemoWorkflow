@@ -25,6 +25,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare flagwarning'
 GlobalVariable.FlagWarning = 0
 
 'declare variable appno'
@@ -37,11 +38,7 @@ WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 'Verify sort & paging'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
     'declare arraylist resultset, checkVerifySort, checkVerifyFooter'
-    ArrayList<WebElement> resultReset
-
-    ArrayList<WebElement> checkVerifySort
-
-    ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
+    ArrayList<String> resultReset, checkVerifySort, checkVerifyFooter
 
     'Verif reset'
     resultReset = CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
@@ -557,6 +554,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 
                 2))
 
+		'declare listapp = liststring'
         listApp = listString
 
         'reset arraylist listString'
@@ -578,6 +576,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
                 2))
 
+		'declare listapp = liststring'
         listApp = listString
 
         'reset arraylist ListString'
@@ -610,6 +609,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedReset + ';\n'))
 
+		'flagwarning = 1'
         GlobalVariable.FlagWarning = 1
     }
     
@@ -624,6 +624,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedSort + ';\n'))
 
+		'flagwarning = 1'
         GlobalVariable.FlagWarning = 1
     }
     
@@ -638,6 +639,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedFooter + ';\n'))
 
+		'flag warning = 1'
         GlobalVariable.FlagWarning = 1
     }
 }
@@ -763,21 +765,28 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabReserve
 'close window index 1'
 WebUI.closeWindowIndex('1')
 
+'switch window index 0'
 WebUI.switchToWindowIndex('0')
 
+'check if flagwarning = 0 & flagfailed = 0'
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+	'write to excel success'
+    new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
+	'check ismatch = false & flagfailed = 0'
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+		'write to excel failed'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
+		'write to excel reason failed verify equal or match'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
+		'flagfailed = 1'
         GlobalVariable.FlagFailed = 1
     }
 }
