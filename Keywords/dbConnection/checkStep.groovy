@@ -39,4 +39,13 @@ public class checkStep {
 		})
 		return custCheckStep
 	}
+	
+	@Keyword
+	public checkLastStep(Sql instanceLOS, String appno){
+		String applaststep = ""
+		instanceLOS.eachRow(("select app_last_step from APP where app_no = '"+appno+"'"), {  row ->
+			applaststep=row[0]
+		})
+		return applaststep
+	}
 }
