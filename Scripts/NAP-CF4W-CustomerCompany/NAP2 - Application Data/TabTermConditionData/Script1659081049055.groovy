@@ -61,7 +61,7 @@ String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cust
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData/span_appNo'))
 
 'Hashmap untuk mengambil nilai tccode, tcmandatory, tc priorto dan tc is waivable berdasarkan condition-condition dari rule excel'
-HashMap<String, ArrayList> result = CustomKeywords.'tcData.verifTCData.verifyTermConditionData'(sqlconnectionLOS, sqlconnectionFOU, 
+HashMap<String, ArrayList> result = CustomKeywords.'tcData.verifyTCData.verifyTCList'(sqlconnectionLOS, sqlconnectionFOU, 
     custModel, appNo)
 
 ArrayList<WebElement> TCCode
@@ -121,7 +121,7 @@ for (int i = 1; i <= count; i++) {
 
     if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes") {
         'verif document name based on rule'
-        if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlconnectionFOU, textDocumentName), TCCode.get(
+        if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlconnectionFOU, textDocumentName), TCCode.get(
                 i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
 			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabTermConditionData',

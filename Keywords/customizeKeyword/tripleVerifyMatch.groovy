@@ -1,4 +1,4 @@
-package tripleVerifyMatch
+package customizeKeyword
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class TripleVerifyMatch {
+public class tripleVerifyMatch {
 	@Keyword
 	public verifyMatch (String excel, String UI, String DB){
 
