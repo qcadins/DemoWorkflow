@@ -504,7 +504,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik button page 1'
     WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 
-    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true))
+    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppInquiryCountDataInPage'(), true))
 	
 	if(resultReset.contains(false)){
 				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',

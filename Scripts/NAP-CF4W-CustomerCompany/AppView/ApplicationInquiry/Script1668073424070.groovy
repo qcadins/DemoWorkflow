@@ -597,7 +597,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 
     'add verify result to checkVerifyFooter'
-    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true))
+    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppInquiryCountDataInPage'(), true))
 
     'check if resultReset contain false'
     if (resultReset.contains(false)) {

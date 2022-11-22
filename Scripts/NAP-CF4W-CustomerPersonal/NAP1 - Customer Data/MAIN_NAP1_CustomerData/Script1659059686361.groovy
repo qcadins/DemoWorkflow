@@ -901,7 +901,7 @@ public pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
-			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 			
 			'Verif appno yang ada di page 2 tidak ada di page 1'
 			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
@@ -919,7 +919,7 @@ public pagingTesting(){
 					
 			listString = new ArrayList<String>()
 			
-			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 					
 			'Verif appno yang ada di page 1 tidak ada di page 2'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
@@ -937,7 +937,7 @@ public pagingTesting(){
 			
 			listString = new ArrayList<String>()
 			
-			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPaging'(listString)
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 					
 			'Verif appno yang ada di page 2 tidak ada di page 1'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
