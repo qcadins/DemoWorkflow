@@ -356,9 +356,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

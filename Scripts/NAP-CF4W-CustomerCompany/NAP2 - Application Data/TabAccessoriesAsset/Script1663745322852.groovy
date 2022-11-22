@@ -1023,10 +1023,10 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 	
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '7a.Accessories',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 						0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
 		
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '7a.Accessories',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 						1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
 			GlobalVariable.FlagFailed=1

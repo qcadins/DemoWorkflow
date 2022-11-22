@@ -326,10 +326,10 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 			GlobalVariable.FlagFailed=1

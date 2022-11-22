@@ -226,10 +226,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 	
 	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 1)){
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 	
-			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"Comresfund"+";\n")
 	
@@ -238,10 +238,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 	
 	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 1)){
-				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"Comresfund"+";\n"))
 		
@@ -250,10 +250,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 		
 	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 1)){
-				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"Comresfund"+";\n"))
 		

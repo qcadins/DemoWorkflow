@@ -116,10 +116,10 @@ WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Perso
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				0, GlobalVariable.NumofUploadDocument-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '12.TabUploadDocument',
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				1, GlobalVariable.NumofUploadDocument-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

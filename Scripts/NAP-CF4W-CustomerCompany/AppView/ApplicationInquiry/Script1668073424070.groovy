@@ -602,11 +602,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if resultReset contain false'
     if (resultReset.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed reset to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedReset + ';\n'))
 
@@ -616,11 +616,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if checkVerifySort contain false'
     if (checkVerifySort.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed sort to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedSort + ';\n'))
 
@@ -630,11 +630,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     'check if checkVerifyFooter contain false'
     if (checkVerifyFooter.contains(false)) {
         'write status warning to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
 
         'write reason failed footer to excel'
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
             1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
                 '-', '') + (GlobalVariable.ReasonFailedFooter + ';\n'))
 
@@ -766,16 +766,16 @@ WebUI.closeWindowIndex('1')
 WebUI.switchToWindowIndex('0')
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
