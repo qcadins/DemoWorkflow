@@ -20,128 +20,104 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
+'declare finddatafile GV'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/ContactInformation - Company - GuarantorCompany')
 
 'input name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Name_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 12))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12))
 
 'input job title'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Job Title_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 13))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13))
 
-if (GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 14).length() > 2) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).length() > 2) {
     'select id type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/select_Id Type'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 14), false)
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14), false)
 
     'input id no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Id No_'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 15))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15))
 }
 
-if (((GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 14) != 'E-KTP') && (GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 14) != 'AKTA')) && (GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 14) != 'NPWP')) {
+if (((GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14) != 'E-KTP') && (GlobalVariable.FindDataFile.getValue(
+    GlobalVariable.NumofGuarantor, 14) != 'AKTA')) && (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 
+    14) != 'NPWP')) {
     'input idexpired date'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Id Expired Date'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 16))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16))
 }
 
 'input mobile phone 1'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Mobile Phone 1_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 17))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17))
 
 'input email1'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Email 1_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 18))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18))
 
 'select gender'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/select_Select One Female  Male'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 19), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 19), false)
 
 'select job position'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/select_Select Job Position'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 20).toUpperCase(), false)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 20).toUpperCase(), false)
 
 'input birth place'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Birth Place_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 21))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 21))
 
 'input birth date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Birth Date_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 22))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 22))
 
-if (GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 23).length() > 2) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 23).length() > 2) {
     'select relation'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/select_Relation'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 23), false)
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 23), false)
 }
 
 'input mobile 2'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Mobile Phone 2'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 24))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 24))
 
 'input email 2'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Email 2_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 25))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 25))
 
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/textarea_Address_'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 27))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 27))
 
 'input RT'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_RT'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 28))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 28))
 
 'input RW'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_RW'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 29))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 29))
 
-if (GlobalVariable.FindDataFile.getValue(
-    GlobalVariable.NumofGuarantor, 30).length() > 2) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 30).length() > 2) {
     'click button zipcode'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/button_Zipcode_btn btn-raised btn-primary'))
 
     'input Zipcode'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Zip Code_ZipCode'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 30))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 30))
 
     'input kecamatan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kecamatan_kecamatan'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 31))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 31))
 
     'input kelurahan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kelurahan_Kelurahan'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 32))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 32))
 
     'input kota'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Kota_kota'), 
-        GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 33))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 33))
 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/button_Search'))
@@ -159,51 +135,44 @@ if (GlobalVariable.FindDataFile.getValue(
 
 'input phone 1 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 1_Area'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 34))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 34))
 
 'input phone 1 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 1_Number'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 35))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 35))
 
 'input phone 1 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 1_Ext'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 36))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 36))
 
 'input phone 2 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 2_Area'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 37))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 37))
 
 'input phone 2 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 2_Number'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 38))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 38))
 
 'input phone 2 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Phone 2_Ext'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 39))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 39))
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Fax_Area'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 40))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 40))
 
 'input fax number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/input_Fax_Number'), 
-    GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 41))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 41))
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation - Company/button_Save  Continue'))
 
-if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-        GlobalVariable.NumofGuarantor, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed == 
+0)) {
     'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.ContactInformation')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, 
+        '3.ContactInformation')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
@@ -212,8 +181,7 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'), 
         GlobalVariable.NumofGuarantor, '3.ContactInformation')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-            GlobalVariable.NumofGuarantor, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofGuarantor, '3.ContactInformation')
@@ -226,11 +194,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+	'declare numofverifstore = numofguarantor'
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'call test case verify contact info store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
-

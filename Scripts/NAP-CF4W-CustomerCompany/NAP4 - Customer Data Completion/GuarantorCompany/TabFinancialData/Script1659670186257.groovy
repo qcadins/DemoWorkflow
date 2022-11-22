@@ -24,20 +24,26 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
+'declare find data file GV'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData - Company - GuarantorCompany')
 
+'declare datafilecustdetail variable'
 datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany')
 
+'declare copyappcolm = 0'
 GlobalVariable.CopyAppColm = 0
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
+'declare variable'
 ArrayList<WebElement> variable
 
-ArrayList<WebElement> financialDateDelete = new ArrayList<WebElement>()
+'declare finanancialdatedelete'
+ArrayList<String> financialDateDelete = new ArrayList<>()
 
-ArrayList<WebElement> bankAccDelete = new ArrayList<WebElement>()
+'declare bankAccdelete'
+ArrayList<String> bankAccDelete = new ArrayList<>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
@@ -57,6 +63,7 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 
 'Check if Edit Untuk financial data'
 if (copyapp.equalsIgnoreCase('Edit')) {
+	'count table financial data row di cofins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/label_nodataavailable'), 
@@ -87,6 +94,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'click button edit'
                                 WebUI.click(modifyNewbuttonedit)
 
+								'call function input financial data'
                                 inputFinancialData()
 
                                 break
@@ -176,6 +184,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 'click button add'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'))
 
+								'call function input financial data'
                                 inputFinancialData()
 
                                 break
@@ -210,6 +219,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 }
 
+'count financial attribue list'
 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div label'))
 
 int row = 37
@@ -260,6 +270,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                     'click button edit'
                                     WebUI.click(modifyNewbuttonedit)
 
+									'call function input bank'
                                     inputBank(copyapp, variable, flagFailed)
 
                                     break
@@ -310,15 +321,27 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (bankAccDelete.size() > 0) {
+<<<<<<< HEAD
+		'write to excel status warning'
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+=======
         CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
+>>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
+<<<<<<< HEAD
+		'write to excel reason failed delete'
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+=======
         CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
+>>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
+		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
     
+	'count bank acc di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
@@ -341,8 +364,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
 
-                    BankDetail = WebUI.getText(modifyNewbankaccdetail)
-
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
@@ -352,7 +373,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 financialdata, 70)) + ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 69))
 
                             'verify bank beda'
-                            if (!(BankDetail.equalsIgnoreCase(bankdetailexcel)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 
+                            if (!(WebUI.getText(modifyNewbankaccdetail).equalsIgnoreCase(bankdetailexcel)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 
                                 10, FailureHandling.OPTIONAL)) {
                                 if (i == variable.size()) {
                                     'click button add bank'
@@ -360,7 +381,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                     inputBank(copyapp, variable, flagFailed)
                                 }
-                            } else if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
+                            } else if (WebUI.getText(modifyNewbankaccdetail).equalsIgnoreCase(bankdetailexcel)) {
                                 break
                             }
                         }
@@ -370,6 +391,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button add bank'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_addBank'))
 
+				'call function input bank'
                 inputBank(copyapp, variable, flagFailed)
             }
         } else {
@@ -388,6 +410,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'click button add bank'
                     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_addBank'))
 
+					'call function input bank'
                     inputBank(copyapp, variable, flagFailed)
                 }
             }
