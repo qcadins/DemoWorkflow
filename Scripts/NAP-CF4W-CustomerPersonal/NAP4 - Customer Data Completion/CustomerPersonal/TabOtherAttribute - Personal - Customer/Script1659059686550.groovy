@@ -741,10 +741,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

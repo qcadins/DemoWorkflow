@@ -1319,10 +1319,10 @@ def getData(def datafile) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
             0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
             1, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

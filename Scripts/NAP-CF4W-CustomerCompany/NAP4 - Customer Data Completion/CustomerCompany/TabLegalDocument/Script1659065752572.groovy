@@ -517,4 +517,3 @@ def verifLegalDocType(int legal){
 			}
 		}
 	}
-}

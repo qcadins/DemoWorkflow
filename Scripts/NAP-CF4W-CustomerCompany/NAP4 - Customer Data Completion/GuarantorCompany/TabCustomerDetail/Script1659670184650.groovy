@@ -161,14 +161,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'click button back'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 } else {
-<<<<<<< HEAD
     if (GlobalVariable.FlagWarning > 0) {
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
-=======
-    if (flagWarning > 0) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
     }
 }

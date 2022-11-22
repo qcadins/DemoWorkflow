@@ -321,20 +321,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (bankAccDelete.size() > 0) {
-<<<<<<< HEAD
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
-=======
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-<<<<<<< HEAD
-		'write to excel reason failed delete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
-=======
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		'flagwarning +1'

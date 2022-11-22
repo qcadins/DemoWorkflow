@@ -161,7 +161,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 
 'check if flagwarning = 0 & flagfailed = 0'
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
@@ -169,11 +169,11 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 	'check if ismatch = false & flagfailed = 0'
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		'write to excel status failed'
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5. Application', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
 		'write to excel reason verify equal or match'
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '5. Application', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5. Application', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		'flagfailed = 1'

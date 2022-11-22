@@ -434,18 +434,18 @@ for (dbindex = 0; dbindex < listSumm.size(); dbindex++) {
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
     'wrtie to excel status success'
-	new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		'write to excel status failed'
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10. Commission', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
 		'write to excel reason failed equal or match'
-        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '10. Commission', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10. Commission', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
