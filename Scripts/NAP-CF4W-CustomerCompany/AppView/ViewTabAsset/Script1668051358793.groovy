@@ -25,6 +25,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare flagwarning = 0'
 GlobalVariable.FlagWarning = 0
 
 'click tab Asset'
@@ -38,12 +39,14 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
     CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '6. Asset')
 }
 
+'get text appno dari confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
 ArrayList<WebElement> resultAssetSuppInfo = CustomKeywords.'appView.verifyAppView.checkAssetSupplierInfo'(sqlconnectionLOS, 
     appno)
 
+'set index = 0'
 index = 0
 
 'verify Supplier Name'
@@ -62,6 +65,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 ArrayList<WebElement> resultAssetInfo = CustomKeywords.'appView.verifyAppView.checkAssetInformation'(sqlconnectionLOS, 
     appno)
 
+'reset index = 0'
 index = 0
 
 'verify asset name'
@@ -104,11 +108,13 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LicensePlate')).toUpperCase(), 
         (resultAssetInfo[index++]).toUpperCase(), false))
 
+'check if letter no present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/LetterNo'), 5, FailureHandling.OPTIONAL)) {
     'verify Letter No'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LetterNo')).toUpperCase(), 
             (resultAssetInfo[index++]).toUpperCase(), false))
 } else {
+	'skip letter no'
     index++
 }
 
@@ -132,53 +138,66 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 ArrayList<WebElement> resultAssetAttrList = CustomKeywords.'appView.verifyAppView.checkAssetAttr'(sqlconnectionLOS, 
     appno)
 
+'reset index = 0'
 index = 0
 
+'check if asset region present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), 5, FailureHandling.OPTIONAL)) {
     'verify Asset Region'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip asset region'
     index++
 }
 
+'check if warna body present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), 5, FailureHandling.OPTIONAL)) {
     'verify Warna Body'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip warna body'
     index++
 }
 
+'check if color present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), 5, FailureHandling.OPTIONAL)) {
     'verify Color'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip color'
     index++
 }
 
+'check if oil exp date present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), 5, FailureHandling.OPTIONAL)) {
     'verify Oli Exp Date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip oil exp date'
     index++
 }
 
+'check if setoran per hari present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), 5, FailureHandling.OPTIONAL)) {
     'verify Setoran per hari'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip setoran perhari'
     index++
 }
 
+'check if road worthiness present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), 5, FailureHandling.OPTIONAL)) {
     'verify Road Worthiness'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
 } else {
+	'skip road wothiness'
     index++
 }
 
@@ -189,8 +208,10 @@ ArrayList<WebElement> resultAssetAccessories = CustomKeywords.'appView.verifyApp
 'count Asset Accessories table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#assetAcc > lib-ucgridview > div > table > tbody tr'))
 
+'reset index = 0'
 index = 0
 
+'looping accessories app view'
 for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
     'modify object SupplierName'
     modifyNewSupplierName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -244,6 +265,7 @@ for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
 'get arraylist asset user from db'
 ArrayList<WebElement> resultAssetUser = CustomKeywords.'appView.verifyAppView.checkAssetUser'(sqlconnectionLOS, appno)
 
+'reset index = 0'
 index = 0
 
 'verify asset user name'
@@ -260,8 +282,10 @@ ArrayList<WebElement> resultAssetOwner = CustomKeywords.'appView.verifyAppView.c
 'count Asset owner div section'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#owner div'))
 
+'reset index = 0'
 index = 0
 
+'looping asset owner app view'
 for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerindex++) {
     'modify object asset owner left'
     modifyNewAssetOwnerLeft = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -284,8 +308,10 @@ for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerinde
 ArrayList<WebElement> resultAssetLocation = CustomKeywords.'appView.verifyAppView.checkAssetLocation'(sqlconnectionLOS, 
     appno)
 
+'reset index = 0'
 index = 0
 
+'looping asset location app view'
 for (Locindex = 1; Locindex < resultAssetLocation.size(); Locindex++) {
     'modify object asset location'
     modifyNewAssetLocation = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -303,6 +329,7 @@ ArrayList<WebElement> resultAssetCollateral = CustomKeywords.'appView.verifyAppV
 'count Asset collateral table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#AdditionalCollateralSection > div > table > tbody tr'))
 
+'reset index = 0'
 index = 0
 
 for (collateralindex = 1; collateralindex <= variableData.size(); collateralindex++) {
@@ -371,20 +398,25 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
             false))
 }
 
+'check if flagwarning = 0 & flagfailed = 0'
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
+	'write to excel success'
+    new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
+	'check if ismatch = false & flagfailed = 0'
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
+		'write to excel status failed'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
+		'write to excel reason verify equal or match'
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
+		'flagfailed = 1'
         GlobalVariable.FlagFailed = 1
     }
 }
-

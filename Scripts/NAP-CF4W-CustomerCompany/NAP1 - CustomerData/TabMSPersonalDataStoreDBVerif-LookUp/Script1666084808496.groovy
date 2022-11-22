@@ -39,9 +39,8 @@ for (int i = 0; i <= (result.size() - 1); i++) {
     }
 }
 
-int arrayindex = 0
-
-int confinsindex = 0
+'declare arrayindex & confinsindex'
+int arrayindex = 0, confinsindex = 0
 
 'verify shareholder legal name'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 

@@ -30,106 +30,100 @@ ArrayList<String> custnamefaileddelete = new ArrayList<>()
 
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 8).length()>1){
-	'Koneksi database'
-	String servername = findTestData('Login/Login').getValue(1, 8)
-	
-	String instancename = findTestData('Login/Login').getValue(2, 8)
-	
-	String username = findTestData('Login/Login').getValue(3, 8)
-	
-	String password = findTestData('Login/Login').getValue(4, 8)
-	
-	String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-	
-	String driverclassname = findTestData('Login/Login').getValue(6, 8)
-	
-	String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-	
-	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
-	
-	ArrayList<String> listFam = new ArrayList<>()
-	listFam = CustomKeywords.'dbConnection.getInfoForEditNAP.getFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 8))
-	ArrayList<Boolean> arrayMatch = new ArrayList<>()
-	for(int familydt=1 ;familydt<=variableData.size();familydt++){
-		'modify object family name'
-		modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			familydt) + ']/td[2]', true)
-		
-		modifyNewFamilyType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			familydt) + ']/td[3]', true)
-		
-		modifyNewFamilyRelation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			familydt) + ']/td[4]', true)
-		
-		modifyNewFamilyCustModel = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-			'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-			familydt) + ']/td[5]', true)
-		Boolean isMatch = 0
-		for(int familydb=0;familydb<listFam.size();familydb++){
-			String result = listFam.get(familydb)
-			resultarray = result.split(', ')
-			if(WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName),"(?i)"+resultarray[0],true,FailureHandling.OPTIONAL)==false || 
-				WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType),"(?i)"+resultarray[1],true,FailureHandling.OPTIONAL)==false ||
-				WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation),"(?i)"+resultarray[2],true,FailureHandling.OPTIONAL)==false ||
-				WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel),"(?i)"+resultarray[3],true,FailureHandling.OPTIONAL)==false){
-				isMatch=false
-				continue
-			}
-			else{
-				isMatch=true
-				break
-			}
-		}
-		
-		arrayMatch.add(isMatch)
-		
-		
-		
-	}
-	if(arrayMatch.contains(false)){
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-		
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
-		
-		GlobalVariable.FlagWarning++
-	}
-	
-	
+if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    GlobalVariable.NumofColm, 8).length() > 1)) {
+    'Connect DB LOS'
+    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
+    ArrayList<String> listFam = new ArrayList<>()
+
+    listFam = CustomKeywords.'dbConnection.getInfoForEditNAP.getFamilyDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+            GlobalVariable.NumofColm, 8))
+
+    ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+    for (int familydt = 1; familydt <= variableData.size(); familydt++) {
+        'modify object family name'
+        modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+            familydt) + ']/td[2]', true)
+
+        modifyNewFamilyType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+            familydt) + ']/td[3]', true)
+
+        modifyNewFamilyRelation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+            familydt) + ']/td[4]', true)
+
+        modifyNewFamilyCustModel = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+            familydt) + ']/td[5]', true)
+
+        Boolean isMatch = 0
+
+        for (int familydb = 0; familydb < listFam.size(); familydb++) {
+            String result = listFam.get(familydb)
+
+            resultarray = result.split(', ')
+
+            if ((((WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName), '(?i)' + (resultarray[0]), true, FailureHandling.OPTIONAL) == 
+            false) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType), '(?i)' + (resultarray[1]), true, FailureHandling.OPTIONAL) == 
+            false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation), '(?i)' + (resultarray[2]), true, FailureHandling.OPTIONAL) == 
+            false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel), '(?i)' + (resultarray[3]), true, FailureHandling.OPTIONAL) == 
+            false)) {
+                isMatch = false
+
+                continue
+            } else {
+                isMatch = true
+
+                break
+            }
+        }
+        
+        arrayMatch.add(isMatch)
+    }
+    
+    if (arrayMatch.contains(false)) {
+        'write to excel status warning'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.StatusWarning)
+
+        'write to excel reason failed load data'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.ReasonFailedLoadData)
+
+        'flagwarning +1'
+        (GlobalVariable.FlagWarning)++
+    }
 }
+
 for (int i = 1; i <= variableData.size(); i++) {
     'modify object family name'
     modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
         'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
         i) + ']/td[2]', true)
 
-    'modify object button edit'
-    modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[6]/span/span[1]/span/span/span/span/span/a/i', true)
-
-    'modify object button delete'
-    modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[6]/span/span[2]/span/span/span/span/span/a/i', true)
-
     'Loop Multiple family data'
     for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
     1); (GlobalVariable.NumofFamily)++) {
+
         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
             GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {
+		
             if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
                 if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-                        GlobalVariable.NumofFamily, 19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                        GlobalVariable.NumofFamily, 19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(findTestData(
+                        'NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                         GlobalVariable.NumofFamily, 16))) {
+					
+                    'modify object button edit'
+                    modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+                        'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+                        i) + ']/td[6]/span/span[1]/span/span/span/span/span/a/i', true)
+
                     if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
                         'click button edit'
                         WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
@@ -462,14 +456,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                             GlobalVariable.NumofFamily, 54), false)
                                 }
-                                
-                             
                             }
                         } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 13) == 'LookUp') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
-
                                 'click customer lookup'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Family Legal Name_btn btn-raised btn-primary'))
 
@@ -515,20 +506,20 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     continue
                                 }
-								
-								if (GlobalVariable.Role == 'Testing') {
-									
-									getDataCust()
-									'call test case Family data verif'
-									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'),
-										[:], FailureHandling.CONTINUE_ON_FAILURE)
-								}
                                 
-								'select customer relation'
-								WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
-									findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-										GlobalVariable.NumofFamily, 18), false)
-								
+                                if (GlobalVariable.Role == 'Testing') {
+                                    getDataCust()
+
+                                    'call test case Family data verif'
+                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'), 
+                                        [:], FailureHandling.CONTINUE_ON_FAILURE)
+                                }
+                                
+                                'select customer relation'
+                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
+                                    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                                        GlobalVariable.NumofFamily, 18), false)
+
                                 'select customer model'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
                                     findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
@@ -705,30 +696,38 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         continue
                                     }
                                 }
-                                
                             }
                         }
                         
-						//Ambil nilai dari confins untuk verif store db lookup
-						if (GlobalVariable.Role == 'Testing' && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-									GlobalVariable.NumofFamily, 13) == 'LookUp')) {
-								getDataCust()
-								def confinsdata = GlobalVariable.Confinsdata
-								confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
-											'value'))
-								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'),'value'))
-								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'),'value'))
-								confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'),'value'))
-								GlobalVariable.Confinsdata = confinsdata
-						}
-							
+                        //Ambil nilai dari confins untuk verif store db lookup
+                        if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 13) == 'LookUp')) {
+                            getDataCust()
+
+                            def confinsdata = GlobalVariable.Confinsdata
+
+                            confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
+                                    'value'))
+
+                            confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'), 
+                                    'value'))
+
+                            confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'), 
+                                    'value'))
+
+                            confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'), 
+                                    'value'))
+
+                            GlobalVariable.Confinsdata = confinsdata
+                        }
+                        
                         'click button save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
                         Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                                 GlobalVariable.NumofFamily, 4))
 
-                        if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
+                        if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
                             'cek alert'
                             GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofFamily, 
                                 '2.TabFamilyData')
@@ -739,9 +738,9 @@ for (int i = 1; i <= variableData.size(); i++) {
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
                                     'NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/TableFamilyHeader'), 
                                 GlobalVariable.NumofFamily, '2.TabFamilyData')
-							
-							'customer added +1'
-							(GlobalVariable.CountNumofCustomer)++
+
+                            'customer added +1'
+                            (GlobalVariable.CountNumofCustomer)++
 
                             if (iscompleteMandatory == 0) {
                                 errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
@@ -752,19 +751,19 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'),
-										5, FailureHandling.OPTIONAL)) {
-								'click button cancel'
-								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-		
-								'customer added -1'
-								(GlobalVariable.CountNumofCustomer)--
-						} else {
-								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
-											CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-												'2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
-								}
-						}
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
+                            5, FailureHandling.OPTIONAL)) {
+                            'click button cancel'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+
+                            'customer added -1'
+                            (GlobalVariable.CountNumofCustomer)--
+                        } else {
+                            if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
+                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
+                            }
+                        }
                         
                         if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
                             GlobalVariable.NumofFamily, 13) == 'Input Data') {
@@ -773,58 +772,59 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
+                        } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
+                            GlobalVariable.NumofFamily, 13) == 'LookUp') {
+                            if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+                                'call test case family lookup store data verif'
+                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'), 
+                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
+                            }
                         }
-						
-						else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-								GlobalVariable.NumofFamily, 13) == 'LookUp') {
-								if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal ==
-								'Yes')) {
-									'call test case family lookup store data verif'
-									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'),
-										[:], FailureHandling.CONTINUE_ON_FAILURE)
-								}
-						}
-						break
+                        
+                        break
                     }
                 } else {
                     if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-                            GlobalVariable.NumofFamily + 1, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-                            GlobalVariable.NumofColm, 13)) {
+                        GlobalVariable.NumofFamily + 1, 12) != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                        GlobalVariable.NumofColm, 13)) {
+                        'modify object button delete'
+                        modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
+                            'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
+                            i) + ']/td[6]/span/span[2]/span/span/span/span/span/a/i', true)
+
                         if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
-							
-							'get cust name sebelum delete'
-							CustNameBefore = WebUI.getText(modifyNewFamilyName)
-							
+                            'get cust name sebelum delete'
+                            CustNameBefore = WebUI.getText(modifyNewFamilyName)
+
                             'click button Delete'
                             WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
                             'accept alert'
                             WebUI.acceptAlert()
-							
-							if(i == variableData.size()){
-								if(WebUI.verifyElementNotPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)){
-									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-								}else{
-									'add cust name failed kedalam array'
-									custnamefaileddelete.add(CustNameBefore)
-									continue
-								}
-								
-							}
-							else{
-								'get cust name sebelum delete'
-								CustNameAfter = WebUI.getText(modifyNewFamilyName)
-								
-								if(WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)){
-									variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-								}else{
-									'add cust name failed kedalam array'
-									custnamefaileddelete.add(CustNameBefore)
-									continue
-								}
-							}
-							
-							
+
+                            if (i == variableData.size()) {
+                                if (WebUI.verifyElementNotPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
+                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    custnamefaileddelete.add(CustNameBefore)
+
+                                    continue
+                                }
+                            } else {
+                                'get cust name sebelum delete'
+                                CustNameAfter = WebUI.getText(modifyNewFamilyName)
+
+                                if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
+                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+                                } else {
+                                    'add cust name failed kedalam array'
+                                    custnamefaileddelete.add(CustNameBefore)
+
+                                    continue
+                                }
+                            }
+                            
                             i--
                         }
                     }
@@ -836,119 +836,120 @@ for (int i = 1; i <= variableData.size(); i++) {
     }
 }
 
-if(custnamefaileddelete.size() > 0){
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-		'2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-	
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-		'2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
-	
-	GlobalVariable.FlagWarning++
+if (custnamefaileddelete.size() > 0) {
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 
+        1, GlobalVariable.StatusWarning)
+
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 
+        1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+
+    (GlobalVariable.FlagWarning)++
 }
 
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyData'), [:], 
-    FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-def getDataCust(){
-	
-	def confinsdata = []
-	'add customer name to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add birth place to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add id type to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'),
-			'value'))
-	
-	'add id expired date to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'),
-			'value'))
-	
-	'add marital status to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'),
-			'value'))
-	
-	'add mobile phone to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add customer model to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'),
-			'value'))
-	
-	'add gender to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Gender'),
-			'value'))
-	
-	'add birth date to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add id no to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add tax id to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'),
-			'value'))
-	
-	'add mother maiden name to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name'),
-			'value'))
-	
-	'add email to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Email_form-control ng-untouched ng-pristine ng-invalid'),
-			'value'))
-	
-	'add nationality to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'),
-			'value'))
-	
-	'check if nationality = Local or Foreigner'
-	if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'),
-		'value').equalsIgnoreCase('LOCAL')) {
-		'add country to array'
-		confinsdata.add(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountry')))
-	} else {
-		'add country to array'
-		confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountryLookup'),
-				'value'))
-	}
-	
-	'add address to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/textarea_Address'),
-			'value'))
-	
-	'add RT to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RT'),
-			'value'))
-	
-	'add RW to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RW'),
-			'value'))
-	
-	'add zipcode to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelZipcode'),'value'))
-	
-	'add kelurahan to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKelurahan'),
-			'value'))
-	
-	'add kecamatan to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKecamatan'),
-			'value'))
-	
-	'add kota to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKota'),
-			'value'))
-	
-	'add ownership to array'
-	confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'),
-			'value'))
-	GlobalVariable.Confinsdata = confinsdata
+def getDataCust() {
+    def confinsdata = []
+
+    'add customer name to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add birth place to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add id type to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'), 
+            'value'))
+
+    'add id expired date to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'), 
+            'value'))
+
+    'add marital status to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'), 
+            'value'))
+
+    'add mobile phone to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add customer model to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
+            'value'))
+
+    'add gender to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Gender'), 
+            'value'))
+
+    'add birth date to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add id no to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add tax id to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 
+            'value'))
+
+    'add mother maiden name to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name'), 
+            'value'))
+
+    'add email to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Email_form-control ng-untouched ng-pristine ng-invalid'), 
+            'value'))
+
+    'add nationality to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
+            'value'))
+
+    'check if nationality = Local or Foreigner'
+    if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
+        'value').equalsIgnoreCase('LOCAL')) {
+        'add country to array'
+        confinsdata.add(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountry')))
+    } else {
+        'add country to array'
+        confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelCountryLookup'), 
+                'value'))
+    }
+    
+    'add address to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/textarea_Address'), 
+            'value'))
+
+    'add RT to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RT'), 
+            'value'))
+
+    'add RW to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RW'), 
+            'value'))
+
+    'add zipcode to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelZipcode'), 
+            'value'))
+
+    'add kelurahan to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKelurahan'), 
+            'value'))
+
+    'add kecamatan to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKecamatan'), 
+            'value'))
+
+    'add kota to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/LabelKota'), 
+            'value'))
+
+    'add ownership to array'
+    confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'), 
+            'value'))
+
+    GlobalVariable.Confinsdata = confinsdata
 }
 

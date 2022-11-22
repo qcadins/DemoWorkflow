@@ -19,28 +19,27 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 datafile = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
-ArrayList<String> variableData
+ArrayList<WebElement> variableData
 
 copyapp = datafile.getValue(GlobalVariable.NumofMS, 10)
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-        'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL))
+            'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL))
 }
 
 'Loop Multiple ManagementSharholder Data'
 for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
 1); (GlobalVariable.NumofMS)++) {
-
-GlobalVariable.FlagFailed = 0
+    GlobalVariable.FlagFailed = 0
 
     if (datafile.getValue(GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) {
@@ -58,15 +57,17 @@ GlobalVariable.FlagFailed = 0
             modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[2]', true)
-			
+
             'verify if copy app edit'
             if (copyapp.equalsIgnoreCase('Edit')) {
                 if (WebUI.verifyElementNotPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
                     copyapp == 'No'
                 } else if (WebUI.verifyElementPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
-                    if (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) || WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 17)) || 
-                    WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 52)) || WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 50)) || 
-                    WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 62))) {
+                    if ((((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 19)) || 
+                    WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 17))) || WebUI.getText(
+                        modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 52))) || WebUI.getText(
+                        modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 50))) || WebUI.getText(
+                        modifyNewMSName).equalsIgnoreCase(datafile.getValue(GlobalVariable.NumofMS, 62))) {
                         break
                     }
                 }
@@ -84,7 +85,7 @@ GlobalVariable.FlagFailed = 0
                         'input shareholder name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 19))
-						
+
                         'input birth place'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 20))
@@ -124,18 +125,18 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                             'verify input error'
-                            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
-                                'click select'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                            } else {
-                                'click X'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                                flagWarning++
-
-                                continue
-                            }
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+								10, FailureHandling.OPTIONAL)) {
+								'click select'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+							} else {
+								'click X'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+						
+								GlobalVariable.FlagWarning++
+						
+								continue
+							}
                         }
                         
                         'click button position SLIK'
@@ -148,18 +149,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'input establishment date'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -189,29 +190,29 @@ GlobalVariable.FlagFailed = 0
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Email_form-control ng-untouched ng-pristine ng-valid'), 
                             datafile.getValue(GlobalVariable.NumofMS, 36))
 
-						'klik button job position'
+                        'klik button job position'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Job Position_btn btn-raised btn-primary'))
 
-						'input job position code'
+                        'input job position code'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Job Position Code_JobCodeId'), 
                             datafile.getValue(GlobalVariable.NumofMS, 37))
 
-						'click button search'
+                        'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'input share'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
@@ -270,18 +271,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         if (datafile.getValue(GlobalVariable.NumofMS, 47).length() > 1) {
                             'click button authority AML lookup'
@@ -295,26 +296,19 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                             'verify input error'
-                            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
-                                'click select'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                            } else {
-                                'click X'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                                flagWarning++
-
-                                continue
-                            }
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+								10, FailureHandling.OPTIONAL)) {
+								'click select'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+							} else {
+								'click X'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+						
+								GlobalVariable.FlagWarning++
+						
+								continue
+							}
                         }
-						
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-							'value', FailureHandling.OPTIONAL)
-						'add name to Global variable'
-						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-						
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -337,16 +331,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_X'))
-
-                            flagWarning++
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'select company type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'), 
@@ -387,13 +383,6 @@ GlobalVariable.FlagFailed = 0
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         }
-							
-							'get customer name'
-							custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-								'value', FailureHandling.OPTIONAL)
-							'add name to Global variable'
-							GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-							
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
                         'click radio public'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
@@ -424,16 +413,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_X'))
-
-                            flagWarning++
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'input share'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
@@ -495,16 +486,18 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Search'))
 
                             'verify input error'
-                            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
-                                'click select'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/a_Select'))
-                            } else {
-                                'click X'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_X'))
-
-                                flagWarning++
-                            }
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+								10, FailureHandling.OPTIONAL)) {
+								'click select'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+							} else {
+								'click X'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+						
+								GlobalVariable.FlagWarning++
+						
+								continue
+							}
                             
                             'select ownership'
                             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
@@ -550,16 +543,18 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Search'))
 
                             'verify input error'
-                            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
-                                'click select'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
-                            } else {
-                                'click X'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_X'))
-
-                                flagWarning++
-                            }
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+								10, FailureHandling.OPTIONAL)) {
+								'click select'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+							} else {
+								'click X'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+						
+								GlobalVariable.FlagWarning++
+						
+								continue
+							}
                         }
                     }
                 } else if (datafile.getValue(GlobalVariable.NumofMS, 13) == 'LookUp') {
@@ -601,12 +596,12 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Cancel'))
 
                             'Write to Excel FAILED'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                             'Flagfailed +1 karena lookup gagal'
                             (GlobalVariable.FlagFailed)++
@@ -614,14 +609,7 @@ GlobalVariable.FlagFailed = 0
                             continue
                         }
                         
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-							'value', FailureHandling.OPTIONAL)
-						'add name to Global variable'
-						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-						
-						
-						'check if role testing maka get data MS untuk data verif'
+                        'check if role testing maka get data MS untuk data verif'
                         if (GlobalVariable.RoleCompany == 'Testing') {
                             'call function MS Personal get data'
                             getDataMS(datafile)
@@ -655,18 +643,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Employee  Non Professional  Professional  Small Medium Enterprise'), 
                             datafile.getValue(GlobalVariable.NumofMS, 25), false)
 
-						if (datafile.getValue(GlobalVariable.NumofMS, 27).length() > 1) {
-							'click lookup button proffession name'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Profession Name_btn btn-raised btn-primary'))
+                        if (datafile.getValue(GlobalVariable.NumofMS, 27).length() > 1) {
+                            'click lookup button proffession name'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Profession Name_btn btn-raised btn-primary'))
 
-							'input profession code'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Profession Code_professionCodeId'),
-								datafile.getValue(GlobalVariable.NumofMS, 26))
+                            'input profession code'
+                            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Profession Code_professionCodeId'), 
+                                datafile.getValue(GlobalVariable.NumofMS, 26))
 
-							'click button search'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
+                            'click button search'
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
-							'verify input error'
+                            'verify input error'
 							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
 								10, FailureHandling.OPTIONAL)) {
 								'click select'
@@ -674,13 +662,13 @@ GlobalVariable.FlagFailed = 0
 							} else {
 								'click X'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-								flagWarning++
-
+						
+								GlobalVariable.FlagWarning++
+						
 								continue
 							}
-						}
-						
+                        }
+                        
                         'click button position SLIK'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Position SLIK_btn btn-raised btn-primary'))
 
@@ -691,18 +679,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'input establishment date'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -719,18 +707,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'input share'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
@@ -790,21 +778,19 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Search'))
 
                             'verify input error'
-                            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
-                                'click select'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
-                            } else {
-                                'click X'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
-
-                                flagWarning++
-
-                                continue
-                            }
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+								10, FailureHandling.OPTIONAL)) {
+								'click select'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+							} else {
+								'click X'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+						
+								GlobalVariable.FlagWarning++
+						
+								continue
+							}
                         }
-						
-						
                     } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -840,12 +826,12 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
 
                             'Write to Excel FAILED'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                             'Flagfailed +1 karena lookup gagal'
                             (GlobalVariable.FlagFailed)++
@@ -853,34 +839,28 @@ GlobalVariable.FlagFailed = 0
                             continue
                         }
                         
-						'get customer name'
-						custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-							'value', FailureHandling.OPTIONAL)
-						'add name to Global variable'
-						GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-						
-						'check if role testing maka get data MS untuk data verif'
-						if (GlobalVariable.RoleCompany == 'Testing') {
-							'call function get data'
-							getDataMS(datafile)
+                        'check if role testing maka get data MS untuk data verif'
+                        if (GlobalVariable.RoleCompany == 'Testing') {
+                            'call function get data'
+                            getDataMS(datafile)
 
-							'add company type to array'
-							GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'),
-									'value'))
+                            'add company type to array'
+                            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'), 
+                                    'value'))
 
-							'add customer model to array'
-							GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One Corporate  Non Corporate'),
-									'value'))
+                            'add customer model to array'
+                            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One Corporate  Non Corporate'), 
+                                    'value'))
 
-							'add ownership to array'
-							GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
-									'value'))
+                            'add ownership to array'
+                            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+                                    'value'))
 
-							'call test case company data verif'
-							WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataVerif'),
-								[:], FailureHandling.CONTINUE_ON_FAILURE)
-						}
-						
+                            'call test case company data verif'
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataVerif'), 
+                                [:], FailureHandling.CONTINUE_ON_FAILURE)
+                        }
+                        
                         'click button position SLIK'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Position SLIK_btn btn-raised btn-primary'))
 
@@ -891,20 +871,18 @@ GlobalVariable.FlagFailed = 0
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Search'))
 
                         'verify input error'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
-                            'click select'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'))
-                        } else {
-                            'click X'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_X'))
-
-                            flagWarning++
-
-                            continue
-                        }
-                        
-                        
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'),
+							10, FailureHandling.OPTIONAL)) {
+							'click select'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
+						} else {
+							'click X'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
+					
+							GlobalVariable.FlagWarning++
+					
+							continue
+						}
                         
                         'select company type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'), 
@@ -943,48 +921,67 @@ GlobalVariable.FlagFailed = 0
                         }
                     }
                     
-					'call function untuk get data MS yang sudah di input untuk verif Store DB'
+                    'call function untuk get data MS yang sudah di input untuk verif Store DB'
                     getData(datafile)
-					}
+                }
+                
+                if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
+                    'get MS Personal name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+                } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+                    'get MS Company name'
+                    custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+                        'value', FailureHandling.OPTIONAL)
+
+                    'add name to Global variable'
+                    GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
+                }
                 
                 'click button save'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 
-                if (Integer.parseInt(datafile.getValue(GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed==0) {
+                if ((Integer.parseInt(datafile.getValue(GlobalVariable.NumofMS, 4)) == 0) && (GlobalVariable.FlagFailed == 
+                0)) {
                     'Check alert'
-                    GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '2.TabManagementShareholderData')
+                    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, 
+                        '2.TabManagementShareholderData')
                 }
                 
-				if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(
-					GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
-						5, FailureHandling.OPTIONAL)) {
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
+                if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofMS, 
+                    14).equalsIgnoreCase('Company')) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
+                        'click button cancel'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
-						'customer added -1'
-						(GlobalVariable.CountNumofCustomer)--
-					} else {
-						if (flagWarning > 0) {
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-						}
-					}
-				} else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'),
-						5, FailureHandling.OPTIONAL)) {
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
+                        'customer added -1'
+                        (GlobalVariable.CountNumofCustomer)--
+                    } else {
+                        if (GlobalVariable.FlagWarning > 0) {
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+                        }
+                    }
+                } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
+                        'click button cancel'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
-						'customer added -1'
-						(GlobalVariable.CountNumofCustomer)--
-					} else {
-						if (flagWarning > 0) {
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-						}
-					}
-				}
+                        'customer added -1'
+                        (GlobalVariable.CountNumofCustomer)--
+                    } else {
+                        if (GlobalVariable.FlagWarning > 0) {
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+                        }
+                    }
+                }
+                
                 'verify flagfailed lookup == 0 '
                 if (GlobalVariable.FlagFailed == 0) {
                     'Check save Process write to excel'
@@ -1027,40 +1024,41 @@ GlobalVariable.FlagFailed = 0
                         }
                     }
                 }
-				
-				if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(
-					GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
-						5, FailureHandling.OPTIONAL)) {
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
+                
+                if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafile.getValue(GlobalVariable.NumofMS, 
+                    14).equalsIgnoreCase('Company')) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
+                        'click button cancel'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
-						'customer added -1'
-						(GlobalVariable.CountNumofCustomer)--
-					} else {
-						if (flagWarning > 0) {
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-						}
-					}
-				} else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'),
-						5, FailureHandling.OPTIONAL)) {
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
+                        'customer added -1'
+                        (GlobalVariable.CountNumofCustomer)--
+                    } else {
+                        if (GlobalVariable.FlagWarning > 0) {
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+                        }
+                    }
+                } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
+                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
+                        5, FailureHandling.OPTIONAL)) {
+                        'click button cancel'
+                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
-						'customer added -1'
-						(GlobalVariable.CountNumofCustomer)--
-					} else {
-						if (flagWarning > 0) {
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-						}
-					}
-				}
-				break
+                        'customer added -1'
+                        (GlobalVariable.CountNumofCustomer)--
+                    } else {
+                        if (GlobalVariable.FlagWarning > 0) {
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+                        }
+                    }
+                }
+                
+                break
             }
-		}
+        }
     }
 }
 
@@ -1071,9 +1069,9 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManage
 GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '2a.TabManagementShareholderMain')
 
 if (GlobalVariable.FlagFailed == 0) {
-   'Write to Excel SUCCESS'
-   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2a.TabManagementShareholderMain',
-	   0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+    'Write to Excel SUCCESS'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2a.TabManagementShareholderMain', 
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
 def getDataMS(def datafile) {
@@ -1185,148 +1183,148 @@ def getDataMS(def datafile) {
     GlobalVariable.Confinsdata = confinsdata
 }
 
-def getData(def datafile){
-	'check if role testing dan input dengan lookup maka get data dari confins untuk verif store DB'
-	if (GlobalVariable.RoleCompany == 'Testing' && datafile.getValue(GlobalVariable.NumofMS, 13).equalsIgnoreCase('LookUp')) {
-		if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-			'call function MS get Data'
-			getDataMS(datafile)
+def getData(def datafile) {
+    'check if role testing dan input dengan lookup maka get data dari confins untuk verif store DB'
+    if ((GlobalVariable.RoleCompany == 'Testing') && datafile.getValue(GlobalVariable.NumofMS, 13).equalsIgnoreCase('LookUp')) {
+        if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+            'call function MS get Data'
+            getDataMS(datafile)
 
-			'add Position SLIK to array'
-			GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/label_positionSLIK'),
-					'value'))
+            'add Position SLIK to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/label_positionSLIK'), 
+                    'value'))
 
-			Select selectcustomertype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div/div[2]/div/div/lib-ucdropdownlist/div/select')))
+            Select selectcustomertype = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div/div[2]/div/div/lib-ucdropdownlist/div/select')))
 
-			'add company type to array'
-			GlobalVariable.Confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
+            'add company type to array'
+            GlobalVariable.Confinsdata.add(selectcustomertype.getFirstSelectedOption().getText())
 
-			Select selectcustomermodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
+            Select selectcustomermodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="CustMainData"]/div[2]/div[2]/div/div/lib-ucdropdownlist/div/select')))
 
-			'add customer model to array'
-			GlobalVariable.Confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
+            'add customer model to array'
+            GlobalVariable.Confinsdata.add(selectcustomermodel.getFirstSelectedOption().getText())
 
-			'add share to array'
-			GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
-					'value').replace('%', ''))
+            'add share to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
+                    'value').replace('%', ''))
 
-			if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'),
-				2, FailureHandling.OPTIONAL)) {
-				'add is active to array'
-				GlobalVariable.Confinsdata.add('Yes')
-			} else {
-				'add is active to array'
-				GlobalVariable.Confinsdata.add('No')
-			}
-			
-			if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'),
-				2, FailureHandling.OPTIONAL)) {
-				'add is owner to array'
-				GlobalVariable.Confinsdata.add('Yes')
-			} else {
-				'add is owner to array'
-				GlobalVariable.Confinsdata.add('No')
-			}
-			
-			Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+                2, FailureHandling.OPTIONAL)) {
+                'add is active to array'
+                GlobalVariable.Confinsdata.add('Yes')
+            } else {
+                'add is active to array'
+                GlobalVariable.Confinsdata.add('No')
+            }
+            
+            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
+                2, FailureHandling.OPTIONAL)) {
+                'add is owner to array'
+                GlobalVariable.Confinsdata.add('Yes')
+            } else {
+                'add is owner to array'
+                GlobalVariable.Confinsdata.add('No')
+            }
+            
+            Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 
-			'add ownership to array'
-			GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
-		}else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-		'call function MS get data'
-		getDataMS(datafile)
+            'add ownership to array'
+            GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
+        } else if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
+            'call function MS get data'
+            getDataMS(datafile)
 
-		Select selectIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[3]/div/div/lib-ucdropdownlist/div/select')))
+            Select selectIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[3]/div/div/lib-ucdropdownlist/div/select')))
 
-		'add ID TYPE array'
-		GlobalVariable.Confinsdata.add(selectIdType.getFirstSelectedOption().getText())
+            'add ID TYPE array'
+            GlobalVariable.Confinsdata.add(selectIdType.getFirstSelectedOption().getText())
 
-		Select selectmaritalstatus = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[7]/div/div/lib-ucdropdownlist/div/select')))
+            Select selectmaritalstatus = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[7]/div/div/lib-ucdropdownlist/div/select')))
 
-		'add marital status array'
-		GlobalVariable.Confinsdata.add(selectmaritalstatus.getFirstSelectedOption().getText())
+            'add marital status array'
+            GlobalVariable.Confinsdata.add(selectmaritalstatus.getFirstSelectedOption().getText())
 
-		Select selectGender = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select')))
+            Select selectGender = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select')))
 
-		Select selectcustmodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[11]/div[1]/div/lib-ucdropdownlist/div/select')))
+            Select selectcustmodel = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="CustMainData"]/div[2]/div[11]/div[1]/div/lib-ucdropdownlist/div/select')))
 
-		'add customer model array'
-		GlobalVariable.Confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
+            'add customer model array'
+            GlobalVariable.Confinsdata.add(selectcustmodel.getFirstSelectedOption().getText())
 
-		'add proffesion to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelProffesion'),
-				'value'))
+            'add proffesion to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelProffesion'), 
+                    'value'))
 
-		'add position SLIK to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/label_positionSLIK'),
-				'value'))
+            'add position SLIK to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/label_positionSLIK'), 
+                    'value'))
 
-		'add establishment date to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'),
-				'value'))
+            'add establishment date to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Establishment Date_form-control ng-untouched ng-pristine ng-invalid'), 
+                    'value'))
 
-		'add Gender array'
-		GlobalVariable.Confinsdata.add(selectGender.getFirstSelectedOption().getText())
+            'add Gender array'
+            GlobalVariable.Confinsdata.add(selectGender.getFirstSelectedOption().getText())
 
-		'add job position array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelJobposition'),
-				'value'))
+            'add job position array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelJobposition'), 
+                    'value'))
 
-		'add share to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
-				'value').replace(' %', ''))
+            'add share to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Share()_form-control ng-untouched ng-pristine ng-valid'), 
+                    'value').replace(' %', ''))
 
-		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
-			2, FailureHandling.OPTIONAL)) {
-			'add is active to array'
-			GlobalVariable.Confinsdata.add('Yes')
-		} else {
-			'add is active to array'
-			GlobalVariable.Confinsdata.add('No')
-		}
-		
-		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
-			2, FailureHandling.OPTIONAL)) {
-			'add is owner to array'
-			GlobalVariable.Confinsdata.add('Yes')
-		} else {
-			'add is owner to array'
-			GlobalVariable.Confinsdata.add('No')
-		}
-		
-		if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'),
-			2, FailureHandling.OPTIONAL)) {
-			'add is signer to array'
-			GlobalVariable.Confinsdata.add('Yes')
-		} else {
-			'add is signer to array'
-			GlobalVariable.Confinsdata.add('No')
-		}
-		
-		'add department aml to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelDepartmnetAML'),
-				'value'))
+            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+                2, FailureHandling.OPTIONAL)) {
+                'add is active to array'
+                GlobalVariable.Confinsdata.add('Yes')
+            } else {
+                'add is active to array'
+                GlobalVariable.Confinsdata.add('No')
+            }
+            
+            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+                2, FailureHandling.OPTIONAL)) {
+                'add is owner to array'
+                GlobalVariable.Confinsdata.add('Yes')
+            } else {
+                'add is owner to array'
+                GlobalVariable.Confinsdata.add('No')
+            }
+            
+            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
+                2, FailureHandling.OPTIONAL)) {
+                'add is signer to array'
+                GlobalVariable.Confinsdata.add('Yes')
+            } else {
+                'add is signer to array'
+                GlobalVariable.Confinsdata.add('No')
+            }
+            
+            'add department aml to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelDepartmnetAML'), 
+                    'value'))
 
-		'add authority aml to array'
-		GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelAuthorityAML'),
-				'value'))
+            'add authority aml to array'
+            GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/labelAuthorityAML'), 
+                    'value'))
 
-		Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+            Select selectownership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 
-		'add ownership to array'
-		GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
-	}
+            'add ownership to array'
+            GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
+        }
+    }
 }
-}
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-				0, GlobalVariable.NumofMS-1, GlobalVariable.StatusFailed)
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-				1, GlobalVariable.NumofMS-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            1, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		GlobalVariable.FlagFailed=1
-	}
+        GlobalVariable.FlagFailed = 1
+    }
 }
