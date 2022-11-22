@@ -32,7 +32,7 @@ datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'get app no from data file dupcheck'
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
-Boolean DupCheckStatus = CustomKeywords.'dbConnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
+Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 GlobalVariable.FlagFailed = 0
 

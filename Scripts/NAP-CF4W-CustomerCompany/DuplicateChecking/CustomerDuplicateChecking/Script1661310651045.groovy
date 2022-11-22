@@ -39,7 +39,7 @@ String subjectName
 def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
 'check dupcheck status'
-Boolean DupCheckStatus = CustomKeywords.'dbConnection.DupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
+Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 if (DupCheckStatus == true) {
     'click menu duplicate Checking'

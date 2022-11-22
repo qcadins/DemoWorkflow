@@ -37,7 +37,7 @@ datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
-String DupCheckCount = CustomKeywords.'dbConnection.DupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
+String DupCheckCount = CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
 'declare variable untuk Store nama customer'
 def StoreCDCCustomerName = '', StoreCDCFamilyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''
@@ -71,7 +71,7 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
         'get guarantor name'
         String name = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
 
-        String GuarantorType = CustomKeywords.'dbConnection.DupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
+        String GuarantorType = CustomKeywords.'dupCheck.dupCheckVerif.checkCustomerType'(sqlconnectionLOS, DupcheckAppNo, 
             name)
 
         if (GuarantorType.equalsIgnoreCase('COMPANY')) {
