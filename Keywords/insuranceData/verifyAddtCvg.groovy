@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifAddtRate {
+public class verifyAddtCvg {
 
 	@Keyword
 	public verifyAddtPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt, String mainCvgType, String yearNo){
@@ -71,7 +71,7 @@ public class verifAddtRate {
 
 		Integer inscoHORow = -1
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
 		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
@@ -105,7 +105,7 @@ public class verifAddtRate {
 
 		inscoHORow=-1
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePath, 'RuleAddCvg', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'RuleAddCvg', inscoHOCode)+1
 
 		def ruleAddtCvg = findTestData('DownloadRule/InsuranceAddtCvgRule')
 		Integer assetAge = Integer.parseInt(GlobalVariable.BDYear)-Integer.parseInt(year)+(Integer.parseInt(yearNo)-1)
@@ -177,7 +177,7 @@ public class verifAddtRate {
 	}
 
 	@Keyword
-	public checkAddtInsCode(Sql instanceLOS, String addtName){
+	public checkAddtCvgCode(Sql instanceLOS, String addtName){
 		String refcode
 		instanceLOS.eachRow(("select ref_master_code from REF_MASTER_LOS where REF_MASTER_TYPE_CODE = 'INS_ADD_CVG_TYPE' and is_active=1 and ref_master_name = '"+addtName+"'"), { def row ->
 			refcode = row[0]

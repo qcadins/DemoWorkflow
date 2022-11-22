@@ -56,15 +56,15 @@ if(refsize>0){
 }
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
-def supRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') +
+def supRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') +
 1
 
 'Mengambil nilai row keberapa dimulai data supplier employee commission pada excel'
-def suppEmpRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Employee Commission Data') +
+def suppEmpRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Employee Commission Data') +
 1
 
 'Mengambil nilai row keberapa dimulai data referantor commission pada excel'
-def refRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Referantor Commission Data') +
+def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Referantor Commission Data') +
 1
 
 'Mencari nilai commission amount dari setiap commission source dari supplier, supplier employee, dan referantor'
@@ -192,11 +192,11 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
 	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

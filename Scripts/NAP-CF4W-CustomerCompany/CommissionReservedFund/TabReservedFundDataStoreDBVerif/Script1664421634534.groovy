@@ -25,7 +25,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbconnection.connectDB.connectLOS'()
 ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
+def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
 2
 
 ArrayList<WebElement> resultDB = CustomKeywords.'dbconnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
@@ -41,11 +41,11 @@ for (int i = 0; i < resultDB.size(); i++) {
 'jika nilai di confins tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

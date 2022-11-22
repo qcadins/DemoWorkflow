@@ -84,7 +84,7 @@ String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cust
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/span_appNo'))
 
 'Hashmap untuk mengambil nilai tccode, tcmandatory, tc priorto dan tc is waivable berdasarkan condition-condition dari rule excel'
-HashMap<String,ArrayList> result = CustomKeywords.'tcData.verifTCData.verifyTermConditionData'(sqlConnectionLOS, sqlConnectionFOU,custModel,appNo)
+HashMap<String,ArrayList> result = CustomKeywords.'tcData.verifyTCData.verifyTCList'(sqlConnectionLOS, sqlConnectionFOU,custModel,appNo)
 
 ArrayList<String> TCCode, TCMandatory, TCPrior, TCWaive
 TCCode = result.get("TCCode")
@@ -131,7 +131,7 @@ for (int i = 1; i <= count; i++) {
 
 	if(GlobalVariable.Role=="Testing" &&  GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'verif document name based on rule'
-		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
+		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
 			writeToExcelFailedVerifRule()
 			GlobalVariable.FlagFailed=1
 		}
@@ -332,21 +332,21 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 	
 public writeToExcelFailedVerifRule(){
 	'write to excel failed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData', 0,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData', 0,
 		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 	
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

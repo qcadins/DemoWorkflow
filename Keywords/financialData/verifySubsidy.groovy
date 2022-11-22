@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifSubsidy {
+public class verifySubsidy {
 
 	@Keyword
 	public verifySubsidyDefault(Sql instanceLOS, Sql instanceFOU, String appNo){
@@ -126,7 +126,7 @@ public class verifSubsidy {
 			}
 			if(((ruleSubsidyInsco.getValue(1,i)=="" && matchInsco==1) || matchInsco==1) && ((ruleSubsidyInsco.getValue(2,i)=="" && matchLobCode==1) || matchLobCode==1)){
 				subsidyFromType.add(ruleSubsidyInsco.getValue(3,i))
-				subsidyFromValue.add(checkName(instanceFOU,ruleSubsidyInsco.getValue(4,i)))
+				subsidyFromValue.add(checkFromValueName(instanceFOU,ruleSubsidyInsco.getValue(4,i)))
 				subsidyAlloc.add(ruleSubsidyInsco.getValue(5,i))
 				subsidySource.add(ruleSubsidyInsco.getValue(6,i))
 				subsidyType.add(ruleSubsidyInsco.getValue(7,i))
@@ -167,7 +167,7 @@ public class verifSubsidy {
 			if(((ruleSubsidySuppl.getValue(1,i)=="" && matchrsvfield==1) || matchrsvfield==1) && ((ruleSubsidySuppl.getValue(2,i)=="" && matchsupplcode==1) || matchsupplcode==1)
 			&& ((ruleSubsidySuppl.getValue(3,i)=="" && matchLobCode==1) || matchLobCode==1)){
 				subsidyFromType.add(ruleSubsidySuppl.getValue(4,i))
-				subsidyFromValue.add(checkName(instanceFOU,ruleSubsidySuppl.getValue(5,i)))
+				subsidyFromValue.add(checkFromValueName(instanceFOU,ruleSubsidySuppl.getValue(5,i)))
 				subsidyAlloc.add(ruleSubsidySuppl.getValue(6,i))
 				subsidySource.add(ruleSubsidySuppl.getValue(7,i))
 				subsidyType.add(ruleSubsidySuppl.getValue(8,i))
@@ -221,7 +221,7 @@ public class verifSubsidy {
 	}
 
 	@Keyword
-	public checkName(Sql instanceFOU, String code){
+	public checkFromValueName(Sql instanceFOU, String code){
 		String name
 		instanceFOU.eachRow(("select VENDOR_NAME from vendor where vendor_code = '"+code+"'"), { def row ->
 			name = row[0]

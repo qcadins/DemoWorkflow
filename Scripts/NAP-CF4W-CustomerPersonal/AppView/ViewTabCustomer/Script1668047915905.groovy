@@ -415,16 +415,16 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

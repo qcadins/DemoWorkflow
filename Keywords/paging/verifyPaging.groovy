@@ -156,7 +156,7 @@ public class verifyPaging {
 	}
 
 	@Keyword
-	public addAppNoForPaging(ArrayList<String> listString){
+	public addAppNoForPagingNAP1(ArrayList<String> listString){
 
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
@@ -194,7 +194,7 @@ public class verifyPaging {
 	}
 
 	@Keyword
-	public addAppNoForPagingComRsv(ArrayList<String> listString){
+	public addAppNoForPagingComResFund(ArrayList<String> listString){
 
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
@@ -324,7 +324,7 @@ public class verifyPaging {
 	}
 
 	@Keyword
-	public ComRsvCountDataInPage(){
+	public ComResFundCountDataInPage(){
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true
@@ -405,7 +405,7 @@ public class verifyPaging {
 	}
 
 	@Keyword
-	public AppViewCountDataInPage(){
+	public AppInquiryCountDataInPage(){
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true

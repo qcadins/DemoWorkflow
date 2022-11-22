@@ -159,11 +159,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
                                         'write to excel failed'
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
 
                                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorPersonal - 1, 
                                             GlobalVariable.StatusReasonLookup)
 
@@ -218,11 +218,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
                                         'write to excel failed'
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
 
                                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                                        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                             '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
 
                                         'Flagfailed +1 karena lookup gagal'
@@ -308,7 +308,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 								(GlobalVariable.CountNumofCustomer)--
 							} else {
 								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
-									CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+									CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 										'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
 								}
 							}
@@ -381,10 +381,10 @@ for (int i = 1; i <= variableData.size(); i++) {
 }
 
 if (custnamefaileddelete.size() > 0) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
         0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
         1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 
     (GlobalVariable.FlagWarning)++

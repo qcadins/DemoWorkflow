@@ -72,15 +72,15 @@ if(refsize>0){
 }
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
-def supRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Commission Data') +
+def supRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Commission Data') +
 1
 
 'Mengambil nilai row keberapa dimulai data supplier employee commission pada excel'
-def suppEmpRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Employee Commission Data') +
+def suppEmpRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Supplier Employee Commission Data') +
 1
 
 'Mengambil nilai row keberapa dimulai data referantor commission pada excel'
-def refRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Referantor Commission Data') +
+def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Referantor Commission Data') +
 1
 
 'Mencari nilai commission amount dari setiap commission source dari supplier, supplier employee, dan referantor'
@@ -100,11 +100,11 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 					if(WebUI.verifyEqual(Double.parseDouble(comSupp.get(i-1).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
 							GlobalVariable.NumofColm, (2 * i) + 1 + supRow)))==false){
 						'Write to Excel FAILED'
-						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+						CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 							0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 						
 						'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-						CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+						CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 							1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 						
 					
@@ -129,11 +129,11 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 						'Verif amount commmision supplier employee db dengan excel'
 						if(WebUI.verifyEqual(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString()),Double.parseDouble(value[i-1]))==false){
 							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 							
 							'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
 					
@@ -160,11 +160,11 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 						'Verif amount commmision referantor db dengan excel'
 						if(WebUI.verifyEqual(Double.parseDouble(comRef.get(countRf+(j-1)).toString()),Double.parseDouble(value[i-1]))==false){
 							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 							
 							'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
 					
@@ -188,11 +188,11 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(comSupp.get(i-1).toString())*100)/100,Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
 					GlobalVariable.NumofColm, (2 * i) + 2 + supRow)))==false){
 					'Write to Excel FAILED'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
 					'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 					
 					
@@ -217,11 +217,11 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 						'Verif percentage commmision supplier employee db dengan excel'
 						if(WebUI.verifyEqual(Math.round(Double.parseDouble(comSuppEmp.get(count+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1]))==false){
 							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 							
 							'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
 						
@@ -248,11 +248,11 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 						'Verif percentage commmision referantor db dengan excel'
 						if(WebUI.verifyEqual(Math.round(Double.parseDouble(comRef.get(countRf+(j-1)).toString())*100)/100,Double.parseDouble(value[i-1]))==false){
 							'Write to Excel FAILED'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 							
 							'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
 							

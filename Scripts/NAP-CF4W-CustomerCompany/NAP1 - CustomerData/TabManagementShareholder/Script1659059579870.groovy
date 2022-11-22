@@ -601,11 +601,11 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Cancel'))
 
                             'Write to Excel FAILED'
-                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                             'Flagfailed +1 karena lookup gagal'
@@ -840,11 +840,11 @@ GlobalVariable.FlagFailed = 0
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
 
                             'Write to Excel FAILED'
-                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
                                 '2.TabManagementShareholderData', 1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
 
                             'Flagfailed +1 karena lookup gagal'
@@ -966,7 +966,7 @@ GlobalVariable.FlagFailed = 0
 						(GlobalVariable.CountNumofCustomer)--
 					} else {
 						if (flagWarning > 0) {
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
 						}
 					}
@@ -980,7 +980,7 @@ GlobalVariable.FlagFailed = 0
 						(GlobalVariable.CountNumofCustomer)--
 					} else {
 						if (flagWarning > 0) {
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
 						}
 					}
@@ -1039,7 +1039,7 @@ GlobalVariable.FlagFailed = 0
 						(GlobalVariable.CountNumofCustomer)--
 					} else {
 						if (flagWarning > 0) {
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
 						}
 					}
@@ -1053,7 +1053,7 @@ GlobalVariable.FlagFailed = 0
 						(GlobalVariable.CountNumofCustomer)--
 					} else {
 						if (flagWarning > 0) {
-							CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+							CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 								'2.TabManagementShareholderData', 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
 						}
 					}
@@ -1072,7 +1072,7 @@ GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.ch
 
 if (GlobalVariable.FlagFailed == 0) {
    'Write to Excel SUCCESS'
-   CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabManagementShareholderMain',
+   CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2a.TabManagementShareholderMain',
 	   0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
@@ -1321,10 +1321,10 @@ def getData(def datafile){
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 				0, GlobalVariable.NumofMS-1, GlobalVariable.StatusFailed)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 				1, GlobalVariable.NumofMS-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

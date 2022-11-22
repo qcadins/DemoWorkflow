@@ -20,11 +20,11 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifInsuranceFee {
+public class verifyInsuranceFee {
 
 
 	@Keyword
-	public verifFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
+	public verifyFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
 
 		ArrayList<String> defAmt = new ArrayList<String>()
 
@@ -67,7 +67,7 @@ public class verifInsuranceFee {
 
 		Integer inscoHORow = -1, insAssetCategoryRow = -1
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
 		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
@@ -100,7 +100,7 @@ public class verifInsuranceFee {
 		}
 
 		//check admin & stampduty
-		insAssetCategoryRow = (new excelGetRow.getRowWithColumn()).getExcelRow(filePath, 'Fee', insAssetCategory,1)+1
+		insAssetCategoryRow = (new customizeKeyword.getRow()).getRowWithColumn(filePath, 'Fee', insAssetCategory,1)+1
 
 		def ruleFee = findTestData('DownloadRule/InsuranceFeeRule')
 

@@ -476,33 +476,32 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
 }
 
 def verifLegalDocType(int legal){
-	if (legal == 1) {
-		if (GlobalVariable.RoleCompany == 'Testing') {
-			
-			'connect DB FOU'
-			Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+	if (GlobalVariable.RoleCompany == 'Testing') {
+                            
+							'connect DB FOU'
+							Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-			ArrayList<WebElement> LegalDocType
+                            ArrayList<WebElement> LegalDocType
 
-			'get data array dari db'
-			LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                            'get data array dari db'
+                            LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
 
-			'verify array dari db == option list confins'
-			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
-				LegalDocType) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-					'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
+                            'verify array dari db == option list confins'
+                            if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
+                                LegalDocType) == false) {
+                                'Write To Excel GlobalVariable.StatusFailed'
+                                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-					'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
+                                'Write To Excel GlobalVariable.ReasonFailedDDL'
+                                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    '6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
 
-				(GlobalVariable.FlagFailed)++
-			}
-			
-			'get total label from ddl'
-			int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
+                                (GlobalVariable.FlagFailed)++
+                            }
+                            
+                            'get total label from ddl'
+                            int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
 
 			'verify total ddl confins = total ddl db'
 			if (WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size()) == false){

@@ -107,16 +107,16 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '9. Term and Condition', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

@@ -42,7 +42,7 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
@@ -54,7 +54,7 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Y
 		
 		String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
 
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			16, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
 	}
 }
@@ -78,7 +78,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
-	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifSubsidy.verifySubsidyDefault'(sqlconnectionLOS, sqlconnectionFOU,appNo)
+	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifySubsidy.verifySubsidyDefault'(sqlconnectionLOS, sqlconnectionFOU,appNo)
 	
 	ArrayList<String> SubsidyFromType, SubsidyFromValue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue
 	SubsidyFromType = result.get("FT")
@@ -105,7 +105,7 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 			modifySubsidy()
 			
 			'Verif subsidy from type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyFromTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
@@ -115,17 +115,17 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 			}
 			
 			'Verif subsidy allocation sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyAllocCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyAllocCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy value type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidyValueTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyValueTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy source sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifSubsidy.checkSubsidySourceCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidySourceCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
@@ -280,10 +280,10 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
 }
 
 if(subsidyfaileddelete.size() > 0){
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 			'9.TabFinancialData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
 			'9.TabFinancialData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
 	
 	GlobalVariable.FlagWarning++
@@ -520,11 +520,11 @@ public modifySubsidy(){
 
 def writeReasonFailedVerifRule() {
 	'write to excel failed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
 	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 
 	GlobalVariable.FlagFailed = 1

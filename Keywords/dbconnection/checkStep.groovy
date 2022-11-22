@@ -1,4 +1,4 @@
-package tripleVerifyMatch
+package dbconnection
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -17,16 +17,26 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-
-import groovy.sql.Sql
+import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class TripleVerifyMatch {
-	@Keyword
-	public verifyMatch (String excel, String UI, String DB){
+public class checkStep {
 
-		WebUI.verifyMatch(excel, UI, false)
-		WebUI.verifyMatch(excel, DB, false)
-		WebUI.verifyMatch(UI, DB, false)
+	@Keyword
+	public checkAppCurrStep(Sql instanceLOS, String appNo){
+		String appStep
+		instanceLOS.eachRow(("select app_curr_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
+			appStep = row[0]
+		})
+		return appStep
+	}
+
+	@Keyword
+	public checkCustCheckStep(Sql instanceLOS, String appNo){
+		String custCheckStep
+		instanceLOS.eachRow(("select cust_checking_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
+			custCheckStep = row[0]
+		})
+		return custCheckStep
 	}
 }

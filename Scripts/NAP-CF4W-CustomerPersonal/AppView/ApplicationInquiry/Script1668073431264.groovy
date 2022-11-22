@@ -504,13 +504,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     'Klik button page 1'
     WebUI.click(findTestObject('AppView/MainInformation/pageOne'))
 
-    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppViewCountDataInPage'(), true))
+    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.AppInquiryCountDataInPage'(), true))
 	
 	if(resultReset.contains(false)){
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+				(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+";\n"))
 		
@@ -518,10 +518,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 	}
 			
 	if(checkVerifySort.contains(false) ){
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+";\n"))
 			
@@ -529,10 +529,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 	}
 			
 	if(checkVerifyFooter.contains(false)){
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
+					(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '1.MainInformation',
 							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
 			    GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+";\n"))
 			
@@ -577,23 +577,23 @@ for (i = 0; i < result.size(); i++) {
 int index = 0
 
 'verify app no'
-checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(appno, WebUI.getText(findTestObject(
                 'AppView/MainInformation/Label App No')).toString().toUpperCase(), (result[index++]).toString().toUpperCase()))
 
 'verify office'
-checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(
             4, 1).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 14) == 'LookUp') {
     'verify customer no'
-    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Cust No')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -602,7 +602,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1
     result[index++]
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 }
@@ -612,7 +612,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tenor'
-checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
             GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Tenor')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
@@ -621,7 +621,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-checkVerifyEqualOrMatch(CustomKeywords.'tripleVerifyMatch.TripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 25).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Model')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
@@ -664,16 +664,16 @@ WebUI.closeWindowIndex('1')
 WebUI.switchToWindowIndex('0')
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
+    new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 0, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 1, GlobalVariable.NumofColm - 
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '1. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

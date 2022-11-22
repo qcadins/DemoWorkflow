@@ -59,7 +59,7 @@ if(WebUI.verifyElementPresent(findTestObject('Object Repository/LoginR3BranchMan
 else{
 	
 	'write to excel job title'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 'Login',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 'Login',
 		2, 4, WebUI.getText(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/label_JobTitleRole')))
 }
 

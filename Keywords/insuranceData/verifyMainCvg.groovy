@@ -20,29 +20,28 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifSumInsured {
+public class verifyMainCvg {
 
-
-	public verifySumInsuredMainCov(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName ){
-
+	public verifyMainPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt){
 		HashMap<String,ArrayList> result = new HashMap<>()
-		ArrayList<String> yearNo = new ArrayList<>()
+		ArrayList<String> maincvgType = new ArrayList<>()
 
-		ArrayList<String> sumInsuredPctg = new ArrayList<>()
+		ArrayList<String> mainRate = new ArrayList<>()
 
 		String userDir = System.getProperty('user.dir')
 
 		String filePathAssetCat = userDir+GlobalVariable.MainCovRulePath
 
-		String appId, assetCode, assetCondition, assetCategoryCode, inscoHOCode, insAssetCategory
+		String filePath = userDir+GlobalVariable.AddtCovRulePath
+
+		String appId, assetCode, assetCondition, assetCategoryCode, inscoHOCode, insAssetCategory, inscoBranchCode
 
 		instanceLOS.eachRow(("select app_id from app where app_no = '"+appNo+"'"), { def row ->
 			appId = row[0]
 		})
 
-		instanceLOS.eachRow(("select full_asset_code, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
+		instanceLOS.eachRow(("select full_asset_code from app_asset where app_id = '"+appId+"'"), { def row ->
 			assetCode = row[0]
-			assetCondition = row[1]
 		})
 
 		instanceLOS.eachRow(("select asset_category_code from ASSET_MASTER_LOS where FULL_ASSET_CODE = '"+assetCode+"'"), { def row ->
@@ -55,9 +54,14 @@ public class verifSumInsured {
 			inscoHOCode = row[0]
 		})
 
+		instanceFOU.eachRow(("select VENDOR_CODE from vendor where vendor_name ='"+inscoBranchName+"' AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH'"), { def row ->
+
+			inscoBranchCode = row[0]
+		})
+
 		Integer inscoHORow = -1
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
 		def ruleAssetCategory = findTestData('DownloadRule/InsAssetCategory')
 
@@ -90,31 +94,34 @@ public class verifSumInsured {
 		}
 
 
-		inscoHORow = (new excelGetRow.getRow()).getExcelRow(filePathAssetCat, 'SumInsured', inscoHOCode)+1
+		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'MainCvg', inscoHOCode)+1
 
-		def ruleSumInsuredRate = findTestData('DownloadRule/InsuranceSumInsuredRule')
+		def ruleMainCvg = findTestData('DownloadRule/InsuranceMainCvgRule')
 
 		int match = 0
-		for(int i=inscoHORow;i<=ruleSumInsuredRate.getRowNumbers();i++){
-			if(ruleSumInsuredRate.getValue(1,i)!=inscoHOCode && ruleSumInsuredRate.getValue(1,i)!=""){
+		for(int i = inscoHORow;i<=ruleMainCvg.getRowNumbers();i++){
+			if(ruleMainCvg.getValue(1,i)!=inscoHOCode && ruleMainCvg.getValue(1,i)!=""){
 				match=0
 			}
-			if(ruleSumInsuredRate.getValue(1,i)==inscoHOCode || (match==1 && ruleSumInsuredRate.getValue(1,i)=="")){
+			if(ruleMainCvg.getValue(1,i)==inscoHOCode || (match==1 && ruleMainCvg.getValue(1,i)=="")){
 				if(match==0){
 					match = 1
 				}
-				if(ruleSumInsuredRate.getValue(2,i)==insAssetCategory && ruleSumInsuredRate.getValue(3,i)==assetCondition){
-					yearNo.add(ruleSumInsuredRate.getValue(4,i))
-					sumInsuredPctg.add(ruleSumInsuredRate.getValue(5,i))
+				if((ruleMainCvg.getValue(2,i)==inscoBranchCode || ruleMainCvg.getValue(2,i)=="-")
+				&& (ruleMainCvg.getValue(3,i)==region || ruleMainCvg.getValue(3,i)=="-") && (ruleMainCvg.getValue(4,i)==insAssetCategory || ruleMainCvg.getValue(4,i)=="-")
+				&& Long.parseLong(ruleMainCvg.getValue(5,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleMainCvg.getValue(6,i))>=Long.parseLong(covAmt)){
+					maincvgType.add(ruleMainCvg.getValue(7,i))
+					mainRate.add(ruleMainCvg.getValue(10,i))
 				}
 			}
-			else if((ruleSumInsuredRate.getValue(1,i)=="" && ruleSumInsuredRate.getValue(2,i)=="" && ruleSumInsuredRate.getValue(3,i)=="")
+			else if((ruleMainCvg.getValue(1,i)=="" && ruleMainCvg.getValue(2,i)=="" && ruleMainCvg.getValue(3,i)=="")
 			|| match==0){
 				break
 			}
 		}
-		result.put("Year",yearNo)
-		result.put("Pctg",sumInsuredPctg)
+
+		result.put("MainCvg",maincvgType)
+		result.put("MainRate",mainRate)
 		return result
 	}
 }

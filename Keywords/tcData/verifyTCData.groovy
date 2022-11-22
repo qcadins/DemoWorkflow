@@ -20,10 +20,10 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
-public class verifTCData {
+public class verifyTCData {
 
 	@Keyword
-	public verifyTermConditionData(Sql instanceLOS, Sql instanceFOU, String MrCustModelName, String appNo){
+	public verifyTCList(Sql instanceLOS, Sql instanceFOU, String MrCustModelName, String appNo){
 		HashMap<String, ArrayList> result = new HashMap<>()
 		ArrayList<String> TCCode = new ArrayList<>()
 		ArrayList<String> TCMandatory = new ArrayList<>()
@@ -56,7 +56,7 @@ public class verifTCData {
 		String filePath = userDir+GlobalVariable.TCRulePath
 
 		Integer lobCodeRow = -1
-		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'TC', lobCode)+1
+		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'TC', lobCode)+1
 
 		def ruleTC = findTestData('DownloadRule/TCRule')
 

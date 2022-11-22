@@ -168,11 +168,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (assettypefaileddelete.size() > 0) {
 		'write to excel status warning'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed delete'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
 		'flagwarning +1'
@@ -296,11 +296,11 @@ if (GlobalVariable.FlagFailed == 0) {
 
 if (GlobalVariable.FlagWarning > 0) {
 	'write to excel status warning'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
 	'write to excel reason failed input data'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 

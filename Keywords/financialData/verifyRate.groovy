@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class verifRate {
+public class verifyRate {
 
 
 	@Keyword
@@ -52,7 +52,7 @@ public class verifRate {
 		String filePath = userDir+GlobalVariable.FinancialRateRulePath
 
 		Integer lobCodeRow = -1
-		lobCodeRow = (new excelGetRow.getRow()).getExcelRow(filePath, 'CreditRate', lobCode)+1
+		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'CreditRate', lobCode)+1
 
 		def ruleRate = findTestData('DownloadRule/FinancialRateRule')
 

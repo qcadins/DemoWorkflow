@@ -53,7 +53,7 @@ if (!(appLastStep.equalsIgnoreCase('UPL_DOC')) && (GlobalVariable.FirstTimeEntry
 }
 
 'Hashmap untuk menampung arraylist refund allocation dan refund amount dari membaca rule file'
-HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.verifIncomeInfoAmtRuleBased'(
+HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.verifyIncomeInfoAmtRuleBased'(
     sqlConnectionLOS, appNo)
 
 ArrayList<WebElement> refundFrom = result.get('From')
@@ -113,22 +113,22 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
                 'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
                 if (textIncomeInfo.equalsIgnoreCase('Upping Rate')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkDiffRateAmtValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(
                         sqlConnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Insurance Income')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkInsValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(
                         sqlConnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Life Insurance Income')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkLifeInsValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(
                         sqlConnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Admin Fee')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkAdminFeeValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(
                         sqlConnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Provision Fee')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkProvisionFeeValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(
                         sqlConnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Other Fee')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifIncomeInfoBasedOnRule.checkOtherFeeValue'(
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(
                         sqlConnectionLOS, appNo)
                 }
                 
@@ -138,11 +138,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if (WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(',', ''))), Math.round(getAmountFromAppDB * 
                         Double.parseDouble(refundAmt[i]))) == false) {
                     'Write to Excel FAILED'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
                     'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-                    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                         1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 
                     GlobalVariable.FlagFailed = 1
@@ -165,7 +165,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/CommissionRes
 ArrayList<WebElement> variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
-def supRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') + 
+def supRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') + 
 1
 
 'Pengecekan Jika terdapat minimal 1 List Supplier'
@@ -363,7 +363,7 @@ if (variableSupp.size() > 0) {
 
 //Supplier Employee
 'Mengambil nilai row keberapa dimulai data supplier employee commission pada excel'
-def suppEmpRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Employee Commission Data') + 
+def suppEmpRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Employee Commission Data') + 
 1
 
 'Arraylist untuk menampung List Supplier Employee'
@@ -660,7 +660,7 @@ if (variableSuppEmp.size() > 0) {
 
 //Referantor
 'Mengambil nilai row keberapa dimulai data referantor commission pada excel'
-def refRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Referantor Commission Data') + 
+def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Referantor Commission Data') + 
 1
 
 'Arraylist untuk menampung List Referantor'
@@ -925,10 +925,10 @@ if (variableRef.size() > 0) {
 }
 
 if (commissiondelete.size() > 0) {
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 
     (GlobalVariable.FlagWarning)++
@@ -942,17 +942,17 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/Comm
 'Pengecekan jika calculate error'
 if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     'Write to Excel FAILED'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 
     'Pengecekan error alert amount/percentage melebihi limit'
     if (WebUI.getText(alertCalculate).toLowerCase().contains('Cannot be more than'.toLowerCase())) {
         'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
-        CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
     }
     
@@ -1018,9 +1018,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

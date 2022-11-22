@@ -117,7 +117,7 @@ ArrayList<String> allocBhv = resultVerifRule.get("Bhv")
 BigDecimal totalAmt = 0
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(filePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
+def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(filePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
 
 'Arraylist untuk menampung remaining info'
 ArrayList<WebElement> varRemainingBfrCalculate = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
@@ -142,11 +142,11 @@ for(int i = 0;i<allocFrom.size();i++){
 		'Verify allocation from yang tampil pada confins sesuai dengan rule file'
 		if(WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)==false){
 			'Write to Excel FAILED'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed=1
@@ -187,11 +187,11 @@ for(int i = 0;i<allocFrom.size();i++){
 			'Verify amount yang tampil di confins sesuai dengan default amount pada rule file '
 			if(WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)==false){
 				'Write to Excel FAILED'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 				
 				'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 				
 				GlobalVariable.FlagFailed=1
@@ -207,11 +207,11 @@ for(int i = 0;i<allocFrom.size();i++){
 				'Verify field bisa diisi'
 				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)==false){
 					'Write to Excel FAILED'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					GlobalVariable.FlagFailed=1
 				}
@@ -229,11 +229,11 @@ for(int i = 0;i<allocFrom.size();i++){
 				'Verify field tidak bisa diisi'
 				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)==false){
 					'Write to Excel FAILED'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
 					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+					CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					GlobalVariable.FlagFailed=1
 				}
@@ -271,11 +271,11 @@ else if(alert==null){
 
 if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
 	'Write to Excel FAILED'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 
 	'Klik cancel'
@@ -373,10 +373,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					0, numofcolm-1, GlobalVariable.StatusFailed)
 	
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
 					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 		GlobalVariable.FlagFailed=1

@@ -56,7 +56,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
-	String defaultAssetReg = CustomKeywords.'insuranceData.verifAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
+	String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo)
 	
 //	'Verif default asset region based on rule'
 //	if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
@@ -114,11 +114,11 @@ if(GlobalVariable.Role=="Testing"){
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
 		inscoBranchName)==false){
 		'write to excel failed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
 			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 		'Write To Excel GlobalVariable.StatusReason'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
 		GlobalVariable.FlagFailed=1
@@ -130,11 +130,11 @@ if(GlobalVariable.Role=="Testing"){
 	'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
 	if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
 		'write to excel failed'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
 			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 		'Write To Excel GlobalVariable.StatusReason'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
 		GlobalVariable.FlagFailed=1
@@ -180,11 +180,11 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
 
     'write to excel failed'
-    CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonGenerateGagal)
 	
 	GlobalVariable.FlagFailed=1
@@ -195,7 +195,7 @@ selectedInscoBranch = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerP
         GlobalVariable.NumofColm, 26)
 
 'Membaca rule excel untuk menentukan default admin fee dan customer stampduty beserta behaviournya'
-HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifInsuranceFee.verifFee'(sqlConnectionLOS, appNo,selectedInscoBranch, sqlConnectionFOU)
+HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifyInsuranceFee.verifyFee'(sqlConnectionLOS, appNo,selectedInscoBranch, sqlConnectionFOU)
 
 ArrayList<String> feeBhv, defAmt
 feeBhv = result.get("Bhv")
@@ -265,7 +265,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
         GlobalVariable.NumofColm, 34), false)
 
 'Mengambil nilai row keberapa dimulai data additional coverage (apply to all) pada excel'
-def addCovRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage') + 
+def addCovRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Insurance Coverage') + 
 3
 
 ArrayList<WebElement> variableAddCovAll = driver.findElements(By.cssSelector('#insuranceCoverage > div:nth-child(2) > div > label'))
@@ -323,26 +323,26 @@ if(capinssetting=="YEARLY"){
 	int count = variable.size()
 	
 	'Mengambil nilai row keberapa dimulai data additional coverage section edit generated insurance table pada excel'
-	def addCovTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
+	def addCovTableRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table') +
 	6
 	
 	'Mengambil nilai row keberapa dimulai data edit generated insurance table pada excel'
-	def editGenTableRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
+	def editGenTableRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Edit Generated Insurance Table')+1
 	
 	'Mengambil nilai row keberapa dimulai data sum insured amount pada excel'
-	def sumInsuredAmountRow = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
+	def sumInsuredAmountRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Sum Insured Amount') +
 	1
 	
 	'Mengambil nilai row keberapa data main premi rate pada excel'
-	def Rate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
+	def Rate = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Rate') +
 	2
 	
 	'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-	def AddRate = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
+	def AddRate = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Additional Premi Rate') +
 	1
 	
 	'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
-	def TotalPremium = CustomKeywords.'excelGetRow.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
+	def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 	1
 	
 	int counterPaidByMF=0
@@ -363,7 +363,7 @@ if(capinssetting=="YEARLY"){
 			sumInsuredPercentValue = WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %","")
 			
 			'Membaca rule excel untuk menentukan year num dan default sum insured percentage'
-			HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifSumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
+			HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifySumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
 			
 			ArrayList<String> yearNo, sumInsuredPctg
 			
@@ -491,7 +491,7 @@ if(capinssetting=="YEARLY"){
 		//Verif Main Premi Rate Based on Rule
 		if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
-			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifMainRate.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 			
 			modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
@@ -562,7 +562,7 @@ if(capinssetting=="YEARLY"){
 		
 		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-			result = CustomKeywords.'insuranceData.verifAddtRate.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 			
 			addtCvgType = result.get("AddtCvg")
 			addtPremiRate = result.get("AddtRate")
@@ -575,7 +575,7 @@ if(capinssetting=="YEARLY"){
 					true)
 				
 				'Verif additional coverage yang tampil pada confins sesuai dengan rule'
-				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvg.get(addCovIndex-1), false)==false){
 					writeFailedReasonVerifyRule()
 					break
 				}
@@ -686,7 +686,7 @@ if(capinssetting=="YEARLY"){
 				'Looping berdasarkan jumlah additional coverage type pada rule excel'
 				for(int k = 0;k<addtCvgType.size();k++){
 					'Verif additional coverage type confins sesuai dengan rule'
-					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifAddtRate.checkAddtInsCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
+					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
 						'Pengecekan jika terdapat sum insured amount'
 						if(countSumInsuredAmount == 1){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
@@ -824,7 +824,7 @@ if(capinssetting=="YEARLY"){
 	if(GlobalVariable.Role=="Testing"){
 		
 		'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
-		totalResult = CustomKeywords.'insuranceData.verifInsuranceData.verifyTabInsuranceData'()
+		totalResult = CustomKeywords.'insuranceData.verifyInsuranceData.verifyInsuranceCvgResult'()
 		
 		'ambil nilai total main premi dari confins'
 		String textTotalMainPremiAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace(
@@ -930,7 +930,7 @@ if(capinssetting=="YEARLY"){
 		'Jika ada paid by mf'
 		if(totalResult[2]==1){
 			'write to excel discount amount'
-			CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 				GlobalVariable.NumofColm - 1, textDiscountAmt)
 		}
 	}
@@ -938,7 +938,7 @@ if(capinssetting=="YEARLY"){
 	'Jika ada paid by mf'
 	if (counterPaidByMF == 1) {
 		'Write to excel discount amount'
-		CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
 	
@@ -967,11 +967,11 @@ else if (capinssetting=="PARTIAL"){
 
 public writeFailedReasonVerifyRule(){
 	'write to excel failed'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
 		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed = 1
@@ -979,10 +979,10 @@ public writeFailedReasonVerifyRule(){
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1
