@@ -138,11 +138,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                             modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'get referantor name'
@@ -224,10 +224,10 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
     }
     
     if (referantorfaileddelete.size() > 0) {
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 
         (GlobalVariable.FlagWarning)++
@@ -343,11 +343,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                             'Click delete'
@@ -405,11 +405,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                             modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                 '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'Click delete'
@@ -504,11 +504,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                         'write to excel WARNING'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                         'get referantor name'
@@ -570,11 +570,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                         modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                         'write to excel WARNING'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                         'Write To Excel GlobalVariable.StatusReasonLookup'
-                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                             1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                         'Click delete'
@@ -629,7 +629,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 }
                 
                 'write to excel SUCCESS'
-                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                     0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
             }
         }
@@ -744,11 +744,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_X'))
 
                     'write to excel WARNING'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonLookup)
 
                     'Click delete'
@@ -807,11 +807,11 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
                     modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
                     'write to excel WARNING'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
                     'Write To Excel GlobalVariable.StatusReasonLookup'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                     'Click delete'
@@ -889,7 +889,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 }
                 
                 'write to excel SUCCESS'
-                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+                CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
                     0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 
                 modifyObjectIndex++
@@ -980,17 +980,17 @@ def adddatatoarraylist(ArrayList<String> referantorDetail) {
 
 def writeReasonFailedDelete() {
     'Write To Excel GlobalVariable.ReasonFailedDelete'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.ReasonFailedDelete)
 }
 
 def writeReasonFailedLookup() {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
@@ -998,11 +998,11 @@ def writeReasonFailedLookup() {
 
 def writeReasonFailedDDL() {
     'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDDL)
 
     GlobalVariable.FlagFailed = 1
@@ -1010,11 +1010,11 @@ def writeReasonFailedDDL() {
 
 def writeToExcelTidakSesuaiDB() {
     'write to excel WARNING'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 
     'Write To Excel GlobalVariable.StatusReason'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 
         1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
 
     'click cancel'
@@ -1037,10 +1037,10 @@ def getTextBankAccount(String newSelectBankaccount) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '5.TabReferantorData',
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

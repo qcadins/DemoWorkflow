@@ -29,26 +29,26 @@ public class checkSaveProcess {
 	public checkStatus (int count, TestObject object, int colm, String sheetname){
 		if(WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)){
 			if(count==0){
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusSuccess)
 			}
 			else{
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.StatusReasonSystem)
 			}
 		}else{
 			if(count==0){
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.StatusReasonSaveGagal)
 			}
 			else{
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
-				(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+				(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 			}
 		}
@@ -59,9 +59,9 @@ public class checkSaveProcess {
 	public checkValidasi (TestObject object, int colm, String sheetname){
 		if(WebUI.verifyElementPresent(object, 5, FailureHandling.OPTIONAL)){
 
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					1, colm - 1, GlobalVariable.StatusFailedValidasi)
 		}
 	}
@@ -75,9 +75,9 @@ public class checkSaveProcess {
 
 			String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label')
 
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					0, colm - 1, GlobalVariable.StatusFailed)
-			(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					1, colm - 1, FailedAlertReason)
 			flagFailed=1
 		}
@@ -89,9 +89,9 @@ public class checkSaveProcess {
 	public writeWarningAppView(int colm, String sheetname){
 		String AlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label')
 
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				0, colm - 1, GlobalVariable.StatusWarning)
-		(new writetoexcel.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, sheetname,
+		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				1, colm - 1, AlertReason)
 	}
 }

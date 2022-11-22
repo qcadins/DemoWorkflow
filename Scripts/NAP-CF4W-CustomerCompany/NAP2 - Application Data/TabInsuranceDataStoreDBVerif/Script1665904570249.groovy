@@ -504,11 +504,11 @@ if (insuredBy == 'Customer') {
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
         GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1, 
         GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB) //					if ((floodratearray[(year - 1)]).length() > 0) {
 } //						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate),
 //								FailureHandling.OPTIONAL))
