@@ -50,7 +50,7 @@ if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP
 	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
 	
 	ArrayList<String> listFam = new ArrayList<>()
-	listFam = CustomKeywords.'dbConnection.EditNAP.GetFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	listFam = CustomKeywords.'dbConnection.getInfoForEditNAP.getFamilyDataforEditNAP'(sqlConnectionLOS,findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 8))
 	ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	for(int familydt=1 ;familydt<=variableData.size();familydt++){

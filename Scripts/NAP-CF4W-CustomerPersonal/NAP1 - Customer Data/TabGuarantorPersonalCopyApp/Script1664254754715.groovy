@@ -51,7 +51,7 @@ if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPerson
 
     ArrayList<Boolean> listGuar = new ArrayList<Boolean>()
 
-    listGuar = CustomKeywords.'dbConnection.EditNAP.GetGuarantorDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    listGuar = CustomKeywords.'dbConnection.getInfoForEditNAP.getGuarantorDataforEditNAP'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 8))
 
     ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()

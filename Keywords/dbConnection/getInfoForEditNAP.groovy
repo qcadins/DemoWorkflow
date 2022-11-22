@@ -23,13 +23,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class EditNAP {
+public class getInfoForEditNAP {
 
 	int colmcount
 	int i
 
 	@Keyword
-	public CustomerDataPersonal (Sql instance, String appno){
+	public customerDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
@@ -47,7 +47,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public FamilyDataPersonal (Sql instance, String appno){
+	public familyDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_FAMILY = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
@@ -65,7 +65,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public GuarantorDataPersonal (Sql instance, String appno){
+	public guarantorDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
@@ -83,7 +83,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public GuarantorDataCompany (Sql instance, String appno){
+	public guarantorDataCompany (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, TAX_ID_NO FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_GUARANTOR = 1"), {  row ->
@@ -101,7 +101,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public CustomerDataCompany (Sql instance, String appno){
+	public customerDataCompany (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, TAX_ID_NO FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1"), {  row ->
@@ -119,7 +119,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public ShareholderDataPersonal (Sql instance, String appno){
+	public shareholderDataPersonal (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, rml.REF_MASTER_NAME, FORMAT(BIRTH_DT, 'MM/dd/yyyy') , ID_NO, acp.MOTHER_MAIDEN_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_ID_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE' AND rml.IS_ACTIVE = '1'"), {  row ->
@@ -137,7 +137,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public ShareholderDataCompany (Sql instance, String appno){
+	public shareholderDataCompany (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("Select CUST_NAME, TAX_ID_NO FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = 1"), {  row ->
@@ -156,7 +156,7 @@ public class EditNAP {
 
 
 	@Keyword
-	public GetFamilyDataforEditNAP(Sql instance, String appno){
+	public getFamilyDataforEditNAP(Sql instance, String appno){
 		ArrayList<String> arrayFamilyData = new ArrayList<String>()
 		String familydata
 		instance.eachRow(("SELECT CUST_NAME , [CUST_TYPE] ,[RELATIONSHIP]  ,[CUST_MODEL]  FROM (SELECT CUST_NAME, mastername.Code, REF_MASTER_NAME,app_cust_id FROM (select cust_name, [Code], value,app_cust_id FROM (select cust_name, mr_cust_type_code AS [CUST_TYPE], (CASE WHEN MR_CUST_RELATIONSHIP_CODE = '' THEN 'SELF' ELSE MR_CUST_RELATIONSHIP_CODE END) as [RELATIONSHIP], MR_CUST_MODEL_CODE AS [CUST_MODEL],app_cust_id from app_cust ac with(nolock) join app a with(nolock) on ac.app_id = a.app_id where app_no ='"+appno+"' and (is_customer=1 or is_family=1)) as Orig unpivot (value for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL]))as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' and rf.REF_MASTER_TYPE_CODE IN('CUST_PERSONAL_RELATIONSHIP','CUST_TYPE','CUST_MODEL')) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_TYPE],[RELATIONSHIP],[CUST_MODEL])) as piv order by [RELATIONSHIP],app_cust_id"), {  row ->
@@ -175,7 +175,7 @@ public class EditNAP {
 	}
 
 	@Keyword
-	public GetMSDataforEditNAP (Sql instance, String appno){
+	public getMSDataforEditNAP (Sql instance, String appno){
 		String customerdata
 		ArrayList<String> listcustdata = new ArrayList<>()
 		instance.eachRow(("SELECT CUST_NAME , MR_CUST_TYPE_CODE , SHARE_PRCNT , IS_ACTIVE , IS_OWNER , IS_SIGNER  FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY_MGMNT_SHRHOLDER accms WITH(NOLOCK) ON accms.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = '1'"), {  row ->
@@ -194,7 +194,7 @@ public class EditNAP {
 
 
 	@Keyword
-	public GetGuarantorDataforEditNAP(Sql instance, String appno){
+	public getGuarantorDataforEditNAP(Sql instance, String appno){
 		ArrayList<String> arrayGuarantorData = new ArrayList<String>()
 		String guardata
 		instance.eachRow(("SELECT CUST_NAME , MR_CUST_TYPE_CODE , MR_CUST_RELATIONSHIP_CODE  FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID WHERE APP_NO = '"+appno+"' AND IS_GUARANTOR = '1' order by app_cust_id"), {  row ->

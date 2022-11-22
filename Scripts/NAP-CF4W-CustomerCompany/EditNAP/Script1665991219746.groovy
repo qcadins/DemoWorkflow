@@ -270,7 +270,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 			ArrayList<Boolean> listMS = new ArrayList<Boolean>()
 		
-			listMS = CustomKeywords.'dbConnection.EditNAP.GetMSDataforEditNAP'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			listMS = CustomKeywords.'dbConnection.getInfoForEditNAP.getMSDataforEditNAP'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 8))
 		
 			ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
@@ -554,7 +554,7 @@ def inputAppNo() {
 
 def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
     if (appStep == 'SHR') {
-        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.getInfoForEditNAP.customerDataCompany'(sqlconnectionLOS, appNo)
 
         int index = 0
 
@@ -572,12 +572,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
     } else if (appStep == 'GUAR') {
-        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.getInfoForEditNAP.customerDataCompany'(sqlconnectionLOS, appNo)
 
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.getInfoForEditNAP.shareholderDataPersonal'(sqlconnectionLOS, 
             appNo)
 
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.getInfoForEditNAP.shareholderDataCompany'(sqlconnectionLOS, 
             appNo)
 
         String MsName = ''
@@ -685,22 +685,22 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
     } else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
 		'get customer company data'
-        ArrayList<String> custdata = CustomKeywords.'dbConnection.EditNAP.CustomerDataCompany'(sqlconnectionLOS, appNo)
+        ArrayList<String> custdata = CustomKeywords.'dbConnection.getInfoForEditNAP.customerDataCompany'(sqlconnectionLOS, appNo)
 
 		'get MS Personal Data'
-        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> shrPersonalData = CustomKeywords.'dbConnection.getInfoForEditNAP.shareholderDataPersonal'(sqlconnectionLOS, 
             appNo)
 
 		'get MS Company Data'
-        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.EditNAP.ShareholderDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> shrCompanyData = CustomKeywords.'dbConnection.getInfoForEditNAP.shareholderDataCompany'(sqlconnectionLOS, 
             appNo)
 
 		'get Guarantor personal Data'
-        ArrayList<String> guarPersonalData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataPersonal'(sqlconnectionLOS, 
+        ArrayList<String> guarPersonalData = CustomKeywords.'dbConnection.getInfoForEditNAP.guarantorDataPersonal'(sqlconnectionLOS, 
             appNo)
 
 		'get Guarantor Company data'
-        ArrayList<String> guarCompanyData = CustomKeywords.'dbConnection.EditNAP.GuarantorDataCompany'(sqlconnectionLOS, 
+        ArrayList<String> guarCompanyData = CustomKeywords.'dbConnection.getInfoForEditNAP.guarantorDataCompany'(sqlconnectionLOS, 
             appNo)
 
 		'declare index, lastcolm variable'
