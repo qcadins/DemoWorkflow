@@ -105,10 +105,10 @@ if(GlobalVariable.Role=="Testing"){
 	Integer countInscoBranch = 0
 	
 	'Ambil array string (text) insco branch name dari db'
-	inscoBranchName = CustomKeywords.'dbConnection.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
+	inscoBranchName = CustomKeywords.'insuranceData.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
 	
 	'Ambil nilai count insco branch name dari db'
-	countInscoBranch = CustomKeywords.'dbConnection.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
+	countInscoBranch = CustomKeywords.'insuranceData.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
 	
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
@@ -348,7 +348,7 @@ if(capinssetting=="YEARLY"){
 	int counterPaidByMF=0
 	
 	'Ambil nilai string road worthiness document dari db'
-	String rwd = CustomKeywords.'dbConnection.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
+	String rwd = CustomKeywords.'assetData.checkAssetRoadWorthinessDoc.checkRWD'(sqlConnectionLOS,appNo)
 	
 	'Looping data tabel insurance untuk input data'
 	for (int i = 1; i <= count; i++) {

@@ -1,4 +1,4 @@
-package dbConnection
+package nap4Data
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,7 +21,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class checkNAP4db {
+public class checkNAP4 {
 
 	@Keyword
 	public checkLegaldocument(Sql instance){

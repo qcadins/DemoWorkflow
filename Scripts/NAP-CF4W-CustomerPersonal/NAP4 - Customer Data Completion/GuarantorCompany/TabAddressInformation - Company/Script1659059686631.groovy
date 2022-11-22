@@ -334,7 +334,7 @@ def verifyDDLAddress(int Address){
 		ArrayList<String> Ownership
 
 		'get data array dari db'
-		AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+		AddressType = CustomKeywords.'nap4Data.checkNAP4.checkAddressTypeCompany'(sqlconnectionFOU)
 
 		'get total label from ddl'
 		int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
@@ -367,7 +367,7 @@ def verifyDDLAddress(int Address){
 		}
 		
 		'get data array dari db'
-		Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+		Ownership = CustomKeywords.'nap4Data.checkNAP4.checkOwnership'(sqlconnectionFOU)
 
 		'get total label from ddl'
 		int totalOwnership = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Ownership'))

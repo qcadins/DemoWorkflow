@@ -339,10 +339,10 @@ def verifyDDLAddress(int Address){
 		ArrayList<String> Ownership
 
 		'get data array dari db'
-		AddressType = CustomKeywords.'dbConnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+		AddressType = CustomKeywords.'nap4Data.checkNAP4.checkAddressTypeCompany'(sqlconnectionFOU)
 
 		'get data array dari db'
-		Ownership = CustomKeywords.'dbConnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+		Ownership = CustomKeywords.'nap4Data.checkNAP4.checkOwnership'(sqlconnectionFOU)
 
 		'verify array dari db == option list confins'
 

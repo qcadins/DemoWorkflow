@@ -211,6 +211,210 @@ public class getInfoForEditNAP {
 
 		return arrayGuarantorData
 	}
+	
+	
+	@Keyword
+	public verifyMatchCopyAppYesNAP2Personal(Sql instance, String copyAppNo, String appNo){
+		Boolean isMatch = true
+		ArrayList<String> copyappdata = new ArrayList<String>()
+		ArrayList<String> appdata = new ArrayList<String>()
+		ArrayList<String> insuredBy = new ArrayList<String>()
+		instance.eachRow(("select ins_asset_covered_by from app_ins_obj where app_id in (select app_id from app where app_no in('"+copyAppNo+"','"+appNo+"'))"), { def row ->
+			insuredBy.add(row[0])
+		})
+
+		if(insuredBy.get(0).equalsIgnoreCase(insuredBy.get(1))){
+			if(insuredBy.get(0)=="CU"){
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+			else if(insuredBy.get(0)=="CUCO"){
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+			else if(insuredBy.get(0)=="CO"){
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+		}
+		else{
+			isMatch=false
+		}
+
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2LifeInsuranceStoreDB(instance, appNo)
+		for(int i = 0;i<copyappdata.size();i++){
+			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+				isMatch = false
+				break
+			}
+		}
+
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
+		for(int i = 0;i<copyappdata.size();i++){
+			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+				isMatch = false
+				break
+			}
+		}
+
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
+		for(int i = 0;i<copyappdata.size();i++){
+			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+				isMatch = false
+				break
+			}
+		}
+
+		return isMatch
+	}
+
+	@Keyword
+	public verifyMatchCopyAppYesNAP2Company(Sql instance, String copyAppNo, String appNo){
+
+		Boolean isMatch = true
+		ArrayList<String> copyappdata = new ArrayList<String>()
+		ArrayList<String> appdata = new ArrayList<String>()
+		ArrayList<String> insuredBy = new ArrayList<String>()
+		instance.eachRow(("select ins_asset_covered_by from app_ins_obj where app_id in (select app_id from app where app_no in('"+copyAppNo+"','"+appNo+"'))"), { def row ->
+			insuredBy.add(row[0])
+		})
+
+		if(insuredBy.get(0).equalsIgnoreCase(insuredBy.get(1))){
+			if(insuredBy.get(0)=="CU"){
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+			else if(insuredBy.get(0)=="CUCO"){
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceCustMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+			else if(insuredBy.get(0)=="CO"){
+				copyappdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).NAP2InsuranceMFStoreDB(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+
+				copyappdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, copyAppNo)
+				appdata = (new dbConnection.CustomerDataVerif()).checkTotalInsurance(instance, appNo)
+				for(int i = 0;i<copyappdata.size();i++){
+					if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+						isMatch = false
+						break
+					}
+				}
+			}
+		}
+		else{
+			isMatch=false
+		}
+
+
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2FinancialStoreDB(instance, appNo)
+		for(int i = 0;i<copyappdata.size();i++){
+			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+				isMatch = false
+				break
+			}
+		}
+
+		copyappdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, copyAppNo)
+		appdata = (new dbConnection.CustomerDataVerif()).NAP2SubsidyStoreDB(instance, appNo)
+		for(int i = 0;i<copyappdata.size();i++){
+			if(WebUI.verifyMatch(copyappdata[i],appdata[i],false,FailureHandling.OPTIONAL)==false){
+				isMatch = false
+				break
+			}
+		}
+
+		return isMatch
+	}
 }
 
 

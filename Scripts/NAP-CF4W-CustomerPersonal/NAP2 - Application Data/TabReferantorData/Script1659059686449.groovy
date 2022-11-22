@@ -329,7 +329,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 									   
 									   'Cek total data referantor pada db'
-									   Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
+									   Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 									   
 									   'Ambil nilai total data referantor pada lookup confins'
 									   String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -391,7 +391,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   ArrayList<String> BankAccount = new ArrayList<String>()
 									   
 									   'Ambil array teks bank account dari db'
-									   BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
+									   BankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 									   
 									   'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 									   if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
@@ -402,7 +402,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
 										   
 										   'Ambil teks default bank account dari db'
-										   String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
+										   String defaultBankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 										   
 										   'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 										   if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
@@ -493,7 +493,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 								
 								'Cek total data referantor pada db'
-								Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
+								Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 								
 								'Ambil nilai total data referantor pada lookup confins'
 								String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -559,7 +559,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								ArrayList<String> BankAccount = new ArrayList<String>()
 								
 								'Ambil array teks bank account dari db'
-								BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
+								BankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 								
 								'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 								if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
@@ -570,7 +570,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
 									
 									'Ambil teks default bank account dari db'
-									String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
+									String defaultBankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 									
 									'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 									if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
@@ -734,7 +734,7 @@ if(datafilereferantor.getValue(
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 						
 						'Cek total data referantor pada db'
-						Integer countReferantor = CustomKeywords.'dbConnection.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
+						Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnection, refCategory, officeName)
 						
 						'Ambil nilai total data referantor pada lookup confins'
 						String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -798,7 +798,7 @@ if(datafilereferantor.getValue(
 						ArrayList<String> BankAccount = new ArrayList<String>()
 						
 						'Ambil array teks bank account dari db'
-						BankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
+						BankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDDL'(sqlConnection, refCategory, officeName, referantorCode)
 						
 						'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 						if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
@@ -809,7 +809,7 @@ if(datafilereferantor.getValue(
 						if(refCategory.equalsIgnoreCase("Customer")||refCategory.equalsIgnoreCase("Agency")){
 							
 							'Ambil teks default bank account dari db'
-							String defaultBankAccount = CustomKeywords.'dbConnection.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
+							String defaultBankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 							
 							'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 							if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
@@ -868,7 +868,7 @@ if(datafilereferantor.getValue(
 					'Pengecekan referantor category (customer, agency, atau mf employee)'
 					if (refCategory.equalsIgnoreCase('CUSTOMER')) {
 						'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkCustomerReferantor'(
+						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkCustomerReferantor'(
 							sqlConnection, referantorCode)
 		
 						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
@@ -881,7 +881,7 @@ if(datafilereferantor.getValue(
 						}
 					} else if (refCategory.equalsIgnoreCase('AGENCY')) {
 						'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkAgencyReferantor'(
+						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkAgencyReferantor'(
 							sqlConnection, referantorCode)
 		
 						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
@@ -894,7 +894,7 @@ if(datafilereferantor.getValue(
 						}
 					} else if(refCategory.equalsIgnoreCase('MULTIFINANCE EMPLOYEE')){
 						'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'dbConnection.checkReferantorDetail.checkMFEmployeeReferantor'(
+						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkMFEmployeeReferantor'(
 							sqlConnection, referantorCode)
 		
 						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)

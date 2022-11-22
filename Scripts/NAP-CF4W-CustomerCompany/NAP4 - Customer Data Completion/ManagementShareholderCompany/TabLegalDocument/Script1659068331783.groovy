@@ -102,7 +102,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             ArrayList<String> LegalDocType
 
                             'get data array dari db'
-                            LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                            LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
                             'verify array dari db == option list confins'
                             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -284,7 +284,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 ArrayList<String> LegalDocType
 
                                 'get data array dari db'
-                                LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                                LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
                                 'verify array dari db == option list confins'
                                 if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -382,7 +382,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     ArrayList<String> LegalDocType
 
                     'get data array dari db'
-                    LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                    LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
@@ -477,7 +477,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     ArrayList<String> LegalDocType
 
                     'get data array dari db'
-                    LegalDocType = CustomKeywords.'dbConnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+                    LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
                     'verify array dari db == option list confins'
                     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 

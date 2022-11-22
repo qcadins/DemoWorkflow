@@ -92,10 +92,10 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 		Integer countLifeInscoBranch = 0
 	
 		'Ambil array string (text) life insco branch name dari db'
-		lifeInscoBranchName = CustomKeywords.'dbConnection.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
+		lifeInscoBranchName = CustomKeywords.'lifeInsuranceData.checkLifeInscoBranch.checkDDLLifeInscoBranch'(sqlConnectionFOU, officeName)
 	
 		'Ambil nilai count life insco branch name dari db'
-		countLifeInscoBranch = CustomKeywords.'dbConnection.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,
+		countLifeInscoBranch = CustomKeywords.'lifeInsuranceData.checkLifeInscoBranch.countDDLLifeInscoBranch'(sqlConnectionFOU,
 			officeName)
 	
 		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'

@@ -105,19 +105,6 @@ public class connectDB {
 	}
 
 	@Keyword
-	def ConnectDB(){
-		String conn = "jdbc:sqlserver://r3db-server.ad-ins.com;instanceName=r3;databaseName=LOS" //’sqlserver’ tergantung jenis database yang digunakan, dalam hal ini karena menggunakan SQLServer
-
-		if(connection != null && !connection.isClosed()){
-			connection.close()
-		}
-
-		def connection = DriverManager.getConnection(conn, "sa", "SQLServer2017") //parameter yang digunakan -> url, username, password
-
-		return connection
-	}
-
-	@Keyword
 	public getExcelPath(String Path){
 		String userDir = System.getProperty('user.dir')
 

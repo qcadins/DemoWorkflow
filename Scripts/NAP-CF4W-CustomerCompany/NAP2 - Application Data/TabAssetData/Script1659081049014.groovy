@@ -58,7 +58,7 @@ String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custome
 String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 'Ambil text supplier scheme dari db'
-String suppschm = CustomKeywords.'dbConnection.checkSupplier.checkSupplierScheme'(sqlconnectionLOS, POName)
+String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlconnectionLOS, POName)
 
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
@@ -68,7 +68,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
     'Ambil nilai total count supplier data dari db'
-    Integer countSupplierData = CustomKeywords.'dbConnection.checkSupplier.countSupplierData'(sqlconnectionFOU, suppschm, 
+    Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlconnectionFOU, suppschm, 
         office)
 
     'Ambil nilai total data supplier pada lookup confins'
@@ -141,10 +141,10 @@ ArrayList<WebElement> salesPerson
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'Ambil array string admin head dari db'
-    adminHead = CustomKeywords.'dbConnection.checkSupplier.checkAdminHead'(sqlconnectionFOU, suppName)
+    adminHead = CustomKeywords.'assetData.checkSupplier.checkAdminHead'(sqlconnectionFOU, suppName)
 
     'Ambil array string sales person dari db'
-    salesPerson = CustomKeywords.'dbConnection.checkSupplier.checkSalesPerson'(sqlconnectionFOU, suppName)
+    salesPerson = CustomKeywords.'assetData.checkSupplier.checkSalesPerson'(sqlconnectionFOU, suppName)
 
     'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
     if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
@@ -195,7 +195,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
     'Ambil nilai total count asset data dari db'
-    Integer countAssetData = CustomKeywords.'dbConnection.checkAssetData.countAssetName'(sqlconnectionLOS, sqlconnectionFOU, 
+    Integer countAssetData = CustomKeywords.'assetData.checkAssetData.countAssetName'(sqlconnectionLOS, sqlconnectionFOU, 
         POName)
 
     'Ambil nilai total data asset pada lookup confins'
@@ -267,7 +267,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     ArrayList<WebElement> assetUsage = new ArrayList<WebElement>()
 
     'Ambil array string (text) asset usage dari db'
-    assetUsage = CustomKeywords.'dbConnection.checkAssetData.checkAssetUsageDDL'(sqlconnectionFOU)
+    assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlconnectionFOU)
 
     Integer countAssetUsage = assetUsage.size()
 
@@ -501,7 +501,7 @@ for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesAsset'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-if (CustomKeywords.'dbConnection.checkAssetData.checkSelfUsageCompany'()==true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfUsageCompany'()==true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
@@ -521,7 +521,7 @@ if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompan
         ArrayList<WebElement> userRelation = new ArrayList<WebElement>()
 
         'Ambil array string (text) user relationship dari db'
-        userRelation = CustomKeywords.'dbConnection.checkAssetData.checkCompanyRelationshipDDL'(sqlconnectionFOU)
+        userRelation = CustomKeywords.'assetData.checkAssetData.checkCompanyRelationshipDDL'(sqlconnectionFOU)
 
         Integer countUserRelation = userRelation.size()
 
@@ -560,7 +560,7 @@ if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompan
         false)
 }
 
-if (CustomKeywords.'dbConnection.checkAssetData.checkSelfOwnerCompany'()==true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'()==true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
@@ -581,7 +581,7 @@ if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompan
             ArrayList<WebElement> ownerPersonalRelation = new ArrayList<WebElement>()
 
             'Ambil array string (text) owner relationship dari db'
-            ownerPersonalRelation = CustomKeywords.'dbConnection.checkAssetData.checkPersonalRelationshipDDL'(sqlconnectionFOU)
+            ownerPersonalRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlconnectionFOU)
 
             Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
 
@@ -614,7 +614,7 @@ if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompan
             ArrayList<WebElement> ownerCompanyRelation = new ArrayList<WebElement>()
 
             'Ambil array string (text) owner relationship dari db'
-            ownerCompanyRelation = CustomKeywords.'dbConnection.checkAssetData.checkCompanyRelationshipDDL'(sqlconnectionFOU)
+            ownerCompanyRelation = CustomKeywords.'assetData.checkAssetData.checkCompanyRelationshipDDL'(sqlconnectionFOU)
 
             Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
 

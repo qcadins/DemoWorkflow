@@ -68,7 +68,7 @@ if (GlobalVariable.Role == 'Testing') {
     String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
 
     'Pengecekan interest type dari db product offering '
-    String InterestType = CustomKeywords.'dbConnection.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
+    String InterestType = CustomKeywords.'applicationData.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
 
     'Ambil text interest type dari confins'
     String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
@@ -93,13 +93,13 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
         'Cek nama officer pada db dari username login confins'
-        String officerName = CustomKeywords.'dbConnection.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
+        String officerName = CustomKeywords.'applicationData.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
 
         'Verif username login dengan text label officer'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true))
 
         'Ambil nama spv dari db'
-        spvName = CustomKeywords.'dbConnection.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
+        spvName = CustomKeywords.'applicationData.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
 
         'Pengecekan jika nama spv dari db = null'
         if (spvName == null) {
@@ -128,7 +128,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
             'Cek total data officer pada db'
-            Integer countOfficer = CustomKeywords.'dbConnection.checkOfficer.countOfficerLookup'(sqlConnectionFOU, office)
+            Integer countOfficer = CustomKeywords.'applicationData.checkOfficer.countOfficerLookup'(sqlConnectionFOU, office)
 
             'Ambil nilai total data officer pada lookup confins'
             String[] textTotalDataOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(

@@ -201,7 +201,7 @@ if (variableSupp.size() > 0) {
                 supRow + 2), FailureHandling.OPTIONAL)
 
         'Query Select pada database untuk mengambil nilai supplier code'
-        supplierCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, supplierName)
+        supplierCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         ArrayList<WebElement> variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
@@ -487,7 +487,7 @@ if (variableSuppEmp.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccSuppEmp[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai supplier employee no'
-        supplierEmployeeCode = CustomKeywords.'dbConnection.checkCommissionCode.checkSupplierEmployeeCode'(sqlconnectionFOU, 
+        supplierEmployeeCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierEmployeeCode'(sqlconnectionFOU, 
             supplierEmployeeName, supplierEmpPos, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
@@ -758,7 +758,7 @@ if (variableRef.size() > 0) {
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccRef[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai referantor code/nomor'
-        refCode = CustomKeywords.'dbConnection.checkCommissionCode.checkReferantorCode'(sqlconnectionFOU, refName)
+        refCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkReferantorCode'(sqlconnectionFOU, refName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + refCode) + ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))

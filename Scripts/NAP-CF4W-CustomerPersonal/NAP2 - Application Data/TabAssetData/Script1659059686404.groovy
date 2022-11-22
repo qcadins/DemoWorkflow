@@ -81,7 +81,7 @@ String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custome
 String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 'Ambil text supplier scheme dari db'
-String suppschm = CustomKeywords.'dbConnection.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
+String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
 
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
@@ -91,7 +91,7 @@ if (GlobalVariable.Role == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
     'Ambil nilai total count supplier data dari db'
-    Integer countSupplierData = CustomKeywords.'dbConnection.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, 
+    Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, 
         office)
 
     'Ambil nilai total data supplier pada lookup confins'
@@ -165,10 +165,10 @@ ArrayList<Boolean> salesPerson
 
 if (GlobalVariable.Role == 'Testing') {
     'Ambil array string admin head dari db'
-    adminHead = CustomKeywords.'dbConnection.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
+    adminHead = CustomKeywords.'assetData.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
 
     'Ambil array string sales person dari db'
-    salesPerson = CustomKeywords.'dbConnection.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
+    salesPerson = CustomKeywords.'assetData.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
 
     'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
@@ -220,7 +220,7 @@ if (GlobalVariable.Role == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
     'Ambil nilai total count asset data dari db'
-    Integer countAssetData = CustomKeywords.'dbConnection.checkAssetData.countAssetName'(sqlConnectionLOS, sqlConnectionFOU, 
+    Integer countAssetData = CustomKeywords.'assetData.checkAssetData.countAssetName'(sqlConnectionLOS, sqlConnectionFOU, 
         POName)
 
     'Ambil nilai total data asset pada lookup confins'
@@ -294,7 +294,7 @@ if (GlobalVariable.Role == 'Testing') {
     ArrayList<Boolean> assetUsage = new ArrayList<Boolean>()
 
     'Ambil array string (text) asset usage dari db'
-    assetUsage = CustomKeywords.'dbConnection.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+    assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
 
     Integer countAssetUsage = assetUsage.size()
 
@@ -542,7 +542,7 @@ for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 //call test case aksesoris
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAccessoriesAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-if (CustomKeywords.'dbConnection.checkAssetData.checkSelfUsagePersonal'() == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -562,7 +562,7 @@ if (CustomKeywords.'dbConnection.checkAssetData.checkSelfUsagePersonal'() == tru
         ArrayList<Boolean> userRelation = new ArrayList<Boolean>()
 
         'Ambil array string (text) user relationship dari db'
-        userRelation = CustomKeywords.'dbConnection.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
+        userRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
 
         Integer countUserRelation = userRelation.size()
 
@@ -603,7 +603,7 @@ if (CustomKeywords.'dbConnection.checkAssetData.checkSelfUsagePersonal'() == tru
             GlobalVariable.NumofColm, 39), false)
 }
 
-if (CustomKeywords.'dbConnection.checkAssetData.checkSelfOwnerPersonal'() == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
 } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -623,7 +623,7 @@ if (CustomKeywords.'dbConnection.checkAssetData.checkSelfOwnerPersonal'() == tru
             ArrayList<Boolean> ownerPersonalRelation = new ArrayList<Boolean>()
 
             'Ambil array string (text) owner relationship dari db'
-            ownerPersonalRelation = CustomKeywords.'dbConnection.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
+            ownerPersonalRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
 
             Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
 
@@ -666,7 +666,7 @@ if (CustomKeywords.'dbConnection.checkAssetData.checkSelfOwnerPersonal'() == tru
             ArrayList<Boolean> ownerCompanyRelation = new ArrayList<Boolean>()
 
             'Ambil array string (text) owner relationship dari db'
-            ownerCompanyRelation = CustomKeywords.'dbConnection.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
+            ownerCompanyRelation = CustomKeywords.'assetData.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
 
             Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
 
