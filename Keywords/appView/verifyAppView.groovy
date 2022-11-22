@@ -887,7 +887,7 @@ public class verifyAppView {
 				//					AllocComRef.add(checkCommissionAllocation(instanceFOU, row[0]))
 				//				}
 				if(i==1){
-					Newcomdt = new dbConnection.checkCommissionCode().checkReferantorName(instanceFOU, comdt)
+					Newcomdt = new commissionReserveFundData.checkCommissionCode().checkReferantorName(instanceFOU, comdt)
 					listComRef.add(Newcomdt)
 				}
 				else{
