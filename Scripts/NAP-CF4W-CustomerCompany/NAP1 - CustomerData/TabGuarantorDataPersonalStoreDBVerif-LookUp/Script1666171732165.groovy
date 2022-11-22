@@ -33,9 +33,8 @@ ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.Guara
 //    }
 //}
 
-int arrayindex = 0
-
-int confinsindex = 0
+'declare arrayindex & confinsindex'
+int arrayindex = 0, confinsindex = 0
 
 'verify relationship'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 

@@ -33,22 +33,8 @@ ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(B
 
 if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8).length() > 1)) {
-    'Koneksi database'
-    String servername = findTestData('Login/Login').getValue(1, 8)
-
-    String instancename = findTestData('Login/Login').getValue(2, 8)
-
-    String username = findTestData('Login/Login').getValue(3, 8)
-
-    String password = findTestData('Login/Login').getValue(4, 8)
-
-    String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-    String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-    String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+    'Connect database LOS'
+    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'(urlLOS, username, password, driverclassname)
 
     ArrayList<String> listGuar = new ArrayList<String>()
 
@@ -67,34 +53,44 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-Custome
             'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             guardt) + ']/td[2]', true)
 
+		'modify object guarantor type'
         modifyNewGuarantorType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
             'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             guardt) + ']/td[3]', true)
 
+		'modify object guarantor relation'
         modifyNewGuarantorRelation = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
             'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             guardt) + ']/td[4]', true)
 
+		'verif guarantor name = result'
         arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName), '(?i)' + (resultarray[0]), true))
 
+		'verif guarantor type = result'
         arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType), '(?i)' + (resultarray[1]), true))
 
+		'verif guarantor relation = result'
         arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation), '(?i)' + (resultarray[2]), true))
     }
     
     if (arrayMatch.contains(false)) {
+		'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
+		'write to excel reason failed load data'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
 
+		'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
+		'write to excel reason failed load data'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
 
+		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
 }
@@ -109,30 +105,30 @@ for (int i = 1; i <= variableData.size(); i++) {
     modifyNewGuarantorTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
         'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
         i) + ']/td[3]', true)
-
-    'modify object button edit'
-    modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[5]/span/span[1]/span/a/i', true)
-
-    'modify object button delete'
-    modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
-        'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-        i) + ']/td[5]/span/span[2]/span/a/i', true)
-
+	
     'Loop Multiple guarantor data'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
+
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
+		
             if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+				
                 if (WebUI.getText(modifyNewGuarantorTypeName).equalsIgnoreCase('Personal')) {
+					
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 19)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
                         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal, 16))) {
-                        if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
+						
+						'modify object button edit'
+						modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+							'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+							i) + ']/td[5]/span/span[1]/span/a/i', true)
+					
+						if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
                             'click button edit'
                             WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
@@ -592,6 +588,12 @@ for (int i = 1; i <= variableData.size(); i++) {
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(
                             GlobalVariable.NumofGuarantorPersonal + 1, 12) != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                             GlobalVariable.NumofColm, 13)) {
+						
+							'modify object button delete'
+							modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
+								'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+								i) + ']/td[5]/span/span[2]/span/a/i', true)
+						
                             if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'get cust name sebelum delete'
                                 CustNameBefore = WebUI.getText(modifyNewGuarantorName)
@@ -743,4 +745,3 @@ def getDataGuarPersonal() {
 
     GlobalVariable.Confinsdata = confinsdata
 }
-

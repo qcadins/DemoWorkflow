@@ -54,12 +54,13 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 }
 
+'click button add'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Add'))
+
 if ((findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
     GlobalVariable.NumofColm, 8).length() < 1)) {
-    'click button add'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Add'))
 
     if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
@@ -668,10 +669,10 @@ def pagingTesting() {
 
         if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
                 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
                 1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
                     2).replace('-', '') + ((GlobalVariable.ReasonFailedReset + 'NAP1') + ';\n'))
 
@@ -680,10 +681,10 @@ def pagingTesting() {
         
         if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
                 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
                 1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
                     2).replace('-', '') + ((GlobalVariable.ReasonFailedSort + 'NAP1') + ';\n'))
 
@@ -692,10 +693,10 @@ def pagingTesting() {
         
         if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 1))) {
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
                 1, GlobalVariable.StatusWarning)
 
-            new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
+            new customizeKeyword.writeExcel().writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
                 1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
                     2).replace('-', '') + ((GlobalVariable.ReasonFailedFooter + 'NAP1') + ';\n'))
 

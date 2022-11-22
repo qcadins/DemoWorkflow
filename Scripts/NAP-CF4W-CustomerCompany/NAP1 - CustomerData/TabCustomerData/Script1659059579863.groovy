@@ -26,16 +26,6 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-<<<<<<< HEAD
-=======
-'Get Appno'
-String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/Applicant No'))
-
-'Write to excel Appno'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
-    GlobalVariable.NumofColm - 1, appNo)
-
->>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
@@ -141,13 +131,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             31), false)
 	
-	'get customer name'
-	custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-		'value', FailureHandling.OPTIONAL)
-
-	'add name to Global variable'
-	GlobalVariable.CustomerName = custname
-	
 } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp') {
     'double check untuk copy app data'
@@ -209,13 +192,6 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
             }
         }
     }
-		
-		'get customer name'
-		custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-			'value', FailureHandling.OPTIONAL)
-		
-		'add name to Global variable'
-		GlobalVariable.CustomerName = custname
     
 	'check if role testing untuk get data customer digunakan untuk data verif'
     if (GlobalVariable.RoleCompany == 'Testing') {
@@ -269,6 +245,13 @@ if (GlobalVariable.RoleCompany == 'Testing' && findTestData('NAP-CF4W-CustomerCo
 	GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
 }
 
+'get customer name'
+custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+	'value', FailureHandling.OPTIONAL)
+	
+'add name to Global variable'
+GlobalVariable.CustomerName = custname
+	
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -397,10 +380,10 @@ def getDataCust() {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
-		(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1

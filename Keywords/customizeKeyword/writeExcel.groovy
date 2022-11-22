@@ -57,7 +57,7 @@ public class writeExcel {
 	 * Write to Excel
 	 */
 	@Keyword
-	def writeExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
+	def writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
 
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
