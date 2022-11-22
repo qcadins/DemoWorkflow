@@ -61,9 +61,7 @@ if (insuredBy == 'Customer') {
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (result.size() - 1); i++) {
-//        if ((result[i]) == null) {
-//            (result[i]) = ''
-//        } else 
+
 		if ((result[i]) == 'true') {
             (result[i]) = 'Yes'
         } else if ((result[i]) == 'false') {
@@ -88,9 +86,7 @@ if (insuredBy == 'Customer') {
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultCustomerInsurance.size() - 1); i++) {
-//        if ((resultCustomerInsurance[i]) == null) {
-//            (resultCustomerInsurance[i]) = ''
-//        } else 
+
 		if ((resultCustomerInsurance[i]) == 'true') {
             (resultCustomerInsurance[i]) = 'Yes'
         } else if ((resultCustomerInsurance[i]) == 'false') {
@@ -100,9 +96,7 @@ if (insuredBy == 'Customer') {
     
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-//        if ((resultMFinsurance[i]) == null) {
-//            (resultMFinsurance[i]) = ''
-//        } else 
+
 		if ((resultMFinsurance[i]) == 'true') {
             (resultMFinsurance[i]) = 'Yes'
         } else if ((resultMFinsurance[i]) == 'false') {
@@ -258,9 +252,7 @@ if (insuredBy == 'Customer') {
 
 		'ganti value null > "" (String kosong)'
 		for (int i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-//			if ((resultMultiMainCVG[i]) == null) {
-//				(resultMultiMainCVG[i]) = ''
-//			} else 
+
 			if ((resultMultiMainCVG[i]) == 'true') {
 				(resultMultiMainCVG[i]) = 'Yes'
 			} else if ((resultMultiMainCVG[i]) == 'false') {
@@ -352,9 +344,7 @@ if (insuredBy == 'Customer') {
 
             'ganti value null > "" (String kosong)'
             for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-//                if ((resultAddCVG[i]) == null) {
-//                    (resultAddCVG[i]) = ''
-//                } else 
+
 				if ((resultAddCVG[i]) == 'true') {
                     (resultAddCVG[i]) = 'Yes'
                 } else if ((resultAddCVG[i]) == 'false') {
@@ -426,73 +416,41 @@ if (insuredBy == 'Customer') {
                         arrayMatch.add(WebUI.verifyMatch((floodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((floodratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate), 
-//                                FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('TPL')) {
                     if ((tplarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((tplarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((tplratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate), 
-//                                FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('Act of God')) {
                     if ((actofgodarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((actofgodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((actofgodratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate), 
-//                                FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('SRCC')) {
                     if ((srccarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((srccarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((srccratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate), 
-//                                FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
                     if ((TJHTParray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((TJHTParray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((TJHTPratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate), 
-//                                FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
                     if ((Kecelakaanarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((Kecelakaanarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
-//                                    addpremirate), FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('Terrorist')) {
                     if ((terroristarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((terroristarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((terroristratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
-//                                    addpremirate), FailureHandling.OPTIONAL))
-//                    }
                 } else if (addcvg.equalsIgnoreCase('Theft & Robbery')) {
                     if ((Theftrobberyarray[(year - 1)]).length() > 0) {
                         arrayMatch.add(WebUI.verifyMatch((Theftrobberyarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
                     }
                     
-//                    if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
-//                        arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
-//                                    addpremirate), FailureHandling.OPTIONAL))
-//                    }
                 }
 				'verify additional premi rate db = confins'
 				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
@@ -546,9 +504,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 	'ganti value null > "" (String kosong)'
 	for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-//		if ((resultMFinsurance[i]) == null) {
-//			(resultMFinsurance[i]) = ''
-//		} else 
+
 		if ((resultMFinsurance[i]) == 'true') {
 			(resultMFinsurance[i]) = 'Yes'
 		} else if ((resultMFinsurance[i]) == 'false') {
@@ -672,9 +628,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 		'ganti value null > "" (String kosong)'
 		for (int i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-//			if ((resultMultiMainCVG[i]) == null) {
-//				(resultMultiMainCVG[i]) = ''
-//			} else 
+
 			if ((resultMultiMainCVG[i]) == 'true') {
 				(resultMultiMainCVG[i]) = 'Yes'
 			} else if ((resultMultiMainCVG[i]) == 'false') {
@@ -766,9 +720,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 			'ganti value null > "" (String kosong)'
 			for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-//				if ((resultAddCVG[i]) == null) {
-//					(resultAddCVG[i]) = ''
-//				} else 
+
 				if ((resultAddCVG[i]) == 'true') {
 					(resultAddCVG[i]) = 'Yes'
 				} else if ((resultAddCVG[i]) == 'false') {
@@ -840,73 +792,41 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 						arrayMatch.add(WebUI.verifyMatch((floodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((floodratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(floodratearray[(year - 1)]), Math.round(addpremirate),
-//								FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('TPL')) {
 					if ((tplarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((tplarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((tplratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(tplratearray[(year - 1)]), Math.round(addpremirate),
-//								FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('Act of God')) {
 					if ((actofgodarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((actofgodarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((actofgodratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(actofgodratearray[(year - 1)]), Math.round(addpremirate),
-//								FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('SRCC')) {
 					if ((srccarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((srccarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((srccratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(srccratearray[(year - 1)]), Math.round(addpremirate),
-//								FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('Tanggung Jawab Hukum Terhadap Penumpang')) {
 					if ((TJHTParray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((TJHTParray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((TJHTPratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(TJHTPratearray[(year - 1)]), Math.round(addpremirate),
-//								FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('Kecelakaan Diri Untuk Penumpang')) {
 					if ((Kecelakaanarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((Kecelakaanarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((Kecelakaanratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Kecelakaanratearray[(year - 1)]), Math.round(
-//									addpremirate), FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('Terrorist')) {
 					if ((terroristarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((terroristarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((terroristratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(terroristratearray[(year - 1)]), Math.round(
-//									addpremirate), FailureHandling.OPTIONAL))
-//					}
 				} else if (addcvg.equalsIgnoreCase('Theft & Robbery')) {
 					if ((Theftrobberyarray[(year - 1)]).length() > 0) {
 						arrayMatch.add(WebUI.verifyMatch((Theftrobberyarray[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 					}
 					
-//					if ((Theftrobberyratearray[(year - 1)]).length() > 0) {
-//						arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(Theftrobberyratearray[(year - 1)]), Math.round(
-//									addpremirate), FailureHandling.OPTIONAL))
-//					}
 				}
 				'verify additional rate pada db = confins'
 				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))

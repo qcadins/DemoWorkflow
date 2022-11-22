@@ -462,7 +462,6 @@ for (int i = 1; i <= count; i++) {
 	}
 }
 
-//customizeKeyword.getRow
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
 1
