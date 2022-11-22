@@ -16,7 +16,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'Custom keyword untuk mengatur path file yang akan didownload ke dalam folder project'
-CustomKeywords.'dbConnection.DownloadRule.setDownloadPath'()
+CustomKeywords.'downloadRule.downloadRule.setDownloadPath'()
 
 'open Browser'
 WebUI.openBrowser('')
@@ -62,7 +62,7 @@ for(int i=1;i<=countFileCode;i++){
 	String newFileName = findTestData('DownloadRule/DownloadRuleFileCode').getValue(2,i)
 	
 	'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
-	CustomKeywords.'dbConnection.DownloadRule.deleteFile'(newFileName)
+	CustomKeywords.'downloadRule.downloadRule.deleteFile'(newFileName)
 	
 	'Klik download'
 	WebUI.click(findTestObject('DownloadRule/a_Download'))
@@ -71,7 +71,7 @@ for(int i=1;i<=countFileCode;i++){
 	WebUI.delay(10)
 	
 	'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
-	CustomKeywords.'dbConnection.DownloadRule.renameFile'(filenameWithExtension,newFileName)
+	CustomKeywords.'downloadRule.downloadRule.renameFile'(filenameWithExtension,newFileName)
 
 	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
 	WebUI.delay(2)

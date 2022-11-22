@@ -1,4 +1,4 @@
-package dbConnection
+package downloadRule
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -23,7 +23,7 @@ import internal.GlobalVariable
 import java.io.File
 import java.nio.file.*;
 import java.io.IOException;
-public class DownloadRule {
+public class downloadRule {
 	@Keyword
 	def setDownloadPath() {
 
