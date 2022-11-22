@@ -1,4 +1,4 @@
-package dbConnection
+package customizeKeyword
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -21,9 +21,9 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class CountRowAssetAttribute {
+public class getRowAssetAttribute {
 	@Keyword
-	public countRowAssetAttribute (Sql instance, Sql instanceLOS, String assetcode,String POName){
+	def countRowAssetAttribute(Sql instance, Sql instanceLOS, String assetcode,String POName){
 		String countRowAssetAttributeResult, assetschmCode
 		instanceLOS.eachRow(("select distinct compnt_value from prod_offering po WITH(NOLOCK) join prod_offering_h poh WITH(NOLOCK) on po.PROD_OFFERING_ID = poH.PROD_OFFERING_ID join prod_offering_d pod WITH(NOLOCK) on pod.PROD_OFFERING_H_ID = poh.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
