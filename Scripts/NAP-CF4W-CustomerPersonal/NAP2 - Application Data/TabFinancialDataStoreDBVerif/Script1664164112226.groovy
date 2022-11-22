@@ -288,11 +288,11 @@ arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

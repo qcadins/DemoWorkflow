@@ -93,10 +93,10 @@ if(GlobalVariable.Role=="Testing" && findTestData('NAP-CF4W-CustomerPersonal/NAP
 		
 	}
 	if(arrayMatch.contains(false)){
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 		
-		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+		CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
 		
 		GlobalVariable.FlagWarning++
@@ -277,11 +277,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                         'Write to Excel FAILED'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                         'Write to Excel reason lookup'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                         GlobalVariable.FlagFailed = 1
@@ -344,11 +344,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                         'Write to Excel FAILED'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                         'Write to Excel reason lookup'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                         GlobalVariable.FlagFailed = 1
@@ -445,11 +445,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                         'Write to Excel FAILED'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                         'Write to Excel reason lookup'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                         GlobalVariable.FlagFailed = 1
@@ -504,11 +504,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                     'Write to Excel FAILED'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                     'Write to Excel Reason Lookup'
-                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                         '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                     GlobalVariable.FlagFailed = 1
@@ -598,11 +598,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                         'Write to Excel FAILED'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                         'Write to Excel Reason Lookup'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                         GlobalVariable.FlagFailed = 1
@@ -665,11 +665,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
                                         'Write to Excel FAILED'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
 
                                         'Write to Excel Reason Lookup'
-                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, 
+                                        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, 
                                             '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
                                         GlobalVariable.FlagFailed = 1
@@ -761,7 +761,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 								(GlobalVariable.CountNumofCustomer)--
 						} else {
 								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
-											CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+											CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 												'2.TabFamilyData', 0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
 								}
 						}
@@ -837,10 +837,10 @@ for (int i = 1; i <= variableData.size(); i++) {
 }
 
 if(custnamefaileddelete.size() > 0){
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 		'2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+	CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath,
 		'2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 	
 	GlobalVariable.FlagWarning++

@@ -250,11 +250,11 @@ if (GlobalVariable.Role == 'Testing') {
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, 
         GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
@@ -284,11 +284,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -319,11 +319,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -354,11 +354,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -389,11 +389,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 19).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -430,11 +430,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 23).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -477,11 +477,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 27).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -512,11 +512,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 29).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -547,11 +547,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 31).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -582,11 +582,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 33).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -653,11 +653,11 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 39).leng
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
         'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
         'write to excel reason lookup'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
@@ -727,7 +727,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {
     if (flagWarning > 0) {
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
+        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
     }
 }
@@ -742,10 +742,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofGuarantor - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofGuarantor - 
             1, GlobalVariable.StatusFailed)
 
-        new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofGuarantor - 
+        new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofGuarantor - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

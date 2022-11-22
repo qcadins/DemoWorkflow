@@ -154,11 +154,11 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 0, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 0, 
         GlobalVariable.NumofVerifStore - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '4.EmergencyContact', 1, 
+    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 1, 
         GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

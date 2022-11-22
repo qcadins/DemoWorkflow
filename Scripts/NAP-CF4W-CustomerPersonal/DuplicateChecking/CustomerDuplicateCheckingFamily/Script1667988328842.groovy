@@ -419,10 +419,10 @@ def loopingSubjectCustNo(String newFamilyName) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        new writetoexcel.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
+        new writetoexcel.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

@@ -55,11 +55,11 @@ for(int i=0;i<resultDB.size();i++){
 	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))==false){
 			'Write to Excel FAILED'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
 			'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 			
 			

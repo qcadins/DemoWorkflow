@@ -409,16 +409,16 @@ for (dbindex = 0; dbindex < listSumm.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
+	new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
-		new customizeKeyword.writeToExcel().writeToExcelFunction(GlobalVariable.DataFilePath, '11. Commission', 1, GlobalVariable.NumofColm -
+		new customizeKeyword.writeToExcel().writeToExcel(GlobalVariable.DataFilePath, '11. Commission', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1

@@ -102,11 +102,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
 			lifeInscoBranchName)==false){
 			'write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
 			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write To Excel GlobalVariable.StatusReason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
 			GlobalVariable.FlagFailed=1
@@ -118,11 +118,11 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 		'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
 		if(WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)==false){
 			'write to excel failed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
 			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
 			'Write To Excel GlobalVariable.StatusReason'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
 		
 			GlobalVariable.FlagFailed=1
@@ -326,10 +326,10 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
-			(new customizeKeyword.writeToExcel()).writeToExcelFunction(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+			(new customizeKeyword.writeToExcel()).writeToExcel(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 			GlobalVariable.FlagFailed=1
