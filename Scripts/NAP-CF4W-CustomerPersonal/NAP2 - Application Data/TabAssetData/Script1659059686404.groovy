@@ -496,7 +496,7 @@ String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
     GlobalVariable.NumofColm, 17)
 
 'count asset attribute'
-String countAssetAtrtibute = CustomKeywords.'dbConnection.CountRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
+String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
     sqlConnectionLOS, Fullassetcode, POName)
 
 for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
