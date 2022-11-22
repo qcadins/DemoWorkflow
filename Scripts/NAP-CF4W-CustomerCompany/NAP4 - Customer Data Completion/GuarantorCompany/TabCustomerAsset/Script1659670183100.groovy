@@ -19,25 +19,32 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
-ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
+'declare arraylist assettype failed delete'
+ArrayList<String> assettypefaileddelete = new ArrayList<>()
 
-ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
+'declare arraylist failed data'
+ArrayList<String> faileddata = new ArrayList<>()
 
+'declare findatafile GV'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset - Company - GuarantorCompany')
 
+'get asset type array dari data file'
 def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
+'get asset desc array dari data file'
 def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 
+'get asset value array dari data file'
 def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 
+'get asset qty array dari data file'
 def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 
 'copyapp'
@@ -49,6 +56,7 @@ ArrayList<WebElement> variable
 if (copyapp.equalsIgnoreCase('Edit')) {
     if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
         5, FailureHandling.OPTIONAL)) {
+		'count table customer asset row di confins'
         variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
         for (i = 1; i <= variable.size(); i++) {
@@ -99,9 +107,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+							'add failed delete asset to array'
                             faileddata.add(assettypearray[(asset - 1)])
 
-                            flagWarning++
+							'GlobalVariable.FlagWarning +1'
+                            GlobalVariable.FlagWarning++
                         }
                         
                         break
@@ -157,15 +167,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (assettypefaileddelete.size() > 0) {
+		'write to excel status warning'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
 
+		'write to excel reason failed delete'
         CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 
             1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
+		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
     
+	'count table customer asset row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
     for (asset = 1; asset <= assettypearray.size(); asset++) {
@@ -205,9 +219,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'click button cancel'
                         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+						'add failed delete customer asset to array'
                         faileddata.add(assettypearray[(asset - 1)])
 
-                        flagWarning++
+						'flagwarning +1'
+                        GlobalVariable.FlagWarning++
                     }
                 }
             } else if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)])) {
@@ -245,9 +261,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                 'click button cancel'
                 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset - Company/button_Cancel'))
 
+				'add failed delete customer asset to array'
                 faileddata.add(assettypearray[(asset - 1)])
 
-                flagWarning++
+				'flagwarning +1'
+                GlobalVariable.FlagWarning++
             }
         }
     }
@@ -276,10 +294,12 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-if (flagWarning > 0) {
+if (GlobalVariable.FlagWarning > 0) {
+	'write to excel status warning'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
+	'write to excel reason failed input data'
     CustomKeywords.'writetoexcel.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
@@ -291,6 +311,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 }
 
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+	'declare numof verif store = num of guarantor'
     GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'Call test case verify customer asset store data'
