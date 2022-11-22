@@ -138,11 +138,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 if (WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(',', ''))), Math.round(getAmountFromAppDB * 
                         Double.parseDouble(refundAmt[i]))) == false) {
                     'Write to Excel FAILED'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
                     'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-                    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
                         1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 
                     GlobalVariable.FlagFailed = 1
@@ -925,10 +925,10 @@ if (variableRef.size() > 0) {
 }
 
 if (commissiondelete.size() > 0) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 
     (GlobalVariable.FlagWarning)++
@@ -942,17 +942,17 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/Comm
 'Pengecekan jika calculate error'
 if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     'Write to Excel FAILED'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
         1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 
     'Pengecekan error alert amount/percentage melebihi limit'
     if (WebUI.getText(alertCalculate).toLowerCase().contains('Cannot be more than'.toLowerCase())) {
         'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
     }
     

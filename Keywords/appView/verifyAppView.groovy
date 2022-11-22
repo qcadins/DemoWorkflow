@@ -1,4 +1,4 @@
-package dbConnection
+package appView
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -25,7 +25,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql
 import internal.GlobalVariable
 
-public class VerifyAppView {
+public class verifyAppView {
 
 	int colmcount
 	int i

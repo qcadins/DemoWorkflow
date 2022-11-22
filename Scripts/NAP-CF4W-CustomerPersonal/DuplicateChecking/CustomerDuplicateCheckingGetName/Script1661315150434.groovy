@@ -95,17 +95,17 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 }
 
 if (StoreCDCCustomerName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
         12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 }
 
 if (StoreCDCFamilyName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
         14, GlobalVariable.NumofColm - 1, StoreCDCFamilyName)
 }
 
 if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
         16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 }
 
@@ -115,21 +115,21 @@ StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
 
 StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
-CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm - 
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm - 
     1, StoreCDCCustomerName)
 
 for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCFamilyPath, '1.CustomerDetail', 12, FamilyName, StoreCDCFamilyNameArray[
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCFamilyPath, '1.CustomerDetail', 12, FamilyName, StoreCDCFamilyNameArray[
         (FamilyName - 1)])
 }
 
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 }
 
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 }
 

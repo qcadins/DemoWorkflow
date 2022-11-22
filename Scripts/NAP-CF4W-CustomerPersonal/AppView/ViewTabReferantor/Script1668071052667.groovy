@@ -60,7 +60,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
-ArrayList<String> resultReferantor = CustomKeywords.'dbConnection.VerifyAppView.checkReferantor'(sqlconnection, appno)
+ArrayList<String> resultReferantor = CustomKeywords.'appView.verifyAppView.checkReferantor'(sqlconnection, appno)
 
 'count ref table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewReferantor > div > table > tbody > tr'))

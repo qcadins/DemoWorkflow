@@ -59,13 +59,13 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get insured by from db'
-String resultInsuredBy = CustomKeywords.'dbConnection.VerifyAppView.checkInsuredBy'(sqlconnection, appno)
+String resultInsuredBy = CustomKeywords.'appView.verifyAppView.checkInsuredBy'(sqlconnection, appno)
 
 println(resultInsuredBy)
 
 if(resultInsuredBy.equalsIgnoreCase('Customer')){
 	'get arraylist Insurance Customer from db'
-	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceCustomer'(sqlconnection, appno)
+	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'appView.verifyAppView.checkInsuranceCustomer'(sqlconnection, appno)
 	
 	index = 0
 	
@@ -104,7 +104,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer')){
 }else if(resultInsuredBy.equalsIgnoreCase('Multifinance')){
 
 'get arraylist Insurance Multifinance from db'
-ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceMultifinance'(sqlconnection, appno)
+ArrayList<String> resultInsuranceMultifinance = CustomKeywords.'appView.verifyAppView.checkInsuranceMultifinance'(sqlconnection, appno)
 
 index = 0
 
@@ -151,7 +151,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 }else if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance')){
 
 'get arraylist Insurance Cust-Multifinance from db'
-ArrayList<String> resultInsuranceHybrid = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceCustMf'(sqlconnection, appno)
+ArrayList<String> resultInsuranceHybrid = CustomKeywords.'appView.verifyAppView.checkInsuranceCustMf'(sqlconnection, appno)
 
 index = 0
 
@@ -224,7 +224,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
 	
 	'get arraylist Insurance cvg from db'
-	ArrayList<String> resultInsuranceMainCoverage = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceMainCoverage'(sqlconnection, appno)
+	ArrayList<String> resultInsuranceMainCoverage = CustomKeywords.'appView.verifyAppView.checkInsuranceMainCoverage'(sqlconnection, appno)
 	
 	'count insurance cvg table'
 	variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#coverage > lib-ucgridview > div > table > tbody tr'))
@@ -271,7 +271,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 		
 		
 		'get arraylist Insurance add cvg from db'
-		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'dbConnection.VerifyAppView.checkAdditionalCoverage'(sqlconnection, appno, cvgindex)
+		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'appView.verifyAppView.checkAdditionalCoverage'(sqlconnection, appno, cvgindex)
 		
 		checkVerifyEqualOrMatch(addtionalcvg.containsAll(resultAddtionalCoverage))
 		
@@ -296,7 +296,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 	}
 	
 	'get arraylist Insurance summary from db'
-	ArrayList<String> resultInsuranceSummary = CustomKeywords.'dbConnection.VerifyAppView.checkInsuranceSummary'(sqlconnection, appno)
+	ArrayList<String> resultInsuranceSummary = CustomKeywords.'appView.verifyAppView.checkInsuranceSummary'(sqlconnection, appno)
 	
 	index = 0
 	

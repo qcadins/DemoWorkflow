@@ -43,7 +43,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
-HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbConnection.VerifyAppView.checkReservedFund'(sqlconnectionLOS, appno)
+HashMap<String,ArrayList> resultRSV = CustomKeywords.'appView.verifyAppView.checkReservedFund'(sqlconnectionLOS, appno)
 
 ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
 

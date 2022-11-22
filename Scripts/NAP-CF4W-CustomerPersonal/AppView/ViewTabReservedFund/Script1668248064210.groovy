@@ -61,7 +61,7 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 
 
 'get referantor data arraylist from db'
-HashMap<String,ArrayList> resultRSV = CustomKeywords.'dbConnection.VerifyAppView.checkReservedFund'(sqlconnection, appno)
+HashMap<String,ArrayList> resultRSV = CustomKeywords.'appView.verifyAppView.checkReservedFund'(sqlconnection, appno)
 ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
 ArrayList<String> listRSV = resultRSV.get("RSVList")
 

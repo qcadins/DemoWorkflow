@@ -60,7 +60,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultFin = CustomKeywords.'dbConnection.VerifyAppView.checkFinancial'(sqlconnection, appno)
+HashMap<String,ArrayList> resultFin = CustomKeywords.'appView.verifyAppView.checkFinancial'(sqlconnection, appno)
 ArrayList<String> listSubsidy = resultFin.get("Subsidy")
 ArrayList<String> listFee = resultFin.get("Fee")
 ArrayList<String> listFinancialData = resultFin.get("FinData")

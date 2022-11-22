@@ -59,7 +59,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist term and condition from db'
-ArrayList<String> resultTC = CustomKeywords.'dbConnection.VerifyAppView.checkTermandCondition'(sqlconnection, appno)
+ArrayList<String> resultTC = CustomKeywords.'appView.verifyAppView.checkTermandCondition'(sqlconnection, appno)
 
 'count TC table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#viewAppTcInfo > lib-ucgridview > div > table > tbody tr'))

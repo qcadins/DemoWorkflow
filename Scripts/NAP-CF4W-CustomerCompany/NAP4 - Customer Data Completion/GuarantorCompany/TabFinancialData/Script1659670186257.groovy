@@ -145,11 +145,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (financialDateDelete.size() > 0) {
 		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		'flagwarning +1'
@@ -323,17 +323,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     if (bankAccDelete.size() > 0) {
 <<<<<<< HEAD
 		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
 =======
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
 >>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
 <<<<<<< HEAD
 		'write to excel reason failed delete'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '5.FinancialData', 
 =======
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
 >>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
             1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
@@ -569,11 +569,11 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel'))
 
             'Write To Excel GlobalVariable.StatusWarning'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
                 0, financialdata - 1, GlobalVariable.StatusWarning)
 
             'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
                 1, financialdata - 1, GlobalVariable.StatusReasonLookup)
 
             flagWarning++
@@ -870,7 +870,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
         }
         
         if (flagWarning > 0) {
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
                 0, financialdata - 1, GlobalVariable.StatusWarning)
         }
         
