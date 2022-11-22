@@ -23,6 +23,8 @@ int flagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
+<<<<<<< HEAD
+=======
 int countcustomer
 
 'Get Appno'
@@ -32,6 +34,7 @@ String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
     GlobalVariable.NumofColm - 1, appNo)
 
+>>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
