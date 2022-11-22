@@ -29,7 +29,7 @@ import java.awt.event.KeyEvent
 
 public class uploadFile {
 	@Keyword
-	def uploadFile (TestObject to, String filePath) {
+	def uploadFunction (TestObject to, String filePath) {
 		WebUI.click(to)
 		StringSelection ss = new StringSelection(filePath);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);

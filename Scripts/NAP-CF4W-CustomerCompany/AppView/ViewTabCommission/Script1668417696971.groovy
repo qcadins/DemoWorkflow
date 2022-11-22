@@ -44,7 +44,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
-HashMap<String,ArrayList> resultCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionData'(sqlconnectionLOS, appno, sqlconnectionFOU)
+HashMap<String,ArrayList> resultCom = CustomKeywords.'appView.verifyAppView.checkCommissionData'(sqlconnectionLOS, appno, sqlconnectionFOU)
 
 ArrayList<String> ComSupp = resultCom.get("ComSupp")
 
@@ -52,7 +52,7 @@ ArrayList<String> ComSuppEmp = resultCom.get("ComSuppEmp")
 
 ArrayList<String> ComRef = resultCom.get("ComRef")
 
-ArrayList<String> listSumm = CustomKeywords.'dbConnection.VerifyAppView.checkSummaryCommission'(sqlconnectionLOS, appno)
+ArrayList<String> listSumm = CustomKeywords.'appView.verifyAppView.checkSummaryCommission'(sqlconnectionLOS, appno)
 
 ArrayList<String> AllocCom = new ArrayList<>()
 
@@ -61,7 +61,7 @@ Suppindex = 1
 
 for (dbindex = 0; dbindex < ComSupp.size(); dbindex++) {
     if ((dbindex % 10) == 0) {
-        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSupp[dbindex])
+        AllocCom = CustomKeywords.'appView.verifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSupp[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'
@@ -172,7 +172,7 @@ SuppEmpindex = 1
 
 for (dbindex = 0; dbindex < ComSuppEmp.size(); dbindex++) {
     if ((dbindex % 12) == 0) {
-        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSuppEmp[dbindex])
+        AllocCom = CustomKeywords.'appView.verifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComSuppEmp[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'
@@ -303,7 +303,7 @@ Refindex = 1
 
 for (dbindex = 0; dbindex < ComRef.size(); dbindex++) {
     if ((dbindex % 10) == 0) {
-        AllocCom = CustomKeywords.'dbConnection.VerifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComRef[dbindex])
+        AllocCom = CustomKeywords.'appView.verifyAppView.checkCommissionAllocation'(sqlconnectionLOS, ComRef[dbindex])
 
         for (int i = 0; i < AllocCom.size(); i++) {
             'modify object commission data'

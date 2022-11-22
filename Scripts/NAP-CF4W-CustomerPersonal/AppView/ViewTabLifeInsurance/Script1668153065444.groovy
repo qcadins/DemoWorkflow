@@ -60,10 +60,10 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get life insurance data arraylist from db'
-ArrayList<String> resultLIData = CustomKeywords.'dbConnection.VerifyAppView.checkLifeInsurance'(sqlconnection, appno)
+ArrayList<String> resultLIData = CustomKeywords.'appView.verifyAppView.checkLifeInsurance'(sqlconnection, appno)
 
 'get life insurance data arraylist from db'
-ArrayList<String> resultLIObject = CustomKeywords.'dbConnection.VerifyAppView.checkLifeInsuranceObject'(sqlconnection, appno)
+ArrayList<String> resultLIObject = CustomKeywords.'appView.verifyAppView.checkLifeInsuranceObject'(sqlconnection, appno)
 
 int index = 0
 

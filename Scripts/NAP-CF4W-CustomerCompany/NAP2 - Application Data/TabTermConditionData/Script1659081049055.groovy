@@ -124,11 +124,11 @@ for (int i = 1; i <= count; i++) {
         if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlconnectionFOU, textDocumentName), TCCode.get(
                 i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed++
@@ -145,11 +145,11 @@ for (int i = 1; i <= count; i++) {
         'verif prior to based on rule'
         if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo), TCPrior.get(i - 1), false) == false){
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 			'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed++

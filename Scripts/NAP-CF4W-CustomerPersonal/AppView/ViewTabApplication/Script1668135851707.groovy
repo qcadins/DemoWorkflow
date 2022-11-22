@@ -60,13 +60,13 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get mo data arraylist from db'
-ArrayList<String> resultMO = CustomKeywords.'dbConnection.VerifyAppView.checkMOInfo'(sqlconnection, appno)
+ArrayList<String> resultMO = CustomKeywords.'appView.verifyAppView.checkMOInfo'(sqlconnection, appno)
 
 'get app & restructuring data arraylist from db'
-ArrayList<String> resultAppRestr = CustomKeywords.'dbConnection.VerifyAppView.checkAppInfoAndRestructuringData'(sqlconnection, appno)
+ArrayList<String> resultAppRestr = CustomKeywords.'appView.verifyAppView.checkAppInfoAndRestructuringData'(sqlconnection, appno)
 
 'get app attribute data arraylist from db'
-ArrayList<String> resultAttr = CustomKeywords.'dbConnection.VerifyAppView.checkApplicationAttribute'(sqlconnection, appno)
+ArrayList<String> resultAttr = CustomKeywords.'appView.verifyAppView.checkApplicationAttribute'(sqlconnection, appno)
 
 int index = 0
 

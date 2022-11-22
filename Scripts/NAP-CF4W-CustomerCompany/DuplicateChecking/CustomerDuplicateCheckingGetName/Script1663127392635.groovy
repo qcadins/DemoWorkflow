@@ -125,19 +125,19 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 
 'check if storeCDCCustomerName is null'
 if (StoreCDCCustomerName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 }
 
 'check if StoreCDCManagementShareholderPersonalName is null'
 if (StoreCDCManagementShareholderPersonalName != null) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         14, GlobalVariable.NumofColm - 1, (StoreCDCManagementShareholderPersonalName + ';') + StoreCDCManagementShareholderCompanyName)
 }
 
 'check if StoreCDCGuarantorPersonalName and StoreCDCGuarantorCompanyName is null'
 if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 }
 
@@ -154,29 +154,29 @@ StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
 StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
 'write customer name to Excel CDC Customer Company'
-CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCCustomerCompany, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerCompany, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
     1, StoreCDCCustomerName)
 
 'looping untuk write MS Personal Name ke Excel CDC MS Personal'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write MS Company Name ke Excel CDC MS Company'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write Guarantor Personal Name ke Excel CDC Guarantor Personal'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 }
 
 'looping untuk write Guarantor Company Name ke Excel CDC Guarantor Company'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
-    CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 }

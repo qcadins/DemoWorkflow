@@ -38,7 +38,7 @@ String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlcon
 String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
 
 'Write to excel Appno'
-CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, 
     GlobalVariable.NumofColm - 1, appNo)
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
@@ -336,10 +336,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			}
 			
 			if (arrayMatch.contains(false)) {
-				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 					0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 		
-				CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
 		
 				(GlobalVariable.FlagWarning)++
@@ -561,15 +561,15 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         String custname = custdata[index++]
 
         'Write to Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             18, GlobalVariable.NumofColm - 1, custname)
 
         'Write to tab duplicate checking Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             12, GlobalVariable.NumofColm - 1, custname)
 
         'Write to Tax ID'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
     } else if (appStep == 'GUAR') {
         ArrayList<String> custdata = CustomKeywords.'dbConnection.getInfoForEditNAP.customerDataCompany'(sqlconnectionLOS, appNo)
@@ -589,15 +589,15 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         String custname = custdata[index++]
 
         'Write to tab customer main data Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             18, GlobalVariable.NumofColm - 1, custname)
 
         'Write to tab duplicate checking Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             12, GlobalVariable.NumofColm - 1, custname)
 
         'Write to Tax ID'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
 
         'untuk mendapatkan posisi copy app dari excel'
@@ -616,13 +616,13 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 
         for (int colm = GlobalVariable.CopyAppColm; colm < ((shrPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
             'Write to tab Management Shareholder data customer type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Personal')
 
             custname = (shrPersonalData[index++])
 
             'Write to tab Management Shareholder cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 18, colm - 1, custname)
 
             if (MsName == '') {
@@ -634,19 +634,19 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write to tab Management Shareholder data id type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 20, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data birth date'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 31, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 32, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data mother maiden name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 34, colm - 1, shrPersonalData[index++])
 			
             lastcolm = colm
@@ -657,13 +657,13 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 
         for (int colm = lastcolm; colm < ((shrCompanyData.size() / 2) + lastcolm); colm++) {
             'Write to tab Management Shareholder data customer type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Company')
 
             custname = (shrCompanyData[index++])
 
             'Write to tab Management Shareholder cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 51, colm - 1, custname)
 
             if (MsName == '') {
@@ -675,12 +675,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write to tab Management Shareholder data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 52, colm - 1, shrCompanyData[index++])
         }
         
         'Write to dupcheck cust name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             15, GlobalVariable.NumofColm - 1, MsName)
     } else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
@@ -713,15 +713,15 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         String custname = custdata[index++]
 
         'Write to tab customer main data Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             18, GlobalVariable.NumofColm - 1, custname)
 
         'Write to tab duplicate checking Cust Name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             12, GlobalVariable.NumofColm - 1, custname)
 
         'Write to Tax ID'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             19, GlobalVariable.NumofColm - 1, custdata[index++])
 
         'untuk mendapatkan posisi copy app dari excel'
@@ -741,13 +741,13 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 
         for (int colm = GlobalVariable.CopyAppColm; colm < ((shrPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
             'Write to tab Management Shareholder data customer type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Personal')
 
             custname = (shrPersonalData[index++])
 
             'Write to tab Management Shareholder cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 18, colm - 1, custname)
 
             if (MsName == '') {
@@ -759,19 +759,19 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write to tab Management Shareholder data id type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 20, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data birth date'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 31, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 32, colm - 1, shrPersonalData[index++])
 
             'Write to tab Management Shareholder data mother maiden name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 34, colm - 1, shrPersonalData[index++])
 			
             lastcolm = colm
@@ -785,13 +785,13 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 		
         for (int colm = lastcolm; colm < ((shrCompanyData.size() / 2) + lastcolm); colm++) {
             'Write to tab Management Shareholder data customer type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Company')
 
             custname = (shrCompanyData[index++])
 
             'Write to tab Management Shareholder cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 51, colm - 1, custname)
 
             if (MsName == '') {
@@ -803,12 +803,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write to tab Management Shareholder data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 52, colm - 1, shrCompanyData[index++])
         }
         
         'Write to dupcheck cust name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             15, GlobalVariable.NumofColm - 1, MsName)
 
         'untuk mendapatkan posisi copy app dari excel'
@@ -829,7 +829,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             custname = (guarPersonalData[index++])
 
             'Write guarantor personal cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 18, colm - 1, custname)
 
             if (GuarName == '') {
@@ -841,19 +841,19 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write guarantor personal data id type'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 20, colm - 1, guarPersonalData[index++])
 
             'Write to guarantor personal data birth date'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 26, colm - 1, guarPersonalData[index++])
 
             'Write to guarantor personal data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 28, colm - 1, guarPersonalData[index++])
 
             'Write to guarantor personal data mother maiden name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 29, colm - 1, guarPersonalData[index++])
 			
 			
@@ -877,7 +877,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             custname = (guarCompanyData[index++])
 
             'Write to tab guarantor company cust name'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                 17, colm - 1, custname)
 
             if (GuarName == '') {
@@ -889,12 +889,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             }
             
             'Write to tab guarantor company data id no'
-            CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                 18, colm - 1, guarCompanyData[index++])
         }
         
         'Write to dupcheck cust name'
-        CustomKeywords.'customizeKeyword.writeToExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
             18, GlobalVariable.NumofColm - 1, GuarName)
     }
 }

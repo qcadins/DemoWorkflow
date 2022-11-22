@@ -565,7 +565,7 @@ WebUI.delay(5)
 
 ArrayList<String> result = new ArrayList<String>()
 
-result = CustomKeywords.'dbConnection.VerifyAppView.checkAppViewDataDB'(sqlconnection, appno)
+result = CustomKeywords.'appView.verifyAppView.checkAppViewDataDB'(sqlconnection, appno)
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i < result.size(); i++) {

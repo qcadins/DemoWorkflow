@@ -40,7 +40,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist guarantor from db'
-ArrayList<String> resultGuar = CustomKeywords.'dbConnection.VerifyAppView.checkGuarantor'(sqlconnectionLOS, appno)
+ArrayList<String> resultGuar = CustomKeywords.'appView.verifyAppView.checkGuarantor'(sqlconnectionLOS, appno)
 
 'count guarantor table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))
