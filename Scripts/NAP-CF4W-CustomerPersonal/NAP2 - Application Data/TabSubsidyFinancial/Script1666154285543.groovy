@@ -46,7 +46,7 @@ def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 1
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
-	for (i = 0; i < AllocationformArray.size(); i++) {
+	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
 			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, TotalPremium + 2)
@@ -98,7 +98,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 	'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
 	if(varsize==SubsidyFromType.size() && varsize > 0){
 		'Looping data subsidi pada confins'
-		for (i = 1; i <= varsize; i++) {
+		for (int i = 1; i <= varsize; i++) {
 			 
 			modifySubsidy()
 			
@@ -149,7 +149,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 	'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-	for (i = 1; i <= variable.size(); i++) {
+	for (int i = 1; i <= variable.size(); i++) {
 
 		modifySubsidy()
 
@@ -161,7 +161,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 		modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Button_Delete'),
 			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[2]/i', true)
 
-		for (subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
+		for (int subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
 			if (((WebUI.getText(modifyNewFromTypeName).equalsIgnoreCase(SubsidyTypeArray[(subsidyarray - 1)]) && WebUI.getText(
 				modifyNewFromValueName).equalsIgnoreCase(SubsidyfromValueArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidyAllocation).equalsIgnoreCase(
 				AllocationformArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidySource).equalsIgnoreCase(SubsidySourceArray[
@@ -291,8 +291,8 @@ ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(B
 
 int countData = variableData.size()
 
-for (s = 1; s <= SubsidyTypeArray.size(); s++) {
-	for (SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
+for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
+	for (int SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
 		if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 
