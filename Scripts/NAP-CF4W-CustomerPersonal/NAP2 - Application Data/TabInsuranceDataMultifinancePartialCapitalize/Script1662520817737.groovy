@@ -25,29 +25,9 @@ import org.openqa.selenium.Keys as Keys
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
@@ -405,7 +385,6 @@ for (int i = 1; i <= count; i++) {
 			countSumInsuredAmount = 1
 		}
 		
-		modifyAddtCovName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddtCovName'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[5]/div/div/label",true)
 		modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
 		
 		//Verif additional premi rate based on rule
@@ -413,7 +392,7 @@ for (int i = 1; i <= count; i++) {
 			'Looping berdasarkan jumlah additional coverage type pada rule excel'
 			for(int k = 0;k<addtCvgType.size();k++){
 				'Verif additional coverage type confins sesuai dengan rule'
-				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, WebUI.getText(modifyAddtCovName)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
+				if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
 					'Pengecekan jika terdapat sum insured amount'
 					if(countSumInsuredAmount == 1){
 						'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
@@ -660,22 +639,6 @@ if (counterPaidByMF == 1) {
 		GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
 
-GlobalVariable.TotalMainPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalMainPremium')).replace('.00', '').replace(',','')
-
-GlobalVariable.TotalAdditionalPremium = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalAdditionalPremium')).replace('.00', '').replace(',','')
-
-GlobalVariable.TotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace('.00', '').replace(',','')
-
-GlobalVariable.TotalPremiumtoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace('.00', '').replace(',','')
-
-GlobalVariable.Discount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
-	'value', FailureHandling.OPTIONAL)
-
-GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
-
-GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
-	'value', FailureHandling.OPTIONAL)
-
 public writeFailedReasonVerifyRule(){
 	'write to excel failed'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
@@ -751,7 +714,6 @@ public AddRatetoGV(int count, int countAddCov){
 			
 		}
 	}
-	
 	
 	GlobalVariable.MainPremiRate = MainRate
 	GlobalVariable.AdditionalPremiRate = AddtRate

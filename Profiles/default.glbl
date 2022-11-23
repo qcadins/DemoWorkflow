@@ -242,11 +242,6 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>''</initValue>
-      <name>Discount</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
       <name>DupcheckVerif</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -561,11 +556,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>TotalAdditionalPremium</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>0.00</initValue>
       <name>TotalCommissionAmt</name>
    </GlobalVariableEntity>
@@ -586,23 +576,8 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
-      <name>TotalFee</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>'0.00'</initValue>
       <name>TotalInsurance</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>TotalMainPremium</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>TotalPremiumtoCust</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

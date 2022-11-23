@@ -19,28 +19,10 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String databaseLOS = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String urlLOS = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseLOS
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
 'connect DB'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(urlLOS, username, password, driverclassname)
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
     GlobalVariable.NumofColm, 12)
