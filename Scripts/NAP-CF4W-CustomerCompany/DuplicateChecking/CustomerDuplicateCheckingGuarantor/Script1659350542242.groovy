@@ -44,7 +44,7 @@ def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 'declare modify object variable'
 def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
-'declare subjectname variable'
+'declare variable untuk table dupcheck'
 String subjectName, newCustomerNoValue, newApplicantNoValue, newGuarNameAppInProcess, newGuarName
 
 'check if guarantor array size > 0'
@@ -642,9 +642,11 @@ def loopingSubjectCustNo(String newGuarName) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify match or equal'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

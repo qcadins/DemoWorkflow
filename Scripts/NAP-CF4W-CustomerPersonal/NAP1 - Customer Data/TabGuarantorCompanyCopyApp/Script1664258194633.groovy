@@ -353,7 +353,6 @@ for (int i = 1; i <= variableData.size(); i++) {
 									custnamefaileddelete.add(CustNameBefore)
 									continue
 								}
-								
 							}
 							else{
 								'get cust name sebelum delete'
