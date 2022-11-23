@@ -32,12 +32,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Guaran
         GlobalVariable.NumofGuarantorPersonal, 19))
 
 
-//'ganti value null > "" (String kosong)'
-//for (int i = 0; i <= (result.size() - 1); i++) {
-//    if ((result[i]) == null) {
-//        (result[i]) = ''
-//    }
-//}
 
 int arrayindex = 0
 

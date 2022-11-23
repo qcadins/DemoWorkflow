@@ -29,10 +29,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSData
 
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-//    if ((result[i]) == null) {
-//        (result[i]) = ''
-//    }
-//    
+
     if ((result[i]).equalsIgnoreCase('TRUE')) {
         (result[i]) = 'Yes'
     } else if ((result[i]).equalsIgnoreCase('FALSE')) {

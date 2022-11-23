@@ -27,9 +27,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
 
 'ganti value TRUE/FALSE > "YES"/"NO" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-//	if ((result[i]) == null) {
-//		(result[i]) = ''
-//	}
+
 	
 	if ((result[i]).equalsIgnoreCase('TRUE')) {
 		(result[i]) = 'Yes'

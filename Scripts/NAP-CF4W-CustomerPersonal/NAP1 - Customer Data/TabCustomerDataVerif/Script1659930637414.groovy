@@ -26,12 +26,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
         'value'))
 
 
-//'ganti value null > "" (String kosong)'
-//for (int i = 0; i <= (result.size() - 1); i++) {
-//	if ((result[i]) == null) {
-//		(result[i]) = ''
-//	}
-//}
+
 
 
 for (int i = 0; i < result.size(); i++) {

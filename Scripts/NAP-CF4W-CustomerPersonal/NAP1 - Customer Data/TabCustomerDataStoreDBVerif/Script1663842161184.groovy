@@ -31,12 +31,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonal'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
-//'ganti value null > "" (String kosong)'
-//for (int i = 0; i <= (result.size() - 1); i++) {
-//    if ((result[i]) == null) {
-//        (result[i]) = ''
-//    }
-//}
+
 
 int arrayindex = 0
 

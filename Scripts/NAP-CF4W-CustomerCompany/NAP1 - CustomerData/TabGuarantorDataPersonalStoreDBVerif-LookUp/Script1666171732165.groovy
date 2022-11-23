@@ -26,12 +26,7 @@ ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.Guara
         12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
         16))
 
-//'ganti value null > "" (String kosong)'
-//for (int i = 0; i <= (result.size() - 1); i++) {
-//    if ((result[i]) == null) {
-//        (result[i]) = ''
-//    }
-//}
+
 
 'declare arrayindex & confinsindex'
 int arrayindex = 0, confinsindex = 0

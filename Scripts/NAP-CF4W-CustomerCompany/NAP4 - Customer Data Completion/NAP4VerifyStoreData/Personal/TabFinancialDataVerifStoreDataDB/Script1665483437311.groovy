@@ -44,9 +44,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
         'ganti value null > "" (String kosong)'
         for (i = 0; i <= (resultfinancialdata.size() - 1); i++) {
-//            if ((resultfinancialdata[i]) == null) {
-//                (resultfinancialdata[i]) = ''
-//            } else 
+
 			if ((resultfinancialdata[i]).equalsIgnoreCase('true')) {
                 (resultfinancialdata[i]) = 'Yes'
             } else if ((resultfinancialdata[i]).equalsIgnoreCase('false')) {
@@ -99,9 +97,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
         'ganti value null > "" (String kosong)'
         for (i = 0; i <= (resultbankacc.size() - 1); i++) {
-//            if ((resultbankacc[i]) == null) {
-//                (resultbankacc[i]) = ''
-//            } else 
+
 			if ((resultbankacc[i]).equalsIgnoreCase('true')) {
                 (resultbankacc[i]) = 'Yes'
             } else if ((resultbankacc[i]).equalsIgnoreCase('false')) {

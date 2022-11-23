@@ -26,12 +26,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Em
 
 println(result)
 
-//'ganti value null > "" (String kosong)'
-//for (i = 0; i <= (result.size() - 1); i++) {
-//    if ((result[i]) == null) {
-//        (result[i]) = ''
-//    }
-//}
+
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
