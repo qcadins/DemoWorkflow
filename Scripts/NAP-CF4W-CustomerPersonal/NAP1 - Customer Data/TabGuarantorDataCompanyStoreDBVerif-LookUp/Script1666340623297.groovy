@@ -23,11 +23,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Guaran
 		12), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany,
 		16))
 
-
-
-'declare arrayindex & confinsindex'
-int arrayindex = 0, confinsindex = 0
-
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for (int i = 0; i < result.size(); i++) {

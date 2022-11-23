@@ -22,13 +22,15 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<WebElement> arrayMatch = new ArrayList<WebElement>()
+'declare arraylist arraymatch'
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
 def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt') + 
 2
 
-ArrayList<WebElement> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
+'declare arraylist resultDB'
+ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
     findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         13))
 
