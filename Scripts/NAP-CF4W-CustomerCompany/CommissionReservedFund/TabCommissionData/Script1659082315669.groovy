@@ -36,7 +36,7 @@ GlobalVariable.FlagFailed = 0
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Arraylist untuk menampung Income Information'
-ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
+ArrayList<String> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
 
 'Inisialisasi Variabel untuk menghitung jumlah baris pada Income Information, dibagi 2 karena countincomeinfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
 int countIncomeInfo = varIncomeInfo.size() / 2
@@ -63,10 +63,10 @@ ArrayList<String> refundFrom = result.get('From')
 ArrayList<String> refundAmt = result.get('Amt')
 
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
-ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<>()
+ArrayList<String> TotalAllocateCommissionAmt = new ArrayList<String>()
 
 'declare arraylist commissiondelete'
-ArrayList<String> commissiondelete = new ArrayList<>()
+ArrayList<String> commissiondelete = new ArrayList<String>()
 
 'check if role = testing'
 if (GlobalVariable.RoleCompany == 'Testing') {
@@ -75,11 +75,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         TotalAllocateCommissionAmt.add(0.00)
 
         if (i == (countIncomeInfo - 1)) {
-			'modify object allocated amount'
+            'modify object allocated amount'
             modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'), 
                 'xpath', 'equals', ('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div[2]/label', true)
 
-			'modify object remaining allocated amount'
+            'modify object remaining allocated amount'
             modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'), 
                 'xpath', 'equals', ('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div[2]/label', true)
 
@@ -90,22 +90,22 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             break
         }
         
-		'modify object income info amt'
-		modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-            'xpath', 'equals', (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label'), true)
+        'modify object income info amt'
+        modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
+            'xpath', 'equals', ('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label', true)
 
-		'modify object remaining info amt'
+        'modify object remaining info amt'
         modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'), 
-            'xpath', 'equals', (('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label'), true)
+            'xpath', 'equals', ('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label', true)
 
         'cek income info = remaining info before calculate'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectIncomeInfoAmt), WebUI.getText(modifyObjectRemainingInfoAmt), 
                 false), '12.TabCommissionData', GlobalVariable.NumofColm)
 
         if ((GlobalVariable.CheckRuleCompany == 'Yes') && (GlobalVariable.FirstTimeEntry == 'Yes')) {
-			'modify objecy income info'
+            'modify objecy income info'
             modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-                'xpath', 'equals', (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[1]/label'), true)
+                'xpath', 'equals', ('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[1]/label', true)
 
             'Varibel String untuk mengambil dan menampung income information'
             String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
@@ -119,11 +119,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(
                         sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Insurance Income')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(
-                        sqlconnectionLOS, appNo)
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlconnectionLOS, 
+                        appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Life Insurance Income')) {
-                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(
-                        sqlconnectionLOS, appNo)
+                    getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlconnectionLOS, 
+                        appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Admin Fee')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(
                         sqlconnectionLOS, appNo)
@@ -135,7 +135,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                         sqlconnectionLOS, appNo)
                 }
                 
-				'get text modify objecy income info amt'
+                'get text modify objecy income info amt'
                 String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
 
                 'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
@@ -157,8 +157,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 'Mengambil nilai allocation type dari excel'
-allocationType = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-    12)
+allocationType = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, 12)
 
 'Select dropdownlist allocation type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
@@ -166,10 +165,11 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/CommissionRes
 
 //Supplier
 'Arraylist untuk menampung List Supplier'
-ArrayList<WebElement> variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
+ArrayList<String> variableSupp = driver.findElements(By.cssSelector('#formInformationSupplier h4'))
 
 'Mengambil nilai row keberapa dimulai data supplier commission pada excel'
-def supRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') + 1
+def supRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Commission Data') + 
+1
 
 'Pengecekan Jika terdapat minimal 1 List Supplier'
 if (variableSupp.size() > 0) {
@@ -177,8 +177,8 @@ if (variableSupp.size() > 0) {
     String supplierName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SupplierName'))
 
     'Mengambil nilai supplier name yang akan didelete dari excel'
-    String deleteSupp = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-        supRow + 1)
+    String deleteSupp = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, supRow + 
+        1)
 
     'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
     if (supplierName.equalsIgnoreCase(deleteSupp)) {
@@ -200,18 +200,18 @@ if (variableSupp.size() > 0) {
 
         'Select dropdownlist bank account pada supplier'
         WebUI.selectOptionByIndex(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_BankAccountSupplier'), 
-            findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                supRow + 2), FailureHandling.OPTIONAL)
+            GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, supRow + 2), FailureHandling.OPTIONAL)
 
         'Query Select pada database untuk mengambil nilai supplier code'
-        supplierCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, supplierName)
+        supplierCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierCode'(sqlconnectionFOU, 
+            supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
-        ArrayList<WebElement> variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
+        ArrayList<String> variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
                 ' > div > div > div:nth-child(1) label.col-md-4.adInsLabel'))
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kanan'
-        ArrayList<WebElement> variableAllocateCommissionRight = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
+        ArrayList<String> variableAllocateCommissionRight = driver.findElements(By.cssSelector(('#ListAllocated' + supplierCode) + 
                 ' > div > div > div:nth-child(2) label.col-md-4.adInsLabel'))
 
         'Menghitung count (size dari variabel) sebelah kiri'
@@ -252,7 +252,7 @@ if (variableSupp.size() > 0) {
                 i) + ']/div/label[1]')
             }
             
-			'modify object allocate commission'
+            'modify object allocate commission'
             modifyObjectAllocateCommission = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Allocate Commission Supp'), 
                 'xpath', 'equals', newxpathAllocateCommission, true)
 
@@ -260,30 +260,30 @@ if (variableSupp.size() > 0) {
             String allocateCommission = WebUI.getText(modifyObjectAllocateCommission).replace(' (AMT/%)', '').replaceAll(
                 '\\s', '')
 
-			'modify object commision amt'
+            'modify object commision amt'
             modifyObjectCommissionAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Admin Fee SUPP (Amt)'), 
                 'xpath', 'equals', newxpathCommissionAmt, true)
 
-			'modify object commission percentage'
+            'modify object commission percentage'
             modifyObjectCommissionPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input__AdminFee SUPP (Percentage)'), 
                 'xpath', 'equals', newxpathCommissionPercentage, true)
 
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * i) + 1) + supRow) != '') {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * i) + 1) + 
+                    supRow) != '') {
                     'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                    WebUI.setText(modifyObjectCommissionAmt, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+                    WebUI.setText(modifyObjectCommissionAmt, GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(
                             GlobalVariable.NumofColm, ((2 * i) + 1) + supRow), FailureHandling.OPTIONAL)
                 }
                 
                 'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if (allocationType == 'Percentage') {
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * i) + 2) + supRow) != '') {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * i) + 2) + 
+                    supRow) != '') {
                     'Input Percentage, 2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                    WebUI.setText(modifyObjectCommissionPercentage, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
+                    WebUI.setText(modifyObjectCommissionPercentage, GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(
                             GlobalVariable.NumofColm, ((2 * i) + 2) + supRow), FailureHandling.OPTIONAL)
                 }
                 
@@ -291,7 +291,7 @@ if (variableSupp.size() > 0) {
                 WebUI.click(modifyObjectCommissionAmt)
             }
             
-			'check if role == testing'
+            'check if role == testing'
             if (GlobalVariable.RoleCompany == 'Testing') {
                 'Variabel string untuk mengambil dan menampung nilai amount dari web confins yang sudah diinput'
                 String textAmount = WebUI.getAttribute(modifyObjectCommissionAmt, 'value').replace(',', '')
@@ -311,16 +311,16 @@ if (variableSupp.size() > 0) {
 
                 'Looping Income Information'
                 for (int j = 1; j <= countIncomeInfo; j++) {
-					'modify object income info'
+                    'modify object income info'
                     modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
-                        'xpath', 'equals', (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[1]/label'), true)
+                        'xpath', 'equals', ('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[1]/label', true)
 
                     'Varibel String untuk mengambil dan menampung income information'
                     String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
 
-					'modify objecy income info amt'
+                    'modify objecy income info amt'
                     modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-                        'xpath', 'equals', (('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[2]/label'), true)
+                        'xpath', 'equals', ('//*[@id="viewIncomeInfo"]/div[' + j) + ']/div/div[2]/label', true)
 
                     'Pengecekan income information yang sesuai dengan fee/income allocate commission from'
                     if (textIncomeInfo == allocateCommission) {
@@ -368,11 +368,11 @@ if (variableSupp.size() > 0) {
 
 //Supplier Employee
 'Mengambil nilai row keberapa dimulai data supplier employee commission pada excel'
-def suppEmpRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Supplier Employee Commission Data') + 
-1
+def suppEmpRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+    'Supplier Employee Commission Data') + 1
 
 'Arraylist untuk menampung List Supplier Employee'
-ArrayList<WebElement> variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
+ArrayList<String> variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 
 'Pengecekan jika terdapat minimal 1 Supplier Employee'
 if (variableSuppEmp.size() > 0) {
@@ -383,7 +383,7 @@ if (variableSuppEmp.size() > 0) {
 
         newxpathSupplierEmpName = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[1]/label')
 
-		'modify object supp emp name'
+        'modify object supp emp name'
         modifyObjectSuppEmpName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SuppEmpName'), 
             'xpath', 'equals', newxpathSupplierEmpName, true)
 
@@ -392,7 +392,7 @@ if (variableSuppEmp.size() > 0) {
 
         newxpathSuppName = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[2]/div[4]/label')
 
-		'modify object supplier name'
+        'modify object supplier name'
         modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SupplierNameSuppEmp'), 
             'xpath', 'equals', newxpathSuppName, true)
 
@@ -401,7 +401,7 @@ if (variableSuppEmp.size() > 0) {
 
         newxpathSupplierEmpPos = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[2]/div[2]/label')
 
-		'modify object supplier emp pos'
+        'modify object supplier emp pos'
         modifyObjectSupplierEmpPos = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SuppEmpPosition'), 
             'xpath', 'equals', newxpathSupplierEmpPos, true)
 
@@ -409,12 +409,12 @@ if (variableSuppEmp.size() > 0) {
         String supplierEmpPos = WebUI.getText(modifyObjectSupplierEmpPos)
 
         'Mengambil dan menyimpan nama supplier employee dari excel yang akan didelete'
-        def deleteSuppEmpName = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-            GlobalVariable.NumofColm, suppEmpRow + 1)
+        def deleteSuppEmpName = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, suppEmpRow + 
+            1)
 
         'Mengambil dan menyimpan posisi dari supplier employee dari excel yang akan didelete'
-        def deleteSuppEmpPos = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-            GlobalVariable.NumofColm, suppEmpRow + 2)
+        def deleteSuppEmpPos = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, suppEmpRow + 
+            2)
 
         'Pengecekan pada excel jika ada supplier employee yang ingin didelete'
         if ((deleteSuppEmpName.length() > 0) && (deleteSuppEmpPos.length() > 0)) {
@@ -431,7 +431,7 @@ if (variableSuppEmp.size() > 0) {
                     deleteSuppEmpPos[(j - 1)])) {
                     newxpathDelSuppEmp = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[2]/button/i')
 
-					'modify object delete supp emp'
+                    'modify object delete supp emp'
                     modifyDelSuppEmp = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_deleteSuppEmp'), 
                         'xpath', 'equals', newxpathDelSuppEmp, true)
 
@@ -485,20 +485,20 @@ if (variableSuppEmp.size() > 0) {
 
         newxpathBankAccount = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[3]/div[1]/div[2]/select')
 
-		'modify object bank account'
+        'modify object bank account'
         modifyObjectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_BankAccountSuppEmp'), 
             'xpath', 'equals', newxpathBankAccount, true)
 
         'Mengambil nama bank account supplier employee pada excel'
-        def bankAccSuppEmp = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-            GlobalVariable.NumofColm, suppEmpRow + 3).split(';')
+        def bankAccSuppEmp = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, suppEmpRow + 
+            3).split(';')
 
         'Select dropdownlist bank account dari supplier employee'
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccSuppEmp[(i - 1)], FailureHandling.OPTIONAL)
 
         'Query select pada database untuk mengambil nilai supplier employee no'
-        supplierEmployeeCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierEmployeeCode'(sqlconnectionFOU, 
-            supplierEmployeeName, supplierEmpPos, supplierName)
+        supplierEmployeeCode = CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkSupplierEmployeeCode'(
+            sqlconnectionFOU, supplierEmployeeName, supplierEmpPos, supplierName)
 
         'Inisialisasi variabel Arraylist untuk menampung allocate commission from sebelah kiri'
         variableAllocateCommissionLeft = driver.findElements(By.cssSelector(('#ListAllocated' + supplierEmployeeCode.replace(
@@ -546,7 +546,7 @@ if (variableSuppEmp.size() > 0) {
                 j) + ']/div/label[1]')
             }
             
-			'modify objecy allocate commission'
+            'modify objecy allocate commission'
             modifyObjectAllocateCommission = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Allocate Commission Supp Emp'), 
                 'xpath', 'equals', newxpathAllocateCommission, true)
 
@@ -554,22 +554,22 @@ if (variableSuppEmp.size() > 0) {
             String allocateCommission = WebUI.getText(modifyObjectAllocateCommission).replace(' (AMT/%)', '').replaceAll(
                 '\\s', '')
 
-			'modify obejct allocate commission amt'
+            'modify obejct allocate commission amt'
             modifyObjectCommissionAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Admin Fee supp emp (Amt)'), 
                 'xpath', 'equals', newxpathCommissionAmt, true)
 
-			'modify object commission percentage'
+            'modify object commission percentage'
             modifyObjectCommissionPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input__AdminFee()SuppEmp'), 
                 'xpath', 'equals', newxpathCommissionPercentage, true)
 
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
                 'Mengambil nilai amount dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+16(suppEmpRow) = 20  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 2) + suppEmpRow).split(';', -1)
+                value = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 
+                    2) + suppEmpRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 2) + suppEmpRow).length() > 0) {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + 
+                    suppEmpRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Amount'
                         WebUI.setText(modifyObjectCommissionAmt, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -580,11 +580,11 @@ if (variableSuppEmp.size() > 0) {
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if (allocationType == 'Percentage') {
                 'Mengambil nilai percentage dari excel, 2j+3, +3 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+3+16(suppEmpRow) = 21  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 3) + suppEmpRow).split(';', -1)
+                value = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 
+                    3) + suppEmpRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 3) + suppEmpRow).length() > 0) {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 3) + 
+                    suppEmpRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Percentage'
                         WebUI.setText(modifyObjectCommissionPercentage, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -618,14 +618,14 @@ if (variableSuppEmp.size() > 0) {
 
                     newxpathIncomeInfoAmt = (('//*[@id="viewIncomeInfo"]/div[' + k) + ']/div/div[2]/label')
 
-					'modify objecy income info'
+                    'modify objecy income info'
                     modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Upping Rate'), 
                         'xpath', 'equals', newxpathIncomeInfo, true)
 
                     'Varibel String untuk mengambil dan menampung income information'
                     String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
 
-					'modify object income info amt'
+                    'modify object income info amt'
                     modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
                         'xpath', 'equals', newxpathIncomeInfoAmt, true)
 
@@ -679,7 +679,7 @@ def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable
 1
 
 'Arraylist untuk menampung List Referantor'
-ArrayList<WebElement> variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
+ArrayList<String> variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
 'Pengecekan jika terdapat minimal 1 Referantor'
 if (variableRef.size() > 0) {
@@ -690,7 +690,7 @@ if (variableRef.size() > 0) {
 
         newxpathRefName = (('//*[@id=\'formInformationReferantor\']/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[1]/label')
 
-		'modify object ref name'
+        'modify object ref name'
         modifyObjectRefName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_RefName'), 
             'xpath', 'equals', newxpathRefName, true)
 
@@ -698,8 +698,8 @@ if (variableRef.size() > 0) {
         String refName = WebUI.getText(modifyObjectRefName)
 
         'Mengambil dan menyimpan nama referantor dari excel yang akan didelete'
-        def deleteRefName = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-            refRow + 1)
+        def deleteRefName = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, refRow + 
+            1)
 
         'Pengecekan pada excel jika ada referantor yang ingin didelete'
         if (deleteRefName.length() > 0) {
@@ -712,7 +712,7 @@ if (variableRef.size() > 0) {
                 if (refName.equalsIgnoreCase(deleteRefName[(j - 1)])) {
                     newxpathDelRef = (('//*[@id=\'formInformationReferantor\']/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[2]/button/i')
 
-					'modify object del ref'
+                    'modify object del ref'
                     modifyDelRef = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_deleteref'), 
                         'xpath', 'equals', newxpathDelRef, true)
 
@@ -764,13 +764,13 @@ if (variableRef.size() > 0) {
 
         newxpathBankAccount = (('//*[@id=\'formInformationReferantor\']/div[' + (i + 1)) + ']/div/div[2]/div[1]/div[2]/select')
 
-		'modify object bank account'
+        'modify object bank account'
         modifyObjectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_bankAccRef'), 
             'xpath', 'equals', newxpathBankAccount, true)
 
         'Mengambil nama bank account referantor pada excel'
-        def bankAccRef = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-            refRow + 2).split(';')
+        def bankAccRef = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, refRow + 
+            2).split(';')
 
         'Select dropdownlist bank account referantor'
         WebUI.selectOptionByIndex(modifyObjectBankAccount, bankAccRef[(i - 1)], FailureHandling.OPTIONAL)
@@ -820,7 +820,7 @@ if (variableRef.size() > 0) {
                 ']/div/label[1]')
             }
             
-			'modify object allocate commission'
+            'modify object allocate commission'
             modifyObjectAllocateCommission = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_Allocate Commission Ref'), 
                 'xpath', 'equals', newxpathAllocateCommission, true)
 
@@ -828,22 +828,22 @@ if (variableRef.size() > 0) {
             String allocateCommission = WebUI.getText(modifyObjectAllocateCommission).replace(' (AMT/%)', '').replaceAll(
                 '\\s', '')
 
-			'modify object commission amt'
+            'modify object commission amt'
             modifyObjectCommissionAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Admin Fee Ref(Amt)'), 
                 'xpath', 'equals', newxpathCommissionAmt, true)
 
-			'modify object commission percentage'
+            'modify object commission percentage'
             modifyObjectCommissionPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input__AdminFee Ref ()'), 
                 'xpath', 'equals', newxpathCommissionPercentage, true)
 
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
                 'Mengambil nilai amount dari excel, 2j+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+1+32(refRow) = 35  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 1) + refRow).split(';', -1)
+                value = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 
+                    1) + refRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 1) + refRow).length() > 0) {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 1) + 
+                    refRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Amount'
                         WebUI.setText(modifyObjectCommissionAmt, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -854,11 +854,11 @@ if (variableRef.size() > 0) {
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if (allocationType == 'Percentage') {
                 'Mengambil nilai percentage dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 2) + refRow).split(';', -1)
+                value = GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 
+                    2) + refRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 
-                    ((2 * j) + 2) + refRow).length() > 0) {
+                if (GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + 
+                    refRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Percentage'
                         WebUI.setText(modifyObjectCommissionPercentage, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -898,7 +898,7 @@ if (variableRef.size() > 0) {
                     'Varibel String untuk mengambil dan menampung income information'
                     String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo).replaceAll('\\s', '')
 
-					'modify object income info amt'
+                    'modify object income info amt'
                     modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
                         'xpath', 'equals', newxpathIncomeInfoAmt, true)
 
@@ -947,13 +947,13 @@ if (variableRef.size() > 0) {
 }
 
 if (commissiondelete.size() > 0) {
-	'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-        0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+    'write to excel status warning'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 0, GlobalVariable.CopyAppColm - 
+        1, GlobalVariable.StatusWarning)
 
-	'write to excel reason failed delete'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-        1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
+    'write to excel reason failed delete'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 1, GlobalVariable.CopyAppColm - 
+        1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 
     (GlobalVariable.FlagWarning)++
 }
@@ -967,18 +967,18 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/Comm
 'Pengecekan jika calculate error'
 if (WebUI.verifyElementPresent(alertCalculate, 2, FailureHandling.OPTIONAL)) {
     'Write to Excel FAILED'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 1, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusReasonCalculateGagal)
 
     'Pengecekan error alert amount/percentage melebihi limit'
     if (WebUI.getText(alertCalculate).toLowerCase().contains('Cannot be more than'.toLowerCase())) {
         'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 1, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
     }
     
     'Klik cancel'
@@ -1000,8 +1000,8 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabC
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(
-        GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataCommissionDataNAPCompany.getValue(GlobalVariable.NumofColm, 
+        4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'
@@ -1015,7 +1015,7 @@ if (GlobalVariable.FlagFailed == 0) {
         GlobalVariable.NumofColm, '12.TabCommissionData')
 
     if (iscompleteMandatory == 0) {
-		'declare errorValObject'
+        'declare errorValObject'
         errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 
         'cek validasi'
@@ -1044,12 +1044,15 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel status failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
+        'write to excel status failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 
+            1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        'write to excel reason failed verify equal or match'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
+

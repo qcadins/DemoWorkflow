@@ -21,19 +21,16 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.By as By
 
 'declare guarantor array'
-def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 19).split(
-	';', -1)
+def GuarantorArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 19).split(';', -1)
 
 'declare guarantor action array'
-def GuarantorActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-	20).split(';', -1)
+def GuarantorActionArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 20).split(';', -1)
 
 'declare guarantor negative action array'
-def GuarantorNegativeArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-	21).split(';', -1)
+def GuarantorNegativeArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 21).split(';', -1)
 
 'get app no from data file dupcheck'
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 12)
 
 'declare web driver'
 WebDriver driver = DriverFactory.getWebDriver()

@@ -19,17 +19,18 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
+'declare arraymatch arraylist'
+ArrayList<String> arrayMatch = new ArrayList<String>()
 
-ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
-        12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 
-        16))
+'call keyword get guarantor data store db personal lookup'
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
+    GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12), GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(
+        GlobalVariable.NumofGuarantorPersonal, 16))
 
+'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {
-	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
-	
+    'verify result == confinsdata'
+    arrayMatch.add(WebUI.verifyMatch((result[i]).toUpperCase(), (GlobalVariable.Confinsdata[i]).toUpperCase(), true, FailureHandling.OPTIONAL))
 }
 
 'jika nilai di confins tidak sesuai dengan db'
@@ -42,4 +43,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
         1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-

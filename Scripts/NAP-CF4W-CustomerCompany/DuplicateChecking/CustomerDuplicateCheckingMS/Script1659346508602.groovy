@@ -21,19 +21,16 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
 'get MS Array'
-def ManagementShareholderArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-	16).split(';', -1)
+def ManagementShareholderArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
 'get MS Action array'
-def ManagementShareholderActionArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-	17).split(';', -1)
+def ManagementShareholderActionArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
 'get MS Negative Action Array'
-def ManagementShareholderNegativeArray = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm,
-	18).split(';', -1)
+def ManagementShareholderNegativeArray = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
 'get appno dari datafile dupcheck'
-String DupcheckAppNo = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPCompany.getValue(GlobalVariable.NumofColm, 12)
 
 'delcare web driver'
 WebDriver driver = DriverFactory.getWebDriver()

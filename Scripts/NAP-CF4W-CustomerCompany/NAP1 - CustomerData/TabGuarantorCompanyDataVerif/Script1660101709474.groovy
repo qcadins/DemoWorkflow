@@ -25,11 +25,8 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'))
 
-
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-
-	
 	if ((result[i]).equalsIgnoreCase('TRUE')) {
 		(result[i]) = 'Yes'
 	} else if ((result[i]).equalsIgnoreCase('FALSE')) {
@@ -56,4 +53,3 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		GlobalVariable.FlagFailed=1
 	}
 }
-

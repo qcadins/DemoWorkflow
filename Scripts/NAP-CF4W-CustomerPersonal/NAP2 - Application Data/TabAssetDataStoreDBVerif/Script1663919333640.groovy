@@ -43,16 +43,6 @@ ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.Custome
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultassetinformation.size() - 1); i++) {
-
-	if ((resultassetinformation[i]).equalsIgnoreCase(',')) {
-        (resultassetinformation[i]) = ', '
-    }
-}
-
-println(resultassetinformation)
-
 int arraysuppinfoindex = 0
 
 int arrayassetinfoindex = 0

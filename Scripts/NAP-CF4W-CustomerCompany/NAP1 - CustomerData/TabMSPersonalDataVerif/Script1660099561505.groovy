@@ -19,16 +19,15 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB FOU'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'call keyword get MS personal data lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One AKTA  E-KTP  KARTU TANDA MAHASISWA  KITAS  NPWP  SIM'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Employee  Non Professional  Professional  Small Medium Enterprise'), 
         'value'))
 
-
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-
 	if ((result[i]).equalsIgnoreCase('TRUE')) {
 		(result[i]) = 'Yes'
 	} else if ((result[i]).equalsIgnoreCase('FALSE')) {
@@ -36,6 +35,7 @@ for (int i = 0; i <= (result.size() - 1); i++) {
 	}
 }
 
+'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
@@ -43,9 +43,11 @@ for (int i = 0; i < result.size(); i++) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 				0, GlobalVariable.NumofMS-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verif equal pr match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
 				1, GlobalVariable.NumofMS-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

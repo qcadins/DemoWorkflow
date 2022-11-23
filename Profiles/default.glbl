@@ -629,4 +629,44 @@
       <initValue>''</initValue>
       <name>InsuranceLength</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData\')\r\n'</initValue>
+      <name>findTestDataCustomerCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder\')'</initValue>
+      <name>findTestDataManagementShareholder</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal\')'</initValue>
+      <name>findTestDataGuarantorPersonalCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany\')'</initValue>
+      <name>findTestDataGuarantorCompanyCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/DuplicateChecking\')'</initValue>
+      <name>findTestDataDupcheckNAPCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'DownloadRule/DuplicateCheckingRule\')'</initValue>
+      <name>findTestDataDupcheckRule</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData\')'</initValue>
+      <name>findTestDataCommissionDataNAPCompany</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData\')'</initValue>
+      <name>findTestDataReservedFundDataNAPCompany</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
