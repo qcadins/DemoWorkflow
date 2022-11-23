@@ -19,13 +19,11 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
+    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12), GlobalVariable.findTestDataFamily.getValue(
+        GlobalVariable.NumofFamily, 16), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 27))
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonalLookUp'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-        GlobalVariable.NumofFamily, 12), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-        GlobalVariable.NumofFamily, 16), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-        GlobalVariable.NumofFamily, 27))
-
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
+ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'ganti value yang bernilai "IDN" > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
@@ -36,29 +34,27 @@ for (int i = 0; i <= (result.size() - 1); i++) {
 
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
-	if ((GlobalVariable.Confinsdata[i]) == null || (GlobalVariable.Confinsdata[i]).equalsIgnoreCase('IDN')) {
-		(GlobalVariable.Confinsdata[i]) = ''
-	}
+    if (((GlobalVariable.Confinsdata[i]) == null) || (GlobalVariable.Confinsdata[i]).equalsIgnoreCase('IDN')) {
+        (GlobalVariable.Confinsdata[i]) = ''
+    }
 }
 
 'declare array for confins data'
 def confinsdata = []
 
 for (int i = 0; i < result.size(); i++) {
-	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
-	
+    'verify result == confinsdata'
+    arrayMatch.add(WebUI.verifyMatch(result[i], '(?i)' + (GlobalVariable.Confinsdata[i]), true, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-		0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-		1, GlobalVariable.NumofFamily - 1, GlobalVariable.ReasonFailedStoredDB)
+    'write to excel FAILED'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 
+        1, GlobalVariable.StatusFailed)
 
+    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 
+        1, GlobalVariable.ReasonFailedStoredDB)
 }
 

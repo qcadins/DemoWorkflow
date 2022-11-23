@@ -19,27 +19,25 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
+ArrayList<String> arrayMatch = new ArrayList<String>()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonalLookUp'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 13), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 17))
-
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
+    GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 13), GlobalVariable.findTestDataCustomerPersonal.getValue(
+        GlobalVariable.NumofColm, 17))
 
 for (int i = 0; i < result.size(); i++) {
-	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
-	
+    'verify result == confinsdata'
+    arrayMatch.add(WebUI.verifyMatch(result[i], '(?i)' + (GlobalVariable.Confinsdata[i]), true, FailureHandling.OPTIONAL))
 }
 
 'jika nilai di confins tidak sesuai dengan db'
-if(arrayMatch.contains(false)){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+if (arrayMatch.contains(false)) {
+    'Write To Excel GlobalVariable.StatusFailed'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusFailed)
+
+    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
+        1, GlobalVariable.ReasonFailedStoredDB)
 }
 

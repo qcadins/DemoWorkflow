@@ -30,7 +30,6 @@ String filePath = userDir + GlobalVariable.PathPersonal
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = filePath
 
-
  GlobalVariable.FlagFailed = 0
 
 'Koneksi database'
@@ -175,7 +174,7 @@ if(GlobalVariable.Role=="Testing"){
 
 
 'Mengambil nilai allocation type dari excel'
-allocationType = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+allocationType = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
     GlobalVariable.NumofColm, 12)
 
 'Select dropdownlist allocation type'
@@ -197,7 +196,7 @@ if (variableSupp.size() > 0) {
     String supplierName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SupplierName'))
 
     'Mengambil nilai supplier name yang akan didelete dari excel'
-    String deleteSupp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+    String deleteSupp = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
         GlobalVariable.NumofColm, supRow+1)
 
     'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
@@ -219,7 +218,7 @@ if (variableSupp.size() > 0) {
 
         'Select dropdownlist bank account pada supplier'
         WebUI.selectOptionByIndex(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/select_BankAccountSupplier'), 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+            GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                 GlobalVariable.NumofColm, supRow+2), FailureHandling.OPTIONAL)
 
         'Query Select pada database untuk mengambil nilai supplier code'
@@ -286,20 +285,20 @@ if (variableSupp.size() > 0) {
 
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, (2 * i) + 1 + supRow) != '') {
                     'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                    WebUI.setText(modifyObjectCommissionAmt, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                    WebUI.setText(modifyObjectCommissionAmt, GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                             GlobalVariable.NumofColm, (2 * i) + 1 + supRow), FailureHandling.OPTIONAL)
                 }
                 
                 'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if(allocationType == 'Percentage') {
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, (2 * i) + 2 + supRow) != '') {
                     'Input Percentage, 2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                    WebUI.setText(modifyObjectCommissionPercentage, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                    WebUI.setText(modifyObjectCommissionPercentage, GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                             GlobalVariable.NumofColm, (2 * i) + 2 + supRow), FailureHandling.OPTIONAL)
                 }
                 
@@ -425,11 +424,11 @@ if (variableSuppEmp.size() > 0) {
         String supplierEmpPos = WebUI.getText(modifyObjectSupplierEmpPos)
 
         'Mengambil dan menyimpan nama supplier employee dari excel yang akan didelete'
-        def deleteSuppEmpName = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+        def deleteSuppEmpName = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
             GlobalVariable.NumofColm, suppEmpRow + 1)
 
         'Mengambil dan menyimpan posisi dari supplier employee dari excel yang akan didelete'
-        def deleteSuppEmpPos = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+        def deleteSuppEmpPos = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
             GlobalVariable.NumofColm, suppEmpRow + 2)
 
         'Pengecekan pada excel jika ada supplier employee yang ingin didelete'
@@ -503,7 +502,7 @@ if (variableSuppEmp.size() > 0) {
             'xpath', 'equals', newxpathBankAccount, true)
 
         'Mengambil nama bank account supplier employee pada excel'
-        def bankAccSuppEmp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+        def bankAccSuppEmp = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
             GlobalVariable.NumofColm, suppEmpRow + 3).split(';')
 
         'Select dropdownlist bank account dari supplier employee'
@@ -575,10 +574,10 @@ if (variableSuppEmp.size() > 0) {
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
                 'Mengambil nilai amount dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+16(suppEmpRow) = 20  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                value = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Amount'
@@ -590,10 +589,10 @@ if (variableSuppEmp.size() > 0) {
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if(allocationType =='Percentage'){
                 'Mengambil nilai percentage dari excel, 2j+3, +3 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+3+16(suppEmpRow) = 21  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                value = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Percentage'
@@ -709,7 +708,7 @@ if (variableRef.size() > 0) {
         String refName = WebUI.getText(modifyObjectRefName)
 
         'Mengambil dan menyimpan nama referantor dari excel yang akan didelete'
-        def deleteRefName = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+        def deleteRefName = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
             GlobalVariable.NumofColm, refRow + 1)
 
         'Pengecekan pada excel jika ada referantor yang ingin didelete'
@@ -777,7 +776,7 @@ if (variableRef.size() > 0) {
             'xpath', 'equals', newxpathBankAccount, true)
 
         'Mengambil nama bank account referantor pada excel'
-        def bankAccRef = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+        def bankAccRef = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
             GlobalVariable.NumofColm, refRow + 2).split(';')
 
         'Select dropdownlist bank account referantor'
@@ -844,10 +843,10 @@ if (variableRef.size() > 0) {
             'Pengecekan allocation type jika amount'
             if (allocationType == 'Amount') {
                 'Mengambil nilai amount dari excel, 2j+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+1+32(refRow) = 35  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                value = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Amount'
@@ -859,10 +858,10 @@ if (variableRef.size() > 0) {
                 WebUI.click(modifyObjectCommissionPercentage)
             } else if(allocationType=="Percentage"){
                 'Mengambil nilai percentage dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-                value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                value = GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
 
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(
+                if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).length() > 0) {
                     if ((value[(i - 1)]) != '') {
                         'Input Percentage'
@@ -1009,7 +1008,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commissi
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'

@@ -230,37 +230,37 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 	
 	checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComResFundCountDataInPage'(),true))
 	
-	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=GlobalVariable.findTestDataCustomerPersonal.getValue(
 		GlobalVariable.NumofColm, 1)){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 	
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+				1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerPersonal.getValue(
 					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"Comresfund"+";\n")
 	
 			GlobalVariable.FlagWarning=1
 	}
 	
-	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=GlobalVariable.findTestDataCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 1)){
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+						1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"Comresfund"+";\n"))
 		
 			GlobalVariable.FlagWarning=1
 	}
 		
-	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=GlobalVariable.findTestDataCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 1)){
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+						1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"Comresfund"+";\n"))
 		
 
@@ -270,7 +270,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
 
 'Input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'),
-	findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+	GlobalVariable.findTestDataCustomerPersonal.getValue(
 		GlobalVariable.NumofColm, 13))
 
 'Klik Search'
@@ -284,15 +284,15 @@ WebUI.delay(5)
 if (GlobalVariable.Role == 'Data Entry') {
 	
 	'dijalankan tanpa copy app / dengan edit hasil copy app'
-	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
-		10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
+	if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
+		10).equalsIgnoreCase('No') || GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Edit')) {
 		'call test case tab commission'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionData'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	//dijalankan dengan copy app
-	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
+	else if(GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Yes')){
 	
 		'Klik Calculate'
@@ -329,15 +329,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
 	'dijalankan tanpa copy app / dengan edit hasil copy app'
-	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
-		10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
+	if(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
+		10).equalsIgnoreCase('No') || GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Edit')){
 		'call test case tab reserved fund data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundData'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	//dijalankan dengan copy app
-	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
+	else if(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Yes')){
 		'Klik Button Calculate'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Calculate'))
@@ -374,15 +374,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 } else {
 
     'dijalankan tanpa copy app / dengan edit hasil copy app'
-	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
-		10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
+	if (GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
+		10).equalsIgnoreCase('No') || GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Edit')) {
 		'call test case tab commission'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionData'),
 			[:], FailureHandling.STOP_ON_FAILURE)
 	}
 	//dijalankan dengan copy app
-	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm,
+	else if(GlobalVariable.findTestDataCommissionNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Yes')){
 	
 		'Klik Calculate'
@@ -419,15 +419,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
 	'dijalankan tanpa copy app / dengan edit hasil copy app'
-	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
-		10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
+	if(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
+		10).equalsIgnoreCase('No') || GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Edit')){
 		'call test case tab reserved fund data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundData'),
 		[:], FailureHandling.STOP_ON_FAILURE)
 	}
 	//dijalankan dengan copy app
-	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm,
+	else if(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm,
 		10).equalsIgnoreCase('Yes')){
 		'Klik Button Calculate'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Calculate'))

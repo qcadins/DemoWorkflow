@@ -26,11 +26,8 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare data file dupcheck'
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
-
 'get app no from data file dupcheck'
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12)
 
 Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
@@ -45,7 +42,7 @@ if (DupCheckStatus == true) {
 
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'), 
-        datafileDupcheck.getValue(GlobalVariable.NumofColm, 12))
+        GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
@@ -60,7 +57,7 @@ if (DupCheckStatus == true) {
     GlobalVariable.CountDupcheckRow = variable.size()
 
     'get cust name dari data file excel'
-    custnamedupcheck = datafileDupcheck.getValue(GlobalVariable.NumofColm, 13)
+    custnamedupcheck = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 13)
 
     'array customer name data inputan'
     def CustomerNameArray = GlobalVariable.CustomerName.split(';')
@@ -100,7 +97,7 @@ if (DupCheckStatus == true) {
         'get text subject type'
         subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
-        if ((GlobalVariable.Role == 'Testing') && (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.findTestDataCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 8).length() == 0)) {
             'verify name == data inputan'
             checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
@@ -119,7 +116,7 @@ if (DupCheckStatus == true) {
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                         5, FailureHandling.OPTIONAL))) {
-                        if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
+                        if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/checkbox negative'))
                         }
@@ -211,7 +208,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'), 
                     5, FailureHandling.OPTIONAL)) {
-                    if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
+                    if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
@@ -252,7 +249,7 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
-                    } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
+                    } else if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
                             String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
@@ -293,7 +290,7 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
-                    } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
+                    } else if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
@@ -354,7 +351,7 @@ if (DupCheckStatus == true) {
     'click button submit'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Submit'))
 
-    Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 4))
+    Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 4))
 
     if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
         'cek alert'
@@ -611,37 +608,37 @@ def pagingTesting() {
 
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.DupcheckCountDataInPage'(), true))
 
-        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
                 GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + 
                 ';\n'))
 
