@@ -31,9 +31,7 @@ String driverclassname = findTestData('Login/Login').getValue(6, 9)
 String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
 
 'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 

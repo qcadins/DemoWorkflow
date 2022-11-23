@@ -59,7 +59,7 @@ public class checkReferantorDetail {
 	@Keyword
 	public checkMFEmployeeReferantor(Sql instance, String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
-		instance.eachRow('select top(1) tax_id_no, emp_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode  from ref_emp WITH(NOLOCK) where emp_no=\''+referantorCode+'\' and is_active=1', { def row ->
+		instance.eachRow("select top(1) ISNULL(tax_id_no,'') AS [Taxidno], emp_name, addr, area_code_4, area_code_3, area_code_2, area_code_1, city, zipcode from ref_emp WITH(NOLOCK) where emp_no='"+referantorCode+"' and is_active=1", { def row ->
 			referantorDetail.add(row[0])
 			referantorDetail.add(row[1])
 			referantorDetail.add(row[2])
