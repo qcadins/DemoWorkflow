@@ -41,6 +41,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 	'Verif reset'
 	resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 	
+	'delcare arraylist liststring'
 	ArrayList<String> listString = new ArrayList<String>()
 	
 	'Klik Search'
@@ -70,6 +71,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="
 		
 		listString.add(WebUI.getText(appNoObject))
 	}
+	
 	'Verif sort appno ascending'
 	Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
@@ -345,8 +347,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+	
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		
     } //dijalankan dengan copy
     else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
@@ -451,8 +455,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('No') || findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+	
         'call test case reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
+		
     } else if (findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Yes')) {
 
@@ -488,4 +494,3 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     }
 }
-

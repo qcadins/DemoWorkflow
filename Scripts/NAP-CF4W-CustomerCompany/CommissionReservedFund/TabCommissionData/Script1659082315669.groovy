@@ -46,7 +46,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 //String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
-String appLastStep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlConnectionLOS, appNo)
+String appLastStep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlconnectionLOS, appNo)
 
 if (!(appLastStep.equalsIgnoreCase('UPL_DOC')) && (GlobalVariable.FirstTimeEntry == 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
@@ -54,26 +54,32 @@ if (!(appLastStep.equalsIgnoreCase('UPL_DOC')) && (GlobalVariable.FirstTimeEntry
 
 'Hashmap untuk menampung arraylist refund allocation dan refund amount dari membaca rule file'
 HashMap<String, ArrayList> result = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.verifyIncomeInfoAmtRuleBased'(
-    sqlConnectionLOS, appNo)
+    sqlconnectionLOS, appNo)
 
-ArrayList<WebElement> refundFrom = result.get('From')
+'dedclare arraylist refunForm'
+ArrayList<String> refundFrom = result.get('From')
 
-ArrayList<WebElement> refundAmt = result.get('Amt')
+'declare arraylist refunAmt'
+ArrayList<String> refundAmt = result.get('Amt')
 
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
-ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
+ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<>()
 
-ArrayList<WebElement> commissiondelete = new ArrayList<WebElement>()
+'declare arraylist commissiondelete'
+ArrayList<String> commissiondelete = new ArrayList<>()
 
+'check if role = testing'
 if (GlobalVariable.RoleCompany == 'Testing') {
     'Looping untuk set nilai awal 0 untuk total amount allocate commission dan verif income info berdasarkan rule file'
     for (int i = 0; i < countIncomeInfo; i++) {
         TotalAllocateCommissionAmt.add(0.00)
 
         if (i == (countIncomeInfo - 1)) {
+			'modify object allocated amount'
             modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'), 
                 'xpath', 'equals', ('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div[2]/label', true)
 
+			'modify object remaining allocated amount'
             modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'), 
                 'xpath', 'equals', ('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div[2]/label', true)
 
@@ -84,15 +90,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             break
         }
         
-        newxpathIncomeInfoAmt = (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label')
-
-        newxpathRemainingInfoAmt = (('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label')
-
-        modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
-            'xpath', 'equals', newxpathIncomeInfoAmt, true)
+		modifyObjectIncomeInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_IncomeUppingRate'), 
+            'xpath', 'equals', (('//*[@id=\'viewIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label'), true)
 
         modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'), 
-            'xpath', 'equals', newxpathRemainingInfoAmt, true)
+            'xpath', 'equals', (('//*[@id=\'viewRemainIncomeInfo\']/div[' + (i + 1)) + ']/div/div[2]/label'), true)
 
         'cek income info = remaining info before calculate'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectIncomeInfoAmt), WebUI.getText(modifyObjectRemainingInfoAmt), 
@@ -114,22 +116,22 @@ if (GlobalVariable.RoleCompany == 'Testing') {
                 'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
                 if (textIncomeInfo.equalsIgnoreCase('Upping Rate')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Insurance Income')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Life Insurance Income')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Admin Fee')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Provision Fee')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 } else if (textIncomeInfo.equalsIgnoreCase('Other Fee')) {
                     getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(
-                        sqlConnectionLOS, appNo)
+                        sqlconnectionLOS, appNo)
                 }
                 
                 String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)

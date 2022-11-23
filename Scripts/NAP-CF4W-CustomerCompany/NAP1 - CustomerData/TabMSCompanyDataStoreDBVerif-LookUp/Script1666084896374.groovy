@@ -25,8 +25,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSData
         GlobalVariable.NumofMS, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
         GlobalVariable.NumofMS, 50))
 
-
-
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
 //    if ((result[i]) == null) {
@@ -40,11 +38,7 @@ for (int i = 0; i <= (result.size() - 1); i++) {
     }
 }
 
-println(result)
-
-int arrayindex = 0
-
-int confinsindex = 0
+int arrayindex = 0, confinsindex = 0
 
 'verify shareholder name'
 arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
