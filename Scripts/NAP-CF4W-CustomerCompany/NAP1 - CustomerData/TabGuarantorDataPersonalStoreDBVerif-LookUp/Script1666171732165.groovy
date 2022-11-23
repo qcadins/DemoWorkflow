@@ -28,7 +28,7 @@ ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.Guara
 
 for (int i = 0; i < result.size(); i++) {
 	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
 	
 }
 

@@ -45,15 +45,11 @@ for (int i = 1; i <= variableData.size(); i++) {
     'Loop Multiple guarantor data'
     for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
     1); (GlobalVariable.NumofGuarantorCompany)++) {
-
         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 
             12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
             13)) {
-		
             if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
-				
                 if (WebUI.getText(modifyNewGuarantorTypeName).equalsIgnoreCase('Company')) {
-					
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                             GlobalVariable.NumofGuarantorCompany, 18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
                         findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
@@ -300,6 +296,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 							
 						}
 						
+						'verify button cancel present'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'),
 							5, FailureHandling.OPTIONAL)) {
 							'click button cancel'
@@ -314,6 +311,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 							}
 						}
 						
+						'check if input data / lookup'
 						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
 							GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
 							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
@@ -334,6 +332,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 						
 						break
                     } else {
+						'check if next colm != current appno'
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                             GlobalVariable.NumofGuarantorCompany + 1, 12) != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                             GlobalVariable.NumofColm, 13)) {
@@ -385,9 +384,11 @@ for (int i = 1; i <= variableData.size(); i++) {
 }
 
 if (custnamefaileddelete.size() > 0) {
+	'write to excel status warning'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
         0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
+	'write to excel reason failed delete'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
         1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 

@@ -26,12 +26,16 @@ GlobalVariable.FlagWarning = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'declare datafileugarantorpersonal variable'
 datafileguarantorpersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
 
+'declare datafileugarantorcompany variable'
 datafileguarantorcompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
 
+'get copyapp status dari data file/excel'
 copyapp = datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 10)
 
+'declare variableData'
 ArrayList<WebElement> variableData
 
 if (GlobalVariable.RoleCompany == 'Testing') {
@@ -86,6 +90,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 					'click radio personal'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 				
+					'chcek if indput data / lookup'
                     if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                         
 						'select guarantor relationship'
@@ -453,6 +458,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         }
                     }
                     
+					'check if input data / lookup'
                     if (datafileguarantorpersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             'call test case Guarantor personal data verif'

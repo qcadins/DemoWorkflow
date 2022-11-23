@@ -33,8 +33,10 @@ Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     8)
 
+'check appCurrStep'
 String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
 
+'check custStep'
 String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
 
 'Write to excel Appno'
@@ -43,500 +45,511 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (appStep == 'CUST') {
+		'call test case tab customer data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case Customer duplicate checking'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case NAP2'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case comresfund'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'SHR') {
 	
+		'call function get cust data'
 		getCustdata(sqlconnectionLOS, appNo, appStep)
 	
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
+		'call function input appno'
         inputAppNo()
 
+		'call test case tab MS copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case Tab Guarantor Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case dupcheck'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case NAP2'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case comresfund'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'GUAR') {
 	
+		'call function get cust data'
 		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
+		'call function input appno'
         inputAppNo()
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case Tab Guarantor Copy App'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case dupcheck'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case NAP2'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
+		'call funtion get cust data'
         getCustdata(sqlconnectionLOS, appNo, appStep)
 
+		'call test case dupchcek'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
         if ((appStep == 'NAPD') || (appStep == 'REF')) {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case NAP2'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'APP') {
             'click menu application data'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+			'call function input appno'
             inputAppNo()
 
+			'call test case application data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'call test case tab asset data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+			'call test case tab insurance data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+			'call test case tab financial data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+			'call test case term and condition data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'call test case upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'ASSET') {
             'click menu application data'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+			'call function input appno'
             inputAppNo()
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case tab asset data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case tab insurance data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case tab financial data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'INS') {
             'click menu application data'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+			'call function input appno'
             inputAppNo()
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case tab insurance data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case tab financial data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
-        } else if (appStep == 'FIN') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'TC') {
             'click menu application data'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+			'call function input app no'
             inputAppNo()
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     } else if (appStep == 'UPL_DOC') {
         'click menu application data'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+		'call function input appno'
         inputAppNo()
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case upload document'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if ((appStep == 'COM') || (appStep == 'RSV')) {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if ((appStep == 'SRV') && (custStep == 'CDA_REQ')) {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
     }
-} else if (GlobalVariable.Role == 'Testing') {
-    if (appStep == 'CUST') {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        if (GlobalVariable.DupcheckVerif == 'Yes') {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-        }
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (appStep == 'SHR') {
+} else if (GlobalVariable.RoleCompany == 'Testing') {
+	if (appStep == 'CUST') {
+		'call test case tab customer data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
 	
-		'get cust data untuk dupcheck verif'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
-	
-        'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-        inputAppNo()
-
-		if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 8).length() > 1)) {
-		ArrayList<Boolean> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+		'call test case dupcheck verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+			FailureHandling.STOP_ON_FAILURE)
 		
-			ArrayList<Boolean> listMS = new ArrayList<Boolean>()
-		
-			listMS = CustomKeywords.'dbConnection.getInfoForEditNAP.getMSDataforEditNAP'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-					GlobalVariable.NumofColm, 8))
-		
-			ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-		
-			for (int msdt = 1; msdt <= variableData.size(); msdt++) {
-				String result = listMS.get(msdt - 1)
-		
-				resultarray = result.split(', ')
-		
-				println(resultarray)
-		
-				'ganti value TRUE/FALSE > YES/NO (String kosong)'
-				for (i = 0; i <= (resultarray.size() - 1); i++) {
-					if ((resultarray[i]).equalsIgnoreCase('TRUE')) {
-						(resultarray[i]) = 'YES'
-					} else if ((resultarray[i]).equalsIgnoreCase('FALSE')) {
-						(resultarray[i]) = 'NO'
-					}
-				}
-				
-				'modify object MS name'
-				modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[2]', true)
-		
-				'modify object MS type'
-				modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[3]', true)
-		
-				'modify object MS share'
-				modifyNewMSShare = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[4]', true)
-		
-				'modify object is Active'
-				modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[5]', true)
-		
-				'modify object is Owner'
-				modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[6]', true)
-		
-				'modify object is Signer'
-				modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
-					'xpath', 'equals', ('//*[@id="mgmnt-shrholder-tab"]/app-mngmnt-shrhldr-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
-					msdt) + ']/td[7]', true)
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSName), '(?i)' + (resultarray[0]), true))
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSType), '(?i)' + (resultarray[1]), true))
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewMSShare).replace('  %', ''), '(?i)' + (resultarray[2]),
-						true))
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisActive), '(?i)' + (resultarray[3]), true))
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner), '(?i)' + (resultarray[4]), true))
-		
-				arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner), '(?i)' + (resultarray[5]), true))
-			}
-			
-			if (arrayMatch.contains(false)) {
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-					0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-		
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
-		
-				(GlobalVariable.FlagWarning)++
-			}
+		if (GlobalVariable.DupcheckVerif == 'Yes') {
+			'call test case dupcheck'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:],
+				FailureHandling.STOP_ON_FAILURE)
 		}
-			
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        if (GlobalVariable.DupcheckVerif == 'Yes') {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-        }
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (appStep == 'GUAR') {
-		'get cust data untuk dupcheck verif'
+		
+		'call test case Customer duplicate checking'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP2'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	} else if (appStep == 'SHR') {
+	
+		'call function get cust data'
+		getCustdata(sqlconnectionLOS, appNo, appStep)
+	
+		'click Menu customer main data'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+	
+		'call function input appno'
+		inputAppNo()
+	
+		'call test case tab MS copy app'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case Tab Guarantor Copy App'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case dupcheck verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+		
+		if (GlobalVariable.DupcheckVerif == 'Yes') {
+			'call test case dupcheck'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+		}
+		
+		'call test case NAP2'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	} else if (appStep == 'GUAR') {
+	
+		'call function get cust data'
 		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
-        'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-        inputAppNo()
-
+		'click Menu customer main data'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+	
+		'call function input appno'
+		inputAppNo()
+	
+		'call test case Tab Guarantor Copy App'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case dupcheck verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+			FailureHandling.STOP_ON_FAILURE)
 		
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        if (GlobalVariable.DupcheckVerif == 'Yes') {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-        }
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
-    'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
-        getCustdata(sqlconnectionLOS, appNo, appStep)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-        if (GlobalVariable.DupcheckVerif == 'Yes') {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-        }
-
-        if ((appStep == 'NAPD') || (appStep == 'REF')) {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        } else if (appStep == 'APP') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        } else if (appStep == 'ASSET') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        } else if (appStep == 'INS') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        } else if (appStep == 'FIN') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        } else if (appStep == 'TC') {
-            'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-            inputAppNo()
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-        }
-    } else if (appStep == 'UPL_DOC') {
-        'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
-
-        inputAppNo()
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    } else if ((appStep == 'COM') || (appStep == 'RSV')) {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
-
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    } else if ((appStep == 'SRV') && (custStep == 'CDA_REQ')) {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    }
+		if (GlobalVariable.DupcheckVerif == 'Yes') {
+			'call test case dupcheck'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+		}
+		
+		'call test case NAP2'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	} else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep ==
+	'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
+		'call funtion get cust data'
+		getCustdata(sqlconnectionLOS, appNo, appStep)
+	
+		'call test case dupcheck verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+		
+		if (GlobalVariable.DupcheckVerif == 'Yes') {
+			'call test case dupcheck'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+		}
+	
+		if ((appStep == 'NAPD') || (appStep == 'REF')) {
+			'call test case NAP2'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.STOP_ON_FAILURE)
+		} else if (appStep == 'APP') {
+			'click menu application data'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+	
+			'call function input appno'
+			inputAppNo()
+	
+			'call test case application data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab asset data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab insurance data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab financial data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.STOP_ON_FAILURE)
+		} else if (appStep == 'ASSET') {
+			'click menu application data'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+	
+			'call function input appno'
+			inputAppNo()
+	
+			'call test case tab asset data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab insurance data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab financial data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.STOP_ON_FAILURE)
+		} else if (appStep == 'INS') {
+			'click menu application data'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+	
+			'call function input appno'
+			inputAppNo()
+	
+			'call test case tab insurance data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case tab financial data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.STOP_ON_FAILURE)
+		} else if (appStep == 'TC') {
+			'click menu application data'
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+	
+			'call function input app no'
+			inputAppNo()
+	
+			'call test case term and condition data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case upload document'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+				FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case comresfund'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+			'call test case NAP4'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+				[:], FailureHandling.STOP_ON_FAILURE)
+		}
+	} else if (appStep == 'UPL_DOC') {
+		'click menu application data'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+	
+		'call function input appno'
+		inputAppNo()
+	
+		'call test case upload document'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	} else if ((appStep == 'COM') || (appStep == 'RSV')) {
+		'call test case comresfund'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	} else if ((appStep == 'SRV') && (custStep == 'CDA_REQ')) {
+		'call test case NAP4'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'),
+			[:], FailureHandling.STOP_ON_FAILURE)
+	}
 }
 
 def inputAppNo() {

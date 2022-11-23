@@ -43,7 +43,7 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'ganti value yang bernilai "IDN" > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('IDN')) {
+    if ((result[i]).equalsIgnoreCase('INA')) {
         (result[i]) = ''
     }
 }

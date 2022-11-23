@@ -19,6 +19,7 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB FOU'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'call keyword get guarantor data verif'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataCompany'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -36,6 +37,7 @@ for (int i = 0; i <= (result.size() - 1); i++) {
 	}
 }
 
+'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {
     'verify result = confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
@@ -43,9 +45,11 @@ for (int i = 0; i < result.size(); i++) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
 				0, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
 				1, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

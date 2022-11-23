@@ -328,12 +328,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomer
         'call test case verif customer store data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
-} else (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
+} else if(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp'){
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
         'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreDBVerif-LookUp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreDBVerif-LookUp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
 
@@ -380,9 +379,11 @@ def getDataCust() {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

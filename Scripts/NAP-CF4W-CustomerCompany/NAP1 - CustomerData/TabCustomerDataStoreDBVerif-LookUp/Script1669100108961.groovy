@@ -19,15 +19,18 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare arrayMatch arraylist'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'call keyowrd get customer data store db company'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 17))
 
+'looping verif confinsdata = db'
 for (int i = 0; i < result.size(); i++) {
 	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i], "(?i)"+GlobalVariable.Confinsdata[i], true, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
 	
 }
 
@@ -41,4 +44,3 @@ if(arrayMatch.contains(false)){
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-

@@ -35,65 +35,11 @@ for (int i = 0; i <= (result.size() - 1); i++) {
     }
 }
 
-int arrayindex = 0, confinsindex = 0
-
-'verify shareholder name'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify position slik'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
-
-'verify company type'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify customer model'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify share percent'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify is active'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify is owner'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify address'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify RT'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify RW'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify Zipcode'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify kecamatan'
-arrayMatch.add(WebUI.verifyEqual((Math.round(Double.parseDouble(GlobalVariable.Confinsdata[confinsindex++]))), Math.round(Double.parseDouble((result[arrayindex++]))), FailureHandling.OPTIONAL))
-
-'verify kelurahan'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify kota'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
-
-'verify ownership'
-arrayMatch.add(WebUI.verifyMatch((GlobalVariable.Confinsdata[confinsindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-        false, FailureHandling.OPTIONAL))
+for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
+	'verify result == confinsdata'
+	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
+	
+}
 
 'jika nilai di confins tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
