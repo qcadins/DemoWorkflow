@@ -39,6 +39,7 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'4. Referantor')
 }
 
+'gettext appno dari UI confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
@@ -49,6 +50,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewRe
 
 Refindex = 1
 
+'looping referantor appview'
 for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
     'modify object ref category'
     modifyNewRefCat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
@@ -112,15 +114,18 @@ for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

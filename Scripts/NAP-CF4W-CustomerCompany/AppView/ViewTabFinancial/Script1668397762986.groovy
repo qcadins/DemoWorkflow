@@ -42,9 +42,17 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 
 'get financial data arraylist from db'
 HashMap<String,ArrayList> resultFin = CustomKeywords.'appView.verifyAppView.checkFinancial'(sqlconnectionLOS, appno)
+
+'declare arraylist listsubsidy'
 ArrayList<String> listSubsidy = resultFin.get("Subsidy")
+
+'declare arraylist listFee'
 ArrayList<String> listFee = resultFin.get("Fee")
+
+'declare arraylist listFinancialData'
 ArrayList<String> listFinancialData = resultFin.get("FinData")
+
+'declare arraylist installmentTable'
 ArrayList<String> installmentTable = resultFin.get("InstTable")
 
 Subindex = 1
@@ -292,19 +300,21 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1
 	}
 }
-

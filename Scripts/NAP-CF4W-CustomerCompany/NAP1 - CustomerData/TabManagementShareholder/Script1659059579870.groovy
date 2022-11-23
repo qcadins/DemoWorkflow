@@ -74,10 +74,11 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
             }
             
             if ((i == variableData.size()) || (copyapp == 'No')) {
+				
+				'click button add'
+				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
+				
                 if (datafile.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
-                    'click button add'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
-
                     if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
                         'click radio personal'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Personal'))
@@ -558,9 +559,7 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                     }
                 } else if (datafile.getValue(GlobalVariable.NumofMS, 13) == 'LookUp') {
-                    'click button add'
-                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Add'))
-
+                    
                     if (datafile.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
                         'click radio personal'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Personal'))

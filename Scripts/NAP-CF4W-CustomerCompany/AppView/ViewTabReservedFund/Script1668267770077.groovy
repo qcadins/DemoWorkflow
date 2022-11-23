@@ -45,8 +45,10 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 'get referantor data arraylist from db'
 HashMap<String,ArrayList> resultRSV = CustomKeywords.'appView.verifyAppView.checkReservedFund'(sqlconnectionLOS, appno)
 
+'declare arraylist totalRSV'
 ArrayList<String> totalRSV = resultRSV.get("TotalRSVAmt")
 
+'declare arraylist listRSV'
 ArrayList<String> listRSV = resultRSV.get("RSVList")
 
 'count rsv table'
@@ -91,19 +93,21 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
             ',', ''), (totalRSV[0]).toString(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11. ReservedFund', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11. ReservedFund', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-

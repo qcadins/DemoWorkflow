@@ -38,13 +38,13 @@ if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_e
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'7. Insurance')
 }
 
+'gettext appno dari UI confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get insured by from db'
 String resultInsuredBy = CustomKeywords.'appView.verifyAppView.checkInsuredBy'(sqlconnectionLOS, appno)
 
-println(resultInsuredBy)
-
+'check if insuredby = customer / multifinance / cust-mf / off system'
 if(resultInsuredBy.equalsIgnoreCase('Customer')){
 	'get arraylist Insurance Customer from db'
 	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'appView.verifyAppView.checkInsuranceCustomer'(sqlconnectionLOS, appno)
@@ -203,6 +203,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 		(resultInsuredBy).toUpperCase(), false))
 }
 
+'check if insuredby = cust-mf / multifinance'
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
 	
 	'get arraylist Insurance cvg from db'
@@ -255,8 +256,8 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 		'get arraylist Insurance add cvg from db'
 		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'appView.verifyAppView.checkAdditionalCoverage'(sqlconnectionLOS, appno, cvgindex)
 		
+		'verify add cvg'
 		checkVerifyEqualOrMatch(addtionalcvg.containsAll(resultAddtionalCoverage))
-		
 		
 		'verify Main premi to cust'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoCust).replace(',','').toUpperCase(), (resultInsuranceMainCoverage[index++]).toUpperCase(), false))
@@ -330,19 +331,21 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason veirfy equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-
