@@ -19,14 +19,14 @@ import internal.GlobalVariable as GlobalVariable
 WebUI.openBrowser('')
 
 'input web R3 LOS'
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 1))
+WebUI.navigateToUrl(GlobalVariable.findTestDataLogin.getValue(1, 1))
 
 'input username'
-WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), findTestData('Login/Login').getValue(
+WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), GlobalVariable.findTestDataLogin.getValue(
         2, 1))
 
 'input password'
-WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputPass'), findTestData('Login/Login').getValue(
+WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputPass'), GlobalVariable.findTestDataLogin.getValue(
         3, 1))
 
 'click button login'
