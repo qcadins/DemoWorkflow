@@ -26,7 +26,7 @@ public class checkOfficer {
 	@Keyword
 	public countOfficerLookup(Sql instance, String officeLoc){
 		Integer countData
-		instance.eachRow(("select count(*) from ref_user_role rur WITH(NOLOCK) join ref_job_title rjt WITH(NOLOCK) on rur.REF_JOB_TITLE_ID = rjt.REF_JOB_TITLE_ID join ref_office ro WITH(NOLOCK) on  rur.REF_OFFICE_ID = rur.REF_OFFICE_ID where job_title_code = 'SALES_PERSON' and office_name = '"+officeLoc+"' and rur.is_active=1"), { def row ->
+		instance.eachRow(("select count(*) from ref_user_role rur WITH(NOLOCK) join ref_job_title rjt WITH(NOLOCK) on rur.REF_JOB_TITLE_ID = rjt.REF_JOB_TITLE_ID join ref_office ro WITH(NOLOCK) on ro.REF_OFFICE_ID = rur.REF_OFFICE_ID where job_title_code = 'SALES_PERSON' and office_name = '"+officeLoc+"' and rur.is_active=1"), { def row ->
 			countData = (row[0])
 		})
 		return countData
