@@ -675,26 +675,19 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
                                     datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 20), false)
                             }
-                            
-                            'get customer name'
-                            custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-                                'value', FailureHandling.OPTIONAL)
-
-                            'add name to Global variable'
-                            GlobalVariable.CustomerName = ((GlobalVariable.CustomerName + ';') + custname)
-
-							//Ambil nilai dari confins untuk verif store db lookup
-							if(GlobalVariable.Role== 'Testing' && datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp'){
-								'call function get data guarantor company'
-								getDataGuarCompany()
-								 
-								 'add relationship to array'
-								 GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 'value'))
-								 
-							}
                         }
                     }
-                    
+					  
+					  //Ambil nilai dari confins untuk verif store db lookup
+					  if(GlobalVariable.Role== 'Testing' && datafileguarantorcompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp'){
+						  'call function get data guarantor company'
+						  getDataGuarCompany()
+						   
+						   'add relationship to array'
+						   GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 'value'))
+						   
+					  }
+					  
 					  'get customer name'
 					  custname = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'),
 						  'value', FailureHandling.OPTIONAL)

@@ -49,6 +49,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
     'Looping income info'
     for (int i = 1; i < countIncomeInfo; i++) {
+		'modify object remaining info amt'
         modifyRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'), 
             'xpath', 'equals', ('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label', true)
 

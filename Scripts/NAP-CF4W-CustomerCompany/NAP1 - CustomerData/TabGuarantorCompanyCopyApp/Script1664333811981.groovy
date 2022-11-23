@@ -64,277 +64,275 @@ for (int i = 1; i <= variableData.size(); i++) {
 							'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 							i) + ']/td[5]/span/span[1]/span/a/i', true)
 						
-                        if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
-                            'click button edit'
-                            WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
+						'click button edit'
+						WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
-                            if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+							GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+						
+							'click radio personal'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 							
+							'click radio company'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
+
+							'select customer relationship'
+							WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+								findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 17), false)
+
+							'input guarantor name'
+							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'),
+								findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 18))
+
+							'input tax id'
+							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'),
+								findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 19))
+
+							'select customer type'
+							WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
+								findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 20), false)
+
+							'select customer model'
+							WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'),
+								findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 21), false)
+
+							if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+								GlobalVariable.NumofGuarantorCompany, 23) == 'Yes') {
+								'click button copy'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
+							} else {
+								'input text address'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 24))
+
+								'input RT'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RT'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 25))
+
+								'input RW'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RW'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 26))
+
+								'click button zipcode'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Zipcode_btn btn-raised btn-primary'))
+
+								'input zipcode'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Zipcode'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 27))
+
+								'input Kecamatan'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input Kecamatan'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 28))
+
+								'input Kelurahan'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kelurahan'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 29))
+
+								'input kota'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kota'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 30))
+
+								'click search'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Search'))
+
+								'verify input error'
+								if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'),
+									10, FailureHandling.OPTIONAL)) {
+									'click select'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
+								} else {
+									'click X'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/Button_X'))
+
+									'click button cancel'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
+
+									'write to excel failed'
+									CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+										'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
+
+									'Write To Excel GlobalVariable.StatusReasonLookup'
+									CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+										'3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorPersonal - 1,
+										GlobalVariable.StatusReasonLookup)
+
+									'Flagfailed +1 karena lookup gagal'
+									(GlobalVariable.FlagFailed)++
+
+									continue
+								}
+								
+								'select ownership'
+								WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 31), false)
+							}
+						} else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+							GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
+							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'),
+								5, FailureHandling.OPTIONAL)) {
+								
 								'click radio personal'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 								
-                                'click radio company'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
+								'click radio company'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
 
-                                'select customer relationship'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 
-                                    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 17), false)
+								'click guarantor lookup'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Guarantor Legal Name_btn btn-raised btn-primary'))
 
-                                'input guarantor name'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-                                    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 18))
+								'input customer no'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer No_custNoId'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 15))
 
-                                'input tax id'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 19))
+								'input customer name'
+								WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer Name_custNameId'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 16))
 
-                                'select customer type'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-                                    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 20), false)
+								'click search'
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Search'))
 
-                                'select customer model'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'), 
-                                    findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 21), false)
+								'verify input error'
+								if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'),
+									10, FailureHandling.OPTIONAL)) {
+									'click select'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
+								} else {
+									'click X'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/Button_X'))
 
-                                if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                    GlobalVariable.NumofGuarantorCompany, 23) == 'Yes') {
-                                    'click button copy'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
-                                } else {
-                                    'input text address'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 24))
+									'click button cancel'
+									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
-                                    'input RT'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RT'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 25))
-
-                                    'input RW'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RW'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 26))
-
-                                    'click button zipcode'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Zipcode_btn btn-raised btn-primary'))
-
-                                    'input zipcode'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Zipcode'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 27))
-
-                                    'input Kecamatan'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input Kecamatan'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 28))
-
-                                    'input Kelurahan'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kelurahan'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 29))
-
-                                    'input kota'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kota'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 30))
-
-                                    'click search'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Search'))
-
-                                    'verify input error'
-                                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
-                                        'click select'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
-                                    } else {
-                                        'click X'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                        'click button cancel'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-
-                                        'write to excel failed'
-                                        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                            '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
-
-                                        'Write To Excel GlobalVariable.StatusReasonLookup'
-                                        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                            '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorPersonal - 1, 
-                                            GlobalVariable.StatusReasonLookup)
-
-                                        'Flagfailed +1 karena lookup gagal'
-                                        (GlobalVariable.FlagFailed)++
-
-                                        continue
-                                    }
-                                    
-                                    'select ownership'
-                                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 31), false)
-                                }
-                            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
-                                if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                                    5, FailureHandling.OPTIONAL)) {
-                                    
-									'click radio personal'
-									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
-									
-									'click radio company'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
-
-                                    'click guarantor lookup'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Guarantor Legal Name_btn btn-raised btn-primary'))
-
-                                    'input customer no'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer No_custNoId'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 15))
-
-                                    'input customer name'
-                                    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer Name_custNameId'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 16))
-
-                                    'click search'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Search'))
-
-                                    'verify input error'
-                                    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
-                                        'click select'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
-                                    } else {
-                                        'click X'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                        'click button cancel'
-                                        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-
-                                        'write to excel failed'
-                                        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                            '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
-
-                                        'Write To Excel GlobalVariable.StatusReasonLookup'
-                                        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                            '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
-
-                                        'Flagfailed +1 karena lookup gagal'
-                                        (GlobalVariable.FlagFailed)++
-
-                                        continue
-                                    }
-                                    
-                                    'select customer relationship'
-                                    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 
-                                        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 17), false)
-
-                                    'check if role testing untuk get data customer digunakan untuk data verif'
-                                    if (GlobalVariable.RoleCompany == 'Testing') {
-                                        'call function get data guarantor company'
-                                        getDataGuarCompany()
-
-                                        'call test case company data verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyDataVerif'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    }
-                                    
-									'cek apakah ada value customer type pada excel'
-                                    if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 20).length() > 1) {
-                                        'select customer type'
-                                        WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-                                            findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                                GlobalVariable.NumofGuarantorCompany, 20), false)
-                                    }
-                                }
-                            }
-                            
-                            'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
-                            if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp')) {
-                                'call function get data guarantor company'
-                                getDataGuarCompany()
-
-                                'add relationship to array'
-                                GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 
-                                        'value'))
-                            }
-                            
-                            'Click save'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
-
-                            if ((Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                    GlobalVariable.NumofGuarantorCompany, 4)) == 0) && (GlobalVariable.FlagFailed == 0)) {
-                                'Check alert'
-                                GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(
-                                    GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
-                            }
-                            
-                            'verify flagfailed  lookup == 0 '
-                            if (GlobalVariable.FlagFailed == 0) {
-                                'Check save Process write to excel'
-                                CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(
-                                            'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                            GlobalVariable.NumofGuarantorCompany, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
-                                    GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
-
-                                'customer added +1'
-                                (GlobalVariable.CountNumofCustomer)++
-
-                                if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                        GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
-                                    'Check error validasi'
-                                    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
-                                        GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
-                                }
-                                
-                                
-                            }
-							
-							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'),
-								5, FailureHandling.OPTIONAL)) {
-								'click button cancel'
-								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
-
-								'customer added -1'
-								(GlobalVariable.CountNumofCustomer)--
-							} else {
-								if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+									'write to excel failed'
 									CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+										'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
+
+									'Write To Excel GlobalVariable.StatusReasonLookup'
+									CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+										'3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
+
+									'Flagfailed +1 karena lookup gagal'
+									(GlobalVariable.FlagFailed)++
+
+									continue
+								}
+								
+								'select customer relationship'
+								WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+									findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 17), false)
+
+								'check if role testing untuk get data customer digunakan untuk data verif'
+								if (GlobalVariable.RoleCompany == 'Testing') {
+									'call function get data guarantor company'
+									getDataGuarCompany()
+
+									'call test case company data verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyDataVerif'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
+								
+								'cek apakah ada value customer type pada excel'
+								if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 20).length() > 1) {
+									'select customer type'
+									WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
+										findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+											GlobalVariable.NumofGuarantorCompany, 20), false)
 								}
 							}
-                            
-                            if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                                if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                                'Yes')) {
-                                    'call test case guarantor data company store verif'
-                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataCompanyStoreDBVerif'), 
-                                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                }
-                            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
-                                GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
-                                if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                                'Yes')) {
-                                    'call test case guarantor data company store verif'
-                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataCompanyStoreDBVerif-LookUp'), 
-                                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                }
-                            }
-                            
-                            break
-                        }
+						}
+						
+						'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
+						if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+							GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp')) {
+							'call function get data guarantor company'
+							getDataGuarCompany()
+
+							'add relationship to array'
+							GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'),
+									'value'))
+						}
+						
+						'Click save'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
+
+						if ((Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+								GlobalVariable.NumofGuarantorCompany, 4)) == 0) && (GlobalVariable.FlagFailed == 0)) {
+							'Check alert'
+							GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(
+								GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+						}
+						
+						'verify flagfailed  lookup == 0 '
+						if (GlobalVariable.FlagFailed == 0) {
+							'Check save Process write to excel'
+							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(
+										'NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+										GlobalVariable.NumofGuarantorCompany, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'),
+								GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+
+							'customer added +1'
+							(GlobalVariable.CountNumofCustomer)++
+
+							if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+									GlobalVariable.NumofGuarantorCompany, 4)) == 0) {
+								'Check error validasi'
+								CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'),
+									GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
+							}
+							
+							
+						}
+						
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'),
+							5, FailureHandling.OPTIONAL)) {
+							'click button cancel'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
+
+							'customer added -1'
+							(GlobalVariable.CountNumofCustomer)--
+						} else {
+							if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+									'3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
+							}
+						}
+						
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+							GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
+							'Yes')) {
+								'call test case guarantor data company store verif'
+								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataCompanyStoreDBVerif'),
+									[:], FailureHandling.CONTINUE_ON_FAILURE)
+							}
+						} else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
+							GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
+							'Yes')) {
+								'call test case guarantor data company store verif'
+								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorDataCompanyStoreDBVerif-LookUp'),
+									[:], FailureHandling.CONTINUE_ON_FAILURE)
+							}
+						}
+						
+						break
                     } else {
                         if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(
                             GlobalVariable.NumofGuarantorCompany + 1, 12) != findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -344,40 +342,38 @@ for (int i = 1; i <= variableData.size(); i++) {
 							modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
 								'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 								i) + ']/td[5]/span/span[2]/span/a/i', true)
-						
-                            if (WebUI.verifyElementPresent(modifyNewButtonDelete, 5, FailureHandling.OPTIONAL)) {
-                                'get cust name sebelum delete'
-                                CustNameBefore = WebUI.getText(modifyNewGuarantorName)
+							
+							'get cust name sebelum delete'
+							CustNameBefore = WebUI.getText(modifyNewGuarantorName)
 
-                                variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+							variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-                                'click button Delete'
-                                WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
+							'click button Delete'
+							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
 
-                                'accept alert'
-                                WebUI.acceptAlert()
+							'accept alert'
+							WebUI.acceptAlert()
 
-                                if (i == variableData.size()) {
-                                    if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
-                                        continue
-                                    } else {
-                                        'add cust name failed kedalam array'
-                                        custnamefaileddelete.add(CustNameBefore)
-                                    }
-                                } else {
-                                    'get cust name sebelum delete'
-                                    CustNameAfter = WebUI.getText(modifyNewGuarantorName)
+							if (i == variableData.size()) {
+								if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+									continue
+								} else {
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+								}
+							} else {
+								'get cust name sebelum delete'
+								CustNameAfter = WebUI.getText(modifyNewGuarantorName)
 
-                                    if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
-                                        continue
-                                    } else {
-                                        'add cust name failed kedalam array'
-                                        custnamefaileddelete.add(CustNameBefore)
-                                    }
-                                }
-                                
-                                i--
-                            }
+								if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
+									continue
+								} else {
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
+								}
+							}
+							
+							i--
                         }
                     }
                 }else {
