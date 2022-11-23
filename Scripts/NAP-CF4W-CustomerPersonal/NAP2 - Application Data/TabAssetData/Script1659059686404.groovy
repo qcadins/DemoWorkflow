@@ -474,7 +474,7 @@ String Fullassetcode = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
     sqlConnectionLOS, Fullassetcode, POName)
 
-for (i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
+for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
     String newAssetAtrributeInputText = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
 
     String newAssetAtrributeList = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select'
