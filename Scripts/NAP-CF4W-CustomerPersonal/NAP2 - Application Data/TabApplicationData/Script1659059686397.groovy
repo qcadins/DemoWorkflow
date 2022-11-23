@@ -19,39 +19,14 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
+GlobalVariable.FlagFailed = 0
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
- GlobalVariable.FlagFailed = 0
-
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -78,17 +53,18 @@ if (GlobalVariable.Role == 'Testing') {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true))
 }
 
-'Ambil nilai username dari confins'
-String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(
-    ' ', '').replace('|', ';').split(';')
-
-String usernameLogin = userLogin[0]
-
 String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
 if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Marketing Officer'.toLowerCase())) {
     if (GlobalVariable.Role == 'Testing') {
+		
+		'Ambil nilai username dari confins'
+		String[] userLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_userLogin')).replace(
+			' ', '').replace('|', ';').split(';')
+		
+		String usernameLogin = userLogin[0]
+		
         'Ambil text label officer dari confins'
         String textOfficer = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_Officer'))
 
@@ -114,12 +90,14 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
         checkVerifyEqualOrMatch(WebUI.verifyMatch(textSPV, '(?i)' + spvName, true))
     }
 } else {
-    'Ambil text original office dari confins'
-    String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
     'Pengecekan jika button lookup ada'
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'), 
         10, FailureHandling.OPTIONAL)) {
+		
+		'Ambil text original office dari confins'
+		String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+	
         'Click Lookup Officer'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'))
 
@@ -622,6 +600,8 @@ if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '6.TabApplicationData')
 }
+
+WebUI.delay(5)
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'

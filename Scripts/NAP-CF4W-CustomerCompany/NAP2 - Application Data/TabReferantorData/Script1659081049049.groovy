@@ -354,6 +354,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                             WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 
                             if (WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)) {
+								writeReasonFailedDelete()
                             }
                             
                             continue

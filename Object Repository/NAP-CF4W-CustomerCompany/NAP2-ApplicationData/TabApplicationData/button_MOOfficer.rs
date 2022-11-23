@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;salesInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+         <value>//*[@id=&quot;MOInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;salesInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+      <value>//*[@id=&quot;MOInfomation&quot;]/div[1]/div[2]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

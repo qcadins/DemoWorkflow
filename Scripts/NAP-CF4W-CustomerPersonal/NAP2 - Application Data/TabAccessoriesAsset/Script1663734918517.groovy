@@ -24,14 +24,8 @@ import groovy.sql.Sql as Sql
 
 int modifyObjectIndex=1
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 GlobalVariable.AssetPrice = 0.00
 
@@ -39,12 +33,12 @@ GlobalVariable.TotalAccessoriesPrice = 0.00
 
 WebDriver driver = DriverFactory.getWebDriver()
 
-'arraylist referantor name yang gagal'
-ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
-
 'Jika copy app edit'
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
+
+	'arraylist referantor name yang gagal'
+	ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
 
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	

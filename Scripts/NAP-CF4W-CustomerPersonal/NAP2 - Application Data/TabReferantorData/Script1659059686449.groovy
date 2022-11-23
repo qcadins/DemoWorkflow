@@ -21,17 +21,8 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
-
-'arraylist referantor name yang gagal'
-ArrayList<String> referantorfaileddelete = new ArrayList<String>()
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -47,39 +38,28 @@ if (GlobalVariable.Role == 'Testing') {
 
 datafilereferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil text original office dari confins'
 String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
+//pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
+if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
+	'Pengecekan checkbox sebelumnya tidak tercentang'
+	if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),
+			'aria-checked') == "false") {
+		'click referantor checkbox'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
+	}
+}
+
 //Jika copy app edit
 if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
-    //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
-    if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
-        'Pengecekan checkbox sebelumnya tidak tercentang'
-        if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),
-    			'aria-checked') == "false") {
-    		'click referantor checkbox'
-    		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
-    	}
-    }
+	
+	'arraylist referantor name yang gagal'
+	ArrayList<String> referantorfaileddelete = new ArrayList<String>()
     
     ArrayList<String> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
@@ -186,13 +166,13 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								  'get cust name sebelum delete'
 								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 										  
-										  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+								  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
 											  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										  }else{
-											  'add cust name failed kedalam array'
-											  referantorfaileddelete.add(referantornamebefore)
-											  continue
-										  }
+								  }else{
+										'add cust name failed kedalam array'
+										referantorfaileddelete.add(referantornamebefore)
+										continue
+								  }
 							  }
 							  i--
 						  }
@@ -244,7 +224,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 		}
 	}
 	
-		if(referantorfaileddelete.size() > 0){
+	if(referantorfaileddelete.size() > 0){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 				'5.TabReferantorData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 			
@@ -252,7 +232,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 			
 			GlobalVariable.FlagWarning++
-		}
+	}
 		
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	int countData = variableData.size()
@@ -376,7 +356,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 									
 									if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
-										
+										writeReasonFailedDelete()
 									}
 									
 									continue
@@ -644,13 +624,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						}
 						  
 					}
-					Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 4))
-							
-					if(iscompleteMandatory==0){
-							errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-							'cek validasi'
-							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofReferantor, '5.TabReferantorData')
-					}
+					
 							
 					'write to excel SUCCESS'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
@@ -666,12 +640,6 @@ if(datafilereferantor.getValue(
 		GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
 	
 	if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
-        'Pengecekan checkbox sebelumnya tidak tercentang'
-        if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'), 
-            'aria-checked')=="false") {
-            'click referantor checkbox'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'))
-        }
 		
 		int modifyObjectIndex = 1
 		
@@ -856,6 +824,8 @@ if(datafilereferantor.getValue(
 				
 				//Testing
 				if(GlobalVariable.Role=="Testing"){
+					
+					ArrayList<String> referantorDetail = new ArrayList<String>()
 					String newButtonViewDetail = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[8]/a/i'
 					
 					'modify button view detail'
@@ -868,44 +838,28 @@ if(datafilereferantor.getValue(
 					'Pengecekan referantor category (customer, agency, atau mf employee)'
 					if (refCategory.equalsIgnoreCase('CUSTOMER')) {
 						'pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkCustomerReferantor'(
+						 referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkCustomerReferantor'(
 							sqlConnection, referantorCode)
 		
-						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
-		
-						'Jika nilai di confins ada yang tidak sesuai dengan db'
-						if (arrayMatch.contains(false)) {
-							writeToExcelTidakSesuaiDB()
-							modifyObjectIndex++
-							continue
-						}
 					} else if (refCategory.equalsIgnoreCase('AGENCY')) {
 						'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkAgencyReferantor'(
+						referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkAgencyReferantor'(
 							sqlConnection, referantorCode)
 		
-						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
-		
-						'Jika nilai di confins ada yang tidak sesuai dengan db'
-						if (arrayMatch.contains(false)) {
-							writeToExcelTidakSesuaiDB()
-							modifyObjectIndex++
-							continue
-						}
-					} else if(refCategory.equalsIgnoreCase('MULTIFINANCE EMPLOYEE')){
+					} else if(refCategory.equalsIgnoreCase('MF_EMP')){
 						'Pengecekan ke db dan simpan data-data detail referantor yang dibutuhkan dari db'
-						ArrayList<WebElement> referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkMFEmployeeReferantor'(
+						referantorDetail = CustomKeywords.'referantorData.checkReferantorDetail.checkMFEmployeeReferantor'(
 							sqlConnection, referantorCode)
-		
-						ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
 						
-						
-						'Jika nilai di confins ada yang tidak sesuai dengan db'
-						if (arrayMatch.contains(false)) {
-							writeToExcelTidakSesuaiDB()
-							modifyObjectIndex++
-							continue
-						}
+					}
+					
+					ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
+					
+					'Jika nilai di confins ada yang tidak sesuai dengan db'
+					if (arrayMatch.contains(false)) {
+						writeToExcelTidakSesuaiDB()
+						modifyObjectIndex++
+						continue
 					}
 					
 					'click x'
