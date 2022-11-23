@@ -270,37 +270,37 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 	
 	checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(),true))
 	
-	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	if(resultReset.contains(false) && GlobalVariable.StatusFailed!= GlobalVariable.findTestDataCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 1)){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 	
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerCompany.getValue(
 					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"NAP4"+";\n")
 	
 			GlobalVariable.FlagWarning=1
 	}
 	
-	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=GlobalVariable.findTestDataCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 1)){
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+						1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"NAP4"+";\n"))
 		
 			GlobalVariable.FlagWarning=1
 	}
 		
-	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=GlobalVariable.findTestDataCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 1)){
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+						1, GlobalVariable.NumofColm-1, GlobalVariable.findTestDataCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"NAP4"+";\n"))
 		
 
@@ -310,7 +310,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
 'input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
+    GlobalVariable.findTestDataCDCNAPCompany.getValue(GlobalVariable.NumofColm, 
         12))
 
 'click search'
@@ -363,15 +363,15 @@ for (int i = 1; i <= count; i++) {
     String CustomerType = WebUI.getText(modifynewCustomerType)
 
     'tampung customer array excel'
-    def CustomerArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+    def CustomerArray = GlobalVariable.findTestDataCDCNAPCompany.getValue(
         GlobalVariable.NumofColm, 13).split(';')
 
     'tampung managementshareholder array excel'
-    def ManagementShareholderArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+    def ManagementShareholderArray = GlobalVariable.findTestDataCDCNAPCompany.getValue(
         GlobalVariable.NumofColm, 15).split(';')
 
     'tampung guarantor array excel'
-    def GuarantorArray = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+    def GuarantorArray = GlobalVariable.findTestDataCDCNAPCompany.getValue(
         GlobalVariable.NumofColm, 17).split(';')
 
     'verify customerarray > 0'
@@ -396,7 +396,7 @@ for (int i = 1; i <= count; i++) {
                     }
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+                if (GlobalVariable.findTestDataCDCNAPCompany.getValue(
                     GlobalVariable.NumofColm, 14) == 'YES') {
                     'verify if customerarray == customename'
                     if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
@@ -459,7 +459,7 @@ for (int i = 1; i <= count; i++) {
                     checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+                if (GlobalVariable.findTestDataCDCNAPCompany.getValue(
                     GlobalVariable.NumofColm, 16) == 'YES') {
                     'verify customername == managementshareholder array'
                     if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'PERSONAL')) {
@@ -530,7 +530,7 @@ for (int i = 1; i <= count; i++) {
                     }
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+                if (GlobalVariable.findTestDataCDCNAPCompany.getValue(
                     GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
@@ -576,7 +576,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-Cust
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
 'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.findTestDataCDCNAPCompany.getValue(
             GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/input_Application No_AppNoId'), 
     GlobalVariable.NumofColm, '14.CustomerDataCompletion')
 

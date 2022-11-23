@@ -23,7 +23,6 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-C
     findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
         13))
 
-
 'Looping delay untuk handling copy app selama +- 2 menit'
 for(int i = 1;i<=8;i++){
 	'click button search'
@@ -36,9 +35,7 @@ for(int i = 1;i<=8;i++){
 	else{
 		'delay 14 detik'
 		WebUI.delay(14)
-	
 	}
-	
 }
 
 'verify data'

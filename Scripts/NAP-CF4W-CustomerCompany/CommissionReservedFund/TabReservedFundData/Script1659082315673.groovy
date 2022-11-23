@@ -33,13 +33,13 @@ GlobalVariable.FlagFailed = 0
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Arraylist untuk menampung income info'
-ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
+ArrayList<String> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
 
 'Arraylist untuk menampung remaining info commission'
-ArrayList<WebElement> remainingInfoCom = new ArrayList<WebElement>()
+ArrayList<String> remainingInfoCom = new ArrayList<String>()
 
 'Arraylist untuk menampung remaining info reserved fund sebelum calculate'
-ArrayList<WebElement> remainingInfoRsv = new ArrayList<WebElement>()
+ArrayList<String> remainingInfoRsv = new ArrayList<String>()
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     remainingInfoCom = GlobalVariable.ComRemainingInfoAmt
@@ -49,7 +49,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
     'Looping income info'
     for (int i = 1; i < countIncomeInfo; i++) {
-		'modify object remaining info amt'
+        'modify object remaining info amt'
         modifyRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'), 
             'xpath', 'equals', ('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label', true)
 
@@ -84,13 +84,13 @@ HashMap<String, ArrayList> resultVerifRule = CustomKeywords.'commissionReserveFu
     lobCode)
 
 'Arraylist untuk menampung nilai array alloc from'
-ArrayList<WebElement> allocFrom = resultVerifRule.get('From')
+ArrayList<String> allocFrom = resultVerifRule.get('From')
 
 'Arraylist untuk menampung nilai array alloc amount default'
-ArrayList<WebElement> defAllocAmt = resultVerifRule.get('Amt')
+ArrayList<String> defAllocAmt = resultVerifRule.get('Amt')
 
 'Arraylist untuk menampung nilai array alloc behaviour'
-ArrayList<WebElement> allocBhv = resultVerifRule.get('Bhv')
+ArrayList<String> allocBhv = resultVerifRule.get('Bhv')
 
 BigDecimal totalAmt = 0
 
@@ -99,7 +99,7 @@ def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(filePath, '
 2
 
 'Arraylist untuk menampung remaining info'
-ArrayList<WebElement> varRemainingBfrCalculate = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
+ArrayList<String> varRemainingBfrCalculate = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
 
 'Inisialisasi Variabel untuk menghitung jumlah baris pada remaining Information, dibagi 2 karena countremaininginfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
 int countRemainingInfoBfrCalculate = varRemainingBfrCalculate.size() / 2
@@ -111,14 +111,14 @@ modifyRemainingAllocatedAmountBfrCalculate = WebUI.modifyObjectProperty(findTest
 for (int i = 0; i < allocFrom.size(); i++) {
     xpathInputAlloc = (('//input[@id=\'ReservedFundAmt' + i) + '\']')
 
-	'modify input alloc'
+    'modify input alloc'
     inputAlloc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'), 
         'xpath', 'equals', xpathInputAlloc, true)
 
     xpathAllocFromSection = (('//*[@id=\'reserved-fund-tab\']/reserved-fund/div/div/div/form/div/div[1]/div[' + (i + 1)) + 
     ']/lib-ucsubsection/div/form/div/h4')
 
-	'modify alloc from section object'
+    'modify alloc from section object'
     allocFromSectionObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/h4_RSVAllocFrom'), 
         'xpath', 'equals', xpathAllocFromSection, true)
 
@@ -149,11 +149,11 @@ for (int i = 0; i < allocFrom.size(); i++) {
 
         newxpathRemainingInfoAmt = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
 
-		'modify objecy remaining info'
+        'modify objecy remaining info'
         modifyObjectRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfo'), 
             'xpath', 'equals', newxpathRemainingInfo, true)
 
-		'modify object remaining info amt'
+        'modify object remaining info amt'
         modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'), 
             'xpath', 'equals', newxpathRemainingInfoAmt, true)
 
@@ -167,7 +167,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
             'Ambil nilai amount remaining info'
             textRemainingInfoAmt = WebUI.getText(modifyObjectRemainingInfoAmt).replace(',', '')
 
-			'remaining info amt parse double'
+            'remaining info amt parse double'
             remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
 
             break
@@ -214,8 +214,8 @@ for (int i = 0; i < allocFrom.size(); i++) {
             }
             
             'Input Alloc Reserved Fund Amount'
-            WebUI.setText(inputAlloc, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-                    GlobalVariable.NumofColm, rsvAmtRow + i), FailureHandling.OPTIONAL)
+            WebUI.setText(inputAlloc, GlobalVariable.findTestDataReservedFundDataNAPCompany.getValue(GlobalVariable.NumofColm, 
+                    rsvAmtRow + i), FailureHandling.OPTIONAL)
         } else if ((allocBhv[i]).equalsIgnoreCase('lock')) {
             if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) && (GlobalVariable.FirstTimeEntry == 
             'Yes')) {
@@ -262,12 +262,12 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 if (alert.toLowerCase().contains('Must Be Less Than'.toLowerCase()) || WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/error_maxnumber'), 
     2, FailureHandling.OPTIONAL)) {
     'Write to Excel FAILED'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 0, 
+        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
     'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
-        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 1, 
+        GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
 
     'Klik cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'))
@@ -285,7 +285,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
         GlobalVariable.NumofColm)
 
     'Arraylist untuk menampung remaining info'
-    ArrayList<WebElement> varRemainingInfo = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
+    ArrayList<String> varRemainingInfo = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
 
     'Inisialisasi Variabel untuk menghitung jumlah baris pada remaining Information, dibagi 2 karena countremaininginfo menghitung label beserta amountnya, sedangkan yang dibutuhkan untuk dihitung/dicount adalah labelnya'
     int countRemainingInfo = varRemainingInfo.size() / 2
@@ -319,8 +319,8 @@ WebUI.delay(5)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(
-        GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataReservedFundDataNAPCompany.getValue(GlobalVariable.NumofColm, 
+        4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'
@@ -362,11 +362,13 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
+        'write to excel failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 
+            1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        'write to excel reason failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

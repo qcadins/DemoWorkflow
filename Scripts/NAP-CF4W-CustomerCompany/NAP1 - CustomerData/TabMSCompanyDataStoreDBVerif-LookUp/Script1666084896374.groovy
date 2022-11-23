@@ -19,15 +19,15 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare arraymatch arraylist'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompanyLookUp'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofMS, 12), findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(
-        GlobalVariable.NumofMS, 50))
+'call keyword Ms data company store db lookup'
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompanyLookUp'(sqlconnectionLOS, 
+    GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 12), GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 50))
 
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {
-
     if ((result[i]).equalsIgnoreCase('TRUE')) {
         (result[i]) = 'Yes'
     } else if ((result[i]).equalsIgnoreCase('FALSE')) {
@@ -35,10 +35,11 @@ for (int i = 0; i <= (result.size() - 1); i++) {
     }
 }
 
+'looping verif confinsdata = db'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
-	'verify result == confinsdata'
-	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
-	
+    'verify result == confinsdata'
+    arrayMatch.add(WebUI.verifyMatch((result[i]).toUpperCase(), (GlobalVariable.Confinsdata[i]).toUpperCase().replace('0 ', 
+                '0'), true, FailureHandling.OPTIONAL))
 }
 
 'jika nilai di confins tidak sesuai dengan db'

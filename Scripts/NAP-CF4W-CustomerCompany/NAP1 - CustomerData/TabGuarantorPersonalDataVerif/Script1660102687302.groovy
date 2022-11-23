@@ -19,6 +19,7 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB FOU'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'call keyword get guarantor personal data verif lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
             'NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Guarantor Legal Name'), 
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_IDType'), 
@@ -35,6 +36,7 @@ for (int i = 0; i <= (result.size() - 1); i++) {
 	}
 }
 
+'looping db = confins'
 for (int i = 0; i < result.size(); i++) {
     'verify result = confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
@@ -42,9 +44,11 @@ for (int i = 0; i < result.size(); i++) {
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
 				0, GlobalVariable.NumofGuarantorPersonal-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
 				1, GlobalVariable.NumofGuarantorPersonal-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

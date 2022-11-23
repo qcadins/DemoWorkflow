@@ -44,8 +44,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
-    10)
+copyapp = GlobalVariable.findTestDataCDCNAPCompany.getValue(GlobalVariable.NumofColm, 10)
 
 ArrayList<WebElement> variable
 
