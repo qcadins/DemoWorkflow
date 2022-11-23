@@ -20,7 +20,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-Cus
 
 'input appNo'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
 'Looping delay untuk handling copy app selama +- 2 menit'
@@ -41,7 +41,7 @@ for(int i = 1;i<=8;i++){
 }
 'verify data'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/Applicant/td_0002APP20211200947'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13), FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.delay(5)

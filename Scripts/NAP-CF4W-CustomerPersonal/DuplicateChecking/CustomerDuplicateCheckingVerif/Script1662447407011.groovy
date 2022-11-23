@@ -24,39 +24,30 @@ Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'variable data file tab customer data'
-dataCustomer = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
-
-'variable data file tab family data'
-dataFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
-
-'variable data file tab guarantor data personal'
-dataGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
-
-'variable data file tab guarantor data company'
-dataGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
-
-'variable data file Dupcheckrule'
-ruledupcheck = findTestData('DownloadRule/DuplicateCheckingRule')
-
 'declare variable untuk dupcheckresult'
-ArrayList<String> DupcheckResult = new ArrayList<>()
+ArrayList<String> DupcheckResult = new ArrayList<String>()
 
 'array untuk menampung hasil status dupcheck'
-def CustomerPersonalStatus = '', FamilyPersonalStatus = '', GuarantorPersonalStatus = '', GuarantorCompanyStatus = ''
+def CustomerPersonalStatus = ''
+
+def FamilyPersonalStatus = ''
+
+def GuarantorPersonalStatus = ''
+
+def GuarantorCompanyStatus = ''
 
 for (i = 1; i <= 1; i++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 14) == 'Input Data') {
+    if (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
         'check rule 1'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(
-                sqlconnectionLOS, dataCustomer.getValue(GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    21), dataCustomer.getValue(GlobalVariable.NumofColm, 30), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 30))) > 0) || (Integer.parseInt(
+            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 30), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 13)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 13)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -65,14 +56,15 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 2'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(
-                sqlconnectionLOS, dataCustomer.getValue(GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    21), dataCustomer.getValue(GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(
+            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 14)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 14)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -81,14 +73,15 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 3'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 27))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(
-                sqlconnectionLOS, dataCustomer.getValue(GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    21), dataCustomer.getValue(GlobalVariable.NumofColm, 27), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 27))) > 0) || (Integer.parseInt(
+            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 27), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 15)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 15)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -97,12 +90,12 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 4'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4Cust'(sqlconnectionFOU, dataCustomer.getValue(
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4AppCust'(
-                sqlconnectionLOS, dataCustomer.getValue(GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    13))) > 0)) {
+                sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 16)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 16)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -111,14 +104,15 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 5'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(
-                sqlconnectionLOS, dataCustomer.getValue(GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    21), dataCustomer.getValue(GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 
-                    13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(
+            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 17)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 17)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -127,13 +121,14 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 6'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30))) > 0) || (Integer.parseInt(
-            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6AppCust'(sqlconnectionLOS, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6AppCust'(
+                sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 30), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 18)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 18)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -142,13 +137,14 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check rule 7'
-        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7Cust'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27))) > 0) || (Integer.parseInt(
-            CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7AppCust'(sqlconnectionLOS, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 13))) > 0)) {
+        if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7Cust'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    27))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7AppCust'(
+                sqlconnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 27), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = ruledupcheck.getValue(2, 19)
+            CustomerPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 19)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -162,20 +158,19 @@ for (i = 1; i <= 1; i++) {
 }
 
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-        GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-            GlobalVariable.NumofFamily, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
             'check rule 1'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 33))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        11), dataFamily.getValue(GlobalVariable.NumofFamily, 33), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        33))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 11), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        33), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 13)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -185,13 +180,14 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 2'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        19), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 14)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -201,13 +197,14 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 3'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 30), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        30), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 15)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -217,11 +214,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 4'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) || (Integer.parseInt(
+                CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4AppCust'(sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 16)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -231,13 +229,14 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 5'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        11), dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 11), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        19), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 17)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -247,12 +246,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 6'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        33))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        33), dataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 33))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 33), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 18)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -262,12 +262,13 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             
             'check rule 7'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7Cust'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        30), dataFamily.getValue(GlobalVariable.NumofFamily, 12))) > 0)) {
+                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 30), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = ruledupcheck.getValue(2, 19)
+                FamilyPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -283,21 +284,21 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-        GlobalVariable.NumofGuarantorPersonal, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-            GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
             'check rule 1'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(
-                    sqlconnectionLOS, dataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        30), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal1AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        28), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        21), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        30), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 13)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -307,14 +308,16 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 2'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(
-                    sqlconnectionLOS, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal2AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        28), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        21), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 14)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -324,14 +327,16 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 3'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        27))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(
-                    sqlconnectionLOS, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        27), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 27))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal3AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        28), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        21), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        27), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 15)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -341,12 +346,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 4'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19))) > 0) || (Integer.parseInt(
-                CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4AppCust'(sqlconnectionLOS, dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19))) > 
+            0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal4AppCust'(sqlconnectionLOS, 
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 16)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -356,14 +361,16 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 5'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(
-                    sqlconnectionLOS, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal5AppCust'(
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        28), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        21), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 17)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -373,13 +380,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 6'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), GlobalVariable.findTestDataGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 30))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal6AppCust'(
-                    sqlconnectionLOS, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 30), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        30), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 18)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -389,13 +397,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             
             'check rule 7'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), GlobalVariable.findTestDataGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 27))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRulePersonal7AppCust'(
-                    sqlconnectionLOS, dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 27), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        19), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        27), GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = ruledupcheck.getValue(2, 19)
+                GuarantorPersonalStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -411,20 +420,19 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.NumofGuarantorCompany, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
             'check rule company 1'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany1Cust'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(
+                    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), GlobalVariable.findTestDataGuarantorCompany.getValue(
                         GlobalVariable.NumofGuarantorCompany, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany1AppCust'(
-                    sqlconnectionLOS, dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 19), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                    sqlconnectionLOS, GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        18), GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        19), GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                         12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = ruledupcheck.getValue(2, 20)
+                GuarantorCompanyStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 20)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
@@ -434,12 +442,12 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             
             'check rule company 2'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2Cust'(sqlconnectionFOU, 
-                    dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18))) > 0) || (Integer.parseInt(
-                CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(sqlconnectionLOS, dataGuarantorCompany.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                        12))) > 0)) {
+                    GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18))) > 0) || 
+            (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(sqlconnectionLOS, 
+                    GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18), GlobalVariable.findTestDataGuarantorCompany.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = ruledupcheck.getValue(2, 21)
+                GuarantorCompanyStatus = GlobalVariable.findTestDataDupcheckRule.getValue(2, 21)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
@@ -456,12 +464,11 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 def NegativeResult = []
 
 for (i = 1; i <= 1; i++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 14) == 'Input Data') {
+    if (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
         'check negative rule 1'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 30))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 30))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -469,9 +476,9 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check Negative rule 2'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -479,9 +486,9 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check negative rule 3'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 27))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 27))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -489,7 +496,7 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check negative rule 4'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, dataCustomer.getValue(
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 19))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
@@ -498,9 +505,9 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check negative rule 5'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 28), dataCustomer.getValue(GlobalVariable.NumofColm, 21), dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 28), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    21), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 19))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -508,8 +515,9 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check negative rule 6'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 30))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    30))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -517,8 +525,9 @@ for (i = 1; i <= 1; i++) {
         }
         
         'check Negative rule 7'
-        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, dataCustomer.getValue(
-                    GlobalVariable.NumofColm, 19), dataCustomer.getValue(GlobalVariable.NumofColm, 27))) > 0) {
+        if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    GlobalVariable.NumofColm, 19), GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+                    27))) > 0) {
             'add "NEGATIVE" kedalam array negative result'
             NegativeResult.add('NEGATIVE')
 
@@ -534,15 +543,13 @@ for (i = 1; i <= 1; i++) {
 }
 
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-        GlobalVariable.NumofFamily, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(
-            GlobalVariable.NumofFamily, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
             'check negative rule 1'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 33))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 33))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -550,9 +557,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 2'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -560,9 +567,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 3'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 30))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 30))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -570,8 +577,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 4'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -579,9 +586,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 5'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 31), dataFamily.getValue(GlobalVariable.NumofFamily, 
-                        21), dataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 31), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        21), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -589,8 +596,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 6'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
                         33))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -599,8 +606,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             }
             
             'check negative rule 7'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, 
-                    dataFamily.getValue(GlobalVariable.NumofFamily, 19), dataFamily.getValue(GlobalVariable.NumofFamily, 
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, GlobalVariable.findTestDataFamily.getValue(
+                        GlobalVariable.NumofFamily, 19), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
                         30))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -619,16 +626,14 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-        GlobalVariable.NumofGuarantorPersonal, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(
-            GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
             'check negative rule 1'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        30))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal1'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 30))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -636,10 +641,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 2'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal2'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -647,10 +652,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 3'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        27))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal3'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 27))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -658,8 +663,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 4'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal4'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -667,10 +672,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 5'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28), dataGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorPersonal, 21), dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
-                        19))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal5'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 28), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 21), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -678,8 +683,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 6'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal6'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19), GlobalVariable.findTestDataGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 30))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -688,8 +693,8 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             }
             
             'check negative rule 7'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19), dataGuarantorPersonal.getValue(
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRulePersonal7'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorPersonal, 19), GlobalVariable.findTestDataGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 27))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -708,14 +713,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.NumofGuarantorCompany, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+        if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
             'check negative rule company 1'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany1'(sqlconnectionFOU, 
-                    dataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), dataGuarantorCompany.getValue(
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany1'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 18), GlobalVariable.findTestDataGuarantorCompany.getValue(
                         GlobalVariable.NumofGuarantorCompany, 19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -724,8 +727,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             }
             
             'check negative rule company 2'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany2'(sqlconnectionFOU, 
-                    dataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18))) > 0) {
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany2'(sqlconnectionFOU, GlobalVariable.findTestDataGuarantorCompany.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 18))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
 
@@ -753,7 +756,7 @@ if ((DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')) || Ne
     GlobalVariable.DupcheckVerif = 'Yes'
 }
 
-def checkStatusDupcheck(String Status, ArrayList<WebElement> DupcheckResult) {
+def checkStatusDupcheck(String Status, ArrayList<String> DupcheckResult) {
     'verify apakah hasil pengecekan mengandung status REVIEW'
     if (Status.equalsIgnoreCase('REVIEW')) {
         'declare value result = review'

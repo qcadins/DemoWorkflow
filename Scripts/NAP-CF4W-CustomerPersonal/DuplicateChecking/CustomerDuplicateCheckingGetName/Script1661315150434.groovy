@@ -32,9 +32,7 @@ Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMU
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
-
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)

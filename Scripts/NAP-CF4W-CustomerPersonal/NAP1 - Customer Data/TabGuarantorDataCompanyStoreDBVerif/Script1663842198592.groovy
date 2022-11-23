@@ -19,113 +19,109 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 12), findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnectionLOS, 
+    GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 12), GlobalVariable.findTestDataGuarantorCompany.getValue(
         GlobalVariable.CopyAppColm, 18))
-
-
 
 int arrayindex = 0
 
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
+ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 17).toUpperCase(), 
+        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify guarantor name'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 
+        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 19).toUpperCase(), 
+        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 20).toUpperCase(), 
+        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-        GlobalVariable.CopyAppColm, 21).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 21).toUpperCase(), 
+        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify copy addres atau tidak'
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-    GlobalVariable.CopyAppColm, 23).equalsIgnoreCase('Yes')) {
+if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 23).equalsIgnoreCase('Yes')) {
     'verify address copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rt copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify RW copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 40).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 41).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 42).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 43).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 44).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-            GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 45).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 24).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify Rt'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 25).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rw'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 26).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 26).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 27).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 28).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 29).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 29).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 30).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 30).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(
-            GlobalVariable.CopyAppColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 31).toUpperCase(), 
+            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-		0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-		1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.ReasonFailedStoredDB)
+    'write to excel FAILED'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+        0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
 
+    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
+        1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 

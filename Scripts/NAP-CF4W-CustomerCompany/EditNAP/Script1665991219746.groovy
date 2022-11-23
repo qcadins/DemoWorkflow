@@ -25,9 +25,6 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
-
 'get appno dari data file'
 String appNo = GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 8)
 

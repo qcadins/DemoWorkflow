@@ -19,12 +19,10 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB FOU'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(findTestObject(
-            'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataPersonal'(sqlconnectionFOU, WebUI.getAttribute(
+        findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
         'value'))
-
-
 
 'declare array for confins data'
 def confinsdata = []
@@ -34,14 +32,15 @@ for (int i = 0; i < result.size(); i++) {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
 }
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-				0, GlobalVariable.NumofFamily-1, GlobalVariable.StatusFailed)
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 
+            1, GlobalVariable.StatusFailed)
 
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData',
-				1, GlobalVariable.NumofFamily-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		GlobalVariable.FlagFailed=1
-	}
+        GlobalVariable.FlagFailed = 1
+    }
 }
+
