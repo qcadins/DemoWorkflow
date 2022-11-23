@@ -21,14 +21,8 @@ import org.openqa.selenium.By as By
 import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
  GlobalVariable.FlagFailed = 0
 
@@ -54,28 +48,9 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 int count = variable.size()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil text customer model dari confins'
 String custModel = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/label_custModel'))

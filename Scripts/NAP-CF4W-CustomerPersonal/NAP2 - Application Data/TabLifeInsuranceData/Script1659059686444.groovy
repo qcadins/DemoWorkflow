@@ -22,38 +22,14 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
 import groovy.sql.Sql as Sql
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
+GlobalVariable.FlagFailed=0
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
- GlobalVariable.FlagFailed=0
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
-
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 

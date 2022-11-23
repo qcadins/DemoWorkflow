@@ -15,11 +15,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-String filePath = userDir + GlobalVariable.PathPersonal
-
-GlobalVariable.DataFilePath = filePath
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'

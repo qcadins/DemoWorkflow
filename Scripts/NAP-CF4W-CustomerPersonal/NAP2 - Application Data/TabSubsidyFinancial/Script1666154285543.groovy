@@ -65,28 +65,9 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Su
 
 int varsize = variable.size()
 
-'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String databaseFOU = findTestData('Login/Login').getValue(5, 7)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-String urlFOU = (((servername + ';instanceName=') + instancename) + ';databaseName=') + databaseFOU
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connect'(urlFOU, username, password, driverclassname)
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil appno dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
