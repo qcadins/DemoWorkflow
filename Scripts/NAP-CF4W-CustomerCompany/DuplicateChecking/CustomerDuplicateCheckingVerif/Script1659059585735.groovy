@@ -714,4 +714,3 @@ def checkStatusDupcheck(String Status, ArrayList<WebElement> DupcheckResult) {
         DupcheckResult.add('LOCK')
     }
 }
-

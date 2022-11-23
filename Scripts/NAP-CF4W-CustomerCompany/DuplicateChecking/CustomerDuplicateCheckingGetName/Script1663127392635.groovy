@@ -125,18 +125,21 @@ for (index = 1; index <= GlobalVariable.CountDupcheckRow; index++) {
 
 'check if storeCDCCustomerName is null'
 if (StoreCDCCustomerName != null) {
+	'write to excel storeCDCCustomerName'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         12, GlobalVariable.NumofColm - 1, StoreCDCCustomerName)
 }
 
-'check if StoreCDCManagementShareholderPersonalName is null'
+'check if StoreCDCManagementShareholderName is null'
 if (StoreCDCManagementShareholderPersonalName != null) {
+	'write to excel storeCDCManagementShareholderName'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         14, GlobalVariable.NumofColm - 1, (StoreCDCManagementShareholderPersonalName + ';') + StoreCDCManagementShareholderCompanyName)
 }
 
 'check if StoreCDCGuarantorPersonalName and StoreCDCGuarantorCompanyName is null'
 if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != null)) {
+	'write to excel StoreCDCGuarantorPersonalName and StoreCDCGuarantorCompanyName'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
 }
@@ -159,24 +162,28 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerCompany, '1
 
 'looping untuk write MS Personal Name ke Excel CDC MS Personal'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
+	'write to excel CDC Shareholder personal Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write MS Company Name ke Excel CDC MS Company'
 for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
+	'write to excel CDC Shareholder Company Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
         12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
 }
 
 'looping untuk write Guarantor Personal Name ke Excel CDC Guarantor Personal'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
+	'write to excel CDC Guarantor Personal Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
 }
 
 'looping untuk write Guarantor Company Name ke Excel CDC Guarantor Company'
 for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
+	'write to excel CDC Guarantor Company Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
         StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
 }

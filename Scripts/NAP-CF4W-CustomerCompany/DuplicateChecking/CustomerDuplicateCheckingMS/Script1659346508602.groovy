@@ -44,7 +44,7 @@ def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 'declare modify object variable'
 def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
-'declare subjectname variable'
+'declare variable untuk table dupcheck'
 String subjectName, newApplicantNoValue, newMSNameAppInProcess, newMSName, newCustomerNoValue
 
 'check if MS Array > 0'
@@ -126,6 +126,7 @@ if (ManagementShareholderArray.size() > 0) {
                     }
                 }
                 
+				'count table application in process'
                 ArrayList<WebElement> variabletd = driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
 
                 int counttd = variabletd.size()
@@ -327,6 +328,7 @@ if (ManagementShareholderArray.size() > 0) {
                                     'click select application in process'
                                     WebUI.click(modifyselectManagementShareholderCompany, FailureHandling.OPTIONAL)
 
+									'check if role = testing'
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match ApplicantNo'
                                         checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newMSName).toString(), newApplicantNoValue.toString(), 
@@ -348,6 +350,7 @@ if (ManagementShareholderArray.size() > 0) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
+							'check if role = testing'
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
@@ -639,9 +642,11 @@ def loopingSubjectCustNo(String newMSName) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

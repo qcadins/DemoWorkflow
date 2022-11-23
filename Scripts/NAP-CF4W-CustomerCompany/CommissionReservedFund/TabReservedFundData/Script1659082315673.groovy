@@ -49,6 +49,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
     'Looping income info'
     for (int i = 1; i < countIncomeInfo; i++) {
+		'modify object remaining info amt'
         modifyRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'), 
             'xpath', 'equals', ('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label', true)
 
@@ -110,12 +111,14 @@ modifyRemainingAllocatedAmountBfrCalculate = WebUI.modifyObjectProperty(findTest
 for (int i = 0; i < allocFrom.size(); i++) {
     xpathInputAlloc = (('//input[@id=\'ReservedFundAmt' + i) + '\']')
 
+	'modify input alloc'
     inputAlloc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'), 
         'xpath', 'equals', xpathInputAlloc, true)
 
     xpathAllocFromSection = (('//*[@id=\'reserved-fund-tab\']/reserved-fund/div/div/div/form/div/div[1]/div[' + (i + 1)) + 
     ']/lib-ucsubsection/div/form/div/h4')
 
+	'modify alloc from section object'
     allocFromSectionObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/h4_RSVAllocFrom'), 
         'xpath', 'equals', xpathAllocFromSection, true)
 
@@ -146,9 +149,11 @@ for (int i = 0; i < allocFrom.size(); i++) {
 
         newxpathRemainingInfoAmt = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
 
+		'modify objecy remaining info'
         modifyObjectRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfo'), 
             'xpath', 'equals', newxpathRemainingInfo, true)
 
+		'modify object remaining info amt'
         modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'), 
             'xpath', 'equals', newxpathRemainingInfoAmt, true)
 
@@ -162,6 +167,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
             'Ambil nilai amount remaining info'
             textRemainingInfoAmt = WebUI.getText(modifyObjectRemainingInfoAmt).replace(',', '')
 
+			'remaining info amt parse double'
             remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
 
             break
@@ -356,8 +362,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 0, numofcolm - 1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname, 1, numofcolm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1

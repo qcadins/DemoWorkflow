@@ -28,7 +28,7 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 17).length() != 0) {
         ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
             sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 17))
@@ -36,11 +36,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
         ArrayList<String> resultfinancialattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialAttrStoreData'(sqlconnectionLOS, 
             appno, custname)
 
-        int financialdataindex = 0
-
-        int financialattr = 0
-
-        r
+        int financialdataindex = 0, financialattr = 0
 
         'ganti value null > "" (String kosong)'
         for (i = 0; i <= (resultfinancialdata.size() - 1); i++) {
