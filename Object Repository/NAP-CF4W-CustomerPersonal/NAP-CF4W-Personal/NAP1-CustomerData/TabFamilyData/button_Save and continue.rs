@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@type = 'button' and (text() = ' Save' or . = ' Save')]</value>
+         <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[3]/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -31,25 +31,25 @@
       <value>btn btn-raised btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Save</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-cust-main-data/div/div/div/div/div[3]/div[2]/div[2]/app-family-main-data-paging/div/div[3]/button</value>
+      <value>//*[@id=&quot;family-tab&quot;]/app-family-main-data-paging/div/div[3]/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -22,10 +22,13 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
 
+'get custname from confins'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
+'call keyword NAP2TabReferantorStoreDB dari DB'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnectionLOS, datafileReferantor.getValue(
 		GlobalVariable.CopyAppColm, 12), custname)
+
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
 int arrayindex = 0
@@ -34,18 +37,24 @@ int bankindex = 0
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
+    'verify referantor category'
+	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+	'verify referantor name'
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+	'verify referantor bank acc'
     arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
+	'verify referantor bank acc'
 	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
+	'verify referantor bank acc'
 	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+	'verify referantor tax calculation method'
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }

@@ -30,6 +30,7 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
+'declare arraymatch warraylist'
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 int arrayindex = 0, arrayFeeIndex = 0

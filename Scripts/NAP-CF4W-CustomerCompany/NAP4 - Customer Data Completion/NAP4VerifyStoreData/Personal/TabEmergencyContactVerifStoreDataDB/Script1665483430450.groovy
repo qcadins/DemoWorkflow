@@ -28,10 +28,7 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4EmergencyContactStoreData'(sqlconnectionLOS, appno, custname)
 
-println(result)
-
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-
 
 int arrayindex = 0
 

@@ -97,6 +97,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
+	'count table address info confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {

@@ -44,7 +44,8 @@ ArrayList<String> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
-    ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
+	'call keyword NAP2InsuranceCustStoreDB untuk get data dari db'
+    ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13))
 
@@ -65,11 +66,13 @@ if (insuredBy == 'Customer') {
                     GlobalVariable.NumofColm, index).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     } 
 } else if (insuredBy == 'Customer - Multifinance') {
-    ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
+	'call keyword NAP2InsuranceCustMFStoreDB untuk get data dari db'
+    ArrayList<String> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
         sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13))
 
-    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
+	'call keyword NAP2InsuranceMFStoreDB untuk get data dari db'
+    ArrayList<String> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13))
 
@@ -236,6 +239,7 @@ if (insuredBy == 'Customer') {
         'Mengambil nilai setting cap insurance dari db'
         String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
+		'call keyword NAP2InsuranceMultiMainCVGtoreDB untuk get data dari db'
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, datafileCustomerCompany.getValue(
 				GlobalVariable.NumofColm, 13))
@@ -480,15 +484,13 @@ if (arrayMatch.contains(false)) {
 def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU) {
     arrayindex = 0
 
-    ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
+	'call keyword NAP2InsuranceMFStoreDB untuk get data dari db'
+    ArrayList<String> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS, 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13))
 
     'ganti value null > "" (String kosong)'
     for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-//        if ((resultMFinsurance[i]) == null) {
-//            (resultMFinsurance[i]) = ''
-//        } else 
 		if ((resultMFinsurance[i]) == 'true') {
             (resultMFinsurance[i]) = 'Yes'
         } else if ((resultMFinsurance[i]) == 'false') {
@@ -832,4 +834,3 @@ def insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnec
         }
     }
 }
-

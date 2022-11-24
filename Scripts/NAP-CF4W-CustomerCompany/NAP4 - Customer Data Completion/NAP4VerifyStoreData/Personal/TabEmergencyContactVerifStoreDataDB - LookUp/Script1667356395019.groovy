@@ -41,7 +41,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Em
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
-
 int arrayindex = 0
 
 for(arrayindex = 0; arrayindex < result.size() ; arrayindex++){
@@ -59,4 +58,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 1, 
         GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-
