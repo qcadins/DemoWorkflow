@@ -19,37 +19,42 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 13))
+ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
-ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm,
+ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 	13))
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 int arrayindex = 0, arrayFeeIndex = 0
 
 'Verif jika use default fee value no'
-if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 20).equalsIgnoreCase("No")){
+if(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20).equalsIgnoreCase("No")){
 	
 	'Verif admin fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 21).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	
 	arrayFeeIndex++
 	
 	'Verif is capitalize admin fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 26),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 26).equalsIgnoreCase("Yes")){
 		
 		'Verif admin fee capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 27).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 26).equalsIgnoreCase("No")){
 		
 		'Verif admin fee capitalize'
@@ -57,23 +62,23 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 	}
 	
 	'Verif additional admin'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 22).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	
 	arrayFeeIndex++
 	
 	'Verif is capitalize additional admin'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 28),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 28).equalsIgnoreCase("Yes")){
 		
 		'Verif additional admin capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 29).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 28).equalsIgnoreCase("No")){
 		
 		'Verif additional admin capitalize'
@@ -81,23 +86,23 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 	}
 	
 	'verif notary fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 23).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	
 	arrayFeeIndex++
 	
 	'verif is capitalize notary fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 30),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 30).equalsIgnoreCase("Yes")){
 		
 		'verif notary fee capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 31).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 30).equalsIgnoreCase("No")){
 		
 		'verif notary fee capitalize'
@@ -105,23 +110,23 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 	}
 	
 	'verif other fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 24).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	
 	arrayFeeIndex++
 	
 	'verif is capitalize other fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 32),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 32).equalsIgnoreCase("Yes")){
 		
 		'verif other fee capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 33).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 32).equalsIgnoreCase("No")){
 		
 		'verif other fee capitalize'
@@ -129,23 +134,23 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 	}
 	
 	'verif fiducia fee'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 25).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	
 	arrayFeeIndex++
 	
 	'verif fiducia fee is capitalize'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 34),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 34).equalsIgnoreCase("Yes")){
 		
 		'verif fiducia fee capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 35).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 34).equalsIgnoreCase("No")){
 		
 		'verif fiducia fee capitalize'
@@ -153,39 +158,39 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 	}
 
 	'verif provision fee'
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 36).equalsIgnoreCase("Amount")){
 		
 		'verif provision fee amount'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 39).replace(',', ''),resultFee[arrayFeeIndex++],false))
 		
 		arrayFeeIndex++
 	
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 36).equalsIgnoreCase("Percentage")){
 		
 		arrayFeeIndex++
 		
 		'verif provision fee percentage'
-		arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 38)),Double.parseDouble(resultFee[arrayFeeIndex++])))
 	
 	}
 	
 	'verif provision fee is capitalize'
-	arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 40),resultFee[arrayFeeIndex++],false))
 	
-	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	if(datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 40).equalsIgnoreCase("Yes")){
 		
 		'verif provision fee capitalize'
-		arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+		arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 41).replace(',', ''),resultFee[arrayFeeIndex++],false))
 	}
-	else if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+	else if(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 40).equalsIgnoreCase("No")){
 		
 		'verif provision fee capitalize'
@@ -195,53 +200,53 @@ if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 }
 
 'verify total fee amount'
-arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 21).replace(',', '')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 22).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 23).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 24).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 25).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 21).replace(',', '')) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 22).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 23).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 24).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 25).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 39).replace(',', '')), Integer.parseInt(result[arrayindex++]), FailureHandling.OPTIONAL))
 
 'verify total capitalize amt'
-arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 27).replace(',', '')) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 29).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 31).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 33).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
-                GlobalVariable.NumofColm, 35).replace(',', ''))) + Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 27).replace(',', '')) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 29).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 31).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 33).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
+                GlobalVariable.NumofColm, 35).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 41).replace(',', '')), Integer.parseInt(result[arrayindex++]), FailureHandling.OPTIONAL))
 
 'verify provision fee calculation base'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
             GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 43).equalsIgnoreCase(
+if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 43).equalsIgnoreCase(
     'Effective Rate')) {
     'verify effective rate'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'skip flat rate'
     arrayindex++
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 
+} else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 
     43).equalsIgnoreCase('Flat Rate')) {
     'skip flat rate'
     arrayindex++
 
     'verify flat rate'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 46).equalsIgnoreCase(
+if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 46).equalsIgnoreCase(
     'Yes')) {
     'verify grace period'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify grace period type'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
                 GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 else{
@@ -250,7 +255,7 @@ else{
 	
 
 'verify TDP paid at MF'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
             GlobalVariable.NumofColm, 49).replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

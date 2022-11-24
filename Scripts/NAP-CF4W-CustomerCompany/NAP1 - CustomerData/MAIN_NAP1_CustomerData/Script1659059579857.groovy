@@ -26,24 +26,33 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileMS'
+datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+
+'declare datafileGuarantorPersonal'
+datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
+
 'click Menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+not_run: WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
 //Verify sort & paging
 'call function pagingtesting'
-pagingTesting()
+not_run: pagingTesting()
 
 'Ambil nilai office login dari confins'
-String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
-	',', ';').split(';')
+not_run: String[] officeLogin = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OfficeLocLogin')).replace(
+    ',', ';').split(';')
 
 'declare POStat'
-String POStat
+not_run: String POStat
 
-if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() > 1) {
+not_run: if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() > 1) {
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
-        GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -55,22 +64,22 @@ if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Add'))
 }
 
-if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || GlobalVariable.findTestDataCustomerCompany.getValue(
-    GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) && (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+not_run: if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerCompany.getValue(
+    GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
     8).length() < 1)) {
-    if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+    if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'click button lookup copy app'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_LookupCopyApp'))
 
         'input app no'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_AppNoCopyApp'), 
-            GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 9))
+            datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 9))
 
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'call custom keyword checkCopyAppPOStat'
-        POStat = CustomKeywords.'dbConnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerCompany.getValue(
+        POStat = CustomKeywords.'dbConnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
@@ -79,7 +88,7 @@ if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofCol
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
             WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
         }
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
         'click button lookup product offering'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Product Offering Name_btn btn-raised btn-primary'))
 
@@ -120,19 +129,19 @@ if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofCol
     
     'click button next'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Next'))
-} else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes') && (GlobalVariable.findTestDataCustomerCompany.getValue(
+} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes') && (datafileCustomerCompany.getValue(
     GlobalVariable.NumofColm, 8).length() < 1)) {
     'click button lookup copy app'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_LookupCopyApp'))
 
     'input app no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_AppNoCopyApp'), 
-        GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 9))
+        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 9))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
-    POStat = CustomKeywords.'dbConnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerCompany.getValue(
+    POStat = CustomKeywords.'dbConnection.checkPOStat.checkCopyAppPOStat'(sqlconnectionLOS, datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
@@ -147,19 +156,19 @@ if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofCol
 }
 
 'Get Appno'
-String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/Applicant No'))
+not_run: String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/Applicant No'))
 
 'Write to excel Appno'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
-    1, appNo)
+not_run: CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+    12, GlobalVariable.NumofColm - 1, appNo)
 
 if (GlobalVariable.Role == 'Data Entry') {
-    if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || GlobalVariable.findTestDataCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
         8).length() > 1)) {
         'call Testcase tab Customer data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -198,7 +207,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
     1); (GlobalVariable.NumofMS)++) {
-        if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
 
@@ -207,13 +216,13 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
@@ -249,7 +258,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
-        if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(
+        if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 13)) {
             GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
@@ -258,14 +267,14 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
         'call test case guarantor tanpa copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 
@@ -301,12 +310,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
     'check if copy app yes / no / edit'
-    if ((GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || GlobalVariable.findTestDataCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    not_run: if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
         8).length() > 1)) {
         'call Testcase tab Customer data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -345,7 +354,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
     1); (GlobalVariable.NumofMS)++) {
-        if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
 
@@ -354,13 +363,13 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
@@ -392,7 +401,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
-        if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(
+        if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 13)) {
             GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
@@ -401,13 +410,13 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
-    } else if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 
@@ -638,37 +647,37 @@ def pagingTesting() {
 
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP1CountDataInPage'(), true))
 
-        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + ((GlobalVariable.ReasonFailedReset + 'NAP1') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + ((GlobalVariable.ReasonFailedSort + 'NAP1') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             1))) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + ((GlobalVariable.ReasonFailedFooter + 'NAP1') + ';\n'))
 
             GlobalVariable.FlagWarning = 1

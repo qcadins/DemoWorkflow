@@ -19,22 +19,24 @@ import org.openqa.selenium.Keys as Keys
 'Assign directori file excel ke global variabel'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
 
-println(GlobalVariable.DataFilePath)
+'declare datafileLogin'
+datafileLogin = findTestData('Login/Login')
 
 'open Browser'
 WebUI.openBrowser('')
 
+'maximize window'
 WebUI.maximizeWindow()
 
 'input web R3 LOS'
-WebUI.navigateToUrl(GlobalVariable.findTestDataLogin.getValue(1, 2))
+WebUI.navigateToUrl(datafileLogin.getValue(1, 2))
 
 'input username'
-WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), GlobalVariable.findTestDataLogin.getValue(
+WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputUser'), datafileLogin.getValue(
         2, 2))
 
 'input Password'
-WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputPass'), GlobalVariable.findTestDataLogin.getValue(
+WebUI.setText(findTestObject('LoginR3BranchManagerSuperuser/input_Loan Origination System_inputPass'), datafileLogin.getValue(
         3, 2))
 
 'click button login'
@@ -42,7 +44,7 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/button_LOGIN'))
 
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/input_Choose Your Role_Office'))
 
-WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), "(?i)"+GlobalVariable.findTestDataLogin.getValue(
+WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), "(?i)"+datafileLogin.getValue(
         4, 2), true)
 
 WebUI.sendKeys(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), Keys.chord(Keys.ENTER))

@@ -19,18 +19,20 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
 'declare arrayMatch arraylist'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'call keyowrd get customer data store db company'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnectionLOS, GlobalVariable.findTestDataCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 13), GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 17))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnectionLOS, datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 13), datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 17))
 
 'looping verif confinsdata = db'
 for (int i = 0; i < result.size(); i++) {
 	'verify result == confinsdata'
 	arrayMatch.add(WebUI.verifyMatch(result[i].toUpperCase(), GlobalVariable.Confinsdata[i].toUpperCase(), true, FailureHandling.OPTIONAL))
-	
 }
 
 'jika nilai di confins tidak sesuai dengan db'

@@ -19,62 +19,65 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'call keyword get customer data store DB'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompany'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 13), GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13), datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
         19))
 
 int arrayindex = 0
 
 'verify customer name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify address'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify RT'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify RW'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 26).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 26).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify Zipcode'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify keluraham'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 29).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 29).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify kota'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 30).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 30).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'veirfy ownership'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'jika nilai di confins tidak sesuai dengan db'

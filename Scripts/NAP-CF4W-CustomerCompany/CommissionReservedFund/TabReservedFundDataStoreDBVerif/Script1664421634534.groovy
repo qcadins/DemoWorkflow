@@ -22,6 +22,12 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileReservedFund'
+datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
@@ -31,11 +37,11 @@ def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVaria
 
 'declare arraylist resultDB'
 ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
 for (int i = 0; i < resultDB.size(); i++) {
     'verif reserved fund amt db dengan excel'
-    arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()), Double.parseDouble(GlobalVariable.findTestDataReservedFundDataNAPCompany.getValue(
+    arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()), Double.parseDouble(datafileReservedFund.getValue(
                     GlobalVariable.NumofColm, rsvAmtRow + i).replace(',', ''))))
 }
 

@@ -18,6 +18,12 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileTabUploadDoc'
+datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument')
+
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -27,8 +33,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) +
 	1); (GlobalVariable.NumofUploadDocument)++) {
-		if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
-			GlobalVariable.NumofUploadDocument, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+		if (datafileTabUploadDoc.getValue(
+			GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 13)) {
 			'click menu titik 3'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
@@ -44,27 +50,27 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 			
 			'upload file'
 			CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'),
-				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
+				datafileTabUploadDoc.getValue(
 					GlobalVariable.NumofUploadDocument, 13))
 
 			'input document name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'),
-				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
+				datafileTabUploadDoc.getValue(
 					GlobalVariable.NumofUploadDocument, 14))
 
 			'select jenis document'
 			WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'),
-				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
+				datafileTabUploadDoc.getValue(
 					GlobalVariable.NumofUploadDocument, 15), false)
 
 			'input MOU Id'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'),
-				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
+				datafileTabUploadDoc.getValue(
 					GlobalVariable.NumofUploadDocument, 16))
 
 			'input notes'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'),
-				findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument').getValue(
+				datafileTabUploadDoc.getValue(
 					GlobalVariable.NumofUploadDocument, 17))
 
 			'click button save'
@@ -99,7 +105,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUpl
 
 'input app no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
-	findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))
 
 'click button search'
@@ -107,7 +113,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUpl
 
 'verify appno'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'),
-	findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+	datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
