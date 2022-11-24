@@ -26,8 +26,14 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileDupcheck'
+datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
 'get app no from data file dupcheck'
-String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
@@ -42,7 +48,7 @@ if (DupCheckStatus == true) {
 
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/input_Application No_AppNoId'), 
-        GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12))
+        datafileDupcheck.getValue(GlobalVariable.NumofColm, 12))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
@@ -52,12 +58,12 @@ if (DupCheckStatus == true) {
 
     WebDriver driver = DriverFactory.getWebDriver()
 
-    ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
+    ArrayList<String> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
 
     GlobalVariable.CountDupcheckRow = variable.size()
 
     'get cust name dari data file excel'
-    custnamedupcheck = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 13)
+    custnamedupcheck = datafileDupcheck.getValue(GlobalVariable.NumofColm, 13)
 
     'array customer name data inputan'
     def CustomerNameArray = GlobalVariable.CustomerName.split(';')
@@ -97,8 +103,8 @@ if (DupCheckStatus == true) {
         'get text subject type'
         subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
-        if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.findTestDataCustomerPersonal.getValue(
-            GlobalVariable.NumofColm, 8).length() == 0)) {
+        if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8).length() == 
+        0)) {
             'verify name == data inputan'
             checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
         }
@@ -116,7 +122,7 @@ if (DupCheckStatus == true) {
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                         5, FailureHandling.OPTIONAL))) {
-                        if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
+                        if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/checkbox negative'))
                         }
@@ -125,7 +131,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
-                    ArrayList<WebElement> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
+                    ArrayList<String> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
                     for (int id = 1; id <= variableidno.size(); id++) {
                         'modify object id no customer match'
@@ -167,7 +173,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
-                    ArrayList<WebElement> applicationinprocessrow = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
+                    ArrayList<String> applicationinprocessrow = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
 
                     for (int id = 1; id <= applicationinprocessrow.size(); id++) {
                         'modify object id no customer match'
@@ -208,7 +214,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'), 
                     5, FailureHandling.OPTIONAL)) {
-                    if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
+                    if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
@@ -249,7 +255,7 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
-                    } else if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
+                    } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
                             String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
@@ -290,7 +296,7 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
-                    } else if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
+                    } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
@@ -351,7 +357,7 @@ if (DupCheckStatus == true) {
     'click button submit'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Submit'))
 
-    Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 4))
+    Integer iscompleteMandatory = Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 4))
 
     if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
         'cek alert'
@@ -368,17 +374,17 @@ if (DupCheckStatus == true) {
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back'), 
         10, FailureHandling.OPTIONAL)) {
         'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back'))
-    } //Verify sort & paging
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Back')) //Verify sort & paging
+    }
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
-            1, GlobalVariable.StatusFailed)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
-            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -388,11 +394,11 @@ def pagingTesting() {
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
         Object appNoObject
 
-        ArrayList<WebElement> resultReset = new ArrayList<WebElement>()
+        ArrayList<String> resultReset = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifySort = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifySort = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
         'Verif reset'
         resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
@@ -400,13 +406,13 @@ def pagingTesting() {
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
 
-        ArrayList<WebElement> listString = new ArrayList<WebElement>()
+        ArrayList<String> listString = new ArrayList<String>()
 
         'Inisialisasi driver'
         WebDriver driver = DriverFactory.getWebDriver()
 
         'Inisialisasi variabel'
-        ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+        ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
         'Klik header office'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_Office'))
@@ -433,7 +439,7 @@ def pagingTesting() {
 
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
-        ArrayList<WebElement> listApp = new ArrayList<WebElement>()
+        ArrayList<String> listApp = new ArrayList<String>()
 
         'Klik header appno'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
@@ -457,7 +463,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
@@ -475,7 +481,7 @@ def pagingTesting() {
         'Klik header custname'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
@@ -496,7 +502,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
@@ -514,7 +520,7 @@ def pagingTesting() {
         'Klik header product offering anme'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
@@ -551,7 +557,7 @@ def pagingTesting() {
 
             rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             for (int i = 1; i <= rowData.size(); i++) {
                 appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
@@ -575,7 +581,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
@@ -593,7 +599,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
@@ -608,39 +614,38 @@ def pagingTesting() {
 
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.DupcheckCountDataInPage'(), true))
 
-        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
-            GlobalVariable.NumofColm, 1))) {
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+            1))) {
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
-                    GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
-
-            GlobalVariable.FlagWarning = 1
-        }
-        
-        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
-            GlobalVariable.NumofColm, 1))) {
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
-                    GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
+                    '-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != GlobalVariable.findTestDataCustomerPersonal.getValue(
-            GlobalVariable.NumofColm, 1))) {
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+            1))) {
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, 
-                GlobalVariable.NumofColm - 1, GlobalVariable.findTestDataCustomerPersonal.getValue(
-                    GlobalVariable.NumofColm, 2).replace('-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + 
-                ';\n'))
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
+                    '-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
+
+            GlobalVariable.FlagWarning = 1
+        }
+        
+        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+            1))) {
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
+                    '-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }

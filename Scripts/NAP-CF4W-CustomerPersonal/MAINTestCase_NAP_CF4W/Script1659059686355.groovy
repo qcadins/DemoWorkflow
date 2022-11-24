@@ -20,9 +20,12 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
 if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
-        if (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], 
@@ -42,7 +45,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
 } else {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
-        if (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
         }
         

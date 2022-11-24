@@ -29,6 +29,9 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagFailed = 0
 
+'declare datafileReservedFund'
+datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -195,7 +198,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			}
 			
 			'Input Alloc Reserved Fund Amount'
-			WebUI.setText(inputAlloc, GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(
+			WebUI.setText(inputAlloc, datafileReservedFund.getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i), FailureHandling.OPTIONAL)
 		}
 		else if(allocBhv[i].equalsIgnoreCase("lock")){
@@ -308,7 +311,7 @@ WebUI.delay(5)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'

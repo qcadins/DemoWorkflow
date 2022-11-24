@@ -19,10 +19,13 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileTabGuarantorPersonal'
+datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+    datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), datafileTabGuarantorPersonal.getValue(
         GlobalVariable.NumofGuarantorPersonal, 16))
 
 for (int i = 0; i < result.size(); i++) {

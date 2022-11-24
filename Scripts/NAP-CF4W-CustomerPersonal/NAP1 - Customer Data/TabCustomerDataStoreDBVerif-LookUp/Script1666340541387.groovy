@@ -21,8 +21,11 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 13), GlobalVariable.findTestDataCustomerPersonal.getValue(
+    datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13), datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 17))
 
 for (int i = 0; i < result.size(); i++) {
