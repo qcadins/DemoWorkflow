@@ -74,11 +74,11 @@ arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[a
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
 	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 
 }

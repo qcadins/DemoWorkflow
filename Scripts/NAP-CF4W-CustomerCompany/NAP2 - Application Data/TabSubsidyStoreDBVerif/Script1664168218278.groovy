@@ -16,11 +16,11 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13))
 
 int arrayindexdb = 0
 
@@ -41,44 +41,34 @@ def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.Numof
 
 def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
-println(result)
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-for(int arrayindexexcel = 0; arrayindexexcel < SubsidyTypeArray.size() ; arrayindexexcel++){
+for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
 	
 'verify subsidy from value type'
-arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	FailureHandling.OPTIONAL))
 
 'verify subsidy from value'
-arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), 
-    false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(),
+	false, FailureHandling.OPTIONAL))
 
 'verify allocation from'
-arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	FailureHandling.OPTIONAL))
 
 'veirfy subsidy source'
-arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false, 
-    FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	FailureHandling.OPTIONAL))
 
-if(SubsidyValueTypeArray[arrayindexexcel].equalsIgnoreCase('Amount')){
 'verify subsidy amount'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]), 
-    FailureHandling.OPTIONAL))
-
-'skip percentage'
-arrayindexdb++
-
-}else if(SubsidyValueTypeArray[arrayindexexcel].equalsIgnoreCase('Percentage')){
-
-'skip amount'
-arrayindexdb++
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
+	FailureHandling.OPTIONAL))
 
 'verify subsidy percentage'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]), 
-    FailureHandling.OPTIONAL))
-}
+arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
+	FailureHandling.OPTIONAL))
+
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

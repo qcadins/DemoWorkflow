@@ -90,10 +90,11 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 					0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusWarning)
 				
 				'Write To Excel GlobalVariable.StatusReason'
-				CustomKeywords.'customizeKeyword.writeExcel.writ	eToExcelFunction'(GlobalVariable.DataFilePath, '11.TabUploadDocument',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument',
 					1, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 			}
 		}
+			
 	}
 }
 

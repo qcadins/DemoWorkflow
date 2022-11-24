@@ -16,62 +16,72 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
-
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories')
 
-'call custom keyword NAP2AccessoriesStoreDB'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.CopyAppColm,
+		12))
 
-'declare arraynum'
 int arraynum = 0
 
-for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) + 
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) +
 1); (GlobalVariable.NumofAccessories)++) {
-    'verify supplier code'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	'verify supplier code'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify supplier name'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            14).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	'verify supplier name'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 14).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify accessories code'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            15).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	'verify accessories code'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 15).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify accessories name'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            16).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	'verify accessories name'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 16).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify accessories price'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            17).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	'verify accessories price'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 17).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-        18).equalsIgnoreCase('Percentage')) {
-        'verify DP Percent'
-        WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-                19).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+	if (datafileAccessories.getValue(
+		GlobalVariable.NumofAccessories, 18).equalsIgnoreCase('Percentage')) {
+		'verify DP Percent'
+		arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+				GlobalVariable.NumofAccessories, 19).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-        'skip amount'
-        arraynum++
-    } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-        18).equalsIgnoreCase('Amount')) {
-        'skip percentage'
-        arraynum++
+		'skip amount'
+		arraynum++
+	} else if (datafileAccessories.getValue(
+		GlobalVariable.NumofAccessories, 18).equalsIgnoreCase('Amount')) {
+		'skip percentage'
+		arraynum++
 
-        'verify DP Amount'
-        WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-                20).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
-    }
-    
-    'verify notes'
-    WebUI.verifyMatch(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
-            21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+		'verify DP Amount'
+		arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+				GlobalVariable.NumofAccessories, 20).replace(',', ''), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}
+	
+	'verify notes'
+	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
+			GlobalVariable.NumofAccessories, 21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
+
+'Jika nilai di confins ada yang tidak sesuai dengan db'
+if (arrayMatch.contains(false)) {
+	'write to excel FAILED'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
+		0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
+	
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
+		1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedStoredDB)
+
 }

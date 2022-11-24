@@ -19,8 +19,8 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -28,32 +28,31 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileTabApplication'
 datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
 
-String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/labelCustomerName'))
+String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/labelCustomerName'))
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 13), custname)
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 13), custname)
 		
-ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))
 		
 //String bankaccount
-//def bankarray, confinsdatabankacc 
-//		
+//def bankarray, confinsdatabankacc
+//
 //	if(datafileTabApplication.getValue(
 //        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-//	
-//	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnectionLOS, datafileCustomerCompany.getValue(
+//
+//	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
 //		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
 //			 bankarray = bankaccount.split(', ')
 //			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
 //	}
 
-int arrayindex = 0
+int arrayindex = 0, attrindex = 0
 //int bankindex = 0
 //int confinsindex = 0
-int attrindex = 0
-
-ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'verify application source'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
@@ -81,11 +80,11 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 
 if(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 22) == 'Float Rate'){
-'verify floating period'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	'verify floating period'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
-arrayindex++
+	arrayindex++
 }
 
 'verify installment scheme'
@@ -119,63 +118,63 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 'verify if copy address'
 if(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 30).length() > 0){
-'verify address'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify Rt'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify RW'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify Zipcode'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify kelurahan'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify kota'
-arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
-		GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify address'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify Rt'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify RW'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify Zipcode'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kecamatan'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kelurahan'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kota'
+	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 
-'verify address'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify rt'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify rw'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 33).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify zipcode'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 34).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify kecamatan'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 35).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-
-'verify kelurahan'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 36).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify kota'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify address'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify rt'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify rw'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 33).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify zipcode'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 34).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kecamatan'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 35).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kelurahan'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 36).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify kota'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify phone area 1'
@@ -238,7 +237,6 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 53).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-
 'verify Blacklist APPI'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 56).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -247,22 +245,9 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 57).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'convert date confins dan excel agar sama'
-SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-Date parsedDate = null
-
-String sentDate = datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 58)
-
-parsedDate = sdf.parse(sentDate)
-
-sdf = new SimpleDateFormat('yyyy-MM-dd')
-
-String sDate = sdf.format(parsedDate)
-
 'verify Date app data'
-arrayMatch.add(WebUI.verifyMatch(sDate, (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(convertDateFormat(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 58)), (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
 
 'verify app data code'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
@@ -282,4 +267,19 @@ if (arrayMatch.contains(false)) {
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 
+}
+
+public convertDateFormat(String sentDate){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+	
+	Date parsedDate = null
+	
+	parsedDate = sdf.parse(sentDate)
+	
+	sdf = new SimpleDateFormat('yyyy-MM-dd')
+	
+	String sDate = sdf.format(parsedDate)
+	
+	return sDate
 }

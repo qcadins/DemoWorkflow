@@ -47,7 +47,7 @@ def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 1
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
-	for (i = 0; i < AllocationformArray.size(); i++) {
+	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
 			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, TotalPremium + 2)
@@ -66,11 +66,9 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Su
 
 int varsize = variable.size()
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'connect DB FOU'
-Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil appno dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/span_appNo'))
@@ -79,7 +77,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
-	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifySubsidy.verifySubsidyDefault'(sqlconnectionLOS, sqlconnectionFOU,appNo)
+	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifySubsidy.verifySubsidyDefault'(sqlConnectionLOS, sqlConnectionFOU,appNo)
 	
 	ArrayList<String> SubsidyFromType, SubsidyFromValue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue
 	SubsidyFromType = result.get("FT")
@@ -101,12 +99,12 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 	'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
 	if(varsize==SubsidyFromType.size() && varsize > 0){
 		'Looping data subsidi pada confins'
-		for (i = 1; i <= varsize; i++) {
+		for (int i = 1; i <= varsize; i++) {
 			 
 			modifySubsidy()
 			
 			'Verif subsidy from type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
@@ -116,17 +114,17 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 			}
 			
 			'Verif subsidy allocation sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyAllocCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy value type sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyValueTypeCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy source sesuai rule'
-			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidySourceCode'(sqlconnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
+			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
 				writeReasonFailedVerifRule()
 			}
 			
@@ -152,23 +150,20 @@ if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Y
 
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 	'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-	for (i = 1; i <= variable.size(); i++) {
+	for (int i = 1; i <= variable.size(); i++) {
 
 		modifySubsidy()
 
-		'modify object button edit'
-		modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Button_Edit'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[1]/i', true)
-
-		'modify object button Delete'
-		modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Button_Delete'),
-			'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[2]/i', true)
-
-		for (subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
+		for (int subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
 			if (((WebUI.getText(modifyNewFromTypeName).equalsIgnoreCase(SubsidyTypeArray[(subsidyarray - 1)]) && WebUI.getText(
 				modifyNewFromValueName).equalsIgnoreCase(SubsidyfromValueArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidyAllocation).equalsIgnoreCase(
 				AllocationformArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidySource).equalsIgnoreCase(SubsidySourceArray[
 				(subsidyarray - 1)])) {
+			
+				'modify object button edit'
+				modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Button_Edit'),
+				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[1]/i', true)
+			
 				WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
 				'select multifinance / supplier'
@@ -236,6 +231,11 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
 				
 				break
 			} else {
+			
+				'modify object button Delete'
+				modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Button_Delete'),
+						'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[2]/i', true)
+				
 				if (subsidyarray == SubsidyTypeArray.size()) {
 					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 							'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
@@ -294,8 +294,8 @@ ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(B
 
 int countData = variableData.size()
 
-for (s = 1; s <= SubsidyTypeArray.size(); s++) {
-	for (SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
+for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
+	for (int SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
 		if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 
@@ -321,74 +321,7 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 				WebUI.getText(modifyNewSubsidyAllocation)))) || !((SubsidySourceArray[(s - 1)]).equalsIgnoreCase(WebUI.getText(
 					modifyNewSubsidySource)))) {
 				if (countData == SubsidyCheck) {
-					'click button add subsidy'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))
-
-					'select multifinance / supplier'
-					WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-						'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
-
-					if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
-
-						'select subsidy from value'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
-							'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
-				
-						'select subsidy allocation from '
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-					
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-					
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-					
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
-						
-					} else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
-						'select subsidy allocation from'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-					
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-					
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-					
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
-					}
-					
-					'click button save subsidy'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_SaveSubsidy'))
-
-					'Verify gagal add'
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-						10, FailureHandling.OPTIONAL)) {
-						'Click cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
-					}
+					addSubsidy()
 				}
 			} else {
 				break
@@ -397,72 +330,7 @@ for (s = 1; s <= SubsidyTypeArray.size(); s++) {
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 			if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
 				if (SubsidyTypeArray.size() > 0) {
-					'click button add subsidy'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))
-
-					'select multifinance / supplier'
-					WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-						'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
-
-					if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
-						'select subsidy from value'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
-							'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
-						
-						'select subsidy allocation from '
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-					
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-					
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-					
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
-					} else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
-						'select subsidy allocation from'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
-							'(?i)' + (AllocationformArray[(s - 1)]), true)
-					
-						'select subsidy source'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
-							'(?i)' + (SubsidySourceArray[(s - 1)]), true)
-					
-						'select subsidy value type'
-						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
-							'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
-					
-						if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
-							'input subsidy value amount'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValueAmountArray[(s - 1)])
-						} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
-							'input subsidy value percentage'
-							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
-								SubsidyValuePercentageArray[(s - 1)])
-						}
-					}
-					
-					'click button save subsidy'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_SaveSubsidy'))
-
-					'Verify gagal add'
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-						10, FailureHandling.OPTIONAL)) {
-						'Click cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
-					}
+					addSubsidy()
 				}
 			}
 		}
@@ -529,5 +397,76 @@ def writeReasonFailedVerifRule() {
 		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 
 	GlobalVariable.FlagFailed = 1
+}
+
+public addSubsidy(){
+	'click button add subsidy'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))
+
+	'select multifinance / supplier'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
+		'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
+
+	if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
+
+		'select subsidy from value'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),
+			'(?i)' + (SubsidyfromValueArray[(s - 1)]), true)
+		
+		'select subsidy allocation from '
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
+			'(?i)' + (AllocationformArray[(s - 1)]), true)
+	
+		'select subsidy source'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceSupplier'),
+			'(?i)' + (SubsidySourceArray[(s - 1)]), true)
+	
+		'select subsidy value type'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/Select_SubsidyValueTypeSupplier'),
+			'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
+	
+		if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
+			'input subsidy value amount'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
+				SubsidyValueAmountArray[(s - 1)])
+		} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
+			'input subsidy value percentage'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueSupplier'),
+				SubsidyValuePercentageArray[(s - 1)])
+		}
+		
+	} else if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Multifinance')) {
+		'select subsidy allocation from'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_AllocationFromMultifinance'),
+			'(?i)' + (AllocationformArray[(s - 1)]), true)
+	
+		'select subsidy source'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidySourceMultifinance'),
+			'(?i)' + (SubsidySourceArray[(s - 1)]), true)
+	
+		'select subsidy value type'
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_SubsidyValueTypeMultifinance'),
+			'(?i)' + (SubsidyValueTypeArray[(s - 1)]), true)
+	
+		if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Amount')) {
+			'input subsidy value amount'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
+				SubsidyValueAmountArray[(s - 1)])
+		} else if ((SubsidyValueTypeArray[(s - 1)]).equalsIgnoreCase('Percentage')) {
+			'input subsidy value percentage'
+			WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_SubsidyValueAmountMultifinance'),
+				SubsidyValuePercentageArray[(s - 1)])
+		}
+	}
+	
+	'click button save subsidy'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_SaveSubsidy'))
+
+	'Verify gagal add'
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
+		10, FailureHandling.OPTIONAL)) {
+		'Click cancel'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
+	}
 }
 

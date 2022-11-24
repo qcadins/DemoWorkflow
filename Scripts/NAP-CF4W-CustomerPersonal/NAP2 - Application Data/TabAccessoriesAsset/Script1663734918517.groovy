@@ -27,6 +27,12 @@ int modifyObjectIndex=1
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileTabAsset'
+datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
+
+'declare datafileAccessories'
+datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
+
 GlobalVariable.AssetPrice = 0.00
 
 GlobalVariable.TotalAccessoriesPrice = 0.00
@@ -34,7 +40,7 @@ GlobalVariable.TotalAccessoriesPrice = 0.00
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Jika copy app edit'
-if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+if(datafileTabAsset.getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
 	'arraylist accessories name yang gagal'
@@ -91,23 +97,23 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 				  2); (GlobalVariable.NumofAccessories)++) {
 			  
-				  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				  if (datafileAccessories.getValue(
 					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 						  GlobalVariable.NumofColm, 13))) {
 					  'Pengecekan jika supplier name dan accessories name pada confins sesuai dengan excel'
-					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(datafileAccessories.getValue(
 						  GlobalVariable.NumofAccessories, 16))) {
 							  
 						  'input accessories price'
-						  WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						  WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
 								  GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 				  
 						  'select security deposit type'
-						  WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						  WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
 								  GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 				  
-						  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						  if (datafileAccessories.getValue(
 							  GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 							  'input security deposit percentage'
 							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -116,18 +122,18 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				  
 							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 				  
-							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
 										  GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
 							  
-						  } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						  } else if (datafileAccessories.getValue(
 							  GlobalVariable.NumofAccessories, 18) == 'Amount') {
 							  'input security deposit amount'
-							  WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							  WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
 									  GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 						  }
 						  
 						  'input accessories notes'
-						  WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						  WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 								  GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				  
 						  if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
@@ -190,13 +196,13 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						  
 								  BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 						  
-								  if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								  if (datafileAccessories.getValue(
 									  GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 									  int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 						  
 									  'verify securitydeposit value equal'
 									  checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-								  } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								  } else if (datafileAccessories.getValue(
 									  GlobalVariable.NumofAccessories, 18) == 'Amount') {
 									  float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 						  
@@ -276,7 +282,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 	for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 		2); (GlobalVariable.NumofAccessories)++) {
 			
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			if (datafileAccessories.getValue(
 					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					  GlobalVariable.NumofColm, 13))) {
 				'Looping confins accessories'
@@ -328,12 +334,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					   
 							   'input Supplier Code'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-								   findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 13))
 					   
 							   'input supplier name'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-								   findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 14))
 					   
 							   'click button search'
@@ -374,12 +380,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					   
 							   'input Accessories Code'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-								   findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 15))
 					   
 							   'input accessories name'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-								   findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 16))
 					   
 							   'click button search'
@@ -416,14 +422,14 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   }
 							   
 							   'input accessories price'
-							   WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							   WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 					   
 							   'select security deposit type'
-							   WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							   WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 					   
-							   if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							   if (datafileAccessories.getValue(
 								   GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 								   'input security deposit percentage'
 								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -432,17 +438,17 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					   
 								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 					   
-								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
 											   GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-							   } else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							   } else if (datafileAccessories.getValue(
 								   GlobalVariable.NumofAccessories, 18) == 'Amount') {
 								   'input security deposit amount'
-								   WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								   WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
 										   GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 							   }
 							   
 							   'input accessories notes'
-							   WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							   WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 					   
 							   if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
@@ -479,8 +485,8 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							   add=0
 						   }
 						   
-						   if(!findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
-							   GlobalVariable.NumofAccessories, 14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectSupplierName,'value')) || !findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						   if(!datafileAccessories.getValue(
+							   GlobalVariable.NumofAccessories, 14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectSupplierName,'value')) || !datafileAccessories.getValue(
 							   GlobalVariable.NumofAccessories, 16).equalsIgnoreCase(WebUI.getAttribute(modifyObjectAccName,'value')) ){
 							   if(countData==j){
 								   'click button add'
@@ -507,12 +513,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 						'input Supplier Code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 13))
 				
 						'input supplier name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 14))
 				
 						'click button search'
@@ -553,12 +559,12 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 						'input Accessories Code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 15))
 				
 						'input accessories name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-							findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 16))
 				
 						'click button search'
@@ -595,14 +601,14 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						}
 						
 						'input accessories price'
-						WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 				
 						'select security deposit type'
-						WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 				
-						if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						if (datafileAccessories.getValue(
 							GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 							'input security deposit percentage'
 							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -611,17 +617,17 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 				
 							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 				
-							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
 										GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-						} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						} else if (datafileAccessories.getValue(
 							GlobalVariable.NumofAccessories, 18) == 'Amount') {
 							'input security deposit amount'
-							WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+							WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
 									GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 						}
 						
 						'input accessories notes'
-						WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+						WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				
 						if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
@@ -666,13 +672,13 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 						
 								BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 						
-								if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								if (datafileAccessories.getValue(
 									GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 									int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 						
 									'verify securitydeposit value equal'
 									checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-								} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+								} else if (datafileAccessories.getValue(
 									GlobalVariable.NumofAccessories, 18) == 'Amount') {
 									float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 						
@@ -692,11 +698,11 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 }
 	
 //Jika copy app no
-else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+else if(datafileTabAsset.getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
 	for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 	1); (GlobalVariable.NumofAccessories)++) {
-		if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+		if (datafileAccessories.getValue(
 			GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))) {
 			'click button add'
@@ -739,12 +745,12 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 	
 			'input Supplier Code'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 13))
 	
 			'input supplier name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 14))
 	
 			'click button search'
@@ -784,12 +790,12 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 	
 			'input Accessories Code'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 15))
 	
 			'input accessories name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 16))
 	
 			'click button search'
@@ -826,14 +832,14 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 			}
 			
 			'input accessories price'
-			WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 	
 			'select security deposit type'
-			WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 	
-			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			if (datafileAccessories.getValue(
 				GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 				'input security deposit percentage'
 				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -842,17 +848,17 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 	
 				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 	
-				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
 							GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-			} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			} else if (datafileAccessories.getValue(
 				GlobalVariable.NumofAccessories, 18) == 'Amount') {
 				'input security deposit amount'
-				WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
 						GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 			}
 			
 			'input accessories notes'
-			WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+			WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 	
 			if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
@@ -899,13 +905,13 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 		
 				BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 		
-				if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				if (datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 					int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 		
 					'verify securitydeposit value equal'
 					checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-				} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(
+				} else if (datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 18) == 'Amount') {
 					float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 		

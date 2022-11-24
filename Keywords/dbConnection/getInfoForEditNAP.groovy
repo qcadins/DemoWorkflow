@@ -211,8 +211,8 @@ public class getInfoForEditNAP {
 
 		return arrayGuarantorData
 	}
-	
-	
+
+
 	@Keyword
 	public verifyMatchCopyAppYesNAP2Personal(Sql instance, String copyAppNo, String appNo){
 		Boolean isMatch = true

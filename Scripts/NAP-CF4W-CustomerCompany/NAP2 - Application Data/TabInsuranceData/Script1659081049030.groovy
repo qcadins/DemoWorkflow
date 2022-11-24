@@ -15,15 +15,15 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-GlobalVariable.FlagFailed = 0
-
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'declare datafileTabInsurance'
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData')
 
-String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+GlobalVariable.FlagFailed = 0
+
+String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
@@ -33,15 +33,17 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 		'INSURANCE', false, FailureHandling.OPTIONAL))
+
+	if(GlobalVariable.FirstTimeEntry=="Yes"){
+		'Verifikasi perhitungan asset price'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
+				',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false))
 	
-	'Verifikasi perhitungan asset price'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
-			',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false))
+		'Verifikasi perhitungan asset price incl accessories'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
+				',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
+	}
 	
-	
-	'Verifikasi perhitungan asset price incl accessories'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
-			',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
 }
 
 String insuredBy = datafileTabInsurance.getValue(
@@ -75,24 +77,28 @@ WebUI.delay(3)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
-if (Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)) == 0
-	&& GlobalVariable.FlagFailed==0) {
-	'Check alert'
-	GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
+WebUI.delay(2)
+
+Integer iscompleteMandatory = Integer.parseInt(datafileTabInsurance.getValue(
+		GlobalVariable.NumofColm, 4))
+
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
+	'cek alert'
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm,
+		'8.TabInsuranceData')
 }
 
-WebUI.delay(5)
+if (GlobalVariable.FlagFailed == 0) {
+	'check save process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'),
+		GlobalVariable.NumofColm, '8.TabInsuranceData')
 
-if(GlobalVariable.FlagFailed == 0){
-'check save process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)),
-	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), GlobalVariable.NumofColm, '8.TabInsuranceData')
+	if (iscompleteMandatory == 0) {
+		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 
-if(Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)) == 0){
-'check error validasi'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), GlobalVariable.NumofColm, '8.TabInsuranceData')
-}
-
+		'cek validasi'
+		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '8.TabInsuranceData')
+	}
 }
 
 if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
@@ -106,8 +112,6 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	5, FailureHandling.OPTIONAL)) {
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
-
- 
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
@@ -121,4 +125,5 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 			GlobalVariable.FlagFailed=1
 		}
 }
+
 

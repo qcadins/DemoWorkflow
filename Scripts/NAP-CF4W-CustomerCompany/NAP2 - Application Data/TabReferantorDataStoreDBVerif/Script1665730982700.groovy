@@ -16,38 +16,38 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
 
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnectionLOS, datafileReferantor.getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
 		GlobalVariable.CopyAppColm, 12), custname)
+
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
-int arrayindex = 0
-int bankindex = 0
+int arrayindex = 0, bankindex = 0
 
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
+			GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
+			GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-	
 	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
+			GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
@@ -61,5 +61,3 @@ if (arrayMatch.contains(false)) {
 		1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedStoredDB)
 
 }
-
-

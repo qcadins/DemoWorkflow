@@ -16,15 +16,15 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 13))
 
 int arrayindex = 0
 
-int flagWarning = 0
+int flagFailed = 0
 
 'declare datafileTabTC'
 datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
@@ -48,7 +48,7 @@ for(index = 0 ; index < result.size()/9 ; index++){
 	
 	isChecked = result[arrayindex++]
 	
-	PromiseDate = result[arrayindex++] 
+	PromiseDate = result[arrayindex++]
 	
 	ExpiredDate = result[arrayindex++]
 	
@@ -57,37 +57,37 @@ for(index = 0 ; index < result.size()/9 ; index++){
 	if(docRequired.equalsIgnoreCase('false')){
 		if(isChecked.equalsIgnoreCase('true')){
 			if(!(RequiredNoCheckArray.contains(TCdoc))){
-				flagWarning++
+				flagFailed++
 			}
 		}
 	}else if(docRequired.equalsIgnoreCase('true')){
 		if(isChecked.equalsIgnoreCase('false')){
 			if(!(YesUncheckArray.contains(TCdoc))){
-				flagWarning++
+				flagFailed++
 			}
 		}
 	}
 	
 	if(PromiseDate != ''){
 		if(!(PromiseDateArray.contains(PromiseDate))){
-			flagWarning++
+			flagFailed++
 		}
 	}
 	
 	if(ExpiredDate != ''){
 		if(!(ExpiredDateArray.contains(ExpiredDate)) && !(ExpiredDocArray.contains(TCdoc))){
-			flagWarning++
+			flagFailed++
 		}
 	}
 	
 	if(WaivedChecked.equalsIgnoreCase('true')){
 		if(!(WaivedCheckArray.contains(TCdoc))){
-			flagWarning++
+			flagFailed++
 		}
 	}
 }
 
-if(flagWarning > 0){
+if(flagFailed > 0){
 	'write to excel FAILED'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabTermConditionData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
