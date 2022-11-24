@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.Select as Select
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'get applaststep dari confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("GUARANTOR") && !appLastStep.equalsIgnoreCase("NAP DETAIL") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -214,9 +215,11 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 	}
 	
 	if(referantorfaileddelete.size() > 0){
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 				'5.TabReferantorData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 			
+			'write to excel reason failed delete'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 			
@@ -965,9 +968,11 @@ public getTextBankAccount(String newSelectBankaccount){
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

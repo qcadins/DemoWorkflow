@@ -59,6 +59,7 @@ if (arrayMatch.contains(false)) {
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
+	'call keyword NAP2InsuranceCustStoreDB untuk get data dari db'
 	ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -82,10 +83,12 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 }
 
 public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
+	'call keyword NAP2InsuranceCustMFStoreDB untuk get data dari db'
 	ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
 		sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
 
+	'call keyword NAP2InsuranceMFStoreDB untuk get data dari db'
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -238,6 +241,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
+		'call keyword NAP2InsuranceMultiMainCVGtoreDB untuk get data dari db'
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -477,6 +481,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
 	arrayindex = 0
 	
+	'call keyword NAP2InsuranceMFStoreDB untuk get data dari db'
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -601,6 +606,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
+		'call keyword NAP2InsuranceMultiMainCVGtoreDB untuk get data dari db'
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))

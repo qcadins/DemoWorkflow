@@ -32,6 +32,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Fi
 ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnection, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 		13))
 
+'declare arraymatch arraylist'
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 int arrayindex = 0, arrayFeeIndex = 0

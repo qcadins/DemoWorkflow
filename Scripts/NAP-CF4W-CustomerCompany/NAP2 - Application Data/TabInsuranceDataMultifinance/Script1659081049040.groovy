@@ -918,8 +918,10 @@ else if (capinssetting=="PARTIAL"){
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 	
+'get text dari confins untuk verify di tab financial'
 GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/TotalInsurance'))
 	
+'get attribute dari confins untuk verify di tab financial'
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL)
 	
