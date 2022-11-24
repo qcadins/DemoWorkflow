@@ -21,47 +21,27 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 'Koneksi database'
-String servername = findTestData('Login/Login').getValue(1, 8)
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 8)
-
-String username = findTestData('Login/Login').getValue(3, 8)
-
-String password = findTestData('Login/Login').getValue(4, 8)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 8)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
-
-'Arraylist untuk menampung income info'
-ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
-
-'Arraylist untuk menampung remaining info commission'
-ArrayList<WebElement> remainingInfoCom = new ArrayList<WebElement>()
 
 'Arraylist untuk menampung remaining info reserved fund sebelum calculate'
 ArrayList<WebElement> remainingInfoRsv = new ArrayList<WebElement>()
 
 if(GlobalVariable.Role=="Testing"){
+	
+	'Arraylist untuk menampung remaining info commission'
+	ArrayList<WebElement> remainingInfoCom = new ArrayList<WebElement>()
+	
+	'Arraylist untuk menampung income info'
+	ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
 	
 	remainingInfoCom = GlobalVariable.ComRemainingInfoAmt
 	
@@ -130,10 +110,10 @@ modifyRemainingAllocatedAmountBfrCalculate = WebUI.modifyObjectProperty(findTest
 
 'Looping data allocation reserve fund'
 for(int i = 0;i<allocFrom.size();i++){
-	xpathInputAlloc = "//input[@id='ReservedFundAmt"+i+"']"
-	inputAlloc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),'xpath','equals',xpathInputAlloc, true)
-	xpathAllocFromSection = "//*[@id='reserved-fund-tab']/reserved-fund/div/div/div/form/div/div[1]/div["+(i+1)+"]/lib-ucsubsection/div/form/div/h4"
-	allocFromSectionObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/h4_RSVAllocFrom'),'xpath','equals',xpathAllocFromSection, true)
+
+	inputAlloc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/input_PROMO_InterestIncome'),'xpath','equals',"//input[@id='ReservedFundAmt"+i+"']", true)
+ 
+	allocFromSectionObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/h4_RSVAllocFrom'),'xpath','equals',"//*[@id='reserved-fund-tab']/reserved-fund/div/div/div/form/div/div[1]/div["+(i+1)+"]/lib-ucsubsection/div/form/div/h4", true)
 	
 	'Ambil nilai string text nama section allocation pada confins'
 	String textAllocFromSection = WebUI.getText(allocFromSectionObject)
@@ -157,23 +137,18 @@ for(int i = 0;i<allocFrom.size();i++){
 	BigDecimal remainingInfoAmt
 	'Looping remaining info'
 	for(int j =1;j<=countRemainingInfoBfrCalculate;j++){
-		newxpathRemainingInfo = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[1]/label')
-		 
-		newxpathRemainingInfoAmt = (('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[2]/label')
 		
-		modifyObjectRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfo'),'xpath','equals',newxpathRemainingInfo,true)
+		modifyObjectRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfo'),'xpath','equals',(('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[1]/label'),true)
 		
-		modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),'xpath','equals',newxpathRemainingInfoAmt, true)
+		modifyObjectRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),'xpath','equals',(('//*[@id="viewRemainIncomeInfo"]/div[' + j) + ']/div/div[2]/label'), true)
 		
 		'Ambil nilai string text remaining info'
 		String textRemainingInfo = WebUI.getText(modifyObjectRemainingInfo)
 		
-		String textRemainingInfoAmt 
-		
 		'Pengecekan jika text remaining info pada confins sesuai dengan nama section allocation'
 		if(textRemainingInfo == textAllocFromSection){
 			'Ambil nilai amount remaining info'
-			textRemainingInfoAmt = WebUI.getText(modifyObjectRemainingInfoAmt).replace(",","")
+			String textRemainingInfoAmt = WebUI.getText(modifyObjectRemainingInfoAmt).replace(",","")
 			remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
 			break
 		}
