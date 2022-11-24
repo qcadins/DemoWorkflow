@@ -18,25 +18,23 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-def FamilyArray = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+'declare datafileDupcheck'
+datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
 
-def FamilyActionArray = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 17).split(';', 
-    -1)
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
-def FamilyNegativeArray = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 18).split(';', 
-    -1)
+def FamilyArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+
+def FamilyActionArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+
+def FamilyNegativeArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
 'declare modify object variable'
-def modifyButtonEdit
-
-def modifyCustomerNo
-
-def modifyApplicantNo
-
-def modifySubjectType
+def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
 'declare subjectname variable'
 String subjectName
@@ -49,7 +47,7 @@ String newMSName
 
 String newCustomerNoValue
 
-if ((FamilyArray.size() > 0) && (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16).length() > 
+if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 
 0)) {
     for (int f = 1; f <= FamilyArray.size(); f++) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'), 
@@ -98,7 +96,7 @@ if ((FamilyArray.size() > 0) && (GlobalVariable.findTestDataDupcheckNAPPersonal.
             'get text subject type'
             subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
-            if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+            if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
                 8).length() == 0)) {
                 'verify name == data inputan'
                 checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))

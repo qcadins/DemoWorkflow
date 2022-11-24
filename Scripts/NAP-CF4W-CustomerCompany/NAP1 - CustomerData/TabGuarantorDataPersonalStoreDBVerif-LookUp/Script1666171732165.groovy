@@ -16,6 +16,9 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
+'declare datafileGuarantorPersonal'
+datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
+
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
@@ -24,7 +27,7 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'call keyword get guarantor data store db personal lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12), GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(
+    datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), datafileGuarantorPersonal.getValue(
         GlobalVariable.NumofGuarantorPersonal, 16))
 
 'looping verif db = confinsdata'

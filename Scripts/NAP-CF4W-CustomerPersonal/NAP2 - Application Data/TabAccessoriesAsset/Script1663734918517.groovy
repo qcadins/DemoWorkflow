@@ -218,9 +218,9 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  
-							  	 'get accessories name'
+								   'get accessories name'
 								 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-							  	  
+									
 								 'Click delete'
 								  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 								  

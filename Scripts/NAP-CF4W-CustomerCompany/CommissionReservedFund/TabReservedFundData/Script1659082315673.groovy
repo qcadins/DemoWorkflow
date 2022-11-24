@@ -27,6 +27,9 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileReservedFund'
+datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+
 GlobalVariable.FlagFailed = 0
 
 'Inisialisasi driver'
@@ -214,7 +217,7 @@ for (int i = 0; i < allocFrom.size(); i++) {
             }
             
             'Input Alloc Reserved Fund Amount'
-            WebUI.setText(inputAlloc, GlobalVariable.findTestDataReservedFundDataNAPCompany.getValue(GlobalVariable.NumofColm, 
+            WebUI.setText(inputAlloc, datafileReservedFund.getValue(GlobalVariable.NumofColm, 
                     rsvAmtRow + i), FailureHandling.OPTIONAL)
         } else if ((allocBhv[i]).equalsIgnoreCase('lock')) {
             if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes')) && (GlobalVariable.FirstTimeEntry == 
@@ -319,7 +322,7 @@ WebUI.delay(5)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataReservedFundDataNAPCompany.getValue(GlobalVariable.NumofColm, 
+Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 
         4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {

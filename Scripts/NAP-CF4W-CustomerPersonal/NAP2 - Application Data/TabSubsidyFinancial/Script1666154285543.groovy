@@ -25,27 +25,28 @@ import groovy.sql.Sql as Sql
 
 ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 
-def datafilefinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+'declare datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
-def SubsidyTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
+def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
 
-def SubsidyfromValueArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
+def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
 
-def AllocationformArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
+def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
 
-def SubsidySourceArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
+def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
 
-def SubsidyValueTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
+def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
 
-def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
+def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
 
-def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
+def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
 def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
-if (datafilefinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
+if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
 	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
 			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -327,7 +328,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 			}
 		} else if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-			if (datafilefinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
+			if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
 				if (SubsidyTypeArray.size() > 0) {
 					addSubsidy()
 				}

@@ -25,7 +25,7 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/labelCustomerName'))
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13), custname)
+		GlobalVariable.NumofColm, 13), custname)
 		
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
@@ -33,11 +33,11 @@ ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NA
 		GlobalVariable.NumofColm, 13))
 		
 //String bankaccount
-//def bankarray, confinsdatabankacc 
-//		
+//def bankarray, confinsdatabankacc
+//
 //	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
 //        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-//	
+//
 //	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 //		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
 //			 bankarray = bankaccount.split(', ')

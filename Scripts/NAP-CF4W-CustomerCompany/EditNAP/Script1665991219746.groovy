@@ -25,8 +25,20 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileMS'
+datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+
+'declare datafileGuarantorPersonal'
+datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
+
+'declare datafileGuarantorCompany'
+datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
+
 'get appno dari data file'
-String appNo = GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 8)
+String appNo = datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8)
 
 'check appCurrStep'
 String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
@@ -544,7 +556,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 def inputAppNo() {
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
-        GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -606,7 +618,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
         1); (GlobalVariable.NumofMS)++) {
-            if (GlobalVariable.findTestDataManagementShareholder.getValue(GlobalVariable.NumofMS, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+            if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
 
@@ -735,7 +747,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
         1); (GlobalVariable.NumofMS)++) {
-            if (GlobalVariable.findTestDataManagementShareholder.getValue(GlobalVariable.NumofMS, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofColm, 
+            if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
 
@@ -821,7 +833,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
         1); (GlobalVariable.NumofGuarantorPersonal)++) {
-            if (GlobalVariable.findTestDataGuarantorPersonalCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(
+            if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
@@ -866,7 +878,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
         1); (GlobalVariable.NumofGuarantorCompany)++) {
-            if (GlobalVariable.findTestDataGuarantorCompanyCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerCompany.getValue(
+            if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
 
@@ -901,4 +913,3 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             GlobalVariable.NumofColm - 1, GuarName)
     }
 }
-

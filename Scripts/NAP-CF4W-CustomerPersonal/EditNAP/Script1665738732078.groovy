@@ -23,7 +23,19 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String appNo = GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 8)
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabFamily'
+datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+
+'declare datafileTabGuarantorPersonal'
+datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+
+'declare datafileTabGuarantorCompany'
+datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
+
+String appNo = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8)
 
 String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
 
@@ -610,7 +622,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
         1); (GlobalVariable.NumofFamily)++) {
-            if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
+            if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
 
@@ -625,10 +637,10 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18, 
                 colm - 1, custname)
 
-            if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
+            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
                 'Write to dupcheck fam name'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16) + 
+                    15, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16) + 
                     ';') + custname)
             } else {
                 'Write to dupcheck fam name'
@@ -701,7 +713,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
         1); (GlobalVariable.NumofFamily)++) {
-            if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
+            if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
 
@@ -716,10 +728,10 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18, 
                 colm - 1, custname)
 
-            if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
+            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
                 'Write to dupcheck fam name'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 16) + 
+                    15, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16) + 
                     ';') + custname)
             } else {
                 'Write to dupcheck fam name'
@@ -749,7 +761,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
         1); (GlobalVariable.NumofGuarantorPersonal)++) {
-            if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
+            if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
 
@@ -764,10 +776,10 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 17, colm - 1, custname)
 
-            if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
+            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                 'Write to dupcheck cust name'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 19) + 
+                    18, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19) + 
                     ';') + custname)
             } else {
                 'Write to dupcheck cust name'
@@ -797,7 +809,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
         1); (GlobalVariable.NumofGuarantorCompany)++) {
-            if (GlobalVariable.findTestDataGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
+            if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
 
@@ -812,10 +824,10 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                 17, colm - 1, custname)
 
-            if (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
+            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                 'Write to dupcheck cust name'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, (GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 19) + 
+                    18, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19) + 
                     ';') + custname)
             } else {
                 'Write to dupcheck cust name'

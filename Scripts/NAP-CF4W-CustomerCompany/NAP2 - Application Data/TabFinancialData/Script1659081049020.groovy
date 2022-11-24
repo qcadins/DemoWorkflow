@@ -54,7 +54,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		'FINANCIAL DATA', false, FailureHandling.OPTIONAL))
 }
 
-def datafilefinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
+'declare datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry == "Yes") {
@@ -604,7 +605,7 @@ WebUI.delay(5)
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(
+Integer iscompleteMandatory = Integer.parseInt(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {

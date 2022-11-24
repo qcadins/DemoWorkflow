@@ -31,15 +31,23 @@ GlobalVariable.AssetPrice = 0.00
 
 GlobalVariable.TotalAccessoriesPrice = 0.00
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileTabAsset'
+datafileTabAsset = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData')
+
+'declare datafileAccessories'
+datafileAccessories = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories')
+
 WebDriver driver = DriverFactory.getWebDriver()
 
 'arraylist referantor name yang gagal'
-ArrayList<Boolean> accessoriesnamefaileddelete = new ArrayList<Boolean>()
+ArrayList<String> accessoriesnamefaileddelete = new ArrayList<String>()
 
 'Jika copy app edit'
-if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase(
-    'Edit')) {
-    ArrayList<Boolean> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+    ArrayList<String> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
     //Edit & Delete Acc, edit jika ada data pada confins dan excel datafile, delete jika ada data pada confins tetapi tidak ada data pada excel
     'Pengecekan pada confins accessories ada datanya'
@@ -110,24 +118,21 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             'Looping excel datafile'
             for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
             2); (GlobalVariable.NumofAccessories)++) {
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerCompany.getValue(
                         GlobalVariable.NumofColm, 13))) {
                     'Pengecekan assessories name dan supplier name pada confins sesuai dengan datafile excel'
-                    if (WebUI.getAttribute(modifyObjectSupplierName, 'value').equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
+                    if (WebUI.getAttribute(modifyObjectSupplierName, 'value').equalsIgnoreCase(datafileAccessories.getValue(
                             GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName, 'value').equalsIgnoreCase(
-                        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            16))) {
+                        datafileAccessories.getValue(GlobalVariable.NumofAccessories, 16))) {
                         'input accessories price'
-                        WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
+                        WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                17), FailureHandling.OPTIONAL)
 
                         'select security deposit type'
-                        WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
+                        WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                18), false, FailureHandling.OPTIONAL)
 
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Percentage') {
+                        if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                             'input security deposit percentage'
                             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -135,28 +140,27 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
-                            WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
+                            WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
                                         GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-                        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Amount') {
+                        } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                             'input security deposit amount'
-                            WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                    GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
+                            WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                    20), FailureHandling.OPTIONAL)
                         }
                         
                         'input accessories notes'
-                        WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
+                        WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                21), FailureHandling.OPTIONAL)
 
                         if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage, 
                             'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'get referantor name'
                             accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
@@ -281,16 +285,16 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     }
     
     if (accessoriesnamefaileddelete.size() > 0) {
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
-            GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 1, 
-            GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 1, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 
         (GlobalVariable.FlagWarning)++
     }
     
-    ArrayList<Boolean> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+    ArrayList<String> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
     int countData = variableData.size()
 
@@ -300,8 +304,7 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
     'Looping excel'
     for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
     2); (GlobalVariable.NumofAccessories)++) {
-        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-            12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13))) {
             'Looping confins accessories'
             for (int j = 1; j <= countData; j++) {
@@ -374,13 +377,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         'input Supplier Code'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'), 
-                            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                                13))
+                            datafileAccessories.getValue(GlobalVariable.NumofAccessories, 13))
 
                         'input supplier name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'), 
-                            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                                14))
+                            datafileAccessories.getValue(GlobalVariable.NumofAccessories, 14))
 
                         'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -393,12 +394,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             'click button x'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
 
                             'click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -408,8 +409,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'Write To Excel GlobalVariable.ReasonFailedDelete'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                    1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                             }
                             
                             continue
@@ -420,13 +421,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         'input Accessories Code'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'), 
-                            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                                15))
+                            datafileAccessories.getValue(GlobalVariable.NumofAccessories, 15))
 
                         'input accessories name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'), 
-                            findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                                16))
+                            datafileAccessories.getValue(GlobalVariable.NumofAccessories, 16))
 
                         'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -439,12 +438,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             'click button x'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
 
                             'click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -454,23 +453,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'Write To Excel GlobalVariable.ReasonFailedDelete'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                    1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                             }
                             
                             continue
                         }
                         
                         'input accessories price'
-                        WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
+                        WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                17), FailureHandling.OPTIONAL)
 
                         'select security deposit type'
-                        WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
+                        WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                18), false, FailureHandling.OPTIONAL)
 
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Percentage') {
+                        if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                             'input security deposit percentage'
                             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -478,28 +476,27 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
-                            WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
+                            WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
                                         GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-                        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Amount') {
+                        } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                             'input security deposit amount'
-                            WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                    GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
+                            WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                    20), FailureHandling.OPTIONAL)
                         }
                         
                         'input accessories notes'
-                        WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
+                        WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                21), FailureHandling.OPTIONAL)
 
                         if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage, 
                             'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
                             'write to excel WARNING'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 
                             'Write To Excel GlobalVariable.StatusReasonLookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 
                             'click delete'
                             WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -509,8 +506,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                                 'Write To Excel GlobalVariable.ReasonFailedDelete'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                    '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                    1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                             }
                             
                             continue
@@ -534,14 +531,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                             BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 
-                            if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                                18) == 'Percentage') {
+                            if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                                 int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                                 'verify securitydeposit value equal'
                                 checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-                            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 18) == 'Amount') {
+                            } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                                 float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                                 'verify securitydeposit value equal'
@@ -558,9 +553,9 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                         add = 0
                     }
                     
-                    if (!(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                        14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectSupplierName, 'value'))) || !(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                        GlobalVariable.NumofAccessories, 16).equalsIgnoreCase(WebUI.getAttribute(modifyObjectAccName, 'value')))) {
+                    if (!(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 14).equalsIgnoreCase(WebUI.getAttribute(
+                            modifyObjectSupplierName, 'value'))) || !(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                        16).equalsIgnoreCase(WebUI.getAttribute(modifyObjectAccName, 'value')))) {
                         if (countData == j) {
                             'click button add'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Add'))
@@ -570,9 +565,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                             countData = variableData.size()
 
                             add = 1
-                        }
-                    } //'Jika pada confins tidak ada data accessories'
-                    else {
+                        } //'Jika pada confins tidak ada data accessories'
+                    } else {
                         break
                     }
                 } else if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'), 
@@ -585,13 +579,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                     'input Supplier Code'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'), 
-                        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            13))
+                        datafileAccessories.getValue(GlobalVariable.NumofAccessories, 13))
 
                     'input supplier name'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'), 
-                        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            14))
+                        datafileAccessories.getValue(GlobalVariable.NumofAccessories, 14))
 
                     'click button search'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -619,8 +611,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                             'Write To Excel GlobalVariable.ReasonFailedDelete'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                         }
                         
                         continue
@@ -631,13 +623,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                     'input Accessories Code'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'), 
-                        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            15))
+                        datafileAccessories.getValue(GlobalVariable.NumofAccessories, 15))
 
                     'input accessories name'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'), 
-                        findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            16))
+                        datafileAccessories.getValue(GlobalVariable.NumofAccessories, 16))
 
                     'click button search'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -665,23 +655,22 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                             'Write To Excel GlobalVariable.ReasonFailedDelete'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                         }
                         
                         continue
                     }
                     
                     'input accessories price'
-                    WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                            GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
+                    WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                            17), FailureHandling.OPTIONAL)
 
                     'select security deposit type'
-                    WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                            GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
+                    WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                            18), false, FailureHandling.OPTIONAL)
 
-                    if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                        18) == 'Percentage') {
+                    if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                         'input security deposit percentage'
                         WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -689,18 +678,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
-                        WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
+                        WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
                                     GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-                    } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                        18) == 'Amount') {
+                    } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                         'input security deposit amount'
-                        WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                                GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
+                        WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                                20), FailureHandling.OPTIONAL)
                     }
                     
                     'input accessories notes'
-                    WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                            GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
+                    WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                            21), FailureHandling.OPTIONAL)
 
                     if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage, 
                         'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
@@ -720,8 +708,8 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         if (WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)) {
                             'Write To Excel GlobalVariable.ReasonFailedDelete'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
+                                1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
                         }
                         
                         continue
@@ -745,14 +733,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                         BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 
-                        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Percentage') {
+                        if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                             int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                             'verify securitydeposit value equal'
                             checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-                        } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                            18) == 'Amount') {
+                        } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                             float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                             'verify securitydeposit value equal'
@@ -767,14 +753,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
                         0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
                 }
             }
-        }
-    } //Jika copy app no
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 
-    10).equalsIgnoreCase('No')) {
+        } //Jika copy app no
+    }
+} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
     for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) + 
     1); (GlobalVariable.NumofAccessories)++) {
-        if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-            12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13))) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Add'))
@@ -836,13 +820,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
             'input Supplier Code'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    13))
+                datafileAccessories.getValue(GlobalVariable.NumofAccessories, 13))
 
             'input supplier name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    14))
+                datafileAccessories.getValue(GlobalVariable.NumofAccessories, 14))
 
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -882,13 +864,11 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
             'input Accessories Code'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    15))
+                datafileAccessories.getValue(GlobalVariable.NumofAccessories, 15))
 
             'input accessories name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'), 
-                findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    16))
+                datafileAccessories.getValue(GlobalVariable.NumofAccessories, 16))
 
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
@@ -924,15 +904,14 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             }
             
             'input accessories price'
-            WebUI.setText(modifyObjectAccessoriesPrice, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                    GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
+            WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 17), 
+                FailureHandling.OPTIONAL)
 
             'select security deposit type'
-            WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                    GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
+            WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                    18), false, FailureHandling.OPTIONAL)
 
-            if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                18) == 'Percentage') {
+            if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                 'input security deposit percentage'
                 WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 
@@ -940,18 +919,17 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                 WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 
-                WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                            GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-            } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                18) == 'Amount') {
+                WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                            19)), FailureHandling.OPTIONAL)
+            } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                 'input security deposit amount'
-                WebUI.setText(modifyObjectInputAmount, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                        GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
+                WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 20), 
+                    FailureHandling.OPTIONAL)
             }
             
             'input accessories notes'
-            WebUI.setText(modifyObjectInputNoteAccessories, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(
-                    GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
+            WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(GlobalVariable.NumofAccessories, 
+                    21), FailureHandling.OPTIONAL)
 
             if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage, 
                 'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
@@ -997,14 +975,12 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
 
                 BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 
-                if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    18) == 'Percentage') {
+                if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
                     int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 
                     'verify securitydeposit value equal'
                     checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-                } else if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 
-                    18) == 'Amount') {
+                } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
                     float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 
                     'verify securitydeposit value equal'
@@ -1015,21 +991,21 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').g
             }
             
             'write to excel success'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 
-                0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0, 
+                GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
         }
     }
 }
-	
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-						0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
-		
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-						1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-		
-			GlobalVariable.FlagFailed=1
-	}
+
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0, GlobalVariable.NumofAccessories - 
+            1, GlobalVariable.StatusFailed)
+
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 1, GlobalVariable.NumofAccessories - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+        GlobalVariable.FlagFailed = 1
+    }
 }
 

@@ -75,8 +75,8 @@ if (GlobalVariable.Role == 'Data Entry') {
 	
 	'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-                    copyAppColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-                    copyAppColm, 10).equalsIgnoreCase("Edit")){
+					copyAppColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
+					copyAppColm, 10).equalsIgnoreCase("Edit")){
 		GlobalVariable.CopyAppColm = copyAppColm
 		'call test case tab referantor'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'),
@@ -84,7 +84,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	//dijalankan dengan copy app tab referantor
 	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
-                    copyAppColm, 10).equalsIgnoreCase("Yes")){
+					copyAppColm, 10).equalsIgnoreCase("Yes")){
 		'click button save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 		
@@ -261,7 +261,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
 		}
 	}
-    
+	
 	'Dijalankan tanpa copy app tab life insurance atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
@@ -371,14 +371,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
 	'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
+	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) +
 		1); (GlobalVariable.NumofUploadDocument)++) {
-        	if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+			if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
 				GlobalVariable.NumofUploadDocument, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13)) {
 			copyAppColm = GlobalVariable.NumofUploadDocument
 			break
-        }
+		}
 	}
 	
 	'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'

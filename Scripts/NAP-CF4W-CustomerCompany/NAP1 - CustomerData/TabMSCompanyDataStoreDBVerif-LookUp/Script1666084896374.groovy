@@ -22,9 +22,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare arraymatch arraylist'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
+'declare datafileMS'
+datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+
 'call keyword Ms data company store db lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompanyLookUp'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 12), GlobalVariable.findTestDataCustomerCompany.getValue(GlobalVariable.NumofMS, 50))
+    datafileMS.getValue(GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 50))
 
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (result.size() - 1); i++) {

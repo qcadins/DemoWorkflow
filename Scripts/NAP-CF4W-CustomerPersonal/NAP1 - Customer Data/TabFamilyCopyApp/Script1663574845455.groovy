@@ -26,18 +26,24 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabFamily'
+datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+
 ArrayList<String> custnamefaileddelete = new ArrayList<String>()
 
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
     8).length() > 1)) {
     'Connect DB LOS'
     Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
     ArrayList<String> listFam = new ArrayList<String>()
 
-    listFam = CustomKeywords.'dbConnection.getInfoForEditNAP.getFamilyDataforEditNAP'(sqlConnectionLOS, GlobalVariable.findTestDataCustomerPersonal.getValue(
+    listFam = CustomKeywords.'dbConnection.getInfoForEditNAP.getFamilyDataforEditNAP'(sqlConnectionLOS, datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 8))
 
     ArrayList<String> arrayMatch = new ArrayList<String>()
@@ -108,11 +114,11 @@ for (int i = 1; i <= variableData.size(); i++) {
     'Loop Multiple family data'
     for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
     1); (GlobalVariable.NumofFamily)++) {
-        if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12) == GlobalVariable.findTestDataCustomerPersonal.getValue(
+        if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
             if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
-                if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
-                        19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(GlobalVariable.findTestDataFamily.getValue(
+                if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
+                        19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 16))) {
                     'modify object button edit'
                     modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -123,53 +129,53 @@ for (int i = 1; i <= variableData.size(); i++) {
                         'click button edit'
                         WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
-                        if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+                        if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 'select customer relation'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 18), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
 
                                 'input family name'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 19))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
 
                                 'input birth place'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 20))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 20))
 
                                 'select idtype'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 21), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21), false)
 
                                 'input Id Expired Date'
-                                if (((GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') && 
-                                (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) && 
-                                (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 21) != 'AKTA')) {
+                                if (((datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') && 
+                                (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) && 
+                                (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'AKTA')) {
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 22))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22))
                                 }
                                 
                                 'select marital status'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 23), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 23), false)
 
                                 'input mobile phone'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 24))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 24))
 
                                 'select customer model'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 25), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 
                                 1) {
                                     'click lookup button proffession name'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
 
                                     'input profession code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession Code_professionCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 26))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 26))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -191,43 +197,43 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 
                                 'input employee establishment date'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Employee Establishment Date'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 28))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 28))
 
                                 'select gender'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Gender'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 29), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 29), false)
 
                                 'input birth date'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 30))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 30))
 
                                 'input id no'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 31))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 31))
 
                                 'input tax id'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 32))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 32))
 
                                 'input mother maiden name'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mother Maiden Name'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 33))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 33))
 
                                 'input email'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Email_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 34))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 34))
 
                                 'select nationality'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 35), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35), false)
 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
                                     'click button lookup country'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
 
                                     'input country code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Country Code_countryCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 36))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 36))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -258,14 +264,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 
                                 1) {
                                     'click button lookup job position'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
 
                                     'input job position code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Job Position Code_JobCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 38))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 38))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -285,14 +291,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 
                                 1) {
                                     'click button lookup department AML'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
 
                                     'input department AML Code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 41))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 41))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -323,14 +329,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 
                                 1) {
                                     'click button lookup authority AML'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
 
                                     'input authority AML Code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 43))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 43))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -350,41 +356,41 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 46) == 'Yes') {
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46) == 'Yes') {
                                     'click button copy'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Copy'))
-                                } else if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 46) == 
+                                } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46) == 
                                 'No') {
                                     'input text address'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/textarea_Address'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 47))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 47))
 
                                     'input RT'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RT'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 48))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 48))
 
                                     'input RW'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_RW'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 49))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 49))
 
                                     'click button zipcode'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Zipcode_btn btn-raised btn-primary'))
 
                                     'input zipcode'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Zipcode_form-control ng-untouched ng-pristine ng-invalid'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 50))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 50))
 
                                     'input kecamatan'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Kecamatan'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 51))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 51))
 
                                     'input kelurahan'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Kelurahan'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 52))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 52))
 
                                     'input kota'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Kota'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 53))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 53))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_SearchZipcode'))
@@ -416,10 +422,10 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     
                                     'select ownership'
                                     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 54), false)
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 54), false)
                                 }
                             }
-                        } else if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
+                        } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
                                 'click customer lookup'
@@ -427,15 +433,15 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'input customer no'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer No_custNoId'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 15))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 15))
 
                                 'input customer name'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer Name_custNameId'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 16))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 16))
 
                                 'input customer id no'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_IdNoId'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 17))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 17))
 
                                 'click search'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -475,20 +481,20 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 
                                 'select customer relation'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 18), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
 
                                 'select customer model'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 25), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 
                                 1) {
                                     'click lookup button proffession name'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
 
                                     'input profession code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession Code_professionCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 26))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 26))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -510,19 +516,19 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 
                                 'input employee establishment date'
                                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Employee Establishment Date'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 28))
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 28))
 
                                 'select nationality'
                                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
-                                    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 35), false)
+                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35), false)
 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
                                     'click button lookup country'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
 
                                     'input country code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Country Code_countryCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 36))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 36))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -553,14 +559,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 
                                 1) {
                                     'click button lookup job position'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
 
                                     'input job position code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Job Position Code_JobCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 38))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 38))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -580,14 +586,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 
                                 1) {
                                     'click button lookup department AML'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
 
                                     'input department AML Code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 41))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 41))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -618,14 +624,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     }
                                 }
                                 
-                                if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 
+                                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 
                                 1) {
                                     'click button lookup authority AML'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
 
                                     'input authority AML Code'
                                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Code_MasterCodeId'), 
-                                        GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 43))
+                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 43))
 
                                     'click button search'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
@@ -648,7 +654,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         }
                         
                         //Ambil nilai dari confins untuk verif store db lookup
-                        if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        if ((GlobalVariable.Role == 'Testing') && (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
                             13) == 'LookUp')) {
                             getDataCust()
 
@@ -672,7 +678,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         'click button save'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Save'))
 
-                        Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 
+                        Integer iscompleteMandatory = Integer.parseInt(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
                                 4))
 
                         if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
@@ -713,13 +719,13 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
-                        if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+                        if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                             if (GlobalVariable.Role == 'Testing') {
                                 'call test case Family data store verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
-                        } else if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
+                        } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
                             if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                                 'call test case family lookup store data verif'
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'), 
@@ -730,7 +736,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         break
                     }
                 } else {
-                    if (GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily + 1, 12) != GlobalVariable.findTestDataCustomerPersonal.getValue(
+                    if (datafileTabFamily.getValue(GlobalVariable.NumofFamily + 1, 12) != datafileCustomerPersonal.getValue(
                         GlobalVariable.NumofColm, 13)) {
                         'modify object button delete'
                         modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 

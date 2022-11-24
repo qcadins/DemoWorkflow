@@ -22,24 +22,24 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
-
 int arrayindex = 0
 
 int flagWarning = 0
 
-datafiletermcondition = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
+'declare datafileTabTC'
+datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
 
-def YesUncheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+def YesUncheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
-def PromiseDateArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+def PromiseDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
-def RequiredNoCheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+def RequiredNoCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
-def ExpiredDocArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+def ExpiredDocArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
-def ExpiredDateArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+def ExpiredDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
-def WaivedCheckArray = datafiletermcondition.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+def WaivedCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
 for(index = 0 ; index < result.size()/9 ; index++){
 	TCdoc = result[arrayindex++]

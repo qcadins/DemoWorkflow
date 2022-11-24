@@ -16,15 +16,24 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
-String DepartmentAML = GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 33)
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
-String AuthorityAML = GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 35)
+'declare datafileTabGuarantorPersonal'
+datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+
+'declare datafileTabGuarantorCompany'
+datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
+
+String DepartmentAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 33)
+
+String AuthorityAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 35)
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), GlobalVariable.findTestDataGuarantorPersonal.getValue(
+    datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(
         GlobalVariable.CopyAppColm, 19))
 
 int arrayindex = 0
@@ -32,69 +41,69 @@ int arrayindex = 0
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify guarantor name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 19).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 19).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth place'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 20).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 20).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 21).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if ((!(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('E-KTP')) || 
-!(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('AKTA'))) || !(GlobalVariable.findTestDataGuarantorPersonal.getValue(
+if ((!(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('E-KTP')) || 
+!(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('AKTA'))) || !(datafileTabGuarantorPersonal.getValue(
     GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('NPWP'))) {
     'verify id expired date'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     arrayindex++
 }
 
 'verify marital status'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 23).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 23).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mobile phone'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 24).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 24).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 25).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 25).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify gender'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 26).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 26).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 27).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 27).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id no'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 28).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 28).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 29).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 29).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mother maiden name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 30).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 30).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify email'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 31).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 31).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 //'verify department aml value'
-//if (GlobalVariable.findTestDataGuarantorPersonal.getValue(
+//if (datafileTabGuarantorPersonal.getValue(
 //    GlobalVariable.CopyAppColm, 33) == '#N/A') {
 //    'set department aml value menjadi string kosong'
 //    DepartmentAML = ''
@@ -104,7 +113,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.ge
 //arrayMatch.add(WebUI.verifyMatch(DepartmentAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 //
 //'verify authority aml value'
-//if (GlobalVariable.findTestDataGuarantorPersonal.getValue(
+//if (datafileTabGuarantorPersonal.getValue(
 //    GlobalVariable.CopyAppColm, 35) == '#N/A') {
 //    'set authority aml value menjadi kosong'
 //    AuthorityAML = ''
@@ -113,69 +122,69 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.ge
 //'verify authority aml'
 //arrayMatch.add(WebUI.verifyMatch(AuthorityAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 'verify copy address atau tidak'
-if (GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 38).equalsIgnoreCase('Yes')) {
+if (datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 38).equalsIgnoreCase('Yes')) {
     'verify addres copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rt copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rw copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 40).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 40).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 41).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 41).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 42).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 42).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 43).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 43).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 44).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 44).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership copy dari customer'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataCustomerPersonal.getValue(GlobalVariable.NumofColm, 45).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 45).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 39).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 39).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rt'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 40).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 40).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rw'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 41).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 41).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 42).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 42).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 43).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 43).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 44).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 44).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 45).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 45).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.findTestDataGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 46).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 46).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 

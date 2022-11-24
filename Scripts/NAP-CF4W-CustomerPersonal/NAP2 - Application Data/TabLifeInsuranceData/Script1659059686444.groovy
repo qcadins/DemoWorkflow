@@ -25,6 +25,9 @@ import groovy.sql.Sql as Sql
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileTabLifeInsurance'
+datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
+
 GlobalVariable.FlagFailed=0
 
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -50,7 +53,7 @@ def jsCode = 'return document.querySelector("input.mat-checkbox-input.cdk-visual
 CustomKeywords.'JsExecutor.jsExecutionFunction'(jsCode)
 
 'Cek IsCoverLifeInsurance Tercentang atau tidak pada Excel'
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+if (datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
@@ -107,26 +110,26 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     
     'Select DropDownList Life Insco Branch Name'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 13), false, FailureHandling.OPTIONAL)
 
     'Select DropDownList Premium Payment Method'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 14), false)
 
     'Cek dan Memastikan Jika Premium Payment Method = Paid in Advance & Capitalized Mix'
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+    if (datafileTabLifeInsurance.getValue(
         GlobalVariable.NumofColm, 14) == 'Paid in Advance & Capitalized Mix') {
         'Set Nilai Persentasi Capitalized Premium'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
-            findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+            datafileTabLifeInsurance.getValue(
                 GlobalVariable.NumofColm, 15))
     }
     
     'Set Notes'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/textarea_Notes'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 16))
 
     'Inisialisasi Driver'
@@ -152,15 +155,15 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         String textSubject = WebUI.getText(modifyObjectSubject)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Customer tercentang atau tidak'
-        String isCustomer = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        String isCustomer = datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 18)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Guarantor tercentang atau tidak'
-        String isGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        String isGuarantor = datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 19)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Spouse tercentang atau tidak'
-        String isSpouse = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        String isSpouse = datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 20)
 
         if (textSubject == 'CUSTOMER') {
@@ -191,7 +194,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
                 
-                def checkGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+                def checkGuarantor = datafileTabLifeInsurance.getValue(
                     GlobalVariable.NumofColm, 21).split(';')
 
                 modifyObjectSubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
@@ -234,7 +237,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     
     'Set Admin Fee Amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Admin Fee Amount_CustAdminFeeAmt'), 
-        findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+        datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 23))
 
     NumberFormat decimalFormat = NumberFormat.getPercentInstance()
@@ -243,7 +246,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         'value', FailureHandling.OPTIONAL).replaceAll('\\s', '')
 
     GlobalVariable.CapitalizePremiumPercentage = decimalFormat.parse(CapitalizePremiumPercentageValue).floatValue()
-} else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+} else if(datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'NO') {
     if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
@@ -258,7 +261,7 @@ WebUI.delay(5)
 'click Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'

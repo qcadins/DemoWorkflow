@@ -18,6 +18,9 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileTabInsurance'
+datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
+
 GlobalVariable.FlagFailed = 0
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
@@ -43,7 +46,7 @@ if (GlobalVariable.Role == 'Testing') {
 	
 }
 
-String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+String insuredBy = datafileTabInsurance.getValue(
     GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
@@ -76,7 +79,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+Integer iscompleteMandatory = Integer.parseInt(datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {

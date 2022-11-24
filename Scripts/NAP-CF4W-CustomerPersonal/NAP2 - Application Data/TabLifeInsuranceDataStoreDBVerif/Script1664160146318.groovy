@@ -19,14 +19,17 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabLifeInsurance'
+datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
+
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
-
-
 
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (result.size() - 1); i++) {
-
 	if((result[i]) == 'true'){
 	(result[i]) = 'Yes'
 	}else if((result[i]) == 'false'){
@@ -39,35 +42,35 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 int arrayindex = 0
 
 'verify insco branch name'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify premium payment method'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify premium percentage'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 15).replace('%',''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify notes'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 16).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject customer'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject guarantor'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject spouse'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify admin fee'
-arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
+arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 

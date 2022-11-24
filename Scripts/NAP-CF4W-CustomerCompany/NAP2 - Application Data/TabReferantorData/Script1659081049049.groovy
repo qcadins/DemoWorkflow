@@ -39,7 +39,8 @@ if (GlobalVariable.Role == 'Testing') {
         'REFERANTOR', false, FailureHandling.OPTIONAL))
 }
 
-datafilereferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
+'declare datafileReferantor'
+datafileReferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
@@ -53,7 +54,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 //Jika copy app edit
-if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
     //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
     if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
         'Pengecekan checkbox sebelumnya tidak tercentang'
@@ -116,21 +117,21 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
             'Looping excel referantor'
             for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(
                 GlobalVariable.CountofReferantor) + 2); (GlobalVariable.NumofReferantor)++) {
-                if (datafilereferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+                if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                     GlobalVariable.NumofColm, 13)) {
                     'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
-                    if (textRefCategory.equalsIgnoreCase(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 13)) && 
-                    WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(datafilereferantor.getValue(
+                    if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) && 
+                    WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(datafileReferantor.getValue(
                             GlobalVariable.NumofReferantor, 14))) {
                         'select bank account'
-                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 16), FailureHandling.OPTIONAL)
 
                         'call function gettext bankaccount'
                         getTextBankAccount(newSelectBankaccount)
 
                         'select tax calculation'
-                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
 
                         'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -243,7 +244,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
     'Looping excel referantor'
     for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(
         GlobalVariable.CountofReferantor) + 2); (GlobalVariable.NumofReferantor)++) {
-        if (datafilereferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
             GlobalVariable.NumofColm, 13)) {
             'Looping confins referantor'
             for (int j = 1; j <= countData; j++) {
@@ -292,7 +293,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     if (add == 1) {
                         'select referantor category'
-                        WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 13), false, FailureHandling.OPTIONAL)
 
                         'Ambil dan simpan nilai referantor category dari confins'
@@ -326,7 +327,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         
                         'input referantor name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                            datafilereferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                            datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
 
                         'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -391,14 +392,14 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                         }
                         
                         'select bank account'
-                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 16), FailureHandling.OPTIONAL)
 
                         'call function gettext bankaccount'
                         getTextBankAccount(newSelectBankaccount)
 
                         'select tax calculation method'
-                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
 
                         'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -431,8 +432,8 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     'Ambil referantor category yang dipilih pada confins'
                     String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 
-                    if (!(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory)) || 
-                    !(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 14).equalsIgnoreCase(WebUI.getAttribute(
+                    if (!(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory)) || 
+                    !(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14).equalsIgnoreCase(WebUI.getAttribute(
                             modifyObjectReferantorName, 'value')))) {
                         if (countData == j) {
                             'click button add'
@@ -454,7 +455,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Add'))
 
                     'select referantor category'
-                    WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             13), false, FailureHandling.OPTIONAL)
 
                     'Ambil dan simpan nilai referantor category dari confins'
@@ -488,7 +489,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     
                     'input referantor name'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                        datafilereferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                        datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
 
                     'click button search'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -556,14 +557,14 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     }
                     
                     'select bank account'
-                    WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             16), FailureHandling.OPTIONAL)
 
                     'call function gettext bankaccount'
                     getTextBankAccount(newSelectBankaccount)
 
                     'select tax calculation method'
-                    WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             17), false, FailureHandling.OPTIONAL)
 
                     'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -618,7 +619,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     }
                 }
                 
-                Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                         4))
 
                 if (iscompleteMandatory == 0) {
@@ -638,7 +639,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 }
 
 //Jika copy app no
-if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
     if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
         'Pengecekan checkbox sebelumnya tidak tercentang'
         if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'), 
@@ -652,7 +653,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
         'looping referantor'
         for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) + 
         1); (GlobalVariable.NumofReferantor)++) {
-            if (datafilereferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+            if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 13)) {
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Add'))
@@ -692,7 +693,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                     'xpath', 'equals', newButtonDelete, true)
 
                 'select referantor category'
-                WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                         13), false, FailureHandling.OPTIONAL)
 
                 'Ambil dan simpan nilai referantor category dari confins'
@@ -726,7 +727,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 
                 'input referantor name'
                 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                    datafilereferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                    datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
 
                 'click button search'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -793,14 +794,14 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
                 }
                 
                 'select bank account'
-                WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                         16), FailureHandling.OPTIONAL)
 
                 'call function gettext bankaccount'
                 getTextBankAccount(newSelectBankaccount)
 
                 'select tax calculation method'
-                WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(GlobalVariable.NumofReferantor, 
+                WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                         17), false, FailureHandling.OPTIONAL)
 
                 'cek inputan mandatory apakah sudah terisi semua atau belum'
@@ -902,7 +903,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafilereferantor.getValue(GlobalVariable.CopyAppColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.CopyAppColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'

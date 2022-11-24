@@ -18,6 +18,11 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabUploadDoc'
+datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
@@ -28,8 +33,8 @@ if (GlobalVariable.Role == 'Testing') {
 if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
     for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
     1); (GlobalVariable.NumofUploadDocument)++) {
-        if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
-            GlobalVariable.NumofUploadDocument, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+        if (datafileTabUploadDoc.getValue(
+            GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
             'click menu titik 3'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
@@ -45,27 +50,27 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
             
             'upload file'
             CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+                datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 13))
 
             'input document name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+                datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 14))
 
             'select jenis document'
             WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+                datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 15), false)
 
             'input MOU Id'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+                datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 16))
 
             'input notes'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(
+                datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 17))
 
             'click button save'
@@ -101,7 +106,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 'input app no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
 'click button search'
@@ -109,7 +114,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 
 'verify appno'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

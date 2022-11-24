@@ -19,9 +19,12 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileTabFamily'
+datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 12), GlobalVariable.findTestDataFamily.getValue(
-        GlobalVariable.NumofFamily, 16), GlobalVariable.findTestDataFamily.getValue(GlobalVariable.NumofFamily, 27))
+    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(
+        GlobalVariable.NumofFamily, 16), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27))
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 

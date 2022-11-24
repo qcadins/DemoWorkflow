@@ -22,16 +22,22 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(filePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
-ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnection, GlobalVariable.findTestDataCustomerPersonal.getValue(
+'declare datafileReservedFund'
+datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+
+'Row yang menandakan dimulainya data section reserve fund amount pada excel'
+def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
+
+ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
 for(int i=0;i<resultDB.size();i++){
 	
 	'verif reserved fund amt db dengan excel'
-	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(GlobalVariable.findTestDataReservedFundNAPPersonal.getValue(
+	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(datafileReservedFund.getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))==false){
 			'Write to Excel FAILED'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
@@ -40,8 +46,6 @@ for(int i=0;i<resultDB.size();i++){
 			'Write To Excel GlobalVariable.ReasonFailedStoredDB'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
-			
-			
 	}
 }
 

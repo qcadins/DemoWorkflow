@@ -20,6 +20,9 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'declare datafileTabInsurance'
+datafileTabInsurance = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData')
+
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -41,7 +44,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
 }
 
-String insuredBy = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(
+String insuredBy = datafileTabInsurance.getValue(
 	GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
@@ -72,7 +75,7 @@ WebUI.delay(3)
 'Klik save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 4)) == 0
+if (Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)) == 0
 	&& GlobalVariable.FlagFailed==0) {
 	'Check alert'
 	GlobalVariable.FlagFailed=CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
@@ -82,10 +85,10 @@ WebUI.delay(5)
 
 if(GlobalVariable.FlagFailed == 0){
 'check save process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 4)),
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)),
 	findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), GlobalVariable.NumofColm, '8.TabInsuranceData')
 
-if(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 4)) == 0){
+if(Integer.parseInt(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 4)) == 0){
 'check error validasi'
 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/errorvalidasi'), GlobalVariable.NumofColm, '8.TabInsuranceData')
 }

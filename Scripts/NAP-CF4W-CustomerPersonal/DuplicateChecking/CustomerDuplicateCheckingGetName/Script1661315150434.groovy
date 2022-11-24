@@ -16,6 +16,9 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
+'declare datafileDupcheck'
+datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 String CDCCustomerPersonal = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
@@ -32,7 +35,7 @@ Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMU
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String DupcheckAppNo = GlobalVariable.findTestDataDupcheckNAPPersonal.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)

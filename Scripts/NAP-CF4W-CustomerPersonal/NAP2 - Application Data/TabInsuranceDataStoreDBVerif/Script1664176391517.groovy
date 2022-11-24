@@ -25,7 +25,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 String insuredBy = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
-    GlobalVariable.NumofColm, 12)
+	GlobalVariable.NumofColm, 12)
 
 int arrayindex = 0
 
@@ -41,18 +41,18 @@ if (insuredBy == 'Customer') {
 } else if (insuredBy == 'Customer - Multifinance') {
 	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
 } else if (insuredBy == 'Multifinance') {
-    insuredMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
+	insuredMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-    'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+	'write to excel FAILED'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1,
+		GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
@@ -596,7 +596,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 		}
 	} else {
 		'Mengambil nilai setting cap insurance dari db'
-        String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
+		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
