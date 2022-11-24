@@ -24,10 +24,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Em
         'value'), WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ID No'), 
         'value'))
 
-println(result)
-
-
-
 'ganti value null > "" (String kosong)'
 for (i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
     if ((GlobalVariable.Confinsdata[i]) == null) {

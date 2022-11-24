@@ -83,11 +83,14 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 21).length() > 2) {
+	'click button cust group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/button_Customer Group'))
 
+	'input cust name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/input_Customer Name_custNameId'), 
         GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 21))
 
+	'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/button_Search'))
 
     'verify input error'
