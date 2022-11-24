@@ -21,15 +21,26 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileCDC'
+datafileCDC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion')
+
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 //Verify sort & paging
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
-	ArrayList<Boolean> resultReset,checkVerifySort,checkVerifyFooter = new ArrayList<>()
-	//	verif reset nap4
-	resultReset = CustomKeywords.'paging.verifyPaging.resetPagingCustDataCompletion'()
-	
+    ArrayList<String> resultReset
+
+    ArrayList<String> checkVerifySort
+
+    ArrayList<String> checkVerifyFooter = new ArrayList<String>()
+
+    //	verif reset nap4
+    resultReset = CustomKeywords.'paging.verifyPaging.resetPagingCustDataCompletion'()
+
     ArrayList<String> listString = new ArrayList<String>()
 
     'click search'
@@ -45,15 +56,13 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_Office'))
 
     'Verif tidak ada alert yang muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     for (int i = 1; i <= rowData.size(); i++) {
         appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'), 
@@ -92,8 +101,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custNo'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -114,8 +122,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custName'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -154,8 +161,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_POName'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 
-        2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     listString = new ArrayList<String>()
 
@@ -208,7 +214,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 
         'Verif page 2 active'
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'), 
-            'aria-current', 2))
+                'aria-current', 2))
 
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
@@ -226,92 +232,89 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
         Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
-		
-		'Klik button prev'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Prev'))
-		
-		'Verify page 1 active'
-		checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'),
-			'aria-current', 2))
-		
-		listApp = listString
-				
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
-				
-		'Verif appno yang ada di page 1 tidak ada di page 2'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
-		
-		'Klik button next'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Next'))
-		
-		'Verify page 2 active'
-		checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'),
-			'aria-current', 2))
-		
-		listApp = listString
-		
-		listString = new ArrayList<String>()
-		
-		listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
-				
-		'Verif appno yang ada di page 2 tidak ada di page 1'
-		isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
-		
-		checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
-		
-    }
-	
-	'Klik button page 1'
-	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'))
-	
-	checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(),true))
-	
-	if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-		GlobalVariable.NumofColm, 1)){
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-	
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-					GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"NAP4"+";\n")
-	
-			GlobalVariable.FlagWarning=1
-	}
-	
-	if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 1)){
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-		
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"NAP4"+";\n"))
-		
-			GlobalVariable.FlagWarning=1
-	}
-		
-	if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 1)){
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-		
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-						1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-			GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"NAP4"+";\n"))
-		
 
-			GlobalVariable.FlagWarning=1
-	}
+        'Klik button prev'
+        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Prev'))
+
+        'Verify page 1 active'
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'), 
+                'aria-current', 2))
+
+        listApp = listString
+
+        listString = new ArrayList<String>()
+
+        listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
+
+        'Verif appno yang ada di page 1 tidak ada di page 2'
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+
+        checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+
+        'Klik button next'
+        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Next'))
+
+        'Verify page 2 active'
+        checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'), 
+                'aria-current', 2))
+
+        listApp = listString
+
+        listString = new ArrayList<String>()
+
+        listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
+
+        'Verif appno yang ada di page 2 tidak ada di page 1'
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+
+        checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+    }
+    
+    'Klik button page 1'
+    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'))
+
+    checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(), true))
+
+    if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        1))) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            1, GlobalVariable.NumofColm - 1, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                '') + GlobalVariable.ReasonFailedReset) + 'NAP4') + ';\n')
+
+        GlobalVariable.FlagWarning = 1
+    }
+    
+    if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        1))) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                '') + ((GlobalVariable.ReasonFailedSort + 'NAP4') + ';\n'))
+
+        GlobalVariable.FlagWarning = 1
+    }
+    
+    if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        1))) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
+            1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                '') + ((GlobalVariable.ReasonFailedFooter + 'NAP4') + ';\n'))
+
+        GlobalVariable.FlagWarning = 1
+    }
 }
 
 'input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 12))
+    datafileCDC.getValue(GlobalVariable.NumofColm, 12))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
@@ -325,7 +328,7 @@ ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root
 
 int count = variable.size()
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 'verify equal number of customer'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
@@ -365,16 +368,13 @@ for (int i = 1; i <= count; i++) {
     String CustomerType = WebUI.getText(modifynewCustomerType)
 
     'tampung customer array excel'
-    def CustomerArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 13).split(';')
+    def CustomerArray = datafileCDC.getValue(GlobalVariable.NumofColm, 13).split(';')
 
     'tampung family array excel'
-    def FamilyArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 15).split(';')
+    def FamilyArray = datafileCDC.getValue(GlobalVariable.NumofColm, 15).split(';')
 
     'tampung guarantor array excel'
-    def GuarantorArray = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 17).split(';')
+    def GuarantorArray = datafileCDC.getValue(GlobalVariable.NumofColm, 17).split(';')
 
     'verify customerarray > 0'
     if (CustomerArray.size() > 0) {
@@ -398,8 +398,7 @@ for (int i = 1; i <= count; i++) {
                     }
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 14) == 'YES') {
+                if (datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') {
                     'verify if customerarray == customename'
                     if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                         'click button action'
@@ -442,8 +441,7 @@ for (int i = 1; i <= count; i++) {
                     }
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 16) == 'YES') {
+                if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
                     'verify customername == family array'
                     if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                         'click button action'
@@ -497,8 +495,7 @@ for (int i = 1; i <= count; i++) {
                     }
                 }
             } else if (isComplete == 'YES') {
-                if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-                    GlobalVariable.NumofColm, 18) == 'YES') {
+                if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
                         WebUI.click(modifynewButtonAction)
@@ -542,12 +539,12 @@ String filePath = userDir + GlobalVariable.PathPersonal
 
 GlobalVariable.DataFilePath = filePath
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-        GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileCDC.getValue(GlobalVariable.NumofColm, 4))
 
-if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
+if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '15.CustomerDataCompletion')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
+        '15.CustomerDataCompletion')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
@@ -570,16 +567,15 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
+            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		GlobalVariable.FlagFailed=1
-	}
+        GlobalVariable.FlagFailed = 1
+    }
 }
-
 

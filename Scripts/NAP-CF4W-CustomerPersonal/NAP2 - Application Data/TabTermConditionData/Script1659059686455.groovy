@@ -24,7 +24,10 @@ import groovy.sql.Sql as Sql
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
+
+'declare datafileTabTC'
+datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData')
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -156,7 +159,7 @@ for (int i = 1; i <= count; i++) {
             WebUI.uncheck(modifyObjectCheckbox)
         }
         
-        def checkNO = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+        def checkNO = datafileTabTC.getValue(
             GlobalVariable.NumofColm, 14).split(';', -1)
 
         'Pengecekan jika perlu dokumen yang required no tercentang'
@@ -180,7 +183,7 @@ for (int i = 1; i <= count; i++) {
             WebUI.check(modifyObjectCheckbox)
         }
         
-        def uncheckYES = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+        def uncheckYES = datafileTabTC.getValue(
             GlobalVariable.NumofColm, 12).split(';', -1)
 
         newxpathPromiseDate = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
@@ -189,7 +192,7 @@ for (int i = 1; i <= count; i++) {
         modifyObjectPromiseDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
             'xpath', 'equals', newxpathPromiseDate, true)
 
-        def PromiseDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+        def PromiseDate = datafileTabTC.getValue(
             GlobalVariable.NumofColm, 13).split(';', -1)
 
         'Pengecekan jika perlu dokumen required yes uncentang'
@@ -204,7 +207,7 @@ for (int i = 1; i <= count; i++) {
                         WebUI.uncheck(modifyObjectCheckbox)
                     }
                     
-                    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+                    if (datafileTabTC.getValue(
                         GlobalVariable.NumofColm, 13).length() > 0) {
                         'Input Promise Date'
                         WebUI.setText(modifyObjectPromiseDate, PromiseDate[(j - 1)])
@@ -220,13 +223,13 @@ for (int i = 1; i <= count; i++) {
     modifyObjectExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_expiredDate'), 
         'xpath', 'equals', newxpathExpiredDate, true)
 
-    def expiredDateDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+    def expiredDateDocument = datafileTabTC.getValue(
         GlobalVariable.NumofColm, 15).split(';', -1)
 
-    def expiredDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+    def expiredDate = datafileTabTC.getValue(
         GlobalVariable.NumofColm, 16).split(';', -1)
 
-    def waivedDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+    def waivedDocument = datafileTabTC.getValue(
         GlobalVariable.NumofColm, 17).split(';', -1)
 
     'Pengecekan jika waive dapat diklik'
@@ -269,7 +272,7 @@ for (int i = 1; i <= count; i++) {
 'Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
+Integer iscompleteMandatory = Integer.parseInt(datafileTabTC.getValue(
         GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {

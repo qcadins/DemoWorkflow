@@ -19,12 +19,18 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabAsset'
+datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
+
 ArrayList<Boolean> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
-    sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
 ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
@@ -208,37 +214,37 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
     GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')) {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify Rt'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify RW'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 40).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify Zipcode'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 41).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 43).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 44).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 } else {

@@ -20,6 +20,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+'declare datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+
 'declare NTFforProvisionCalc Value'
 BigDecimal NTFforProvisionCalc
 
@@ -130,10 +133,10 @@ BigDecimal NTFValueADDCapEXCProvCap = NTFValueADDInsuranceCap.add(TotalFeeCapEXC
 BigDecimal NTFValueFinal = Math.round(NTFValueADDCapEXCProvCap.multiply(ProvisionPercentage / 100))
 
 'check if calculate based is OTR-DP'
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+if (datafileTabFinancial.getValue(
     GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP')) {
     'check if provision fee type Percentage'
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+    if (datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Percentage') {
         'calculate NTFProvisionCalc multiply percentage'
         BigDecimal NTFValuexPercentage = NTFforProvisionCalc.multiply(ProvisionPercentage / 100)
@@ -143,7 +146,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
         'verify match strNTFValueXPercentage and strProvisionAmount'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-    } else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+    } else if(datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
         'calculate Provisionfeeamount divide NTFforprovisioncalc'
         BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
@@ -151,17 +154,17 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
         'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
         checkVerifyEqualOrMatch(WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL))
     }
-} else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+} else if(datafileTabFinancial.getValue(
     GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
     'check if provision fee type Percentage'
-    if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+    if (datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Percentage') {
         'convert NTFValueFinal to string'
         String strNTFValueFinal = NTFValueFinal.toString()
 
         'verify matvh NTFValueFinal and provision amount'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-    } else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
+    } else if(datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
         'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
         ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)

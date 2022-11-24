@@ -24,21 +24,22 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Su
 
 int arrayindexdb = 0
 
-def datafilefinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+'declare datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
-def SubsidyTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
-def SubsidyfromValueArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
-def AllocationformArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
-def SubsidySourceArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
-def SubsidyValueTypeArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
-def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
-def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
 println(result)
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
