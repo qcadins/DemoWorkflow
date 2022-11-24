@@ -227,33 +227,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
-'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'), 
-    5, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'))
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-
-    'click button cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
-        1, GlobalVariable.StatusFailed)
-
-    'Write To Excel GlobalVariable.StatusReasonLookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1, GlobalVariable.NumofColm - 
-        1, GlobalVariable.StatusReasonLookup)
-
-    GlobalVariable.FlagFailed = 1
-
-    'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-        'Klik new consumer finance'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-    }
-}
+verifyInputErrorLookUp()
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'), 
@@ -475,29 +449,22 @@ String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribu
     sqlConnectionLOS, Fullassetcode, POName)
 
 for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
-    String newAssetAtrributeInputText = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]'
-
-    String newAssetAtrributeList = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select'
-
-    String newAssetAtrributeInputDate = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]'
-
-    String newAssetAtrributeInputNumber = ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]'
 
     'modify Asset Attribute Input Text'
     modifyObjectAssetAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', newAssetAtrributeInputText, true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]', true)
 
     'modify Asset Attribute Select Dropdownlist'
     modifyObjectAssetAttributeList = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', newAssetAtrributeList, true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select', true)
 
     'modify Asset Attribute Input Date'
     modifyObjectAssetAttributeInputDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', newAssetAtrributeInputDate, true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]', true)
 
     'modify Asset Attribute Input Number '
     modifyObjectAssetAttributeInputNumber = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', newAssetAtrributeInputNumber, true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]', true)
 
     if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, 1, FailureHandling.OPTIONAL)) {
         'input "Attribute"'
@@ -802,40 +769,12 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
         'click search button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-        'verify input error'
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'), 
-            5, FailureHandling.OPTIONAL)) {
-            'click select'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'))
-        } else {
-            'click X'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-
-            'click button cancel'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-            'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-            GlobalVariable.FlagFailed = 1
-
-            'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-                'Klik new consumer finance'
-                WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-            }
-        }
+		verifyInputErrorLookUp()
 		
 		assetLocInput()
 		
     }
 }
-
-
 
 GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
         'value').replace(',', ''))
@@ -959,33 +898,7 @@ public assetLocInput(){
 	'click search button'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-	'verify input error'
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
-		5, FailureHandling.OPTIONAL)) {
-		'click select'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'))
-	} else {
-		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-
-		'click button cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-		'Write To Excel GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-		GlobalVariable.FlagFailed = 1
-
-		'Pengecekan jika new consumer finance belum diexpand'
-		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-			'Klik new consumer finance'
-			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-		}
-	}
+	verifyInputErrorLookUp()
 }
 
 public assetLocCopy(){
@@ -996,5 +909,34 @@ public assetLocCopy(){
 
 	'click button copy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
+}
+
+public verifyInputErrorLookUp(){
+	'verify input error'
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
+		5, FailureHandling.OPTIONAL)) {
+		'click select'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'))
+	} else {
+		'click X'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
+		'click button cancel'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+	
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
+			1, GlobalVariable.StatusFailed)
+	
+		'Write To Excel GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1, GlobalVariable.NumofColm -
+			1, GlobalVariable.StatusReasonLookup)
+	
+		GlobalVariable.FlagFailed = 1
+	
+		'Pengecekan jika new consumer finance belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+			'Klik new consumer finance'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+		}
+	}
 }

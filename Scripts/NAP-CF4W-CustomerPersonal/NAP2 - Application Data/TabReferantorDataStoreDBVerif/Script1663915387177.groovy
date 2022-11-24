@@ -16,20 +16,6 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
@@ -40,16 +26,9 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Ta
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
-println(result)
-int arrayindex = 0
-int bankindex = 0
-
+int arrayindex = 0, bankindex = 0
 
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
-
-
-println(bankaccount)
-println(result)
 
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(
@@ -79,5 +58,3 @@ if (arrayMatch.contains(false)) {
 		1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedStoredDB)
 
 }
-
-

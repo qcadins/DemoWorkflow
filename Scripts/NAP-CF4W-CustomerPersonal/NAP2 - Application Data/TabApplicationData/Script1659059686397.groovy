@@ -378,35 +378,7 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
     'Click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
-    'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'Click Select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-            FailureHandling.OPTIONAL)
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click cancel'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-
-        'write to excel failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'Write To Excel GlobalVariable.StatusReasonLookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-
-        'Pengecekan jika new consumer finance belum diexpand'
-        if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-            'Klik new consumer finance'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-        }
-    }
+	verifyInputErrorLookUp()
 }
 
 'Input Phone 1 Area'
@@ -497,35 +469,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
-'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'Click Select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-        FailureHandling.OPTIONAL)
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-    'click cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-
-    'write to excel failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-    'Write To Excel GlobalVariable.StatusReasonLookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-    GlobalVariable.FlagFailed = 1
-
-    'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-        'Klik new consumer finance'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-    }
-}
+verifyInputErrorLookUp()
 
 'Select option dropdownlist Blacklist APPI'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_BlackListAppi'), 
@@ -553,35 +497,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
-'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'Click Select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'), 
-        FailureHandling.OPTIONAL)
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-    'click cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-
-    'write to excel failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-    'Write To Excel GlobalVariable.StatusReasonLookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData', 
-        1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-    GlobalVariable.FlagFailed = 1
-
-    'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-        'Klik new consumer finance'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-    }
-}
+verifyInputErrorLookUp()
 
 'Input Jumlah Asset'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/input_JUMLAH ASSET'), 
@@ -641,3 +557,34 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	}
 }
 
+public verifyInputErrorLookUp(){
+	'verify input error'
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),
+		10, FailureHandling.OPTIONAL)) {
+		'Click Select'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/a_Select'),
+			FailureHandling.OPTIONAL)
+	} else {
+		'click X'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+
+		'click cancel'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
+
+		'write to excel failed'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+		'Write To Excel GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+		GlobalVariable.FlagFailed = 1
+
+		'Pengecekan jika new consumer finance belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+			'Klik new consumer finance'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+		}
+	}
+}

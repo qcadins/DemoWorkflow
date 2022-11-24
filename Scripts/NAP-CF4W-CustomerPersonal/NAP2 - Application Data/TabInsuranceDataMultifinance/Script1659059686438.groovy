@@ -79,13 +79,11 @@ if(GlobalVariable.Role=="Testing"){
 	'Ambil text original office dari confins'
 	String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 	
-	Integer countInscoBranch = 0
-	
 	'Ambil array string (text) insco branch name dari db'
 	inscoBranchName = CustomKeywords.'insuranceData.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
 	
 	'Ambil nilai count insco branch name dari db'
-	countInscoBranch = CustomKeywords.'insuranceData.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
+	Integer countInscoBranch = CustomKeywords.'insuranceData.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
 	
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
@@ -117,7 +115,6 @@ if(GlobalVariable.Role=="Testing"){
 		GlobalVariable.FlagFailed=1
 	}
 }
-
 
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'), 
@@ -567,8 +564,6 @@ if(capinssetting=="YEARLY"){
 			if(GlobalVariable.FlagFailed == 1){
 				break
 			}
-			
-			
 		}
 		
 		//AdditionalCoverage & Sum Insured Amount
@@ -593,9 +588,7 @@ if(capinssetting=="YEARLY"){
 	
 			'Supaya checkbox bisa diklik'
 			if ((i == 1) && (j == 1)) {
-				WebUI.click(addCovYearCheckbox)
-	
-				WebUI.click(addCovYearCheckbox)
+				WebUI.doubleClick(addCovYearCheckbox)
 			}
 			
 			'Pengecekan jika label = loading'
@@ -688,9 +681,7 @@ if(capinssetting=="YEARLY"){
 							}
 							break
 						}
-
 					}
-					
 				}
 			}
 			'Pengecekan road worthiness document bernilai off the road'
@@ -708,7 +699,6 @@ if(capinssetting=="YEARLY"){
 						'Verif rate tidak terlock'
 						WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
 					}
-					
 				}
 							
 				'Pengecekan additional premi rate pada excel kosong atau tidak'
@@ -730,7 +720,6 @@ if(capinssetting=="YEARLY"){
 						'Verif rate terlock'
 						WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
 					}
-					
 				}
 			}
 		}
@@ -785,20 +774,16 @@ if(capinssetting=="YEARLY"){
 				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12))
 			
 			}
-			
 		}
 	}
-	
 	
 	GlobalVariable.MainPremiRate = MainRate
 	GlobalVariable.AdditionalPremiRate = AddtRate
 
-	
 	if(GlobalVariable.FlagFailed==0){
 		'cek alert'
 		GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '8.TabInsuranceData')
 	}
-	
 	
 	ArrayList<WebElement> totalResult
 	BigDecimal totalPremitoCustResult

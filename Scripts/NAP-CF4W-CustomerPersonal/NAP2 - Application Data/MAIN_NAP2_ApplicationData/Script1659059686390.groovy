@@ -155,7 +155,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 	else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
 					
-					
 		'input chasis number'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'),
 				findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
@@ -220,7 +219,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 		}
 	}
-	println(GlobalVariable.NumofColm)
+	
 	'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -299,7 +298,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 
-   
 	'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
@@ -338,7 +336,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 
-
 	'Dijalankan tanpa copy app tab term & condition atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
@@ -372,7 +369,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
 	}
-
 	
 	'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
@@ -585,7 +581,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 	
-	println("num of colm:"+GlobalVariable.NumofColm)
 	'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -672,7 +667,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 	
-	
 	'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(
@@ -711,7 +705,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 		}
 	}
 	
-	
 	'Dijalankan tanpa copy app tab term & condition atau copy app dengan edit'
 	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
 						GlobalVariable.NumofColm, 10).equalsIgnoreCase("No") || findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
@@ -745,7 +738,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 		}
 	}
-	
 	
 	'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 	for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) +
@@ -830,7 +822,6 @@ public pagingTesting(){
 		'Verif reset'
 		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 		
-		
 		ArrayList<String> listString = new ArrayList<String>()
 		
 		'click button search'
@@ -844,6 +835,7 @@ public pagingTesting(){
 	
 		'Klik header office'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_Office'))
+		
 		'Verif tidak ada alert yang muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 		
@@ -1042,8 +1034,5 @@ public pagingTesting(){
 	
 				GlobalVariable.FlagWarning=1
 		}
-			
-			
 	}
-	
 }

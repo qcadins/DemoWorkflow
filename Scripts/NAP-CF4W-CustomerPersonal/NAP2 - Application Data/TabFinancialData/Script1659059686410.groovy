@@ -61,17 +61,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
     'Ambil nilai result dari rule credit fee'
     HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
-    ArrayList<String> listFee
-
-    ArrayList<String> feeType
-
-    ArrayList<String> fee
-
-    ArrayList<String> feeBhv
-
-    ArrayList<String> feecapType
-
-    ArrayList<String> feecap
+    ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap
 
     listFee = result.get('listFee')
 
@@ -477,7 +467,6 @@ if (datafilefinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
             Keys.chord(Keys.RIGHT, datafilefinancial.getValue(GlobalVariable.NumofColm, 39)))
     }
-
 }
 
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' && GlobalVariable.FirstTimeEntry == "Yes"){
@@ -513,9 +502,6 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' &
 		}
 	}
 }
-
-
-
 
 if (datafilefinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
     'select Rate type'
@@ -636,7 +622,6 @@ if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal
 	'call test case subsidy store db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
-
 
 	'call test case financial datastore db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),

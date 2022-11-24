@@ -63,7 +63,6 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
     
     ArrayList<String> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
-
 	//Edit jika ada data pada confins dan datanya sesuai dengan excel
 	'Pengecekan ada data referantor pada confins'
 	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
@@ -72,44 +71,34 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 		'Looping confins referantor'
 		for(int i =1;i<=variable.size();i++){
 			
-			String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input"
-			
 			'modify input referantor name'
-			modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
-			
-			String newButtonReferantorXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
-			 ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
+			modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input", true)
 	
 			'modify button referantor lookup'
 			 modifyObjectButtonReferantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_LookupReferantor'),
-				 'xpath', 'equals', newButtonReferantorXpath, true)
-	
-			String newSelectReferantorCategoryXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
-			 ']/td[2]/select'
+				 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 	
 			'modify select referantor category'
 			 modifyObjectSelectReferantorCategory = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_ReferantorCategory'),
-				 'xpath', 'equals', newSelectReferantorCategoryXpath, true)
+				 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
+			 ']/td[2]/select', true)
 			
-			 String newButtonDelete = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[9]/a/i'
 			 'modify button delete'
 			 modifyButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Delete'),
-				 'xpath', 'equals', newButtonDelete, true)
+				 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[9]/a/i', true)
 			 
-			 String newSelectTaxCalculation = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
-			  ']/td[6]/select'
-	
 			  'modify select tax calculation'
 			  modifySelectTaxCalcualtion = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_TaxCalculationMethod'),
-				  'xpath', 'equals', newSelectTaxCalculation, true)
-	
-			  String newSelectBankaccount = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select'
+				  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
+			  ']/td[6]/select', true)
 	
 			  'modify select bank account'
 			  modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
-				  'xpath', 'equals', newSelectBankaccount, true)
+				  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select', true)
 			  
-			  Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(newSelectReferantorCategoryXpath)))
+			  Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
+			 ']/td[2]/select')))
+			  
 			  'Ambil text referantor category yang dipilih pada confins'
 			  String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 			  
@@ -130,7 +119,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						  GlobalVariable.NumofReferantor, 16),FailureHandling.OPTIONAL)
 						  
 						  'call function gettext bankaccount'
-						  getTextBankAccount(newSelectBankaccount)
+						  getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
 						  
 						  'select tax calculation'
 						  WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
@@ -212,7 +201,6 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 										continue
 									}
 								}
-								
 								i--
 							  }
 							  else{
@@ -249,43 +237,32 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 				
 				'Looping confins referantor'
 				for(int j = 1;j<=countData;j++){
-					String newReferantorNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input"
-					 
+				
 					'modify input referantor name'
-					modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',newReferantorNameXpath, true)
-					 
-					String newButtonReferantorXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
-					  ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
+					modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input", true)
 			 
 					'modify button referantor lookup'
 					modifyObjectButtonReferantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_LookupReferantor'),
-						  'xpath', 'equals', newButtonReferantorXpath, true)
-			 
-					String newSelectReferantorCategoryXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
-					  ']/td[2]/select'
+						  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
+					  ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 			 
 					'modify select referantor category'
 					modifyObjectSelectReferantorCategory = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_ReferantorCategory'),
-						  'xpath', 'equals', newSelectReferantorCategoryXpath, true)
-					 
-					String newButtonDelete = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[9]/a/i'
+						  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
+					  ']/td[2]/select', true)
 					
 					'modify button delete'
 					modifyButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Delete'),
-						  'xpath', 'equals', newButtonDelete, true)
+						  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[9]/a/i', true)
 					  
-					String newSelectTaxCalculation = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
-					   ']/td[6]/select'
-			 
 					'modify select tax calculation'
 					modifySelectTaxCalcualtion = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_TaxCalculationMethod'),
-						   'xpath', 'equals', newSelectTaxCalculation, true)
-			 
-					String newSelectBankaccount = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select'
+						   'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
+					   ']/td[6]/select', true)
 			 
 					'modify select bank account'
 					modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
-						   'xpath', 'equals', newSelectBankaccount, true)
+						   'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select', true)
 					
 					String refCategory, referantorCode
 					
@@ -361,8 +338,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									
 									continue
 								}
-								
-							   
+								 
 							   if(GlobalVariable.Role=="Testing"){
 								   'Pengecekan terdapat opsi ddl bank account selain select one'
 								   if(WebUI.getNumberOfTotalOption(modifySelectBankAccount)>1){
@@ -397,7 +373,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
 				   
 							   'call function gettext bankaccount'
-							   getTextBankAccount(newSelectBankaccount)
+							   getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 							   
 							   'select tax calculation method'
 							   WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
@@ -418,18 +394,17 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								   'Click delete'
 								   WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								   
-								   
 								   if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 									   writeReasonFailedDelete()
 								   }
 								   
 								   continue
 							   }
-							   
 							   add=0
 						   }
 						   
-						   Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(newSelectReferantorCategoryXpath)))
+						   Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
+					  ']/td[2]/select')))
 						   
 						   'Ambil referantor category yang dipilih pada confins'
 						   String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
@@ -497,7 +472,6 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						'click button search'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 						
-						
 						'verify lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/a_Select'),
 							 5, FailureHandling.OPTIONAL)) {
@@ -523,11 +497,9 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							 'Click delete'
 							 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							 
-							 
 							 if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 								 writeReasonFailedDelete()
 							 }
-						
 							 continue
 						 }
 						 
@@ -565,7 +537,7 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
 			
 						'call function gettext bankaccount'
-						getTextBankAccount(newSelectBankaccount)
+						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 						
 						'select tax calculation method'
 						WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
@@ -585,7 +557,6 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							
 							'Click delete'
 							WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-							
 							
 							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 								writeReasonFailedDelete()
@@ -607,25 +578,21 @@ if (datafilereferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									referantorfaileddelete.add(referantornamebefore)
 									}
 								}else{
-								'get cust name sebelum delete'
-								referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+									'get cust name sebelum delete'
+									referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 								
-								if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-									continue
-								}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
+									if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+										continue
+									}else{
+										'add cust name failed kedalam array'
+										referantorfaileddelete.add(referantornamebefore)
+									}
 								}
-								}
-								
 								j--
-			
-							continue
+								continue
 						}
-						  
 					}
 					
-							
 					'write to excel SUCCESS'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
@@ -653,38 +620,28 @@ if(datafilereferantor.getValue(
 				'click button add'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Add'))
 	
-				String newButtonReferantorXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
-				']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
-	
 				'modify button referantor lookup'
 				modifyObjectButtonReferantor = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_LookupReferantor'),
-					'xpath', 'equals', newButtonReferantorXpath, true)
-	
-				String newSelectReferantorCategoryXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
-				']/td[2]/select'
+					'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
+				']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 	
 				'modify select referantor category'
 				modifyObjectSelectReferantorCategory = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_ReferantorCategory'),
-					'xpath', 'equals', newSelectReferantorCategoryXpath, true)
-	
-				String newSelectTaxCalculation = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
-				']/td[6]/select'
+					'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
+				']/td[2]/select', true)
 	
 				'modify select tax calculation'
 				modifySelectTaxCalcualtion = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_TaxCalculationMethod'),
-					'xpath', 'equals', newSelectTaxCalculation, true)
-	
-				String newSelectBankaccount = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select'
+					'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) +
+				']/td[6]/select', true)
 	
 				'modify select bank account'
 				modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
-					'xpath', 'equals', newSelectBankaccount, true)
-	
-				String newButtonDelete = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[9]/a/i'
+					'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select', true)
 	
 				'modify button delete'
 				modifyButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Delete'),
-					'xpath', 'equals', newButtonDelete, true)
+					'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[9]/a/i', true)
 	
 				'select referantor category'
 				WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafilereferantor.getValue(
@@ -750,11 +707,9 @@ if(datafilereferantor.getValue(
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 					
-					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 						writeReasonFailedDelete()
 					}
-	
 					continue
 				}
 				
@@ -787,13 +742,12 @@ if(datafilereferantor.getValue(
 					}
 				}
 				
-				
 				'select bank account'
 				WebUI.selectOptionByIndex(modifySelectBankAccount, datafilereferantor.getValue(
 						GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
 	
 				'call function gettext bankaccount'
-				getTextBankAccount(newSelectBankaccount)
+				getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select')
 				
 				'select tax calculation method'
 				WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafilereferantor.getValue(
@@ -813,7 +767,6 @@ if(datafilereferantor.getValue(
 					
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-					
 					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 						writeReasonFailedDelete()
@@ -864,9 +817,7 @@ if(datafilereferantor.getValue(
 					
 					'click x'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/span_XViewDetail'))
-				
 				}
-				
 				
 				'write to excel SUCCESS'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
@@ -877,8 +828,6 @@ if(datafilereferantor.getValue(
 		}
 	}
 }
-
-		
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/Button Save'))

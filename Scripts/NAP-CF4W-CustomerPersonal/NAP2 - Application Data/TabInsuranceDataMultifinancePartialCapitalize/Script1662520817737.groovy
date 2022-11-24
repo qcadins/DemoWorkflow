@@ -312,9 +312,8 @@ for (int i = 1; i <= count; i++) {
 
 		'Supaya checkbox bisa diklik'
 		if ((i == 1) && (j == 1)) {
-			WebUI.click(addCovYearCheckbox)
+			WebUI.doubleClick(addCovYearCheckbox)
 
-			WebUI.click(addCovYearCheckbox)
 		}
 		
 		'Pengecekan jika label = loading'
@@ -367,12 +366,8 @@ for (int i = 1; i <= count; i++) {
 						
 						'Select index sum insured amount'
 						WebUI.selectOptionByIndex(modifySumInsuredAmount, SumInsuredValueArray[((i - 1))], FailureHandling.OPTIONAL)
-						
-						
 					}
 				}
-				
-
 			}
 		}
 		
@@ -412,9 +407,7 @@ for (int i = 1; i <= count; i++) {
 						}
 						break
 					}
-
 				}
-				
 			}
 		}
 		
@@ -453,12 +446,10 @@ for (int i = 1; i <= count; i++) {
 					'verif rate terlock'
 					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
 				}
-				
 			}
 		}
 	}
 }
-
 
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
@@ -472,7 +463,6 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		'Centang full capitalize amount'
 		WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
-	
 }
 else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="NO"){
@@ -482,7 +472,6 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 		WebUI.uncheck(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
 }
-
 
 'Klik calculate insurance'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
@@ -613,8 +602,7 @@ if(GlobalVariable.Role=="Testing"){
 	// Verif untuk capitalizze bukan 0 dan tidak ada paid by mf
 	else if((totalResult[3]) != 0 && totalResult[2]==0){
 		'Klik 2x untuk refresh capitalize amount di confins'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
+		WebUI.doubleClick(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 		
 		'Mengambil nilai capitalize amount dari confins'
 		textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
@@ -709,9 +697,7 @@ public AddRatetoGV(int count, int countAddCov){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12))
-			
 			}
-			
 		}
 	}
 	
@@ -723,8 +709,7 @@ public refreshCapitalize(int counterPaidByMF){
 	if (counterPaidByMF == 0 && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL)!='0' && GlobalVariable.Role=="Data Entry") {
 		'Klik 2x untuk refresh capitalize amount di confins'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
+		WebUI.doubleClick(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 		
 	}
 }

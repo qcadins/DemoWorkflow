@@ -351,62 +351,46 @@ WebDriver driver = DriverFactory.getWebDriver()
 'get table row'
 ArrayList<WebElement> counttdInstallment = driver.findElements(By.cssSelector('#FinData_FinData > form > div.ng-star-inserted > table > tbody tr'))
 
-'declare installmentamountvalue'
-int installmentamountvalue
-
-'declare principalamountvalue'
-int principalamountvalue
-
-'declare interestamountvalue'
-int interestamountvalue
+int installmentamountvalue, principalamountvalue, interestamountvalue
 
 String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
 int gracePeriodNum = Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),'value'))
 'loop for tabel amortisasi '
 for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallment.size(); InstallmentSchemecount++) {
-    String NewInstallmentAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
-    ']/td[2]'
 
     'modify object installmentamount'
     modifyNewInstallmentAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InstallmentAmount'), 
-        'xpath', 'equals', NewInstallmentAmount, true)
+        'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
+    ']/td[2]', true)
 
     String strInstallmentamount = WebUI.getText(modifyNewInstallmentAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
-    String NewPrincipalAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[3]'
-
     'modify object principal amount'
     modifyNewPrincipalAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_PrincipalAmount'), 
-        'xpath', 'equals', NewPrincipalAmount, true)
+        'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[3]', true)
 
     String strPrincipalamount = WebUI.getText(modifyNewPrincipalAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
-    String NewInterestAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[4]'
-
     'modify object interest amount'
     modifyNewInterestAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'), 
-        'xpath', 'equals', NewInterestAmount, true)
+        'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[4]', true)
 
     String strInterestamount = WebUI.getText(modifyNewInterestAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
-
-    String NewOSPrincipalAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
-    ']/td[5]'
-
+	
     'modify object OS Principal amount'
     modifyNewOSPrincipalAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_OSPrincipalAmount'), 
-        'xpath', 'equals', NewOSPrincipalAmount, true)
+        'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
+    ']/td[5]', true)
 
     String strOSPrincipalAmount = WebUI.getText(modifyNewOSPrincipalAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
-    String NewOSInterestAmount = ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[6]'
-
     'modify object OS Interest amount'
     modifyNewOSInterestAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_OSInterestAmount'), 
-        'xpath', 'equals', NewOSInterestAmount, true)
+        'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[6]', true)
 
     String strOSInterestAmount = WebUI.getText(modifyNewOSInterestAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')

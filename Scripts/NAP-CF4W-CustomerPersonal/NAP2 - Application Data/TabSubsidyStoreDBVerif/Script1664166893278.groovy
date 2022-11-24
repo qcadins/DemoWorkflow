@@ -40,7 +40,6 @@ def SubsidyValueAmountArray = datafilefinancial.getValue(GlobalVariable.NumofCol
 
 def SubsidyValuePercentageArray = datafilefinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
-println(result)
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){

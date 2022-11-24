@@ -141,19 +141,12 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 
     'Looping data life insurance subject'
     for (int i = 1; i <= count; i++) {
-        String newxpathSubject
-
-        String newxpathcheckbox
-
-        newxpathSubject = (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[3]')
-
-        newxpathcheckbox = (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[4]/input')
-
+        
         modifyObjectSubject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectType'), 
-            'xpath', 'equals', newxpathSubject, true)
+            'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[3]'), true)
 
         modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_CheckSubject'), 
-            'xpath', 'equals', newxpathcheckbox, true)
+            'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[4]/input'), true)
 
         'Variabel text digunakan untuk menyimpan isi dari kolom Subject Type'
         String textSubject = WebUI.getText(modifyObjectSubject)
@@ -201,10 +194,8 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
                 def checkGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(
                     GlobalVariable.NumofColm, 21).split(';')
 
-                newxpathSubjectName = (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[1]')
-
                 modifyObjectSubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
-                    'xpath', 'equals', newxpathSubjectName, true)
+                    'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[1]'), true)
 
                 String textSubjectName = WebUI.getText(modifyObjectSubjectName)
 

@@ -24,7 +24,7 @@ import groovy.sql.Sql as Sql
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
@@ -69,37 +69,24 @@ TCWaive = result.get("TCWaive")
 
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {
-    String newxpathRequired
-
-    String newxpathcheckbox
-
-    newxpathRequired = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-    i) + ']/td[4]')
-
-    newxpathcheckbox = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-    i) + ']/td[5]/input')
-	
-	newxpathpriorto = "//*[@id='TC-tab']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr["+i+"]/td[3]"
 
     modifyObjectRequired = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'), 
-        'xpath', 'equals', newxpathRequired, true)
+        'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[4]'), true)
 
     modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_Checkbox'), 
-        'xpath', 'equals', newxpathcheckbox, true)
+        'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[5]/input'), true)
 
-	modifyObjectPriorTo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_PriorTo'),'xpath','equals',newxpathpriorto,true)
-	
-    newxpathDocumentName = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-    i) + ']/td[2]')
+	modifyObjectPriorTo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_PriorTo'),'xpath','equals',"//*[@id='TC-tab']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr["+i+"]/td[3]",true)
 
     modifyObjectDocumentName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
-        'xpath', 'equals', newxpathDocumentName, true)
-	
-	newxpathWaived = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
-		 i) + ']/td[6]/input')
+        'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[2]'), true)
 	
 	modifyObjectWaived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_waived'),
-		'xpath', 'equals', newxpathWaived, true)
+		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
+		 i) + ']/td[6]/input'), true)
 	
 	'Variabel yang digunakan untuk menyimpan isi dari nama dokumen'
 	String textDocumentName = WebUI.getText(modifyObjectDocumentName)
@@ -183,11 +170,9 @@ for (int i = 1; i <= count; i++) {
         def uncheckYES = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
             GlobalVariable.NumofColm, 12).split(';', -1)
 
-        newxpathPromiseDate = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-        i) + ']/td[7]/input')
-
         modifyObjectPromiseDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
-            'xpath', 'equals', newxpathPromiseDate, true)
+            'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+        i) + ']/td[7]/input'), true)
 
         def PromiseDate = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
             GlobalVariable.NumofColm, 13).split(';', -1)
@@ -213,12 +198,10 @@ for (int i = 1; i <= count; i++) {
             }
         }
     }
-    
-    newxpathExpiredDate = (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
-    i) + ']/td[8]/input')
-
+   
     modifyObjectExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_expiredDate'), 
-        'xpath', 'equals', newxpathExpiredDate, true)
+        'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' + 
+    i) + ']/td[8]/input'), true)
 
     def expiredDateDocument = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(
         GlobalVariable.NumofColm, 15).split(';', -1)

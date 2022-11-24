@@ -37,7 +37,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
-	'arraylist referantor name yang gagal'
+	'arraylist accessories name yang gagal'
 	ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
 
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
@@ -49,63 +49,43 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 		'Looping confins accessories'
 		for(int i =1;i<=variable.size();i++){
 			
-			String newSupplierNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[2]/lib-uclookupgeneric/div/div/input"
-			
 			'modify object supplier name'
-			modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',newSupplierNameXpath,true)
-			
-			String newAccNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input"
+			modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[2]/lib-uclookupgeneric/div/div/input",true)
 			
 			'modify object acc name'
-			modifyObjectAccName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccName'),'xpath','equals',newAccNameXpath,true)
+			modifyObjectAccName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input",true)
 			
-			String newButtonSupplierXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button'
-			 
 			'modify button supplier lookup'
 			modifyObjectButtonSupplier = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
-						 'xpath', 'equals', newButtonSupplierXpath, true)
-			 
-			String newButtonAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
+						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 			 
 			'modify button accessories lookup'
 			modifyObjectButtonAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Accessories'),
-						 'xpath', 'equals', newButtonAccessoriesXpath, true)
-			 
-			String newAccessoriesPriceXpath = ('//*[@id="accessoryPriceAmt' + (i - 1)) + '"]'
+						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 			 
 			'modify input accessories price amount'
 			modifyObjectAccessoriesPrice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_accessoryPriceAmt0'),
-						 'xpath', 'equals', newAccessoriesPriceXpath, true)
-			 
-			String newDownPaymentTypeXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select'
+						 'xpath', 'equals', ('//*[@id="accessoryPriceAmt' + (i - 1)) + '"]', true)
 			 
 			'modify select security deposit type'
 			modifyObjectDownPaymentType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Amount  Percentage'),
-						 'xpath', 'equals', newDownPaymentTypeXpath, true)
-			 
-			String newInputPercentageXpath = ('//*[@id="AccessoryDownPaymentPrcnt' + (i - 1)) + '"]'
+						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select', true)
 			 
 			'modify input security deposit percentage'
 			modifyObjectInputPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentPrcnt0'),
-						 'xpath', 'equals', newInputPercentageXpath, true)
-			 
-			 String newInputAmountXpath = ('//*[@id="AccessoryDownPaymentAmt' + (i - 1)) + '"]'
+						 'xpath', 'equals', ('//*[@id="AccessoryDownPaymentPrcnt' + (i - 1)) + '"]', true)
 			 
 			 'modify input security deposit amount'
 			 modifyObjectInputAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentAmt0'),
-						 'xpath', 'equals', newInputAmountXpath, true)
-			 
-			 String newNoteAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[7]/textarea'
+						 'xpath', 'equals', ('//*[@id="AccessoryDownPaymentAmt' + (i - 1)) + '"]', true)
 			 
 			 'modify input note'
 			 modifyObjectInputNoteAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/textarea_Note Accessories'),
-						 'xpath', 'equals', newNoteAccessoriesXpath, true)
-			 
-			  String newButtonDeleteXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a/i'
+						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[7]/textarea', true)
 			 
 			  'modify button delete'
 			  modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Delete'),
-						 'xpath', 'equals', newButtonDeleteXpath, true)
+						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a/i', true)
 
 			  'Looping excel datafile accessories'
 			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
@@ -160,7 +140,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 								  1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
 							  
-							 'get referantor name'
+							 'get accessories name'
 							 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 							
 							 'Click delete'
@@ -173,18 +153,18 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 								 if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 									 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								 }else{
-									'add cust name failed kedalam array'
+									'add accessories name failed kedalam array'
 									accessoriesnamefaileddelete.add(accessoriesnamebefore)
 									continue
 								 }
 							 }else{
-									'get cust name sebelum delete'
+									'get accessories name sebelum delete'
 									accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
-											'add cust name failed kedalam array'
+											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 											continue
 										}
@@ -238,7 +218,7 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  
-							  	 'get referantor name'
+							  	 'get accessories name'
 								 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 							  	  
 								 'Click delete'
@@ -251,18 +231,18 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
-											'add cust name failed kedalam array'
+											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 											continue
 										}
 								  }else{
-										'get cust name sebelum delete'
+										'get accessories name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
-											'add cust name failed kedalam array'
+											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 											continue
 										}
@@ -301,63 +281,44 @@ if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-
 					  GlobalVariable.NumofColm, 13))) {
 				'Looping confins accessories'
 				for(int j = 1;j<=countData;j++){
-					 String newSupplierNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[2]/lib-uclookupgeneric/div/div/input"
-					 
+	
 					 'modify object supplier name'
-					 modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',newSupplierNameXpath,true)
-					 
-					 String newAccNameXpath = "//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input"
+					 modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[2]/lib-uclookupgeneric/div/div/input",true)
 					 
 					 'modify object acc name'
-					 modifyObjectAccName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccName'),'xpath','equals',newAccNameXpath,true)
+					 modifyObjectAccName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[3]/lib-uclookupgeneric/div/div/input",true)
 					 
-					 String newButtonSupplierXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button'
-					  
 					 'modify button supplier lookup'
 					 modifyObjectButtonSupplier = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
-								  'xpath', 'equals', newButtonSupplierXpath, true)
-					  
-					 String newButtonAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
+								  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 					  
 					 'modify button accessories lookup'
 					 modifyObjectButtonAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Accessories'),
-								  'xpath', 'equals', newButtonAccessoriesXpath, true)
-					  
-					 String newAccessoriesPriceXpath = ('//*[@id="accessoryPriceAmt' + (j - 1)) + '"]'
+								  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 					  
 					 'modify input accessories price amount'
 					 modifyObjectAccessoriesPrice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_accessoryPriceAmt0'),
-								  'xpath', 'equals', newAccessoriesPriceXpath, true)
-					  
-					 String newDownPaymentTypeXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select'
+								  'xpath', 'equals', ('//*[@id="accessoryPriceAmt' + (j - 1)) + '"]', true)
 					  
 					 'modify select security deposit type'
 					 modifyObjectDownPaymentType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Amount  Percentage'),
-								  'xpath', 'equals', newDownPaymentTypeXpath, true)
-					  
-					 String newInputPercentageXpath = ('//*[@id="AccessoryDownPaymentPrcnt' + (j - 1)) + '"]'
+								  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select', true)
 					  
 					 'modify input security deposit percentage'
 					 modifyObjectInputPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentPrcnt0'),
-								  'xpath', 'equals', newInputPercentageXpath, true)
+								  'xpath', 'equals', ('//*[@id="AccessoryDownPaymentPrcnt' + (j - 1)) + '"]', true)
 					  
-					  String newInputAmountXpath = ('//*[@id="AccessoryDownPaymentAmt' + (j - 1)) + '"]'
-					  
-					  'modify input security deposit amount'
+					 'modify input security deposit amount'
 					  modifyObjectInputAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentAmt0'),
-								  'xpath', 'equals', newInputAmountXpath, true)
+								  'xpath', 'equals', ('//*[@id="AccessoryDownPaymentAmt' + (j - 1)) + '"]', true)
 					  
-					  String newNoteAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[7]/textarea'
-					  
-					  'modify input note'
+					 'modify input note'
 					  modifyObjectInputNoteAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/textarea_Note Accessories'),
-								  'xpath', 'equals', newNoteAccessoriesXpath, true)
+								  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[7]/textarea', true)
 					  
-					   String newButtonDeleteXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[8]/a/i'
-					  
-					   'modify button delete'
+					 'modify button delete'
 					   modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Delete'),
-								  'xpath', 'equals', newButtonDeleteXpath, true)
+								  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[8]/a/i', true)
 					'Pengecekan jika ada data accessories sebelumnya'
 					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
 						'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
@@ -741,53 +702,37 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 			'click button add'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Add'))
 	
-			String newButtonSupplierXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button'
-	
 			'modify button supplier lookup'
 			modifyObjectButtonSupplier = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Supplier'),
-				'xpath', 'equals', newButtonSupplierXpath, true)
-	
-			String newButtonAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button'
+				'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[2]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 	
 			'modify button accessories lookup'
 			modifyObjectButtonAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Lookup Accessories'),
-				'xpath', 'equals', newButtonAccessoriesXpath, true)
-	
-			String newAccessoriesPriceXpath = ('//*[@id="accessoryPriceAmt' + (modifyObjectIndex - 1)) + '"]'
+				'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button', true)
 	
 			'modify input accessories price amount'
 			modifyObjectAccessoriesPrice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_accessoryPriceAmt0'),
-				'xpath', 'equals', newAccessoriesPriceXpath, true)
-	
-			String newDownPaymentTypeXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select'
+				'xpath', 'equals', ('//*[@id="accessoryPriceAmt' + (modifyObjectIndex - 1)) + '"]', true)
 	
 			'modify select security deposit type'
 			modifyObjectDownPaymentType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Amount  Percentage'),
-				'xpath', 'equals', newDownPaymentTypeXpath, true)
-	
-			String newInputPercentageXpath = ('//*[@id="AccessoryDownPaymentPrcnt' + (modifyObjectIndex - 1)) + '"]'
+				'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select', true)
 	
 			'modify input security deposit percentage'
 			modifyObjectInputPercentage = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentPrcnt0'),
-				'xpath', 'equals', newInputPercentageXpath, true)
-	
-			String newInputAmountXpath = ('//*[@id="AccessoryDownPaymentAmt' + (modifyObjectIndex - 1)) + '"]'
+				'xpath', 'equals', ('//*[@id="AccessoryDownPaymentPrcnt' + (modifyObjectIndex - 1)) + '"]', true)
 	
 			'modify input security deposit amount'
 			modifyObjectInputAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_AccessoryDownPaymentAmt0'),
-				'xpath', 'equals', newInputAmountXpath, true)
-	
-			String newNoteAccessoriesXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[7]/textarea'
+				'xpath', 'equals', ('//*[@id="AccessoryDownPaymentAmt' + (modifyObjectIndex - 1)) + '"]', true)
 	
 			'modify input note'
 			modifyObjectInputNoteAccessories = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/textarea_Note Accessories'),
-				'xpath', 'equals', newNoteAccessoriesXpath, true)
-	
-			String newButtonDeleteXpath = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[8]/a/i'
+				'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[7]/textarea', true)
 	
 			'modify button delete'
 			modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Delete'),
-				'xpath', 'equals', newButtonDeleteXpath, true)
+				'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[8]/a/i', true)
 	
 			'click lookup supplier'
 			WebUI.click(modifyObjectButtonSupplier, FailureHandling.OPTIONAL)
@@ -831,8 +776,6 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
 				}
-
-	
 				continue
 			}
 			
@@ -873,14 +816,12 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 				'click ok pada alert'
 				WebUI.acceptAlert(FailureHandling.OPTIONAL)
 	
-				
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
 				}
 
-				
 				continue
 			}
 			
@@ -936,7 +877,6 @@ else if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
 				}
 
-	
 				continue
 			}
 			
