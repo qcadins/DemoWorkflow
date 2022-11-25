@@ -19,8 +19,8 @@ import groovy.sql.Sql as Sql
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+'connect DB'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -28,31 +28,23 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
-'declare arraylist arraymatch'
-ArrayList<String> arrayMatch = new ArrayList<String>()
-
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
-def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
-    'Reserve Fund Amt') + 2
+def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Reserve Fund Amt')+2
 
-'declare arraylist resultDB'
-ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnectionLOS, 
-    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 13))
 
-for (int i = 0; i < resultDB.size(); i++) {
-    'verif reserved fund amt db dengan excel'
-    arrayMatch.add(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()), Double.parseDouble(datafileReservedFund.getValue(
-                    GlobalVariable.NumofColm, rsvAmtRow + i).replace(',', ''))))
+for(int i=0;i<resultDB.size();i++){
+	
+	'verif reserved fund amt db dengan excel'
+	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(datafileReservedFund.getValue(
+				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))==false){
+			'Write to Excel FAILED'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			
+			'Write To Excel GlobalVariable.ReasonFailedStoredDB'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+	}
 }
-
-'jika nilai di confins tidak sesuai dengan db'
-if (arrayMatch.contains(false)) {
-    'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 0, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 1, 
-        GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
-}
-

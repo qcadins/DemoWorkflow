@@ -24,8 +24,8 @@ import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
-'connect DB TAX'
-Sql sqlconnectionTAX = CustomKeywords.'dbConnection.connectDB.connectTAX'()
+'Koneksi database'
+Sql sqlConnectionTAX = CustomKeywords.'dbConnection.connectDB.connectTAX'()
 
 'Inisialisasi global variabel untuk penghitungan summary'
 GlobalVariable.TotalCommissionAmt = 0.00
@@ -42,7 +42,7 @@ variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEm
 variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 
 'Arraylist untuk menampung tax rate (wht dan vat), penalty rate, persentase taxable serta tiernya (amt from dan amt to) dari db'
-ArrayList<WebElement> taxRate = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxRateCompany'(sqlconnectionTAX)
+ArrayList<WebElement> taxRate = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxRateCompany'(sqlConnectionTAX)
 
 whtRate = (taxRate[0]).split(';')
 
@@ -50,55 +50,40 @@ vatRate = (taxRate[1]).split(';')
 
 'Looping data Supplier'
 for (int i = 1; i <= variableSupp.size(); i++) {
-	newxpathSupplierName = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[1]/label')
-
-	newxpathCommAmt = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[2]/div[2]/label')
-
-	newxpathAmtAftTax = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[3]/div[1]/label')
-
-	newxpathTax = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[1]/div[3]/label')
-
-	newxpathVat = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[2]/div[3]/label')
-
-	newxpathDisburse = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[3]/div[2]/label')
-
-	newxpathExpense = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[4]/div[3]/label')
-
-	newxpathCalMethod = (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[4]/div[2]/label')
 
 	modifyObjectSuppName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SupplierName'),
-		'xpath', 'equals', newxpathSupplierName, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
 	'Variabel string untuk mengambil nama dari supplier employee ke-i dari web confins'
 	String supplierName = WebUI.getText(modifyObjectSuppName)
 
 	'modify object total commission amount'
 	modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtSupplier'),
-		'xpath', 'equals', newxpathCommAmt, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[2]/div[2]/label'), true)
 
 	'modify object total commission after tax amount'
 	modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommisssionAfterTaxAmtSupplier'),
-		'xpath', 'equals', newxpathAmtAftTax, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[3]/div[1]/label'), true)
 
 	'modify object withholding tax amount'
 	modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtSupp'),
-		'xpath', 'equals', newxpathTax, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[1]/div[3]/label'), true)
 
 	'modify object vat amount'
 	modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_VatAmtSupp'),
-		'xpath', 'equals', newxpathVat, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[2]/div[3]/label'), true)
 
 	'modify object disburse amount'
 	modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_DisburseAmtSupp'),
-		'xpath', 'equals', newxpathDisburse, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[3]/div[2]/label'), true)
 
 	'modify object expense amount'
 	modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_ExpenseAmtSupp'),
-		'xpath', 'equals', newxpathExpense, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[4]/div[3]/label'), true)
 
 	'modify object calculation method'
 	modifyObjectCalMethod = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_CalculationMethod'),
-		'xpath', 'equals', newxpathCalMethod, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[2]/div[4]/div[2]/label'), true)
 
 	'Menghitung total amount untuk verify summary'
 	CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax,
@@ -129,7 +114,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
 		supplierName)
 
 	'Pengecekan calculation method gross atau nett'
@@ -138,7 +123,6 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -146,17 +130,15 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 					whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 					vatRate[1]), taxpayerInfo[2])
 
-			//			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
 			'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 			WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
 		}
-		//				  WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+	  
 	} else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
 		'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -173,7 +155,6 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
 	
-
 	'Pengecekan expense amt pada confins sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -182,55 +163,40 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 
 'Looping data supplier employee'
 for (int j = 1; j <= variableSuppEmp.size(); j++) {
-	newxpathSupplierEmpName = (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (j + 1)) + ']/div/div[1]/div[2]/div/div[1]/label')
-
-	newxpathCommAmt = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[2]/div[2]/label')
-
-	newxpathAmtAftTax = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[3]/div[1]/label')
-
-	newxpathTax = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[1]/div[3]/label')
-
-	newxpathVat = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[2]/div[3]/label')
-
-	newxpathDisburse = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[3]/div[2]/label')
-
-	newxpathExpense = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[4]/div[3]/label')
-
-	newxpathCalMethod = (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[4]/div[2]/label')
 
 	modifyObjectSuppEmpName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_SuppEmpName'),
-		'xpath', 'equals', newxpathSupplierEmpName, true)
+		'xpath', 'equals', (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (j + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
 	'Variabel string untuk mengambil nama dari supplier employee ke-i dari web confins'
 	String supplierEmployeeName = WebUI.getText(modifyObjectSuppEmpName)
 
 	'modify object total commission amount'
 	modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtSuppEmp'),
-		'xpath', 'equals', newxpathCommAmt, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[2]/div[2]/label'), true)
 
 	'modify object total commission after tax amount'
 	modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommissionAfterTaxAmtSuppEmp'),
-		'xpath', 'equals', newxpathAmtAftTax, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[3]/div[1]/label'), true)
 
 	'modify object withholding tax amount'
 	modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtSuppEmp'),
-		'xpath', 'equals', newxpathTax, true)
+		'xpath', 'equals',  (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[1]/div[3]/label'), true)
 
 	'modify object vat amount'
 	modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_VatAmtSuppEmp'),
-		'xpath', 'equals', newxpathVat, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[2]/div[3]/label'), true)
 
 	'modify object disburse amount'
 	modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_DisburseAmtSuppEmp'),
-		'xpath', 'equals', newxpathDisburse, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[3]/div[2]/label'), true)
 
 	'modify object expense amount'
 	modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_ExpenseAmtSuppEmp'),
-		'xpath', 'equals', newxpathExpense, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[4]/div[3]/label'), true)
 
 	'modify object calculation metthod'
 	modifyObjectCalMethod = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_CalculationMethodSuppEmp'),
-		'xpath', 'equals', newxpathCalMethod, true)
+		'xpath', 'equals', (('//*[@id="formInformationSupplierEmployee"]/div[' + (j + 1)) + ']/div/div[3]/div[4]/div[2]/label'), true)
 
 	'Menghitung total amount untuk verify summary'
 	CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax,
@@ -261,7 +227,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
 		supplierEmployeeName)
 
 	'Pengecekan calculation method pada confins gross atau nett'
@@ -270,7 +236,6 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -278,17 +243,15 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 					whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 					vatRate[1]), taxpayerInfo[2])
 
-			//			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
 			'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 			WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
 		}
-		//				 WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+	   
 	} else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
 		'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -305,7 +268,6 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
 	
-
 	'Pengecekan expense amount pada confins sesuai perhitungans'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -314,55 +276,40 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 
 'Looping data referantor'
 for (int k = 1; k <= variableRef.size(); k++) {
-	newxpathRefName = (('//*[@id=\'formInformationReferantor\']/div[' + (k + 1)) + ']/div/div[1]/div[2]/div/div[1]/label')
-
-	newxpathCommAmt = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[2]/div[2]/label')
-
-	newxpathAmtAftTax = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[3]/div[1]/label')
-
-	newxpathTax = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[1]/div[3]/label')
-
-	newxpathVat = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[2]/div[3]/label')
-
-	newxpathDisburse = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[3]/div[2]/label')
-
-	newxpathExpense = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[4]/div[3]/label')
-
-	newxpathCalMethod = (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[4]/div[2]/label')
 
 	modifyObjectRefName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_RefName'),
-		'xpath', 'equals', newxpathRefName, true)
+		'xpath', 'equals', (('//*[@id=\'formInformationReferantor\']/div[' + (k + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
 	'Variabel string untuk mengambil nama dari referantor ke-i dari web confins'
 	String refName = WebUI.getText(modifyObjectRefName)
 
 	'modify object total commission amount'
 	modifyObjectCommAmt = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommissionAmtRef'),
-		'xpath', 'equals', newxpathCommAmt, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[2]/div[2]/label'), true)
 
 	'modify object total commission after tax amount'
 	modifyObjectAmtAftTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_TotalCommissionAfterTaxAmtRef'),
-		'xpath', 'equals', newxpathAmtAftTax, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[3]/div[1]/label'), true)
 
 	'modify object withholding tax amount'
 	modifyObjectTax = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_WithHoldingTaxAmtRef'),
-		'xpath', 'equals', newxpathTax, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[1]/div[3]/label'), true)
 
 	'modify object vat amount'
 	modifyObjectVat = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_VatAmtRef'),
-		'xpath', 'equals', newxpathVat, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[2]/div[3]/label'), true)
 
 	'modify object disburse amount'
 	modifyObjectDisburse = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_DisburseAmtRef'),
-		'xpath', 'equals', newxpathDisburse, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[3]/div[2]/label'), true)
 
 	'modify object expense amount'
 	modifyObjectExpense = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_ExpenseAmtRef'),
-		'xpath', 'equals', newxpathExpense, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[4]/div[3]/label'), true)
 
 	'modify object calculation method'
 	modifyObjectCalMethod = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_CalculationMethodRef'),
-		'xpath', 'equals', newxpathCalMethod, true)
+		'xpath', 'equals', (('//*[@id="formInformationReferantor"]/div[' + (k + 1)) + ']/div/div[2]/div[4]/div[2]/label'), true)
 
 	'Menghitung total amount yang akan digunakan untuk verify summary'
 	CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax,
@@ -393,7 +340,7 @@ for (int k = 1; k <= variableRef.size(); k++) {
 	BigDecimal vaTax = Double.parseDouble(textVat)
 
 	'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
-	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlconnectionTAX,
+	ArrayList<WebElement> taxpayerInfo = CustomKeywords.'commissionReserveFundData.taxCalculation.checkTaxpayerInfo'(sqlConnectionTAX,
 		refName)
 
 	'Pengecekan calculation method pada confins gross atau nett'
@@ -402,7 +349,6 @@ for (int k = 1; k <= variableRef.size(); k++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -410,17 +356,15 @@ for (int k = 1; k <= variableRef.size(); k++) {
 					whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 					vatRate[1]), taxpayerInfo[2])
 
-			//			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
 			'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 			WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
 		}
-		//				 WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+	   
 	} else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
 		'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '12.TabCommissionData',
 			GlobalVariable.NumofColm)
 		
-
 		'Pengecekan tax kind code'
 		if ((taxpayerInfo[0]) == 'C') {
 			'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -437,7 +381,6 @@ for (int k = 1; k <= variableRef.size(); k++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
 	
-
 	'Pengecekan expense amount pada confins sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '12.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -472,31 +415,25 @@ String textTotalVat = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/Com
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalCommAmt, String.format('%.2f', GlobalVariable.TotalCommissionAmt), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalCommAmtAftTax, String.format('%.2f', GlobalVariable.TotalCommissionAmtAftTax), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalDisburseAmt, String.format('%.2f', GlobalVariable.TotalDisburseAmt), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalExpenseAmt, String.format('%.2f', GlobalVariable.TotalExpenseAmt), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalTax, String.format('%.2f', GlobalVariable.TotalTax), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalVat, String.format('%.2f', GlobalVariable.TotalVat), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Arraylist untuk menampung Income Information'
 ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
@@ -521,22 +458,18 @@ ArrayList<WebElement> AllocatedCommissionAmt = new ArrayList<WebElement>()
 AllocatedCommissionAmt = GlobalVariable.AllocatedCommissionAmt
 
 for (int i = 1; i < countRemainingInfo; i++) {
-	xpathIncomeInfo = (('//*[@id="viewIncomeInfo"]/div[' + i) + ']/div/div[2]/label')
-	
-	xpathRemainingInfo = (('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label')
 	
 	modifyIncomeInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'),
-		'xpath', 'equals', xpathIncomeInfo, true)
+		'xpath', 'equals', (('//*[@id="viewIncomeInfo"]/div[' + i) + ']/div/div[2]/label'), true)
 
 	modifyRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'),
-		'xpath', 'equals', xpathRemainingInfo, true)
+		'xpath', 'equals', (('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label'), true)
 	
 	'Ambil nilai income info amount dari confins'
 	String textIncomeInfoAmt = WebUI.getText(modifyIncomeInfo).replace(',', '')
 	
 	'Ambil nilai remaining info amount dari confins'
 	String textRemainingInfoAmt = WebUI.getText(modifyRemainingInfo).replace(',', '')
-	
 	
 	'Verifikasi untuk section remaining info after calculate,  income info tab commission - nilai yg sudah dibagikan'
 	checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(textRemainingInfoAmt)), Math.round(Double.parseDouble(textIncomeInfoAmt) - (Math.round(
@@ -568,7 +501,6 @@ String textRemainingAllocatedAmount = WebUI.getText(modifyRemainingAllocatedAmou
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingAllocatedAmount, String.format('%.2f', remainingAllocatedAmount), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 GlobalVariable.RemainingAllocatedAmt = remainingAllocatedAmount
 
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
@@ -582,4 +514,3 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 		GlobalVariable.FlagFailed=1
 	}
 }
-
