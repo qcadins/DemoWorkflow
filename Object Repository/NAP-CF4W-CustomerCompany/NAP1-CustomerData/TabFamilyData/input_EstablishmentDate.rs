@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_EstablishmentDate</name>
+   <tag></tag>
+   <elementGuidId>71e3fe5c-8c29-43d2-acae-b78f42494155</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[11]/div[3]/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[11]/div[3]/div/input</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_JobPosition</name>
+   <tag></tag>
+   <elementGuidId>4d664c6e-f1d2-448b-ac60-f13b554d92c4</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[12]/div[3]/div/lib-uclookupgeneric/div/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustMainData&quot;]/div[2]/div[12]/div[3]/div/lib-uclookupgeneric/div/div/input</value>
+   </webElementProperties>
+</WebElementEntity>
