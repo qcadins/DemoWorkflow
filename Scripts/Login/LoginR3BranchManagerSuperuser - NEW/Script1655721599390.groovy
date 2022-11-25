@@ -25,7 +25,7 @@ datafileLogin = findTestData('Login/Login')
 'open Browser'
 WebUI.openBrowser('')
 
-'maximize window'
+'maximize window browser'
 WebUI.maximizeWindow()
 
 'input web R3 LOS'
