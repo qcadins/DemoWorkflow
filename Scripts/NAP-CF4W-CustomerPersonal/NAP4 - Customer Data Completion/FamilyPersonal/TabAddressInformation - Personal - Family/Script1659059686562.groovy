@@ -31,7 +31,8 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+            GlobalVariable.NumofFamily, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
             GlobalVariable.NumofFamily, 13))) {
         copyAppColm = index
 
@@ -40,13 +41,12 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-    GlobalVariable.NumofColm, 10)
+copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(GlobalVariable.NumofFamily, 10)
 
-ArrayList<WebElement> variable
-
+'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	'count table addres row di confins'
+    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (i = 1; i <= variable.size(); i++) {
         'modify object address type'
@@ -63,7 +63,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
              GlobalVariable.FlagFailed = 0
 
             if (GlobalVariable.FindDataFile.getValue(Address, 10).length() != 0) {
-                if (GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+                if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+                        GlobalVariable.NumofFamily, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
                         GlobalVariable.NumofFamily, 13))) {
                     if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
                             12))) {
@@ -87,6 +88,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
+	'count ulang table address row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
@@ -99,7 +101,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                     i) + ']/td[1]', true)
 
-                if (GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+                if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
+                        GlobalVariable.NumofFamily, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail - Personal - Family').getValue(
                         GlobalVariable.NumofFamily, 13))) {
                     if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
                             12)))) {
@@ -107,7 +110,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button add'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Add'))
 
-							'verif ddl ownership dan address type'
+                            'verif ddl ownership dan address type'
 							verifyDDLAddress(Address)
                             
 							'call function input address'
@@ -136,7 +139,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     GlobalVariable.NumofFamily, 13))) {
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Add'))
-
+				
 				'verif ddl ownership dan address type'
 				verifyDDLAddress(Address)
 				
@@ -275,7 +278,7 @@ def inputaddress() {
     'click save'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Save'))
 
-    iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(Address, 4))
+    Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(Address, 4))
 
     if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
         'cek alert'
@@ -311,14 +314,13 @@ def inputaddress() {
 }
 
 def verifyDDLAddress(int Address){
+	
 	if (GlobalVariable.RoleCompany == 'Testing') {
-		
+
 		'connect DB FOU'
 		Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-		ArrayList<String> AddressType
-
-		ArrayList<String> Ownership
+		ArrayList<String> AddressType, Ownership
 
 		'get data array dari db'
 		AddressType = CustomKeywords.'nap4Data.checkNAP4.checkAddressTypePersonal'(sqlconnectionFOU)

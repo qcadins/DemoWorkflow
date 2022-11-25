@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 'click lookup profesi'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Profession Name_btn btn-raised btn-primary'))
@@ -30,28 +30,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'))
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
-
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusFailed)
-
-    'write to excel reason lookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusReasonLookup)
-
-    'flagfailed +1 karena gagal melakukan lookup'
-    (GlobalVariable.FlagFailed)++
-}
+verifyInputError()
 
 'pilih job position'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/select_JobPosition'), 
@@ -104,28 +83,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'))
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
-
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusFailed)
-
-    'write to excel reason lookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusReasonLookup)
-
-    'flagfailed +1 karena gagal melakukan lookup'
-    (GlobalVariable.FlagFailed)++
-}
+verifyInputError()
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 23).length() > 0) {
     'pilih big/medium/small'
@@ -180,28 +138,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompleti
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'))
-} else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
-
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
-
-    'write to excel if failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusFailed)
-
-    'write to excel reason lookup'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusReasonLookup)
-
-    'flagfailed +1 karena gagal melakukan lookup'
-    (GlobalVariable.FlagFailed)++
-}
+verifyInputError()
 
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/textarea_notes'), 
@@ -314,7 +251,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 79).length() > 
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
 
-            flagWarning++
+            GlobalVariable.FlagWarning++
         }
     }
     
@@ -448,7 +385,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 106).length() >
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
 
-            flagWarning++
+            GlobalVariable.FlagWarning++
         }
     }
     
@@ -515,10 +452,34 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
 } else {
-    if (flagWarning > 0) {
+    if (GlobalVariable.FlagWarning > 0) {
 		'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofMS - 
             1, GlobalVariable.StatusWarning)
     }
 }
 
+def verifyInputError(){
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'),
+		10, FailureHandling.OPTIONAL)) {
+		'click select'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/a_Select'))
+	} else {
+		'click X'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/TabApplicationData/Button_X'))
+	
+		'click button back'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee - Personal/button_Back'))
+	
+		'write to excel if failed'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofMS -
+			1, GlobalVariable.StatusFailed)
+	
+		'write to excel reason lookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 1, GlobalVariable.NumofMS -
+			1, GlobalVariable.StatusReasonLookup)
+	
+		'flagfailed +1 karena gagal melakukan lookup'
+		(GlobalVariable.FlagFailed)++
+	}
+}
