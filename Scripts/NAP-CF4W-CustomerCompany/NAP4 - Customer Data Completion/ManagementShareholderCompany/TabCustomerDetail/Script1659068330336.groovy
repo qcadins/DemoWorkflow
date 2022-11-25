@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
@@ -25,145 +25,161 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail - Company - ManagementShareholderCompany')
 
 'input establishment date'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Establishment Date'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 14))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Establishment Date'),
+	GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 14))
 
 'input no of employee'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_No Of Employee'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_No Of Employee'),
+	GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15))
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).length() > 2) {
-    'click button customer group'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Customer Group_'))
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).length() > 2) {
+	'click button customer group'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Customer Group_'))
 
-    'input customer no'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer No_custNoId'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16))
+	'input customer no'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer No_custNoId'),
+		GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16))
 
-    'input customer name'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer Name_custNameId'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 17))
+	'input customer name'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Customer Name_custNameId'),
+		GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17))
 
-    'click button search'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Search'))
+	'click button search'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Search'))
 
-    'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/Button_X'))
+	'verify input error'
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'),
+		10, FailureHandling.OPTIONAL)) {
+		'click select'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'))
+	} else {
+		'click X'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/Button_X'))
 
-        flagWarning++
-    }
+		'flagwarning +1'
+		GlobalVariable.FlagWarning++
+	}
 }
 
-if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'), 
-    2, FailureHandling.OPTIONAL)) {
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18) == 'Yes') {
-        'Click VIP checklist'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
-    }
-} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'), 
-    2)) {
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18) == 'No') {
-        'Click VIP checklist'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
-    }
+if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'),
+	2, FailureHandling.OPTIONAL)) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18) == 'Yes') {
+		'Click VIP checklist'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
+	}
+} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'),
+	2)) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18) == 'No') {
+		'Click VIP checklist'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_VIP_border'))
+	}
 }
 
-if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'), 
-    2, FailureHandling.OPTIONAL)) {
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 19) == 'Yes') {
-        'click affiliation and multifinance'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
-    }
-} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'), 
-    2)) {
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 19) == 'No') {
-        'click affiliation and multifinance'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
-    }
+if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'),
+	2, FailureHandling.OPTIONAL)) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 19) == 'Yes') {
+		'click affiliation and multifinance'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
+	}
+} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'),
+	2)) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 19) == 'No') {
+		'click affiliation and multifinance'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Affiliation with Multifinance'))
+	}
 }
 
 'click button industry type'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Industry Type_btn btn-raised btn-primary'))
 
 'input industry code'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Industry Type Code_industryTypeCodeId'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 20))
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/input_Industry Type Code_industryTypeCodeId'),
+	GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 20))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Search'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'), 
-    10, FailureHandling.OPTIONAL)) {
-    'click select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'))
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'),
+	10, FailureHandling.OPTIONAL)) {
+	'click select'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/a_Select'))
 } else {
-    'click X'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/Button_X'))
+	'click X'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/Button_X'))
 
-    'click button back'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+	'click button back'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 
-    'write to excel if failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, 
-        GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
+	'write to excel if failed'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+	'write to excel reason lookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 1,
+		GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+	'Flagfailed +1 karena gagal melakukan lookup'
+	(GlobalVariable.FlagFailed)++
 }
 
 'select customer model'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/select_Select One Corporate  Non Corporate'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 22), false)
+WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/select_Select One Corporate  Non Corporate'),
+	GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 22), false)
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 18) == 'Yes') {
-    'input VIP note'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/textarea_VIP Notes'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 23))
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18) == 'Yes') {
+	'input VIP note'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/textarea_VIP Notes'),
+		GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 23))
 }
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0) && (GlobalVariable.FlagFailed == 
-0)) {
-    'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '1.CustomerDetail')
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4))
+
+if (iscompleteMandatory == 0 && (GlobalVariable.FlagFailed == 0)) {
+	'Check alert'
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm,
+		'1.CustomerDetail')
 }
 
+'check if flagfailed = 0'
 if (GlobalVariable.FlagFailed == 0) {
-    'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.NumofMS, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'), 
-        GlobalVariable.NumofMS, '1.CustomerDetail')
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
+				GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'),
+		GlobalVariable.NumofColm, '1.CustomerDetail')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0) {
-        'Check error validasi'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
-            GlobalVariable.NumofMS, '1.CustomerDetail')
-    }
+	if (iscompleteMandatory == 0) {
+		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		
+		'Check error validasi'
+		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
+			GlobalVariable.NumofColm, '1.CustomerDetail')
+	}
 }
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/label_Establishment Date'), 
-    5, FailureHandling.OPTIONAL)) {
-    'click button back'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+'check iflabel estahblishment date is present'
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/label_Establishment Date'),
+	5, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 } else {
-    if (flagWarning > 0) {
+	'check if flagwarning = 0'
+	if (GlobalVariable.FlagWarning > 0) {
 		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
-            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-    }
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+	}
 }
 
+'check if role = testing & store Db = yes'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
+	'declare numofverif = numof colm'
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
 
-    'call test case verify customer detail store data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerDetailVerifStoreDataDB'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	'call test case verify customer detail store data'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerDetailVerifStoreDataDB'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
-

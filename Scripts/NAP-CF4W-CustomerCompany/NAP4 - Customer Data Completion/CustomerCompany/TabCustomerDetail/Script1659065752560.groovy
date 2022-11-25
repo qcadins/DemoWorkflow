@@ -137,8 +137,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18) == 'Yes')
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail - Company/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
-0)) {
+Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4))
+
+if (iscompleteMandatory == 0 && (GlobalVariable.FlagFailed == 0)) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.CustomerDetail')
@@ -151,7 +152,9 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'), 
         GlobalVariable.NumofColm, '1.CustomerDetail')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
+    if (iscompleteMandatory == 0) {
+		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofColm, '1.CustomerDetail')

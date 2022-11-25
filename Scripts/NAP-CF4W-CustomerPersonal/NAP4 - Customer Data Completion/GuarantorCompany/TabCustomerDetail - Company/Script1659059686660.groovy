@@ -15,9 +15,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
@@ -61,7 +61,7 @@ if (GlobalVariable.FindDataFile.getValue(
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
-        flagWarning++
+        GlobalVariable.FlagWarning++
     }
 }
 
@@ -174,7 +174,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {
-    if (flagWarning > 0) {
+    if (GlobalVariable.FlagWarning > 0) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
             0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
     }

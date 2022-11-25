@@ -15,9 +15,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
- GlobalVariable.FlagFailed = 0
+GlobalVariable.FlagFailed = 0
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
@@ -99,7 +99,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 21).length() 
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
-        flagWarning++
+        GlobalVariable.FlagWarning++
     }
 }
 
@@ -176,6 +176,7 @@ if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '1.CustomerDetail')
 }
 
+'check if flagfailed = 0'
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Add'), 
@@ -194,14 +195,16 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {
-    if (flagWarning > 0) {
+	'check if flagwarning = 0'
+    if (GlobalVariable.FlagWarning > 0) {
+		'write to excel warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
 }
 
 if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-	
+	'declare numofverif = numof colm'
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
 	
     'call test case store data verif customer detail'

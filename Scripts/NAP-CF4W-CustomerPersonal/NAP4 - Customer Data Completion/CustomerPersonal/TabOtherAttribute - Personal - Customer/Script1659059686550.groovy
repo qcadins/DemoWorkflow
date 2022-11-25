@@ -19,7 +19,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-int flagWarning = 0
+GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
@@ -272,27 +272,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 13).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).length() > 1) {
@@ -307,27 +287,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).length() > 1) {
@@ -342,27 +302,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 19).length() > 1) {
@@ -377,27 +317,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 19).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 21).length() > 1) {
@@ -418,27 +338,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 23).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 24).length() > 1) {
@@ -465,27 +365,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 27).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 29).length() > 1) {
@@ -500,27 +380,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 29).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 31).length() > 1) {
@@ -535,27 +395,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 31).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+   verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 33).length() > 1) {
@@ -570,27 +410,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 33).length() 
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+    verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 34).length() > 1) {
@@ -619,7 +439,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 36).length() 
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
-        flagWarning++
+        GlobalVariable.FlagWarning++
     }
 }
 
@@ -640,28 +460,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 39).length() 
     'click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/button_Search'))
 
-    'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
+	'verify input error'
+	verifyInputError()
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 40).length() > 1) {
@@ -690,7 +490,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 42).length())
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
-        flagWarning++
+        GlobalVariable.FlagWarning++
     }
 }
 
@@ -725,7 +525,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {
-    if (flagWarning > 0) {
+    if (GlobalVariable.FlagWarning > 0) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
@@ -751,3 +551,26 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     }
 }
 
+def verifyInputError(){
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'),
+		10, FailureHandling.OPTIONAL)) {
+		'click select'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute - Personal/a_Select'))
+	} else {
+		'click X'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+
+		'click button back'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
+
+		'write to excel if failed'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute',
+			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+		'write to excel reason lookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute',
+			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}

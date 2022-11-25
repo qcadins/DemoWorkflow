@@ -45,10 +45,8 @@ for (index = 2; index <= (countcolm + 1); index++) {
 copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
     GlobalVariable.NumofColm, 10)
 
-ArrayList<WebElement> variable
-
 if (copyapp.equalsIgnoreCase('Edit')) {
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (i = 1; i <= variable.size(); i++) {
         'modify object address type'
@@ -160,6 +158,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/button_Save  Continue'))
 
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/th_Address'),
+	5, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Back'))
+}
+	
 def inputaddress() {
     'pilih address type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
@@ -329,9 +333,7 @@ def verifyDDLAddress(int Address){
 		'connect DB FOU'
 		Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-		ArrayList<String> AddressType
-
-		ArrayList<String> Ownership
+		ArrayList<String> AddressType, Ownership
 
 		'get data array dari db'
 		AddressType = CustomKeywords.'nap4Data.checkNAP4.checkAddressTypeCompany'(sqlconnectionFOU)

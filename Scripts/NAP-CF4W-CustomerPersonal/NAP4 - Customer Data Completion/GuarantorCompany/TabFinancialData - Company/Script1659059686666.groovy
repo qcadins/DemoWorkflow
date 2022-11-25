@@ -33,11 +33,9 @@ GlobalVariable.CopyAppColm = 0
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
-ArrayList<WebElement> variable
+ArrayList<String> financialDateDelete = new ArrayList<>()
 
-ArrayList<WebElement> financialDateDelete = new ArrayList<WebElement>()
-
-ArrayList<WebElement> bankAccDelete = new ArrayList<WebElement>()
+ArrayList<String> bankAccDelete = new ArrayList<>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
@@ -52,12 +50,13 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofGuarantor, 
+copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofGuarantor, 
     10)
 
-'Check if Edit Untuk financial data'
+'Check if Edit Untuk Financial Data'
 if (copyapp.equalsIgnoreCase('Edit')) {
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+    'count table financialdata confins'
+    ArrayList<Boolean> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/label_nodataavailable'), 
             FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
@@ -66,14 +65,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-            'modify object button edit'
-            modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a/i', true)
-
-            'modify object button delete'
-            modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i', true)
-
             for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 GlobalVariable.FlagFailed = 0
 
@@ -81,52 +72,57 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
-                        if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                            'check if date sama'
-                            if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
-                                'click button edit'
-                                WebUI.click(modifyNewbuttonedit)
+                        'modify object button edit'
+                        modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                            'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a/i', true)
 
-								'call function input financial data'
-                                inputFinancialData()
+                        if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
+                                    financialdata, 35)))) {
+                            'click button edit'
+                            WebUI.click(modifyNewbuttonedit)
 
-                                break
-                            } else {
-                                if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).length() == 0) {
-                                    'click button delete'
-                                        WebUI.click(modifyNewbuttondelete)
+                            'call function input data financial'
+                            inputDataFinancial()
 
-                                        'accept alert'
-                                        WebUI.acceptAlert(FailureHandling.OPTIONAL)
-
-                                        if (i == variable.size()) {
-                                            if (WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                financialDateDelete.add(modifyDateNew)
-
-                                                continue
-                                            }
-                                        } else {
-                                            'get cust name sesudah delete'
-                                            modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
-
-                                            if (WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                financialDateDelete.add(modifyDateNew)
-
-                                                continue
-                                            }
-                                        }
-                                        
-                                        i--
-                                }
-                            }
-                        } else {
                             break
+                        } else {
+                            'modify object button delete'
+                            modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i', 
+                                true)
+
+                            if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).length() == 0) {
+                                'click button delete'
+                                WebUI.click(modifyNewbuttondelete)
+
+                                'accept alert'
+                                WebUI.acceptAlert(FailureHandling.OPTIONAL)
+
+                                if (i == variable.size()) {
+                                    if (WebUI.verifyElementNotPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
+                                        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                    } else {
+                                        'add cust name failed kedalam array'
+                                        financialDateDelete.add(modifyDateNew)
+
+                                        continue
+                                    }
+                                } else {
+                                    'get cust name sesudah delete'
+                                    modifyDateNewAfter = WebUI.getText(modifyNewDate).replace('-', ' ')
+
+                                    if (WebUI.verifyNotMatch(modifyDateNewAfter, modifyDateNew, false, FailureHandling.OPTIONAL)) {
+                                        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+                                    } else {
+                                        'add cust name failed kedalam array'
+                                        financialDateDelete.add(modifyDateNew)
+
+                                        continue
+                                    }
+                                }
+                                
+                                i--
+                            }
                         }
                     }
                 } else {
@@ -135,17 +131,20 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
         }
     }
-			
-			if (financialDateDelete.size() > 0) {
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData',
-					0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-		
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData',
-					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
-		
-				(GlobalVariable.FlagWarning)++
-			}
     
+    if (financialDateDelete.size() > 0) {
+        'write to excel status warning'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.StatusWarning)
+
+        'write to excel reason delete failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+
+        (GlobalVariable.FlagWarning)++
+    }
+    
+    'count ulang table financial data setelah edit/delete'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
@@ -166,17 +165,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
                         'verify date beda'
-                        if (!(WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
-                            5, FailureHandling.OPTIONAL)) {
+                        if (!(WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
+                                    financialdata, 35)))) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
                             if (i == variable.size()) {
                                 'click button add'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'))
 
-                                inputFinancialData()
+                                inputDataFinancial()
 
                                 break
                             }
-                        } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35)))) {
+                        } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
+                                    financialdata, 35)))) {
                             break
                         }
                     }
@@ -196,7 +196,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Add'))
 
-                    inputFinancialData()
+                    'call funtion input financial data'
+                    inputDataFinancial()
                 }
             }
         } else {
@@ -205,6 +206,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
 }
 
+'count financial attr label'
 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div label'))
 
 int row = 37
@@ -220,18 +222,11 @@ for (i = 1; i <= variable.size(); i++) {
 
 'Check if Edit Untuk Bank Account dan Bank Statement'
 if (copyapp.equalsIgnoreCase('Edit')) {
+    'count table bank acc confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
     if (variable.size() > 0) {
         for (i = 1; i <= variable.size(); i++) {
-            'modify button edit'
-            modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[1]', true)
-
-            'modify button delete'
-            modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[2]', true)
-
             'modify bank name - branch - bank no'
             modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
@@ -241,59 +236,65 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
                 int flagFailed = 0
 
-                if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
+                if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
                         if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
-                            if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                                bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + 
-                                ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
-                                    financialdata, 70)) + ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 69))
+                            bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + ' - ') + 
+                            GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
+                                financialdata, 70)) + ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 69))
 
-                                if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
-                                    'click button edit'
-                                    WebUI.click(modifyNewbuttonedit)
+                            if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
+                                'modify button edit'
+                                modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                    'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[1]', 
+                                    true)
 
-                                    inputBank(copyapp, variable, flagFailed)
+                                'click button edit'
+                                WebUI.click(modifyNewbuttonedit)
 
-                                    break
-                                } else {
-                                    if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 10).length() == 0) {
-                                        'click button delete'
-                                        WebUI.click(modifyNewbuttondelete)
+                                inputBank(copyapp, variable, flagFailed)
 
-                                        'accept alert'
-                                        WebUI.acceptAlert(FailureHandling.OPTIONAL)
-
-                                        if (i == variable.size()) {
-                                            if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, 5, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                bankAccDelete.add(BankDetail)
-
-                                                continue
-                                            }
-                                        } else {
-                                            'get cust name sebelum delete'
-                                            modifyBankaccAfter = WebUI.getText(modifyNewbankaccdetail)
-
-                                            if (WebUI.verifyNotMatch(modifyBankaccAfter, BankDetail, false, FailureHandling.OPTIONAL)) {
-                                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
-                                            } else {
-                                                'add cust name failed kedalam array'
-                                                bankAccDelete.add(BankDetail)
-
-                                                continue
-                                            }
-                                        }
-                                        
-                                        i--
-                                    }
-                                }
-                            } else {
                                 break
+                            } else {
+                                if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 10).length() == 0) {
+                                    'modify button delete'
+                                    modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
+                                        'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[2]', 
+                                        true)
+
+                                    'click button delete'
+                                    WebUI.click(modifyNewbuttondelete)
+
+                                    'accept alert'
+                                    WebUI.acceptAlert(FailureHandling.OPTIONAL)
+
+                                    if (i == variable.size()) {
+                                        if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, 5, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            bankAccDelete.add(BankDetail)
+
+                                            continue
+                                        }
+                                    } else {
+                                        'get cust name sebelum delete'
+                                        modifyBankaccAfter = WebUI.getText(modifyNewbankaccdetail)
+
+                                        if (WebUI.verifyNotMatch(modifyBankaccAfter, BankDetail, false, FailureHandling.OPTIONAL)) {
+                                            variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
+                                        } else {
+                                            'add cust name failed kedalam array'
+                                            bankAccDelete.add(BankDetail)
+
+                                            continue
+                                        }
+                                    }
+                                    
+                                    i--
+                                }
                             }
                         }
                     }
@@ -305,21 +306,22 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (bankAccDelete.size() > 0) {
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.StatusWarning)
 
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 
-            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 1, GlobalVariable.CopyAppColm - 
+            1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
     }
     
+    'count ulang bank acc confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
-        if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
+        if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
             if (variable.size() > 0) {
                 for (i = 1; i <= variable.size(); i++) {
                     'modify button edit'
@@ -403,12 +405,12 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
     'call test case verify financial data store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabFinancialDataVerifStoreDataDB'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabFinancialDataVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-def inputFinancialData() {
-    int flagWarning = 0
+def inputDataFinancial() {
+    GlobalVariable.FlagWarning = 0
 
     'input gross monthly income amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/input_Monthly Income'), 
@@ -507,12 +509,10 @@ def inputFinancialData() {
         GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_SaveFinancialData'))
-
-
 }
 
-def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
-    int flagWarning = 0
+def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
+    GlobalVariable.FlagWarning = 0
 
     if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 1) {
         'click bank lookup'
@@ -543,14 +543,14 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel'))
 
             'Write To Excel GlobalVariable.StatusWarning'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
-                0, financialdata - 1, GlobalVariable.StatusWarning)
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0, 
+                financialdata - 1, GlobalVariable.StatusWarning)
 
             'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
-                1, financialdata - 1, GlobalVariable.StatusReasonLookup)
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1, 
+                financialdata - 1, GlobalVariable.StatusReasonLookup)
 
-            flagWarning++
+            GlobalVariable.FlagWarning++
         }
         
         'input bank branch'
@@ -843,9 +843,9 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData - Company/button_Cancel Bank'))
         }
         
-        if (flagWarning > 0) {
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 
-                0, financialdata - 1, GlobalVariable.StatusWarning)
+        if (GlobalVariable.FlagWarning > 0) {
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0, 
+                financialdata - 1, GlobalVariable.StatusWarning)
         }
         
         WebUI.delay(5)
@@ -934,23 +934,24 @@ def inputBankStatementFromEmpty() {
     }
 }
 
-def convertDate(String date){
-	'convert date confins dan excel agar sama'
-	SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
+def convertDate(String date) {
+    'convert date confins dan excel agar sama'
+    SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
-	Date parsedDate = null
+    Date parsedDate = null
 
-	String sentDate = date
+    String sentDate = date
 
-	String sDate
+    String sDate
 
-	if (sentDate != '') {
-		parsedDate = sdf.parse(sentDate)
+    if (sentDate != '') {
+        parsedDate = sdf.parse(sentDate)
 
-		sdf = new SimpleDateFormat('dd MMM YYYY')
+        sdf = new SimpleDateFormat('dd MMM YYYY')
 
-		sDate = sdf.format(parsedDate)
-	}
-	
-	return sDate
+        sDate = sdf.format(parsedDate)
+    }
+    
+    return sDate
 }
+

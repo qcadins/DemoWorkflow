@@ -36,8 +36,7 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
-            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(findTestData(
-            'NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
+            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
             GlobalVariable.NumofGuarantor, 13))) {
         copyAppColm = index
 
@@ -46,15 +45,12 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
-    10)
-
-ArrayList<WebElement> variable
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofGuarantor, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
-    'count table address row di confins'
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	'count table addres row di confins'
+    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (i = 1; i <= variable.size(); i++) {
         'modify object address type'
@@ -81,9 +77,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'click button edit'
                             WebUI.click(modifyNewbuttonedit)
 
-							'verif ddl ownership dan address type'
-							verifyDDLAddress(Address)
-                            
+                            'verif ddl ownership dan address type'
+                            verifyDDLAddress(Address)
+							
                             'call function input address'
                             inputaddress()
 
@@ -97,7 +93,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
     
-	'count table address info confins'
+	'count ulang table address row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
@@ -111,8 +107,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     i) + ']/td[1]', true)
 
                 if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(
-                    findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
+                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
                         GlobalVariable.NumofGuarantor, 13))) {
                     if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
                             12)))) {
@@ -142,9 +137,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
         if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
             if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
-                    GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(
-                findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
+                    GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(
                     GlobalVariable.NumofGuarantor, 13))) {
+				
                 'click button add'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Add'))
 
@@ -165,13 +160,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Save  Continue'))
 
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/th_Address'),
+	10, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation - Personal/button_Back'))
+}
+	
 def inputaddress() {
     GlobalVariable.FlagFailed = 0
 
     'pilih address type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'), 
-        findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/AddressInformation - Company - ManagementShareholderCompany').getValue(
-            Address, 12), false, FailureHandling.OPTIONAL)
+        GlobalVariable.FindDataFile.getValue(Address, 12), false, FailureHandling.OPTIONAL)
 
     if (GlobalVariable.FindDataFile.getValue(Address, 13).length() > 1) {
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_CopyAddressFrom'), 
@@ -236,11 +236,11 @@ def inputaddress() {
             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/button_Cancel'))
 
             'write to excel if failed'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 0, Address - 1, GlobalVariable.StatusFailed)
 
             'write to excel reason lookup'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation', 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
                 1, Address - 1, GlobalVariable.StatusReasonLookup)
 
             'Flagfailed +1 karena gagal melakukan lookup'
@@ -337,15 +337,13 @@ def verifyDDLAddress(int Address){
 		'connect DB FOU'
 		Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-		ArrayList<String> AddressType
-
-		ArrayList<String> Ownership
+		ArrayList<String> AddressType, Ownership
 
 		'get data array dari db'
-		AddressType = CustomKeywords.'dbconnection.checkNAP4db.checkAddressTypeCompany'(sqlconnectionFOU)
+		AddressType = CustomKeywords.'nap4Data.checkNAP4.checkAddressTypeCompany'(sqlconnectionFOU)
 
 		'get data array dari db'
-		Ownership = CustomKeywords.'dbconnection.checkNAP4db.checkOwnership'(sqlconnectionFOU)
+		Ownership = CustomKeywords.'nap4Data.checkNAP4.checkOwnership'(sqlconnectionFOU)
 
 		'get total label from ddl'
 		int totalddladdresstype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'))
@@ -356,12 +354,12 @@ def verifyDDLAddress(int Address){
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Select One Business  Legal  Mailing'),
 			AddressType) == false) {
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-				0, Address - 1, GlobalVariable.StatusFailed)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+				'2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
 			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-				1, Address - 1, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+				'2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -376,12 +374,10 @@ def verifyDDLAddress(int Address){
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation - Company/select_Ownership'),
 			Ownership) == false) {
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-				0, Address - 1, GlobalVariable.StatusFailed)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
 			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '2.AddressInformation',
-				1, Address - 1, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
 
 			(GlobalVariable.FlagFailed)++
 		}
