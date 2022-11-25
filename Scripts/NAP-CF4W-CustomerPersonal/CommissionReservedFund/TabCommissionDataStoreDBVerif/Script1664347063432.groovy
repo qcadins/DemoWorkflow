@@ -90,10 +90,8 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 							1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 						
-					
 					}
 			}
-			
 		}
 	}
 	int count = 0
@@ -119,11 +117,9 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-					
 						}
 					}
 				}
-				
 			}
 		}
 	}
@@ -150,16 +146,12 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-					
 						}
 					}
 				}
-				
 			}
 		}
 	}
-	
-	
 }
 else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Percentage")){
 	if(suppSource!=null){
@@ -178,10 +170,8 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 					
-					
 				}
 			}
-			
 		}
 	}
 	int count=0
@@ -207,11 +197,9 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-						
 						}
 					}
 				}
-				
 			}
 		}
 	}
@@ -238,22 +226,10 @@ else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("P
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 								1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 							
-							
 						}
 					}
 				}
-				
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -48,4 +48,3 @@ for(int i=0;i<resultDB.size();i++){
 				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
 	}
 }
-

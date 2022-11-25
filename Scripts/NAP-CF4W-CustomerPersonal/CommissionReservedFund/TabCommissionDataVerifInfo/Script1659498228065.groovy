@@ -123,7 +123,6 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -131,17 +130,15 @@ for (int i = 1; i <= variableSupp.size(); i++) {
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
-            //			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
             'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
             WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
         }
-        //				  WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+      
     } else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
         'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -158,7 +155,6 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
     
-
     'Pengecekan expense amt pada confins sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -240,7 +236,6 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -248,17 +243,15 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
-            //			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
             'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
             WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
         }
-        //				 WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+       
     } else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
         'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -275,7 +268,6 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
     
-
     'Pengecekan expense amount pada confins sesuai perhitungans'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -357,7 +349,6 @@ for (int k = 1; k <= variableRef.size(); k++) {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt - whTax), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -365,17 +356,15 @@ for (int k = 1; k <= variableRef.size(); k++) {
                     whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
                     vatRate[1]), taxpayerInfo[2])
 
-            //			 	WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
             'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
             WebUI.verifyLessThanOrEqual(Math.abs(vaTax - (taxAmount[1])), 10)
         }
-        //				 WebUI.verifyLessThanOrEqual(Math.abs(whTax-taxAmount[0]),10)
+       
     } else if (WebUI.getText(modifyObjectCalMethod).equalsIgnoreCase('GROSS')) {
         'Verif nilai comm amt after tax pada confins sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCommAmtAftTax, String.format('%.2f', commAmt), false), '13.TabCommissionData',
 			GlobalVariable.NumofColm)
         
-
         'Pengecekan tax kind code'
         if ((taxpayerInfo[0]) == 'C') {
             'Arraylist untuk menampung amount dari wht dan vat berdasarkan penghitungan'
@@ -392,7 +381,6 @@ for (int k = 1; k <= variableRef.size(); k++) {
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textDisburseAmt, String.format('%.2f', commAmtAftTax + vaTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
     
-
     'Pengecekan expense amount pada confins sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textExpenseAmt, String.format('%.2f', disburseAmt + whTax), false), '13.TabCommissionData',
 		GlobalVariable.NumofColm)
@@ -427,31 +415,25 @@ String textTotalVat = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalCommAmt, String.format('%.2f', GlobalVariable.TotalCommissionAmt), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalCommAmtAftTax, String.format('%.2f', GlobalVariable.TotalCommissionAmtAftTax), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalDisburseAmt, String.format('%.2f', GlobalVariable.TotalDisburseAmt), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalExpenseAmt, String.format('%.2f', GlobalVariable.TotalExpenseAmt), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalTax, String.format('%.2f', GlobalVariable.TotalTax), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalVat, String.format('%.2f', GlobalVariable.TotalVat), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
-
 
 'Arraylist untuk menampung Income Information'
 ArrayList<WebElement> varIncomeInfo = driver.findElements(By.cssSelector('#viewIncomeInfo label'))
@@ -519,7 +501,6 @@ String textRemainingAllocatedAmount = WebUI.getText(modifyRemainingAllocatedAmou
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingAllocatedAmount, String.format('%.2f', remainingAllocatedAmount), false), '13.TabCommissionData',
 	GlobalVariable.NumofColm)
 
-
 GlobalVariable.RemainingAllocatedAmt = remainingAllocatedAmount
 
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
@@ -533,4 +514,3 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 		GlobalVariable.FlagFailed=1
 	}
 }
-

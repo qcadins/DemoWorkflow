@@ -67,13 +67,10 @@ if(GlobalVariable.Role=="Testing"){
 		'Tambahkan data remaining info ke arraylist untuk keperluan verifikasi setelah calculate'
 		remainingInfoRsv.add(textRemainingInfoAmt)
 	}
-
 }
 
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/span_appNo'))
-
-//String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
 String appLastStep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlConnectionLOS, appNo)
@@ -136,7 +133,6 @@ for(int i = 0;i<allocFrom.size();i++){
 		}
 	}
 	
-	
 	BigDecimal remainingInfoAmt
 	'Looping remaining info'
 	for(int j =1;j<=countRemainingInfoBfrCalculate;j++){
@@ -174,10 +170,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				
 				GlobalVariable.FlagFailed=1
 			}
-			
-			
 		}
-		
 		
 		'Pengecekan editable/tidaknya field-field allocation pada confins sesuai behaviour pada rule file'
 		if(allocBhv[i].equalsIgnoreCase("def")){
@@ -193,8 +186,6 @@ for(int i = 0;i<allocFrom.size();i++){
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					GlobalVariable.FlagFailed=1
 				}
-				
-				
 			}
 			
 			'Input Alloc Reserved Fund Amount'
@@ -214,12 +205,9 @@ for(int i = 0;i<allocFrom.size();i++){
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
 					GlobalVariable.FlagFailed=1
-				}
-				
+				}	
 			}
-			
 		}
-		
 	}
 	else{
 		
@@ -232,13 +220,12 @@ for(int i = 0;i<allocFrom.size();i++){
 		'Tambahkan amount masing-masing allocation untuk perhitungan total reserved fund amount'
 		totalAmt+=Double.parseDouble(inputAllocAmt.replace(",",""))
 	}
-	
 }
-
-String alert
 
 'Klik Button Calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Calculate'))
+
+String alert
 
 if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/alert_Commission'),1,FailureHandling.OPTIONAL)){
 	alert = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL)
@@ -271,7 +258,6 @@ if(GlobalVariable.Role=="Testing"){
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false), '14.TabReservedFundData',
 		 GlobalVariable.NumofColm)
 	
-	
 	'Arraylist untuk menampung remaining info'
 	ArrayList<WebElement> varRemainingInfo = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
 	
@@ -289,7 +275,6 @@ if(GlobalVariable.Role=="Testing"){
 		false), '14.TabReservedFundData',
 		GlobalVariable.NumofColm)
 	
-	
 	'Looping remaining info amount setelah calculate'
 	for (int i = 1; i < countRemainingInfo; i++) {
 		modifyRemainingInfoAmtAftCal = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),
@@ -303,7 +288,6 @@ if(GlobalVariable.Role=="Testing"){
 			GlobalVariable.NumofColm)
 		
 	}
-	
 }
 
 WebUI.delay(5)
@@ -347,7 +331,6 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
     }
 } 
-	
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
