@@ -28,16 +28,9 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Family
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-'ganti value yang bernilai "IDN" > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('IDN')) {
-        (result[i]) = ''
-    }
-}
-
 'ganti value null > "" (String kosong)'
 for (int i = 0; i <= (GlobalVariable.Confinsdata.size() - 1); i++) {
-    if (((GlobalVariable.Confinsdata[i]) == null) || (GlobalVariable.Confinsdata[i]).equalsIgnoreCase('IDN')) {
+    if (((GlobalVariable.Confinsdata[i]) == null) || (GlobalVariable.Confinsdata[i]).equalsIgnoreCase('INA')) {
         (GlobalVariable.Confinsdata[i]) = ''
     }
 }

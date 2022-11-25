@@ -67,59 +67,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
 }
 
-
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-
-	if ((result[i]).equalsIgnoreCase('true')) {
-		(result[i]) = 'Yes'
-	} else if ((result[i]).equalsIgnoreCase('false')) {
-		(result[i]) = 'No'
-	}
-}
-
-if(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
-	'EMPLOYEE' || WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
-	'PROFESSIONAL'){
-	
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (jobaddress.size() - 1); i++) {
-
-	if ((jobaddress[i]).equalsIgnoreCase('true')) {
-		(jobaddress[i]) = 'Yes'
-	} else if ((jobaddress[i]).equalsIgnoreCase('false')) {
-		(jobaddress[i]) = 'No'
-	}
-}
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (prevjobaddress.size() - 1); i++) {
-
-	if ((prevjobaddress[i]).equalsIgnoreCase('true')) {
-		(prevjobaddress[i]) = 'Yes'
-	} else if ((prevjobaddress[i]).equalsIgnoreCase('false')) {
-		(prevjobaddress[i]) = 'No'
-	}
-}
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (othaddress.size() - 1); i++) {
-
-	if ((othaddress[i]).equalsIgnoreCase('true')) {
-		(othaddress[i]) = 'Yes'
-	} else if ((othaddress[i]).equalsIgnoreCase('false')) {
-		(othaddress[i]) = 'No'
-	}
-}
-}
-int arrayindex = 0
-
-int JobAddressindex = 0
-
-int PrevJobindex = 0
-
-int OtherAddressindex = 0
+int arrayindex = 0, JobAddressindex = 0, PrevJobindex = 0, OtherAddressindex = 0
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'EMPLOYEE') {

@@ -27,16 +27,6 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4LegalDocStoreData'(sqlconnectionLOS, appno, custname)
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-
-	if ((result[i]).equalsIgnoreCase('true')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('false')) {
-        (result[i]) = 'No'
-    }
-}
-
 int arrayindex = 0
 
 def legaldoctypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).split(';', -1)
@@ -52,7 +42,6 @@ def notarynamearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofV
 def notarylocationarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).split(';', -1)
 
 def notesarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).split(';', -1)
-
 
 for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarrayexcel++){
 	

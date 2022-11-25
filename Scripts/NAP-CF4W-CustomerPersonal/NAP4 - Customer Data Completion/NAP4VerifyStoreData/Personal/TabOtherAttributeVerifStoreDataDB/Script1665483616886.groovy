@@ -28,31 +28,9 @@ ArrayList<String> resultotherattrinfo = CustomKeywords.'dbConnection.CustomerDat
 ArrayList<String> resultotherattrlist = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherAttrStoreData'(sqlconnectionLOS, appno, 
     GlobalVariable.Custname)
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultotherattrinfo.size() - 1); i++) {
-
-	if ((resultotherattrinfo[i]).equalsIgnoreCase('true')) {
-		(resultotherattrinfo[i]) = 'Yes'
-	} else if ((resultotherattrinfo[i]).equalsIgnoreCase('false')) {
-		(resultotherattrinfo[i]) = 'No'
-	}
-}
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultotherattrlist.size() - 1); i++) {
-
-	if ((resultotherattrlist[i]).equalsIgnoreCase('true')) {
-		(resultotherattrlist[i]) = 'Yes'
-	} else if ((resultotherattrlist[i]).equalsIgnoreCase('false')) {
-		(resultotherattrlist[i]) = 'No'
-	}
-}
-
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-int arrayindexinfo = 0
-
-int arrayindexlist = 0
+int arrayindexinfo = 0, arrayindexlist = 0
 
 'verify debtor group'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfo[

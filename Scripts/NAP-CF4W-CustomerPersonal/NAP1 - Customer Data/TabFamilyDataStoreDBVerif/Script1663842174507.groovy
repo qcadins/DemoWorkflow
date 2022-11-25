@@ -42,13 +42,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Family
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-'ganti value yang bernilai "IDN" > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('INA')) {
-        (result[i]) = ''
-    }
-}
-
 int arrayindex = 0
 
 'verify relationship'
@@ -239,4 +232,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 
         1, GlobalVariable.ReasonFailedStoredDB)
 }
-

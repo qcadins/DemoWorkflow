@@ -140,8 +140,6 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-
-
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'

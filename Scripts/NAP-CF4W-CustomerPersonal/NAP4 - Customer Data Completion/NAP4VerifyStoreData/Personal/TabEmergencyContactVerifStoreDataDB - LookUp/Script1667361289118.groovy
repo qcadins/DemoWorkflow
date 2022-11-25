@@ -41,8 +41,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Em
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
-
-
 int arrayindex = 0
 
 for(arrayindex = 0; arrayindex < result.size() ; arrayindex++){

@@ -28,11 +28,7 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4EmergencyContactStoreData'(sqlconnectionLOS, appno, custname)
 
-println(result)
-
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
-
-
 
 int arrayindex = 0
 
@@ -144,8 +140,6 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-
-
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'write to excel FAILED'
@@ -158,5 +152,3 @@ if (arrayMatch.contains(false)) {
 }
 
 CustomKeywords.'dbConnection.connectDB.ConnectDB'()
-
-

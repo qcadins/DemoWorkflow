@@ -31,15 +31,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSData
         17), datafileMS.getValue(
         GlobalVariable.NumofMS, 27))
 
-'ganti value null > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('TRUE')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('FALSE')) {
-        (result[i]) = 'No'
-    }
-}
-
 'looping verif db = confinsdata'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
 	'verify result == confinsdata'

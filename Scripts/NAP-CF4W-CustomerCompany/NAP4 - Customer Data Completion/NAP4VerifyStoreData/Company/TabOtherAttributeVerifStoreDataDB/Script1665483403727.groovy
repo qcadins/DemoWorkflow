@@ -30,11 +30,7 @@ ArrayList<String> resultotherattrinfo = CustomKeywords.'dbConnection.CustomerDat
 ArrayList<String> resultotherattrlist = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherAttrStoreData'(sqlconnectionLOS, appno, 
     GlobalVariable.Custname)
 
-println(resultotherattrlist)
-
-int arrayindexinfo = 0
-
-int arrayindexlist = 0
+int arrayindexinfo = 0, arrayindexlist = 0
 
 'verify debtor group'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfo[

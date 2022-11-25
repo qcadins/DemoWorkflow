@@ -44,15 +44,6 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonal'(sqlconnectionLOS, datafileMS.getValue(
         GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 19))
 
-'ganti value null > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('TRUE')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('FALSE')) {
-        (result[i]) = 'No'
-    }
-}
-
 int arrayindex = 0
 
 'verify shareholder legal name'

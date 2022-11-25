@@ -28,15 +28,6 @@ datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-	if((result[i]) == 'true'){
-	(result[i]) = 'Yes'
-	}else if((result[i]) == 'false'){
-	(result[i]) = 'No'
-	}
-}
-
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 int arrayindex = 0
@@ -72,7 +63,6 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 'verify admin fee'
 arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {

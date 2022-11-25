@@ -26,15 +26,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/select_Select One Employee  Non Professional  Professional  Small Medium Enterprise'), 
         'value'))
 
-'ganti value null > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-	if ((result[i]).equalsIgnoreCase('TRUE')) {
-		(result[i]) = 'Yes'
-	} else if ((result[i]).equalsIgnoreCase('FALSE')) {
-		(result[i]) = 'No'
-	}
-}
-
 'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'

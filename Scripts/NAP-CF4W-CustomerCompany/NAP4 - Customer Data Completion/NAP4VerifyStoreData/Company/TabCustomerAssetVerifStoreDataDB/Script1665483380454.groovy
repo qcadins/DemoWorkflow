@@ -27,16 +27,6 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4CustomerAssetDataStoreData'(sqlconnectionLOS, appno, custname)
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-
-	if ((result[i]).equalsIgnoreCase('true')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('false')) {
-        (result[i]) = 'No'
-    }
-}
-
 int arrayindex = 0
 
 def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
@@ -46,7 +36,6 @@ def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.
 def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).split(';', -1)
 
 def assetqtyarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
-
 
 for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++){
 	

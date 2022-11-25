@@ -29,15 +29,6 @@ datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Ta
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompanyLookUp'(sqlconnectionLOS, 
     datafileMS.getValue(GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 50))
 
-'ganti value null > "" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('TRUE')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('FALSE')) {
-        (result[i]) = 'No'
-    }
-}
-
 'looping verif confinsdata = db'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
     'verify result == confinsdata'

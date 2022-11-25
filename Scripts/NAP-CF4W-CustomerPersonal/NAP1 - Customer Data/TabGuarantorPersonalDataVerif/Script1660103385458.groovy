@@ -25,15 +25,6 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
         'value'), WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_CustomerModel'), 
         'value'))
 
-'ganti value TRUE/FALSE > "YES"/"NO" (String kosong)'
-for (int i = 0; i <= (result.size() - 1); i++) {
-    if ((result[i]).equalsIgnoreCase('TRUE')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('FALSE')) {
-        (result[i]) = 'No'
-    }
-}
-
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))

@@ -28,26 +28,6 @@ ArrayList<String> resultotherattrinfo = CustomKeywords.'dbConnection.CustomerDat
 ArrayList<String> resultotherattrlist = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherAttrStoreData'(sqlconnectionLOS, appno, 
     GlobalVariable.Custname)
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultotherattrinfo.size() - 1); i++) {
- 
-	if ((resultotherattrinfo[i]).equalsIgnoreCase('true')) {
-		(resultotherattrinfo[i]) = 'Yes'
-	} else if ((resultotherattrinfo[i]).equalsIgnoreCase('false')) {
-		(resultotherattrinfo[i]) = 'No'
-	}
-}
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (resultotherattrlist.size() - 1); i++) {
-
-	if ((resultotherattrlist[i]).equalsIgnoreCase('true')) {
-		(resultotherattrlist[i]) = 'Yes'
-	} else if ((resultotherattrlist[i]).equalsIgnoreCase('false')) {
-		(resultotherattrlist[i]) = 'No'
-	}
-}
-
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 int arrayindexinfo = 0
@@ -112,7 +92,6 @@ if (!(authorityaml.equalsIgnoreCase('#N/A'))) {
 	'verify Authorithy AML'
 	arrayMatch.add(WebUI.verifyMatch(authorityaml.toUpperCase(), (resultotherattrlist[arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
-
 
 'convert date confins dan excel agar sama'
 SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')

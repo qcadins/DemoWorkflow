@@ -27,17 +27,6 @@ String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custo
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4CustomerDetailCompanyStoreData'(sqlconnection, appno, custname)
 
-
-'ganti value null > "" (String kosong)'
-for (i = 0; i <= (result.size() - 1); i++) {
-
-	if ((result[i]).equalsIgnoreCase('true')) {
-        (result[i]) = 'Yes'
-    } else if ((result[i]).equalsIgnoreCase('false')) {
-        (result[i]) = 'No'
-    }
-}
-
 int arrayindex = 0
 
 'verify Establishment Date'

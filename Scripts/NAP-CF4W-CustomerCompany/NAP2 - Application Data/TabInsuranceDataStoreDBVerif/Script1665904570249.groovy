@@ -63,16 +63,6 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 	ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
-
-	'ganti value null > "" (String kosong)'
-	for (int i = 0; i <= (result.size() - 1); i++) {
-
-		if ((result[i]) == 'true') {
-			(result[i]) = 'Yes'
-		} else if ((result[i]) == 'false') {
-			(result[i]) = 'No'
-		}
-	}
 	
 	'index 14 karena mengikuti row di data file / excel'
 	for (int index = 14; index < (result.size() + 14); index++) {
@@ -92,26 +82,6 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
-
-	'ganti value null > "" (String kosong)'
-	for (int i = 0; i <= (resultCustomerInsurance.size() - 1); i++) {
-
-		if ((resultCustomerInsurance[i]) == 'true') {
-			(resultCustomerInsurance[i]) = 'Yes'
-		} else if ((resultCustomerInsurance[i]) == 'false') {
-			(resultCustomerInsurance[i]) = 'No'
-		}
-	}
-	
-	'ganti value null > "" (String kosong)'
-	for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-
-		if ((resultMFinsurance[i]) == 'true') {
-			(resultMFinsurance[i]) = 'Yes'
-		} else if ((resultMFinsurance[i]) == 'false') {
-			(resultMFinsurance[i]) = 'No'
-		}
-	}
 	
 	'index 14 karena mengikuti row di data file / excel'
 	for (int index = 14; index <= (resultCustomerInsurance.size() + 13); index++) {
@@ -246,16 +216,6 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
 
-		'ganti value null > "" (String kosong)'
-		for (int i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-
-			if ((resultMultiMainCVG[i]) == 'true') {
-				(resultMultiMainCVG[i]) = 'Yes'
-			} else if ((resultMultiMainCVG[i]) == 'false') {
-				(resultMultiMainCVG[i]) = 'No'
-			}
-		}
-		
 		def capitalizedarray = datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 45).split(';', -1)
 
@@ -337,18 +297,6 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					GlobalVariable.NumofColm, 13))
 			
 			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
-
-			'ganti value null > "" (String kosong)'
-			for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-
-				if ((resultAddCVG[i]) == 'true') {
-					(resultAddCVG[i]) = 'Yes'
-				} else if ((resultAddCVG[i]) == 'false') {
-					(resultAddCVG[i]) = 'No'
-				}
-			}
-			
-			println(resultAddCVG)
 
 			def floodarray = datafileTabInsurance.getValue(
 				GlobalVariable.NumofColm, 50).split(';', -1)
@@ -485,16 +433,6 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
-
-	'ganti value null > "" (String kosong)'
-	for (int i = 0; i <= (resultMFinsurance.size() - 1); i++) {
-
-		if ((resultMFinsurance[i]) == 'true') {
-			(resultMFinsurance[i]) = 'Yes'
-		} else if ((resultMFinsurance[i]) == 'false') {
-			(resultMFinsurance[i]) = 'No'
-		}
-	}
 	
 	'verify asset region'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
@@ -610,16 +548,6 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
-
-		'ganti value null > "" (String kosong)'
-		for (int i = 0; i <= (resultMultiMainCVG.size() - 1); i++) {
-
-			if ((resultMultiMainCVG[i]) == 'true') {
-				(resultMultiMainCVG[i]) = 'Yes'
-			} else if ((resultMultiMainCVG[i]) == 'false') {
-				(resultMultiMainCVG[i]) = 'No'
-			}
-		}
 		
 		def capitalizedarray = datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 45).split(';', -1)
@@ -702,18 +630,6 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 					GlobalVariable.NumofColm, 13))
 			
 			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
-
-			'ganti value null > "" (String kosong)'
-			for (int i = 0; i <= (resultAddCVG.size() - 1); i++) {
-
-				if ((resultAddCVG[i]) == 'true') {
-					(resultAddCVG[i]) = 'Yes'
-				} else if ((resultAddCVG[i]) == 'false') {
-					(resultAddCVG[i]) = 'No'
-				}
-			}
-			
-			println(resultAddCVG)
 
 			def floodarray = datafileTabInsurance.getValue(
 				GlobalVariable.NumofColm, 50).split(';', -1)
@@ -815,7 +731,6 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				}
 				'verify additional rate pada db = confins'
 				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
-				
 				
 			}
 		}
