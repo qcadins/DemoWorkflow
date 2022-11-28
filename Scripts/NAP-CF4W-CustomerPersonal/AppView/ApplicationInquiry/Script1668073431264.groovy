@@ -19,36 +19,25 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'decare datafileMainInforamtion'
+datafileMainInformation = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation')
 
-GlobalVariable.FlagWarning = 0
+'declare datafileLogin'
+datafileLogin = findTestData('Login/Login')
 
-String servername = findTestData('Login/Login').getValue(1, 9)
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
-String instancename = findTestData('Login/Login').getValue(2, 9)
+'declare datafileTabApplication'
+datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
 
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
-appno = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-    GlobalVariable.NumofColm, 13)
+appno = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)
 
 'click menu app inquiry'
 WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
@@ -516,7 +505,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 		
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation',
-					1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+					1, GlobalVariable.NumofColm-1, datafileMainInformation.getValue(
 						GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedReset+";\n"))
 		
 				GlobalVariable.FlagWarning=1
@@ -527,7 +516,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation',
-							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+							1, GlobalVariable.NumofColm-1, datafileMainInformation.getValue(
 				GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+";\n"))
 			
 					GlobalVariable.FlagWarning=1
@@ -538,7 +527,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation',
-							1, GlobalVariable.NumofColm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/AppView/MainInformation').getValue(
+							1, GlobalVariable.NumofColm-1, datafileMainInformation.getValue(
 			    GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+";\n"))
 			
 	
@@ -586,28 +575,28 @@ checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verif
                 'AppView/MainInformation/Label App No')).toString().toUpperCase(), (result[index++]).toString().toUpperCase()))
 
 'verify office'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileLogin.getValue(
             4, 1).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+if (datafileCustomerPersonal.getValue(
     GlobalVariable.NumofColm, 14) == 'LookUp') {
     'verify customer no'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Cust No')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
-} else if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+} else if (datafileCustomerPersonal.getValue(
     GlobalVariable.NumofColm, 14) == 'Input Data') {
     'Skip'
     result[index++]
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 }
@@ -617,7 +606,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tenor'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileTabApplication.getValue(
             GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Tenor')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
@@ -626,7 +615,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 25).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Model')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 

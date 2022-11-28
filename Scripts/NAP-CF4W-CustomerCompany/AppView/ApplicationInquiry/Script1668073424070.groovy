@@ -27,9 +27,20 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagWarning = 0
 
+'decare datafileMainInforamtion'
+datafileMainInformation = findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation')
+
+'declare datafileLogin'
+datafileLogin = findTestData('Login/Login')
+
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+'declare datafileTabApplication'
+datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
+
 'get appno dari excel'
-appno = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    13)
+appno = datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)
 
 'click menu app inquiry'
 WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
@@ -38,16 +49,16 @@ WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
     'declare arraylist resultset, checkVerifySort, checkVerifyFooter'
     ArrayList<String> resultReset = new ArrayList<String>()
-	
-	ArrayList<String> checkVerifySort = new ArrayList<String>()
-	
-	ArrayList<String> checkVerifyFooter = new ArrayList<String>()
+
+    ArrayList<String> checkVerifySort = new ArrayList<String>()
+
+    ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
     'Verif reset'
     resultReset = CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
 
     'declare arraylist liststring'
-    ArrayList<WebElement> listString = new ArrayList<WebElement>()
+    ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'
     WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
@@ -56,7 +67,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebDriver driver = DriverFactory.getWebDriver()
 
     'Inisialisasi variabel'
-    ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+    ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
     'Klik header appno'
     WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
@@ -82,7 +93,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
     'declare arraylist listApp'
-    listApp = new ArrayList<WebElement>()
+    listApp = new ArrayList<String>()
 
     'Klik header appno'
     WebUI.click(findTestObject('Object Repository/AppView/span_Appno'))
@@ -113,7 +124,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     for (int i = 1; i <= rowData.size(); i++) {
         'modify object appno'
@@ -140,7 +151,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -165,7 +176,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_CustName'))
 
     'reset listString arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -191,7 +202,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset liststring arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -214,7 +225,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
     'reset listring arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -240,7 +251,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset listString arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -263,7 +274,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
     'reset listString arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -289,7 +300,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset liststring arraylist'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -312,7 +323,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -340,7 +351,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -368,7 +379,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -394,7 +405,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -417,7 +428,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -443,7 +454,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -466,7 +477,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -492,7 +503,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
     'reset arraylist listString'
-    listString = new ArrayList<WebElement>()
+    listString = new ArrayList<String>()
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -531,7 +542,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
         'reset listString arraylist'
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         'looping rowdata confins'
         for (int i = 1; i <= rowData.size(); i++) {
@@ -557,11 +568,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 
                 2))
 
-		'declare listapp = liststring'
+        'declare listapp = liststring'
         listApp = listString
 
         'reset arraylist listString'
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         'call addAppNoForPagingAppView keyword'
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
@@ -579,11 +590,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
                 2))
 
-		'declare listapp = liststring'
+        'declare listapp = liststring'
         listApp = listString
 
         'reset arraylist ListString'
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         'call addAppNoForPagingAppView keyword'
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
@@ -609,10 +620,10 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
         'write reason failed reset to excel'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
-            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
-                '-', '') + (GlobalVariable.ReasonFailedReset + ';\n'))
+            1, datafileMainInformation.getValue(GlobalVariable.NumofColm, 2).replace('-', '') + (GlobalVariable.ReasonFailedReset + 
+            ';\n'))
 
-		'flagwarning = 1'
+        'flagwarning = 1'
         GlobalVariable.FlagWarning = 1
     }
     
@@ -624,10 +635,10 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
         'write reason failed sort to excel'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
-            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
-                '-', '') + (GlobalVariable.ReasonFailedSort + ';\n'))
+            1, datafileMainInformation.getValue(GlobalVariable.NumofColm, 2).replace('-', '') + (GlobalVariable.ReasonFailedSort + 
+            ';\n'))
 
-		'flagwarning = 1'
+        'flagwarning = 1'
         GlobalVariable.FlagWarning = 1
     }
     
@@ -638,11 +649,11 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
             1, GlobalVariable.StatusWarning)
 
         'write reason failed footer to excel'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
-            1, findTestData('NAP-CF4W-CustomerCompany/AppView/MainInformation').getValue(GlobalVariable.NumofColm, 2).replace(
-                '-', '') + (GlobalVariable.ReasonFailedFooter + ';\n'))
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.MainInformation', 1, GlobalVariable.NumofColm - 
+            1, datafileMainInformation.getValue(GlobalVariable.NumofColm, 2).replace('-', '') + (GlobalVariable.ReasonFailedFooter + 
+            ';\n'))
 
-		'flag warning = 1'
+        'flag warning = 1'
         GlobalVariable.FlagWarning = 1
     }
 }
@@ -663,7 +674,7 @@ WebUI.switchToWindowIndex('1')
 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
     GlobalVariable.FlagWarning = 1
 
-	'write Status Warning'
+    'write Status Warning'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm, '1. Customer')
 }
 
@@ -671,7 +682,7 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_
 WebUI.delay(5)
 
 'declare result arraylist'
-ArrayList<WebElement> result = new ArrayList<WebElement>()
+ArrayList<String> result = new ArrayList<String>()
 
 'call checkAppViewDataDB keyword'
 result = CustomKeywords.'appView.verifyAppView.checkAppViewData'(sqlconnectionLOS, appno)
@@ -691,28 +702,25 @@ checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verif
                 'AppView/MainInformation/Label App No')).toString().toUpperCase(), (result[index++]).toString().toUpperCase()))
 
 'verify office'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('Login/Login').getValue(
-            4, 1).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), 
-        (result[index++]).toString().toUpperCase()))
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileLogin.getValue(4, 1).toUpperCase(), 
+        WebUI.getText(findTestObject('AppView/MainInformation/Label Office')).toString().toUpperCase(), (result[index++]).toString().toUpperCase()))
 
-if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    14) == 'LookUp') {
+if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     'verify customer no'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 16).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Label Cust No')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 17).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
-} else if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 
-    14) == 'Input Data') {
+} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
     'skip'
     result[index++]
 
     'verify customer name'
-    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+    checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 19).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Name')).toString().toUpperCase(), 
             (result[index++]).toString().toUpperCase()))
 }
@@ -722,7 +730,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tenor'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileTabApplication.getValue(
             GlobalVariable.NumofColm, 20).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Tenor')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
@@ -731,7 +739,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (result[index++]).toString().toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+checkVerifyEqualOrMatch(CustomKeywords.'customizeKeyword.tripleVerifyMatch.verifyMatch'(datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 22).toUpperCase(), WebUI.getText(findTestObject('AppView/MainInformation/Customer Model')).toString().toUpperCase(), 
         (result[index++]).toString().toUpperCase()))
 
@@ -773,23 +781,24 @@ WebUI.switchToWindowIndex('0')
 
 'check if flagwarning = 0 & flagfailed = 0'
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	'write to excel success'
+    'write to excel success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
-	'check ismatch = false & flagfailed = 0'
+    'check ismatch = false & flagfailed = 0'
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 0, GlobalVariable.NumofColm - 
-            1, GlobalVariable.StatusFailed)
+        'write to excel failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 0, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 1, GlobalVariable.NumofColm - 
-            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        'write to excel reason failed verify equal or match'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1. MainInformation', 1, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		'flagfailed = 1'
+        'flagfailed = 1'
         GlobalVariable.FlagFailed = 1
     }
 }
+
