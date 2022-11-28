@@ -71,9 +71,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[2]', true)
 
-        
-
-
         for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
                 'verify if asset type sama'
                 if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
@@ -177,20 +174,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                     i) + ']/td[2]', true)
 
-                'modify object button edit'
-                modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
-                    'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-                    i) + ']/td[6]/span/span[1]/span/a/i', true)
-
-                'modify object button delete'
-                modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttondelete'), 
-                    'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-                    i) + ']/td[6]/span/span[2]/span/a/i', true)
-
                 'verify if legal type beda'
                 if (!(WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
-                    modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)])) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
-                    5, FailureHandling.OPTIONAL)) {
+                    modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)]))) {
                     if (i == variable.size()) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))

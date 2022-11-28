@@ -83,15 +83,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'),
 						'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 						i) + ']/td[6]/span/span[1]/span/a/i', true)
-					
+				
                     'click button edit'
                     WebUI.click(modifyNewbuttonedit)
 
 					'call function verif legal doc type'
-                    verifLegalDocType(legal)
-                    
-                    'call function input legal doc'
-					inputLegalDoc()
+					verifLegalDocType(legal)
+					
+					'call function input legal doc'
+                    inputLegalDoc()
                     
                     break
                 } else {
@@ -149,19 +149,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (legaltypefaileddelete.size() > 0) {
 		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed delete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
+            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 
-		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
     
     if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/buttonedit'), 
         5, FailureHandling.OPTIONAL)) {
+	
 		'count table legal doc row di confins'
         variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
@@ -177,24 +177,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                     i) + ']/td[2]', true)
 
-                'modify object button edit'
-                modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
-                    'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-                    i) + ']/td[6]/span/span[1]/span/a/i', true)
-
                 'verify if legal type beda'
                 if (!(WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
-                    modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)])) || WebUI.verifyElementNotPresent(modifyNewbuttonedit, 
-                    5, FailureHandling.OPTIONAL)) {
+                    modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)]))) {
                     if (i == variable.size()) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
-						'call function verif legal doc type'
+                        'call function verif legal doc type'
 						verifLegalDocType(legal)
-						               
-						'call function input legal doc'         
-                        inputLegalDoc()
+                        
+	                    'call function input legal doc'
+						 inputLegalDoc()
                         
                         break
                     }
@@ -210,7 +204,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
-            'call function verif legal doc type'
+			'call function verif legal doc type'
 			verifLegalDocType(legal)
             
             'call function input legal doc'
@@ -223,57 +217,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Add'))
 
-           'call function verif legal doc type'
-            verifLegalDocType(legal)
+			'call function verif legal doc type'
+			verifLegalDocType(legal)
             
-            'select legal doc type'
-            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'), 
-                LegalDocTypeArray[(legal - 1)], false)
-
-            'input doc no'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Document No'), 
-                DocumentNoArray[(legal - 1)])
-
-            'input date issued'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'), 
-                DateIssuedArray[(legal - 1)])
-
-            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).length() > 0) {
-                'input expired date'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'), 
-                    ExpiredDateArray[(legal - 1)])
-            }
-            
-            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).length() > 0) {
-                'input notary name'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'), 
-                    NotaryNameArray[(legal - 1)])
-            }
-            
-            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).length() > 0) {
-                'input notary location'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'), 
-                    NotaryLocationArray[(legal - 1)])
-            }
-            
-            if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).length() > 0) {
-                'input Notes'
-                WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'), 
-                    NotesArray[(legal - 1)])
-            }
-            
-            'click button save'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Save'))
-
-            if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'), 
-                5, FailureHandling.OPTIONAL)) {
-                'click button cancel'
-                WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
-
-                faileddata.add(LegalDocTypeArray[(legal - 1)])
-
-                GlobalVariable.FlagWarning++
-            }
+            'call function input legal doc'
+			inputLegalDoc()
         }
     }
 }
@@ -281,31 +229,33 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed == 
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
 0)) {
     'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, 
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '6.LegalDocument')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'), 
-        GlobalVariable.NumofGuarantor, '6.LegalDocument')
+                GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute - Company/button_Debtor Group_btn btn-raised btn-primary'), 
+        GlobalVariable.NumofColm, '6.LegalDocument')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/errorvalidasi'), 
-            GlobalVariable.NumofGuarantor, '6.LegalDocument')
+            GlobalVariable.NumofColm, '6.LegalDocument')
     }
 }
 
 if (GlobalVariable.FlagWarning > 0) {
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
+	'write to excel status warning'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
+	'write to excel failed reason'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
@@ -315,8 +265,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 }
 
+'check if role = testing & check verif store db = yes'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
+	'declare numofverifstore = numofcolm'
+    GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
 
     'Call test case verify legal doc store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreDataDB'), 
@@ -324,46 +276,44 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
 }
 
 def verifLegalDocType(int legal){
-	if (legal == 1) {
-		if (GlobalVariable.RoleCompany == 'Testing') {
-			'connect DB FOU'
-			Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+	if (GlobalVariable.RoleCompany == 'Testing') {
 		
-			'declare legaldoctype arraylist'
-			ArrayList<String> LegalDocType
-		
-			'get data array dari db'
-			LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
-		
-			'verify array dari db == option list confins'
-			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
-				LegalDocType) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
-					0, legal - 1, GlobalVariable.StatusFailed)
-		
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '6.LegalDocument',
-					1, legal - 1, GlobalVariable.ReasonFailedDDL)
-		
-				(GlobalVariable.FlagFailed)++
-			}
-			
-			'get total label from ddl'
-			int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
-		
-			'verify total ddl confins = total ddl db'
-			if (WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size()) == false){
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-					'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
+		'connect DB FOU'
+		Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-					'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
+		ArrayList<WebElement> LegalDocType
 
-				(GlobalVariable.FlagFailed)++
-			}
+		'get data array dari db'
+		LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+
+		'verify array dari db == option list confins'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'),
+			LegalDocType) == false) {
+			'Write To Excel GlobalVariable.StatusFailed'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+				'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
+
+			'Write To Excel GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
+				'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
+
+			(GlobalVariable.FlagFailed)++
+		}
+		
+		'get total label from ddl'
+		int totalLegaldoctypeddl = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/select_NIP  SIUP  TDP'))
+
+		'verify total ddl confins = total ddl db'
+		if (WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size()) == false){
+		'Write To Excel GlobalVariable.StatusFailed'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+		'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
+		
+		'Write To Excel GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
+		'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
+		
+		(GlobalVariable.FlagFailed)++
 		}
 	}
 }
@@ -381,25 +331,25 @@ def inputLegalDoc(){
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Issued Date'),
 		DateIssuedArray[(legal - 1)])
 
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).length() > 0) {
 		'input expired date'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Expired Date'),
 			ExpiredDateArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
 		'input notary name'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Name'),
 			NotaryNameArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).length() > 0) {
 		'input notary location'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/input_Notary Location'),
 			NotaryLocationArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18).length() > 0) {
 		'input Notes'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/textarea_Notes'),
 			NotesArray[(legal - 1)])
@@ -413,8 +363,10 @@ def inputLegalDoc(){
 		'click button cancel'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company/button_Cancel'))
 
+		'add failed delete data to array'
 		faileddata.add(LegalDocTypeArray[(legal - 1)])
 
+		'GlobalVariable.FlagWarning +1'
 		GlobalVariable.FlagWarning++
 	}
 }
