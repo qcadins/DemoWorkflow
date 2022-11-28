@@ -436,17 +436,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 			GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
 }
 
-if (datafileTabAsset.getValue(
-	GlobalVariable.NumofColm, 18) == 'Used') {
-	if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 71) == 'Yes') {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 18) == 'Used') {
+	if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 62) == 'Yes') {
 		'click button check rapindo'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
 	}
 }
 
-String Fullassetcode = datafileTabAsset.getValue(
-	GlobalVariable.NumofColm, 17)
+String Fullassetcode = datafileTabAsset.getValue(GlobalVariable.NumofColm, 17)
 
 'count asset attribute'
 String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU,
@@ -670,10 +667,8 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 		datafileTabAsset.getValue(
 			GlobalVariable.NumofColm, 44), false)
 
-	if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 42) == 'Company') {
-		if (datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 46).length() > 1) {
+	if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Personal') {
+		if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).length() > 1) {
 			'click button owner profession'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Owner Profession_btn btn-raised btn-primary'))
 
@@ -695,8 +690,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 			}
 		}
-	} else if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 42) == 'Company') {
+	} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
 		'select company owner profession'
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Company Owner Profession'),
 			datafileTabAsset.getValue(
@@ -757,13 +751,11 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 
 		'input Kecamatan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KecamatanAssetOwner'),
-			datafileTabAsset.getValue(
-				GlobalVariable.NumofColm, 59))
+			datafileTabAsset.getValue(GlobalVariable.NumofColm, 59))
 
 		'input kelurahan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KelurahanAssetOwner'),
-			datafileTabAsset.getValue(
-				GlobalVariable.NumofColm, 58))
+			datafileTabAsset.getValue(GlobalVariable.NumofColm, 58))
 
 		'input Kota'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_KotaAssetOwner'),
@@ -888,13 +880,11 @@ public assetLocInput(){
 
 	'input Kecamatan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 59))
+		datafileTabAsset.getValue(GlobalVariable.NumofColm, 59))
 
 	'input kelurahan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 58))
+		datafileTabAsset.getValue(GlobalVariable.NumofColm, 58))
 
 	'input Kota'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'),
