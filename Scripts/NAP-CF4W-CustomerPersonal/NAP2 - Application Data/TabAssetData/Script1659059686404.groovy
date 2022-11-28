@@ -438,7 +438,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 if (datafileTabAsset.getValue(
     GlobalVariable.NumofColm, 18) == 'Used') {
     if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 71) == 'Yes') {
+        GlobalVariable.NumofColm, 62) == 'Yes') {
         'click button check rapindo'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
     }
