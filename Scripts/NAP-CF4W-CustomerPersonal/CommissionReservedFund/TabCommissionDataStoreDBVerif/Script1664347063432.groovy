@@ -67,12 +67,12 @@ def refRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable
 1
 
 'Mencari nilai commission amount dari setiap commission source dari supplier, supplier employee, dan referantor'
-HashMap<String,ArrayList> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,commissionData.getValue(GlobalVariable.NumofColm,12))
+HashMap<String,ArrayList> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3CommissionDataStoreDB'(sqlconnection, appno,datafileCommission.getValue(GlobalVariable.NumofColm,12))
 ArrayList<String> comSupp = result.get("Supp")
 ArrayList<String> comSuppEmp = result.get("SuppEmp")
 ArrayList<String> comRef = result.get("Ref")
 
-if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount")){
+if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount")){
 	if(suppSource!=null){
 		for(int i = 1;i<=suppSource;i++){
 			'2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
@@ -153,7 +153,7 @@ if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount
 		}
 	}
 }
-else if(commissionData.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Percentage")){
+else if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Percentage")){
 	if(suppSource!=null){
 		for(int i = 1;i<=suppSource;i++){
 			'2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'

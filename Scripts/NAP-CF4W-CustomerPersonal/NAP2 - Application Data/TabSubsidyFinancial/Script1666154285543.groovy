@@ -101,7 +101,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 		'Looping data subsidi pada confins'
 		for (int i = 1; i <= varsize; i++) {
 			 
-			modifySubsidy()
+			modifySubsidy(i)
 			
 			'Verif subsidy from type sesuai rule'
 			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
@@ -152,7 +152,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 	'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 	for (int i = 1; i <= variable.size(); i++) {
 
-		modifySubsidy()
+		modifySubsidy(i)
 
 		for (int subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
 			if (((WebUI.getText(modifyNewFromTypeName).equalsIgnoreCase(SubsidyTypeArray[(subsidyarray - 1)]) && WebUI.getText(
@@ -321,7 +321,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 				WebUI.getText(modifyNewSubsidyAllocation)))) || !((SubsidySourceArray[(s - 1)]).equalsIgnoreCase(WebUI.getText(
 					modifyNewSubsidySource)))) {
 				if (countData == SubsidyCheck) {
-					addSubsidy()
+					addSubsidy(s)
 				}
 			} else {
 				break
@@ -330,7 +330,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 			if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
 				if (SubsidyTypeArray.size() > 0) {
-					addSubsidy()
+					addSubsidy(s)
 				}
 			}
 		}
@@ -359,7 +359,7 @@ for (int SubsidyCheck = 1; SubsidyCheck <= variableData.size(); SubsidyCheck++) 
 	}
 }
 
-public modifySubsidy(){
+public modifySubsidy(int i){
 	'modify object from type name'
 	modifyNewFromTypeName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'),
 		'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
@@ -399,7 +399,7 @@ def writeReasonFailedVerifRule() {
 	GlobalVariable.FlagFailed = 1
 }
 
-public addSubsidy(){
+public addSubsidy(int s){
 	'click button add subsidy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))
 
