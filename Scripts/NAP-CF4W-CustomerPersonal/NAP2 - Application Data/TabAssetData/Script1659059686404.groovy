@@ -791,8 +791,7 @@ WebUI.waitForAlert(3)
 'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
-if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 62) == 'No') {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 62) == 'No') {
     'Menunggu Alert konfirmasi integrator muncul'
     WebUI.waitForAlert(3)
 
@@ -802,8 +801,7 @@ if (datafileTabAsset.getValue(
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileTabAsset.getValue(GlobalVariable.NumofColm, 4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'

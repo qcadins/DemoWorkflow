@@ -43,6 +43,7 @@ def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.N
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+if(result.size() > 0){
 for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
 	
 'verify subsidy from value type'
@@ -70,7 +71,7 @@ arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[a
 	FailureHandling.OPTIONAL))
 
 }
-
+}
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 	'write to excel FAILED'

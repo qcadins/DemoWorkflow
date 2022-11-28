@@ -397,7 +397,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					
 				}
 				'verify additional premi rate db = confins'
-				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
+				arrayMatch.add(WebUI.verifyEqual(Math.round(AddRate[(index)]), Math.round(addpremirate)))
 			}
 		}
 			
@@ -730,7 +730,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 					
 				}
 				'verify additional rate pada db = confins'
-				arrayMatch.add(WebUI.verifyEqual(AddRate[(index)], addpremirate))
+				arrayMatch.add(WebUI.verifyEqual(Math.round(AddRate[(index)]), Math.round(addpremirate)))
 				
 			}
 		}

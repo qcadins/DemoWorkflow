@@ -44,9 +44,14 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify ID expired date'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('E-KTP') || GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('AKTA') || GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equals('NPWP')){
+	'skip expired date'
+	arrayindex++
+}else{
+	'verify ID expired date'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+		false, FailureHandling.OPTIONAL))
+}
 
 'verify relationship'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(),

@@ -26,9 +26,9 @@ GlobalVariable.FlagWarning = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
-ArrayList<WebElement> legaltypefaileddelete = new ArrayList<WebElement>()
+ArrayList<String> legaltypefaileddelete = new ArrayList<String>()
 
-ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
+ArrayList<String> faileddata = new ArrayList<WebElement>()
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument - Company - Customer')
 
@@ -88,7 +88,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					verifLegalDocType(legal)
 					
 					'call function input legal doc'
-                    inputLegalDoc()
+                    inputLegalDoc(faileddata)
                     
                     break
                 } else {
@@ -185,7 +185,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						verifLegalDocType(legal)
                         
 	                    'call function input legal doc'
-						 inputLegalDoc()
+						 inputLegalDoc(faileddata)
                         
                         break
                     }
@@ -205,7 +205,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
@@ -218,7 +218,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 }
@@ -276,12 +276,12 @@ def verifLegalDocType(int legal){
 	if (GlobalVariable.RoleCompany == 'Testing') {
 		
 		'connect DB FOU'
-		Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+		Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 		ArrayList<WebElement> LegalDocType
 
 		'get data array dari db'
-		LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+		LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
 		'verify array dari db == option list confins'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
@@ -315,7 +315,21 @@ def verifLegalDocType(int legal){
 	}
 }
 
-def inputLegalDoc(){
+def inputLegalDoc(ArrayList<String> faileddata){
+	def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+	
+	def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+	
+	def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+	
+	def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+	
+	def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+	
+	def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+	
+	def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+	
 	'select legal doc type'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
 		LegalDocTypeArray[(legal - 1)], false)

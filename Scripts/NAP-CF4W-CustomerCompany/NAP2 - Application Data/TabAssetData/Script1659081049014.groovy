@@ -779,7 +779,7 @@ GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObjec
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
 
 'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
-WebUI.waitForAlert(3)
+WebUI.waitForAlert(1)
 
 'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
@@ -787,13 +787,11 @@ WebUI.acceptAlert(FailureHandling.OPTIONAL)
 if (datafileTabAsset.getValue(
 	GlobalVariable.NumofColm, 62) == 'No') {
 	'Menunggu Alert konfirmasi integrator muncul'
-	WebUI.waitForAlert(3)
+	WebUI.waitForAlert(1)
 
 	'Accept Alert Konfirmasi Integrator'
 	WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }
-
-WebUI.delay(2)
 
 Integer iscompleteMandatory = Integer.parseInt(datafileTabAsset.getValue(
 		GlobalVariable.NumofColm, 4))

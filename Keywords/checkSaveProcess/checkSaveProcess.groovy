@@ -70,8 +70,8 @@ public class checkSaveProcess {
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 3, FailureHandling.OPTIONAL) &&
-		!WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert')).toUpperCase().contains("Success".toUpperCase())){
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
+			if(!WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert')).toUpperCase().contains("Success".toUpperCase())){
 
 			String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label')
 
@@ -80,6 +80,7 @@ public class checkSaveProcess {
 			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 					1, colm - 1, FailedAlertReason)
 			flagFailed=1
+		}
 		}
 		return flagFailed
 	}

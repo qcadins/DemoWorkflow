@@ -34,13 +34,13 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 'check if role == testing'
 if (GlobalVariable.RoleCompany == 'Testing') {
     'connect DB FOU'
-    Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+    Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
     'get count total attribute list dari db'
     ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
 
     'verify total data attribute list == total data attribute list db'
-    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'dbconnection.checkNAP4db.countAttributeListCompany'(sqlconnectionFOU), variable.size()))
+    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'nap4Data.checkNAP4.countAttributeListCompany'(sqlconnectionFOU), variable.size()))
 
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'))

@@ -135,7 +135,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
     arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 35).toUpperCase(), (resultfinancialdata[financialdataindex++]), 
         false, FailureHandling.OPTIONAL))
 	
-	if(i == GlobalVariable.NumofVerifStore){
+	if(index == GlobalVariable.NumofVerifStore){
 		
 		int row = 38
 	for(finattr = 0; finattr < resultfinancialattr.size(); finattr++){
