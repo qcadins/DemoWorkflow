@@ -49,7 +49,7 @@ if (DupCheckStatus == true) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 
     'call paging testing function'
-    pagingTesting(datafileCustomerCompany)
+    pagingTesting()
 
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), datafileDupcheck.getValue(
@@ -405,7 +405,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     }
 }
 
-def pagingTesting(String datafileCustomerCompany) {
+def pagingTesting() {
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
         Object appNoObject
 

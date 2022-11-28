@@ -30,46 +30,46 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail - Company - Guarantor').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail')))) {
         if (GlobalVariable.Role == 'Data Entry') {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerDetail - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabAddressInformation - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabAddressInformation'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabContactInformation - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabContactInformation'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabFinancialData - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabFinancialData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerAsset - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerAsset'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabLegalDocument - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabLegalDocument'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabOtherAttribute - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabOtherAttribute'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerDetail - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerDetail'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabAddressInformation - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabAddressInformation'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabContactInformation - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabContactInformation'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabFinancialData - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabFinancialData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerAsset - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabCustomerAsset'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabLegalDocument - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabLegalDocument'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabOtherAttribute - Company'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/TabOtherAttribute'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
     }

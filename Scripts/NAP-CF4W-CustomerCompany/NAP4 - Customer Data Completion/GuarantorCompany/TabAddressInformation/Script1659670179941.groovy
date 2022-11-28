@@ -134,6 +134,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
+	GlobalVariable.FlagFailed = 0
+	
     for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
         if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
             if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany').getValue(

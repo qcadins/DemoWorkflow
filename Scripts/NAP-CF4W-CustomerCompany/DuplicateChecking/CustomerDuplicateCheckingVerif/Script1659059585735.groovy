@@ -59,8 +59,6 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
 
         'verify apakah hasil pengecekan mengandung status REVIEW'
         checkStatusDupcheck(CustomerCompanyStatus, DupcheckResult)
-
-        break
     }
     
     'check rule company 2'
@@ -73,8 +71,6 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
 
         'verify apakah hasil pengecekan mengandung status REVIEW'
         checkStatusDupcheck(CustomerCompanyStatus, DupcheckResult)
-
-        break
     }
 } else {
     'declare no value'
@@ -412,8 +408,6 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
                 GlobalVariable.NumofColm, 19), datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 20))) > 0) {
         'add "NEGATIVE" kedalam array negative result'
         NegativeResult.add('NEGATIVE')
-
-        break
     }
     
     'check Negative rule company 2'
@@ -421,8 +415,6 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
                 GlobalVariable.NumofGuarantorCompany, 19))) > 0) {
         'add "NEGATIVE" kedalam array negative result'
         NegativeResult.add('NEGATIVE')
-
-        break
     }
     
     'add "" kedalam array karena tidak kena negative check'

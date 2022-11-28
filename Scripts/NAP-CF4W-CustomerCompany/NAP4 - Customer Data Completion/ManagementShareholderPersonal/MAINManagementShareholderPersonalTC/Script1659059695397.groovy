@@ -32,59 +32,59 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofFamily; (Globa
         GlobalVariable.NumofMS, 13).equalsIgnoreCase(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail')))) {
         if (GlobalVariable.RoleCompany == 'Data Entry') {
 			'call test case customer detail'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerDetail - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call test case address info'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabAddressInformation - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabAddressInformation'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call test case job data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobData - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call test caseemergency contact'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabEmergencyContact - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tab financial data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabFinancialData - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabFinancialData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call test case customer asset'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerAsset - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call test case other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabOtherAttribute - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (GlobalVariable.RoleCompany == 'Testing') {
 			'call test case customer detail'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerDetail - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case address information'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabAddressInformation - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabAddressInformation'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case tab job data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobData - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabJobData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case emergency contact'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabEmergencyContact - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case tab financial data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabFinancialData - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabFinancialData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case tab customer asset'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerAsset - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
 			'call test case other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabOtherAttribute - Personal - ManagementShareholder'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
     }
