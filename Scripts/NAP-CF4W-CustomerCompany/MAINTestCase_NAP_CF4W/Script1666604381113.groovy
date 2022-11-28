@@ -27,6 +27,9 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
     1); (GlobalVariable.NumofColm)++) {
+		if(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != "Unexecuted"){
+			continue
+		}
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
@@ -53,6 +56,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
     1); (GlobalVariable.NumofColm)++) {
+		if(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != "Unexecuted"){
+			continue
+		}
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
         } else {
