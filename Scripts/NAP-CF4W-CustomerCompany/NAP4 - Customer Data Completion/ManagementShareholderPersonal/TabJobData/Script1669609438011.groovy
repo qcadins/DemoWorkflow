@@ -37,8 +37,9 @@ if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofMS, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/JobData - Personal - Guarantor').getValue(GlobalVariable.NumofGuarantor, 4))
+
+if (iscompleteMandatory && GlobalVariable.FlagFailed == 0) {
 	'Check alert'
 	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '3.JobData')
 }
@@ -49,15 +50,14 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
         GlobalVariable.NumofMS, '3.JobData')
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-            GlobalVariable.NumofMS, 4)) == 0) {
+    if (iscompleteMandatory == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofMS, '3.JobData')
     }
 }
 
-if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonalCompany=="Yes"){
+if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
 	GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
 		
 	'call test case verify job data store data'

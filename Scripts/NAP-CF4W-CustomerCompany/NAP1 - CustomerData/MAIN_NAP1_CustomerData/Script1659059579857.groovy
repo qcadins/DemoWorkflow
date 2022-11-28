@@ -124,6 +124,13 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
         }
         
         'input product offering code'
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_ProductOfferingCode'), 
+            datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 12))
+
+        'click button search'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
+
+        'verify input error'
         verifyInputError()
     }
     

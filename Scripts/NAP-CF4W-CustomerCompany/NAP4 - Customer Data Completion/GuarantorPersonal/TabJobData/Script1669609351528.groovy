@@ -37,8 +37,9 @@ if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-        GlobalVariable.NumofGuarantor, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
+Integer iscompleteMandatory = Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/JobData - Personal - Guarantor').getValue(GlobalVariable.NumofGuarantor, 4))
+
+if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.JobData')
 }
@@ -49,8 +50,7 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofGuarantor, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
         GlobalVariable.NumofGuarantor, '3.JobData')
 
-    if (Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData - Company - GuarantorPersonal').getValue(
-            GlobalVariable.NumofGuarantor, 4)) == 0) {
+    if (iscompleteMandatory == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
             GlobalVariable.NumofGuarantor, '3.JobData')

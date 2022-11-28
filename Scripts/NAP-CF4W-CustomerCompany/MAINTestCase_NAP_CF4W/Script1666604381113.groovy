@@ -21,62 +21,72 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
     1); (GlobalVariable.NumofColm)++) {
-		'call test case NAP1'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        } else {
+            'call test case NAP1'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], 
+                FailureHandling.CONTINUE_ON_FAILURE)
 
-		'call test case Duplicate checking'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case Duplicate checking'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
+                FailureHandling.CONTINUE_ON_FAILURE)
 
-		'call test case NAP2'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case NAP2'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-		'call test case ComResFund'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case ComResFund'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-		'call test case CDC'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case CDC'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
+        }
     }
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
     1); (GlobalVariable.NumofColm)++) {
-
-		'call test case NAP1'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
-
-		'call test case Ducheck verif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
-
-		'check if dupcheck == yes'
-        if (GlobalVariable.DupcheckVerif == 'Yes') {
-			'call test case Duplicate checking'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], 
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
+        } else {
+            'call test case NAP1'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
-        }
-        
-		'call test case NAP2'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
 
-		'call test case Comresfund'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
+            'call test case Ducheck verif'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+                [:], FailureHandling.STOP_ON_FAILURE)
 
-		'call test case CDC NAP4'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            'check if dupcheck == yes'
+            if (GlobalVariable.DupcheckVerif == 'Yes') {
+                'call test case Duplicate checking'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+            }
+            
+            'call test case NAP2'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                [:], FailureHandling.STOP_ON_FAILURE)
 
-		'check if verif Appview = yes'
-        if (GlobalVariable.CheckAppViewCompany == 'Yes') {
-            'call test case verify app view'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            'call test case Comresfund'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.STOP_ON_FAILURE)
+
+            'call test case CDC NAP4'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                [:], FailureHandling.STOP_ON_FAILURE)
+
+            'check if verif Appview = yes'
+            if (GlobalVariable.CheckAppViewCompany == 'Yes') {
+                'call test case verify app view'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            }
         }
     }
 }
