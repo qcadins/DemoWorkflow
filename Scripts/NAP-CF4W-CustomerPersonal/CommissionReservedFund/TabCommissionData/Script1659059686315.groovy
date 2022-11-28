@@ -29,9 +29,10 @@ GlobalVariable.FlagFailed = 0
 'declare datafileCommission'
 datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
 
-'Koneksi database'
+'Koneksi database fou'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'koneksi database los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'Inisialisasi driver'
@@ -56,6 +57,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 'Arraylist untuk menampung total amount dari allocate commission (upping rate, admin fee, dsb)'
 ArrayList<WebElement> TotalAllocateCommissionAmt = new ArrayList<WebElement>()
 
+'arraylist untuk menampung nama-nama dari yang dibagikan komisi yang gagal delete'
 ArrayList <String> commissiondelete = new ArrayList<>()
 
 if(GlobalVariable.Role=="Testing"){
@@ -69,6 +71,7 @@ if(GlobalVariable.Role=="Testing"){
 	for (int i = 0; i < countIncomeInfo; i++) {
 		TotalAllocateCommissionAmt.add(0.00)
 	
+		'Pengcekan max allocated amount x remaining allocated amount'
 		if(i==countIncomeInfo-1){
 			modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
 			
@@ -103,24 +106,31 @@ if(GlobalVariable.Role=="Testing"){
 				
 				'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
 				if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
+					'ambil nilai diff rate'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
+					'ambil nilai insurance'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
+					'ambil nilai life insurance'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
+					'ambil nilai admin fee'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
+					'ambil nilai provision fee'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
 				}
 				else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
+					'ambil nilai other fee'
 					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
 				}
 				
+				'get text income info amount'
 				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
 				
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
@@ -174,7 +184,9 @@ if (variableSupp.size() > 0) {
         'Click OK pada alert'
         WebUI.acceptAlert()
 		
+		'Pengecekan setelah didelete supplier masih muncul'
 		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
+			'add supplier name failed kedalam array'
 			commissiondelete.add(supplierDelete)
 		}
     } else {
@@ -402,12 +414,14 @@ if (variableSuppEmp.size() > 0) {
                     'Klik OK pada alert yang muncul'
                     WebUI.acceptAlert()
 
+					'Pengecekan jika i merupakan data supplier emp yang terakhir'
 					if(i == variableSuppEmp.size()){
+						'Pengcekan jika data supplier emp tidak muncul'
 						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, 5, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
 								variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 						}else{
-								'add cust name failed kedalam array'
+								'add supplier emp name failed kedalam array'
 								commissiondelete.add(supplierEmpDelete)
 								continue
 						}
@@ -415,12 +429,13 @@ if (variableSuppEmp.size() > 0) {
 					}else{
 							'get cust name setelah delete'
 							supplierEmpNameAfter = WebUI.getText(modifyObjectSuppEmpName)
-										
+							
+							'Pengecekan jika data supp emp name ke i after delete tidak sama dengan before delete'			
 							if(WebUI.verifyNotMatch(supplierEmpNameAfter, supplierEmpDelete, false, FailureHandling.OPTIONAL)){
 									'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
 									variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 							}else{
-									'add cust name failed kedalam array'
+									'add supplier emp name failed kedalam array'
 									commissiondelete.add(supplierEmpDelete)
 									continue
 							}
@@ -655,12 +670,14 @@ if (variableRef.size() > 0) {
                     'Klik OK pada alert yang muncul'
                     WebUI.acceptAlert()
 					
+					'Pengecekan jika data referantor ke i merupakan data terakhir'
 					if(i == variableRef.size()){
+							'Pengecekan referantor name tidak muncul setelah didelete'
 							if(WebUI.verifyElementNotPresent(modifyObjectRefName, 5, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
 								variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 							}else{
-								'add cust name failed kedalam array'
+								'add ref name failed kedalam array'
 								commissiondelete.add(refName)
 								continue
 							}
@@ -669,11 +686,12 @@ if (variableRef.size() > 0) {
 							'get cust name setelah delete'
 							refNameAfter = WebUI.getText(modifyObjectRefName)
 										
+							'Pengecekan jika referantor name after delete tidaklah sama dengan referantor name before delete'
 							if(WebUI.verifyNotMatch(refNameAfter, refName, false, FailureHandling.OPTIONAL)){
 									'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
 									variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 							}else{
-									'add cust name failed kedalam array'
+									'add ref name failed kedalam array'
 									commissiondelete.add(refName)
 									continue
 							}
@@ -858,10 +876,13 @@ if (variableRef.size() > 0) {
     }
 }
 
+'Pengecekan jika ada delete yang gagal'
 if(commissiondelete.size() > 0){
+	'write to excel status warning'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
+	'write to excel reason'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'13.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
@@ -912,6 +933,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/Commissi
 
 WebUI.delay(2)
 
+'Get nilai iscompletemandatory dari excel dan parsing ke integer'
 Integer iscompleteMandatory = Integer.parseInt(datafileCommission.getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
@@ -952,9 +974,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
 					0, numofcolm-1, GlobalVariable.StatusFailed)
 
+			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
 					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

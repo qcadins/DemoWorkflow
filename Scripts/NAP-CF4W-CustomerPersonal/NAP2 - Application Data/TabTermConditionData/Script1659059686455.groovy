@@ -193,7 +193,7 @@ for (int i = 1; i <= count; i++) {
 					}
 					
 					if (datafileTabTC.getValue(
-						GlobalVariable.NumofColm, 13).length() > 0) {
+						GlobalVariable.NumofColm, 13).length() > 0 && PromiseDate[(j-1)]!="") {
 						'Input Promise Date'
 						WebUI.setText(modifyObjectPromiseDate, PromiseDate[(j - 1)])
 					}

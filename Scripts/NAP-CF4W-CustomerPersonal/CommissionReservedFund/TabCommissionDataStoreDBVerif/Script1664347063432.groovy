@@ -28,6 +28,7 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileCommission'
 datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
 
+'Get appno dari excel customer main data'
 String appno = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)
 
 'Mencari jumlah supplier, supplier employee, dan referantor yang muncul dalam commission'
@@ -37,10 +38,14 @@ int suppsize = countData.get(0)
 int suppempsize = countData.get(1)
 int refsize = countData.get(2)
 
+'declare integer suppsource'
 Integer suppSource
+
+'declare arraylist suppempsource,refsource, arraymatch'
 ArrayList<Integer> suppEmpSource = new ArrayList<Integer>()
 ArrayList<Integer> refSource = new ArrayList<Integer>()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
 if(suppsize>0){
 	'Mencari jumlah commission source dari masing-masing supplier'
 	suppSource = CustomKeywords.'dbConnection.CustomerDataVerif.countCommissionSourceSupplierDB'(sqlconnection, appno)
@@ -72,8 +77,11 @@ ArrayList<String> comSupp = result.get("Supp")
 ArrayList<String> comSuppEmp = result.get("SuppEmp")
 ArrayList<String> comRef = result.get("Ref")
 
+'Pengecekan pada excel allocation type jika bernilai amount atau percentage'
 if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Amount")){
+	'jika supplier tidak bernilai null/ ada datanya'
 	if(suppSource!=null){
+		'looping supplier'
 		for(int i = 1;i<=suppSource;i++){
 			'2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 			if(datafileCommission.getValue(
@@ -95,11 +103,14 @@ if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Am
 		}
 	}
 	int count = 0
+	'Jika supplier employee ada datanya/tidak bernilai null'
 	if(suppEmpSource!=null){
+		'Looping supplier employee'
 		for (int i = 1; i <= suppempsize; i++) {
 			if(i>1){
 				count +=suppEmpSource.get(i-2)
 			}
+			'looping allocation commmission'
 			for (int j = 1; j <= suppEmpSource.get(i-1); j++) {
 				value = datafileCommission.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).split(';', -1)
@@ -124,6 +135,7 @@ if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Am
 		}
 	}
 	int countRf=0
+	'Jika referantor ada datanya/tidak bernilai null'
 	if(refSource!=null){
 		for (int i = 1; i <= refsize; i++) {
 			if(i>1){
