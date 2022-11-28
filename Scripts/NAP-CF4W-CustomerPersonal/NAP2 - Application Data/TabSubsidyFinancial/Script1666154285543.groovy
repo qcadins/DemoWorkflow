@@ -172,7 +172,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 
 				if ((SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Supplier') || (SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Multifinance')) {
 					
-					int i = 2
+					i = 2
 										
 					if((SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Supplier')){
 						

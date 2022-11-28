@@ -333,9 +333,9 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 def pagingTesting(){
 	//Verify sort & paging
 	if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
-		ArrayList<String> resultReset
+		ArrayList<String> resultReset = new ArrayList<String>()
 	
-		ArrayList<String> checkVerifySort
+		ArrayList<String> checkVerifySort = new ArrayList<String>()
 	
 		ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 	

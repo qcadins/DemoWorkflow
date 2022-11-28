@@ -789,7 +789,11 @@ public verifyMatch(){
 
 public pagingTesting(){
 	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
-		ArrayList<Boolean> resultReset,checkVerifySort,checkVerifyFooter = new ArrayList<>()
+		ArrayList<String> resultReset = new ArrayList<String>()
+
+        ArrayList<String> checkVerifySort = new ArrayList<String>()
+
+        ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 		
 		'Verif reset'
 		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()

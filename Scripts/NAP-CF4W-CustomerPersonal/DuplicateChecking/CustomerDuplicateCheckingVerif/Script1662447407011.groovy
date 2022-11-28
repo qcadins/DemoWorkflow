@@ -52,7 +52,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 21), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 30), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 13)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 13)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -68,7 +68,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 21), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 14)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 14)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -84,7 +84,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 21), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 27), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "LOCK" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 15)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 15)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -98,7 +98,7 @@ for (i = 1; i <= 1; i++) {
                 sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 16)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 16)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -114,7 +114,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 21), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 19), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 17)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 17)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -129,7 +129,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 19), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 30), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 18)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 18)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -144,7 +144,7 @@ for (i = 1; i <= 1; i++) {
                     GlobalVariable.NumofColm, 19), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 27), datafileCustomerPersonal.getValue(
                     GlobalVariable.NumofColm, 13))) > 0)) {
             'add "REVIEW" kedalam array CustomerPersonalStatus'
-            CustomerPersonalStatus = datafileDucheckRule.getValue(2, 19)
+            CustomerPersonalStatus = datafileDupcheckRule.getValue(2, 19)
 
             'verify apakah hasil pengecekan mengandung status REVIEW'
             checkStatusDupcheck(CustomerPersonalStatus, DupcheckResult)
@@ -169,7 +169,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 11), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 33), datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 13)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -185,7 +185,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 21), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19), datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 14)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -201,7 +201,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 21), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 30), datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "LOCK" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 15)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -215,7 +215,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     sqlconnectionLOS, datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19), datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 16)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -231,7 +231,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 11), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19), datafileTabFamily.getValue(
                         GlobalVariable.NumofFamily, 12))) > 0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 17)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -247,7 +247,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 33), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12))) > 
             0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 18)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -263,7 +263,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         GlobalVariable.NumofFamily, 30), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12))) > 
             0)) {
                 'add "REVIEW" kedalam array FamilyPersonalStatus'
-                FamilyPersonalStatus = datafileDucheckRule.getValue(2, 19)
+                FamilyPersonalStatus = datafileDupcheckRule.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(FamilyPersonalStatus, DupcheckResult)
@@ -291,7 +291,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         GlobalVariable.NumofGuarantorPersonal, 21), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         30), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 13)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 13)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -309,7 +309,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         GlobalVariable.NumofGuarantorPersonal, 19), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 14)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 14)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -327,7 +327,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         GlobalVariable.NumofGuarantorPersonal, 27), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 15)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 15)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -342,7 +342,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         GlobalVariable.NumofGuarantorPersonal, 19), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 16)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 16)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -360,7 +360,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         GlobalVariable.NumofGuarantorPersonal, 19), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 17)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 17)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -376,7 +376,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 30), datafileTabGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 18)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 18)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -392,7 +392,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 27), datafileTabGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorPersonal, 12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorPersonalStatus'
-                GuarantorPersonalStatus = datafileDucheckRule.getValue(2, 19)
+                GuarantorPersonalStatus = datafileDupcheckRule.getValue(2, 19)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorPersonalStatus, DupcheckResult)
@@ -408,18 +408,18 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
+    if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+        if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
             'check rule company 1'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany1Cust'(sqlconnectionFOU, 
-                    datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), datafileGuarantorPersonal.getValue(
+                    datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), datafileTabGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorCompany, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany1AppCust'(
-                    sqlconnectionLOS, datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), datafileGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 19), datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
+                    sqlconnectionLOS, datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18), datafileTabGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 19), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
                         12))) > 0)) {
                 'add "LOCK" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = datafileDucheckRule.getValue(2, 20)
+                GuarantorCompanyStatus = datafileDupcheckRule.getValue(2, 20)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
@@ -429,12 +429,12 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             
             'check rule company 2'
             if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2Cust'(sqlconnectionFOU, 
-                    datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18))) > 0) || (Integer.parseInt(
-                CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(sqlconnectionLOS, datafileGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 18), datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
+                    datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 18))) > 0) || (Integer.parseInt(
+                CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(sqlconnectionLOS, datafileTabGuarantorPersonal.getValue(
+                        GlobalVariable.NumofGuarantorCompany, 18), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
                         12))) > 0)) {
                 'add "REVIEW" kedalam array GuarantorCompanyStatus'
-                GuarantorCompanyStatus = datafileDucheckRule.getValue(2, 21)
+                GuarantorCompanyStatus = datafileDupcheckRule.getValue(2, 21)
 
                 'verify apakah hasil pengecekan mengandung status REVIEW'
                 checkStatusDupcheck(GuarantorCompanyStatus, DupcheckResult)
@@ -694,12 +694,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
+    if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
-        if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+        if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
             'check negative rule company 1'
             if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany1'(sqlconnectionFOU, datafileTabGuarantorPersonal.getValue(
-                        GlobalVariable.NumofGuarantorCompany, 18), datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        GlobalVariable.NumofGuarantorCompany, 18), datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 
                         19))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')
@@ -708,7 +708,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             }
             
             'check negative rule company 2'
-            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany2'(sqlconnectionFOU, datafileGuarantorPersonal.getValue(
+            if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany2'(sqlconnectionFOU, datafileTabGuarantorPersonal.getValue(
                         GlobalVariable.NumofGuarantorCompany, 18))) > 0) {
                 'add "NEGATIVE" kedalam array negative result'
                 NegativeResult.add('NEGATIVE')

@@ -811,6 +811,8 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
         '7.TabAssetData')
 }
 
+WebUI.delay(3)
+
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 

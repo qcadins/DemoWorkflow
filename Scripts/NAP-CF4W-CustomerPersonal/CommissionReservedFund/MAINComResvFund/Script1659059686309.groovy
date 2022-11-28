@@ -98,9 +98,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 
 public pagingTesting(){
 	if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
-		ArrayList<String> resultReset
+		ArrayList<String> resultReset = new ArrayList<String>()
 	
-		ArrayList<String> checkVerifySort
+		ArrayList<String> checkVerifySort = new ArrayList<String>()
 	
 		ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 	

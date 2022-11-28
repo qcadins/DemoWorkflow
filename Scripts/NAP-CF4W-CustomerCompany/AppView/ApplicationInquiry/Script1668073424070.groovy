@@ -37,7 +37,11 @@ WebUI.click(findTestObject('AppView/MainInformation/MENU APP INQUIRY'))
 'Verify sort & paging'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
     'declare arraylist resultset, checkVerifySort, checkVerifyFooter'
-    ArrayList<String> resultReset, checkVerifySort, checkVerifyFooter
+    ArrayList<String> resultReset = new ArrayList<String>()
+	
+	ArrayList<String> checkVerifySort = new ArrayList<String>()
+	
+	ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
     'Verif reset'
     resultReset = CustomKeywords.'paging.verifyPaging.resetPagingAppInquiry'()
