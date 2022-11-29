@@ -40,7 +40,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
-	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
+	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoredata'(sqlconnectionLOS, appno, custname)
 	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'PROFESSIONAL') {
@@ -207,6 +207,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if(prevjobaddress.size() > 0){
 'verify Previous company name'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 76).toUpperCase(), (prevjobaddress[
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -214,6 +215,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 'verify Previous employment date'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 77).toUpperCase(), (prevjobaddress[
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
 row = 79
 for(i = 2; i < prevjobaddress.size(); i++){
@@ -222,6 +224,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if(othaddress.size() > 0){
 'verify Other business'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 100).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -241,6 +244,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 'verify establishment date'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 104).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
 row = 106
 for(i = 5 ; i < othaddress.size(); i++){

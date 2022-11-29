@@ -53,13 +53,9 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 ArrayList<WebElement> variable
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
-    } else {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
-    }
-    
+	'count table legal doc confins'   
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	
     for (i = 1; i <= variable.size(); i++) {
         'modify object legal doc type'
         modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
@@ -186,6 +182,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         
 	                    'call function input legal doc'
 						 inputLegalDoc(faileddata)
+						 
+						 'count table legal doc table setelah add legal doc baru'
+						 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
                         
                         break
                     }

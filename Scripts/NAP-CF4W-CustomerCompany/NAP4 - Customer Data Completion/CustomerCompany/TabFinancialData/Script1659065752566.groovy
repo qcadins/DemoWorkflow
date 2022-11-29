@@ -79,8 +79,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
-                        if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
-                                    financialdata, 35)))) {
+					
+						String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+							
+                        if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
                             'modify object button edit'
                             modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
                                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a/i', true)
@@ -156,7 +158,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         GlobalVariable.FlagFailed = 0
-
+		
         if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
             for (i = 1; i <= variable.size(); i++) {
                 'modify object Date'
@@ -167,15 +169,21 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                     datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
+						
+						String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+						
                         'verify date beda'
-                        if (!(WebUI.getText(modifyNewDate, FailureHandling.OPTIONAL).replace('-', ' ').equalsIgnoreCase(
-                            convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))))) {
+                        if (!(WebUI.getText(modifyNewDate, FailureHandling.OPTIONAL).replace('-', ' ').equalsIgnoreCase(converteddate))) {
                             if (i == variable.size()) {
                                 'click button add'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
 
+								'call function input financial data'
                                 inputDataFinancial()
-
+								
+								'count ulang table financial setelah add financial data baru'
+								variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+								
                                 break
                             }
                         } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(

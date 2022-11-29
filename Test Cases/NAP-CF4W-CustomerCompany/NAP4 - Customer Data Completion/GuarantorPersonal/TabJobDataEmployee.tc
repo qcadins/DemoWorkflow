@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabJobDataEmployeeGuarantor</name>
+   <name>TabJobDataEmployee</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>e189df35-3e61-4d09-bbf4-7333dd55f447</testCaseGuid>

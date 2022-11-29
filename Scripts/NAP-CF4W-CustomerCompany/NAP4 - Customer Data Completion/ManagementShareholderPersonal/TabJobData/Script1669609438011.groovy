@@ -63,6 +63,4 @@ if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCo
 	'call test case verify job data store data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabJobDataVerifStoreDataDB'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-	
-	
+}	

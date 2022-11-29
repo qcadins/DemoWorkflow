@@ -391,13 +391,16 @@ if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStor
 } else if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) && findTestData(
     'NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact - Company - ManagementShareholderPersonal').getValue(
     GlobalVariable.NumofMS, 12).equalsIgnoreCase('LookUp')) {
+
+	GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
+	
     'call test case verify emergency contact store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactVerifStoreDataDB - LookUp'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def getDataEmergencyContact() {
-    ArrayList<WebElement> confinsdata = new ArrayList<WebElement>()
+    ArrayList<String> confinsdata = new ArrayList<String>()
 
     'get name'
     confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
@@ -441,4 +444,3 @@ def getDataEmergencyContact() {
 
     GlobalVariable.Confinsdata = confinsdata
 }
-

@@ -62,15 +62,15 @@ for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarra
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notary name'
-	arrayMatch.add(WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notarynamearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toString().toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notary location'
-	arrayMatch.add(WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notarylocationarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toString().toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notes'
-	arrayMatch.add(WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(notesarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toString().toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 }
 

@@ -159,6 +159,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 					'call function input asset data'
                     inputAssetData()
+					
+					'count ulang table customer asset setelah add customer asset baru'
+					variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                 }
             } else if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)])) {
                 break

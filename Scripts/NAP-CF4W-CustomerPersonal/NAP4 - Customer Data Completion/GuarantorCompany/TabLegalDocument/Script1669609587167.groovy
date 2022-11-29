@@ -53,13 +53,9 @@ copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingl
 ArrayList<WebElement> variable
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
-    } else {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
-    }
-    
+	'count table legal doc confins'   
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	
     for (i = 1; i <= variable.size(); i++) {
         'modify object legal doc type'
         modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
@@ -80,15 +76,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'),
 						'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 						i) + ']/td[6]/span/span[1]/span/a/i', true)
-					
+				
                     'click button edit'
                     WebUI.click(modifyNewbuttonedit)
 
 					'call function verif legal doc type'
 					verifLegalDocType(legal)
-                    
-                    'call function input legal doc'
-					inputLegalDoc()
+					
+					'call function input legal doc'
+                    inputLegalDoc(faileddata)
                     
                     break
                 } else {
@@ -147,18 +143,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     if (legaltypefaileddelete.size() > 0) {
 		'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            0, GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusWarning)
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-		'write to excel reason failed'
+		'write to excel reason failed delete'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            1, GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 
-		'flagwarning +1'
         (GlobalVariable.FlagWarning)++
     }
     
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/buttonedit'), 
         5, FailureHandling.OPTIONAL)) {
+	
+		'count table legal doc row di confins'
         variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
         for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
@@ -180,12 +177,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Add'))
 
-						'call function verif legal doc type'
+                        'call function verif legal doc type'
 						verifLegalDocType(legal)
                         
-                        'call function input legal doc'
-                        inputLegalDoc()
-						
+	                    'call function input legal doc'
+						 inputLegalDoc(faileddata)
+						 
+						 'count table legal doc table setelah add legal doc baru'
+						 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+                        
                         break
                     }
                 } else if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)])) {
@@ -200,11 +200,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Add'))
 
-            'call function verif legal doc type'
+			'call function verif legal doc type'
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
@@ -213,11 +213,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Add'))
 
-            'call function verif legal doc type'
+			'call function verif legal doc type'
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 }
@@ -225,29 +225,32 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed == 
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
 0)) {
     'Check alert'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '6.LegalDocument')
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
+        '6.LegalDocument')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'), 
-        GlobalVariable.NumofGuarantor, '6.LegalDocument')
+                GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'), 
+        GlobalVariable.NumofColm, '6.LegalDocument')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/errorvalidasi'), 
-            GlobalVariable.NumofGuarantor, '6.LegalDocument')
+            GlobalVariable.NumofColm, '6.LegalDocument')
     }
 }
 
 if (GlobalVariable.FlagWarning > 0) {
+	'write to excel status warning'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusWarning)
 
+	'write to excel failed reason'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }

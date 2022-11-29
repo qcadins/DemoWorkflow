@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.util.ArrayList
+
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
@@ -53,13 +56,9 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 ArrayList<WebElement> variable
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
-    } else {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
-    }
-    
+	'count table legal doc confins'   
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	
     for (i = 1; i <= variable.size(); i++) {
         'modify object legal doc type'
         modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
@@ -88,7 +87,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					verifLegalDocType(legal)
 					
 					'call function input legal doc'
-                    inputLegalDoc()
+                    inputLegalDoc(faileddata)
                     
                     break
                 } else {
@@ -185,7 +184,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						verifLegalDocType(legal)
                         
 	                    'call function input legal doc'
-						 inputLegalDoc()
+						 inputLegalDoc(faileddata)
+						 
+						 'count table legal doc table setelah add legal doc baru'
+						 variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
                         
                         break
                     }
@@ -205,7 +207,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
@@ -218,7 +220,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			verifLegalDocType(legal)
             
             'call function input legal doc'
-			inputLegalDoc()
+			inputLegalDoc(faileddata)
         }
     }
 }
@@ -276,12 +278,12 @@ def verifLegalDocType(int legal){
 	if (GlobalVariable.RoleCompany == 'Testing') {
 		
 		'connect DB FOU'
-		Sql sqlconnectionFOU = CustomKeywords.'dbconnection.connectDB.connectFOU'()
+		Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 		ArrayList<WebElement> LegalDocType
 
 		'get data array dari db'
-		LegalDocType = CustomKeywords.'dbconnection.checkNAP4db.checkLegaldocument'(sqlconnectionFOU)
+		LegalDocType = CustomKeywords.'nap4Data.checkNAP4.checkLegaldocument'(sqlconnectionFOU)
 
 		'verify array dari db == option list confins'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
@@ -315,7 +317,21 @@ def verifLegalDocType(int legal){
 	}
 }
 
-def inputLegalDoc(){
+def inputLegalDoc(ArrayList<String> faileddata){
+	def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+	
+	def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+	
+	def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+	
+	def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+	
+	def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+	
+	def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+	
+	def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+	
 	'select legal doc type'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
 		LegalDocTypeArray[(legal - 1)], false)

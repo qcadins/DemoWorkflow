@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabJobDataSMEGuarantor</name>
+   <name>TabJobDataSME</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>d349143e-6edd-40ae-bf26-11065d6bddb4</testCaseGuid>

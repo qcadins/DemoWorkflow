@@ -47,8 +47,8 @@ copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingl
 if (copyapp.equalsIgnoreCase('Edit')) {
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'),
 		5, FailureHandling.OPTIONAL)) {
-		'count table customer asset confins'
-		ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
+		'count table customer asset row di confins'
+		ArrayList<Boolean> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
 		for (i = 1; i <= variable.size(); i++) {
 			'modify object customer asset type'
@@ -63,6 +63,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				
 				'verify if asset type sama'
 				if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)])) {
+					
 					'modify object button edit'
 					modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'),
 						'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[6]/a/i', true)
@@ -70,9 +71,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'click button edit'
 					WebUI.click(modifyNewbuttonedit)
 
-					'call function input customer asset'
+					'call function input asset data'
 					inputAssetData()
-
+					
 					break
 				} else {
 					if (asset == assettypearray.size()) {
@@ -128,18 +129,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (assettypefaileddelete.size() > 0) {
-		'wrtie to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofGuarantor -
+		'write to excel status warning'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusWarning)
 
 		'write to excel reason failed delete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofGuarantor -
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
 	
-	'count ulang table customer asset confins'
+	'count ulang table customer asset row di confins'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
 	for (asset = 1; asset <= assettypearray.size(); asset++) {
@@ -155,8 +156,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'click button add'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
 
-					'call function input customer asset'
+					'call function input asset data'
 					inputAssetData()
+					
+					'count ulang table customer asset setelah add customer asset baru'
+					variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 				}
 			} else if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)])) {
 				break
@@ -164,12 +168,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12) == 'Yes') {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 12) == 'Yes') {
 		for (asset = 1; asset <= assettypearray.size(); asset++) {
 			'click button add'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
 
-			'call function input customer asset'
+			'call function input asset data'
 			inputAssetData()
 		}
 	}
@@ -178,33 +182,37 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed ==
-0)) {
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0)) {
 	'Check alert'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '5.CustomerAsset')
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm,
+		'5.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
 	'Check save Process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-				GlobalVariable.NumofGuarantor, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'),
-		GlobalVariable.NumofGuarantor, '5.CustomerAsset')
+				GlobalVariable.NumofColm, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'),
+		GlobalVariable.NumofColm, '5.CustomerAsset')
 
-	if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
+	if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
 		'Check error validasi'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
-			GlobalVariable.NumofGuarantor, '5.CustomerAsset')
+			GlobalVariable.NumofColm, '5.CustomerAsset')
 	}
 }
 
+'check if flagwarning > 0'
 if (GlobalVariable.FlagWarning > 0) {
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofGuarantor -
+	'write to excel status warning'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusWarning)
 
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofGuarantor -
+	'wrtie to excel reason failed'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm -
 		1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
+'check if th customer asset is present'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/th_Customer Asset Type'),
 	5, FailureHandling.OPTIONAL)) {
 	'click button back'

@@ -37,7 +37,6 @@ def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofV
 
 def assetqtyarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
 
-
 for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++){
 	
 	'verify asset type'

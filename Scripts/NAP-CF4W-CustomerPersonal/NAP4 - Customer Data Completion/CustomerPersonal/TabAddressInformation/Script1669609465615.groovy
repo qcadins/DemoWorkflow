@@ -49,121 +49,122 @@ copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingl
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
 	'count table addres row di confins'
-    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-    for (i = 1; i <= variable.size(); i++) {
-        'modify object address type'
-        modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-            'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[1]', true)
+	for (i = 1; i <= variable.size(); i++) {
+		'modify object address type'
+		modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
+			'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[1]', true)
 
-        'modify object address type'
-        modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-            'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-            i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
+		'modify object button edit'
+		modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
+			'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
-        for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-             GlobalVariable.FlagFailed = 0
+		for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+			 GlobalVariable.FlagFailed = 0
 
-            if (GlobalVariable.FindDataFile.getValue(Address, 10).length() != 0) {
-                if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                        GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                        GlobalVariable.NumofColm, 13))) {
-                    if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
-                            12))) {
-                        if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
-                            'click button edit'
-                            WebUI.click(modifyNewbuttonedit)
+			if (GlobalVariable.FindDataFile.getValue(
+				Address, 9).length() != 0) {
+				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+						GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+						GlobalVariable.NumofGuarantor, 13))) {
+					if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+							Address, 12))) {
+						if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
+							'click button edit'
+							WebUI.click(modifyNewbuttonedit)
 
-                            'verif ddl ownership dan address type'
+						   'verif ddl ownership dan address type'
 							verifyDDLAddress(Address)
-                            
+							
 							'call function input address'
-                            inputaddress()
+							inputaddress()
 
-                            break
-                        }
-                    }
-                }
-            } else {
-                break
-            }
-        }
-    }
-    
+							break
+						}
+					}
+				}
+			} else {
+				break
+			}
+		}
+	}
+	
 	'count ulang table address row di confins'
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-    for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-         GlobalVariable.FlagFailed = 0
+	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+		GlobalVariable.FlagFailed = 0
 
-        if (GlobalVariable.FindDataFile.getValue(Address, 10).length() != 0) {
-            for (i = 1; i <= variable.size(); i++) {
-                'modify object address type'
-                modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'), 
-                    'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
-                    i) + ']/td[1]', true)
+		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
+			for (i = 1; i <= variable.size(); i++) {
+				'modify object address type'
+				modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
+					'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[1]', true)
 
-                if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                        GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                        GlobalVariable.NumofColm, 13))) {
-                    if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
-                            12)))) {
-                        if (i == variable.size()) {
-                            'click button add'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Add'))
+				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+						GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+						GlobalVariable.NumofGuarantor, 13))) {
+					if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+							Address, 12)))) {
+						if (i == variable.size()) {
+							'click button add'
+							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
 
-                            'verif ddl ownership dan address type'
+							'verif ddl ownership dan address type'
 							verifyDDLAddress(Address)
-                            
+							
 							'call function input address'
-                            inputaddress()
+							inputaddress()
 
-                            break
-                        }
-                    } else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
-                            Address, 12))) {
-                        break
-                    }
-                }
-            }
-        } else {
-            break
-        }
-    }
+							break
+						}
+					} else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+							Address, 12))) {
+						break
+					}
+				}
+			}
+		} else {
+			break
+		}
+	}
 } else if (copyapp.equalsIgnoreCase('No')) {
-    for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-         GlobalVariable.FlagFailed = 0
-
-        if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
-            if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                    GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(
-                findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal - Customer').getValue(
-                    GlobalVariable.NumofColm, 13))) {
-                'click button add'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Add'))
+	GlobalVariable.FlagFailed = 0
+	
+	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
+			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+					GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail - Company - ManagementShareholderPersonal').getValue(
+					GlobalVariable.NumofGuarantor, 13))) {
 				
+				'click button add'
+				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
+
 				'verif ddl ownership dan address type'
 				verifyDDLAddress(Address)
 				
 				'call function input address'
-                inputaddress()
+				inputaddress()
 
-                break
-            }
-        } else {
-            break
-        }
-    }
+				break
+			}
+		} else {
+			break
+		}
+	}
 }
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Save  Continue'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Save  Continue'))
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/th_Address'), 
-    5, FailureHandling.OPTIONAL)) {
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Back'))
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/th_Address'),
+	10, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Back'))
 }
 
 def inputaddress() {

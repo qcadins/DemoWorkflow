@@ -398,7 +398,7 @@ if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStor
 }
 
 def getDataEmergencyContact() {
-    ArrayList<WebElement> confinsdata = new ArrayList<WebElement>()
+    ArrayList<String> confinsdata = new ArrayList<>()
 
     'get name'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
