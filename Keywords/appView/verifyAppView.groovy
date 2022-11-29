@@ -30,6 +30,7 @@ public class verifyAppView {
 	int colmcount
 	int i
 
+	//keyword check app view data
 	@Keyword
 	public checkAppViewData (Sql instance, String appno){
 		String appdata
@@ -48,6 +49,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view customer main company
 	@Keyword
 	public checkCustomerMainDataCompany (Sql instance, String appno){
 		String appdata
@@ -66,15 +68,15 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view customer main personal
 	@Keyword
 	public checkCustomerMainDataPersonal (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
 		instance.eachRow(("SELECT CUST_NAME, [SALUTATION], ISNULL([Custprefix],'-') AS [Cust_prefix], ISNULL([Custsuffix],'-') AS [Cust_suffix], MR_GENDER_CODE, [ID_TYPE] + ' / ' + ID_NO, MOTHER_MAIDEN_NAME, ISNULL(FORMAT(ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXPIRED_DATE], MR_MARITAL_STAT_CODE, BIRTH_PLACE + ' / ' + FORMAT(BIRTH_DT, 'dd-MMM-yyyy'), [NATIONALITY], ISNULL(TAX_ID_NO,'-') AS [TAX_ID_NO], [Countryname], MOBILE_PHN_NO_1, [EDUCATION], EMAIL_1, [RELIGION], CASE WHEN CAST([IS_VIP] as nvarchar(25)) = '0' THEN 'NO' WHEN CAST([IS_VIP] as nvarchar(25)) = '1' THEN 'NO' ELSE CAST([IS_VIP] as nvarchar(25)) END  FROM (SELECT [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE, ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, mastername.Code, REF_MASTER_NAME FROM (select [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE , ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, [Code], value FROM (SELECT MR_EDUCATION_CODE AS 'EDUCATION', MR_NATIONALITY_CODE as 'NATIONALITY', MR_RELIGION_CODE as 'RELIGION', MR_SALUTATION_CODE as 'SALUTATION', acp.CUST_PREFIX_NAME as [Custprefix], ac.IS_VIP  as [IS_VIP], acp.CUST_SUFFIX_NAME as [Custsuffix], rc.COUNTRY_NAME as [Countryname], CUST_NAME, MR_GENDER_CODE, MR_ID_TYPE_CODE as 'ID_TYPE', ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1  FROM APP_CUST_PERSONAL acp WITH(NOLOCK) join app_cust ac WITH(NOLOCK) ON ac.app_cust_id = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN V_REF_COUNTRY rc WITH(NOLOCK) ON rc.COUNTRY_CODE = acp.NATIONALITY_COUNTRY_CODE WHERE ac.IS_CUSTOMER = '1' and app_no ='"+ appno +"') as Orig unpivot (value for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION])) as piv"), {  row ->
-
+			
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
-
 
 			for(i = 0 ; i < colmcount ; i++){
 				appdata = (row[i])
@@ -84,6 +86,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view check addr
 	@Keyword
 	public checkAddrData (Sql instance, String appno){
 		String appdata
@@ -93,7 +96,6 @@ public class verifyAppView {
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
 
-
 			for(i = 0 ; i < colmcount ; i++){
 				appdata = (row[i])
 				listappdata.add(appdata)
@@ -102,6 +104,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view MS data
 	@Keyword
 	public checkMSData (Sql instance, String appno){
 		String appdata
@@ -120,6 +123,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view family data
 	@Keyword
 	public checkFamData (Sql instance, String appno){
 		String appdata
@@ -129,7 +133,6 @@ public class verifyAppView {
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
 
-
 			for(i = 0 ; i < colmcount ; i++){
 				appdata = (row[i])
 				listappdata.add(appdata)
@@ -138,6 +141,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view contact person data
 	@Keyword
 	public checkContactPersonData (Sql instance, String appno){
 		String appdata
@@ -156,7 +160,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
-
+	//keyword check app emergency contact data
 	@Keyword
 	public checkEmergencyContactData (Sql instance, String appno){
 		String appdata
@@ -166,7 +170,6 @@ public class verifyAppView {
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
 
-
 			for(i = 0 ; i < colmcount ; i++){
 				appdata = (row[i])
 				listappdata.add(appdata)
@@ -175,6 +178,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view financial data
 	@Keyword
 	public checkFinancialData (Sql instance, String appno){
 		String appdata
@@ -193,6 +197,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view financial data personal
 	@Keyword
 	public checkFinancialDataPersonal (Sql instance, String appno){
 		String appdata
@@ -211,6 +216,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view financial attr data
 	@Keyword
 	public checkFinancialAttrData (Sql instance, String appno){
 		String appdata
@@ -229,6 +235,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	
+	//keyword check app view bank acc
 	@Keyword
 	public checkBankAcc (Sql instance, String appno){
 		String appdata
@@ -248,6 +256,7 @@ public class verifyAppView {
 	}
 
 
+	//keyword check app view bank statement ada / tidak
 	@Keyword
 	public checkFinancialCheckBankStatStoreData (Sql instance, String appno, String name, String accno){
 		String bankstat
@@ -258,6 +267,7 @@ public class verifyAppView {
 		return bankstat
 	}
 
+	//keyword check app view bank satement
 	@Keyword
 	public checkBankStatData (Sql instance, String appno, String accno){
 		String appdata
@@ -276,6 +286,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view legal doc data
 	@Keyword
 	public checkLegalDocData (Sql instance, String appno){
 		String appdata
@@ -294,6 +305,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view cust group data
 	@Keyword
 	public checkCustGroupData (Sql instance, String appno){
 		String appdata
@@ -312,6 +324,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view other information data
 	@Keyword
 	public checkOtherInfoData (Sql instance, String appno){
 		String appdata
@@ -330,6 +343,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view other attr data
+	@Keyword
 	public checkOtherAttrData (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -347,7 +362,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
-
+	//keyword check app view tab guarator 
+	@Keyword
 	public checkGuarantor (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -365,6 +381,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset supplier
+	@Keyword
 	public checkAssetSupplierInfo (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -382,6 +400,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset information
+	@Keyword
 	public checkAssetInformation (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -399,6 +419,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset attr
+	@Keyword
 	public checkAssetAttr (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -416,6 +438,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset accessories
+	@Keyword
 	public checkAssetAccessories (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -433,6 +457,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset user
+	@Keyword
 	public checkAssetUser (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -450,6 +476,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset owner
+	@Keyword
 	public checkAssetOwner (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -467,6 +495,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view asset location
+	@Keyword
 	public checkAssetLocation (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -484,7 +514,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
-
+	//keyword check app view asset collateral
+	@Keyword
 	public checkAssetCollateral (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -502,6 +533,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view term and condition
+	@Keyword
 	public checkTermandCondition (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -519,6 +552,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view referantor
+	@Keyword
 	public checkReferantor (Sql instance, String appno){
 		String refdata
 		ArrayList <String> listrefdata = new ArrayList<String>()
@@ -536,6 +571,8 @@ public class verifyAppView {
 		return listrefdata
 	}
 
+	//keyword check app view MOI information
+	@Keyword
 	public checkMOInfo (Sql instance, String appno){
 		String modata
 		ArrayList <String> listmodata = new ArrayList<String>()
@@ -553,6 +590,8 @@ public class verifyAppView {
 		return listmodata
 	}
 
+	//keyword check app view app info and restruring
+	@Keyword
 	public checkAppInfoAndRestructuringData(Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
@@ -570,6 +609,8 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//keyword check app view application attr
+	@Keyword
 	public checkApplicationAttribute(Sql instance, String appno){
 		String attrdata
 		ArrayList <String> listattrdata = new ArrayList<String>()
@@ -587,9 +628,8 @@ public class verifyAppView {
 		return listattrdata
 	}
 
-
-
-
+	//keyword check app view life insurance
+	@Keyword
 	public checkLifeInsurance(Sql instance, String appno){
 		String lifeinsdata
 		ArrayList <String> listlifeinsdata = new ArrayList<String>()
@@ -607,6 +647,8 @@ public class verifyAppView {
 		return listlifeinsdata
 	}
 
+	//keyword check app view life insurance object
+	@Keyword
 	public checkLifeInsuranceObject(Sql instance, String appno){
 		String lifeinsdata
 		ArrayList <String> listlifeinsdata = new ArrayList<String>()
@@ -624,9 +666,8 @@ public class verifyAppView {
 		return listlifeinsdata
 	}
 
-
-
-
+	//keyword check app view insuredby
+	@Keyword
 	public checkInsuredBy(Sql instance, String appno){
 		String insuredby
 		instance.eachRow(("SELECT rml.REF_MASTER_NAME as 'INSURED_BY' FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), {  row ->
@@ -637,7 +678,8 @@ public class verifyAppView {
 		return insuredby
 	}
 
-
+	//keyword check app view insurance customer
+	@Keyword
 	public checkInsuranceCustomer(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -655,6 +697,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view insurance MF
+	@Keyword
 	public checkInsuranceMultifinance(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -672,6 +716,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view insurance cust-MF
+	@Keyword
 	public checkInsuranceCustMf(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -689,6 +735,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view app Main CVG
+	@Keyword
 	public checkInsuranceMainCoverage(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -706,6 +754,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view app Add CVG
+	@Keyword
 	public checkAdditionalCoverage(Sql instance, String appno, int yearno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -723,6 +773,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view app insurance summary
+	@Keyword
 	public checkInsuranceSummary(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
@@ -740,6 +792,8 @@ public class verifyAppView {
 		return listinsurance
 	}
 
+	//keyword check app view app reserved fund
+	@Keyword
 	public checkReservedFund(Sql instance, String appno){
 		ArrayList<String> totalrsv = new ArrayList<String>()
 		String rsvdata
@@ -767,6 +821,8 @@ public class verifyAppView {
 		return result
 	}
 
+	//keyword check app view app financial
+	@Keyword
 	public checkFinancial(Sql instance, String appno){
 		String findt
 		ArrayList<String> listSubsidy = new ArrayList<String>()
@@ -831,6 +887,8 @@ public class verifyAppView {
 		return result
 	}
 
+	//keyword check app view app commission
+	@Keyword
 	public checkCommissionData(Sql instance, String appno, Sql instanceFOU){
 
 
@@ -915,6 +973,8 @@ public class verifyAppView {
 
 	}
 
+	//keyword check app view app commision allocation
+	@Keyword
 	public checkCommissionAllocation(Sql instance, String comid){
 		//Check Referantor
 		ArrayList<String> resultAlloc = new ArrayList<>()
@@ -928,6 +988,8 @@ public class verifyAppView {
 
 	}
 
+	//keyword check app view app info summary commission
+	@Keyword
 	public checkSummaryCommission(Sql instance, String appno){
 		String comdt
 		ArrayList<String> resultSum = new ArrayList<>()

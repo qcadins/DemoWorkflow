@@ -21,7 +21,8 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class verifySubsidy {
-
+	
+	//keyword verify subsidy default
 	@Keyword
 	public verifySubsidyDefault(Sql instanceLOS, Sql instanceFOU, String appNo){
 		HashMap<String,ArrayList> result = new HashMap<>()
@@ -187,6 +188,8 @@ public class verifySubsidy {
 		return result
 
 	}
+	
+	//keyword check subsisdy value type code
 	@Keyword
 	public checkSubsidyValueTypeCode(Sql instanceLOS, String name){
 		String Code
@@ -195,6 +198,8 @@ public class verifySubsidy {
 		})
 		return Code
 	}
+	
+	//keyword check subsisdy from type code
 	@Keyword
 	public checkSubsidyFromTypeCode(Sql instanceLOS, String name){
 		String Code
@@ -203,6 +208,8 @@ public class verifySubsidy {
 		})
 		return Code
 	}
+	
+	//keyword check subsisdy allocation code
 	@Keyword
 	public checkSubsidyAllocCode(Sql instanceLOS, String name){
 		String Code
@@ -211,6 +218,8 @@ public class verifySubsidy {
 		})
 		return Code
 	}
+	
+	//keyword check subsisdy source code
 	@Keyword
 	public checkSubsidySourceCode(Sql instanceLOS, String name){
 		String Code
@@ -220,6 +229,7 @@ public class verifySubsidy {
 		return Code
 	}
 
+	//keyword check subsisdy from value name
 	@Keyword
 	public checkFromValueName(Sql instanceFOU, String code){
 		String name

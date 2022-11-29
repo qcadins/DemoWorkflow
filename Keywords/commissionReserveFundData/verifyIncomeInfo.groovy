@@ -22,6 +22,8 @@ import internal.GlobalVariable
 import java.util.regex.Pattern
 import java.util.regex.Matcher
 public class verifyIncomeInfo {
+	
+	//keyword verify income info amount rule based
 	@Keyword
 	public verifyIncomeInfoAmtRuleBased(Sql instanceLOS, String appNo){
 		String lobCode
@@ -65,6 +67,7 @@ public class verifyIncomeInfo {
 		return result
 	}
 
+	//keyword check admin fee value
 	@Keyword
 	public checkAdminFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
@@ -74,6 +77,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword check provision fee value
 	@Keyword
 	public checkProvisionFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
@@ -83,6 +87,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword check diff rate amt value
 	@Keyword
 	public checkDiffRateAmtValue(Sql instanceLOS, String appNo){
 		BigDecimal value
@@ -92,6 +97,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword check other fee value
 	@Keyword
 	public checkOtherFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
@@ -101,6 +107,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword check ins value
 	@Keyword
 	public checkInsValue(Sql instanceLOS, String appNo){
 		BigDecimal value
@@ -113,6 +120,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword check life ins value
 	@Keyword
 	public checkLifeInsValue(Sql instanceLOS, String appNo){
 		BigDecimal value

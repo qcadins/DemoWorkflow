@@ -23,6 +23,7 @@ import internal.GlobalVariable
 
 public class checkOfficer {
 
+	//keyword count officer lookup
 	@Keyword
 	public countOfficerLookup(Sql instance, String officeLoc){
 		Integer countData
@@ -32,6 +33,7 @@ public class checkOfficer {
 		return countData
 	}
 
+	//keyword check SPV
 	@Keyword
 	public checkSPV(Sql instance, String username){
 		String spvname
@@ -41,6 +43,7 @@ public class checkOfficer {
 		return spvname
 	}
 
+	//keyword check officer name
 	@Keyword
 	public checkOfficerName(Sql instance, String username){
 		String officerName

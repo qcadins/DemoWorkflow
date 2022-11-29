@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkSupplier {
 
+	//keyword check admin head
 	@Keyword
 	public checkAdminHead(Sql instance, String suppName){
 		ArrayList<String> adminHead = new ArrayList<String>()
@@ -31,6 +32,7 @@ public class checkSupplier {
 		return adminHead
 	}
 
+	//keyword check sales person
 	@Keyword
 	public checkSalesPerson(Sql instance, String suppName){
 		ArrayList<String> salesPerson = new ArrayList<String>()
@@ -40,6 +42,7 @@ public class checkSupplier {
 		return salesPerson
 	}
 
+	//keyword check supplier scheme
 	@Keyword
 	public checkSupplierScheme(Sql instance, String poname){
 		String suppschm
@@ -49,6 +52,7 @@ public class checkSupplier {
 		return suppschm
 	}
 
+	//keyword count supplier data
 	@Keyword
 	public countSupplierData(Sql instance, String suppschm, String officeName){
 		Integer countData

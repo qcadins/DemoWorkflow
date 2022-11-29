@@ -28,6 +28,7 @@ public class getInfoForEditNAP {
 	int colmcount
 	int i
 
+	//keyword customer data personal
 	@Keyword
 	public customerDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -46,6 +47,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword family data personal
 	@Keyword
 	public familyDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -64,6 +66,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword guarantor data personal
 	@Keyword
 	public guarantorDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -82,6 +85,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword guarantor data company
 	@Keyword
 	public guarantorDataCompany (Sql instance, String appno){
 		String customerdata
@@ -100,6 +104,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword customer data company
 	@Keyword
 	public customerDataCompany (Sql instance, String appno){
 		String customerdata
@@ -118,6 +123,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword shareholder data personal
 	@Keyword
 	public shareholderDataPersonal (Sql instance, String appno){
 		String customerdata
@@ -136,6 +142,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
+	//keyword shareholder data company
 	@Keyword
 	public shareholderDataCompany (Sql instance, String appno){
 		String customerdata
@@ -155,6 +162,7 @@ public class getInfoForEditNAP {
 	}
 
 
+	//keyword get family data for edit NAP
 	@Keyword
 	public getFamilyDataforEditNAP(Sql instance, String appno){
 		ArrayList<String> arrayFamilyData = new ArrayList<String>()
@@ -174,6 +182,7 @@ public class getInfoForEditNAP {
 		return arrayFamilyData
 	}
 
+	//keyword get shareholder data for edit NAP
 	@Keyword
 	public getMSDataforEditNAP (Sql instance, String appno){
 		String customerdata
@@ -192,7 +201,7 @@ public class getInfoForEditNAP {
 		return listcustdata
 	}
 
-
+	//keyword get guarantor data for edit NAP
 	@Keyword
 	public getGuarantorDataforEditNAP(Sql instance, String appno){
 		ArrayList<String> arrayGuarantorData = new ArrayList<String>()
@@ -212,7 +221,7 @@ public class getInfoForEditNAP {
 		return arrayGuarantorData
 	}
 
-
+	//keyword verify match copy app yes NAP2 Personal
 	@Keyword
 	public verifyMatchCopyAppYesNAP2Personal(Sql instance, String copyAppNo, String appNo){
 		Boolean isMatch = true
@@ -318,6 +327,7 @@ public class getInfoForEditNAP {
 		return isMatch
 	}
 
+	//keyword verify match copy app yes NAP2 Company
 	@Keyword
 	public verifyMatchCopyAppYesNAP2Company(Sql instance, String copyAppNo, String appNo){
 
@@ -416,6 +426,3 @@ public class getInfoForEditNAP {
 		return isMatch
 	}
 }
-
-
-

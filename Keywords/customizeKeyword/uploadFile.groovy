@@ -28,6 +28,8 @@ import java.awt.datatransfer.StringSelection
 import java.awt.event.KeyEvent
 
 public class uploadFile {
+
+	//keyword upload file function
 	@Keyword
 	def uploadFunction (TestObject to, String filePath) {
 		WebUI.click(to)

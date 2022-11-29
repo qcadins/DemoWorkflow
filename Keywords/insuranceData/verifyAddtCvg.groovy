@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class verifyAddtCvg {
 
+	//keyword verify add premi rate
 	@Keyword
 	public verifyAddtPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt, String mainCvgType, String yearNo){
 		HashMap<String,ArrayList> result = new HashMap<>()
@@ -176,6 +177,7 @@ public class verifyAddtCvg {
 		return result
 	}
 
+	//keyword check add cvg code
 	@Keyword
 	public checkAddtCvgCode(Sql instanceLOS, String addtName){
 		String refcode

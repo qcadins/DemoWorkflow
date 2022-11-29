@@ -39,7 +39,7 @@ public class checkStep {
 		})
 		return custCheckStep
 	}
-	
+
 	@Keyword
 	public checkLastStep(Sql instanceLOS, String appno){
 		String applaststep = ""

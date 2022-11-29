@@ -45,6 +45,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword verify sort descending
 	@Keyword
 	public verifySortDescending(ArrayList<String> listString){
 		String prev = ""
@@ -64,6 +65,7 @@ public class verifyPaging {
 		return true;
 	}
 
+	//keyword verify paging function
 	@Keyword
 	public verifyPagingFunction(ArrayList<String> dataPageOne, ArrayList<String> dataPageTwo){
 		ArrayList<String> commonData = new ArrayList<>()
@@ -88,6 +90,7 @@ public class verifyPaging {
 		}
 	}
 
+	//keyword reset paging
 	@Keyword
 	public resetPaging(){
 		ArrayList<Boolean> arrayMatch = new ArrayList<>()
@@ -106,6 +109,7 @@ public class verifyPaging {
 		return arrayMatch
 	}
 
+	//keyword reset paging inquiry
 	@Keyword
 	public resetPagingAppInquiry(){
 		ArrayList<Boolean> arrayMatch = new ArrayList<>()
@@ -139,6 +143,7 @@ public class verifyPaging {
 		return arrayMatch
 	}
 
+	//keyword reset paging CDC
 	@Keyword
 	public resetPagingCustDataCompletion(){
 
@@ -155,6 +160,7 @@ public class verifyPaging {
 		return arrayMatch
 	}
 
+	//keyword add ApNo for Paging NAP1
 	@Keyword
 	public addAppNoForPagingNAP1(ArrayList<String> listString){
 
@@ -174,6 +180,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging NAP2
 	@Keyword
 	public addAppNoForPagingNAP2(ArrayList<String> listString){
 
@@ -193,6 +200,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging ComResFund
 	@Keyword
 	public addAppNoForPagingComResFund(ArrayList<String> listString){
 
@@ -212,6 +220,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging Dupcheck
 	@Keyword
 	public addAppNoForPagingDupcheck(ArrayList<String> listString){
 
@@ -231,6 +240,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging NAP4
 	@Keyword
 	public addAppNoForPagingNAP4(ArrayList<String> listString){
 
@@ -250,6 +260,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging Appview
 	@Keyword
 	public addAppNoForPagingAppView(ArrayList<String> listString){
 
@@ -269,6 +280,7 @@ public class verifyPaging {
 
 	}
 
+	//keyword count data in page NAP1
 	@Keyword
 	public NAP1CountDataInPage(){
 		'Inisialisasi driver'
@@ -296,6 +308,7 @@ public class verifyPaging {
 		return isCount
 	}
 
+	//keyword count data in page NAP2
 	@Keyword
 	public NAP2CountDataInPage(){
 		'Inisialisasi driver'
@@ -323,6 +336,7 @@ public class verifyPaging {
 		return isCount
 	}
 
+	//keyword count data in page ComResFund
 	@Keyword
 	public ComResFundCountDataInPage(){
 		'Inisialisasi driver'
@@ -350,6 +364,7 @@ public class verifyPaging {
 		return isCount
 	}
 
+	//keyword count data in page Dupcheck
 	@Keyword
 	public DupcheckCountDataInPage(){
 		'Inisialisasi driver'
@@ -377,6 +392,7 @@ public class verifyPaging {
 		return isCount
 	}
 
+	//keyword count data in page NAP4
 	@Keyword
 	public NAP4CountDataInPage(){
 		'Inisialisasi driver'
@@ -404,6 +420,7 @@ public class verifyPaging {
 		return isCount
 	}
 
+	//keyword count data in page App Inquiry
 	@Keyword
 	public AppInquiryCountDataInPage(){
 		'Inisialisasi driver'
@@ -430,7 +447,4 @@ public class verifyPaging {
 
 		return isCount
 	}
-
-
-
 }

@@ -563,6 +563,7 @@ public class CustomerDataVerif {
 	}
 
 
+	//get NAP2 insurance Main CVG Store DB
 	@Keyword
 	public NAP2InsuranceMainCVGtoreDB (Sql instance, String appno){
 		String insurancedata
@@ -581,6 +582,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get NAP2 insurance Add CVG Store DB
 	@Keyword
 	public NAP2InsuranceAddCVGtoreDB (Sql instance, String appno){
 		String insurancedata
@@ -600,7 +602,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
-
+	//get NAP2 insurance Main Premi Rate Store DB
 	@Keyword
 	public NAP2InsuranceMainPremiRateStoreDB (Sql instance, String appno){
 		String insurancedata
@@ -619,6 +621,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get NAP2 insurance Multi Main CVG Store DB
 	@Keyword
 	public NAP2InsuranceMultiMainCVGtoreDB (Sql instance, String appno){
 		String insurancedata
@@ -637,6 +640,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get NAP2 insurance Partial capitalized Store DB
 	@Keyword
 	public NAP2InsurancePartialCaptilizeStoreDB (Sql instance, String appno){
 		String insurancedata
@@ -655,6 +659,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get NAP2 insurance multi add cvg Store DB
 	@Keyword
 	public NAP2InsuranceMultiAddCVGtoreDB (Sql instance, String appno){
 		String insurancedata
@@ -674,6 +679,7 @@ public class CustomerDataVerif {
 		return insurancelist
 	}
 
+	//get NAP2 insurance CVG Store DB
 	@Keyword
 	public NAP2InsuranceCVGStoreDB (Sql instance, String appno){
 		String insurancedata
@@ -692,7 +698,7 @@ public class CustomerDataVerif {
 		return listCVG
 	}
 
-
+	//get NAP2 life insurance Store DB
 	@Keyword
 	public NAP2LifeInsuranceStoreDB (Sql instance, String appno){
 		String lifeinsurancedata
@@ -711,6 +717,7 @@ public class CustomerDataVerif {
 		return listlifeinsurance
 	}
 
+	//get NAP2 financial Store DB
 	@Keyword
 	public NAP2FinancialStoreDB (Sql instance, String appno){
 		String financialdata
@@ -729,6 +736,7 @@ public class CustomerDataVerif {
 		return listfinancialdata
 	}
 
+	//get NAP2 financial fee Store DB
 	@Keyword
 	public NAP2FinancialFeeStoreDB (Sql instance, String appno){
 		String financialfeedata
@@ -747,7 +755,7 @@ public class CustomerDataVerif {
 		return listfinancialfeedata
 	}
 
-
+	//get NAP2 subsidy Store DB
 	@Keyword
 	public NAP2SubsidyStoreDB (Sql instance, String appno){
 		String subsidy
@@ -766,6 +774,7 @@ public class CustomerDataVerif {
 		return listsubsidy
 	}
 
+	//get NAP2 Term condition Store DB
 	@Keyword
 	public NAP2TermConditionStoreDB (Sql instance, String appno){
 		String termandcondition
@@ -784,7 +793,7 @@ public class CustomerDataVerif {
 		return listTC
 	}
 
-
+	//get NAP3 commission data Store DB
 	@Keyword
 	public NAP3CommissionDataStoreDB(Sql instance, String appno, String allocationType){
 		HashMap<String, ArrayList> result = new HashMap<>()
@@ -854,7 +863,7 @@ public class CustomerDataVerif {
 		return result
 	}
 
-
+	//get NAP3 count commission recipient data Store DB
 	@Keyword
 	public countCommissionRecipientDB(Sql instance, String appno){
 		ArrayList<Integer> listcount = new ArrayList<>()
@@ -864,6 +873,7 @@ public class CustomerDataVerif {
 		return listcount
 	}
 
+	//get NAP3 count commission source supplier data Store DB
 	@Keyword
 	public countCommissionSourceSupplierDB(Sql instance, String appno){
 		Integer countCS
@@ -873,6 +883,7 @@ public class CustomerDataVerif {
 		return countCS
 	}
 
+	//get NAP3 count commission source supplier emp data Store DB
 	@Keyword
 	public countCommissionSourceSupplierEmpDB(Sql instance, String appno){
 		ArrayList<Integer> countCS = new ArrayList<>()
@@ -883,6 +894,7 @@ public class CustomerDataVerif {
 		return countCS
 	}
 
+	//get NAP3 count commission source referantor data Store DB
 	@Keyword
 	public countCommissionSourceReferantorDB(Sql instance, String appno){
 		ArrayList<Integer> countCS = new ArrayList<>()
@@ -892,7 +904,7 @@ public class CustomerDataVerif {
 		return countCS
 	}
 
-
+	//get NAP3 reserved fund data Store DB
 	@Keyword
 	public NAP3ReservedFundDataStoreDB(Sql instance, String appno){
 		ArrayList<String> rsvAmt = new ArrayList<>()
@@ -902,7 +914,7 @@ public class CustomerDataVerif {
 		return rsvAmt
 	}
 
-
+	//get NAP4 customer detail personal Store DB
 	@Keyword
 	public NAP4CustomerDetailPersonalStoreData (Sql instance, String appno, String name){
 		String customerdetail
@@ -921,7 +933,7 @@ public class CustomerDataVerif {
 		return listcust
 	}
 
-
+	//get NAP4 address information personal Store DB
 	@Keyword
 	public NAP4AddressStoreData (Sql instance, String appno, String name, String addresstype){
 		String address
@@ -940,6 +952,7 @@ public class CustomerDataVerif {
 		return listaddr
 	}
 
+	//get NAP4 jobdata employee personal Store DB
 	@Keyword
 	public NAP4JobdataEmployeePersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -958,6 +971,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata professional personal Store DB
 	@Keyword
 	public NAP4JobdataProfPersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -976,6 +990,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata non-professional personal Store DB
 	@Keyword
 	public NAP4JobdataNonProfPersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -994,6 +1009,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata Small medium enterprise personal Store DB
 	@Keyword
 	public NAP4JobdataSMEPersonalStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -1012,6 +1028,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata address personal Store DB
 	@Keyword
 	public NAP4JobdataAddressStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -1030,6 +1047,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata prev job address personal Store DB
 	@Keyword
 	public NAP4PrevJobAddressStoreData (Sql instance, String appno, String name){
 		String Jobdata
@@ -1048,6 +1066,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 jobdata other biz address personal Store DB
 	@Keyword
 	public NAP4OtherBizAddressStoredata (Sql instance, String appno, String name){
 		String Jobdata
@@ -1066,6 +1085,7 @@ public class CustomerDataVerif {
 		return listjob
 	}
 
+	//get NAP4 emergency contacy personal Store DB
 	@Keyword
 	public NAP4EmergencyContactStoreData (Sql instance, String appno, String name){
 		String emergencycontact
@@ -1086,6 +1106,7 @@ public class CustomerDataVerif {
 
 	}
 
+	//get NAP4 emergency contact personal Store DB lookup
 	@Keyword
 	public NAP4EmergencyContactStoreDataLookUp (Sql instance, String appno, String name){
 		String emergencycontact
@@ -1101,6 +1122,7 @@ public class CustomerDataVerif {
 		return listemergencycontact
 	}
 
+	//get NAP4 emergency contacy personal lookup data verif
 	@Keyword
 	public NAP4EmergencyContactDataVerif (Sql instance, String name, String idno){
 		String emergencycontact
@@ -1116,6 +1138,7 @@ public class CustomerDataVerif {
 		return listemergencycontact
 	}
 
+	//get NAP4 financial data personal Store DB
 	@Keyword
 	public NAP4FinancialDataPersonalStoreData (Sql instance, String appno, String name, String date){
 		String financialdata
@@ -1135,6 +1158,7 @@ public class CustomerDataVerif {
 		return listfinancialdata
 	}
 
+	//get NAP4 financial attr personal Store DB
 	@Keyword
 	public NAP4FinancialAttrStoreData (Sql instance, String appno, String name){
 		String financialattr
@@ -1153,6 +1177,7 @@ public class CustomerDataVerif {
 		return listfinancialattr
 	}
 
+	//get NAP4 bank acc personal Store DB
 	@Keyword
 	public NAP4FinDataBankAccStoreData (Sql instance, String appno, String name, String bankno){
 		String bankacc
@@ -1173,6 +1198,7 @@ public class CustomerDataVerif {
 		return listbankacc
 	}
 
+	//get NAP4 check bank statement Store DB
 	@Keyword
 	public NAP4FinancialCheckBankStatStoreData (Sql instance, String appno, String name, String accno){
 		String bankstat
@@ -1184,6 +1210,7 @@ public class CustomerDataVerif {
 		return bankstat
 	}
 
+	//get NAP4 bank statement information personal Store DB
 	@Keyword
 	public NAP4BankStatDataStoreData (Sql instance, String appno, String name, String accno){
 		String bankstatdata
@@ -1204,6 +1231,7 @@ public class CustomerDataVerif {
 		return listbankstatdata
 	}
 
+	//get NAP4 customer asset data personal Store DB
 	@Keyword
 	public NAP4CustomerAssetDataStoreData (Sql instance, String appno, String name){
 		String customerasset
@@ -1221,6 +1249,7 @@ public class CustomerDataVerif {
 		return listcustomerasset
 	}
 
+	//get NAP4 other attr info Store DB
 	@Keyword
 	public NAP4OtherAttrInfoStoreData (Sql instance, String appno, String name){
 		String Otherattrinfo
@@ -1238,6 +1267,7 @@ public class CustomerDataVerif {
 		return listotherinfo
 	}
 
+	//get NAP4 other attr Store DB
 	@Keyword
 	public NAP4OtherAttrStoreData (Sql instance, String appno, String name){
 		String OtherAttr
@@ -1256,6 +1286,7 @@ public class CustomerDataVerif {
 		return listOtherAttr
 	}
 
+	//get NAP4 customer detail company Store DB
 	@Keyword
 	public NAP4CustomerDetailCompanyStoreData (Sql instance, String appno, String name){
 		String customerdetail
@@ -1274,6 +1305,7 @@ public class CustomerDataVerif {
 		return listcust
 	}
 
+	//get NAP4 contact information company Store DB
 	@Keyword
 	public NAP4ContactInformationStoreData (Sql instance, String appno, String name){
 		String contactinfo
@@ -1292,6 +1324,7 @@ public class CustomerDataVerif {
 		return listcontact
 	}
 
+	//get NAP4 financial data company Store DB
 	@Keyword
 	public NAP4FinancialDataCompanyStoreData (Sql instance, String appno, String name, String date){
 		String financialdata
@@ -1310,6 +1343,7 @@ public class CustomerDataVerif {
 		return listfindata
 	}
 
+	//get NAP4 financial attr company Store DB
 	@Keyword
 	public NAP4FinancialAttrCompanyStoreData (Sql instance, String appno, String name){
 		String financialattr
@@ -1328,6 +1362,7 @@ public class CustomerDataVerif {
 		return listfinancialattr
 	}
 
+	//get NAP4 bank acc company Store DB
 	@Keyword
 	public NAP4FinDataBankAccCompanyStoreData (Sql instance, String appno, String name, String bankno){
 		String bankacc
@@ -1348,6 +1383,7 @@ public class CustomerDataVerif {
 		return listbankacc
 	}
 
+	//get NAP4 bank statement company store db
 	@Keyword
 	public NAP4FinancialCheckBankStatCompanyStoreData (Sql instance, String appno, String name, String accno){
 		String bankstat
@@ -1359,6 +1395,7 @@ public class CustomerDataVerif {
 		return bankstat
 	}
 
+	//get NAP4 bank statement info Store DB
 	@Keyword
 	public NAP4BankStatDataCompanyStoreData (Sql instance, String appno, String name, String accno){
 		String bankstatdata
@@ -1379,6 +1416,7 @@ public class CustomerDataVerif {
 		return listbankstatdata
 	}
 
+	//get NAP4 legal doc company Store DB
 	@Keyword
 	public NAP4LegalDocStoreData (Sql instance, String appno, String name){
 		String legaldoc
@@ -1397,7 +1435,7 @@ public class CustomerDataVerif {
 		return listlegaldocdata
 	}
 
-
+	//keyword check total insurance
 	@Keyword
 	public checkTotalInsurance(Sql instance, String appno){
 		String insurancedata

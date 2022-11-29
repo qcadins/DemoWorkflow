@@ -22,7 +22,7 @@ import internal.GlobalVariable
 
 public class verifyAssetRegion {
 
-
+	//keyword asset region
 	@Keyword
 	public checkAssetRegionBasedOnRule(Sql instanceLOS, String appNo){
 

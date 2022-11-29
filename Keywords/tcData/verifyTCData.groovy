@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class verifyTCData {
 
+	//keyword verify TC List
 	@Keyword
 	public verifyTCList(Sql instanceLOS, Sql instanceFOU, String MrCustModelName, String appNo){
 		HashMap<String, ArrayList> result = new HashMap<>()

@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class taxCalculation {
 
+	//keyword check tax rate company
 	@Keyword
 	public checkTaxRateCompany(Sql instance){
 		ArrayList<String> taxRate = new ArrayList<Double>()
@@ -33,6 +34,7 @@ public class taxCalculation {
 		return taxRate
 	}
 
+	//keyword check tax payer info
 	@Keyword
 	public checkTaxpayerInfo(Sql instance, String name){
 		ArrayList<String> taxpayerInfo = new ArrayList<String>()
@@ -44,6 +46,7 @@ public class taxCalculation {
 		return taxpayerInfo
 	}
 
+	//keyword calculate nett tax company
 	@Keyword
 	public calculateNettTaxCompany(Double taxablepercent, BigDecimal comAmt, Double amt_to, Double npwpRate, Double vatRate, Boolean isVat){
 		ArrayList<Double> taxAmount = new ArrayList<Double>()
@@ -69,6 +72,8 @@ public class taxCalculation {
 		return taxAmount
 	}
 
+	//keyword calculate gross tax company
+	@Keyword
 	public calculateGrossTaxCompany(Double taxablepercent, BigDecimal comAmt, Double amt_to, Double npwpRate, Double vatRate, Double penaltyRate, Boolean isVat, Boolean npwpExist){
 		ArrayList<Double> taxAmount = new ArrayList<Double>()
 		Double trxAmt, dppAmt, whtAmount, vatAmount

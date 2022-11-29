@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class verifyFee {
 
+	//keyword verify financial fee
 	@Keyword
 	public verifyFinancialFee(Sql instanceLOS, String appNo){
 		HashMap<String,ArrayList> result = new HashMap<>()
@@ -108,6 +109,7 @@ public class verifyFee {
 
 	}
 
+	//keyword check fee code
 	@Keyword
 	public checkFeeCode(Sql instanceLOS, String feeName){
 		String feeCode
