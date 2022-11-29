@@ -687,13 +687,6 @@ ArrayList<String> result = new ArrayList<String>()
 'call checkAppViewDataDB keyword'
 result = CustomKeywords.'appView.verifyAppView.checkAppViewData'(sqlconnectionLOS, appno)
 
-'ganti value null > "" (String kosong)'
-for (i = 0; i < result.size(); i++) {
-    if ((result[i]) == null) {
-        (result[i]) = '-'
-    }
-}
-
 'declare index = 0'
 int index = 0
 

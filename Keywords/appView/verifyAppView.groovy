@@ -30,12 +30,12 @@ public class verifyAppView {
 	int colmcount
 	int i
 
-	//keyword check app view data
+	//keyword check main info app view
 	@Keyword
 	public checkAppViewData (Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT APP_NO, ORI_OFFICE_NAME, CUST_NO, CUST_NAME, PROD_OFFERING_NAME, TENOR, FULL_ASSET_NAME, rml.REF_MASTER_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_ASSET aa WITH(NOLOCK) ON aa.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_CUST_MODEL_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1' AND rml.IS_ACTIVE = '1'"), {  row ->
+		instance.eachRow(("SELECT ISNULL(APP_NO,'-') AS APP_NO, ISNULL(ORI_OFFICE_NAME,'-') AS ORI_OFFICE_NAME, ISNULL(CUST_NO,'-') AS CUST_NO, ISNULL(CUST_NAME,'-') AS CUST_NAME, ISNULL(PROD_OFFERING_NAME,'-') AS PROD_OFFERING_NAME, ISNULL(TENOR,'-') AS TENOR, ISNULL(FULL_ASSET_NAME,'-') AS FULL_ASSET_NAME, ISNULL(rml.REF_MASTER_NAME,'-') AS rml.REF_MASTER_NAME FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_ASSET aa WITH(NOLOCK) ON aa.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = MR_CUST_MODEL_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1' AND rml.IS_ACTIVE = '1'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -74,7 +74,7 @@ public class verifyAppView {
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
 		instance.eachRow(("SELECT CUST_NAME, [SALUTATION], ISNULL([Custprefix],'-') AS [Cust_prefix], ISNULL([Custsuffix],'-') AS [Cust_suffix], MR_GENDER_CODE, [ID_TYPE] + ' / ' + ID_NO, MOTHER_MAIDEN_NAME, ISNULL(FORMAT(ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXPIRED_DATE], MR_MARITAL_STAT_CODE, BIRTH_PLACE + ' / ' + FORMAT(BIRTH_DT, 'dd-MMM-yyyy'), [NATIONALITY], ISNULL(TAX_ID_NO,'-') AS [TAX_ID_NO], [Countryname], MOBILE_PHN_NO_1, [EDUCATION], EMAIL_1, [RELIGION], CASE WHEN CAST([IS_VIP] as nvarchar(25)) = '0' THEN 'NO' WHEN CAST([IS_VIP] as nvarchar(25)) = '1' THEN 'NO' ELSE CAST([IS_VIP] as nvarchar(25)) END  FROM (SELECT [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE, ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, mastername.Code, REF_MASTER_NAME FROM (select [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE , ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, [Code], value FROM (SELECT MR_EDUCATION_CODE AS 'EDUCATION', MR_NATIONALITY_CODE as 'NATIONALITY', MR_RELIGION_CODE as 'RELIGION', MR_SALUTATION_CODE as 'SALUTATION', acp.CUST_PREFIX_NAME as [Custprefix], ac.IS_VIP  as [IS_VIP], acp.CUST_SUFFIX_NAME as [Custsuffix], rc.COUNTRY_NAME as [Countryname], CUST_NAME, MR_GENDER_CODE, MR_ID_TYPE_CODE as 'ID_TYPE', ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1  FROM APP_CUST_PERSONAL acp WITH(NOLOCK) join app_cust ac WITH(NOLOCK) ON ac.app_cust_id = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN V_REF_COUNTRY rc WITH(NOLOCK) ON rc.COUNTRY_CODE = acp.NATIONALITY_COUNTRY_CODE WHERE ac.IS_CUSTOMER = '1' and app_no ='"+ appno +"') as Orig unpivot (value for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION])) as piv"), {  row ->
-			
+
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
 
@@ -235,7 +235,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
-	
+
 	//keyword check app view bank acc
 	@Keyword
 	public checkBankAcc (Sql instance, String appno){
@@ -362,7 +362,7 @@ public class verifyAppView {
 		return listappdata
 	}
 
-	//keyword check app view tab guarator 
+	//keyword check app view tab guarator
 	@Keyword
 	public checkGuarantor (Sql instance, String appno){
 		String appdata

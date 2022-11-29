@@ -19,33 +19,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+'connect DB los'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'click tab Insurance'
 WebUI.click(findTestObject('Object Repository/AppView/Insurance/InsuranceTab'))
@@ -53,16 +33,17 @@ WebUI.click(findTestObject('Object Repository/AppView/Insurance/InsuranceTab'))
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	'write to excel status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'7. Insurance')
 }
 
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get insured by from db'
 String resultInsuredBy = CustomKeywords.'appView.verifyAppView.checkInsuredBy'(sqlconnection, appno)
 
-println(resultInsuredBy)
-
+'Pengecekan insured by'
 if(resultInsuredBy.equalsIgnoreCase('Customer')){
 	'get arraylist Insurance Customer from db'
 	ArrayList<String> resultInsuranceCustomer = CustomKeywords.'appView.verifyAppView.checkInsuranceCustomer'(sqlconnection, appno)
@@ -221,6 +202,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 		(resultInsuredBy).toUpperCase(), false))
 }
 
+'Pengecekan insured by'
 if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredBy.equalsIgnoreCase('Multifinance')){
 	
 	'get arraylist Insurance cvg from db'
@@ -231,6 +213,7 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 	
 	index = 0
 	
+	'looping insurance cvg table'
 	for(cvgindex = 1; cvgindex <= variableData.size(); cvgindex++){
 		'modify object Main cvg'
 		modifyNewMainCvg = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals',
@@ -267,14 +250,14 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 		'verify Main cvg'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainCvg).toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
 		
+		'get additional coverage from confins'
 		ArrayList<String> addtionalcvg = WebUI.getText(modifyNewAddCvg).split(', ')
-		
 		
 		'get arraylist Insurance add cvg from db'
 		ArrayList<String> resultAddtionalCoverage = CustomKeywords.'appView.verifyAppView.checkAdditionalCoverage'(sqlconnection, appno, cvgindex)
 		
+		'verif additional coverage confins x db'
 		checkVerifyEqualOrMatch(addtionalcvg.containsAll(resultAddtionalCoverage))
-		
 		
 		'verify Main premi to cust'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMainPremitoCust).replace(',','').toUpperCase(), (resultInsuranceCoverage[index++]).toUpperCase(), false))
@@ -346,21 +329,22 @@ if(resultInsuredBy.equalsIgnoreCase('Customer - Multifinance') || resultInsuredB
 	
 }
 
-
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. Insurance', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-

@@ -19,33 +19,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+'connect DB los'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'click tab Asset'
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
@@ -53,8 +33,11 @@ WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	'write to excel status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'6. Asset')
 }
+
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get arraylist asset supplier info'
@@ -120,6 +103,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LicensePlate')).toUpperCase(), 
         (resultAssetInfo[index++]).toUpperCase(), false))
 
+'Pengecekan pada confins ada atau tidaknya letterno'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/LetterNo'), 5, FailureHandling.OPTIONAL)) {
     'verify Letter No'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LetterNo')).toUpperCase(), 
@@ -149,6 +133,7 @@ ArrayList<String> resultAssetAttrList = CustomKeywords.'appView.verifyAppView.ch
 
 index = 0
 
+'Pengecekan pada confins ada atau tidaknya asset region'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), 5, FailureHandling.OPTIONAL)) {
     'verify Asset Region'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), 
@@ -157,6 +142,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
     index++
 }
 
+'Pengecekan pada confins ada atau tidaknya warna body'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), 5, FailureHandling.OPTIONAL)) {
     'verify Warna Body'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), 
@@ -165,6 +151,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/W
     index++
 }
 
+'Pengecekan pada confins ada atau tidaknya color'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), 5, FailureHandling.OPTIONAL)) {
     'verify Color'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), 
@@ -173,6 +160,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
     index++
 }
 
+'Pengecekan pada confins ada atau tidaknya oli exp date'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), 5, FailureHandling.OPTIONAL)) {
     'verify Oli Exp Date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), 
@@ -181,6 +169,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
     index++
 }
 
+'Pengecekan pada confins ada atau tidaknya setoran per hari'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), 5, FailureHandling.OPTIONAL)) {
     'verify Setoran per hari'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), 
@@ -189,6 +178,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/S
     index++
 }
 
+'Pengecekan pada confins ada atau tidaknya road worthiness'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), 5, FailureHandling.OPTIONAL)) {
     'verify Road Worthiness'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), 
@@ -206,6 +196,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#assetA
 
 index = 0
 
+'Looping accessories pada confins'
 for (AccIndex = 1; AccIndex <= variableData.size(); AccIndex++) {
     'modify object SupplierName'
     modifyNewSupplierName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -277,6 +268,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#owner 
 
 index = 0
 
+'Looping asset owner data confins'
 for (AssetOwnerindex = 1; AssetOwnerindex <= variableData.size(); AssetOwnerindex++) {
     'modify object asset owner left'
     modifyNewAssetOwnerLeft = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -300,6 +292,7 @@ ArrayList<String> resultAssetLocation = CustomKeywords.'appView.verifyAppView.ch
 
 index = 0
 
+'looping asset location pada confins'
 for (Locindex = 1; Locindex < resultAssetLocation.size(); Locindex++) {
     'modify object asset location'
     modifyNewAssetLocation = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -319,6 +312,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#Additi
 
 index = 0
 
+'looping asset collateral pada confins'
 for (collateralindex = 1; collateralindex <= variableData.size(); collateralindex++) {
     'modify object collateral no'
     modifyNewCollateralNo = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -386,15 +380,18 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6. Asset', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel failed reason verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6. Asset', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

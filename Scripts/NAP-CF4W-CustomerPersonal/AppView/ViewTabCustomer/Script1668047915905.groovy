@@ -19,44 +19,25 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
+'connect DB los'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
-
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get cust main data arraylist from db'
 ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnection, 
     appno)
 
+'declare index'
 int index = 0
 
-println(resultCustomerMainData)
-
+'looping customer data'
 for (custIndex = 1; custIndex <= resultCustomerMainData.size(); custIndex++) {
     if (custIndex == resultCustomerMainData.size()) {
         custIndex++
@@ -79,6 +60,7 @@ ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cs
 
 index = 0
 
+'looping cust address'
 for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
     'modify object address type'
     modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -129,6 +111,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#Family
 
 index = 0
 
+'looping family data'
 for (Famindex = 1; Famindex <= variableData.size(); Famindex++) {
     'modify object fam Name'
     modifyNewFamName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -166,6 +149,7 @@ for (Famindex = 1; Famindex <= variableData.size(); Famindex++) {
 'get arraylist emergency contact from db'
 ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnection, appno)
 
+'looping emergency contact'
 for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
     'modify object emergency contact '
     modifyNewEmergencycontact = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -183,6 +167,7 @@ ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFin
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
+'looping financial data'
 for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
     'modify object financial data date'
     modifyNewfinancialDataDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -197,6 +182,7 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnection, 
     appno)
 
+'looping fin data attr'
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
     'modify object financial data attr'
     modifyNewfinancialDataAttr = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -212,6 +198,7 @@ ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBan
 
 index = 0
 
+'looping bank acc'
 for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
     'modify object bank name - bank acc no - acc name'
     modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -241,6 +228,7 @@ for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
 'count bank statement table'
 variableDataBank = DriverFactory.getWebDriver().findElements(By.cssSelector('#BankAccount > div lib-ucsubsection'))
 
+'looping bank statement'
 for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
     variableDataBankStatement = DriverFactory.getWebDriver().findElements(By.cssSelector(('#BankAccInfo' + bankIndex) + 
             '> div:nth-child(2) > table > tbody tr'))
@@ -250,6 +238,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
         modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
             'equals', ('//*[@id="BankAccount"]/div/div[' + (bankIndex + 1)) + ']/lib-ucsubsection/div/form/div/h4', true)
 
+		'get bankdetail from confins'
         bankDetail = WebUI.getText(modifyNewBankDetail).split(' - ')
 
         'verify Bank Acc Statement'
@@ -258,6 +247,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
 
         index = 0
 
+		'looping bank acc statement'
         for (bankstatIndex = 1; bankstatIndex <= (resultBankAccStatement.size() / 7); bankstatIndex++) {
             'modify object Month'
             modifyNewMonth = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -323,7 +313,6 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
                     (resultBankAccStatement[index++]).toUpperCase(), false))
         }
         
-        println(resultBankAccStatement)
     }
 }
 
@@ -333,8 +322,10 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     'count customer group table'
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
+	'get cust group from db'
     ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnection, appno)
 
+	'looping cust group'
     for (custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
         'modify object cust group name'
         modifyNewcustGroupName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -349,6 +340,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 'get arraylist other info from db'
 ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnection, appno)
 
+'looping other info'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
     'modify object other info'
     modifyNewothinfoobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -415,15 +407,18 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

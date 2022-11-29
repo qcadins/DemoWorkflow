@@ -20,33 +20,13 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+'connect DB los'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'Klik tab financial'
 WebUI.click(findTestObject('Object Repository/AppView/Financial/Financial Tab'))
@@ -54,9 +34,11 @@ WebUI.click(findTestObject('Object Repository/AppView/Financial/Financial Tab'))
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	'write status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'8. Financial')
 }
 
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get financial data arraylist from db'
@@ -134,7 +116,6 @@ for (dbindex = 0; dbindex < listFee.size(); dbindex++) {
 	'modify object fee capitalize'
 	modifyNewFeeCap = WebUI.modifyObjectProperty(findTestObject('AppView/Financial/ModifyFee'), 'xpath', 'equals', "//*[@id='fee']/div/div["+Feeindex+"]/div/div[4]", true)
 
-	
 	'verify all fee'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewFee).toUpperCase().replace(",",""), (listFee[dbindex]).toUpperCase(),
 			false))
@@ -148,6 +129,7 @@ for (dbindex = 0; dbindex < listFee.size(); dbindex++) {
 	Feeindex++
 }
 
+'declare finindex'
 int Finindex = 0
 
 'verify total asset price'
@@ -272,7 +254,6 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 	'modify object os interest amount'
 	modifyNewOSIntAmt = WebUI.modifyObjectProperty(findTestObject('AppView/Financial/ModifyTable'), 'xpath', 'equals', "//*[@id='mat-tab-content-0-7']/div/view-financial/div/div[8]/table/tbody/tr["+Instindex+"]/td[6]", true)
 
-	
 	'verify seqno'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNo).toUpperCase().replace(",",""), (installmentTable[dbindex]).toUpperCase(),
 			false))
@@ -311,15 +292,18 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
+		'write to excel failed reason verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. Financial', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

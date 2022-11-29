@@ -20,33 +20,13 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+'connect DB LOS'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'Klik tab referantor'
 WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'))
@@ -54,9 +34,11 @@ WebUI.click(findTestObject('Object Repository/AppView/Referantor/Referantor Tab'
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	'write to excel status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'4. Referantor')
 }
 
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get referantor data arraylist from db'
@@ -67,6 +49,7 @@ variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ViewRe
 
 Refindex = 1
 
+'looping referantor db'
 for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
     'modify object ref category'
     modifyNewRefCat = WebUI.modifyObjectProperty(findTestObject('AppView/Referantor/ModifyObj'), 'xpath', 'equals', ('//*[@id=\'ViewReferantor\']/div/table/tbody/tr[' + 
@@ -130,15 +113,18 @@ for (dbindex = 0; dbindex < resultReferantor.size(); dbindex++) {
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4. Referantor', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

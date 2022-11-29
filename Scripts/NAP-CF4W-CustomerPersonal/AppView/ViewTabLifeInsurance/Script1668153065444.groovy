@@ -20,33 +20,13 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement as WebElement
 
-'Assign directori file excel ke global variabel'
-String userDir = System.getProperty('user.dir')
-
-'Assign directori file excel ke global variabel'
-String filePath = userDir + GlobalVariable.PathAppInquiryPersonal
-
-'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = filePath
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)
 
 GlobalVariable.FlagWarning = 0
 
-String servername = findTestData('Login/Login').getValue(1, 9)
-
-String instancename = findTestData('Login/Login').getValue(2, 9)
-
-String username = findTestData('Login/Login').getValue(3, 9)
-
-String password = findTestData('Login/Login').getValue(4, 9)
-
-String database = findTestData('Login/Login').getValue(5, 9)
-
-String driverclassname = findTestData('Login/Login').getValue(6, 9)
-
-String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
-
-'connect DB'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connect'(url, username, password, driverclassname)
+'connect DB LOS'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'Klik tab life insurance'
 WebUI.click(findTestObject('Object Repository/AppView/LifeInsurance/LifeInsurance Tab'))
@@ -54,19 +34,23 @@ WebUI.click(findTestObject('Object Repository/AppView/LifeInsurance/LifeInsuranc
 'Verif tidak ada alert yang muncul'
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
 	GlobalVariable.FlagWarning = 1
+	'write to excel status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'7. LifeInsurance')
 }
 
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get life insurance data arraylist from db'
 ArrayList<String> resultLIData = CustomKeywords.'appView.verifyAppView.checkLifeInsurance'(sqlconnection, appno)
 
-'get life insurance data arraylist from db'
+'get life insurance data object arraylist from db'
 ArrayList<String> resultLIObject = CustomKeywords.'appView.verifyAppView.checkLifeInsuranceObject'(sqlconnection, appno)
 
+'declare index'
 int index = 0
 
+'Pengcekan ada tidaknya lifeinsurancedata from db'
 if(resultLIData.get(0)=="-"){
 	'verify cover life insurance'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/LifeInsurance/CoverLifeInsurance')).toUpperCase(),
@@ -105,9 +89,10 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 'count life insurance object table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mat-tab-content-0-6 > div > app-life-insurance > lib-ucgridview > div > table > tbody > tr'))
 
+'Pengecekan ada tidaknya life insurance data object from db & from confins'
 if(resultLIObject.size()>0 && resultLIObject !=null && variableData.size()>0){
 	LIindex = 1
-	
+	'looping life insurance data object from db'
 	for (dbindex = 0; dbindex < resultLIObject.size(); dbindex++) {
 		'modify object name'
 		modifyNewName = WebUI.modifyObjectProperty(findTestObject('AppView/LifeInsurance/ModifyObj'), 'xpath', 'equals', "//*[@id='mat-tab-content-0-6']/div/app-life-insurance/lib-ucgridview/div/table/tbody/tr["+LIindex+"]/td[2]", true)
@@ -136,25 +121,25 @@ if(resultLIObject.size()>0 && resultLIObject !=null && variableData.size()>0){
 	
 		LIindex++
 	}
-	
-	
 }
 
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
+	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1
 	}
 }
-

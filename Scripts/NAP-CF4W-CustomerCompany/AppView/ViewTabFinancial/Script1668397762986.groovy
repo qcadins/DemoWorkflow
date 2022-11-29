@@ -137,6 +137,7 @@ for (dbindex = 0; dbindex < listFee.size(); dbindex++) {
 	Feeindex++
 }
 
+'declare finindex'
 int Finindex = 0
 
 'verify total asset price'
@@ -261,7 +262,6 @@ for (dbindex = 0; dbindex < installmentTable.size(); dbindex++) {
 	'modify object os interest amount'
 	modifyNewOSIntAmt = WebUI.modifyObjectProperty(findTestObject('AppView/Financial/ModifyTable'), 'xpath', 'equals', "//*[@id='mat-tab-content-0-7']/div/view-financial/div/div[8]/table/tbody/tr["+Instindex+"]/td[6]", true)
 
-	
 	'verify seqno'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNo).toUpperCase().replace(",",""), (installmentTable[dbindex]).toUpperCase(),
 			false))
