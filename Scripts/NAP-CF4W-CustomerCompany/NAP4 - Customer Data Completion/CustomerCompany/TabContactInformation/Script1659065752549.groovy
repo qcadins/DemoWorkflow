@@ -199,4 +199,3 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
-
