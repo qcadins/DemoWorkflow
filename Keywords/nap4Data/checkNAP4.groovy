@@ -23,6 +23,7 @@ import internal.GlobalVariable
 
 public class checkNAP4 {
 
+	//keyword check legal document DDL
 	@Keyword
 	public checkLegaldocument(Sql instance){
 		ArrayList<String> legaldocument = new ArrayList<String>()
@@ -32,6 +33,7 @@ public class checkNAP4 {
 		return legaldocument
 	}
 
+	//keyword check addresstype personal DDL
 	@Keyword
 	public checkAddressTypePersonal(Sql instance){
 		ArrayList<String> AddressType = new ArrayList<String>()
@@ -41,6 +43,7 @@ public class checkNAP4 {
 		return AddressType
 	}
 
+	//keyword check addresstype company DDL
 	@Keyword
 	public checkAddressTypeCompany(Sql instance){
 		ArrayList<String> AddressType = new ArrayList<String>()
@@ -50,7 +53,7 @@ public class checkNAP4 {
 		return AddressType
 	}
 
-
+	//keyword check ownership DDL
 	@Keyword
 	public checkOwnership(Sql instance){
 		ArrayList<String> Ownership = new ArrayList<String>()
@@ -60,6 +63,7 @@ public class checkNAP4 {
 		return Ownership
 	}
 
+	//keyword count debtorgroup total data
 	@Keyword
 	public countDebtorGroup(Sql instance){
 		Integer countData
@@ -69,6 +73,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count debtor business scale total data
 	@Keyword
 	public countDebtorBusinessScale(Sql instance){
 		Integer countData
@@ -78,6 +83,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count counterpart category total data
 	@Keyword
 	public countCounterpartCategory(Sql instance){
 		Integer countData
@@ -87,6 +93,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count sustainable business total data
 	@Keyword
 	public countSustainableBusiness(Sql instance){
 		Integer countData
@@ -96,7 +103,7 @@ public class checkNAP4 {
 		return countData
 	}
 
-
+	//keyword count debtorgroupSLIK total data
 	@Keyword
 	public countDebtorGroupSLIK(Sql instance){
 		Integer countData
@@ -106,6 +113,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count rating institute total data
 	@Keyword
 	public countRatingInstitute(Sql instance){
 		Integer countData
@@ -115,6 +123,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count affiliate with multifinance total data
 	@Keyword
 	public countAffiliateMultifinanceSLIK(Sql instance){
 		Integer countData
@@ -124,6 +133,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count CSPUSL Source AML total data
 	@Keyword
 	public countCSPUSLSourceAML(Sql instance){
 		Integer countData
@@ -133,6 +143,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count payment total data
 	@Keyword
 	public countPaymentType(Sql instance){
 		Integer countData
@@ -142,6 +153,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count business source AML total data
 	@Keyword
 	public countBusinessSourceAML(Sql instance){
 		Integer countData
@@ -151,6 +163,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count department AML total data
 	@Keyword
 	public countDepartmentAML(Sql instance){
 		Integer countData
@@ -160,6 +173,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count authority AML total data
 	@Keyword
 	public countAuthorityAML(Sql instance){
 		Integer countData
@@ -169,6 +183,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count building ownership total data
 	@Keyword
 	public countBuildingOwnership(Sql instance){
 		Integer countData
@@ -178,6 +193,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count attribute list company total data
 	@Keyword
 	public countAttributeListCompany(Sql instance){
 		Integer countData
@@ -187,6 +203,7 @@ public class checkNAP4 {
 		return countData
 	}
 
+	//keyword count attribute list personal total data
 	@Keyword
 	public countAttributeListPersonal(Sql instance){
 		Integer countData

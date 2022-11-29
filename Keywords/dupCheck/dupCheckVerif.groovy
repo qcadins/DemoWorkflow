@@ -23,6 +23,7 @@ import internal.GlobalVariable
 
 public class dupCheckVerif {
 
+	//keyword check dupcheck
 	@Keyword
 	public checkDupcheck (Sql instance, String appNo){
 		String dupcheckcount
@@ -33,6 +34,7 @@ public class dupCheckVerif {
 		return dupcheckcount
 	}
 
+	//keyword check customer type
 	@Keyword
 	public checkCustomerType (Sql instance, String Appno, String CustName){
 		String Custtype
@@ -43,6 +45,7 @@ public class dupCheckVerif {
 		return Custtype
 	}
 
+	//keyword check dupcheck rule personal 1 table cust
 	@Keyword
 	public checkDupcheckRulePersonal1Cust (Sql instance, String idno, String idtype, String Mothername){
 		String Result1
@@ -53,6 +56,7 @@ public class dupCheckVerif {
 		return Result1
 	}
 
+	//keyword check dupcheck rule personal 1 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal1AppCust (Sql instance, String idno, String idtype, String Mothername, String appno){
 		String Result1LOS
@@ -63,6 +67,7 @@ public class dupCheckVerif {
 		return Result1LOS
 	}
 
+	//keyword check dupcheck rule personal 2 table cust
 	@Keyword
 	public checkDupcheckRulePersonal2Cust (Sql instance, String idno, String idtype, String custname){
 		String Result2
@@ -73,6 +78,7 @@ public class dupCheckVerif {
 		return Result2
 	}
 
+	//keyword check dupcheck rule personal 2 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal2AppCust (Sql instance, String idno, String idtype, String custname, String appno){
 		String Result2LOS
@@ -83,6 +89,7 @@ public class dupCheckVerif {
 		return Result2LOS
 	}
 
+	//keyword check dupcheck rule personal 3 table cust
 	@Keyword
 	public checkDupcheckRulePersonal3Cust (Sql instance, String idno, String idtype, String birthdate){
 		String Result3
@@ -93,6 +100,7 @@ public class dupCheckVerif {
 		return Result3
 	}
 
+	//keyword check dupcheck rule personal 3 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal3AppCust (Sql instance, String idno, String idtype, String birthdate, String appno){
 		String Result3LOS
@@ -103,6 +111,7 @@ public class dupCheckVerif {
 		return Result3LOS
 	}
 
+	//keyword check dupcheck rule personal 4 table cust
 	@Keyword
 	public checkDupcheckRulePersonal4Cust (Sql instance, String custname){
 		String Result4
@@ -113,6 +122,7 @@ public class dupCheckVerif {
 		return Result4
 	}
 
+	//keyword check dupcheck rule personal 4 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal4AppCust (Sql instance, String custname, String appno){
 		String Result4LOS
@@ -123,6 +133,7 @@ public class dupCheckVerif {
 		return Result4LOS
 	}
 
+	//keyword check dupcheck rule personal 5 table cust
 	@Keyword
 	public checkDupcheckRulePersonal5Cust (Sql instance, String idno, String idtype, String custname){
 		String Result5
@@ -133,6 +144,7 @@ public class dupCheckVerif {
 		return Result5
 	}
 
+	//keyword check dupcheck rule personal 5 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal5AppCust (Sql instance, String idno, String idtype, String custname, String appno){
 		String Result5LOS
@@ -143,6 +155,7 @@ public class dupCheckVerif {
 		return Result5LOS
 	}
 
+	//keyword check dupcheck rule personal 6 table cust
 	@Keyword
 	public checkDupcheckRulePersonal6Cust (Sql instance, String custname, String mothername){
 		String Result6
@@ -153,6 +166,7 @@ public class dupCheckVerif {
 		return Result6
 	}
 
+	//keyword check dupcheck rule personal 6 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal6AppCust (Sql instance, String custname, String mothername, String appno){
 		String Result6LOS
@@ -163,6 +177,7 @@ public class dupCheckVerif {
 		return Result6LOS
 	}
 
+	//keyword check dupcheck rule personal 7 table cust
 	@Keyword
 	public checkDupcheckRulePersonal7Cust (Sql instance, String custname, String birthdate){
 		String Result7
@@ -173,6 +188,7 @@ public class dupCheckVerif {
 		return Result7
 	}
 
+	//keyword check dupcheck rule personal 7 table appcust
 	@Keyword
 	public checkDupcheckRulePersonal7AppCust (Sql instance, String custname, String birthdate, String appno){
 		String Result7LOS
@@ -183,6 +199,7 @@ public class dupCheckVerif {
 		return Result7LOS
 	}
 
+	//keyword check dupcheck rule company 1 table cust
 	@Keyword
 	public checkDupcheckRuleCompany1Cust (Sql instance, String custname, String taxidno){
 		String Result8
@@ -193,6 +210,7 @@ public class dupCheckVerif {
 		return Result8
 	}
 
+	//keyword check dupcheck rule company 1 table appcust
 	@Keyword
 	public checkDupcheckRuleCompany1AppCust (Sql instance, String custname, String taxidno, String appno){
 		String Result8LOS
@@ -203,6 +221,7 @@ public class dupCheckVerif {
 		return Result8LOS
 	}
 
+	//keyword check dupcheck rule company 2 table cust
 	@Keyword
 	public checkDupcheckRuleCompany2Cust (Sql instance, String custname){
 		String Result9
@@ -213,6 +232,7 @@ public class dupCheckVerif {
 		return Result9
 	}
 
+	//keyword check dupcheck rule company 2 table appcust
 	@Keyword
 	public checkDupcheckRuleCompany2AppCust (Sql instance, String custname, String appno){
 		String Result9LOS
@@ -223,6 +243,7 @@ public class dupCheckVerif {
 		return Result9LOS
 	}
 
+	//keyword check dupcheck rule negative personal 1
 	@Keyword
 	public checkNegativeRulePersonal1 (Sql instance, String idno, String idtype, String Mothername){
 		String Result1
@@ -233,6 +254,7 @@ public class dupCheckVerif {
 		return Result1
 	}
 
+	//keyword check dupcheck rule negative personal 2
 	@Keyword
 	public checkNegativeRulePersonal2 (Sql instance, String idno, String idtype, String custname){
 		String Result2
@@ -243,6 +265,7 @@ public class dupCheckVerif {
 		return Result2
 	}
 
+	//keyword check dupcheck rule negative personal 3
 	@Keyword
 	public checkNegativeRulePersonal3 (Sql instance, String idno, String idtype, String birthdate){
 		String Result3
@@ -253,6 +276,7 @@ public class dupCheckVerif {
 		return Result3
 	}
 
+	//keyword check dupcheck rule negative personal 4
 	@Keyword
 	public checkNegativeRulePersonal4 (Sql instance, String custname){
 		String Result4
@@ -263,6 +287,7 @@ public class dupCheckVerif {
 		return Result4
 	}
 
+	//keyword check dupcheck rule negative personal 5
 	@Keyword
 	public checkNegativeRulePersonal5 (Sql instance, String idno, String idtype, String custname){
 		String Result5
@@ -273,6 +298,7 @@ public class dupCheckVerif {
 		return Result5
 	}
 
+	//keyword check dupcheck rule negative personal 6
 	@Keyword
 	public checkNegativeRulePersonal6 (Sql instance, String custname, String mothername){
 		String Result6
@@ -283,6 +309,7 @@ public class dupCheckVerif {
 		return Result6
 	}
 
+	//keyword check dupcheck rule negative personal 7
 	@Keyword
 	public checkNegativeRulePersonal7 (Sql instance, String custname, String birthdate){
 		String Result7
@@ -293,6 +320,7 @@ public class dupCheckVerif {
 		return Result7
 	}
 
+	//keyword check dupcheck rule negative company 1
 	@Keyword
 	public checkNegativeRuleCompany1 (Sql instance, String custname, String taxidno){
 		String Result8
@@ -303,6 +331,7 @@ public class dupCheckVerif {
 		return Result8
 	}
 
+	//keyword check dupcheck rule negative company 2
 	@Keyword
 	public checkNegativeRuleCompany2 (Sql instance, String custname){
 		String Result9
@@ -313,6 +342,7 @@ public class dupCheckVerif {
 		return Result9
 	}
 
+	//keyword check dupcheck status
 	@Keyword
 	public checkDupCheckStatus (Sql instance, String appno){
 		String Result
@@ -330,4 +360,3 @@ public class dupCheckVerif {
 		return DupCheckStatus
 	}
 }
-

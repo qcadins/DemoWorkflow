@@ -48,6 +48,7 @@ import java.lang.String
 public class getRow {
 
 
+	//keyword getExcelRow
 	@Keyword
 	public int getExcelRow(String filePath, String sheetName, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
@@ -76,7 +77,7 @@ public class getRow {
 
 	}
 
-	
+	//keyword getRowWithColum
 	@Keyword
 	public int getRowWithColumn(String filePath, String sheetName, String cellValue, Integer col) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
@@ -97,13 +98,7 @@ public class getRow {
 			catch(Exception e){
 
 			}
-
 		}
-
 		return row_num
-
-
 	}
-
-
 }

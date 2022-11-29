@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkAssetData {
 
+	//keyword count asset name
 	@Keyword
 	public countAssetName(Sql instanceLOS, Sql instanceFOU, String POName){
 		Integer countAsset
@@ -35,6 +36,7 @@ public class checkAssetData {
 		return countAsset
 	}
 
+	//keyword check personal relationship DDL
 	@Keyword
 	public checkPersonalRelationshipDDL(Sql instance){
 		ArrayList<String> personalRelationDDL = new ArrayList<String>()
@@ -44,6 +46,7 @@ public class checkAssetData {
 		return personalRelationDDL
 	}
 
+	//keyword check company relationship DDL
 	@Keyword
 	public checkCompanyRelationshipDDL(Sql instance){
 		ArrayList<String> companyRelationDDL = new ArrayList<String>()
@@ -53,6 +56,7 @@ public class checkAssetData {
 		return companyRelationDDL
 	}
 
+	//keyword check asset usage DDL
 	@Keyword
 	public checkAssetUsageDDL(Sql instance){
 		ArrayList<String> assetUsage = new ArrayList<String>()
@@ -62,6 +66,7 @@ public class checkAssetData {
 		return assetUsage
 	}
 
+	//keyword check self owner personal
 	@Keyword
 	public checkSelfOwnerPersonal(){
 		Boolean ismatch = false
@@ -73,6 +78,7 @@ public class checkAssetData {
 		return ismatch
 	}
 
+	//keyword check self usage personal
 	@Keyword
 	public checkSelfUsagePersonal(){
 		Boolean ismatch = false
@@ -84,6 +90,7 @@ public class checkAssetData {
 		return ismatch
 	}
 
+	//keyword check self owner company
 	@Keyword
 	public checkSelfOwnerCompany(){
 		Boolean ismatch = false
@@ -95,6 +102,7 @@ public class checkAssetData {
 		return ismatch
 	}
 
+	//keyword check self usage company
 	@Keyword
 	public checkSelfUsageCompany(){
 		Boolean ismatch = false

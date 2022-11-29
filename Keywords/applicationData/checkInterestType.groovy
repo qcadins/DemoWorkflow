@@ -23,6 +23,7 @@ import internal.GlobalVariable
 
 public class checkInterestType {
 
+	//keyword check interest
 	@Keyword
 	public checkInterest(Sql instance,String prodname){
 		String interestType

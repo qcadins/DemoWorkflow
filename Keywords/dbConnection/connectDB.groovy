@@ -28,6 +28,7 @@ import internal.GlobalVariable
 public class connectDB {
 	private static Connection connection = null;
 
+	//keyword connectLOS
 	@Keyword
 	public connectLOS(){
 		String servername = findTestData('Login/Login').getValue(1, 9)
@@ -47,6 +48,7 @@ public class connectDB {
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
 
+	//keyword connectFOU
 	@Keyword
 	public connectFOU(){
 		String servername = findTestData('Login/Login').getValue(1, 7)
@@ -66,6 +68,7 @@ public class connectDB {
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
 
+	//keyword connectCAMUNDASIT
 	@Keyword
 	public connectCAMUNDASIT(){
 		String servername = findTestData('Login/Login').getValue(1, 8)
@@ -85,6 +88,7 @@ public class connectDB {
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
 
+	//keyword connectTAX
 	@Keyword
 	public connectTAX(){
 		String servername = findTestData('Login/Login').getValue(1, 10)
@@ -104,6 +108,7 @@ public class connectDB {
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
 
+	//keyword getExcelPath
 	@Keyword
 	public getExcelPath(String Path){
 		String userDir = System.getProperty('user.dir')

@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkAssetRoadWorthinessDoc {
 
+	//keyword check road wothiness document
 	@Keyword
 	public checkRWD(Sql instanceLOS, String appNo){
 		String attrVal

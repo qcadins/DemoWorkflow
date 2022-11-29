@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkReferantorDetail {
 
+	//keyword check customer referantor
 	@Keyword
 	public checkCustomerReferantor(Sql instance,String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
@@ -39,6 +40,7 @@ public class checkReferantorDetail {
 		return referantorDetail
 	}
 
+	//keyword check agency referantor
 	@Keyword
 	public checkAgencyReferantor(Sql instance,String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
@@ -56,6 +58,7 @@ public class checkReferantorDetail {
 		return referantorDetail
 	}
 
+	//keyword check Mf Employee Referantor
 	@Keyword
 	public checkMFEmployeeReferantor(Sql instance, String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()

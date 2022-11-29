@@ -24,6 +24,8 @@ import java.io.File
 import java.nio.file.*;
 import java.io.IOException;
 public class downloadRule {
+	
+	//keyword set download path
 	@Keyword
 	def setDownloadPath() {
 
@@ -35,6 +37,7 @@ public class downloadRule {
 		RunConfiguration.setWebDriverPreferencesProperty("prefs", chromePrefs)
 	}
 
+	//keyword delete file
 	@Keyword
 	def deleteFile(String filename){
 		File dir = new File(System.getProperty('user.dir') + "\\Rule");
@@ -51,6 +54,7 @@ public class downloadRule {
 		}
 	}
 
+	//keyword rename file
 	@Keyword
 	def renameFile(String filename, String newname){
 		File file = new File(System.getProperty('user.dir') + "\\Rule\\"+filename);

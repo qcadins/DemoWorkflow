@@ -22,6 +22,8 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class getRowAssetAttribute {
+	
+	//keyword count Row Asset Attr
 	@Keyword
 	def countRowAssetAttribute(Sql instance, Sql instanceLOS, String assetcode,String POName){
 		String countRowAssetAttributeResult, assetschmCode

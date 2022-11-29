@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkCommissionCode {
 
+	//keyword check supplier code
 	@Keyword
 	public checkSupplierCode(Sql instance, String supplierName){
 		String supplierCode
@@ -32,6 +33,7 @@ public class checkCommissionCode {
 		return supplierCode
 	}
 
+	//keyword check supplier employee code
 	@Keyword
 	public checkSupplierEmployeeCode(Sql instance,String supplierEmployeeName, String supplierEmpPos, String supplierName){
 		String supplierEmployeeCode
@@ -41,6 +43,7 @@ public class checkCommissionCode {
 		return supplierEmployeeCode
 	}
 
+	//keyword check referantor code
 	@Keyword
 	public checkReferantorCode(Sql instance,String referantorName){
 		String referantorCode
@@ -60,6 +63,7 @@ public class checkCommissionCode {
 		return referantorCode
 	}
 
+	//keyword check referantor name
 	@Keyword
 	public checkReferantorName(Sql instance,String referantorCode){
 		String referantorName
