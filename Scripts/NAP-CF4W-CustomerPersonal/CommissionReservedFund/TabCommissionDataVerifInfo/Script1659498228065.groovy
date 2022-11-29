@@ -51,6 +51,7 @@ vatRate = (taxRate[1]).split(';')
 'Looping data Supplier'
 for (int i = 1; i <= variableSupp.size(); i++) {
 
+	'modify supplier name'
     modifyObjectSuppName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SupplierName'), 
         'xpath', 'equals', (('//*[@id="formInformationSupplier"]/div[' + (i + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
@@ -89,28 +90,40 @@ for (int i = 1; i <= variableSupp.size(); i++) {
     CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
+	'get text comm amt'
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
 
+	'get text disburse amt'
     String textDisburseAmt = WebUI.getText(modifyObjectDisburse).replace(',', '').trim()
 
+	'get text expense amt'
     String textExpenseAmt = WebUI.getText(modifyObjectExpense).replace(',', '').trim()
 
+	'get text comm amt aft tax'
     String textCommAmtAftTax = WebUI.getText(modifyObjectAmtAftTax).replace(',', '').trim()
 
+	'get text wht'
     String textWHT = WebUI.getText(modifyObjectTax).replace(',', '').trim()
 
+	'get text vat'
     String textVat = WebUI.getText(modifyObjectVat).replace(',', '').trim()
 
+	'parsing double commamt'
     BigDecimal commAmt = Double.parseDouble(textCommAmt)
 
+	'parsing double disburseamt'
     BigDecimal disburseAmt = Double.parseDouble(textDisburseAmt)
 
+	'parsing double expenseamt'
     BigDecimal expenseAmt = Double.parseDouble(textExpenseAmt)
 
+	'parsing double commamtafttax'
     BigDecimal commAmtAftTax = Double.parseDouble(textCommAmtAftTax)
 
+	'parsing double whtax'
     BigDecimal whTax = Double.parseDouble(textWHT)
 
+	'parsing double vatax'
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
@@ -164,6 +177,7 @@ for (int i = 1; i <= variableSupp.size(); i++) {
 'Looping data supplier employee'
 for (int j = 1; j <= variableSuppEmp.size(); j++) {
 
+	'modify supplier employee name'
     modifyObjectSuppEmpName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_SuppEmpName'), 
         'xpath', 'equals', (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (j + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
@@ -202,28 +216,40 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
     CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
+	'get text commamt'
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
 
+	'get text disburseamt'
     String textDisburseAmt = WebUI.getText(modifyObjectDisburse).replace(',', '').trim()
 
+	'get text expenseamt'
     String textExpenseAmt = WebUI.getText(modifyObjectExpense).replace(',', '').trim()
 
+	'get text commamtafttax'
     String textCommAmtAftTax = WebUI.getText(modifyObjectAmtAftTax).replace(',', '').trim()
 
+	'get text wht'
     String textWHT = WebUI.getText(modifyObjectTax).replace(',', '').trim()
 
+	'get text vat'
     String textVat = WebUI.getText(modifyObjectVat).replace(',', '').trim()
 
+	'parsing double commamt'
     BigDecimal commAmt = Double.parseDouble(textCommAmt)
 
+	'parsing double disburseamt'
     BigDecimal disburseAmt = Double.parseDouble(textDisburseAmt)
 
+	'parsing double expense amt'
     BigDecimal expenseAmt = Double.parseDouble(textExpenseAmt)
 
+	'parsing double commamtafttax'
     BigDecimal commAmtAftTax = Double.parseDouble(textCommAmtAftTax)
 
+	'parsing double whtax'
     BigDecimal whTax = Double.parseDouble(textWHT)
 
+	'parsing double vatax'
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
@@ -277,6 +303,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 'Looping data referantor'
 for (int k = 1; k <= variableRef.size(); k++) {
 
+	'modify referantor name'
     modifyObjectRefName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_RefName'), 
         'xpath', 'equals', (('//*[@id=\'formInformationReferantor\']/div[' + (k + 1)) + ']/div/div[1]/div[2]/div/div[1]/label'), true)
 
@@ -315,28 +342,40 @@ for (int k = 1; k <= variableRef.size(); k++) {
     CustomKeywords.'commissionReserveFundData.commission.calculateCommissionSummary'(modifyObjectCommAmt, modifyObjectAmtAftTax, modifyObjectTax, 
         modifyObjectVat, modifyObjectDisburse, modifyObjectExpense)
 
+	'get text commamt'
     String textCommAmt = WebUI.getText(modifyObjectCommAmt).replace(',', '').trim()
 
+	'get text disburseamt'
     String textDisburseAmt = WebUI.getText(modifyObjectDisburse).replace(',', '').trim()
 
+	'get text expenseamt'
     String textExpenseAmt = WebUI.getText(modifyObjectExpense).replace(',', '').trim()
 
+	'get text comm amt aft tax'
     String textCommAmtAftTax = WebUI.getText(modifyObjectAmtAftTax).replace(',', '').trim()
 
+	'get text wht'
     String textWHT = WebUI.getText(modifyObjectTax).replace(',', '').trim()
 
+	'get text vat'
     String textVat = WebUI.getText(modifyObjectVat).replace(',', '').trim()
 
+	'parsing double commamt'
     BigDecimal commAmt = Double.parseDouble(textCommAmt)
 
+	'parsing double disburseamt'
     BigDecimal disburseAmt = Double.parseDouble(textDisburseAmt)
 
+	'parsing double expenseamt'
     BigDecimal expenseAmt = Double.parseDouble(textExpenseAmt)
 
+	'parsing double commamtafttax'
     BigDecimal commAmtAftTax = Double.parseDouble(textCommAmtAftTax)
 
+	'parsing double whtax'
     BigDecimal whTax = Double.parseDouble(textWHT)
 
+	'parsing double vatax'
     BigDecimal vaTax = Double.parseDouble(textVat)
 
     'Arraylist untuk menampung flag npwp exist dan is vat, serta tax kind code dari db'
@@ -457,11 +496,14 @@ ArrayList<WebElement> AllocatedCommissionAmt = new ArrayList<WebElement>()
 
 AllocatedCommissionAmt = GlobalVariable.AllocatedCommissionAmt
 
+'looping remaining info'
 for (int i = 1; i < countRemainingInfo; i++) {
 	
+	'modify income info'
 	modifyIncomeInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'),
 		'xpath', 'equals', (('//*[@id="viewIncomeInfo"]/div[' + i) + ']/div/div[2]/label'), true)
 
+	'modify remaining info'
     modifyRemainingInfo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_UppingRateRemaining'), 
         'xpath', 'equals', (('//*[@id="viewRemainIncomeInfo"]/div[' + i) + ']/div/div[2]/label'), true)
 	
@@ -482,6 +524,7 @@ for (int i = 1; i < countRemainingInfo; i++) {
 
 GlobalVariable.ComRemainingInfoAmt = remainingInfoAmt
 
+'modify max allocated amount'
 modifyMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'), 
     'xpath', 'equals', ('//*[@id="viewIncomeInfo"]/div[' + countIncomeInfo) + ']/div[2]/label', true)
 
@@ -491,6 +534,7 @@ String textMaxAllocatedAmount = WebUI.getText(modifyMaxAllocatedAmount).replace(
 'Penghitungan nilai remaining allocated amount tab commission'
 BigDecimal remainingAllocatedAmount = Double.parseDouble(textMaxAllocatedAmount) - GlobalVariable.TotalExpenseAmt
 
+'modify remaining allocated amount'
 modifyRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'), 
     'xpath', 'equals', ('//div[@id="viewRemainIncomeInfo"]/div[' + countRemainingInfo) + ']/div[2]/label', true)
 
@@ -505,9 +549,11 @@ GlobalVariable.RemainingAllocatedAmt = remainingAllocatedAmount
 
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
 				0, numofcolm-1, GlobalVariable.StatusFailed)
 
+		'write reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
 				1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

@@ -31,9 +31,11 @@ datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
 def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
 
+'get reserved fund data from db'
 ArrayList<String> resultDB = CustomKeywords.'dbConnection.CustomerDataVerif.NAP3ReservedFundDataStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
+'looping reserved fund data from db'
 for(int i=0;i<resultDB.size();i++){
 	
 	'verif reserved fund amt db dengan excel'

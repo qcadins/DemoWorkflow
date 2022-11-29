@@ -102,6 +102,7 @@ if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Am
 			}
 		}
 	}
+	'declare count'
 	int count = 0
 	'Jika supplier employee ada datanya/tidak bernilai null'
 	if(suppEmpSource!=null){
@@ -134,13 +135,16 @@ if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Am
 			}
 		}
 	}
+	'declare countrf'
 	int countRf=0
 	'Jika referantor ada datanya/tidak bernilai null'
 	if(refSource!=null){
+		'looping referantor'
 		for (int i = 1; i <= refsize; i++) {
 			if(i>1){
 				countRf +=refSource.get(i-2)
 			}
+			'looping allocate commission'
 			for (int j = 1; j <= refSource.get(i-1); j++) {
 				 value = datafileCommission.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).split(';', -1)
@@ -166,7 +170,9 @@ if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Am
 	}
 }
 else if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCase("Percentage")){
+	'Jika supplier ada datanya atau tidak bernilai null'
 	if(suppSource!=null){
+		'looping supplier allocate commission'
 		for(int i = 1;i<=suppSource;i++){
 			'2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
 			if(datafileCommission.getValue(
@@ -186,12 +192,16 @@ else if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCas
 			}
 		}
 	}
+	'declare count'
 	int count=0
+	'jika supplier employee ada datanya atau tidak bernilai null'
 	if(suppEmpSource!=null){
+		'looping data supplier employee'
 		for (int i = 1; i <= suppempsize; i++) {
 			if(i>1){
 				count +=suppEmpSource.get(i-2)
 			}
+			'looping allocate commission supplier employee'
 			for (int j = 1; j <= suppEmpSource.get(i-1); j++) {
 				value = datafileCommission.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
@@ -215,12 +225,16 @@ else if(datafileCommission.getValue(GlobalVariable.NumofColm,12).equalsIgnoreCas
 			}
 		}
 	}
+	'declare countrf'
 	int countRf=0
+	'Pengecekan jika referantor ada datanya atau tidak bernilai null'
 	if(refSource!=null){
+		'looping data referantor'
 		for (int i = 1; i <= refsize; i++) {
 			if(i>1){
 				countRf +=refSource.get(i-2)
 			}
+			'looping allocate commission referantor'
 			for (int j = 1; j <= refSource.get(i-1); j++) {
 				value = datafileCommission.getValue(
                     GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
