@@ -35,6 +35,7 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'get app no from data file dupcheck'
 String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
 
+'cek dupcheckstatus from db'
 Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 GlobalVariable.FlagFailed = 0
@@ -56,6 +57,7 @@ if (DupCheckStatus == true) {
     'click action'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
+	'initialize driver'
     WebDriver driver = DriverFactory.getWebDriver()
 
     ArrayList<String> variable = driver.findElements(By.cssSelector('#ListSubjId > lib-ucgridview > div > table > tbody tr'))
@@ -71,6 +73,7 @@ if (DupCheckStatus == true) {
     'declare variable count negative customer'
     GlobalVariable.NegativeCustCount = 0
 
+	'Pengecekan jika dupcheck customer name tidak kosong'
     if (custnamedupcheck.length() > 0) {
         'modify object subjecttype'
         modifySubjectType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/SubjectType'), 
@@ -103,25 +106,30 @@ if (DupCheckStatus == true) {
         'get text subject type'
         subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
 
+		'Jika role testing dan edit appno tidak ada isinya pada excel'
         if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8).length() == 
         0)) {
             'verify name == data inputan'
             checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
         }
         
+		'Jika subject name confins sama dengan excel'
         if (subjectName.equalsIgnoreCase(custnamedupcheck)) {
             'click button edit'
             if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
-                WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
+                
+				'click edit/icon pensil'
+				WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
 
                 'if role == testing'
                 if (GlobalVariable.Role == 'Testing') {
-                    'if dupcheck verif == review dan negative check == negative'
+                    'if dupcheck verif == review dan negative check == negative atau dupcheck verif = lock dan negative check = negative dan ada select app in process'
                     if ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 'REVIEW') && ((GlobalVariable.NegativeverifResult[
                     GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                         5, FailureHandling.OPTIONAL))) {
+						'Jika pada excel negative checking bernilai yes'
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/checkbox negative'))
@@ -129,10 +137,13 @@ if (DupCheckStatus == true) {
                     }
                 }
                 
+				'Pengecekan jika ada data similar'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
+					
                     ArrayList<String> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
+					'looping similar data'
                     for (int id = 1; id <= variableidno.size(); id++) {
                         'modify object id no customer match'
                         modifyIDNoCustomer = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoCustomerMatchSimilarData'), 
@@ -142,14 +153,19 @@ if (DupCheckStatus == true) {
                         modifyCustomerNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                             'xpath', 'equals', ('//*[@id="subSecMatch"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
+						'get text new customer no'
                         String newCustomerNoValue = WebUI.getText(modifyCustomerNoObject, FailureHandling.OPTIONAL)
 
+						'get text newidnocust'
                         String NewIdNoCustomerMatch = WebUI.getText(modifyIDNoCustomer, FailureHandling.OPTIONAL)
 
+						'get text id no cust'
                         String IdNoCustomer = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'), 
                             FailureHandling.OPTIONAL)
 
+						'Jika newidnocust tidak null'
                         if (NewIdNoCustomerMatch != null) {
+							'Jika new id no cust = id no cust'
                             if (NewIdNoCustomerMatch.equalsIgnoreCase(IdNoCustomer)) {
                                 'modify object id no customer match'
                                 modifynewSelect = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
@@ -171,10 +187,12 @@ if (DupCheckStatus == true) {
                     }
                 }
                 
+				'Jika ada data app in process'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/label_NoDataFoundAppInProcess'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
                     ArrayList<String> applicationinprocessrow = driver.findElements(By.cssSelector('#subSecAppProcess > table > tbody tr'))
-
+					
+					'Looping data app in process'
                     for (int id = 1; id <= applicationinprocessrow.size(); id++) {
                         'modify object id no customer match'
                         modifyIDNoCustomerPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IDNoPersonal'), 
@@ -184,13 +202,18 @@ if (DupCheckStatus == true) {
                         modifyApplicantNoAppInProcess = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                             'xpath', 'equals', ('//*[@id="subSecAppProcess"]/table/tbody/tr[' + id) + ']/td[1]', true)
 
+						'get text newapplicantno'
                         String newApplicantNoValue = WebUI.getText(modifyApplicantNoAppInProcess, FailureHandling.OPTIONAL)
 
+						'get text newidnocust'
                         String NewIdNoCustomerPersonalMatch = WebUI.getText(modifyIDNoCustomerPersonal, FailureHandling.OPTIONAL)
 
+						'get text idnocust'
                         String IdNoCustomerPersonal = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/IdNoCustomer'))
 
+						'Jika newidnocust tidak null'
                         if (NewIdNoCustomerPersonalMatch != null) {
+							'Jika newidnocust = idnocust'
                             if (NewIdNoCustomerPersonalMatch.equalsIgnoreCase(IdNoCustomerPersonal)) {
                                 'modify object select customer match'
                                 modifyselectCustomerPersonal = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
@@ -212,9 +235,12 @@ if (DupCheckStatus == true) {
                     }
                 }
                 
+				'Jika subjecttypeheader belum muncul'
                 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/subjecttypeheader'), 
                     5, FailureHandling.OPTIONAL)) {
+					'Jika excel action bernilai new'
                     if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('New')) {
+						'Jika ada button new pada confins'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
@@ -228,8 +254,10 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
+						//pengecekan jika ada match similar data
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text new custno'
                             String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                 FailureHandling.OPTIONAL)
 
@@ -241,8 +269,10 @@ if (DupCheckStatus == true) {
                                 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
                                         newCustomerNoValue, false))
                             }
+						//pengecekan jika ada appinprocess
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
@@ -255,9 +285,12 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
+					//jika action excel bernilai select similardata
                     } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                        'Jika ada button select match similar data'
+						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text new cust no'
                             String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                 FailureHandling.OPTIONAL)
 
@@ -272,7 +305,9 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
-                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
+                        
+						} //jika ada button new
+						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'))
@@ -282,8 +317,10 @@ if (DupCheckStatus == true) {
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
                                         '', false))
                             }
-                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
+                        } //jika ada select application in process
+						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
@@ -296,9 +333,12 @@ if (DupCheckStatus == true) {
                                         newApplicantNoValue, false))
                             }
                         }
-                    } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
+                    } //Pengecekan jika action bernilai select applicationinprocess
+					else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
+						'jika select appinprocess ada pada confins'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
@@ -313,7 +353,8 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
-                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
+                        } //jika button new ada pada confins
+						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'))
@@ -322,8 +363,10 @@ if (DupCheckStatus == true) {
                                 'verify match ApplicantNo'
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
                             }
-                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                        } //jika match similar data ada pada confins
+						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
+							'get text newcustno'
                             String newCustomerNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/Tr_CustomerNoSimilarData'), 
                                 FailureHandling.OPTIONAL)
 
@@ -345,12 +388,15 @@ if (DupCheckStatus == true) {
         (GlobalVariable.NegativeCustCount)++
     }
     
+	'call test case dupcheckfamily'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingFamily'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
 
+	'call test case dupcheckguarantor'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
 
+	'call test case dupcheckgetname'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingGetName'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -380,9 +426,11 @@ if (DupCheckStatus == true) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, 
             GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
+		'write to excel reasonf failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, 
             GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
@@ -392,12 +440,16 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 
 def pagingTesting() {
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
+		'declare appnoobject'
         Object appNoObject
 
+		'declare result reset'
         ArrayList<String> resultReset = new ArrayList<String>()
 
+		'declare check verify sort'
         ArrayList<String> checkVerifySort = new ArrayList<String>()
 
+		'declare check verify footer'
         ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
         'Verif reset'
@@ -406,6 +458,7 @@ def pagingTesting() {
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
 
+		'declare liststring'
         ArrayList<String> listString = new ArrayList<String>()
 
         'Inisialisasi driver'
@@ -426,6 +479,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
+		'looping untuk menyimpan appno ascending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -437,6 +491,7 @@ def pagingTesting() {
         'verif sort appno ascending'
         Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
+		'verif sort appno ascending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         ArrayList<String> listApp = new ArrayList<String>()
@@ -444,6 +499,7 @@ def pagingTesting() {
         'Klik header appno'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
 
+		'looping untuk menyimpan appno descending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -455,6 +511,7 @@ def pagingTesting() {
         'verif sort appno descending'
         isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 
+		'verif sort appno descending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header custname'
@@ -465,6 +522,7 @@ def pagingTesting() {
 
         listString = new ArrayList<String>()
 
+		'looping untuk menyimpan custname ascending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -476,6 +534,7 @@ def pagingTesting() {
         'verif sort custname ascending'
         isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
+		'verif sort custname ascending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header custname'
@@ -483,6 +542,7 @@ def pagingTesting() {
 
         listString = new ArrayList<String>()
 
+		'looping untuk menyimpan custname descending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -494,6 +554,7 @@ def pagingTesting() {
         'verif sort custname descending'
         isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
+		'verif sort custname descending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header product offering name'
@@ -504,6 +565,7 @@ def pagingTesting() {
 
         listString = new ArrayList<String>()
 
+		'looping untuk menyimpan po name ascending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -515,6 +577,7 @@ def pagingTesting() {
         'verif sort poname ascending'
         isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 
+		'verif sort poname ascending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header product offering anme'
@@ -522,6 +585,7 @@ def pagingTesting() {
 
         listString = new ArrayList<String>()
 
+		'looping untuk menyimpan po name descending'
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -533,6 +597,7 @@ def pagingTesting() {
         'verif sort poname descending'
         isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 
+		'verif sort poname descending'
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik 2x header appno supaya appno descending'
@@ -544,6 +609,7 @@ def pagingTesting() {
         String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/countData')).replace(
             ' ', '').replace(':', ';').split(';')
 
+		'parsing countdata ke integer'
         Integer countDt = Integer.parseInt(textCountData[1])
 
         'Jika countdata secara keseluruhan lebih besar daripada data pada page 1'
@@ -559,6 +625,7 @@ def pagingTesting() {
 
             listString = new ArrayList<String>()
 
+			'looping untuk menyimpan appno di page 2'
             for (int i = 1; i <= rowData.size(); i++) {
                 appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
                     'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
@@ -570,6 +637,7 @@ def pagingTesting() {
             'Verif appno descending pada page 2 tidak ada di page 1'
             Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
+			'Verif appno descending pada page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
             'Klik button prev'
@@ -582,12 +650,14 @@ def pagingTesting() {
             listApp = listString
 
             listString = new ArrayList<String>()
-
+			
+			'keyword yang berisi looping untuk menyimpan appno di page 1'
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
             isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
+			'Verif appno yang ada di page 1 tidak ada di page 2'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
             'Klik button next'
@@ -601,24 +671,30 @@ def pagingTesting() {
 
             listString = new ArrayList<String>()
 
+			'keyword yang berisi looping untuk menyimpan appno di page 2'
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
             isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
+			'Verif appno yang ada di page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
         }
         
         'Klik button page 1'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/pageOne'))
 
+		'verif jumlah data yang muncul pada paging sesuai'
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.DupcheckCountDataInPage'(), true))
 
+		'Pengecekan jika pada verif reset ada yang tidak sesuai'
         if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
+			'write to excel status warning'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
+			'write to excel reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
                     '-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
@@ -626,11 +702,14 @@ def pagingTesting() {
             GlobalVariable.FlagWarning = 1
         }
         
+		'Pengecekan jika pada verif sort ada yang tidak sesuai'
         if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
+			'write to excel status warning'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
+			'write to excel reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
                     '-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
@@ -638,11 +717,14 @@ def pagingTesting() {
             GlobalVariable.FlagWarning = 1
         }
         
+		'Pengecekan jika pada verif footer ada yang tidak sesuai'
         if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
+			'write to excel status warning'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
+			'write to excel reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
                 1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
                     '-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + ';\n'))
@@ -651,4 +733,3 @@ def pagingTesting() {
         }
     }
 }
-

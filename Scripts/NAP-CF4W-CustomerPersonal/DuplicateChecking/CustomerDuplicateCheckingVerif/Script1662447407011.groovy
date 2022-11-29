@@ -45,6 +45,7 @@ datafileDupcheckRule = findTestData('DownloadRule/DuplicateCheckingRule')
 'array untuk menampung hasil status dupcheck'
 def CustomerPersonalStatus = '', FamilyPersonalStatus = '', GuarantorPersonalStatus = '', GuarantorCompanyStatus = ''
 
+'looping data customer'
 for (i = 1; i <= 1; i++) {
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
         'check rule 1'
@@ -160,6 +161,7 @@ for (i = 1; i <= 1; i++) {
     }
 }
 
+'looping data family'
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13)) {
@@ -280,6 +282,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
     }
 }
 
+'looping data guarantor personal'
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
@@ -409,6 +412,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
 }
 
+'looping data guarantorcompany'
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
@@ -453,6 +457,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 
 def NegativeResult = []
 
+'looping customer'
 for (i = 1; i <= 1; i++) {
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
         'check negative rule 1'
@@ -530,6 +535,7 @@ for (i = 1; i <= 1; i++) {
     }
 }
 
+'looping data family'
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13)) {
@@ -612,6 +618,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
     }
 }
 
+'looping data guarantor personal'
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
@@ -695,6 +702,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
 }
 
+'looping data guarantor company'
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
     if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
@@ -736,6 +744,7 @@ println(GlobalVariable.DupcheckVerifResult)
 
 println(GlobalVariable.NegativeverifResult)
 
+'Jika dupcheckresult bernilai review atau lock atau negativeresult bernilai negative'
 if ((DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')) || NegativeResult.contains('NEGATIVE')) {
     GlobalVariable.DupcheckVerif = 'Yes'
 }
