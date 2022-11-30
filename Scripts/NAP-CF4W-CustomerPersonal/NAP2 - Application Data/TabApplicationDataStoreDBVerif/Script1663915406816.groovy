@@ -28,13 +28,17 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabApplication'
 datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/labelCustomerName'))
 
+'get application data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
 		GlobalVariable.NumofColm, 13), custname)
 		
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'get application attribute data from db'
 ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
 		GlobalVariable.NumofColm, 13))
 		
@@ -50,6 +54,7 @@ ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NA
 //			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
 //	}
 
+'declare arrayindex, attrindex'
 int arrayindex = 0, attrindex = 0
 //int bankindex = 0
 //int confinsindex = 0
@@ -78,6 +83,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+'Jika interest type = float rate'
 if(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 22) == 'Float Rate'){
 	'verify floating period'

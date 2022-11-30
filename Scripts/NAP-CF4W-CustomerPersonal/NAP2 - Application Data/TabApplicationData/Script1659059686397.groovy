@@ -27,10 +27,13 @@ datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Custom
 
 GlobalVariable.FlagFailed = 0
 
+'koneksi database los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi database fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -56,6 +59,7 @@ if (GlobalVariable.Role == 'Testing') {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true))
 }
 
+'declare spvname'
 String spvName
 
 'Pengecekan job title pada excel cmo atau bukan'
@@ -271,6 +275,7 @@ if (datafileTabApplication.getValue(
             GlobalVariable.NumofColm, 21), false)
 }
 
+'get interest type from confins'
 String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
     'value', FailureHandling.OPTIONAL)
 
@@ -279,12 +284,17 @@ String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPe
 //    textInterestType, false)
 //CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
 //	21, GlobalVariable.NumofColm - 1, textInterestType)
+
+'def object scheme'
 scheme = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme')
 
+'def object wop'
 wop = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment')
 
+'def object notif'
 notif = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_CustomerNotification')
 
+'def object inssource'
 inssource = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/select_InstallmentSourcePaymentType')
 
 'Verify/Jika Interest Type = Float Rate'
@@ -299,6 +309,7 @@ if (textInterestType.equalsIgnoreCase('Float Rate')) {
 WebUI.selectOptionByLabel(scheme, datafileTabApplication.getValue(
         GlobalVariable.NumofColm, 24), false)
 
+'get wop from excel'
 textwop = datafileTabApplication.getValue(
     GlobalVariable.NumofColm, 25)
 
@@ -381,6 +392,7 @@ if (datafileTabApplication.getValue(
     'Click search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
+	'verify input error lookup'
 	verifyInputErrorLookUp()
 }
 
@@ -439,9 +451,11 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
     datafileTabApplication.getValue(
         GlobalVariable.NumofColm, 48))
 
+'get coc from excel'
 String coc = datafileTabApplication.getValue(
     GlobalVariable.NumofColm, 50)
 
+'declare object slikbtn'
 slikbtn = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Economic Sector (Slik)')
 
 'Select option dropdownlist characteristic of credit'
@@ -472,6 +486,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
+'verify input error lookup'
 verifyInputErrorLookUp()
 
 'Select option dropdownlist Blacklist APPI'
@@ -500,6 +515,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-A
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
+'function untuk verify input error lookup'
 verifyInputErrorLookUp()
 
 'Input Jumlah Asset'

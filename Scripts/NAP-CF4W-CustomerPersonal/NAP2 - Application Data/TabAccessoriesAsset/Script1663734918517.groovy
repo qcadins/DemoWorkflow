@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import groovy.sql.Sql as Sql
 
+'declare modifyobjectindex'
 int modifyObjectIndex=1
 
 'get data file path'
@@ -33,10 +34,13 @@ datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
 
+'inisialisasi assetprice gv'
 GlobalVariable.AssetPrice = 0.00
 
+'inisialisasi totalaccessoriesprice gv'
 GlobalVariable.TotalAccessoriesPrice = 0.00
 
+'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Jika copy app edit'
@@ -46,6 +50,7 @@ if(datafileTabAsset.getValue(
 	'arraylist accessories name yang gagal'
 	ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
 
+	'declare variable arraylist'
 	ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	
 	//Edit & Delete Acc, edit jika ada data pada excel dan confins yang sesuai, delete jika ada data pada confins tetapi tidak ada datanya pada excel
@@ -136,6 +141,7 @@ if(datafileTabAsset.getValue(
 						  WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 								  GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				  
+						  'Jika field mandatory kosong'
 						  if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 							  'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 							  'write to excel WARNING'
@@ -155,7 +161,9 @@ if(datafileTabAsset.getValue(
 							 'click ok pada alert'
 							 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
+							 'Jika accessories merupakan data index terakhir'
 							 if(i == variable.size()){
+								 'Jika acc name tidak muncul'
 								 if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 									 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 								 }else{
@@ -167,33 +175,41 @@ if(datafileTabAsset.getValue(
 									'get accessories name sebelum delete'
 									accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
+									'Jika nama acc after delete tidak sama dengan nama acc before delete'
+									if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
+									}else{
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 											continue
-										}
+									}
 							 }
 							 i--
 				  
 							 continue
 						  }
 							  if(GlobalVariable.Role=="Testing"){
+								  'number format untuk mengubah persentase ke desimal'
 								  NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
 								  
+								  'get accessories price'
 								  def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
 						  
+								  'get accessories input percentage'
 								  def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
 						  
+								  'get accessories input amount'
 								  def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
 						  
+								  'parsing accessoriesprice ke integer'
 								  BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
 						  
+								  'parsing accessories input percentage ke dalam bentuk float/desimal'
 								  float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
 						  
 								  Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
 						  
+								  'parsing accessories input amount ke integer'
 								  BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 						  
 								  if (datafileAccessories.getValue(
@@ -224,8 +240,8 @@ if(datafileTabAsset.getValue(
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  
-								   'get accessories name'
-								 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+								  'get accessories name'
+								  accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 									
 								 'Click delete'
 								  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -233,7 +249,9 @@ if(datafileTabAsset.getValue(
 								  'click ok pada alert'
 								  WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								  
+								  'Jika acccessories merupakan data index terakhir'
 								  if(i == variable.size()){
+									  	'Jika accessories name tidak muncul'
 										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
@@ -245,6 +263,7 @@ if(datafileTabAsset.getValue(
 										'get accessories name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
+										'Jika accessories name after delete tidak sama dengan accessories name before delete'
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 										}else{
@@ -262,19 +281,25 @@ if(datafileTabAsset.getValue(
 			  }
 		}
 	}
-	
+	'Jika delete accessories gagal'
 	if(accessoriesnamefaileddelete.size() > 0){
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 					'7a.Accessories', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 			
+			'write to excel reason failed delete'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 				 '7a.Accessories', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
-		
+	'declare variabledata'
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+	
+	'declare countdata'
 	int countData = variableData.size()
+	
+	'declare add'
 	int add=0
 	
 	//Add Acc jika ada data pada excel, tetapi data tersebut tidak ditemukan pada confins
@@ -345,6 +370,7 @@ if(datafileTabAsset.getValue(
 							   'click button search'
 							   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 					   
+							   'verify input lookup'
 							   if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 								   5, FailureHandling.OPTIONAL)) {
 								   'click select'
@@ -353,6 +379,7 @@ if(datafileTabAsset.getValue(
 								   'click button x'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
+								   'write to excel statuswarning'
 								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 									   0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 								   
@@ -391,6 +418,7 @@ if(datafileTabAsset.getValue(
 							   'click button search'
 							   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 					   
+							   'verify input lookup'
 							   if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 								   5, FailureHandling.OPTIONAL)) {
 								   'click select'
@@ -399,6 +427,7 @@ if(datafileTabAsset.getValue(
 								   'click button x'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
+								   'write to excel status warning'
 								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 									   0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 								   
@@ -451,6 +480,7 @@ if(datafileTabAsset.getValue(
 							   WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 									   GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 					   
+							   'Jika ada field mandatory yang kosong'
 							   if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 								   'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 								   'write to excel WARNING'
@@ -475,8 +505,13 @@ if(datafileTabAsset.getValue(
 					   
 								   continue
 							   }
-								 def AccPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+								'declare accessories price'
+								def AccPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+								
+								'parsing accessories price ke integer'
 								BigDecimal BDAccPrice = Integer.parseInt(AccPrice)
+								
+								'Tambahkan accessories price ke totalaccessoriesprice'
 								GlobalVariable.TotalAccessoriesPrice += BDAccPrice.doubleValue()
 								
 							   'write to excel success'
@@ -524,6 +559,7 @@ if(datafileTabAsset.getValue(
 						'click button search'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 				
+						'verify input lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 							5, FailureHandling.OPTIONAL)) {
 							'click select'
@@ -532,6 +568,7 @@ if(datafileTabAsset.getValue(
 							'click button x'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
+							'write to excel status warning'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 								0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 							
@@ -570,6 +607,7 @@ if(datafileTabAsset.getValue(
 						'click button search'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 				
+						'verify input lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 							5, FailureHandling.OPTIONAL)) {
 							'click select'
@@ -578,6 +616,7 @@ if(datafileTabAsset.getValue(
 							'click button x'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
+							'write to excel status warning'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 								0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 							
@@ -630,6 +669,7 @@ if(datafileTabAsset.getValue(
 						WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
 								GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				
+						'Jika ada field mandatory yang kosong'
 						if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 							'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 							'write to excel WARNING'
@@ -656,20 +696,27 @@ if(datafileTabAsset.getValue(
 						}
 							
 						if(GlobalVariable.Role=="Testing"){
+								'number format untuk mengubah persentase ke desimal'
 								NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
 								
+								'get accessoriesprice'
 								def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
 						
+								'get accessories input percentage'
 								def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
 						
+								'get accessories input amount'
 								def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
 						
+								'parsing accesories price ke integer'
 								BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
 						
+								'parsing accessories input percentage ke dalam bentuk float / decimal'
 								float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
 						
 								Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
 						
+								'parsing accessories input amount ke integer'
 								BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 						
 								if (datafileAccessories.getValue(
@@ -685,6 +732,7 @@ if(datafileTabAsset.getValue(
 									'verify securitydeposit value equal'
 									checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
 								}
+								'tambahakan accessoriesprice ke total accesories price gv'
 								GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 						}
 						'write to excel success'
@@ -756,6 +804,7 @@ else if(datafileTabAsset.getValue(
 			'click button search'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 	
+			'verify input lookup'
 			if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 				5, FailureHandling.OPTIONAL)) {
 				'click select'
@@ -764,6 +813,7 @@ else if(datafileTabAsset.getValue(
 				'click button x'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
+				'write to excel status warning'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 					0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 				
@@ -801,6 +851,7 @@ else if(datafileTabAsset.getValue(
 			'click button search'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search (1)'))
 	
+			'verify input lookup'
 			if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/a_Select'),
 				5, FailureHandling.OPTIONAL)) {
 				'click select'
@@ -809,6 +860,7 @@ else if(datafileTabAsset.getValue(
 				'click button x'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
+				'write to excel status warning'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 					0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 				
@@ -889,20 +941,27 @@ else if(datafileTabAsset.getValue(
 			modifyObjectIndex++
 	
 			if(GlobalVariable.Role=="Testing"){
+				'number format untuk mengubah persentase ke desimal'
 				NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
 				
+				'get accessories price'
 				def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
 		
+				'get accessories input percentage'
 				def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
 		
+				'get accessories input amount'
 				def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
 		
+				'parsing accesories price ke integer'
 				BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
 		
+				'parsing accessories input percentage ke dalam bentuk desimal / float'
 				float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
 		
 				Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
 		
+				'parsing accessories input amount ke integer'
 				BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
 		
 				if (datafileAccessories.getValue(
@@ -918,6 +977,7 @@ else if(datafileTabAsset.getValue(
 					'verify securitydeposit value equal'
 					checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
 				}
+				'Tambahakan accessories price ke total accessories price gv'
 				GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 			}
 			
@@ -930,9 +990,11 @@ else if(datafileTabAsset.getValue(
 	
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel failed'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 					0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
 	
+			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
 					1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	

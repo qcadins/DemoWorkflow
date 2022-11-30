@@ -25,16 +25,20 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabAsset'
 datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
 
+'get supplier data from db'
 ArrayList<Boolean> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
     sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
+'get asset data from db'
 ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, 
     datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
+'declare arraysuppinfoindex, arrayassetinfoindex'
 int arraysuppinfoindex = 0, arrayassetinfoindex = 0
 
 'verify supplier code'

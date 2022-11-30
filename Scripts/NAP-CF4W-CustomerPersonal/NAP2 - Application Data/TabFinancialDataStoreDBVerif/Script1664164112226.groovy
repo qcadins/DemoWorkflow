@@ -26,14 +26,18 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
+'get financial data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13))
 
+'get financial fee from db'
 ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13))
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
+'declare arrayindex, arrayfeeindex'
 int arrayindex = 0, arrayFeeIndex = 0
 
 'Verif jika use default fee value no'

@@ -354,10 +354,15 @@ WebDriver driver = DriverFactory.getWebDriver()
 'get table row'
 ArrayList<WebElement> counttdInstallment = driver.findElements(By.cssSelector('#FinData_FinData > form > div.ng-star-inserted > table > tbody tr'))
 
+'declare installmentamountvalue, principalamountvalue, interestamountvalue'
 int installmentamountvalue, principalamountvalue, interestamountvalue
 
+'get grace period method from confins'
 String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
+
+'get grace period num from confins and parse it to integer'
 int gracePeriodNum = Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Grace Period'),'value'))
+
 'loop for tabel amortisasi '
 for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallment.size(); InstallmentSchemecount++) {
 
@@ -366,6 +371,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
         'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
     ']/td[2]', true)
 
+	'get text installment amount'
     String strInstallmentamount = WebUI.getText(modifyNewInstallmentAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
@@ -373,6 +379,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     modifyNewPrincipalAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_PrincipalAmount'), 
         'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[3]', true)
 
+	'get principal amount'
     String strPrincipalamount = WebUI.getText(modifyNewPrincipalAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
@@ -380,6 +387,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     modifyNewInterestAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'), 
         'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[4]', true)
 
+	'get interest amount'
     String strInterestamount = WebUI.getText(modifyNewInterestAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 	
@@ -388,6 +396,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
         'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + 
     ']/td[5]', true)
 
+	'get os principal amount'
     String strOSPrincipalAmount = WebUI.getText(modifyNewOSPrincipalAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
@@ -395,6 +404,7 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     modifyNewOSInterestAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_OSInterestAmount'), 
         'xpath', 'equals', ('//*[@id="FinData_FinData"]/form/div[3]/table/tbody/tr[' + InstallmentSchemecount) + ']/td[6]', true)
 
+	'get os interest amount'
     String strOSInterestAmount = WebUI.getText(modifyNewOSInterestAmount, FailureHandling.OPTIONAL).replace(',', '').replace(
         '.00', '')
 
@@ -437,13 +447,14 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
     'verify value not minus(-)'
     WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSInterestAmount), 0)
 
+	'Jika grace period method bukan rollover dan bukan interest only dan graceperiodnum = 0'
     if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
 		'get first row installment amount value'
 		if (InstallmentSchemecount == 1) {
 			'Verify installment amount = installment amount seq1'
 			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount)))
 		}
-	}
+	}//jika grace period method = rollover atau interest only dan grace period num bukan 0
 	else if((gracePeriodMethod.equalsIgnoreCase("ROLLOVER")||gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY"))&&gracePeriodNum!=0){
 		if(InstallmentSchemecount==gracePeriodNum+1){
 			'Verify installment amount = installment amount seq graceperiod+1'
@@ -583,9 +594,11 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
+			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	

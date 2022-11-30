@@ -25,8 +25,10 @@ import org.openqa.selenium.Keys as Keys
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'declare datafileTabInsurance'
@@ -35,8 +37,10 @@ datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))
 
+'declare arraysuminsured'
 ArrayList<String> arraysuminsured = new ArrayList<>()
 
+'declare arrayaddpremi'
 ArrayList<String> arrayaddpremi = new ArrayList<>()
 
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
@@ -73,14 +77,19 @@ def AddRate = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariabl
 def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
+'declare counterpaidbymf'
 int counterPaidByMF=0
 
+'declare variableaddcovall'
 ArrayList<WebElement> variableAddCovAll = driver.findElements(By.cssSelector('#insuranceCoverage > div:nth-child(2) > div > label'))
 
 'Mengambil dan menyimpan jumlah additional coverage'
 int countAddCov = variableAddCovAll.size()
 
+'get region from confins'
 String selectedRegion = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value')
+
+'get coverage amount from confins'
 String covAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
 
 'Ambil nilai string road worthiness document dari db'
@@ -103,6 +112,7 @@ for (int i = 1; i <= count; i++) {
 		'Membaca rule excel untuk menentukan year num dan default sum insured percentage'
 		HashMap<String, ArrayList> resultSumInsured = CustomKeywords.'insuranceData.verifySumInsured.verifySumInsuredMainCov'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch)
 		
+		'declare yearno,suminsuredpercentage'
 		ArrayList<String> yearNo, sumInsuredPctg
 		
 		yearNo = resultSumInsured.get("Year")
@@ -117,6 +127,7 @@ for (int i = 1; i <= count; i++) {
 				
 				'Verify default sum insured percentage yang tampil pada confins sesuai dengan rule'
 				if(WebUI.verifyEqual(Double.parseDouble(sumInsuredPercentValue),Double.parseDouble(sumInsuredPctg.get(j)))==false){
+					'write to excel failed reason verify rule'
 					writeFailedReasonVerifyRule()
 				}
 				
@@ -200,13 +211,16 @@ for (int i = 1; i <= count; i++) {
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
 		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
 		
+		'modify random object'
 		modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
+		'klik modify random object'
 		WebUI.click(modifyRandomObject)
 		
 		'Ambil nilai main premi rate dari confins'
 		String mainPremiVal = WebUI.getAttribute(mainPremiRateObject,'value').replace(" %","")
 		
+		'declare maincvgtype, mainpremirate arraylist'
 		ArrayList<String> mainCvgType, mainPremiRate
 		mainCvgType = resultMainCvg.get("MainCvg")
 		mainPremiRate = resultMainCvg.get("MainRate")

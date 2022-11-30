@@ -23,6 +23,7 @@ datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 
 GlobalVariable.FlagFailed = 0
 
+'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -46,6 +47,7 @@ if (GlobalVariable.Role == 'Testing') {
 	
 }
 
+'get insuredby from excel'
 String insuredBy = datafileTabInsurance.getValue(
     GlobalVariable.NumofColm, 12)
 
@@ -116,9 +118,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
+			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	

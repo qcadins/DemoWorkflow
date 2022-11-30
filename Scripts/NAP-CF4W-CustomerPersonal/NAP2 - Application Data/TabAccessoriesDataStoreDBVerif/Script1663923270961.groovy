@@ -22,13 +22,17 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
 
+'get accessories data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.CopyAppColm,
 		12))
 
+'declare arraynum'
 int arraynum = 0
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'looping data accessories'
 for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
 1); (GlobalVariable.NumofAccessories)++) {
 	'verify supplier code'
