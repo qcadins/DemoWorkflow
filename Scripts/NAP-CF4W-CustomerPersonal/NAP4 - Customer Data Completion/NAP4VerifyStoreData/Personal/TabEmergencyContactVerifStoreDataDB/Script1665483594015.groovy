@@ -22,10 +22,13 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 	
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
+'get emergencycontact data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4EmergencyContactStoreData'(sqlconnectionLOS, appno, custname)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
@@ -155,5 +158,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.EmergencyContact', 1, 
         GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-
-CustomKeywords.'dbConnection.connectDB.ConnectDB'()

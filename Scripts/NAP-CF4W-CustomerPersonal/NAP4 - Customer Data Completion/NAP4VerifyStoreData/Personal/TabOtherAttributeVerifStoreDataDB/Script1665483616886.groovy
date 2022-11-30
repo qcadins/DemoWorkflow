@@ -20,11 +20,14 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
+'get otherattrinfo from db'
 ArrayList<String> resultotherattrinfo = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherAttrInfoStoreData'(sqlconnectionLOS, appno, 
     GlobalVariable.Custname)
 
+'get otherattr data from db'
 ArrayList<String> resultotherattrlist = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherAttrStoreData'(sqlconnectionLOS, appno, 
     GlobalVariable.Custname)
 

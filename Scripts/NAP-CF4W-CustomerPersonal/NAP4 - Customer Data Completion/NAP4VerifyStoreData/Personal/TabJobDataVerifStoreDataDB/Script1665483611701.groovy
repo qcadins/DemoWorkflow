@@ -19,8 +19,10 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
 ArrayList<String> result = new ArrayList<>()
@@ -34,36 +36,47 @@ ArrayList<String> othaddress = new ArrayList<>()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'EMPLOYEE') {
+	'get job employee data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataEmployeePersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data oth address from db'
 	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
 	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'PROFESSIONAL') {
-	
+	'get job professional data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataProfPersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data oth address from db'
 	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
 	
 } else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/CustomerModelCode')) ==
 'NON PROFESSIONAL') {
+	'get job non professional data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataNonProfPersonalStoreData'(sqlconnectionLOS, appno, custname)
 } else {
-	
+	'get job sme data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataSMEPersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data oth address from db'
 	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
 }
 

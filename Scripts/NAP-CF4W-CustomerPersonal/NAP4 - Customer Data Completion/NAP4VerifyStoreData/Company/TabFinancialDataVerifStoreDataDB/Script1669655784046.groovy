@@ -24,17 +24,19 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-'connect DB'
-
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 35).length() != 0) {
 		
+	'get financial data from db'
 	ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 35))
 	
+	'get financialattr from db'
 	ArrayList<String> resultfinancialattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialAttrCompanyStoreData'(sqlconnectionLOS, appno, custname)
 	
 	int financialdataindex = 0, financialattr = 0
@@ -154,6 +156,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 70).length() != 0) {
+	'get bankacc from db'
 	ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 70))
 	
 	int bankacc = 0
@@ -186,6 +189,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 73).split(',').join(), (resultbankacc[bankacc++].split(',').join()).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 	
+	'get bankstat from db'
 	String bankstat = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialCheckBankStatCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 	
 	'verify bank statement yes/no'
@@ -205,6 +209,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 		
 		def creditarray = GlobalVariable.FindDataFile.getValue(index, 79).split(';',-1)
 		
+		'get bankstatdata from db'
 		ArrayList<String> resultbankstatdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4BankStatDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 		
 		'ganti value null > "" (String kosong)'

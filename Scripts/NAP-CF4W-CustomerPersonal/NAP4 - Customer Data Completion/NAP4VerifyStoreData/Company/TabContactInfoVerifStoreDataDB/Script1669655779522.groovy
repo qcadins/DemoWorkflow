@@ -21,10 +21,13 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>() 
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
 
+'get contact information from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4ContactInformationStoreData'(sqlconnectionLOS, appno, custname)
 
 int arrayindex = 0
