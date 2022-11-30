@@ -26,12 +26,14 @@ GlobalVariable.FlagFailed = 0
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
+//jika role testing
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
             'CUSTOMER', false, FailureHandling.OPTIONAL))
 }
 
+//jika inputdata
 if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
     'input customer legal name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-valid'), 
@@ -45,6 +47,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Id Type'), 
         datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21), false)
 
+	'jika id type pada excel bukan e-ktp atau bukan npwp atau bukan akta'
     if (((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21) != 'E-KTP') && (datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 21) != 'NPWP')) && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         21) != 'AKTA')) {
@@ -128,6 +131,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
         }
     }
     
+	'jika authority aml tidak kosong'
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 36).length() > 1) {
         'click authority AML Lookup'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Authority AML_btn btn-raised btn-primary'))
@@ -219,7 +223,8 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Ownership'), 
         datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 45), false //Verif data lookup db dengan yang muncul di confins
         ) //Ambil nilai terbaru dari confins untuk verif store db lookup
-} else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
+} //jika lookup
+else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     'click lookup button customer'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
 
@@ -268,18 +273,21 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     }
     
     if (GlobalVariable.Role == 'Testing') {
+		//getdata cust
         getDataCust()
 
         'call test case customer data verif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
+	'jika customer model tidak kosong'
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 25).length() > 1) {
         'select customer model'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'), 
             datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 25), false)
     }
     
+	'jika department aml tidak kosong'
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 34).length() > 1) {
         'click button department lookup'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
@@ -321,6 +329,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
         }
     }
     
+	'jika authority aml tidak kosong'
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 36).length() > 1) {
         'click authority AML Lookup'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Authority AML_btn btn-raised btn-primary'))
@@ -346,6 +355,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     }
     
     if (GlobalVariable.Role == 'Testing') {
+		//getdatacust
         getDataCust()
     }
 }
@@ -424,6 +434,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     }
 } else {
     if (flagWarning > 0) {
+		'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
@@ -446,6 +457,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
 GlobalVariable.FlagFailed = 0
 
 def getDataCust() {
+	'declare confinsdata'
     def confinsdata = []
 
     'add customer name to array'
@@ -537,13 +549,14 @@ def getDataCust() {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-

@@ -37,11 +37,14 @@ String AuthorityAML = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 43)
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get familydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonal'(sqlconnectionLOS, datafileTabFamily.getValue(
         GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
+'declare arrayindex'
 int arrayindex = 0
 
 'verify relationship'
@@ -60,6 +63,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.Numof
 arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+'jika idtype bukan ektp atau bukan akta atau bukan npwp'
 if ((!(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22).equalsIgnoreCase('E-KTP')) || !(datafileTabFamily.getValue(
     GlobalVariable.NumofFamily, 22).equalsIgnoreCase('AKTA'))) || !(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
     22).equalsIgnoreCase('NPWP'))) {

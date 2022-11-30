@@ -19,15 +19,18 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
+'get cust data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
     datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13), datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 17))
 
+'looping cust data from db'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     arrayMatch.add(WebUI.verifyMatch(result[i], '(?i)' + (GlobalVariable.Confinsdata[i]), true, FailureHandling.OPTIONAL))

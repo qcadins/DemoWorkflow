@@ -25,12 +25,15 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabGuarantorCompany'
 datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
+'get guarantorcompanydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnectionLOS, 
     datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorCompany.getValue(
         GlobalVariable.CopyAppColm, 18))
 
+'declare arrayindex'
 int arrayindex = 0
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify relationship'

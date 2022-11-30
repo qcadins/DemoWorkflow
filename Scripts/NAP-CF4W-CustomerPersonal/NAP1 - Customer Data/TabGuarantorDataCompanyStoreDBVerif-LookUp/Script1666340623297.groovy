@@ -22,12 +22,15 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileTabGuarantorCompany'
 datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
+'get guarantorcompanydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompanyLookUp'(sqlconnectionLOS, 
     datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12), datafileTabGuarantorCompany.getValue(
         GlobalVariable.NumofGuarantorCompany, 16))
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
+'looping guarantorcompanydata'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     arrayMatch.add(WebUI.verifyMatch(result[i], '(?i)' + (GlobalVariable.Confinsdata[i]), true, FailureHandling.OPTIONAL))
@@ -43,4 +46,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
         1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-

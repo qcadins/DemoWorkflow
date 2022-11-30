@@ -22,10 +22,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileTabFamily'
 datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
 
+'get familydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
     datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(
         GlobalVariable.NumofFamily, 16), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27))
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'ganti value null > "" (String kosong)'

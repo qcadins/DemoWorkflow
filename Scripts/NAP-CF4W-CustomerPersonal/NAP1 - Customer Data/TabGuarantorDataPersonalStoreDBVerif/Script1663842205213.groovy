@@ -14,8 +14,6 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import org.openqa.selenium.WebElement
-
 import groovy.sql.Sql as Sql
 
 'declare datafileCustomerPersonal'
@@ -24,18 +22,25 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabGuarantorPersonal'
 datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
 
+'declare datafileTabGuarantorCompany'
+datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
+
+'get department aml from excel'
 String DepartmentAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 33)
 
+'get authority aml from excel'
 String AuthorityAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 35)
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get guarantor personal data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, 
     datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 19))
 
 int arrayindex = 0
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'verify relationship'
@@ -54,6 +59,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVar
 arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+'jika id type bukan e-ktp atau bukan akta atau bukan npwp'
 if ((!(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('E-KTP')) || 
 !(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('AKTA'))) || !(datafileTabGuarantorPersonal.getValue(
     GlobalVariable.CopyAppColm, 22).equalsIgnoreCase('NPWP'))) {
@@ -61,6 +67,7 @@ if ((!(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).equ
     arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 22).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
+	'skip'
     arrayindex++
 }
 
@@ -119,6 +126,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVar
 //
 //'verify authority aml'
 //arrayMatch.add(WebUI.verifyMatch(AuthorityAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
 'verify copy address atau tidak'
 if (datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 38).equalsIgnoreCase('Yes')) {
     'verify addres copy dari customer'
@@ -196,4 +204,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
         1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-
