@@ -49,17 +49,17 @@ datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabT
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument')
 
 'click menu application data'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 //Verify sort & paging
-not_run: pagingTesting()
+pagingTesting()
 
 'input Appno'
-not_run: WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
     datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
 'Looping delay untuk handling copy app selama +- 2 menit'
-not_run: for (int i = 1; i <= 8; i++) {
+for (int i = 1; i <= 8; i++) {
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Search'))
 
@@ -74,10 +74,10 @@ not_run: for (int i = 1; i <= 8; i++) {
 }
 
 'click icon pensil untuk select'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
 'get data file path'
-not_run: GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) > 0) {
@@ -343,8 +343,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call test case tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab upload document
             //dijalankan dengan copy app tab referantor
-            ) //dijalankan dengan copy app tab application
-        //dijalankan dengan copy app tab asset
+            //dijalankan dengan copy app tab application
+            ) //dijalankan dengan copy app tab asset
         //dijalankan dengan copy app tab insurance
         //Dijalankan dengan copy app tab financial
         //Dijalankan dengan copy app tab term&condition
@@ -420,7 +420,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab application atau copy app dengan edit'
-    not_run: if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabApplication.getValue(
+    if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabApplication.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'Call test case tab application data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -451,8 +451,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab asset atau copy app dengan edit'
-    not_run: if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(GlobalVariable.NumofColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case tab asset data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
@@ -519,7 +519,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
-    not_run: if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabInsurance.getValue(
+    if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -568,7 +568,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
-    not_run: if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
+    if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab financial'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -601,7 +601,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab term & condition atau copy app dengan edit'
-    not_run: if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabTC.getValue(GlobalVariable.NumofColm, 
+    if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabTC.getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab term condition'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabTermConditionData'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -630,7 +630,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    not_run: for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
     1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
@@ -641,8 +641,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'
-    not_run: if (datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase('No') || datafileTabUploadDoc.getValue(
-        copyAppColm, 10).equalsIgnoreCase('Edit')) {
+    if (datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase('No') || datafileTabUploadDoc.getValue(copyAppColm, 
+        10).equalsIgnoreCase('Edit')) {
         'call test case tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase('Yes')) {
@@ -706,16 +706,16 @@ def verifyMatch() {
 
 def pagingTesting() {
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
-        ArrayList<WebElement> resultReset = new ArrayList<WebElement>()
+        ArrayList<String> resultReset = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifySort = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifySort = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
         'Verif reset'
         resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 
-        ArrayList<WebElement> listString = new ArrayList<WebElement>()
+        ArrayList<String> listString = new ArrayList<String>()
 
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -961,4 +961,3 @@ def pagingTesting() {
         }
     }
 }
-

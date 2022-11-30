@@ -187,8 +187,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
                 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'), 
                     SubsidyTypeArray[(subsidyarray - 1)], false)
 
-                if ((SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Supplier') || (SubsidyTypeArray[(subsidyarray - 
-                1)]).equalsIgnoreCase('Multifinance')) {
+                if ((SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Supplier') || (SubsidyTypeArray[(subsidyarray - 1)]).equalsIgnoreCase('Multifinance')) {
 			
 					objectidx = 2
 					

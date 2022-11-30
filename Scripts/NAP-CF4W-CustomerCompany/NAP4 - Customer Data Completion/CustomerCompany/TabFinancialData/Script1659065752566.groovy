@@ -81,6 +81,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+					
                         String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
                         if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
