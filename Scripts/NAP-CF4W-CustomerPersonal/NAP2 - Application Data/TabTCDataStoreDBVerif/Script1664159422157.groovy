@@ -16,31 +16,41 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB'
+'connect DB los'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get tc data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TermConditionStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
+'declare arrayindex'
 int arrayindex = 0
 
+'declare flagfailed'
 int flagFailed = 0
 
 'declare datafileTabTC'
 datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData')
 
+'declareYesUncheckArray '
 def YesUncheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
+'declare PromiseDateArray'
 def PromiseDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
+'declare RequiredNoCheckArray'
 def RequiredNoCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
+'declare ExpiredDocArray'
 def ExpiredDocArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
+'declare ExpiredDateArray'
 def ExpiredDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
+'declare WaivedCheckArray'
 def WaivedCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
+'looping verif tc data from db'
 for(index = 0 ; index < result.size()/9 ; index++){
 	TCdoc = result[arrayindex++]
 	

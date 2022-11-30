@@ -23,23 +23,31 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import groovy.sql.Sql as Sql
 
+'declare subsidyfaileddelete'
 ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
+'declare subsidytypearray'
 def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
 
+'declare SubsidyfromValueArray'
 def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
 
+'declare AllocationformArray'
 def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
 
+'declare SubsidySourceArray'
 def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
 
+'declare SubsidyValueTypeArray'
 def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
 
+'declare SubsidyValueAmountArray'
 def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
 
+'declare SubsidyValuePercentageArray'
 def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
@@ -47,6 +55,7 @@ def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 1
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
+	'looping allocationformarray'
 	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
 			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
@@ -55,19 +64,24 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase
 		
 		String overrideSubsidyValueAmountArray = SubsidyValueAmountArray.join(';')
 
+		'write subsidy amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 			16, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
 	}
 }
-
+'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+'declare variable'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
+'declare varsize'
 int varsize = variable.size()
 
+'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil appno dari confins'
@@ -79,6 +93,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 	'Hashmap untuk mengambil arraylist-arraylist nilai result subsidy dari rule subsidy berdasarkan kondisi-kondisi'
 	HashMap<String,ArrayList> result = CustomKeywords.'financialData.verifySubsidy.verifySubsidyDefault'(sqlConnectionLOS, sqlConnectionFOU,appNo)
 	
+	'declare subsidyfromtype, subsidyfromvalue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue'
 	ArrayList<String> SubsidyFromType, SubsidyFromValue, SubsidyAlloc, SubsidySource, SubsidyValueType, SubsidyValue
 	SubsidyFromType = result.get("FT")
 	SubsidyFromValue = result.get("FV")
@@ -100,31 +115,36 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 	if(varsize==SubsidyFromType.size() && varsize > 0){
 		'Looping data subsidi pada confins'
 		for (int i = 1; i <= varsize; i++) {
-			 
+			'modify subsidy'
 			modifySubsidy(i)
 			
 			'Verif subsidy from type sesuai rule'
 			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyFromTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewFromTypeName)),SubsidyFromType.get(i-1),false)==false){
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy from value sesuai rule'
 			if(WebUI.verifyMatch(WebUI.getText(modifyNewFromValueName),SubsidyFromValue.get(i-1),false)==false){
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy allocation sesuai rule'
 			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyAllocCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyAllocation)),SubsidyAlloc.get(i-1),false)==false){
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy value type sesuai rule'
 			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidyValueTypeCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidyValueType)),SubsidyValueType.get(i-1),false)==false){
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
 			'Verif subsidy source sesuai rule'
 			if(WebUI.verifyMatch(CustomKeywords.'financialData.verifySubsidy.checkSubsidySourceCode'(sqlConnectionLOS, WebUI.getText(modifyNewSubsidySource)),SubsidySource.get(i-1),false)==false){
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -133,6 +153,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 				
 				'Verif subsidy percentage sesuai rule'
 				if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyPercentage).replace(" %","")),Double.parseDouble(SubsidyValue.get(i-1)))==false){
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -141,6 +162,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 				
 				'Verif subsidy amount sesuai rule'
 				if(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(modifyNewSubsidyAmount).replace(",","")),Double.parseDouble(SubsidyValue.get(i-1)))==false){
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -151,7 +173,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 	'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 	for (int i = 1; i <= variable.size(); i++) {
-
+		'modify subsidy'
 		modifySubsidy(i)
 
 		for (int subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
@@ -164,6 +186,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 				modifyNewButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Button_Edit'),
 				'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[1]/i', true)
 			
+				'klik button edit'
 				WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
 				'select multifinance / supplier'
@@ -245,7 +268,8 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 								
 						'click button delete'
 						WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
-								
+						
+						'accept alert'
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								
 						if(i == variable.size()){
@@ -280,20 +304,26 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 	}
 }
 
+'Jika ada delete subsidy yang gagal'
 if(subsidyfaileddelete.size() > 0){
+	'write to excel status warning'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'10.TabFinancialData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
+	'write to excel reason failed delete'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 			'10.TabFinancialData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
 	
 	GlobalVariable.FlagWarning++
 }
 
+'declare variabledata'
 ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 
+'declare countdata'
 int countData = variableData.size()
 
+'looping subsidytype'
 for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 	for (int SubsidyCheck = 1; SubsidyCheck <= countData; SubsidyCheck++) {
 		if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
@@ -321,6 +351,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 				WebUI.getText(modifyNewSubsidyAllocation)))) || !((SubsidySourceArray[(s - 1)]).equalsIgnoreCase(WebUI.getText(
 					modifyNewSubsidySource)))) {
 				if (countData == SubsidyCheck) {
+					'add subsidy'
 					addSubsidy(s)
 				}
 			} else {
@@ -330,6 +361,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 			if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
 				if (SubsidyTypeArray.size() > 0) {
+					'add subsidy'
 					addSubsidy(s)
 				}
 			}

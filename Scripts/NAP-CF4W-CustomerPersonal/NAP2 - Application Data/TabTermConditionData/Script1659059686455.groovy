@@ -29,6 +29,7 @@ GlobalVariable.FlagFailed = 0
 'declare datafileTabTC'
 datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData')
 
+'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -51,8 +52,10 @@ ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#TC-tab > a
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya dokumen'
 int count = variable.size()
 
+'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'Ambil text customer model dari confins'
@@ -64,6 +67,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 'Hashmap untuk mengambil nilai tccode, tcmandatory, tc priorto dan tc is waivable berdasarkan condition-condition dari rule excel'
 HashMap<String,ArrayList> result = CustomKeywords.'tcData.verifyTCData.verifyTCList'(sqlConnectionLOS, sqlConnectionFOU,custModel,appNo)
 
+'declare TCCode, TCMandatory, TCPrior, TCWaive'
 ArrayList<String> TCCode, TCMandatory, TCPrior, TCWaive
 TCCode = result.get("TCCode")
 TCMandatory = result.get("TCMdt")
@@ -73,20 +77,25 @@ TCWaive = result.get("TCWaive")
 'Looping data dokumen'
 for (int i = 1; i <= count; i++) {
 
+	'modify required'
 	modifyObjectRequired = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_Checkbox'),
 		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 	i) + ']/td[4]'), true)
 
+	'modify checkbox'
 	modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_Checkbox'),
 		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 	i) + ']/td[5]/input'), true)
 
+	'modify priorto'
 	modifyObjectPriorTo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/td_PriorTo'),'xpath','equals',"//*[@id='TC-tab']/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr["+i+"]/td[3]",true)
 
+	'modify documentname'
 	modifyObjectDocumentName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'),
 		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 	i) + ']/td[2]'), true)
 	
+	'modifywaived'
 	modifyObjectWaived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_waived'),
 		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 		 i) + ']/td[6]/input'), true)
@@ -97,12 +106,14 @@ for (int i = 1; i <= count; i++) {
 	if(GlobalVariable.Role=="Testing" &&  GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'verif document name based on rule'
 		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
+			'write to excel failed verify rule'
 			writeToExcelFailedVerifRule()
 			GlobalVariable.FlagFailed=1
 		}
 		if(TCMandatory.get(i-1)=="false"){
 			'verif required based on rule'
 			if(WebUI.verifyElementText(modifyObjectRequired,"NO")==false){
+				'write to excel failed verify rule'
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
@@ -110,18 +121,21 @@ for (int i = 1; i <= count; i++) {
 		else if(TCMandatory.get(i-1)=="true"){
 			'verif required based on rule'
 			if(WebUI.verifyElementText(modifyObjectRequired,"YES")==false){
+				'write to excel failed verify rule'
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
 		}
 		'verif prior to based on rule'
 		if(WebUI.verifyMatch(WebUI.getText(modifyObjectPriorTo),TCPrior.get(i-1),false)==false){
+			'write to excel failed verify rule'
 			writeToExcelFailedVerifRule()
 			GlobalVariable.FlagFailed=1
 		}
 		if(TCWaive.get(i-1)=="false"){
 			'verif waive terlock based on rule'
 			if(WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)==false){
+				'write to excel failed verify rule'
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
@@ -129,6 +143,7 @@ for (int i = 1; i <= count; i++) {
 		else if(TCWaive.get(i-1)=="true"){
 			'verif waive tidak terlock/ dapat dicentang based on rule'
 			if(WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)==false){
+				'write to excel failed verify rule'
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
@@ -146,6 +161,7 @@ for (int i = 1; i <= count; i++) {
 			WebUI.uncheck(modifyObjectCheckbox)
 		}
 		
+		'declare checkno'
 		def checkNO = datafileTabTC.getValue(
 			GlobalVariable.NumofColm, 14).split(';', -1)
 
@@ -170,13 +186,16 @@ for (int i = 1; i <= count; i++) {
 			WebUI.check(modifyObjectCheckbox)
 		}
 		
+		'declare uncheckyes'
 		def uncheckYES = datafileTabTC.getValue(
 			GlobalVariable.NumofColm, 12).split(';', -1)
 
+		'modify promise date'
 		modifyObjectPromiseDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'),
 			'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 		i) + ']/td[7]/input'), true)
 
+		'declare promisedate'
 		def PromiseDate = datafileTabTC.getValue(
 			GlobalVariable.NumofColm, 13).split(';', -1)
 
@@ -201,17 +220,20 @@ for (int i = 1; i <= count; i++) {
 			}
 		}
 	}
-   
+	'modify expired date'
 	modifyObjectExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabTermConditionData/input_expiredDate'),
 		'xpath', 'equals', (('//*[@id="TC-tab"]/app-tc-data/div/div/div/div/div/form/div/app-term-conditions/div/table/tbody/tr[' +
 	i) + ']/td[8]/input'), true)
 
+	'declare expiredDateDocument'
 	def expiredDateDocument = datafileTabTC.getValue(
 		GlobalVariable.NumofColm, 15).split(';', -1)
 
+	'declare expiredDate'
 	def expiredDate = datafileTabTC.getValue(
 		GlobalVariable.NumofColm, 16).split(';', -1)
 
+	'declare waivedDocument'
 	def waivedDocument = datafileTabTC.getValue(
 		GlobalVariable.NumofColm, 17).split(';', -1)
 
@@ -304,9 +326,11 @@ public writeToExcelFailedVerifRule(){
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabTermConditionData',
 				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
