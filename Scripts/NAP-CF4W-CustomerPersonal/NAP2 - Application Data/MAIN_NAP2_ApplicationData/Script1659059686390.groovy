@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
+'declare copyappcolm'
 Integer copyAppColm = 2
 GlobalVariable.CopyAppColm=2
 
@@ -82,6 +83,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-App
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 if (GlobalVariable.Role == 'Data Entry') {
+	'Jika count of referantor (excel) > 0 '
 	if((Integer.parseInt(GlobalVariable.CountofReferantor) > 0)){
 		'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
@@ -412,7 +414,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 
 } else {
-
+	'Jika count of referantor (excel) > 0 '
 	if((Integer.parseInt(GlobalVariable.CountofReferantor) > 0)){
 		'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
@@ -789,15 +791,19 @@ public verifyMatch(){
 
 public pagingTesting(){
 	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
+		'declare result reset'
 		ArrayList<String> resultReset = new ArrayList<String>()
 
+		'declare checkverifysort'
         ArrayList<String> checkVerifySort = new ArrayList<String>()
 
+		'declare checkverifyfooter'
         ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 		
 		'Verif reset'
 		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 		
+		'declare liststring'
 		ArrayList<String> listString = new ArrayList<String>()
 		
 		'click button search'
@@ -821,6 +827,7 @@ public pagingTesting(){
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 		
+		'looping untuk simpan appno ascending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
@@ -829,11 +836,16 @@ public pagingTesting(){
 		}
 		'verif sort appno ascending'
 		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'verif sort appno ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		listApp = new ArrayList<String>()
+		
 		'Klik header appno'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_appNo'))
+		
+		'looping untuk simpan appno descending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
@@ -842,6 +854,8 @@ public pagingTesting(){
 		}
 		'Verif sort appno descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
+		
+		'Verif sort appno descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		'Klik header custname'
@@ -851,6 +865,8 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 		
 		listString = new ArrayList<String>()
+		
+		'looping untuk simpan custname ascending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/custName')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
@@ -860,11 +876,15 @@ public pagingTesting(){
 		}
 		'Verif sort custname ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'Verif sort custname ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		'Klik header custname'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_custName'))
 		listString = new ArrayList<String>()
+		
+		'looping untuk simpan custname descending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/custName')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
@@ -874,6 +894,8 @@ public pagingTesting(){
 		}
 		'Verif sort custname descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+		
+		'Verif sort custname descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		'Klik header poname'
@@ -883,6 +905,8 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 		
 		listString = new ArrayList<String>()
+		
+		'looping untuk simpan poname ascending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/POName')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
@@ -892,11 +916,16 @@ public pagingTesting(){
 		}
 		'verif sort poname ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'verif sort poname ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		'Klik header poname'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/span_POName'))
+		
 		listString = new ArrayList<String>()
+		
+		'looping untuk simpan poname descending'
 		for(int i=1;i<=rowData.size();i++){
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/POName')
 					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
@@ -906,6 +935,8 @@ public pagingTesting(){
 		}
 		'verif sort poname descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+		
+		'verif sort poname descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
 		
 		'Klik 2x appno supaya urutan descending'
@@ -914,6 +945,8 @@ public pagingTesting(){
 		
 		'Ambil count data dari confins'
 		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/countData')).replace(' ', '').replace(':', ';').split(';')
+		
+		'parsing countdata ke integer'
 		Integer countDt = Integer.parseInt(textCountData[1])
 		
 		'Jika count data keseluruhan lebih besar daripada jumlah data page 1'
@@ -926,10 +959,13 @@ public pagingTesting(){
 					
 			listString = new ArrayList<String>()
 			
+			'looping untuk simpan appno page 2'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 			
 			'Verif appno pada page 2 tidak ada di page 1'
 			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp,listString)
+			
+			'Verif appno pada page 2 tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging,true))
 			
 			'Klik button prev'
@@ -943,11 +979,13 @@ public pagingTesting(){
 					
 			listString = new ArrayList<String>()
 			
+			'looping untuk simpan appno page 1'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 					
 			'Verif appno yang ada di page 1 tidak ada di page 2'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 			
+			'Verif appno yang ada di page 1 tidak ada di page 2'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 			
 			'Klik button next'
@@ -961,44 +999,56 @@ public pagingTesting(){
 			
 			listString = new ArrayList<String>()
 			
+			'looping untuk simpan appno page 2'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 					
 			'Verif appno yang ada di page 2 tidak ada di page 1'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 			
+			'Verif appno yang ada di page 2 tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		}
 		
 		'Klik button page 1'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/pageOne'))
 		
+		'verif jumlah data yang muncul pada paging sesuai'
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP2CountDataInPage'(),true))
 		
+		'Jika verif reset ada yang tidak sesuai'
 		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
+				'write to excel status warning'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-		
+				
+				'write to excel reason'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 					1, GlobalVariable.NumofColm-1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace("-","")+GlobalVariable.ReasonFailedReset+"NAP2"+";\n")
 		
 				GlobalVariable.FlagWarning=1
 		}
 		
+		'Jika verif sort ada yang tidak sesuai'
 		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				'write to excel status warning'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
 			
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				'write to excel reason'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							1, GlobalVariable.NumofColm-1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedSort+"NAP2"+";\n"))
 			
 				GlobalVariable.FlagWarning=1
 		}
 			
+		'Jika verif footer ada yang tidak sesuai'
 		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				'write to excel status warning'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							0, GlobalVariable.NumofColm-1, GlobalVariable.StatusWarning)
-			
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+				
+				'write to excel reason'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 							1, GlobalVariable.NumofColm-1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace("-","")+(GlobalVariable.ReasonFailedFooter+"NAP2"+";\n"))
 			
 				GlobalVariable.FlagWarning=1
