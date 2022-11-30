@@ -88,7 +88,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21), false)
 
-                        'input Id Expired Date'
+                        'Verify ID Type'
                         if (((datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') && 
                         (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) && (datafileTabFamily.getValue(
                             GlobalVariable.NumofFamily, 21) != 'AKTA')) {

@@ -22,12 +22,15 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileTabGuarantorPersonal'
 datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
+'get guarantordatapersonal from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
     datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), datafileTabGuarantorPersonal.getValue(
         GlobalVariable.NumofGuarantorPersonal, 16))
 
+'looping guarantordatapersonal from db'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
     arrayMatch.add(WebUI.verifyMatch(result[i], '(?i)' + (GlobalVariable.Confinsdata[i]), true, FailureHandling.OPTIONAL))

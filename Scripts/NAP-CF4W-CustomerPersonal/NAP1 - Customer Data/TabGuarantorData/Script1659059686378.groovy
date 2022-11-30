@@ -33,8 +33,10 @@ datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-
 'declare datafileTabGuarantorCompany'
 datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
+'get copyapp from excel'
 copyapp = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10)
 
+'declare variabledata'
 ArrayList<String> variableData
 
 if (GlobalVariable.Role == 'Testing') {
@@ -43,13 +45,14 @@ if (GlobalVariable.Role == 'Testing') {
         'GUARANTOR', false, FailureHandling.OPTIONAL)
 }
 
-'Loop Multiple Guarantor Data'
+'Loop Multiple Guarantor Data Personal Excel'
 for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     GlobalVariable.FlagFailed = 0
-
+	'jika appno guarantor perrsonal excel = appno customermaindata excel'
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
+		'jika tabel confins bernilai no data available'
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
             5, FailureHandling.OPTIONAL)) {
             'count table guarantor pada confins'
@@ -59,6 +62,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
         }
         
+		'looping tabel guarantor'
         for (int i = 1; i <= variableData.size(); i++) {
             'modify object guarantor name'
             modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -67,11 +71,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
             'verify if copy app edit'
             if (copyapp.equalsIgnoreCase('Edit')) {
+				'jika no data available pada confins muncul'
                 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
                     5, FailureHandling.OPTIONAL)) {
                     copyapp == 'No'
-                } else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
-                    if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileTabGuarantorPersonal.getValue(
+                } //jika ada guarantor
+				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+                    //jika guarantor name confins = guarantor name excel / excel lookup 
+					if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileTabGuarantorPersonal.getValue(
                             GlobalVariable.NumofGuarantorPersonal, 19)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
                         datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 16))) {
                         break
@@ -79,6 +86,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 }
             }
             
+			'jika guarantor merupakan data terakhir atau copyapp bernilai no'
             if ((i == variableData.size()) || (copyapp == 'No')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                     5, FailureHandling.OPTIONAL)) {
@@ -202,6 +210,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                             continue
                         }
                         
+						'jika authority aml tidak kosong'
                         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                             36).length() > 1) {
                             'click button lookup authority AML'
@@ -219,11 +228,13 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                             verifyInputError(flagWarning)
                         }
                         
+						'jika copy address yes'
                         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                             38) == 'Yes') {
                             'click button copy'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
-                        } else if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+                        } //jika copy address no
+						else if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                             38) == 'No') {
                             'input text address'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'), 
@@ -348,6 +359,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                             }
                             
                             if (GlobalVariable.Role == 'Testing') {
+								//getdataguarpersonal
                                 getDataGuarPersonal()
 
                                 'call test case Personal data verif'
@@ -360,6 +372,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                                 datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                     18), false)
 
+							'jika customermodel tidak kosong'
                             if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                 25).length() > 1) {
                                 'select customer model'
@@ -368,6 +381,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                                         25), false)
                             }
                             
+							'jika department aml tidak kosong'
                             if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                 34).length() > 1) {
                                 'click lookup department AML'
@@ -407,6 +421,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                                 }
                             }
                             
+							'jika authority aml tidak kosong'
                             if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                                 36).length() > 1) {
                                 'click button lookup authority AML'
@@ -480,6 +495,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                         (GlobalVariable.CountNumofCustomer)--
                     } else {
                         if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+							'write to excel status warning'
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                                 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                         }
@@ -508,13 +524,14 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
 }
 
-//GuarantorCompany
+//GuarantorCompany looping excel
 for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
 1); (GlobalVariable.NumofGuarantorCompany)++) {
     GlobalVariable.FlagFailed = 0
-
+	'Jika appno guarantor company excel = appno customer main data excel'
     if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
+		'Jika muncul no data available'
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
             5, FailureHandling.OPTIONAL)) {
             'count table guarantor pada confins'
@@ -524,17 +541,22 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
         }
         
+		'loopung tabel guarantor'
         for (int i = 1; i <= variableData.size(); i++) {
             'modify object guarantor name'
             modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="guarantor-tab"]/app-guarantor-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[2]', true)
 
+			'jika copy app bernilai edit'
             if (copyapp.equalsIgnoreCase('Edit')) {
+				'jika muncul no data available'
                 if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
                     5, FailureHandling.OPTIONAL)) {
                     copyapp = 'No'
-                } else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+                } //jika guarantor name ada pada confins
+				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+					'jika guarantor name confins = guarantorname excel / excel lookup'
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileTabGuarantorCompany.getValue(
                             GlobalVariable.NumofGuarantorCompany, 18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
                         datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 16))) {
@@ -543,6 +565,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                 }
             }
             
+			'jika guarantor merupakan index terakhir atau copyapp = no'
             if ((i == variableData.size()) || (copyapp == 'No')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                     5, FailureHandling.OPTIONAL)) {
@@ -577,11 +600,13 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                             datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 21), 
                             false)
 
+						'jika copy address yes'
                         if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 23) == 
                         'Yes') {
                             'click button copy'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
-                        } else if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                        } //jika copy address no
+						else if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                             23) == 'No') {
                             'input text address'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'), 
@@ -726,6 +751,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                                 datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                     17), false)
 
+							'jika customertype tidak kosong'
                             if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                 20).length() > 1) {
                                 'select customer type'
@@ -787,6 +813,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                     } else {
                         if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
+							'write to excel status warning'
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                                 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                         }
@@ -982,4 +1009,3 @@ def verifyInputError(int flagWarning) {
         flagWarning++
     }
 }
-
