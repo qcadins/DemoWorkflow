@@ -40,8 +40,7 @@ GlobalVariable.TotalAccessoriesPrice = 0.00
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Jika copy app edit'
-if(datafileTabAsset.getValue(
-	GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
+if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
 	'arraylist accessories name yang gagal'
 	ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
@@ -97,8 +96,7 @@ if(datafileTabAsset.getValue(
 			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessoriesCompany) +
 				  2); (GlobalVariable.NumofAccessories)++) {
 			  
-				  if (datafileAccessories.getValue(
-					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+				  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 						  GlobalVariable.NumofColm, 13))) {
 					  'Pengecekan jika supplier name dan accessories name pada confins sesuai dengan excel'
 					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
@@ -156,25 +154,24 @@ if(datafileTabAsset.getValue(
 							 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 							 if(i == variable.size()){
-								 if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								 }else{
+								 if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 									'add accessories name failed kedalam array'
 									accessoriesnamefaileddelete.add(accessoriesnamebefore)
-									continue
 								 }
 							 }else{
-									'get accessories name sebelum delete'
-									accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-										
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
-											'add accessories name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
-										}
+								 'get accessories name sebelum delete'
+								 accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+							 	
+								 if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
+									 'add accessories name failed kedalam array'
+									 accessoriesnamefaileddelete.add(accessoriesnamebefore)
+								 }
+
 							 }
+							 
+							 'count table accessories setelah delete'
+							  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+							  
 							 i--
 				  
 							 continue
@@ -225,7 +222,7 @@ if(datafileTabAsset.getValue(
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 								  
 								   'get accessories name'
-								 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+								   accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 									
 								 'Click delete'
 								  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -234,7 +231,7 @@ if(datafileTabAsset.getValue(
 								  WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								  
 								  if(i == variable.size()){
-										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
+										if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 										}
@@ -242,7 +239,7 @@ if(datafileTabAsset.getValue(
 										'get accessories name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
+										if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
 										}
@@ -258,6 +255,13 @@ if(datafileTabAsset.getValue(
 						  }
 				  }
 			  }
+				  
+			'count table accessories setelah delete'
+			variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
+			
+			if(variableData.size() == 1){
+				break
+			}
 		}
 	}
 	

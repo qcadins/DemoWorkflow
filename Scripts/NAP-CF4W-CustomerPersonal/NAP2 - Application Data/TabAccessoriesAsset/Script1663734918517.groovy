@@ -164,27 +164,24 @@ if(datafileTabAsset.getValue(
 							 'Jika accessories merupakan data index terakhir'
 							 if(i == variable.size()){
 								 'Jika acc name tidak muncul'
-								 if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-									 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								 }else{
-									'add accessories name failed kedalam array'
-									accessoriesnamefaileddelete.add(accessoriesnamebefore)
-									continue
+								 if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
+									 'add accessories name failed kedalam array'
+									 accessoriesnamefaileddelete.add(accessoriesnamebefore)
 								 }
 							 }else{
 									'get accessories name sebelum delete'
 									accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 										
 									'Jika nama acc after delete tidak sama dengan nama acc before delete'
-									if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-									}else{
-											'add accessories name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
+									if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
+										'add accessories name failed kedalam array'
+										accessoriesnamefaileddelete.add(accessoriesnamebefore)
 									}
 							 }
-							 i--
+							 'count table accessories setelah delete'
+							  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+							  
+							  i--
 				  
 							 continue
 						  }
@@ -252,26 +249,23 @@ if(datafileTabAsset.getValue(
 								  'Jika acccessories merupakan data index terakhir'
 								  if(i == variable.size()){
 									  	'Jika accessories name tidak muncul'
-										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
+										if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
 											'add accessories name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
+											accessoriesnamefaileddelete.add(accessoriesnamebefore)												
 										}
 								  }else{
 										'get accessories name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
 										'Jika accessories name after delete tidak sama dengan accessories name before delete'
-										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
+										if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
 										}
 								  }
+								  'count ulang table accessories setelah delete'
+								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								  
 								  i--
 							  }else{
 								  break
@@ -279,6 +273,12 @@ if(datafileTabAsset.getValue(
 						  }
 				  }
 			  }
+			'count table accessories setelah delete'
+			variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
+					
+			if(variableData.size() == 1){
+				break
+			}
 		}
 	}
 	'Jika delete accessories gagal'
