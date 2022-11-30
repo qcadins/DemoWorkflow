@@ -83,11 +83,14 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 21).length() > 2) {
+	'klik lookup customer group'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Customer Group'))
 
+	'set text custname'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Customer Name_custNameId'), 
         GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 21))
 
+	'klik button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Search'))
 
     'verify input error'
@@ -121,11 +124,14 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
 
 'pilih country jika foreigner'
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 25) == 'Foreigner') {
+	'klik button lookup country'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_Country'))
 
+	'input country code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/input_Country Code_countryCodeId'), 
         GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 26))
 
+	'klik search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/button_SearchCountry'))
 
     'verify input error'

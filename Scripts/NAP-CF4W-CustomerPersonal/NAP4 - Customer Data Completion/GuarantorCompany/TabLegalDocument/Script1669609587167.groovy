@@ -32,18 +32,25 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument - Company - Guarantor')
 
+'declare LegalDocTypeArray'
 def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).split(';')
 
+'declare DocumentNoArray'
 def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';')
 
+'declare DateIssuedArray'
 def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';')
 
+'declare ExpiredDateArray'
 def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';')
 
+'declare NotaryNameArray'
 def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';')
 
+'declare NotaryLocationArray'
 def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).split(';')
 
+'declare NotesArray'
 def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).split(';')
 
 'copyapp'

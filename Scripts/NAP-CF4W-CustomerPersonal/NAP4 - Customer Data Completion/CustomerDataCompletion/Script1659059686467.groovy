@@ -19,6 +19,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
+'klik menu new consumer finance'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
 
 'declare datafileCustomerPersonal'
@@ -43,10 +44,13 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 'click action'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/i_CF4W 2021_font-medium-3 ft-edit-2'))
 
+'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+'declare variable'
 ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-detail > div > div > div > div.px-3 > lib-ucgridview > div > table > tbody tr'))
 
+'declare count'
 int count = variable.size()
 
 GlobalVariable.FlagFailed = 0
@@ -54,6 +58,7 @@ GlobalVariable.FlagFailed = 0
 'verify equal number of customer'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
 
+'looping cdc subject'
 for (int i = 1; i <= count; i++) {
 
     'modify object customername'
@@ -192,6 +197,7 @@ for (int i = 1; i <= count; i++) {
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     } else {
+						'call test case guarantor personal'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
@@ -204,6 +210,7 @@ for (int i = 1; i <= count; i++) {
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     } else {
+						'call test case guarantor company'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
@@ -212,6 +219,7 @@ for (int i = 1; i <= count; i++) {
                 if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
+						'klik button action'
                         WebUI.click(modifynewButtonAction)
 
                         if (GlobalVariable.Role == 'Data Entry') {
@@ -219,6 +227,7 @@ for (int i = 1; i <= count; i++) {
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         } else {
+							'call test case guarantor personal'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
                         }
@@ -231,6 +240,7 @@ for (int i = 1; i <= count; i++) {
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         } else {
+							'call test case guarantor company'
                             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
                                 [:], FailureHandling.STOP_ON_FAILURE)
                         }
@@ -280,9 +290,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
             1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
@@ -293,15 +305,19 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 def pagingTesting(){
 	//Verify sort & paging
 	if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal == 'Yes')) {
+		'declare result reset'
 		ArrayList<String> resultReset = new ArrayList<String>()
 	
+		'declare checkverifysort'
 		ArrayList<String> checkVerifySort = new ArrayList<String>()
 	
+		'declare checkverifysort'
 		ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 	
 		//	verif reset nap4
 		resultReset = CustomKeywords.'paging.verifyPaging.resetPagingCustDataCompletion'()
 	
+		'declare liststring'
 		ArrayList<String> listString = new ArrayList<String>()
 	
 		'click search'
@@ -325,6 +341,7 @@ def pagingTesting(){
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
+		'looping simpan appno ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -336,6 +353,7 @@ def pagingTesting(){
 		'verif sort appno ascending'
 		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'verif sort appno ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		listApp = new ArrayList<String>()
@@ -343,6 +361,7 @@ def pagingTesting(){
 		'Klik header appno'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
 	
+		'looping simpan appno descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -354,6 +373,7 @@ def pagingTesting(){
 		'verif sort appno descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 	
+		'verif sort appno descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik 2x header custno supaya descending'
@@ -366,6 +386,7 @@ def pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping simpan custno descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -377,6 +398,7 @@ def pagingTesting(){
 		'Verif sort custno descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
+		'Verif sort custno descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
@@ -387,6 +409,7 @@ def pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping simpan custname ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -398,6 +421,7 @@ def pagingTesting(){
 		'verif sort custname ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'verif sort custname ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
@@ -405,6 +429,7 @@ def pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping simpan custname descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -416,6 +441,7 @@ def pagingTesting(){
 		'verif sort custname descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
+		'verif sort custname descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header poname'
@@ -426,6 +452,7 @@ def pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping simpan poname ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -437,6 +464,7 @@ def pagingTesting(){
 		'verif sort poname ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'verif sort poname ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header poname'
@@ -444,6 +472,7 @@ def pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping simpan poname descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -455,6 +484,7 @@ def pagingTesting(){
 		'verif sort poname descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
+		'verif sort poname descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik 2x appno supaya descending'
@@ -466,6 +496,7 @@ def pagingTesting(){
 		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/countData')).replace(
 			' ', '').replace(':', ';').split(';')
 	
+		'parsing integer countdata'
 		Integer countDt = Integer.parseInt(textCountData[1])
 	
 		'Jika count data secara keseluruhan lebih besar daripada data pada page 1'
@@ -481,6 +512,7 @@ def pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'looping simpan appno page 2'
 			for (int i = 1; i <= rowData.size(); i++) {
 				appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -492,6 +524,7 @@ def pagingTesting(){
 			'Verif appno pada page 2 tidak ada di page 1'
 			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno pada page 2 tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button prev'
@@ -505,11 +538,13 @@ def pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'looping simpan appno page 1'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 	
 			'Verif appno yang ada di page 1 tidak ada di page 2'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno yang ada di page 1 tidak ada di page 2'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button next'
@@ -523,24 +558,30 @@ def pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'looping simpan appno page 2'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 	
 			'Verif appno yang ada di page 2 tidak ada di page 1'
 			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno yang ada di page 2 tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		}
 		
 		'Klik button page 1'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'))
 	
+		'verif jumlah data yang muncul dalam paging sesuai footer'
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(), true))
 	
+		'jika verif reset tidak sesuai'
 		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 			1))) {
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	
+			'write to excel reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm - 1, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'NAP4') + ';\n')
@@ -548,11 +589,14 @@ def pagingTesting(){
 			GlobalVariable.FlagWarning = 1
 		}
 		
+		'jika verif sort tidak sesuai'
 		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 			1))) {
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	
+			'write to excel reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedSort + 'NAP4') + ';\n'))
@@ -560,11 +604,14 @@ def pagingTesting(){
 			GlobalVariable.FlagWarning = 1
 		}
 		
+		'jika verif footer tidak sesuai'
 		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 			1))) {
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	
+			'write to excel reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
 				1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedFooter + 'NAP4') + ';\n'))

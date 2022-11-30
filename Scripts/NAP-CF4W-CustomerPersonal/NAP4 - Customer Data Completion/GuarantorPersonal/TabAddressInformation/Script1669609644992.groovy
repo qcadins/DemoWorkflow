@@ -206,15 +206,19 @@ def inputaddress() {
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Zip Code_ZipCode'),
 			GlobalVariable.FindDataFile.getValue(Address, 17))
 
+		'input kecamatan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kecamatan_kecamatan'),
 			GlobalVariable.FindDataFile.getValue(Address, 18))
 
+		'input kelurahan'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kelurahan_Kelurahan'),
 			GlobalVariable.FindDataFile.getValue(Address, 19))
 
+		'input kota'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kota_kota'),
 			GlobalVariable.FindDataFile.getValue(Address, 20))
 
+		'click search'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Search'))
 
 		'verify input error'

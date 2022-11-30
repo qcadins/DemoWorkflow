@@ -28,6 +28,7 @@ if (GlobalVariable.FindDataFile.getValue(
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'), 
         'ABCD')
 
+	'klik label contact person name '
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/label_Contact Person Name'))
 
     'input contact person name'
@@ -232,6 +233,7 @@ if (GlobalVariable.FindDataFile.getValue(
     }
     
     if (GlobalVariable.RoleCompany == 'Testing') {
+		'call function getdataemergencycontact'
         getDataEmergencyContact()
 
         'get address'
@@ -298,6 +300,7 @@ if (GlobalVariable.FindDataFile.getValue(
         GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact-Customer/input_Phone3_Ext'), 
                 'value'))
 
+		'call tc emergencycontactdataverif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactDataVerif'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
@@ -319,6 +322,7 @@ if (GlobalVariable.FindDataFile.getValue(
     }
     
     if (GlobalVariable.RoleCompany == 'Testing') {
+		'call function getdataemergencycontact'
         getDataEmergencyContact()
 
         'get address'

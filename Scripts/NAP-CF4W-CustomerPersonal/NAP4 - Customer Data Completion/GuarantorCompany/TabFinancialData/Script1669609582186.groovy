@@ -26,6 +26,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData - Company - Guarantor')
 
+'declare datafilecustdetail'
 datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail - Company - Guarantor')
 
 GlobalVariable.CopyAppColm = 0
@@ -258,6 +259,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
 				'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
 
+			'get text bank acc detail'
 			BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
 			for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
@@ -334,9 +336,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
+		'write to excel status warning'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.CopyAppColm -
 			1, GlobalVariable.StatusWarning)
 
+		'write to excel reason failed delete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 1, GlobalVariable.CopyAppColm -
 			1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
@@ -356,6 +360,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
 						'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
 
+					'get text bank acc detail'
 					BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -372,6 +377,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									'click button add bank'
 									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_addBank'))
 
+									'call function inputBank'
 									inputBank(copyapp, variable, flagFailed)
 								}
 							} else if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
@@ -396,6 +402,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						'click button add bank'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_addBank'))
 
+						'call function inputBank'
 						inputBank(copyapp, variable, flagFailed)
 					}
 				}
@@ -416,6 +423,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'click button add bank'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_addBank'))
 
+					'call function inputBank'
 					inputBank(copyapp, variable, flagFailed)
 				}
 			}
@@ -691,6 +699,7 @@ def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
 
                     month = selectmonth.getFirstSelectedOption().getText()
 
+					'get year'
                     year = WebUI.getAttribute(modifyNewinputYear, 'value')
 
                     if ((((((GlobalVariable.FindDataFile.getValue(financialdata, 74).length() > 0) || (GlobalVariable.FindDataFile.getValue(
@@ -701,6 +710,7 @@ def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
                         for (int excelindex = 0; excelindex < montharray.size(); excelindex++) {
                             if ((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
                                 year)) {
+								'call function inputBankStatement'
                                 inputBankStatement(excelindex + 1)
 
                                 break
@@ -774,6 +784,7 @@ def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
 
                         month = selectmonth.getFirstSelectedOption().getText()
 
+						'get year'
                         year = WebUI.getAttribute(modifyNewinputYear, 'value')
 
                         if ((((((GlobalVariable.FindDataFile.getValue(financialdata, 74).length() > 0) || (GlobalVariable.FindDataFile.getValue(
@@ -825,6 +836,7 @@ def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[8]/a/i', true)
 
+									'call function inputBankStatement'
                                     inputBankStatement(excelindex + 1)
                                 }
                             } else if ((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
@@ -834,12 +846,14 @@ def inputBank(String copyapp, ArrayList<Boolean> variable, int flagFailed) {
                         }
                     }
                 } else {
+					'call function inputBankStatementFromEmpty'
                     inputBankStatementFromEmpty()
 
                     break
                 }
             }
         } else if (copyapp.equalsIgnoreCase('No')) {
+			'call function inputBankStatementFromEmpty'
             inputBankStatementFromEmpty()
         }
         
@@ -960,6 +974,7 @@ def inputBankStatementFromEmpty() {
             'click add new button'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_banknewrow'))
 
+			'call function inputBankStatement'
             inputBankStatement(BSindex)
         }
     }

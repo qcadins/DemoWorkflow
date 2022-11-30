@@ -32,12 +32,16 @@ ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerAsset - Personal - Guarantor')
 
+'declare assettypearray'
 def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
+'declare assetdescriptionarray'
 def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 
+'declare assetvaluearray'
 def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 
+'declare assetquantityarray'
 def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 
 'copyapp'
@@ -201,9 +205,11 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (GlobalVariable.FlagWarning > 0) {
+	'write to excel status warning'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.CustomerAsset', 0, GlobalVariable.NumofGuarantor -
 		1, GlobalVariable.StatusWarning)
 
+	'wrtie to excel reason failed'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.CustomerAsset', 1, GlobalVariable.NumofGuarantor -
 		1, GlobalVariable.ReasonFailedInputData + faileddata)
 }

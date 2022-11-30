@@ -27,6 +27,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal - Customer')
 
+'declare copyappcolm'
 int copyAppColm = 0
 
 'get count colm'
@@ -51,6 +52,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	'count table addres row di confins'
 	ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
+	'looping tabel address'
 	for (i = 1; i <= variable.size(); i++) {
 		'modify object address type'
 		modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
@@ -62,6 +64,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
+		'looping address'
 		for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
 			 GlobalVariable.FlagFailed = 0
 
@@ -208,15 +211,19 @@ def inputaddress() {
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Zip Code_ZipCode'), 
             GlobalVariable.FindDataFile.getValue(Address, 17))
 
+		'input kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kecamatan_kecamatan'), 
             GlobalVariable.FindDataFile.getValue(Address, 18))
 
+		'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kelurahan_Kelurahan'), 
             GlobalVariable.FindDataFile.getValue(Address, 19))
 
+		'input kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/input_Kota_kota'), 
             GlobalVariable.FindDataFile.getValue(Address, 20))
 
+		'click search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/button_Search'))
 
         'verify input error'

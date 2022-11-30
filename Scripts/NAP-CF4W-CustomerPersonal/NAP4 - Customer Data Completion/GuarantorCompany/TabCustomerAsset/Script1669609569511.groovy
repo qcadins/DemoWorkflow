@@ -26,18 +26,25 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
 
+'declare assettypefaileddelete'
 ArrayList<WebElement> assettypefaileddelete = new ArrayList<WebElement>()
 
+'declare faileddata'
 ArrayList<WebElement> faileddata = new ArrayList<WebElement>()
 
+'declare GlobalVariable.FindDataFile'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerAsset - Company - Guarantor')
 
+'declare assettypearray'
 def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
+'declare assetdescriptionarray'
 def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 
+'declare assetvaluearray'
 def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 
+'declare assetquantityarray'
 def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 
 'copyapp'
