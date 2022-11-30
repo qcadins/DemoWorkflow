@@ -38,17 +38,17 @@ ArrayList<String> faileddata = new ArrayList<>()
 'declare finddatafile GV'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument - Company - GuarantorCompany')
 
-def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).split(';')
+def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).split(';', -1)
 
-def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';')
+def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 
-def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';')
+def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 
-def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';')
+def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 
-def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';')
+def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 
-def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).split(';')
+def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).split(';', -1)
 
 def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).split(';')
 
@@ -59,7 +59,12 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
 ArrayList<WebElement> variable
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-	'count table legal doc confins'   
+	
+	'count table legal doc jika no data'
+	variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
+	
+	if (variableData.size() == 0) {
+	'count table legal doc confins'   													
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 	
     for (i = 1; i <= variable.size(); i++) {
@@ -67,7 +72,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
             'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[1]', true)
-
+		
         'modify object doc no type'
         modifyNewDocNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
             'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
@@ -114,12 +119,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
                         if (i == variable.size()) {
-                            if (WebUI.verifyElementNotPresent(modifyNewLegalDocType, 5, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
-                            } else {
-                                'add legal failed kedalam array'
-                                legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
+                            if (WebUI.verifyElementPresent(modifyNewLegalDocType, 5, FailureHandling.OPTIONAL)) {
+								'add legal failed kedalam array'
+								legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
                             }
                         } else {
                             'get legal doc type setelah delete'
@@ -128,23 +130,30 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'get legal doc no setelah delete'
                             legaldocnoAfter = WebUI.getText(modifyNewDocNo)
 
-                            if (WebUI.verifyNotMatch(legaldoctypeafter, legaldoctypebefore, false, FailureHandling.OPTIONAL) && 
-                            WebUI.verifyNotMatch(legaldocnoAfter, legaldocnobefore, false, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
-                            } else {
-                                'add legal failed kedalam array'
-                                legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
-
-                                continue
+                            if (WebUI.verifyMatch(legaldoctypeafter, legaldoctypebefore, false, FailureHandling.OPTIONAL) && 
+                            WebUI.verifyMatch(legaldocnoAfter, legaldocnobefore, false, FailureHandling.OPTIONAL)) {
+								'add legal failed kedalam array'
+								legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
                             }
                         }
                         
+						'count ulang table pada confins'
+						variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
+						
                         i--
                     }
                 }
         }
+		
+		'count table legal doc jika no data'
+		variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
+		
+		'verify jika table confins no data maka looping akan di skip'
+		if(variableData.size() == 1){
+			break
+		}
     }
+	}
     
     if (legaltypefaileddelete.size() > 0) {
 		'write to excel status warning'
@@ -158,8 +167,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         (GlobalVariable.FlagWarning)++
     }
     
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
+    if (variableData.size() == 0) {
 	
 		'count table legal doc row di confins'
         variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
@@ -200,8 +208,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
         }
     } else {
-        variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#legal-tab > app-legal-doc-tab > div > div.ng-star-inserted > table > tbody tr'))
-
         for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Add'))
