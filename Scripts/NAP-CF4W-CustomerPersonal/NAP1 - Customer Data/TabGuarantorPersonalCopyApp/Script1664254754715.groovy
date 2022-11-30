@@ -605,7 +605,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 							'Jika guarantor merupakan index terakhir'
                             if (i == variableData.size()) {
 								'jika tidak muncul guarantor name'
-                                if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
                                 }
@@ -614,7 +614,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 CustNameAfter = WebUI.getText(modifyNewGuarantorName)
 
 								'Jika guarantor name after delete tidak sama dengan guarantor name before delete'
-                                if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
                                 	'add cust name failed kedalam array'
                                 	custnamefaileddelete.add(CustNameBefore)
                                 }

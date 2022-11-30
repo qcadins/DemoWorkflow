@@ -235,24 +235,22 @@ if(datafileTabAsset.getValue(
 								  
 								  if(i == variable.size()){
 										if(WebUI.verifyElementNotPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
-												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
 										}
 								  }else{
 										'get accessories name sebelum delete'
 										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
 												
 										if(WebUI.verifyNotMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-												 variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-										}else{
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-											continue
 										}
 								  }
+								 
+								  'count table accessories setelah delete'
+								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								 
 								  i--
 							  }else{
 								  break

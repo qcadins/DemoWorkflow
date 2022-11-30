@@ -248,25 +248,21 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
 								
 						if(i == variable.size()){
 								if(WebUI.verifyElementNotPresent(modifyNewSubsidyAllocation, 5, FailureHandling.OPTIONAL)){
-										variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-								}else{
-										'add cust name failed kedalam array'
-										subsidyfaileddelete.add(subsidyallocationnamebefore)
-										continue
+									'add cust name failed kedalam array'
+									subsidyfaileddelete.add(subsidyallocationnamebefore)
 								}
-									
 						}else{
 								'get cust name sebelum delete'
 								subsidyallocationnameAfter = WebUI.getText(modifyNewSubsidyAllocation)
 											
 								if(WebUI.verifyNotMatch(subsidyallocationnameAfter, subsidyallocationnamebefore, false, FailureHandling.OPTIONAL)){
-										variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-								}else{
-										'add cust name failed kedalam array'
-										subsidyfaileddelete.add(subsidyallocationnamebefore)
-										continue
+									'add cust name failed kedalam array'
+									subsidyfaileddelete.add(subsidyallocationnamebefore)										
 								}
 						}
+						
+						'count ulang table subsidy setelah delete'
+						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 						
 						i--
 					} else {

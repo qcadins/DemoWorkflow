@@ -68,43 +68,9 @@ for (int i = 1; i <= variableData.size(); i++) {
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
-                                'select customer relation'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
-
-                                'input family name'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
-
-                                'input birth place'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 20))
-
-                                'select idtype'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21), false)
-
-                                'Verify ID Type'
-                                if (((datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') && 
-                                (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) && 
-                                (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'AKTA')) {
-									'input Id Expired Date'
-									WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'), 
-                                        datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22))
-                                }
                                 
-                                'select marital status'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 23), false)
-
-                                'input mobile phone'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 24))
-
-                                'select customer model'
-                                WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
-
+								inputData()
+								
 								'jika proefession tidak kosong'
                                 if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 
                                 1) {
@@ -327,23 +293,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             //jika ada button family data pada confins
 							if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
                                 5, FailureHandling.OPTIONAL)) {
-                                'click customer lookup'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Family Legal Name_btn btn-raised btn-primary'))
-
-                                'input customer no'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer No_custNoId'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 15))
-
-                                'input customer name'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer Name_custNameId'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 16))
-
-                                'input customer id no'
-                                WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_IdNoId'), 
-                                    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 17))
-
-                                'click search'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
+                                LookupData()
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/a_Select'), 
@@ -625,7 +575,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 							'jika family merupakan index terakhir'
                             if (i == variableData.size()) {
 								'jika familyname tidak muncul dalam tabel'
-                                if (WebUI.verifyElementNotPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
                                 }
@@ -634,7 +584,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 CustNameAfter = WebUI.getText(modifyNewFamilyName)
 
 								'jika familyname after delete tidak sama dengan familyname before delete'
-                                if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
 								}
@@ -863,4 +813,63 @@ def closeLookup(){
 		'2.TabFamilyData', 1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
 
 	GlobalVariable.FlagFailed = 1
+}
+
+def inputData(){
+	'select customer relation'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
+
+	'input family name'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Family Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
+
+	'input birth place'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 20))
+
+	'select idtype'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_IDType'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21), false)
+
+	'Verify ID Type'
+	if (((datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') &&
+	(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) &&
+	(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'AKTA')) {
+		'input Id Expired Date'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'),
+			datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22))
+	}
+	
+	'select marital status'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Marital Status'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 23), false)
+
+	'input mobile phone'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 24))
+
+	'select customer model'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
+}
+
+def LookupData(){
+	'click customer lookup'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Family Legal Name_btn btn-raised btn-primary'))
+
+	'input customer no'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer No_custNoId'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 15))
+
+	'input customer name'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Customer Name_custNameId'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 16))
+
+	'input customer id no'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id No_IdNoId'),
+		datafileTabFamily.getValue(GlobalVariable.NumofFamily, 17))
+
+	'click search'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Search'))
 }

@@ -326,7 +326,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             WebUI.acceptAlert()
 
                             if (i == variableData.size()) {
-                                if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
                                      'add cust name failed kedalam array'
                                     custnamefaileddelete.add(CustNameBefore)
                                 }
@@ -334,7 +334,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 'get cust name sebelum delete'
                                 CustNameAfter = WebUI.getText(modifyNewGuarantorName)
 
-                                if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
 									'add cust name failed kedalam array'
 									custnamefaileddelete.add(CustNameBefore)
                                 }

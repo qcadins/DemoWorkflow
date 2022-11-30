@@ -187,25 +187,23 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								
 								if(i == variable.size()){
-									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-										variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-									}else{
+									if(WebUI.verifyElementPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
 										'add cust name failed kedalam array'
 										referantorfaileddelete.add(referantornamebefore)
-										continue
 									}
 								}else{
 									'get cust name sebelum delete'
 									referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 								
-									if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-										variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-									}else{
+									if(WebUI.verifyMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
 										'add cust name failed kedalam array'
 										referantorfaileddelete.add(referantornamebefore)
-										continue
 									}
 								}
+								
+								'count ulang table referantor'
+								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								
 								i--
 							  }
 							  else{
@@ -214,6 +212,12 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						  }
 				  }
 			  }
+			'check if table udah kosong'
+			variableData = driver.findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
+			
+			if(variableData.size() == 1){
+				break
+			}
 		}
 	}
 	
@@ -568,35 +572,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
 								writeReasonFailedDelete()
 							}
-							
-							'get referantor name'
-								referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-							  
-								variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								
-								'Click delete'
-								WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-								
-								if(j == variable.size()){
-									if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
-										continue
-									}else{
-									'add cust name failed kedalam array'
-									referantorfaileddelete.add(referantornamebefore)
-									}
-								}else{
-									'get cust name sebelum delete'
-									referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-								
-									if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-										continue
-									}else{
-										'add cust name failed kedalam array'
-										referantorfaileddelete.add(referantornamebefore)
-									}
-								}
-								j--
-								continue
+							continue
 						}
 					}
 					
