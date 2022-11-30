@@ -35,7 +35,7 @@ if (GlobalVariable.Role == 'Testing') {
             'FAMILY', false, FailureHandling.OPTIONAL))
 }
 
-'Loop Multiple family data'
+'Loop Multiple family data excel'
 for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
     GlobalVariable.FlagFailed = 0
 
@@ -44,14 +44,18 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
         'count table family pada confins'
         ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
+		'looping tabel family data pada confins'
         for (int i = 1; i <= variableData.size(); i++) {
             'modify object family name'
             modifyNewFamilyName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
                 'xpath', 'equals', ('//*[@id="family-tab"]/app-family-main-data-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[2]', true)
 
+			'Jika copyappedit'
             if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+				'jika ada familyname yang muncul pada confins'
                 if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
+					'jika familyname pada tabfamily = familyname confins atau familyname pada tab family lookup = familyname confins'
                     if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
                             19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(
                             GlobalVariable.NumofFamily, 16))) {
@@ -60,6 +64,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
             }
             
+			'jika family merupakan index terakhir'
             if (i == variableData.size()) {
                 if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
@@ -87,6 +92,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         if (((datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'E-KTP') && 
                         (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21) != 'NPWP')) && (datafileTabFamily.getValue(
                             GlobalVariable.NumofFamily, 21) != 'AKTA')) {
+							'input Id Expired Date'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Id Expired Date'), 
                                 datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22))
                         }
@@ -103,6 +109,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
 
+						'jika profession tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 1) {
                             'click lookup button proffession name'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
@@ -161,6 +168,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35), false)
 
+						'jika nationality = foreigner'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
                             'click button lookup country'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
@@ -198,6 +206,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika job position tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 1) {
                             'click button lookup job position'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
@@ -224,6 +233,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika department aml tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 1) {
                             'click button lookup department AML'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
@@ -261,6 +271,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika authority aml tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 1) {
                             'click button lookup authority AML'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
@@ -287,10 +298,12 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika copy address yes'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46) == 'Yes') {
                             'click button copy'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Copy'))
-                        } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46) == 'No') {
+                        } //jika copy address no
+						else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46) == 'No') {
                             'input text address'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/textarea_Address'), 
                                 datafileTabFamily.getValue(GlobalVariable.NumofFamily, 47))
@@ -411,6 +424,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         }
                         
                         if (GlobalVariable.Role == 'Testing') {
+							//getdatacust
                             getDataCust()
 
                             'call test case Family data verif'
@@ -422,6 +436,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25), false)
 
+						'jika profession tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 1) {
                             'click lookup button proffession name'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Profession Name_btn btn-raised btn-primary'))
@@ -456,6 +471,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_nationality'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35), false)
 
+						'jika nationality = foreigner'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35) == 'Foreigner') {
                             'click button lookup country'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_INDONESIA_btn btn-raised btn-primary'))
@@ -493,6 +509,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika jobposition tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 39).length() > 1) {
                             'click button lookup job position'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Job Position_btn btn-raised btn-primary'))
@@ -519,6 +536,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika depatrment aml tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 42).length() > 1) {
                             'click button lookup department AML'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_DEPARTMENT AML_btn btn-raised btn-primary'))
@@ -556,6 +574,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             }
                         }
                         
+						'jika authority aml tidak kosong'
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 44).length() > 1) {
                             'click button lookup authority AML'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Authority AML_btn btn-raised btn-primary'))
@@ -583,19 +602,25 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                         }
                         
                         if (GlobalVariable.Role == 'Testing') {
+							'getdatacust'
                             getDataCust()
 
+							'declare confins data'
                             def confinsdata = GlobalVariable.Confinsdata
 
+							'add customerrelation ke dalam array'
                             confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
                                     'value'))
 
+							'add profession ke array'
                             confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_Profession'), 
                                     'value'))
 
+							'add job position ke array'
                             confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_JobPosition'), 
                                     'value'))
 
+							'add establishment date ke array'
                             confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/input_EstablishmentDate'), 
                                     'value'))
 
@@ -684,6 +709,7 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 def getDataCust() {
+	'declare confinsdata'
     def confinsdata = []
 
     'add customer name to array'
@@ -790,9 +816,11 @@ def getDataCust() {
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.NumofFamily - 
             1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.NumofFamily - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

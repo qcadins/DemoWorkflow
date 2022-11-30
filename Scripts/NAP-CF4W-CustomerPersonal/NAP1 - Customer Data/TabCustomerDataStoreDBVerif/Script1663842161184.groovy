@@ -28,11 +28,14 @@ String AuthorityAML = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get cust data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonal'(sqlconnectionLOS, 
     datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
 
+'declare arrayindex'
 int arrayindex = 0
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify product offering code'
@@ -51,6 +54,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariabl
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+'Jika id type e-ktp atau akta atau npwp'
 if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21).equalsIgnoreCase('E-KTP') || datafileCustomerPersonal.getValue(
     GlobalVariable.NumofColm, 21).equalsIgnoreCase('AKTA')) || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
     21).equalsIgnoreCase('NPWP')) {
@@ -117,6 +121,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariabl
 //
 //'verify authority aml'
 //WebUI.verifyMatch(AuthorityAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL)
+
 'verify address'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -159,4 +164,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 1, GlobalVariable.NumofColm - 
         1, GlobalVariable.ReasonFailedStoredDB)
 }
-
