@@ -287,7 +287,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
                         
                         'count ulang table subsidy setelah delete'
                         variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-
+						
                         i--
                     } else {
                         break
@@ -295,6 +295,12 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
                 }
             }
         }
+		'check if table subsidy sudah kosong'
+		variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr/td'))
+		
+		if(variableData.size() == 1){
+			break
+		}
     }
 }
 
@@ -502,4 +508,3 @@ def addSubsidy(int s) {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
     }
 }
-
