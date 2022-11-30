@@ -606,12 +606,8 @@ for (int i = 1; i <= variableData.size(); i++) {
                             if (i == variableData.size()) {
 								'jika tidak muncul guarantor name'
                                 if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
-                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-                                } else {
-                                    'add cust name failed kedalam array'
-                                    custnamefaileddelete.add(CustNameBefore)
-
-                                    continue
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
                                 }
                             } else {
                                 'get cust name sebelum delete'
@@ -619,15 +615,14 @@ for (int i = 1; i <= variableData.size(); i++) {
 
 								'Jika guarantor name after delete tidak sama dengan guarantor name before delete'
                                 if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
-                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-                                } else {
-                                    'add cust name failed kedalam array'
-                                    custnamefaileddelete.add(CustNameBefore)
-
-                                    continue
+                                	'add cust name failed kedalam array'
+                                	custnamefaileddelete.add(CustNameBefore)
                                 }
                             }
                             
+							'count ulang table guarantor setelah delete'
+                            variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+							
                             i--
                         }
                     }

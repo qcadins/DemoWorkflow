@@ -36,14 +36,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'get guarantor personal data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, 
-    datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(
-        GlobalVariable.CopyAppColm, 19))
+    datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 19))
 
-'declare arrayindex'
 int arrayindex = 0
 
 'declare arraymatch'
-ArrayList<String> arrayMatch = new ArrayList<String>()
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'verify relationship'
 arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 
@@ -206,4 +204,3 @@ if (arrayMatch.contains(false)) {
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
         1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.ReasonFailedStoredDB)
 }
-
