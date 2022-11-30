@@ -19,31 +19,40 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebElement
 
-'connect DB'
+'connect DB los'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'connect db fou'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'declare datafileTabInsurance'
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
+'get insuredby from excel'
 String insuredBy = datafileTabInsurance.getValue(
 	GlobalVariable.NumofColm, 12)
 
+'declare arrayindex'
 int arrayindex = 0
 
+'declare arraysuminsured'
 ArrayList<String> arraysuminsured = new ArrayList<Boolean>()
 
+'declare arrayaddpremi'
 ArrayList<String> arrayaddpremi = new ArrayList<Boolean>()
 
+'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
+	'call function insuredcust'
 	insuredCust(arrayMatch,sqlconnectionLOS)
 } else if (insuredBy == 'Customer - Multifinance') {
+	'call function insuredcustmf'
 	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
 } else if (insuredBy == 'Multifinance') {
+	'call function insuredmf'
 	insuredMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
 }
 
@@ -59,6 +68,7 @@ if (arrayMatch.contains(false)) {
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
+	'get insurance cust data from db'
 	ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -72,10 +82,12 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 }
 
 public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
+	'get insurance cust data from db'
 	ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
 		sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
 
+	'get insurance mf data from db'
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -154,6 +166,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 
 	if (datafileTabInsurance.getValue(
 		GlobalVariable.NumofColm, 36).length() == 0) {
+		'get main coverage data from db'
 		ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -172,10 +185,12 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 			GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
+			'get additional coverage data from db'
 			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 
+			'looping verif additionalcoverage data from db'
 			for (int index = 0; index < resultAddCVG.size(); index++) {
 				if ((resultAddCVG[index]).equalsIgnoreCase('Flood')) {
 					arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
@@ -208,24 +223,31 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
+		'get insurance mf multi main coverage from db'
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
 		
+		'declare capitalized array'
 		def capitalizedarray = datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 45).split(';', -1)
 
+		'declare paidbyarray'
 		def paidbyarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
 			46).split(';', -1)
 
+		'declare suminsuredarray'
 		def suminsuredarray = datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 47).split(';', -1)
 
+		'declare maincvgarray'
 		def maincvgarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
 			48).split(';', -1)
 
+		'declare indexdb'
 		int indexdb = 0
 
+		'looping verif resultmultimaincvg'
 		for (int index = 0; index < (resultMultiMainCVG.size() / 5); index++) {
 			
 			indexdb++
@@ -288,10 +310,12 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 			GlobalVariable.NumofColm, 55).length() > 0)) || (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 56).length() > 0)) || (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 57).length() > 0)) {
+			'get insurance multi addittional coverage data from db'
 			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 			
+			'declare addrate'
 			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
 
 			def floodarray = datafileTabInsurance.getValue(
@@ -344,6 +368,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 
 			indexdb = 0
 
+			'looping verif resultaddcvg'
 			for (int index = 0; index < (resultAddCVG.size() / 3); index++) {
 				year = Integer.parseInt(resultAddCVG[indexdb++])
 
@@ -425,6 +450,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
 	arrayindex = 0
 	
+	'get insurance mf data from db'
 	ArrayList<Boolean> resultMFinsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMFStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13))
@@ -485,6 +511,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 	if (datafileTabInsurance.getValue(
 		GlobalVariable.NumofColm, 36).length() == 0) {
+		'get insurance main coverage from db'
 		String resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -503,6 +530,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			GlobalVariable.NumofColm, 41).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 42).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 43).equalsIgnoreCase('Yes')) {
+			'get insurance additional coverage from db'
 			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
@@ -539,6 +567,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
+		'get insurance multi main coverage from db'
 		ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 			sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -557,6 +586,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 		int indexdb = 0
 
+		'looping resultmultimaincvg verif'
 		for (int index = 0; index < (resultMultiMainCVG.size() / 5); index++) {
 			
 			indexdb++
@@ -619,10 +649,12 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			GlobalVariable.NumofColm, 55).length() > 0)) || (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 56).length() > 0)) || (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 57).length() > 0)) {
+			'get insurance multi additional coverage from db'
 			ArrayList<Boolean> resultAddCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiAddCVGtoreDB'(
 				sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 			
+			'declare addrate'
 			ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
 
 			def floodarray = datafileTabInsurance.getValue(
@@ -675,6 +707,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 
 			indexdb = 0
 
+			'looping verif result add cvg'
 			for (int index = 0; index < (resultAddCVG.size() / 3); index++) {
 				int year = Integer.parseInt(resultAddCVG[indexdb++])
 
@@ -754,6 +787,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 }
 
 public convertDate(String enddate){
+	'untuk mengubah format tanggal'
 	Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
 	
 	String inslength = GlobalVariable.InsuranceLength

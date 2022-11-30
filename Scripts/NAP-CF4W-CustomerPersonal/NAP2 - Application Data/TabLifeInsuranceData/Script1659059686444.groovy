@@ -30,10 +30,13 @@ datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 
 GlobalVariable.FlagFailed=0
 
+'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("INSURANCE") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -66,8 +69,10 @@ if (datafileTabLifeInsurance.getValue(
 		'Ambil text original office dari confins'
 		String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 	
+		'declare lifeinscobranchname'
 		ArrayList<WebElement> lifeInscoBranchName = new ArrayList<WebElement>()
 	
+		'declare countlifeinscobranch'
 		Integer countLifeInscoBranch = 0
 	
 		'Ambil array string (text) life insco branch name dari db'
@@ -145,9 +150,11 @@ if (datafileTabLifeInsurance.getValue(
     'Looping data life insurance subject'
     for (int i = 1; i <= count; i++) {
         
+		'modify subject'
         modifyObjectSubject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectType'), 
             'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[3]'), true)
 
+		'modify checkbox'
         modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_CheckSubject'), 
             'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[4]/input'), true)
 
@@ -242,14 +249,17 @@ if (datafileTabLifeInsurance.getValue(
 
     NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 
+	'get capitalizepremiumpercentage'
     CapitalizePremiumPercentageValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
         'value', FailureHandling.OPTIONAL).replaceAll('\\s', '')
 
+	'parsing capitalizepremiumpercentage ke desimal'
     GlobalVariable.CapitalizePremiumPercentage = decimalFormat.parse(CapitalizePremiumPercentageValue).floatValue()
 } else if(datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'NO') {
     if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
+		'uncentang coverlifeinsurance'
         WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
 
         GlobalVariable.CapitalizePremiumPercentage = 0
@@ -296,9 +306,11 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
 	
+			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
 					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	

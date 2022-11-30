@@ -25,11 +25,14 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabLifeInsurance'
 datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
 
+'get life insurance data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13))
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'declare arrayindex'
 int arrayindex = 0
 
 'verify insco branch name'
