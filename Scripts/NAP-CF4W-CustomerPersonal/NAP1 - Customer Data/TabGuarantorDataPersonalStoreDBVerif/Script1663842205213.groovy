@@ -14,6 +14,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import org.openqa.selenium.WebElement
+
 import groovy.sql.Sql as Sql
 
 'declare datafileCustomerPersonal'
@@ -21,9 +23,6 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 
 'declare datafileTabGuarantorPersonal'
 datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
-
-'declare datafileTabGuarantorCompany'
-datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
 String DepartmentAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 33)
 
@@ -33,12 +32,11 @@ String AuthorityAML = datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyA
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, 
-    datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(
-        GlobalVariable.CopyAppColm, 19))
+    datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 19))
 
 int arrayindex = 0
 
-ArrayList<String> arrayMatch = new ArrayList<String>()
+ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'verify relationship'
 arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 

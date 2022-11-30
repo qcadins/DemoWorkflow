@@ -560,27 +560,22 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                             if (i == variableData.size()) {
                                 if (WebUI.verifyElementNotPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
-                                    'count ulang table pada confins'
-                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-                                } else {
-                                    'add cust name failed kedalam array'
-                                    custnamefaileddelete.add(CustNameBefore)
+                                	'add cust name failed kedalam array'
+                                	custnamefaileddelete.add(CustNameBefore)                                    
                                 }
                             } else {
                                 'get cust name sebelum delete'
                                 CustNameAfter = WebUI.getText(modifyNewGuarantorName)
 
                                 if (WebUI.verifyNotMatch(CustNameAfter, CustNameBefore, false, FailureHandling.OPTIONAL)) {
-                                    'count ulang table pada confins'
-                                    variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
-                                } else {
-                                    'add cust name failed kedalam array'
-                                    custnamefaileddelete.add(CustNameBefore)
-
-                                    continue
+									'add cust name failed kedalam array'
+									custnamefaileddelete.add(CustNameBefore)
                                 }
                             }
                             
+                            'count ulang table pada confins setelah delete guarantor'
+                            variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
+							
                             i--
                         }
                     }
