@@ -16,33 +16,44 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB'
+'connect DB los'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get subsidy data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
+'declare arrayindexdb'
 int arrayindexdb = 0
 
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
+'declare SubsidyTypeArray'
 def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
+'declare SubsidyfromValueArray'
 def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
+'declare AllocationformArray'
 def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
+'declare SubsidySourceArray'
 def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
+'declare SubsidyValueTypeArray'
 def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
+'declare SubsidyValueAmountArray'
 def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
+'declare SubsidyValuePercentageArray'
 def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'looping subsidy data from db'
 for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
 	
 'verify subsidy from value type'

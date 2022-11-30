@@ -27,6 +27,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
+'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("GUARANTOR") && !appLastStep.equalsIgnoreCase("NAP DETAIL") && GlobalVariable.FirstTimeEntry=="Yes"){
@@ -42,8 +43,10 @@ if (GlobalVariable.Role == 'Testing') {
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
+'koneksi db fou'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil text original office dari confins'
@@ -195,19 +198,25 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 			
 		}
 	}
-	
+	'Jika ada referantor yang gagal delete'
 	if(referantorfaileddelete.size() > 0){
+			'write to excel status warning'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 				'5.TabReferantorData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 			
+			'write to excel reason failed delete'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 					1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
-		
+	'declare variabledata'
 	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+	
+	'declare countdata'
 	int countData = variableData.size()
+	
+	'declare add'
 	int add=0
 	
 	//Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
@@ -248,6 +257,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 					modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
 						   'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select', true)
 					
+					'declare refcategory, referantorcode'
 					String refCategory, referantorCode
 					
 					'Jika pada confins ada data referantor sebelumnya'
@@ -281,6 +291,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							   
 									   'Verif total data referantor confins sesuai dengan db'
 									   if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+										   'write to excel reason failed lookup'
 										   writeReasonFailedLookup()
 									   }
 								   }
@@ -317,6 +328,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 									
 									if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+										'write to excel reason failed delete'
 										writeReasonFailedDelete()
 									}
 									
@@ -335,6 +347,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   
 									   'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 									   if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+										   'write to excel reason failed ddl'
 										   writeReasonFailedDDL()
 									   }
 									   
@@ -346,6 +359,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 										   
 										   'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 										   if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+											   'write to excel reason failed ddl'
 											   writeReasonFailedDDL()
 										   }
 									   }
@@ -379,6 +393,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								   WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								   
 								   if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+									   'write to excel reason failed delete'
 									   writeReasonFailedDelete()
 								   }
 								   
@@ -387,6 +402,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							   add=0
 						   }
 						   
+						   'declare object selectedrefcategory'
 						   Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) +
 					  ']/td[2]/select')))
 						   
@@ -443,6 +459,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						
 								'Verif total data referantor confins sesuai dengan db'
 								if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+									'write to excel reason failed lookup'
 									writeReasonFailedLookup()
 								}
 							}
@@ -482,6 +499,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							 
 							 if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+								 'write to excel reason failed delete'
 								 writeReasonFailedDelete()
 							 }
 							 continue
@@ -499,6 +517,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								
 								'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 								if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+									'write to excel reason failed ddl'
 									writeReasonFailedDDL()
 								}
 								
@@ -510,6 +529,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									
 									'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 									if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+										'write to excel reason failed ddl'
 										writeReasonFailedDDL()
 									}
 								}
@@ -543,6 +563,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							
 							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+								'write to excel reason failed delete'
 								writeReasonFailedDelete()
 							}
 							
@@ -627,6 +648,7 @@ if(datafileReferantor.getValue(
 				
 						'Verif total data referantor confins sesuai dengan db'
 						if(WebUI.verifyEqual(totalDataReferantor, countReferantor)==false){
+							'write to excel reason failed lookup'
 							writeReasonFailedLookup()
 						}
 					}
@@ -665,6 +687,7 @@ if(datafileReferantor.getValue(
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+						'write to excel reason failed delete'
 						writeReasonFailedDelete()
 					}
 					continue
@@ -682,6 +705,7 @@ if(datafileReferantor.getValue(
 						
 						'Verifikasi array teks bank account dari db sesuai dengan ddl yang tampil pada confins'
 						if(WebUI.verifyOptionsPresent(modifySelectBankAccount, BankAccount)==false){
+							'write to excel reason failed ddl'
 							writeReasonFailedDDL()
 						}
 						
@@ -693,6 +717,7 @@ if(datafileReferantor.getValue(
 							
 							'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
 							if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+								'write to excel reason failed ddl'
 								writeReasonFailedDDL()
 							}
 						}
@@ -726,6 +751,7 @@ if(datafileReferantor.getValue(
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 					
 					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+						'write to excel reason failed delete'
 						writeReasonFailedDelete()
 					}
 					
@@ -734,7 +760,7 @@ if(datafileReferantor.getValue(
 				
 				//Testing
 				if(GlobalVariable.Role=="Testing"){
-					
+					'declare referantordetail'
 					ArrayList<String> referantorDetail = new ArrayList<String>()
 					String newButtonViewDetail = ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[8]/a/i'
 					
@@ -762,11 +788,12 @@ if(datafileReferantor.getValue(
 							sqlConnection, referantorCode)
 						
 					}
-					
+					'add data boolean referantordetail ke arraylist arraymatch'
 					ArrayList <Boolean> arrayMatch = adddatatoarraylist(referantorDetail)
 					
 					'Jika nilai di confins ada yang tidak sesuai dengan db'
 					if (arrayMatch.contains(false)) {
+						'write to excel reason failed tidak sesuai db'
 						writeToExcelTidakSesuaiDB()
 						modifyObjectIndex++
 						continue
@@ -843,22 +870,31 @@ def adddatatoarraylist(ArrayList<String> referantorDetail) {
     'arraylist boolean untuk menampung hasil dari verififikasi data dari confins sesuai dengan db atau tidak (true atau false)'
     ArrayList<String> arrayMatch = new ArrayList<String>()
 
+	'verify npwpno db x confins'
     arrayMatch.add(WebUI.verifyMatch(textNPWPNo, '(?i)' + (referantorDetail[0]), true, FailureHandling.OPTIONAL))
 
+	'verify npwpname db x confins'
     arrayMatch.add(WebUI.verifyMatch(textNPWPName, '(?i)' + (referantorDetail[1]), true, FailureHandling.OPTIONAL))
 
+	'verify address db x confins'
     arrayMatch.add(WebUI.verifyMatch(textAddress, '(?i)' + (referantorDetail[2]), true, FailureHandling.OPTIONAL))
 
+	'verify rt db x confins'
     arrayMatch.add(WebUI.verifyMatch(textRT, '(?i)' + (referantorDetail[3]), true, FailureHandling.OPTIONAL))
 
+	'verify rw db x confins'
     arrayMatch.add(WebUI.verifyMatch(textRW, '(?i)' + (referantorDetail[4]), true, FailureHandling.OPTIONAL))
 
+	'verify kelurahan db x confins'
     arrayMatch.add(WebUI.verifyMatch(textKelurahan, '(?i)' + (referantorDetail[5]), true, FailureHandling.OPTIONAL))
 
+	'verify kecamatan db x confins'
     arrayMatch.add(WebUI.verifyMatch(textKecamatan, '(?i)' + (referantorDetail[6]), true, FailureHandling.OPTIONAL))
 
+	'verify city db x confins'
     arrayMatch.add(WebUI.verifyMatch(textCity, '(?i)' + (referantorDetail[7]), true, FailureHandling.OPTIONAL))
 
+	'verify zipcode db x confins'
 	arrayMatch.add(WebUI.verifyMatch(textZipcode, "(?i)"+referantorDetail[8], true, FailureHandling.OPTIONAL))
 	
 	return arrayMatch
@@ -921,9 +957,11 @@ public getTextBankAccount(String newSelectBankaccount){
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

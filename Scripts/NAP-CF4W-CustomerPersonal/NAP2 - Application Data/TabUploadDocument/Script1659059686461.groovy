@@ -78,6 +78,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
 
 			WebUI.delay(10)
 			
+			'write to excel status success'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
                 0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
 
@@ -86,6 +87,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
                 'click button close'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 
+				'write to excel status warning'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument', 
                     0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusWarning)
 				
@@ -119,9 +121,11 @@ WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Perso
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				0, GlobalVariable.NumofUploadDocument-1, GlobalVariable.StatusFailed)
 
+		'write to excel reason failed verify equal or match'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 				1, GlobalVariable.NumofUploadDocument-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

@@ -16,23 +16,29 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB'
+'connect DB los'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
+'get text custname'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
+'get referantor data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
 		GlobalVariable.CopyAppColm, 12), custname)
 
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
+'declare arrayindex, bankindex'
 int arrayindex = 0, bankindex = 0
 
+'declare bankaccount'
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
+'looping referantor data verif'
 for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
