@@ -45,8 +45,7 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
     10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-    if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
         'count table customer asset row di confins'
         ArrayList<Boolean> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
@@ -58,7 +57,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'modify object customer asset desc'
             modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
-
+			
             for (asset = 1; asset <= assettypearray.size(); asset++) {
                 
                 'verify if asset type sama'
@@ -95,10 +94,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
                         if (i == variable.size()) {
-                            if (WebUI.verifyElementNotPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-                            } else {
+                            if (WebUI.verifyElementPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
                                 'add asset type failed kedalam array'
                                 assettypefaileddelete.add(assettypebefore + assetdescbefore)
                             }
@@ -109,32 +105,35 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'get asset desc setelah delete'
                             assetdescAfter = WebUI.getText(modifyNewcustomeassetDesc)
 
-                            if (WebUI.verifyNotMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
-                            WebUI.verifyNotMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-                            } else {
+                            if (WebUI.verifyMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
+                            WebUI.verifyMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
                                 'add asset type failed kedalam array'
                                 assettypefaileddelete.add(assettypebefore + assetdescbefore)
-
-                                continue
                             }
                         }
+						
+						'count ulang table pada confins'
+						variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                         
                         i--
                     }
                 }
             }
+			
+			'verify jika table confins no data maka looping akan di skip'
+			if(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase('NO DATA AVAILABLE')){
+				break
+			}
         }
     }
     
     if (assettypefaileddelete.size() > 0) {
         'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofMS - 
             1, GlobalVariable.StatusWarning)
 
         'write to excel reason failed delete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofMS - 
             1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
         (GlobalVariable.FlagWarning)++
@@ -142,7 +141,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     'count ulang table customer asset row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-
+	
     for (asset = 1; asset <= assettypearray.size(); asset++) {
         for (i = 1; i <= variable.size(); i++) {
             'modify object customer asset type'
@@ -168,7 +167,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 12) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 12) == 'Yes') {
         for (asset = 1; asset <= assettypearray.size(); asset++) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Add'))
@@ -182,33 +181,33 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0)) {
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0)) {
     'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, 
         '5.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.NumofColm, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'), 
-        GlobalVariable.NumofColm, '5.CustomerAsset')
+                GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute - Personal/button_Debtor Group_'), 
+        GlobalVariable.NumofMS, '5.CustomerAsset')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
-            GlobalVariable.NumofColm, '5.CustomerAsset')
+            GlobalVariable.NumofMS, '5.CustomerAsset')
     }
 }
 
 'check if flagwarning > 0'
 if (GlobalVariable.FlagWarning > 0) {
     'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofMS - 
         1, GlobalVariable.StatusWarning)
 
     'wrtie to excel reason failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofColm - 
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofMS - 
         1, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
@@ -221,7 +220,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 
 'check if role == testing & store DB = Yes'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
+    GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
 
     'Call test case verify customer asset store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerAssetVerifStoreDataDB'), 
@@ -229,13 +228,13 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
 }
 
 def inputAssetData(){
-	ArrayList<String> assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+	ArrayList<String> assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 13).split(';', -1)
 	
-	ArrayList<String> assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+	ArrayList<String> assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 14).split(';', -1)
 	
-	ArrayList<String> assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+	ArrayList<String> assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 15).split(';', -1)
 	
-	ArrayList<String> assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+	ArrayList<String> assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofMS, 16).split(';', -1)
 	
 	'pilih asset type'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/select_MobilMotorRumah'),

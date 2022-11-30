@@ -46,8 +46,7 @@ copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Com
     10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-    if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/buttonedit'), 
-        5, FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
         'count table customer asset row di confins'
         ArrayList<Boolean> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
@@ -59,7 +58,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'modify object customer asset desc'
             modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset - Personal/td_assettype'), 
                 'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
-
+			
             for (asset = 1; asset <= assettypearray.size(); asset++) {
                 
                 'verify if asset type sama'
@@ -96,10 +95,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
                         if (i == variable.size()) {
-                            if (WebUI.verifyElementNotPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-                            } else {
+                            if (WebUI.verifyElementPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
                                 'add asset type failed kedalam array'
                                 assettypefaileddelete.add(assettypebefore + assetdescbefore)
                             }
@@ -110,22 +106,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             'get asset desc setelah delete'
                             assetdescAfter = WebUI.getText(modifyNewcustomeassetDesc)
 
-                            if (WebUI.verifyNotMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
-                            WebUI.verifyNotMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
-                                'count ulang table pada confins'
-                                variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-                            } else {
+                            if (WebUI.verifyMatch(assettypeafter, assettypebefore, false, FailureHandling.OPTIONAL) && 
+                            WebUI.verifyMatch(assetdescAfter, assetdescbefore, false, FailureHandling.OPTIONAL)) {
                                 'add asset type failed kedalam array'
                                 assettypefaileddelete.add(assettypebefore + assetdescbefore)
-
-                                continue
                             }
                         }
+						
+						'count ulang table pada confins'
+						variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
                         
                         i--
                     }
                 }
             }
+			
+			'verify jika table confins no data maka looping akan di skip'
+			if(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase('NO DATA AVAILABLE')){
+				break
+			}
         }
     }
     
@@ -143,7 +142,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     'count ulang table customer asset row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
-
+	
     for (asset = 1; asset <= assettypearray.size(); asset++) {
         for (i = 1; i <= variable.size(); i++) {
             'modify object customer asset type'
