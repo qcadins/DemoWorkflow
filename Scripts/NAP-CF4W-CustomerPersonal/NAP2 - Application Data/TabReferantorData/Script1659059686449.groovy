@@ -907,38 +907,26 @@ public writeReasonFailedDelete(){
 }
 
 public writeReasonFailedLookup(){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
-	'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDataLookup)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 	
 	GlobalVariable.FlagFailed=1
 }
 
 public writeReasonFailedDDL(){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
-
-	'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDDL)
+	
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 	
 	GlobalVariable.FlagFailed=1
 }
 
 public writeToExcelTidakSesuaiDB(){
-	'write to excel WARNING'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusWarning)
 	
-	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		1, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusReasonTidakSesuaiDB)
-
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonTidakSesuaiDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonTidakSesuaiDB)
+	
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_CancelViewDetail'))
 }

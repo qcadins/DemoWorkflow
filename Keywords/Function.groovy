@@ -19,9 +19,9 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
 
 public class Function {
-	//JS Executor Function
+	//keyword verify input error lookup
 	@Keyword
-	public verifyInputErrorLookUp(Object button){
+	public verifyInputErrorLookUp(Object button, String sheet, int colm){
 		'verify input error'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/a_Select'),
 		10, FailureHandling.OPTIONAL)) {
@@ -35,12 +35,12 @@ public class Function {
 			WebUI.click(button)
 
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet,
+					0, colm - 1, GlobalVariable.StatusFailed)
 
 			'Write To Excel GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet,
+					1, colm - 1, GlobalVariable.StatusReasonLookup)
 
 			'GlobalVariable.FlagFailed =1 karena lookup gagal'
 			GlobalVariable.FlagFailed = 1

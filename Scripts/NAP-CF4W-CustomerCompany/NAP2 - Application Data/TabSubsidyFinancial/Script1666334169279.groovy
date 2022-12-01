@@ -414,13 +414,9 @@ def modifySubsidy(int i) {
 }
 
 def writeReasonFailedVerifRule() {
-    'write to excel failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData', 0, GlobalVariable.NumofColm - 
-        1, GlobalVariable.StatusFailed)
-
-    'Write To Excel GlobalVariable.StatusReason'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData', 1, GlobalVariable.NumofColm - 
-        1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
 }

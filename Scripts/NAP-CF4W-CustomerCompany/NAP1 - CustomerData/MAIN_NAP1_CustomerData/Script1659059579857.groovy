@@ -83,7 +83,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'))
+        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
             WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
@@ -127,7 +127,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'))
+        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
     'click button next'
@@ -148,7 +148,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
-    CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'))
+    CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     if ((POStat == 'DEACT') || (POStat == 'EXP')) {
         WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
