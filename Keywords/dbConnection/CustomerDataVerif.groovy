@@ -485,6 +485,24 @@ public class CustomerDataVerif {
 		return listassetinfo
 	}
 
+	@Keyword
+	public NAP2AssetDocumentStoreDB(Sql instance, String appno){
+		String assetDocData
+		ArrayList <String> listAssetDoc = new ArrayList<String>()
+		instance.eachRow(("SELECT CASE WHEN IS_RECEIVED = 1 THEN 'YES' WHEN IS_RECEIVED = 0 THEN 'NO' END AS IS_RECEIVED, DOC_NO, ISNULL(FORMAT(EXPIRED_DT,'MM/dd/yyyy'),'') AS EXPIRED_DT, DOC_NOTES FROM app_collateral_doc acd with(nolock) join APP_COLLATERAL ac with(nolock) on acd.APP_COLLATERAL_ID = ac.APP_COLLATERAL_ID join app a with(nolock) on ac.app_id = a.app_id where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				assetDocData = (row[i])
+				listAssetDoc.add(assetDocData)
+			}
+		})
+		return listAssetDoc
+	}
+
 	//get tab asset accessories data store db
 	@Keyword
 	public NAP2AccessoriesStoreDB (Sql instance, String appno){

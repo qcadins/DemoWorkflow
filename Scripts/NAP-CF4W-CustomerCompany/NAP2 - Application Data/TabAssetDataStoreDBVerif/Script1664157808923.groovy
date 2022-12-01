@@ -33,6 +33,10 @@ ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.Custome
 	datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))
 
+'get asset document from db'
+ArrayList<String> resultdocumentinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AssetDocumentStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 13))
+
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 int arraysuppinfoindex = 0, arrayassetinfoindex = 0
@@ -282,6 +286,30 @@ if (datafileTabAsset.getValue(
 	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(
 				GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[arrayassetinfoindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
+}
+
+'looping data document'
+for (int i = 0;i<resultdocumentinformation.size();i) {
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).length()>0){
+		'verify received'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(
+				GlobalVariable.NumofColm, 64).toUpperCase(), (resultdocumentinformation[i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}
+	else{
+		i++
+	}
+
+	'verify document no'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(
+			GlobalVariable.NumofColm, 65).toUpperCase(), (resultdocumentinformation[i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify expired date'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(
+			GlobalVariable.NumofColm, 66), (resultdocumentinformation[i++]), false, FailureHandling.OPTIONAL))
+
+	'verify document notes'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(
+			GlobalVariable.NumofColm, 67).toUpperCase(), (resultdocumentinformation[i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

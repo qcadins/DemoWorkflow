@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_ExpiredDate</name>
+   <tag></tag>
+   <elementGuidId>8b9f2e7c-e780-4923-9e02-3e12c8ddfd77</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[4]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[4]/input</value>
+   </webElementProperties>
+</WebElementEntity>

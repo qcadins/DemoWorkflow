@@ -482,6 +482,41 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 	}
 }
 
+ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDocument'(sqlConnectionFOU,Fullassetcode)
+
+'looping asset document'
+for(int i = 0;i<docName.size();i++){
+	modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/td_AssetDocument'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[1]",true)
+	textDocumentName = WebUI.getText(modifyDocumentName)
+	if(WebUI.verifyMatch(textDocumentName, docName[i],false)==false){
+		checkVerifyEqualOrMatch(false)
+		break
+	}
+	modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Received'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[2]/input",true)
+	modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNo'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[3]/input",true)
+	modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[4]/input",true)
+	modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[5]/input",true)
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifyReceived,2,FailureHandling.OPTIONAL)){
+		'centang received'
+		WebUI.check(modifyReceived)
+	}
+	else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifyReceived,2,FailureHandling.OPTIONAL)){
+		'uncentang received'
+		WebUI.uncheck(modifyReceived)
+	}
+	
+	'input documentNo'
+	WebUI.setText(modifyDocumentNo, datafileTabAsset.getValue(GlobalVariable.NumofColm, 65))
+	
+	'input expired date'
+	WebUI.setText(modifyExpiredDate, datafileTabAsset.getValue(GlobalVariable.NumofColm, 66))
+	
+	'input document notes'
+	WebUI.setText(modifyDocumentNotes, datafileTabAsset.getValue(GlobalVariable.NumofColm, 67))
+	
+}
+
 //call test case aksesoris
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAccessoriesAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
