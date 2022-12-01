@@ -41,24 +41,24 @@ if (WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP
 	
 	if (iscompleteMandatory && GlobalVariable.FlagFailed == 0) {
 		'Check alert'
-		GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS, '3.JobData')
+		GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, '3.JobData')
 	}
 		
 	if (GlobalVariable.FlagFailed == 0) {
 		'Check save Process write to excel'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData - Company - ManagementShareholderPersonal').getValue(
-					GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'),
-			GlobalVariable.NumofMS, '3.JobData')
+					GlobalVariable.NumofGuarantor, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/EmergencyContact-Customer/input_ContactPersonName'),
+			GlobalVariable.NumofGuarantor, '3.JobData')
 	
 		if (iscompleteMandatory == 0) {
 			'Check error validasi'
 			CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'),
-				GlobalVariable.NumofMS, '3.JobData')
+				GlobalVariable.NumofGuarantor, '3.JobData')
 		}
 	}
 	
 	if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
-		GlobalVariable.NumofVerifStore = GlobalVariable.NumofMS
+		GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 			
 		'call test case verify job data store data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabJobDataVerifStoreDataDB'),

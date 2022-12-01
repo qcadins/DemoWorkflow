@@ -128,13 +128,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (assettypefaileddelete.size() > 0) {
-		'write to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofMS -
-			1, GlobalVariable.StatusWarning)
 
-		'write to excel reason failed delete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofMS -
-			1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.NumofMS, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -206,13 +202,9 @@ if (GlobalVariable.FlagFailed == 0) {
 
 'check if flagwarning > 0'
 if (GlobalVariable.FlagWarning > 0) {
-    'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusWarning)
-
-    'wrtie to excel reason failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofMS - 
-        1, GlobalVariable.ReasonFailedInputData + faileddata)
+    	
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDDL'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.NumofMS, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + faileddata)
 }
 
 'check if th customer asset is present'

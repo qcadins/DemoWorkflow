@@ -690,14 +690,10 @@ def pagingTesting() {
 		'Pengecekan jika pada verif reset ada yang tidak sesuai'
         if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
-			'write to excel status warning'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-			'write to excel reason'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
-                    '-', '') + ((GlobalVariable.ReasonFailedReset + 'Dupcheck') + ';\n'))
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+					'') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
@@ -705,29 +701,21 @@ def pagingTesting() {
 		'Pengecekan jika pada verif sort ada yang tidak sesuai'
         if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
-			'write to excel status warning'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-			'write to excel reason'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
                     '-', '') + ((GlobalVariable.ReasonFailedSort + 'Dupcheck') + ';\n'))
-
+			
             GlobalVariable.FlagWarning = 1
         }
         
 		'Pengecekan jika pada verif footer ada yang tidak sesuai'
         if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             1))) {
-			'write to excel status warning'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-
-			'write to excel reason'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace(
-                    '-', '') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + ';\n'))
+						
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+					'') + ((GlobalVariable.ReasonFailedFooter + 'Dupcheck') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }

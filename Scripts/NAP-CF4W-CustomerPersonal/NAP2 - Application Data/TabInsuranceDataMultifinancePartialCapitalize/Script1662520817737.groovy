@@ -671,13 +671,9 @@ if (counterPaidByMF == 1) {
 }
 
 public writeFailedReasonVerifyRule(){
-	'write to excel failed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+		
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed=1
 }

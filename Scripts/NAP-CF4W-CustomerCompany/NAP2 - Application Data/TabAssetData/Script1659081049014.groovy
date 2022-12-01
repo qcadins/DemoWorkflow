@@ -82,27 +82,21 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	'Verify total count data lookup supplier pada confins sama dengan db'
 	if (WebUI.verifyEqual(totalDataSupplier, countSupplierData) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
-
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+		
 		GlobalVariable.FlagFailed = 1
 	}
 }
 
 'input supplier code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCode'),
-	datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 12))
+	datafileTabAsset.getValue(GlobalVariable.NumofColm, 12))
 
 'input supplier name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-	datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 13))
+	datafileTabAsset.getValue(GlobalVariable.NumofColm, 13))
 
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
@@ -122,13 +116,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
-	'write to excel status failed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusFailed)
-
-	'Write To Excel GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusReasonLookup)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
 	GlobalVariable.FlagFailed = 1
 
@@ -152,13 +141,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 	'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'),
 		salesPerson) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -166,13 +151,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 	'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'),
 		adminHead) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -211,13 +192,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	'Verify total count data lookup asset pada confins sama dengan db'
 	if (WebUI.verifyEqual(totalDataAsset, countAssetData) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-		'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDataLookup)
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -231,7 +208,8 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
-verifyInputErrorLookUp()
+'verify input error'
+		CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'),
@@ -254,13 +232,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 	'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'),
 		assetUsage) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -270,13 +244,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
 	if (WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false) {
-		'Write To Excel GlobalVariable.StatusFailed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write To Excel GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1,
-			GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -547,13 +517,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsageCompany'() == true) {
 		'Verif dropdownlist user relationship yang muncul pada confins sesuai dengan array string user relationship dari db'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_User Relationship'),
 			userRelation) == false) {
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+			
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 			GlobalVariable.FlagFailed = 1
 		}
@@ -563,13 +529,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsageCompany'() == true) {
 
 		'Verif jumlah user relationship yang muncul pada confins sesuai dengan jumlah user relationship pada db'
 		if (WebUI.verifyEqual(totalUserRelation - 1, countUserRelation) == false) {
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 			GlobalVariable.FlagFailed = 1
 		}
@@ -620,13 +582,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 			'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
 			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'),
 				ownerCompanyRelation) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 				GlobalVariable.FlagFailed = 1
 			}
@@ -636,13 +594,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 
 			'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
 			if (WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 				GlobalVariable.FlagFailed = 1
 			}
@@ -663,13 +617,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 			'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
 			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'),
 				ownerCompanyRelation) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 				GlobalVariable.FlagFailed = 1
 			}
@@ -679,13 +629,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 
 			'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
 			if (WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false) {
-				'Write To Excel GlobalVariable.StatusFailed'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-				'Write To Excel GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-					1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 				GlobalVariable.FlagFailed = 1
 			}
@@ -800,7 +746,8 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 		'click search button'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-		verifyInputErrorLookUp()
+		'verify input error'
+		CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
 		
 		assetLocInput()
 		
@@ -927,7 +874,8 @@ public assetLocInput(){
 	'click search button'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-	verifyInputErrorLookUp()
+	'verify input error'
+	CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
 }
 
 public assetLocCopy(){
@@ -938,35 +886,4 @@ public assetLocCopy(){
 
 	'click button copy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
-}
-
-public verifyInputErrorLookUp(){
-	'verify input error'
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'),
-		5, FailureHandling.OPTIONAL)) {
-		'click select'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'))
-	} else {
-		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
-	
-		'click button cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-	
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusFailed)
-	
-		'Write To Excel GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 1, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusReasonLookup)
-	
-		GlobalVariable.FlagFailed = 1
-	
-		'Pengecekan jika new consumer finance belum diexpand'
-		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-			'Klik new consumer finance'
-			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-		}
-	}
 }

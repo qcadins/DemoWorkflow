@@ -236,14 +236,9 @@ def inputaddress() {
 
             'Click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation/button_Cancel'))
-
-            'write to excel if failed'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
-                0, Address - 1, GlobalVariable.StatusFailed)
-
-            'write to excel reason lookup'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 
-                1, Address - 1, GlobalVariable.StatusReasonLookup)
+			
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
             'Flagfailed +1 karena gagal melakukan lookup'
             (GlobalVariable.FlagFailed)++
@@ -355,13 +350,9 @@ def verifyDDLAddress(int Address){
 
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation/select_Select One Business  Legal  Mailing'),
 			AddressType) == false) {
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-				'2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
-
-			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-				'2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
+			
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -375,12 +366,10 @@ def verifyDDLAddress(int Address){
 		'verify array dari db == option list confins'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation/select_Ownership'),
 			Ownership) == false) {
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 0, Address - 1, GlobalVariable.StatusFailed)
 
-			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.AddressInformation', 1, Address - 1, GlobalVariable.ReasonFailedDDL)
-
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			
 			(GlobalVariable.FlagFailed)++
 		}
 	}

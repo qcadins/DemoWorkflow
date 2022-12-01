@@ -569,11 +569,8 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
 
 	GlobalVariable.FlagFailed = 1
 }
@@ -636,13 +633,9 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 }
 
 def writeReasonFailedVerifRule() {
-	'write to excel failed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+	
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 
 	GlobalVariable.FlagFailed = 1
 }

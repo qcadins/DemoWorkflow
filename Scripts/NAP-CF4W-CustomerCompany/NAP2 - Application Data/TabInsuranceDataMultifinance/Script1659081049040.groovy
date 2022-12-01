@@ -91,13 +91,9 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
 	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
 		inscoBranchName)==false){
-		'write to excel failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
-		'Write To Excel GlobalVariable.StatusReason'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 		
 		GlobalVariable.FlagFailed=1
 	}
@@ -107,13 +103,9 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	
 	'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
 	if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
-		'write to excel failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
-		'Write To Excel GlobalVariable.StatusReason'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 		
 		GlobalVariable.FlagFailed=1
 	}
@@ -155,14 +147,9 @@ GlobalVariable.InsuranceLength = WebUI.getAttribute(findTestObject('Object Repos
 if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)) {
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
-
-	'write to excel failed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
-	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonGenerateGagal)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonGenerateGagal'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonGenerateGagal)
 	
 	GlobalVariable.FlagFailed=1
 }
@@ -926,13 +913,9 @@ GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NA
 		'value', FailureHandling.OPTIONAL)
 	
 public writeFailedReasonVerifyRule(){
-	'write to excel failed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.StatusReason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+		
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed = 1
 }

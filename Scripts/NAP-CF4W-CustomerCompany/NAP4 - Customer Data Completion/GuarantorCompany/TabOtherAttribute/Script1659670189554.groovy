@@ -214,13 +214,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0,
-		GlobalVariable.NumofGuarantor - 1, GlobalVariable.StatusFailed)
 
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1,
-		GlobalVariable.NumofGuarantor - 1, GlobalVariable.ReasonFailedDataLookup)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.NumofGuarantor, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
 	GlobalVariable.FlagFailed = 1
 }
@@ -446,7 +442,7 @@ if (GlobalVariable.FlagFailed == 0) {
                 GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/CustomerType'), 
         GlobalVariable.NumofGuarantor, '7.OtherAttribute')
 
-    if (iscompleteMandatory) == 0) {
+    if (iscompleteMandatory == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/CustomerType'), 
             GlobalVariable.NumofGuarantor, '7.OtherAttribute')
@@ -497,13 +493,8 @@ def verifyInputError() {
 		'click button back'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
-		'write to excel if failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.StatusFailed)
-
-		'write to excel reason lookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.StatusReasonLookup)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.NumofGuarantor, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
 		GlobalVariable.FlagFailed = 1
 	}

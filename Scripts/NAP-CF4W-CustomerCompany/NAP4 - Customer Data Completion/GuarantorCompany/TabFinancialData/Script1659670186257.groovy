@@ -30,8 +30,8 @@ GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-Custom
 'declare datafilecustdetail variable'
 datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail - Company - GuarantorCompany')
 
-'declare copyappcolm = 0'
-GlobalVariable.CopyAppColm = 0
+'declare NumofGuarantor = 0'
+GlobalVariable.NumofGuarantor = 0
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -46,8 +46,8 @@ ArrayList<String> bankAccDelete = new ArrayList<>()
 for (index = 2; index <= (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm,
 			13))) {
-		'declare copyappcolm = index'
-		GlobalVariable.CopyAppColm = index
+		'declare NumofGuarantor = index'
+		GlobalVariable.NumofGuarantor = index
 
 		'declare numofverif store = index'
 		GlobalVariable.NumofVerifStore = index
@@ -74,7 +74,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-			for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+			for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -145,13 +145,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
-		'write to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.StatusWarning)
-
-		'write to excel reason delete failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.NumofGuarantor, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -160,7 +156,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		'count ulang table financial data setelah edit/delete'
 		variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -202,7 +198,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			}
 		}
 	} else {
-		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
@@ -221,7 +217,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		}
 	}
 } else if (copyapp == 'No') {
-	for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+	for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofGuarantor,
 					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -251,7 +247,7 @@ for (i = 1; i <= variable.size(); i++) {
 		'xpath', 'equals', ('//*[@id="AttributeList"]/div/div[' + i) + ']/div/div/input', true)
 
 	'input posisi laporan'
-	WebUI.setText(modifyinputFinAttr, GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, row++))
+	WebUI.setText(modifyinputFinAttr, GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, row++))
 }
 
 'Check if Edit Untuk Bank Account dan Bank Statement'
@@ -267,7 +263,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 			BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-			for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+			for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 				int flagFailed = 0
 
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
@@ -341,11 +337,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.StatusWarning)
-
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 1, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.NumofGuarantor, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -354,7 +348,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
 	if (variable.size() > 0) {
-		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -392,7 +386,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			}
 		}
 	} else {
-		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -412,7 +406,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
-	for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+	for (financialdata = GlobalVariable.NumofGuarantor; financialdata <= (countcolm + 1); financialdata++) {
 		int flagFailed = 0
 
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -579,14 +573,9 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 
 			'Click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Cancel'))
-
-			'Write To Excel GlobalVariable.StatusWarning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0,
-				financialdata - 1, GlobalVariable.StatusWarning)
-
-			'Write To Excel GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1,
-				financialdata - 1, GlobalVariable.StatusReasonLookup)
+			
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 
 			(GlobalVariable.FlagWarning)++
 		}

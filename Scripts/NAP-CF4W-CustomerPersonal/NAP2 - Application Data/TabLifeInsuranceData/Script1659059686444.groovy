@@ -85,13 +85,9 @@ if (datafileTabLifeInsurance.getValue(
 		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
 			lifeInscoBranchName)==false){
-			'write to excel failed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-		
-			'Write To Excel GlobalVariable.StatusReason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+					
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 		
 			GlobalVariable.FlagFailed=1
 		}
@@ -101,13 +97,9 @@ if (datafileTabLifeInsurance.getValue(
 	
 		'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
 		if(WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)==false){
-			'write to excel failed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData', 0,
-			GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 		
-			'Write To Excel GlobalVariable.StatusReason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDDL)
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 		
 			GlobalVariable.FlagFailed=1
 		}

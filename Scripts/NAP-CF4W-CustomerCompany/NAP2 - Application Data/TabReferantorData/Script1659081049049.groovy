@@ -897,13 +897,9 @@ public writeReasonFailedDelete(){
 }
 
 public writeReasonFailedLookup(){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusFailed)
 
-	'Write To Excel GlobalVariable.ReasonFailedDataLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-		1, GlobalVariable.NumofReferantor, GlobalVariable.ReasonFailedDataLookup)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 	
 	GlobalVariable.FlagFailed=1
 }

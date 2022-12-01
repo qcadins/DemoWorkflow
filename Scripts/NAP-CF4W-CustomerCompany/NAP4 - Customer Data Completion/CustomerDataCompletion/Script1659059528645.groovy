@@ -578,13 +578,9 @@ def pagingTesting(){
 	
 		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-	
-			'write to excel failed reset'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+						
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'NAP4') + ';\n')
 	
 			GlobalVariable.FlagWarning = 1
@@ -592,13 +588,9 @@ def pagingTesting(){
 		
 		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-	
-			'write to excel failed reset'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+						
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedSort + 'NAP4') + ';\n'))
 	
 			GlobalVariable.FlagWarning = 1
@@ -606,14 +598,9 @@ def pagingTesting(){
 		
 		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-	
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-	
-			'write to excel failed reset'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+				
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedFooter + 'NAP4') + ';\n'))
 	
 			GlobalVariable.FlagWarning = 1

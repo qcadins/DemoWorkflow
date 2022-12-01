@@ -145,14 +145,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 25) == 'Forei
 
         'click button back'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-        'write to excel if failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason Lookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
         GlobalVariable.FlagFailed = 1
     }
