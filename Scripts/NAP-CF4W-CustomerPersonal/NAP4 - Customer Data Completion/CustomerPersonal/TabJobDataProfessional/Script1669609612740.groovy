@@ -442,15 +442,10 @@ def verifyInputError(){
 	
 		'click button back'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/button_Back'))
-	
-		'write to excel if failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusFailed)
-	
-		'write to excel reason lookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm -
-			1, GlobalVariable.StatusReasonLookup)
-	
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+		
 		GlobalVariable.FlagFailed = 1
 	}
 }
