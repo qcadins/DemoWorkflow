@@ -72,4 +72,14 @@ public class writeExcel {
 		workbook.write(outFile);
 		outFile.close();
 	}
+	
+	// write to excel status and reason
+	@Keyword
+	public writeToExcelStatusReason (String sheetname, int colm, String status, String reason){
+
+		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+						0, colm - 1, status)
+		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+						1, colm - 1, reason)
+	}
 }

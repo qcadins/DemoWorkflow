@@ -320,13 +320,9 @@ public pagingTesting(){
 	
 		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
-	
-			'write to excel reason failed footer'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'Comresfund') + ';\n')
 	
 			GlobalVariable.FlagWarning = 1
@@ -334,27 +330,19 @@ public pagingTesting(){
 		
 		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	
-			'write to excel reason failed footer'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedSort + 'Comresfund') + ';\n'))
-	
+			
 			GlobalVariable.FlagWarning = 1
 		}
 		
 		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 	
-			'write to excel reason failed footer'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm - 1, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			'Write To Excel GlobalVariable.StatusWarning and reason'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedFooter + 'Comresfund') + ';\n'))
 	
 			GlobalVariable.FlagWarning = 1
@@ -376,13 +364,9 @@ public copyAppYesCommission(){
 	'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
 		5, FailureHandling.OPTIONAL)) {
-		'Write to excel failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write to excel failed reason'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'Klik cancel'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
@@ -409,13 +393,9 @@ public copyAppYesReservedFund(){
 	'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'),
 		5, FailureHandling.OPTIONAL)) {
-		'Write to excel failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'Write to excel failed reason'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-			1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'Klik cancel'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'))

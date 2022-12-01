@@ -142,14 +142,9 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'click button cancel'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-
-                                    'write to excel failed'
-                                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                        '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
-
-                                    'Write To Excel GlobalVariable.StatusReasonLookup'
-                                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                        '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusReasonLookup)
+									
+									'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+									CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                     'Flagfailed +1 karena lookup gagal'
                                     (GlobalVariable.FlagFailed)++
@@ -196,13 +191,8 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     'click button cancel'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
-                                    'write to excel failed'
-                                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                        '3b.TabGuarantorDataCompany', 0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
-
-                                    'Write To Excel GlobalVariable.StatusReasonLookup'
-                                    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 
-                                        '3b.TabGuarantorDataCompany', 1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusReasonLookup)
+									'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+									CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                     'Flagfailed +1 karena lookup gagal'
                                     (GlobalVariable.FlagFailed)++

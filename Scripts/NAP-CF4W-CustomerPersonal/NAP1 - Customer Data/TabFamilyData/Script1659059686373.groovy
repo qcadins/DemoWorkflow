@@ -192,13 +192,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                                'Write to Excel FAILED'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                                'Write to Excel reason lookup'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                 GlobalVariable.FlagFailed = 1
 
@@ -257,13 +252,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                                'Write to Excel FAILED'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                                'Write to Excel reason lookup'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                 GlobalVariable.FlagFailed = 1
 
@@ -350,13 +340,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                                'Write to Excel FAILED'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                                'Write to Excel reason lookup'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                 GlobalVariable.FlagFailed = 1
 
@@ -410,13 +395,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                            'Write to Excel FAILED'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                            'Write to Excel Reason Lookup'
-                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                             GlobalVariable.FlagFailed = 1
 
@@ -495,13 +475,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                                'Write to Excel FAILED'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                                'Write to Excel Reason Lookup'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                 GlobalVariable.FlagFailed = 1
 
@@ -560,13 +535,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
-                                'Write to Excel FAILED'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusFailed)
-
-                                'Write to Excel Reason Lookup'
-                                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
-                                    1, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusReasonLookup)
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
                                 GlobalVariable.FlagFailed = 1
 

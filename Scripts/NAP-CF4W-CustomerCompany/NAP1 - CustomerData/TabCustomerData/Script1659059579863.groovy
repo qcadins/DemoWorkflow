@@ -97,35 +97,8 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
-        'click select'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/a_Select'))
-    } else {
-        'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_X'))
-
-        'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'))
-
-        'Write To Excel GlobalVariable.StatusFailed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-        'Write To Excel GlobalVariable.StatusReasonLookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-        'Flagfailed +1 karena lookup gagal'
-        (GlobalVariable.FlagFailed)++
-
-        'Pengecekan jika new consumer finance belum diexpand'
-        if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-            'Klik new consumer finance'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-        }
-    }
-    
+	CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'))
+ 
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
@@ -162,34 +135,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
-            'click select'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/a_Select'))
-        } else {
-            'click X'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_X'))
-
-            'click button back'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'))
-
-            'Write To Excel GlobalVariable.StatusFailed'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-            'Write To Excel GlobalVariable.StatusReasonLookup'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonLookup)
-
-            'Flagfailed +1 karena lookup gagal'
-            (GlobalVariable.FlagFailed)++
-
-            'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-                'Klik new consumer finance'
-                WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-            }
-        }
+		CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'))
     }
     
 	'check if role testing untuk get data customer digunakan untuk data verif'
@@ -289,13 +235,9 @@ if (GlobalVariable.FlagFailed == 0) {
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
-            'Write to excel failed'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-            'Write to excel failed reason'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-                1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailedCopyApp)
+            
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
         }
     }
 }

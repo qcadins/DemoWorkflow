@@ -125,13 +125,9 @@ if(GlobalVariable.RoleCompany=="Testing"){
 				
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
-					'Write to Excel FAILED'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-						0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 					
-					'Write To Excel GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-						1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyRule)
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -875,13 +871,9 @@ alertCalculate = findTestObject('Object Repository/NAP-CF4W-CustomerCompany/Comm
 
 'Pengecekan jika calculate error'
 if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
-	'Write to Excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 	
-	'Write To Excel GlobalVariable.StatusReasonCalculateGagal'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-		1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonCalculateGagal)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
 	
 	'Pengecekan error alert amount/percentage melebihi limit'
 	if(WebUI.getText(alertCalculate).toLowerCase().contains("Cannot be more than".toLowerCase())){
