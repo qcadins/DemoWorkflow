@@ -211,13 +211,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0,
-		GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
-
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1,
-		GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedDataLookup)
+	
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
 	GlobalVariable.FlagFailed = 1
 }

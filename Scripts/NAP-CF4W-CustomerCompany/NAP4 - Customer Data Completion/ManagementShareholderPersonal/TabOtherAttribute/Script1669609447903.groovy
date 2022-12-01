@@ -248,13 +248,9 @@ if (GlobalVariable.Role == 'Testing') {
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-    'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.NumofMS - 
-        1, GlobalVariable.StatusFailed)
 
-    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.NumofMS - 
-        1, GlobalVariable.ReasonFailedDataLookup)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
 }
@@ -562,14 +558,9 @@ def verifyInputError(){
 
 		'click button back'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-
-		'write to excel if failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute',
-			0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
-
-		'write to excel reason lookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute',
-			1, GlobalVariable.NumofMS - 1, GlobalVariable.StatusReasonLookup)
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
 		GlobalVariable.FlagFailed = 1
 	}

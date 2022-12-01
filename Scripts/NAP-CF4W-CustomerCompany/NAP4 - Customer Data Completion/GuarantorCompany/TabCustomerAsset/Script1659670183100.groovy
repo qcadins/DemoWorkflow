@@ -135,13 +135,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (assettypefaileddelete.size() > 0) {
-		'write to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.StatusWarning)
 
-		'write to excel reason failed delete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.NumofGuarantor, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
 		(GlobalVariable.FlagWarning)++
 	}

@@ -140,13 +140,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 25) == '
 		'click button back'
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 
-		'write to excel if failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 0, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.StatusFailed)
-
-		'write to excel Reason Lookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail', 1, GlobalVariable.NumofGuarantor -
-			1, GlobalVariable.StatusReasonLookup)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.NumofGuarantor, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
 		'flagfailed +1 karena gagal melakukan lookup'
 		(GlobalVariable.FlagFailed)++

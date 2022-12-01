@@ -144,13 +144,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
-		'write to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.StatusWarning)
-
-		'write to excel reason delete failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -340,11 +336,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.StatusWarning)
-
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 1, GlobalVariable.CopyAppColm -
-			1, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -579,13 +573,8 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 			'Click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Cancel'))
 
-			'Write To Excel GlobalVariable.StatusWarning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 0,
-				financialdata - 1, GlobalVariable.StatusWarning)
-
-			'Write To Excel GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.FinancialData', 1,
-				financialdata - 1, GlobalVariable.StatusReasonLookup)
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 
 			(GlobalVariable.FlagWarning)++
 		}

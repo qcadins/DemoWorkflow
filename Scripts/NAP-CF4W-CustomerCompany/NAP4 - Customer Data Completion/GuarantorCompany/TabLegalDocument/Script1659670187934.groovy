@@ -53,7 +53,7 @@ def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.Nu
 def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).split(';')
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofGuarantor, 
     10)
 
 ArrayList<WebElement> variable
@@ -156,13 +156,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
     
     if (legaltypefaileddelete.size() > 0) {
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
 
-		'write to excel reason failed delete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.NumofGuarantor, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -237,34 +233,30 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 'click button save and continue'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/button_Save  Continue'))
 
-if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
+if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) && (GlobalVariable.FlagFailed == 
 0)) {
     'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantor, 
         '6.LegalDocument')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.NumofColm, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'), 
-        GlobalVariable.NumofColm, '6.LegalDocument')
+                GlobalVariable.NumofGuarantor, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'), 
+        GlobalVariable.NumofGuarantor, '6.LegalDocument')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 4)) == 0) {
+    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/errorvalidasi'), 
-            GlobalVariable.NumofColm, '6.LegalDocument')
+            GlobalVariable.NumofGuarantor, '6.LegalDocument')
     }
 }
 
 if (GlobalVariable.FlagWarning > 0) {
-	'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.NumofColm - 
-        1, GlobalVariable.StatusWarning)
 
-	'write to excel failed reason'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.NumofColm - 
-        1, GlobalVariable.ReasonFailedInputData + faileddata)
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.NumofGuarantor, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/th_Expired Date'), 
@@ -275,8 +267,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-Cus
 
 'check if role = testing & check verif store db = yes'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-	'declare numofverifstore = numofcolm'
-    GlobalVariable.NumofVerifStore = GlobalVariable.NumofColm
+	'declare numofverifstore = NumofGuarantor'
+    GlobalVariable.NumofVerifStore = GlobalVariable.NumofGuarantor
 
     'Call test case verify legal doc store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreDataDB'), 
@@ -297,13 +289,9 @@ def verifLegalDocType(int legal){
 		'verify array dari db == option list confins'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
 			LegalDocType) == false) {
-			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-				'6.LegalDocument', 0, legal - 1, GlobalVariable.StatusFailed)
 
-			'Write To Excel GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelFunction'(GlobalVariable.DataFilePath,
-				'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDDL)
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -321,25 +309,28 @@ def verifLegalDocType(int legal){
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 		'6.LegalDocument', 1, legal - 1, GlobalVariable.ReasonFailedDDL)
 		
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDDL)
+		
 		(GlobalVariable.FlagFailed)++
 		}
 	}
 }
 
 def inputLegalDoc(ArrayList<String> faileddata){
-	def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+	def LegalDocTypeArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 12).split(';', -1)
 	
-	def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+	def DocumentNoArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 13).split(';', -1)
 	
-	def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+	def DateIssuedArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 14).split(';', -1)
 	
-	def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+	def ExpiredDateArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).split(';', -1)
 	
-	def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+	def NotaryNameArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).split(';', -1)
 	
-	def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+	def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).split(';', -1)
 	
-	def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+	def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).split(';', -1)
 	
 	'select legal doc type'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
@@ -353,25 +344,25 @@ def inputLegalDoc(ArrayList<String> faileddata){
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/input_Issued Date'),
 		DateIssuedArray[(legal - 1)])
 
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 15).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 15).length() > 0) {
 		'input expired date'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/input_Expired Date'),
 			ExpiredDateArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 16).length() > 0) {
 		'input notary name'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/input_Notary Name'),
 			NotaryNameArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 17).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 17).length() > 0) {
 		'input notary location'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/input_Notary Location'),
 			NotaryLocationArray[(legal - 1)])
 	}
 	
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 18).length() > 0) {
+	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofGuarantor, 18).length() > 0) {
 		'input Notes'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/textarea_Notes'),
 			NotesArray[(legal - 1)])
