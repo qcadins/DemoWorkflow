@@ -78,22 +78,22 @@ else {
 	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
 	
 			'call tc custdupcheckverif'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
+	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
 	            FailureHandling.STOP_ON_FAILURE)
 	
 			'jika dupcheckverif bernilai yes'
-	        if (GlobalVariable.DupcheckVerif == 'Yes') {
+	        not_run: if (GlobalVariable.DupcheckVerif == 'Yes') {
 				'call tc custdupcheck'
 	            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), [:], 
 	                FailureHandling.STOP_ON_FAILURE)
 	        }
 	        
 			'call tc main nap2'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
 	            [:], FailureHandling.STOP_ON_FAILURE)
 	
 			'call tc main comresfund'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
+	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
 	            FailureHandling.STOP_ON_FAILURE)
 	
 			'call tc nap4 cdc'

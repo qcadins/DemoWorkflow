@@ -17,6 +17,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.support.ui.Select as Select
 
 int flagWarning = 0
 
@@ -109,6 +110,8 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 23) == 'Yes') {
                                 'click button copy'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
+								
+								getDataGuarCompany()
                             } //jika copy address no
 							else if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                                 23) == 'No') {
@@ -396,13 +399,17 @@ def getDataGuarCompany() {
     'declare array for confins data'
     def confinsdata = []
 
-    'add customer name to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-            'value'))
-
-    'add tax id to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-            'value'))
+	if(datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany,
+		13) == 'LookUp'){
+	    
+		'add customer name to array'
+	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
+	            'value'))
+	
+	    'add tax id to array'
+	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
+	            'value'))
+	}
 
     'add address to array'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/textarea_Address'), 
@@ -431,18 +438,30 @@ def getDataGuarCompany() {
     'add kota to array'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelKota'), 
             'value'))
+	
+	if(datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany,
+		13) == 'LookUp'){
 
-    'add company type to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-            'value'))
-
-    'add customer model to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'), 
-            'value'))
-
-    'add ownership to array'
-    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'), 
-            'value'))
+	    'add company type to array'
+	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
+	            'value'))
+	
+	    'add customer model to array'
+	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'), 
+	            'value'))
+	
+	    'add ownership to array'
+	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'), 
+	            'value'))
+	}
+	else if(datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany,
+			13) == 'Input Data'){
+		Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//div[@id='Address']/div/div[2]/div[2]/div/div/div/div/select")))
+		String optionLabel = select.getFirstSelectedOption().getText()
+		
+		'add ownership to array'
+		confinsdata.add(optionLabel)
+	}
 
     GlobalVariable.Confinsdata = confinsdata
 }
