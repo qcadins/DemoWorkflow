@@ -25,10 +25,12 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileTabAsset'
 datafileTabAsset = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData')
 
+'get supplier data from db'
 ArrayList<Boolean> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
 	sqlconnection, datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))
 
+'get asset data from db'
 ArrayList<Boolean> resultassetinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection,
 	datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))

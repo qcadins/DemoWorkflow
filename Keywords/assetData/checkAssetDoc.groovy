@@ -22,12 +22,16 @@ import internal.GlobalVariable
 
 public class checkAssetDoc {
 
+	//Keyword untuk mencari nama-nama asset document yang muncul pada tab asset data
 	@Keyword
 	public checkAssetDocument(Sql instance, String fullAssetCode){
 		ArrayList<String> documentName = new ArrayList<String>()
+
 		instance.eachRow(("select rad.ASSET_DOC_NAME from ASSET_MASTER am with(nolock) join ASSET_DOC_LIST adl with(nolock) on am.ASSET_TYPE_ID = adl.ASSET_TYPE_ID join REF_ASSET_DOC rad with(nolock) on rad.REF_ASSET_DOC_ID = adl.REF_ASSET_DOC_ID where am.FULL_ASSET_CODE = '"+fullAssetCode+"' and am.PARENT_ID is not null"), { def row ->
 			documentName.add(row[0].toUpperCase())
+
 		})
+
 		return documentName
 	}
 }

@@ -452,21 +452,36 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 	}
 }
 
+'keyword untuk mencari nama-nama asset document yang muncul pada tab asset'
 ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDocument'(sqlConnectionFOU,Fullassetcode)
 
 'looping asset document'
 for(int i = 0;i<docName.size();i++){
+	'modify document name'
 	modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/td_AssetDocument'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[1]",true)
+	
+	'get text document name'
 	textDocumentName = WebUI.getText(modifyDocumentName)
+	
+	'Verif document name yang muncul pada confins sesuai dengan db'
 	if(WebUI.verifyMatch(textDocumentName, docName[i],false)==false){
 		checkVerifyEqualOrMatch(false)
 		break
 	}
+	
+	'modify object received'
 	modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Received'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[2]/input",true)
+	
+	'modify object document no'
 	modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNo'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[3]/input",true)
+	
+	'modify object expired date'
 	modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[4]/input",true)
+	
+	'modify document notes'
 	modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[5]/input",true)
 	
+	'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
 	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifyReceived,2,FailureHandling.OPTIONAL)){
 		'centang received'
 		WebUI.check(modifyReceived)
