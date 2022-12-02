@@ -20,70 +20,72 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.DataFilePath)
 
-def CountofGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail - Personal - Guarantor').getColumnNumbers()
+def CountofGuarantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail').getColumnNumbers()
+
+GlobalVariable.NAP4 = 'GUARANTOR PERSONAL'
 
 WebUI.delay(10)
 
 for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= CountofGuarantor; (GlobalVariable.NumofGuarantor)++) {
-    if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail - Personal - Guarantor').getValue(
+    if ((findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail - Personal - Guarantor').getValue(
+        GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail')))) {
         if (GlobalVariable.Role == 'Data Entry') {
-			'call tc customerdetail'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerDetail'), 
+            'call tc customerdetail'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc AddressInformation'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabAddressInformation'), 
+            'call tc AddressInformation'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc JobData'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabJobData'), 
+            'call tc JobData'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc EmergencyContact'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabEmergencyContact'), 
+            'call tc EmergencyContact'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc FinancialData'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabFinancialData'), 
+            'call tc FinancialData'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc CustomerAsset'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerAsset'), 
+            'call tc CustomerAsset'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc OtherAttribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabOtherAttribute'), 
+            'call tc OtherAttribute'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
-			'call tc customerdetail'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerDetail'), 
+            'call tc customerdetail'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc AddressInformation'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabAddressInformation'), 
+            'call tc AddressInformation'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc JobData'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabJobData'), 
+            'call tc JobData'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc EmergencyContact'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabEmergencyContact'), 
+            'call tc EmergencyContact'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc FinancialData'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabFinancialData'), 
+            'call tc FinancialData'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc CustomerAsset'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabCustomerAsset'), 
+            'call tc CustomerAsset'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call tc OtherAttribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/TabOtherAttribute'), 
+            'call tc OtherAttribute'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
     }

@@ -15,69 +15,71 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
+GlobalVariable.NAP4 = 'CUSTOMER'
+
 if (GlobalVariable.Role == 'Data Entry') {
-	'call tc customerdetail'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabCustomerDetail'), 
+    'call tc customerdetail'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc AddressInformation'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabAddressInformation'), 
+    'call tc AddressInformation'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc Family'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabFamily'), 
+    'call tc Family'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFamily'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc JobData'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabJobData'), 
+    'call tc JobData'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc EmergencyContact'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabEmergencyContact'), 
+    'call tc EmergencyContact'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc FinancialData'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabFinancialData'), 
+    'call tc FinancialData'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc CustomerAsset'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabCustomerAsset'), 
+    'call tc CustomerAsset'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call tc OtherAttribute'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabOtherAttribute'), 
+    'call tc OtherAttribute'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
-	
-	'call tc customerdetail'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabCustomerDetail'), 
+    'call tc customerdetail'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc AddressInformation'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabAddressInformation'), 
+
+    'call tc AddressInformation'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc Family'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabFamily'), 
+
+    'call tc Family'
+    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFamily'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc JobData'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabJobData'), 
+
+    'call tc JobData'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc EmergencyContact'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabEmergencyContact'), 
+
+    'call tc EmergencyContact'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc FinancialData'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabFinancialData'), 
+
+    'call tc FinancialData'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc CustomerAsset'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabCustomerAsset'), 
+
+    'call tc CustomerAsset'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
         [:], FailureHandling.STOP_ON_FAILURE)
-	
-	'call tc OtherAttribute'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/TabOtherAttribute'), 
+
+    'call tc OtherAttribute'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
         [:], FailureHandling.STOP_ON_FAILURE)
 }
+

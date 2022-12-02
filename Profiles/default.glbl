@@ -604,4 +604,9 @@
       <initValue>''</initValue>
       <name>InsuranceLength</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>NAP4</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
