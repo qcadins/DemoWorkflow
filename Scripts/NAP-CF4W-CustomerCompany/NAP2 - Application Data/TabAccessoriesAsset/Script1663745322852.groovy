@@ -198,13 +198,13 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 									  int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 						  
 									  'verify securitydeposit value equal'
-									  CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt), '7a.Accessories',GlobalVariable.NumofAccessories)
+									  checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
 								  } else if (datafileAccessories.getValue(
 									  GlobalVariable.NumofAccessories, 18) == 'Amount') {
 									  float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 						  
 									  'verify securitydeposit value equal'
-									  CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg), '7a.Accessories',GlobalVariable.NumofAccessories)
+									  checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
 								  }
 								  GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 							  }
@@ -679,13 +679,13 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 									int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 						
 									'verify securitydeposit value equal'
-									CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt), '7a.Accessories',GlobalVariable.NumofAccessories)
+									checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
 								} else if (datafileAccessories.getValue(
 									GlobalVariable.NumofAccessories, 18) == 'Amount') {
 									float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 						
 									'verify securitydeposit value equal'
-									CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg), '7a.Accessories',GlobalVariable.NumofAccessories)
+									checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
 								}
 								GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 						}
@@ -912,13 +912,13 @@ else if(datafileTabAsset.getValue(
 					int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
 		
 					'verify securitydeposit value equal'
-					CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt), '7a.Accessories',GlobalVariable.NumofAccessories)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
 				} else if (datafileAccessories.getValue(
 					GlobalVariable.NumofAccessories, 18) == 'Amount') {
 					float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
 		
 					'verify securitydeposit value equal'
-					CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg), '7a.Accessories',GlobalVariable.NumofAccessories)
+					checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
 				}
 				GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 			}
@@ -927,5 +927,19 @@ else if(datafileTabAsset.getValue(
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 				GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 		}
+	}
+}
+	
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
+					0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
+	
+			'write to excel verify equal or match'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
+					1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+	
+			GlobalVariable.FlagFailed=1
 	}
 }

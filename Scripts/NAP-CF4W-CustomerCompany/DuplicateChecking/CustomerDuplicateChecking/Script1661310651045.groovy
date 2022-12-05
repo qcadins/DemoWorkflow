@@ -110,7 +110,7 @@ if (DupCheckStatus == true) {
         if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() == 
         0)) {
             'verify name == data inputan'
-            CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true), '4.DuplicateChecking', GlobalVariable.NumofColm)
+            checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
         }
         
         if (subjectName.equalsIgnoreCase(custnamedupcheck)) {
@@ -169,7 +169,8 @@ if (DupCheckStatus == true) {
 
                                 if (GlobalVariable.RoleCompany == 'Testing') {
                                     'verify match CustomerNo'
-                                    CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo), newCustomerNoValue, 
+                                            false))
                                 }
                                 
                                 break
@@ -214,8 +215,8 @@ if (DupCheckStatus == true) {
 
                                 if (GlobalVariable.RoleCompany == 'Testing') {
                                     'verify match ApplicantNo'
-                                    CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), 
-                                            newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo).toString(), 
+                                            newApplicantNoValue.toString(), false))
                                 }
                                 
                                 break
@@ -234,7 +235,7 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo), '', false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -250,8 +251,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
-                                        newCustomerNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
+                                        newCustomerNoValue, false))
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -264,8 +265,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
-                                        newApplicantNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
+                                        newApplicantNoValue, false))
                             }
                         }
                     } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select SimilarData')) {
@@ -280,8 +281,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
-                                        newCustomerNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
+                                        newCustomerNoValue, false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -293,8 +294,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
-                                        '', false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
+                                        '', false))
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInprocessCompany'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -307,8 +308,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
-                                        newApplicantNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
+                                        newApplicantNoValue, false))
                             }
                         }
                     } else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
@@ -323,8 +324,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
-                                        newApplicantNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
+                                        newApplicantNoValue, false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -336,8 +337,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
-                                        '', false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(WebUI.getText(modifyApplicantNo, FailureHandling.OPTIONAL), 
+                                        '', false))
                             }
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -350,8 +351,8 @@ if (DupCheckStatus == true) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
-                                        newCustomerNoValue, false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCustomerNo, FailureHandling.OPTIONAL), 
+                                        newCustomerNoValue, false))
                             }
                         }
                     }
@@ -388,6 +389,20 @@ CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'), 10, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'))
+}
+
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        'write to excel status failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
+
+        'write to excel verify equal or match'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, 
+            GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+        GlobalVariable.FlagFailed = 1
+    }
 }
 
 def pagingTesting() {

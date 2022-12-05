@@ -52,7 +52,7 @@ public class Function {
 			}
 		}
 	}
-	
+
 	//keyword verify check verify equal or match
 	@Keyword
 	public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
@@ -66,6 +66,17 @@ public class Function {
 					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1
+		}
+	}
+	
+	//keyword check app step
+	@Keyword
+	public checkAppStep(String appStep){
+		if((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
+    'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')){
+			return true
+		}else {
+			return false
 		}
 	}
 }

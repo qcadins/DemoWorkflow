@@ -101,7 +101,7 @@ if (GuarantorArray.size() > 0) {
             if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
                 GlobalVariable.NumofColm, 8).length() == 0)) {
                 'verify name == data inputan'
-                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
             }
         }
         
@@ -181,8 +181,8 @@ if (GuarantorArray.size() > 0) {
 
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match GuarantorNo'
-                                        CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, 
-                                                false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, 
+                                                false))
                                     }
                                     
                                     break
@@ -226,8 +226,8 @@ if (GuarantorArray.size() > 0) {
 
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match GuarantorNo'
-                                        CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, 
-                                                false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName), newGuarantorNoValue, 
+                                                false))
                                     }
                                     
                                     break
@@ -284,8 +284,8 @@ if (GuarantorArray.size() > 0) {
 
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match ApplicantNo'
-                                        CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
-                                                newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
+                                                newApplicantNoValue.toString(), false))
                                     }
                                     
                                     break
@@ -331,8 +331,8 @@ if (GuarantorArray.size() > 0) {
 
                                     if (GlobalVariable.RoleCompany == 'Testing') {
                                         'verify match ApplicantNo'
-                                        CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
-                                                newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                        checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
+                                                newApplicantNoValue.toString(), false))
                                     }
                                     
                                     break
@@ -355,8 +355,8 @@ if (GuarantorArray.size() > 0) {
 							'check if role testing'
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
-                                        false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
+                                        false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -389,8 +389,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
-                                        newCustomerNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
+                                        newCustomerNoValue.toString(), false))
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -416,8 +416,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
-                                        newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
+                                        newApplicantNoValue.toString(), false))
                             }
                         }
                     } else if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('Select SimilarData')) {
@@ -447,8 +447,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
-                                        newCustomerNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
+                                        newCustomerNoValue.toString(), false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -462,8 +462,8 @@ if (GuarantorArray.size() > 0) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
-                                        false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
+                                        false))
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -489,8 +489,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
-                                        newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
+                                        newApplicantNoValue.toString(), false))
                             }
                         }
                     } else {
@@ -520,8 +520,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
-                                        newApplicantNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newGuarNameAppInProcess).toString(), 
+                                        newApplicantNoValue.toString(), false))
                             }
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
@@ -535,8 +535,8 @@ if (GuarantorArray.size() > 0) {
 
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match ApplicantNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
-                                        false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
+                                        false))
                             }
                         } else {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
@@ -562,8 +562,8 @@ if (GuarantorArray.size() > 0) {
                             
                             if (GlobalVariable.RoleCompany == 'Testing') {
                                 'verify match CustomerNo'
-                                CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
-                                        newCustomerNoValue.toString(), false), '4.DuplicateChecking', GlobalVariable.NumofColm)
+                                checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newGuarName).toString(), 
+                                        newCustomerNoValue.toString(), false))
                             }
                         }
                     }
@@ -639,3 +639,18 @@ def loopingSubjectCustNo(String newGuarName) {
 
     return custNo
 }
+
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'write to excel status failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusFailed)
+
+		'write to excel reason failed verify match or equal'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 1, GlobalVariable.NumofColm - 
+            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+        GlobalVariable.FlagFailed = 1
+    }
+}
+

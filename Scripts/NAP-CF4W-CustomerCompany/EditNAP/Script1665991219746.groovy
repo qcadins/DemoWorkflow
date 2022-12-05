@@ -129,8 +129,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
-    'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
+    } else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
         'call funtion get cust data'
         getCustdata(sqlconnectionLOS, appNo, appStep)
 
@@ -388,8 +387,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
-    } else if ((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
-    'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')) {
+    } else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
         'call funtion get cust data'
         getCustdata(sqlconnectionLOS, appNo, appStep)
 

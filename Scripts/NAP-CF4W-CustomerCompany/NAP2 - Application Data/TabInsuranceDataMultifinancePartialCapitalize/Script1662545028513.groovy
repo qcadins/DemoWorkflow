@@ -541,16 +541,16 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
 	
 	'Verif total main premi sesuai perhitungan'
-	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
 	
 	'Verif total additional premi sesuai perhitungan'
-	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
 	
 	'Verif total fee sesuai perhitungan'
-	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false))
 	
 	'Verif total premi to customer sesuai perhitungan'
-	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
 	
 	if(totalResult[2]==0){
 		'Input diskon'
@@ -588,7 +588,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 	
 	'Verif total premi to customer after discount sesuai perhitungan'
-	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
 	
 	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 		'value').replace(',', '')
@@ -596,7 +596,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	'Verif untuk capitalize bukan 0 dan ada paid by mf'
 	if ((totalResult[3]) != 0 && totalResult[2]==1) {
 		'Verify capitalize amount sesuai perhitungan'
-		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false))
 		
 		'write to excel discount amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
@@ -612,12 +612,12 @@ if(GlobalVariable.RoleCompany=="Testing"){
 			'value').replace(',', '')
 			
 		'Verify capitalize amount sesuai perhitungan'
-		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult - discountAmt).toString(), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult - discountAmt).toString(), false))
 	}
 	//Verif untuk capitalize bernilai 0, ada paid by mf, dan full capitalize tercentang
 	else if((totalResult[3]) == 0 && totalResult[2]==1 && WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
 		'Verify capitalize amount sesuai perhitungan'
-		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(),false), '8.TabInsuranceData', GlobalVariable.NumofColm)
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(),false))
 	}
 }
 
@@ -636,6 +636,20 @@ public writeFailedReasonVerifyRule(){
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed=1
+}
+
+public checkVerifyEqualOrMatch(Boolean isMatch){
+	if(isMatch==false && GlobalVariable.FlagFailed==0){
+		'write to excel status failed'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
+
+		'write to excel verify equal or match'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
+				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+		GlobalVariable.FlagFailed=1
+	}
 }
 
 public AddRatetoGV(int count, int countAddCov){
