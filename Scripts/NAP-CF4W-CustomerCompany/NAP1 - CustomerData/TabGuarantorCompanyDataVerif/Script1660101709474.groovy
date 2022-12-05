@@ -28,19 +28,5 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
 'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {
     'verify result = confinsdata'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-				0, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.StatusFailed)
-
-		'write to excel reason failed verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-				1, GlobalVariable.NumofGuarantorCompany-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL), '3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany)
 }

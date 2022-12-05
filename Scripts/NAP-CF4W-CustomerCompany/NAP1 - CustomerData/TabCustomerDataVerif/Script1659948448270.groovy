@@ -27,19 +27,5 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.Custom
 'looping verif db = confinsdta'
 for (int i = 0; i < result.size(); i++) {
     'verify result == confinsdata'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL))
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-
-		'write to excel reason failed verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
+    CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(result[i], GlobalVariable.Confinsdata[i], false, FailureHandling.OPTIONAL), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 }

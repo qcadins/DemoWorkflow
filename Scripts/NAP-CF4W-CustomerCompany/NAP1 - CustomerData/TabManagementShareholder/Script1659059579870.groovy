@@ -39,8 +39,8 @@ copyapp = datafileMS.getValue(GlobalVariable.NumofMS, 10)
 'check if testing'
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-            'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL))
+    CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
+            'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL), '2.TabManagementShareholderData', GlobalVariable.NumofMS)
 }
 
 'Loop Multiple ManagementSharholder Data'
@@ -1309,19 +1309,5 @@ def getData() {
             'add ownership to array'
             GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
         }
-    }
-}
-
-def checkVerifyEqualOrMatch(Boolean isMatch) {
-    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        'write to excel status failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-            0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusFailed)
-
-        'write to excel reason verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-            1, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-        GlobalVariable.FlagFailed = 1
     }
 }
