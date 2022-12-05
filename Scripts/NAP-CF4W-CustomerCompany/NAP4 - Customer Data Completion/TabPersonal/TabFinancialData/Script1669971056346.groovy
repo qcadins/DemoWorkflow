@@ -24,6 +24,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.CopyAppColm = 0
 
+def datafilecustdetail 
+
 if(GlobalVariable.NAP4 == 'SHAREHOLDER PERSONAL'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
@@ -42,8 +44,6 @@ if(GlobalVariable.NAP4 == 'SHAREHOLDER PERSONAL'){
 	
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/FinancialData')
 }
-
-
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -401,7 +401,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			int flagFailed = 0
 	
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+				if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
+			12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
@@ -421,7 +422,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		int flagFailed = 0
 
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
+			12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'

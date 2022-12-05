@@ -24,6 +24,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.CopyAppColm = 0
 
+def datafilecustdetail 
+
 if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
@@ -51,8 +53,6 @@ if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData')
 }
-
-
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -93,7 +93,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation - Personal/select_addressType'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-			for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+			for (int financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -177,7 +177,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		'count ulang table financial data setelah edit/delete'
 		variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+		for (int financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -410,7 +410,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			int flagFailed = 0
 	
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
@@ -430,7 +431,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		int flagFailed = 0
 
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'

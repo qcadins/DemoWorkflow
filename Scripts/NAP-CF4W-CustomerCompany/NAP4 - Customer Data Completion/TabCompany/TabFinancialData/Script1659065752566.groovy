@@ -24,6 +24,8 @@ import internal.GlobalVariable as GlobalVariable
 'declare copyappcolm = 0'
 GlobalVariable.CopyAppColm = 0
 
+def datafilecustdetail 
+
 if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
@@ -64,7 +66,8 @@ ArrayList<String> bankAccDelete = new ArrayList<>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
+    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
+			12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
             13))) {
         'declare copyappcolm = index'
         GlobalVariable.CopyAppColm = index
