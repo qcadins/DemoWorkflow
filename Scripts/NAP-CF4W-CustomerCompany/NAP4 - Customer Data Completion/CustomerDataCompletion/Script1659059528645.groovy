@@ -318,14 +318,10 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-Custom
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel status failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.CustomerDataCompletion', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		
         GlobalVariable.FlagFailed = 1
     }
 }

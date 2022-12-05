@@ -168,14 +168,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (legaltypefaileddelete.size() > 0) {
-		'write to excel status warning'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument',
-			0, GlobalVariable.ColmNAP4 - 1, GlobalVariable.StatusWarning)
 
-		'write to excel reason failed delete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument',
-			1, GlobalVariable.ColmNAP4 - 1, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
-
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+		
 		(GlobalVariable.FlagWarning)++
 	}
 	
@@ -270,13 +266,9 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (GlobalVariable.FlagWarning > 0) {
-	'write to excel status warning'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 0, GlobalVariable.ColmNAP4 -
-		1, GlobalVariable.StatusWarning)
 
-	'write to excel failed reason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.LegalDocument', 1, GlobalVariable.ColmNAP4 -
-		1, GlobalVariable.ReasonFailedInputData + faileddata)
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument/th_Expired Date'),
