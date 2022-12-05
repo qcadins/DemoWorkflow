@@ -73,13 +73,30 @@ public class writeExcel {
 		outFile.close();
 	}
 	
+	@Keyword
+	def writeToExcelNumber(String filePath, String sheetName, int rowNo, int collNo, Integer cellValue) {
+		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
+
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheet(sheetName); //getSheet -> sheet num n (start from index 0)
+
+		'Write data to excel'
+		//sheet.createRow(0) //for create clear row (if needed), start from index 0
+		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue); //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
+
+		file.close();
+		FileOutputStream outFile =new FileOutputStream(new File(filePath));
+		workbook.write(outFile);
+		outFile.close();
+	}
+
 	// write to excel status and reason
 	@Keyword
 	public writeToExcelStatusReason (String sheetname, int colm, String status, String reason){
 
 		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
-						0, colm - 1, status)
+				0, colm - 1, status)
 		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
-						1, colm - 1, reason)
+				1, colm - 1, reason)
 	}
 }

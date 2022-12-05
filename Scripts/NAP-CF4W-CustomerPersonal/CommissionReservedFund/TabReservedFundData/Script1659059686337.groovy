@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
+import com.kms.katalon.core.testdata.reader.ExcelFactory
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
@@ -96,8 +97,8 @@ ArrayList<String> defAllocAmt = resultVerifRule.get("Amt")
 'Arraylist untuk menampung nilai array alloc behaviour'
 ArrayList<String> allocBhv = resultVerifRule.get("Bhv")
 
-'declare totalamt'
-BigDecimal totalAmt = 0
+//'declare totalamt'
+//BigDecimal totalAmt = 0
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
 def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2
@@ -205,20 +206,26 @@ for(int i = 0;i<allocFrom.size();i++){
 					GlobalVariable.FlagFailed=1
 				}	
 			}
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+				rsvAmtRow+i-1, GlobalVariable.NumofColm-1, Integer.parseInt(inputAllocAmt))
+			
 		}
 	}
 	else{
 		
 		'Verify field tidak bisa diisi'
 		WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+		
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+			rsvAmtRow+i-1, GlobalVariable.NumofColm-1, Integer.parseInt(inputAllocAmt))
 	}
 	
-	if(GlobalVariable.Role=="Testing"){
-		'get attribute dari inputalloc pada confins'
-		inputAllocAmt = WebUI.getAttribute(inputAlloc, 'value')
-		'Tambahkan amount masing-masing allocation untuk perhitungan total reserved fund amount'
-		totalAmt+=Double.parseDouble(inputAllocAmt.replace(",",""))
-	}
+//	if(GlobalVariable.Role=="Testing"){
+//		'get attribute dari inputalloc pada confins'
+//		inputAllocAmt = WebUI.getAttribute(inputAlloc, 'value')
+//		'Tambahkan amount masing-masing allocation untuk perhitungan total reserved fund amount'
+//		totalAmt+=Double.parseDouble(inputAllocAmt.replace(",",""))
+//	}
 }
 
 'Klik Button Calculate'
@@ -246,6 +253,9 @@ if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verify
 }
 
 if(GlobalVariable.Role=="Testing"){
+	'get nilai total reserved fund amount from excel'
+	BigDecimal totalAmt = Long.parseLong(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, rsvAmtRow+allocFrom.size()).replace(",",""))
+	
 	'Menyimpan nilai Total Reserved Fund Amount dari Web CONFINS'
 	String totalReservedFundAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt')).replace(
 		',', '').replace('.00', '')
@@ -290,46 +300,46 @@ if(GlobalVariable.Role=="Testing"){
 
 WebUI.delay(5)
 
-'Klik save'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Save'))
-
-'get nilai iscompletemandatory dari excel'
-Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 4))
-
-if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
-	'cek alert'
-	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
-}
-
-if(GlobalVariable.FlagFailed==0 ){
-	'Check save Process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
-		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/alert_Submit'), GlobalVariable.NumofColm, '14.TabReservedFundData')
-	if(iscompleteMandatory==0){
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
-		'cek validasi'
-		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '14.TabReservedFundData')
-	}
-}
-
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
-	'call test case reserved fund datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-
-'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
-    5, FailureHandling.OPTIONAL)) {
-    'Klik cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'))
-
-    'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
-        'Klik new consumer finance'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
-    }
-} 
+//'Klik save'
+//WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Save'))
+//
+//'get nilai iscompletemandatory dari excel'
+//Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 4))
+//
+//if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
+//	'cek alert'
+//	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '14.TabReservedFundData')
+//}
+//
+//if(GlobalVariable.FlagFailed==0 ){
+//	'Check save Process write to excel'
+//	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
+//		findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/alert_Submit'), GlobalVariable.NumofColm, '14.TabReservedFundData')
+//	if(iscompleteMandatory==0){
+//		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+//		'cek validasi'
+//		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '14.TabReservedFundData')
+//	}
+//}
+//
+//if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
+//	'call test case reserved fund datastore db verif'
+//	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
+//			[:], FailureHandling.CONTINUE_ON_FAILURE)
+//}
+//
+//'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
+//if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
+//    5, FailureHandling.OPTIONAL)) {
+//    'Klik cancel'
+//    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/CommissionReservedFund/TabReservedFundData/button_Cancel'))
+//
+//    'Pengecekan jika new consumer finance belum diexpand'
+//    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+//        'Klik new consumer finance'
+//        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+//    }
+//} 
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
