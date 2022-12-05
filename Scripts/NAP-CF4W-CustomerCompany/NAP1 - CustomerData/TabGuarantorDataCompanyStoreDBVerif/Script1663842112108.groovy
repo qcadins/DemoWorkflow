@@ -124,12 +124,8 @@ if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 23).
 
 'jika nilai di confins tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-    'Write To Excel GlobalVariable.StatusFailed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusFailed)
 
-    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        1, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.ReasonFailedStoredDB)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
 

@@ -22,7 +22,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-Cus
 
 'input kode profesi'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Profession Code_professionCodeId'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 28))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 28))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -33,27 +33,27 @@ verifyInputError()
 if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'), 
     2, FailureHandling.OPTIONAL)) {
     'check is well known company'
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 30) == 'Yes') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 30) == 'Yes') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'), 
     2)) {
     'check is well known company'
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 30) == 'No') {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 30) == 'No') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Is Well Known Company'))
     }
 }
 
 'input nama perusahaan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Company Name'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 31))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 31))
 
 'click button lookup industry type'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/button_Industry Type_btn btn-raised btn-primary'))
 
 'input industry code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Industry Type Code_industryTypeCodeId'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 32))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 32))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/button_Search'))
@@ -63,46 +63,46 @@ verifyInputError()
 
 'input professional no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Professional No'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 34), FailureHandling.CONTINUE_ON_FAILURE)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 34), FailureHandling.CONTINUE_ON_FAILURE)
 
 'input start working date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Start Working Date'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 35))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 35))
 
 'input job title'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/input_Job Title Name'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 36))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 36))
 
 'input address'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_Address_'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 55))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 55))
 
 'input RT'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RT'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 56))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 56))
 
 'input RW'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RW'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 57))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 57))
 
 'click search zipcode'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Zipcode_btn btn-raised btn-primary'))
 
 'input zipcode'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Zip Code_ZipCode'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 58))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 58))
 
 'input Kecamatan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kecamatan_kecamatan'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 60))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 60))
 
 'input kelurahan'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kelurahan_Kelurahan'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 59))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 59))
 
 'input kota'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kota_kota'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 61))
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 61))
 
 'click search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
@@ -112,102 +112,102 @@ verifyInputError()
 
 'input note'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_notes'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 62), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 62), FailureHandling.OPTIONAL)
 
 'input phone1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 63), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 63), FailureHandling.OPTIONAL)
 
 'input phone1 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 64), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 64), FailureHandling.OPTIONAL)
 
 'input phone1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 65), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 65), FailureHandling.OPTIONAL)
 
 'input phone2 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 66), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 66), FailureHandling.OPTIONAL)
 
 'input phone2 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 67), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 67), FailureHandling.OPTIONAL)
 
 'input phone2 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 68), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 68), FailureHandling.OPTIONAL)
 
 'input phone3 area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 69), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 69), FailureHandling.OPTIONAL)
 
 'input phone3 number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 70), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 70), FailureHandling.OPTIONAL)
 
 'input phone3 extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 71), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 71), FailureHandling.OPTIONAL)
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 72), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 72), FailureHandling.OPTIONAL)
 
 'input fax'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 73), FailureHandling.OPTIONAL)
+    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 73), FailureHandling.OPTIONAL)
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 74).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74).length() > 0) {
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 74), false, FailureHandling.OPTIONAL)
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74), false, FailureHandling.OPTIONAL)
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 76).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 76).length() > 0) {
     'input Previous Company Name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Previous Company Name_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 76))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 76))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 77).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 77).length() > 0) {
     'input previous employment date'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Previous Employment Date_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 77))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 77))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 79).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 79).length() > 0) {
     'input address'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_Address PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 79))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 79))
 
     'input RT'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RT  PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 80))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 80))
 
     'input RW'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RW PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 81))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 81))
 
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 82).length() > 0) {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 82).length() > 0) {
         'click search zipcode'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Zipcode_btn PreviousJobAddress'))
 
         'input zipcode'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Zip Code_PreviousJobAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 82))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 82))
 
         'input Kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kecamatan_PreviousJobAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 84))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 84))
 
         'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kelurahan_PreviousJobAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 83))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 83))
 
         'input kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kota_PreviousJobAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 85))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 85))
 
         'click search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
@@ -227,121 +227,121 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 79).length() 
     
     'input note'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_Notes_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 86))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 86))
 
     'input phone1 Area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Area_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 87))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 87))
 
     'input phone1 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Number_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 88))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 88))
 
     'input phone1 Extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_ext_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 89))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 89))
 
     'input phone2 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Area_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 90))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 90))
 
     'input phone2 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Number_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 91))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 91))
 
     'input phone2 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Ext_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 92))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 92))
 
     'input phone3 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Area_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 93))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 93))
 
     'input phone3 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Number_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 94))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 94))
 
     'input phone3 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Ext_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 95))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 95))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Area_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 96))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 96))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Number_PreviousJobAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 97))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 97))
 
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 98).length() > 0) {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 98).length() > 0) {
         'select ownership'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/select_OwnerShip PreviousJobAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 98), false, FailureHandling.OPTIONAL)
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 98), false, FailureHandling.OPTIONAL)
     }
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 100).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 100).length() > 0) {
     'input other business name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Other Business Name_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 100))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 100))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 101).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 101).length() > 0) {
     'input other business type'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Other Business Type_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 101))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 101))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 102).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 102).length() > 0) {
     'input other business industry type'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Other Business Industry Type_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 102))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 102))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 103).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 103).length() > 0) {
     'input other job position'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Other Job Position_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 103))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 103))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 104).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 104).length() > 0) {
     'input establishment date'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Establishment Date_'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 104))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 104))
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 106).length() > 0) {
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 106).length() > 0) {
     'input address'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_Address_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 106))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 106))
 
     'input RT'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RT  OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 107))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 107))
 
     'input RW'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_RW OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 108))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 108))
 
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 109).length() > 0) {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 109).length() > 0) {
         'click search zipcode'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Zipcode_btn OtherBusinessAddress'))
 
         'input zipcode'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Zip Code_OtherBusinessAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 109))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 109))
 
         'input Kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kecamatan_OtherBusinessAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 111))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 111))
 
         'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kelurahan_OtherBusinessAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 110))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 110))
 
         'input kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Kota_OtherBusinessAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 112))
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 112))
 
         'click search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/button_Search'))
@@ -361,56 +361,56 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 106).length()
     
     'input note'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/textarea_Notes_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 113))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 113))
 
     'input phone1 Area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Area_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 114))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 114))
 
     'input phone1 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_Number_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 115))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 115))
 
     'input phone1 Extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 1_ext_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 116))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 116))
 
     'input phone2 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Area_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 117))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 117))
 
     'input phone2 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Number_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 118))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 118))
 
     'input phone2 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 2_Ext_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 119))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 119))
 
     'input phone3 area'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Area_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 120))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 120))
 
     'input phone3 number'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_Number_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 121))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 121))
 
     'input phone3 extension'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Phone 3_ext_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 122))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 122))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Area_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 123))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 123))
 
     'input fax'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/input_Fax_Number_OtherBusinessAddress'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 124))
+        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 124))
 
-    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 125).length() > 0) {
+    if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 125).length() > 0) {
         'select ownership'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee - Personal/select_Ownership OtherBusinessAddress'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 125), false, FailureHandling.OPTIONAL)
+            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 125), false, FailureHandling.OPTIONAL)
     }
 }
 
@@ -426,7 +426,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
 } else {
     if (GlobalVariable.FlagWarning > 0) {
         'write to excel if warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.NumofColm - 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.ColmNAP4 - 
             1, GlobalVariable.StatusWarning)
     }
 }
@@ -444,7 +444,7 @@ def verifyInputError(){
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional - Personal/button_Back'))
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 		
 		GlobalVariable.FlagFailed = 1
 	}

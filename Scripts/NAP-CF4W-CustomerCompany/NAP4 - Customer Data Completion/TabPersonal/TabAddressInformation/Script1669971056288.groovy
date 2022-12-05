@@ -47,8 +47,8 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-            GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-            GlobalVariable.NumofColm, 13))) {
+            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+            GlobalVariable.ColmNAP4, 13))) {
         copyAppColm = index
 
         break
@@ -56,7 +56,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 10)
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -82,8 +82,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			if (GlobalVariable.FindDataFile.getValue(
 				Address, 9).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.NumofColm, 13))) {
+						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+						GlobalVariable.ColmNAP4, 13))) {
 					if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
 							Address, 12))) {
 						if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
@@ -120,8 +120,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					i) + ']/td[1]', true)
 
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.NumofColm, 13))) {
+						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+						GlobalVariable.ColmNAP4, 13))) {
 					if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
 							Address, 12)))) {
 						if (i == variable.size()) {
@@ -152,8 +152,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
 		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
 			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-					GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-					GlobalVariable.NumofColm, 13))) {
+					GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+					GlobalVariable.ColmNAP4, 13))) {
 				
 				'click button add'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))

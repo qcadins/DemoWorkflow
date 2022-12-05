@@ -63,9 +63,9 @@ ArrayList<String> bankAccDelete = new ArrayList<String>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm,
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 			12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-			GlobalVariable.NumofColm, 13))) {
+			GlobalVariable.ColmNAP4, 13))) {
 		GlobalVariable.CopyAppColm = index
 
 		GlobalVariable.NumofVerifStore = index
@@ -76,7 +76,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-    GlobalVariable.NumofColm, 10)
+    GlobalVariable.ColmNAP4, 10)
 
 'Check if Edit Untuk Financial Data'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -98,8 +98,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
+							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 					
 						'convert date '
 						String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17))
@@ -187,8 +187,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.NumofColm, 13))) {
+							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 							String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17))
 
@@ -222,9 +222,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
 			
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm,
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 				12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-				GlobalVariable.NumofColm, 13))) {
+				GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 				
 				'click button add'
@@ -243,9 +243,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 } else if (copyapp == 'No') {
 	for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofColm,
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-					GlobalVariable.NumofColm, 13))) {
+					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 					'click button add'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
@@ -285,9 +285,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 13))) {
+							GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 24)) + ' - ') +
 							GlobalVariable.FindDataFile.getValue(financialdata, 25)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -378,9 +378,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(
-							GlobalVariable.NumofColm, 13))) {
+							GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 24)) + ' - ') +
 							GlobalVariable.FindDataFile.getValue(financialdata, 25)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -411,7 +411,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.NumofColm, 13))) {
+						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))
@@ -431,7 +431,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-					GlobalVariable.NumofColm, 13))) {
+					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData - Personal/button_AddBank'))

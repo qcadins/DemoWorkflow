@@ -12,6 +12,11 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>[]</initValue>
+      <name>AdditionalPremiRate</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
       <name>AllocatedCommissionAmt</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -78,6 +83,11 @@
       <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 4)</initValue>
       <name>CheckVerifStoreDBPersonal</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>ColmNAP4</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -306,13 +316,28 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>''</initValue>
+      <name>InsuranceLength</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
       <name>MainCovRulePath</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>[]</initValue>
+      <name>MainPremiRate</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
       <name>MaxRefundRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>NAP4</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -588,25 +613,5 @@
       <description></description>
       <initValue>0.00</initValue>
       <name>TotalVat</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>MainPremiRate</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>AdditionalPremiRate</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>InsuranceLength</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>NAP4</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

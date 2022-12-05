@@ -17,6 +17,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.NAP4 = 'CUSTOMER'
 
+GlobalVariable.ColmNAP4 = GlobalVariable.NumofColm
+
 if (GlobalVariable.Role == 'Data Entry') {
     'call tc customerdetail'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
