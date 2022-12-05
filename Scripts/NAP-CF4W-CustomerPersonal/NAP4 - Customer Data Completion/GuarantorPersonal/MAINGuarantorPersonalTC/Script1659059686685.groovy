@@ -32,7 +32,7 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail')))) {
         
-		GlobalVariable.ColmNAP4 = GlobalVariable.NumofGurantor
+		GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
 	
 		if (GlobalVariable.Role == 'Data Entry') {
             'call tc customerdetail'
