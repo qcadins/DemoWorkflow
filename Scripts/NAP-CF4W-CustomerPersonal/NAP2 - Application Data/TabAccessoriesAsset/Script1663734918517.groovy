@@ -144,13 +144,9 @@ if(datafileTabAsset.getValue(
 						  'Jika field mandatory kosong'
 						  if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 							  'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
-							  'write to excel WARNING'
-							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								  0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 							  
-							  'Write To Excel GlobalVariable.StatusReasonLookup'
-							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								  1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+							  'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
 							  
 							 'get accessories name'
 							 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
@@ -283,13 +279,9 @@ if(datafileTabAsset.getValue(
 	}
 	'Jika delete accessories gagal'
 	if(accessoriesnamefaileddelete.size() > 0){
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-					'7a.Accessories', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 			
-			'write to excel reason failed delete'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-				 '7a.Accessories', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
@@ -379,13 +371,8 @@ if(datafileTabAsset.getValue(
 								   'click button x'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
-								   'write to excel statuswarning'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
-								   
-								   'Write To Excel GlobalVariable.StatusReasonLookup'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
+								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 					   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -427,14 +414,9 @@ if(datafileTabAsset.getValue(
 								   'click button x'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
-								   'write to excel status warning'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 								   
-								   'Write To Excel GlobalVariable.StatusReasonLookup'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
-					   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 					   
@@ -483,13 +465,9 @@ if(datafileTabAsset.getValue(
 							   'Jika ada field mandatory yang kosong'
 							   if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 								   'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
-								   'write to excel WARNING'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 								   
-								   'Write To Excel GlobalVariable.StatusReasonLookup'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-									   1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
 								   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -568,14 +546,9 @@ if(datafileTabAsset.getValue(
 							'click button x'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
-							'write to excel status warning'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 							
-							'Write To Excel GlobalVariable.StatusReasonLookup'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
-				
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 				
@@ -616,14 +589,9 @@ if(datafileTabAsset.getValue(
 							'click button x'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
-							'write to excel status warning'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 							
-							'Write To Excel GlobalVariable.StatusReasonLookup'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
-				
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 				
@@ -672,13 +640,9 @@ if(datafileTabAsset.getValue(
 						'Jika ada field mandatory yang kosong'
 						if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 							'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
-							'write to excel WARNING'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
 							
-							'Write To Excel GlobalVariable.StatusReasonLookup'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-								1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
 							
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -813,14 +777,9 @@ else if(datafileTabAsset.getValue(
 				'click button x'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
-				'write to excel status warning'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 				
-				'Write To Excel GlobalVariable.StatusReasonLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
-	
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 	
@@ -860,14 +819,9 @@ else if(datafileTabAsset.getValue(
 				'click button x'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
-				'write to excel status warning'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
+				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
 				
-				'Write To Excel GlobalVariable.StatusReasonLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonLookup)
-	
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
 	
@@ -915,13 +869,9 @@ else if(datafileTabAsset.getValue(
 	
 			if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 				'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
-				'write to excel WARNING'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					0, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusWarning)
-				
-				'Write To Excel GlobalVariable.StatusReasonLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					1, GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+								
+				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
 				
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -990,14 +940,10 @@ else if(datafileTabAsset.getValue(
 	
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
-			'write to excel failed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					0, GlobalVariable.NumofAccessories-1, GlobalVariable.StatusFailed)
 	
-			'write to excel reason failed verify equal or match'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-	
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			
 			GlobalVariable.FlagFailed=1
 	}
 }

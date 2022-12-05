@@ -916,13 +916,9 @@ if (variableRef.size() > 0) {
 
 'Pengecekan jika ada delete yang gagal'
 if(commissiondelete.size() > 0){
-	'write to excel status warning'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'13.TabCommissionData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	'write to excel reason'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'13.TabCommissionData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + commissiondelete)
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
 }

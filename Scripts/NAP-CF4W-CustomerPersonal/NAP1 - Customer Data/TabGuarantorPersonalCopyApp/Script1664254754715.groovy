@@ -88,22 +88,13 @@ if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(Glo
     
 	'Jika ada verif data yang tidak sesuai'
     if (arrayMatch.contains(false)) {
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-		'write to excel reason'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
 
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
-
-		'write to excel reason'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedLoadData)
-
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
+		
         (GlobalVariable.FlagWarning)++
     }
 }
@@ -617,14 +608,10 @@ for (int i = 1; i <= variableData.size(); i++) {
 
 'Jika ada delete guarantor gagal'
 if (custnamefaileddelete.size() > 0) {
-	'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-        0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-	'write to excel reason failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-        1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
-
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
     (GlobalVariable.FlagWarning)++
 }
 

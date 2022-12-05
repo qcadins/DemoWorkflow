@@ -309,13 +309,9 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 
 'Jika ada delete subsidy yang gagal'
 if(subsidyfaileddelete.size() > 0){
-	'write to excel status warning'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'10.TabFinancialData', 0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 	
-	'write to excel reason failed delete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-			'10.TabFinancialData', 1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
 	
 	GlobalVariable.FlagWarning++
 }

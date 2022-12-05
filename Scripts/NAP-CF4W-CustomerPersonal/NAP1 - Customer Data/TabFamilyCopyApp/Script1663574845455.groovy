@@ -609,14 +609,10 @@ for (int i = 1; i <= variableData.size(); i++) {
 
 'jika ada familyname gagal delete'
 if (custnamefaileddelete.size() > 0) {
-	'write to excel warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.CopyAppColm - 
-        1, GlobalVariable.StatusWarning)
 
-	'write to excel reasonfaileddelete'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.CopyAppColm - 
-        1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
-
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
     (GlobalVariable.FlagWarning)++
 }
 
@@ -798,14 +794,10 @@ def checkFamilyDataEditNAP(){
 		}
 		
 		if (arrayMatch.contains(false)) {
-			'write to excel status warning'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 0, GlobalVariable.CopyAppColm -
-				1, GlobalVariable.StatusWarning)
 	
-			'write to excel reason failed load data'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 1, GlobalVariable.CopyAppColm -
-				1, GlobalVariable.ReasonFailedLoadData)
-	
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
+			
 			'flagwarning +1'
 			(GlobalVariable.FlagWarning)++
 		}

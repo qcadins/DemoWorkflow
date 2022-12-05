@@ -41,12 +41,8 @@ for(int i=0;i<resultDB.size();i++){
 	'verif reserved fund amt db dengan excel'
 	if(WebUI.verifyEqual(Double.parseDouble(resultDB.get(i).toString()),Double.parseDouble(datafileReservedFund.getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i).replace(",","")))==false){
-			'Write to Excel FAILED'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-				0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 			
-			'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 	}
 }

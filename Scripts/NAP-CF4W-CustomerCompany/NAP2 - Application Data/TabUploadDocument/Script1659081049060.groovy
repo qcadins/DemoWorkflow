@@ -80,43 +80,35 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
                 'click button close'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 
-                    0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusWarning)
-
-                'Write To Excel GlobalVariable.StatusReason'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 
-                    1, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusReasonMandatoryEmpty)
+				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
             }
         }
     }
 }
 
 'click button submit'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 
 'click menu Customer data completion paging'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))
 
 'input app no'
-not_run: WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 
     datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
 'click button search'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Search'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Search'))
 
 'verify appno'
-not_run: WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'), 
+WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'), 
     datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        'write to excel status failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 0, 
-            GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusFailed)
 
-        'write to excel verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 1, 
-            GlobalVariable.NumofUploadDocument - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

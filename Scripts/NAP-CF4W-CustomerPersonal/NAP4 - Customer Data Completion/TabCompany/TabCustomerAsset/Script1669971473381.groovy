@@ -203,13 +203,9 @@ if (GlobalVariable.FlagFailed == 0) {
 
 'check if flagwarning > 0'
 if (GlobalVariable.FlagWarning > 0) {
-    'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 0, GlobalVariable.ColmNAP4 - 
-        1, GlobalVariable.StatusWarning)
 
-    'wrtie to excel reason failed'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.CustomerAsset', 1, GlobalVariable.ColmNAP4 - 
-        1, GlobalVariable.ReasonFailedInputData + faileddata)
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedInputData'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 'check if th customer asset is present'

@@ -58,13 +58,9 @@ if (insuredBy == 'Customer') {
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 0,
-		GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 1,
-		GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedStoredDB)
+	
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){

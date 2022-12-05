@@ -374,14 +374,10 @@ for (int i = 1; i <= variableData.size(); i++) {
 
 'Jika ada delete guarantor gagal'
 if (custnamefaileddelete.size() > 0) {
-	'write to excel status warning'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusWarning)
 
-	'write to excel reason failed delete'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-        1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
-
+	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	
     (GlobalVariable.FlagWarning)++
 }
 

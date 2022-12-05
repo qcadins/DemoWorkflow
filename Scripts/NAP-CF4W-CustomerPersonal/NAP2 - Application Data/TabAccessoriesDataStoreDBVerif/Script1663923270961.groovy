@@ -80,12 +80,8 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (In
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-		0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusFailed)
 	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-		1, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedStoredDB)
-
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	
 }

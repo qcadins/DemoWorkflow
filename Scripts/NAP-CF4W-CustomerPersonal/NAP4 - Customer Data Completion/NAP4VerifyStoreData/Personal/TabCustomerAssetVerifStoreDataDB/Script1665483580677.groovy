@@ -61,13 +61,9 @@ for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++)
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	'write to excel FAILED'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.CustomerAsset',
-		0, GlobalVariable.NumofVerifStore - 1, GlobalVariable.StatusFailed)
-	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.CustomerAsset',
-		1, GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
 
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.CustomerAsset', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	
 }
 
