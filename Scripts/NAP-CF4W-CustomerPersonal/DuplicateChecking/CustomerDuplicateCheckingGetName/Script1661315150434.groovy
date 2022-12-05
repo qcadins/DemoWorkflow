@@ -137,7 +137,7 @@ StoreCDCGuarantorPersonalNameArray = StoreCDCGuarantorPersonalName.split(';')
 StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 
 'write to excel storecdccustomername'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerPersonal, '1.CustomerDetail', 11, GlobalVariable.NumofColm - 
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerPersonal, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
     1, StoreCDCCustomerName)
 
 for (FamilyName = 1; FamilyName <= StoreCDCFamilyNameArray.size(); FamilyName++) {
