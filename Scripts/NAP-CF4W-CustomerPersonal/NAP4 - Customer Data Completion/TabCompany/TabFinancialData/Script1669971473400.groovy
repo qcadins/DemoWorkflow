@@ -80,8 +80,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                        datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 					
                         String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
@@ -168,8 +168,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                        datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                         if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
                             String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
@@ -203,8 +203,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                    datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                        GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                    datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
@@ -221,9 +221,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 } else if (copyapp == 'No') {
     for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
         if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 
+            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
                     12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-                    GlobalVariable.NumofGuarantor, 13))) {
+                    GlobalVariable.ColmNAP4, 13))) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
                     'click button add'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
@@ -270,8 +270,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                        datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                         if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
                             bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + ' - ') + 
                             GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -362,8 +362,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                            GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                        datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                        datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                         if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
                             bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + ' - ') + 
                             GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -393,8 +393,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-                    datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 13))) {
+                        GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+                    datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
                         'click button add bank'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_addBank'))
@@ -412,9 +412,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         int flagFailed = 0
 
         if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofGuarantor, 
+            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
                     12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-                    GlobalVariable.NumofGuarantor, 13))) {
+                    GlobalVariable.ColmNAP4, 13))) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
                     'click button add bank'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_addBank'))

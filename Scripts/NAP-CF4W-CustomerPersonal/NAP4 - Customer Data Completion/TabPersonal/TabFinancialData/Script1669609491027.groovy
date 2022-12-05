@@ -411,7 +411,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+                        GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
@@ -432,7 +432,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-                        GlobalVariable.NumofGuarantor, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+                        GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'
