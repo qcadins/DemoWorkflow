@@ -552,14 +552,10 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 0, GlobalVariable.ColmNAP4 - 
-            1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.OtherAttribute', 1, GlobalVariable.ColmNAP4 - 
-            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		
         GlobalVariable.FlagFailed = 1
     }
 }

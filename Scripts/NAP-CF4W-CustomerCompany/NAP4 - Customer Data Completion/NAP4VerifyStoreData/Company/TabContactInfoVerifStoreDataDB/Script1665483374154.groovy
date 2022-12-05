@@ -100,11 +100,7 @@ for (i = 14; i < result.size(); i++) {
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
-	'Write To Excel GlobalVariable.StatusFailed'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.ContactInformation',
-			0, GlobalVariable.NumofVerifStore - 1, GlobalVariable.StatusFailed)
 	
-	'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.ContactInformation',
-			1, GlobalVariable.NumofVerifStore - 1, GlobalVariable.ReasonFailedStoredDB)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }

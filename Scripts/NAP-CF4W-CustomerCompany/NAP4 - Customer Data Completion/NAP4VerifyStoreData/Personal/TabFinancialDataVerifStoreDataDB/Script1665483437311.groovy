@@ -171,11 +171,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-    'write to excel FAILED'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 0, GlobalVariable.NumofVerifStore - 
-        1, GlobalVariable.StatusFailed)
 
-    'Write To Excel GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.FinancialData', 1, GlobalVariable.NumofVerifStore - 
-        1, GlobalVariable.ReasonFailedStoredDB)
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
