@@ -820,16 +820,16 @@ if(capinssetting=="YEARLY"){
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
 		
 		'Verif total main premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		
 		'Verif total additional premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		
 		'Verif total fee sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		
 		'Verif total premi to customer sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		
 		'Jika tidak ada paid by mf'
 		if(totalResult[2]==0){
@@ -869,7 +869,7 @@ if(capinssetting=="YEARLY"){
 		totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 		
 		'Verif total premi to customer after discount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		
 		String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 			'value').replace(',', '')
@@ -877,12 +877,12 @@ if(capinssetting=="YEARLY"){
 		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false))
+			CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		}
 		//Jika capitalize amount bernilai 0
 		else if(totalResult[3]==0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false))
+			CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 		}
 		'Jika ada paid by mf'
 		if(totalResult[2]==1){
@@ -918,18 +918,4 @@ public writeFailedReasonVerifyRule(){
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed = 1
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-
-		'write to excel reason failed verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
 }

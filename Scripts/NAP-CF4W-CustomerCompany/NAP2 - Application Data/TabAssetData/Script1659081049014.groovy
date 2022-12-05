@@ -46,8 +46,8 @@ if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && (GlobalVariable.First
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL), '7.TabAssetData', GlobalVariable.NumofColm)
 }
 
 String suppName
@@ -375,13 +375,13 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
 
 		'verify security deposit value equal'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt), '7.TabAssetData', GlobalVariable.NumofColm)
 	} else if (datafileTabAsset.getValue(
 		GlobalVariable.NumofColm, 24) == 'Amount') {
 		float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
 
 		'verify security deposit value equal'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg), '7.TabAssetData', GlobalVariable.NumofColm)
 	}
 }
 
@@ -465,7 +465,7 @@ for(int i = 0;i<docName.size();i++){
 	
 	'Verif document name yang muncul pada confins sesuai dengan db'
 	if(WebUI.verifyMatch(textDocumentName, docName[i],false)==false){
-		checkVerifyEqualOrMatch(false)
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(false, '7.TabAssetData', GlobalVariable.NumofColm)
 		break
 	}
 	
@@ -834,20 +834,6 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
 }
 
 WebUI.delay(10)
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-
-		'write to excel status verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
-}
 
 public assetLocInput(){
 	'input address'

@@ -36,8 +36,8 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'REFERANTOR', false, FailureHandling.OPTIONAL))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'REFERANTOR', false, FailureHandling.OPTIONAL), '5.TabReferantorData', GlobalVariable.NumofReferantor)
 }
 
 'declare datafileReferantor'
@@ -938,19 +938,5 @@ public getTextBankAccount(String newSelectBankaccount){
 		Select selectBankAcc =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(newSelectBankaccount)))
 		'Ambil text bank account yang dipilih pada confins'
 		GlobalVariable.BankAccount = GlobalVariable.BankAccount+' - ' +selectBankAcc.getFirstSelectedOption().getText()
-	}
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-				0, GlobalVariable.NumofReferantor-1, GlobalVariable.StatusFailed)
-
-		'write to excel reason failed verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
-				1, GlobalVariable.NumofReferantor-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
 	}
 }

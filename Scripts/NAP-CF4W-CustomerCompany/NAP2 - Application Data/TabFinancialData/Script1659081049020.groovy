@@ -50,8 +50,8 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'FINANCIAL DATA', false, FailureHandling.OPTIONAL))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'FINANCIAL DATA', false, FailureHandling.OPTIONAL), '9.TabFinancialData', GlobalVariable.NumofColm)
 }
 
 'declare datafileTabFinancial'
@@ -646,18 +646,4 @@ def sendKeys(TestObject object) {
 	WebUI.sendKeys(object, Keys.chord(Keys.BACK_SPACE), FailureHandling.OPTIONAL)
 
 	WebUI.sendKeys(object, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-
-		'write to excel verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
 }

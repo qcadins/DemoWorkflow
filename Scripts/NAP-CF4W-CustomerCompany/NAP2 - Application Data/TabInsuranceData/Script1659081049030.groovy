@@ -31,17 +31,17 @@ if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.Fi
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'INSURANCE', false, FailureHandling.OPTIONAL))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'INSURANCE', false, FailureHandling.OPTIONAL), '8.TabInsuranceData', GlobalVariable.NumofColm)
 
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'Verifikasi perhitungan asset price'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
-				',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
+				',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 	
 		'Verifikasi perhitungan asset price incl accessories'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
-				',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
+				',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false), '8.TabInsuranceData', GlobalVariable.NumofColm)
 	}
 	
 }
@@ -112,18 +112,4 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 	5, FailureHandling.OPTIONAL)) {
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-		if(isMatch==false && GlobalVariable.FlagFailed==0){
-			'write to excel status failed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-					0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-	
-			'write to excel verify equal or match'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData',
-					1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-	
-			GlobalVariable.FlagFailed=1
-		}
 }

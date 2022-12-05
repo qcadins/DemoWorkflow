@@ -39,8 +39,8 @@ if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'APPLICATION DATA', false, FailureHandling.OPTIONAL))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
+		'APPLICATION DATA', false, FailureHandling.OPTIONAL), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 	'Ambil text product offering dari confins'
 	String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
@@ -53,7 +53,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		'value')
 
 	'Verif interest type pada confins dengan db'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true))
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true), '6.TabApplicationData', GlobalVariable.NumofColm)
 }
 
 String spvName
@@ -75,7 +75,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		String officerName = CustomKeywords.'applicationData.checkOfficer.checkOfficerName'(sqlConnectionFOU, usernameLogin)
 
 		'Verif username login dengan text label officer'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textOfficer, '(?i)' + officerName, true), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 		'Ambil nama spv dari db'
 		spvName = CustomKeywords.'applicationData.checkOfficer.checkSPV'(sqlConnectionFOU, usernameLogin)
@@ -90,7 +90,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_SPV'))
 
 		'Verif text spv dari confins sesuai dengan nama spv dari db'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textSPV, '(?i)' + spvName, true))
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textSPV, '(?i)' + spvName, true), '6.TabApplicationData', GlobalVariable.NumofColm)
 	}
 } else {
 
@@ -168,7 +168,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 				String textSPV = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_LookupSPV'))
 
 				'Verif nama spv pada lookup yang diselect sama dengan yang muncul pada tab application data confins'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(textSPV, '(?i)' + spvName, true))
+				CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textSPV, '(?i)' + spvName, true), '6.TabApplicationData', GlobalVariable.NumofColm)
 			}
 		} else {
 			'click X'
@@ -540,18 +540,4 @@ if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCo
 		'call test case store db application data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-				0, GlobalVariable.NumofColm-1, GlobalVariable.StatusFailed)
-
-		'write to excel verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '6.TabApplicationData',
-				1, GlobalVariable.NumofColm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
-		GlobalVariable.FlagFailed=1
-	}
 }
