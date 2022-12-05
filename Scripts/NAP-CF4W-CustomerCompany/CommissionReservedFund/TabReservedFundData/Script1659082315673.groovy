@@ -61,7 +61,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		String textRemainingInfoAmt = WebUI.getText(modifyRemainingInfoAmt).replace(',', '')
 	
 		'cek remaining info after calculate tab commission = remaining info reserved fund'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingInfoAmt,String.format('%.2f', remainingInfoCom[(i - 1)]),false), '13.TabReservedFundData',
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textRemainingInfoAmt,String.format('%.2f', remainingInfoCom[(i - 1)]),false), '13.TabReservedFundData',
 			GlobalVariable.NumofColm)
 
 		'Tambahkan data remaining info ke arraylist untuk keperluan verifikasi setelah calculate'
@@ -237,7 +237,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		',', '').replace('.00', '')
 	
 	'Verifikasi hasil perhitungan total reserved fund amount sesuai dnegan nilai total reserved fund amount dari web'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false), '13.TabReservedFundData',
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false), '13.TabReservedFundData',
 		 GlobalVariable.NumofColm)
 	
 	'Arraylist untuk menampung remaining info'
@@ -253,9 +253,8 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	String textRemainingAllocatedAmount = WebUI.getText(modifyRemainingAllocatedAmount).replace(',', '')
 	
 	'verif remaining allocated amount = remaining allocated amount (after calc di comision) - nilai yg dibagina di reserve fund'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingAllocatedAmount, String.format('%.2f', GlobalVariable.RemainingAllocatedAmt - totalAmt),
-		false), '13.TabReservedFundData',
-		GlobalVariable.NumofColm)
+	CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textRemainingAllocatedAmount, String.format('%.2f', GlobalVariable.RemainingAllocatedAmt - totalAmt),
+		false), '13.TabReservedFundData', GlobalVariable.NumofColm)
 	
 	'Looping remaining info amount setelah calculate'
 	for (int i = 1; i < countRemainingInfo; i++) {
@@ -266,7 +265,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		String textRemainingInfoAmtAftCal = WebUI.getText(modifyRemainingInfoAmtAftCal).replace(',', '')
 	
 		'verifikasi setelah calculate di tab reserve fund, nilai remaining info tidak berubah (masih sesuai setelah save dari tab commission)'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingInfoAmtAftCal, remainingInfoRsv[(i - 1)], false), '13.TabReservedFundData',
+		CustomKeywords.'Function.checkVerifyEqualOrMatch'(WebUI.verifyMatch(textRemainingInfoAmtAftCal, remainingInfoRsv[(i - 1)], false), '13.TabReservedFundData',
 			GlobalVariable.NumofColm)
 		
 	}
@@ -311,19 +310,5 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/Commissi
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
 		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
-	}
-}
-	
-public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
-		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
-					0, numofcolm-1, GlobalVariable.StatusFailed)
-	
-		'write to excel verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
-					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-	
-		GlobalVariable.FlagFailed=1
 	}
 }

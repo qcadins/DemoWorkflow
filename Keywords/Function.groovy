@@ -52,4 +52,20 @@ public class Function {
 			}
 		}
 	}
+	
+	//keyword verify check verify equal or match
+	@Keyword
+	public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
+		if(isMatch==false && GlobalVariable.FlagFailed==0){
+			'write to excel status failed'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
+					0, numofcolm-1, GlobalVariable.StatusFailed)
+
+			'write to excel verify equal or match'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
+					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+
+			GlobalVariable.FlagFailed=1
+		}
+	}
 }
