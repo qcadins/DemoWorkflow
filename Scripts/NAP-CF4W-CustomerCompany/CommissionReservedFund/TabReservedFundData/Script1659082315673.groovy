@@ -245,7 +245,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	String totalReservedFundAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt')).replace(
 		',', '').replace('.00', '')
 	
-	'Verifikasi hasil perhitungan total reserved fund amount sesuai dnegan nilai total reserved fund amount dari web'
+	'Verifikasi hasil perhitungan total reserved fund amount pada excel sesuai dengan nilai total reserved fund amount dari web'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false), '13.TabReservedFundData',
 		 GlobalVariable.NumofColm)
 	
