@@ -209,7 +209,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
 'verify input error'
-		CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
+CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'),
@@ -218,8 +218,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 
 'input asset price'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'),
-	datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 19))
+	datafileTabAsset.getValue(GlobalVariable.NumofColm, 19))
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	ArrayList<Boolean> assetUsage = new ArrayList<Boolean>()
@@ -308,11 +307,12 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 
 'select security deposit type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'),
-	datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 26), false)
+	datafileTabAsset.getValue(GlobalVariable.NumofColm, 26), false)
 
-if (datafileTabAsset.getValue(
-	GlobalVariable.NumofColm, 26) == 'Percentage') {
+'click untuk refresh page'
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'))
+
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage') {
 	'Untuk handle jika field input percentage terlock'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'),
 		'Amount', false)
@@ -332,8 +332,7 @@ if (datafileTabAsset.getValue(
 	WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),
 		Keys.chord(Keys.RIGHT, datafileTabAsset.getValue(
 				GlobalVariable.NumofColm, 27)))
-} else if (datafileTabAsset.getValue(
-	GlobalVariable.NumofColm, 26) == 'Amount') {
+} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Amount') {
 	'input security deposit amount'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),
 		datafileTabAsset.getValue(
@@ -351,37 +350,28 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 		GlobalVariable.NumofColm, 30))
 
 if (GlobalVariable.RoleCompany == 'Testing') {
-	NumberFormat decimalFormat = NumberFormat.getPercentInstance()
-
-	def AssetPrice = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'),
-		'value').split(',').join()
-
-	def DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),
-		'value').split(',').join()
-
-	def DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),
-		'value').replaceAll('\\s', '')
-
-	BigDecimal intDownPaymentAmt = Integer.parseInt(DownPaymentAmt)
-
-	BigDecimal intAssetPrice = Integer.parseInt(AssetPrice)
-
-	float floatDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
-
-	Number NumberDownPaymentPrctg = decimalFormat.parse(DownPaymentPrctg)
-
-	if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 24) == 'Percentage') {
-		int multiplyAssetPricexDownPaymentPrctg = intAssetPrice * NumberDownPaymentPrctg
+	if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage') {
+		
+		'get attribute dp amount dari confins'
+		DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),
+				'value')
+		
+		'get DP amount dari excel'
+		DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
 
 		'verify security deposit value equal'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAssetPricexDownPaymentPrctg, intDownPaymentAmt))
-	} else if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 24) == 'Amount') {
-		float divideDownPaymentAmtAssetPrice = intDownPaymentAmt / intAssetPrice
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(DownPaymentAmt, DownPaymentAmtExcel, false))
+		
+	} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Amount') {
+		'get attribute dp percentage dari confins'
+		DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),
+			'value').replace(' %', '')
 
+		'get dp percentage dari excel'
+		DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 68)
+		
 		'verify security deposit value equal'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAssetPrice, floatDownPaymentPrctg))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(DownPaymentPrctg)), Math.round(Double.parseDouble(DownPaymentPrctgExcel))))
 	}
 }
 
