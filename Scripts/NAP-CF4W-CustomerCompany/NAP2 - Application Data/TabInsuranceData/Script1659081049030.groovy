@@ -36,12 +36,10 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'Verifikasi perhitungan asset price'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace(
-				',', ''), String.format('%.2f', GlobalVariable.AssetPrice), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87), false))
 	
 		'Verifikasi perhitungan asset price incl accessories'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace(
-				',', ''), String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 88), false))
 	}
 	
 }

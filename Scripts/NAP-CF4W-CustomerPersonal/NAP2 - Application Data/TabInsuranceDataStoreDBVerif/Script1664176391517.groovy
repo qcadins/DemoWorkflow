@@ -29,20 +29,19 @@ Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
 'get insuredby from excel'
-String insuredBy = datafileTabInsurance.getValue(
-	GlobalVariable.NumofColm, 12)
+String insuredBy = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12)
 
 'declare arrayindex'
 int arrayindex = 0
 
 'declare arraysuminsured'
-ArrayList<String> arraysuminsured = new ArrayList<Boolean>()
+ArrayList<String> arraysuminsured = new ArrayList<String>()
 
 'declare arrayaddpremi'
-ArrayList<String> arrayaddpremi = new ArrayList<Boolean>()
+ArrayList<String> arrayaddpremi = new ArrayList<String>()
 
 'declare arraymatch'
-ArrayList<String> arrayMatch = new ArrayList<Boolean>()
+ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
@@ -50,7 +49,7 @@ if (insuredBy == 'Customer') {
 	insuredCust(arrayMatch,sqlconnectionLOS)
 } else if (insuredBy == 'Customer - Multifinance') {
 	'call function insuredcustmf'
-	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
+	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU, arrayindex)
 } else if (insuredBy == 'Multifinance') {
 	'call function insuredmf'
 	insuredMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
@@ -77,7 +76,7 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 	}
 }
 
-public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
+public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU, int arrayindex){
 	'get insurance cust data from db'
 	ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
 		sqlconnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -93,13 +92,11 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 		'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
 		if ((index - 13) != resultCustomerInsurance.size()) {
 			'verify insco branch name'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
-						GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(),
+			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 		} else if ((index - 13) == resultCustomerInsurance.size()) {
 		   
-			arrayMatch.add(WebUI.verifyMatch(convertDate(datafileTabInsurance.getValue(
-				GlobalVariable.NumofColm, 19)), (resultCustomerInsurance[arrayindex++]).toUpperCase(), false,
+			arrayMatch.add(WebUI.verifyMatch(convertDate(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19)), (resultCustomerInsurance[arrayindex++]).toUpperCase(), false,
 					FailureHandling.OPTIONAL))
 		}
 	}
@@ -160,8 +157,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 				GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 
-	if (datafileTabInsurance.getValue(
-		GlobalVariable.NumofColm, 36).length() == 0) {
+	
 		'get main coverage data from db'
 		ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -172,8 +168,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					GlobalVariable.NumofColm, 34).toUpperCase().replace(',', ''), (resultMainCVG[0]).toUpperCase(), false,
 				FailureHandling.OPTIONAL))
 
-		if (((((((datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || datafileTabInsurance.getValue(
+		if (((((((datafileTabInsurance.getValue(GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 37).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 38).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 39).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
@@ -215,7 +210,8 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 				}
 			}
 		}
-	} else {
+	
+	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 45).length() > 0) {
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
@@ -225,20 +221,16 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 				GlobalVariable.NumofColm, 13))
 		
 		'declare capitalized array'
-		def capitalizedarray = datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 45).split(';', -1)
+		def capitalizedarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 45).split(';', -1)
 
 		'declare paidbyarray'
-		def paidbyarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
-			46).split(';', -1)
+		def paidbyarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 46).split(';', -1)
 
 		'declare suminsuredarray'
-		def suminsuredarray = datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 47).split(';', -1)
+		def suminsuredarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 47).split(';', -1)
 
 		'declare maincvgarray'
-		def maincvgarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
-			48).split(';', -1)
+		def maincvgarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 48).split(';', -1)
 
 		'declare indexdb'
 		int indexdb = 0
@@ -505,8 +497,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 
-	if (datafileTabInsurance.getValue(
-		GlobalVariable.NumofColm, 36).length() == 0) {
+	
 		'get insurance main coverage from db'
 		String resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
@@ -517,8 +508,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 					GlobalVariable.NumofColm, 34).toUpperCase().replace(',', ''), resultMainCVG.replace('[', '').replace(
 					']', '').toUpperCase(), false, FailureHandling.OPTIONAL))
 
-		if (((((((datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || datafileTabInsurance.getValue(
+		if (((((((datafileTabInsurance.getValue(GlobalVariable.NumofColm, 36).equalsIgnoreCase('Yes') || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 37).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 38).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 39).equalsIgnoreCase('Yes')) || datafileTabInsurance.getValue(
@@ -559,7 +549,8 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				}
 			}
 		}
-	} else {
+			
+	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 45).length() > 0) {
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 

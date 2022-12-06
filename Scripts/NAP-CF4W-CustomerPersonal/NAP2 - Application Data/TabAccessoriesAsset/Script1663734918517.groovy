@@ -34,12 +34,6 @@ datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
 
-'inisialisasi assetprice gv'
-GlobalVariable.AssetPrice = 0.00
-
-'inisialisasi totalaccessoriesprice gv'
-GlobalVariable.TotalAccessoriesPrice = 0.00
-
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -447,15 +441,7 @@ if(datafileTabAsset.getValue(
 					   
 								   continue
 							   }
-								'declare accessories price'
-								def AccPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
-								
-								'parsing accessories price ke integer'
-								BigDecimal BDAccPrice = Integer.parseInt(AccPrice)
-								
-								'Tambahkan accessories price ke totalaccessoriesprice'
-								GlobalVariable.TotalAccessoriesPrice += BDAccPrice.doubleValue()
-								
+					
 							   'write to excel success'
 							   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 									   GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
@@ -866,7 +852,5 @@ def countAccessoriesDP(){
 							  'verify securitydeposit value equal'
 							  checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))
 						  }
-						  
-		GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
 	}
 }

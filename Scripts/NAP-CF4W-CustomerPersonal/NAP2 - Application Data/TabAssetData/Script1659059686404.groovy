@@ -50,7 +50,7 @@ if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && (GlobalVariable.First
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
-        'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL))
+            'ASSET & COLLATERAL DATA', false, FailureHandling.OPTIONAL))
 }
 
 'declare suppname'
@@ -66,16 +66,14 @@ String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custome
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
 
 if (GlobalVariable.Role == 'Testing') {
-	
-	'Ambil text supplier scheme dari db'
-	String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
-	
+    'Ambil text supplier scheme dari db'
+    String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
+
     'click search button'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
     'Ambil nilai total count supplier data dari db'
-    Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, 
-        office)
+    Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, office)
 
     'Ambil nilai total data supplier pada lookup confins'
     String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
@@ -86,9 +84,9 @@ if (GlobalVariable.Role == 'Testing') {
 
     'Verify total count data lookup supplier pada confins sama dengan db'
     if (WebUI.verifyEqual(totalDataSupplier, countSupplierData) == false) {
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -96,25 +94,25 @@ if (GlobalVariable.Role == 'Testing') {
 
 'input supplier code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 12))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 12))
 
 'input supplier name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 13))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 13))
 
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-
 'verify input error'
-CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
+CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+    '7.TabAssetData', GlobalVariable.NumofColm)
 
 if (GlobalVariable.Role == 'Testing') {
-	'declare arraylist adminhead,salesperson'
-	ArrayList<Boolean> adminHead,salesPerson
-	
+    'declare arraylist adminhead,salesperson'
+    ArrayList<String> adminHead
+
+    ArrayList<String> salesPerson
+
     'Ambil array string admin head dari db'
     adminHead = CustomKeywords.'assetData.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
 
@@ -124,9 +122,9 @@ if (GlobalVariable.Role == 'Testing') {
     'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
         salesPerson) == false) {
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -134,9 +132,9 @@ if (GlobalVariable.Role == 'Testing') {
     'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
         adminHead) == false) {
-
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -144,16 +142,13 @@ if (GlobalVariable.Role == 'Testing') {
 
 'select sales person'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 14), false)
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 14), false)
 
 'Jika admin head pada excel tidak kosong'
-if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 15).length() > 0) {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 15).length() > 0) {
     'select admin head'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 15), false)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 15), false)
 }
 
 'click button asset lookup'
@@ -176,52 +171,50 @@ if (GlobalVariable.Role == 'Testing') {
 
     'Verify total count data lookup asset pada confins sama dengan db'
     if (WebUI.verifyEqual(totalDataAsset, countAssetData) == false) {
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
 
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
-		
         GlobalVariable.FlagFailed = 1
     }
 }
 
 'input asset name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_FullAssetCode'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 17))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 17))
 
 'click search button'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
 'verify input error'
-CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
+CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+    '7.TabAssetData', GlobalVariable.NumofColm)
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 18), false)
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 18), false)
 
 'input asset price'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 19))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 19))
 
 if (GlobalVariable.Role == 'Testing') {
-	'declare assetusage'
-    ArrayList<Boolean> assetUsage = new ArrayList<Boolean>()
+    'declare assetusage'
+    ArrayList<String> assetUsage = new ArrayList<String>()
 
     'Ambil array string (text) asset usage dari db'
     assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
 
-	'declare countassetusage'
+    'declare countassetusage'
     Integer countAssetUsage = assetUsage.size()
 
     'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
         assetUsage) == false) {
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
-		
         GlobalVariable.FlagFailed = 1
     }
     
@@ -230,9 +223,9 @@ if (GlobalVariable.Role == 'Testing') {
 
     'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
     if (WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false) {
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -240,24 +233,20 @@ if (GlobalVariable.Role == 'Testing') {
 
 'select asset usage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 20), false)
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 20), false)
 
 'input color'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Color'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 21))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 21))
 
 'Jika district code pada excel tidak kosong'
-if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 22).length() > 0) {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 22).length() > 0) {
     'click button BPKB Lookup'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_BPKB City Issuer_btn btn-raised btn-primary'))
 
     'input district code'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_District Code'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 22))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 22))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_SearchBPKB city Issuer'))
@@ -271,9 +260,8 @@ if (datafileTabAsset.getValue(
         'click X'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 
-		'Jika asset condition pada excel = new'
-        if (datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 20) == 'New') {
+        'Jika asset condition pada excel = new'
+        if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 20) == 'New') {
             flagWarning++
         }
     }
@@ -281,18 +269,15 @@ if (datafileTabAsset.getValue(
 
 'input BPKP issue date'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_BPKB Issue Date'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 23))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 23))
 
 'input notes'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/textarea_Notes'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 24))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 24))
 
 'input manufacturing year'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Manufacturing Year'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 25))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 25))
 
 'select security deposit type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
@@ -301,16 +286,15 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Per
 'click untuk refresh page'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'))
 
-if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 26) == 'Percentage') {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage') {
     'Untuk handle jika field input percentage terlock'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
         'Amount', false)
 
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/Select_Downpayment Asset Information'), 
         'Percentage', false)
-	
-	'input down payment percentage'
+
+    'input down payment percentage'
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
         Keys.chord(Keys.CONTROL, 'a'))
 
@@ -321,61 +305,55 @@ if (datafileTabAsset.getValue(
         Keys.chord(Keys.HOME))
 
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
-        Keys.chord(Keys.RIGHT, datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 27)))
-} else if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 26) == 'Amount') {
+        Keys.chord(Keys.RIGHT, datafileTabAsset.getValue(GlobalVariable.NumofColm, 27)))
+} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Amount') {
     'input down payment amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 28))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 28))
 }
 
 'input chasis number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 29))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 29))
 
 'input engine number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 30))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 30))
 
 if (GlobalVariable.Role == 'Testing') {
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage') {
-		'get downpaymentamount from confins'
-		DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),
-			'value')
-			
-		DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
+        'get downpaymentamount from confins'
+        DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
+            'value')
+
+        DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
 
         'verify down payment value equal'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(DownPaymentAmt, DownPaymentAmtExcel, false))
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Amount') {
-		'get downpayment percentage from confins'
-		DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),
-			'value').replaceAll(' %', '')
+        'get downpayment percentage from confins'
+        DownPaymentPrctg = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'), 
+            'value').replaceAll(' %', '')
 
-		'get dp percentage dari excel'
-		DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 68)
-		
+        'get dp percentage dari excel'
+        DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 68)
+
         'verify down payment value equal'
-        checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(DownPaymentPrctg)), Math.round(Double.parseDouble(DownPaymentPrctgExcel))))
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(DownPaymentPrctg)), Math.round(Double.parseDouble(
+                        DownPaymentPrctgExcel))))
     }
 }
 
 'input license plate number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'), 
-    datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 31))
+    datafileTabAsset.getValue(GlobalVariable.NumofColm, 31))
 
 'Jika ada serial 4 pada confins'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'), 
     5, FailureHandling.OPTIONAL)) {
     'input serial 4'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial4'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
 'Jika ada serial 5 pada confins'
@@ -383,24 +361,20 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     5, FailureHandling.OPTIONAL)) {
     'input serial 5'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Serial5'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
 }
 
 'Jika asset condition excel = used'
-if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 18) == 'Used') {
-	'Jika check rapindo = yes'
-    if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 62) == 'Yes') {
+if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 18) == 'Used') {
+    'Jika check rapindo = yes'
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 62) == 'Yes') {
         'click button check rapindo'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_CheckRapindo'))
     }
 }
 
 'get full asset code from excel'
-String Fullassetcode = datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 17)
+String Fullassetcode = datafileTabAsset.getValue(GlobalVariable.NumofColm, 17)
 
 'count asset attribute'
 String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowAssetAttribute'(sqlConnectionFOU, 
@@ -408,10 +382,10 @@ String countAssetAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribu
 
 'looping asset attribute'
 for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
-
     'modify Asset Attribute Input Text'
     modifyObjectAssetAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]', true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]', 
+        true)
 
     'modify Asset Attribute Select Dropdownlist'
     modifyObjectAssetAttributeList = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
@@ -419,11 +393,13 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 
     'modify Asset Attribute Input Date'
     modifyObjectAssetAttributeInputDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]', true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]', 
+        true)
 
     'modify Asset Attribute Input Number '
     modifyObjectAssetAttributeInputNumber = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetAttribute'), 
-        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]', true)
+        'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]', 
+        true)
 
     if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, 1, FailureHandling.OPTIONAL)) {
         'input "Attribute"'
@@ -441,53 +417,59 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
 }
 
 'keyword untuk mencari nama-nama asset document yang muncul pada tab asset'
-ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDocument'(sqlConnectionFOU,Fullassetcode)
+ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDocument'(sqlConnectionFOU, Fullassetcode)
 
 'looping asset document'
-for(int i = 0;i<docName.size();i++){
-	'modify document name'
-	modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/td_AssetDocument'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[1]",true)
-	
-	'get text document name'
-	textDocumentName = WebUI.getText(modifyDocumentName)
-	
-	'Verif document name yang muncul pada confins sesuai dengan db'
-	if(WebUI.verifyMatch(textDocumentName, docName[i],false)==false){
-		checkVerifyEqualOrMatch(false)
-		break
-	}
-	
-	'modify object received'
-	modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Received'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[2]/input",true)
-	
-	'modify object document no'
-	modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNo'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[3]/input",true)
-	
-	'modify object expired date'
-	modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[4]/input",true)
-	
-	'modify document notes'
-	modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'),'xpath','equals',"//*[@id='AddAssetDocument']/div/table/tbody/tr["+(i+1)+"]/td[5]/input",true)
-	
-	'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
-	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifyReceived,2,FailureHandling.OPTIONAL)){
-		'centang received'
-		WebUI.check(modifyReceived)
-	}
-	else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifyReceived,2,FailureHandling.OPTIONAL)){
-		'uncentang received'
-		WebUI.uncheck(modifyReceived)
-	}
-	
-	'input documentNo'
-	WebUI.setText(modifyDocumentNo, datafileTabAsset.getValue(GlobalVariable.NumofColm, 65))
-	
-	'input expired date'
-	WebUI.setText(modifyExpiredDate, datafileTabAsset.getValue(GlobalVariable.NumofColm, 66))
-	
-	'input document notes'
-	WebUI.setText(modifyDocumentNotes, datafileTabAsset.getValue(GlobalVariable.NumofColm, 67))
-	
+for (int i = 0; i < docName.size(); i++) {
+    'modify document name'
+    modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/td_AssetDocument'), 
+        'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[1]', true)
+
+    'get text document name'
+    textDocumentName = WebUI.getText(modifyDocumentName)
+
+    'Verif document name yang muncul pada confins sesuai dengan db'
+    if (WebUI.verifyMatch(textDocumentName, docName[i], false) == false) {
+        checkVerifyEqualOrMatch(false)
+
+        break
+    }
+    
+    'modify object received'
+    modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Received'), 
+        'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[2]/input', true)
+
+    'modify object document no'
+    modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNo'), 
+        'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[3]/input', true)
+
+    'modify object expired date'
+    modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'), 
+        'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[4]/input', true)
+
+    'modify document notes'
+    modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'), 
+        'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[5]/input', true)
+
+    'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase('Yes') && WebUI.verifyElementNotChecked(
+        modifyReceived, 2, FailureHandling.OPTIONAL)) {
+        'centang received'
+        WebUI.check(modifyReceived)
+    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase('No') && WebUI.verifyElementChecked(
+        modifyReceived, 2, FailureHandling.OPTIONAL)) {
+        'uncentang received'
+        WebUI.uncheck(modifyReceived)
+    }
+    
+    'input documentNo'
+    WebUI.setText(modifyDocumentNo, datafileTabAsset.getValue(GlobalVariable.NumofColm, 65))
+
+    'input expired date'
+    WebUI.setText(modifyExpiredDate, datafileTabAsset.getValue(GlobalVariable.NumofColm, 66))
+
+    'input document notes'
+    WebUI.setText(modifyDocumentNotes, datafileTabAsset.getValue(GlobalVariable.NumofColm, 67))
 }
 
 //call test case aksesoris
@@ -497,8 +479,7 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Da
 if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
-} else if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 37) == 'No') {
+} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 37) == 'No') {
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status selfusage checkbox'), 
         'aria-checked') == 'true') {
         'click self usage check box'
@@ -507,26 +488,25 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
     
     'input user name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_User Name_form-control ng-untouched ng-pristine ng-valid'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 38))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 38))
 
     if (GlobalVariable.Role == 'Testing') {
-		'declare userrelation'
-        ArrayList<Boolean> userRelation = new ArrayList<Boolean>()
+        'declare userrelation'
+        ArrayList<String> userRelation = new ArrayList<String>()
 
         'Ambil array string (text) user relationship dari db'
         userRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
 
-		'declare countuserrelation'
+        'declare countuserrelation'
         Integer countUserRelation = userRelation.size()
 
         'Verif dropdownlist user relationship yang muncul pada confins sesuai dengan array string user relationship dari db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
             userRelation) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
-			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
-			
             GlobalVariable.FlagFailed = 1
         }
         
@@ -535,9 +515,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
 
         'Verif jumlah user relationship yang muncul pada confins sesuai dengan jumlah user relationship pada db'
         if (WebUI.verifyEqual(totalUserRelation - 1, countUserRelation) == false) {
-
-			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
             GlobalVariable.FlagFailed = 1
         }
@@ -545,55 +525,48 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
     
     'select user relationship'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_User Relationship'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 39), false)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 39), false)
 }
 
 'pengecekan nilai self owner pada excel'
 if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
-	
-	if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 52) == 'Yes') {
-		'function untuk copy address asset location'
-		assetLocCopy()
-		
-	} else if (datafileTabAsset.getValue(
-		GlobalVariable.NumofColm, 52) == 'No') {
-		'function untuk input address asset location'
-		assetLocInput()
-		
-	}
-} else if (datafileTabAsset.getValue(
-    GlobalVariable.NumofColm, 41) == 'No') {
+
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
+        'function untuk copy address asset location'
+        assetLocCopy()
+    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'No') {
+        'function untuk input address asset location'
+        assetLocInput()
+    }
+} else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41) == 'No') {
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status self owner checkbox'), 
         'aria-checked') == 'true') {
         'click self owner checkbox'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
     }
     
-    if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 42) == 'Personal') {
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Personal') {
         'click radio button personal'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Personal'))
 
         if (GlobalVariable.Role == 'Testing') {
-			'declare ownerpersonalrelation'
-            ArrayList<Boolean> ownerPersonalRelation = new ArrayList<Boolean>()
+            'declare ownerpersonalrelation'
+            ArrayList<String> ownerPersonalRelation = new ArrayList<String>()
 
             'Ambil array string (text) owner relationship dari db'
             ownerPersonalRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
 
-			'declare countonwerpersonalrelation'
+            'declare countonwerpersonalrelation'
             Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
 
             'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
                 ownerPersonalRelation) == false) {
-
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+                CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -603,34 +576,33 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
             if (WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation) == false) {
-
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+                CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
         }
-    } else if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 42) == 'Company') {
+    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
         'click radio button company'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/div_Company'))
 
         if (GlobalVariable.Role == 'Testing') {
-			'declare ownercompanyrelation'
-            ArrayList<Boolean> ownerCompanyRelation = new ArrayList<Boolean>()
+            'declare ownercompanyrelation'
+            ArrayList<String> ownerCompanyRelation = new ArrayList<String>()
 
             'Ambil array string (text) owner relationship dari db'
             ownerCompanyRelation = CustomKeywords.'assetData.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
 
-			'declare countownercompanyrelation'
+            'declare countownercompanyrelation'
             Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
 
             'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
                 ownerCompanyRelation) == false) {
-
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+                CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -640,10 +612,10 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
             if (WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false) {
+                'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+                CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
 
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
-				
                 GlobalVariable.FlagFailed = 1
             }
         }
@@ -651,25 +623,20 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
     
     'input owner name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Owner Name_form-control ng-untouched ng-pristine ng-invalid'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 43))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 43))
 
     'select owner relationship'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 44), false)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 44), false)
 
-    if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 42) == 'Personal') {
-        if (datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 46).length() > 1) {
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Personal') {
+        if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).length() > 1) {
             'click button owner profession'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Owner Profession_btn btn-raised btn-primary'))
 
             'input profession code'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Profession Code_professionCodeId'), 
-                datafileTabAsset.getValue(
-                    GlobalVariable.NumofColm, 45))
+                datafileTabAsset.getValue(GlobalVariable.NumofColm, 45))
 
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search'))
@@ -684,97 +651,77 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
             }
         }
-    } else if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 42) == 'Company') {
+    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
         'select company owner profession'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_Company Owner Profession'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 47), false)
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 47), false)
     }
     
     'select id type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-ID Type'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 48), false)
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 48), false)
 
     'input id no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Owner Id No'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 49))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 49))
 
     'input owner mobile no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Owner Mobile Phone No'), 
-        datafileTabAsset.getValue(
-            GlobalVariable.NumofColm, 50))
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 50))
 
-    if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 52) == 'Yes') {
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
         'select copy address'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/select_-Select One- JOB  LEGAL  MAILING  RESIDENCE'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 53), false)
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 53), false)
 
         'click button copy'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Copy'))
-		
-		'function untuk copy address asset location'
-		assetLocCopy()
-		
-    } else if (datafileTabAsset.getValue(
-        GlobalVariable.NumofColm, 52) == 'No') {
+
+        'function untuk copy address asset location'
+        assetLocCopy()
+    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'No') {
         'input address'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 54))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 54))
 
         'input RT'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_RT'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 55))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 55))
 
         'input RW'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_RW'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 56))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 56))
 
         'click button Zipcode'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Zipcode_btn btn-raised btn-primary'))
 
         'input Zipcode'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Zipcode_form-control ng-untouched ng-pristine ng-invalid'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 57))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 57))
 
         'input Kecamatan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_KecamatanAssetOwner'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 59))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 59))
 
         'input kelurahan'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_KelurahanAssetOwner'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 58))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 58))
 
         'input Kota'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_KotaAssetOwner'), 
-            datafileTabAsset.getValue(
-                GlobalVariable.NumofColm, 60))
+            datafileTabAsset.getValue(GlobalVariable.NumofColm, 60))
 
         'click search button'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-		'verify input error'
-		CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
-		
-		'function untuk input address asset location'
-		assetLocInput()
-		
+        'verify input error'
+        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+            '7.TabAssetData', GlobalVariable.NumofColm)
+
+        'function untuk input address asset location'
+        assetLocInput()
     }
 }
-
-'tambahkan asset price ke gv'
-GlobalVariable.AssetPrice += Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
-        'value').replace(',', ''))
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Save'))
@@ -824,9 +771,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 } else {
     if (flagWarning > 0) {
-		'write to excel status warning'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, 
-            GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
+        'write to excel status warning'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
+            1, GlobalVariable.StatusWarning)
     }
 }
 
@@ -842,68 +789,62 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 
 WebUI.delay(10)
 
-public checkVerifyEqualOrMatch(Boolean isMatch){
-	if(isMatch==false && GlobalVariable.FlagFailed==0){
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+    if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-		
-		GlobalVariable.FlagFailed=1
-	}
+        GlobalVariable.FlagFailed = 1
+    }
 }
 
-public assetLocInput(){
-	'input address'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_AddressText'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 54))
+def assetLocInput() {
+    'input address'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_AddressText'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 54))
 
-	'input RT'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRT'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 55))
+    'input RT'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRT'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 55))
 
-	'input RW'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRW'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 56))
+    'input RW'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_InputRW'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 56))
 
-	'click button zipcode'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonZipcode'))
+    'click button zipcode'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonZipcode'))
 
-	'input Zipcode'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inptZipcode'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 57))
+    'input Zipcode'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inptZipcode'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 57))
 
-	'input Kecamatan'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 59))
+    'input Kecamatan'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKecamatan'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 59))
 
-	'input kelurahan'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 58))
+    'input kelurahan'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKelurahan'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 58))
 
-	'input Kota'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 60))
+    'input Kota'
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_inputKota'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 60))
 
-	'click search button'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
+    'click search button'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
-	'verify input error'
-	CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), '7.TabAssetData', GlobalVariable.NumofColm)
+    'verify input error'
+    CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+        '7.TabAssetData', GlobalVariable.NumofColm)
 }
 
-public assetLocCopy(){
-	'select copy address'
-	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation _ Copy Address'),
-		datafileTabAsset.getValue(
-			GlobalVariable.NumofColm, 53), false)
+def assetLocCopy() {
+    'select copy address'
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation _ Copy Address'), 
+        datafileTabAsset.getValue(GlobalVariable.NumofColm, 53), false)
 
-	'click button copy'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
+    'click button copy'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
 }
+
