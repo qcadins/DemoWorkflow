@@ -340,7 +340,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'value')
 
         'get DP amount dari excel'
-        DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
+        DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 70)
 
         'verify security deposit value equal'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(DownPaymentAmt, DownPaymentAmtExcel, false))
@@ -350,7 +350,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'value').replace(' %', '')
 
         'get dp percentage dari excel'
-        DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 68)
+        DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
 
         'verify security deposit value equal'
         checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(DownPaymentPrctg)), Math.round(Double.parseDouble(

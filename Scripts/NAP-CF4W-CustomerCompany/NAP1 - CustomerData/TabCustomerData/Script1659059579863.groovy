@@ -87,8 +87,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 
     'input kelurahan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kelurahan_Kelurahan'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
-            29))
+        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 29))
 
     'input kota'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kota_kota'), datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 30))
@@ -101,11 +100,9 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
  
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
-            31), false)
+        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 31), false)
 	
-} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
-    14) == 'LookUp') {
+} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     'double check untuk copy app data'
     if (((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
         16).length() > 0) || (datafileCustomerCompany.getValue(
@@ -188,6 +185,11 @@ if (GlobalVariable.RoleCompany == 'Testing' && datafileCustomerCompany.getValue(
 	
 	'add ownership to array'
 	GlobalVariable.Confinsdata.add(selectownership.getFirstSelectedOption().getText())
+	
+	'call function getAddressData'
+	getAddressData()
+	
+	println(GlobalVariable.LookupAddressData)
 }
 
 'get customer name'
@@ -316,6 +318,36 @@ def getDataCust() {
             'value'))
 
     GlobalVariable.Confinsdata = confinsdata
+}
+
+def getAddressData(){
+	'get address'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), 'value'))
+
+	'get RT'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), 'value'))
+
+	'get RW'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), 'value'))
+
+	'get zipcode'
+    GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelZipcode'),'value'))
+
+    'get kecamatan'
+    GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKecamatan'), 
+    		'value'))
+	
+    'get kelurahan'
+    GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKelurahan'), 
+            'value'))
+
+    'get kota'
+    GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/LabelKota'), 'value'))
+ 
+	Select selectOwnership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+	
+	'get ownership'
+	GlobalVariable.LookupAddressData.add(selectOwnership.getFirstSelectedOption().getText())
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

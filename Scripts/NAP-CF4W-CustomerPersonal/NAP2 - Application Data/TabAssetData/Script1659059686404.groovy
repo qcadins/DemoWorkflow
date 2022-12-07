@@ -326,7 +326,7 @@ if (GlobalVariable.Role == 'Testing') {
         DownPaymentAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'), 
             'value')
 
-        DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
+        DownPaymentAmtExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 70)
 
         'verify down payment value equal'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(DownPaymentAmt, DownPaymentAmtExcel, false))
@@ -336,7 +336,7 @@ if (GlobalVariable.Role == 'Testing') {
             'value').replaceAll(' %', '')
 
         'get dp percentage dari excel'
-        DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 68)
+        DownPaymentPrctgExcel = datafileTabAsset.getValue(GlobalVariable.NumofColm, 69)
 
         'verify down payment value equal'
         checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(DownPaymentPrctg)), Math.round(Double.parseDouble(

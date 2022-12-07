@@ -251,8 +251,11 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
     }
     
     if (GlobalVariable.Role == 'Testing') {
-		//getdatacust
+		'call function getdatacust'
         getDataCust()
+		
+		'call function get address data'
+		getAddressData()
     }
 }
 
@@ -438,6 +441,41 @@ def getDataCust() {
             'value'))
 
     GlobalVariable.Confinsdata = confinsdata
+}
+
+def getAddressData(){
+	'get address'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/textarea_Address'),
+			'value'))
+
+	'get RT'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RT'),
+			'value'))
+
+	'get RW'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_RW'),
+			'value'))
+
+	'get zipcode'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/input_zipcodeLookUp'),
+			'value'))
+
+	'get kelurahan'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKelurahan'),
+			'value'))
+	
+	'get kecamatan'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKecamatan'),
+			'value'))
+
+	'get kota'
+	GlobalVariable.LookupAddressData.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/LabelKota'),
+			'value'))
+	
+	Select selectOwnership = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//div[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+	
+	'get ownership'
+	GlobalVariable.LookupAddressData.add(selectOwnership.getFirstSelectedOption().getText())
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {

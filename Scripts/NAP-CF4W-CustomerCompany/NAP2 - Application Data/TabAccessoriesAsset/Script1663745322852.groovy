@@ -825,7 +825,7 @@ def countAccessoriesDP(){
 							  AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value')
 							  
 							  'get value accessories dari excel'
-							  AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
+							  AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 24)
 							  
 							  'verify securitydeposit value equal'
 							  checkVerifyEqualOrMatch(WebUI.verifyMatch(AccessoriesInputAmt, AccessoriesAmountExcel, false))
@@ -836,7 +836,7 @@ def countAccessoriesDP(){
 							  AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replace(' %', '')
 
 							  'get value accessories value dari excel'
-							  AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 22)
+							  AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
 							  
 							  'verify securitydeposit value equal'
 							  checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))

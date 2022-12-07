@@ -362,8 +362,7 @@ if(capinssetting=="YEARLY"){
 			'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[1]/div/input', true)
 	
 		'Ambil nilai capitalize dari excel'
-		capitalizeValue = datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, editGenTableRow+1)
+		capitalizeValue = datafileTabInsurance.getValue(GlobalVariable.NumofColm, editGenTableRow+1)
 	
 		capitalizeValueArray = capitalizeValue.split(';', -1)
 	
@@ -798,8 +797,8 @@ if(capinssetting=="YEARLY"){
 		String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
 			',', '')
 		
-		'Perhitungan total fee'
-		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 86)
+		'get perhitungan total fee dari excel'
+		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87)
 		
 		'Perhitungan total premi to customer'
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))

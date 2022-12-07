@@ -557,8 +557,8 @@ if(GlobalVariable.Role=="Testing"){
 	String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
 		',', '')
 	
-	'Perhitungan total fee'
-	totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 86)
+	'get perhitungan total fee dari excel'
+	totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87)
 	
 	'Perhitungan total premi to customer'
 	totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))

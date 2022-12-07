@@ -321,6 +321,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>[]</initValue>
+      <name>LookupAddressData</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
       <name>MainCovRulePath</name>
    </GlobalVariableEntity>
