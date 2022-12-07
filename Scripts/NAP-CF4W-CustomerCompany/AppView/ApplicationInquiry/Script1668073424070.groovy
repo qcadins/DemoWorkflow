@@ -556,7 +556,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         }
         
         'Verif appno yang ada di page 2 tidak ada di page 1'
-        Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+        Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
         'add verify result to checkVerifySort'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -578,7 +578,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
 
         'Verif appno yang ada di page 1 tidak ada di page 2'
-        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
         'add verify result to checkVerifyFooter'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -600,7 +600,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
         listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingAppView'(listString)
 
         'Verif appno yang ada di page 2 tidak ada di page 1'
-        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+        isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
         'add verify result to checkVerifyFooter'
         checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))

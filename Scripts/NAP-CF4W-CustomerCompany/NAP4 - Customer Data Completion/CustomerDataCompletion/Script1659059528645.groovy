@@ -57,11 +57,11 @@ checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, cou
 for (int i = 1; i <= count; i++) {
 
     'modify object customername'
-    modifynewCustomerName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/CustomerName'), 
+    modifynewCustomerName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerName'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]', true)
 	
     'modify object customertype'
-    modifynewCustomerType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/CustomerType'), 
+    modifynewCustomerType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerType'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[3]', true)
 
     'modify object iscomplete'
@@ -341,7 +341,7 @@ def pagingTesting(){
 		ArrayList<String> listString = new ArrayList<String>()
 	
 		'click search'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
 	
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
@@ -526,7 +526,7 @@ def pagingTesting(){
 			}
 			
 			'Verif appno pada page 2 tidak ada di page 1'
-			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 	
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
@@ -544,7 +544,7 @@ def pagingTesting(){
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 	
 			'Verif appno yang ada di page 1 tidak ada di page 2'
-			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 	
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
@@ -562,7 +562,7 @@ def pagingTesting(){
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 	
 			'Verif appno yang ada di page 2 tidak ada di page 1'
-			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 	
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		}

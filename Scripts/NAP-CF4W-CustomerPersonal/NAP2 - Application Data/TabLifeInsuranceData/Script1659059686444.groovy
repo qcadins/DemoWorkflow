@@ -53,7 +53,7 @@ if (GlobalVariable.Role == 'Testing') {
 def jsCode = 'return document.querySelector("input.mat-checkbox-input.cdk-visually-hidden").classList.remove("cdk-visually-hidden");'
 
 'Custom Keyword untuk Execute Javascript'
-CustomKeywords.'JsExecutor.jsExecutionFunction'(jsCode)
+CustomKeywords.'JsExecutor.jsExecutioncustomizeKeyword.Function'(jsCode)
 
 'Cek IsCoverLifeInsurance Tercentang atau tidak pada Excel'
 if (datafileTabLifeInsurance.getValue(

@@ -27,22 +27,21 @@ Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 'declare datafileTabInsurance'
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData')
 
-String insuredBy = datafileTabInsurance.getValue(
-	GlobalVariable.NumofColm, 12)
+String insuredBy = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12)
 
 int arrayindex = 0
 
-ArrayList<String> arraysuminsured = new ArrayList<Boolean>()
+ArrayList<String> arraysuminsured = new ArrayList<String>()
 
-ArrayList<String> arrayaddpremi = new ArrayList<Boolean>()
+ArrayList<String> arrayaddpremi = new ArrayList<String>()
 
-ArrayList<String> arrayMatch = new ArrayList<Boolean>()
+ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
 	insuredCust(arrayMatch,sqlconnectionLOS)
 } else if (insuredBy == 'Customer - Multifinance') {
-	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
+	insuredCustMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU, arrayindex)
 } else if (insuredBy == 'Multifinance') {
 	insuredMF(arrayMatch,sqlconnectionLOS,sqlconnectionFOU)
 }
@@ -68,7 +67,7 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 	}
 }
 
-public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU){
+public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlconnectionFOU, int arrayindex){
 	'call keyword NAP2InsuranceCustMFStoreDB untuk get data dari db'
 	ArrayList<Boolean> resultCustomerInsurance = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustMFStoreDB'(
 		sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
@@ -89,9 +88,9 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					false, FailureHandling.OPTIONAL))
 		} else if ((index - 13) == resultCustomerInsurance.size()) {
 		   
-			arrayMatch.add(WebUI.verifyMatch(convertDate(datafileTabInsurance.getValue(
-				GlobalVariable.NumofColm, 19)), (resultCustomerInsurance[arrayindex++]).toUpperCase(), false,
-					FailureHandling.OPTIONAL))
+			String countDate = CustomKeywords.'customizeKeyword.convertDate.countDateInsurance'(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19))
+		
+			arrayMatch.add(WebUI.verifyMatch(countDate, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 		}
 	}
 	
@@ -151,8 +150,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 				GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 
-	if (datafileTabInsurance.getValue(
-		GlobalVariable.NumofColm, 36).length() == 0) {
+	
 		ArrayList<Boolean> resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -203,7 +201,8 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 				}
 			}
 		}
-	} else {
+			
+	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 45).length() > 0) {
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
@@ -484,8 +483,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 
-	if (datafileTabInsurance.getValue(
-		GlobalVariable.NumofColm, 36).length() == 0) {
+	
 		String resultMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainCVGtoreDB'(sqlconnectionLOS,
 			findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))
@@ -536,7 +534,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 				}
 			}
 		}
-	} else {
+	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 45).length() > 0) {
 		'Mengambil nilai setting cap insurance dari db'
 		String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 
@@ -752,22 +750,4 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			}
 		}
 	}
-}
-
-public convertDate(String enddate){
-	Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
-	
-	String inslength = GlobalVariable.InsuranceLength
-	
-	Calendar cal = Calendar.getInstance()
-	
-	cal.setTime(enddate_Formated)
-	
-	cal.add(Calendar.MONTH, Integer.parseInt(inslength))
-	
-	DateFormat dateFormat = new SimpleDateFormat('MM/dd/yyyy')
-	
-	String enddateFinal = dateFormat.format(cal.getTime())
-	
-	return enddateFinal
 }

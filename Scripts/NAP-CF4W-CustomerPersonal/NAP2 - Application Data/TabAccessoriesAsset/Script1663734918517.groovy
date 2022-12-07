@@ -34,12 +34,6 @@ datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPers
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
 
-'inisialisasi assetprice gv'
-GlobalVariable.AssetPrice = 0.00
-
-'inisialisasi totalaccessoriesprice gv'
-GlobalVariable.TotalAccessoriesPrice = 0.00
-
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -181,45 +175,9 @@ if(datafileTabAsset.getValue(
 				  
 							 continue
 						  }
-							  if(GlobalVariable.Role=="Testing"){
-								  'number format untuk mengubah persentase ke desimal'
-								  NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
-								  
-								  'get accessories price'
-								  def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
 						  
-								  'get accessories input percentage'
-								  def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
-						  
-								  'get accessories input amount'
-								  def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
-						  
-								  'parsing accessoriesprice ke integer'
-								  BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
-						  
-								  'parsing accessories input percentage ke dalam bentuk float/desimal'
-								  float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
-						  
-								  Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
-						  
-								  'parsing accessories input amount ke integer'
-								  BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
-						  
-								  if (datafileAccessories.getValue(
-									  GlobalVariable.NumofAccessories, 18) == 'Percentage') {
-									  int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
-						  
-									  'verify securitydeposit value equal'
-									  checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-								  } else if (datafileAccessories.getValue(
-									  GlobalVariable.NumofAccessories, 18) == 'Amount') {
-									  float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
-						  
-									  'verify securitydeposit value equal'
-									  checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
-								  }
-								  GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
-							  }
+						  'call function count accessries DP'
+						  countAccessoriesDP()
 							  
 						  'write to excel success'
 						  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
@@ -483,15 +441,7 @@ if(datafileTabAsset.getValue(
 					   
 								   continue
 							   }
-								'declare accessories price'
-								def AccPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
-								
-								'parsing accessories price ke integer'
-								BigDecimal BDAccPrice = Integer.parseInt(AccPrice)
-								
-								'Tambahkan accessories price ke totalaccessoriesprice'
-								GlobalVariable.TotalAccessoriesPrice += BDAccPrice.doubleValue()
-								
+					
 							   'write to excel success'
 							   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 									   GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
@@ -658,47 +608,9 @@ if(datafileTabAsset.getValue(
 				
 							continue
 						}
+						'call function count accessries DP'
+						countAccessoriesDP()
 							
-						if(GlobalVariable.Role=="Testing"){
-								'number format untuk mengubah persentase ke desimal'
-								NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
-								
-								'get accessoriesprice'
-								def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
-						
-								'get accessories input percentage'
-								def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
-						
-								'get accessories input amount'
-								def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
-						
-								'parsing accesories price ke integer'
-								BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
-						
-								'parsing accessories input percentage ke dalam bentuk float / decimal'
-								float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
-						
-								Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
-						
-								'parsing accessories input amount ke integer'
-								BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
-						
-								if (datafileAccessories.getValue(
-									GlobalVariable.NumofAccessories, 18) == 'Percentage') {
-									int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
-						
-									'verify securitydeposit value equal'
-									checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-								} else if (datafileAccessories.getValue(
-									GlobalVariable.NumofAccessories, 18) == 'Amount') {
-									float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
-						
-									'verify securitydeposit value equal'
-									checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
-								}
-								'tambahakan accessoriesprice ke total accesories price gv'
-								GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
-						}
 						'write to excel success'
 						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 							GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
@@ -890,46 +802,8 @@ else if(datafileTabAsset.getValue(
 			
 			modifyObjectIndex++
 	
-			if(GlobalVariable.Role=="Testing"){
-				'number format untuk mengubah persentase ke desimal'
-				NumberFormat decimalFormatAccessories = NumberFormat.getPercentInstance()
-				
-				'get accessories price'
-				def AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
-		
-				'get accessories input percentage'
-				def AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replaceAll('\\s', '')
-		
-				'get accessories input amount'
-				def AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value').split(',').join()
-		
-				'parsing accesories price ke integer'
-				BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
-		
-				'parsing accessories input percentage ke dalam bentuk desimal / float'
-				float floatBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg).floatValue()
-		
-				Number NumberBDAccessoriesInputPrctg = decimalFormatAccessories.parse(AccessoriesInputPrctg)
-		
-				'parsing accessories input amount ke integer'
-				BigDecimal BDAccessoriesInputAmt = Integer.parseInt(AccessoriesInputAmt)
-		
-				if (datafileAccessories.getValue(
-					GlobalVariable.NumofAccessories, 18) == 'Percentage') {
-					int multiplyAccessoriesPricexDownPaymentPrctg = BDAccessoriesPrice * NumberBDAccessoriesInputPrctg
-		
-					'verify securitydeposit value equal'
-					checkVerifyEqualOrMatch(WebUI.verifyEqual(multiplyAccessoriesPricexDownPaymentPrctg, BDAccessoriesInputAmt))
-				} else if (datafileAccessories.getValue(
-					GlobalVariable.NumofAccessories, 18) == 'Amount') {
-					float divideDownPaymentAmtAccessoriesPrice = BDAccessoriesInputAmt / BDAccessoriesPrice
-		
-					'verify securitydeposit value equal'
-					checkVerifyEqualOrMatch(WebUI.verifyEqual(divideDownPaymentAmtAccessoriesPrice, floatBDAccessoriesInputPrctg))
-				}
-				'Tambahakan accessories price ke total accessories price gv'
-				GlobalVariable.TotalAccessoriesPrice += BDAccessoriesPrice.doubleValue()
-			}
+			'call function count accessries DP'
+			countAccessoriesDP()
 			
 			'write to excel success'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
@@ -945,5 +819,38 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 			
 			GlobalVariable.FlagFailed=1
+	}
+}
+
+def countAccessoriesDP(){
+	if(GlobalVariable.RoleCompany=="Testing"){
+		'get attribute accessories price dari confins'
+		AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
+						  
+		'convert accessories price > integer'
+		BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
+								  
+						  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+				  
+							  'get attribute accessories input amount dari confins'
+							  AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value')
+							  
+							  'get value accessories dari excel'
+							  AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
+							  
+							  'verify securitydeposit value equal'
+							  checkVerifyEqualOrMatch(WebUI.verifyMatch(AccessoriesInputAmt, AccessoriesAmountExcel, false))
+							  
+						  } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
+				  
+							  'get attribute accessories input percentage dari confins'
+							  AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replace(' %', '')
+
+							  'get value accessories value dari excel'
+							  AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 22)
+							  
+							  'verify securitydeposit value equal'
+							  checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))
+						  }
 	}
 }

@@ -777,7 +777,6 @@ if(capinssetting=="YEARLY"){
 	
 	ArrayList<WebElement> totalResult
 	BigDecimal totalPremitoCustResult
-	BigDecimal totalFeeResult
 	if(GlobalVariable.RoleCompany=="Testing"){
 		
 		'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
@@ -793,31 +792,17 @@ if(capinssetting=="YEARLY"){
 		
 		'ambil nilai total fee dari confins'
 		String textTotalFeeAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace(
-			',', '')
+			'.00', '')
 		
 		'ambil nilai total premi to customer dari confins'
 		String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
 			',', '')
 		
-		'ambil nilai admin fee dari confins'
-		String adminFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),
-			'value').replace(',', '')
-		
-		'Parsing adminfee ke tipe data angka (long)'
-		BigDecimal adminFeeAmt = Long.parseLong(adminFeeAmtText)
-		
-		'ambil nilai stampduty fee dari confins'
-		String stampdutyFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),
-			'value').replace(',', '')
-		
-		'Parsing stampdutyfee ke tipe data angka (long)'
-		BigDecimal stampdutyFeeAmt = Long.parseLong(stampdutyFeeAmtText)
-		
 		'Perhitungan total fee'
-		totalFeeResult = (adminFeeAmt + stampdutyFeeAmt)
+		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 86)
 		
 		'Perhitungan total premi to customer'
-		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
+		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
 		
 		'Verif total main premi sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
@@ -826,7 +811,7 @@ if(capinssetting=="YEARLY"){
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
 		
 		'Verif total fee sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, totalFeeResult, false))
 		
 		'Verif total premi to customer sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
@@ -877,7 +862,7 @@ if(capinssetting=="YEARLY"){
 		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false))
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString(), false))
 		}
 		//Jika capitalize amount bernilai 0
 		else if(totalResult[3]==0) {

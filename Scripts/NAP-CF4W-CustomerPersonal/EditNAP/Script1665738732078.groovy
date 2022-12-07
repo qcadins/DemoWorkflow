@@ -139,7 +139,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } //Jika appstep = napd atau ref atau app atau asset atau ins atau lfi atau fin atau tc 
-	else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
+	else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
 		'getcustdata untuk proses dupcheck'
 		getCustdata(sqlconnectionLOS, appNo, appStep)
 
@@ -490,7 +490,7 @@ else if (GlobalVariable.Role == 'Testing') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
     } //Jika appstep == napd atau ref atau app atau asset atau ins atau lfi atau fin atau tc
-	else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
+	else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
         'getcustdata untuk proses dupcheck'
 		getCustdata(sqlconnectionLOS, appNo, appStep)
 

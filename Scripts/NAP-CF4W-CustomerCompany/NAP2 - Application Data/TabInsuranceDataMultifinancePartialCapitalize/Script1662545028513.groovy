@@ -498,7 +498,6 @@ if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-Cust
 //kenapa karena jika set merupakan inputan user excel tidak perlu diverif
 ArrayList<WebElement> totalResult
 BigDecimal totalPremitoCustResult
-BigDecimal totalFeeResult
 if(GlobalVariable.RoleCompany=="Testing"){
 	
 	'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
@@ -514,31 +513,17 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	
 	'ambil nilai total fee dari confins'
 	String textTotalFeeAmt = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalFee')).replace(
-		',', '')
+		'.00', '')
 	
 	'ambil nilai total premi to customer dari confins'
 	String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
 		',', '')
 	
-	'ambil nilai admin fee dari confins'
-	String adminFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),
-		'value').replace(',', '')
-	
-	'Parsing adminfee ke tipe data angka (long)'
-	BigDecimal adminFeeAmt = Long.parseLong(adminFeeAmtText)
-	
-	'ambil nilai stampduty fee dari confins'
-	String stampdutyFeeAmtText = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),
-		'value').replace(',', '')
-	
-	'Parsing stampdutyfee ke tipe data angka (long)'
-	BigDecimal stampdutyFeeAmt = Long.parseLong(stampdutyFeeAmtText)
-	
 	'Perhitungan total fee'
-	totalFeeResult = (adminFeeAmt + stampdutyFeeAmt)
+	totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 86)
 	
 	'Perhitungan total premi to customer'
-	totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + totalFeeResult)
+	totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
 	
 	'Verif total main premi sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
@@ -547,7 +532,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
 	
 	'Verif total fee sesuai perhitungan'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, String.format('%.2f', totalFeeResult), false))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, totalFeeResult, false))
 	
 	'Verif total premi to customer sesuai perhitungan'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
@@ -596,7 +581,7 @@ if(GlobalVariable.RoleCompany=="Testing"){
 	'Verif untuk capitalize bukan 0 dan ada paid by mf'
 	if ((totalResult[3]) != 0 && totalResult[2]==1) {
 		'Verify capitalize amount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult).toString(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString(), false))
 		
 		'write to excel discount amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
@@ -612,12 +597,12 @@ if(GlobalVariable.RoleCompany=="Testing"){
 			'value').replace(',', '')
 			
 		'Verify capitalize amount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + totalFeeResult - discountAmt).toString(), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + Long.parseLong(totalFeeResult.replace(',','')) - discountAmt).toString(), false))
 	}
 	//Verif untuk capitalize bernilai 0, ada paid by mf, dan full capitalize tercentang
 	else if((totalResult[3]) == 0 && totalResult[2]==1 && WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
 		'Verify capitalize amount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+totalFeeResult).toString(),false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+Long.parseLong(totalFeeResult.replace(',',''))).toString(),false))
 	}
 }
 
