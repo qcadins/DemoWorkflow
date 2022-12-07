@@ -97,7 +97,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-	CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
  
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
@@ -135,7 +135,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-		CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
 	'check if role testing untuk get data customer digunakan untuk data verif'

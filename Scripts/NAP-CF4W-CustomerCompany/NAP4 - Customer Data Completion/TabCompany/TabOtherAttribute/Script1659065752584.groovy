@@ -63,7 +63,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -79,7 +79,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -96,7 +96,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -113,7 +113,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -130,7 +130,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -147,7 +147,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -164,7 +164,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -181,7 +181,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -198,7 +198,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -214,7 +214,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Search'))
 
     'get text total data dari lookup confins'
-    totaldata = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute - Company/LabelTotalData')).replace(
+    totaldata = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/LabelTotalData')).replace(
         'TOTAL DATA : ', '')
 
     'verify total data lookup confins == total data lookup db'
@@ -351,7 +351,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 27).length() >
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/a_Select'))
     } else {
         'click X'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
         GlobalVariable.FlagWarning++
     }
@@ -435,7 +435,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39).length() >
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39))
 }
 
-GlobalVariable.Custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail - Personal/CustomerNameDetail'))
+GlobalVariable.Custname = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/button_Save'))
@@ -496,10 +496,10 @@ def verifyInputError() {
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute/a_Select'))
 	} else {
 		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
 		'click button back'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.OtherAttribute', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)

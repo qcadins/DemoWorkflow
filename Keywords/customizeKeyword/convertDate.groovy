@@ -25,7 +25,7 @@ import internal.GlobalVariable
 
 public class convertDate {
 	@Keyword
-	public ConvertDate (String date){
+	public convertDateSdf (String date){
 
 		'convert date confins dan excel agar sama'
 		SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
@@ -46,24 +46,24 @@ public class convertDate {
 
 		return sDate
 	}
-	
+
 	@Keyword
-	public counDateInsurance (String enddate){
+	public countDateInsurance (String enddate){
 		'untuk mengubah format tanggal'
 		Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
-		
+
 		String inslength = GlobalVariable.InsuranceLength
-		
+
 		Calendar cal = Calendar.getInstance()
-		
+
 		cal.setTime(enddate_Formated)
-		
+
 		cal.add(Calendar.MONTH, Integer.parseInt(inslength))
-		
+
 		DateFormat dateFormat = new SimpleDateFormat('MM/dd/yyyy')
-		
+
 		String enddateFinal = dateFormat.format(cal.getTime())
-		
+
 		return enddateFinal
 	}
 }

@@ -103,7 +103,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-	CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     
 	'jika authority aml tidak kosong'
     if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 36).length() > 1) {
@@ -165,7 +165,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_SearchZipcode'))
 
     'verify input error'
-	CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/select_Ownership'), 
@@ -192,7 +192,7 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search (1)'))
 
     'verify input error'
-	CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     
     if (GlobalVariable.Role == 'Testing') {
 		//getdata cust
@@ -222,7 +222,7 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-		CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
 	'jika authority aml tidak kosong'

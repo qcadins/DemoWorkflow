@@ -96,7 +96,7 @@ def insuredCustMF(ArrayList<String> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
                         ',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
         } else if ((index - 13) == resultCustomerInsurance.size()) {
 			
-			String countDate = CustomKeywords.'customizeKeyword.convertDate.counDateInsurance'(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19)) 
+			String countDate = CustomKeywords.'customizeKeyword.convertDate.countDateInsurance'(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19)) 
 			
             arrayMatch.add(WebUI.verifyMatch(countDate, (resultCustomerInsurance[
                     arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
