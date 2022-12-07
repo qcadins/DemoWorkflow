@@ -92,7 +92,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
         'Jika postat bernilai deact atau exp'
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
@@ -138,7 +138,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
     'click button next'
@@ -161,7 +161,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
-	CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'jika postat bernilai deact atau exp'
     if ((POStat == 'DEACT') || (POStat == 'EXP')) {
@@ -652,7 +652,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -672,7 +672,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -692,7 +692,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))

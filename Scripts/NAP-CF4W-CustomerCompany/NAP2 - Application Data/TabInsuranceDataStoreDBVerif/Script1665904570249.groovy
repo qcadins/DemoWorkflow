@@ -88,9 +88,9 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					false, FailureHandling.OPTIONAL))
 		} else if ((index - 13) == resultCustomerInsurance.size()) {
 		   
-			arrayMatch.add(WebUI.verifyMatch(convertDate(datafileTabInsurance.getValue(
-				GlobalVariable.NumofColm, 19)), (resultCustomerInsurance[arrayindex++]).toUpperCase(), false,
-					FailureHandling.OPTIONAL))
+			String countDate = CustomKeywords.'customizeKeyword.convertDate.counDateInsurance'(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19))
+		
+			arrayMatch.add(WebUI.verifyMatch(countDate, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 		}
 	}
 	
@@ -750,22 +750,4 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			}
 		}
 	}
-}
-
-public convertDate(String enddate){
-	Date enddate_Formated = new SimpleDateFormat('MM/dd/yyyy').parse(enddate)
-	
-	String inslength = GlobalVariable.InsuranceLength
-	
-	Calendar cal = Calendar.getInstance()
-	
-	cal.setTime(enddate_Formated)
-	
-	cal.add(Calendar.MONTH, Integer.parseInt(inslength))
-	
-	DateFormat dateFormat = new SimpleDateFormat('MM/dd/yyyy')
-	
-	String enddateFinal = dateFormat.format(cal.getTime())
-	
-	return enddateFinal
 }

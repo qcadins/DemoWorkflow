@@ -93,7 +93,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 					
 						'convert date '
-						String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17))
+						String converteddate = CustomKeywords.'customizeKeyword.convertDate.ConvertDate'(GlobalVariable.FindDataFile.getValue(financialdata, 17))
 
 						if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
 							'modify object button edit'
@@ -181,7 +181,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-							String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 17))
+							String converteddate = CustomKeywords.'customizeKeyword.convertDate.ConvertDate'(GlobalVariable.FindDataFile.getValue(financialdata, 17))
 
 							'verify date beda'
 							if (!(WebUI.getText(modifyNewDate, FailureHandling.OPTIONAL).replace('-', ' ').equalsIgnoreCase(
@@ -198,8 +198,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 									break
 								}
-							} else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
-										financialdata, 17)))) {
+							} else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
 								break
 							}
 						}
@@ -956,25 +955,4 @@ def inputBankStatementFromEmpty() {
             inputBankStatement(BSindex)
         }
     }
-}
-
-def convertDate(String date) {
-    'convert date confins dan excel agar sama'
-    SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-    Date parsedDate = null
-
-    String sentDate = date
-
-    String sDate
-
-    if (sentDate != '') {
-        parsedDate = sdf.parse(sentDate)
-
-        sdf = new SimpleDateFormat('dd MMM YYYY')
-
-        sDate = sdf.format(parsedDate)
-    }
-    
-    return sDate
 }

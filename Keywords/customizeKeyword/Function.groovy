@@ -1,3 +1,4 @@
+package customizeKeyword
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -15,13 +16,12 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-
 import internal.GlobalVariable
 
 public class Function {
 	//keyword verify input error lookup
 	@Keyword
-	public verifyInputErrorLookUp(Object button, String sheet, int colm){
+	public verifyInputLookup(Object button, String sheet, int colm){
 		'verify input error'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/a_Select'),
 		10, FailureHandling.OPTIONAL)) {
@@ -35,11 +35,11 @@ public class Function {
 			WebUI.click(button)
 
 			'Write To Excel GlobalVariable.StatusFailed'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet,
+			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheet,
 					0, colm - 1, GlobalVariable.StatusFailed)
 
 			'Write To Excel GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet,
+			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheet,
 					1, colm - 1, GlobalVariable.StatusReasonLookup)
 
 			'GlobalVariable.FlagFailed =1 karena lookup gagal'
@@ -50,17 +50,6 @@ public class Function {
 				'Klik new consumer finance'
 				WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 			}
-		}
-	}
-
-	//keyword check app step
-	@Keyword
-	public checkAppStep(String appStep){
-		if((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep ==
-		'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')){
-			return true
-		}else {
-			return false
 		}
 	}
 }

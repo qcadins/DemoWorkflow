@@ -83,7 +83,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
             WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
@@ -127,7 +127,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
     'click button next'
@@ -148,7 +148,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
-    CustomKeywords.'Function.verifyInputErrorLookUp'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+    CustomKeywords.'customizeKeyword.Function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     if ((POStat == 'DEACT') || (POStat == 'EXP')) {
         WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2, FailureHandling.OPTIONAL)
@@ -596,7 +596,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -614,7 +614,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -632,7 +632,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP1'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
         }

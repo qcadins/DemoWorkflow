@@ -24,50 +24,50 @@ import internal.GlobalVariable as GlobalVariable
 'declare copyappcolm = 0'
 GlobalVariable.CopyAppColm = 0
 
-def datafilecustdetail 
+def datafilecustdetail
 
-if(GlobalVariable.NAP4 == 'CUSTOMER'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
-	
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
-}else if(GlobalVariable.NAP4 == 'SHAREHOLDER COMPANY'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
-	
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
-			
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
-}else if(GlobalVariable.NAP4 == 'GUARANTOR COMPANY'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
-	
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
-			
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
+if (GlobalVariable.NAP4 == 'CUSTOMER') {
+    'get data file path'
+    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+
+    'get data file customer'
+    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
+
+    'declare data file Global variable'
+    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
+} else if (GlobalVariable.NAP4 == 'SHAREHOLDER COMPANY') {
+    'get data file path'
+    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+
+    'get data file customer'
+    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
+
+    'declare data file Global variable'
+    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
+} else if (GlobalVariable.NAP4 == 'GUARANTOR COMPANY') {
+    'get data file path'
+    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+
+    'get data file customer'
+    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
+
+    'declare data file Global variable'
+    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
 }
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 'declare financialDateDelete arraylist'
-ArrayList<String> financialDateDelete = new ArrayList<>()
+ArrayList<String> financialDateDelete = new ArrayList<String>()
 
 'declare bankAccDelete arraylist'
-ArrayList<String> bankAccDelete = new ArrayList<>()
+ArrayList<String> bankAccDelete = new ArrayList<String>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
-			12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
+    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
+            12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
             13))) {
         'declare copyappcolm = index'
         GlobalVariable.CopyAppColm = index
@@ -90,7 +90,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
     if (variableData.size() != 1) {
         'count table financialdata confins'
-        ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
+        ArrayList<String> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
         for (int i = 1; i <= variable.size(); i++) {
             'modify object Date'
@@ -104,8 +104,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
-					
-                        String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+                        String converteddate = CustomKeywords.'customizeKeyword.convertDate.ConvertDate'(GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
                         if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
                             'modify object button edit'
@@ -169,9 +168,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (financialDateDelete.size() > 0) {
-
-		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+        'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, 
+            GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -193,7 +192,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                         if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-                            String converteddate = convertDate(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+                            String converteddate = CustomKeywords.'customizeKeyword.convertDate.ConvertDate'(GlobalVariable.FindDataFile.getValue(financialdata, 35))
 
                             'verify date beda'
                             if (!(WebUI.getText(modifyNewDate, FailureHandling.OPTIONAL).replace('-', ' ').equalsIgnoreCase(
@@ -210,8 +209,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                                     break
                                 }
-                            } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(convertDate(GlobalVariable.FindDataFile.getValue(
-                                        financialdata, 35)))) {
+                            } else if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
                                 break
                             }
                         }
@@ -361,9 +359,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     }
     
     if (bankAccDelete.size() > 0) {
-		
-		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + bankAccDelete)
+        'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, 
+            GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + bankAccDelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -567,7 +565,7 @@ def inputDataFinancial() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_SaveFinancialData'))
 }
 
-def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
+def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
     GlobalVariable.FlagWarning = 0
 
     if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 1) {
@@ -598,8 +596,9 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             'Click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Cancel'))
 
-			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
+            'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, 
+                GlobalVariable.StatusReasonLookup)
 
             (GlobalVariable.FlagWarning)++
         }
@@ -983,25 +982,4 @@ def inputBankStatementFromEmpty() {
             inputBankStatement(BSindex)
         }
     }
-}
-
-def convertDate(String date) {
-    'convert date confins dan excel agar sama'
-    SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
-
-    Date parsedDate = null
-
-    String sentDate = date
-
-    String sDate
-
-    if (sentDate != '') {
-        parsedDate = sdf.parse(sentDate)
-
-        sdf = new SimpleDateFormat('dd MMM YYYY')
-
-        sDate = sdf.format(parsedDate)
-    }
-    
-    return sDate
 }

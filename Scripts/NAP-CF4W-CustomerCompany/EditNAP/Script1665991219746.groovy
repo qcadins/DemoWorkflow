@@ -129,7 +129,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
+    } else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
         'call funtion get cust data'
         getCustdata(sqlconnectionLOS, appNo, appStep)
 
@@ -387,7 +387,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call test case NAP4'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (CustomKeywords.'Function.checkAppStep'(appStep) == true) {
+    } else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
         'call funtion get cust data'
         getCustdata(sqlconnectionLOS, appNo, appStep)
 

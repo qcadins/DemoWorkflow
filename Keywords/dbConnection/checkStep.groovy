@@ -22,6 +22,7 @@ import internal.GlobalVariable
 
 public class checkStep {
 
+	//keyword check app curr step
 	@Keyword
 	public checkAppCurrStep(Sql instanceLOS, String appNo){
 		String appStep
@@ -31,6 +32,7 @@ public class checkStep {
 		return appStep
 	}
 
+	//keyword cust check step
 	@Keyword
 	public checkCustCheckStep(Sql instanceLOS, String appNo){
 		String custCheckStep
@@ -40,6 +42,7 @@ public class checkStep {
 		return custCheckStep
 	}
 
+	//keyword check last step
 	@Keyword
 	public checkLastStep(Sql instanceLOS, String appno){
 		String applaststep = ""
@@ -47,5 +50,16 @@ public class checkStep {
 			applaststep=row[0]
 		})
 		return applaststep
+	}
+	
+	//keyword check app step
+	@Keyword
+	public checkNAP2Step(String appStep){
+		if((((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep ==
+		'INS')) || (appStep == 'LFI')) || (appStep == 'FIN')) || (appStep == 'TC')){
+			return true
+		}else {
+			return false
+		}
 	}
 }

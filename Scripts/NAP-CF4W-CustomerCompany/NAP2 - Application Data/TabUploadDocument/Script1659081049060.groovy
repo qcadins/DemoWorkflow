@@ -48,7 +48,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
             }
             
             'upload file'
-            CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
+            CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
                 datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 13))
 
             'input document name'

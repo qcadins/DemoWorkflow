@@ -49,7 +49,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
             }
             
             'upload file'
-            CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
+            CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
                 datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 13))
 
