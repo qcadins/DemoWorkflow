@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>buttondelete</name>
+   <tag></tag>
+   <elementGuidId>8a0a473a-13cd-43d6-b6ea-9a825752f179</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustomerAssetSection&quot;]/div[2]/table/tbody/tr/td[7]/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CustomerAssetSection&quot;]/div[2]/table/tbody/tr/td[7]/a/i</value>
+   </webElementProperties>
+</WebElementEntity>

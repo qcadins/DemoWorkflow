@@ -197,7 +197,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								converteddate))) {
 								if (i == variable.size()) {
 									'click button add'
-									WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
+									WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 
 									'call function input financial data'
 									inputFinancialData()
@@ -227,7 +227,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 				
 				'click button add'
-				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
+				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 	
 				'call function input financial data'
 				inputFinancialData()
@@ -247,7 +247,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 					'click button add'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData/button_Add'))
+					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
 
 					'call funtion input financial data'
 					inputFinancialData()
@@ -568,7 +568,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
             'click cancel'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData/button_Cancel'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)

@@ -55,17 +55,17 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
-    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-            GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-            GlobalVariable.ColmNAP4, 13))) {
-        copyAppColm = index
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 13))) {
+		copyAppColm = index
 
-        break
-    }
+		break
+	}
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4, 10)
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -135,7 +135,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							Address, 12)))) {
 						if (i == variable.size()) {
 							'click button add'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
+							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Add'))
 
 							'verif ddl ownership dan address type'
 							verifyDDLAddress(Address)
@@ -165,7 +165,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				
 				'click button add'
-				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
+				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Add'))
 
 				'verif ddl ownership dan address type'
 				verifyDDLAddress(Address)
@@ -182,12 +182,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 }
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Save  Continue'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Save  Continue'))
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/th_Address'),
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/th_Address'),
 	10, FailureHandling.OPTIONAL)) {
 	'click button back'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Back'))
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
 }
 
 def inputaddress() {

@@ -3,7 +3,7 @@
    <description></description>
    <name>th_Customer Asset Type</name>
    <tag></tag>
-   <elementGuidId>6b111ea6-7c0b-45dd-a4f5-e92b53a6586b</elementGuidId>
+   <elementGuidId>6bcc942b-ea5f-4661-a627-f92399f560eb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

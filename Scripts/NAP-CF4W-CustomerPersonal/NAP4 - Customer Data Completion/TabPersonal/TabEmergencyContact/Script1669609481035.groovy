@@ -232,7 +232,7 @@ if (GlobalVariable.FindDataFile.getValue(
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/Button_X'))
 
         'click button back'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -422,7 +422,7 @@ if (GlobalVariable.FlagFailed == 0) {
     if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(
             GlobalVariable.ColmNAP4, 4)) == 0) {
         'Check error validasi'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/errorvalidasi'), 
             GlobalVariable.ColmNAP4, '4.EmergencyContact')
     }
 }
@@ -430,7 +430,7 @@ if (GlobalVariable.FlagFailed == 0) {
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Contact Person Name'), 
     5, FailureHandling.OPTIONAL)) {
     'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
 if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) && GlobalVariable.FindDataFile.getValue(

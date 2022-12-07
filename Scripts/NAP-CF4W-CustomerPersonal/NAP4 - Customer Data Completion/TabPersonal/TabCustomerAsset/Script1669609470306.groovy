@@ -60,20 +60,20 @@ def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.Col
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-    GlobalVariable.ColmNAP4, 10)
+	GlobalVariable.ColmNAP4, 10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
-	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 		'count table customer asset row di confins'
 		ArrayList<Boolean> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
 
 		for (i = 1; i <= variable.size(); i++) {
 			'modify object customer asset type'
-			modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/td_assettype'),
+			modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
 
 			'modify object customer asset desc'
-			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/td_assettype'),
+			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
 			
 			for (asset = 1; asset <= assettypearray.size(); asset++) {
@@ -82,7 +82,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)]) && WebUI.getText(modifyNewcustomeassetDesc).equalsIgnoreCase(assetdescriptionarray[(asset - 1)])) {
 					
 					'modify object button edit'
-					modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/buttonedit'),
+					modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/buttonedit'),
 						'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[6]/a/i', true)
 					
 					'click button edit'
@@ -95,7 +95,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				} else {
 					if (asset == assettypearray.size()) {
 						'modify object button delete'
-						modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/buttondelete'),
+						modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/buttondelete'),
 							'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[7]/a/i',
 							true)
 						
@@ -159,11 +159,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	for (asset = 1; asset <= assettypearray.size(); asset++) {
 		for (i = 1; i <= variable.size(); i++) {
 			'modify object customer asset type'
-			modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/td_assettype'),
+			modifyNewcustomeassetType = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[1]', true)
 			
 			'modify object customer asset desc'
-			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/td_assettype'),
+			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
 
 			'verify if asset type beda'
@@ -171,7 +171,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
 				if (i == variable.size()) {
 					'click button add'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/button_Add'))
+					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Add'))
 
 					'call function input asset data'
 					inputAssetData()
@@ -188,7 +188,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12) == 'Yes') {
 		for (asset = 1; asset <= assettypearray.size(); asset++) {
 			'click button add'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/button_Add'))
+			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Add'))
 
 			'call function input asset data'
 			inputAssetData()
@@ -197,24 +197,24 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 }
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/button_Save  Continue'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Save  Continue'))
 
 if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 4)) == 0) {
-    'Check alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.ColmNAP4, '6.CustomerAsset')
+	'Check alert'
+	GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.ColmNAP4, '6.CustomerAsset')
 }
 
 if (GlobalVariable.FlagFailed == 0) {
-    'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
-                GlobalVariable.ColmNAP4, 4)), findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/OtherAttribute/button_Debtor Group_'), 
-        GlobalVariable.ColmNAP4, '6.CustomerAsset')
+	'Check save Process write to excel'
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
+				GlobalVariable.ColmNAP4, 4)), findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Debtor Group_'),
+		GlobalVariable.ColmNAP4, '6.CustomerAsset')
 
-    if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 4)) == 0) {
-        'Check error validasi'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/errorvalidasi'), 
-            GlobalVariable.ColmNAP4, '6.CustomerAsset')
-    }
+	if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 4)) == 0) {
+		'Check error validasi'
+		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/errorvalidasi'),
+			GlobalVariable.ColmNAP4, '6.CustomerAsset')
+	}
 }
 
 'check if flagwarning > 0'
@@ -225,10 +225,10 @@ if (GlobalVariable.FlagWarning > 0) {
 }
 
 'check if th customer asset is present'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/th_Customer Asset Type'), 
-    5, FailureHandling.OPTIONAL)) {
-    'click button back'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/button_Back'))
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/th_Customer Asset Type'),
+	5, FailureHandling.OPTIONAL)) {
+	'click button back'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Back'))
 }
 
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
@@ -253,28 +253,28 @@ def inputAssetData() {
 	def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).split(';', -1)
 	
     'pilih asset type'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/select_MobilMotorRumah'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/select_MobilMotorRumah'), 
         assettypearray[(asset - 1)], false)
 
     'input asset description'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/input_Asset Description_'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/input_Asset Description'), 
         assetdescriptionarray[(asset - 1)])
 
     'input asset value'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/input_Asset Value_'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/input_Asset Value'), 
         assetvaluearray[(asset - 1)])
 
     'input asset quantity'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/input_Asset Quantity_'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/input_Asset Quantity'), 
         assetquantityarray[(asset - 1)])
 
     'click button save'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/CustomerAsset/button_Save'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Save'))
 
-    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset/button_Cancel'), 
+    if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Cancel'), 
         1, FailureHandling.OPTIONAL)) {
         'click button cancel'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset/button_Cancel'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Cancel'))
 
         faileddata.add(assettypearray[(asset - 1)])
 

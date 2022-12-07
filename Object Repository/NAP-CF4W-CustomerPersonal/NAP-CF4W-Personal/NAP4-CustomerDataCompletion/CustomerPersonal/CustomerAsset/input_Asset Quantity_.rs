@@ -3,7 +3,7 @@
    <description></description>
    <name>input_Asset Quantity_</name>
    <tag></tag>
-   <elementGuidId>cfef8d44-ba5b-4bf8-ab75-40dc04d2e955</elementGuidId>
+   <elementGuidId>78afb68a-dba0-4da5-b2b0-2d844b050a07</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

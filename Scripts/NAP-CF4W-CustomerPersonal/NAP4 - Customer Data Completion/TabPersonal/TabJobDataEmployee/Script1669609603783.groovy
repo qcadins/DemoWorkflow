@@ -194,7 +194,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74).length() >
 
 if(GlobalVariable.NAP4 == 'CUSTOMER'){
 'click eKYC'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
 }
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 76).length() > 0) {

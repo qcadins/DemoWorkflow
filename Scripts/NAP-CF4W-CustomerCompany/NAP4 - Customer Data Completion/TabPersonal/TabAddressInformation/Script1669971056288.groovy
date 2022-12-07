@@ -126,7 +126,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							Address, 12)))) {
 						if (i == variable.size()) {
 							'click button add'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
+							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Add'))
 
 							'verif ddl ownership dan address type'
 							verifyDDLAddress(Address)
@@ -156,7 +156,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				
 				'click button add'
-				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Add'))
+				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Add'))
 
 				'verif ddl ownership dan address type'
 				verifyDDLAddress(Address)
@@ -173,12 +173,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 }
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Save  Continue'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Save  Continue'))
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/th_Address'),
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/th_Address'),
 	10, FailureHandling.OPTIONAL)) {
 	'click button back'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerPersonal/AddressInformation/button_Back'))
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
 }
 
 def inputaddress() {
