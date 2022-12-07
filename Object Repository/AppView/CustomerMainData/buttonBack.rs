@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>KYC Report AML</name>
+   <name>buttonBack</name>
    <tag></tag>
-   <elementGuidId>98bd57e6-81cd-4b8d-92b8-7e4c45a44580</elementGuidId>
+   <elementGuidId>cbace598-6450-471f-9d65-d221ddf55ad2</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[5]/label[2]/span</value>
+         <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[5]/label[2]/span</value>
+      <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
    </webElementProperties>
 </WebElementEntity>

@@ -51,10 +51,10 @@ public class verifyAppView {
 
 	//keyword check app view customer main company
 	@Keyword
-	public checkCustomerMainDataCompany (Sql instance, String appno){
+	public checkCustomerMainDataCompany (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT CUST_NAME, ritl.INDUSTRY_TYPE_NAME, NUM_OF_EMP, CASE WHEN IS_AFFILIATE_WITH_MF = 0 THEN '-' END, CASE WHEN IS_VIP = 0 THEN 'NO' END, MR_CUST_MODEL_CODE, MR_COMPANY_TYPE_CODE, TAX_ID_NO, FORMAT(ESTABLISHMENT_DT, 'dd-MMM-yyyy') FROM APP_CUST_COMPANY acc WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON acc.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN REF_INDUSTRY_TYPE_LOS ritl WITH(NOLOCK) ON ritl.INDUSTRY_TYPE_CODE = acc.INDUSTRY_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1'"), {  row ->
+		instance.eachRow(("SELECT CUST_NAME, ritl.INDUSTRY_TYPE_NAME, NUM_OF_EMP, CASE WHEN IS_AFFILIATE_WITH_MF = 0 THEN '-' END, CASE WHEN IS_VIP = 0 THEN 'NO' END, MR_CUST_MODEL_CODE, MR_COMPANY_TYPE_CODE, TAX_ID_NO, FORMAT(ESTABLISHMENT_DT, 'dd-MMM-yyyy') FROM APP_CUST_COMPANY acc WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON acc.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN REF_INDUSTRY_TYPE_LOS ritl WITH(NOLOCK) ON ritl.INDUSTRY_TYPE_CODE = acc.INDUSTRY_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -70,10 +70,10 @@ public class verifyAppView {
 
 	//keyword check app view customer main personal
 	@Keyword
-	public checkCustomerMainDataPersonal (Sql instance, String appno){
+	public checkCustomerMainDataPersonal (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT CUST_NAME, [SALUTATION], ISNULL([Custprefix],'-') AS [Cust_prefix], ISNULL([Custsuffix],'-') AS [Cust_suffix], MR_GENDER_CODE, [ID_TYPE] + ' / ' + ID_NO, MOTHER_MAIDEN_NAME, ISNULL(FORMAT(ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXPIRED_DATE], MR_MARITAL_STAT_CODE, BIRTH_PLACE + ' / ' + FORMAT(BIRTH_DT, 'dd-MMM-yyyy'), [NATIONALITY], ISNULL(TAX_ID_NO,'-') AS [TAX_ID_NO], [Countryname], MOBILE_PHN_NO_1, [EDUCATION], EMAIL_1, [RELIGION], CASE WHEN CAST([IS_VIP] as nvarchar(25)) = '0' THEN 'NO' WHEN CAST([IS_VIP] as nvarchar(25)) = '1' THEN 'NO' ELSE CAST([IS_VIP] as nvarchar(25)) END  FROM (SELECT [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE, ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, mastername.Code, REF_MASTER_NAME FROM (select [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE , ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, [Code], value FROM (SELECT MR_EDUCATION_CODE AS 'EDUCATION', MR_NATIONALITY_CODE as 'NATIONALITY', MR_RELIGION_CODE as 'RELIGION', MR_SALUTATION_CODE as 'SALUTATION', acp.CUST_PREFIX_NAME as [Custprefix], ac.IS_VIP  as [IS_VIP], acp.CUST_SUFFIX_NAME as [Custsuffix], rc.COUNTRY_NAME as [Countryname], CUST_NAME, MR_GENDER_CODE, MR_ID_TYPE_CODE as 'ID_TYPE', ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1  FROM APP_CUST_PERSONAL acp WITH(NOLOCK) join app_cust ac WITH(NOLOCK) ON ac.app_cust_id = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN V_REF_COUNTRY rc WITH(NOLOCK) ON rc.COUNTRY_CODE = acp.NATIONALITY_COUNTRY_CODE WHERE ac.IS_CUSTOMER = '1' and app_no ='"+ appno +"') as Orig unpivot (value for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION])) as piv"), {  row ->
+		instance.eachRow(("SELECT CUST_NAME, [SALUTATION], ISNULL([Custprefix],'-') AS [Cust_prefix], ISNULL([Custsuffix],'-') AS [Cust_suffix], MR_GENDER_CODE, [ID_TYPE] + ' / ' + ID_NO, MOTHER_MAIDEN_NAME, ISNULL(FORMAT(ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXPIRED_DATE], MR_MARITAL_STAT_CODE, BIRTH_PLACE + ' / ' + FORMAT(BIRTH_DT, 'dd-MMM-yyyy'), [NATIONALITY], CASE WHEN TAX_ID_NO IS NULL OR TAX_ID_NO = ' ' THEN '-' ELSE TAX_ID_NO END AS [TAX_ID_NO], [Countryname], MOBILE_PHN_NO_1, [EDUCATION], EMAIL_1, [RELIGION], CASE WHEN CAST([IS_VIP] as nvarchar(25)) = '0' THEN 'NO' WHEN CAST([IS_VIP] as nvarchar(25)) = '1' THEN 'NO' ELSE CAST([IS_VIP] as nvarchar(25)) END  FROM (SELECT [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE, ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, mastername.Code, REF_MASTER_NAME FROM (select [Custprefix], [IS_VIP], [Custsuffix], [Countryname], CUST_NAME, MR_GENDER_CODE , ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1, [Code], value FROM (SELECT MR_EDUCATION_CODE AS 'EDUCATION', MR_NATIONALITY_CODE as 'NATIONALITY', MR_RELIGION_CODE as 'RELIGION', MR_SALUTATION_CODE as 'SALUTATION', acp.CUST_PREFIX_NAME as [Custprefix], ac.IS_VIP  as [IS_VIP], acp.CUST_SUFFIX_NAME as [Custsuffix], rc.COUNTRY_NAME as [Countryname], CUST_NAME, MR_GENDER_CODE, MR_ID_TYPE_CODE as 'ID_TYPE', ID_NO, MOTHER_MAIDEN_NAME, ID_EXPIRED_DT, MR_MARITAL_STAT_CODE, BIRTH_PLACE, BIRTH_DT, TAX_ID_NO, MOBILE_PHN_NO_1, EMAIL_1  FROM APP_CUST_PERSONAL acp WITH(NOLOCK) join app_cust ac WITH(NOLOCK) ON ac.app_cust_id = acp.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN V_REF_COUNTRY rc WITH(NOLOCK) ON rc.COUNTRY_CODE = acp.NATIONALITY_COUNTRY_CODE WHERE ac.CUST_NAME = '"+ name +"' and app_no ='"+ appno +"') as Orig unpivot (value for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([ID_TYPE],[EDUCATION],[NATIONALITY],[RELIGION],[SALUTATION])) as piv"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -88,10 +88,10 @@ public class verifyAppView {
 
 	//keyword check app view check addr
 	@Keyword
-	public checkAddrData (Sql instance, String appno){
+	public checkAddrData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT [CUST_ADDR_TYPE], [ADDR], ISNULL([BUILDING_OWNERSHIP],'-') AS [OWNERSHIP], CASE WHEN PHN_EXT_1 IS NOT NULL THEN [PHN1] + ' -' + PHN_EXT_1 ELSE [PHN1] + ' -' END, CASE WHEN PHN_EXT_2 IS NOT NULL THEN [PHN2] + ' -' + PHN_EXT_2 ELSE [PHN2] + ' -' END  FROM (SELECT APP_CUST_ADDR_ID, [ADDR], [PHN1], [PHN2], PHN_EXT_1, PHN_EXT_2, mastername.Code, REF_MASTER_NAME FROM (select PHN_EXT_1, PHN_EXT_2, APP_CUST_ADDR_ID, [ADDR], [PHN1], [PHN2], [Code], value FROM (SELECT PHN_EXT_2, APP_CUST_ADDR_ID, MR_CUST_ADDR_TYPE_CODE AS 'CUST_ADDR_TYPE', CASE WHEN aca.ADDR + ' RT/RW ' + aca.AREA_CODE_4 + '/' + aca.AREA_CODE_3 + ' ' + aca.AREA_CODE_2 + ' ' + aca.AREA_CODE_1 + ' ' + aca.CITY + ' ' + aca.ZIPCODE IS NULL OR aca.ADDR NOT LIKE '%[a-zA-Z0-9]%' THEN 'RT/RW /' ELSE aca.ADDR + ' RT/RW ' + aca.AREA_CODE_4 + '/' + aca.AREA_CODE_3 + ' ' + aca.AREA_CODE_2 + ' ' + aca.AREA_CODE_1 + ' ' + aca.CITY + ' ' + aca.ZIPCODE END AS [ADDR], MR_HOUSE_OWNERSHIP_CODE  AS 'BUILDING_OWNERSHIP',  aca.PHN_EXT_1 , CASE WHEN aca.PHN_AREA_1 + ' - ' + aca.PHN_1 IS NULL OR aca.PHN_AREA_1 NOT LIKE '%[a-zA-Z0-9]%' OR aca.PHN_1 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE aca.PHN_AREA_1 + ' - ' + aca.PHN_1 END AS [PHN1], CASE WHEN aca.PHN_AREA_2 + ' - ' + aca.PHN_2 IS NULL OR aca.PHN_AREA_2 NOT LIKE '%[a-zA-Z0-9]%' OR aca.PHN_2 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE aca.PHN_AREA_2 + ' - ' + aca.PHN_2 END AS [PHN2] FROM APP_CUST_ADDR aca WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON aca.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aca.MR_CUST_ADDR_TYPE_CODE WHERE a.APP_NO = '"+ appno +"'  AND IS_CUSTOMER = '1' ) as orig unpivot (value for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' ) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP])) as piv ORDER BY piv.APP_CUST_ADDR_ID"), {  row ->
+		instance.eachRow(("SELECT [CUST_ADDR_TYPE], [ADDR], ISNULL([BUILDING_OWNERSHIP],'-') AS [OWNERSHIP], CASE WHEN PHN_EXT_1 IS NOT NULL THEN [PHN1] + ' -' + PHN_EXT_1 ELSE [PHN1] + ' -' END, CASE WHEN PHN_EXT_2 IS NOT NULL THEN [PHN2] + ' -' + PHN_EXT_2 ELSE [PHN2] + ' -' END  FROM (SELECT APP_CUST_ADDR_ID, [ADDR], [PHN1], [PHN2], PHN_EXT_1, PHN_EXT_2, mastername.Code, REF_MASTER_NAME FROM (select PHN_EXT_1, PHN_EXT_2, APP_CUST_ADDR_ID, [ADDR], [PHN1], [PHN2], [Code], value FROM (SELECT PHN_EXT_2, APP_CUST_ADDR_ID, MR_CUST_ADDR_TYPE_CODE AS 'CUST_ADDR_TYPE', CASE WHEN aca.ADDR + ' RT/RW ' + aca.AREA_CODE_4 + '/' + aca.AREA_CODE_3 + ' ' + aca.AREA_CODE_2 + ' ' + aca.AREA_CODE_1 + ' ' + aca.CITY + ' ' + aca.ZIPCODE IS NULL OR aca.ADDR NOT LIKE '%[a-zA-Z0-9]%' THEN 'RT/RW /' ELSE aca.ADDR + ' RT/RW ' + aca.AREA_CODE_4 + '/' + aca.AREA_CODE_3 + ' ' + aca.AREA_CODE_2 + ' ' + aca.AREA_CODE_1 + ' ' + aca.CITY + ' ' + aca.ZIPCODE END AS [ADDR], MR_HOUSE_OWNERSHIP_CODE  AS 'BUILDING_OWNERSHIP',  aca.PHN_EXT_1 , CASE WHEN aca.PHN_AREA_1 + ' - ' + aca.PHN_1 IS NULL OR aca.PHN_AREA_1 NOT LIKE '%[a-zA-Z0-9]%' OR aca.PHN_1 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE aca.PHN_AREA_1 + ' - ' + aca.PHN_1 END AS [PHN1], CASE WHEN aca.PHN_AREA_2 + ' - ' + aca.PHN_2 IS NULL OR aca.PHN_AREA_2 NOT LIKE '%[a-zA-Z0-9]%' OR aca.PHN_2 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE aca.PHN_AREA_2 + ' - ' + aca.PHN_2 END AS [PHN2] FROM APP_CUST_ADDR aca WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON aca.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aca.MR_CUST_ADDR_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"') as orig unpivot (value for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP]) )as unpiv) as mastername JOIN REF_MASTER_LOS rf WITH(NOLOCK) ON rf.REF_MASTER_Code = mastername.value WHERE rf.IS_ACTIVE = '1' ) AS ref PIVOT (MAX(ref.REF_MASTER_NAME) for [Code] in ([CUST_ADDR_TYPE],[BUILDING_OWNERSHIP])) as piv ORDER BY piv.APP_CUST_ADDR_ID"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -162,10 +162,10 @@ public class verifyAppView {
 
 	//keyword check app emergency contact data
 	@Keyword
-	public checkEmergencyContactData (Sql instance, String appno){
+	public checkEmergencyContactData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT ace.CONTACT_PERSON_NAME, ace.MR_GENDER_CODE, rml.REF_MASTER_NAME, CASE WHEN ace.BIRTH_PLACE NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.BIRTH_PLACE END , ace.ID_NO,  CASE WHEN FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') NOT LIKE '%[a-zA-Z0-9]%' OR FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') END, ISNULL(FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXP_DATE], ace.MR_CUST_RELATIONSHIP_CODE, ISNULL(ace.MOBILE_PHN_NO_1,'-') AS [MOBILE_PHONE1], ISNULL(ace.MOBILE_PHN_NO_2,'-') AS [MOBILE_PHONE2], ace.EMAIL, ISNULL(ace.PHN_1,'-') AS [PHONE1], ISNULL(ace.PHN_2,'-') AS [PHONE2], ISNULL(ace.PHN_3,'-') AS [PHONE3] FROM APP_CUST_PERSONAL acp JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_EMRGNC_CNTCT ace WITH(NOLOCK) ON ace.APP_CUST_ID = acp.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = ace.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = 1 AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
+		instance.eachRow(("SELECT ace.CONTACT_PERSON_NAME, ace.MR_GENDER_CODE, rml.REF_MASTER_NAME, CASE WHEN ace.BIRTH_PLACE NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.BIRTH_PLACE END , ace.ID_NO,  CASE WHEN FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') NOT LIKE '%[a-zA-Z0-9]%' OR FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') IS NULL THEN '-' ELSE FORMAT(ace.BIRTH_DT, 'dd-MMM-yyyy') END, ISNULL(FORMAT(ace.ID_EXPIRED_DT, 'dd-MMM-yyyy'),'-') AS [ID_EXP_DATE], ace.MR_CUST_RELATIONSHIP_CODE, CASE WHEN ace.MOBILE_PHN_NO_1 IS NULL OR ace.MOBILE_PHN_NO_1 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.MOBILE_PHN_NO_1 END AS [MOBILE_PHONE1], CASE WHEN ace.MOBILE_PHN_NO_2 IS NULL OR ace.MOBILE_PHN_NO_2 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.MOBILE_PHN_NO_2 END AS [MOBILE_PHONE2], ace.EMAIL, CASE WHEN ace.PHN_1 IS NULL OR ace.PHN_1 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.PHN_1 END AS [PHONE1], CASE WHEN ace.PHN_2 IS NULL OR ace.PHN_2 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.PHN_2 END AS [PHONE2], CASE WHEN ace.PHN_3 IS NULL OR ace.PHN_3 NOT LIKE '%[a-zA-Z0-9]%' THEN '-' ELSE ace.PHN_3 END AS [PHONE3] FROM APP_CUST_PERSONAL acp JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_EMRGNC_CNTCT ace WITH(NOLOCK) ON ace.APP_CUST_ID = acp.APP_CUST_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = ace.MR_ID_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"' AND rml.REF_MASTER_TYPE_CODE = 'ID_TYPE'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -199,10 +199,10 @@ public class verifyAppView {
 
 	//keyword check app view financial data personal
 	@Keyword
-	public checkFinancialDataPersonal (Sql instance, String appno){
+	public checkFinancialDataPersonal (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT FORMAT(DATE_AS_OF, 'dd-MMM-yyyy') FROM APP_CUST_PERSONAL_FIN_DATA acpfd WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_PERSONAL_ID = acpfd.APP_CUST_PERSONAL_ID JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1'"), {  row ->
+		instance.eachRow(("SELECT FORMAT(DATE_AS_OF, 'dd-MMM-yyyy') FROM APP_CUST_PERSONAL_FIN_DATA acpfd WITH(NOLOCK) JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_PERSONAL_ID = acpfd.APP_CUST_PERSONAL_ID JOIN APP_CUST ac WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -218,10 +218,10 @@ public class verifyAppView {
 
 	//keyword check app view financial attr data
 	@Keyword
-	public checkFinancialAttrData (Sql instance, String appno){
+	public checkFinancialAttrData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT ATTR_VALUE  FROM APP_CUST_FIN_DATA_ATTR_CONTENT acfdac WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acfdac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1'"), {  row ->
+		instance.eachRow(("SELECT ATTR_VALUE  FROM APP_CUST_FIN_DATA_ATTR_CONTENT acfdac WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acfdac.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -238,10 +238,10 @@ public class verifyAppView {
 
 	//keyword check app view bank acc
 	@Keyword
-	public checkBankAcc (Sql instance, String appno){
+	public checkBankAcc (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT rbl.BANK_NAME + ' - ' + acba.BANK_ACC_NO + ' - ' + acba.BANK_ACC_NAME, acba.BANK_BRANCH , FORMAT(acba.BEG_BALANCE_AMT, 'N0')  FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_BANK_LOS rbl WITH(NOLOCK) ON rbl.BANK_CODE = acba.BANK_CODE WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1'"), {  row ->
+		instance.eachRow(("SELECT rbl.BANK_NAME + ' - ' + acba.BANK_ACC_NO + ' - ' + acba.BANK_ACC_NAME, acba.BANK_BRANCH , FORMAT(acba.BEG_BALANCE_AMT, 'N0')  FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_BANK_LOS rbl WITH(NOLOCK) ON rbl.BANK_CODE = acba.BANK_CODE WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -269,10 +269,10 @@ public class verifyAppView {
 
 	//keyword check app view bank satement
 	@Keyword
-	public checkBankStatData (Sql instance, String appno, String accno){
+	public checkBankStatData (Sql instance, String appno, String accno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT acbs.MONTH  ,acbs.YEAR , acbs.DEBIT_TRX_COUNT , FORMAT(acbs.DEBIT_AMT, 'N0') , acbs.CREDIT_TRX_COUNT , FORMAT(acbs.CREDIT_AMT, 'N0'), acbs.BALANCE_AMT FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST_COMPANY acp WITH(NOLOCK) ON acba.APP_CUST_ID = acp.APP_CUST_ID JOIN APP_CUST ac ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT acbs WITH(NOLOCK) ON acba.APP_CUST_BANK_ACC_ID = acbs.APP_CUST_BANK_ACC_ID WHERE a.APP_NO = '"+ appno +"' AND acba.BANK_ACC_NO = '"+ accno +"' AND IS_CUSTOMER = '1' "), {  row ->
+		instance.eachRow(("SELECT acbs.MONTH  ,acbs.YEAR , acbs.DEBIT_TRX_COUNT , FORMAT(acbs.DEBIT_AMT, 'N0') , acbs.CREDIT_TRX_COUNT , FORMAT(acbs.CREDIT_AMT, 'N0'), acbs.BALANCE_AMT FROM APP_CUST_BANK_ACC acba WITH(NOLOCK) JOIN APP_CUST ac ON ac.APP_CUST_ID = acba.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_CUST_BANK_STMNT acbs WITH(NOLOCK) ON acba.APP_CUST_BANK_ACC_ID = acbs.APP_CUST_BANK_ACC_ID WHERE a.APP_NO = '"+ appno +"' AND acba.BANK_ACC_NO = '"+ accno +"' AND CUST_NAME = '"+ name +"' "), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -307,10 +307,10 @@ public class verifyAppView {
 
 	//keyword check app view cust group data
 	@Keyword
-	public checkCustGroupData (Sql instance, String appno){
+	public checkCustGroupData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT CUST_NAME FROM APP_CUST ac WITH(NOLOCK), (SELECT acg.CUST_NO FROM APP_CUST_GRP acg WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acg.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1') as SUBQ  WHERE ac.CUST_NO = SUBQ.CUST_NO GROUP BY CUST_NAME"), {  row ->
+		instance.eachRow(("SELECT CUST_NAME FROM APP_CUST ac WITH(NOLOCK), (SELECT acg.CUST_NO FROM APP_CUST_GRP acg WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acg.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"') as SUBQ  WHERE ac.CUST_NO = SUBQ.CUST_NO GROUP BY CUST_NAME"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -326,10 +326,10 @@ public class verifyAppView {
 
 	//keyword check app view other information data
 	@Keyword
-	public checkOtherInfoData (Sql instance, String appno){
+	public checkOtherInfoData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT oth.LBPPMS_DEBT_GRP_LBPP_DESCR , oth.LBPPMS_BIZ_SCL_LBPP_DESCR , oth.LBPPMS_CNTRPRT_LBPP_DESCR , oth.LBPPMS_BIZ_SUSTAIN_LBPP_DESCR  FROM APP_CUST_OTHER_INFO oth WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = oth.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1'"), {  row ->
+		instance.eachRow(("SELECT oth.LBPPMS_DEBT_GRP_LBPP_DESCR , oth.LBPPMS_BIZ_SCL_LBPP_DESCR , oth.LBPPMS_CNTRPRT_LBPP_DESCR , oth.LBPPMS_BIZ_SUSTAIN_LBPP_DESCR  FROM APP_CUST_OTHER_INFO oth WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = oth.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -345,10 +345,10 @@ public class verifyAppView {
 
 	//keyword check app view other attr data
 	@Keyword
-	public checkOtherAttrData (Sql instance, String appno){
+	public checkOtherAttrData (Sql instance, String appno, String name){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT ISNULL(ref_master_name,acac.attr_value) AS [OTHER_ATTR] FROM APP_CUST_ATTR_CONTENT acac WITH (NOLOCK) JOIN APP_CUST ac WITH (NOLOCK) ON ac.APP_CUST_ID = acac.APP_CUST_ID JOIN APP a WITH (NOLOCK) ON a.APP_ID = ac.APP_ID join ref_attr_los ral WITH (NOLOCK) on ral.ATTR_CODE = acac.ref_attr_code left join ref_master_los rf with(nolock) on rf.ref_master_code = acac.attr_value and ref_master_type_code = ral.attr_value WHERE a.APP_NO = '"+ appno +"' AND IS_CUSTOMER = '1' group by acac.REF_ATTR_CODE, REF_MASTER_NAME,acac.attr_value,APP_CUST_ATTR_CONTENT_ID order by APP_CUST_ATTR_CONTENT_ID"), {  row ->
+		instance.eachRow(("SELECT ISNULL(ref_master_name,acac.attr_value) AS [OTHER_ATTR] FROM APP_CUST_ATTR_CONTENT acac WITH (NOLOCK) JOIN APP_CUST ac WITH (NOLOCK) ON ac.APP_CUST_ID = acac.APP_CUST_ID JOIN APP a WITH (NOLOCK) ON a.APP_ID = ac.APP_ID join ref_attr_los ral WITH (NOLOCK) on ral.ATTR_CODE = acac.ref_attr_code left join ref_master_los rf with(nolock) on rf.ref_master_code = acac.attr_value and ref_master_type_code = ral.attr_value WHERE a.APP_NO = '"+ appno +"' AND CUST_NAME = '"+ name +"' group by acac.REF_ATTR_CODE, REF_MASTER_NAME,acac.attr_value,APP_CUST_ATTR_CONTENT_ID order by APP_CUST_ATTR_CONTENT_ID"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -560,55 +560,55 @@ public class verifyAppView {
 			}
 		})
 		instance.eachRow(("select doc_name, CASE WHEN is_received = 1 THEN 'YES' WHEN IS_RECEIVED = 0 THEN 'NO' END AS IS_RECEIVED, CASE WHEN doc_no = '' THEN '-' ELSE doc_no end as doc_no, ISNULL(FORMAT(EXPIRED_DT,'yyyy-MM-dd'),'-') AS EXPIRED_DT, CASE WHEN doc_notes = '' THEN '-' ELSE DOC_NOTES END AS DOC_NOTES from app_collateral_doc acd with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
-			
-				ResultSetMetaData rsmd = row.getMetaData()
-				colmcount = rsmd.getColumnCount()
-				for(i = 0 ; i < colmcount ; i++){
-					appdata = (row[i])
-					collateraldoc.add(appdata)
-				}
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				collateraldoc.add(appdata)
+			}
 		})
 		instance.eachRow(("select COLLATERAL_ACCESSORY_NAME, ACCESSORY_PRICE_AMT, DOWN_PAYMENT_PRCNT, DOWN_PAYMENT_AMT, ACCESSORY_NOTES from APP_COLLATERAL_ACCESSORY aca with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
-			
-				ResultSetMetaData rsmd = row.getMetaData()
-				colmcount = rsmd.getColumnCount()
-			
-			
-				for(i = 0 ; i < colmcount ; i++){
-					appdata = (row[i])
-					collateralacc.add(appdata)
-				}
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				collateralacc.add(appdata)
+			}
 		})
 		instance.eachRow(("select collateral_attr_name, CASE WHEN attr_value = '' THEN '-' ELSE attr_value end as attr_value from app_collateral_attr acat with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
-			
-				ResultSetMetaData rsmd = row.getMetaData()
-				colmcount = rsmd.getColumnCount()
-			
-			
-				for(i = 0 ; i < colmcount ; i++){
-					appdata = (row[i])
-					collateralattr.add(appdata)
-				}
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				collateralattr.add(appdata)
+			}
 		})
 		instance.eachRow(("select user_name, MR_USER_RELATIONSHIP_CODE AS [USER_RELATIONSHIP_NAME], owner_name, OWNER_ADDR, MR_OWNER_RELATIONSHIP_CODE AS [ONWER_RELATIONSHIP_NAME], OWNER_AREA_CODE_4 +' / '+owner_area_code_3 AS [RT / RW], mr_id_type_code AS [ID_TYPE], owner_area_code_2, OWNER_ID_NO, owner_area_code_1,CASE WHEN OWNER_MOBILE_PHN_NO = '' THEN '-' ELSE OWNER_MOBILE_PHN_NO END AS OWNER_MOBILE_PHN_NO, owner_city,CASE WHEN OWNER_PROFESSION_CODE = '' THEN '-' ELSE OWNER_PROFESSION_CODE END AS OWNER_PROFESSION_CODE,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4+' / '+LOCATION_AREA_CODE_3 as [RT / RW], LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1, location_city, location_zipcode FROM( SELECT user_name, owner_name, OWNER_ID_NO, OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR, OWNER_AREA_CODE_4, owner_area_code_3, owner_area_code_2, owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4,LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode,mastername.Code,rml.REF_MASTER_NAME as [REFMASTER] FROM ( select user_name, owner_name, OWNER_ID_NO, OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR,OWNER_AREA_CODE_4,owner_area_code_3,owner_area_code_2,owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4,LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode,[Code],value FROM(select user_name, MR_USER_RELATIONSHIP_CODE, owner_name, MR_OWNER_RELATIONSHIP_CODE, mr_id_type_code,OWNER_ID_NO,OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR, OWNER_AREA_CODE_4,owner_area_code_3, owner_area_code_2,owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4, LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode from APP_COLLATERAL_REGISTRATION acr with(nolock) where app_collateral_id = '"+appcollateralid+"') as Orig unpivot (value for [Code] in (MR_USER_RELATIONSHIP_CODE,MR_OWNER_RELATIONSHIP_CODE,mr_id_type_code))as unpiv )as mastername left JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = mastername.value )AS ref PIVOT(MAX([REFMASTER]) for [Code] in (MR_USER_RELATIONSHIP_CODE, MR_OWNER_RELATIONSHIP_CODE, mr_id_type_code)) as piv "), {  row ->
-			
-				ResultSetMetaData rsmd = row.getMetaData()
-				colmcount = rsmd.getColumnCount()
-			
-			
-				for(i = 0 ; i < colmcount ; i++){
-					appdata = (row[i])
-					collateraluserownerloc.add(appdata)
-				}
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				appdata = (row[i])
+				collateraluserownerloc.add(appdata)
+			}
 		})
-		
-		
+
+
 		collateralDetail.put("ColInfo", collateralinfo)
 		collateralDetail.put("ColDoc", collateraldoc)
 		collateralDetail.put("ColAcc", collateralacc)
 		collateralDetail.put("ColAttr", collateralattr)
 		collateralDetail.put("ColUserOwnerLoc",collateraluserownerloc)
-	
+
 		return collateralDetail
 	}
 

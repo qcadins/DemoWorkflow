@@ -22,66 +22,44 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryCompany)
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+GlobalVariable.FlagWarning = 0
 
-'get text appno'
+'connect DB los'
+Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
+'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
-'get custname'
-custname = WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName'))
+'get cust main data arraylist from db'
+ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnection, appno, GlobalVariable.MSName)
 
-'Verif Customer Main Data'
-ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataCompany'(sqlconnectionLOS, 
-    appno, custname)
-
+'declare index'
 int index = 0
 
-'verify cust name'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
+'looping customer data'
+for (custIndex = 1; custIndex <= resultCustomerMainData.size(); custIndex++) {
+    if (custIndex == resultCustomerMainData.size()) {
+        custIndex++
+    }
+    
+    'modify object Cust Main'
+    modifyNewCustMain = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+        ('//*[@id="CustPersonalMainDataId"]/div/div[' + custIndex) + ']/span/div/div[2]', true)
 
-'verify industry type'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/IndustryType')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
+    'Verif Customer Main Data'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCustMain).toString().toUpperCase(), (resultCustomerMainData[
+            index++]).toUpperCase(), false))
+}
 
-'verify num of employee'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NumofEmployee')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify affiliation MF'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/AffiliationMF')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify is VIP'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/isVIP')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify Cust model'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerModel')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify company type'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CompanyType')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify NPWP'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/NPWP')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'verify Establishment date'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/EstablishmentDate')).toString().toUpperCase(), 
-        (resultCustomerMainData[index++]).toString().toUpperCase(), false))
-
-'get arraylist from db'
-ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnectionLOS, appno, custname)
+'get address arraylist from db'
+ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnection, appno, GlobalVariable.MSName)
 
 'count address table'
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
 
 index = 0
 
-'looping address appview'
+'looping cust address'
 for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
     'modify object address type'
     modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -115,106 +93,37 @@ for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBuildingOwnership).toUpperCase(), (resultAddress[index++]).toUpperCase(), 
             false))
 
-    'verify phone 1'
+    'verify Address phone 1'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPhone1).toUpperCase(), (resultAddress[index++]).toUpperCase(), 
             false))
 
-    'verify phone 2'
+    'verify Address phone 2'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPhone2).toUpperCase(), (resultAddress[index++]).toUpperCase(), 
             false))
 }
 
-'get arraylist MS from db'
-ArrayList<String> resultMS = CustomKeywords.'appView.verifyAppView.checkMSData'(sqlconnectionLOS, appno)
+'get arraylist emergency contact from db'
+ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnection, appno, GlobalVariable.MSName)
 
-'count MS table'
-variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustShareholder > table > tbody tr'))
+'looping emergency contact'
+for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
+    'modify object emergency contact '
+    modifyNewEmergencycontact = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
+        'equals', ('//*[@id="AppCustEmrgncCntctId"]/div/div[' + ecIndex) + ']/span/div/div[2]', true)
 
-index = 0
-
-'looping MS Appview'
-for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
-    'modify object MS Name'
-    modifyNewMSName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[2]', true)
-
-    'modify object address'
-    modifyNewMSType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[3]', true)
-
-    'modify object share'
-    modifyNewShare = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[4]', true)
-
-    'modify object isactive'
-    modifyNewisActive = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[5]', true)
-
-    'modify object is owner'
-    modifyNewisOwner = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[6]', true)
-
-    'modify object is signer'
-    modifyNewisSigner = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[7]', true)
-
-    'modify object button detail'
-    modifyNewbuttonDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustShareholder"]/table/tbody/tr[' + MSindex) + ']/td[8]/span/a/i', true)
-
-    'verify ms name'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMSName).toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    'verify ms type'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMSType).toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    'verify share'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewShare).replace(' %', '').toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    'verify is active'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisActive).toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    'verify is owner'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisOwner).toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    'verify is signer'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner).toUpperCase(), (resultMS[index++]).toUpperCase(), 
-            false))
-
-    GlobalVariable.MSName = WebUI.getText(modifyNewMSName)
-	
-	if(WebUI.getText(modifyNewMSType).equalsIgnoreCase('Personal')){
-	'call test case verify view MSPersonal detail'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-MSPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-	}
-}
-
-'get arraylist contact person from db'
-ArrayList<String> resultCP = CustomKeywords.'appView.verifyAppView.checkContactPersonData'(sqlconnectionLOS, appno)
-
-'looping contact person appview'
-for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
-    'modify object contact person'
-    modifyNewcontactpersonobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
-        'equals', ('//*[@id="AppCustComapnyContactPersonId"]/div/div[' + cpIndex) + ']/span/div/div[2]', true)
-
-    'verify contact person'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewcontactpersonobject).toUpperCase(), (resultCP[(cpIndex - 
+    'verify Emergency Contact person'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewEmergencycontact).toUpperCase(), (resultEC[(ecIndex - 
             1)]).toUpperCase(), false))
 }
 
 'get arraylist financial data from db'
-ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialData'(sqlconnectionLOS, appno, custname)
+ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialDataPersonal'(sqlconnection, 
+    appno, GlobalVariable.MSName)
 
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-'looping financial appview'
+'looping financial data'
 for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
     'modify object financial data date'
     modifyNewfinancialDataDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -226,26 +135,26 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 }
 
 'get arraylist fin data attr from db'
-ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnectionLOS, appno, 
-    custname)
+ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnection, 
+    appno, GlobalVariable.MSName)
 
-'looping financial atr appview'
+'looping fin data attr'
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
     'modify object financial data attr'
     modifyNewfinancialDataAttr = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
         'equals', ('//*[@id="FinAttrInfoId"]/div[' + finIndex) + ']/label[2]', true)
 
     'verify financial data attr'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace('.00', '').toUpperCase(), 
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace('.00', '').replace(',','').toUpperCase(), 
             (resultFindataattr[(finIndex - 1)]).toUpperCase(), false))
 }
 
 'get arraylist bank acc from db'
-ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnectionLOS, appno, custname)
+ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnection, appno, GlobalVariable.MSName)
 
 index = 0
 
-'looping bankacc appview'
+'looping bank acc'
 for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
     'modify object bank name - bank acc no - acc name'
     modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -267,7 +176,7 @@ for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBankBranch).toUpperCase(), (resultBankAcc[index++]).toUpperCase(), 
             false))
 
-    'verify Bank Acc beginnning balance'
+    'verify Bank Acc beginning balance'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBeginningBalance).replace('.00', '').toUpperCase(), 
             (resultBankAcc[index++]).toUpperCase(), false))
 }
@@ -275,7 +184,7 @@ for (int bankIndex = 0; bankIndex < (resultBankAcc.size() / 3); bankIndex++) {
 'count bank statement table'
 variableDataBank = DriverFactory.getWebDriver().findElements(By.cssSelector('#BankAccount > div lib-ucsubsection'))
 
-'looping bank statement app view'
+'looping bank statement'
 for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
     variableDataBankStatement = DriverFactory.getWebDriver().findElements(By.cssSelector(('#BankAccInfo' + bankIndex) + 
             '> div:nth-child(2) > table > tbody tr'))
@@ -285,14 +194,16 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
         modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
             'equals', ('//*[@id="BankAccount"]/div/div[' + (bankIndex + 1)) + ']/lib-ucsubsection/div/form/div/h4', true)
 
+		'get bankdetail from confins'
         bankDetail = WebUI.getText(modifyNewBankDetail).split(' - ')
 
         'verify Bank Acc Statement'
-        ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnectionLOS, 
-            appno, bankDetail[1], custname)
+        ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnection, 
+            appno, bankDetail[1], GlobalVariable.MSName)
 
         index = 0
 
+		'looping bank acc statement'
         for (bankstatIndex = 1; bankstatIndex <= (resultBankAccStatement.size() / 7); bankstatIndex++) {
             'modify object Month'
             modifyNewMonth = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -353,62 +264,12 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
             checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCredit).replace('.00', '').toUpperCase(), (resultBankAccStatement[
                     index++]).toUpperCase(), false))
 
-            'verify Bank Acc'
+            'verify Bank Acc statement balance amount'
             checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBalanceAmount).replace(',', '').toUpperCase(), 
                     (resultBankAccStatement[index++]).toUpperCase(), false))
         }
+        
     }
-}
-
-'get arraylist legal doc from db'
-ArrayList<String> resultLegalDoc = CustomKeywords.'appView.verifyAppView.checkLegalDocData'(sqlconnectionLOS, appno)
-
-'count legal doc table'
-variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustLegalDoc > table > tbody tr'))
-
-index = 0
-
-'looping legal index appview'
-for (Legalindex = 1; Legalindex <= variableData.size(); Legalindex++) {
-    'modify object Legal Doc Type'
-    modifyNewLegalDocType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[1]', true)
-
-    'modify object doc No'
-    modifyNewLegalDocNo = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[2]', true)
-
-    'modify object Issue Date'
-    modifyNewIssueDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[3]', true)
-
-    'modify object expired date'
-    modifyNewExpiredDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[4]', true)
-
-    'modify object notary name'
-    modifyNewNotaryName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="CustLegalDoc"]/table/tbody/tr[' + Legalindex) + ']/td[5]', true)
-
-    'verify legal doc type'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocType).toUpperCase(), (resultLegalDoc[index++]).toUpperCase(), 
-            false))
-
-    'verify legal doc no'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewLegalDocNo).toUpperCase(), (resultLegalDoc[index++]).toUpperCase(), 
-            false))
-
-    'verify legal doc issue date'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewIssueDate).toUpperCase(), (resultLegalDoc[index++]).toUpperCase(), 
-            false))
-
-    'verify legal doc expired date'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewExpiredDate).toUpperCase(), (resultLegalDoc[index++]).toUpperCase(), 
-            false))
-
-    'verify legal doc notary name'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotaryName).toUpperCase(), (resultLegalDoc[index++]).toUpperCase(), 
-            false))
 }
 
 'verify jika ada customer group'
@@ -417,9 +278,10 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     'count customer group table'
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
-    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnectionLOS, appno, 
-        custname)
+	'get cust group from db'
+    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnection, appno, GlobalVariable.MSName)
 
+	'looping cust group'
     for (custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
         'modify object cust group name'
         modifyNewcustGroupName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -432,9 +294,9 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 }
 
 'get arraylist other info from db'
-ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno, custname)
+ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnection, appno, GlobalVariable.MSName)
 
-'looping other attribute appview'
+'looping other info'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
     'modify object other info'
     modifyNewothinfoobject = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -446,50 +308,81 @@ for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
 }
 
 'get arraylist other attr list from db'
-ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnectionLOS, appno, 
-    custname)
+ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnection, appno, GlobalVariable.MSName)
 
 'verify Business period AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), 
-        (resultOtherAttrList[12]).toUpperCase(), false))
-
-'verify Business Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Source AML')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Period AML')).toUpperCase(), 
         (resultOtherAttrList[11]).toUpperCase(), false))
 
-'verify CSP USL Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CSP USL Source')).toUpperCase(), 
-        (resultOtherAttrList[9]).toUpperCase(), false))
-
-'verify Payment Type'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Payment Type')).toUpperCase(), 
+'verify Business source AML'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Source AML')).toUpperCase(), 
         (resultOtherAttrList[10]).toUpperCase(), false))
 
+'verify CSP USL Source AML'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/CSP USL Source')).toUpperCase(), 
+        (resultOtherAttrList[6]).toUpperCase(), false))
+
+'verify Department AML'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Department AML')).toUpperCase(), 
+        (resultOtherAttrList[5]).toUpperCase(), false))
+
+'verify Department AML'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Department AML2')).toUpperCase(), 
+        (resultOtherAttrList[5]).toUpperCase(), false))
+
+'verify Payment Type'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Payment Type')).toUpperCase(), 
+        (resultOtherAttrList[7]).toUpperCase(), false))
+
 'verify KYC Report'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/KYC Report AMl')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/KYC Report AML')).toUpperCase(), 
         (resultOtherAttrList[8]).toUpperCase(), false))
 
-'verify Exceed BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Exceed BMPK')).toUpperCase(), 
-        (resultOtherAttrList[2]).toUpperCase(), false))
+'verify Attend'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Attend')).toUpperCase(), 
+        (resultOtherAttrList[9]).toUpperCase(), false))
 
-'verify Violate BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), 
+'verify Building'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Building')).toUpperCase(),
+		(resultOtherAttrList[10]).toUpperCase(), false))
+
+'verify Aff with MF'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Aff With MF SLIK')).toUpperCase(), 
+        (resultOtherAttrList[4]).toUpperCase(), false))
+
+'verify Debtor Group SLIK'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Debtor Group SLIK')).toUpperCase(), 
+        (resultOtherAttrList[1]).toUpperCase(), false))
+
+'verify Exceed BMPK'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Exceed BMPK')).toUpperCase(), 
         (resultOtherAttrList[3]).toUpperCase(), false))
 
+'verify Is Split Treasure'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Is Split Treasure')).toUpperCase(), 
+        (resultOtherAttrList[0]).toUpperCase(), false))
+
+'verify Violate BMPK'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Violate BMPK')).toUpperCase(), 
+        (resultOtherAttrList[2]).toUpperCase(), false))
+
+
+'clik button back'
+WebUI.click(findTestObject('Object Repository/AppView/CustomerMainData/buttonBack'))
+
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-    'write to excel success'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
-        1, GlobalVariable.StatusSuccess)
+	'write to excel status success'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
+		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-        'write to excel failed'
+		'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-        'write to excel reason failed verify equal or match'
+		'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

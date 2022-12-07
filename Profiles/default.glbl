@@ -619,4 +619,9 @@
       <initValue>0.00</initValue>
       <name>TotalVat</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>MSName</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -30,9 +30,11 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
+'get custname'
+custname = WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName'))
+
 'get cust main data arraylist from db'
-ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnection, 
-    appno)
+ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnection, appno, custname)
 
 'declare index'
 int index = 0
@@ -53,7 +55,7 @@ for (custIndex = 1; custIndex <= resultCustomerMainData.size(); custIndex++) {
 }
 
 'get address arraylist from db'
-ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnection, appno)
+ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnection, appno, custname)
 
 'count address table'
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
@@ -147,7 +149,7 @@ for (Famindex = 1; Famindex <= variableData.size(); Famindex++) {
 }
 
 'get arraylist emergency contact from db'
-ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnection, appno)
+ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnection, appno, custname)
 
 'looping emergency contact'
 for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
@@ -162,7 +164,7 @@ for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
 
 'get arraylist financial data from db'
 ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialDataPersonal'(sqlconnection, 
-    appno)
+    appno, custname)
 
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -180,7 +182,7 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 
 'get arraylist fin data attr from db'
 ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnection, 
-    appno)
+    appno, custname)
 
 'looping fin data attr'
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
@@ -194,7 +196,7 @@ for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
 }
 
 'get arraylist bank acc from db'
-ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnection, appno)
+ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnection, appno, custname)
 
 index = 0
 
@@ -243,7 +245,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
 
         'verify Bank Acc Statement'
         ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnection, 
-            appno, bankDetail[1])
+            appno, bankDetail[1], custname)
 
         index = 0
 
@@ -323,7 +325,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
 	'get cust group from db'
-    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnection, appno)
+    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnection, appno, custname)
 
 	'looping cust group'
     for (custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
@@ -338,7 +340,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 }
 
 'get arraylist other info from db'
-ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnection, appno)
+ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnection, appno, custname)
 
 'looping other info'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
@@ -352,7 +354,7 @@ for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
 }
 
 'get arraylist other attr list from db'
-ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnection, appno)
+ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnection, appno, custname)
 
 'verify Business period AML'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Period AML')).toUpperCase(), 
