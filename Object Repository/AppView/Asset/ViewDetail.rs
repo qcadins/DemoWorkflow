@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ViewDetail</name>
+   <tag></tag>
+   <elementGuidId>c0122323-89b5-4f5a-8dc6-f2fcdf7bcf7c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AdditionalCollateralSection&quot;]/div/table/tbody/tr/td[10]/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AdditionalCollateralSection&quot;]/div/table/tbody/tr/td[10]/a/i</value>
+   </webElementProperties>
+</WebElementEntity>

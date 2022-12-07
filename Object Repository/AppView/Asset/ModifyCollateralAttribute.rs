@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ModifyCollateralAttribute</name>
+   <tag></tag>
+   <elementGuidId>3af83341-2549-4dfe-a183-21442bc0b2d2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;collAttr&quot;]/div/div/div[1]/div/label[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;collAttr&quot;]/div/div/div[1]/div/label[1]</value>
+   </webElementProperties>
+</WebElementEntity>

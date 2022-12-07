@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Back</name>
+   <tag></tag>
+   <elementGuidId>c32d7aeb-7510-4447-9bce-2cb10bfc8a99</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;mat-tab-content-0-4&quot;]/div/view-asset-data/div/app-view-collateral-data/div/div/div[1]/div/span/button</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;mat-tab-content-0-4&quot;]/div/view-asset-data/div/app-view-collateral-data/div/div/div[1]/div/span/button</value>
+   </webElementProperties>
+</WebElementEntity>

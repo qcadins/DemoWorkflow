@@ -533,6 +533,85 @@ public class verifyAppView {
 		return listappdata
 	}
 
+	//Keyword check app view asset collateral detail
+	@Keyword
+	public checkAssetCollateralDetail(Sql instance, String appno){
+		HashMap<String, ArrayList<String>> collateralDetail = new HashMap<String, ArrayList<String>>()
+		String appdata, appcollateralid
+		ArrayList <String> collateralinfo = new ArrayList<String>()
+		ArrayList <String> collateraldoc = new ArrayList<String>()
+		ArrayList <String> collateralattr = new ArrayList<String>()
+		ArrayList <String> collateralacc = new ArrayList<String>()
+		ArrayList <String> collateraluserownerloc = new ArrayList<String>()
+		instance.eachRow(("SELECT app_collateral_id, ISNULL(app_collateral_no,'-') AS app_collateral_no, asset_type_name , full_asset_name, collateral_value_amt, manufacturing_year, MR_COLLATERAL_CONDITION_CODE, CASE WHEN SERIAL_NO_1 = '' THEN '-' ELSE SERIAL_NO_1 END AS SERIAL_NO_1, REF_MASTER_NAME, CASE WHEN SERIAL_NO_2 = '' THEN '-' ELSE SERIAL_NO_2 END AS SERIAL_NO_2, FORMAT(ASSET_TAX_DT,'dd-MMM-yyyy') AS ASSET_TAX_DT, CASE WHEN SERIAL_NO_3 = '' THEN '-' ELSE SERIAL_NO_3 END AS SERIAL_NO_3, CASE WHEN CAST(COLLATERAL_PORTION_PRCNT AS VARCHAR)= '0.000000' THEN '-' ELSE CAST(COLLATERAL_PORTION_PRCNT AS VARCHAR) END AS COLLATERAL_PORTION_PRCNT, CASE WHEN COLLATERAL_NOTES = '' THEN '-' ELSE COLLATERAL_NOTES END AS COLLATERAL_NOTES FROM APP_COLLATERAL ac with(nolock) join app a with(nolock) on ac.app_id = a.app_id join v_asset_type at with(nolock) on at.ASSET_TYPE_CODE = ac.ASSET_TYPE_CODE join ref_master_los rml with(nolock) on rml.REF_MASTER_CODE = ac.MR_COLLATERAL_USAGE_CODE where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				if(i==0){
+					appcollateralid=row[i]
+				}
+				else{
+					appdata = (row[i])
+					collateralinfo.add(appdata)
+				}
+			}
+		})
+		instance.eachRow(("select doc_name, CASE WHEN is_received = 1 THEN 'YES' WHEN IS_RECEIVED = 0 THEN 'NO' END AS IS_RECEIVED, CASE WHEN doc_no = '' THEN '-' ELSE doc_no end as doc_no, ISNULL(FORMAT(EXPIRED_DT,'yyyy-MM-dd'),'-') AS EXPIRED_DT, CASE WHEN doc_notes = '' THEN '-' ELSE DOC_NOTES END AS DOC_NOTES from app_collateral_doc acd with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
+			
+				ResultSetMetaData rsmd = row.getMetaData()
+				colmcount = rsmd.getColumnCount()
+				for(i = 0 ; i < colmcount ; i++){
+					appdata = (row[i])
+					collateraldoc.add(appdata)
+				}
+		})
+		instance.eachRow(("select COLLATERAL_ACCESSORY_NAME, ACCESSORY_PRICE_AMT, DOWN_PAYMENT_PRCNT, DOWN_PAYMENT_AMT, ACCESSORY_NOTES from APP_COLLATERAL_ACCESSORY aca with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
+			
+				ResultSetMetaData rsmd = row.getMetaData()
+				colmcount = rsmd.getColumnCount()
+			
+			
+				for(i = 0 ; i < colmcount ; i++){
+					appdata = (row[i])
+					collateralacc.add(appdata)
+				}
+		})
+		instance.eachRow(("select collateral_attr_name, CASE WHEN attr_value = '' THEN '-' ELSE attr_value end as attr_value from app_collateral_attr acat with(nolock) where app_collateral_id = '"+appcollateralid+"'"), {  row ->
+			
+				ResultSetMetaData rsmd = row.getMetaData()
+				colmcount = rsmd.getColumnCount()
+			
+			
+				for(i = 0 ; i < colmcount ; i++){
+					appdata = (row[i])
+					collateralattr.add(appdata)
+				}
+		})
+		instance.eachRow(("select user_name, MR_USER_RELATIONSHIP_CODE AS [USER_RELATIONSHIP_NAME], owner_name, OWNER_ADDR, MR_OWNER_RELATIONSHIP_CODE AS [ONWER_RELATIONSHIP_NAME], OWNER_AREA_CODE_4 +' / '+owner_area_code_3 AS [RT / RW], mr_id_type_code AS [ID_TYPE], owner_area_code_2, OWNER_ID_NO, owner_area_code_1,CASE WHEN OWNER_MOBILE_PHN_NO = '' THEN '-' ELSE OWNER_MOBILE_PHN_NO END AS OWNER_MOBILE_PHN_NO, owner_city,CASE WHEN OWNER_PROFESSION_CODE = '' THEN '-' ELSE OWNER_PROFESSION_CODE END AS OWNER_PROFESSION_CODE,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4+' / '+LOCATION_AREA_CODE_3 as [RT / RW], LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1, location_city, location_zipcode FROM( SELECT user_name, owner_name, OWNER_ID_NO, OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR, OWNER_AREA_CODE_4, owner_area_code_3, owner_area_code_2, owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4,LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode,mastername.Code,rml.REF_MASTER_NAME as [REFMASTER] FROM ( select user_name, owner_name, OWNER_ID_NO, OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR,OWNER_AREA_CODE_4,owner_area_code_3,owner_area_code_2,owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4,LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode,[Code],value FROM(select user_name, MR_USER_RELATIONSHIP_CODE, owner_name, MR_OWNER_RELATIONSHIP_CODE, mr_id_type_code,OWNER_ID_NO,OWNER_MOBILE_PHN_NO, OWNER_PROFESSION_CODE,OWNER_ADDR, OWNER_AREA_CODE_4,owner_area_code_3, owner_area_code_2,owner_area_code_1,owner_city,OWNER_ZIPCODE,location_addr,LOCATION_AREA_CODE_4, LOCATION_AREA_CODE_3,LOCATION_AREA_CODE_2,LOCATION_AREA_CODE_1,location_city,location_zipcode from APP_COLLATERAL_REGISTRATION acr with(nolock) where app_collateral_id = '"+appcollateralid+"') as Orig unpivot (value for [Code] in (MR_USER_RELATIONSHIP_CODE,MR_OWNER_RELATIONSHIP_CODE,mr_id_type_code))as unpiv )as mastername left JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = mastername.value )AS ref PIVOT(MAX([REFMASTER]) for [Code] in (MR_USER_RELATIONSHIP_CODE, MR_OWNER_RELATIONSHIP_CODE, mr_id_type_code)) as piv "), {  row ->
+			
+				ResultSetMetaData rsmd = row.getMetaData()
+				colmcount = rsmd.getColumnCount()
+			
+			
+				for(i = 0 ; i < colmcount ; i++){
+					appdata = (row[i])
+					collateraluserownerloc.add(appdata)
+				}
+		})
+		
+		
+		collateralDetail.put("ColInfo", collateralinfo)
+		collateralDetail.put("ColDoc", collateraldoc)
+		collateralDetail.put("ColAcc", collateralacc)
+		collateralDetail.put("ColAttr", collateralattr)
+		collateralDetail.put("ColUserOwnerLoc",collateraluserownerloc)
+	
+		return collateralDetail
+	}
+
 	//keyword check app view term and condition
 	@Keyword
 	public checkTermandCondition (Sql instance, String appno){

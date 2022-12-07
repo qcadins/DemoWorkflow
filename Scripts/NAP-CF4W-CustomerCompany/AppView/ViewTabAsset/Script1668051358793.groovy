@@ -46,6 +46,13 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 ArrayList<WebElement> resultAssetSuppInfo = CustomKeywords.'appView.verifyAppView.checkAssetSupplierInfo'(sqlconnectionLOS, 
     appno)
 
+HashMap<String,ArrayList> collateralDetail = new HashMap<String,ArrayList>()
+ArrayList <String> collateralinfo = new ArrayList<String>()
+ArrayList <String> collateraldoc = new ArrayList<String>()
+ArrayList <String> collateralattr = new ArrayList<String>()
+ArrayList <String> collateralacc = new ArrayList<String>()
+ArrayList <String> collateraluserownerloc = new ArrayList<String>()
+
 'set index = 0'
 index = 0
 
@@ -364,6 +371,9 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
     'modify object notes'
     modifyNewNote = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="AdditionalCollateralSection"]/div/table/tbody/tr[' + collateralindex) + ']/td[9]', true)
+	
+	'modify button view detail'
+	modifyButtonViewDetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ViewDetail'),'xpath','equals',"//*[@id='AdditionalCollateralSection']/div/table/tbody/tr["+collateralindex+"]/td[10]/a/i",true)
 
     'verify Collateral no'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewCollateralNo).toUpperCase(), (resultAssetCollateral[
@@ -396,6 +406,164 @@ for (collateralindex = 1; collateralindex <= variableData.size(); collateralinde
     'verify Note'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNote).toUpperCase(), (resultAssetCollateral[index++]).toUpperCase(), 
             false))
+	
+	'Klik button view detail'
+	WebUI.click(modifyButtonViewDetail)
+	
+	'Pengecekan data collateral detail pada db'
+	collateralDetail = CustomKeywords.'appView.verifyAppView.checkAssetCollateralDetail'(sqlconnectionLOS, appno)
+	collateralinfo = collateralDetail.get("ColInfo")
+	collateraldoc = collateralDetail.get("ColDoc")
+	collateralattr = collateralDetail.get("ColAttr")
+	collateralacc = collateralDetail.get("ColAcc")
+	collateraluserownerloc = collateralDetail.get("ColUserOwnerLoc")
+	
+	index = 0
+	
+	'verify app colatteral no confins dengan db'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/ModifyCollateralInfo')).toUpperCase(),collateralinfo[index++].toUpperCase(),false))
+	
+	'looping verify section collateral information confins dengan db'
+	for(int collateralindex = 2;collateralindex<=(collateralinfo.size()+1)/2;collateralindex++){
+		'modify object collateralinfoleft'
+		modifyCollateralInfoLeft = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralInfo'),'xpath','equals',"//*[@id='asset']/div["+collateralindex+"]/label[2]",true)
+		
+		'modify object collateralinforight'
+		modifyCollateralInfoRight = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralInfo'),'xpath','equals',"//*[@id='asset']/div["+collateralindex+"]/label[4]",true)
+		
+		'verify collateral information bagian kiri'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCollateralInfoLeft).replace(",","").toUpperCase(),collateralinfo[index++].replace(" -  "," - ").toUpperCase(),false))
+		
+		'verify collateral information bagian kanan'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCollateralInfoRight).toUpperCase(),collateralinfo[index++].toUpperCase(),false))
+	}
+	
+	index = 0
+	'looping verify section collateral document confins dengan db'
+	for(int collateralindex = 1;collateralindex<=collateraldoc.size()/5;collateralindex++){
+		'modify object document name'
+		modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralDocument'),'xpath','equals',"//*[@id='AddCollDocument']/table/tbody/tr["+collateralindex+"]/td[1]",true)
+		
+		'modify object received'
+		modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralDocument'),'xpath','equals',"//*[@id='AddCollDocument']/table/tbody/tr["+collateralindex+"]/td[2]",true)
+		
+		'modify object document no'
+		modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralDocument'),'xpath','equals',"//*[@id='AddCollDocument']/table/tbody/tr["+collateralindex+"]/td[3]",true)
+		 
+		'modify object expired date'
+		modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralDocument'),'xpath','equals',"//*[@id='AddCollDocument']/table/tbody/tr["+collateralindex+"]/td[4]",true)
+		 
+		'modify object document notes'
+		modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralDocument'),'xpath','equals',"//*[@id='AddCollDocument']/table/tbody/tr["+collateralindex+"]/td[5]",true)
+				
+		'verify document name'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyDocumentName).toUpperCase(),collateraldoc[index++].toUpperCase(),false))
+		
+		'verify received'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyReceived).toUpperCase(),collateraldoc[index++].toUpperCase(),false))
+		
+		'verify document no'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyDocumentNo).toUpperCase(),collateraldoc[index++].toUpperCase(),false))
+		
+		'verify expired date'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyExpiredDate).toUpperCase(),collateraldoc[index++].toUpperCase(),false))
+		
+		'verify document notes'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyDocumentNotes).toUpperCase(),collateraldoc[index++].toUpperCase(),false))
+		
+	}
+	
+	index = 0
+	'looping section collateral attribute confins dengan db'
+	for(int collateralindex = 1;collateralindex<=collateralattr.size()/2;collateralindex++){
+		'modify object attrname'
+		modifyAttrName = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAttribute'),'xpath','equals',"//*[@id='collAttr']/div/div/div["+collateralindex+"]/div/label[1]",true)
+		
+		'modify object attrvalue'
+		modifyAttrValue = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAttribute'),'xpath','equals',"//*[@id='collAttr']/div/div/div["+collateralindex+"]/div/label[2]",true)
+	
+		'verify attribute name'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyAttrName).toUpperCase(),collateralattr[index++].toUpperCase(),false))
+		
+		'verify attribute value'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyAttrValue).replace(",","").toUpperCase(),collateralattr[index++].toUpperCase(),false))
+		
+	}
+	
+	index = 0
+	'looping section collateral accessories confins dengan db'
+	for(int collateralindex = 1;collateralindex<=collateralacc.size()/5;collateralindex++){
+		'modify object accessories name'
+		modifyAccName = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAccessories'),'xpath','equals',"//*[@id='collateralAccessories']/lib-ucgridview/div/table/tbody/tr["+collateralindex+"]/td[2]",true)
+		
+		'modify object accessories price'
+		modifyAccPrice = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAccessories'),'xpath','equals',"//*[@id='collateralAccessories']/lib-ucgridview/div/table/tbody/tr["+collateralindex+"]/td[3]",true)
+		
+		'modify object security deposit percentage'
+		modifySecDepositPctg = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAccessories'),'xpath','equals',"//*[@id='collateralAccessories']/lib-ucgridview/div/table/tbody/tr["+collateralindex+"]/td[4]",true)
+		
+		'modify object security deposit amount'
+		modifySecDepositAmt = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAccessories'),'xpath','equals',"//*[@id='collateralAccessories']/lib-ucgridview/div/table/tbody/tr["+collateralindex+"]/td[5]",true)
+		
+		'modify object accessories notes'
+		modifyNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralAccessories'),'xpath','equals',"//*[@id='collateralAccessories']/lib-ucgridview/div/table/tbody/tr["+collateralindex+"]/td[6]",true)
+		
+		'verify accessories name'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyAccName).toUpperCase(),collateralacc[index++].toUpperCase(),false))
+		
+		'verify accessories price'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyAccPrice).replace(",","").toUpperCase(),collateralacc[index++].toUpperCase(),false))
+		
+		'verify security deposit percent'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifySecDepositPctg).replace("  %","").toUpperCase(),collateralacc[index++].toUpperCase(),false))
+		
+		'verify security deposit amount'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifySecDepositAmt).replace(",","").toUpperCase(),collateralacc[index++].toUpperCase(),false))
+		
+		'modify accessories notes'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNotes).toUpperCase(),collateralacc[index++].toUpperCase(),false))
+		
+	}
+	
+	index = 0
+	
+	'verify collateral user name confins dengan db'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/CollateralUserName')),collateraluserownerloc[index++].toUpperCase(),false))
+	
+	'verify collateral user relationship confins dengan db'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/CollateralUserRelationship')),collateraluserownerloc[index++].toUpperCase(),false))
+	
+	'get banyaknya field pada section collateral owner confins'
+	variableDataColl = DriverFactory.getWebDriver().findElements(By.cssSelector('#CollOwnerId > div label.label-control.ng-star-inserted'))
+	
+	'looping verify section collateral owner confins dengan db'
+	for(int collateralindex = 1;collateralindex<=variableDataColl.size();collateralindex++){
+				 
+		'modify object collateral owner'
+		modifyCollOwner = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralOwner'),'xpath','equals',"//*[@id='CollOwnerId']/div/div["+collateralindex+"]/span/div/div[2]",true)
+						 
+		'verify collateral owner'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCollOwner).toUpperCase(),collateraluserownerloc[index++].toUpperCase(),false))
+				
+	}
+	
+	'get banyaknya field pada section collateral location confins'
+	variableDataColl = DriverFactory.getWebDriver().findElements(By.cssSelector('#LocationId > div label.label-control.ng-star-inserted'))
+	
+	'looping verify section collateral location confins dengan db'
+	for(int collateralindex = 1;collateralindex<=variableDataColl.size();collateralindex++){
+		
+		'modify object collateral location'
+		modifyCollLocation = WebUI.modifyObjectProperty(findTestObject('Object Repository/AppView/Asset/ModifyCollateralLocation'),'xpath','equals',"//*[@id='LocationId']/div/div["+collateralindex+"]/span/div/div[2]",true)
+				 
+		'verify collateral location'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyCollLocation).toUpperCase(),collateraluserownerloc[index++].toUpperCase(),false))
+	   
+	}
+
+	'Klik button back'
+	WebUI.click(findTestObject('Object Repository/AppView/Asset/Back'))
+	
 }
 
 'check if flagwarning = 0 & flagfailed = 0'
