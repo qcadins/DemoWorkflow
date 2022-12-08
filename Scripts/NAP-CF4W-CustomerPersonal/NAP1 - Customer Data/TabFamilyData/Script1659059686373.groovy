@@ -787,8 +787,7 @@ def getDataCust() {
 		'add ownership to array'
 		confinsdata.add(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabFamilyData/select_Ownership'),
 				'value'))
-	}
-	else if(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data'){
+	}else if(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data'){
 		
 		Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//div[@id='Address']/div/div[2]/div[2]/div/div/div/div/select")))
 		String optionLabel = select.getFirstSelectedOption().getText()

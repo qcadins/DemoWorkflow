@@ -458,6 +458,9 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 1) {
                             'click button copy'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Copy'))
+							
+							'call function MS Personal get data'
+							getDataMS()
                         } else {
                             'input address'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -515,6 +518,9 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 1) {
                             'click button copy'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Copy'))
+							
+							'call function MS Personal get data'
+							getDataMS()
                         } else {
                             'input address'
                             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -1074,14 +1080,16 @@ def getDataMS() {
     def confinsdata = []
 
     if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-        'add customer name to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add tax id to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
+		if(datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'LookUp'){
+	        'add customer name to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add tax id to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+		}
+		
         'add address to array'
         confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
                 'value'))
@@ -1109,43 +1117,55 @@ def getDataMS() {
         'add kota to array'
         confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelKota'), 
                 'value'))
+		
+		if(datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data'){
+			
+			Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+			String optionLabel = select.getFirstSelectedOption().getText()
+			
+			'add ownership to array'
+			confinsdata.add(optionLabel)
+		}
     } else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-        'add customer name to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add birth place to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add id expired date to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id Expired Date_form-control ng-untouched ng-pristine ng-valid'), 
-                'value'))
-
-        'add mobile phone to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add birth date to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add id no to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add tax id to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 
-                'value'))
-
-        'add mother maiden name to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-invalid'), 
-                'value'))
-
-        'add email to array'
-        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Email_form-control ng-untouched ng-pristine ng-valid'), 
-                'value'))
-
+	
+		if(datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'LookUp'){
+	        'add customer name to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add birth place to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Place_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add id expired date to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id Expired Date_form-control ng-untouched ng-pristine ng-valid'), 
+	                'value'))
+	
+	        'add mobile phone to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mobile Phone_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add birth date to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Birth Date_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add id no to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Id No_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add tax id to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Tax Id No_form-control ng-untouched ng-pristine ng-valid'), 
+	                'value'))
+	
+	        'add mother maiden name to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Mother Maiden Name_form-control ng-untouched ng-pristine ng-invalid'), 
+	                'value'))
+	
+	        'add email to array'
+	        confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Email_form-control ng-untouched ng-pristine ng-valid'), 
+	                'value'))
+		}
+		
         'add address to array'
         confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'), 
                 'value'))
@@ -1173,6 +1193,15 @@ def getDataMS() {
         'add kota to array'
         confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/LabelKota'), 
                 'value'))
+		
+		if(datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data'){
+			
+			Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
+			String optionLabel = select.getFirstSelectedOption().getText()
+			
+			'add ownership to array'
+			confinsdata.add(optionLabel)
+		}
     }
     
     GlobalVariable.Confinsdata = confinsdata
