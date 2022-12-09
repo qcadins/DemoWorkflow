@@ -5,6 +5,8 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -45,57 +47,73 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 ArrayList<String> resultGuar = CustomKeywords.'appView.verifyAppView.checkGuarantor'(sqlconnectionLOS, appno)
 
 'count guarantor table'
-variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))
+ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guaAll > table > tbody tr'))
 
 index = 0
 
-'looping guarantor appview'
-for (dbindex = 0; dbindex < resultGuar.size(); dbindex++) {
-    for (Guarindex = 1; Guarindex <= variableData.size(); Guarindex++) {
-        'modify object guar Name'
-        modifyNewGuarName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-            ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[1]', true)
+dbindex = 0
 
-        'modify object Guar Type'
-        modifyNewGuarType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-            ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[2]', true)
-
-        'modify object relationship'
-        modifyNewRelationship = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
-            'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[3]', true)
-
-        'modify object Mobile Phone'
-        modifyNewMobilePhone = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
-            'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[4]', true)
-
-        if (WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false, 
-            FailureHandling.OPTIONAL)) {
-            'verify guarantor name'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor type'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarType).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor relationship'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRelationship).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            dbindex++
-
-            'verify guarantor mobile phone'
-            checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMobilePhone).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), 
-                    false))
-
-            break
-        }
-    }
+for (Guarindex = 1; Guarindex <= variableData.size(); Guarindex++) {
+	'modify object guar Name'
+	modifyNewGuarName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+			('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[1]', true)
+			
+	'modify object Guar Type'
+	modifyNewGuarType = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+			('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[2]', true)
+			
+	'modify object relationship'
+	modifyNewRelationship = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
+			'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[3]', true)
+			
+	'modify object Mobile Phone'
+	modifyNewMobilePhone = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
+			'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[4]', true)
+			
+	'modify object button detail'
+	modifyNewButtonDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath',
+			'equals', ('//*[@id="guaAll"]/table/tbody/tr[' + Guarindex) + ']/td[5]/a/i', true)
+			
+	if (WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex]).toUpperCase(), false, 
+			FailureHandling.OPTIONAL)) {
+		'verify guarantor name'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarName).toUpperCase(), (resultGuar[dbindex++]).toUpperCase(), 
+				false))
+				
+		'verify guarantor type'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewGuarType).toUpperCase(), (resultGuar[dbindex++]).toUpperCase(), 
+				false))
+				
+		'verify guarantor relationship'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRelationship).toUpperCase(), (resultGuar[dbindex++]).toUpperCase(), 
+				false))
+				
+		'verify guarantor mobile phone'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewMobilePhone).toUpperCase(), (resultGuar[dbindex++]).toUpperCase(), 
+				false))
+	}
+	
+	'get guarantor name'
+	GlobalVariable.CustDetailName = WebUI.getText(modifyNewGuarName)
+			
+	'get guarantor type' 
+	guartype = WebUI.getText(modifyNewGuarType)
+			
+	'click button detail'
+	WebUI.click(modifyNewButtonDetail)
+			
+	if(guartype.equalsIgnoreCase('PERSONAL')){
+		'call test case verify view Personal detail'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}else if(guartype.equalsIgnoreCase('COMPANY')){
+		'call test case verify view Company detail'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	
+	'clik button X'
+	WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonX'))
 }
+
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
 	'write to excel success'
@@ -116,4 +134,3 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
         GlobalVariable.FlagFailed = 1
     }
 }
-

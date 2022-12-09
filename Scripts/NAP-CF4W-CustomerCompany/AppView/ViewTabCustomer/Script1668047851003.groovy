@@ -194,12 +194,15 @@ for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
     WebUI.click(modifyNewbuttonDetail)
 
     if (MSType.equalsIgnoreCase('Personal')) {
-        'call test case verify view MSPersonal detail'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-MSPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        'call test case verify view Personal detail'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (MSType.equalsIgnoreCase('Company')) {
-        'call test case verify view MSCompany detail'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-MSCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        'call test case verify view Company detail'
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
+	
+	'clik button back'
+	WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonBackMS'))
 }
 
 'get arraylist contact person from db'
