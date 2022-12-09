@@ -29,7 +29,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get custname'
-custname = WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName'))
+custname = WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName'))
 
 'Verif Customer Main Data'
 ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataCompany'(sqlconnectionLOS, 
@@ -38,7 +38,7 @@ ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView
 int index = 0
 
 'verify cust name'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName')).toString().toUpperCase(), 
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify industry type'
@@ -77,7 +77,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnectionLOS, appno, custname)
 
 'count address table'
-ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
+ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
 
 index = 0
 
@@ -186,7 +186,7 @@ for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewisSigner).toUpperCase(), (resultMS[index++]).toUpperCase(), 
             false))
 
-    GlobalVariable.MSName = WebUI.getText(modifyNewMSName)
+    GlobalVariable.CustDetailName = WebUI.getText(modifyNewMSName)
 
     MSType = WebUI.getText(modifyNewMSType)
 
@@ -247,8 +247,6 @@ for (finIndex = 1; finIndex <= resultFindata.size(); finIndex++) {
 
     findetailindex = 0
 
-    println(resultFindataDetail.size())
-
     for (int detailindex = 1; detailindex <= (resultFindataDetail.size() / 2); detailindex++) {
         'modify object financial detail kiri'
         modifyNewfinancialkiri = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -268,7 +266,7 @@ for (finIndex = 1; finIndex <= resultFindata.size(); finIndex++) {
     }
     
     'click button back'
-    WebUI.click(findTestObject('Object Repository/AppView/Financial/buttonBack'))
+    WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonBackFinancial'))
 }
 
 'get arraylist fin data attr from db'

@@ -176,6 +176,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>''</initValue>
+      <name>CustDetailName</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
       <name>CountofReferantorCompany</name>
    </GlobalVariableEntity>
@@ -318,11 +323,6 @@
       <description></description>
       <initValue>''</initValue>
       <name>InsuranceLength</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>LookupAddressData</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -618,10 +618,5 @@
       <description></description>
       <initValue>0.00</initValue>
       <name>TotalVat</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>MSName</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

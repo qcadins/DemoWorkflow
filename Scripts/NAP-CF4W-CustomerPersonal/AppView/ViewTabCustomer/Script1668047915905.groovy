@@ -5,6 +5,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.String as String
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -25,16 +26,17 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 GlobalVariable.FlagWarning = 0
 
 'connect DB los'
-Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'get appno from confins'
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get custname'
-custname = WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName'))
+custname = WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/CustomerName'))
 
 'get cust main data arraylist from db'
-ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnection, appno, custname)
+ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataPersonal'(sqlconnectionLOS, 
+    appno, custname)
 
 'declare index'
 int index = 0
@@ -55,10 +57,10 @@ for (custIndex = 1; custIndex <= resultCustomerMainData.size(); custIndex++) {
 }
 
 'get address arraylist from db'
-ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnection, appno, custname)
+ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnectionLOS, appno, custname)
 
 'count address table'
-ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
+ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
 
 index = 0
 
@@ -106,7 +108,7 @@ for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
 }
 
 'get arraylist family from db'
-ArrayList<String> resultFam = CustomKeywords.'appView.verifyAppView.checkFamData'(sqlconnection, appno)
+ArrayList<String> resultFam = CustomKeywords.'appView.verifyAppView.checkFamData'(sqlconnectionLOS, appno)
 
 'count fam table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#Family > table > tbody tr'))
@@ -131,6 +133,10 @@ for (Famindex = 1; Famindex <= variableData.size(); Famindex++) {
     modifyNewBirthDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="Family"]/table/tbody/tr[' + Famindex) + ']/td[5]', true)
 
+    'modify object button detail'
+    modifyNewButtonDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+        ('//*[@id="Family"]/table/tbody/tr[' + Famindex) + ']/td[6]/a/i', true)
+
     'verify FAM Name'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewFamName).toUpperCase(), (resultFam[index++]).toUpperCase(), 
             false))
@@ -146,10 +152,19 @@ for (Famindex = 1; Famindex <= variableData.size(); Famindex++) {
     'verify FAM birth date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBirthDate).toUpperCase(), (resultFam[index++]).toUpperCase(), 
             false))
+
+    GlobalVariable.CustDetailName = WebUI.getText(modifyNewFamName)
+
+    'click button detail'
+    WebUI.click(modifyNewButtonDetail)
+
+    'call test case verify app view family detail'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ViewTabCustomer-Familydetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 'get arraylist emergency contact from db'
-ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnection, appno, custname)
+ArrayList<String> resultEC = CustomKeywords.'appView.verifyAppView.checkEmergencyContactData'(sqlconnectionLOS, appno, 
+    custname)
 
 'looping emergency contact'
 for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
@@ -163,7 +178,7 @@ for (ecIndex = 1; ecIndex <= resultEC.size(); ecIndex++) {
 }
 
 'get arraylist financial data from db'
-ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialDataPersonal'(sqlconnection, 
+ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialDataPersonal'(sqlconnectionLOS, 
     appno, custname)
 
 'count financial data table'
@@ -175,13 +190,52 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
     modifyNewfinancialDataDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
         'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + finIndex) + ']/td[1]', true)
 
+    'modify object financial data button detail'
+    modifyNewButtonDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+        ('//*[@id="ListCustFinData"]/table/tbody/tr[' + finIndex) + ']/td[2]/a/i', true)
+
+    findate = WebUI.getText(modifyNewfinancialDataDate)
+
     'verify financial data date'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataDate).toUpperCase(), (resultFindata[(finIndex - 
-            1)]).toUpperCase(), false))
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(findate, (resultFindata[(finIndex - 1)]).toUpperCase(), false))
+
+    'click button detail'
+    WebUI.click(modifyNewButtonDetail)
+
+    'get arraylist financial data detail'
+    ArrayList<String> resultFindataDetail = CustomKeywords.'appView.verifyAppView.checkFinancialDetailPersonal'(sqlconnectionLOS, 
+        appno, custname, findate)
+
+    findetailindex = 0
+
+    for (int detailindex = 1; detailindex <= ((resultFindataDetail.size() + 1) / 2); detailindex++) {
+        'modify object financial detail kiri'
+        modifyNewfinancialkiri = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
+            'equals', ('//*[@id="FinId"]/div/div[' + detailindex) + ']/label[2]', true)
+
+        'modify object financial detail kanan'
+        modifyNewfinancialkanan = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
+            'equals', ('//*[@id="FinId"]/div/div[' + detailindex) + ']/label[4]', true)
+
+        'verify financial data kiri'
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialkiri).replace(',', ''), (resultFindataDetail[
+                findetailindex++]).toUpperCase(), false))
+
+        if (detailindex == ((resultFindataDetail.size() + 1) / 2)) {
+            break
+        }
+        
+        'verify financial data kanan'
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialkanan).replace(',', ''), (resultFindataDetail[
+                findetailindex++]).toUpperCase(), false))
+    }
+    
+    'click button back'
+    WebUI.click(findTestObject('Object Repository/AppView/CustomerMainData/attributelist personal/buttonBackFinancial'))
 }
 
 'get arraylist fin data attr from db'
-ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnection, 
+ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnectionLOS, 
     appno, custname)
 
 'looping fin data attr'
@@ -191,12 +245,12 @@ for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
         'equals', ('//*[@id="FinAttrInfoId"]/div[' + finIndex) + ']/label[2]', true)
 
     'verify financial data attr'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace('.00', '').toUpperCase(), 
-            (resultFindataattr[(finIndex - 1)]).toUpperCase(), false))
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewfinancialDataAttr).replace(',', '').replace('.00', 
+                '').toUpperCase(), (resultFindataattr[(finIndex - 1)]).toUpperCase(), false))
 }
 
 'get arraylist bank acc from db'
-ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnection, appno, custname)
+ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnectionLOS, appno, custname)
 
 index = 0
 
@@ -240,16 +294,16 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
         modifyNewBankDetail = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
             'equals', ('//*[@id="BankAccount"]/div/div[' + (bankIndex + 1)) + ']/lib-ucsubsection/div/form/div/h4', true)
 
-		'get bankdetail from confins'
+        'get bankdetail from confins'
         bankDetail = WebUI.getText(modifyNewBankDetail).split(' - ')
 
         'verify Bank Acc Statement'
-        ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnection, 
+        ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnectionLOS, 
             appno, bankDetail[1], custname)
 
         index = 0
 
-		'looping bank acc statement'
+        'looping bank acc statement'
         for (bankstatIndex = 1; bankstatIndex <= (resultBankAccStatement.size() / 7); bankstatIndex++) {
             'modify object Month'
             modifyNewMonth = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
@@ -314,7 +368,6 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
             checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewBalanceAmount).replace(',', '').toUpperCase(), 
                     (resultBankAccStatement[index++]).toUpperCase(), false))
         }
-        
     }
 }
 
@@ -324,10 +377,11 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     'count customer group table'
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
-	'get cust group from db'
-    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnection, appno, custname)
+    'get cust group from db'
+    ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnectionLOS, 
+        appno, custname)
 
-	'looping cust group'
+    'looping cust group'
     for (custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
         'modify object cust group name'
         modifyNewcustGroupName = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 
@@ -340,7 +394,8 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 }
 
 'get arraylist other info from db'
-ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnection, appno, custname)
+ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno, 
+    custname)
 
 'looping other info'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
@@ -354,7 +409,8 @@ for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
 }
 
 'get arraylist other attr list from db'
-ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnection, appno, custname)
+ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnectionLOS, 
+    appno, custname)
 
 'verify Business period AML'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist personal/Business Period AML')).toUpperCase(), 
@@ -409,18 +465,18 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	'write to excel status success'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm -
-		1, GlobalVariable.StatusSuccess)
+    'write to excel status success'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
+        1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel status failed'
+        'write to excel status failed'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusFailed)
 
-		'write to excel reason failed verify equal or match'
+        'write to excel reason failed verify equal or match'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2. Customer', 1, GlobalVariable.NumofColm - 
             1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 

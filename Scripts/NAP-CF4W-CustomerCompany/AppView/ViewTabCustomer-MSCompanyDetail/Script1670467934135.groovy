@@ -30,12 +30,12 @@ appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/
 
 'Verif Customer Main Data'
 ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataCompany'(sqlconnectionLOS, 
-    appno, GlobalVariable.MSName)
+    appno, GlobalVariable.CustDetailName)
 
 int index = 0
 
 'verify cust name'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/CustomerMainData/CustomerName')).toString().toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName')).toString().toUpperCase(), 
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify industry type'
@@ -71,7 +71,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'get arraylist from db'
-ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultAddress = CustomKeywords.'appView.verifyAppView.checkAddrData'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 'count address table'
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustAddress > table > tbody tr'))
@@ -122,7 +122,7 @@ for (addrindex = 1; addrindex <= variableData.size(); addrindex++) {
 }
 
 'get arraylist contact person from db'
-ArrayList<String> resultCP = CustomKeywords.'appView.verifyAppView.checkContactPersonData'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultCP = CustomKeywords.'appView.verifyAppView.checkContactPersonData'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 'looping contact person appview'
 for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
@@ -136,7 +136,7 @@ for (cpIndex = 1; cpIndex <= resultCP.size(); cpIndex++) {
 }
 
 'get arraylist financial data from db'
-ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialData'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultFindata = CustomKeywords.'appView.verifyAppView.checkFinancialData'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 'count financial data table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -154,7 +154,7 @@ for (finIndex = 1; finIndex <= variableData.size(); finIndex++) {
 
 'get arraylist fin data attr from db'
 ArrayList<String> resultFindataattr = CustomKeywords.'appView.verifyAppView.checkFinancialAttrData'(sqlconnectionLOS, appno, 
-    GlobalVariable.MSName)
+    GlobalVariable.CustDetailName)
 
 'looping financial atr appview'
 for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
@@ -168,7 +168,7 @@ for (finIndex = 1; finIndex <= resultFindataattr.size(); finIndex++) {
 }
 
 'get arraylist bank acc from db'
-ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultBankAcc = CustomKeywords.'appView.verifyAppView.checkBankAcc'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 index = 0
 
@@ -216,7 +216,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
 
         'verify Bank Acc Statement'
         ArrayList<String> resultBankAccStatement = CustomKeywords.'appView.verifyAppView.checkBankStatData'(sqlconnectionLOS, 
-            appno, bankDetail[1], GlobalVariable.MSName)
+            appno, bankDetail[1], GlobalVariable.CustDetailName)
 
         index = 0
 
@@ -288,7 +288,7 @@ for (int bankIndex = 0; bankIndex < variableDataBank.size(); bankIndex++) {
 }
 
 'get arraylist legal doc from db'
-ArrayList<String> resultLegalDoc = CustomKeywords.'appView.verifyAppView.checkLegalDocData'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultLegalDoc = CustomKeywords.'appView.verifyAppView.checkLegalDocData'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 'count legal doc table'
 variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustLegalDoc > table > tbody tr'))
@@ -345,7 +345,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
     variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustGrp > table > tbody tr'))
 
     ArrayList<String> resultCustGroup = CustomKeywords.'appView.verifyAppView.checkCustGroupData'(sqlconnectionLOS, appno, 
-        GlobalVariable.MSName)
+        GlobalVariable.CustDetailName)
 
     for (int custGroupindex = 1; custGroupindex <= resultCustGroup.size(); custGroupindex++) {
         'modify object cust group name'
@@ -359,7 +359,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/
 }
 
 'get arraylist other info from db'
-ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno, GlobalVariable.MSName)
+ArrayList<String> resultOtherInfo = CustomKeywords.'appView.verifyAppView.checkOtherInfoData'(sqlconnectionLOS, appno, GlobalVariable.CustDetailName)
 
 'looping other attribute appview'
 for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
@@ -374,7 +374,7 @@ for (OthIndex = 1; OthIndex <= resultOtherInfo.size(); OthIndex++) {
 
 'get arraylist other attr list from db'
 ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.checkOtherAttrData'(sqlconnectionLOS, appno, 
-    GlobalVariable.MSName)
+    GlobalVariable.CustDetailName)
 
 'verify Business period AML'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), 
@@ -405,7 +405,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 'clik button back'
-WebUI.click(findTestObject('Object Repository/AppView/CustomerMainData/buttonBack'))
+WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonBackMS'))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
     'write to excel success'

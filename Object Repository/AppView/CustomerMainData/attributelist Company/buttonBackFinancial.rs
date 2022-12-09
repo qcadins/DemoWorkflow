@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>buttonBack</name>
+   <name>buttonBackFinancial</name>
    <tag></tag>
    <elementGuidId>4aa5c819-8bcb-4655-a9f8-df6e518cea0b</elementGuidId>
    <selectorCollection>

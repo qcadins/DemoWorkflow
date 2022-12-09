@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Aff With MF SLIK</name>
+   <name>CustomerName</name>
    <tag></tag>
-   <elementGuidId>5625063a-68c4-4474-bc62-6f44bdc2d47c</elementGuidId>
+   <elementGuidId>86fba6a3-724a-4e0d-a493-61f1fc91ea74</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[10]/label[2]/span</value>
+         <value>//*[@id=&quot;CustPersonalMainDataId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[10]/label[2]/span</value>
+      <value>//*[@id=&quot;CustPersonalMainDataId&quot;]/div/div[1]/span/div/div[2]/span/label</value>
    </webElementProperties>
 </WebElementEntity>
