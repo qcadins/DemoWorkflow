@@ -6,11 +6,15 @@
    <elementGuidId>e033cb13-85dc-431d-aa3e-dd821fa3889a</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[1]/div[8]/div/div/div[4]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type=''])[2]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;FinData_FinData&quot;)/form[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3 form-inline form-inline-right&quot;]/input[@class=&quot;form-control full-width ng-untouched ng-pristine ng-valid&quot;]</value>
+      <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[1]/div[8]/div/div/div[4]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

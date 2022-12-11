@@ -256,7 +256,7 @@ if (datafileTabFinancial.getValue(
 
     'verify grace period type'
     arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-                GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false))
+                GlobalVariable.NumofColm, 48).toUpperCase().replace(" ",""), (result[arrayindex++]).toUpperCase().replace("_","").replace(" ",""), false))
 }
 else{
 	arrayindex+=2

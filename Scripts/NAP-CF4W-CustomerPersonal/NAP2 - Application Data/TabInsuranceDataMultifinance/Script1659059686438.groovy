@@ -31,6 +31,8 @@ Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 'declare datafileTabInsurance'
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
+def totalFeeResult 
+
 'Inisialisasi Driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -892,6 +894,10 @@ if(capinssetting=="YEARLY"){
 	textDiscountAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
 		'value').replace(',', '')
 		
+	'get capitalize amount from confins'
+	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
+			'value').replace(',', '')
+			
 	if(GlobalVariable.Role=="Testing"){
 		'Ambil nilai total premi to customer after discount dari confins'
 		String textTotalPremitoCustAftDisc = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomerAfterDiscount')).replace(
@@ -909,10 +915,6 @@ if(capinssetting=="YEARLY"){
 		
 		'Verif total premi to customer after discount sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
-		
-		'get capitalize amount from confins'
-		String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
-			'value').replace(',', '')
 		
 		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
@@ -938,6 +940,10 @@ if(capinssetting=="YEARLY"){
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 			GlobalVariable.NumofColm - 1, textDiscountAmt)
 	}
+	
+	'write to excel capitalize amount'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+6-1,
+		GlobalVariable.NumofColm - 1, textCapitalizeAmount)
 }
 //Jika cap insurance setting bernilai partial
 else if (capinssetting=="PARTIAL"){
@@ -952,6 +958,16 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerP
 'get text insurance capitalize amount'
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL)
+
+'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
+def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
+1
+
+'write to excel capitalize amount'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', capPartialRow+2,
+	GlobalVariable.NumofColm - 1, GlobalVariable.InsuranceCapitalizeAmount)
+
+
 	
 public writeFailedReasonVerifyRule(){
 		

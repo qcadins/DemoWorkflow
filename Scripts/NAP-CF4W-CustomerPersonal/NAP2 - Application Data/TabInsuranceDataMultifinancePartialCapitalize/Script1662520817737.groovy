@@ -31,6 +31,8 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+def textCapitalizeAmount, totalFeeResult
+
 'declare datafileTabInsurance'
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
@@ -655,6 +657,10 @@ if (counterPaidByMF == 1) {
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+2-1,
 		GlobalVariable.NumofColm - 1, textDiscountAmt)
 }
+
+'write to excel capitalize amount'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', TotalPremium+6-1,
+	GlobalVariable.NumofColm - 1, textCapitalizeAmount)
 
 public writeFailedReasonVerifyRule(){
 		

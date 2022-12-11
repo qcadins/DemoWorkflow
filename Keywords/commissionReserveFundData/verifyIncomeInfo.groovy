@@ -22,7 +22,7 @@ import internal.GlobalVariable
 import java.util.regex.Pattern
 import java.util.regex.Matcher
 public class verifyIncomeInfo {
-	
+
 	//keyword verify income info amount rule based
 	@Keyword
 	public verifyIncomeInfoAmtRuleBased(Sql instanceLOS, String appNo){
