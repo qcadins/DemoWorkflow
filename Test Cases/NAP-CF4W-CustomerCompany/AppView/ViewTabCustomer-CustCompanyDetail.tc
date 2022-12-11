@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ViewTabCustomer-MSPersonalDetail</name>
+   <name>ViewTabCustomer-CustCompanyDetail</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>bf7facea-597b-4a4c-acd3-bb6294c5ba5e</testCaseGuid>
+   <testCaseGuid>f3a690ff-5fbe-4fbf-8b17-3e74624877e2</testCaseGuid>
 </TestCaseEntity>

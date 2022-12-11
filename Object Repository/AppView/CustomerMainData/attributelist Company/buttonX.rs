@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>buttonBack</name>
+   <name>buttonX</name>
    <tag></tag>
-   <elementGuidId>cbace598-6450-471f-9d65-d221ddf55ad2</elementGuidId>
+   <elementGuidId>af8e5c9b-6085-4b92-b5b5-75685fe511f0</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
+         <value>/html/body/ngb-modal-window/div/div/app-view-app-cust-detail/div[1]/button/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
+      <value>/html/body/ngb-modal-window/div/div/app-view-app-cust-detail/div[1]/button/span</value>
    </webElementProperties>
 </WebElementEntity>

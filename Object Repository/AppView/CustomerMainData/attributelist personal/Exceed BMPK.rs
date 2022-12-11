@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;attrList&quot;]/div[12]/label[2]/span</value>
+         <value>//*[@id=&quot;attrList&quot;]/div[13]/label[2]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;attrList&quot;]/div[12]/label[2]/span</value>
+      <value>//*[@id=&quot;attrList&quot;]/div[13]/label[2]/span</value>
    </webElementProperties>
 </WebElementEntity>

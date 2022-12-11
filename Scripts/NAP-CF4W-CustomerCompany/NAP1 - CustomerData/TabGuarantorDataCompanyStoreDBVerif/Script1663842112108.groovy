@@ -57,46 +57,39 @@ arrayMatch.add(WebUI.verifyMatch(datafileGuarantorCompany.getValue(GlobalVariabl
 
 'verify copy addres atau tidak'
 if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 23).equalsIgnoreCase('Yes')) {
-	if(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('LookUp')){
-    
-		for(int addr = 0; addr < GlobalVariable.LookupAddressData.size(); addr++){
-			'verify address'
-			arrayMatch.add(WebUI.verifyMatch(GlobalVariable.LookupAddressData[addr],(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-		}
-		
-	}else{
+	confinsindex = 0
+	
 	'verify address copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 24).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify rt copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 25).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify RW copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 26).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify zipcode copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 27).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kecamatan copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 28).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kelurahan copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 29).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kota copy dari customer'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 30).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify ownership'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 31).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confinsindex++].toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-	}
 } else {
     'verify address'
     arrayMatch.add(WebUI.verifyMatch(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 24).toUpperCase(), 

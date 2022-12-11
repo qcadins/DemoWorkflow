@@ -253,9 +253,6 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
     if (GlobalVariable.Role == 'Testing') {
 		'call function getdatacust'
         getDataCust()
-		
-		'call function get address data'
-		getAddressData()
     }
 }
 
