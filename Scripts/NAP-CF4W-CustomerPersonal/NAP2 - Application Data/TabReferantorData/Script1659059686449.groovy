@@ -58,7 +58,7 @@ if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
 	if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),
 			'aria-checked') == "false") {
 		'click referantor checkbox'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
 	}
 }
 

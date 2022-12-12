@@ -79,7 +79,6 @@ arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[array
 'verify subsidy percentage'
 arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]), 
     FailureHandling.OPTIONAL))
-
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

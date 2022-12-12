@@ -30,19 +30,28 @@ GlobalVariable.FlagFailed=0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'get app last step from confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("LIFE INSURANCE") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 
+'call tc subsidy financial'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyFinancial'),
 	[:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'write to excel total subsidy dp'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	52, GlobalVariable.NumofColm - 1, GlobalVariable.SubsidyDP)
+
+'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil appno dari confins'
@@ -58,10 +67,11 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry == "Yes") {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry=="Yes") {
 	'Ambil nilai result dari rule credit fee'
 	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
+	'declare listfee, feetype, fee, feebhv, feecaptype, feecap'
 	ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap
 
 	listFee = result.get('listFee')
@@ -76,6 +86,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 
 	feecap = result.get('feecap')
 
+	'declare counter'
 	Integer counter = 0
 
 	//Looping listfee dari result rule
@@ -86,6 +97,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 			'Verify amount admin fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),
 					'value').replace(',', ''), fee.get(i), false) == false) {
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -97,8 +109,10 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				'verify admin fee terlock'
 				WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),
 					'readonly', 1)
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-					20, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value'))
+				
+				'write to excel admin fee'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+					20, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",","")))
 				
 			}
 			
@@ -106,6 +120,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				'Verify admin fee capitalized amount sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -117,6 +132,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 			'Verify amount additional admin pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),
 					'value').replace(',', ''), fee.get(i), false) == false) {
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -129,14 +145,16 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),
 					'readonly', 1)
 				
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-					21, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value'))
+				'write to excel additional admin fee'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+					21, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",","")))
 			}
 			
 			if (feecapType.get(i) == 'AMT') {
 				'Verify additional admin capitalized amount sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -148,6 +166,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 			'Verify notary fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),
 					'value').replace(',', ''), fee.get(i), false) == false) {
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -160,14 +179,16 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),
 					'readonly', 1)
 				
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-					22, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value'))
+				'write to excel notary fee'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+					22, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",","")))
 			}
 			
 			if (feecapType.get(i) == 'AMT') {
 				'Verify notary fee capitalized amount sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -179,6 +200,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 			'Verify other fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),
 					'value').replace(',', ''), fee.get(i), false) == false) {
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -191,14 +213,16 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),
 					'readonly', 1)
 				
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-					23, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value'))
+				'write to excel other fee'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+					23, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",","")))
 			}
 			
 			if (feecapType.get(i) == 'AMT') {
 				'Verify other fee capitalized amount sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -210,6 +234,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 			'verify fiducia fee pada confins sesuai rule'
 			if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),
 					'value').replace(',', ''), fee.get(i), false) == false) {
+				'write to excel reason failed verify rule'
 				writeReasonFailedVerifRule()
 			}
 			
@@ -222,14 +247,16 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),
 					'readonly', 1)
 				
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-					24, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value'))
+				'write to excel fiducia fee'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+					24, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",","")))
 			}
 			
 			if (feecapType.get(i) == 'AMT') {
 				'Verify fiducia fee capitalized amount sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -242,6 +269,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				'Verify provision fee pada confins sesuai rule'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 						'value').replace(',', ''), fee.get(i), false) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 				
@@ -250,23 +278,28 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 						'readonly', 1) //Verify provision fee amt & pctg terlock
 				} else if (feeBhv.get(i) == 'LOCK') {
+					'Verify provision fee amount terlock'
 					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 						'readonly', 1)
 
+					'Verify provision fee percentage terlock'
 					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 						'readonly', 1)
 					
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %",""))
+					'write to excel provision fee percentage'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
 					
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+					'write to excel provision fee amount'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
 				}
 				//Verify provision fee amt & pctg terlock
 			} else if (feeType.get(i) == 'PRCNT') {
 				'Verify provision fee pada confins sesuai rule'
 				if (WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 							'value').replace(' %', '')), Double.parseDouble(fee.get(i))) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 				
@@ -275,16 +308,21 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 					WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 						'readonly', 1)
 				} else if (feeBhv.get(i) == 'LOCK') {
+					'Verify provision fee amount terlock'
 					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 						'readonly', 1)
 
+					'Verify provision fee percentage terlock'
 					WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 						'readonly', 1)
 					
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %",""))
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+					'write to excel provision fee percentage'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
+					
+					'write to excel provision fee amount'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
 				}
 			}
 			
@@ -292,6 +330,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 				'Verify provision fee capitalized amount'
 				if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'),
 						'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+					'write to excel reason failed verify rule'
 					writeReasonFailedVerifRule()
 				}
 			}
@@ -459,12 +498,15 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 			Keys.chord(Keys.RIGHT, datafileTabFinancial.getValue(GlobalVariable.NumofColm, 38)), FailureHandling.OPTIONAL)
 		
+		'write to excel provision fee amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
 		
 	} else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
+		
 		sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'))
 
+		'input provision fee amount'
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 			Keys.chord(Keys.RIGHT, datafileTabFinancial.getValue(GlobalVariable.NumofColm, 39)))
 	}
@@ -472,6 +514,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 
 if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == 'Yes' && GlobalVariable.FirstTimeEntry == "Yes"){
 	
+	'declare arraylist result'
 	ArrayList<String> result = new ArrayList<String>()
 	
 	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
@@ -479,26 +522,31 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == '
 	
 	'Verify default effective rate'
 	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))==false){
+		'write to excel reason failed verify rule'
 		writeReasonFailedVerifRule()
 	}
 	
 	'Verify default supplier rate'
 	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))==false){
+		'write to excel reason failed verify rule'
 		writeReasonFailedVerifRule()
 	}
 	
 	'Verify def/lock effective rate'
 	if(result.get(2)=="LOCK"){
+		'write to excel effective rate'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
 			43, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %",""))
 		'Verify effective rate terlock'
 		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+			'write to excel reason failed verify rule'
 			writeReasonFailedVerifRule()
 		}
 	}
 	else if(result.get(2)=="DEF"){
 		'Verify effetcive rate tidak terlock/dapat diinput'
 		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+			'write to excel reason failed verify rule'
 			writeReasonFailedVerifRule()
 		}
 	}
@@ -523,9 +571,11 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 			Keys.chord(Keys.RIGHT, datafileTabFinancial.getValue(GlobalVariable.NumofColm, 45)), FailureHandling.OPTIONAL)
 	}
 	
+	'get effective rate from confins'
 	GlobalVariable.Effectiverate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),
 		'value', FailureHandling.OPTIONAL)
 
+	'get flat rate from confins'
 	GlobalVariable.Flatrate = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),
 		'value', FailureHandling.OPTIONAL)
 }
@@ -558,17 +608,25 @@ if (findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationDa
 	}
 }
 
+'input rounding'
+WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Rounding'),
+	datafileTabFinancial.getValue(GlobalVariable.NumofColm, 52))
+
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
+
+'write to excel effective rate'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+	43, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %",""))
 
 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'),
 	5, FailureHandling.OPTIONAL)) {
 	'click button cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
-
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
 
@@ -586,6 +644,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 49).length() > 0) {
 }
 
 if (GlobalVariable.RoleCompany == 'Testing') {
+	'call test case financial data verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialDataVerif'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
@@ -653,7 +712,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
-
+		
 		GlobalVariable.FlagFailed=1
 	}
 }

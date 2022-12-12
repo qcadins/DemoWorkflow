@@ -19,9 +19,25 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import groovy.sql.Sql as Sql
+
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+
+'Ambil appno dari confins'
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/span_appNo'))
+
+'koneksi db los'
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+
+'declare datafileTabApplication'
+datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
+
+'get data file path simulasi'
+def datafilepathsim = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiFinancial)
 
 'declare NTFforProvisionCalc Value'
 BigDecimal NTFforProvisionCalc
@@ -117,63 +133,78 @@ BigDecimal ProvisionPercentage = new BigDecimal(ProvisionFeePercentage)
 'convert installment amount to BigDecimal'
 BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
 
-'calculate value for NTFprovisioncalc'
-NTFforProvisionCalc = BDTotalAssetPrice.subtract(BDDPAssetAccessory)
+//'calculate value for NTFprovisioncalc'
+//NTFforProvisionCalc = BDTotalAssetPrice.subtract(BDDPAssetAccessory)
+//
+//'calculate value for total fee cap Exclude provision fee cap'
+//BigDecimal TotalFeeCapEXCProvCap = BDTotalfeeCapitalized.subtract(BDProvisionFeeCapitalize)
+//
+//'calculate value NTFProvision add Total insurance Cap'
+//BigDecimal NTFValueADDInsuranceCap = NTFforProvisionCalc.add(BDTotalInsuranceCap)
+//
+//'calculate NTFProvisioncalc Add Total fee Cap Exclude Provision fee cap'
+//BigDecimal NTFValueADDCapEXCProvCap = NTFValueADDInsuranceCap.add(TotalFeeCapEXCProvCap)
+//
+//'calculate NTFValue multiply percentage'
+//BigDecimal NTFValueFinal = Math.round(NTFValueADDCapEXCProvCap.multiply(ProvisionPercentage / 100))
 
-'calculate value for total fee cap Exclude provision fee cap'
-BigDecimal TotalFeeCapEXCProvCap = BDTotalfeeCapitalized.subtract(BDProvisionFeeCapitalize)
+//'check if calculate based is OTR-DP'
+//if (datafileTabFinancial.getValue(
+//    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP')) {
+//    'check if provision fee type Percentage'
+//    if (datafileTabFinancial.getValue(
+//        GlobalVariable.NumofColm, 36) == 'Percentage') {
+//        'calculate NTFProvisionCalc multiply percentage'
+//        BigDecimal NTFValuexPercentage = NTFforProvisionCalc.multiply(ProvisionPercentage / 100)
+//
+//        'convert NTFValueXPercentage to string'
+//        String strNTFValuexPercentage = NTFValuexPercentage.toString()
+//
+//        'verify match strNTFValueXPercentage and strProvisionAmount'
+//        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
+//    } else if(datafileTabFinancial.getValue(
+//        GlobalVariable.NumofColm, 36) == 'Amount'){
+//        'calculate Provisionfeeamount divide NTFforprovisioncalc'
+//        BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
+//
+//        'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
+//        checkVerifyEqualOrMatch(WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL))
+//    }
+//} else if(datafileTabFinancial.getValue(
+//    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
+//    'check if provision fee type Percentage'
+//    if (datafileTabFinancial.getValue(
+//        GlobalVariable.NumofColm, 36) == 'Percentage') {
+//        'convert NTFValueFinal to string'
+//        String strNTFValueFinal = NTFValueFinal.toString()
+//
+//        'verify matvh NTFValueFinal and provision amount'
+//        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
+//    } else if(datafileTabFinancial.getValue(
+//        GlobalVariable.NumofColm, 36) == 'Amount'){
+//        'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
+//        ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
+//
+//        'verify matvh provisionfeemaountdivideNTFValueexcludeprovisionfeecap and provision percentage'
+//        checkVerifyEqualOrMatch(WebUI.verifyMatch(ProvisionFeeAmountDivideNTFValueExcProv.toString(), (ProvisionPercentage / 100).toString(), false, 
+//            FailureHandling.OPTIONAL))
+//    }
+//}
 
-'calculate value NTFProvision add Total insurance Cap'
-BigDecimal NTFValueADDInsuranceCap = NTFforProvisionCalc.add(BDTotalInsuranceCap)
-
-'calculate NTFProvisioncalc Add Total fee Cap Exclude Provision fee cap'
-BigDecimal NTFValueADDCapEXCProvCap = NTFValueADDInsuranceCap.add(TotalFeeCapEXCProvCap)
-
-'calculate NTFValue multiply percentage'
-BigDecimal NTFValueFinal = Math.round(NTFValueADDCapEXCProvCap.multiply(ProvisionPercentage / 100))
-
-'check if calculate based is OTR-DP'
+'check if provision fee type Percentage/amount'
 if (datafileTabFinancial.getValue(
-    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP')) {
-    'check if provision fee type Percentage'
-    if (datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Percentage') {
-        'calculate NTFProvisionCalc multiply percentage'
-        BigDecimal NTFValuexPercentage = NTFforProvisionCalc.multiply(ProvisionPercentage / 100)
 
-        'convert NTFValueXPercentage to string'
-        String strNTFValuexPercentage = NTFValuexPercentage.toString()
-
-        'verify match strNTFValueXPercentage and strProvisionAmount'
-        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-    } else if(datafileTabFinancial.getValue(
-        GlobalVariable.NumofColm, 36) == 'Amount'){
-        'calculate Provisionfeeamount divide NTFforprovisioncalc'
-        BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
-
-        'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
-        checkVerifyEqualOrMatch(WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL))
-    }
+        'verify match provision amount'
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,64).replace(".00",""), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
 } else if(datafileTabFinancial.getValue(
-    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
-    'check if provision fee type Percentage'
-    if (datafileTabFinancial.getValue(
-        GlobalVariable.NumofColm, 36) == 'Percentage') {
-        'convert NTFValueFinal to string'
-        String strNTFValueFinal = NTFValueFinal.toString()
-
-        'verify matvh NTFValueFinal and provision amount'
-        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-    } else if(datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
-        'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
-        ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
 
-        'verify matvh provisionfeemaountdivideNTFValueexcludeprovisionfeecap and provision percentage'
-        checkVerifyEqualOrMatch(WebUI.verifyMatch(ProvisionFeeAmountDivideNTFValueExcProv.toString(), (ProvisionPercentage / 100).toString(), false, 
+        'verify match provision percentage'
+        checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,63), ProvisionPercentage.toString(), false,
             FailureHandling.OPTIONAL))
-    }
 }
+
 
 'get attribute admincapitalizevalue'
 def AdminCapitalizeValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
@@ -291,18 +322,22 @@ BigDecimal intInterestAmountValueSeq1 = Integer.parseInt(InterestAmountValueSeq1
 int TotalFeeCapitalize = Integer.parseInt(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE CAPITALIZED')).replace(
         '.00', '').split(',').join())
 
-'calculate total fee capitalize'
-int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeCapValue) + intNotaryFeeCapitalizeValue) + 
-intOtherFeeCapitalize) + intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
+//'calculate total fee capitalize'
+//int TotalCapitalizeValue = ((((intAdminCapitalizeValue + intAdditionalAdminFeeCapValue) + intNotaryFeeCapitalizeValue) + 
+//intOtherFeeCapitalize) + intFiduciaFeeCapitalize) + intProvisionFeeCapitalize
 
 'verify equal totalfeecapitalize'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(TotalFeeCapitalize, TotalCapitalizeValue))
+checkVerifyEqualOrMatch(WebUI.verifyEqual(TotalFeeCapitalize, Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,59).replace(".00","").replace(",",""))))
 
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
+'verify equal dp asset accessory'
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,61).replace(".00","").replace(",","")), intDPAssetAccessoryValue,
+	FailureHandling.CONTINUE_ON_FAILURE))
+
 'verify equal DPAssetAccessory minus subsidy DP = DPAssetAccessoryMinSubsidyDP'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(intDPAssetAccessoryValue - Integer.parseInt(GlobalVariable.SubsidyDPValue), intDPAssetAccessoryMinSubValue, 
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,62).replace(".00","").replace(",","")), intDPAssetAccessoryMinSubValue, 
     FailureHandling.CONTINUE_ON_FAILURE))
 
 'Get value Total insurance value'
@@ -319,7 +354,7 @@ BigDecimal intTotalInsurancevalue = new BigDecimal(TotalInsuranceCapitalizeValue
 checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false))
 
 'verify match Insurance capitalize amount (from tab insurance) and total insurance capitalize (from tab financial)'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.InsuranceCapitalizeAmount, TotalInsuranceCapitalizeValue, false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,60).replace(".00",""), TotalInsuranceCapitalizeValue, false))
 
 'get total life insurance value'
 def TotalLifeInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE')).replace(
@@ -344,9 +379,9 @@ int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * C
 'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
 
-'verify NTF Value'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize, 
-    intNTF, FailureHandling.OPTIONAL))
+//'verify NTF Value'
+//checkVerifyEqualOrMatch(WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize, 
+//    intNTF, FailureHandling.OPTIONAL))
 
 'import webdriver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -485,8 +520,8 @@ checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrinci
 'verify pincipal amount value = NTF'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue, intNTF, FailureHandling.OPTIONAL))
 
-'verity interest amount value - total interest'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(interestamountvalue, intInterestAmountValue, FailureHandling.OPTIONAL))
+//'verity interest amount value - total interest'
+//checkVerifyEqualOrMatch(WebUI.verifyEqual(interestamountvalue, intInterestAmountValue, FailureHandling.OPTIONAL))
 
 'verify PrincipalAmount+InteresetAmount == AR Value'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue + interestamountvalue, intTotalAR, FailureHandling.OPTIONAL))
@@ -494,8 +529,8 @@ checkVerifyEqualOrMatch(WebUI.verifyEqual(principalamountvalue + interestamountv
 'verify installmentamountvalue == AR Value'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(installmentamountvalue, intTotalAR, FailureHandling.OPTIONAL))
 
-'verify intNTF + intInterestAmountValue == AR Value'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL))
+//'verify intNTF + intInterestAmountValue == AR Value'
+//checkVerifyEqualOrMatch(WebUI.verifyEqual(intNTF + intInterestAmountValue, intTotalAR, FailureHandling.OPTIONAL))
 
 'verify equal principal amount seq 1 + os principal amount seq1 + Interest amount seq 1 + os interest amount seq1 = principalamountvalue + interestamountvalue'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(((intOSPrincipalAmountSeq1 + intPrincipalAmountValueSeq1) + intOSInterestAmountSeq1) + intInterestAmountValueSeq1, 
@@ -531,19 +566,286 @@ String textAssetPriceInclAccessory = WebUI.getText(findTestObject('NAP-CF4W-Cust
     ',', '')
 
 'Verifikasi perhitungan asset price'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPrice, String.format('%.2f', GlobalVariable.AssetPrice), false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,56).replace(",",""), false))
 
 'Verifikasi perhitungan asset price incl accessories'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPriceInclAccessory, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice + GlobalVariable.AssetPrice), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetPriceInclAccessory, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,55).replace(",",""), 
     false))
 
 'Verifikasi perhitungan asset accessory price'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetAccessoryPrice, String.format('%.2f', GlobalVariable.TotalAccessoriesPrice), false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textAssetAccessoryPrice, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,57).replace(",",""), false))
+
+'write rounding'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Regular Fixed',14,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 52)))
+
+'write asset price incl acc'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',4,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 55).replace(",","")))
+
+'write dp asset accessory nett'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',1,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 62).replace(",","")))
+
+'write dp asset accessory '
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 61).replace(",","")))
+
+'write effective rate'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 44))/100)
+
+'write tenor'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,1, Double.parseDouble(datafileTabApplication.getValue(GlobalVariable.NumofColm, 20).replace(",","")))
+
+'get payment frequency from excel datafile'
+String payFreq = datafileTabApplication.getValue(GlobalVariable.NumofColm, 19)
+
+def num
+
+'convert payment frequency to number untuk penghitungan simulasi'
+if (payFreq == 'Monthly') {
+	num = "1"
+} else if (payFreq == 'Bimonthly') {
+	num = "2"
+} else if (payFreq == 'Quarterly') {
+	num = "3"
+} else if (payFreq == 'Trimester') {
+	num = "4"
+} else if (payFreq == 'Semi Annually') {
+	num = "6"
+} else if (payFreq == 'Annually') {
+	num = "12"
+}
+
+'write payment frequency'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,1, Double.parseDouble(num.replace(",","")))
+
+'write ins cust premi'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkInsCust'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write lifeins cust premi'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsCust'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write admin fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write provision fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write fiducia fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write notary fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write other fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write additional admin fee'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',13,4, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 22).replace(",","")))
+
+'write ins premi insco'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,7, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkInsInsco'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write lifeins premi insco'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,7, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsInsco'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write insurance capitalize'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',23,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 60).replace(",","")))
+
+'write lifeins cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',24,3, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsuranceCapitalize'(sqlConnectionLOS, appNo).replace(",","")))
+
+'write admin fee cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',25,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 27).replace(",","")))
+
+'write prov fee cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',26,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 41).replace(",","")))
+
+'write fiducia fee cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',27,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 35).replace(",","")))
+
+'write notary fee cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',28,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 31).replace(",","")))
+
+'write other fee cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',30,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 33).replace(",","")))
+
+'write additional admin cap'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',37,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 29).replace(",","")))
 
 'Ambil nilai tdp dan simpan dari confins financial data'
 String textTDP = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TDP')).replace(
-    ',', '')
+	',', '')
 
+String totalAR, totalInterest
+
+def instAmtRounded, GrossYieldVal,TDP, NTFVal
+
+'Pengecekan first installment type'
+if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+	'ADVANCE')) {
+	'write advance value'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,1, 1)
+	
+	'get total ar from simulation'
+	totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 14)
+	
+	'get total interest from simulation'
+	totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 15)
+	
+	'get installment amount from simulation'
+	installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 14)
+	
+	'get ntf value from simulation'
+	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
+	
+	'get tdp from simulation'
+	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
+	
+	'write total AR ke simualasi'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',2,1, Double.parseDouble(totalAR.replace(",","")))
+	
+	'write besar angsuran ke simualasi'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
+	
+	'write total AR ke datafile'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',69,GlobalVariable.NumofColm-1, Double.parseDouble(totalAR.replace(",","")))
+	
+	'write total Interest ke datafile'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',68,GlobalVariable.NumofColm-1, Double.parseDouble(totalInterest.replace(",","")))
+	
+	'get installment amount yang telah dibulatkan nilainya'
+	instAmtRounded  = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 18)
+		
+	'write installment amount'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',67,GlobalVariable.NumofColm-1, Double.parseDouble(instAmtRounded.replace(",","")))
+	
+	'write NTF'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',66,GlobalVariable.NumofColm-1, Double.parseDouble(NTFVal.replace(",","")))
+	
+	'write TDP'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',65,GlobalVariable.NumofColm-1, Double.parseDouble(TDP.replace(",","")))
+	
+	'get nilai gross yield from simulation'
+	GrossYieldVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(10, 84)
+	
+	'write gross yield'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',70,GlobalVariable.NumofColm-1, Double.parseDouble(GrossYieldVal.replace(",","")))
+	
+} else if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+	'ARREAR')) {
+	'write arrear value'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,1, 0)
+	
+	'Pengecekan grace period number dan type'
+	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+		'get total ar'
+		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 80)
+		
+		'get total interest'
+		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 79)
+		
+		'get installment amount'
+		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 80)
+		
+	}
+	else if(gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&gracePeriodNum>0){
+		
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, gracePeriodNum)
+		
+		'write to excel installment amount for segno grace period'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',14,4, 0)
+		
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Regular Fixed',211,1, gracePeriodNum)
+		
+		'get total ar'
+		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 214)
+		
+		'get total interest'
+		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 213)
+		
+		'get installment amount'
+		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 214)
+		
+		
+	}
+	else if(gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum>0){
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, gracePeriodNum)
+		
+		'write to excel installment amount for segno grace period'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',14,4, Double.parseDouble(findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(3, 151).replace(",","")))
+		
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Regular Fixed',145,1, gracePeriodNum)
+		
+		'get total ar'
+		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 148)
+		
+		'get total interest'
+		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 147)
+		
+		'get installment amount'
+		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 148)
+		
+	}
+	
+	'write total AR ke simualasi'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',2,1, Double.parseDouble(totalAR.replace(",","")))
+	
+	'write besar angsuran ke simualasi'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
+	
+	'get ntf value from excel'
+	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
+	
+	'get tdp from excel'
+	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
+	
+	'write total AR ke datafile'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',69,GlobalVariable.NumofColm-1, Double.parseDouble(totalAR.replace(",","")))
+	
+	'write total Interest ke datafile'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',68,GlobalVariable.NumofColm-1, Double.parseDouble(totalInterest.replace(",","")))
+	
+	'get installment amount rounded'
+	instAmtRounded  = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 18)
+	
+	'write installment amount'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',67,GlobalVariable.NumofColm-1, Double.parseDouble(instAmtRounded.replace(",","")))
+	
+	'write NTF'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',66,GlobalVariable.NumofColm-1, Double.parseDouble(NTFVal.replace(",","")))
+	
+	'write TDP'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',65,GlobalVariable.NumofColm-1, Double.parseDouble(TDP.replace(",","")))
+	
+	'get gross yield value'
+	GrossYieldVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(10, 84)
+	
+	'write gross yield'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',70,GlobalVariable.NumofColm-1, Double.parseDouble(GrossYieldVal.replace(",","")))
+	
+	
+}
+
+'verify interest amount confins x excel with tolerance'
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))),5))
+	
+'verify total ar confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 5))
+	
+'verify installment amount (rounded) confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(strInstallmentAmount, instAmtRounded.replace(",","").replace(".00",""), false))
+	
+'verify tdp confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, TDP.replace(",",""), false))
+	
+'verify ntf confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".00",""), false))
+	
+'verify gross yield confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
+	
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
     ',', '')
@@ -554,27 +856,26 @@ BigDecimal totalInsurance = Double.parseDouble(TotalInsuranceValue.replace(',', 
 'Convert total fee dari string ke tipe data angka'
 BigDecimal totalFee = Double.parseDouble(textTotalFee)
 
-'Perhitungan tdp'
-BigDecimal TDP = (((((intDPAssetAccessoryMinSubValue + totalFee) + totalInsurance) + intTotalLifeInsurance) - BDTotalfeeCapitalized) - 
-BDTotalInsuranceCap) - intTotalLifeInsuranceCapitalize
+//'Perhitungan tdp'
+//BigDecimal TDP = (((((intDPAssetAccessoryMinSubValue + totalFee) + totalInsurance) + intTotalLifeInsurance) - BDTotalfeeCapitalized) - 
+//BDTotalInsuranceCap) - intTotalLifeInsuranceCapitalize
 
 'verify total fee = all fees'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(((((BDAdminFeeValue + BDAdditionalAdminFeeValue) + BDNotaryFeeValue) + BDOtherFeeValue) + BDFiduciaFeeAmount) + 
-    ProvisionFeeAmount, totalFee))
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,58).replace(",","")), totalFee))
 
-'Pengecekan jika installment type advance'
-if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
-    'Advance')) {
-    'Ambil installment amount segno 1'
-    BigDecimal firstInstallmentAmount = Double.parseDouble(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InstallmentAmount')).replace(
-            ',', ''))
+//'Pengecekan jika installment type advance'
+//if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
+//    'Advance')) {
+//    'Ambil installment amount segno 1'
+//    BigDecimal firstInstallmentAmount = Double.parseDouble(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InstallmentAmount')).replace(
+//            ',', ''))
+//
+//    'Nilai tdp ditambahkan dengan installment amount segno 1'
+//    TDP += firstInstallmentAmount
+//}
 
-    'Nilai tdp ditambahkan dengan installment amount segno 1'
-    TDP += firstInstallmentAmount
-}
-
-'Verifikasi tdp pada confins sesuai perhitungan'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false))
+//'Verifikasi tdp pada confins sesuai perhitungan'
+//checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false))
 
 'Verifikasi tdp paid at mf <= tdp'
 WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 

@@ -3,6 +3,6 @@
    <description></description>
    <name>TabFinancialDataVerif</name>
    <tag></tag>
-   <comment></comment>
+   <comment>verify match Total insurance(from tab insruance) and total insurance (from tab financial)</comment>
    <testCaseGuid>38c06879-2068-483d-b42e-322f09150777</testCaseGuid>
 </TestCaseEntity>

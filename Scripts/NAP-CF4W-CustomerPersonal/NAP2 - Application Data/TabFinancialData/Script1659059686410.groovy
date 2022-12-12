@@ -41,6 +41,10 @@ if(!appLastStep.equalsIgnoreCase("LIFE INSURANCE") && GlobalVariable.FirstTimeEn
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabSubsidyFinancial'),
 	[:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'write to excel total subsidy dp'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+	52, GlobalVariable.NumofColm - 1, GlobalVariable.SubsidyDP)
+
 'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
@@ -63,7 +67,7 @@ if (GlobalVariable.Role == 'Testing') {
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == 'Yes') && GlobalVariable.FirstTimeEntry == "Yes") {
+if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == 'Yes') && GlobalVariable.FirstTimeEntry=="Yes") {
     'Ambil nilai result dari rule credit fee'
     HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
@@ -107,8 +111,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                     'readonly', 1)
 				
 				'write to excel admin fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					20, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value'))
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					20, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",","")))
 				
             }
             
@@ -142,8 +146,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                     'readonly', 1)
 				
 				'write to excel additional admin fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					21, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value'))
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					21, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",","")))
             }
             
             if (feecapType.get(i) == 'AMT') {
@@ -176,8 +180,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                     'readonly', 1)
 				
 				'write to excel notary fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					22, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value'))
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					22, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",","")))
             }
             
             if (feecapType.get(i) == 'AMT') {
@@ -210,8 +214,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                     'readonly', 1)
 				
 				'write to excel other fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					23, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value'))
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					23, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",","")))
             }
             
             if (feecapType.get(i) == 'AMT') {
@@ -244,8 +248,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                     'readonly', 1)
 				
 				'write to excel fiducia fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					24, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value'))
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+					24, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",","")))
             }
             
             if (feecapType.get(i) == 'AMT') {
@@ -283,12 +287,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                         'readonly', 1)
 					
 					'write to excel provision fee percentage'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %",""))
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
 					
 					'write to excel provision fee amount'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
                 }
                 //Verify provision fee amt & pctg terlock
             } else if (feeType.get(i) == 'PRCNT') {
@@ -313,12 +317,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                         'readonly', 1)
 					
 					'write to excel provision fee percentage'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %",""))
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
 					
 					'write to excel provision fee amount'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
 				}
             }
             
@@ -604,11 +608,19 @@ if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2
 	}
 }
 
+'input rounding'
+WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Rounding'),
+	datafileTabFinancial.getValue(GlobalVariable.NumofColm, 52))
+
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
 'click button calculate'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
+
+'write to excel effective rate'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+	43, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %",""))
 
 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'), 
     5, FailureHandling.OPTIONAL)) {

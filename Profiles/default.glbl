@@ -619,4 +619,14 @@
       <initValue>0.00</initValue>
       <name>TotalVat</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Simulasi\\Simulasi Perhitungan Gross Yield &amp; Angsuran Regular Fixed CF.xlsx'</initValue>
+      <name>PathSimulasiFinancial</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>SubsidyDP</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

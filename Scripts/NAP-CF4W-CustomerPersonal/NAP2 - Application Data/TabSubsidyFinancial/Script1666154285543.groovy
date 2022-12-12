@@ -205,7 +205,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						'select subsidy from value'
 						WebUI.selectOptionByLabel(subsidyfromvalue,SubsidyfromValueArray[(subsidyarray - 1)], false)
 						
-						objectidx
+						objectidx++
 					}
 					
 					subsidyallocationfrom = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/select_AllocationFromSupplier'),
@@ -255,6 +255,9 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
 				}
 				
+				if(AllocationformArray[(subsidyarray - 1)].equalsIgnoreCase("Subsidy DP")){
+						GlobalVariable.SubsidyDP+=Integer.parseInt(SubsidyValueAmountArray[(subsidyarray - 1)].replace(",",""))
+				}
 				break
 			} else {
 			
@@ -508,6 +511,10 @@ public addSubsidy(int s){
 		10, FailureHandling.OPTIONAL)) {
 		'Click cancel'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
+	}
+		
+	if(AllocationformArray[(s - 1)].equalsIgnoreCase("Subsidy DP")){
+		GlobalVariable.SubsidyDP+=Integer.parseInt(SubsidyValueAmountArray[(s - 1)].replace(",",""))
 	}
 }
 
