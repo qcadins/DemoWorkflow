@@ -35,7 +35,7 @@ ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView
 int index = 0
 
 'verify cust name'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName')).toString().toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/CustomerName')).toString().toUpperCase(), 
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify industry type'
@@ -377,31 +377,31 @@ ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.ch
     GlobalVariable.CustDetailName)
 
 'verify Business period AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Business Period AML')).toUpperCase(), 
         (resultOtherAttrList[9]).toUpperCase(), false))
 
 'verify Business Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Source AML')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Business Source AML')).toUpperCase(), 
         (resultOtherAttrList[8]).toUpperCase(), false))
 
 'verify CSP USL Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CSP USL Source')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/CSP USL Source')).toUpperCase(), 
         (resultOtherAttrList[6]).toUpperCase(), false))
 
 'verify Payment Type'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Payment Type')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Payment Type')).toUpperCase(), 
         (resultOtherAttrList[7]).toUpperCase(), false))
 
 'verify KYC Report'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/KYC Report AMl')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/KYC Report AMl')).toUpperCase(), 
         (resultOtherAttrList[5]).toUpperCase(), false))
 
 'verify Exceed BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Exceed BMPK')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Exceed BMPK')).toUpperCase(), 
         (resultOtherAttrList[3]).toUpperCase(), false))
 
 'verify Violate BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Violate BMPK')).toUpperCase(), 
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {

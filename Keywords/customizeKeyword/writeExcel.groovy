@@ -72,7 +72,7 @@ public class writeExcel {
 		workbook.write(outFile);
 		outFile.close();
 	}
-	
+
 	@Keyword
 	def writeToExcelNumber(String filePath, String sheetName, int rowNo, int collNo, Integer cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository

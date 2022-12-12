@@ -29,7 +29,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 appno = WebUI.getText(findTestObject('Object Repository/AppView/MainInformation/Label App No'))
 
 'get custname'
-custname = WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName'))
+custname = WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/CustomerName'))
 
 'Verif Customer Main Data'
 ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView.checkCustomerMainDataCompany'(sqlconnectionLOS, 
@@ -38,7 +38,7 @@ ArrayList<String> resultCustomerMainData = CustomKeywords.'appView.verifyAppView
 int index = 0
 
 'verify cust name'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CustomerName')).toString().toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/CustomerName')).toString().toUpperCase(), 
         (resultCustomerMainData[index++]).toString().toUpperCase(), false))
 
 'verify industry type'
@@ -195,14 +195,14 @@ for (MSindex = 1; MSindex <= variableData.size(); MSindex++) {
 
     if (MSType.equalsIgnoreCase('Personal')) {
         'call test case verify view Personal detail'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-SubjectPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (MSType.equalsIgnoreCase('Company')) {
         'call test case verify view Company detail'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-SubjectCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 	
 	'clik button back'
-	WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonBackMS'))
+	WebUI.click(findTestObject('AppView/CustomerMainData/attributelistCompany/buttonBackMS'))
 }
 
 'get arraylist contact person from db'
@@ -269,7 +269,7 @@ for (finIndex = 1; finIndex <= resultFindata.size(); finIndex++) {
     }
     
     'click button back'
-    WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonBackFinancial'))
+    WebUI.click(findTestObject('AppView/CustomerMainData/attributelistCompany/buttonBackFinancial'))
 }
 
 'get arraylist fin data attr from db'
@@ -497,31 +497,31 @@ ArrayList<String> resultOtherAttrList = CustomKeywords.'appView.verifyAppView.ch
     custname)
 
 'verify Business period AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Period AML')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Business Period AML')).toUpperCase(), 
         (resultOtherAttrList[9]).toUpperCase(), false))
 
 'verify Business Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Business Source AML')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Business Source AML')).toUpperCase(), 
         (resultOtherAttrList[8]).toUpperCase(), false))
 
 'verify CSP USL Source AML'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/CSP USL Source')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/CSP USL Source')).toUpperCase(), 
         (resultOtherAttrList[6]).toUpperCase(), false))
 
 'verify Payment Type'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Payment Type')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Payment Type')).toUpperCase(), 
         (resultOtherAttrList[7]).toUpperCase(), false))
 
 'verify KYC Report'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/KYC Report AMl')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/KYC Report AMl')).toUpperCase(), 
         (resultOtherAttrList[5]).toUpperCase(), false))
 
 'verify Exceed BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Exceed BMPK')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Exceed BMPK')).toUpperCase(), 
         (resultOtherAttrList[3]).toUpperCase(), false))
 
 'verify Violate BMPK'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelist Company/Violate BMPK')).toUpperCase(), 
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/CustomerMainData/attributelistCompany/Violate BMPK')).toUpperCase(), 
         (resultOtherAttrList[2]).toUpperCase(), false))
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {

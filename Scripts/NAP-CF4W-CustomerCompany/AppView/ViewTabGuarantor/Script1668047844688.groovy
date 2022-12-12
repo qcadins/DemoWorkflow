@@ -104,14 +104,14 @@ for (Guarindex = 1; Guarindex <= variableData.size(); Guarindex++) {
 			
 	if(guartype.equalsIgnoreCase('PERSONAL')){
 		'call test case verify view Personal detail'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-SubjectPersonalDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}else if(guartype.equalsIgnoreCase('COMPANY')){
 		'call test case verify view Company detail'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-CustCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ViewTabCustomer-SubjectCompanyDetail'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	
 	'clik button X'
-	WebUI.click(findTestObject('AppView/CustomerMainData/attributelist Company/buttonX'))
+	WebUI.click(findTestObject('AppView/CustomerMainData/attributelistCompany/buttonX'))
 }
 
 
