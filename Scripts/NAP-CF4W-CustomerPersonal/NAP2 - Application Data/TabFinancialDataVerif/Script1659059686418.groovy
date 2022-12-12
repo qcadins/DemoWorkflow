@@ -351,7 +351,7 @@ def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('NAP-CF4W-Custo
 BigDecimal intTotalInsurancevalue = new BigDecimal(TotalInsuranceCapitalizeValue.replace(',', ''))
 
 'verify match Total insurance(from tab insruance) and total insurance (from tab financial)'
-//checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false))
 
 'verify match Insurance capitalize amount (from tab insurance) and total insurance capitalize (from tab financial)'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,60).replace(".00",""), TotalInsuranceCapitalizeValue, false))
@@ -377,7 +377,7 @@ Number CapitalizePremiumPercentage = GlobalVariable.CapitalizePremiumPercentage
 int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * CapitalizePremiumPercentage)
 
 'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
-//checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
+checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
 
 //'verify NTF Value'
 //checkVerifyEqualOrMatch(WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize, 

@@ -20,21 +20,24 @@ import org.openqa.selenium.WebElement
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
 'declare datafileTabFinancial'
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnection, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+'get financial data from db'
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 		13))
 
-ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnection, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+'get financial fee from db'
+ArrayList<String> resultFee = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2FinancialFeeStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 		13))
 
-'declare arraymatch arraylist'
+'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 
+'declare arrayindex, arrayfeeindex'
 int arrayindex = 0, arrayFeeIndex = 0
 
 'Verif jika use default fee value no'
@@ -212,7 +215,7 @@ arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(datafileTabFinancial.getVa
 				GlobalVariable.NumofColm, 23).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
 				GlobalVariable.NumofColm, 24).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
 				GlobalVariable.NumofColm, 25).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 39).replace(',', '')), Integer.parseInt(result[arrayindex++]), FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 39).replace(',', '')), Integer.parseInt(result[arrayindex++])))
 
 'verify total capitalize amt'
 arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(datafileTabFinancial.getValue(
@@ -221,17 +224,17 @@ arrayMatch.add(WebUI.verifyEqual(((((Integer.parseInt(datafileTabFinancial.getVa
 				GlobalVariable.NumofColm, 31).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
 				GlobalVariable.NumofColm, 33).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
 				GlobalVariable.NumofColm, 35).replace(',', ''))) + Integer.parseInt(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 41).replace(',', '')), Integer.parseInt(result[arrayindex++]), FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 41).replace(',', '')), Integer.parseInt(result[arrayindex++])))
 
 'verify provision fee calculation base'
 arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-			GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+			GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false))
 
 if (datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 43).equalsIgnoreCase('Effective Rate')) {
 	'verify effective rate'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false))
 
 	'skip flat rate'
 	arrayindex++
@@ -242,18 +245,18 @@ if (datafileTabFinancial.getValue(
 
 	'verify flat rate'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false))
 }
 
 if (datafileTabFinancial.getValue(
 	GlobalVariable.NumofColm, 46).equalsIgnoreCase('Yes')) {
 	'verify grace period'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false))
 
 	'verify grace period type'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-				GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+				GlobalVariable.NumofColm, 48).toUpperCase().replace(" ",""), (result[arrayindex++]).toUpperCase().replace("_","").replace(" ",""), false))
 }
 else{
 	arrayindex+=2
@@ -261,11 +264,11 @@ else{
 
 'verify TDP paid at MF'
 arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
-			GlobalVariable.NumofColm, 49).replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+			GlobalVariable.NumofColm, 49).replace(',', ''), (result[arrayindex++]).toUpperCase(), false))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	
+
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
