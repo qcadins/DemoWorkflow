@@ -3,7 +3,7 @@
    <description></description>
    <name>input kota</name>
    <tag></tag>
-   <elementGuidId>68765dd0-48ca-41b1-9ddd-8fbf637f4812</elementGuidId>
+   <elementGuidId>52699838-1927-4279-a65c-1a7df120e6ab</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
