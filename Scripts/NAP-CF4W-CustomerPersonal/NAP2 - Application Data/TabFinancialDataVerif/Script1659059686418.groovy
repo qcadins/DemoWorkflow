@@ -769,11 +769,13 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 		
 	}
 	else if(gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum>0){
-		
+		'write to excel grace period number'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, gracePeriodNum)
 		
+		'write to excel installment amount for segno grace period'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',14,4, Double.parseDouble(findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(3, 151).replace(",","")))
 		
+		'write to excel grace period number'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Regular Fixed',145,1, gracePeriodNum)
 		
 		'get total ar'
@@ -793,8 +795,10 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	'write besar angsuran ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
 	
+	'get ntf value from excel'
 	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
 	
+	'get tdp from excel'
 	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
 	
 	'write total AR ke datafile'
@@ -803,6 +807,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	'write total Interest ke datafile'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',68,GlobalVariable.NumofColm-1, Double.parseDouble(totalInterest.replace(",","")))
 	
+	'get installment amount rounded'
 	instAmtRounded  = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 18)
 	
 	'write installment amount'
@@ -814,6 +819,7 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	'write TDP'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'10.TabFinancialData',65,GlobalVariable.NumofColm-1, Double.parseDouble(TDP.replace(",","")))
 	
+	'get gross yield value'
 	GrossYieldVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(10, 84)
 	
 	'write gross yield'
@@ -822,16 +828,22 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NA
 	
 }
 
+'verify interest amount confins x excel with tolerance'
 checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))),5))
 	
+'verify total ar confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 5))
 	
+'verify installment amount (rounded) confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(strInstallmentAmount, instAmtRounded.replace(",","").replace(".00",""), false))
 	
+'verify tdp confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, TDP.replace(",",""), false))
 	
+'verify ntf confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".00",""), false))
 	
+'verify gross yield confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
 	
 'Ambil nilai total fee dan simpan dari confins financial datas'
