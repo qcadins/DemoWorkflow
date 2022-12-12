@@ -19,7 +19,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/a_New Consumer Finance'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -28,20 +28,20 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 datafileCDC = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion')
 
 'click menu Customer Data Completion'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 'call funtion paging testing'
 pagingTesting()
 
 'input Appno'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/input_Application No_AppNoId'), 
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
     datafileCDC.getValue(GlobalVariable.NumofColm, 12))
 
 'click search'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Search'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
 
 'click action'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/i_CF4W 2021_font-medium-3 ft-edit-2'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/i_CF4W 2021_font-medium-3 ft-edit-2'))
 
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -65,11 +65,11 @@ for (int i = 1; i <= count; i++) {
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[3]', true)
 
     'modify object iscomplete'
-    modifynewisComplete = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/td_isComplete'), 
+    modifynewisComplete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/td_isComplete'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[7]', true)
 
     'modify object button action'
-    modifynewButtonAction = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/buttonAction'), 
+    modifynewButtonAction = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/buttonAction'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[8]', true)
 
     'get text customer name'
@@ -283,7 +283,7 @@ for (int i = 1; i <= count; i++) {
 }
 
 'click button submit'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Submit'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Submit'))
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbconnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
@@ -298,14 +298,14 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
 
 if (GlobalVariable.FlagFailed == 0) {
 'Check save Process write to excel'
-CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/input_Application No_AppNoId'), 
+CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
     GlobalVariable.NumofColm, '14.CustomerDataCompletion')
 }
 
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'), 
+if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'), 
     5, FailureHandling.OPTIONAL)) {
     'click button back'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion/button_Back'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
   
 	'write to excel if failed'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
@@ -341,7 +341,7 @@ def pagingTesting(){
 		ArrayList<String> listString = new ArrayList<String>()
 	
 		'click search'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
 	
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
@@ -350,19 +350,19 @@ def pagingTesting(){
 		ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 	
 		'Klik header office'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_Office'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_Office'))
 	
 		'Verif tidak ada alert yang muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 		'Klik header appno'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[4]/span', true)
 	
@@ -377,10 +377,10 @@ def pagingTesting(){
 		listApp = new ArrayList<String>()
 	
 		'Klik header appno'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[4]/span', true)
 	
@@ -393,9 +393,9 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik 2x header custno supaya descending'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custNo'))
 	
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custNo'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
@@ -403,7 +403,7 @@ def pagingTesting(){
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custNo'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[5]/span', true)
 	
@@ -416,7 +416,7 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custName'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custName'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
@@ -424,7 +424,7 @@ def pagingTesting(){
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[6]/span', true)
 	
@@ -437,12 +437,12 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_custName'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custName'))
 	
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/custName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[6]/span', true)
 	
@@ -455,7 +455,7 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header poname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_POName'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_POName'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
@@ -463,7 +463,7 @@ def pagingTesting(){
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/POName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[7]/span', true)
 	
@@ -476,12 +476,12 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header poname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_POName'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_POName'))
 	
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/POName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[7]/span', true)
 	
@@ -494,12 +494,12 @@ def pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik 2x appno supaya descending'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
 	
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/span_appNo'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
 	
 		'Ambil nilai count data dari confins'
-		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/countData')).replace(
+		String[] textCountData = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/countData')).replace(
 			' ', '').replace(':', ';').split(';')
 	
 		Integer countDt = Integer.parseInt(textCountData[1])
@@ -507,10 +507,10 @@ def pagingTesting(){
 		'Jika count data secara keseluruhan lebih besar daripada data pada page 1'
 		if (countDt > rowData.size()) {
 			'Klik page 2'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'))
+			WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/nextPage'))
 	
 			'Verif page 2 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/nextPage'),
 					'aria-current', 2))
 	
 			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -518,7 +518,7 @@ def pagingTesting(){
 			listString = new ArrayList<String>()
 	
 			for (int i = 1; i <= rowData.size(); i++) {
-				appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
+				appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 	
@@ -531,10 +531,10 @@ def pagingTesting(){
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button prev'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Prev'))
+			WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/button_Prev'))
 	
 			'Verify page 1 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/pageOne'),
 					'aria-current', 2))
 	
 			listApp = listString
@@ -549,10 +549,10 @@ def pagingTesting(){
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button next'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/button_Next'))
+			WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/button_Next'))
 	
 			'Verify page 2 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/nextPage'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/nextPage'),
 					'aria-current', 2))
 	
 			listApp = listString
@@ -568,7 +568,7 @@ def pagingTesting(){
 		}
 		
 		'Klik button page 1'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/pageOne'))
+		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/pageOne'))
 	
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(), true))
 	

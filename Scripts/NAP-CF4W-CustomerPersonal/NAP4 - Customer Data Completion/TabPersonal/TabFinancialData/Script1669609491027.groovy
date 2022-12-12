@@ -90,7 +90,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 		for (int i = 1; i <= variable.size(); i++) {
 			'modify object Date'
-			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
 			for (int financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
@@ -106,7 +106,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 						if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
 							'modify object button edit'
-							modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+							modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 								'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a/i', true)
 
 							'click button edit'
@@ -119,7 +119,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						} else {
 							if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).length() == 0) {
 								'modify object button delete'
-								modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+								modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 									'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i',
 									true)
 
@@ -183,7 +183,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify object Date'
-					modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+					modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 						'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -197,7 +197,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								converteddate))) {
 								if (i == variable.size()) {
 									'click button add'
-									WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
+									WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 
 									'call function input financial data'
 									inputFinancialData()
@@ -227,7 +227,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 				
 				'click button add'
-				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
+				WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 	
 				'call function input financial data'
 				inputFinancialData()
@@ -247,7 +247,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 					'click button add'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
+					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
 
 					'call funtion input financial data'
 					inputFinancialData()
@@ -261,7 +261,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, 21).length() > 1) {
 	'input jumlah harta'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Jumlah Harta'),
+	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Jumlah Harta'),
 		GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, 21))
 }
 
@@ -274,7 +274,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	if (variable.size() > 0) {
 		for (int i = 1; i <= variable.size(); i++) {
 			'modify bank name - branch - bank no'
-			modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+			modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 				'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
 
 			BankDetail = WebUI.getText(modifyNewbankaccdetail)
@@ -294,7 +294,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 							if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
 								'modify button edit'
-								modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+								modifyNewbuttonedit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 									'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[1]',
 									true)
 
@@ -308,7 +308,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							} else {
 								if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 10).length() == 0) {
 									'modify button delete'
-									modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+									modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 										'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[2]',
 										true)
 
@@ -370,7 +370,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify bank name - branch - bank no'
-					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
+					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 						'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/h5', true)
 
 					'get text bank acc detail'
@@ -448,12 +448,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 }
 
 'click button save and continue'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'))
 
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/th_Date'),
+if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/th_Date'),
 	5, FailureHandling.OPTIONAL)) {
 	'click button back'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
+	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
@@ -465,29 +465,29 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 def inputFinancialData() {
     GlobalVariable.FlagWarning = 0
 
-    String maritalStatus = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/label_MaritalStatus'))
+    String maritalStatus = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/label_MaritalStatus'))
 
     'input monthly income'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Income_'), 
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Income_'), 
         GlobalVariable.FindDataFile.getValue(financialdata, 12))
 
     'input monthly other income'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Other Income_'), 
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Other Income_'), 
         GlobalVariable.FindDataFile.getValue(financialdata, 13))
 
     'pilih source monthly other income'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_BusinessOnline ShopSalaryStock Trading'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_BusinessOnline ShopSalaryStock Trading'), 
         GlobalVariable.FindDataFile.getValue(financialdata, 14), false)
 
-    monthlyInstallment = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Installment Amount_')
+    monthlyInstallment = findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Installment Amount_')
 
-    monthlyExpense = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Expense Amount_')
+    monthlyExpense = findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Expense Amount_')
 
-    datesAsOf = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Date As Of_form-')
+    datesAsOf = findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Date As Of_form-')
 
-    buttonCalculate = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Calculate')
+    buttonCalculate = findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Calculate')
 
-    buttonSave = findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Save')
+    buttonSave = findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Save')
 
     'Pengecekan jika maritalstatus married'
     if (maritalStatus.equalsIgnoreCase('Married')) {
@@ -506,24 +506,24 @@ def inputFinancialData() {
         'Pengecekan spouse monthly income pada excel terisi'
         if (GlobalVariable.FindDataFile.getValue(financialdata, 18).length() >= 1) {
             'Input spouse monthly income'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_SpouseMonthlyIncome'), 
+            WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_SpouseMonthlyIncome'), 
                 GlobalVariable.FindDataFile.getValue(financialdata, 18))
         }
         
         'Pengecekan isjoinincome bernilai yes atau no pada excel'
         if (GlobalVariable.FindDataFile.getValue(financialdata, 19).equalsIgnoreCase('Yes')) {
             'Jika is join income belum tercentang'
-            if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
+            if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
                 5, FailureHandling.OPTIONAL)) {
                 'centang is join income'
-                WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
+                WebUI.check(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
             }
         } else if (GlobalVariable.FindDataFile.getValue(financialdata, 19).equalsIgnoreCase('No')) {
             'jika is join income sudah tercentang'
-            if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
+            if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
                 5, FailureHandling.OPTIONAL)) {
                 'Un-centang is join income'
-                WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
+                WebUI.uncheck(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
             }
         }
     }
@@ -549,26 +549,26 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
 
     if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 1) {
         'click lookup bank'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Bank Name_btn btn-raised btn-primary'))
+        WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Bank Name_btn btn-raised btn-primary'))
 
         'input bank code'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Bank Code_BankCode'), 
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Bank Code_BankCode'), 
             GlobalVariable.FindDataFile.getValue(financialdata, 23))
 
         'click button search bank'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Search'))
+        WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Search'))
 
         'verify input error'
-        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'), 
+        if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'), 
             10, FailureHandling.OPTIONAL)) {
             'click select'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'))
+            WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'))
         } else {
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
             'click cancel'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
+            WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
@@ -577,47 +577,47 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         }
         
         'input bank branch name'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Bank Branch_'), 
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Bank Branch_'), 
             GlobalVariable.FindDataFile.getValue(financialdata, 25))
 
         'input bank account name'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Account Name_'), 
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Account Name_'), 
             GlobalVariable.FindDataFile.getValue(financialdata, 26))
 
         'input bank account number'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Account No_'), 
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Account No_'), 
             GlobalVariable.FindDataFile.getValue(financialdata, 27))
 
-        if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
+        if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
             2, FailureHandling.OPTIONAL)) {
             'checkbox default'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 28) == 'Yes') {
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
+                WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
             }
-        } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
+        } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
             2)) {
             'checkbox default'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 28) == 'No') {
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
+                WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
             }
         }
         
-        if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+        if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
             2, FailureHandling.OPTIONAL)) {
             'checkbox active'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 29) == 'Yes') {
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
+                WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
             }
-        } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+        } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
             2)) {
             'checkbox active'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 29) == 'No') {
-                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
+                WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
             }
         }
         
         'input begining balance'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Beginning Balance_'), 
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Beginning Balance_'), 
             GlobalVariable.FindDataFile.getValue(financialdata, 30))
 
         'Month array'
@@ -644,37 +644,37 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
             if (variablebankstatement.size() > 0) {
                 for (BSindex = 1; BSindex <= variablebankstatement.size(); BSindex++) {
                     'modify object from input credit'
-                    modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
+                    modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[6]/input', true)
 
                     'modify object from input credit transaction count'
-                    modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
+                    modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[5]/input', true)
 
                     'modify object from input debit'
-                    modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
+                    modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[4]/input', true)
 
                     'modify object from input debit transaction count'
-                    modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
+                    modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[3]/input', true)
 
                     'modify object from input year'
-                    modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
+                    modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[2]/input', true)
 
                     'modify object from select month'
-                    modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                    modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[1]/select', true)
 
                     'modify object delete button'
-                    modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                    modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                         ']/td[8]/a/i', true)
 
@@ -728,37 +728,37 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
                 if (variablebankstatement.size() > 0) {
                     for (BSindex = 1; BSindex <= variablebankstatement.size(); BSindex++) {
                         'modify object from input credit'
-                        modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
+                        modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[6]/input', true)
 
                         'modify object from input credit transaction count'
-                        modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
+                        modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[5]/input', true)
 
                         'modify object from input debit'
-                        modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
+                        modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[4]/input', true)
 
                         'modify object from input debit transaction count'
-                        modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
+                        modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[3]/input', true)
 
                         'modify object from input year'
-                        modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
+                        modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[2]/input', true)
 
                         'modify object from select month'
-                        modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                        modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[1]/select', true)
 
                         'modify object delete button'
-                        modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                        modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                             'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                             BSindex) + ']/td[8]/a/i', true)
 
@@ -779,42 +779,42 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
                                 year)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 10, FailureHandling.OPTIONAL)) {
                                 if (BSindex == variablebankstatement.size()) {
                                     'click add new button'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
+                                    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
 
                                     BSindex++
 
                                     'modify object from input credit'
-                                    modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
+                                    modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[6]/input', true)
 
                                     'modify object from input credit transaction count'
-                                    modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
+                                    modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[5]/input', true)
 
                                     'modify object from input debit'
-                                    modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
+                                    modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[4]/input', true)
 
                                     'modify object from input debit transaction count'
-                                    modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
+                                    modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[3]/input', true)
 
                                     'modify object from input year'
-                                    modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
+                                    modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[2]/input', true)
 
                                     'modify object from select month'
-                                    modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                                    modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[1]/select', true)
 
                                     'modify object delete button'
-                                    modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+                                    modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                                         'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + 
                                         BSindex) + ']/td[8]/a/i', true)
 
@@ -840,10 +840,10 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         }
         
         'click button calculate bank'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_CalculateBank'))
+        WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_CalculateBank'))
 
         'click button save'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveBank'))
+        WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveBank'))
 
         Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(financialdata, 4))
 
@@ -854,7 +854,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         
         if (GlobalVariable.FlagFailed == 0) {
             'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'), 
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'), 
                 financialdata, '5.FinancialData')
 
             if (iscompleteMandatory == 0) {
@@ -865,10 +865,10 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
             }
         }
         
-        if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'), 
+        if (WebUI.verifyElementNotPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'), 
             5, FailureHandling.OPTIONAL)) {
             'click button Cancel'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
+            WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
 
             (GlobalVariable.FlagWarning)++
         }
@@ -928,37 +928,37 @@ def inputBankStatementFromEmpty() {
         35).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 36).length() > 0)) {
         for (BSindex = 1; BSindex <= montharray.size(); BSindex++) {
             'modify object from input credit'
-            modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
+            modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credit'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[6]/input', true)
 
             'modify object from input credit transaction count'
-            modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
+            modifyNewinputCreditTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_credittransactioncount'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[5]/input', true)
 
             'modify object from input debit'
-            modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
+            modifyNewinputDebit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debit'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[4]/input', true)
 
             'modify object from input debit transaction count'
-            modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
+            modifyNewinputDebitTransactioncount = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_debittransactionaccount'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[3]/input', true)
 
             'modify object from input year'
-            modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
+            modifyNewinputYear = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Year'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[2]/input', true)
 
             'modify object from select month'
-            modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
+            modifyNewselectMonth = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/select_Month'), 
                 'xpath', 'equals', ('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr[' + BSindex) + 
                 ']/td[1]/select', true)
 
             'click add new button'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
+            WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
 
 			'call function input bank statement'
             inputBankStatement(BSindex)

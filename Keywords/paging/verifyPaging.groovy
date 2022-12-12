@@ -250,7 +250,7 @@ public class verifyPaging {
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
 		for (int i = 1; i <= rowData.size(); i++) {
-			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/appNo'),
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 
@@ -398,19 +398,19 @@ public class verifyPaging {
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"20",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/select_pageSize'),"20",false)
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		int countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"50",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/select_pageSize'),"50",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/select_pageSize'),"10",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
