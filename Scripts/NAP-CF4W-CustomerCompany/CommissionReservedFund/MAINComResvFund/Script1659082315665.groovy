@@ -32,14 +32,14 @@ datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFu
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
-if (WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
+if (WebUI.verifyElementNotVisible(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
     FailureHandling.OPTIONAL)) {
     'click menu Consumer finance 4w'
     WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 }
 
 'Klik Commission Reserved Fund'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
+WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
 
 WebUI.delay(5)
 
@@ -47,14 +47,14 @@ WebUI.delay(5)
 pagingTesting()
 
 'Input Appno'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
+WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
     datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
 'Klik Search'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Search'))
+WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
 
 'Klik Select'
-WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/i_Select'))
+WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
 
 WebUI.delay(5)
 
@@ -110,7 +110,7 @@ public pagingTesting(){
 		ArrayList<String> listString = new ArrayList<String>()
 	
 		'Klik Search'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Search'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
 	
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
@@ -119,19 +119,19 @@ public pagingTesting(){
 		ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 	
 		'Klik header office'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_Office'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_Office'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
 	
 		'Klik header appNo'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_appNo'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/appNo'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[4]/span', true)
 	
@@ -146,10 +146,10 @@ public pagingTesting(){
 		listApp = new ArrayList<String>()
 	
 		'Klik header appNo'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_appNo'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/appNo'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[4]/span', true)
 	
@@ -162,7 +162,7 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_custName'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_custName'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
@@ -170,7 +170,7 @@ public pagingTesting(){
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/custName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[5]/span', true)
 	
@@ -183,12 +183,12 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_custName'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_custName'))
 	
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/custName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[5]/span', true)
 	
@@ -201,7 +201,7 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header product offering name'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_POName'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_POName'))
 	
 		'Verify alert tidak muncul'
 		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
@@ -209,7 +209,7 @@ public pagingTesting(){
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/POName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[6]/span', true)
 	
@@ -222,12 +222,12 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header product offering name'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_POName'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_POName'))
 	
 		listString = new ArrayList<String>()
 	
 		for (int i = 1; i <= rowData.size(); i++) {
-			appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/POName'),
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 				i) + ']/td[6]/span', true)
 	
@@ -240,12 +240,12 @@ public pagingTesting(){
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header appno 2x supaya urutan descending'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_appNo'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/span_appNo'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Ambil string count data untuk menentukan total data secara keseluruhan'
-		String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/countData')).replace(
+		String[] textCountData = WebUI.getText(findTestObject('NAP/CommissionReservedFund/countData')).replace(
 			' ', '').replace(':', ';').split(';')
 	
 		Integer countDt = Integer.parseInt(textCountData[1])
@@ -253,10 +253,10 @@ public pagingTesting(){
 		'Jika total data secara keseluruhan lebih besar daripada data page 1'
 		if (countDt > rowData.size()) {
 			'Klik page 2'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/nextPage'))
+			WebUI.click(findTestObject('NAP/CommissionReservedFund/nextPage'))
 	
 			'Verif page 2 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/nextPage'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
 					'aria-current', 2))
 	
 			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -264,7 +264,7 @@ public pagingTesting(){
 			listString = new ArrayList<String>()
 	
 			for (int i = 1; i <= rowData.size(); i++) {
-				appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/appNo'),
+				appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 	
@@ -277,10 +277,10 @@ public pagingTesting(){
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button prev'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/button_Prev'))
+			WebUI.click(findTestObject('NAP/CommissionReservedFund/button_Prev'))
 	
 			'Verify page 1 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/pageOne'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/pageOne'),
 					'aria-current', 2))
 	
 			listApp = listString
@@ -295,10 +295,10 @@ public pagingTesting(){
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button next'
-			WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/button_Next'))
+			WebUI.click(findTestObject('NAP/CommissionReservedFund/button_Next'))
 	
 			'Verify page 2 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/nextPage'),
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
 					'aria-current', 2))
 	
 			listApp = listString
@@ -314,7 +314,7 @@ public pagingTesting(){
 		}
 		
 		'Klik button page 1'
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/CommissionReservedFund/pageOne'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/pageOne'))
 	
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComResFundCountDataInPage'(), true))
 	
@@ -352,24 +352,24 @@ public pagingTesting(){
 
 public copyAppYesCommission(){
 	'Klik Calculate'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Calculate'))
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Calculate'))
 
 	'Klik save'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Save'))
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Save'))
 
 	'Write to excel success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData', 0,
 		GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
 	'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
+	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
 		5, FailureHandling.OPTIONAL)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'Klik cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData/button_Cancel'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 
 		'Pengecekan jika new consumer finance belum diexpand'
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
@@ -381,24 +381,24 @@ public copyAppYesCommission(){
 
 public copyAppYesReservedFund(){
 	'Klik Button Calculate'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Calculate'))
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Calculate'))
 
 	'Klik save'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Save'))
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Save'))
 
 	'Write to excel success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
 		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 
 	'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'),
+	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'),
 		5, FailureHandling.OPTIONAL)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'Klik cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData/button_Cancel'))
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 
 		'Pengecekan jika new consumer finance belum diexpand'
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
