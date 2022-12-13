@@ -37,7 +37,7 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'get applaststep from confins'
-String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("INSURANCE") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
@@ -45,7 +45,7 @@ if(!appLastStep.equalsIgnoreCase("INSURANCE") && GlobalVariable.FirstTimeEntry==
 
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
         'LIFE INSURANCE', false, FailureHandling.OPTIONAL))
 }
 
@@ -59,15 +59,15 @@ CustomKeywords.'JsExecutor.jsExecutioncustomizeKeyword.Function'(jsCode)
 if (datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
-    if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
+    if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
         'Mencentang IsCoverLifeInsurance'
-        WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
+        WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
     }
     
 	if(GlobalVariable.Role=="Testing"){
 		'Ambil text original office dari confins'
-		String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+		String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 	
 		'declare lifeinscobranchname'
 		ArrayList<WebElement> lifeInscoBranchName = new ArrayList<WebElement>()
@@ -83,7 +83,7 @@ if (datafileTabLifeInsurance.getValue(
 			officeName)
 	
 		'Verif dropdownlist life insco branch name yang muncul pada confins sesuai dengan array string life insco branch name dari db'
-		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
+		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'),
 			lifeInscoBranchName)==false){
 					
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
@@ -93,7 +93,7 @@ if (datafileTabLifeInsurance.getValue(
 		}
 	
 		'Ambil nilai jumlah option/pilihan life insco branch name dari confins'
-		Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
+		Integer totalLifeInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'))
 	
 		'Verif jumlah life insco branch name yang muncul pada confins sesuai dengan jumlah life insco branch name pada db'
 		if(WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)==false){
@@ -106,12 +106,12 @@ if (datafileTabLifeInsurance.getValue(
 	}
     
     'Select DropDownList Life Insco Branch Name'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
         datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 13), false, FailureHandling.OPTIONAL)
 
     'Select DropDownList Premium Payment Method'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'), 
         datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 14), false)
 
@@ -119,13 +119,13 @@ if (datafileTabLifeInsurance.getValue(
     if (datafileTabLifeInsurance.getValue(
         GlobalVariable.NumofColm, 14) == 'Paid in Advance & Capitalized Mix') {
         'Set Nilai Persentasi Capitalized Premium'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
             datafileTabLifeInsurance.getValue(
                 GlobalVariable.NumofColm, 15))
     }
     
     'Set Notes'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/textarea_Notes'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/textarea_Notes'), 
         datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 16))
 
@@ -143,11 +143,11 @@ if (datafileTabLifeInsurance.getValue(
     for (int i = 1; i <= count; i++) {
         
 		'modify subject'
-        modifyObjectSubject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectType'), 
+        modifyObjectSubject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectType'), 
             'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[3]'), true)
 
 		'modify checkbox'
-        modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_CheckSubject'), 
+        modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_CheckSubject'), 
             'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[4]/input'), true)
 
         'Variabel text digunakan untuk menyimpan isi dari kolom Subject Type'
@@ -196,7 +196,7 @@ if (datafileTabLifeInsurance.getValue(
                 def checkGuarantor = datafileTabLifeInsurance.getValue(
                     GlobalVariable.NumofColm, 21).split(';')
 
-                modifyObjectSubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
+                modifyObjectSubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
                     'xpath', 'equals', (('//*[@id="gridLifeInsD"]/table/tbody/tr[' + i) + ']/td[1]'), true)
 
                 String textSubjectName = WebUI.getText(modifyObjectSubjectName)
@@ -235,24 +235,24 @@ if (datafileTabLifeInsurance.getValue(
     }
     
     'Set Admin Fee Amount'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Admin Fee Amount_CustAdminFeeAmt'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_Admin Fee Amount_CustAdminFeeAmt'), 
         datafileTabLifeInsurance.getValue(
             GlobalVariable.NumofColm, 23))
 
     NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 
 	'get capitalizepremiumpercentage'
-    CapitalizePremiumPercentageValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
+    CapitalizePremiumPercentageValue = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
         'value', FailureHandling.OPTIONAL).replaceAll('\\s', '')
 
 	'parsing capitalizepremiumpercentage ke desimal'
     GlobalVariable.CapitalizePremiumPercentage = decimalFormat.parse(CapitalizePremiumPercentageValue).floatValue()
 } else if(datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'NO') {
-    if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
+    if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         1, FailureHandling.OPTIONAL)) {
 		'uncentang coverlifeinsurance'
-        WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
+        WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
 
         GlobalVariable.CapitalizePremiumPercentage = 0
     }
@@ -261,7 +261,7 @@ if (datafileTabLifeInsurance.getValue(
 WebUI.delay(5)
 
 'click Save'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 
 Integer iscompleteMandatory = Integer.parseInt(datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 4))
 
@@ -273,9 +273,9 @@ if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 if(GlobalVariable.FlagFailed==0){
 	'check save process write to excel'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory,
-		findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'), GlobalVariable.NumofColm, '9.TabLifeInsuranceData')
+		findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'), GlobalVariable.NumofColm, '9.TabLifeInsuranceData')
 	if(iscompleteMandatory==0){
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		errorValObject = findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 		'cek validasi'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '9.TabLifeInsuranceData')
 	}
@@ -288,10 +288,10 @@ if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=
 }
 
 'Verify input data'
-if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
     'click cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
 
    
 } 

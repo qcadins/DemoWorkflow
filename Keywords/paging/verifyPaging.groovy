@@ -95,17 +95,17 @@ public class verifyPaging {
 	public resetPaging(){
 		ArrayList<Boolean> arrayMatch = new ArrayList<>()
 		//Reset paging nap1, nap2, comresfund, dupcheck
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),"AppNo")
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),"CustName")
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),"POName")
-		WebUI.selectOptionByIndex(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),1)
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),"ClaimBy")
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_taskClaimStatus'),0,2))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_ClaimBy'),'value'),"",false))
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_AppNo'),"AppNo")
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custName'),"CustName")
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_POName'),"POName")
+		WebUI.selectOptionByIndex(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/select_taskClaimStatus'),1)
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_ClaimBy'),"ClaimBy")
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/button_Reset'))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_POName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyOptionSelectedByIndex(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/select_taskClaimStatus'),0,2))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_ClaimBy'),'value'),"",false))
 		return arrayMatch
 	}
 
@@ -125,7 +125,7 @@ public class verifyPaging {
 		WebUI.selectOptionByIndex(findTestObject('AppView/MainInformation/select_ApplicationStatus'),1)
 		WebUI.selectOptionByIndex(findTestObject('AppView/MainInformation/select_ContractStatus'),1)
 		WebUI.selectOptionByIndex(findTestObject('AppView/MainInformation/select_CustomerCheckingStep'),1)
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/button_Reset'))
 
 		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_AppNo'), 'value'),"", false))
 		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('AppView/MainInformation/input_CustNo'), 'value'),"", false))
@@ -148,15 +148,15 @@ public class verifyPaging {
 	public resetPagingCustDataCompletion(){
 
 		ArrayList<Boolean> arrayMatch = new ArrayList<>()
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),"AppNo")
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),"CustName")
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),"POName")
-		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),"CustNo")
-		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Reset'))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custName'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_POName'),'value'),"",false))
-		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/input_custNo'),'value'),"",false))
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_AppNo'),"AppNo")
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custName'),"CustName")
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_POName'),"POName")
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custNo'),"CustNo")
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/button_Reset'))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_AppNo'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_POName'),'value'),"",false))
+		arrayMatch.add(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/input_custNo'),'value'),"",false))
 		return arrayMatch
 	}
 
@@ -170,7 +170,7 @@ public class verifyPaging {
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
 		for (int i = 1; i <= rowData.size(); i++) {
-			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/appNo'),
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 
@@ -190,7 +190,7 @@ public class verifyPaging {
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
 		for (int i = 1; i <= rowData.size(); i++) {
-			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/appNo'),
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 
@@ -230,7 +230,7 @@ public class verifyPaging {
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
 		for (int i = 1; i <= rowData.size(); i++) {
-			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'),
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[4]/span', true)
 
@@ -286,19 +286,19 @@ public class verifyPaging {
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"20",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/select_pageSize'),"20",false)
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		int countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"50",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/select_pageSize'),"50",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/select_pageSize'),"10",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > cust-main-data-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
@@ -314,19 +314,19 @@ public class verifyPaging {
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"20",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/select_pageSize'),"20",false)
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		int countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"50",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/select_pageSize'),"50",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/select_pageSize'),"10",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
@@ -370,19 +370,19 @@ public class verifyPaging {
 		'Inisialisasi driver'
 		WebDriver driver = DriverFactory.getWebDriver()
 		Boolean isCount = true
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"20",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/select_pageSize'),"20",false)
 		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		int countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"50",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/select_pageSize'),"50",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
 			isCount = false
 		}
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/select_pageSize'),"10",false)
+		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){

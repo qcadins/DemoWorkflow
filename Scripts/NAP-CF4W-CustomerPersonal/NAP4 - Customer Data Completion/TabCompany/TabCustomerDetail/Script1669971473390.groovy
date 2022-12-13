@@ -148,7 +148,7 @@ if (GlobalVariable.FlagFailed == 0) {
 		GlobalVariable.ColmNAP4, '1.CustomerDetail')
 
 	if (iscompleteMandatory == 0) {
-		errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+		errorValObject = findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 		
 		'Check error validasi'
 		CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP/NAP4-CustomerDataCompletion/errorvalidasi'),

@@ -482,7 +482,7 @@ def verifyInputError() {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/a_Select'))
 	} else {
 		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 
 		'click button back'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))

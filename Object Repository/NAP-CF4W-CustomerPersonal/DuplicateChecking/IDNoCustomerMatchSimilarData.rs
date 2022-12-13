@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>IDNoCustomerMatchSimilarData</name>
+   <tag></tag>
+   <elementGuidId>52860ef7-d6db-46ba-bf64-39313e6951a2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;subSecMatch&quot;]/table/tbody/tr[1]/td[4]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;subSecMatch&quot;]/table/tbody/tr[1]/td[4]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;subSecMatch&quot;]/table/tbody/tr[1]/td[4]</value>
+   </webElementProperties>
+</WebElementEntity>

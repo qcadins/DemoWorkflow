@@ -59,7 +59,7 @@
       <matchCondition>equals</matchCondition>
       <name>ref_element</name>
       <type>Main</type>
-      <value>Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabUploadDocument/iframe</value>
+      <value>Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/iframe</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
