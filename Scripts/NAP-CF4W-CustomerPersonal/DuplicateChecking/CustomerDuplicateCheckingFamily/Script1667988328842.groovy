@@ -258,7 +258,10 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
 
-                            continue
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+                            
+							break
                         } //Jika button select application in process ada pada confins
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
@@ -317,7 +320,10 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
 
-                            continue
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+                            
+							break
 							
                         } //Jika ada button new
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
@@ -371,7 +377,10 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Cancel'))
 
-                            continue
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+							
+                            break
                         } //Jika ada button new pada confins
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {

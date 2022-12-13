@@ -13,6 +13,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -55,8 +56,20 @@ if (DupCheckStatus == true) {
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), datafileDupcheck.getValue(
             GlobalVariable.NumofColm, 12))
 
-    'click button search'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Search'))
+	'Looping delay untuk handling copy app selama +- 2 menit'
+	for(int i = 1;i<=8;i++){
+		'click button search'
+	    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Search'))
+		
+		'Pengecekan ada/tidak adanya button action pencil yang muncul'
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'), 1, FailureHandling.OPTIONAL)){
+			break
+		}
+		else{
+			'delay 14 detik'
+			WebUI.delay(14)
+		}
+	}
 
     'click action'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
@@ -240,6 +253,12 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+							
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+					
+							KeywordUtil.markFailedAndStop('gagal')
+							
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
                             5, FailureHandling.OPTIONAL)) {
                             'gettext newCustomervalue dari UI confins'
@@ -287,6 +306,12 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+							
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+							
+							KeywordUtil.markFailedAndStop('gagal dupcheck')
+							
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
@@ -330,6 +355,12 @@ if (DupCheckStatus == true) {
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
+							
+							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDupcheck)
+							
+							KeywordUtil.markFailedAndStop('gagal')
+				
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
                             5, FailureHandling.OPTIONAL)) {
                             'click button new customer'
@@ -376,15 +407,17 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/Cust
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Submit'))
 
-if (Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 4)) == 0) {
+if (Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 4)) == 0 && GlobalVariable.FlagFailed == 0) {
     'Check alert'
     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, '4.DuplicateChecking')
 }
 
+if(GlobalVariable.FlagFailed == 0){
 'Check save Process write to excel'
 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileDupcheck.getValue(GlobalVariable.NumofColm, 
             4)), findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/input_Application No_AppNoId'), GlobalVariable.NumofColm, 
     '4.DuplicateChecking')
+}
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'), 10, FailureHandling.OPTIONAL)) {
     'click button back'
@@ -579,7 +612,7 @@ def pagingTesting() {
             }
             
             'Verif appno descending pada page 2 tidak ada di page 1'
-            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -597,7 +630,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -615,7 +648,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
         }
@@ -656,4 +689,3 @@ def pagingTesting() {
         }
     }
 }
-

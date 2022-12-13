@@ -629,4 +629,9 @@
       <initValue>0</initValue>
       <name>SubsidyDP</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Dupcheck gagal'</initValue>
+      <name>ReasonFailedDupcheck</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
