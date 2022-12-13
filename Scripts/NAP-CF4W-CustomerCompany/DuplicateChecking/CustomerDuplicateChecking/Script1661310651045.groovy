@@ -448,7 +448,7 @@ def pagingTesting() {
         resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 
         'click button search'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Search'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Search'))
 
         ArrayList<String> listString = new ArrayList<String>()
 
@@ -459,19 +459,19 @@ def pagingTesting() {
         ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
         'Klik header office'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_Office'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_Office'))
 
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
         'Klik header appno'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_appNo'))
 
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/appNo'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[4]/span', true)
 
@@ -486,10 +486,10 @@ def pagingTesting() {
         ArrayList<String> listApp = new ArrayList<String>()
 
         'Klik header appno'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_appNo'))
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/appNo'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[4]/span', true)
 
@@ -502,7 +502,7 @@ def pagingTesting() {
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header custname'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_custName'))
 
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
@@ -510,7 +510,7 @@ def pagingTesting() {
         listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/custName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[5]/span', true)
 
@@ -523,12 +523,12 @@ def pagingTesting() {
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header custname'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_custName'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_custName'))
 
         listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/custName'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/custName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[5]/span', true)
 
@@ -541,7 +541,7 @@ def pagingTesting() {
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header product offering name'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_POName'))
 
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
@@ -549,7 +549,7 @@ def pagingTesting() {
         listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/POName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[6]/span', true)
 
@@ -562,12 +562,12 @@ def pagingTesting() {
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik header product offering anme'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_POName'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_POName'))
 
         listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
-            appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/POName'), 
+            appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/POName'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                 i) + ']/td[6]/span', true)
 
@@ -580,12 +580,12 @@ def pagingTesting() {
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
         'Klik 2x header appno supaya appno descending'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_appNo'))
 
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/span_appNo'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/span_appNo'))
 
         'Ambil nilai countdata dari confins'
-        String[] textCountData = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/countData')).replace(
+        String[] textCountData = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/countData')).replace(
             ' ', '').replace(':', ';').split(';')
 
         Integer countDt = Integer.parseInt(textCountData[1])
@@ -604,7 +604,7 @@ def pagingTesting() {
             listString = new ArrayList<String>()
 
             for (int i = 1; i <= rowData.size(); i++) {
-                appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/appNo'), 
+                appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/appNo'), 
                     'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' + 
                     i) + ']/td[4]/span', true)
 
@@ -617,10 +617,10 @@ def pagingTesting() {
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
             'Klik button prev'
-            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Prev'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Prev'))
 
             'Verify page 1 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/pageOne'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/pageOne'), 
                     'aria-current', 2))
 
             listApp = listString
@@ -635,7 +635,7 @@ def pagingTesting() {
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
             'Klik button next'
-            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_Next'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Next'))
 
             'Verify page 2 active'
             checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
@@ -654,7 +654,7 @@ def pagingTesting() {
         }
         
         'Klik button page 1'
-        WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/pageOne'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/pageOne'))
 
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.DupcheckCountDataInPage'(), true))
 

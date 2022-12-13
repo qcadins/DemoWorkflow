@@ -149,7 +149,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -183,7 +183,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -213,7 +213,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -240,7 +240,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input app no'
             inputAppNo()
@@ -262,7 +262,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     } else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
         'call function input appno'
         inputAppNo()
@@ -414,7 +414,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.STOP_ON_FAILURE)
         } else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -448,7 +448,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.STOP_ON_FAILURE)
         } else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -478,7 +478,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.STOP_ON_FAILURE)
         } else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input appno'
             inputAppNo()
@@ -505,7 +505,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.STOP_ON_FAILURE)
         } else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
             'call function input app no'
             inputAppNo()
@@ -527,7 +527,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     } else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
         'call function input appno'
         inputAppNo()
@@ -557,14 +557,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
 def inputAppNo() {
     'input Appno'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
     'click button search'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Search'))
 
     'click icon pensil untuk select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 }
 
 def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {

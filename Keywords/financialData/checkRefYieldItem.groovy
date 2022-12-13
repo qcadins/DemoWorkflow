@@ -128,7 +128,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
+			value = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
 					'value', FailureHandling.OPTIONAL).replace(',', '')
 		}
 

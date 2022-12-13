@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_LookupCopyApp</name>
+   <tag></tag>
+   <elementGuidId>bcd87bb8-7e01-43ac-af50-90e5308f87f3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-add/div/div/div/div[2]/div/form/div[1]/div[2]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+</WebElementEntity>

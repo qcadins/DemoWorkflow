@@ -19,37 +19,37 @@ import internal.GlobalVariable as GlobalVariable
 datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
 'Input Insco Branch Name'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Insco Branch Name Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Insco Branch Name Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 14))
 
 'Input Coverage Amount'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 15))
 
 'Input Policy No'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Policy No Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Policy No Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 16))
 
 'Input Policy Name'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Policy Name Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Policy Name Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 17))
 
 'Input Start Date'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_Start Date Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Start Date Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 18))
 
 'Input End Date'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/input_End Date Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_End Date Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 19))
 
 'Input Insurance Notes'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes Cust'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes Cust'), 
     datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 20))
 

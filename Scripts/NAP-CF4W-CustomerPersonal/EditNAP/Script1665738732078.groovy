@@ -161,7 +161,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //Jika appstep == app
 		else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -202,7 +202,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //jika appstep == asset
 		else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -239,7 +239,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //jika appstep == ins
 		else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -273,7 +273,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //jika appstep == lfi
 		else if (appStep == 'LFI') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -303,7 +303,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //Jika appstep == fin
 		else if (appStep == 'FIN') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -329,7 +329,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         } //Jika appstep == tc
 		else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -352,7 +352,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     } //jika appstep == upl_doc
 	else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 		'input appno pada confins'
         inputAppNo(appNo)
@@ -520,7 +520,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //Jika appstep == app
 		else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -561,7 +561,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //jika appstep == asset
 		else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -598,7 +598,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //jika appstep == ins
 		else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -632,7 +632,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //jika appstep == lfi
 		else if (appStep == 'LFI') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -662,7 +662,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //jika appstep == fin
 		else if (appStep == 'FIN') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -688,7 +688,7 @@ else if (GlobalVariable.Role == 'Testing') {
         } //jika appstep == tc
 		else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 			'input appno pada confins'
             inputAppNo(appNo)
@@ -711,7 +711,7 @@ else if (GlobalVariable.Role == 'Testing') {
     } //jika appstep == upl_doc
 	else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 		'input appno pada confins'
         inputAppNo(appNo)
@@ -743,14 +743,14 @@ else if (GlobalVariable.Role == 'Testing') {
 
 def inputAppNo(String appNo) {
     'input Appno'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
         appNo)
 
     'click button search'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Search'))
 
     'click icon pensil untuk select'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 }
 
 def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {

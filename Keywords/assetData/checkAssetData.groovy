@@ -71,7 +71,7 @@ public class checkAssetData {
 	public checkSelfOwnerPersonal(){
 		Boolean ismatch = false
 		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Self Owner Checkbox'),'aria-checked')=="false"){
+		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Owner Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
 
@@ -83,7 +83,7 @@ public class checkAssetData {
 	public checkSelfUsagePersonal(){
 		Boolean ismatch = false
 		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Self Usage Checkbox'),'aria-checked')=="false"){
+		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Usage Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
 
@@ -95,7 +95,7 @@ public class checkAssetData {
 	public checkSelfOwnerCompany(){
 		Boolean ismatch = false
 		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Self Owner Checkbox'),'aria-checked')=="false"){
+		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Owner Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
 
@@ -107,7 +107,7 @@ public class checkAssetData {
 	public checkSelfUsageCompany(){
 		Boolean ismatch = false
 		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabAssetData/input_Self Usage Checkbox'),'aria-checked')=="false"){
+		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Usage Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
 

@@ -63,7 +63,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckPagingPersonal ==
     ArrayList<String> listString = new ArrayList<String>()
 
     'click button search'
-    WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/button_Search'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/button_Search'))
 
     'Inisialisasi driver'
     WebDriver driver = DriverFactory.getWebDriver()

@@ -24,7 +24,7 @@ datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 GlobalVariable.FlagFailed = 0
 
 'get applaststep from confins'
-String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/label_AppLastStep'))
+String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
@@ -32,15 +32,15 @@ if(!appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && GlobalVariable.Fi
 
 if (GlobalVariable.Role == 'Testing') {
 	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/ApplicationCurrentStep')),
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')),
 		'INSURANCE', false, FailureHandling.OPTIONAL))
 
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'Verifikasi perhitungan asset price'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 88), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 88), false))
 	
 		'Verifikasi perhitungan asset price incl accessories'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 89), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 89), false))
 	}
 	
 }
@@ -50,7 +50,7 @@ String insuredBy = datafileTabInsurance.getValue(
     GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
+WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
     insuredBy, false)
 
 'Verifikasi nilai insured by'
@@ -75,7 +75,7 @@ if (insuredBy == 'Customer') {
 WebUI.delay(3)
 
 'Klik save'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Save'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Save'))
 
 WebUI.delay(2)
 
@@ -90,11 +90,11 @@ if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         GlobalVariable.NumofColm, '8.TabInsuranceData')
 
     if (iscompleteMandatory == 0) {
-        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+        errorValObject = findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 
         'cek validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '8.TabInsuranceData')
@@ -108,10 +108,10 @@ if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal
 }
 
 'Verify input data'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
     5, FailureHandling.OPTIONAL)) {
     'click cancel'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

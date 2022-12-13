@@ -849,7 +849,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
                 financialdata, '5.FinancialData')
 
             if (iscompleteMandatory == 0) {
-                errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+                errorValObject = findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 
                 'cek validasi'
                 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, financialdata, '5.FinancialData')
