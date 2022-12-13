@@ -10,6 +10,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -26,86 +27,94 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 
 'Jika role == data entry'
 if (GlobalVariable.Role == 'Data Entry') {
-	'looping countnumofcust'
+    'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
         'Jika status pada excel bukan unexecuted'
-		if(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != "Unexecuted"){
-			'skip ke appno selanjutnya'
-			continue
-		}
-		'jika edit appno tidak kosong'
-		if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
-			'call tc edit nap'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-        } //Jika edit appno kosong
-		else {
-			'call tc main nap1'
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+            'skip ke appno selanjutnya'
+            continue
+        }
+        
+        'jika edit appno tidak kosong'
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+            'call tc edit nap'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE) //Jika edit appno kosong
+        } else {
+            'call tc main nap1'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc custdupcheck'
+            'call tc custdupcheck'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc main nap2'
+            'call tc main nap2'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc main comresfund'
+            'call tc main comresfund'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call tc nap4 cdc'
+            'call tc nap4 cdc'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
-    }
-} //jika role == testing
-else {
+    } //jika role == testing
+    //jika edit appno kosong
+} else {
     'looping countnumofcust'
-	for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
-		'Jika status pada excel bukan unexecuted'
-		if(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != "Unexecuted"){
-			'skip ke appno selanjutnya'
-			continue
-		}
-		'Jika edit appno pada excel tidak kosong'
-		if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
-			'call tc edit nap'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
-        }//jika edit appno kosong
-        else{
-			'call tc main nap1'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
-	
-			'call tc custdupcheckverif'
-	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 
-	            FailureHandling.STOP_ON_FAILURE)
-	
-			'jika dupcheckverif bernilai yes'
-	        not_run: if (GlobalVariable.DupcheckVerif == 'Yes') {
-				'call tc custdupcheck'
-	            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), [:], 
-	                FailureHandling.STOP_ON_FAILURE)
-	        }
-	        
-			'call tc main nap2'
-	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-	            [:], FailureHandling.STOP_ON_FAILURE)
-	
-			'call tc main comresfund'
-	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
-	            FailureHandling.STOP_ON_FAILURE)
-	
-			'call tc nap4 cdc'
-	        not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-	            [:], FailureHandling.STOP_ON_FAILURE)
-	
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
+        'Jika status pada excel bukan unexecuted'
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+            'skip ke appno selanjutnya'
+            continue
         }
-		'Jika flag checkappviewpersonal bernilai yes'
-		not_run: if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
-			'call test case verify app view'
-			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-		}
+        
+        'Jika edit appno pada excel tidak kosong'
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+            'call tc edit nap'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
+        } else {
+            try {
+                'call tc main nap1'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'call tc custdupcheckverif'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'jika dupcheckverif bernilai yes'
+                if (GlobalVariable.DupcheckVerif == 'Yes') {
+                    'call tc custdupcheck'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), 
+                        [:], FailureHandling.STOP_ON_FAILURE)
+                }
+                
+                'call tc main nap2'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'call tc main comresfund'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
+                    FailureHandling.STOP_ON_FAILURE)
+
+                'call tc nap4 cdc'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'Jika flag checkappviewpersonal bernilai yes'
+                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+                    'call test case verify app view'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+                }
+            }
+            catch (Exception e) {
+                KeywordUtil.markFailed('gagal')
+
+                continue
+            } 
+        }
     }
 }
 

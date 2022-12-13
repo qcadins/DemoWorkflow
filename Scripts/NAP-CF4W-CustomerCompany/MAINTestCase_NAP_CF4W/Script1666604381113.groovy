@@ -10,7 +10,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -65,45 +65,46 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
         } else {
-		
-		try {
-			'call test case NAP1'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), [:], 
-                FailureHandling.STOP_ON_FAILURE)
-
-            'call test case Ducheck verif'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-
-            'check if dupcheck == yes'
-            if (GlobalVariable.DupcheckVerif == 'Yes') {
-                'call test case Duplicate checking'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
+            try {
+                'call test case NAP1'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
+
+                'call test case Ducheck verif'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'check if dupcheck == yes'
+                if (GlobalVariable.DupcheckVerif == 'Yes') {
+                    'call test case Duplicate checking'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
+                        [:], FailureHandling.STOP_ON_FAILURE)
+                }
+                
+                'call test case NAP2'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'call test case Comresfund'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
+                    FailureHandling.STOP_ON_FAILURE)
+
+                'call test case CDC NAP4'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'check if verif Appview = yes'
+                if (GlobalVariable.CheckAppViewCompany == 'Yes') {
+                    'call test case verify app view'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+                }
             }
-            
-            'call test case NAP2'
-            not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+            catch (Exception e) {
+                KeywordUtil.markFailed('gagal')
 
-            'call test case Comresfund'
-            not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-
-            'call test case CDC NAP4'
-            not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
-
-            'check if verif Appview = yes'
-            not_run: if (GlobalVariable.CheckAppViewCompany == 'Yes') {
-                'call test case verify app view'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-            }
-		} catch (Exception e) {
-			KeywordUtil.markFailed('gagal')
-			continue
-		}
-            
+                continue
+            } 
         }
     }
 }
+
