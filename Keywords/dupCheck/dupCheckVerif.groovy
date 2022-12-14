@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.sql.ResultSetMetaData
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -348,10 +350,10 @@ public class dupCheckVerif {
 		String Result
 		Boolean DupCheckStatus
 		instance.eachRow(("SELECT CUST_CHECKING_STEP FROM APP WITH(NOLOCK) WHERE APP_NO = '"+ appno + "'"), { row ->
-
+			
 			Result = (row[0])
 
-			if (Result == 'NULL' || Result == 'CDC_AUTO' || Result == 'CDC'){
+			if (Result.equalsIgnoreCase('NULL') || Result.equalsIgnoreCase('CDC_AUTO') || Result.equalsIgnoreCase('CDC')){
 				DupCheckStatus = true
 			}else{
 				DupCheckStatus = false

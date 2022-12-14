@@ -7,8 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;role-modal&quot;]/app-rolepick/div/table/tbody/tr[1]/td[4]/a/button
-</value>
+         <value>//*[@id=&quot;role-modal&quot;]/app-rolepick/div/table/tbody/tr[1]/td[4]/a/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -18,7 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;role-modal&quot;]/app-rolepick/div/table/tbody/tr[1]/td[4]/a/button
-</value>
+      <value>//*[@id=&quot;role-modal&quot;]/app-rolepick/div/table/tbody/tr[1]/td[4]/a/button</value>
    </webElementProperties>
 </WebElementEntity>
