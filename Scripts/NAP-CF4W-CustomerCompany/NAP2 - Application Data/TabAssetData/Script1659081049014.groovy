@@ -100,7 +100,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
 'verify input error'
-if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), 5, 
+if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), GlobalVariable.TimeOut, 
     FailureHandling.OPTIONAL)) {
     'Ambil text supplier name dari lookup confins'
     suppName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/span_suppNameLookup'))
@@ -268,7 +268,7 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 22).length() > 0) {
 
     'verify input error'
     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), 
-        5, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click select'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'))
     } else {
@@ -363,14 +363,14 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
         GlobalVariable.NumofColm, 31))
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'input serial 4'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4'), datafileTabAsset.getValue(
             GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'input serial 5'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5'), datafileTabAsset.getValue(
             GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
@@ -409,16 +409,16 @@ for (int i = 1; i <= Integer.parseInt(countAssetAtrtibute); i++) {
         'xpath', 'equals', ('//*[@id="RefAttrContentAppAssetAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]', 
         true)
 
-    if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, 1, FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputText, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'input "Attribute"'
         WebUI.setText(modifyObjectAssetAttributeInputText, 'Attr', FailureHandling.OPTIONAL)
-    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeList, 1, FailureHandling.OPTIONAL)) {
+    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeList, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'select option index 1'
         WebUI.selectOptionByIndex(modifyObjectAssetAttributeList, 1, FailureHandling.OPTIONAL)
-    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputDate, 1, FailureHandling.OPTIONAL)) {
+    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputDate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'input date 01/01/2000'
         WebUI.setText(modifyObjectAssetAttributeInputDate, '01/01/2000', FailureHandling.OPTIONAL)
-    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputNumber, 1, FailureHandling.OPTIONAL)) {
+    } else if (WebUI.verifyElementPresent(modifyObjectAssetAttributeInputNumber, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'input number 0'
         WebUI.setText(modifyObjectAssetAttributeInputNumber, '0', FailureHandling.OPTIONAL)
     }
@@ -461,11 +461,11 @@ for (int i = 0; i < docName.size(); i++) {
 
     'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase('Yes') && WebUI.verifyElementNotChecked(
-        modifyReceived, 2, FailureHandling.OPTIONAL)) {
+        modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'centang received'
         WebUI.check(modifyReceived)
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 64).equalsIgnoreCase('No') && WebUI.verifyElementChecked(
-        modifyReceived, 2, FailureHandling.OPTIONAL)) {
+        modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'uncentang received'
         WebUI.uncheck(modifyReceived)
     }
@@ -641,7 +641,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 
             'verify input error'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'), 
-                5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click select'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/a_Select'))
             } else {
@@ -758,7 +758,7 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 } else {

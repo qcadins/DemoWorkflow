@@ -95,7 +95,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         GlobalVariable.ColmNAP4, 13))) {
                     if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
                             12))) {
-                        if (WebUI.verifyElementPresent(modifyNewbuttonedit, 5, FailureHandling.OPTIONAL)) {
+                        if (WebUI.verifyElementPresent(modifyNewbuttonedit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click button edit'
                             WebUI.click(modifyNewbuttonedit)
 
@@ -185,7 +185,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Save  Continue'))
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/th_Address'),
-	10, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Back'))
 }
@@ -199,7 +199,7 @@ def inputaddress() {
 
     if (GlobalVariable.FindDataFile.getValue(Address, 13).length() > 1) {
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/select_CopyAddressFrom'), 
-            5, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Select option dropdownlist Copy Address From '
             WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/select_CopyAddressFrom'), 
                 GlobalVariable.FindDataFile.getValue(Address, 13), false, FailureHandling.OPTIONAL)
@@ -249,7 +249,7 @@ def inputaddress() {
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/a_Select'))
         } else {
@@ -337,7 +337,7 @@ def inputaddress() {
     }
     
     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Cancel'), 
-        5, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click button back'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Cancel'))
     }

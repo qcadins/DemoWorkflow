@@ -53,7 +53,7 @@ for (int i = 1; i <= variableData.size(); i++) {
     1); (GlobalVariable.NumofGuarantorCompany)++) {
         if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 13)) {
-            if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementPresent(modifyNewGuarantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 if (WebUI.getText(modifyNewGuarantorTypeName).equalsIgnoreCase('Company')) {
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                             18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorCompany.getValue(
@@ -133,7 +133,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                                 } else {
@@ -158,7 +158,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         } else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
                             if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                                5, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click radio personal'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/Radio Personal'))
 
@@ -181,7 +181,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                                 } else {
@@ -266,7 +266,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         
                         'verify button cancel present'
                         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
@@ -316,7 +316,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             WebUI.acceptAlert()
 
                             if (i == variableData.size()) {
-                                if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+                                if (WebUI.verifyElementPresent(modifyNewGuarantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                      'add cust name failed kedalam array'
                                     custnamefaileddelete.add(CustNameBefore)
                                 }

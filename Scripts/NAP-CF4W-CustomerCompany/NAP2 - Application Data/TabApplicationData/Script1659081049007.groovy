@@ -96,7 +96,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 
 	'Pengecekan jika button lookup ada'
 	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_MOOfficer'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		
 		'Ambil text original office dari confins'
 		String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
@@ -148,7 +148,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 
 		'verify input error'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/a_Select'),
-			10, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			if (GlobalVariable.RoleCompany == 'Testing') {
 				'Ambil nama spv pada lookup confins'
 				spvName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/span_SPVLookup'))

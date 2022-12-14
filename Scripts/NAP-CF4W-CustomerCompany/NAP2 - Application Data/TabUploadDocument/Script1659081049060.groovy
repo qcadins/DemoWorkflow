@@ -40,7 +40,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 
             'jika menu titik 3 disabled/enabled'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'), 
-                5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click new document'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'))
             } else {
@@ -76,7 +76,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
                 0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
 
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'), 
-                5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click button close'
                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
 

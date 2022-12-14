@@ -170,7 +170,7 @@ if (variableSupp.size() > 0) {
 		'Click OK pada alert'
 		WebUI.acceptAlert()
 		
-		if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_SupplierName'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 			commissiondelete.add(supplierDelete)
 		}
 	} else {
@@ -399,7 +399,7 @@ if (variableSuppEmp.size() > 0) {
 					WebUI.acceptAlert()
 
 					if(i == variableSuppEmp.size()){
-						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, 5, FailureHandling.OPTIONAL)){
+						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
 								variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 						}else{
@@ -652,7 +652,7 @@ if (variableRef.size() > 0) {
 					WebUI.acceptAlert()
 					
 					if(i == variableRef.size()){
-							if(WebUI.verifyElementNotPresent(modifyObjectRefName, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementNotPresent(modifyObjectRefName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
 								variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 							}else{
@@ -868,7 +868,7 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_
 alertCalculate = findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/alert_Commission')
 
 'Pengecekan jika calculate error'
-if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
+if(WebUI.verifyElementPresent(alertCalculate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
@@ -929,7 +929,7 @@ if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBC
 
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
-	5, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 

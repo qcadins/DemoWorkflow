@@ -65,7 +65,7 @@ for (int i = 1; i <= variableData.size(); i++) {
     for (GlobalVariable.NumofMS; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
     1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
-            if (WebUI.verifyElementPresent(modifyNewMSName, 5, FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementPresent(modifyNewMSName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 if (((((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 19)) && 
                 WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14))) || 
                 (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 17)) && WebUI.getText(
@@ -76,7 +76,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                     modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) || (WebUI.getText(
                     modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 62)) && WebUI.getText(
                     modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) {
-                    if (WebUI.verifyElementPresent(modifyNewButtonEdit, 5, FailureHandling.OPTIONAL)) {
+                    if (WebUI.verifyElementPresent(modifyNewButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                         'click button edit'
                         WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
@@ -131,7 +131,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                     } else {
@@ -156,7 +156,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -205,7 +205,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -275,7 +275,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -300,7 +300,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                     } else {
@@ -335,7 +335,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'))
                                 } else {
@@ -415,7 +415,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
                                 } else {
@@ -486,7 +486,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/a_Select'))
                                     } else {
@@ -541,7 +541,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/a_Select'))
                                     } else {
@@ -577,7 +577,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -643,7 +643,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                     } else {
@@ -667,7 +667,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -695,7 +695,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                 } else {
@@ -766,7 +766,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'verify input error'
                                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'), 
-                                        10, FailureHandling.OPTIONAL)) {
+                                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                         'click select'
                                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/a_Select'))
                                     } else {
@@ -802,7 +802,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'))
                                 } else {
@@ -855,7 +855,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/a_Select'))
                                 } else {
@@ -921,7 +921,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafileMS.getValue(
                             GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
-                                5, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
@@ -935,7 +935,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         } else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
-                                5, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
@@ -997,7 +997,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal') || datafileMS.getValue(
                             GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
-                                5, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
@@ -1011,7 +1011,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         } else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Public')) {
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'), 
-                                5, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click button cancel'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 

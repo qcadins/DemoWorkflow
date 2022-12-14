@@ -219,14 +219,14 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/butto
 
 String alert
 
-if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/alert_Commission'),1,FailureHandling.OPTIONAL)){
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/alert_Commission'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 	alert = WebUI.getText(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL)
 }
 else if(alert==null){
 	alert = "def"
 }
 
-if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
+if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/error_maxnumber'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
@@ -312,7 +312,7 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckVerifStoreDBComp
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'),
-	5, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 

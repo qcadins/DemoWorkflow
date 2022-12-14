@@ -634,4 +634,9 @@
       <initValue>'Dupcheck gagal'</initValue>
       <name>ReasonFailedDupcheck</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>TimeOut</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

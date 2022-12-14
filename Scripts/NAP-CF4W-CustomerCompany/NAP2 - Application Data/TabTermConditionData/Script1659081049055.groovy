@@ -121,14 +121,14 @@ for (int i = 1; i <= count; i++) {
 		}
 		if(TCWaive.get(i-1)=="false"){
 			'verif waive terlock based on rule'
-			if(WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",1)==false){
+			if(WebUI.verifyElementHasAttribute(modifyObjectWaived,"disabled",GlobalVariable.TimeOut)==false){
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
 		}
 		else if(TCWaive.get(i-1)=="true"){
 			'verif waive tidak terlock/ dapat dicentang based on rule'
-			if(WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",1)==false){
+			if(WebUI.verifyElementNotHasAttribute(modifyObjectWaived,"disabled",GlobalVariable.TimeOut)==false){
 				writeToExcelFailedVerifRule()
 				GlobalVariable.FlagFailed=1
 			}
@@ -141,7 +141,7 @@ for (int i = 1; i <= count; i++) {
 	'Pengecekan nilai kolom required'
 	if (textRequired == 'NO') {
 		'Jika sudah tercentang'
-		if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'Un-centang yang required no'
 			WebUI.uncheck(modifyObjectCheckbox)
 		}
@@ -156,7 +156,7 @@ for (int i = 1; i <= count; i++) {
 				'Pengecekan jika nama dokumen sama dengan dokumen checkno pada excel'
 				if (textDocumentName.equalsIgnoreCase(checkNO[(j - 1)])) {
 					'Jika belum tercentang'
-					if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+					if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						'Centang'
 						WebUI.check(modifyObjectCheckbox)
 					}
@@ -165,7 +165,7 @@ for (int i = 1; i <= count; i++) {
 		}
 	} else {
 		'Jika belum tercentang'
-		if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'Centang yang required yes'
 			WebUI.check(modifyObjectCheckbox)
 		}
@@ -187,7 +187,7 @@ for (int i = 1; i <= count; i++) {
 				'Pengecekan jika nama dokumen sama dengan dokumen uncheckYES pada excel'
 				if (textDocumentName.equalsIgnoreCase(uncheckYES[(j - 1)])) {
 					'Jika sudah tercentang'
-					if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+					if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						'Un-centang'
 						WebUI.uncheck(modifyObjectCheckbox)
 					}
@@ -218,7 +218,7 @@ for (int i = 1; i <= count; i++) {
 	'Pengecekan jika waive dapat diklik'
 	if (WebUI.verifyElementClickable(modifyObjectWaived, FailureHandling.OPTIONAL)) {
 		'Pengecekan jika kondisi awal waived sudah tercentang'
-		if (WebUI.verifyElementChecked(modifyObjectWaived, 1, FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementChecked(modifyObjectWaived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'Uncentang waive'
 			WebUI.uncheck(modifyObjectWaived)
 		}
@@ -241,7 +241,7 @@ for (int i = 1; i <= count; i++) {
 		'Looping dokumen yang perlu diisi expired date'
 		for (j = 1; j <= expiredDateDocument.size(); j++) {
 			'Pengecekan jika kolom check tercentang dan nama dokumen sama dengan dokumen yang perlu diisi expired date pada excel'
-			if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL) && textDocumentName.equalsIgnoreCase(
+			if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) && textDocumentName.equalsIgnoreCase(
 				expiredDateDocument[(j - 1)])) {
 				WebUI.delay(1)
 

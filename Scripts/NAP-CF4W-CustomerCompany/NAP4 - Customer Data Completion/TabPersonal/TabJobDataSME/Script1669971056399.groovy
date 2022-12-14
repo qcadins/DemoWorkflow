@@ -35,13 +35,13 @@ WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/Custom
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 44), false)
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/input_Is Well Known Company_ng-untouched ng-pristine ng-valid'), 
-    2, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'check is well known company'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 45) == 'Yes') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/input_Is Well Known Company_ng-untouched ng-pristine ng-valid'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/input_Is Well Known Company_ng-untouched ng-pristine ng-valid'), 
-    2)) {
+    GlobalVariable.TimeOut)) {
     'check is well known company'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 45) == 'No') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/input_Is Well Known Company_ng-untouched ng-pristine ng-valid'))
@@ -230,7 +230,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 79).length() >
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'))
         } else {
@@ -364,7 +364,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 106).length() 
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'))
         } else {
@@ -436,7 +436,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/label_Profession Name'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/button_Back'))
 } else {
@@ -449,7 +449,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
 def verifyInputError(){
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/a_Select'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'click select'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataSME/a_Select'))
 	} else {

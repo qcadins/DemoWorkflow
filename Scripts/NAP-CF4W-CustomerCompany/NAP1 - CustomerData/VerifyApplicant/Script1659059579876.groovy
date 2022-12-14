@@ -29,7 +29,7 @@ for(int i = 1;i<=8;i++){
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/button_Search'))
 	
 	'Pengecekan ada/tidak adanya button action pencil yang muncul'
-	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'),1,FailureHandling.OPTIONAL)){
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 		break
 	}
 	else{

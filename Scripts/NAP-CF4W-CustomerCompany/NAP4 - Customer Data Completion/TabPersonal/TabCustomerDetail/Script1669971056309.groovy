@@ -49,13 +49,13 @@ WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/C
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 17))
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'), 
-    2, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'check RIP'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'), 
-    2)) {
+    GlobalVariable.TimeOut)) {
     'check RIP'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'))
@@ -63,13 +63,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 }
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'), 
-    2, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'check VIP'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'), 
-    2)) {
+    GlobalVariable.TimeOut)) {
     'check VIP'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'))
@@ -77,13 +77,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 }
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'), 
-    2, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'Check Affiliation'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20) == 'Yes') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'))
     }
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'), 
-    2)) {
+    GlobalVariable.TimeOut)) {
     'Check Affiliation'
     if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20) == 'No') {
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'))
@@ -103,7 +103,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 21).length() >
 
     'verify input error'
     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click select'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/a_Select'))
     } else {
@@ -144,7 +144,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25) == 'Foreig
 
     'verify input error'
     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click select'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/a_Select'))
     } else {
@@ -200,7 +200,7 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/label_Full Name'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {

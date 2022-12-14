@@ -122,13 +122,13 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_Office'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'Klik header appNo'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
 	
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
@@ -165,7 +165,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_custName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -204,7 +204,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_POName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -363,7 +363,7 @@ public copyAppYesCommission(){
 
 	'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
-		5, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -392,7 +392,7 @@ public copyAppYesReservedFund(){
 
 	'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'),
-		5, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
