@@ -337,7 +337,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
         'call test case customer data store verif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabCustomerDataStoreDBVerif'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE)
+            FailureHandling.STOP_ON_FAILURE)
     }
 } else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {

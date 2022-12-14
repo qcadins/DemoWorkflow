@@ -48,6 +48,9 @@ Integer countFileCode = Integer.parseInt(GlobalVariable.CountFileCode)
 
 for(int i=1;i<=countFileCode;i++){
 	
+	if(findTestData('DownloadRule/DownloadRuleFileCode').getValue(3,i).equalsIgnoreCase("No")){
+		continue
+	}
 	'Input file code'
 	WebUI.setText(findTestObject('DownloadRule/input_FileCode'), 
 	    findTestData('DownloadRule/DownloadRuleFileCode').getValue(1,i))

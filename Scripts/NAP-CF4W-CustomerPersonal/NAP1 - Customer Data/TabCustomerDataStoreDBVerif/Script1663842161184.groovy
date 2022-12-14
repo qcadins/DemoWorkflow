@@ -40,19 +40,19 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify product offering code'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify customer name'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 19).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify birth place'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 20).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify id type'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'Jika id type e-ktp atau akta atau npwp'
 if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21).equalsIgnoreCase('E-KTP') || datafileCustomerPersonal.getValue(
@@ -63,44 +63,44 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 21).equalsIgnor
 } else {
     'verify id expired date'
     arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 22).toUpperCase(), 
-            (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+            (result[arrayindex++]).toUpperCase(), false))
 }
 
 'verify marital status'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 23).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify mobile phone'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 24).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify customer model'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 25).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify gender'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 26).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify birth date'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 27).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify id no'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 28).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify tax id'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 29).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify mother maiden name'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 30).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify email'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 31).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 //'verify department aml no value'
 //if (datafileCustomerPersonal.getValue(
@@ -124,35 +124,35 @@ arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariabl
 
 'verify address'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify Rt'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify RW'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 40).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify Zipcode'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 41).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify kecamatan'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 42).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify kelurahan'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 43).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify kota'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 44).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'verify ownership'
 arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 45).toUpperCase(), 
-        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+        (result[arrayindex++]).toUpperCase(), false))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
