@@ -73,7 +73,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_AppNo'))
 
     'Verif tidak ada alert yang muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'looping rowdata confins'
     for (int i = 1; i <= rowData.size(); i++) {
@@ -121,7 +121,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementNo'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -148,7 +148,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_CustNo'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -199,7 +199,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ProdOfferingName'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset liststring arraylist'
     listString = new ArrayList<String>()
@@ -248,7 +248,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_Appdate'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset listString arraylist'
     listString = new ArrayList<String>()
@@ -297,7 +297,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_NAPSubmitted'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset liststring arraylist'
     listString = new ArrayList<String>()
@@ -348,7 +348,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_AgreementStep'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -376,7 +376,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ContractStatus'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -402,7 +402,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStep'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -451,7 +451,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_ApplicationStatus'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -500,7 +500,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
     WebUI.click(findTestObject('AppView/MainInformation/span_CustomerCheckingStep'))
 
     'Verify alert tidak muncul'
-    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+    checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
     'reset arraylist listString'
     listString = new ArrayList<String>()
@@ -536,7 +536,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
         'Verify page 2 active'
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
-                2))
+                GlobalVariable.TimeOut))
 
         'count row data'
         rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-inquiry-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -566,7 +566,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
         'Verify page 1 active'
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/pageOne'), 'aria-current', 
-                2))
+                GlobalVariable.TimeOut))
 
         'declare listapp = liststring'
         listApp = listString
@@ -588,7 +588,7 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingComp
 
         'Verify page 2 active'
         checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('AppView/MainInformation/nextPage'), 'aria-current', 
-                2))
+                GlobalVariable.TimeOut))
 
         'declare listapp = liststring'
         listApp = listString
@@ -671,7 +671,7 @@ WebUI.click(findTestObject('AppView/MainInformation/hyperlink_APPNO'))
 WebUI.switchToWindowIndex('1')
 
 'Verif tidak ada alert yang muncul'
-if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut) == false) {
     GlobalVariable.FlagWarning = 1
 
     'write Status Warning'

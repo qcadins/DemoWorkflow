@@ -275,7 +275,7 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
@@ -329,13 +329,13 @@ def pagingTesting(){
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_Office'))
 	
 		'Verif tidak ada alert yang muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'Klik header appno'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'looping simpan appno ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
@@ -378,7 +378,7 @@ def pagingTesting(){
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custNo'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -401,7 +401,7 @@ def pagingTesting(){
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -444,7 +444,7 @@ def pagingTesting(){
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_POName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -502,7 +502,7 @@ def pagingTesting(){
 	
 			'Verif page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 	
@@ -528,7 +528,7 @@ def pagingTesting(){
 	
 			'Verify page 1 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/pageOne'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	
@@ -548,7 +548,7 @@ def pagingTesting(){
 	
 			'Verify page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	

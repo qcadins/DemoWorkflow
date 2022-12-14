@@ -36,7 +36,7 @@ GlobalVariable.FlagWarning = 0
 WebUI.click(findTestObject('Object Repository/AppView/Commission/Commission Tab'))
 
 'Verif tidak ada alert yang muncul'
-if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut) == false) {
     'flgawarning = 1'
 	GlobalVariable.FlagWarning = 1
 

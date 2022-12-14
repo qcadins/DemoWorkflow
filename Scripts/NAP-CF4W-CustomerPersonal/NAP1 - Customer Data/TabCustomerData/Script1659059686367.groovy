@@ -119,7 +119,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/a_Select'))
         } else {
@@ -239,7 +239,7 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/a_Select'))
         } else {

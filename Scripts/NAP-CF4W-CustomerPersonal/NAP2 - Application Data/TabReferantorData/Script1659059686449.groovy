@@ -133,9 +133,9 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						  GlobalVariable.NumofReferantor, 17),false,FailureHandling.OPTIONAL)
 					  
 						  'cek inputan mandatory apakah sudah terisi semua atau belum'
-						  if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||
-								  WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
-										  modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
+						  if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) ||
+								  WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
+										  modifySelectTaxCalcualtion, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							  
 							  'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
@@ -160,7 +160,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								  
 								  if(i == variable.size()){
-									  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, 5, FailureHandling.OPTIONAL)){
+									  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 										  'add cust name failed kedalam array'
 										  referantorfaileddelete.add(referantornamebefore)
 									  }
@@ -299,7 +299,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							   
 							   'verify lookup'
 							   if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/a_Select'),
-									5, FailureHandling.OPTIONAL)) {
+									GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 									referantorCode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/span_referantorCode'))
 											   
 									'click select'
@@ -314,7 +314,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									'Click delete'
 									WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 									
-									if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+									if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 										'write to excel reason failed delete'
 										writeReasonFailedDelete()
 									}
@@ -365,9 +365,9 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									   GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 				   
 							   'cek inputan mandatory apakah sudah terisi semua atau belum'
-							   if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||
-							   WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
-								   modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
+							   if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) ||
+							   WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
+								   modifySelectTaxCalcualtion, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					
 								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
@@ -375,7 +375,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								   'Click delete'
 								   WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 								   
-								   if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+								   if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'write to excel reason failed delete'
 									   writeReasonFailedDelete()
 								   }
@@ -458,7 +458,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 						
 						'verify lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/a_Select'),
-							 5, FailureHandling.OPTIONAL)) {
+							 GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							 referantorCode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/span_referantorCode'))
 										
 							 'click select'
@@ -476,7 +476,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							 'Click delete'
 							 WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							 
-							 if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+							 if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								 'write to excel reason failed delete'
 								 writeReasonFailedDelete()
 							 }
@@ -506,7 +506,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 									String defaultBankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 									
 									'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
-									if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+									if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true, GlobalVariable.TimeOut)==false){
 										'write to excel reason failed ddl'
 										writeReasonFailedDDL()
 									}
@@ -526,9 +526,9 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 								GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 			
 						'cek inputan mandatory apakah sudah terisi semua atau belum'
-						if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||
-						WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
-							modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
+						if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) ||
+						WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
+							modifySelectTaxCalcualtion, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
@@ -536,7 +536,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							'Click delete'
 							WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							
-							if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'write to excel reason failed delete'
 								writeReasonFailedDelete()
 							}
@@ -640,7 +640,7 @@ if(datafileReferantor.getValue(
 	
 				'verify lookup'
 				if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/a_Select'),
-					5, FailureHandling.OPTIONAL)) {
+					GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					referantorCode = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/span_referantorCode'))
 					
 					'click select'
@@ -655,7 +655,7 @@ if(datafileReferantor.getValue(
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 					
-					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+					if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 						'write to excel reason failed delete'
 						writeReasonFailedDelete()
 					}
@@ -685,7 +685,7 @@ if(datafileReferantor.getValue(
 							String defaultBankAccount = CustomKeywords.'referantorData.checkReferantor.checkBankAccountDefault'(sqlConnection, refCategory, officeName, referantorCode)
 							
 							'Verifikasi opsi yang terpilih secara default pada confins sesuai dengan db'
-							if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true,2)==false){
+							if(WebUI.verifyOptionSelectedByLabel(modifySelectBankAccount,"(?i)"+defaultBankAccount,true, GlobalVariable.TimeOut)==false){
 								'write to excel reason failed ddl'
 								writeReasonFailedDDL()
 							}
@@ -705,9 +705,9 @@ if(datafileReferantor.getValue(
 						GlobalVariable.NumofReferantor, 17), false, FailureHandling.OPTIONAL)
 	
 				'cek inputan mandatory apakah sudah terisi semua atau belum'
-				if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, 3, FailureHandling.OPTIONAL) ||
-				WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, 3, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
-					modifySelectTaxCalcualtion, 0, 3, FailureHandling.OPTIONAL)) {
+				if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) ||
+				WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) || WebUI.verifyOptionSelectedByIndex(
+					modifySelectTaxCalcualtion, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	
 					'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
@@ -715,7 +715,7 @@ if(datafileReferantor.getValue(
 					'Click delete'
 					WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 					
-					if(WebUI.verifyElementPresent(modifyButtonDelete, 5, FailureHandling.OPTIONAL)){
+					if(WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 						'write to excel reason failed delete'
 						writeReasonFailedDelete()
 					}

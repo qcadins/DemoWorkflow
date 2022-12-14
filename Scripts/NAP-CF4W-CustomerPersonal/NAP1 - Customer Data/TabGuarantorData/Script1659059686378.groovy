@@ -57,7 +57,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
         GlobalVariable.NumofColm, 13)) {
 		'jika tabel confins bernilai no data available'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
-            5, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'count table guarantor pada confins'
             variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > table > tbody tr'))
         } else {
@@ -76,10 +76,10 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
             if (copyapp.equalsIgnoreCase('Edit')) {
 				'jika no data available pada confins muncul'
                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     copyapp == 'No'
                 } //jika ada guarantor
-				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     //jika guarantor name confins = guarantor name excel / excel lookup 
 					if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorPersonal.getValue(
                             GlobalVariable.NumofGuarantorPersonal, 19)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
@@ -92,7 +92,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 			'jika guarantor merupakan data terakhir atau copyapp bernilai no'
             if ((i == variableData.size()) || (copyapp == 'No')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'click button Add'
                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'))
 
@@ -190,7 +190,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
                         'verify input error'
                         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click select'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                         } else {
@@ -279,7 +279,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                             } else {
@@ -306,7 +306,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     } else if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                         13) == 'LookUp') {
                         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click guarantor lookup'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Guarantor Legal Name_btn btn-raised btn-primary'))
 
@@ -330,7 +330,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                             } else {
@@ -387,7 +387,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 
                                 'verify input error'
                                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                    10, FailureHandling.OPTIONAL)) {
+                                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                     'click select'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                                 } else {
@@ -471,7 +471,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                     }
                     
                     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                        5, FailureHandling.OPTIONAL)) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
@@ -517,7 +517,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
         GlobalVariable.NumofColm, 13)) {
 		'Jika muncul no data available'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
-            5, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'count table guarantor pada confins'
             variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#guarantor-tab > app-guarantor-main-data-paging > div > div:nth-child(2) > table > tbody tr'))
         } else {
@@ -536,10 +536,10 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
             if (copyapp.equalsIgnoreCase('Edit')) {
 				'jika muncul no data available'
                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     copyapp = 'No'
                 } //jika guarantor name ada pada confins
-				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, 5, FailureHandling.OPTIONAL)) {
+				else if (WebUI.verifyElementPresent(modifyNewGuarantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					'jika guarantor name confins = guarantorname excel / excel lookup'
                     if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorCompany.getValue(
                             GlobalVariable.NumofGuarantorCompany, 18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(
@@ -552,7 +552,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 			'jika guarantor merupakan index terakhir atau copyapp = no'
             if ((i == variableData.size()) || (copyapp == 'No')) {
                 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'click button Add'
                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'))
 
@@ -637,7 +637,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                             } else {
@@ -664,7 +664,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     } else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
                         13) == 'LookUp') {
                         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click guarantor lookup'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Guarantor Legal Name_btn btn-raised btn-primary'))
 
@@ -683,7 +683,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
                             } else {
@@ -784,7 +784,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                     }
                     
                     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'), 
-                        5, FailureHandling.OPTIONAL)) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                         'click button cancel'
                         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
                     } else {
@@ -820,7 +820,7 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Add'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button save and continue'
     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 }
@@ -998,7 +998,7 @@ def getDataGuarCompany() {
 
 def verifyInputError(int flagWarning) {
     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'), 
-        10, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click select'
         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/a_Select'))
     } else {

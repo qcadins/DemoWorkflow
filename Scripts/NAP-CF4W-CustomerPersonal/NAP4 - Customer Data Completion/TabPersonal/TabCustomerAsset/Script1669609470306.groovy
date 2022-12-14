@@ -112,7 +112,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 						if (i == variable.size()) {
-							if (WebUI.verifyElementPresent(modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
+							if (WebUI.verifyElementPresent(modifyNewcustomeassetType, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 								'add asset type failed kedalam array'
 								assettypefaileddelete.add(assettypebefore + assetdescbefore)
 							}
@@ -168,7 +168,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 			'verify if asset type beda'
 			if (!(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)]) && WebUI.getText(modifyNewcustomeassetDesc).equalsIgnoreCase(assetdescriptionarray[(asset - 1)])) || WebUI.verifyElementNotPresent(
-				modifyNewcustomeassetType, 5, FailureHandling.OPTIONAL)) {
+				modifyNewcustomeassetType, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				if (i == variable.size()) {
 					'click button add'
 					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Add'))
@@ -226,7 +226,7 @@ if (GlobalVariable.FlagWarning > 0) {
 
 'check if th customer asset is present'
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/th_Customer Asset Type'),
-	5, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
@@ -272,7 +272,7 @@ def inputAssetData() {
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Save'))
 
     if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Cancel'), 
-        1, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click button cancel'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Cancel'))
 

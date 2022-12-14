@@ -104,11 +104,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             if (feeBhv.get(i) == 'DEF') {
                 'Verify admin fee tidak terlock'
                 WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
             } else if (feeBhv.get(i) == 'LOCK') {
                 'verify admin fee terlock'
                 WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
 				
 				'write to excel admin fee'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -139,11 +139,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             if (feeBhv.get(i) == 'DEF') {
                 'verify additional admin tidak terlock'
                 WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
             } else if (feeBhv.get(i) == 'LOCK') {
                 'verify additional admin terlock'
                 WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
 				
 				'write to excel additional admin fee'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -173,11 +173,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             if (feeBhv.get(i) == 'DEF') {
                 'Verify notary fee tidak terlock'
                 WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
             } else if (feeBhv.get(i) == 'LOCK') {
                 'Verify notary fee terlock'
                 WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
 				
 				'write to excel notary fee'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -207,11 +207,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             if (feeBhv.get(i) == 'DEF') {
                 'verify other fee tidak terlock'
                 WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
             } else if (feeBhv.get(i) == 'LOCK') {
                 'verify other fee terlock'
                 WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
 				
 				'write to excel other fee'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -241,11 +241,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             if (feeBhv.get(i) == 'DEF') {
                 'Verify fiducia fee tidak terlock'
                 WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
             } else if (feeBhv.get(i) == 'LOCK') {
                 'Verify fiducia fee terlock'
                 WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'readonly', 1)
+                    'readonly', GlobalVariable.TimeOut)
 				
 				'write to excel fiducia fee'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -276,15 +276,15 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                 if (feeBhv.get(i) == 'DEF') {
                     'Verify provision fee amount tidak terlock'
                     WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', 1) //Verify provision fee amt & pctg terlock
+                        'readonly', GlobalVariable.TimeOut) //Verify provision fee amt & pctg terlock
                 } else if (feeBhv.get(i) == 'LOCK') {
 					'Verify provision fee amount terlock'
                     WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', 1)
+                        'readonly', GlobalVariable.TimeOut)
 
 					'Verify provision fee percentage terlock'
                     WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', 1)
+                        'readonly', GlobalVariable.TimeOut)
 					
 					'write to excel provision fee percentage'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -306,15 +306,15 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
                 if (feeBhv.get(i) == 'DEF') {
                     'verify provision fee percentage tidak terlock'
                     WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', 1)
+                        'readonly', GlobalVariable.TimeOut)
                 } else if (feeBhv.get(i) == 'LOCK') {
 					'Verify provision fee amount terlock'
                     WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', 1)
+                        'readonly', GlobalVariable.TimeOut)
 
 					'Verify provision fee percentage terlock'
                     WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', 1)
+                        'readonly', GlobalVariable.TimeOut)
 					
 					'write to excel provision fee percentage'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
@@ -344,7 +344,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 21),FailureHandling.OPTIONAL)
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 26) == 'Yes') {
             'click admin fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_checkbox'))
@@ -367,7 +367,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 22))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 28) == 'Yes') {
             'click additional admin capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize_checkbox'))
@@ -390,7 +390,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 23))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 30) == 'Yes') {
             'click notary fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize_checkbox'))
@@ -413,7 +413,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 24))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 32) == 'Yes') {
             'click other fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize_checkbox'))
@@ -436,7 +436,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 25))
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 34) == 'Yes') {
             'click fiducia fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize_checkbox'))
@@ -473,7 +473,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 37), false)
 
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize_checkbox'), 
-        2, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 40) == 'Yes') {
             'click provision fee capitalized checkbox'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize_checkbox'))
@@ -538,14 +538,14 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' &
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
 			43, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %",""))
 		'Verify effective rate terlock'
-		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled', GlobalVariable.TimeOut)==false){
 			'write to excel reason failed verify rule'
 			writeReasonFailedVerifRule()
 		}
 	}
 	else if(result.get(2)=="DEF"){
 		'Verify effetcive rate tidak terlock/dapat diinput'
-		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled',1)==false){
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'disabled', GlobalVariable.TimeOut)==false){
 			'write to excel reason failed verify rule'
 			writeReasonFailedVerifRule()
 		}
@@ -581,7 +581,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 43).length() > 1) {
 }
 
 'Pengecekan supplier rate tidak terlock'
-if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'disabled',1,FailureHandling.OPTIONAL)){
+if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'disabled', GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	'Input supplier rate'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),datafileTabFinancial.getValue(GlobalVariable.NumofColm, 50))
 }
@@ -623,7 +623,7 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 	43, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %",""))
 
 if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/td_InterestAmount'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
 	

@@ -226,13 +226,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             datafileMS.getValue(GlobalVariable.NumofMS, 39))
 
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 40).equalsIgnoreCase('Yes')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 40).equalsIgnoreCase('No')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'))
@@ -240,13 +240,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 41).equalsIgnoreCase('Yes')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 41).equalsIgnoreCase('No')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
@@ -254,13 +254,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 42).equalsIgnoreCase('Yes')) {
                                 'click check box is Signer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 42).equalsIgnoreCase('No')) {
                                 'click check box is Signer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'))
@@ -365,13 +365,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             datafileMS.getValue(GlobalVariable.NumofMS, 58))
 
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
@@ -379,13 +379,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
@@ -439,13 +439,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             datafileMS.getValue(GlobalVariable.NumofMS, 67))
 
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 68).equalsIgnoreCase('Yes')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 68).equalsIgnoreCase('No')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'))
@@ -732,13 +732,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             datafileMS.getValue(GlobalVariable.NumofMS, 39))
 
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 40).equalsIgnoreCase('Yes')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 40).equalsIgnoreCase('No')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'))
@@ -746,13 +746,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 41).equalsIgnoreCase('Yes')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 41).equalsIgnoreCase('No')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
@@ -760,13 +760,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 42).equalsIgnoreCase('Yes')) {
                                 'click check box is Signer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 42).equalsIgnoreCase('No')) {
                                 'click check box is Signer'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'))
@@ -894,13 +894,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                             datafileMS.getValue(GlobalVariable.NumofMS, 58))
 
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
                                 'click check box is Owner'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
@@ -908,13 +908,13 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                         }
                         
                         if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
                             }
                         } else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                            2, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
                                 'click check box is Active'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
@@ -1233,7 +1233,7 @@ def getData() {
                     'value').replace(' %', ''))
 
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                2, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'add is active to array'
                 GlobalVariable.Confinsdata.add('Yes')
             } else {
@@ -1242,7 +1242,7 @@ def getData() {
             }
             
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'), 
-                2, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'add is owner to array'
                 GlobalVariable.Confinsdata.add('Yes')
             } else {
@@ -1299,7 +1299,7 @@ def getData() {
                     'value').replace(' %', ''))
 
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                2, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'add is active to array'
                 GlobalVariable.Confinsdata.add('Yes')
             } else {
@@ -1308,7 +1308,7 @@ def getData() {
             }
             
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                2, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'add is owner to array'
                 GlobalVariable.Confinsdata.add('Yes')
             } else {
@@ -1317,7 +1317,7 @@ def getData() {
             }
             
             if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Signer_ng-untouched ng-pristine ng-valid'), 
-                2, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'add is signer to array'
                 GlobalVariable.Confinsdata.add('Yes')
             } else {

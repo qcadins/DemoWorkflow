@@ -49,7 +49,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
     for (int g = 1; g <= GuarantorArray.size(); g++) {
 		'Pengecekan jika ada pada confins subjecttypeheader'
         if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
-            5, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'define interger i'
             int i = 0
 
@@ -66,7 +66,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                     ']/td[7]/span/span/span/span/span/span/a', true)
 
                 'verify subject type sesuai dan button edit ada atau tidak'
-                if ((WebUI.getText(modifySubjectType) == 'GUARANTOR') && WebUI.verifyElementPresent(modifyButtonEdit, 5, 
+                if ((WebUI.getText(modifySubjectType) == 'GUARANTOR') && WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, 
                     FailureHandling.OPTIONAL)) {
                     break
                 } else {
@@ -107,7 +107,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 		'Jika subjectname pada confins = guarantor name pada excel'
         if (subjectName.equalsIgnoreCase(GuarantorArray[(g - 1)])) {
 			'Jika ada button edit pada confins'
-            if (WebUI.verifyElementPresent(modifyButtonEdit, 5, FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
 
@@ -118,7 +118,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                     GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
-                        5, FailureHandling.OPTIONAL))) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL))) {
 						'Jika negative check pada dupcheck guarantor bernilai yes'
                         if ((GuarantorNegativeArray[(g - 1)]).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
@@ -346,12 +346,12 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                 
 				//Jika pada confins belum muncul object subjecttypeheader
                 if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/subjecttypeheader'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					'Jika guarantor action pada excel bernilai new'
                     if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('New')) {
 						'Jika ada button new pada confins'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
@@ -370,8 +370,8 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //Jika ada button match similar data pada confins
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
-                            5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
 								'get text newcustomerno'
@@ -431,8 +431,8 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 					else if ((GuarantorActionArray[(g - 1)]).equalsIgnoreCase('Select SimilarData')) {
 						'Jika ada button select similardata pada confins'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
-                            5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
                                 'get text new customer no'
@@ -469,7 +469,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //Jika ada button new
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 
@@ -510,8 +510,8 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 					else {
 						'Jika ada button select appinprocess pada confins'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_selectApplicationInprocessCompany'), 
-                            5, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL) || WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'verify tabel head == 10/5 untuk menentukan object select 10 untuk personal dan 5 untuk company'
                             if (counttd == 10) {
                                 'get new applicant no value'
@@ -548,7 +548,7 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //Jika ada button new pada confins
 						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
-                            5, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click button new customer'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'))
 

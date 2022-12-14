@@ -129,13 +129,13 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_Office'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'Klik header appNo'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'looping untuk menyimpan list appno ascending untuk dilakukan verif'
 		for (int i = 1; i <= rowData.size(); i++) {
@@ -176,7 +176,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_custName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -219,7 +219,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_POName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
@@ -276,7 +276,7 @@ public pagingTesting(){
 	
 			'Verif page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 	
@@ -302,7 +302,7 @@ public pagingTesting(){
 	
 			'Verify page 1 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/pageOne'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	
@@ -322,7 +322,7 @@ public pagingTesting(){
 	
 			'Verify page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	
@@ -389,7 +389,7 @@ public copyAppYesCommission(){
 
 	'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
-		5, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -418,7 +418,7 @@ public copyAppYesReservedFund(){
 
 	'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'),
-		5, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)

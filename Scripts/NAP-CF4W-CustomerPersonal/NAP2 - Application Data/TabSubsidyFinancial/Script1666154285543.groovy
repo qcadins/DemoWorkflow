@@ -250,7 +250,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 
 				'Verify gagal add'
 				if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-					10, FailureHandling.OPTIONAL)) {
+					GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					'Click cancel'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
 				}
@@ -279,7 +279,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								
 						if(i == variable.size()){
-								if (WebUI.verifyElementPresent(modifyNewSubsidyAllocation, 5, FailureHandling.OPTIONAL)) {
+								if (WebUI.verifyElementPresent(modifyNewSubsidyAllocation, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	                                'add cust name failed kedalam array'
 	                                subsidyfaileddelete.add(subsidyallocationnamebefore)
 								}
@@ -508,7 +508,7 @@ public addSubsidy(int s){
 
 	'Verify gagal add'
 	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'Click cancel'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_CancelSubsidy'))
 	}

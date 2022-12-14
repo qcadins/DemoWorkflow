@@ -117,7 +117,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 						if (i == variable.size()) {
-							if (WebUI.verifyElementPresent(modifyNewLegalDocType, 5, FailureHandling.OPTIONAL)) {
+							if (WebUI.verifyElementPresent(modifyNewLegalDocType, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 								'add legal failed kedalam array'
 								legaltypefaileddelete.add(legaldoctypebefore + legaldocnobefore)
 							}
@@ -258,7 +258,7 @@ if (GlobalVariable.FlagWarning > 0) {
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/th_Expired Date'),
-	10, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
@@ -363,7 +363,7 @@ def inputLegalDoc(ArrayList<String> faileddata){
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/button_Save'))
 
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/button_Cancel'),
-		5, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'click button cancel'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/button_Cancel'))
 

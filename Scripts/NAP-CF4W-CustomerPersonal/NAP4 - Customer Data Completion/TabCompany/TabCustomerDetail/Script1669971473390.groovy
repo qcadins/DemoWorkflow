@@ -50,7 +50,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).length() >
 
 	'verify input error'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/a_Select'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'click select'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/a_Select'))
 	} else {
@@ -63,13 +63,13 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).length() >
 }
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'),
-	2, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
 		'Click VIP checklist'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'),
-	2)) {
+	GlobalVariable.TimeOut)) {
 	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
 		'Click VIP checklist'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'))
@@ -77,13 +77,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 }
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'),
-	2, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
 		'click affiliation and multifinance'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'),
-	2)) {
+	GlobalVariable.TimeOut)) {
 	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
 		'click affiliation and multifinance'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'))
@@ -102,7 +102,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/Cust
 
 'verify input error'
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/a_Select'),
-	10, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click select'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/a_Select'))
 } else {
@@ -158,7 +158,7 @@ if (GlobalVariable.FlagFailed == 0) {
 
 'check iflabel estahblishment date is present'
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/label_Establishment Date'),
-	5, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {

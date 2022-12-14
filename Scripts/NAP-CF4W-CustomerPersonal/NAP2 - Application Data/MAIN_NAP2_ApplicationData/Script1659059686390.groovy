@@ -67,7 +67,7 @@ for(int i = 1;i<=8;i++){
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Search'))
 	
 	'Pengecekan ada/tidak adanya button action pencil yang muncul'
-	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'),1,FailureHandling.OPTIONAL)){
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 		break
 	}
 	else{
@@ -173,14 +173,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 			datafileTabAsset.getValue(GlobalVariable.NumofColm, 31))
 		
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'input serial 4'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
 				datafileTabAsset.getValue(GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 		}
 		
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'input serial 5'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
 				datafileTabAsset.getValue(GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
@@ -206,7 +206,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 						GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -227,7 +227,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 	//dijalankan dengan copy app tab insurance
 	else if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
 					
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'),3,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 			'Klik calculate insurance'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 		}
@@ -242,7 +242,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			
 		'verify fail'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -368,7 +368,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -477,14 +477,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 			datafileTabAsset.getValue(GlobalVariable.NumofColm, 31))
 					
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'input serial 4'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'),
 				datafileTabAsset.getValue(GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 		}
 					
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			'input serial 5'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'),
 				datafileTabAsset.getValue(GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
@@ -512,7 +512,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		WebUI.delay(10)
 			
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -534,14 +534,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 	else if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Yes")){
 					
 		'verify field discount ada atau tidak untuk write ulang diskon supaya tidak hilang akibat impact dari calculate insurance'
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),2,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 			def val = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),'value')
 			'Set text discount'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),val,FailureHandling.OPTIONAL)
 		}
 		
 		'verify button calculate ada atau tidak'
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'),3,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 			'Klik calculate insurance'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 		}
@@ -556,7 +556,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			
 		'verify fail'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -682,7 +682,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
-			5, FailureHandling.OPTIONAL)) {
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
@@ -753,13 +753,13 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/span_Office'))
 		
 		'Verif tidak ada alert yang muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 		
 		'Klik header appno'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/span_appNo'))
 		
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 		
 		'looping untuk simpan appno ascending'
 		for(int i=1;i<=rowData.size();i++){
@@ -796,7 +796,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/span_custName'))
 		
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 		
 		listString = new ArrayList<String>()
 		
@@ -836,7 +836,7 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/span_POName'))
 		
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 		
 		listString = new ArrayList<String>()
 		
@@ -889,7 +889,7 @@ public pagingTesting(){
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/nextPage'))
 			
 			'verif page 2 active'
-			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/nextPage'),'aria-current',2))
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/nextPage'),'aria-current', GlobalVariable.TimeOut))
 					
 			listString = new ArrayList<String>()
 			
@@ -907,7 +907,7 @@ public pagingTesting(){
 			
 			'Verify page 1 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/pageOne'),
-				'aria-current', 2))
+				'aria-current', GlobalVariable.TimeOut))
 			
 			listApp = listString
 					
@@ -927,7 +927,7 @@ public pagingTesting(){
 			
 			'Verify page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/nextPage'),
-				'aria-current', 2))
+				'aria-current', GlobalVariable.TimeOut))
 			
 			listApp = listString
 			

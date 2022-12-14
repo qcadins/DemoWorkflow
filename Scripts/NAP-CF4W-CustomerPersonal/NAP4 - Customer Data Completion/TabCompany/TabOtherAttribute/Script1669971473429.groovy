@@ -332,7 +332,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 27).length() >
 
 	'verify input error'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/a_Select'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'click select'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/a_Select'))
 	} else {
@@ -447,7 +447,7 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/label_Debtor Group'),
-	10, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 } else {
@@ -477,7 +477,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 
 def verifyInputError() {
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/a_Select'),
-		10, FailureHandling.OPTIONAL)) {
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'click select'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/a_Select'))
 	} else {

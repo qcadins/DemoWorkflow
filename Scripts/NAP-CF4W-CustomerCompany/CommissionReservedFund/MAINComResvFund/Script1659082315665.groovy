@@ -257,7 +257,7 @@ public pagingTesting(){
 	
 			'Verif page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-commission-reserved-fund-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 	
@@ -281,7 +281,7 @@ public pagingTesting(){
 	
 			'Verify page 1 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/pageOne'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	
@@ -299,7 +299,7 @@ public pagingTesting(){
 	
 			'Verify page 2 active'
 			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/CommissionReservedFund/nextPage'),
-					'aria-current', 2))
+					'aria-current', GlobalVariable.TimeOut))
 	
 			listApp = listString
 	

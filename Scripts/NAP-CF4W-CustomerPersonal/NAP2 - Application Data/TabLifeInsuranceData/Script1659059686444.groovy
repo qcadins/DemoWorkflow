@@ -60,7 +60,7 @@ if (datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
-        1, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'Mencentang IsCoverLifeInsurance'
         WebUI.check(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
     }
@@ -168,13 +168,13 @@ if (datafileTabLifeInsurance.getValue(
         if (textSubject == 'CUSTOMER') {
             if (isCustomer == 'YES') {
                 'Jika belum tercentang'
-                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Centang yang subject type Customer'
                     WebUI.check(modifyObjectCheckbox)
                 }
             } else if(isCustomer=='NO'){
                 'Jika sudah tercentang'
-                if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type customer'
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
@@ -182,13 +182,13 @@ if (datafileTabLifeInsurance.getValue(
         } else if (textSubject == 'GUARANTOR') {
             if (isGuarantor == 'YES') {
                 'Jika belum tercentang'
-                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Centang yang subject type Guarantor'
                     WebUI.check(modifyObjectCheckbox)
                 }
             } else if (isGuarantor == 'YES PARTIAL') {
                 'Jika sudah tercentang'
-                if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type guarantor'
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
@@ -204,7 +204,7 @@ if (datafileTabLifeInsurance.getValue(
                 for (j = 1; j <= checkGuarantor.size(); j++) {
                     if (textSubjectName.equalsIgnoreCase(checkGuarantor[(j - 1)])) {
                         'Jika belum tercentang'
-                        if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                        if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'Centang'
                             WebUI.check(modifyObjectCheckbox)
                         }
@@ -212,7 +212,7 @@ if (datafileTabLifeInsurance.getValue(
                 }
             } else if(isGuarantor=='NO') {
                 'Jika sudah tercentang'
-                if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type guarantor'
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
@@ -220,13 +220,13 @@ if (datafileTabLifeInsurance.getValue(
         } else if (textSubject == 'SPOUSE') {
             if (isSpouse == 'YES') {
                 'Jika belum tercentang'
-                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Centang yang subject type Spouse'
                     WebUI.check(modifyObjectCheckbox)
                 }
             } else if(isSpouse=='NO'){
                 'Jika sudah tercentang'
-                if (WebUI.verifyElementChecked(modifyObjectCheckbox, 1, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'Uncentang yang subject type spouse'
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
@@ -250,7 +250,7 @@ if (datafileTabLifeInsurance.getValue(
 } else if(datafileTabLifeInsurance.getValue(
     GlobalVariable.NumofColm, 12) == 'NO') {
     if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
-        1, FailureHandling.OPTIONAL)) {
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'uncentang coverlifeinsurance'
         WebUI.uncheck(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'))
 

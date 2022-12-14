@@ -166,7 +166,7 @@ for(int i = 0;i<allocFrom.size();i++){
 		if(allocBhv[i].equalsIgnoreCase("def")){
 			if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field bisa diisi'
-				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)==false){
+				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
@@ -183,7 +183,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			
 			if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field tidak bisa diisi'
-				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)==false){
+				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
@@ -200,7 +200,7 @@ for(int i = 0;i<allocFrom.size();i++){
 	else{
 		
 		'Verify field tidak bisa diisi'
-		WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+		WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)
 		
 		'write to excel locked reserve fund amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '13.TabReservedFundData',

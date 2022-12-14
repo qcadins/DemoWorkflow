@@ -154,7 +154,7 @@ if(datafileTabAsset.getValue(
 							 'Jika accessories merupakan data index terakhir'
 							 if(i == variable.size()){
 								 'Jika acc name tidak muncul'
-								 if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
+								 if(WebUI.verifyElementPresent(modifyObjectAccName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									 'add accessories name failed kedalam array'
 									 accessoriesnamefaileddelete.add(accessoriesnamebefore)
 								 }
@@ -203,7 +203,7 @@ if(datafileTabAsset.getValue(
 								  'Jika acccessories merupakan data index terakhir'
 								  if(i == variable.size()){
 									  	'Jika accessories name tidak muncul'
-										if(WebUI.verifyElementPresent(modifyObjectAccName, 5, FailureHandling.OPTIONAL)){
+										if(WebUI.verifyElementPresent(modifyObjectAccName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 											'add accessories name failed kedalam array'
 											accessoriesnamefaileddelete.add(accessoriesnamebefore)												
 										}
@@ -322,7 +322,7 @@ if(datafileTabAsset.getValue(
 					   
 							   'verify input lookup'
 							   if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-								   5, FailureHandling.OPTIONAL)) {
+								   GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 								   'click select'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 							   } else {
@@ -338,7 +338,7 @@ if(datafileTabAsset.getValue(
 								   'click ok pada alert'
 								   WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								   
-								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -365,7 +365,7 @@ if(datafileTabAsset.getValue(
 					   
 							   'verify input lookup'
 							   if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-								   5, FailureHandling.OPTIONAL)) {
+								   GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 								   'click select'
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 							   } else {
@@ -381,7 +381,7 @@ if(datafileTabAsset.getValue(
 								   'click ok pada alert'
 								   WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								   
-								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -433,7 +433,7 @@ if(datafileTabAsset.getValue(
 								   'click ok pada alert'
 								   WebUI.acceptAlert(FailureHandling.OPTIONAL)
 								   
-								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -489,7 +489,7 @@ if(datafileTabAsset.getValue(
 				
 						'verify input lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-							5, FailureHandling.OPTIONAL)) {
+							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'click select'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 						} else {
@@ -505,7 +505,7 @@ if(datafileTabAsset.getValue(
 							'click ok pada alert'
 							WebUI.acceptAlert(FailureHandling.OPTIONAL)
 							
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -532,7 +532,7 @@ if(datafileTabAsset.getValue(
 				
 						'verify input lookup'
 						if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-							5, FailureHandling.OPTIONAL)) {
+							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'click select'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 						} else {
@@ -548,7 +548,7 @@ if(datafileTabAsset.getValue(
 							'click ok pada alert'
 							WebUI.acceptAlert(FailureHandling.OPTIONAL)
 							
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -600,7 +600,7 @@ if(datafileTabAsset.getValue(
 							'click ok pada alert'
 							WebUI.acceptAlert(FailureHandling.OPTIONAL)
 							
-							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -682,7 +682,7 @@ else if(datafileTabAsset.getValue(
 	
 			'verify input lookup'
 			if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-				5, FailureHandling.OPTIONAL)) {
+				GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				'click select'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 			} else {
@@ -698,7 +698,7 @@ else if(datafileTabAsset.getValue(
 				'click ok pada alert'
 				WebUI.acceptAlert(FailureHandling.OPTIONAL)
 				
-				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -724,7 +724,7 @@ else if(datafileTabAsset.getValue(
 	
 			'verify input lookup'
 			if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'),
-				5, FailureHandling.OPTIONAL)) {
+				GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				'click select'
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/a_Select'))
 			} else {
@@ -740,7 +740,7 @@ else if(datafileTabAsset.getValue(
 				'click ok pada alert'
 				WebUI.acceptAlert(FailureHandling.OPTIONAL)
 	
-				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
@@ -791,7 +791,7 @@ else if(datafileTabAsset.getValue(
 				'click ok pada alert'
 				WebUI.acceptAlert(FailureHandling.OPTIONAL)
 				
-				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, 5, FailureHandling.OPTIONAL)){
+				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
 							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)

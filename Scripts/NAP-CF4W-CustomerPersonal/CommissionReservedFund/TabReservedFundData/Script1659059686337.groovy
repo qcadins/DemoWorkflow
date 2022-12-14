@@ -177,7 +177,7 @@ for(int i = 0;i<allocFrom.size();i++){
 		if(allocBhv[i].equalsIgnoreCase("def")){
 			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field bisa diisi'
-				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly',2)==false){
+				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
@@ -194,7 +194,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			
 			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Verify field tidak bisa diisi'
-				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)==false){
+				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
@@ -212,7 +212,7 @@ for(int i = 0;i<allocFrom.size();i++){
 	else{
 		
 		'Verify field tidak bisa diisi'
-		WebUI.verifyElementHasAttribute(inputAlloc,'readonly',2)
+		WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)
 		
 		'write to excel locked reserve fund amount'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
@@ -232,7 +232,7 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/butto
 
 String alert
 
-if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/alert_Commission'),1,FailureHandling.OPTIONAL)){
+if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/alert_Commission'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	'get text alert jika muncul'
 	alert = WebUI.getText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/alert_Commission'),FailureHandling.OPTIONAL)
 }
@@ -240,7 +240,7 @@ else if(alert==null){
 	alert = "def"
 }
 
-if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/error_maxnumber'),2,FailureHandling.OPTIONAL)){
+if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/error_maxnumber'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonCalculateGagal)
@@ -329,7 +329,7 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckVerifStoreDBPersonal=="
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'Klik cancel'
     WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 

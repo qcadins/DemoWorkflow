@@ -55,7 +55,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 			'Jika copyappedit'
             if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 				'jika ada familyname yang muncul pada confins'
-                if (WebUI.verifyElementPresent(modifyNewFamilyName, 5, FailureHandling.OPTIONAL)) {
+                if (WebUI.verifyElementPresent(modifyNewFamilyName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					'jika familyname pada tabfamily = familyname confins atau familyname pada tab family lookup = familyname confins'
                     if (WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
                             19)) || WebUI.getText(modifyNewFamilyName).equalsIgnoreCase(datafileTabFamily.getValue(
@@ -69,7 +69,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
             if (i == variableData.size()) {
                 if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
-                        5, FailureHandling.OPTIONAL)) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
@@ -124,7 +124,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -183,7 +183,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -216,7 +216,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -243,7 +243,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -276,7 +276,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -333,7 +333,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -360,7 +360,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                     //Ambil nilai dari confins untuk verif store db lookup
                 } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
                     if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_2Family Data'), 
-                        5, FailureHandling.OPTIONAL)) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
@@ -388,7 +388,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                         'verify input error'
                         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                            10, FailureHandling.OPTIONAL)) {
+                            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click select'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                         } else {
@@ -433,7 +433,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -468,7 +468,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -501,7 +501,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -528,7 +528,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -561,7 +561,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 
                             'verify input error'
                             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'), 
-                                10, FailureHandling.OPTIONAL)) {
+                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 'click select'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/a_Select'))
                             } else {
@@ -637,7 +637,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 
                 'verify input error'
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'), 
-                    5, FailureHandling.OPTIONAL)) {
+                    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
                 } else {

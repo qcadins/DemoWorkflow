@@ -110,7 +110,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 								if (i == variable.size()) {
-									if (WebUI.verifyElementPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
+									if (WebUI.verifyElementPresent(modifyNewDate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 										'add cust name failed kedalam array'
 										financialDateDelete.add(converteddate)
 									}
@@ -302,7 +302,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 									if (i == variable.size()) {
-										if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, 5, FailureHandling.OPTIONAL)) {
+										if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 											'add cust name failed kedalam array'
 											bankAccDelete.add(BankDetail)
 										}
@@ -430,7 +430,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Save  Continue'))
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/th_Date'),
-	10, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
@@ -564,7 +564,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/a_Select'))
         } else {
@@ -593,13 +593,13 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             GlobalVariable.FindDataFile.getValue(financialdata, 70))
 
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'), 
-            2, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 71) == 'Yes') {
                 'click is default'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'), 
-            2)) {
+            GlobalVariable.TimeOut)) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 71) == 'No') {
                 'click is default'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'))
@@ -607,13 +607,13 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
         }
         
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'), 
-            2, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 72) == 'Yes') {
                 'click is active'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'), 
-            2)) {
+            GlobalVariable.TimeOut)) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 72) == 'No') {
                 'click is active'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'))
@@ -702,7 +702,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                                 break
                             } else {
                                 if (excelindex == (montharray.size() - 1)) {
-                                    if (WebUI.verifyElementPresent(modifyNewbuttondelete, 3)) {
+                                    if (WebUI.verifyElementPresent(modifyNewbuttondelete, GlobalVariable.TimeOut)) {
                                         'click delete button'
                                         WebUI.click(modifyNewbuttondelete)
 
@@ -779,7 +779,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
                         0)) {
                             'verify month year beda'
                             if (!((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
-                                year)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 10, FailureHandling.OPTIONAL)) {
+                                year)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 if (BSindex == variablebankstatement.size()) {
                                     'click add new button'
                                     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
@@ -865,7 +865,7 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
         }
         
         if (WebUI.verifyElementNotPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Save  Continue'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Cancel Bank'))
         }

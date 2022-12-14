@@ -32,7 +32,7 @@ GlobalVariable.FlagWarning = 0
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
 
 'Verif tidak ada alert yang muncul'
-if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2) == false) {
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut) == false) {
     GlobalVariable.FlagWarning = 1
 
     'write status warning'
@@ -116,7 +116,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
         (resultAssetInfo[index++]).toUpperCase(), false))
 
 'check if letter no present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/LetterNo'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/LetterNo'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Letter No'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/LetterNo')).toUpperCase(), 
             (resultAssetInfo[index++]).toUpperCase(), false))
@@ -149,7 +149,7 @@ ArrayList<WebElement> resultAssetAttrList = CustomKeywords.'appView.verifyAppVie
 index = 0
 
 'check if asset region present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Asset Region'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -159,7 +159,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
 }
 
 'check if warna body present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Warna Body'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -169,7 +169,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/W
 }
 
 'check if color present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Color'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -179,7 +179,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
 }
 
 'check if oil exp date present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Oli Exp Date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -189,7 +189,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
 }
 
 'check if setoran per hari present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Setoran per hari'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -199,7 +199,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/S
 }
 
 'check if road worthiness present'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Road Worthiness'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))

@@ -188,7 +188,7 @@ if (variableSupp.size() > 0) {
         WebUI.acceptAlert()
 		
 		'Pengecekan setelah didelete supplier masih muncul'
-		if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_SupplierName'),5,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_SupplierName'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 			'add supplier name failed kedalam array'
 			commissiondelete.add(supplierDelete)
 		}
@@ -432,7 +432,7 @@ if (variableSuppEmp.size() > 0) {
 					'Pengecekan jika i merupakan data supplier emp yang terakhir'
 					if(i == variableSuppEmp.size()){
 						'Pengcekan jika data supplier emp tidak muncul'
-						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, 5, FailureHandling.OPTIONAL)){
+						if(WebUI.verifyElementNotPresent(modifyObjectSuppEmpName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list supplier employee setelah operasi delete selesai dilakukan'
 								variableSuppEmp = driver.findElements(By.cssSelector('#formInformationSupplierEmployee h4'))
 						}else{
@@ -700,7 +700,7 @@ if (variableRef.size() > 0) {
 					'Pengecekan jika data referantor ke i merupakan data terakhir'
 					if(i == variableRef.size()){
 							'Pengecekan referantor name tidak muncul setelah didelete'
-							if(WebUI.verifyElementNotPresent(modifyObjectRefName, 5, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyElementNotPresent(modifyObjectRefName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Digunakan untuk menghitung jumlah list referantor setelah operasi delete selesai dilakukan'
 								variableRef = driver.findElements(By.cssSelector('#formInformationReferantor h4'))
 							}else{
@@ -929,7 +929,7 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_
 alertCalculate = findTestObject('NAP/CommissionReservedFund/TabCommissionData/alert_Commission')
 
 'Pengecekan jika calculate error'
-if(WebUI.verifyElementPresent(alertCalculate,2,FailureHandling.OPTIONAL)){
+if(WebUI.verifyElementPresent(alertCalculate, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonCalculateGagal)
@@ -991,7 +991,7 @@ if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal
 
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'), 
-    5, FailureHandling.OPTIONAL)) {
+    GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'Klik cancel'
     WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 

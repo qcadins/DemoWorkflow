@@ -130,7 +130,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 								if (i == variable.size()) {
-									if (WebUI.verifyElementPresent(modifyNewDate, 5, FailureHandling.OPTIONAL)) {
+									if (WebUI.verifyElementPresent(modifyNewDate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 										'add cust name failed kedalam array'
 										financialDateDelete.add(converteddate)
 									}
@@ -319,7 +319,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									WebUI.acceptAlert(FailureHandling.OPTIONAL)
 
 									if (i == variable.size()) {
-										if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, 5, FailureHandling.OPTIONAL)) {
+										if (WebUI.verifyElementNotPresent(modifyNewbankaccdetail, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 											'add cust name failed kedalam array'
 											bankAccDelete.add(BankDetail)
 										}
@@ -451,7 +451,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'))
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/th_Date'),
-	5, FailureHandling.OPTIONAL)) {
+	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
@@ -514,14 +514,14 @@ def inputFinancialData() {
         if (GlobalVariable.FindDataFile.getValue(financialdata, 19).equalsIgnoreCase('Yes')) {
             'Jika is join income belum tercentang'
             if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
-                5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'centang is join income'
                 WebUI.check(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
             }
         } else if (GlobalVariable.FindDataFile.getValue(financialdata, 19).equalsIgnoreCase('No')) {
             'jika is join income sudah tercentang'
             if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'), 
-                5, FailureHandling.OPTIONAL)) {
+                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'Un-centang is join income'
                 WebUI.uncheck(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_checkboxIsJoinIncome'))
             }
@@ -560,7 +560,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
 
         'verify input error'
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'), 
-            10, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click select'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/a_Select'))
         } else {
@@ -589,13 +589,13 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
             GlobalVariable.FindDataFile.getValue(financialdata, 27))
 
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
-            2, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'checkbox default'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 28) == 'Yes') {
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'), 
-            2)) {
+            GlobalVariable.TimeOut)) {
             'checkbox default'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 28) == 'No') {
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Default_ng-untouched ng-pristine ng-valid'))
@@ -603,13 +603,13 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         }
         
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-            2, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'checkbox active'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 29) == 'Yes') {
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-            2)) {
+            GlobalVariable.TimeOut)) {
             'checkbox active'
             if (GlobalVariable.FindDataFile.getValue(financialdata, 29) == 'No') {
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Is Active_ng-untouched ng-pristine ng-valid'))
@@ -699,7 +699,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
                                 break
                             } else {
                                 if (excelindex == (montharray.size() - 1)) {
-                                    if (WebUI.verifyElementPresent(modifyNewbuttondelete, 3)) {
+                                    if (WebUI.verifyElementPresent(modifyNewbuttondelete, GlobalVariable.TimeOut)) {
                                         'click delete button'
                                         WebUI.click(modifyNewbuttondelete)
 
@@ -776,7 +776,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
                         0)) {
                             'verify month year beda'
                             if (!((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
-                                year)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, 10, FailureHandling.OPTIONAL)) {
+                                year)) || WebUI.verifyElementNotPresent(modifyNewbuttondelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 if (BSindex == variablebankstatement.size()) {
                                     'click add new button'
                                     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_banknewrow'))
@@ -866,7 +866,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         }
         
         if (WebUI.verifyElementNotPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_SaveFinancial'), 
-            5, FailureHandling.OPTIONAL)) {
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click button Cancel'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
 

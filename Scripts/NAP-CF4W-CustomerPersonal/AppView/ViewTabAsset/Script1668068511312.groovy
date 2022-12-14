@@ -31,7 +31,7 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 WebUI.click(findTestObject('Object Repository/AppView/Asset/AssetMenu'))
 
 'Verif tidak ada alert yang muncul'
-if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 2)==false){
+if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut)==false){
 	GlobalVariable.FlagWarning = 1
 	'write to excel status warning'
 	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'6. Asset')
@@ -141,7 +141,7 @@ ArrayList<String> resultAssetAttrList = CustomKeywords.'appView.verifyAppView.ch
 index = 0
 
 'Pengecekan pada confins ada atau tidaknya asset region'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetRegion'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Asset Region'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetRegion')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -150,7 +150,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
 }
 
 'Pengecekan pada confins ada atau tidaknya warna body'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/WarnaBody'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Warna Body'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/WarnaBody')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -159,7 +159,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/W
 }
 
 'Pengecekan pada confins ada atau tidaknya color'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/AssetAttrColor'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Color'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/AssetAttrColor')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -168,7 +168,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/A
 }
 
 'Pengecekan pada confins ada atau tidaknya oli exp date'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Oli Expired Date'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Oli Exp Date'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Oli Expired Date')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -177,7 +177,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/O
 }
 
 'Pengecekan pada confins ada atau tidaknya setoran per hari'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Setoran per hari'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/Setoran Per Hari')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))
@@ -186,7 +186,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/S
 }
 
 'Pengecekan pada confins ada atau tidaknya road worthiness'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), 5, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/AppView/Asset/OffTheRoad'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'verify Road Worthiness'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Asset/OffTheRoad')).toUpperCase(), 
             (resultAssetAttrList[index++]).toUpperCase(), false))

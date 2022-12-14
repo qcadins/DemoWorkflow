@@ -157,7 +157,7 @@ for (int i = 1; i <= count; i++) {
 		}
 	}
 	
-	if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
+	if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&counterPaidByMF==0){
 		counterPaidByMF = 1
 	}
 	
@@ -253,7 +253,7 @@ for (int i = 1; i <= count; i++) {
 					
 		if(GlobalVariable.Role=="Testing"){
 			'Verif rate tidak terlock'
-			WebUI.verifyElementNotHasAttribute(mainPremiRateObject, "disabled",1)
+			WebUI.verifyElementNotHasAttribute(mainPremiRateObject, "disabled", GlobalVariable.TimeOut)
 		}
 		'Pengecekan field main premi rate di excel terisi'
 		if (mainPremiRateValue.length() > 0) {
@@ -270,7 +270,7 @@ for (int i = 1; i <= count; i++) {
 	else if(rwd=="ON_THE_ROAD"||rwd==null){
 		if(GlobalVariable.Role=="Testing"){
 				'Verif rate terlock'
-				WebUI.verifyElementHasAttribute(mainPremiRateObject, "disabled",1)
+				WebUI.verifyElementHasAttribute(mainPremiRateObject, "disabled", GlobalVariable.TimeOut)
 		}			
 	}
 	'declare flagloading, flagload'
@@ -363,13 +363,13 @@ for (int i = 1; i <= count; i++) {
 				'Pengecekan nilai additional coverage dari stiap arraynya'
 				if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('Yes')) {
 					'Jika belum tercentang additional coverage'
-					if (WebUI.verifyElementNotChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+					if (WebUI.verifyElementNotChecked(addCovYearCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						'centang additional coverage'
 						WebUI.check(addCovYearCheckbox)
 					}
 				} else if ((addCovYearValueArray[((i - 1))]).equalsIgnoreCase('No')) {
 					'Jika sudah tercentang additional coverage'
-					if (WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+					if (WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						'Uncentang additional coverage'
 						WebUI.uncheck(addCovYearCheckbox)
 					}
@@ -382,12 +382,12 @@ for (int i = 1; i <= count; i++) {
 				true)
 	
 			'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-			if (WebUI.verifyElementPresent(modifySumInsuredAmount, 2, FailureHandling.OPTIONAL)) {
+			if (WebUI.verifyElementPresent(modifySumInsuredAmount, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				countSumInsuredAmount = 1
 			}
 			
 			'Jika sum insured amount ada dan checkbox additional coverage tercentang'
-			if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, 5, FailureHandling.OPTIONAL)) {
+			if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 				'Ambil nilai sum insured amount dari excel'
 				SumInsuredValue = datafileTabInsurance.getValue(
 					GlobalVariable.NumofColm, sumInsuredAmountRow + j)
@@ -412,7 +412,7 @@ for (int i = 1; i <= count; i++) {
 			true)
 
 		'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-		if (WebUI.verifyElementPresent(modifySumInsuredAmount, 2, FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementPresent(modifySumInsuredAmount, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			countSumInsuredAmount = 1
 		}
 		
@@ -462,7 +462,7 @@ for (int i = 1; i <= count; i++) {
 			if(GlobalVariable.Role=="Testing"){
 				if(flagLoad==0){
 					'Verif rate tidak terlock'
-					WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled",1)
+					WebUI.verifyElementNotHasAttribute(modifyAddtRateObject, "disabled", GlobalVariable.TimeOut)
 				}
 				
 			}
@@ -484,7 +484,7 @@ for (int i = 1; i <= count; i++) {
 			if(GlobalVariable.Role=="Testing"){
 				if(flagLoad==0){
 					'verif rate terlock'
-					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled",1)
+					WebUI.verifyElementHasAttribute(modifyAddtRateObject, "disabled", GlobalVariable.TimeOut)
 				}
 			}
 		}
@@ -499,7 +499,7 @@ def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalV
 if(datafileTabInsurance.getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="YES"){
 	'Jika full capitalize amount pada confins belum tercentang'
-	if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
+	if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 		'Centang full capitalize amount'
 		WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
@@ -507,7 +507,7 @@ if(datafileTabInsurance.getValue(
 else if(datafileTabInsurance.getValue(
 				GlobalVariable.NumofColm, capPartialRow+1)=="NO"){
 	'Jika full capitalize amount pada confins sudah tercentang'
-	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),3,FailureHandling.OPTIONAL)){
+	if(WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 		'Uncentang full capitalize amounts'
 		WebUI.uncheck(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'))
 	}
@@ -525,7 +525,7 @@ if(GlobalVariable.FlagFailed==0){
 }
 
 'Pengecekan jika full capitalize amount pada confins tidak tercentang dan pada excel terisi nilai amountnya'
-if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)&&datafileTabInsurance.getValue(
+if(WebUI.verifyElementNotChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&datafileTabInsurance.getValue(
 				GlobalVariable.NumofColm, capPartialRow+2).length()>0){
 	'Input capitalize amount'
 	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),datafileTabInsurance.getValue(
@@ -642,7 +642,7 @@ if(GlobalVariable.Role=="Testing"){
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, ((totalResult[3]) + Long.parseLong(totalFeeResult.replace(',','')) - discountAmt).toString(), false))
 	}
 	//Verif untuk capitalize bernilai 0, ada paid by mf, dan full capitalize tercentang
-	else if((totalResult[3]) == 0 && totalResult[2]==1 && WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
+	else if((totalResult[3]) == 0 && totalResult[2]==1 && WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 		'Verify capitalize amount sesuai perhitungan'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]+Long.parseLong(totalFeeResult.replace(',',''))).toString(),false))
 	}
@@ -721,13 +721,13 @@ public AddRatetoGV(int count, int countAddCov){
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
 			
 			'Pengecekan jika checkbox additional cvg tercentang dan jenisnya merupakan tpl, kdup, tjhtp atau bukan'
-			if(WebUI.verifyElementChecked(addCovYearCheckbox,2,FailureHandling.OPTIONAL)&&!labelAddCov.equalsIgnoreCase("TPL")&&!labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
+			if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&!labelAddCov.equalsIgnoreCase("TPL")&&!labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
 				&&!labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG")){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",","")))
 			}
-			else if(WebUI.verifyElementChecked(addCovYearCheckbox,2,FailureHandling.OPTIONAL)&&(labelAddCov.equalsIgnoreCase("TPL")||labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
+			else if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&(labelAddCov.equalsIgnoreCase("TPL")||labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
 				||labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG"))){
 				
 				'Simpan nilai rate additional cvg'
