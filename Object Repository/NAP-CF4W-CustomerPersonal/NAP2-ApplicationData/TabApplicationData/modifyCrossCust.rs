@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>modifyCrossCust</name>
+   <tag></tag>
+   <elementGuidId>4469b379-7e9c-444a-8a7d-1c674aa13293</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;crossInfomation&quot;]/div[2]/table/tbody/tr/td[3]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;crossInfomation&quot;]/div[2]/table/tbody/tr/td[3]</value>
+   </webElementProperties>
+</WebElementEntity>

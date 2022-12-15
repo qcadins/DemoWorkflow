@@ -36,6 +36,7 @@ public class checkOfficer {
 	//keyword check SPV
 	@Keyword
 	public checkSPV(Sql instance, String username){
+		//String officename, String jobtitlerole
 		String spvname
 		instance.eachRow(("select EMP_NAME from REF_USER refuser WITH(NOLOCK) join REF_EMP emp on refuser.REF_EMP_ID = emp.REF_EMP_ID where REF_USER_ID = (select top 1 SPV_ID from REF_EMP emp JOIN REF_USER refuser on emp.REF_EMP_ID = refuser.REF_EMP_ID JOIN REF_USER_ROLE userrole on refuser.REF_USER_ID = userrole.REF_USER_ID JOIN REF_ROLE d on userrole.REF_ROLE_ID = d.REF_ROLE_ID where USERNAME = '"+username+"' and userrole.IS_ACTIVE = 1)"), { def row ->
 			spvname = (row[0])
