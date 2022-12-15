@@ -19,6 +19,12 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
+def modifyNewAppNo, modifyNewAgrNo, modifyNewCustName
+
+ArrayList<String> crossfaileddelete = new ArrayList<>()
+
+ArrayList<Integer> posAddCross = new ArrayList<>()
+
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
@@ -320,6 +326,153 @@ if (datafileTabApplication.getValue(
 			GlobalVariable.NumofColm, 28), false)
 }
 
+//Cross App/Agr
+def appCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 63)
+def agrCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 64)
+def custCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 65)
+	
+'declare driver'
+WebDriver driver = DriverFactory.getWebDriver()
+	
+'declare variable'
+ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#crossInfomation > div:nth-child(2) > table > tbody > tr'))
+	
+if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
+	appCrossArr = appCross.split(";",-1)
+	agrCrossArr = agrCross.split(";",-1)
+	custCrossArr = custCross.split(";",-1)
+		
+	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
+		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+		for (int i = 1; i <= variable.size(); i++) {
+			'modify object application no'
+			modifyNewAppNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCross'),
+				'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+i+"]/td[1]", true)
+		 
+			'modify object agreement no'
+			modifyNewAgrNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCrossAgr'),
+				'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+i+"]/td[2]", true)
+		 
+			'modify object cust name'
+			modifyNewCustName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCrossCust'),
+				'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+i+"]/td[3]", true)
+		
+			for (int crossarray = 1; crossarray <= appCrossArr.size(); crossarray++) {
+				if (((WebUI.getText(modifyNewAppNo).equalsIgnoreCase(appCrossArr[(crossarray - 1)]) && WebUI.getText(
+					modifyNewAgrNo).equalsIgnoreCase(agrCrossArr[(crossarray - 1)])) && WebUI.getText(modifyNewCustName).equalsIgnoreCase(
+					custCrossArr[(crossarray - 1)])) ) {
+					
+					break
+				} else {
+					
+					'modify object button Delete'
+					modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/buttonDelete'),
+							'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+i+"]/td[4]/a/i", true)
+						
+					if (crossarray == appCrossArr.size()) {
+						if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
+								'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+								
+							'get agreement no before'
+							agrnobefore = WebUI.getText(modifyNewAgrNo)
+										
+							'click button delete'
+							WebUI.click(modifyNewButtonDelete, FailureHandling.OPTIONAL)
+								
+							'accept alert'
+							WebUI.acceptAlert(FailureHandling.OPTIONAL)
+										
+							if(i == variable.size()){
+									if (WebUI.verifyElementPresent(modifyNewAgrNo, 5, FailureHandling.OPTIONAL)) {
+										'add cust name failed kedalam array'
+										crossfaileddelete.add(agrnobefore)
+									}
+							}else{
+									'get cust name sebelum delete'
+									agrNoAfter = WebUI.getText(modifyNewAgrNo)
+													
+									if (WebUI.verifyMatch(agrNoAfter, agrnobefore, false, FailureHandling.OPTIONAL)) {
+										'add cust name failed kedalam array'
+										crossfaileddelete.add(agrnobefore)
+									}
+							}
+								
+							i--
+						} else {
+							break
+						}
+					}
+				}
+			}
+				
+			'check if table cross application/agreement sudah kosong'
+			variable = driver.findElements(By.cssSelector('#crossInfomation > div:nth-child(2) > table > tbody > tr'))
+				
+			if(variable.size() == 1){
+				break
+			}
+		}
+	}
+		
+	'Jika ada delete cross app/ agr yang gagal'
+	if(crossfaileddelete.size() > 0){
+			
+		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + crossfaileddelete)
+			
+		GlobalVariable.FlagWarning++
+	}
+		
+	'declare variabledata'
+	ArrayList<WebElement> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#crossInfomation > div:nth-child(2) > table > tbody > tr'))
+		
+	'declare countdata'
+	int countData = variableData.size()
+		
+	'looping cross app excel'
+	for (int s = 1; s <= appCrossArr.size(); s++) {
+		'looping cross app confins'
+		for (int CrossAppCheck = 1; CrossAppCheck <= countData; CrossAppCheck++) {
+			if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
+				'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+		
+				'modify object application no'
+				modifyNewAppNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCross'),
+					'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+CrossAppCheck+"]/td[1]", true)
+		 
+				'modify object agreement no'
+				modifyNewAgrNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCrossAgr'),
+					'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+CrossAppCheck+"]/td[2]", true)
+					
+				'modify object cust name'
+				modifyNewCustName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/ModifyCrossCust'),
+					'xpath', 'equals', "//*[@id='crossInfomation']/div[2]/table/tbody/tr["+CrossAppCheck+"]/td[3]", true)
+		
+				if (((!((appCrossArr[(s - 1)]).equalsIgnoreCase(WebUI.getText(modifyNewAppNo))) || !((agrCrossArr[
+				(s - 1)]).equalsIgnoreCase(WebUI.getText(modifyNewAgrNo)))) || !((custCrossArr[(s - 1)]).equalsIgnoreCase(
+					WebUI.getText(modifyNewCustName)))) ) {
+					if (countData == CrossAppCheck) {
+						'add posisi data crossapp pada excel ke arraylist'
+						posAddCross.add(s-1)
+					}
+				} else {
+					break
+				}
+			} else if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
+				'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+				if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 63) != '') {
+					if (appCrossArr.size() > 0) {
+						'add posisi data crossapp pada excel ke arraylist'
+						posAddCross.add(s-1)
+					}
+				}
+			}
+		}
+	}	
+}
+
+addCrossAppAgr(posAddCross,sqlConnectionLOS)
+	
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
 if (datafileTabApplication.getValue(
 	GlobalVariable.NumofColm, 30).length() > 1) {
@@ -550,4 +703,82 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 
 		GlobalVariable.FlagFailed=1
 	}
+}
+
+public addCrossAppAgr(ArrayList<Integer> s, Sql sqlConnectionLOS){
+	Boolean verifCountDataLookup = false
+	Integer countDataCross
+
+	if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
+		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+		verifCountDataLookup = true
+	}
+	
+	'klik button add'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_AddCrossAppAgr'))
+	
+	if(verifCountDataLookup == true && GlobalVariable.Role=="Testing"){
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+		
+		countDataCross = CustomKeywords.'applicationData.checkAppCrossData.checkCountAppAgr'(sqlConnectionLOS)
+		
+		'Ambil nilai total data cross agreement pada lookup confins'
+		String[] textTotalDataCross = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_TotalDataCross')).replace(
+			' ', '').replace(':', ';').split(';')
+
+		'Parsing nilai total data cross confins ke integer(angka)'
+		Integer totalDataCross = Integer.parseInt(textTotalDataCross[1])
+
+		'Verif total data cross application confins sesuai dengan db'
+		if(WebUI.verifyEqual(totalDataCross, countDataCross)==false){
+		
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+			
+			GlobalVariable.FlagFailed=1
+		}
+		
+	}
+	for(int i=0;i<s.size();i++){
+		'input application no'
+		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_ApplicationNo'),appCrossArr[s[i]])
+		
+		'input ageement no'
+		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_AgreementNo'),agrCrossArr[s[i]])
+		
+		'input customer name'
+		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_CustName'),custCrossArr[s[i]])
+		
+		'klik button search'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Search'))
+		
+		'verify input lookup'
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_checkboxcross'),
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'centang checkbox'
+			WebUI.check(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_checkboxcross'))
+			
+		} else {
+
+			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
+			
+			continue
+		}
+	
+		'klik button add to temp'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Add To Temp'))
+	}
+	
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_SaveLookup'),
+		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+		'klik button save pada lookup'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_SaveLookup'))
+	
+	}
+	else{
+		'Klik button X'
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/Button_X'))
+	}
+	
 }

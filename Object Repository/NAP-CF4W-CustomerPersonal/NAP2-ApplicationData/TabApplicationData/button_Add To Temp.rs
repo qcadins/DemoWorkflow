@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>(//button[@type='button'])[27]</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/div/div/button</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,25 +31,25 @@
       <value>btn btn-raised btn-warning</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Add To Temp</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;modal fade show d-block&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/app-search-cross-app[1]/lib-ucaddtotemp[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;table-responsive&quot;]/div[@class=&quot;card-header&quot;]/div[@class=&quot;text-right&quot;]/button[@class=&quot;btn btn-raised btn-warning&quot;]</value>
+      <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/div/div/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
