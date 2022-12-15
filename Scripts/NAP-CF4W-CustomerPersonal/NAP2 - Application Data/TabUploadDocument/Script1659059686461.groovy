@@ -24,15 +24,15 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabUploadDoc'
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
 
+countUploadDoc = datafileTabUploadDoc.getColumnNumbers()
+
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
         'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL))
 }
 
-if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocument) + 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(
             GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
@@ -93,7 +93,7 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocument) >= 1) {
         }
 			
     }
-}
+
 
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))

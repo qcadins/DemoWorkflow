@@ -24,15 +24,15 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileTabUploadDoc'
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument')
 
+countUploadDoc = datafileTabUploadDoc.getColumnNumbers()
+
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
             'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL))
 }
 
-if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             'click menu titik 3'
@@ -83,9 +83,11 @@ if (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) >= 1) {
 				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
             }
+        }else{
+		break
         }
     }
-}
+
 
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))

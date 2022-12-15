@@ -43,32 +43,49 @@ if (GlobalVariable.Role == 'Testing') {
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
+countReferantor = datafileReferantor.getColumnNumbers()
+
 'koneksi db fou'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+ArrayList<WebElement> variable
+
 'Ambil text original office dari confins'
 String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
-if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
+'Looping untuk mencari nilai colm yang menunjukkan colm appno'
+for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+	if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+		13)) {
 	'Pengecekan checkbox sebelumnya tidak tercentang'
 	if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),
 			'aria-checked') == "false") {
 		'click referantor checkbox'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
 	}
+			
+	variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+	
+	}else if (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+			13)) {
+			if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),
+				'aria-checked') == "true") {
+				'click referantor checkbox'
+				WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_CheckboxReferantor'))
+			}
+			
+			variable = []
+		}
 }
 
 //Jika copy app edit
 if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
-	
 	'arraylist referantor name yang gagal'
 	ArrayList<String> referantorfaileddelete = new ArrayList<String>()
-    
-    ArrayList<String> variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
 	//Edit jika ada data pada confins dan datanya sesuai dengan excel
 	'Pengecekan ada data referantor pada confins'
@@ -76,7 +93,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 		'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
 	
 		'Looping confins referantor'
-		for(int i =1;i<=variable.size();i++){
+		for(int i = 1; i <= variable.size() ;i++){
 			
 			'modify input referantor name'
 			modifyObjectReferantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_referantorName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[3]/lib-uclookupgeneric/div/div/input", true)
@@ -110,15 +127,12 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 			  String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 			  
 			  'Looping excel referantor'
-			  for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
-				  2); (GlobalVariable.NumofReferantor)++) {
-				  if (datafileReferantor.getValue(
-					  GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
+			  for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+				  if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 					  GlobalVariable.NumofColm, 13)) {
 						
 						'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
-					  if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(
-						  GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(datafileReferantor.getValue(
+					  if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(datafileReferantor.getValue(
 						  GlobalVariable.NumofReferantor, 14))) {
 							  
 							'select bank account'
@@ -140,15 +154,39 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							  'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
 							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
 							  
+							  'get referantor name'
+							  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+							  
 							  'Click delete'
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+							  
+							  if(i == variable.size()){
+								  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								  }else{
+									  'add cust name failed kedalam array'
+									  referantorfaileddelete.add(referantornamebefore)
+									  continue
+								  }
+							  }else{
+								  'get cust name sebelum delete'
+								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+										  
+								  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+											  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+								  }else{
+										'add cust name failed kedalam array'
+										referantorfaileddelete.add(referantornamebefore)
+										continue
+								  }
+							  }
+							  i--
 						  }
 						  break
 					  }
 				  }
 				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
 				  else{
-						  if(GlobalVariable.NumofReferantor == (Integer.parseInt(GlobalVariable.CountofReferantor)+2)){
 							  'Jika pada confins ada datanya'
 							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
 								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
@@ -182,18 +220,15 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							  else{
 								  break
 							  }
-						  }
+							  
+							  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+								  break
+							  }
 				  }
 			  }
-			'check if table referantor sudah kosong'
-			variableData = driver.findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
-			
-			if(variableData.size() == 1){
-				break
-			}
-			
 		}
 	}
+		
 	'Jika ada referantor yang gagal delete'
 	if(referantorfaileddelete.size() > 0){
 			
@@ -213,11 +248,9 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 	
 	//Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
 	'Looping excel referantor'
-	for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
-		2); (GlobalVariable.NumofReferantor)++) {
+	for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 			
-			if (datafileReferantor.getValue(
-				GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
+			if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 				GlobalVariable.NumofColm, 13)) {
 				
 				'Looping confins referantor'
@@ -543,28 +576,26 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 							
 							continue
 						}
-					}
 					
 					'write to excel SUCCESS'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
 						0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 							  
+					}
 				}
+			}else{
+			break
 			}
 	}
 }
 
 //Jika copy app no
-if(datafileReferantor.getValue(
-		GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
-	
-	if (Integer.parseInt(GlobalVariable.CountofReferantor) >= 1) {
+if(datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
 		
 		int modifyObjectIndex = 1
 		
 		'looping referantor'
-		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantor) +
-		1); (GlobalVariable.NumofReferantor)++) {
+		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 			
 			if (datafileReferantor.getValue(
 				GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
@@ -773,9 +804,11 @@ if(datafileReferantor.getValue(
 					0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
 	
 				modifyObjectIndex++
+			}else{
+			break
 			}
 		}
-	}
+	
 }
 
 'click button save'

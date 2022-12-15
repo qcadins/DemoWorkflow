@@ -30,6 +30,8 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabFamily'
 datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
 
+countFamily = datafileTabFamily.getColumnNumbers() 
+
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
@@ -37,7 +39,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'Loop Multiple family data excel'
-for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
+for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (countFamily - 1); (GlobalVariable.NumofFamily)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
@@ -666,6 +668,8 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
                 }
             }
         }
+    }else{
+	break
     }
 }
 

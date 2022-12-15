@@ -33,8 +33,7 @@ int arraynum = 0
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'looping data accessories'
-for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (Integer.parseInt(GlobalVariable.CountofAccessories) +
-1); (GlobalVariable.NumofAccessories)++) {
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
 	'verify supplier code'
 	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
 			GlobalVariable.NumofAccessories, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))

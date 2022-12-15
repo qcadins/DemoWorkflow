@@ -36,6 +36,8 @@ datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Ta
 'get copyapp value dari datafileMS'
 copyapp = datafileMS.getValue(GlobalVariable.NumofMS, 10)
 
+countMS =  datafileMS.getColumnNumbers()
+
 'check if testing'
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
@@ -44,8 +46,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 'Loop Multiple ManagementSharholder Data'
-for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
-1); (GlobalVariable.NumofMS)++) {
+for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (countMS - 1); (GlobalVariable.NumofMS)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
@@ -1060,6 +1061,8 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (Integer.parseInt(Glo
                 break
             }
         }
+    }else{
+	break
     }
 }
 

@@ -106,36 +106,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(2, 1)</initValue>
-      <name>CountAFamily</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(4, 1)</initValue>
-      <name>CountAGuarantorCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(4, 1)</initValue>
-      <name>CountAGuarantorCompanyCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(3, 1)</initValue>
-      <name>CountAGuarantorPersonal</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(3, 1)</initValue>
-      <name>CountAGuarantorPersonalCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(2, 1)</initValue>
-      <name>CountAManagementShareholder</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>0</initValue>
       <name>CountDupcheckRow</name>
    </GlobalVariableEntity>
@@ -161,38 +131,8 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
-      <name>CountofAccessories</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(6, 1)</initValue>
-      <name>CountofAccessoriesCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
-      <name>CountofReferantor</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>''</initValue>
       <name>CustDetailName</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(5, 1)</initValue>
-      <name>CountofReferantorCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
-      <name>CountofUploadDocument</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/CountofSetting').getValue(7, 1)</initValue>
-      <name>CountofUploadDocumentCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -581,6 +521,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>2</initValue>
+      <name>TimeOut</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>0.00</initValue>
       <name>TotalAccessoriesPrice</name>
    </GlobalVariableEntity>
@@ -633,10 +578,5 @@
       <description></description>
       <initValue>'Dupcheck gagal'</initValue>
       <name>ReasonFailedDupcheck</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>2</initValue>
-      <name>TimeOut</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

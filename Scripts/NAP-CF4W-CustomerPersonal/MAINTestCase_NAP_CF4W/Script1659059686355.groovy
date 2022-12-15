@@ -25,12 +25,14 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
+countCustomerPersonal = datafileCustomerPersonal.getColumnNumbers()
+
 'Jika role == data entry'
 if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
             'skip ke appno selanjutnya'
             continue
         }
@@ -63,9 +65,9 @@ if (GlobalVariable.Role == 'Data Entry') {
     //jika edit appno kosong
 } else {
     'looping countnumofcust'
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCust) + 1); (GlobalVariable.NumofColm)++) {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
             'skip ke appno selanjutnya'
             continue
         }

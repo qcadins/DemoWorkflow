@@ -80,10 +80,9 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabRef
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
-    if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) > 0) {
+    
         'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-        for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantorCompany) + 
-        1); (GlobalVariable.NumofReferantor)++) {
+        for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 1); (GlobalVariable.NumofReferantor)++) {
             if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofReferantor
@@ -91,7 +90,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 break
             }
         }
-    }
+    
     
     'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
     if (datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase('No') || datafileReferantor.getValue(copyAppColm, 
@@ -302,8 +301,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             copyAppColm = GlobalVariable.NumofUploadDocument
@@ -346,10 +344,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         verifyMatch()
     }
 } else {
-    if (Integer.parseInt(GlobalVariable.CountofReferantorCompany) > 0) {
+    
         'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-        for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (Integer.parseInt(GlobalVariable.CountofReferantorCompany) + 
-        1); (GlobalVariable.NumofReferantor)++) {
+        for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 1); (GlobalVariable.NumofReferantor)++) {
             if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofReferantor
@@ -357,7 +354,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 break
             }
         }
-    }
+    
     
     'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
     if (datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase('No') || datafileReferantor.getValue(copyAppColm, 
@@ -576,8 +573,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (Integer.parseInt(GlobalVariable.CountofUploadDocumentCompany) + 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.columnNumbers - 1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             copyAppColm = GlobalVariable.NumofUploadDocument

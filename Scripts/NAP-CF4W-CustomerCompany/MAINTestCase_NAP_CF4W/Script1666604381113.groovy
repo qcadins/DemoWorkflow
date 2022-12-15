@@ -25,10 +25,11 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
+countCustomerCompany = datafileCustomerCompany.getColumnNumbers()
+
 if (GlobalVariable.RoleCompany == 'Data Entry') {
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
-    1); (GlobalVariable.NumofColm)++) {
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
             continue
         }
         
@@ -56,9 +57,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     }
 } else if (GlobalVariable.RoleCompany == 'Testing') {
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (Integer.parseInt(GlobalVariable.CountNumofCustCompany) + 
-    1); (GlobalVariable.NumofColm)++) {
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
             continue
         }
         

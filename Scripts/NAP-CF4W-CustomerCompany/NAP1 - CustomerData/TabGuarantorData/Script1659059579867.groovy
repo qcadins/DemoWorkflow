@@ -38,6 +38,10 @@ datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerD
 'get copyapp status dari data file/excel'
 copyapp = datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 10)
 
+countGuarantorPersonal = datafileGuarantorPersonal.getColumnNumbers()
+
+countGuarantorCompany = datafileGuarantorCompany.getColumnNumbers()
+
 'declare variableData'
 ArrayList<String> variableData
 
@@ -48,8 +52,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 'Loop Multiple Guarantor Data'
-for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonalCompany) + 
-1); (GlobalVariable.NumofGuarantorPersonal)++) {
+for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (countGuarantorPersonal - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
@@ -460,11 +463,12 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
                 }
             }
         }
+    }else{
+	break
     }
 }
 
-for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompanyCompany) + 
-1); (GlobalVariable.NumofGuarantorCompany)++) {
+for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (countGuarantorCompany - 1); (GlobalVariable.NumofGuarantorCompany)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
@@ -732,6 +736,8 @@ for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorComp
                 }
             }
         }
+    }else{
+	break
     }
 }
 

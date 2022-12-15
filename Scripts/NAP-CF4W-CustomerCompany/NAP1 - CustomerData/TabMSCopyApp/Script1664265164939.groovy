@@ -62,8 +62,7 @@ for (int i = 1; i <= variableData.size(); i++) {
     customertype = WebUI.getText(modifyNewMSTypeName)
 
     'Loop Multiple Shareholder data'
-    for (GlobalVariable.NumofMS; GlobalVariable.NumofMS <= (Integer.parseInt(GlobalVariable.CountAManagementShareholder) + 
-    1); (GlobalVariable.NumofMS)++) {
+    for (GlobalVariable.NumofMS; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
             if (WebUI.verifyElementPresent(modifyNewMSName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 if (((((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 19)) && 
