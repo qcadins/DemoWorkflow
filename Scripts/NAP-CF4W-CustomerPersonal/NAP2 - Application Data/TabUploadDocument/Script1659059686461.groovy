@@ -24,6 +24,9 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileTabUploadDoc'
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
 
+'Klik tab upload document'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabUploadDoc'))
+
 countUploadDoc = datafileTabUploadDoc.getColumnNumbers()
 
 if (GlobalVariable.Role == 'Testing') {

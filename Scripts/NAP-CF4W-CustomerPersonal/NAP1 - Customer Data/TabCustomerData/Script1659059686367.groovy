@@ -26,6 +26,9 @@ GlobalVariable.FlagFailed = 0
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
+'Klik tab customer'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-CustomerData/buttonTabCust'))
+
 //jika role testing
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'

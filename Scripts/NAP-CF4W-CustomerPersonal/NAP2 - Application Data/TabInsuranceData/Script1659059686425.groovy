@@ -23,6 +23,9 @@ datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 
 GlobalVariable.FlagFailed = 0
 
+'Klik tab insurance'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabInsurance'))
+
 'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
