@@ -396,7 +396,6 @@ if (DupCheckStatus == true) {
         
         (GlobalVariable.NegativeCustCount)++
     }
-}
 
 'call testcase dupcheck Guarantor'
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingGuarantor'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -425,6 +424,7 @@ CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'), GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'))
+}
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
