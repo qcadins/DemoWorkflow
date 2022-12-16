@@ -33,6 +33,9 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileMS'
 datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
+'klik tab management shareholder'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/buttonTabMS'))
+
 'delcare variableData'
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#mgmnt-shrholder-tab > app-mngmnt-shrhldr-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 

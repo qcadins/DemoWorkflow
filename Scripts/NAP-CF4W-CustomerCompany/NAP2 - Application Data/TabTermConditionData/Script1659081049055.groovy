@@ -29,6 +29,9 @@ GlobalVariable.FlagFailed = 0
 'declare datafileTabTC'
 datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
 
+'Klik tab TC'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabTC'))
+
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){

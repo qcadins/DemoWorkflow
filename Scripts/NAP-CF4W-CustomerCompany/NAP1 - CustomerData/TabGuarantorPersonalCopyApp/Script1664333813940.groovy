@@ -32,6 +32,9 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 'declare datafileGuarantorPersonal'
 datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
 
+'Klik tab guarantor'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-CustomerData/buttonTabGuarantor'))
+
 'declare custnamefaileddelete arraylist'
 ArrayList<String> custnamefaileddelete = new ArrayList<String>()
 
