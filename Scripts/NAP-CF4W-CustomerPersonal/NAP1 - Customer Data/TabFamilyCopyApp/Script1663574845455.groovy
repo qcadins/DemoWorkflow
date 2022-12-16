@@ -40,7 +40,7 @@ ArrayList<String> custnamefaileddelete = new ArrayList<String>()
 
 ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cssSelector('#family-tab > app-family-main-data-paging > div > div:nth-child(2) > lib-ucgridview > div > table > tbody tr'))
 
-checkFamilyDataEditNAP()
+checkFamilyDataEditNAP(variableData)
 
 for (int i = 1; i <= variableData.size(); i++) {
     'modify object family name'
@@ -49,8 +49,7 @@ for (int i = 1; i <= variableData.size(); i++) {
         i) + ']/td[2]', true)
 
     'Loop Multiple family data'
-    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
-    1); (GlobalVariable.NumofFamily)++) {
+    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
 			'jika familyname ada pada confins'
@@ -740,7 +739,7 @@ def getDataCust() {
     GlobalVariable.Confinsdata = confinsdata
 }
 
-def checkFamilyDataEditNAP(){
+def checkFamilyDataEditNAP(ArrayList<String> variableData){
 	if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 		8).length() > 1)) {
 		'Connect DB LOS'
@@ -774,14 +773,14 @@ def checkFamilyDataEditNAP(){
 			Boolean isMatch = 0
 	
 			for (int familydb = 0; familydb < listFam.size(); familydb++) {
-				String result = listFam.get(familydb)
+//				String result = listFam.get(familydb)
 	
-				resultarray = result.split(', ')
+//				resultarray = result.split(', ')
 	
-				if ((((WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName), '(?i)' + (resultarray[0]), true, FailureHandling.OPTIONAL) ==
-				false) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType), '(?i)' + (resultarray[1]), true, FailureHandling.OPTIONAL) ==
-				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation), '(?i)' + (resultarray[2]), true, FailureHandling.OPTIONAL) ==
-				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel), '(?i)' + (resultarray[3]), true, FailureHandling.OPTIONAL) ==
+				if ((((WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
+				false) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
 				false)) {
 					isMatch = false
 	

@@ -853,8 +853,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         index = 0
 
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
-        1); (GlobalVariable.NumofFamily)++) {
+        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
             if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
@@ -952,8 +951,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         index = 0
 
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 
-        1); (GlobalVariable.NumofFamily)++) {
+        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
             if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
@@ -1001,8 +999,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         }
         
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
-        1); (GlobalVariable.NumofGuarantorPersonal)++) {
+        for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= datafileTabGuarantorPersonal.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorPersonal)++) {
             if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
@@ -1050,8 +1047,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         }
         
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
-        1); (GlobalVariable.NumofGuarantorCompany)++) {
+        for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= datafileTabGuarantorCompany.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorCompany)++) {
             if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
