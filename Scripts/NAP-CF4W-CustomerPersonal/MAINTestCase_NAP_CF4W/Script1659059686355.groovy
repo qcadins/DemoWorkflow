@@ -32,7 +32,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             'skip ke appno selanjutnya'
             continue
         }
@@ -67,7 +67,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
+        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             'skip ke appno selanjutnya'
             continue
         }
@@ -112,7 +112,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 }
             }
             catch (Exception e) {
-                KeywordUtil.markFailed('gagal')
+                KeywordUtil.markFailed(e.printStackTrace())
 
                 continue
             } 
