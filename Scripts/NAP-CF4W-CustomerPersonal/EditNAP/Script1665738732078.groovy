@@ -52,6 +52,27 @@ String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sql
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
     1, appNo)
 
+List<String> NAP1Step = Arrays.asList("CUST", "FAM", "GUAR")
+
+List<String> NAP2Step = Arrays.asList("REF", "APP", "ASSET", "INS","LFI","FIN","TC","UPL_DOC")
+
+String backStep = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 7)
+
+if(NAP1Step.contains(backStep)&&NAP1Step.contains(appStep)){
+	int posApp = NAP1Step.indexOf(appStep)
+	int posBack = NAP1Step.indexOf(backStep)
+	if(posApp>posBack){
+		appStep = backStep
+	}
+}
+else if(NAP2Step.contains(backStep)&&NAP2Step.contains(appStep)){
+	int posApp = NAP2Step.indexOf(appStep)
+	int posBack = NAP2Step.indexOf(backStep)
+	if(posApp>posBack){
+		appStep = backStep
+	}
+}
+
 'Pengecekan role data entry'
 if (GlobalVariable.Role == 'Data Entry') {
 	'Jika appstep == cust'
