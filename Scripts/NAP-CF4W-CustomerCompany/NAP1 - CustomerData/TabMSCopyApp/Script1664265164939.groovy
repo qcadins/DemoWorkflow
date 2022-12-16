@@ -62,7 +62,7 @@ for (int i = 1; i <= variableData.size(); i++) {
     customertype = WebUI.getText(modifyNewMSTypeName)
 
     'Loop Multiple Shareholder data'
-    for (GlobalVariable.NumofMS; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
+    for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
             if (WebUI.verifyElementPresent(modifyNewMSName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 if (((((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 19)) && 
@@ -1059,7 +1059,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             break
                         } else {
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-                                0, GlobalVariable.CopyAppColm - 1, GlobalVariable.ReasonFailedDelete + customertype)
+                                0, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedDelete + customertype)
                         }
                         
                         break

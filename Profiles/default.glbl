@@ -102,7 +102,7 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>2</initValue>
-      <name>CopyAppColm</name>
+      <name>StartIndex</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -336,7 +336,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'e'</initValue>
+      <initValue>2</initValue>
       <name>NumofUploadDocument</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

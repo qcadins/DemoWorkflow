@@ -27,8 +27,8 @@ datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-C
 
 'get guarantorcompanydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompany'(sqlconnectionLOS, 
-    datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 12), datafileTabGuarantorCompany.getValue(
-        GlobalVariable.CopyAppColm, 18))
+    datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 12), datafileTabGuarantorCompany.getValue(
+        GlobalVariable.StartIndex, 18))
 
 'declare arrayindex'
 int arrayindex = 0
@@ -37,23 +37,23 @@ int arrayindex = 0
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 17).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 17).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify guarantor name'
-arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 18).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 18).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 19).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 19).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 20).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 20).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.CopyAppColm, 21).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafileTabGuarantorCompany.getValue(GlobalVariable.StartIndex, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify copy addres atau tidak'

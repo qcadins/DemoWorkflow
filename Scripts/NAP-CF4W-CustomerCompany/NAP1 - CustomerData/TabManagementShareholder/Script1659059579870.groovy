@@ -46,7 +46,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 'Loop Multiple ManagementSharholder Data'
-for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (countMS - 1); (GlobalVariable.NumofMS)++) {
+for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS <= (countMS - 1); (GlobalVariable.NumofMS)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {

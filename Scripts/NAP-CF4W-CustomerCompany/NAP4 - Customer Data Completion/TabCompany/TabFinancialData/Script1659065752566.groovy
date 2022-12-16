@@ -22,7 +22,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'declare copyappcolm = 0'
-GlobalVariable.CopyAppColm = 0
+GlobalVariable.StartIndex = 0
 
 def datafilecustdetail
 
@@ -70,7 +70,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
             12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
             13))) {
         'declare copyappcolm = index'
-        GlobalVariable.CopyAppColm = index
+        GlobalVariable.StartIndex = index
 
         'declare numofverif store = index'
         GlobalVariable.NumofVerifStore = index
@@ -97,7 +97,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'), 
                 'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-            for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+            for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
                 GlobalVariable.FlagFailed = 0
 
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -169,7 +169,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (financialDateDelete.size() > 0) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex, 
             GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
         (GlobalVariable.FlagWarning)++
@@ -179,7 +179,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         'count ulang table financial data setelah edit/delete'
         variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-        for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
             GlobalVariable.FlagFailed = 0
 
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -220,7 +220,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
         }
     } else {
-        for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                         GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
@@ -239,7 +239,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp == 'No') {
-    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
         if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
                     12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -269,7 +269,7 @@ for (i = 1; i <= variable.size(); i++) {
         'xpath', 'equals', ('//*[@id="AttributeList"]/div/div[' + i) + ']/div/div/input', true)
 
     'input posisi laporan'
-    WebUI.setText(modifyinputFinAttr, GlobalVariable.FindDataFile.getValue(GlobalVariable.CopyAppColm, row++))
+    WebUI.setText(modifyinputFinAttr, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, row++))
 }
 
 'Check if Edit Untuk Bank Account dan Bank Statement'
@@ -285,7 +285,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
             BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-            for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+            for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
                 int flagFailed = 0
 
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
@@ -360,7 +360,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     
     if (bankAccDelete.size() > 0) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.CopyAppColm, 
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex, 
             GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + bankAccDelete)
 
         (GlobalVariable.FlagWarning)++
@@ -370,7 +370,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
     if (variable.size() > 0) {
-        for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
             int flagFailed = 0
 
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -408,7 +408,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
         }
     } else {
-        for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
             int flagFailed = 0
 
             if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
@@ -428,7 +428,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
-    for (financialdata = GlobalVariable.CopyAppColm; financialdata <= (countcolm + 1); financialdata++) {
+    for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
         int flagFailed = 0
 
         if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {

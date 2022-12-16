@@ -210,32 +210,32 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
+            GlobalVariable.StartIndex = GlobalVariable.NumofMS
 
             break
         }
     }
     
     'check if copy app yes / no / edit'
-    if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileCustomerCompany.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
         'Write to excel Success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
@@ -256,40 +256,40 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
     }
     
     'check if copy app yes / no / edit'
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
         'call test case guarantor tanpa copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 
         'Write to excel success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataCompany', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'Write to excel Success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
@@ -351,20 +351,20 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
+            GlobalVariable.StartIndex = GlobalVariable.NumofMS
 
             break
         }
     }
     
     'check if copy app yes / no / edit'
-    if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileMS.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
@@ -372,7 +372,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
@@ -393,39 +393,39 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
     }
     
     'check if copy app yes / no / edit'
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('No')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
 
         'Write to excel Success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'Write to excel Success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, 
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, 
                 GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'

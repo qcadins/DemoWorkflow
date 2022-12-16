@@ -20,7 +20,7 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
-GlobalVariable.CopyAppColm = 1
+GlobalVariable.StartIndex = 1
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
@@ -225,7 +225,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColmNumber() - 1); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
+            GlobalVariable.StartIndex = GlobalVariable.NumofFamily
 
             break
         }
@@ -247,14 +247,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 
         'Write to excel success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/ApplicationCurrentStep')), 
             'FAMILY', false, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 			
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -274,7 +274,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
@@ -297,21 +297,21 @@ if (GlobalVariable.Role == 'Data Entry') {
 
 		'Write to excel success'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataCompany',
-			0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+			0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 		
         'Write to excel success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
-            0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/ApplicationCurrentStep'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 		
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -379,7 +379,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
+            GlobalVariable.StartIndex = GlobalVariable.NumofFamily
 
             break
         }
@@ -407,7 +407,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'FAMILY', false, FailureHandling.OPTIONAL)) {
             
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -427,7 +427,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
-            GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+            GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
             break
         }
@@ -449,21 +449,21 @@ if (GlobalVariable.Role == 'Data Entry') {
 
 		'Write to excel Success'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal',
-			0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+			0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 		
 		'Write to excel Success'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany',
-			0, GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+			0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/ApplicationCurrentStep'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 			'customer added -1'
 			(GlobalVariable.CountNumofCustomer)--
