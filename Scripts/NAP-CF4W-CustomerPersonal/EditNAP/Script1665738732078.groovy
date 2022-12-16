@@ -836,14 +836,14 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         1); (GlobalVariable.NumofFamily)++) {
             if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
+                GlobalVariable.StartIndex = GlobalVariable.NumofFamily
 
                 break
             }
         }
         
 		'looping famdata'
-        for (int colm = GlobalVariable.CopyAppColm; colm < (famData.size() / 5); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
             custname = (famData[index++])
 
             'Write to tab Family cust name'
@@ -935,14 +935,14 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         1); (GlobalVariable.NumofFamily)++) {
             if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofFamily
+                GlobalVariable.StartIndex = GlobalVariable.NumofFamily
 
                 break
             }
         }
         
 		'looping famdata'
-        for (int colm = GlobalVariable.CopyAppColm; colm < (famData.size() / 5); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
             custname = (famData[index++])
 
             'Write to tab Family cust name'
@@ -984,14 +984,14 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         1); (GlobalVariable.NumofGuarantorPersonal)++) {
             if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
                 break
             }
         }
         
 		'looping guarpersonaldata'
-        for (int colm = GlobalVariable.CopyAppColm; colm < (guarPersonalData.size() / 5); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (guarPersonalData.size() / 5); colm++) {
             custname = (guarPersonalData[index++])
 
             'Write guarantor personal cust name'
@@ -1033,14 +1033,14 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         1); (GlobalVariable.NumofGuarantorCompany)++) {
             if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
+                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
 
                 break
             }
         }
         
 		'looping guarcompanydata'
-        for (int colm = GlobalVariable.CopyAppColm; colm < (guarCompanyData.size() / 2); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (guarCompanyData.size() / 2); colm++) {
             custname = (guarCompanyData[index++])
 
             'Write to tab guarantor company cust name'

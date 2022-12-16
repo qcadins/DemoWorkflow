@@ -418,7 +418,7 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 	if(crossfaileddelete.size() > 0){
 			
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + crossfaileddelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + crossfaileddelete)
 			
 		GlobalVariable.FlagWarning++
 	}

@@ -50,7 +50,7 @@ if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/AddressInformation')
 }
 
-int copyAppColm = 0
+GlobalVariable.StartIndex = 0
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -60,7 +60,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
     if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
             GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
             GlobalVariable.ColmNAP4, 13))) {
-        copyAppColm = index
+        GlobalVariable.StartIndex = index
 
         break
     }
@@ -85,7 +85,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' + 
             i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
-        for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+        for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
             GlobalVariable.FlagFailed = 0
 
             if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
@@ -118,7 +118,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	'count ulang table address row di confins'
     variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-    for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+    for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
         GlobalVariable.FlagFailed = 0
 
         if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
@@ -158,7 +158,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
 	
-    for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+    for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
         if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
             if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                     GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(

@@ -58,7 +58,7 @@ String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2
 
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 	if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 		13)) {
 	'Pengecekan checkbox sebelumnya tidak tercentang'
@@ -83,7 +83,7 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable
 }
 
 //Jika copy app edit
-if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase('Edit')) {
+if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
 	'arraylist referantor name yang gagal'
 	ArrayList<String> referantorfaileddelete = new ArrayList<String>()
 
@@ -127,7 +127,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 			  String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 			  
 			  'Looping excel referantor'
-			  for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+			  for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 				  if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 					  GlobalVariable.NumofColm, 13)) {
 						
@@ -233,7 +233,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 	if(referantorfaileddelete.size() > 0){
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
@@ -248,7 +248,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 	
 	//Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
 	'Looping excel referantor'
-	for (GlobalVariable.NumofReferantor = GlobalVariable.CopyAppColm; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+	for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 			
 			if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 				GlobalVariable.NumofColm, 13)) {
@@ -590,7 +590,7 @@ if (datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase
 }
 
 //Jika copy app no
-if(datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase("No")){
+if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("No")){
 		
 		int modifyObjectIndex = 1
 		
@@ -814,11 +814,11 @@ if(datafileReferantor.getValue(GlobalVariable.CopyAppColm, 10).equalsIgnoreCase(
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.CopyAppColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.StartIndex, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
     'cek alert'
-    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.CopyAppColm, 
+    GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.StartIndex, 
         '5.TabReferantorData')
 }
 

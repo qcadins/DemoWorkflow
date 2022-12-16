@@ -376,7 +376,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 if (custnamefaileddelete.size() > 0) {
 
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 	
     (GlobalVariable.FlagWarning)++
 }

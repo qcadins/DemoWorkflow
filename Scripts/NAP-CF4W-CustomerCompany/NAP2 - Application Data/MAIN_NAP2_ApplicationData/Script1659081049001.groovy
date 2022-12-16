@@ -22,7 +22,7 @@ import org.openqa.selenium.By as By
 
 Integer copyAppColm = 2
 
-GlobalVariable.CopyAppColm = 2
+GlobalVariable.StartIndex = 2
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -85,7 +85,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 1); (GlobalVariable.NumofReferantor)++) {
             if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofReferantor
+                GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
 
                 break
             }
@@ -105,14 +105,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         'Write to excel success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 0, 
-            GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
@@ -349,7 +349,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 1); (GlobalVariable.NumofReferantor)++) {
             if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofReferantor
+                GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
 
                 break
             }
@@ -368,14 +368,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
         'Write to excel success'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 0, 
-            GlobalVariable.CopyAppColm - 1, GlobalVariable.StatusSuccess)
+            GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Cancel'))

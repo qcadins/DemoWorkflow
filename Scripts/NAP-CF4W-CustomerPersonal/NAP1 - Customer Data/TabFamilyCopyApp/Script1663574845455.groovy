@@ -611,7 +611,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 if (custnamefaileddelete.size() > 0) {
 
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 	
     (GlobalVariable.FlagWarning)++
 }
@@ -796,7 +796,7 @@ def checkFamilyDataEditNAP(){
 		if (arrayMatch.contains(false)) {
 	
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
 			
 			'flagwarning +1'
 			(GlobalVariable.FlagWarning)++

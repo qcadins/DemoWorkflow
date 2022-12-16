@@ -52,7 +52,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 'Loop Multiple Guarantor Data'
-for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (countGuarantorPersonal - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
+for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVariable.NumofGuarantorPersonal <= (countGuarantorPersonal - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
@@ -468,7 +468,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
     }
 }
 
-for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (countGuarantorCompany - 1); (GlobalVariable.NumofGuarantorCompany)++) {
+for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVariable.NumofGuarantorCompany <= (countGuarantorCompany - 1); (GlobalVariable.NumofGuarantorCompany)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(

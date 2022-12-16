@@ -27,7 +27,7 @@ custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerComp
 
 'get referantor data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
-		GlobalVariable.CopyAppColm, 12), custname)
+		GlobalVariable.StartIndex, 12), custname)
 
 'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
@@ -60,6 +60,6 @@ for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result
 if (arrayMatch.contains(false)) {
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 
 }

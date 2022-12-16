@@ -90,10 +90,10 @@ if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(Glo
     if (arrayMatch.contains(false)) {
 
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
 
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedLoadData'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedLoadData)
 		
         (GlobalVariable.FlagWarning)++
     }
@@ -610,7 +610,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 if (custnamefaileddelete.size() > 0) {
 
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 	
     (GlobalVariable.FlagWarning)++
 }

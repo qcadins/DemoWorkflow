@@ -236,7 +236,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 	if(accessoriesnamefaileddelete.size() > 0){
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.CopyAppColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}

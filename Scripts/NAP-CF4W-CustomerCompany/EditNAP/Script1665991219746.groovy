@@ -621,7 +621,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
             if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
+                GlobalVariable.StartIndex = GlobalVariable.NumofMS
 
                 break
             }
@@ -629,7 +629,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         
         index = 0
 
-        for (int colm = GlobalVariable.CopyAppColm; colm < ((shrPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < ((shrPersonalData.size() / 5) + GlobalVariable.StartIndex); colm++) {
             'Write to tab Management Shareholder data customer type'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Personal')
@@ -749,7 +749,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
             if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
                 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofMS
+                GlobalVariable.StartIndex = GlobalVariable.NumofMS
 
                 break
             }
@@ -758,7 +758,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         'declare index variable'
         index = 0
 
-        for (int colm = GlobalVariable.CopyAppColm; colm < ((shrPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < ((shrPersonalData.size() / 5) + GlobalVariable.StartIndex); colm++) {
             'Write to tab Management Shareholder data customer type'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 13, colm - 1, 'Personal')
@@ -834,7 +834,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
             if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorPersonal
+                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
 
                 break
             }
@@ -842,7 +842,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         
         index = 0
 
-        for (int colm = GlobalVariable.CopyAppColm; colm < ((guarPersonalData.size() / 5) + GlobalVariable.CopyAppColm); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < ((guarPersonalData.size() / 5) + GlobalVariable.StartIndex); colm++) {
             custname = (guarPersonalData[index++])
 
             'Write guarantor personal cust name'
@@ -878,7 +878,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileGuarantorCompany.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
             if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.CopyAppColm = GlobalVariable.NumofGuarantorCompany
+                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
 
                 break
             }
@@ -886,7 +886,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         
         index = 0
 
-        for (int colm = GlobalVariable.CopyAppColm; colm < ((guarCompanyData.size() / 2) + GlobalVariable.CopyAppColm); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < ((guarCompanyData.size() / 2) + GlobalVariable.StartIndex); colm++) {
             custname = (guarCompanyData[index++])
 
             'Write to tab guarantor company cust name'

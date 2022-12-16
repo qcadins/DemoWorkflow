@@ -22,7 +22,7 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories')
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.CopyAppColm,
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.StartIndex,
 		12))
 
 int arraynum = 0
@@ -77,6 +77,6 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (da
 if (arrayMatch.contains(false)) {
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.CopyAppColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 
 }

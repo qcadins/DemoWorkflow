@@ -27,7 +27,7 @@ custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerComp
 
 'call keyword NAP2TabReferantorStoreDB dari DB'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
-		GlobalVariable.CopyAppColm, 12), custname)
+		GlobalVariable.StartIndex, 12), custname)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
