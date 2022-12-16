@@ -350,7 +350,7 @@ public class dupCheckVerif {
 		String Result
 		Boolean DupCheckStatus
 		instance.eachRow(("SELECT CUST_CHECKING_STEP FROM APP WITH(NOLOCK) WHERE APP_NO = '"+ appno + "'"), { row ->
-			
+
 			Result = (row[0])
 
 			if (Result.equalsIgnoreCase('NULL') || Result.equalsIgnoreCase('CDC_AUTO') || Result.equalsIgnoreCase('CDC')){

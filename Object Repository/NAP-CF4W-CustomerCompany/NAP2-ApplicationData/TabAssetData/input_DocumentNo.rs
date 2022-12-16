@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_DocumentNo</name>
+   <tag></tag>
+   <elementGuidId>3871004c-bc5f-4faf-8fd8-0d99a693a7da</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[3]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[3]/input</value>
+   </webElementProperties>
+</WebElementEntity>

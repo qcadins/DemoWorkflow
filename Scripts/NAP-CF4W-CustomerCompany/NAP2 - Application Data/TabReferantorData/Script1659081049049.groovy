@@ -780,6 +780,8 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 		}
 }
 
+GlobalVariable.NumofReferantor = GlobalVariable.StartIndex
+
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 

@@ -143,6 +143,12 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 37).equalsIgnoreCase('No
     'verify user relation'
     arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+	'skip verif user name'
+	arrayassetinfoindex++
+	
+	'skip verif user relation'
+	arrayassetinfoindex++
 }
 
 if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No')) {
@@ -179,6 +185,15 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No
     'verify owner mobile no'
     arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 50).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+	'skip verif asset owner info'
+	arrayassetinfoindex++
+	arrayassetinfoindex++
+	arrayassetinfoindex++
+	arrayassetinfoindex++
+	arrayassetinfoindex++
+	arrayassetinfoindex++
+	arrayassetinfoindex++
 }
 
 'verify copy address'

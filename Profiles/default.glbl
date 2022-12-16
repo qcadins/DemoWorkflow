@@ -101,11 +101,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
-      <name>StartIndex</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>0</initValue>
       <name>CountDupcheckRow</name>
    </GlobalVariableEntity>
@@ -438,6 +433,11 @@
       <description></description>
       <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
       <name>RSVRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>StartIndex</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

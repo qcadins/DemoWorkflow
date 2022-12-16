@@ -430,7 +430,7 @@ ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDo
 'looping asset document'
 for (int i = 0; i < docName.size(); i++) {
     'modify document name'
-    modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/td_AssetDocument'), 
+    modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/td_AssetDocument'), 
         'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[1]', true)
 
     'get text document name'
@@ -444,19 +444,19 @@ for (int i = 0; i < docName.size(); i++) {
     }
     
     'modify object received'
-    modifyReceived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Received'), 
+    modifyReceived = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Received'), 
         'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[2]/input', true)
 
     'modify object document no'
-    modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_DocumentNo'), 
+    modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_DocumentNo'), 
         'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[3]/input', true)
 
     'modify object expired date'
-    modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'), 
+    modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_ExpiredDate'), 
         'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[4]/input', true)
 
     'modify document notes'
-    modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'), 
+    modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_DocumentNotes'), 
         'xpath', 'equals', ('//*[@id=\'AddAssetDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[5]/input', true)
 
     'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
@@ -485,12 +485,12 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Dat
 
 if (CustomKeywords.'assetData.checkAssetData.checkSelfUsageCompany'() == true) {
     'click self usage check box'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
 } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 37) == 'No') {
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status selfusage checkbox'), 
         'aria-checked') == 'true') {
         'click self usage check box'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox'))
     }
     
     'input user name'
@@ -535,7 +535,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsageCompany'() == true) {
 
 if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
     'click self owner checkbox'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
 
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
         assetLocCopy()
@@ -546,7 +546,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status self owner checkbox'), 
         'aria-checked') == 'true') {
         'click self owner checkbox'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
     }
     
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
@@ -721,6 +721,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
 
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
 
 'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 WebUI.waitForAlert(1)
@@ -837,4 +838,3 @@ def assetLocCopy() {
     'click button copy'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
 }
-

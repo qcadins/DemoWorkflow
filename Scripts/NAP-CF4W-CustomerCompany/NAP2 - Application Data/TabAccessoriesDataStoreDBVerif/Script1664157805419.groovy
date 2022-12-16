@@ -22,14 +22,18 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileAccessories'
 datafileAccessories = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories')
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.StartIndex,
-		12))
+'declare datafileCustomerCompany'
+datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+		13))
 
 int arraynum = 0
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
+for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
+	if(datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))){
 	'verify supplier code'
 	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
 			GlobalVariable.NumofAccessories, 13).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -71,6 +75,10 @@ for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (da
 	'verify notes'
 	arrayMatch.add(WebUI.verifyMatch(datafileAccessories.getValue(
 			GlobalVariable.NumofAccessories, 21).toUpperCase(), (result[arraynum++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	}else{
+	break
+	}
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

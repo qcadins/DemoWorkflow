@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>td_AssetDocument</name>
+   <tag></tag>
+   <elementGuidId>ce4c984d-d3c9-4d1f-b43e-60e3f44e47e8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AddAssetDocument&quot;]/div/table/tbody/tr[1]/td[1]</value>
+   </webElementProperties>
+</WebElementEntity>
