@@ -51,8 +51,7 @@ for (int i = 1; i <= variableData.size(); i++) {
         i) + ']/td[3]', true)
 
     'Loop Multiple guarantor company data excel'
-    for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
-    1); (GlobalVariable.NumofGuarantorCompany)++) {
+    for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= datafileTabGuarantorCompany.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorCompany)++) {
         if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
 			'Jika ada guarantor name pada confins'

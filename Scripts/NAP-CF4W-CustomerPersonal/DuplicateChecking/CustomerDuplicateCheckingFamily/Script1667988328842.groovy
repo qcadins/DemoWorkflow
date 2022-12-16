@@ -157,7 +157,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                         String IdNoFamily = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IdNoCustomer'))
 
 						'get text newfamilyname'
-                        String newFamilyName = WebUI.getText(modifyFamilyNameObject)
+                        newFamilyName = WebUI.getText(modifyFamilyNameObject)
 
 						'Jika newidnofamily tidak null'
                         if (NewIdNoFamilyMatch != null) {
@@ -212,7 +212,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                         String IdNoFamily = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IdNoCustomer'))
 
 						'get text newfamilyname'
-                        String newFamilyNameAppInProcess = WebUI.getText(modifyFamilyNameAppInProcess)
+                        newFamilyNameAppInProcess = WebUI.getText(modifyFamilyNameAppInProcess)
 
 						'Jika newidnofamilymatch tidak bernilai null'
                         if (NewIdNoFamilyMatch != null) {

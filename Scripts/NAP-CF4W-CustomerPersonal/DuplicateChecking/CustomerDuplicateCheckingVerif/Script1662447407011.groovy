@@ -162,7 +162,7 @@ for (i = 1; i <= 1; i++) {
 }
 
 'looping data family'
-for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
+for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= datafileTabFamily.getColumnNumbers() - 1; (GlobalVariable.NumofFamily)++) {
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13)) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
@@ -283,8 +283,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 }
 
 'looping data guarantor personal'
-for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
-1); (GlobalVariable.NumofGuarantorPersonal)++) {
+for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= datafileTabGuarantorPersonal.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorPersonal)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
@@ -413,8 +412,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 }
 
 'looping data guarantorcompany'
-for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
-1); (GlobalVariable.NumofGuarantorCompany)++) {
+for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= datafileTabGuarantorCompany.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorCompany)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
@@ -536,7 +534,7 @@ for (i = 1; i <= 1; i++) {
 }
 
 'looping data family'
-for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.parseInt(GlobalVariable.CountAFamily) + 1); (GlobalVariable.NumofFamily)++) {
+for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= datafileTabFamily.getColumnNumbers() - 1; (GlobalVariable.NumofFamily)++) {
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         13)) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
@@ -619,8 +617,7 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (Integer.pars
 }
 
 'looping data guarantor personal'
-for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
-1); (GlobalVariable.NumofGuarantorPersonal)++) {
+for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= datafileTabGuarantorPersonal.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorPersonal)++) {
     if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
@@ -703,8 +700,7 @@ for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPer
 }
 
 'looping data guarantor company'
-for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (Integer.parseInt(GlobalVariable.CountAGuarantorCompany) + 
-1); (GlobalVariable.NumofGuarantorCompany)++) {
+for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= datafileTabGuarantorCompany.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorCompany)++) {
     if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
         GlobalVariable.NumofColm, 13)) {
         if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {

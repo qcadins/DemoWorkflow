@@ -57,12 +57,13 @@ if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(Glo
 	'declare arraymatch'
     ArrayList<String> arrayMatch = new ArrayList<String>()
 
+	int indexguar = 0
 	'looping tabel guarantor confins'
     for (int guardt = 1; guardt <= variableData.size(); guardt++) {
-		'declare result'
-        String result = listGuar.get(guardt - 1)
-
-        resultarray = result.split(', ')
+//		'declare result'
+//        String result = listGuar.get(guardt - 1)
+//
+//        resultarray = result.split(', ')
 
         'modify object guarantor name'
         modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -80,13 +81,19 @@ if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(Glo
             guardt) + ']/td[4]', true)
 
 		'verif guarantor name confins x db'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName), '(?i)' + (resultarray[0]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName), '(?i)' + (listGuar[indexguar]), true))
 
+		indexguar++
+		
 		'verif guarantor type confins x db'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType), '(?i)' + (resultarray[1]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType), '(?i)' + (listGuar[indexguar]), true))
 
+		indexguar++
+		
 		'verif guarantor relation confins x db'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation), '(?i)' + (resultarray[2]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation), '(?i)' + (listGuar[indexguar]), true))
+		
+		indexguar++
     }
     
 	'Jika ada verif data yang tidak sesuai'
@@ -115,8 +122,7 @@ for (int i = 1; i <= variableData.size(); i++) {
         i) + ']/td[3]', true)
 
     'Loop Multiple guarantor data personal excel'
-    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (Integer.parseInt(GlobalVariable.CountAGuarantorPersonal) + 
-    1); (GlobalVariable.NumofGuarantorPersonal)++) {
+    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= datafileTabGuarantorPersonal.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
 			'Jika ada guarantor name pada confins'

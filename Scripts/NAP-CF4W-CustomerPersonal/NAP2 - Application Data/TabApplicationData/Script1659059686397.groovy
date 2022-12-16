@@ -756,7 +756,7 @@ public addCrossAppAgr(ArrayList<Integer> s, Sql sqlConnectionLOS){
 		Integer totalDataCross = Integer.parseInt(textTotalDataCross[1])
 
 		'Verif total data cross application confins sesuai dengan db'
-		if(WebUI.verifyEqual(totalDataCross, countDataCross)==false){
+		if(WebUI.verifyEqual(totalDataCross, countDataCross, FailureHandling.OPTIONAL)==false){
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
