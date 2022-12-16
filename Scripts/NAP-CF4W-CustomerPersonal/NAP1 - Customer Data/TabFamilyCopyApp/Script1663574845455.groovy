@@ -772,15 +772,15 @@ def checkFamilyDataEditNAP(ArrayList<String> variableData){
 	
 			Boolean isMatch = 0
 	
-			for (int familydb = 0; familydb < listFam.size(); familydb++) {
+			for (int familydb = 0; familydb < listFam.size()/4; familydb++) {
 //				String result = listFam.get(familydb)
 	
 //				resultarray = result.split(', ')
 	
-				if ((((WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
-				false) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
-				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
-				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel), '(?i)' + (listFam[familydb++]), true, FailureHandling.OPTIONAL) ==
+				if ((((WebUI.verifyMatch(WebUI.getText(modifyNewFamilyName), '(?i)' + (listFam[0+(4*familydb)]), true, FailureHandling.OPTIONAL) ==
+				false) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyType), '(?i)' + (listFam[1+(4*familydb)]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyRelation), '(?i)' + (listFam[2+(4*familydb)]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch(WebUI.getText(modifyNewFamilyCustModel), '(?i)' + (listFam[3+(4*familydb)]), true, FailureHandling.OPTIONAL) ==
 				false)) {
 					isMatch = false
 	
