@@ -255,6 +255,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', 
                                         false))
                             }
+						//Karena button action New tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
@@ -317,6 +318,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                                 checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newFamilyNameAppInProcess), 
                                         newApplicantNoValue.toString(), false))
                             }
+						//Karena button action application in process tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
@@ -374,6 +376,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                                 checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newFamilyName), CustomerNoValue.toString(), 
                                         false))
                             }
+						//Karena button action similar data tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.Role == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))

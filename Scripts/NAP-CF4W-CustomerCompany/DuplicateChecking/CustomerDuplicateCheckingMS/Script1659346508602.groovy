@@ -356,6 +356,7 @@ if (ManagementShareholderArray.size() > 0) {
                                 'verify match ApplicantNo'
                                 checkVerifyEqualOrMatch(WebUI.verifyNotMatch(loopingSubjectApplicantNo(subjectName), '', false))
                             }
+						//Karena button action New tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
@@ -453,6 +454,7 @@ if (ManagementShareholderArray.size() > 0) {
                                 checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectCustNo(newMSName).toString(), newCustomerNoValue.toString(), 
                                         false))
                             }
+						//Karena button action similar data tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
@@ -530,6 +532,7 @@ if (ManagementShareholderArray.size() > 0) {
                                 checkVerifyEqualOrMatch(WebUI.verifyMatch(loopingSubjectApplicantNo(newMSNameAppInProcess).toString(), 
                                         newApplicantNoValue.toString(), false))
                             }
+						//Karena button action application in process tidak ketemu cek if Role = testing, jika iya maka akan dicancel
                         } else if (GlobalVariable.RoleCompany == 'Testing') {
                             'click button cancel'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))

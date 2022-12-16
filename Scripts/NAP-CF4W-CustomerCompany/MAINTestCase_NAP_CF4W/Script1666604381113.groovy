@@ -29,7 +29,7 @@ countCustomerCompany = datafileCustomerCompany.getColumnNumbers()
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             continue
         }
         
@@ -58,7 +58,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13).length() == 0) {
+        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             continue
         }
         
@@ -100,7 +100,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 }
             }
             catch (Exception e) {
-                KeywordUtil.markFailed('gagal')
+                KeywordUtil.markFailed(e.printStackTrace())
 
                 continue
             } 
