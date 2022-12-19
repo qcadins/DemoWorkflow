@@ -648,9 +648,12 @@ if(capinssetting=="YEARLY"){
 				modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),
 					'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[7]/div/div/select',
 					true)
+				
+				'modify additional rate object'
+				modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 		
 				'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-				if (WebUI.verifyElementPresent(modifySumInsuredAmount, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+				if (WebUI.getAttribute(modifyAddtRateObject, 'value', FailureHandling.OPTIONAL).contains(",")) {
 					countSumInsuredAmount = 1
 				}
 				
@@ -679,13 +682,14 @@ if(capinssetting=="YEARLY"){
 				'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[7]/div/div/select',
 				true)
 	
+			'modify additional rate object'
+			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+			
 			'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-			if (WebUI.verifyElementPresent(modifySumInsuredAmount, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			if (WebUI.getAttribute(modifyAddtRateObject, 'value', FailureHandling.OPTIONAL).contains(",")) {
 				countSumInsuredAmount = 1
 			}
 			
-			'modify additional rate object'
-			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 			
 			//Verif additional premi rate based on rule
 			if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){

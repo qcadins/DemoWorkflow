@@ -609,8 +609,10 @@ if(capinssetting=="YEARLY"){
 					'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[7]/div/div/select',
 					true)
 		
+				modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+			
 				'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-				if (WebUI.verifyElementPresent(modifySumInsuredAmount, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+				if (WebUI.getAttribute(modifyAddtRateObject, 'value', FailureHandling.OPTIONAL).contains(",")) {
 					countSumInsuredAmount = 1
 				}
 				
@@ -641,11 +643,10 @@ if(capinssetting=="YEARLY"){
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 			
 			'Pengecekan untuk flagging sum insured amount dari additional coverage ada atau tidak'
-			if (WebUI.getAttribute(modifyAddtRateObject, 'value', FailureHandling.OPTIONAL).contains("%")) {
+			if (WebUI.getAttribute(modifyAddtRateObject, 'value', FailureHandling.OPTIONAL).contains(",")) {
 				countSumInsuredAmount = 1
 			}
-			
-			
+		
 			//Verif additional premi rate based on rule
 			if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 				'Looping berdasarkan jumlah additional coverage type pada rule excel'
