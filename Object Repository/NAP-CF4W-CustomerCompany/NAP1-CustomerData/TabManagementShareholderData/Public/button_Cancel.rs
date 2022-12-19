@@ -9,6 +9,10 @@
          <key>XPATH</key>
          <value>//*[@id=&quot;AddEditMgmntShrholder&quot;]/app-cust-main-data/div/app-cust-public/div/div/div/div/div/form/div[3]/button[1]</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'button' and (text() = ' Add' or . = ' Add')]</value>
+      </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>

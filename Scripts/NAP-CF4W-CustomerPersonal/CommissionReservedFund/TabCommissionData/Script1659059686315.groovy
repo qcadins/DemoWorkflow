@@ -918,7 +918,7 @@ if (variableRef.size() > 0) {
 if(commissiondelete.size() > 0){
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + commissiondelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
 }

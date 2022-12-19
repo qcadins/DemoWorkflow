@@ -39,7 +39,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'Loop Multiple family data excel'
-for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (countFamily - 1); (GlobalVariable.NumofFamily)++) {
+for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.NumofFamily <= (countFamily - 1); (GlobalVariable.NumofFamily)++) {
     GlobalVariable.FlagFailed = 0
 
     if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
@@ -668,8 +668,9 @@ for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (countFamily 
                 }
             }
         }
-    }else{
-	break
+    }
+	else{
+		break
     }
 }
 

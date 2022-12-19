@@ -49,7 +49,7 @@ for (int i = 1; i <= variableData.size(); i++) {
         i) + ']/td[2]', true)
 
     'Loop Multiple family data'
-    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
+    for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
 			'jika familyname ada pada confins'
@@ -602,10 +602,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                         }
                     }
                 }
-            } else {
-                break
-            }
+            } 
         }
+		else {
+			break
+		}
     }
 }
 

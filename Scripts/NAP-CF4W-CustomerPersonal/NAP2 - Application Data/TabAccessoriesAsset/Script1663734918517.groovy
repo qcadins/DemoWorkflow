@@ -42,6 +42,14 @@ countAccessories = datafileAccessories.getColumnNumbers()
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+'Looping untuk mencari nilai colm yang menunjukkan colm appno'
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
+	if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = GlobalVariable.NumofAccessories
+			break
+	}
+}
+
 'Jika copy app edit'
 if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
@@ -97,7 +105,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a/i', true)
 
 			  'Looping excel datafile accessories'
-			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
+			  for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			  
 				  if (datafileAccessories.getValue(
 					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerPersonal.getValue(
@@ -183,59 +191,63 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 						  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 								  GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 						  break
+						  }
+						  else{
+							  if(GlobalVariable.NumofAccessories == (countAccessories - 1)){
+								  'Jika pada confins accessories ada data seblumnya'
+								  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
+									  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
+									  
+									  'get accessories name'
+									  accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+										
+									 'Click delete'
+									  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
+									  
+									  'click ok pada alert'
+									  WebUI.acceptAlert(FailureHandling.OPTIONAL)
+									  
+									  'Jika acccessories merupakan data index terakhir'
+									  if(i == variable.size()){
+											  'Jika accessories name tidak muncul'
+											if(WebUI.verifyElementPresent(modifyObjectAccName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+												'add accessories name failed kedalam array'
+												accessoriesnamefaileddelete.add(accessoriesnamebefore)
+											}
+									  }else{
+											'get accessories name sebelum delete'
+											accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
+													
+											'Jika accessories name after delete tidak sama dengan accessories name before delete'
+											if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
+												'add accessories name failed kedalam array'
+												accessoriesnamefaileddelete.add(accessoriesnamebefore)
+											}
+									  }
+									  'count ulang table accessories setelah delete'
+									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+									  
+									  i--
+								  }else{
+									  break
+								  }
+								  
+								  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
+									  break
+								  }
+							  }
+					  }
+					  'count table accessories setelah delete'
+					  variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
+					  
+					  if(variableData.size() == 1){
+						  break
 					  }
 				  }
 				  else{
-						  if(GlobalVariable.NumofAccessories == (countAccessories - 1)){
-							  'Jika pada confins accessories ada data seblumnya'
-							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
-								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
-								  
-								  'get accessories name'
-								  accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-									
-								 'Click delete'
-								  WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
-								  
-								  'click ok pada alert'
-								  WebUI.acceptAlert(FailureHandling.OPTIONAL)
-								  
-								  'Jika acccessories merupakan data index terakhir'
-								  if(i == variable.size()){
-									  	'Jika accessories name tidak muncul'
-										if(WebUI.verifyElementPresent(modifyObjectAccName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
-											'add accessories name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)												
-										}
-								  }else{
-										'get accessories name sebelum delete'
-										accessoriesnameafter = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
-												
-										'Jika accessories name after delete tidak sama dengan accessories name before delete'
-										if(WebUI.verifyMatch(accessoriesnameafter, accessoriesnamebefore, false, FailureHandling.OPTIONAL)){
-											'add accessories name failed kedalam array'
-											accessoriesnamefaileddelete.add(accessoriesnamebefore)
-										}
-								  }
-								  'count ulang table accessories setelah delete'
-								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								  
-								  i--
-							  }else{
-								  break
-							  }
-							  
-							  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
-								  break
-							  }
-						  }
-				  }
-				  'count table accessories setelah delete'
-				  variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
-				  
-				  if(variableData.size() == 1){
 					  break
 				  }
+						
 			  }
 		}
 	}
@@ -258,7 +270,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 	
 	//Add Acc jika ada data pada excel, tetapi data tersebut tidak ditemukan pada confins
 	'Looping excel accessories'
-	for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
+	for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			
 			if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 					  GlobalVariable.NumofColm, 13))) {
@@ -620,14 +632,14 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 					}
 				}
 			}else{
-			break
+				break
 			}
 	}
 }
 	
 //Jika copy app no
 else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
-	for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
+	for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 		if (datafileAccessories.getValue(
 			GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
 				GlobalVariable.NumofColm, 13))) {
@@ -811,6 +823,9 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories', 0,
 				GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 		}
+		else{
+			break
+		}
 	}
 }
 	
@@ -832,27 +847,27 @@ def countAccessoriesDP(){
 		'convert accessories price > integer'
 		BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
 								  
-						  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+		if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 				  
-							  'get attribute accessories input amount dari confins'
-							  AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value')
+			'get attribute accessories input amount dari confins'
+			AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value')
 							  
-							  'get value accessories dari excel'
-							  AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 24)
+			'get value accessories dari excel'
+			AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 24)
 							  
-							  'verify securitydeposit value equal'
-							  checkVerifyEqualOrMatch(WebUI.verifyMatch(AccessoriesInputAmt, AccessoriesAmountExcel, false))
+			'verify securitydeposit value equal'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(AccessoriesInputAmt, AccessoriesAmountExcel, false))
 							  
-						  } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
+		} else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
 				  
-							  'get attribute accessories input percentage dari confins'
-							  AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replace(' %', '')
+			'get attribute accessories input percentage dari confins'
+			AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replace(' %', '')
 
-							  'get value accessories value dari excel'
-							  AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
+			'get value accessories value dari excel'
+			AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
 							  
-							  'verify securitydeposit value equal'
-							  checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))
-						  }
+			'verify securitydeposit value equal'
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))
+		}
 	}
 }
