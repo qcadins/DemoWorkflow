@@ -179,7 +179,6 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								  GlobalVariable.NumofAccessories - 1, GlobalVariable.StatusSuccess)
 						  break
 					  }
-				  }
 				  else{
 						  
 							  'Jika pada confins accessories ada data seblumnya'
@@ -221,6 +220,9 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
 								  break
 							  }
+				  }
+				  }else{
+					  break
 				  }
 			  }
 				  

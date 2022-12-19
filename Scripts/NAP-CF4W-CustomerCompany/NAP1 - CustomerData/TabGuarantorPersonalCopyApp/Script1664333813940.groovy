@@ -45,7 +45,7 @@ ArrayList<String> variableData = DriverFactory.getWebDriver().findElements(By.cs
 if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() > 
 1)) {
     'Connect database LOS'
-    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'(urlLOS, username, password, driverclassname)
+    Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
     ArrayList<String> listGuar = new ArrayList<String>()
 
@@ -54,10 +54,10 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getVal
 
     ArrayList<String> arrayMatch = new ArrayList<String>()
 
+	int indexguar = 0
+	
     for (int guardt = 1; guardt <= variableData.size(); guardt++) {
         String result = listGuar.get(guardt - 1)
-
-        resultarray = result.split(', ')
 
         'modify object guarantor name'
         modifyNewGuarantorName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/FromTypeName'), 
@@ -75,13 +75,13 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getVal
             guardt) + ']/td[4]', true)
 
         'verif guarantor name = result'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName), '(?i)' + (resultarray[0]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorName), '(?i)' + (listGuar[indexguar++]), true))
 
         'verif guarantor type = result'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType), '(?i)' + (resultarray[1]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorType), '(?i)' + (listGuar[indexguar++]), true))
 
         'verif guarantor relation = result'
-        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation), '(?i)' + (resultarray[2]), true))
+        arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyNewGuarantorRelation), '(?i)' + (listGuar[indexguar++]), true))
     }
     
     if (arrayMatch.contains(false)) {
@@ -550,10 +550,10 @@ for (int i = 1; i <= variableData.size(); i++) {
                             i--
                         }
                     }
-                } else {
-                    break
-                }
+                } 
             }
+        }else {
+               break
         }
     }
 }
@@ -561,18 +561,15 @@ for (int i = 1; i <= variableData.size(); i++) {
 if (custnamefaileddelete.size() > 0) {
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 
     (GlobalVariable.FlagWarning)++
 }
 
-'call test case guarantor company copy app'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
 WebUI.delay(5)
 
-'call test case tab guarantor data'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+'call test case tab guarantor personal'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonal'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 def getDataGuarPersonal() {
     'declare array for confins data'

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabGuarantorData</name>
+   <name>TabGuarantorPersonal</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>f31696e9-56ca-4c05-99d6-d0fd90298857</testCaseGuid>
+   <testCaseGuid>2cfdec9d-20c6-4ea8-8499-18ba8068c6ea</testCaseGuid>
 </TestCaseEntity>

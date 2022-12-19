@@ -35,6 +35,9 @@ datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Ta
 'declare datafileGuarantorPersonal'
 datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
 
+'declare datafileGuarantorCompany'
+datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
+
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
@@ -217,13 +220,15 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
+    if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() < 1)) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileCustomerCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
+    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
 
@@ -263,10 +268,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() < 1)) {
         'call test case guarantor tanpa copy app'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonal'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
@@ -306,6 +313,28 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	'untuk mendapatkan posisi copy app dari excel'
+	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileGuarantorCompany.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
+		if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
+
+			break
+		}
+	}
+	
+	'check if copy app yes / no / edit'
+	if (datafileGuarantorCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 8).length() < 1)) {
+		'call test case guarantor tanpa copy app'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompany'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	} else if (datafileGuarantorCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 8).length() > 1)) {
+		'call test case guarantor copy app'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
+	}
+		
     'call test case verify applicant'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
@@ -358,10 +387,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
+    if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() < 1)) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabManagementShareholder'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
+    } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
@@ -400,9 +431,11 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'check if copy app yes / no / edit'
-    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorData'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
+    if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() < 1)) {
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonal'), [:], FailureHandling.STOP_ON_FAILURE)
+    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+        GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -441,6 +474,28 @@ if (GlobalVariable.Role == 'Data Entry') {
             }
         }
     }
+	
+	'untuk mendapatkan posisi copy app dari excel'
+	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileGuarantorCompany.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
+		if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
+
+			break
+		}
+	}
+	
+	'check if copy app yes / no / edit'
+	if (datafileGuarantorCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 8).length() < 1)) {
+		'call test case guarantor tanpa copy app'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompany'), [:], FailureHandling.STOP_ON_FAILURE)
+	} else if (datafileGuarantorCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 8).length() > 1)) {
+		'call test case guarantor copy app'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+			FailureHandling.STOP_ON_FAILURE)
+	}
     
     'call test case verify applicant'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.STOP_ON_FAILURE)

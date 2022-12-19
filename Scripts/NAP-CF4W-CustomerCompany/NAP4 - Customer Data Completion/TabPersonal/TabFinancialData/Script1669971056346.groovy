@@ -52,8 +52,6 @@ ArrayList<String> financialDateDelete = new ArrayList<String>()
 
 ArrayList<String> bankAccDelete = new ArrayList<String>()
 
-int financialdata
-
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
@@ -382,7 +380,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							if (!(BankDetail.equalsIgnoreCase(bankdetailexcel))) {
 								if (i == variable.size()) {
 									'click button add bank'
-									WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+									WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 
 									'call function input bank'
 									inputBank(copyapp, variable, flagFailed)
@@ -407,7 +405,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+						WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 	
 						'call function input bank'
 						inputBank(copyapp, variable, flagFailed)
@@ -428,7 +426,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 
 					'call function input bank'
 					inputBank(copyapp, variable, flagFailed)

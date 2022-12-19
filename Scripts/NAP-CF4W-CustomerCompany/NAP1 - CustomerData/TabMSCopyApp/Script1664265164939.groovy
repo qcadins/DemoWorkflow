@@ -67,18 +67,8 @@ for (int i = 1; i <= variableData.size(); i++) {
     'Loop Multiple Shareholder data'
     for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
-            if (WebUI.verifyElementPresent(modifyNewMSName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                if (((((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 19)) && 
-                WebUI.getText(modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14))) || 
-                (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 17)) && WebUI.getText(
-                    modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) || (WebUI.getText(
-                    modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 52)) && WebUI.getText(
-                    modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) || (WebUI.getText(
-                    modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 50)) && WebUI.getText(
-                    modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) || (WebUI.getText(
-                    modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 62)) && WebUI.getText(
-                    modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14)))) {
-                    if (WebUI.verifyElementPresent(modifyNewButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+            
+                if ( CustomKeywords.'dbConnection.checkStep.checkMSName'( modifyNewMSName,  modifyNewMSTypeName,  datafileMS) == true) {
                         'click button edit'
                         WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
@@ -967,32 +957,31 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                             }
                             
-                            if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
-                                if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                                'Yes')) {
-                                    if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                                        'call test case MS Company data store verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    } else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-                                        'call test case MS Personal data store verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    }
-                                }
-                            } else {
-                                if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                                'Yes')) {
-                                    if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-                                        'call test case MS Company  data store verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif-LookUp'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    } else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
-                                        'call test case MS personal data store verif'
-                                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif-LookUp'), 
-                                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                                    }
-                                }
+                            if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
+                            		'Yes')) {
+                            	if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
+                            		if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+                            			'call test case MS Company data store verif'
+                            			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif'), 
+                            					[:], FailureHandling.CONTINUE_ON_FAILURE)
+                            		} else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
+                            			'call test case MS Personal data store verif'
+                            			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif'), 
+                            					[:], FailureHandling.CONTINUE_ON_FAILURE)
+                            		}
+                            	}
+                            	else {
+                            		
+                            		if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+                            			'call test case MS Company  data store verif'
+                            			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCompanyDataStoreDBVerif-LookUp'), 
+                            					[:], FailureHandling.CONTINUE_ON_FAILURE)
+                            		} else if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Personal')) {
+                            			'call test case MS personal data store verif'
+                            			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSPersonalDataStoreDBVerif-LookUp'), 
+                            					[:], FailureHandling.CONTINUE_ON_FAILURE)
+                            		}
+                            	}
                             }
                         }
                         
@@ -1026,7 +1015,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 }
                             }
                         }
-                    }
+                    
                     
                     break
                 } else {
@@ -1034,24 +1023,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                         13)) {
                         'click button edit'
                         WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
-
-                        if (customertype.equalsIgnoreCase('Personal')) {
-                            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                                'click checkbox is active'
-                                WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
-                            }
-                        } else if (customertype.equalsIgnoreCase('Company')) {
-                            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'), 
-                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                                'click checkbox is active'
-                                WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
-                            }
-                        } else if (customertype.equalsIgnoreCase('Public')) {
-                            if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'), 
-                                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                                WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/input_Is Active_border-primary ng-untouched ng-pristine ng-valid'))
-                            }
+                       
+                        if (WebUI.verifyElementChecked(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'), 
+                        		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+                        	'click checkbox is active'
+                        	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'))
                         }
                         
                         'click button save'
@@ -1068,7 +1044,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         break
                     }
                 }
-            }
+            
         } else {
             break
         }
@@ -1320,4 +1296,3 @@ def getData() {
         }
     }
 }
-
