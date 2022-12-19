@@ -40,6 +40,14 @@ countAccessories = datafileAccessories.getColumnNumbers()
 
 WebDriver driver = DriverFactory.getWebDriver()
 
+'Looping untuk mencari nilai colm yang menunjukkan colm appno'
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
+	if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = GlobalVariable.NumofAccessories
+			break
+	}
+}
+
 'Jika copy app edit'
 if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
