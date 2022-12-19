@@ -184,7 +184,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						  }
 						  break
 					  }
-				  }
 				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
 				  else{
 							  'Jika pada confins ada datanya'
@@ -225,6 +224,9 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 								  break
 							  }
 				  }	  
+				  }else{
+				  break
+				  }
 			}
 		}
 	}

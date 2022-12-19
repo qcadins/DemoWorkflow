@@ -435,7 +435,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39).length() >
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39))
 }
 
-GlobalVariable.Custname = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
+GlobalVariable.Custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 'click button save'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/button_Save'))

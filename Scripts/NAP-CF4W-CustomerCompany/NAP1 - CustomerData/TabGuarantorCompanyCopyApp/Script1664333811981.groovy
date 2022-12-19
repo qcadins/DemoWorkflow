@@ -335,10 +335,10 @@ for (int i = 1; i <= variableData.size(); i++) {
                             i--
                         }
                     }
-                } else {
-                    break
-                }
+                } 
             }
+        }else {
+              break
         }
     }
 }
@@ -346,10 +346,15 @@ for (int i = 1; i <= variableData.size(); i++) {
 if (custnamefaileddelete.size() > 0) {
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + custnamefaileddelete)
 	
     (GlobalVariable.FlagWarning)++
 }
+
+WebUI.delay(5)
+
+'call test case tab guarantor company'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompany'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 def getDataGuarCompany() {
     'declare array for confins data'

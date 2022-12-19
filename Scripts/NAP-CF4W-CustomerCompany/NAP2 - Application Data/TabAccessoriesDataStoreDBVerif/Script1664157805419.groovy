@@ -25,8 +25,8 @@ datafileAccessories = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationDat
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
-		13))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, datafileAccessories.getValue(GlobalVariable.StartIndex,
+		12))
 
 int arraynum = 0
 
