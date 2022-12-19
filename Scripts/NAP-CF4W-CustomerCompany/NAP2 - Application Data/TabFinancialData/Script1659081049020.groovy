@@ -678,6 +678,8 @@ if (GlobalVariable.FlagFailed == 0) {
 	}
 }
 
+WebUI.delay(5)
+
 if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 	'call test case subsidy store db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),

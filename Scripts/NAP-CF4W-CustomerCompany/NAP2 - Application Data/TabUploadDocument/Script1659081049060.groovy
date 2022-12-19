@@ -35,62 +35,62 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL))
 }
 
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
-        if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
-            13)) {
-            'click menu titik 3'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
+for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
+    if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        13)) {
+        'click menu titik 3'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
 
-            'jika menu titik 3 disabled/enabled'
-            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'), 
-                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                'click new document'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'))
-            } else {
-                break
-            }
-            
-            'upload file'
-            CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
-                datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 13))
-
-            'input document name'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
-                datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 14))
-
-            'select jenis document'
-            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-                datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 15), false)
-
-            'input MOU Id'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
-                datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 16))
-
-            'input notes'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-                datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 17))
-
-            'click button save'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_save'))
-
-            WebUI.delay(10)
-
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 
-                0, GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
-
-            if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'), 
-                GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                'click button close'
-                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
-
-				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
-            }
-        }else{
-		break
+        'jika menu titik 3 disabled/enabled'
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'), 
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+            'click new document'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_New Document'))
+        } else {
+            break
         }
-    }
+        
+        'upload file'
+        CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
+            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 13))
 
+        'input document name'
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
+            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 14))
+
+        'select jenis document'
+        WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
+            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 15), false)
+
+        'input MOU Id'
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
+            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 16))
+
+        'input notes'
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
+            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 17))
+
+        'click button save'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_save'))
+
+        WebUI.delay(10)
+
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '11.TabUploadDocument', 0, 
+            GlobalVariable.NumofUploadDocument - 1, GlobalVariable.StatusSuccess)
+
+        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'), 
+            GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+            'click button close'
+            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Close'))
+
+            'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, 
+                GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
+        }
+    } else {
+        break
+    }
+}
 
 'click button submit'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
@@ -111,9 +111,9 @@ WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicatio
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, 
+            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
