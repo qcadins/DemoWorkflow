@@ -105,9 +105,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		
 		'call tc familycopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
@@ -139,6 +145,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
@@ -440,9 +449,15 @@ else if (GlobalVariable.Role == 'Testing') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		
 		'call tc tabfamilycopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -483,6 +498,9 @@ else if (GlobalVariable.Role == 'Testing') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
@@ -854,14 +872,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         index = 0
 
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
-            if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
-                GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.StartIndex = GlobalVariable.NumofFamily
-
-                break
-            }
-        }
+        loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
         
 		'looping famdata'
         for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
@@ -952,14 +963,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         index = 0
 
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
-            if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(
-                GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.StartIndex = GlobalVariable.NumofFamily
-
-                break
-            }
-        }
+        loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
         
 		'looping famdata'
         for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
@@ -1000,14 +1004,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         }
         
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= datafileTabGuarantorPersonal.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorPersonal)++) {
-            if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
-                GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
-
-                break
-            }
-        }
+        loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
         
 		'looping guarpersonaldata'
         for (int colm = GlobalVariable.StartIndex; colm < (guarPersonalData.size() / 5); colm++) {
@@ -1048,14 +1045,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         }
         
         'untuk mendapatkan posisi copy app dari excel'
-        for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= datafileTabGuarantorCompany.getColumnNumbers() - 1; (GlobalVariable.NumofGuarantorCompany)++) {
-            if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
-                GlobalVariable.NumofColm, 13)) {
-                GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
-
-                break
-            }
-        }
+        loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
         
 		'looping guarcompanydata'
         for (int colm = GlobalVariable.StartIndex; colm < (guarCompanyData.size() / 2); colm++) {
@@ -1083,4 +1073,16 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             index = 0
         }
     }
+}
+
+public loopingStartIndex(Integer NumOf, TestData datafile){
+	'untuk mendapatkan posisi copy app dari excel'
+	for (NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {
+		if (datafile.getValue(NumOf, 12) == datafileCustomerPersonal.getValue(
+			GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = NumOf
+
+			break
+		}
+	}
 }

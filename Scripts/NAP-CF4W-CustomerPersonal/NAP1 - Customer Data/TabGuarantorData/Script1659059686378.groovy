@@ -509,7 +509,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
             }
         }
     }else{
-	break
+		break
     }
 }
 
@@ -821,7 +821,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
             }
         }
     }else{
-	break
+		break
     }
 }
 

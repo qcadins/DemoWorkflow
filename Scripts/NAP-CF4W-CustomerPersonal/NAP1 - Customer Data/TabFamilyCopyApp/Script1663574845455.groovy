@@ -602,10 +602,11 @@ for (int i = 1; i <= variableData.size(); i++) {
                         }
                     }
                 }
-            } else {
-                break
-            }
+            } 
         }
+		else {
+			break
+		}
     }
 }
 

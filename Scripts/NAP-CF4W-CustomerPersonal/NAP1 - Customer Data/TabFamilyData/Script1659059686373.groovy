@@ -668,8 +668,9 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                 }
             }
         }
-    }else{
-	break
+    }
+	else{
+		break
     }
 }
 
