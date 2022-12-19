@@ -187,46 +187,49 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						  }
 						  break
 					  }
-				  }
-				  //delete jika ada data pada confins, tetapi pada datafile tidak ada
-				  else{
-							  'Jika pada confins ada datanya'
-							  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
-								  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
-									  
-								  'get referantor name'
-								  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-								  
-								  'Click delete'
-								  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-								  
-								  if(i == variable.size()){
-									  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
-										  'add cust name failed kedalam array'
-										  referantorfaileddelete.add(referantornamebefore)
-									  }
-								  }else{
-									  'get cust name sebelum delete'
-									  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+						  //delete jika ada data pada confins, tetapi pada datafile tidak ada
+						  else{
+									  'Jika pada confins ada datanya'
+									  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
+										  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 											  
-									  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-										  'add cust name failed kedalam array'
-										  referantorfaileddelete.add(referantornamebefore)
-									  }
-								  }
-								  
-								  'count table referantor setelah delete'
-								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+										  'get referantor name'
+										  referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 										  
-								  i--
-							  }
-							  else{
-								  break
-							  }
-							  
-							  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
-								  break
-							  }
+										  'Click delete'
+										  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+										  
+										  if(i == variable.size()){
+											  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+												  'add cust name failed kedalam array'
+												  referantorfaileddelete.add(referantornamebefore)
+											  }
+										  }else{
+											  'get cust name sebelum delete'
+											  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+													  
+											  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+												  'add cust name failed kedalam array'
+												  referantorfaileddelete.add(referantornamebefore)
+											  }
+										  }
+										  
+										  'count table referantor setelah delete'
+										  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+												  
+										  i--
+									  }
+									  else{
+										  break
+									  }
+									  
+									  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+										  break
+									  }
+						  }
+				  }
+				  else{
+					  break
 				  }
 			  }
 		}
@@ -587,7 +590,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 					}
 				}
 			}else{
-			break
+				break
 			}
 	}
 }
@@ -598,7 +601,7 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 		int modifyObjectIndex = 1
 		
 		'looping referantor'
-		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
+		for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 			
 			if (datafileReferantor.getValue(
 				GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
@@ -808,7 +811,7 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 	
 				modifyObjectIndex++
 			}else{
-			break
+				break
 			}
 		}
 	

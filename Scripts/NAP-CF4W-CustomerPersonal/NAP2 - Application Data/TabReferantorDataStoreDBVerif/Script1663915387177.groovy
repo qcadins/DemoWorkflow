@@ -39,7 +39,7 @@ int arrayindex = 0, bankindex = 0
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 'looping referantor data verif'
-for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor < result.size()/6 + 2; (GlobalVariable.NumofReferantor)++) {
+for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/6 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
