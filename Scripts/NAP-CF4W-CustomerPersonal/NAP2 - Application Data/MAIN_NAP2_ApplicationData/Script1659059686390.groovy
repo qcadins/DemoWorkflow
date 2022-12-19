@@ -20,8 +20,6 @@ import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
-'declare copyappcolm'
-Integer copyAppColm = 2
 GlobalVariable.StartIndex=2
 
 'declare datafileCustomerPersonal'
@@ -93,14 +91,14 @@ if (GlobalVariable.Role == 'Data Entry') {
 	
 	
 	'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
-	if(datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase("No") || datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase("Edit")){
+	if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("No") || datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Edit")){
 		
 		'call test case tab referantor'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'),
 					[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	//dijalankan dengan copy app tab referantor
-	else if(datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase("Yes")){
+	else if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Yes")){
 		'click button save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 		
@@ -343,31 +341,31 @@ if (GlobalVariable.Role == 'Data Entry') {
 			if (datafileTabUploadDoc.getValue(
 				GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
 				GlobalVariable.NumofColm, 13)) {
-			copyAppColm = GlobalVariable.NumofUploadDocument
+			GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
 			break
 		}
 	}
 	
 	'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'
-	if(datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("No") || datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("Edit")){
+	if(datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("No") || datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Edit")){
 		'call test case tab upload document'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'),
 						[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	//dijalankan dengan copy app tab upload document
-	else if(datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("Yes")){
+	else if(datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Yes")){
 		'click button submit'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 			
 		'Write to excel success'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
 			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
@@ -392,15 +390,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 	
 	
 	'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
-	if(datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase("No") || datafileReferantor.getValue(
-		copyAppColm, 10).equalsIgnoreCase("Edit")){
+	if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("No") || datafileReferantor.getValue(
+		GlobalVariable.StartIndex, 10).equalsIgnoreCase("Edit")){
 		
 		'call test case tab referantor'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'),
 					[:], FailureHandling.STOP_ON_FAILURE)
 	}
 	//dijalankan dengan copy app tab referantor
-	else if(datafileReferantor.getValue(copyAppColm, 10).equalsIgnoreCase("Yes")){
+	else if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Yes")){
 		'click button save'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 		
@@ -655,31 +653,31 @@ if (GlobalVariable.Role == 'Data Entry') {
 			if (datafileTabUploadDoc.getValue(
 				GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
 				GlobalVariable.NumofColm, 13)) {
-			copyAppColm = GlobalVariable.NumofUploadDocument
+			GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
 			break
 		}
 	}
 	
 	'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'
-	if(datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("No") || datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("Edit")){
+	if(datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("No") || datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Edit")){
 		'call test case tab upload document'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'),
 						[:], FailureHandling.STOP_ON_FAILURE)
 	}
 	//dijalankan dengan copy app tab upload document
-	else if(datafileTabUploadDoc.getValue(copyAppColm, 10).equalsIgnoreCase("Yes")){
+	else if(datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("Yes")){
 		'click button submit'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 			
 		'Write to excel success'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
-			0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
+			0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 			
 		if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'),
 			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 			
 			'click cancel'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
