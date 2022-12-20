@@ -156,7 +156,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
                 'value'))
 
         'call test case verif customer data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
     if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
@@ -267,13 +267,13 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     14) == 'Input Data') {
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
         'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 } else if(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
     14) == 'LookUp'){
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
         'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabCustomerDataStoreDBVerif-LookUp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif-LookUp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
 

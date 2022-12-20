@@ -104,14 +104,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         inputAppNo()
 
         'call test case tab MS copy app'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
         'call test case Tab Guarantor Personal Copy App'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'call test case Tab Guarantor Company Copy App'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
 			FailureHandling.CONTINUE_ON_FAILURE)
 
         'call test case dupcheck'
@@ -138,11 +138,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         inputAppNo()
 
         'call test case Tab Guarantor Personal Copy App'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'call test case Tab Guarantor Company Copy App'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
 			FailureHandling.CONTINUE_ON_FAILURE)
 
         'call test case dupcheck'
@@ -356,14 +356,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         inputAppNo()
 
         'call test case tab MS copy app'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
         'call test case Tab Guarantor Personal Copy App'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 		
 		'call test case Tab Guarantor Company Copy App'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
 			FailureHandling.STOP_ON_FAILURE)
 
         'call test case dupcheck verif'
@@ -397,11 +397,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         inputAppNo()
 
         'call test case Tab Guarantor Personal Copy App'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
 		'call test case Tab Guarantor Company Copy App'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/TabGuarantorCompanyCopyApp'), [:],
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
 			FailureHandling.STOP_ON_FAILURE)
 		
         'call test case dupcheck verif'

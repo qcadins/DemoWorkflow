@@ -361,6 +361,7 @@ public class CustomerDataVerif {
 
 
 			for(i = 0 ; i < colmcount ; i++){
+				println(row[i])
 				MSdata = (row[i])
 				listcustomerdata.add(MSdata)
 			}

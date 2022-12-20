@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TabMSCopyApp</name>
+   <name>MAINMSCopyApp</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>275a0443-1d8d-4cfc-8b48-1d2f6d847498</testCaseGuid>
+   <testCaseGuid>0cb9e56c-cc98-4e9b-b8bd-2f5cfc4155f8</testCaseGuid>
 </TestCaseEntity>

@@ -15,7 +15,7 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
-
+import org.openqa.selenium.WebElement as WebElement
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
@@ -29,10 +29,7 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
 'call keyword MS data store db personal lookup'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, datafileMS.getValue(GlobalVariable.NumofMS, 
-        12), datafileMS.getValue(GlobalVariable.NumofMS, 
-        17), datafileMS.getValue(
-        GlobalVariable.NumofMS, 27))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, datafileMS.getValue(GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 17), datafileMS.getValue(GlobalVariable.NumofMS, 27))
 
 'looping verif db = confinsdata'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
