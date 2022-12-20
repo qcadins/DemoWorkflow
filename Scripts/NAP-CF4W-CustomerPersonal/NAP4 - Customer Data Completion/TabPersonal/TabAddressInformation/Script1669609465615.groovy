@@ -122,15 +122,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 		GlobalVariable.FlagFailed = 0
+		
+		if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 13))) {
+		
 			for (i = 1; i <= variable.size(); i++) {
 				'modify object address type'
 				modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 					'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 					i) + ']/td[1]', true)
 
-				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.ColmNAP4, 13))) {
+				
 					if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
 							Address, 12)))) {
 						if (i == variable.size()) {
@@ -149,11 +152,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							Address, 12))) {
 						break
 					}
-				}
-				else {
-					break
-				}
+
 			}
+			
+		}
+		else {
+			break
+		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
