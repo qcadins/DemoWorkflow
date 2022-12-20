@@ -88,11 +88,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
             GlobalVariable.FlagFailed = 0
 
-            if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
                 if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                         GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(
-                    datafilecustdetail.getValue(
-                        GlobalVariable.ColmNAP4, 13))) {
+                    datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
                     if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(Address, 
                             12))) {
                         if (WebUI.verifyElementPresent(modifyNewbuttonedit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -108,10 +106,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             break
                         }
                     }
-                }
-            } else {
-                break
-            }
+                }else {
+	                break
+	            }
         }
     }
     
@@ -120,8 +117,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
     for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
         GlobalVariable.FlagFailed = 0
-
-        if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
+        
             for (i = 1; i <= variable.size(); i++) {
                 'modify object address type'
                 modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/select_addressType'), 
@@ -149,17 +145,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                             Address, 12))) {
                         break
                     }
-                }
+                }else {
+			        break
+			    }
             }
-        } else {
-            break
-        }
     }
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
 	
     for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
-        if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
             if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                     GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
                     GlobalVariable.ColmNAP4, 13))) {
@@ -175,9 +169,6 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
                 break
             }
-        } else {
-            break
-        }
     }
 }
 
