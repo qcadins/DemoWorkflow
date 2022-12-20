@@ -30,8 +30,7 @@ datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPe
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/AddressInformation')
 
-
-int copyAppColm = 0
+GlobalVariable.StartIndex = 0
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -41,7 +40,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 13))) {
-		copyAppColm = index
+		GlobalVariable.StartIndex = index
 
 		break
 	}
@@ -66,10 +65,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
-		for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+		for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 			GlobalVariable.FlagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(
 					datafilecustdetail.getValue(
@@ -84,25 +82,24 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
 					}
 				}
-			} else {
-				break
-			}
+				else {
+					break
+				}
 		}
 	}
 	
 	'count ulang table address row di confins'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 		GlobalVariable.FlagFailed = 0
 
-		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
 			for (i = 1; i <= variable.size(); i++) {
 				'modify object address type'
 				modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/select_addressType'),
@@ -122,7 +119,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
@@ -131,16 +128,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						break
 					}
 				}
+				else {
+					break
+				}
 			}
-		} else {
-			break
-		}
+		 
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
 	
-	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
+	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
@@ -152,13 +149,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				verifyDDLAddress(Address)
 				
 				'call function input address'
-				inputaddress()
+				inputaddress(Address)
 
 				break
 			}
-		} else {
-			break
-		}
+			else {
+				break
+			}
 	}
 }
 
@@ -171,7 +168,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Back'))
 }
 	
-def inputaddress() {
+def inputaddress(int Address) {
 	GlobalVariable.FlagFailed = 0
 
 	'pilih address type'

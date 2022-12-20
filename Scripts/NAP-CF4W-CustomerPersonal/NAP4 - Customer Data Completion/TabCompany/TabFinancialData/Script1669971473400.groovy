@@ -75,10 +75,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-			for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+			for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -131,9 +130,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							}
 						}
 					}
-				} else {
-					break
-				}
+					else {
+						break
+					}
+				
 			}
 			
 			'count untuk check if ada financial data'
@@ -157,10 +157,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		'count ulang table financial data setelah edit/delete'
 		variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify object Date'
 					modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'),
@@ -192,14 +191,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							}
 						}
 					}
+					else {
+						break
+					}
 				}
-			} else {
-				break
-			}
 		}
 	} else {
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 					datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -211,14 +209,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						inputDataFinancial()
 					}
 				}
-			} else {
-				break
-			}
+				else {
+					break
+				}
 		}
 	}
 } else if (copyapp == 'No') {
-	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+	for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
@@ -230,9 +227,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					inputDataFinancial()
 				}
 			}
-		} else {
-			break
-		}
+			else {
+				break
+			}
 	}
 }
 
@@ -263,10 +260,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 			BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-			for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+			for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 				int flagFailed = 0
 
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -324,9 +320,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							}
 						}
 					}
-				} else {
-					break
-				}
+					else {
+						break
+					}
+				
 			}
 			
 			'check if table bank acc sudah 0'
@@ -348,10 +345,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
 	if (variable.size() > 0) {
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
 				for (i = 1; i <= variable.size(); i++) {
 					'modify bank name - branch - bank no'
 					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'),
@@ -380,17 +376,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							}
 						}
 					}
+					else {
+						break
+					}
 				}
-			} else {
-				break
-			}
+			
 		}
 	} else {
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 					datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
@@ -399,18 +395,17 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 						inputBank(copyapp, variable, flagFailed)
 					}
-				}
-			} else {
-				break
+			}
+			else {
+					break
 			}
 		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
-	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+	for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 		int flagFailed = 0
 
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
+		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
@@ -419,8 +414,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 					inputBank(copyapp, variable, flagFailed)
 				}
-			}
-		} else {
+		}
+		else {
 			break
 		}
 	}

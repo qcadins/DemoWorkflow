@@ -21,34 +21,38 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
+def datafilecustdetail
+
 if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 
-datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
 
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation')
-}else if(GlobalVariable.NAP4 == 'FAMILY'){
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
+	'declare data file Global variable'
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation')
+}
+else if(GlobalVariable.NAP4 == 'FAMILY'){
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 
-datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
 
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/AddressInformation')
-}else if(GlobalVariable.NAP4 == 'GUARANTOR PERSONAL'){
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
+	'declare data file Global variable'
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/AddressInformation')
+}
+else if(GlobalVariable.NAP4 == 'GUARANTOR PERSONAL'){
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 
-datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
 
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/AddressInformation')
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/AddressInformation')
 }
 
-'declare copyappcolm'
-int copyAppColm = 0
+'declare GlobalVariable.StartIndex'
+GlobalVariable.StartIndex = 0
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -58,7 +62,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 13))) {
-		copyAppColm = index
+		GlobalVariable.StartIndex = index
 
 		break
 	}
@@ -85,11 +89,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
 		'looping address'
-		for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+		for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 			 GlobalVariable.FlagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(
-				Address, 9).length() != 0) {
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 13))) {
@@ -103,25 +105,23 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
 					}
 				}
-			} else {
-				break
-			}
+				else {
+					break
+				} 
 		}
 	}
 	
 	'count ulang table address row di confins'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
+	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 		GlobalVariable.FlagFailed = 0
-
-		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
 			for (i = 1; i <= variable.size(); i++) {
 				'modify object address type'
 				modifyNewAddressType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
@@ -141,7 +141,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
@@ -150,16 +150,16 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						break
 					}
 				}
+				else {
+					break
+				}
 			}
-		} else {
-			break
-		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
 	
-	for (Address = copyAppColm; Address <= (countcolm + 1); Address++) {
-		if (GlobalVariable.FindDataFile.getValue(Address, 9).length() != 0) {
+	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
+		
 			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
@@ -171,13 +171,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				verifyDDLAddress(Address)
 				
 				'call function input address'
-				inputaddress()
+				inputaddress(Address)
 
 				break
 			}
-		} else {
-			break
-		}
+			else {
+				break
+			}
 	}
 }
 
@@ -190,7 +190,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
 }
 
-def inputaddress() {
+def inputaddress(int Address) {
 	GlobalVariable.FlagFailed = 0
 	
     'pilih address type'
