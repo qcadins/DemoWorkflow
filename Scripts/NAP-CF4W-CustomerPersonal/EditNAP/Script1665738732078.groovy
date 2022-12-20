@@ -39,6 +39,12 @@ datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-
 'declare datafileTabGuarantorCompany'
 datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
 
+'declare datafileReferantor'
+datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
+
+'declare datafileTabUploadDoc'
+datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
+
 'get appno from excel'
 String appNo = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8)
 
@@ -219,6 +225,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload doc'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -256,6 +265,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -290,6 +302,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -320,6 +335,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -346,6 +364,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -368,6 +389,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -387,6 +411,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+		
 		'call tc upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
@@ -588,6 +615,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -625,6 +655,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -659,6 +692,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -689,6 +725,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -715,6 +754,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -737,6 +779,9 @@ else if (GlobalVariable.Role == 'Testing') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
 
+			'untuk mendapatkan posisi copy app dari excel'
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
                 FailureHandling.STOP_ON_FAILURE)
@@ -756,6 +801,9 @@ else if (GlobalVariable.Role == 'Testing') {
 		'input appno pada confins'
         inputAppNo(appNo)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+		
 		'call tc tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.STOP_ON_FAILURE)
 

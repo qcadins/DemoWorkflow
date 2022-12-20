@@ -35,7 +35,7 @@ if (GlobalVariable.Role == 'Testing') {
         'UPLOAD DOCUMENT', false, FailureHandling.OPTIONAL))
 }
 
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = GlobalVariable.StartIndex; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(
             GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
@@ -94,6 +94,9 @@ if (GlobalVariable.Role == 'Testing') {
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.NumofUploadDocument, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonMandatoryEmpty)
             }
         }
+		else{
+			break
+		}
 			
     }
 
