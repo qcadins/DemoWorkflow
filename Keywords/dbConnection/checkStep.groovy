@@ -63,15 +63,4 @@ public class checkStep {
 		}
 	}
 
-	@Keyword
-	public checkMSName(Object modifyNewMSName, Object modifyNewMSTypeName, TestData datafileMS){
-		if((WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 19)) ||
-		WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 17)) || WebUI.getText(
-		modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 52)) || WebUI.getText(
-		modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 50)) || (WebUI.getText(
-		modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 62)))) && WebUI.getText(
-		modifyNewMSTypeName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 14))){
-			return true
-		}
-	}
 }

@@ -29,6 +29,11 @@ countCustomerCompany = datafileCustomerCompany.getColumnNumbers()
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
+		
+		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerCompany)==true){
+			break
+		}
+		
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             continue
         }
@@ -58,6 +63,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
+		
+		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerCompany)==true){
+			break
+		}
+		
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
             continue
         }
