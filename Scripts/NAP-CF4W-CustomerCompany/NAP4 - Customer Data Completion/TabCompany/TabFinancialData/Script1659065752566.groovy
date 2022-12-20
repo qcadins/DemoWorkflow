@@ -99,8 +99,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
             for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
                 GlobalVariable.FlagFailed = 0
-
-                if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+				
                     if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                             GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                         datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -152,8 +151,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 i--
                             }
                         }
-                    }
-                } else {
+                    }else {
                     break
                 }
             }
@@ -182,7 +180,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
         for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
             GlobalVariable.FlagFailed = 0
 
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+         
                 for (int i = 1; i <= variable.size(); i++) {
                     'modify object Date'
                     modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'), 
@@ -213,15 +211,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                                 break
                             }
                         }
-                    }
+                    }else {
+		                break
+		            }
                 }
-            } else {
-                break
-            }
         }
     } else {
-        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+        for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {           
                 if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
                         GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
                     datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -232,10 +228,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
                         'call function input financial data'
                         inputDataFinancial()
                     }
-                }
-            } else {
-                break
-            }
+                }else {
+		            break
+		        } 
         }
     }
 } else if (copyapp == 'No') {
