@@ -76,7 +76,7 @@ for (int index = 2; index <= (countcolm + 1); index++) {
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-    GlobalVariable.ColmNAP4, 10)
+    GlobalVariable.NumofColm, 10)
 
 'Check if Edit Untuk Financial Data'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -93,7 +93,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-			for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+			for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
 			
@@ -178,7 +178,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		'count ulang table financial data setelah edit/delete'
 		variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -389,7 +389,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							if (!(BankDetail.equalsIgnoreCase(bankdetailexcel))) {
 								if (i == variable.size()) {
 									'click button add bank'
-									WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+									WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 
 									'call function input bank'
 									inputBank(copyapp, variable, flagFailed)
@@ -414,7 +414,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+						WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 	
 						'call function input bank'
 						inputBank(copyapp, variable, flagFailed)
@@ -426,6 +426,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
+
+	'count table bank acc confins'
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 		int flagFailed = 0
 
@@ -434,7 +437,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'
-					WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
+					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_AddBank'))
 
 					'call function input bank'
 					inputBank(copyapp, variable, flagFailed)

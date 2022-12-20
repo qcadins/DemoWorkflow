@@ -70,7 +70,7 @@ public class checkSaveProcess {
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
+//		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
 			if(!WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), FailureHandling.OPTIONAL).toUpperCase().contains("Success".toUpperCase())){
 
 				String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label', FailureHandling.OPTIONAL)
@@ -81,7 +81,7 @@ public class checkSaveProcess {
 						1, colm - 1, FailedAlertReason)
 				flagFailed=1
 			}
-		}
+//		}
 		return flagFailed
 	}
 
