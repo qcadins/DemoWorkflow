@@ -481,12 +481,12 @@ WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Da
 'cek nilai self usage dari excel'
 if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) {
     'click self usage check box'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
 } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 37) == 'No') {
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status selfusage checkbox'), 
         'aria-checked') == 'true') {
         'click self usage check box'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
     }
     
     'input user name'
@@ -534,7 +534,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
 'pengecekan nilai self owner pada excel'
 if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) {
     'click self owner checkbox'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
 
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
         'function untuk copy address asset location'
@@ -547,7 +547,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
     if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status self owner checkbox'), 
         'aria-checked') == 'true') {
         'click self owner checkbox'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
     }
     
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Personal') {

@@ -73,6 +73,8 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 			
 	variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	
+	break
+	
 	}else if (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
 			13)) {
 			if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'),

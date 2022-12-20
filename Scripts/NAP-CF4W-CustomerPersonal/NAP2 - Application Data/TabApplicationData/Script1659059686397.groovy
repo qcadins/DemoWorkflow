@@ -36,6 +36,9 @@ datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Custom
 'Klik tab application'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabApplication'))
 
+'refresh browser supaya tidak muncul error data has been modified'
+WebUI.refresh()
+
 datafileLogin = findTestData('Login/Login')
 
 GlobalVariable.FlagFailed = 0

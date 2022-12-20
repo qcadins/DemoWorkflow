@@ -262,7 +262,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 			} else {
 			
 				'modify object button Delete'
-				modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP2-ApplicationData/TabFinancialData/Button_Delete'),
+				modifyNewButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/Button_Delete'),
 						'xpath', 'equals', ('//*[@id="FinData_Subsidy"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a[2]/i', true)
 				
 				if (subsidyarray == SubsidyTypeArray.size()) {
@@ -277,6 +277,8 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						
 						'accept alert'
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
+						
+						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 								
 						if(i == variable.size()){
 								if (WebUI.verifyElementPresent(modifyNewSubsidyAllocation, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {

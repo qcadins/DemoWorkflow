@@ -375,7 +375,6 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 
 } else {
-	'Jika count of referantor (excel) > 0 '
 	
 		'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 		for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 1); (GlobalVariable.NumofReferantor)++) {

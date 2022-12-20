@@ -620,7 +620,7 @@ if(GlobalVariable.Role=="Testing"){
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
 	
 	'get capitalize amount from confins'
-	String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
+	textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 		'value').replace(',', '')
 	
 	'Verif untuk capitalize bukan 0 dan ada paid by mf'
