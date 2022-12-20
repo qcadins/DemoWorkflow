@@ -181,14 +181,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (int financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+				GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+			datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
+			
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify object Date'
 					modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 						'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 							String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(GlobalVariable.FindDataFile.getValue(financialdata, 17))
 
@@ -211,12 +212,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								break
 							}
 						}
-					}
-					else {
-						break
-					}
 				}
-			
+			}
+			else {
+				break
+			}
 		}
 	} else {
 		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
@@ -367,6 +367,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	if(variable.size() > 0){
 	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
 		int flagFailed = 0
+		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+			datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 13))) {
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify bank name - branch - bank no'
 					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
@@ -375,10 +379,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'get text bank acc detail'
 					BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 13))) {
+					
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 24)) + ' - ') +
 							GlobalVariable.FindDataFile.getValue(financialdata, 25)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -397,12 +398,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								break
 							}
 						}
-					}
-					else {
-						break
-					}
+
 				}
-		
+			}
+			else {
+				break
+			}
 	}
 	}else{
 		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
