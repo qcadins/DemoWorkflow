@@ -29,10 +29,9 @@ datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerDa
 datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
 
 'call keyword MS data store db personal lookup'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, datafileMS.getValue(GlobalVariable.NumofMS, 
-        12), datafileMS.getValue(GlobalVariable.NumofMS, 
-        17), datafileMS.getValue(
-        GlobalVariable.NumofMS, 27))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBPersonalLookUp'(sqlconnectionLOS, '0002APP20211205579', 'FT TIO', 'Pertahanan Sipil')
+
+println(result)
 
 'looping verif db = confinsdata'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {

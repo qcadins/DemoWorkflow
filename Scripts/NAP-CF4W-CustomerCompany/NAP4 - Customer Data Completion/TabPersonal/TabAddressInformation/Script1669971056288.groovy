@@ -56,7 +56,7 @@ for (index = 2; index <= (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4, 10)
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -76,7 +76,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
 		'looping address'
-		for (Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
+		for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
 			 GlobalVariable.FlagFailed = 0
 
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(

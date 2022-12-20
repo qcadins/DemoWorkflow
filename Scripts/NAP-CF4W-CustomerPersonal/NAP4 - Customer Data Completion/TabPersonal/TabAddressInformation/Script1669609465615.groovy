@@ -21,8 +21,6 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-def datafilecustdetail
-
 if(GlobalVariable.NAP4 == 'CUSTOMER'){
 	
 	'get data file path'
@@ -68,8 +66,9 @@ for (index = 2; index <= (countcolm + 1); index++) {
 	}
 }
 
+println(GlobalVariable.StartIndex)
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4, 10)
+copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
