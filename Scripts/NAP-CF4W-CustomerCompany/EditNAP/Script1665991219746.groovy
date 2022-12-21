@@ -54,22 +54,29 @@ String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sql
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
     1, appNo)
 
+'declare list untuk menampung step-step pada nap1'
 List<String> NAP1Step = Arrays.asList("CUST", "SHR", "GUAR")
 
+'declare list untuk menampung step-step pada nap2'
 List<String> NAP2Step = Arrays.asList("REF", "APP", "ASSET", "INS","FIN","TC","UPL_DOC")
 
+'menampung backward step dari excel'
 String backStep = datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 7)
 
+'Jika curr app step dan backward step keduanya ada di list step nap1'
 if(NAP1Step.contains(backStep)&&NAP1Step.contains(appStep)){
 	int posApp = NAP1Step.indexOf(appStep)
 	int posBack = NAP1Step.indexOf(backStep)
+	'Jika posisi curr app step lebih tinggi dari posisi backward step'
 	if(posApp>posBack){
 		appStep = backStep
 	}
 }
+//Jika curr app step dan backward step keduanya ada di list step nap2
 else if(NAP2Step.contains(backStep)&&NAP2Step.contains(appStep)){
 	int posApp = NAP2Step.indexOf(appStep)
 	int posBack = NAP2Step.indexOf(backStep)
+	'Jika posisi curr app step lebih tinggi dari posisi backward step'
 	if(posApp>posBack){
 		appStep = backStep
 	}
