@@ -316,7 +316,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     getDataCust()
 
                                     'call test case Family data verif'
-                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'), 
+                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataVerif'), 
                                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                                 }
                                 
@@ -547,11 +547,11 @@ for (int i = 1; i <= variableData.size(); i++) {
 						if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                                 'call test case Family data store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
+                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)                           
                         } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
                                 'call test case family lookup store data verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'), 
+                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
 						}
@@ -620,7 +620,7 @@ if (custnamefaileddelete.size() > 0) {
 }
 
 'call tc family data'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 def getDataCust() {
 	'declare confinsdata'

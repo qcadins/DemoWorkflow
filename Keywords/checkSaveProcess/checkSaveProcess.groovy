@@ -70,18 +70,18 @@ public class checkSaveProcess {
 	@Keyword
 	public checkAlert(int colm, String sheetname){
 		int flagFailed=0
-//		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
-			if(!WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), FailureHandling.OPTIONAL).toUpperCase().contains("Success".toUpperCase())){
+	if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
+		if(!WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), FailureHandling.OPTIONAL).toUpperCase().contains("Success".toUpperCase())){
 
-				String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label', FailureHandling.OPTIONAL)
+			String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label', FailureHandling.OPTIONAL)
 
-				(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
-						0, colm - 1, GlobalVariable.StatusFailed)
-				(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
-						1, colm - 1, FailedAlertReason)
-				flagFailed=1
-			}
-//		}
+			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+					0, colm - 1, GlobalVariable.StatusFailed)
+			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+					1, colm - 1, FailedAlertReason)
+			flagFailed=1
+		}
+		}
 		return flagFailed
 	}
 

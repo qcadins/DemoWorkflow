@@ -115,14 +115,18 @@ if (GlobalVariable.Role == 'Data Entry') {
 		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
 		
 		'call tc familycopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 		'untuk mendapatkan posisi copy app dari excel'
 		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
 		
 		'call tc guarantorpersonalcopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
+		
+		'call tc guarantorCompanycopyapp'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorCompanyCopyApp'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
 
 		'call tc verifyapplicant'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -155,7 +159,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
 		
 		'call tc guarantorpersonalcopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 
 		'call tc verifyapplicant'
@@ -480,13 +484,13 @@ else if (GlobalVariable.Role == 'Testing') {
 		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
 		
 		'call tc tabfamilycopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
 		'untuk mendapatkan posisi copy app dari excel'
 		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
 		
 		'call tc guarantorpersonalcopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
 		'call tc verify applicant'
@@ -529,7 +533,7 @@ else if (GlobalVariable.Role == 'Testing') {
 		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
 		
 		'call tc guarantorpersonalcopyapp'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalCopyApp'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
 		'call tc verifyapplicant'

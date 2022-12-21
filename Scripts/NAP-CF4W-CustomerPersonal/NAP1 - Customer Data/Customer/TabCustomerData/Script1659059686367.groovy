@@ -202,7 +202,7 @@ else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Loo
         getDataCust()
 
         'call test case customer data verif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
 	'jika customer model tidak kosong'
@@ -339,13 +339,13 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
         'call test case customer data store verif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabCustomerDataStoreDBVerif'), [:], 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif'), [:], 
             FailureHandling.STOP_ON_FAILURE)
     }
 } else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
         'call test case customer data store verif lookup'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabCustomerDataStoreDBVerif-LookUp'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif-LookUp'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }
