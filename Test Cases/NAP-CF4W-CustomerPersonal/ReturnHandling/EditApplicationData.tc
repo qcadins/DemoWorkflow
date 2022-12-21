@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>EditApplicationData</name>
+   <tag></tag>
+   <comment>Verify tab insurance, life insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database)</comment>
+   <testCaseGuid>ae0ec4aa-e08a-4f27-81e7-4ce37145fefb</testCaseGuid>
+</TestCaseEntity>

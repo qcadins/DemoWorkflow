@@ -108,6 +108,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 			'klik cancel return'
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
+		
+		'call test case main return handling'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	else if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
@@ -150,6 +153,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 				'klik cancel return'
 				WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 			}
+			
+			'call test case main return handling'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	else if((datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0) && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
