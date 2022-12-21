@@ -413,7 +413,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     getDataGuarPersonal()
 
                                     'call test case Personal data verif'
-                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorPersonalDataVerif'), 
+                                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalDataVerif'), 
                                         [:], FailureHandling.CONTINUE_ON_FAILURE)
                                 }
                                 
@@ -552,14 +552,14 @@ for (int i = 1; i <= variableData.size(); i++) {
                             13) == 'Input Data') {
                             if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                                 'call test case company data store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif'), 
+                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorDataPersonalStoreDBVerif'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         } else if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                             13) == 'LookUp') {
                             if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                                 'call test case Guarantor personal data verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorDataPersonalStoreDBVerif-LookUp'), 
+                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorDataPersonalStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         }
@@ -625,13 +625,8 @@ if (custnamefaileddelete.size() > 0) {
     (GlobalVariable.FlagWarning)++
 }
 
-'call test case guarantorcompanycopyapp'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorCompanyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-WebUI.delay(5)
-
 'call test case guarantordata'
-WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabGuarantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonal'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 def getDataGuarPersonal() {
     'declare array for confins data'

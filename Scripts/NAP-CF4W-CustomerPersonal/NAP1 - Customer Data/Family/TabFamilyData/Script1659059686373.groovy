@@ -413,7 +413,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                             getDataCust()
 
                             'call test case Family data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataVerif'), 
+                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataVerif'), 
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                         
@@ -656,13 +656,13 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                 if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                         'call test case Family data store verif'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif'), 
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     }
                 } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
                     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                         'call test case Family data store verif lookup'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/TabFamilyDataStoreDBVerif-LookUp'), 
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'), 
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     }
                 }

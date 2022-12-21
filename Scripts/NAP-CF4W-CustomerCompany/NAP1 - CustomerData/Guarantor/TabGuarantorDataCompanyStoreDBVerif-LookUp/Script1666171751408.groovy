@@ -14,6 +14,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import org.openqa.selenium.WebElement
+
 import groovy.sql.Sql as Sql
 
 'connect DB LOS'
@@ -27,8 +30,9 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'call keyword get guarantor data store db company lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBCompanyLookUp'(sqlconnectionLOS, datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-        12), datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-        16))
+        12), datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 16))
+
+println(result)
 
 'looping verif db = confinsdata'
 for (int i = 0; i < result.size(); i++) {

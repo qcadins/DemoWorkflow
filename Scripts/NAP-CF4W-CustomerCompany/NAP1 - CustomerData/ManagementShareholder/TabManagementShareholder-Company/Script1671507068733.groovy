@@ -77,7 +77,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                     }
                 }
             }
-        }
+        
 		
             if ((i == variableData.size()) || (copyapp == 'No')) {
                 'click button add'
@@ -429,7 +429,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 	}
                 }
             }
-         
+        }
         }
     }else{
 	break
