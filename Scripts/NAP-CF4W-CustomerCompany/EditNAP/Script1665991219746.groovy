@@ -110,12 +110,21 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call function input appno'
         inputAppNo()
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofMS, datafileMS)
+		
         'call test case tab MS copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINMSCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileGuarantorPersonal)
+		
         'call test case Tab Guarantor Personal Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
+		
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileGuarantorCompany)
 		
 		'call test case Tab Guarantor Company Copy App'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -144,9 +153,15 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call function input appno'
         inputAppNo()
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileGuarantorPersonal)
+		
         'call test case Tab Guarantor Personal Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
+		
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileGuarantorCompany)
 		
 		'call test case Tab Guarantor Company Copy App'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -362,12 +377,21 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call function input appno'
         inputAppNo()
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofMS, datafileMS)
+		
         'call test case tab MS copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINMSCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileGuarantorPersonal)
+	
         'call test case Tab Guarantor Personal Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
+	
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileGuarantorCompany)
 		
 		'call test case Tab Guarantor Company Copy App'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -403,10 +427,16 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         'call function input appno'
         inputAppNo()
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileGuarantorPersonal)
+		
         'call test case Tab Guarantor Personal Copy App'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileGuarantorCompany)
+		
 		'call test case Tab Guarantor Company Copy App'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), [:],
 			FailureHandling.STOP_ON_FAILURE)
@@ -954,4 +984,16 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18, 
             GlobalVariable.NumofColm - 1, GuarName)
     }
+}
+
+public loopingStartIndex(Integer NumOf, TestData datafile){
+	'untuk mendapatkan posisi copy app dari excel'
+	for (NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {
+		if (datafile.getValue(NumOf, 12) == datafileCustomerPersonal.getValue(
+			GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = NumOf
+
+			break
+		}
+	}
 }
