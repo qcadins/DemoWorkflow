@@ -80,25 +80,88 @@ if (GlobalVariable.Role == 'Data Entry') {
 		copyAppYesReservedFund()
     }
 } else if(GlobalVariable.Role == "Testing"){
-    'dijalankan tanpa copy app / dengan edit hasil copy app'
-    if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCommission.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
-        'call test case tab commission'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
-		'function dijalankan ketika copy app yes'	
-		copyAppYesCommission()
-    }
-    
-    'dijalankan tanpa copy app / dengan edit hasil copy app'
-    if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileReservedFund.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
-        'call test case tab reserved fund data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
-    } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
-		'function dijalankan ketika copy app yes'
-		copyAppYesReservedFund()
-    }
+
+	'Mengambil nilai row keberapa dimulai data return pada excel'
+	def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 'Return Commission & Reserved Fund') +
+	1
+
+	if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes")){
+	
+		'Klik button return'
+		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/button_Return'))
+		
+		'select return to'
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+		
+		'select return reason'
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+		
+		'input note'
+		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+4))
+	
+		'klik save'
+		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
+		
+		if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'),
+			GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+			
+			'klik cancel return'
+			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
+		}
+	}
+	else if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
+	    'dijalankan tanpa copy app / dengan edit hasil copy app'
+	    if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCommission.getValue(
+	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+	        'call test case tab commission'
+	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
+	    } else if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+			'function dijalankan ketika copy app yes'	
+			copyAppYesCommission()
+	    }
+	}
+	
+	returnRowCom = returnRow
+	
+	'Mengambil nilai row keberapa dimulai data return pada excel'
+	returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 'Return Commission & Reserved Fund') +
+	1
+	
+	if(datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes") && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
+		
+			'Klik button return'
+			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/button_Return'))
+			
+			'select return to'
+			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+			
+			'select return reason'
+			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+			
+			'input note'
+			WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+4))
+		
+			'klik save'
+			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
+			
+			if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'),
+				GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+				
+				'klik cancel return'
+				WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
+			}
+	}
+	else if((datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0) && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
+	    'dijalankan tanpa copy app / dengan edit hasil copy app'
+	    if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileReservedFund.getValue(
+	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
+	        'call test case tab reserved fund data'
+	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
+	    } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+			'function dijalankan ketika copy app yes'
+			copyAppYesReservedFund()
+	    }
+	}
 }
 
 public pagingTesting(){
