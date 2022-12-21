@@ -6,11 +6,15 @@
    <elementGuidId>1d134400-1de2-42ea-8bff-a814d4879341</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3/div/div/div/form/div[3]/button[1]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[11]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,25 +31,25 @@
       <value>btn btn-raised btn-danger mr-1 ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Return</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;commission-tab&quot;)/app-commission-v3[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12 text-left&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/form[@class=&quot;form form-horizontal ng-valid ng-touched ng-dirty&quot;]/div[@class=&quot;form-actions right ng-star-inserted&quot;]/button[@class=&quot;btn btn-raised btn-danger mr-1 ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3/div/div/div/form/div[3]/button[1]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
