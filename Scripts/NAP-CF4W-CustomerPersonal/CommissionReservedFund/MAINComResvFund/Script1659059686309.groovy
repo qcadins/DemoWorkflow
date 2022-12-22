@@ -109,6 +109,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
 		
+		'call test case verif return handling = DB'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		
 		'call test case main return handling'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
 	}

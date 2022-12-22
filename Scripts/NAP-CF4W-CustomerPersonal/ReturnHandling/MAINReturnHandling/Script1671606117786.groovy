@@ -74,6 +74,13 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 'klik save'
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/button_Save'))
 
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
+String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
+
+WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)
+
 def inputAppNo() {
 	if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'), FailureHandling.OPTIONAL)){
 		'Klik extend menu return handling'
@@ -92,4 +99,3 @@ def inputAppNo() {
     WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
 
 }
-
