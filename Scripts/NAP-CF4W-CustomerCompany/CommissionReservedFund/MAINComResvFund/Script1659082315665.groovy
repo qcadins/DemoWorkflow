@@ -105,8 +105,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
 			
+		GlobalVariable.APPSTEP = 'COMMISSION'
+			
 		'call test case verif return handling = DB'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'call test case main return handling'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -151,8 +153,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
 			
+		GlobalVariable.APPSTEP = 'RESERVED FUND'
+		
 		'call test case verif return handling = DB'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'call test case main return handling'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
