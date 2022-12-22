@@ -70,13 +70,13 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		TotalAllocateCommissionAmt.add(0.00)
 	
 		if(i==countIncomeInfo-1){
-			modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
-			
-			modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
-			
-			'cek max allocated amount = remaining allocated amount before calculate'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'12.TabCommissionData',
-				GlobalVariable.NumofColm)
+//			modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+//			
+//			modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+//			
+//			'cek max allocated amount = remaining allocated amount before calculate'
+//			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'12.TabCommissionData',
+//				GlobalVariable.NumofColm)
 			
 			break
 		}
