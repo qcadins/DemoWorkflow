@@ -32,12 +32,12 @@ datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPe
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
 
-'Pengecekan jika menu comresfund tidak terlihat'
-if (WebUI.verifyElementNotVisible(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
-    FailureHandling.OPTIONAL)) {
-    'click menu Consumer finance 4w'
-    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-}
+//'Pengecekan jika menu comresfund tidak terlihat'
+//if (WebUI.verifyElementNotVisible(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
+//    FailureHandling.OPTIONAL)) {
+//    'click menu Consumer finance 4w'
+//    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+//}
 
 'Klik Commission Reserved Fund'
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
@@ -136,13 +136,13 @@ if (GlobalVariable.Role == 'Data Entry') {
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/button_Return'))
 			
 			'select return to'
-			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+2),false)
 			
 			'select return reason'
-			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+			WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+3),false)
 			
 			'input note'
-			WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+4))
+			WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+4))
 		
 			'klik save'
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
