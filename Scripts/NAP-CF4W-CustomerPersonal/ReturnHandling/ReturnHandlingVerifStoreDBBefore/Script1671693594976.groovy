@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -26,34 +29,24 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
 
 'get data from db'
-ArrayList<String> resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
+String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
 
 ArrayList<String> resultDetail = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingD'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
-
-String appcurrstep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
-
-String applaststep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 int arrayindex = 0
 
-'verify app Curr step'
-arrayMatch.add(WebUI.verifyMatch(appcurrstep.toUpperCase(), 'RTN', false, FailureHandling.OPTIONAL))
+'verify Status from Header'
+arrayMatch.add(WebUI.verifyMatch('DONE', (resultHeader).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify app last step'
-arrayMatch.add(WebUI.verifyMatch(applaststep.toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayindex = 0
 
-'verify Status'
-arrayMatch.add(WebUI.verifyMatch('REQUEST	', (resultHeader[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+'verify Status from Detail'
+arrayMatch.add(WebUI.verifyMatch('DONE', (resultDetail[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify reason'
-arrayMatch.add(WebUI.verifyMatch(datafileCommission.getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(), 
-		false, FailureHandling.OPTIONAL))
-
-'verify NOTE'
-arrayMatch.add(WebUI.verifyMatch(datafileCommission.getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
-		false, FailureHandling.OPTIONAL))
+'verify Status from Detail'
+arrayMatch.add(WebUI.verifyMatch('INPUTAN EXCEL', (resultDetail[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
