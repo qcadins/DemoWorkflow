@@ -106,7 +106,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		}
 			
 		GlobalVariable.APPSTEP = 'COMMISSION'
-		
+			
 		'call test case verif return handling = DB'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 			
@@ -152,8 +152,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			'klik cancel return'
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
-			
-		GlobalVariable.APPSTEP == 'RESERVED FUND'
+		
+		GlobalVariable.APPSTEP = 'RESERVED FUND'
 		
 		'call test case verif return handling = DB'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)

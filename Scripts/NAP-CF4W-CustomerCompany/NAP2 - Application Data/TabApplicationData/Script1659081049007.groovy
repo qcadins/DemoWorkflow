@@ -476,8 +476,10 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 	}	
 }
 
-addCrossAppAgr(posAddCross,sqlConnectionLOS)
-	
+if(posAddCross.size()>0){
+	addCrossAppAgr(posAddCross,sqlConnectionLOS)
+}
+
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
 if (datafileTabApplication.getValue(
 	GlobalVariable.NumofColm, 30).length() > 1) {
