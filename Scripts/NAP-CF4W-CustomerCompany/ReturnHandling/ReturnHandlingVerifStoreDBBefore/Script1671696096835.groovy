@@ -24,6 +24,8 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 TestData datafile
 
+String SheetExcel
+
 int returnRow
 
 'declare datafileCustomerCompany'
@@ -34,20 +36,20 @@ if(GlobalVariable.APPSTEP == 'COMMISSION'){
 'declare datafileCommission'
 datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 
-'Mengambil nilai row keberapa dimulai data return pada excel'
-def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData',
-	'Return Commission & Reserved Fund') + 1
+SheetExcel = '12.TabCommissionData'
 
 }else if(GlobalVariable.APPSTEP == 'RESERVED FUND'){
 
 'declare datafileReservedFund'
 datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
-'Mengambil nilai row keberapa dimulai data return pada excel'
-def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
-	'Return Commission & Reserved Fund') + 1
+SheetExcel = '13.TabReservedFundData'
 
 }
+
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, SheetExcel,
+	'Return Commission & Reserved Fund') + 1
 
 'get data from db'
 ArrayList<String> resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
@@ -96,5 +98,5 @@ arrayMatch.add(WebUI.verifyMatch('REQUEST', (resultDetail[arrayindex++]).toUpper
 if(arrayMatch.contains(false)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(SheetExcel, GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
