@@ -121,6 +121,12 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 			  modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
 				  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select', true)
 			  
+			  'check if no data available'
+			  if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
+				  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
+				  break
+			  }
+				  
 			  Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
 			 ']/td[2]/select')))
 			  
@@ -161,24 +167,20 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 							  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 							  
 							  if(i == variable.size()){
-								  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
-									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								  }else{
-									  'add cust name failed kedalam array'
-									  referantorfaileddelete.add(referantornamebefore)
-									  continue
+								  if(WebUI.verifyElementPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+											  'add cust name failed kedalam array'
+											  referantorfaileddelete.add(referantornamebefore)
 								  }
 							  }else{
 								  'get cust name sebelum delete'
 								  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 										  
-								  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
-											  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-								  }else{
-										'add cust name failed kedalam array'
-										referantorfaileddelete.add(referantornamebefore)
-										continue
+								  if(WebUI.verifyMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+									  'add cust name failed kedalam array'
+									  referantorfaileddelete.add(referantornamebefore)
 								  }
+								  
+								  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 							  }
 							  i--
 						  }
@@ -217,12 +219,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 								i--
 							  }else{
 								  break
-							  }
-							  
-							  
-							  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
-								  break
-							  }
+							  }						
+					if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
+					  break
+					}
 				  }	  
 				  }else{
 				  break

@@ -313,9 +313,9 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             //dijalankan dengan copy app tab application
             //dijalankan dengan copy app tab asset
             //dijalankan dengan copy app tab insurance
-            ) //Dijalankan dengan copy app tab financial
-        //Dijalankan dengan copy app tab term&condition
-        //dijalankan dengan copy app tab upload document
+            //Dijalankan dengan copy app tab financial
+            //Dijalankan dengan copy app tab term&condition
+            ) //dijalankan dengan copy app tab upload document
     } else if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button submit'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))

@@ -1473,4 +1473,42 @@ public class CustomerDataVerif {
 		})
 		return listCVG
 	}
+
+	//keyword check Return Handling Header Table
+	@Keyword
+	public checkReturnHandlingH(Sql instance, String appno){
+		String returnhandling
+		ArrayList <String> listStat = new ArrayList<String>()
+		instance.eachRow(("SELECT TOP 1 ISNULL(rhh.RETURN_FROM_TRX_TYPE, '') AS [APP_STEP] , ISNULL(rsl.DESCR, '') AS [RETURN_HANDLING_H_STAT] , ISNULL(rrl.REF_REASON_NAME, '') AS [REASON], ISNULL(RETURN_NOTES, '') AS [NOTES] from RETURN_HANDLING_H rhh WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON rhh.APP_ID = a.APP_ID JOIN REF_REASON_LOS rrl WITH(NOLOCK) ON rhh.RETURN_H_REASON = rrl.REF_REASON_CODE JOIN REF_STATUS_LOS rsl WITH(NOLOCK) ON rsl.REF_STATUS_CODE = rhh.RETURN_H_STATUS where APP_NO = '"+ appno +"' ORDER BY rhh.RETURN_HANDLING_H_ID desc"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				returnhandling = (row[i])
+				listStat.add(returnhandling)
+			}
+		})
+		return listStat
+	}
+
+	//keyword check Return Handling Detail Table
+	@Keyword
+	public checkReturnHandlingD(Sql instance, String appno){
+		String returnhandling
+		ArrayList <String> listStat = new ArrayList<String>()
+		instance.eachRow(("SELECT TOP 1 ISNULL(rml.REF_MASTER_NAME, '') AS RTNTASK, ISNULL(rsl.DESCR, '') AS STAT, ISNULL(RETURN_HANDLING_NOTES, '') AS NOTES, ISNULL(RETURN_HANDLING_EXEC_NOTES, '') AS EXCECNOTES FROM RETURN_HANDLING_D rhd JOIN RETURN_HANDLING_H rhh WITH(NOLOCK) ON rhd.RETURN_HANDLING_H_ID = rhh.RETURN_HANDLING_H_ID JOIN APP a WITH(NOLOCK) ON rhh.APP_ID = a.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = rhd.MR_RETURN_TASK_CODE JOIN REF_STATUS_LOS rsl WITH(NOLOCK) ON rsl.REF_STATUS_CODE = rhd.RETURN_STAT WHERE APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'RETURN_TASK_CF4W' ORDER BY rhh.RETURN_HANDLING_H_ID desc"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				returnhandling = (row[i])
+				listStat.add(returnhandling)
+			}
+		})
+		return listStat
+	}
 }
