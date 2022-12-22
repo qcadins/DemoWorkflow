@@ -192,7 +192,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74).length() >
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74), false, FailureHandling.OPTIONAL)
 }
 
-if(GlobalVariable.NAP4 == 'CUSTOMER'){
+if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 'click eKYC'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
 }

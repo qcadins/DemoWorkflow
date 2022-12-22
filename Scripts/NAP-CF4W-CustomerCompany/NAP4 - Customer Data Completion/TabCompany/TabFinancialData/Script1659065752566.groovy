@@ -26,7 +26,7 @@ GlobalVariable.StartIndex = 0
 
 def datafilecustdetail
 
-if (GlobalVariable.NAP4 == 'CUSTOMER') {
+if (GlobalVariable.APPSTEP == 'CUSTOMER') {
     'get data file path'
     GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
@@ -35,7 +35,7 @@ if (GlobalVariable.NAP4 == 'CUSTOMER') {
 
     'declare data file Global variable'
     GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
-} else if (GlobalVariable.NAP4 == 'SHAREHOLDER COMPANY') {
+} else if (GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY') {
     'get data file path'
     GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 
@@ -44,7 +44,7 @@ if (GlobalVariable.NAP4 == 'CUSTOMER') {
 
     'declare data file Global variable'
     GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
-} else if (GlobalVariable.NAP4 == 'GUARANTOR COMPANY') {
+} else if (GlobalVariable.APPSTEP == 'GUARANTOR COMPANY') {
     'get data file path'
     GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 

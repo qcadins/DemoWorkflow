@@ -23,7 +23,7 @@ CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.Da
 
 def CountofFamily = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getColumnNumbers()
 
-GlobalVariable.NAP4 = 'SHAREHOLDER PERSONAL'
+GlobalVariable.APPSTEP = 'SHAREHOLDER PERSONAL'
 
 WebUI.delay(10)
 

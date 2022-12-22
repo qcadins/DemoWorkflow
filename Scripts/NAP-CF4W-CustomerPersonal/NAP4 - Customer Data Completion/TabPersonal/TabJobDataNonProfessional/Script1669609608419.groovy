@@ -47,7 +47,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/input_Job Title Name'), 
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 40))
 
-if(GlobalVariable.NAP4 == 'CUSTOMER'){
+if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 'Click check ekyc'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
 }
