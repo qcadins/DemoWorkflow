@@ -50,7 +50,7 @@ datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
+//WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
 
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuEditApplicationData'))
 
@@ -358,7 +358,6 @@ else if(datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnor
 	'click button submit edit application'
 	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'))
 
-		
 	'Write to excel success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabUploadDocument',
 		0, GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)

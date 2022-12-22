@@ -220,14 +220,15 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 							  }
 							  
 							  
-							  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
-								  break
-							  }
-				  }	  
+							 
+				  		}	  
 				  }else{
-				  break
+				  		break
 				  }
 			}
+			if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
+				  break
+			}  
 		}
 	}
 	

@@ -6,12 +6,12 @@
    <elementGuidId>dcd44483-01d1-4f0d-af4d-ab1220628306</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[10]/button[2]</value>
+         <key>BASIC</key>
+         <value>//button[@type='submit']</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[10]/button[2]/span</value>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[10]/button[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[10]/button[2]/span</value>
+      <value>//button[@type='submit']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

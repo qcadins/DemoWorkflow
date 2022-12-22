@@ -726,9 +726,14 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
     }
 }
 
+//try{
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Save'))
-
+//}
+//catch(Exception e){
+//	'click button save'
+//	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SaveAsset'))
+//}
 'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 WebUI.waitForAlert(3)
 

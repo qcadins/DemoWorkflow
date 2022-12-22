@@ -6,12 +6,12 @@
    <elementGuidId>b1fe766d-5d23-4b40-9833-a098d509e547</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//mat-checkbox[@id='mat-checkbox-1']</value>
+         <key>BASIC</key>
+         <value>//div[@id=&quot;lifeinsInfo&quot;]/div/div/mat-checkbox/label/span/input</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[1]/div/div/mat-checkbox/label/span[1]/input</value>
+         <key>XPATH</key>
+         <value>//mat-checkbox[@id='mat-checkbox-1']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -63,7 +63,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[1]/div/div/mat-checkbox/label/span[1]/input</value>
+      <value>//div[@id=&quot;lifeinsInfo&quot;]/div/div/mat-checkbox/label/span/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -125,6 +125,11 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 			  modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/select_BankAccount'),
 				  'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select', true)
 			  
+			  if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),FailureHandling.OPTIONAL),
+				  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
+				  break
+			  }
+			  
 			  Select selectedRefCategory =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
 			 ']/td[2]/select')))
 			  
@@ -140,7 +145,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 					  if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(datafileReferantor.getValue(
 						  GlobalVariable.NumofReferantor, 14))) {
 							  
-							'select bank account'
+						  'select bank account'
 						  WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(
 						  GlobalVariable.NumofReferantor, 16),FailureHandling.OPTIONAL)
 						  
@@ -202,7 +207,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 										  WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
 										  
 										  if(i == variable.size()){
-											  if(WebUI.verifyElementNotPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+											  if(WebUI.verifyElementPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 												  'add cust name failed kedalam array'
 												  referantorfaileddelete.add(referantornamebefore)
 											  }
@@ -210,7 +215,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 											  'get cust name sebelum delete'
 											  referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
 													  
-											  if(WebUI.verifyNotMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
+											  if(WebUI.verifyMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)){
 												  'add cust name failed kedalam array'
 												  referantorfaileddelete.add(referantornamebefore)
 											  }
@@ -218,22 +223,29 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 										  
 										  'count table referantor setelah delete'
 										  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-												  
+										  
 										  i--
+										  
+										  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+											  break
+										  }
 									  }
 									  else{
 										  break
 									  }
-									  
-									  if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
-										  break
-									  }
+
 						  }
 				  }
 				  else{
 					  break
 				  }
 			  }
+//			  'count table referantor setelah delete'
+//			  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+//			  
+//			  if(variable.size() == 1){
+//				  break
+//			  }
 		}
 	}
 		
@@ -819,8 +831,13 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 	
 }
 
-'click button save'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
+	'click button save'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
+//}
+//catch(Exception e){
+//	'click button save'
+//	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SaveReferantor'))
+//}
 
 Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.StartIndex, 4))
 

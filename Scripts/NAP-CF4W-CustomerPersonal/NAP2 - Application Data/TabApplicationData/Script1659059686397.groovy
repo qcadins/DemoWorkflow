@@ -36,8 +36,13 @@ datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Custom
 'Klik tab application'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabApplication'))
 
-'refresh browser supaya tidak muncul error data has been modified'
-WebUI.refresh()
+'get applaststep from confins'
+String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
+
+if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("APPLICATION DATA")) {
+	'refresh browser supaya tidak muncul error data has been modified'
+	WebUI.refresh()
+}
 
 datafileLogin = findTestData('Login/Login')
 
@@ -48,9 +53,6 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'koneksi database fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
-
-'get applaststep from confins'
-String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
 if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
@@ -498,7 +500,9 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 	
 }
 
-addCrossAppAgr(posAddCross,sqlConnectionLOS)
+if(posAddCross.size()>0){
+	addCrossAppAgr(posAddCross,sqlConnectionLOS)
+}
 	
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
 if (datafileTabApplication.getValue(
@@ -687,6 +691,11 @@ WebUI.delay(3)
 
 'click Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Save'))
+
+//catch(Exception e){
+//	'click button save'
+//	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SaveApplication'))
+//}
 
 Integer iscompleteMandatory = Integer.parseInt(datafileTabApplication.getValue(
         GlobalVariable.NumofColm, 4))

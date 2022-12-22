@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Self Owner Checkbox</name>
+   <name>SaveInsurance</name>
    <tag></tag>
-   <elementGuidId>244110fc-fdd2-47e0-ad81-52e8023aa6f4</elementGuidId>
+   <elementGuidId>0f0c4183-1c39-427d-b756-df8beef72ede</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+         <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+      <value>//*[@id=&quot;insurance-tab&quot;]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[2]/button</value>
    </webElementProperties>
 </WebElementEntity>
