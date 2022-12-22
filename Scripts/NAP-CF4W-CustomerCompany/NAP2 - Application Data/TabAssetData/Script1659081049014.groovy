@@ -552,21 +552,21 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
     }
     
-    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
-        'click radio button Company'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Company'))
+    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Personal') {
+        'click radio button Personal'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Personal'))
 
         if (GlobalVariable.RoleCompany == 'Testing') {
-            ArrayList<String> ownerCompanyRelation = new ArrayList<String>()
+            ArrayList<String> ownerPersonalRelation = new ArrayList<String>()
 
             'Ambil array string (text) owner relationship dari db'
-            ownerCompanyRelation = CustomKeywords.'assetData.checkAssetData.checkCompanyRelationshipDDL'(sqlConnectionFOU)
+            ownerPersonalRelation = CustomKeywords.'assetData.checkAssetData.checkPersonalRelationshipDDL'(sqlConnectionFOU)
 
-            Integer countOwnerCompanyRelation = ownerCompanyRelation.size()
+            Integer countOwnerPersonalRelation = ownerPersonalRelation.size()
 
             'Verif dropdownlist owner relationship yang muncul pada confins sesuai dengan array string owner relationship dari db'
             if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'), 
-                ownerCompanyRelation) == false) {
+                ownerPersonalRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
                     GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
@@ -575,10 +575,10 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
             }
             
             'Ambil nilai jumlah option/pilihan owner relationship dari confins'
-            Integer totalOwnerCompanyRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
+            Integer totalOwnerPersonalRelation = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Owner Relationship'))
 
             'Verif jumlah owner relationship yang muncul pada confins sesuai dengan jumlah owner relationship pada db'
-            if (WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false) {
+            if (WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
                     GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
