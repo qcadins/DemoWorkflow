@@ -77,8 +77,10 @@ WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/button_Save'))
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get status return handling dari DB table ReturnHandling Header'
 String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
 
+'verify status return handling = FINISHED'
 WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)
 
 def inputAppNo() {

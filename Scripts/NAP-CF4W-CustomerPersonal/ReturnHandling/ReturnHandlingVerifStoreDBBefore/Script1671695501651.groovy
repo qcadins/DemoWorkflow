@@ -24,7 +24,7 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 TestData datafile
 
-int rowReason, rowNotes
+int returnRow
 
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
@@ -34,18 +34,18 @@ if(GlobalVariable.APPSTEP == 'COMMISSION'){
 'declare datafileCommission'
 datafile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
 
-rowReason = 56
-
-rowNotes = 57
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 
+	'Return Commission & Reserved Fund') + 1
 
 }else if(GlobalVariable.APPSTEP == 'RESERVED FUND'){
 
 'declare datafileReservedFund'
 datafile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
 
-rowReason = 21
-
-rowNotes = 22
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
+    'Return Commission & Reserved Fund') + 1
 
 }
 
@@ -72,11 +72,11 @@ arrayMatch.add(WebUI.verifyMatch(applaststep.toUpperCase(), (resultHeader[arrayi
 arrayMatch.add(WebUI.verifyMatch('REQUEST', (resultHeader[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify reason from Header'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, rowReason).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+3).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(), 
 		false, FailureHandling.OPTIONAL))
 
 'verify NOTE from Header'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, rowNotes).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 arrayindex = 0
@@ -86,7 +86,7 @@ arrayMatch.add(WebUI.verifyMatch('EDIT APPLICATION DATA'.toUpperCase(), (resultD
 		false, FailureHandling.OPTIONAL))
 
 'verify NOTE from Detail'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, rowNotes).toUpperCase(), (resultDetail[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultDetail[arrayindex++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 'verify Status from Detail'
