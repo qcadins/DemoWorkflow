@@ -6,12 +6,12 @@
    <elementGuidId>28bfb8df-5697-42d0-9aff-a644d1027b2f</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
+         <key>BASIC</key>
+         <value>//button[@type=&quot;submit&quot;]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[2]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
+      <value>//button[@type=&quot;submit&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

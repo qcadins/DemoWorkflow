@@ -98,7 +98,45 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 'call test case Comresfund'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
                     FailureHandling.STOP_ON_FAILURE)
+				
+				'declare datafileCommission'
+				datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+				
+				'declare datafileReservedFund'
+				datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+				
+				'Mengambil nilai row keberapa dimulai data return pada excel'
+				def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+					'Return Commission & Reserved Fund') + 1
+				
+				'Mengambil nilai row keberapa dimulai data return pada excel'
+				def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+					'Return Commission & Reserved Fund') + 1
 
+				for(int i=1;i<=i;i++){
+					if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
+						GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
+					
+						if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')){
+							'write to excel flag return done'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+									returnRowCom, GlobalVariable.NumofColm - 1, "Done")
+						}
+						else if(datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
+							'write to excel flag return done'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+									returnRowRsv, GlobalVariable.NumofColm - 1, "Done")
+						}
+						
+						'call tc main comresfund'
+						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:],
+							FailureHandling.STOP_ON_FAILURE)
+					}
+					else{
+						break
+					}
+				}
+				
                 'call test case CDC NAP4'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                     [:], FailureHandling.STOP_ON_FAILURE)

@@ -24,25 +24,78 @@ datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFu
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
-'Klik extend menu return handling'
-WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
+inputAppNo()
 
-'klik return handling'
-WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'))
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData',
+	'Return Commission & Reserved Fund') + 1
 
-'input application no'
-WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
-    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
+	'Return Commission & Reserved Fund') + 1
 
-'klik search'
-WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
+if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
+	GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
+	'verify match status request pada paging return handling'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'REQUEST', false)
 
-'klik icon pensil untuk select'
-WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
+	'klik icon pensil untuk select'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
 
+	'verify match task status request'
+	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'REQUEST', false)
 
+	'call test case edit application data '
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/EditApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
 
+	inputAppNo()
+	
+	'Looping delay +-20detik'
+	for(int i = 1;i<=4;i++){
+		'klik search'
+		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
+		
+		'Pengecekan kolom status bernilai done'
+		if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'DONE', false,FailureHandling.OPTIONAL)){
+			break
+		}
+		else{
+			'delay 4 detik'
+			WebUI.delay(4)
+		}
+	}
 
+	'klik icon pensil untuk select'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
+	
+	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'DONE', false)
+}
 
+'klik save'
+WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/button_Save'))
 
+'connect DB LOS'
+Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+
+WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)
+
+def inputAppNo() {
+	if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'), FailureHandling.OPTIONAL)){
+		'Klik extend menu return handling'
+		WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
+	}
+   
+
+	'klik return handling'
+	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'))
+
+	'input application no'
+	WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), datafileCustomerCompany.getValue(
+			GlobalVariable.NumofColm, 13))
+
+	'klik search'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
+
+}
