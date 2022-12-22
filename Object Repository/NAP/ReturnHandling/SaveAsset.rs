@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Self Owner Checkbox</name>
+   <name>SaveAsset</name>
    <tag></tag>
-   <elementGuidId>244110fc-fdd2-47e0-ad81-52e8023aa6f4</elementGuidId>
+   <elementGuidId>32862f9f-61f8-4d1c-a604-d880a9d3e225</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+         <value>//*[@id=&quot;assetData&quot;]/div[10]/button </value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+      <value>//*[@id=&quot;assetData&quot;]/div[10]/button </value>
    </webElementProperties>
 </WebElementEntity>

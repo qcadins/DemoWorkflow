@@ -6,12 +6,12 @@
    <elementGuidId>7bdca71f-33a6-42ed-aad4-9305a69b49c5</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='submit'])[2]</value>
+         <key>BASIC</key>
+         <value>//button[@type='submit'][@class='btn btn-raised btn-primary']</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>id(&quot;stepperPersonal&quot;)/div[@class=&quot;bs-stepper-content&quot;]/div[@id=&quot;financial-tab&quot;]/app-financial-data[@class=&quot;ng-star-inserted&quot;]/form[@class=&quot;form-horizontal ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;form-inline-right&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+         <key>XPATH</key>
+         <value>(//button[@type='submit'])[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;financial-tab&quot;]/app-financial-data/form/div/button[2]</value>
+      <value>//button[@type='submit'][@class='btn btn-raised btn-primary']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

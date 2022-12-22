@@ -6,12 +6,12 @@
    <elementGuidId>c9e99338-663c-429e-8206-dab1f8ff0c3d</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/div[2]</value>
+         <key>BASIC</key>
+         <value>//mat-radio-button[@value=&quot;AMT&quot;]/label/span/span[@class=&quot;mat-radio-outer-circle&quot;]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/div[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[6]/app-financial-data/form/app-fee/div/form/div/div/div[2]/div[6]/div/div/div[2]/mat-radio-group/mat-radio-button[1]/label/span[1]/span[1]</value>
+      <value>//mat-radio-button[@value=&quot;AMT&quot;]/label/span/span[@class=&quot;mat-radio-outer-circle&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

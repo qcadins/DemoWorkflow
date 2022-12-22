@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Self Owner Checkbox</name>
+   <name>SaveApplication</name>
    <tag></tag>
-   <elementGuidId>244110fc-fdd2-47e0-ad81-52e8023aa6f4</elementGuidId>
+   <elementGuidId>25a2743f-1dc8-4889-a040-d65b11fdf823</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+         <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+      <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button</value>
    </webElementProperties>
 </WebElementEntity>

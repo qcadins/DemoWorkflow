@@ -18,6 +18,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.WebElement as WebElement
 
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -30,6 +31,7 @@ datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Custom
 
 'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/labelCustomerName'))
+
 
 'get application data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(

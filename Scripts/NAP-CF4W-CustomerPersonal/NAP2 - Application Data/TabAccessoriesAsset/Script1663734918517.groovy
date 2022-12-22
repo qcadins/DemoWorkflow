@@ -66,6 +66,11 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 		'Looping confins accessories'
 		for(int i =1;i<=variable.size();i++){
 			
+			if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
+				'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
+			
+				break
+			}
 			'modify object supplier name'
 			modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[2]/lib-uclookupgeneric/div/div/input",true)
 			
@@ -228,27 +233,30 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 									  variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 									  
 									  i--
+									  
+									  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+										  break
+									  }
 								  }else{
 									  break
 								  }
 								  
-								  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
-									  break
-								  }
+								  
 							  }
 					  }
-					  'count table accessories setelah delete'
-					  variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
 					  
-					  if(variableData.size() == 1){
-						  break
-					  }
 				  }
 				  else{
 					  break
 				  }
 						
 			  }
+//			  'count table accessories setelah delete'
+//			  variableData = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="accessoriesData"]/div[2]/table/tbody/tr/td'))
+//			  
+//			  if(variableData.size() == 1){
+//				  break
+//			  }
 		}
 	}
 	'Jika delete accessories gagal'

@@ -6,11 +6,15 @@
    <elementGuidId>d305e543-7b3b-47cc-8fdf-8b70cb8b2ea4</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//app-dms-iframe/div/div/div/div/div/form/div/div[2]/button[3]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//button[@type='button'])[12]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,25 +31,25 @@
       <value>btn btn-raised btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Submit</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;stepperPersonal&quot;)/div[@class=&quot;bs-stepper-content&quot;]/div[@id=&quot;upload-tab&quot;]/app-dms-iframe[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row text-left&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;px-3&quot;]/form[@class=&quot;form form-horizontal&quot;]/div[@class=&quot;form-body&quot;]/div[@class=&quot;form-actions right ng-star-inserted&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
+      <value>//app-dms-iframe/div/div/div/div/div/form/div/div[2]/button[3]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

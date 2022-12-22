@@ -219,15 +219,26 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 								i--
 							  }else{
 								  break
+<<<<<<< HEAD
 							  }						
 					if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
 					  break
 					}
 				  }	  
+=======
+							  }
+							  
+							  
+							 
+				  		}	  
+>>>>>>> branch 'master' of https://github.com/qcadins/NAP-CF4W-UF
 				  }else{
-				  break
+				  		break
 				  }
 			}
+			if(i == variable.size() && datafileReferantor.getValue(GlobalVariable.NumofReferantor+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
+				  break
+			}  
 		}
 	}
 	

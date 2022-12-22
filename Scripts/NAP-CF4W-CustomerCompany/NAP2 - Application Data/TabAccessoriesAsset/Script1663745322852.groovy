@@ -224,14 +224,15 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							  }else{
 								  break
 							  }
-							  
-							  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
-								  break
-							  }
+							 
 				  }
 				  }else{
 					  break
 				  }
+			  }
+			  
+			  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)){
+				  break
 			  }
 				  
 			'count table accessories setelah delete'

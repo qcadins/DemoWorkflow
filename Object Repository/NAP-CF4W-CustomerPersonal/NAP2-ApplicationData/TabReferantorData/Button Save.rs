@@ -6,11 +6,11 @@
    <elementGuidId>03bf22aa-c834-486b-8327-f03f58d38435</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;referantor-tab&quot;]/app-referantor-data-new/div/div/div/div/form/div[2]/button[2]</value>
+         <key>BASIC</key>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>//button[@type='submit']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

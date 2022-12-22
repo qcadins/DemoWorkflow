@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Self Owner Checkbox</name>
+   <name>SaveReferantor</name>
    <tag></tag>
-   <elementGuidId>244110fc-fdd2-47e0-ad81-52e8023aa6f4</elementGuidId>
+   <elementGuidId>ecb35533-53d7-4b86-93f5-d83a25b0e0c6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+         <value>//*[@id=&quot;referantor-tab&quot;]/app-referantor-data-new/div/div/div/div/form/div[2]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@id=&quot;ownerData&quot;]/div/div/mat-checkbox/label/span/input</value>
+      <value>//*[@id=&quot;referantor-tab&quot;]/app-referantor-data-new/div/div/div/div/form/div[2]/button</value>
    </webElementProperties>
 </WebElementEntity>

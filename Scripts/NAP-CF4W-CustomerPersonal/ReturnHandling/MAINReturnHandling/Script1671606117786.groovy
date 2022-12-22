@@ -37,13 +37,13 @@ def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
     GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
 	'verify match status request pada paging return handling'
-	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'Request', false)
+	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'REQUEST', false)
 
 	'klik icon pensil untuk select'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
 
 	'verify match task status request'
-    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'Request', false)
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'REQUEST', false)
 
 	'call test case edit application data '
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/ReturnHandling/EditApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -56,7 +56,7 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
 		
 		'Pengecekan kolom status bernilai done'
-		if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'Done', false,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'DONE', false,FailureHandling.OPTIONAL)){
 			break
 		}
 		else{
@@ -68,15 +68,18 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 	'klik icon pensil untuk select'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
 	
-    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'Done', false)
+    WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'DONE', false)
 }
 
 'klik save'
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/button_Save'))
 
 def inputAppNo() {
-    'Klik extend menu return handling'
-    WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
+	if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'), FailureHandling.OPTIONAL)){
+		'Klik extend menu return handling'
+		WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/ExtendReturnHandling'))
+	}
+   
 
     'klik return handling'
     WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'))
