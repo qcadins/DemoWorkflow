@@ -3,6 +3,6 @@
    <description></description>
    <name>EditApplicationData</name>
    <tag></tag>
-   <comment></comment>
+   <comment>Verify tab insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database</comment>
    <testCaseGuid>e0f0ddc0-41bb-44c9-923c-ebe723b7e76d</testCaseGuid>
 </TestCaseEntity>

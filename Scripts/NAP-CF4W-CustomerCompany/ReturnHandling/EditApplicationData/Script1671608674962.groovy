@@ -348,6 +348,8 @@ if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCas
 	verifyMatch()
 }
 
+'call testcase verif store db after edit application'
+WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 'Verify tab insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database'
 def verifyMatch() {
