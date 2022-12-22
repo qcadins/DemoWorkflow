@@ -104,6 +104,12 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			'klik cancel return'
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
+			
+		'call test case verif return handling = DB'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			
+		'call test case main return handling'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	else if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
@@ -127,13 +133,13 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/button_Return'))
 		
 		'select return to'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+2),false)
 		
 		'select return reason'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+3),false)
 		
 		'input note'
-		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+4))
+		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+4))
 	
 		'klik save'
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
@@ -144,6 +150,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 			'klik cancel return'
 			WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_CancelReturn'))
 		}
+			
+		'call test case verif return handling = DB'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBAfter'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			
+		'call test case main return handling'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
+		
+		
 	}
 	else if((datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0) && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
