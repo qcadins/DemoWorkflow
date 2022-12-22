@@ -74,15 +74,15 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		
 			'Pengcekan max allocated amount x remaining allocated amount'
 			if(i==countIncomeInfo-1){
-				'modify max allocated amount'
-				modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
-				
-				'modify remaining allocated amount'
-				modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
-				
-				'cek max allocated amount = remaining allocated amount before calculate'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
-					GlobalVariable.NumofColm)
+//				'modify max allocated amount'
+//				modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+//				
+//				'modify remaining allocated amount'
+//				modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+//				
+//				'cek max allocated amount = remaining allocated amount before calculate'
+//				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
+//					GlobalVariable.NumofColm)
 				
 				break
 			}
