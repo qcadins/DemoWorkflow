@@ -24,6 +24,7 @@ datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFu
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
+'function untuk input application no dan search'
 inputAppNo()
 
 'Mengambil nilai row keberapa dimulai data return pada excel'
@@ -48,6 +49,7 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 	'call test case edit application data '
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/EditApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
 
+	'function untuk input application no dan search'
 	inputAppNo()
 	
 	'Looping delay +-20detik'
@@ -68,6 +70,7 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 	'klik icon pensil untuk select'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
 	
+	'verify task status bernilai done'
 	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatus')), 'DONE', false)
 }
 

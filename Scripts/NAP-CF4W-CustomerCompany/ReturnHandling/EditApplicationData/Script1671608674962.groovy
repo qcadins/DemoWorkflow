@@ -51,6 +51,7 @@ datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReserved
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+'Klik menu edit application data'
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuEditApplicationData'))
 
 'input application no'
@@ -74,11 +75,14 @@ def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
+'Pengecekan applaststep untuk menentukan nilai return execution note pada sheet mana yang diambil dari excel'
 if(appLastStep.equalsIgnoreCase("Commission Reserved Fund")){
+	'input return execution notes'
 	WebUI.setText(findTestObject('Object Repository/NAP/ReturnHandling/ReturnExecutionNotes'),datafileCommission.getValue(GlobalVariable.NumofColm,returnRowCom+5))
 	
 }
 else if(appLastStep.equalsIgnoreCase("Reserved Fund")){
+	'input return execution notes'
 	WebUI.setText(findTestObject('Object Repository/NAP/ReturnHandling/ReturnExecutionNotes'),datafileReservedFund.getValue(GlobalVariable.NumofColm,returnRowRsv+5))
 	
 }
