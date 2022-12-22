@@ -277,7 +277,7 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>''</initValue>
-      <name>NAP4</name>
+      <name>APPSTEP</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

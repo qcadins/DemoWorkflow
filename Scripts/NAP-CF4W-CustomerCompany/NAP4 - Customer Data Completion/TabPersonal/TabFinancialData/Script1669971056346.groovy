@@ -26,7 +26,7 @@ GlobalVariable.StartIndex = 0
 
 def datafilecustdetail 
 
-if(GlobalVariable.NAP4 == 'SHAREHOLDER PERSONAL'){
+if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
 	
@@ -35,7 +35,7 @@ if(GlobalVariable.NAP4 == 'SHAREHOLDER PERSONAL'){
 	
 	'declare data file Global variable'
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/FinancialData')
-}else if(GlobalVariable.NAP4 == 'GUARANTOR PERSONAL'){
+}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 	

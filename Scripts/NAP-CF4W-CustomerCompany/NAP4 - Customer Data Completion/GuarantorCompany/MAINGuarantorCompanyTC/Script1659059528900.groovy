@@ -22,7 +22,7 @@ CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.Da
 
 def CountofGuarantor = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail').getColumnNumbers()
 
-GlobalVariable.NAP4 = 'GUARANTOR COMPANY'
+GlobalVariable.APPSTEP = 'GUARANTOR COMPANY'
 
 WebUI.delay(10)
 

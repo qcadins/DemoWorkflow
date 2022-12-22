@@ -23,19 +23,19 @@ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.FlagWarning = 0
 
-if(GlobalVariable.NAP4 == 'CUSTOMER'){
+if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 	
 	'declare data file Global variable'
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/OtherAttribute')
-}else if(GlobalVariable.NAP4 == 'SHAREHOLDER COMPANY'){
+}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 	
 	'declare data file Global variable'
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/OtherAttribute')
-}else if(GlobalVariable.NAP4 == 'GUARANTOR COMPANY'){
+}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 			
