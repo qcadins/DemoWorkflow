@@ -47,6 +47,12 @@ datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersona
 'declare datafileTabUploadDoc'
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
 
+'declare datafileCommission'
+datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
+
+'declare datafileReservedFund'
+datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
@@ -63,6 +69,26 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_
 
 'klik icon pensil untuk select'
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_Select'))
+
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData',
+	'Return Commission & Reserved Fund') + 1
+
+'Mengambil nilai row keberapa dimulai data return pada excel'
+def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
+	'Return Commission & Reserved Fund') + 1
+
+'get applaststep from confins'
+String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
+
+if(appLastStep.equalsIgnoreCase("Commission Reserved Fund")){
+	WebUI.setText(findTestObject('Object Repository/NAP/ReturnHandling/ReturnExecutionNotes'),datafileCommission.getValue(GlobalVariable.NumofColm,returnRowCom+5))
+	
+}
+else if(appLastStep.equalsIgnoreCase("Reserved Fund")){
+	WebUI.setText(findTestObject('Object Repository/NAP/ReturnHandling/ReturnExecutionNotes'),datafileReservedFund.getValue(GlobalVariable.NumofColm,returnRowRsv+5))
+	
+}
 
 //call test case satuan nap2
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
