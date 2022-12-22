@@ -113,6 +113,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 				def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
 					'Return Commission & Reserved Fund') + 1
 
+				'Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
 				for(int i=1;i<=i;i++){
 					if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
 						GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){

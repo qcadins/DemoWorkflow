@@ -1018,6 +1018,7 @@ public loopingStartIndex(Integer NumOf, TestData datafile){
 	}
 }
 
+'Function untuk Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
 public loopingReturnComresfund(){
 	'declare datafileCommission'
 	datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
