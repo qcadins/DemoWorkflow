@@ -7,11 +7,10 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;referantor-tab&quot;]/app-referantor-data-new/div/div/div/div/form/div[2]/button[2]</value>
+         <value>//button[@type=&quot;submit&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -63,6 +63,11 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 		'Looping confins accessories'
 		for(int i =1;i<=variable.size();i++){
 			
+			if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
+				'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
+				break
+			}
+				
 			'modify object supplier name'
 			modifyObjectSupplierName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_supplierAccName'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[2]/lib-uclookupgeneric/div/div/input",true)
 			
