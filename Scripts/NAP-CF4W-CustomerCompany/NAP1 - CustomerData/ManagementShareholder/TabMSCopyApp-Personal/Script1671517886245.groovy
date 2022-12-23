@@ -64,6 +64,7 @@ for (int i = 1; i <= variableData.size(); i++) {
     'get text customer type'
     customertype = WebUI.getText(modifyNewMSTypeName)
 
+	'call function mscopyapp'
     mscopyapp()
 }
 
