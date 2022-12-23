@@ -85,14 +85,8 @@ if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equa
 'klik save'
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/button_Save'))
 
-'connect DB LOS'
-Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
-
-'get status return handling dari DB table ReturnHandling Header'
-String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
-
-'verify status return handling = FINISHED'
-WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)
+'call function verifyStatusReturnHandling'
+verifyStatusReturnHandling()
 
 def inputAppNo() {
 	if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/NAP/ReturnHandling/MenuReturnHandling'), FailureHandling.OPTIONAL)){
@@ -115,6 +109,7 @@ def inputAppNo() {
     WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
 
 }
+
 
 public pagingTesting(){
 	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckPagingPersonal=="Yes"){
@@ -413,4 +408,17 @@ public pagingTesting(){
 				GlobalVariable.FlagWarning=1
 		}
 	}
+
+}
+
+
+def verifyStatusReturnHandling(){
+	'connect DB LOS'
+	Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+	
+	'get status return handling dari DB table ReturnHandling Header'
+	String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
+	
+	'verify status return handling = FINISHED'
+	WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)
 }

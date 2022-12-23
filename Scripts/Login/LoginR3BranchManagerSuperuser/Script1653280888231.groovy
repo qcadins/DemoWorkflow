@@ -18,7 +18,7 @@ import internal.GlobalVariable as GlobalVariable
 'open browser'
 WebUI.openBrowser('')
 
-'declare datafileLogin'
+'declare datafile Login'
 datafileLogin = findTestData('Login/Login')
 
 'input web R3 LOS'
