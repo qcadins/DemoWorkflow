@@ -15,6 +15,11 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.By as By
+
 
 GlobalVariable.StartIndex=2
 
@@ -53,6 +58,8 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 'Klik menu edit application data'
 WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/MenuEditApplicationData'))
+
+pagingTesting()
 
 'input application no'
 WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), datafileCustomerCompany.getValue(
@@ -384,4 +391,260 @@ def verifyMatch() {
 	}
 }
 
+public pagingTesting(){
+	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckPagingCompany=="Yes"){
+		'declare result reset'
+		ArrayList<String> resultReset = new ArrayList<String>()
 
+		'declare checkverifysort'
+		ArrayList<String> checkVerifySort = new ArrayList<String>()
+
+		'declare checkverifyfooter'
+		ArrayList<String> checkVerifyFooter = new ArrayList<String>()
+		
+		'Verif reset'
+		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
+		
+		'declare liststring'
+		ArrayList<String> listString = new ArrayList<String>()
+		
+		'click button search'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Search'))
+		
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		
+		'Inisialisasi variabel'
+		ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-new-edit-app-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+	
+		'Klik header office'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_Office'))
+		
+		'Verif tidak ada alert yang muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
+		
+		'Klik header appno'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_appNo'))
+		
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
+		
+		'looping untuk simpan appno ascending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/appNo')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+		}
+		'verif sort appno ascending'
+		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'verif sort appno ascending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		listApp = new ArrayList<String>()
+		
+		'Klik header appno'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_appNo'))
+		
+		'looping untuk simpan appno descending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/appNo')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[4]/span",true)
+			
+			listApp.add(WebUI.getText(appNoObject))
+		}
+		'Verif sort appno descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
+		
+		'Verif sort appno descending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		'Klik header custname'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_custName'))
+		
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
+		
+		listString = new ArrayList<String>()
+		
+		'looping untuk simpan custname ascending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/custName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'Verif sort custname ascending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'Verif sort custname ascending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		'Klik header custname'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_custName'))
+		listString = new ArrayList<String>()
+		
+		'looping untuk simpan custname descending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/custName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[5]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'Verif sort custname descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+		
+		'Verif sort custname descending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		'Klik header poname'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_POName'))
+		
+		'Verify alert tidak muncul'
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
+		
+		listString = new ArrayList<String>()
+		
+		'looping untuk simpan poname ascending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/POName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+		
+		}
+		'verif sort poname ascending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
+		
+		'verif sort poname ascending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		'Klik header poname'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_POName'))
+		
+		listString = new ArrayList<String>()
+		
+		'looping untuk simpan poname descending'
+		for(int i=1;i<=rowData.size();i++){
+			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/POName')
+					,'xpath','equals',"/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr["+i+"]/td[6]/span",true)
+			
+			listString.add(WebUI.getText(appNoObject))
+			
+		}
+		'verif sort poname descending'
+		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
+		
+		'verif sort poname descending'
+		checkVerifySort.add(WebUI.verifyEqual(isSorted,true))
+		
+		'Klik 2x appno supaya urutan descending'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_appNo'))
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/span_appNo'))
+		
+		'Ambil count data dari confins'
+		String[] textCountData = WebUI.getText(findTestObject('NAP/ReturnHandling/EditApplicationData/countData')).replace(' ', '').replace(':', ';').split(';')
+		
+		'parsing countdata ke integer'
+		Integer countDt = Integer.parseInt(textCountData[1])
+		
+		'Jika count data keseluruhan lebih besar daripada jumlah data page 1'
+		if(countDt>rowData.size()){
+			'Klik page 2'
+			WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/nextPage'))
+			
+			'verif page 2 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/ReturnHandling/EditApplicationData/nextPage'),'aria-current', GlobalVariable.TimeOut))
+					
+			listString = new ArrayList<String>()
+			
+			'looping untuk simpan appno page 2'
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingReturnHandlingEditApp'(listString)
+			
+			'Verif appno pada page 2 tidak ada di page 1'
+			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp,listString)
+			
+			'Verif appno pada page 2 tidak ada di page 1'
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging,true))
+			
+			'Klik button prev'
+			WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/button_Prev'))
+			
+			'Verify page 1 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/ReturnHandling/EditApplicationData/pageOne'),
+				'aria-current', GlobalVariable.TimeOut))
+			
+			listApp = listString
+					
+			listString = new ArrayList<String>()
+			
+			'looping untuk simpan appno page 1'
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingReturnHandlingEditApp'(listString)
+					
+			'Verif appno yang ada di page 1 tidak ada di page 2'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+			
+			'Verif appno yang ada di page 1 tidak ada di page 2'
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+			
+			'Klik button next'
+			WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/button_Next'))
+			
+			'Verify page 2 active'
+			checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP/ReturnHandling/EditApplicationData/nextPage'),
+				'aria-current', GlobalVariable.TimeOut))
+			
+			listApp = listString
+			
+			listString = new ArrayList<String>()
+			
+			'looping untuk simpan appno page 2'
+			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingReturnHandlingEditApp'(listString)
+					
+			'Verif appno yang ada di page 2 tidak ada di page 1'
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+			
+			'Verif appno yang ada di page 2 tidak ada di page 1'
+			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
+		}
+		
+		'Klik button page 1'
+		WebUI.click(findTestObject('NAP/ReturnHandling/EditApplicationData/pageOne'))
+		
+		'verif jumlah data yang muncul pada paging sesuai'
+		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ReturnHandlingEditAppCountDataInPage'(),true))
+		
+		'Jika verif reset ada yang tidak sesuai'
+		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+						
+				'Write To Excel GlobalVariable.StatusWarning and reason'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace(
+						'-', '') + GlobalVariable.ReasonFailedReset) + 'RHEditApp') + ';\n')
+				
+				GlobalVariable.FlagWarning=1
+		}
+		
+		'Jika verif sort ada yang tidak sesuai'
+		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+			
+				'Write To Excel GlobalVariable.StatusWarning and reason'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+						'') + ((GlobalVariable.ReasonFailedSort + 'RHEditApp') + ';\n'))
+			
+				GlobalVariable.FlagWarning=1
+		}
+			
+		'Jika verif footer ada yang tidak sesuai'
+		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+			
+				'Write To Excel GlobalVariable.StatusWarning and reason'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+						'') + ((GlobalVariable.ReasonFailedFooter + 'RHEditApp') + ';\n'))
+			
+				GlobalVariable.FlagWarning=1
+		}
+	}
+}

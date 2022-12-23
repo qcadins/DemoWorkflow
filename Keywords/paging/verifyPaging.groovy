@@ -200,6 +200,46 @@ public class verifyPaging {
 
 	}
 
+	//keyword add ApNo for Paging Return Handling
+	@Keyword
+	public addAppNoForPagingReturnHandling(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+	
+	//keyword add ApNo for Paging Return Handling Edit App
+	@Keyword
+	public addAppNoForPagingReturnHandlingEditApp(ArrayList<String> listString){
+
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-new-edit-app-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+
+		for (int i = 1; i <= rowData.size(); i++) {
+			Object appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/ReturnHandling/EditApplicationData/appNo'),
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
+					i) + ']/td[4]/span', true)
+
+			listString.add(WebUI.getText(appNoObject))
+		}
+		return listString
+
+	}
+
 	//keyword add ApNo for Paging ComResFund
 	@Keyword
 	public addAppNoForPagingComResFund(ArrayList<String> listString){
@@ -328,6 +368,62 @@ public class verifyPaging {
 		}
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/select_pageSize'),"10",false)
 		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+
+	//keyword count data in page return handling
+	@Keyword
+	public ReturnHandlingCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
+			isCount = false
+		}
+
+		return isCount
+	}
+	
+	//keyword count data in page return handling edit app
+	@Keyword
+	public ReturnHandlingEditAppCountDataInPage(){
+		'Inisialisasi driver'
+		WebDriver driver = DriverFactory.getWebDriver()
+		Boolean isCount = true
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/EditApplicationData/select_pageSize'),"20",false)
+		def rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-new-edit-app-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		int countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,20)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/EditApplicationData/select_pageSize'),"50",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-new-edit-app-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+		countDataInPage = rowData.size()
+		if(WebUI.verifyLessThanOrEqual(countDataInPage,50)==false){
+			isCount = false
+		}
+		WebUI.selectOptionByLabel(findTestObject('NAP/ReturnHandling/EditApplicationData/select_pageSize'),"10",false)
+		rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-return-handling-new-edit-app-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 		countDataInPage = rowData.size()
 		if(WebUI.verifyLessThanOrEqual(countDataInPage,10)==false){
 			isCount = false

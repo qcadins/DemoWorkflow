@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_pageSize</name>
+   <tag></tag>
+   <elementGuidId>665e1f9b-07f2-40c9-8ea6-2ec75cbcb331</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[1]/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[1]/select</value>
+   </webElementProperties>
+</WebElementEntity>

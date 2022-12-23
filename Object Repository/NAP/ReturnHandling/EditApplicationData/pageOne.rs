@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>pageOne</name>
+   <tag></tag>
+   <elementGuidId>23d68658-5171-410c-a3e6-ab8ea792742b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-return-handling-new-edit-app-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[2]</value>
+   </webElementProperties>
+</WebElementEntity>
