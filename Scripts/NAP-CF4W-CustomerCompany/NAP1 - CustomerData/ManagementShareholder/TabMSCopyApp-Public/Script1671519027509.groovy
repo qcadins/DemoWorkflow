@@ -66,8 +66,6 @@ for (int i = 1; i <= variableData.size(); i++) {
 
 	'call function mscopyapp'
 	mscopyapp()
-	
-    
 }
 
 def getDataMS() {
