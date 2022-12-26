@@ -629,10 +629,10 @@ def pagingTesting() {
         'Jika countdata secara keseluruhan lebih besar daripada data pada page 1'
         if (countDt > rowData.size()) {
             'Klik page 2'
-            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'))
+            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'))
 
             'Verif page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', GlobalVariable.TimeOut))
 
             rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -678,7 +678,7 @@ def pagingTesting() {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Next'))
 
             'Verify page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', GlobalVariable.TimeOut))
 
             listApp = listString
