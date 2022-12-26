@@ -122,6 +122,8 @@ if (DupCheckStatus == true) {
 				'click edit/icon pensil'
 				WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
 
+				CustomKeywords.'customizeKeyword.zoomKeyword.zoomOut'(20)
+				
                 'if role == testing'
                 if (GlobalVariable.Role == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative atau dupcheck verif = lock dan negative check = negative dan ada select app in process'
@@ -277,14 +279,14 @@ if (DupCheckStatus == true) {
                                         newCustomerNoValue, false))
                             }
 						//pengecekan jika ada appinprocess
-                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
+                        } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
                             'click select app in process'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                             if (GlobalVariable.Role == 'Testing') {
                                 'verify match ApplicantNo'
@@ -330,14 +332,14 @@ if (DupCheckStatus == true) {
                                         '', false))
                             }
                         } //jika ada select application in process
-						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
+						else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
                             'click select application in process'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                             if (GlobalVariable.Role == 'Testing') {
                                 'verify match ApplicantNo'
@@ -348,14 +350,14 @@ if (DupCheckStatus == true) {
                     } //Pengecekan jika action bernilai select applicationinprocess
 					else if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Select ApplicationInProcess')) {
 						'jika select appinprocess ada pada confins'
-                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
+                        if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'), 
                             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'get text new applicant no'
                             String newApplicantNoValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/Tr_ApplicantNoApplicationInProcess'), 
                                 FailureHandling.OPTIONAL)
 
                             'click select application in process'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInprocessPersonal'))
 
                             if (GlobalVariable.Role == 'Testing') {
                                 'verify match ApplicantNo'
