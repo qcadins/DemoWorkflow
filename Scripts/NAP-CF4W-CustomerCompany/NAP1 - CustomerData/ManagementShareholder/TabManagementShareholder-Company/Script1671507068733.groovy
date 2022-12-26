@@ -428,6 +428,9 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 				0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                 	}
                 }
+				if(copyapp == 'No'){
+					break
+				}
             }
         }
         }

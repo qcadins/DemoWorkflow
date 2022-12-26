@@ -135,10 +135,8 @@ if (DupCheckStatus == true) {
                 if (GlobalVariable.RoleCompany == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative'
                     if ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 'REVIEW') && ((GlobalVariable.NegativeverifResult[
-                    GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
-                    'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
-                    WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
-                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL))) {
+                    GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || (((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
+                    'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE'))) {
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox negative'))
@@ -596,10 +594,10 @@ def pagingTesting() {
         'Jika countdata secara keseluruhan lebih besar daripada data pada page 1'
         if (countDt > rowData.size()) {
             'Klik page 2'
-            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'))
 
             'Verif page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', 2))
 
             rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -641,7 +639,7 @@ def pagingTesting() {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Next'))
 
             'Verify page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', 2))
 
             listApp = listString
