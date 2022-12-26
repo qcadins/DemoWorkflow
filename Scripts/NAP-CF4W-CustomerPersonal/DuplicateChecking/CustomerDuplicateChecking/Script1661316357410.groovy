@@ -629,10 +629,10 @@ def pagingTesting() {
         'Jika countdata secara keseluruhan lebih besar daripada data pada page 1'
         if (countDt > rowData.size()) {
             'Klik page 2'
-            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'))
+            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'))
 
             'Verif page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', GlobalVariable.TimeOut))
 
             rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-dup-check-md-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
@@ -649,7 +649,7 @@ def pagingTesting() {
             }
             
             'Verif appno descending pada page 2 tidak ada di page 1'
-            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
 			'Verif appno descending pada page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -669,7 +669,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
 			'Verif appno yang ada di page 1 tidak ada di page 2'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
@@ -678,7 +678,7 @@ def pagingTesting() {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Next'))
 
             'Verify page 2 active'
-            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/DuplicateChecking/nextPage'), 
+            checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/nextPage'), 
                     'aria-current', GlobalVariable.TimeOut))
 
             listApp = listString
@@ -689,7 +689,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingDupcheck'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
 			'Verif appno yang ada di page 2 tidak ada di page 1'
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))

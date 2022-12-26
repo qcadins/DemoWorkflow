@@ -128,6 +128,10 @@ if ((StoreCDCGuarantorPersonalName != null) || (StoreCDCGuarantorCompanyName != 
 	'write to excel storecdcguarantorpersonal dan storecdcguarantorcompany'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '15.CustomerDataCompletion', 
         16, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName + ';') + StoreCDCGuarantorCompanyName)
+	
+	'write to excel storecdcguarantorpersonal'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabLifeInsuranceData',
+		20, GlobalVariable.NumofColm - 1, (StoreCDCGuarantorPersonalName))
 }
 
 StoreCDCFamilyNameArray = StoreCDCFamilyName.split(';')
