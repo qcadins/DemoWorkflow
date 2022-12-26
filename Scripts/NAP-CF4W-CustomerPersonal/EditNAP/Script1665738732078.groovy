@@ -45,6 +45,8 @@ datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPe
 'declare datafileTabUploadDoc'
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
 
+datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+
 'get appno from excel'
 String appNo = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8)
 
