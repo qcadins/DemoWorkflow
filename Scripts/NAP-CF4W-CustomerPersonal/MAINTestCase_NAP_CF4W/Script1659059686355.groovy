@@ -150,15 +150,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 					}
 				}
 				
-                'call tc nap4 cdc'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
-
-                'Jika flag checkappviewpersonal bernilai yes'
-                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
-                    'call test case verify app view'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-                }
+//                'call tc nap4 cdc'
+//                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+//                    [:], FailureHandling.STOP_ON_FAILURE)
+//
+//                'Jika flag checkappviewpersonal bernilai yes'
+//                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+//                    'call test case verify app view'
+//                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+//                }
             }
             catch (Exception e) {
                 KeywordUtil.markFailed(e.printStackTrace())

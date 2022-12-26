@@ -345,6 +345,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                     }
+					break
                 }
             }
         }
