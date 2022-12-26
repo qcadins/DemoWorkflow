@@ -3,6 +3,6 @@
    <description></description>
    <name>EditNAP</name>
    <tag></tag>
-   <comment></comment>
+   <comment>Function untuk Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai &quot;yes&quot; lagi</comment>
    <testCaseGuid>0a09f6e7-d97b-42d9-a972-0521cdcf1584</testCaseGuid>
 </TestCaseEntity>

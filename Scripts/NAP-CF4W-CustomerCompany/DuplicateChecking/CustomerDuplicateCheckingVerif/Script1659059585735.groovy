@@ -63,9 +63,9 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
     
     'check rule company 2'
     if ((Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2Cust'(sqlconnectionFOU, datafileCustomerCompany.getValue(
-                GlobalVariable.NumofGuarantorCompany, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(
-            sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofGuarantorCompany, 19), datafileCustomerCompany.getValue(
-                GlobalVariable.NumofGuarantorCompany, 13))) > 0)) {
+                GlobalVariable.NumofColm, 19))) > 0) || (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheckRuleCompany2AppCust'(
+            sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 19), datafileCustomerCompany.getValue(
+                GlobalVariable.NumofColm, 13))) > 0)) {
         'add "REVIEW" kedalam array CustomerCompanyStatus'
         CustomerCompanyStatus = datafileDupcheckRule.getValue(2, 21)
 
@@ -409,13 +409,15 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
     
     'check Negative rule company 2'
     if (Integer.parseInt(CustomKeywords.'dupCheck.dupCheckVerif.checkNegativeRuleCompany2'(sqlconnectionFOU, datafileCustomerCompany.getValue(
-                GlobalVariable.NumofGuarantorCompany, 19))) > 0) {
+                GlobalVariable.NumofColm, 19))) > 0) {
         'add "NEGATIVE" kedalam array negative result'
         NegativeResult.add('NEGATIVE')
     }
     
-    'add "" kedalam array karena tidak kena negative check'
-    NegativeResult.add('')
+	if(NegativeResult.contains('NEGATIVE')){
+	    'add "" kedalam array karena tidak kena negative check'
+	    NegativeResult.add('')
+	}
 } else {
     'add "" kedalam array karena tidak kena negative check'
     NegativeResult.add('')
@@ -655,6 +657,8 @@ GlobalVariable.NegativeverifResult = NegativeResult
 if ((DupcheckResult.contains('REVIEW') || DupcheckResult.contains('LOCK')) || NegativeResult.contains('NEGATIVE')) {
     GlobalVariable.DupcheckVerif = 'Yes'
 }
+
+WebUI.delay(5)
 
 def checkStatusDupcheck(String Status, ArrayList<String> DupcheckResult) {
     'verify apakah hasil pengecekan mengandung status REVIEW'
