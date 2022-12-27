@@ -36,8 +36,8 @@ public class uploadFile {
 		StringSelection ss = new StringSelection(filePath);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.keyPress(KeyEvent.VK_ENTER); //control, -
+		robot.keyRelease(KeyEvent.VK_ENTER); //-, control
 		robot.delay(1000) //NOTE THE DELAY (500, 1000, 1500 MIGHT WORK FOR YOU)
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);

@@ -132,10 +132,31 @@ if (DupCheckStatus == true) {
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                         GlobalVariable.TimeOut, FailureHandling.OPTIONAL))) {
+					
+						ArrayList<String> variablenegcustno = driver.findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
+						
 						'Jika pada excel negative checking bernilai yes'
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
-                            'click negative checkbox index 1'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+							def modifycheckbox
+							for (int id = 1; id <= variablenegcustno.size(); id++) {
+								'modify negative cust no'
+								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
+								
+								if(WebUI.getText(modifyNegativeCustNo)!=""){
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
+									break
+								}
+
+							}
+							if(modifycheckbox!=null){
+								'click negative checkbox index 1 yang ada negative cust no'
+								WebUI.click(modifycheckbox)
+							}
+                            else{
+								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+							}
                         }
                     }
                 }
