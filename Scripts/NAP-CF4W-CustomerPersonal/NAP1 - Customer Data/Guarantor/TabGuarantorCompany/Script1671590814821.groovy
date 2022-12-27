@@ -302,8 +302,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                     
                     if (GlobalVariable.FlagFailed == 0) {
                         'check save process write to excel'
-                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject(
-                                'Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
+                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('Object Repository/NAP/NAP1-CustomerData/TabGuarantorData/TableGuarantorHeader'), 
                             GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 
                         if (iscompleteMandatory == 0) {
