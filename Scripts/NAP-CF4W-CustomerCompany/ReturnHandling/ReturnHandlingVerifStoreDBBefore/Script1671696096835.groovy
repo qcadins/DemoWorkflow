@@ -48,7 +48,7 @@ SheetExcel = '13.TabReservedFundData'
 }
 
 'Mengambil nilai row keberapa dimulai data return pada excel'
-def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, SheetExcel,
+returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, SheetExcel,
 	'Return Commission & Reserved Fund') + 1
 
 'get data from db'

@@ -139,7 +139,7 @@ if (DupCheckStatus == true) {
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE'))) {
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
                             'click negative checkbox index 1'
-                            WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox negative'))
+                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'))
                         }
                     }
                 }

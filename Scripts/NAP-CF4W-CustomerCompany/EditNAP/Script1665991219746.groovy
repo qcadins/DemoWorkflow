@@ -41,9 +41,6 @@ datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-Customer
 'declare datafileGuarantorCompany'
 datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
 
-'declare datafileDupcheck'
-datafileDupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
-
 'get appno dari data file'
 String appNo = datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8)
 

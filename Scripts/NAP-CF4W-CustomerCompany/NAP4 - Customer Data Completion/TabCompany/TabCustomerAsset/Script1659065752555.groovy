@@ -136,7 +136,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
             }
 			
 			'verify jika table confins no data maka looping akan di skip'
-			if(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase('NO DATA AVAILABLE')){
+			if(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 				break
 			}
         }
