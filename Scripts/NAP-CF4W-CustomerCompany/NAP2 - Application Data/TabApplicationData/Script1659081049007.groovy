@@ -47,6 +47,8 @@ String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cu
 if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("APPLICATION DATA")) {
 	'refresh browser supaya tidak muncul error data has been modified'
 	WebUI.refresh()
+	
+	WebUI.delay(3)
 }
 
 if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){

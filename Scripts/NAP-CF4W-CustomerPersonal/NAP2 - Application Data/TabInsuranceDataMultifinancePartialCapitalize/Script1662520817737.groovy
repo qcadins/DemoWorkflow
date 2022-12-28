@@ -734,7 +734,7 @@ public AddRatetoGV(int count, int countAddCov){
 				||labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG"))){
 				
 				'Simpan nilai rate additional cvg'
-				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12))
+				AddtRate.add(Math.round(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12)))
 			}
 		}
 	}
