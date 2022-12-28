@@ -155,7 +155,7 @@ if (DupCheckStatus == true) {
 								WebUI.click(modifycheckbox)
 							}
                             else{
-								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'))
 							}
                         }
                     }

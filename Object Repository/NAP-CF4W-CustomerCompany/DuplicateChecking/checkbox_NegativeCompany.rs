@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>checkbox_NegativeCompany</name>
+   <tag></tag>
+   <elementGuidId>874bc731-6b8b-4f11-a4d4-4290ba16f2bd</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-subj-match/div/div[2]/div[3]/table/tbody/tr[1]/td[6]/mat-checkbox/label/span[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-dup-check-md-subj-match/div/div[2]/div[3]/table/tbody/tr[1]/td[6]/mat-checkbox/label/span[1]</value>
+   </webElementProperties>
+</WebElementEntity>
