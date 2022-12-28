@@ -72,7 +72,9 @@ class openCloseExcel {
 		if(file.exists()){
 			desktop.open(file)
 		}
+		//digunakan close confirmation license activation pada office, jika sudah berlicense dapat dihapus
 		Robot robot = new Robot();
+		robot.delay(2000)
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		Runtime.getRuntime().exec("taskkill /IM EXCEL.EXE")
