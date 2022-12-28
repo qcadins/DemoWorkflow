@@ -656,6 +656,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                             GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                     }
                     
+					if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 1) == 'SUCCESS') {
                     if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                                 'call test case MS Personal data store verif'
@@ -669,6 +670,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)                            
                         }
                     }
+					}
                 }
                 
                 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'), 
@@ -684,10 +686,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 				0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                 	}
                 }
-				
-				if(copyapp == 'No'){
-					break
-				}
+					break			
 				}
         }
         }

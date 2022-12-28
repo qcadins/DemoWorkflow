@@ -23,18 +23,7 @@ GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
-if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderPersonal/CustomerAsset')
-}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
-	
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset')
-}
+getDataFile()
 	
 ArrayList<String> assettypefaileddelete = new ArrayList<>()
 
@@ -53,7 +42,7 @@ def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNA
 def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).split(';', -1)
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
     GlobalVariable.ColmNAP4, 10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -70,8 +59,31 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
 			
+			'modify object customer asset price'
+			modifyNewcustomeassetPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[3]', true)
+
+			'modify object customer asset qty'
+			modifyNewcustomeassetQty = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[4]', true)
+			
+			'modify object customer asset Total price'
+			modifyNewcustomeassetTotalPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[5]', true)
+			
+			assetType = WebUI.getText(modifyNewcustomeassetType)
+			assetDesc = WebUI.getText(modifyNewcustomeassetDesc)
+			assetPrice = WebUI.getText(modifyNewcustomeassetPrice).replace(',','').replace('.00','')
+			assetQty = WebUI.getText(modifyNewcustomeassetQty)
+			
 			for (asset = 1; asset <= assettypearray.size(); asset++) {
 				
+				'if asset type, desc, price, qty sama semua maka di break'
+				if(assetType.equalsIgnoreCase(assettypearray[(asset - 1)]) && assetDesc.equalsIgnoreCase(assetdescriptionarray[(asset - 1)])
+					&& assetPrice.equalsIgnoreCase(assetvaluearray[(asset - 1)]) && assetQty.equalsIgnoreCase(assetquantityarray[(asset - 1)])){
+					break
+				}
+					
 				'verify if asset type sama'
 				if (WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)]) && WebUI.getText(modifyNewcustomeassetDesc).equalsIgnoreCase(assetdescriptionarray[(asset - 1)])) {
 					
@@ -84,6 +96,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 					'call function input asset data'
 					inputAssetData()
+					
+					'call function count asset value'
+					countAssetValue(i)
 					
 					break
 				} else {
@@ -133,7 +148,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			}
 			
 			'verify jika table confins no data maka looping akan di skip'
-			if(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase('NO DATA AVAILABLE')){
+			if(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
 				break
 			}
 		}
@@ -159,6 +174,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'modify object customer asset desc'
 			modifyNewcustomeassetDesc = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[2]', true)
+			
+			'modify object customer asset price'
+			modifyNewcustomeassetPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[3]', true)
+			
+			'modify object customer asset qty'
+			modifyNewcustomeassetQty = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[4]', true)
+			
+			'modify object customer asset Total price'
+			modifyNewcustomeassetTotalPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+				'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + i) + ']/td[5]', true)
 
 			'verify if asset type beda'
 			if (!(WebUI.getText(modifyNewcustomeassetType).equalsIgnoreCase(assettypearray[(asset - 1)]) && WebUI.getText(modifyNewcustomeassetDesc).equalsIgnoreCase(assetdescriptionarray[(asset - 1)])) || WebUI.verifyElementNotPresent(
@@ -169,6 +196,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 					'call function input asset data'
 					inputAssetData()
+					
+					'call function count asset value'
+					countAssetValue(i+1)
 					
 					'count ulang table customer asset setelah add customer asset baru'
 					variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
@@ -186,6 +216,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 			'call function input asset data'
 			inputAssetData()
+			
+			'call function count asset value'
+			countAssetValue(asset)
 		}
 	}
 }
@@ -225,7 +258,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+getDataFile()
+	
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes') && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
     GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
     'call test case verify store data customer asset'
@@ -274,4 +309,42 @@ def inputAssetData() {
 
         GlobalVariable.FlagWarning++
     }
+}
+
+def countAssetValue(int confinssize){
+	
+	'modify object customer asset price'
+	modifyNewcustomeassetPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+		'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + confinssize) + ']/td[3]', true)
+	
+	'modify object customer asset qty'
+	modifyNewcustomeassetQty = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+		'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + confinssize) + ']/td[4]', true)
+	
+	'modify object customer asset Total price'
+	modifyNewcustomeassetTotalPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
+		'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + confinssize) + ']/td[5]', true)
+	
+	assetPrice = WebUI.getText(modifyNewcustomeassetPrice).replace(',','').replace('.00','')
+	assetQty = WebUI.getText(modifyNewcustomeassetQty)
+	assetTotalPrice = WebUI.getText(modifyNewcustomeassetTotalPrice).replace(',','').replace('.00','')
+	
+	int TotalPrice = Integer.parseInt(assetPrice) * Integer.parseInt(assetQty)
+	
+	WebUI.verifyEqual(TotalPrice, Integer.parseInt(assetTotalPrice))
+}
+
+def getDatafile(){
+	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderPersonal/CustomerAsset')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+		
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset')
+	}
 }
