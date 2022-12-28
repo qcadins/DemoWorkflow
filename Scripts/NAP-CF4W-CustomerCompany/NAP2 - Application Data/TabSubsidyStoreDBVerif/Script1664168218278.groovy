@@ -19,6 +19,7 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get subsidy data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 		GlobalVariable.NumofColm, 13))
 
@@ -44,34 +45,71 @@ def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.N
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 if(result.size() > 0){
-for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
+	for(int arrayindexexcel = 0; arrayindexexcel <= SubsidyTypeArray.size() - 1; arrayindexexcel++){
+		
+		Boolean isMatch = false
+		for (int subsidydb = 0; subsidydb < result.size()/6; subsidydb++) {
+			if ((((WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), '(?i)' + (result[0+(6*subsidydb)]), true, FailureHandling.OPTIONAL) ==
+				false) || (WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), '(?i)' + (result[1+(6*subsidydb)]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), '(?i)' + (result[2+(6*subsidydb)]), true, FailureHandling.OPTIONAL) ==
+				false)) || (WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), '(?i)' + (result[3+(6*subsidydb)]), true, FailureHandling.OPTIONAL) ==
+				false)) {
+					continue
 	
-'verify subsidy from value type'
-arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
-	FailureHandling.OPTIONAL))
-
-'verify subsidy from value'
-arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
-
-'verify allocation from'
-arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
-	FailureHandling.OPTIONAL))
-
-'veirfy subsidy source'
-arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
-	FailureHandling.OPTIONAL))
-
-'verify subsidy amount'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
-	FailureHandling.OPTIONAL))
-
-'verify subsidy percentage'
-arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
-	FailureHandling.OPTIONAL))
-
+			} else {
+			
+					if(SubsidyValueTypeArray[arrayindexexcel].equalsIgnoreCase("Amount")){
+						'verify subsidy amount'
+						if(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[4+(6*subsidydb)]),
+							FailureHandling.OPTIONAL)==true){
+						
+							isMatch = true
+							
+							break
+						}
+						
+					}
+					else if(SubsidyValueTypeArray[arrayindexexcel].equalsIgnoreCase("Percentage")){
+						
+						'verify subsidy percentage'
+						if(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[5+(6*subsidydb)]),
+							FailureHandling.OPTIONAL)==true){
+						
+							isMatch = true
+						
+							break
+						}
+						
+					}
+			}
+		}
+	//'verify subsidy from value type'
+	//arrayMatch.add(WebUI.verifyMatch((SubsidyTypeArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	//	FailureHandling.OPTIONAL))
+	//
+	//'verify subsidy from value'
+	//arrayMatch.add(WebUI.verifyMatch((SubsidyfromValueArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(),
+	//	false, FailureHandling.OPTIONAL))
+	//
+	//'verify allocation from'
+	//arrayMatch.add(WebUI.verifyMatch((AllocationformArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	//	FailureHandling.OPTIONAL))
+	//
+	//'veirfy subsidy source'
+	//arrayMatch.add(WebUI.verifyMatch((SubsidySourceArray[arrayindexexcel]).toUpperCase(), (result[arrayindexdb++]).toUpperCase(), false,
+	//	FailureHandling.OPTIONAL))
+	//
+	//'verify subsidy amount'
+	//arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValueAmountArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
+	//	FailureHandling.OPTIONAL))
+	//
+	//'verify subsidy percentage'
+	//arrayMatch.add(WebUI.verifyEqual(Integer.parseInt((SubsidyValuePercentageArray[arrayindexexcel].replace(',', ''))), (result[arrayindexdb++]),
+	//	FailureHandling.OPTIONAL))
+		arrayMatch.add(isMatch)
+	}
 }
-}
+
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 	
