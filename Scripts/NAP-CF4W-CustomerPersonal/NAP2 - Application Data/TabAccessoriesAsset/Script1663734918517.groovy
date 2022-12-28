@@ -109,12 +109,28 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 			  modifyObjectButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Delete'),
 						 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[8]/a/i', true)
 
+			  Select selectedDPType = new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')))
+			   
+			  'Ambil text DP Type yang dipilih pada confins'
+			  String textDPType = selectedDPType.getFirstSelectedOption().getText()
+			  
 			  'Looping excel datafile accessories'
 			  for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			  
-				  if (datafileAccessories.getValue(
-					  GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerPersonal.getValue(
+				  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerPersonal.getValue(
 						  GlobalVariable.NumofColm, 13))) {
+					  
+					  if ((WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 16)) && WebUI.getAttribute(modifyObjectAccessoriesPrice,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 17)) && textDPType.equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 18)) && WebUI.getAttribute(modifyObjectInputNoteAccessories,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 21))) && (WebUI.getAttribute(modifyObjectInputPercentage,'value').replace(' %','').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 19)) || WebUI.getAttribute(modifyObjectInputAmount,'value').equalsIgnoreCase(datafileAccessories.getValue(
+						  GlobalVariable.NumofAccessories, 20)) )) {
+						  break
+					  }
+						  
 					  'Pengecekan jika supplier name dan accessories name pada confins sesuai dengan excel'
 					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
 						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(datafileAccessories.getValue(
@@ -198,7 +214,8 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 						  break
 						  }
 						  else{
-							  if(GlobalVariable.NumofAccessories == (countAccessories - 1)){
+							  if(datafileAccessories.getValue(GlobalVariable.NumofAccessories + 1, 12) != datafileCustomerCompany.getValue(
+								  GlobalVariable.NumofColm, 13)){
 								  'Jika pada confins accessories ada data seblumnya'
 								  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
 									  'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)){
@@ -240,8 +257,6 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								  }else{
 									  break
 								  }
-								  
-								  
 							  }
 					  }
 					  

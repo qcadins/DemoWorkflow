@@ -440,6 +440,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                     }
                     
                     'check if input data / lookup'
+					if(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 1) == 'SUCCESS'){
                     if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
                         if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
                             'call test case Guarantor personal data verif'
@@ -453,7 +454,7 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                                 [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
                     }
-                    
+					}
                     break
                 }
             }

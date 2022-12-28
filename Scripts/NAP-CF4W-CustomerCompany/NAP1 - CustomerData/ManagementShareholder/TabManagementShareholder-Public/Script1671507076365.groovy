@@ -215,8 +215,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         'click button cancel'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
-                        'customer added -1'
-                        (GlobalVariable.CountNumofCustomer)--
                     } else {
                         if (GlobalVariable.FlagWarning > 0) {
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
@@ -231,9 +229,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                     CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileMS.getValue(
                                 GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
                         GlobalVariable.NumofMS, '2.TabManagementShareholderData')
-
-                    'customer added +1'
-                    (GlobalVariable.CountNumofCustomer)++
 
                     if (Integer.parseInt(datafileMS.getValue(GlobalVariable.NumofMS, 4)) == 0) {
                         'Check error validasi'
@@ -250,18 +245,13 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         'click button cancel'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/button_Cancel'))
 
-                        'customer added -1'
-                        (GlobalVariable.CountNumofCustomer)--
                     } else {
                         if (GlobalVariable.FlagWarning > 0) {
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                                 0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                         }
                     }
-					
-					if(copyapp == 'No'){
 						break
-					}
             }
         }
         }

@@ -279,6 +279,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                         }
                         
                         'check if input data / lookup'
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
                         if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
                             if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
                             'Yes')) {
@@ -294,7 +295,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         }
-                        
+						}
                         break
                     } else {
                         'check if next colm != current appno'

@@ -790,6 +790,7 @@ def mscopyapp(){
 								GlobalVariable.NumofMS, '2.TabManagementShareholderData')
 						}
 						
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 1) == 'SUCCESS') {
 						if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
 								'Yes')) {
 							if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
@@ -801,6 +802,7 @@ def mscopyapp(){
 								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/TabMSPersonalDataStoreDBVerif-LookUp'),
 									[:], FailureHandling.CONTINUE_ON_FAILURE)
 							}
+						}
 						}
 					}
 					
