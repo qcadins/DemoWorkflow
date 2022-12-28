@@ -3,7 +3,7 @@ import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-
+import java.awt.Robot
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.checkpoint.CheckpointFactory
@@ -52,7 +52,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.After
-
+import java.awt.event.KeyEvent
 import java.lang.String
 
 
@@ -69,8 +69,14 @@ class openCloseExcel {
 
 		Desktop desktop = Desktop.getDesktop()
 
-		if(file.exists())
+		if(file.exists()){
 			desktop.open(file)
+		}
+		//digunakan close confirmation license activation pada office, jika sudah berlicense dapat dihapus
+		Robot robot = new Robot();
+		robot.delay(2000)
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 		Runtime.getRuntime().exec("taskkill /IM EXCEL.EXE")
 
 	}
