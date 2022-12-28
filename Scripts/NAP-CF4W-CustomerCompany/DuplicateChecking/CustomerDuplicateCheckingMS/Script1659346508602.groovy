@@ -112,6 +112,11 @@ if (ManagementShareholderArray.size() > 0) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
 
+				'count table application in process'
+				ArrayList<WebElement> variabletd = driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
+
+				int counttd = variabletd.size()
+				
                 'if role == testing'
                 if (GlobalVariable.RoleCompany == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative'
@@ -120,17 +125,42 @@ if (ManagementShareholderArray.size() > 0) {
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
                         GlobalVariable.TimeOut, FailureHandling.OPTIONAL))) {
+					
+						ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
+					
                         if ((ManagementShareholderNegativeArray[(m - 1)]).equalsIgnoreCase('Yes')) {
-                            'click negative checkbox index 1'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+							def modifycheckbox
+							for (int id = 1; id <= variablenegcustno.size(); id++) {
+								'modify negative cust no'
+								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
+								
+								if(WebUI.getText(modifyNegativeCustNo)!=""){
+								if (counttd == 10) {
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
+								}else if (counttd == 5){
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[6]/mat-checkbox/label/span[1]", true)
+								}
+									break
+								}
+
+							}
+							if(modifycheckbox!=null){
+								'click negative checkbox index 1 yang ada negative cust no'
+								WebUI.click(modifycheckbox)
+							}
+                            else{
+								if (counttd == 10) {									
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'))
+								}else if (counttd == 5) {
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'))
+								}
+							}
                         }
                     }
                 }
-                
-				'count table application in process'
-                ArrayList<WebElement> variabletd = driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
-
-                int counttd = variabletd.size()
 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {

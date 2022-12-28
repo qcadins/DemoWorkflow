@@ -113,6 +113,11 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 
 				CustomKeywords.'customizeKeyword.zoomKeyword.zoomOut'(20)
 				
+				ArrayList<WebElement> variabletd = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
+				
+				'declare counttd'
+				int counttd = variabletd.size()
+				
                 'if role == testing'
                 if (GlobalVariable.Role == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative atau dupcheck verif == lock dan negative check == negative dan ada button select appinprocess'
@@ -133,8 +138,13 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
 								
 								if(WebUI.getText(modifyNegativeCustNo)!=""){
-									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+								if (counttd == 10) {
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'),
 										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
+								}else if (counttd == 5){
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativeCompany'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[6]/mat-checkbox/label/span[1]", true)
+								}
 									break
 								}
 
@@ -144,16 +154,15 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 								WebUI.click(modifycheckbox)
 							}
                             else{
-								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+								if (counttd == 10) {									
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'))
+								}else if (counttd == 5) {
+								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativeCompany'))
+								}
 							}
                         }
                     }
                 }
-                
-                ArrayList<WebElement> variabletd = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
-
-				'declare counttd'
-                int counttd = variabletd.size()
 
 				'Jika pada confins ada data match similar data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 

@@ -948,8 +948,11 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         ArrayList<String> famData = CustomKeywords.'dbConnection.getInfoForEditNAP.familyDataPersonal'(sqlconnectionLOS, 
             appNo)
 
+		'declare famName'
+		String famName = ''
+		
 		'declare index'
-        int index = 0
+        int index = 0, lastcolm = 0
 		
 		'declare custname'
         String custname = custdata[index++]
@@ -978,28 +981,25 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12, 
             GlobalVariable.NumofColm - 1, custname)
 
-        index = 0
-
         'untuk mendapatkan posisi copy app dari excel'
         loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		
+        index = 0
         
 		'looping famdata'
-        for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < ((famData.size() / 5) + GlobalVariable.StartIndex); colm++) {
             custname = (famData[index++])
 
             'Write to tab Family cust name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18, 
                 colm - 1, custname)
 
-            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
-                'Write to dupcheck fam name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16) + 
-                    ';') + custname)
+            if (famName == '') {
+                'store fam Name'
+                famName = custname
             } else {
-                'Write to dupcheck fam name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, custname)
+                'store fam Name'
+                famName = ((famName + ';') + custname)
             }
             
             'Write to tab fam data id type'
@@ -1017,9 +1017,12 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             'Write to tab fam data mother maiden name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 32, 
                 colm - 1, famData[index++])
-
-            index = 0
+			
         }
+		
+		'Write to dupcheck cust name'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
+			GlobalVariable.NumofColm - 1, famName)
     } //Jika appstep == napd atau ref atau app atau asset atau ins atau fin atau tc
 	else if (((((((appStep == 'NAPD') || (appStep == 'REF')) || (appStep == 'APP')) || (appStep == 'ASSET')) || (appStep == 
     'INS')) || (appStep == 'FIN')) || (appStep == 'TC')) {
@@ -1039,8 +1042,11 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         ArrayList<String> guarCompanyData = CustomKeywords.'dbConnection.getInfoForEditNAP.guarantorDataCompany'(sqlconnectionLOS, 
             appNo)
 
+		'delcare famName'
+		String famName = '', GuarName = ''
+		
 		'declare index'
-        int index = 0
+        int index = 0, lastcolm = 0
 
 		'declare custname'
         String custname = custdata[index++]
@@ -1069,69 +1075,68 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 12, 
             GlobalVariable.NumofColm - 1, custname)
 
-        index = 0
-
-        'untuk mendapatkan posisi copy app dari excel'
-        loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
-        
+		'untuk mendapatkan posisi copy app dari excel'
+		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		
+		index = 0
+		
 		'looping famdata'
-        for (int colm = GlobalVariable.StartIndex; colm < (famData.size() / 5); colm++) {
-            custname = (famData[index++])
+		for (int colm = GlobalVariable.StartIndex; colm < ((famData.size() / 5) + GlobalVariable.StartIndex); colm++) {
+			custname = (famData[index++])
 
-            'Write to tab Family cust name'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18, 
-                colm - 1, custname)
+			'Write to tab Family cust name'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 18,
+				colm - 1, custname)
 
-            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 0) {
-                'Write to dupcheck fam name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16) + 
-                    ';') + custname)
-            } else {
-                'Write to dupcheck fam name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    15, colm - 1, custname)
-            }
-            
-            'Write to tab fam data id type'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 20, 
-                colm - 1, famData[index++])
+			if (famName == '') {
+				'store fam Name'
+				famName = custname
+			} else {
+				'store fam Name'
+				famName = ((famName + ';') + custname)
+			}
+			
+			'Write to tab fam data id type'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 20,
+				colm - 1, famData[index++])
 
-            'Write to tab fam data birth date'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 29, 
-                colm - 1, famData[index++])
+			'Write to tab fam data birth date'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 29,
+				colm - 1, famData[index++])
 
-            'Write to tab fam data id no'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 30, 
-                colm - 1, famData[index++])
+			'Write to tab fam data id no'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 30,
+				colm - 1, famData[index++])
 
-            'Write to tab fam data mother maiden name'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 32, 
-                colm - 1, famData[index++])
-
-            index = 0
-        }
+			'Write to tab fam data mother maiden name'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 32,
+				colm - 1, famData[index++])
+			
+		}
+		
+		'Write to dupcheck cust name'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 15,
+			GlobalVariable.NumofColm - 1, famName)
         
         'untuk mendapatkan posisi copy app dari excel'
         loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
         
+		index = 0
+		
 		'looping guarpersonaldata'
-        for (int colm = GlobalVariable.StartIndex; colm < (guarPersonalData.size() / 5); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (guarPersonalData.size() / 5) + GlobalVariable.StartIndex; colm++) {
             custname = (guarPersonalData[index++])
 
             'Write guarantor personal cust name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 17, colm - 1, custname)
 
-            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
-                'Write to dupcheck cust name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19) + 
-                    ';') + custname)
+            if (GuarName == '') {
+                'Store Guar Name'
+                GuarName = custname
             } else {
-                'Write to dupcheck cust name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, custname)
+                'Store Guar Name'
+                GuarName = ((GuarName + ';') + custname)
             }
             
             'Write guarantor personal data id type'
@@ -1149,38 +1154,36 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             'Write to guarantor personal data mother maiden name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                 29, colm - 1, guarPersonalData[index++])
-
-            index = 0
         }
         
         'untuk mendapatkan posisi copy app dari excel'
         loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
         
+		index = 0
+		
 		'looping guarcompanydata'
-        for (int colm = GlobalVariable.StartIndex; colm < (guarCompanyData.size() / 2); colm++) {
+        for (int colm = GlobalVariable.StartIndex; colm < (guarCompanyData.size() / 2) + GlobalVariable.StartIndex; colm++) {
             custname = (guarCompanyData[index++])
 
             'Write to tab guarantor company cust name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                 17, colm - 1, custname)
 
-            if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
-                'Write to dupcheck cust name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19) + 
-                    ';') + custname)
+            if (GuarName == '') {
+                'Store Guar Name'
+                GuarName = custname
             } else {
-                'Write to dupcheck cust name'
-                CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 
-                    18, colm - 1, custname)
+                'Store Guar Name'
+                GuarName = ((GuarName + ';') + custname)
             }
             
             'Write to tab guarantor company data id no'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                 18, colm - 1, guarCompanyData[index++])
-
-            index = 0
         }
+		'Write to dupcheck cust name'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking', 18,
+			GlobalVariable.NumofColm - 1, GuarName)
     }
 }
 

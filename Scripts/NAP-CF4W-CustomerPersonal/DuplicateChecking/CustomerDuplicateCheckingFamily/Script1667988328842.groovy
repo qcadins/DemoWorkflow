@@ -143,7 +143,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
 								WebUI.click(modifycheckbox)
 							}
                             else{
-								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox negative'))
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'))
 							}
                         }
                     }
@@ -441,13 +441,12 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
             }
         }
         
-		'+ index negative customer count'
-		(GlobalVariable.NegativeCustCount)++
+        '+ index negative customer count'
+        (GlobalVariable.NegativeCustCount)++
 		
         if (f == FamilyArray.size()) {
             break
         }
-        
     }
 }
 
