@@ -544,6 +544,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
+						if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 1) == 'SUCCESS'){
 						if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                                 'call test case Family data store verif'
@@ -554,6 +555,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'), 
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                         }
+						}
 						}
                         break
                     }

@@ -786,9 +786,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-Ap
 }
 
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){		
     'call test case store db accessories data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 
     'call test case store db asset data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:], 

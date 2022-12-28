@@ -548,6 +548,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
                         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
                             13) == 'Input Data') {
                             if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
@@ -563,7 +564,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         }
-                        
+						}
                         break
                     } else {
 						'Jika appno pada excel guarantor personal tidak sama dengan appno pada excel customermaindata'

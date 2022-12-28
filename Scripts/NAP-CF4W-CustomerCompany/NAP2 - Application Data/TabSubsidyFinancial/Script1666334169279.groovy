@@ -177,6 +177,17 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/
 		modifySubsidy(i)
 
 		for (int subsidyarray = 1; subsidyarray <= SubsidyTypeArray.size(); subsidyarray++) {
+			
+			if (((WebUI.getText(modifyNewFromTypeName).equalsIgnoreCase(SubsidyTypeArray[(subsidyarray - 1)]) && WebUI.getText(
+				modifyNewFromValueName).equalsIgnoreCase(SubsidyfromValueArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidyAllocation).equalsIgnoreCase(
+				AllocationformArray[(subsidyarray - 1)]) && WebUI.getText(modifyNewSubsidySource).equalsIgnoreCase(SubsidySourceArray[
+				(subsidyarray - 1)]) && WebUI.getText(modifyNewSubsidyValueType).equalsIgnoreCase(SubsidyValueTypeArray[
+				(subsidyarray - 1)])) && (WebUI.getText(modifyNewSubsidyAmount).replace('.00','').replace(',','').equalsIgnoreCase(SubsidyValueAmountArray[
+				(subsidyarray - 1)]) || WebUI.getText(modifyNewSubsidyPercentage).replace(' %', '').equalsIgnoreCase(SubsidyValuePercentageArray[
+				(subsidyarray - 1)]))) {
+				break
+			}
+				
 			if (((WebUI.getText(modifyNewFromTypeName).equalsIgnoreCase(SubsidyTypeArray[(subsidyarray - 1)]) && WebUI.getText(
 				modifyNewFromValueName).equalsIgnoreCase(SubsidyfromValueArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidyAllocation).equalsIgnoreCase(
 				AllocationformArray[(subsidyarray - 1)])) && WebUI.getText(modifyNewSubsidySource).equalsIgnoreCase(SubsidySourceArray[

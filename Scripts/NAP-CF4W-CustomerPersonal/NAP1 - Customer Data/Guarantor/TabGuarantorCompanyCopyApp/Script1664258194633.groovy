@@ -286,6 +286,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                             }
                         }
                         
+						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
                         if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
                             if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                                 'call test case company data store verif'
@@ -299,7 +300,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                         }
-                        
+						}
                         break
                     } else {
                         'jika appno excel guarantorcompany tidak sama dengan appno customermaindata excel'

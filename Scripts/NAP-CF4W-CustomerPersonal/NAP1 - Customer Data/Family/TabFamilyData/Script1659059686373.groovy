@@ -653,6 +653,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                     (GlobalVariable.CountNumofCustomer)++
                 }
                 
+				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 1) == 'SUCCESS'){					
                 if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
                     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
                         'call test case Family data store verif'
@@ -666,6 +667,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                             [:], FailureHandling.CONTINUE_ON_FAILURE)
                     }
                 }
+				}
             }
         }
     }

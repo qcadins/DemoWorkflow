@@ -680,7 +680,7 @@ if (GlobalVariable.FlagFailed == 0) {
 
 WebUI.delay(5)
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes" && findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 1) == 'SUCCESS') {
 	'call test case subsidy store db verif'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

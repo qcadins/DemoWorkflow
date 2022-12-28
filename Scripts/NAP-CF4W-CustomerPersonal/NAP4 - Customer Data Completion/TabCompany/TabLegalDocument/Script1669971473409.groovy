@@ -76,7 +76,34 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[2]', true)
 
+		'modify object issue date'
+		modifyNewIssueDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[3]', true)
+		
+		'modify object Expired Date'
+		modifyNewExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[4]', true)
+		
+		'modify object NotaryName'
+		modifyNewNotaryName = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[5]', true)
+		
+		String issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		
+		String expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
+		
 		for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
+			
+				'verify if asset type sama persis'
+				if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
+					modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)]) && issueDate.equalsIgnoreCase(DateIssuedArray[(legal - 1)]) && expiredDate.equalsIgnoreCase(ExpiredDateArray[(legal - 1)]) && WebUI.getText(
+					modifyNewNotaryName).equalsIgnoreCase(NotaryNameArray[(legal - 1)])) {
+					break
+				}
+					
 				'verify if asset type sama'
 				if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
 					modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)])) {
@@ -264,7 +291,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 }
 
 'check if role = testing & check verif store db = yes'
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes') && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument').getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
 	'declare numofverifstore = ColmNAP4'
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
@@ -373,4 +400,19 @@ def inputLegalDoc(ArrayList<String> faileddata){
 		'GlobalVariable.FlagWarning +1'
 		GlobalVariable.FlagWarning++
 	}
+}
+
+public convertDateFormat(String sentDate){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('dd-MMM-yyyy')
+	
+	Date parsedDate = null
+	
+	parsedDate = sdf.parse(sentDate)
+	
+	sdf = new SimpleDateFormat('MM/dd/yyyy')
+	
+	String sDate = sdf.format(parsedDate)
+	
+	return sDate
 }

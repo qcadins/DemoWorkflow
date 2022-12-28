@@ -136,11 +136,27 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 			  'Ambil text referantor category yang dipilih pada confins'
 			  String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 			  
+			  Select selectedTaxCalculation =  new Select(DriverFactory.getWebDriver().findElement(By.xpath(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) +
+			  ']/td[6]/select')))
+					
+			  'Ambil text tax calculation yang dipilih pada confins'
+			  String textTaxCalculation = selectedRefCategory.getFirstSelectedOption().getText()
+			  
 			  'Looping excel referantor'
 			  for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 				  if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 					  GlobalVariable.NumofColm, 13)) {
 						
+					  if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) &&
+						  WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(datafileReferantor.getValue(
+						  GlobalVariable.NumofReferantor, 14)) && textTaxCalculation.equalsIgnoreCase(datafileReferantor.getValue(
+						  GlobalVariable.NumofReferantor, 17))) {
+						  'call function gettext bankaccount'
+						  getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
+						  
+						  break
+					  }
+						  
 						'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
 					  if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) && WebUI.getAttribute(modifyObjectReferantorName,'value').equalsIgnoreCase(datafileReferantor.getValue(
 						  GlobalVariable.NumofReferantor, 14))) {
@@ -853,8 +869,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
 }
 
-if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) && (GlobalVariable.FlagFailed == 
-0)) {
+if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) && findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor,  1) == 'SUCCESS') {
     'call test case store db referantor data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)

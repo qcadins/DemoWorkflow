@@ -4,6 +4,7 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.text.SimpleDateFormat
 import java.util.ArrayList
 
 import org.openqa.selenium.By as By
@@ -26,25 +27,11 @@ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.FlagWarning = 0
 
-if(GlobalVariable.APPSTEP == 'CUSTOMER'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument')
-}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
-			
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/LegalDocument')
-}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument')
-}
+GlobalVariable.APPSTEP = 'CUSTOMER'
+
+GlobalVariable.ColmNAP4 = 2
+
+getDataFile()
 
 ArrayList<String> legaltypefaileddelete = new ArrayList<>()
 
@@ -89,8 +76,35 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		modifyNewDocNo = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[2]', true)
+		
+		'modify object issue date'
+		modifyNewIssueDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[3]', true)
+		
+		'modify object Expired Date'
+		modifyNewExpiredDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[4]', true)
+		
+		'modify object NotaryName'
+		modifyNewNotaryName = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
+			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
+			i) + ']/td[5]', true)
+		
+		String issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		
+		String expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
 
 		for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
+			
+				'verify if asset type sama persis'
+				if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
+					modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)]) && issueDate.equalsIgnoreCase(DateIssuedArray[(legal - 1)]) && expiredDate.equalsIgnoreCase(ExpiredDateArray[(legal - 1)]) && WebUI.getText(
+					modifyNewNotaryName).equalsIgnoreCase(NotaryNameArray[(legal - 1)])) {
+					break
+				}
+				
 				'verify if asset type sama'
 				if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
 					modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)])) {
@@ -277,8 +291,10 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
+getDataFile()
+	
 'check if role = testing & check verif store db = yes'
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes') && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
 	'declare numofverifstore = ColmNAP4'
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
@@ -386,5 +402,42 @@ def inputLegalDoc(ArrayList<String> faileddata){
 
 		'GlobalVariable.FlagWarning +1'
 		GlobalVariable.FlagWarning++
+	}
+}
+
+public convertDateFormat(String sentDate){
+	'convert date confins dan excel agar sama'
+	SimpleDateFormat sdf = new SimpleDateFormat('dd-MMM-yyyy')
+	
+	Date parsedDate = null
+	
+	parsedDate = sdf.parse(sentDate)
+	
+	sdf = new SimpleDateFormat('MM/dd/yyyy')
+	
+	String sDate = sdf.format(parsedDate)
+	
+	return sDate
+}
+
+def getDataFile(){
+	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument')
+	}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+				
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/LegalDocument')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument')
 	}
 }
