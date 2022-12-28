@@ -51,8 +51,13 @@ int count = variable.size()
 
 GlobalVariable.FlagFailed = 0
 
-'verify equal number of customer'
-not_run: checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
+'Jika role testing dan edit appno tidak ada isinya pada excel'
+if ((GlobalVariable.Role == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() ==
+0)) {
+	'verify equal number of customer'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
+
+}
 
 for (int i = 1; i <= count; i++) {
     'modify object customername'

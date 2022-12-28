@@ -44,8 +44,7 @@ def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 String subjectName, newApplicantNoValue, newFamilyNameAppInProcess, newFamilyName, newCustomerNoValue
 
 'Pengecekan jika family dupcheck tidak kosong'
-if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 
-0)) {
+if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofColm, 16).length() > 0)) {
 	'looping family dupcheck excel'
     for (int f = 1; f <= FamilyArray.size(); f++) {
 		'Pengecekan ada tidaknya elemen subjecttypeheader'
@@ -442,12 +441,13 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
             }
         }
         
+		'+ index negative customer count'
+		(GlobalVariable.NegativeCustCount)++
+		
         if (f == FamilyArray.size()) {
             break
         }
         
-        '+ index negative customer count'
-        (GlobalVariable.NegativeCustCount)++
     }
 }
 
