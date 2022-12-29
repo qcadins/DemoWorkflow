@@ -329,7 +329,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                         (GlobalVariable.CountNumofCustomer)++
                     }
                     
-					if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
+					if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
                     if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 
                     'Input Data') {
                         if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {

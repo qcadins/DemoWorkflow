@@ -74,6 +74,28 @@ if (DupCheckStatus == true) {
     'declare variable count negative customer'
     GlobalVariable.NegativeCustCount = 0
 
+	'looping countdupcheckrow'
+	for (GlobalVariable.Index = 1; GlobalVariable.Index <= GlobalVariable.CountDupcheckRow; (GlobalVariable.Index)++) {
+	
+		'modify object subjectname'
+		modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/SubjectName'),
+			'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
+			']/td[2]', true)
+
+		'get text subject name'
+		subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+
+		'Jika role testing dan edit appno kosong'
+		if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+			8).length() == 0)) {
+			'verify name == data inputan'
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
+		}
+	
+	}
+	
+	GlobalVariable.Index = 1
+	
 	'Pengecekan jika dupcheck customer name tidak kosong'
     if (custnamedupcheck.length() > 0) {
         'modify object subjecttype'
@@ -106,13 +128,6 @@ if (DupCheckStatus == true) {
 
         'get text subject type'
         subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
-
-		'Jika role testing dan edit appno tidak ada isinya pada excel'
-        if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8).length() == 
-        0)) {
-            'verify name == data inputan'
-            checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
-        }
         
 		'Jika subject name confins sama dengan excel'
         if (subjectName.equalsIgnoreCase(custnamedupcheck)) {

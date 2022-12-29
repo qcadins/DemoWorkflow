@@ -91,6 +91,23 @@ if (DupCheckStatus == true) {
     'negative count = 0'
     GlobalVariable.NegativeCustCount = 0
 
+	for (GlobalVariable.Index = 1; GlobalVariable.Index <= GlobalVariable.CountDupcheckRow; (GlobalVariable.Index)++) {
+	'modify object subjectname'
+	modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'),
+		'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
+		']/td[2]', true)
+
+	'get text subject name'
+	subjectName = WebUI.getText(modifySubjectName)
+
+	'check if role == testing & tidak edit NAP'
+	if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+		GlobalVariable.NumofColm, 8).length() == 0)) {
+		'verify name == data inputan'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
+	}
+	}
+	
     'verify name == data inputan'
     if (custnamedupcheck.length() > 0) {
         'modify object subjecttype'

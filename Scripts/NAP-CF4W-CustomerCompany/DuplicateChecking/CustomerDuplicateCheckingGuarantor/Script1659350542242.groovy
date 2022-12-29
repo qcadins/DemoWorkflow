@@ -67,6 +67,17 @@ if (GuarantorArray.size() > 0) {
                     'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
                     ']/td[7]/span/span/span/span/span/span/a', true)
 
+				'modify object subjectname'
+				modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'),
+					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
+					']/td[2]', true)
+	
+				'get text subject name'
+				subjectName = WebUI.getText(modifySubjectName)
+	
+				'get text subject type'
+				subjectType = WebUI.getText(modifySubjectType)
+				
                 'verify subject type dan button edit ada'
                 if ((WebUI.getText(modifySubjectType) == 'GUARANTOR') && WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, 
                     FailureHandling.OPTIONAL)) {
@@ -85,24 +96,6 @@ if (GuarantorArray.size() > 0) {
                         break
                     }
                 }
-            }
-            
-            'modify object subjectname'
-            modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/SubjectName'), 
-                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
-                ']/td[2]', true)
-
-            'get text subject name'
-            subjectName = WebUI.getText(modifySubjectName)
-
-            'get text subject type'
-            subjectType = WebUI.getText(modifySubjectType)
-
-			'check if role = testing & bukan edit NAP'
-            if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-                GlobalVariable.NumofColm, 8).length() == 0)) {
-                'verify name == data inputan'
-                checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
             }
         }
         
