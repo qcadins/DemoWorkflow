@@ -42,6 +42,8 @@ String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP
 if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("APPLICATION DATA")) {
 	'refresh browser supaya tidak muncul error data has been modified'
 	WebUI.refresh()
+	
+	WebUI.delay(3)
 }
 
 datafileLogin = findTestData('Login/Login')
