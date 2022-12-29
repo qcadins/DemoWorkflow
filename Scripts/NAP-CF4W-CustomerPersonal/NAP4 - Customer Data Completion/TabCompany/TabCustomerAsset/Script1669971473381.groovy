@@ -42,7 +42,7 @@ ArrayList<String> assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalV
 ArrayList<String> assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).split(';', -1)
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4,
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm,
 	10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {

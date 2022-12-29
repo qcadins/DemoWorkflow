@@ -43,7 +43,7 @@ def assetquantityarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.Col
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(
-	GlobalVariable.ColmNAP4, 10)
+	GlobalVariable.NumofColm, 10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
 	if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {

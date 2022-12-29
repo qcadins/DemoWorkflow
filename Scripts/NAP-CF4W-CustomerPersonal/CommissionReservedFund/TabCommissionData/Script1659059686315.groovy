@@ -179,7 +179,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
 		if (supplierName.equalsIgnoreCase(deleteSupp)) {
 			'Get supplier name'
-			supplierDelete = WebUI.getText(supplierName)
+			supplierDelete = supplierName
 			
 			'Click icon delete (tempat sampah)'
 			WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/i_deletesupp'))
