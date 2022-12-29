@@ -19,6 +19,18 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
+	
+	'declare datafilecustdetail'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail')
+	
+}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+	
+	'declare datafilecustdetail'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail')
+	
+}
+
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
@@ -29,6 +41,9 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
+	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 17).length() != 0) {
         ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
             sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 17))
@@ -67,12 +82,16 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
             arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattr[0], 
                     false, FailureHandling.OPTIONAL))
         }
+    }
     } else {
         break
     }
 }
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
+	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 27) != 0) {
         ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnectionLOS, 
             appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
@@ -164,6 +183,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
                         bankstatdb++]).split(',').join(), false, FailureHandling.OPTIONAL))
             }
         }
+    }
     } else {
         break
     }
