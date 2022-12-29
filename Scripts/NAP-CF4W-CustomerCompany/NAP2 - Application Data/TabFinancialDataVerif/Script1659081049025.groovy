@@ -829,10 +829,10 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 }
 
 'verify interest amount confins x excel with tolerance'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))),5))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))), 10))
 	
 'verify total ar confins x excel'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 5))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 10))
 	
 'verify installment amount (rounded) confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(strInstallmentAmount, instAmtRounded.replace(",","").replace(".00",""), false))

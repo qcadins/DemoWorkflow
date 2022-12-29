@@ -87,7 +87,7 @@ for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVari
 
         if (index == GlobalVariable.NumofVerifStore) {
             'verify Jumlah harta'
-            arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattr[1], 
+            arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattr[0], 
                     false, FailureHandling.OPTIONAL))
         }
     }
