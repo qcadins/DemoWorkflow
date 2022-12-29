@@ -52,7 +52,7 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'define interger i'
             int i = 0
-
+			
 			'looping countdupcheckrow'
             for (GlobalVariable.Index = 1; GlobalVariable.Index <= GlobalVariable.CountDupcheckRow; (GlobalVariable.Index)++) {
                 'modify object subjecttype'
@@ -64,7 +64,18 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                 modifyButtonEdit = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/i_-_font-medium-3 ft-edit-2'), 
                     'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
                     ']/td[7]/span/span/span/span/span/span/a', true)
-
+				
+				'modify object subjectname'
+				modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/SubjectName'),
+					'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) +
+					']/td[2]', true)
+	
+				'get text subject name'
+				subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
+				
+				'get text subject type'
+				subjectType = WebUI.getText(modifySubjectType)
+				
                 'verify subject type dan button edit ada tidaknya'
                 if ((WebUI.getText(modifySubjectType) == 'FAMILY') && WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     break
@@ -82,24 +93,6 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
                         break
                     }
                 }
-            }
-            
-            'modify object subjectname'
-            modifySubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/SubjectName'), 
-                'xpath', 'equals', ('//*[@id="ListSubjId"]/lib-ucgridview/div/table/tbody/tr[' + GlobalVariable.Index) + 
-                ']/td[2]', true)
-
-            'get text subject name'
-            subjectName = WebUI.getText(modifySubjectName, FailureHandling.OPTIONAL)
-
-            'get text subject type'
-            subjectType = WebUI.getText(modifySubjectType, FailureHandling.OPTIONAL)
-
-			'Jika role testing dan edit appno kosong'
-            if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
-                8).length() == 0)) {
-                'verify name == data inputan'
-                checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomerNameArray.contains(subjectName), true))
             }
         }
         
