@@ -118,10 +118,9 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 
 insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes MF')
 
-if (datafileTabInsurance.getValue(
-	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
+if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Modify properti untuk insurance notes bagian company insured by customer multifinance'
-	insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea',
+	insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea',
 		true)
 }
 

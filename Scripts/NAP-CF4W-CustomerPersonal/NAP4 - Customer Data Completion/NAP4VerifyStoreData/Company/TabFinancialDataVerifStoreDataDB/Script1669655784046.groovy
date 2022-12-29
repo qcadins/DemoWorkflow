@@ -19,6 +19,9 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get data file customer'
+datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
+
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
@@ -31,6 +34,9 @@ String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/Cus
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		13))) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 35).length() != 0) {
 		
 	'get financial data from db'
@@ -149,12 +155,16 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 	
 	continue
 	}
+	}
 	}else{
 	break
 	}
 }
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		13))) {
 	if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 70).length() != 0) {
 	'get bankacc from db'
 	ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 70))
@@ -249,6 +259,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 			
 		}
 		
+	}
 	}
 	}else{
 	break

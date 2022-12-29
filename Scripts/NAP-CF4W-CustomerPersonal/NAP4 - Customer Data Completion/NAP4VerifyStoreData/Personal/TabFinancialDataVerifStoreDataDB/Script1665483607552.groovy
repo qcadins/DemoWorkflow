@@ -19,6 +19,22 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+if(GlobalVariable.APPSTEP == 'CUSTOMER'){
+	
+	'declare datafilecustdetail'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
+	
+}else if(GlobalVariable.APPSTEP == 'FAMILY'){
+	
+	'declare datafilecustdetail'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
+	
+}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+
+	'declare datafilecustdetail'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+}
+
 'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
@@ -31,6 +47,9 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
+	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 17).length() != 0) {
         'get financialdata from db'
 		ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
@@ -71,12 +90,16 @@ for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVari
             arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialattr[1], 
                     false, FailureHandling.OPTIONAL))
         }
+    }
     } else {
         break
     }
 }
 
 for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
+	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 27) != 0) {
         'get resultbankacc from db'
 		ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnectionLOS, 
@@ -171,6 +194,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
                         bankstatdb++]).split(',').join(), false, FailureHandling.OPTIONAL))
             }
         }
+    }
     } else {
         break
     }

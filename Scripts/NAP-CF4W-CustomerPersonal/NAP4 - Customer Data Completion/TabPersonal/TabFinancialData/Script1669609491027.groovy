@@ -26,6 +26,10 @@ GlobalVariable.StartIndex = 0
 
 def datafilecustdetail 
 
+GlobalVariable.APPSTEP = 'CUSTOMER'
+
+GlobalVariable.ColmNAP4 = 2
+
 if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)

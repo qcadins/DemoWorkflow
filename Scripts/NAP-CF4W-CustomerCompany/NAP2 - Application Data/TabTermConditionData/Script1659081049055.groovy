@@ -98,11 +98,11 @@ for (int i = 1; i <= count; i++) {
 	String textDocumentName = WebUI.getText(modifyObjectDocumentName)
 
 	if(GlobalVariable.RoleCompany=="Testing" &&  GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-		'verif document name based on rule'
-		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlConnectionFOU,textDocumentName),TCCode.get(i-1),false)==false){
-			writeToExcelFailedVerifRule()
-			GlobalVariable.FlagFailed=1
-		}
+//		'verif document name based on rule'
+//		if(WebUI.verifyMatch(CustomKeywords.'tcData.verifyTCData.checkTCCode'(sqlConnectionFOU,textDocumentName), TCCode.get(i-1), false)==false){
+//			writeToExcelFailedVerifRule()
+//			GlobalVariable.FlagFailed=1
+//		}
 		if(TCMandatory.get(i-1)=="false"){
 			'verif required based on rule'
 			if(WebUI.verifyElementText(modifyObjectRequired,"NO")==false){
