@@ -177,6 +177,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 
 public pagingTesting(){
 	if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
+		'declare arraylist resultreset, checkverifysort, checkverifyfooter'
 		ArrayList<String> resultReset = new ArrayList<String>()
 	
 		ArrayList<String> checkVerifySort = new ArrayList<String>()
@@ -186,6 +187,7 @@ public pagingTesting(){
 		'Verif reset'
 		resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 	
+		'declare arraylist liststring'
 		ArrayList<String> listString = new ArrayList<String>()
 	
 		'Klik Search'
@@ -201,14 +203,15 @@ public pagingTesting(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_Office'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		'Klik header appNo'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
+		'looping untuk menyimpan list appno ascending untuk dilakukan verif'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -220,6 +223,7 @@ public pagingTesting(){
 		'Verif sort appno ascending'
 		Boolean isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'verif sort appno ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		listApp = new ArrayList<String>()
@@ -227,6 +231,7 @@ public pagingTesting(){
 		'Klik header appNo'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
+		'looping untuk menyimpan list appno descending untuk dilakukan verif'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -238,16 +243,18 @@ public pagingTesting(){
 		'Verif sort appno descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listApp)
 	
+		'Verif sort appno descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_custName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
+		'looping untuk menyimpan list custname ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -259,6 +266,7 @@ public pagingTesting(){
 		'Verif sort custname ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'Verif sort custname ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header custname'
@@ -266,6 +274,7 @@ public pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping untuk menyimpan list custname descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/custName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -277,16 +286,18 @@ public pagingTesting(){
 		'Verif sort custname descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
+		'Verif sort custname descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header product offering name'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_POName'))
 	
 		'Verify alert tidak muncul'
-		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), GlobalVariable.TimeOut))
+		checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 	
 		listString = new ArrayList<String>()
 	
+		'looping untuk menyimpan list product offering name ascending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -298,6 +309,7 @@ public pagingTesting(){
 		'Verif sort po name ascending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortAscending'(listString)
 	
+		'Verif sort po name ascending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header product offering name'
@@ -305,6 +317,7 @@ public pagingTesting(){
 	
 		listString = new ArrayList<String>()
 	
+		'looping untuk menyimpan po name descending'
 		for (int i = 1; i <= rowData.size(); i++) {
 			appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/POName'),
 				'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -316,17 +329,18 @@ public pagingTesting(){
 		'Verif sort po name descending'
 		isSorted = CustomKeywords.'paging.verifyPaging.verifySortDescending'(listString)
 	
+		'Verif sort po name descending'
 		checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 	
 		'Klik header appno 2x supaya urutan descending'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
-	
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/span_appNo'))
 	
 		'Ambil string count data untuk menentukan total data secara keseluruhan'
 		String[] textCountData = WebUI.getText(findTestObject('NAP/CommissionReservedFund/countData')).replace(
 			' ', '').replace(':', ';').split(';')
 	
+		'Parsing nilai total count menjadi dalam bentuk integer'
 		Integer countDt = Integer.parseInt(textCountData[1])
 	
 		'Jika total data secara keseluruhan lebih besar daripada data page 1'
@@ -342,6 +356,7 @@ public pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'looping untuk menyimpan list appno dalam page 2'
 			for (int i = 1; i <= rowData.size(); i++) {
 				appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/appNo'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[' +
@@ -351,8 +366,9 @@ public pagingTesting(){
 			}
 			
 			'Verif appno page 2 descending tidak ada di page 1'
-			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+			Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno page 2 descending tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button prev'
@@ -366,11 +382,13 @@ public pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'keyword untuk menyimpan list appno pada page 1'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingComResFund'(listString)
 	
 			'Verif appno yang ada di page 1 tidak ada di page 2'
-			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno yang ada di page 1 tidak ada di page 2'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 	
 			'Klik button next'
@@ -384,22 +402,25 @@ public pagingTesting(){
 	
 			listString = new ArrayList<String>()
 	
+			'keyword untuk menyimpan list appno pada page 2'
 			listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingComResFund'(listString)
 	
 			'Verif appno yang ada di page 2 tidak ada di page 1'
-			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+			isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 	
+			'Verif appno yang ada di page 2 tidak ada di page 1'
 			checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 		}
 		
 		'Klik button page 1'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/pageOne'))
 	
+		'keyword untuk verif data yang muncul pada paging jumlahnya sesuai'
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComResFundCountDataInPage'(), true))
 	
 		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-			
+						
 			'Write To Excel GlobalVariable.StatusWarning and reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'Comresfund') + ';\n')
@@ -409,17 +430,17 @@ public pagingTesting(){
 		
 		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-	
+						
 			'Write To Excel GlobalVariable.StatusWarning and reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedSort + 'Comresfund') + ';\n'))
-			
+	
 			GlobalVariable.FlagWarning = 1
 		}
 		
 		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 			1))) {
-	
+				
 			'Write To Excel GlobalVariable.StatusWarning and reason'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedFooter + 'Comresfund') + ';\n'))
