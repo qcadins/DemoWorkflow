@@ -6,15 +6,15 @@
    <elementGuidId>0bfb2eb9-a305-4543-aa88-6ab0467e1725</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/ul/li[3]</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[(text() = 'Customer Duplicate Checking' or . = 'Customer Duplicate Checking')]</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='APPLICATION DATA'])[1]/following::a[1]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
