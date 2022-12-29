@@ -92,12 +92,12 @@ for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument 
     }
 }
 
-try{
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'),GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	'click button submit edit application'
 	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'))
 	
 }
-catch(Exception e){
+else{
 	'click button submit'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 }

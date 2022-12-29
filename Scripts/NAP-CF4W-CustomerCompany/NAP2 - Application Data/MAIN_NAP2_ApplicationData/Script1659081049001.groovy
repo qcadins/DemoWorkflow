@@ -512,7 +512,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
-    if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
+    not_run: if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab financial'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.STOP_ON_FAILURE)
