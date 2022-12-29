@@ -76,7 +76,7 @@ if (GlobalVariable.Role == 'Testing') {
         'value')
 
     'Verif interest type pada confins dengan db'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true))
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
 }
 
 'declare spvname'

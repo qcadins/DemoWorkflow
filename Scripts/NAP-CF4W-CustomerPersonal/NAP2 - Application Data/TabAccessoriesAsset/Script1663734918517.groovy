@@ -21,6 +21,7 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import groovy.sql.Sql as Sql
+import org.openqa.selenium.support.ui.Select as Select
 
 'declare modifyobjectindex'
 int modifyObjectIndex=1

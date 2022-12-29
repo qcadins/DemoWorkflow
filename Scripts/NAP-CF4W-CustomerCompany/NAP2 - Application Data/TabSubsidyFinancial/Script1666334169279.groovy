@@ -30,25 +30,25 @@ ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 'declare subsidytypearray'
-def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
+def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';',-1)
 
 'declare SubsidyfromValueArray'
-def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
+def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';',-1)
 
 'declare AllocationformArray'
-def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
+def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';',-1)
 
 'declare SubsidySourceArray'
-def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
+def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';',-1)
 
 'declare SubsidyValueTypeArray'
-def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
+def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';',-1)
 
 'declare SubsidyValueAmountArray'
-def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
+def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';',-1)
 
 'declare SubsidyValuePercentageArray'
-def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
+def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';',-1)
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
 def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
@@ -441,19 +441,19 @@ def writeReasonFailedVerifRule() {
 }
 
 public addSubsidy(int s){
-	def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';')
+	def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';',-1)
 	
-	def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';')
+	def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';',-1)
 	
-	def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';')
+	def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';',-1)
 	
-	def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';')
+	def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';',-1)
 	
-	def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';')
+	def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';',-1)
 	
-	def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';')
+	def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';',-1)
 	
-	def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';')
+	def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';',-1)
 	
 	'click button add subsidy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))

@@ -72,15 +72,15 @@ if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
 		
-		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
-			break
-		}
+//		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
+//			break
+//		}
 		
-        'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
-            'skip ke appno selanjutnya'
-            continue
-        }
+//        'Jika status pada excel bukan unexecuted'
+//        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
+//            'skip ke appno selanjutnya'
+//            continue
+//        }
         
         'Jika edit appno pada excel tidak kosong'
         if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
