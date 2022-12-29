@@ -100,15 +100,21 @@ if (GlobalVariable.Role == 'Testing') {
 			
     }
 
-try{
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'),GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	'click button submit edit application'
-	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'))
+	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'), FailureHandling.OPTIONAL)
 	
 }
-catch(Exception e){
+else{
 	'click button submit'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 }
+
+'click menu consumer finance'
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+
+'click menu new consumer finance'
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 
 'click menu Customer data completion paging'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))
