@@ -55,6 +55,8 @@ if (DupCheckStatus == true) {
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
 
+	WebUI.delay(3)
+	
     'call paging testing function'
     pagingTesting()
 

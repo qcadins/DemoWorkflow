@@ -356,28 +356,28 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalIn
 'verify match Insurance capitalize amount (from tab insurance) and total insurance capitalize (from tab financial)'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,60).replace(".00",""), TotalInsuranceCapitalizeValue, false))
 
-'get total life insurance value'
-def TotalLifeInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE')).replace(
-	'.00', '').split(',').join()
-
-'get total life insurance capitalize'
-def TotalLifeInsuranceCapitalize = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE CAPITALIZED')).replace(
-	'.00', '').split(',').join()
-
-'convert total life insurance to BigDecimal'
-BigDecimal intTotalLifeInsurance = Integer.parseInt(TotalLifeInsurance)
-
-'convert total life insurance capitalized to BigDecimal'
-BigDecimal intTotalLifeInsuranceCapitalize = Integer.parseInt(TotalLifeInsuranceCapitalize)
+//'get total life insurance value'
+//def TotalLifeInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE')).replace(
+//	'.00', '').split(',').join()
+//
+//'get total life insurance capitalize'
+//def TotalLifeInsuranceCapitalize = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL LIFE INSURANCE CAPITALIZED')).replace(
+//	'.00', '').split(',').join()
+//
+//'convert total life insurance to BigDecimal'
+//BigDecimal intTotalLifeInsurance = Integer.parseInt(TotalLifeInsurance)
+//
+//'convert total life insurance capitalized to BigDecimal'
+//BigDecimal intTotalLifeInsuranceCapitalize = Integer.parseInt(TotalLifeInsuranceCapitalize)
 
 'convert capitalize premium percentage as Number'
 Number CapitalizePremiumPercentage = GlobalVariable.CapitalizePremiumPercentage
 
-'calculate total life insurance x capitalize premium percentage'
-int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * CapitalizePremiumPercentage)
-
-'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
+//'calculate total life insurance x capitalize premium percentage'
+//int multiplyTotalLifeInsurancexPercentage = Math.round(intTotalLifeInsurance * CapitalizePremiumPercentage)
+//
+//'verify equal total life insurance cap = multiplyTotalLifeInsurancexPercentage'
+//checkVerifyEqualOrMatch(WebUI.verifyEqual(intTotalLifeInsuranceCapitalize, multiplyTotalLifeInsurancexPercentage))
 
 //'verify NTF Value'
 //checkVerifyEqualOrMatch(WebUI.verifyEqual(((NTFforProvisionCalc + TotalFeeCapitalize) + intTotalInsurancevalue) + intTotalLifeInsuranceCapitalize,
@@ -620,7 +620,7 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkInsCust'(sqlConnectionLOS, appNo).replace(",","")))
 
 'write lifeins cust premi'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsCust'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble('0'))
 
 'write admin fee'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, appNo).replace(",","")))
@@ -644,13 +644,13 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,7, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkInsInsco'(sqlConnectionLOS, appNo).replace(",","")))
 
 'write lifeins premi insco'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,7, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsInsco'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,7, Double.parseDouble('0'))
 
 'write insurance capitalize'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',23,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 60).replace(",","")))
 
 'write lifeins cap'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',24,3, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsuranceCapitalize'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',24,3, Double.parseDouble('0'))
 
 'write admin fee cap'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',25,3, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 27).replace(",","")))
@@ -829,10 +829,10 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 }
 
 'verify interest amount confins x excel with tolerance'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))), 10))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(InterestAmountValue.replace(",",""))-Double.parseDouble(totalInterest.replace(",",""))), 15))
 	
 'verify total ar confins x excel'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 10))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 15))
 	
 'verify installment amount (rounded) confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(strInstallmentAmount, instAmtRounded.replace(",","").replace(".00",""), false))
