@@ -181,8 +181,14 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'call function input asset data'
 					inputAssetData()
 					
-					'call function count asset value'
-					countAssetValue(i+1)
+					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype')), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+						'call function count asset value'
+						countAssetValue(i+1)
+					}
+					else{
+						'call function count asset value'
+						countAssetValue(i)
+					}
 					
 					'count ulang table customer asset setelah add customer asset baru'
 					variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustomerAssetSection > div:nth-child(2) > table > tbody tr'))
