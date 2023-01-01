@@ -61,7 +61,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         [:], FailureHandling.STOP_ON_FAILURE)
 
     'call tc Family'
-    not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFamily'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFamily'), 
         [:], FailureHandling.STOP_ON_FAILURE)
 
     'call tc JobData'

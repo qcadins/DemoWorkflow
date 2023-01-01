@@ -334,7 +334,7 @@ if (GlobalVariable.Role == 'Data Entry') {
 	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
 		if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 13)) {
-			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
+			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
 
 			break
 		}

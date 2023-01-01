@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='text'])[15]</value>
+         <value>//*[@id=&quot;JobAddr&quot;]/div/div[2]/div[1]/div[2]/div/div/div/div[2]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

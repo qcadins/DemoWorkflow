@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//textarea[@type='text'])[3]</value>
+         <value>//textarea[@formcontrolname=&quot;OthBizNotes&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -1129,7 +1129,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 
             'Write guarantor personal cust name'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
-                17, colm - 1, custname)
+                18, colm - 1, custname)
 
             if (GuarName == '') {
                 'Store Guar Name'

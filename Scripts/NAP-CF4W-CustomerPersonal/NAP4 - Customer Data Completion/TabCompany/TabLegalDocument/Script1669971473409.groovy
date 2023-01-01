@@ -5,7 +5,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import java.util.ArrayList
-
+import java.text.SimpleDateFormat
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
@@ -51,7 +51,7 @@ def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.Co
 def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18).split(';')
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4,
+copyapp = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion').getValue(GlobalVariable.NumofColm,
 	10)
 
 ArrayList<WebElement> variable
@@ -91,9 +91,24 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[5]', true)
 		
-		String issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		String issueDate 
 		
-		String expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
+		if(WebUI.getText(modifyNewIssueDate)!="-"){
+			issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		}
+		else{
+			issueDate = WebUI.getText(modifyNewIssueDate)
+		}
+		
+		String expiredDate
+		
+		if(WebUI.getText(modifyNewExpiredDate)!="-"){
+			expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
+		}
+		else{
+			expiredDate = WebUI.getText(modifyNewExpiredDate)
+		}
+		
 		
 		for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
 			
@@ -296,7 +311,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
 	'Call test case verify legal doc store data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreDataDB'),
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabLegalDocVerifStoreDataDB'),
 		[:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

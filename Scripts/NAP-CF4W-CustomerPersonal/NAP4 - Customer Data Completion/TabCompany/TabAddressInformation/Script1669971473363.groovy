@@ -36,7 +36,7 @@ GlobalVariable.StartIndex = 0
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 'untuk mendapatkan posisi copy app dari excel'
-for (index = 2; index <= (countcolm + 1); index++) {
+for (index = 2; index < (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 13))) {
@@ -65,7 +65,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="address-tab"]/app-cc-address-paging/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[6]/span/span/span/span/span/span/span/a/i', true)
 
-		for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
+		for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 			GlobalVariable.FlagFailed = 0
 
 				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -97,7 +97,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	'count ulang table address row di confins'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#address-tab > app-cc-address-paging > div > div.ng-star-inserted > lib-ucgridview > div > table > tbody tr'))
 
-	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
+	for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 		GlobalVariable.FlagFailed = 0
 
 		if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
@@ -138,7 +138,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 } else if (copyapp.equalsIgnoreCase('No')) {
 	GlobalVariable.FlagFailed = 0
 	
-	for (int Address = GlobalVariable.StartIndex; Address <= (countcolm + 1); Address++) {
+	for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
@@ -325,7 +325,7 @@ def inputaddress(int Address) {
         GlobalVariable.NumofVerifStore = Address
 
         'call test case verify address store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabAddressVerifStoreDataDB'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabAddressVerifStoreDataDB'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
 }

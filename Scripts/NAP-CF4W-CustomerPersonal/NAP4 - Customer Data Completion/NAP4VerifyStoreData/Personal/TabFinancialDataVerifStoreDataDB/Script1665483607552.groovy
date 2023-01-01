@@ -46,7 +46,7 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+for (int index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
 	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
@@ -96,7 +96,7 @@ for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVari
     }
 }
 
-for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
 	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {

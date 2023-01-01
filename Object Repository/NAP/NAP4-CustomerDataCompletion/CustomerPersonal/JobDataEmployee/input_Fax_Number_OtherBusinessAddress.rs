@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='text'])[60]</value>
+         <value>//*[@id=&quot;OthBizAddr&quot;]/div/div[2]/div[1]/div[4]/div/div/div/div[2]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

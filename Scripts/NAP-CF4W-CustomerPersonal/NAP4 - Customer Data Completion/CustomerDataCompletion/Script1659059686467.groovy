@@ -31,6 +31,8 @@ datafileCDC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalS
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
+WebUI.delay(5)
+
 'call function paging testing'
 pagingTesting()
 

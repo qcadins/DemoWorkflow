@@ -421,7 +421,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39).length() >
 		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 39))
 }
 
-GlobalVariable.Custname = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
+GlobalVariable.Custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 'click button save'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/button_Save'))
@@ -461,7 +461,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
     GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
 	'call test case verify store db tab other attribute'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabOtherAttributeVerifStoreDataDB'), 
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabOtherAttributeVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 

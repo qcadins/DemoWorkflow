@@ -32,15 +32,15 @@ if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
 		
-		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
-			break
-		}
-		
-        'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
-            'skip ke appno selanjutnya'
-            continue
-        }
+//		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
+//			break
+//		}
+//		
+//        'Jika status pada excel bukan unexecuted'
+//        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
+//            'skip ke appno selanjutnya'
+//            continue
+//        }
         
         'jika edit appno tidak kosong'
         if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
@@ -150,15 +150,15 @@ if (GlobalVariable.Role == 'Data Entry') {
 					}
 				}
 				
-//                'call tc nap4 cdc'
-//                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-//                    [:], FailureHandling.STOP_ON_FAILURE)
-//
-//                'Jika flag checkappviewpersonal bernilai yes'
-//                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
-//                    'call test case verify app view'
-//                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-//                }
+                'call tc nap4 cdc'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
+
+                'Jika flag checkappviewpersonal bernilai yes'
+                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+                    'call test case verify app view'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+                }
             }
             catch (Exception e) {
                 KeywordUtil.markFailed(e.printStackTrace())
