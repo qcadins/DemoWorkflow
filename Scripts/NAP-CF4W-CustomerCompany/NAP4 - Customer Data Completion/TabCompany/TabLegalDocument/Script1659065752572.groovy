@@ -303,7 +303,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
 getDataFile()
 	
-'check if role = testing & check verif store db = yes'
+'check if role = testing & verif store db = yes & status = SUCCESS'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes') && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
 	'declare numofverifstore = ColmNAP4'
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4

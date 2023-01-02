@@ -119,6 +119,8 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
 						'Jika negative check pada excel bernilai yes'
                         if ((FamilyNegativeArray[(f - 1)]).equalsIgnoreCase('Yes')) {
                             def modifycheckbox
+							
+							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
 							for (int id = 1; id <= variablenegcustno.size(); id++) {
 								'modify negative cust no'
 								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),

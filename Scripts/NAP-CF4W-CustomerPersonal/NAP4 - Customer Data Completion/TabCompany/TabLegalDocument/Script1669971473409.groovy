@@ -305,7 +305,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 }
 
-'check if role = testing & check verif store db = yes'
+'check if role = testing & verif store db = yes & status = SUCCESS'
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes') && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/LegalDocument').getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
 	'declare numofverifstore = ColmNAP4'
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
