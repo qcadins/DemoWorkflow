@@ -92,7 +92,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
@@ -130,7 +130,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							verifyDDLAddress(Address)
 							
 							'call function input address'
-							inputaddress()
+							inputaddress(Address)
 
 							break
 						}
@@ -159,7 +159,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				verifyDDLAddress(Address)
 				
 				'call function input address'
-				inputaddress()
+				inputaddress(Address)
 
 				break
 			}else {
@@ -177,7 +177,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
 }
 
-def inputaddress() {
+def inputaddress(int Address) {
 	GlobalVariable.FlagFailed = 0
 	
     'pilih address type'

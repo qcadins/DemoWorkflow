@@ -257,6 +257,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
 getDataFile()
 	
+'check if role = testing & verif store db = yes & status = SUCCESS'
 if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes') && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
     GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
 
@@ -322,13 +323,20 @@ def countAssetValue(int confinssize){
 	modifyNewcustomeassetTotalPrice = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/td_assettype'),
 		'xpath', 'equals', ('//*[@id="CustomerAssetSection"]/div[2]/table/tbody/tr[' + confinssize) + ']/td[5]', true)
 	
+	'get text asset price satuan'
 	assetPrice = WebUI.getText(modifyNewcustomeassetPrice).replace(',','').replace('.00','')
+	
+	'get text asset qty'
 	assetQty = WebUI.getText(modifyNewcustomeassetQty)
+	
+	'get text total price confins'
 	assetTotalPrice = WebUI.getText(modifyNewcustomeassetTotalPrice).replace(',','').replace('.00','')
 	
-	int TotalPrice = Integer.parseInt(assetPrice) * Integer.parseInt(assetQty)
+	'multiply qty * price'
+	Double TotalPrice = Double.parseDouble(assetPrice) * Double.parseDouble(assetQty)
 	
-	WebUI.verifyEqual(TotalPrice, Integer.parseInt(assetTotalPrice))
+	'verify equal totalprice = qty*price'
+	WebUI.verifyEqual(TotalPrice, Double.parseDouble(assetTotalPrice))
 }
 
 def getDataFile(){

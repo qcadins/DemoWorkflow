@@ -126,6 +126,8 @@ if (GuarantorArray.size() > 0) {
 						'Jika negative check pada dupcheck guarantor bernilai yes'
                         if ((GuarantorNegativeArray[(g - 1)]).equalsIgnoreCase('Yes')) {
                             def modifycheckbox
+							
+							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
 							for (int id = 1; id <= variablenegcustno.size(); id++) {
 								'modify negative cust no'
 								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),

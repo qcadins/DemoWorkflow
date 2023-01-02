@@ -19,8 +19,10 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 ArrayList<String> result = new ArrayList<>()
@@ -34,40 +36,57 @@ ArrayList<String> othaddress = new ArrayList<>()
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/CustomerModelCode')) ==
 'EMPLOYEE') {
+	'get job employee data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataEmployeePersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data oth address from db'
 	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoredata'(sqlconnectionLOS, appno, custname)
 	
 } else if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/CustomerModelCode')) ==
 'PROFESSIONAL') {
-	
+	'get job professional data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataProfPersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
-	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
+	'get job data oth address from db'
+	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoredata'(sqlconnectionLOS, appno, custname)
 	
 } else if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/CustomerModelCode')) ==
 'NON PROFESSIONAL') {
+	'get job non professional data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataNonProfPersonalStoreData'(sqlconnectionLOS, appno, custname)
 } else {
-	
+	'get job sme data from db'
 	result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataSMEPersonalStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data address from db'
 	jobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4JobdataAddressStoreData'(sqlconnectionLOS, appno, custname)
 
+	'get job data prev address from db'
 	prevjobaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4PrevJobAddressStoreData'(sqlconnectionLOS, appno, custname)
 
-	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoreData'(sqlconnectionLOS, appno, custname)
+	'get job data oth address from db'
+	othaddress = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4OtherBizAddressStoredata'(sqlconnectionLOS, appno, custname)
 }
 
-int arrayindex = 0, JobAddressindex = 0, PrevJobindex = 0, OtherAddressindex = 0
+int arrayindex = 0
+
+int JobAddressindex = 0
+
+int PrevJobindex = 0
+
+int OtherAddressindex = 0
 
 if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/CustomerModelCode')) ==
 'EMPLOYEE') {
@@ -207,7 +226,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
-if(prevjobaddress.size() > 0){
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 76).length() > 0){
 'verify Previous company name'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 76).toUpperCase(), (prevjobaddress[
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -217,14 +236,16 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	PrevJobindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 79).length() > 0){
 row = 79
 for(i = 2; i < prevjobaddress.size(); i++){
 'verify Job address'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, row++).toUpperCase(), (prevjobaddress[
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
+}
 
-if(othaddress.size() > 0){
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 100).length() > 0){
 'verify Other business'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 100).toUpperCase(), (othaddress[
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -246,6 +267,7 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	OtherAddressindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 106).length() > 0){
 row = 106
 for(i = 5 ; i < othaddress.size(); i++){
 'verify Other Job address'
@@ -253,12 +275,12 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 	i]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 }
-
+}
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }

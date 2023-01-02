@@ -24,6 +24,7 @@ CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.Da
 def CountofManagementShareholder = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail').getColumnNumbers()
 
 GlobalVariable.APPSTEP = 'SHAREHOLDER COMPANY'
+
 WebUI.delay(10)
 
 for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofManagementShareholder; (GlobalVariable.NumofMS)++) {
@@ -31,10 +32,9 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofManagementShar
         GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail').getValue(
         GlobalVariable.NumofMS, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/CustomerNameDetail')))) {
-        
-		GlobalVariable.ColmNAP4 = GlobalVariable.NumofMS
-	
-		if (GlobalVariable.RoleCompany == 'Data Entry') {
+        GlobalVariable.ColmNAP4 = GlobalVariable.NumofMS
+
+        if (GlobalVariable.RoleCompany == 'Data Entry') {
             'call test case customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)

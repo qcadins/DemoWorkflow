@@ -31,10 +31,9 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/CustomerNameDetail')))) {
-        
-		GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
-	
-		if (GlobalVariable.RoleCompany == 'Data Entry') {
+        GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
+
+        if (GlobalVariable.RoleCompany == 'Data Entry') {
             'call test case customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)

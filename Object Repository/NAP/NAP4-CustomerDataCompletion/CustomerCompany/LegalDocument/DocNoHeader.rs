@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>DocNoHeader</name>
+   <tag></tag>
+   <elementGuidId>3c7fab7e-5aa3-4156-845e-1df51d128803</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;legal-tab&quot;]/app-legal-doc-tab/div/div[2]/table/thead/tr/th[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;legal-tab&quot;]/app-legal-doc-tab/div/div[2]/table/thead/tr/th[2]</value>
+   </webElementProperties>
+</WebElementEntity>

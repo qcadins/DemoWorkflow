@@ -19,7 +19,10 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
+not_run: WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
+
+'get data file path'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -51,27 +54,26 @@ int count = variable.size()
 
 GlobalVariable.FlagFailed = 0
 
-'Jika role testing dan edit appno tidak ada isinya pada excel'
-if ((GlobalVariable.Role == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() ==
-0)) {
-	'verify equal number of customer'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
-
-}
-
+//'Jika role testing dan edit appno tidak ada isinya pada excel'
+//if ((GlobalVariable.Role == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() ==
+//0)) {
+//	'verify equal number of customer'
+//	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
+//
+//}
 for (int i = 1; i <= count; i++) {
     'modify object customername'
-    modifynewCustomerName = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerName'), 
-        'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]', true)
+    modifynewCustomerName = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerName'), 'xpath', 
+        'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[2]', true)
 
     'modify object customertype'
-    modifynewCustomerType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerType'), 
-        'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[3]', true)
+    modifynewCustomerType = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerType'), 'xpath', 
+        'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[3]', true)
 
     'modify object iscomplete'
     modifynewisComplete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/td_isComplete'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[7]', true)
-	
+
     'modify object button action'
     modifynewButtonAction = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/buttonAction'), 
         'xpath', 'equals', ('//*[@class="table-responsive"]/table/tbody/tr[' + i) + ']/td[8]', true)
@@ -158,6 +160,8 @@ for (int i = 1; i <= count; i++) {
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
                     
+                    isComplete = WebUI.getText(modifynewisComplete)
+
                     'Verify iscomplete == yes'
                     checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 } else if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'COMPANY')) {
@@ -174,6 +178,8 @@ for (int i = 1; i <= count; i++) {
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
                     
+                    isComplete = WebUI.getText(modifynewisComplete)
+
                     'Verify iscomplete == yes'
                     checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 }
@@ -232,6 +238,8 @@ for (int i = 1; i <= count; i++) {
                             [:], FailureHandling.STOP_ON_FAILURE)
                     }
                     
+                    isComplete = WebUI.getText(modifynewisComplete)
+
                     'Verify iscomplete == yes'
                     checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
@@ -262,6 +270,8 @@ for (int i = 1; i <= count; i++) {
                                 [:], FailureHandling.STOP_ON_FAILURE)
                         }
                         
+                        isComplete = WebUI.getText(modifynewisComplete)
+
                         'Verify iscomplete == yes'
                         checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                     } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
@@ -282,6 +292,8 @@ for (int i = 1; i <= count; i++) {
         }
     }
     
+    isComplete = WebUI.getText(modifynewisComplete)
+
     'Verify iscomplete == yes'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifynewisComplete), 'YES', false, FailureHandling.OPTIONAL))
 }
@@ -313,10 +325,9 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
     'write to excel if failed'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
-} //Verify sort & paging
-//	verif reset nap4
-else {
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed) //Verify sort & paging
+    //	verif reset nap4
+} else {
     'write to excel if success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
@@ -530,7 +541,7 @@ def pagingTesting() {
             }
             
             'Verif appno pada page 2 tidak ada di page 1'
-            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            Boolean isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -548,7 +559,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 
             'Verif appno yang ada di page 1 tidak ada di page 2'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
 
@@ -566,7 +577,7 @@ def pagingTesting() {
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 
             'Verif appno yang ada di page 2 tidak ada di page 1'
-            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingcustomizeKeyword.Function'(listApp, listString)
+            isPaging = CustomKeywords.'paging.verifyPaging.verifyPagingFunction'(listApp, listString)
 
             checkVerifyFooter.add(WebUI.verifyEqual(isPaging, true))
         }

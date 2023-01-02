@@ -53,7 +53,7 @@ ArrayList<String> financialDateDelete = new ArrayList<String>()
 ArrayList<String> bankAccDelete = new ArrayList<String>()
 
 'untuk mendapatkan posisi copy app dari excel'
-for (index = 2; index <= (countcolm + 1); index++) {
+for (int index = 2; index < (countcolm + 1); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 			12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 			GlobalVariable.ColmNAP4, 13))) {
@@ -67,7 +67,9 @@ for (index = 2; index <= (countcolm + 1); index++) {
 
 'copyapp'
 copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
-    GlobalVariable.NumofColm, 10)
+	GlobalVariable.NumofColm, 10)
+
+String maritalStatus = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/label_MaritalStatus'))
 
 'Check if Edit Untuk Financial Data'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -84,9 +86,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 				'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-			for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+			for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
+			
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
@@ -103,7 +106,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							WebUI.click(modifyNewbuttonedit)
 
 							'call function input data financial'
-							inputFinancialData()
+							inputFinancialData(maritalStatus)
 
 							break
 						} else {
@@ -140,9 +143,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								i--
 							}
 						}
-					}else {
-					break
-				}
+					}
+					else {
+						break
+					}
+				
 			}
 			
 			'count untuk check if ada financial data'
@@ -157,7 +162,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	if (financialDateDelete.size() > 0) {
 
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -166,17 +171,18 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		'count ulang table financial data setelah edit/delete'
 		variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
 
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+				GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+			datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
+			
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify object Date'
 					modifyNewDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 						'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 							String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(GlobalVariable.FindDataFile.getValue(financialdata, 17))
 
@@ -188,7 +194,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 									WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 
 									'call function input financial data'
-									inputFinancialData()
+									inputFinancialData(maritalStatus)
 
 									'count ulang table financial setelah add financial data baru'
 									variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#ListCustFinData > table > tbody tr'))
@@ -199,15 +205,15 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								break
 							}
 						}
-					} else {
-						break
-					}
 				}
+			}
+			else {
+				break
+			}
 		}
 	} else {
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			
-		
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 				12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 				GlobalVariable.ColmNAP4, 13))) {
@@ -217,31 +223,33 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 				WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
 	
 				'call function input financial data'
-				inputFinancialData()
+				inputFinancialData(maritalStatus)
 				
 				}
-			}else{
+			}
+			else{
 				break
 			}
+		
 		}
 	}
 } else if (copyapp == 'No') {
-	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).length() != 0) {
+	for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
 					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
 					'click button add'
-					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Add'))
+					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
 
 					'call funtion input financial data'
-					inputFinancialData()
+					inputFinancialData(maritalStatus)
 				}
 			}
-		} else {
-			break
-		}
+			else {
+				break
+			}
+		 
 	}
 }
 
@@ -265,10 +273,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 			BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-			for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+			for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 				int flagFailed = 0
 
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
 						datafilecustdetail.getValue(
@@ -327,9 +334,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							}
 						}
 					}
-				} else {
-					break
-				}
+					else {
+						break
+					}
 			}
 			
 			'check if table bank acc sudah 0'
@@ -342,7 +349,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	if (bankAccDelete.size() > 0) {
 
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -351,9 +358,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
 
 	if(variable.size() > 0){
-	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+	for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 		int flagFailed = 0
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
+		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
+			datafilecustdetail.getValue(
+			GlobalVariable.ColmNAP4, 13))) {
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify bank name - branch - bank no'
 					modifyNewbankaccdetail = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
@@ -362,10 +372,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'get text bank acc detail'
 					BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 13))) {
+					
 						if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 24)) + ' - ') +
 							GlobalVariable.FindDataFile.getValue(financialdata, 25)) + ' - ') + GlobalVariable.FindDataFile.getValue(
@@ -384,19 +391,19 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 								break
 							}
 						}
-					}
+
 				}
-		} else {
-			break
-		}
+			}
+			else {
+				break
+			}
 	}
 	}else{
-		for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 	
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-				if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
-			12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 						GlobalVariable.ColmNAP4, 13))) {
 					if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 						'click button add bank'
@@ -406,22 +413,20 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						inputBank(copyapp, variable, flagFailed)
 					}
 				}
-			} else {
-				break
-			}
+				else {
+					break
+				}
 		}
 	}
 } else if (copyapp.equalsIgnoreCase('No')) {
 
 	'count table bank acc confins'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#CustBankAccSection > div > div table'))
-
-	for (financialdata = GlobalVariable.StartIndex; financialdata <= (countcolm + 1); financialdata++) {
+	for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 		int flagFailed = 0
 
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 10).length() != 0) {
-			if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
-			12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				if (GlobalVariable.FindDataFile.getValue(financialdata, 24).length() > 0) {
 					'click button add bank'
@@ -431,9 +436,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					inputBank(copyapp, variable, flagFailed)
 				}
 			}
-		} else {
-			break
-		}
+			else {
+				break
+			}
+		
 	}
 }
 
@@ -452,10 +458,8 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-def inputFinancialData() {
+def inputFinancialData(String maritalStatus) {
     GlobalVariable.FlagWarning = 0
-
-    String maritalStatus = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/label_MaritalStatus'))
 
     'input monthly income'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/input_Monthly Income_'), 

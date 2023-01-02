@@ -471,6 +471,9 @@ for (int i = 1; i < countRemainingInfo; i++) {
 	'Ambil nilai remaining info amount dari confins'
 	String textRemainingInfoAmt = WebUI.getText(modifyRemainingInfo).replace(',', '')
 	
+	println(Double.parseDouble(textIncomeInfoAmt))
+	println(AllocatedCommissionAmt[(i - 1)])
+	
 	'Verifikasi untuk section remaining info after calculate,  income info tab commission - nilai yg sudah dibagikan'
 	checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(textRemainingInfoAmt)), Math.round(Double.parseDouble(textIncomeInfoAmt) - (Math.round(
 						(AllocatedCommissionAmt[(i - 1)]) * 100) / 100))), '12.TabCommissionData',

@@ -74,6 +74,8 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 29).length() > 1) {
+	
 'convert date confins dan excel agar sama'
 SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
@@ -89,6 +91,7 @@ String sDate = sdf.format(parsedDate)
 
 'verify Rating Date'
 arrayMatch.add(WebUI.verifyMatch(sDate, resultotherattrlist[arrayindexlist++], false, FailureHandling.OPTIONAL))
+}
 
 'verify AFF with MF code'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlist[

@@ -19,10 +19,13 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
+'get customer asset data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4CustomerAssetDataStoreData'(sqlconnectionLOS, appno, custname)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
@@ -58,8 +61,9 @@ for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++)
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-	
+
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.CustomerAsset', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	
 }
 

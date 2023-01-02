@@ -27,10 +27,6 @@ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.FlagWarning = 0
 
-GlobalVariable.APPSTEP = 'CUSTOMER'
-
-GlobalVariable.ColmNAP4 = 2
-
 getDataFile()
 
 ArrayList<String> legaltypefaileddelete = new ArrayList<>()
@@ -52,7 +48,7 @@ def NotaryLocationArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.Co
 def NotesArray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18).split(';')
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.ColmNAP4,
+copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm,
 	10)
 
 ArrayList<WebElement> variable
@@ -76,7 +72,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		modifyNewDocNo = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[2]', true)
-		
+
 		'modify object issue date'
 		modifyNewIssueDate = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/td_assettype'),
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
@@ -92,10 +88,25 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'xpath', 'equals', ('//*[@id="legal-tab"]/app-legal-doc-tab/div/div[2]/lib-ucgridview/div/table/tbody/tr[' +
 			i) + ']/td[5]', true)
 		
-		String issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		String issueDate
 		
-		String expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
-
+		if(WebUI.getText(modifyNewIssueDate)!="-"){
+			issueDate = convertDateFormat(WebUI.getText(modifyNewIssueDate))
+		}
+		else{
+			issueDate = WebUI.getText(modifyNewIssueDate)
+		}
+		
+		String expiredDate
+		
+		if(WebUI.getText(modifyNewExpiredDate)!="-"){
+			expiredDate = convertDateFormat(WebUI.getText(modifyNewExpiredDate))
+		}
+		else{
+			expiredDate = WebUI.getText(modifyNewExpiredDate)
+		}
+		
+		
 		for (legal = 1; legal <= LegalDocTypeArray.size(); legal++) {
 			
 				'verify if asset type sama persis'
@@ -104,7 +115,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					modifyNewNotaryName).equalsIgnoreCase(NotaryNameArray[(legal - 1)])) {
 					break
 				}
-				
+					
 				'verify if asset type sama'
 				if (WebUI.getText(modifyNewLegalDocType).equalsIgnoreCase(LegalDocTypeArray[(legal - 1)]) && WebUI.getText(
 					modifyNewDocNo).equalsIgnoreCase(DocumentNoArray[(legal - 1)])) {
@@ -280,7 +291,6 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (GlobalVariable.FlagWarning > 0) {
-
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
 }
@@ -293,7 +303,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
 getDataFile()
 	
-'check if role = testing & check verif store db = yes'
+'check if role = testing & verif store db = yes & status = SUCCESS'
 if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes') && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 1) == 'SUCCESS') {
 	'declare numofverifstore = ColmNAP4'
 	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
