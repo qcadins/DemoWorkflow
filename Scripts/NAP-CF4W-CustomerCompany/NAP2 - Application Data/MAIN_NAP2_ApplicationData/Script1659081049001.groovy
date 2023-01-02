@@ -638,16 +638,16 @@ def verifyMatch() {
 
 def pagingTesting() {
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
-        ArrayList<String> resultReset = new ArrayList<String>()
+        ArrayList<WebElement> resultReset = new ArrayList<WebElement>()
 
-        ArrayList<String> checkVerifySort = new ArrayList<String>()
+        ArrayList<WebElement> checkVerifySort = new ArrayList<WebElement>()
 
-        ArrayList<String> checkVerifyFooter = new ArrayList<String>()
+        ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
 
         'Verif reset'
         resultReset = CustomKeywords.'paging.verifyPaging.resetPaging'()
 
-        ArrayList<String> listString = new ArrayList<String>()
+        ArrayList<WebElement> listString = new ArrayList<WebElement>()
 
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -656,7 +656,7 @@ def pagingTesting() {
         WebDriver driver = DriverFactory.getWebDriver()
 
         'Inisialisasi variabel'
-        ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+        ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > nap-detail-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
         'Klik header office'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/span_Office'))
@@ -683,7 +683,7 @@ def pagingTesting() {
 
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
-        listApp = new ArrayList<String>()
+        listApp = new ArrayList<WebElement>()
 
         'Klik header appno'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/span_appNo'))
@@ -707,7 +707,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
 
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/custName'), 
@@ -725,7 +725,7 @@ def pagingTesting() {
         'Klik header custname'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/span_custName'))
 
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/custName'), 
@@ -746,7 +746,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerCompany/div_erroralert'), 2))
 
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/POName'), 
@@ -764,7 +764,7 @@ def pagingTesting() {
         'Klik header poname'
         WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/span_POName'))
 
-        listString = new ArrayList<String>()
+        listString = new ArrayList<WebElement>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/POName'), 
@@ -799,7 +799,7 @@ def pagingTesting() {
             checkVerifyFooter.add(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/nextPage'), 
                     'aria-current', GlobalVariable.TimeOut))
 
-            listString = new ArrayList<String>()
+            listString = new ArrayList<WebElement>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 
@@ -817,7 +817,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<String>()
+            listString = new ArrayList<WebElement>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 
@@ -835,7 +835,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<String>()
+            listString = new ArrayList<WebElement>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP2'(listString)
 

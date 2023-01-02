@@ -31,65 +31,65 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail')))) {
-	
-		GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
-	
-		if (GlobalVariable.RoleCompany == 'Data Entry') {
-			'call test case tab customer detail'
+        GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
+
+        if (GlobalVariable.RoleCompany == 'Data Entry') {
+            'call test case tab customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab address'
+            'call test case tab address'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab job data'
+            'call test case tab job data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab emergency contact'
+            'call test case tab emergency contact'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab financial'
+            'call test case tab financial'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab customer asset'
+            'call test case tab customer asset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-			'call test case tab other attribute'
+            'call test case tab other attribute'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (GlobalVariable.RoleCompany == 'Testing') {
-			'call test case tab customer detail'
+            'call test case tab customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab address information'
+            'call test case tab address information'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab job data'
+            'call test case tab job data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab emergency contact'
+            'call test case tab emergency contact'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab financial data'
+            'call test case tab financial data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab customer asset'
+            'call test case tab customer asset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
 
-			'call test case tab other attribute'
+            'call test case tab other attribute'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
     }
 }
+

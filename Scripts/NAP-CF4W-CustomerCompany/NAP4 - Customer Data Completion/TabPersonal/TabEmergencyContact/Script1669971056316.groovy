@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import org.openqa.selenium.WebElement
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -47,8 +50,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16), false, FailureHandling.OPTIONAL)
 
     'input id no'
-    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_ID No'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 17))
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_ID No'), GlobalVariable.FindDataFile.getValue(
+            GlobalVariable.ColmNAP4, 17))
 
     if (((GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16) != 'E-KTP') && (GlobalVariable.FindDataFile.getValue(
         GlobalVariable.ColmNAP4, 16) != 'NPWP')) && (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16) != 
@@ -63,8 +66,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19), false, FailureHandling.OPTIONAL)
 
     'input Email'
-    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Email'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20))
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Email'), GlobalVariable.FindDataFile.getValue(
+            GlobalVariable.ColmNAP4, 20))
 
     'select gender'
     WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_Gender'), 
@@ -75,8 +78,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 22))
 
     'input Birth Date'
-    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_BirthDate'), 
-        GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 23))
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_BirthDate'), GlobalVariable.FindDataFile.getValue(
+            GlobalVariable.ColmNAP4, 23))
 
     'input mobile phone 1'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_MobilePhone'), 
@@ -99,12 +102,12 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
             GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 27))
 
         'input RT'
-        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RT'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 28))
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RT'), GlobalVariable.FindDataFile.getValue(
+                GlobalVariable.ColmNAP4, 28))
 
         'input RW'
-        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RW'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 29))
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RW'), GlobalVariable.FindDataFile.getValue(
+                GlobalVariable.ColmNAP4, 29))
 
         'click button zipcode'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/button_Zipcode'))
@@ -122,8 +125,8 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
             GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 32))
 
         'input Kota'
-        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Kota'), 
-            GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 33))
+        WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Kota'), GlobalVariable.FindDataFile.getValue(
+                GlobalVariable.ColmNAP4, 33))
 
         'click button search'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/button_Search'))
@@ -202,7 +205,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         (GlobalVariable.FlagFailed)++
     }
     
-    if (GlobalVariable.RoleCompany == 'Testing') {
+    if (GlobalVariable.Role == 'Testing') {
         'call function getdataemergencycontact'
         getDataEmergencyContact()
 
@@ -271,7 +274,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
                 'value'))
 
         'call tc emergencycontactdataverif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactDataVerif'), 
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactDataVerif'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
@@ -288,7 +291,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/button_Copy'))
     }
     
-    if (GlobalVariable.RoleCompany == 'Testing') {
+    if (GlobalVariable.Role == 'Testing') {
         'call function getdataemergencycontact'
         getDataEmergencyContact()
 

@@ -31,8 +31,10 @@ if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 	
 }
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 'get count colm'
@@ -40,14 +42,16 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+for (int index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
 	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 17).length() != 0) {
-        ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
+        'get financialdata from db'
+		ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataPersonalStoreData'(
             sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 17))
 
+		'get financialattr from db'
         ArrayList<String> resultfinancialattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialAttrStoreData'(sqlconnectionLOS, 
             appno, custname)
 
@@ -88,12 +92,13 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
     }
 }
 
-for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
+for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
 		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
 	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
     if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 27) != 0) {
-        ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnectionLOS, 
+        'get resultbankacc from db'
+		ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnectionLOS, 
             appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 
         int bankacc = 0
@@ -126,6 +131,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
         arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 30).split(',').join(), (resultbankacc[
                 bankacc++]).split(',').join().toUpperCase(), false, FailureHandling.OPTIONAL))
 
+		'get bankstat from db'
         String bankstat = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialCheckBankStatStoreData'(sqlconnectionLOS, 
             appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 
@@ -145,6 +151,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
             def creditarray = GlobalVariable.FindDataFile.getValue(index, 36).split(';', -1)
 
+			'get resultbankstatdata'
             ArrayList<String> resultbankstatdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4BankStatDataStoreData'(sqlconnectionLOS, 
                 appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 
@@ -191,7 +198,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
-
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }

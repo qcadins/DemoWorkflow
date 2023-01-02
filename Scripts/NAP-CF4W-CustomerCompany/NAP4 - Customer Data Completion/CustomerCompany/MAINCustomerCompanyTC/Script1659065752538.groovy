@@ -18,7 +18,7 @@ import internal.GlobalVariable as GlobalVariable
 GlobalVariable.APPSTEP = 'CUSTOMER'
 
 GlobalVariable.ColmNAP4 = GlobalVariable.NumofColm
- 
+
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     'call test case customer detail'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabCustomerDetail'), 

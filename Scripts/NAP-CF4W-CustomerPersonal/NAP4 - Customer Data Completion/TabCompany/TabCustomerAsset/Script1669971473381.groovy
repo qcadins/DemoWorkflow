@@ -326,7 +326,7 @@ def countAssetValue(int confinssize){
 	assetQty = WebUI.getText(modifyNewcustomeassetQty)
 	assetTotalPrice = WebUI.getText(modifyNewcustomeassetTotalPrice).replace(',','').replace('.00','')
 	
-	int TotalPrice = Integer.parseInt(assetPrice) * Integer.parseInt(assetQty)
+	Double TotalPrice = Double.parseDouble(assetPrice) * Double.parseDouble(assetQty)
 	
-	WebUI.verifyEqual(TotalPrice, Integer.parseInt(assetTotalPrice))
+	WebUI.verifyEqual(TotalPrice, Double.parseDouble(assetTotalPrice))
 }

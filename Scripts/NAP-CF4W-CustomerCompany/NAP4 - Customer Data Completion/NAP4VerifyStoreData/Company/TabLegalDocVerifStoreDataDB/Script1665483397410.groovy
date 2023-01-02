@@ -21,10 +21,13 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
+'get legal doc data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4LegalDocStoreData'(sqlconnectionLOS, appno, custname)
 
 int arrayindex = 0
@@ -46,19 +49,19 @@ def notesarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifS
 for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarrayexcel++){
 	
 	'verify document type'
-	arrayMatch.add(WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(legaldoctypearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify document no'
-	arrayMatch.add(WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(docnoarray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify date issued'
-	arrayMatch.add(WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(), 
+	arrayMatch.add(WebUI.verifyMatch(dateissuedarray[legaldocarrayexcel].split(',').join(), (result[arrayindex++]).split(',').join(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify expired date'
-	arrayMatch.add(WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(expireddatearray[legaldocarrayexcel].toUpperCase(), (result[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify notary name'

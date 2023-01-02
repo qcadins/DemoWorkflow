@@ -16,13 +16,16 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'connect DB'
+'connect DB LOS'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
+'get emergencycontact data lookup from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4EmergencyContactStoreDataLookUp'(sqlconnection, appno, custname)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
@@ -40,3 +43,4 @@ if (arrayMatch.contains(false)) {
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.NumofVerifStore, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
+

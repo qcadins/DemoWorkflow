@@ -38,43 +38,45 @@ countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-'connect DB'
-
+'get appno from confins'
 String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/appnolabel'))
 
+'get custname from confins'
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
-for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
-	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
+for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		13))) {
 	if (GlobalVariable.FindDataFile.getValue(index, 9).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 35).length() != 0) {
 		
+	'get financial data from db'
 	ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 35))
 	
+	'get financialattr from db'
 	ArrayList<String> resultfinancialattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialAttrCompanyStoreData'(sqlconnectionLOS, appno, custname)
 	
 	int financialdataindex = 0, financialattr = 0
 	
-    'verify monthly income'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 12).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(), 
-        false, FailureHandling.OPTIONAL))
+	'verify monthly income'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 12).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+		false, FailureHandling.OPTIONAL))
 
-    'verify monthly expense'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 13).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(), 
-        false, FailureHandling.OPTIONAL))
+	'verify monthly expense'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 13).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+		false, FailureHandling.OPTIONAL))
 
-    'verify return of investment %'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 14).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(), 
-        false, FailureHandling.OPTIONAL))
+	'verify return of investment %'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 14).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+		false, FailureHandling.OPTIONAL))
 
-    'verify return of equity %'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 15).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(), 
-        false, FailureHandling.OPTIONAL))
+	'verify return of equity %'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 15).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+		false, FailureHandling.OPTIONAL))
 
-    'verify return of asset %'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 16).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(), 
-        false, FailureHandling.OPTIONAL))
+	'verify return of asset %'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 16).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+		false, FailureHandling.OPTIONAL))
 	
 	'verify profit margin %'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 17).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
@@ -148,9 +150,9 @@ for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVari
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 34).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
-    'verify date as of'
-    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 35).toUpperCase(), (resultfinancialdata[financialdataindex++]), 
-        false, FailureHandling.OPTIONAL))
+	'verify date as of'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 35).toUpperCase(), (resultfinancialdata[financialdataindex++]),
+		false, FailureHandling.OPTIONAL))
 	
 	if(index == GlobalVariable.NumofVerifStore){
 		
@@ -170,11 +172,12 @@ for (int index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVari
 	}
 }
 
-for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable.NumofVerifStore); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-		GlobalVariable.NumofVerifStore, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(
-	datafilecustdetail.getValue(GlobalVariable.NumofVerifStore, 13))) {
+for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
+	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+		13))) {
 	if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 70).length() != 0) {
+	'get bankacc from db'
 	ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 70))
 	
 	int bankacc = 0
@@ -207,6 +210,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 73).split(',').join(), (resultbankacc[bankacc++].split(',').join()).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 	
+	'get bankstat from db'
 	String bankstat = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialCheckBankStatCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 	
 	'verify bank statement yes/no'
@@ -226,6 +230,7 @@ for (index = GlobalVariable.NumofVerifStore; index < (countcolm + GlobalVariable
 		
 		def creditarray = GlobalVariable.FindDataFile.getValue(index, 79).split(';',-1)
 		
+		'get bankstatdata from db'
 		ArrayList<String> resultbankstatdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4BankStatDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
 		
 		'ganti value null > "" (String kosong)'
