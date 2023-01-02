@@ -38,6 +38,12 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'koneksi fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'declare datafileTabCustomer'
+datafileTabCustomer = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
+'declare datafileTabApplication'
+datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
+
 'declare datafileTabAsset'
 datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
 
@@ -278,6 +284,28 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/textarea_Notes'), 
     datafileTabAsset.getValue(GlobalVariable.NumofColm, 24))
 
+ArrayList<String> resultManuYear, resultDP
+
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == "Yes"){
+	'check rule validasi tab asset'
+	HashMap<String, ArrayList> resultAssetValidation =  CustomKeywords.'assetData.checkAssetValidation.checkValidation'(sqlConnectionLOS, sqlConnectionFOU, datafileTabCustomer.getValue(GlobalVariable.NumofColm,12), datafileTabAsset.getValue(GlobalVariable.NumofColm,12), datafileTabAsset.getValue(GlobalVariable.NumofColm,17), datafileTabAsset.getValue(GlobalVariable.NumofColm,18).toUpperCase(), datafileTabAsset.getValue(GlobalVariable.NumofColm,25), datafileTabApplication.getValue(GlobalVariable.NumofColm,20))
+	resultManuYear = resultAssetValidation.get("ManuYearVldt")
+	resultDP = resultAssetValidation.get("DPVldt")
+
+	'Verify manufacturing year default nilainya sesuai dengan rule'
+	WebUI.verifyMatch(resultManuYear.get(0),WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Manufacturing Year'),'value'),false)
+	
+	'Pengecekan behaviour pada inputan manufacturing year'
+	if(resultManuYear.get(1)=="DEF"){
+		'Verify manufacturing year tidak terlock'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Manufacturing Year'),'readonly',GlobalVariable.TimeOut)
+	}
+	else if(resultManuYear.get(1)=="LOCK"){
+		'Verify manufacturing year terlock'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Manufacturing Year'),'readonly',GlobalVariable.TimeOut)
+	}
+}
+
 'input manufacturing year'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Manufacturing Year'), 
     datafileTabAsset.getValue(GlobalVariable.NumofColm, 25))
@@ -288,6 +316,28 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-Applica
 
 'click untuk refresh page'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'))
+
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == "Yes"){
+	'verify dp percentage default sesuai rule'
+	WebUI.verifyEqual(Double.parseDouble(resultDP.get(0)),Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),'value').replace(" %","")))
+	
+	'Pengecekan behaviour pada inputan dp'
+	if(resultDP.get(1)=="DEF" && datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage'){
+		'verify dp percentage tidak terlock'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),'readonly',GlobalVariable.TimeOut)
+	}
+	else if(resultDP.get(1)=="DEF" && datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Amount'){
+		'verify dp amount tidak terlock'
+		WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),'readonly',GlobalVariable.TimeOut)
+	}
+	else if(resultDP.get(1)=="LOCK"){
+		'verify dp percentage terlock'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentPrctg'),'readonly',GlobalVariable.TimeOut)
+		
+		'verify dp amount terlock'
+		WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Amt)_downPaymentAmt'),'readonly',GlobalVariable.TimeOut)
+	}
+}
 
 if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 26) == 'Percentage') {
     'Untuk handle jika field input percentage terlock'
@@ -734,8 +784,19 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAs
 //	'click button save'
 //	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SaveAsset'))
 //}
-'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
-WebUI.waitForAlert(3)
+
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == "Yes"){
+	'Pengecekan jika dp percentage dibawah nilai minimum atau diatas nilai maksimum atau manufacturing year dibawah minimum berdasarkan rule'
+	if(Double.parseDouble(datafileTabAsset.getValue(GlobalVariable.NumofColm, 69))<Double.parseDouble(resultDP.get(2))||Double.parseDouble(datafileTabAsset.getValue(GlobalVariable.NumofColm, 69))>Double.parseDouble(resultDP.get(3)) || Integer.parseInt(datafileTabAsset.getValue(GlobalVariable.NumofColm, 25))<Integer.parseInt(resultManuYear.get(0))){
+		'verify alert muncul'
+		WebUI.verifyAlertPresent(GlobalVariable.TimeOut)
+	}
+}
+else {
+	'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
+	WebUI.waitForAlert(3)
+	
+}
 
 'Accept Alert Konfirmasi Security deposit dibawah minimum atau manufacturing year dibawah angka tertentu'
 WebUI.acceptAlert(FailureHandling.OPTIONAL)
