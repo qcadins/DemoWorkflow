@@ -67,7 +67,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             break
         }
         
-        not_run: if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerCompany.getValue(
+        if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             continue
         }
@@ -77,44 +77,44 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         } else {
             try {
                 'call test case NAP1'
-                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/MAIN_NAP1_CustomerData'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'call test case Ducheck verif'
-                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'check if dupcheck == yes'
-                not_run: if (GlobalVariable.DupcheckVerif == 'Yes') {
+                if (GlobalVariable.DupcheckVerif == 'Yes') {
                     'call test case Duplicate checking'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
                         [:], FailureHandling.STOP_ON_FAILURE)
                 }
                 
                 'call test case NAP2'
-                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'call test case Comresfund'
-                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
+                    FailureHandling.STOP_ON_FAILURE)
 
                 'declare datafileCommission'
-                not_run: datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+                datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 
                 'declare datafileReservedFund'
-                not_run: datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+                datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
                 'Mengambil nilai row keberapa dimulai data return pada excel'
-                not_run: def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, 
-                    '12.TabCommissionData', 'Return Commission & Reserved Fund') + 1
+                def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
+                    'Return Commission & Reserved Fund') + 1
 
                 'Mengambil nilai row keberapa dimulai data return pada excel'
-                not_run: def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, 
-                    '13.TabReservedFundData', 'Return Commission & Reserved Fund') + 1
+                def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
+                    'Return Commission & Reserved Fund') + 1
 
                 'Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
-                not_run: for (int i = 1; i <= i; i++) {
+                for (int i = 1; i <= i; i++) {
                     if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || 
                     datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
                         if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')) {
@@ -141,7 +141,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'check if verif Appview = yes'
-                not_run: if (GlobalVariable.CheckAppViewCompany == 'Yes') {
+                if (GlobalVariable.CheckAppViewCompany == 'Yes') {
                     'call test case verify app view'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
                 }

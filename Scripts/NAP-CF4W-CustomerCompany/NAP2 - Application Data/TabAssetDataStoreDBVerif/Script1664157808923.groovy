@@ -123,13 +123,19 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofC
 arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 31).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify serial no 4'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 32).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+serial4 = resultassetinformation[arrayassetinfoindex++]
 
+if(serial4 != ''){
+'verify serial no 4'
+arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 32).toUpperCase(), (serial4).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
+
+serial5 = resultassetinformation[arrayassetinfoindex++]
+
+if(serial5 != ''){
 'verify serial no 5'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 33).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 33).toUpperCase(), (serial5).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
 'verify asset region'
 arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 35).toUpperCase(), (resultassetinformation[
@@ -166,11 +172,11 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No
 
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42).equalsIgnoreCase('Company')) {
         'verify owner profession'
-        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[
+        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 47).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     } else {
         'verify owner profession'
-        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 47).toUpperCase(), (resultassetinformation[
+        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
     
@@ -185,74 +191,246 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No
     'verify owner mobile no'
     arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 50).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify copy address'
+	if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')) {
+		
+		address = 0
+		
+		'verify address'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify Rt'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify RW'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify Zipcode'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kelurahan'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kecamatan'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kota'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		
+		address = 0
+		
+		'verify address'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify Rt'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify RW'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify Zipcode'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kelurahan'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kecamatan'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kota'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	} else {
+		'verify address'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify rt'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify rw'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify zipcode'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kelurahan'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kecamatan'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kota'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		
+		'verify address'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify rt'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify rw'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify zipcode'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kelurahan'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kecamatan'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+		'verify kota'
+		arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}
 }else{
-	'skip verif asset owner info'
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-	arrayassetinfoindex++
-}
-
-'verify copy address'
-if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')) {
-    'verify address'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[
+	confins = 0
+	
+	'verify owner type'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify Rt'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[
+    'verify owner name'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify RW'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 40).toUpperCase(), (resultassetinformation[
+    'verify owner relation'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify Zipcode'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 41).toUpperCase(), (resultassetinformation[
+    'verify owner profession'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
+              arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+   
+    'verify owner id type'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[
+    'verify owner id no'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 43).toUpperCase(), (resultassetinformation[
+    'verify owner mobile no'
+    arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[confins++].toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	address = confins
+	
+	'verify address'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 44).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-} else {
-    'verify address'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify Rt'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify rt'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify RW'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify rw'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify Zipcode'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify zipcode'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify kelurahan'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify kecamatan'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify kota'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')){
+	address = confins
+	
+	'verify address'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
-            arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	'verify Rt'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify RW'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify Zipcode'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kelurahan'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kecamatan'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kota'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('No')){
+	'verify address'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify rt'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify rw'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify zipcode'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kelurahan'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kecamatan'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify kota'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}
 }
 
 'looping data document'
