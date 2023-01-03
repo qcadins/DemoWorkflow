@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>d4b8ad93-2612-4a0a-858b-69b3dd8fcc60</dataFileGUID>
-   <dataSourceUrl>Rule/InsuranceRateRule.xlsx</dataSourceUrl>
+   <dataSourceUrl>Rule/MainCovRule.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
