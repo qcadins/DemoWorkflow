@@ -31,6 +31,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\AssetValidation.xlsx'</initValue>
+      <name>AssetValRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>BankAccount</name>
    </GlobalVariableEntity>

@@ -79,37 +79,37 @@ public class checkAssetValidation {
 		int matchAssetCondition = 0, matchAssetCategory = 0
 
 		for(int i = 16;i<=ruleDP.getRowNumbers();i++){
-	
+
 			if(ruleDP.getValue(1,i)!=assetCondition && ruleDP.getValue(1,i)!="" && ruleDP.getValue(1,i)!="-"){
 				matchAssetCondition=0
-		
+
 			}
 			if(ruleDP.getValue(1,i)==assetCondition || (matchAssetCondition==1 && ruleDP.getValue(1,i)=="") || ruleDP.getValue(1,i)=="-"){
 				if(matchAssetCondition==0){
 					matchAssetCondition=1
-			
+
 				}
 				if(ruleDP.getValue(6,i)==assetCategoryCode || ruleDP.getValue(6,i)=="-"){
 					matchAssetCategory = 1
-			
+
 				}
 				else if(ruleDP.getValue(6,i)!=assetCategoryCode && ruleDP.getValue(6,i)!="" && ruleDP.getValue(6,i)!="-"){
 					matchAssetCategory = 0
-		
+
 				}
-				if(((ruleDP.getValue(6,i)=="" && matchAssetCategory==1) || matchAssetCategory==1) 
-					&& Long.parseLong(ruleDP.getValue(2,i))<Long.parseLong(manuYear) && Long.parseLong(ruleDP.getValue(3,i))>=Long.parseLong(manuYear)
-					&& Long.parseLong(ruleDP.getValue(4,i))<Long.parseLong(tenor) && Long.parseLong(ruleDP.getValue(5,i))>=Long.parseLong(tenor)){
+				if(((ruleDP.getValue(6,i)=="" && matchAssetCategory==1) || matchAssetCategory==1)
+				&& Long.parseLong(ruleDP.getValue(2,i))<Long.parseLong(manuYear) && Long.parseLong(ruleDP.getValue(3,i))>=Long.parseLong(manuYear)
+				&& Long.parseLong(ruleDP.getValue(4,i))<Long.parseLong(tenor) && Long.parseLong(ruleDP.getValue(5,i))>=Long.parseLong(tenor)){
 					DPVldt.add(ruleDP.getValue(7,i))
 					DPVldt.add(ruleDP.getValue(8,i))
 					DPVldt.add(ruleDP.getValue(9,i))
 					DPVldt.add(ruleDP.getValue(10,i))
-			
+
 					break
 				}
 			}
 			else if((ruleDP.getValue(1,i)=="" && ruleDP.getValue(2,i)=="" && ruleDP.getValue(3,i)=="" && ruleDP.getValue(4,i)=="" && ruleDP.getValue(5,i)=="" && ruleDP.getValue(6,i)=="")){
-	
+
 				break
 			}
 		}

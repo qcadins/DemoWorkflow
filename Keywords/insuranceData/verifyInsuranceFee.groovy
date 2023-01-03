@@ -65,7 +65,7 @@ public class verifyInsuranceFee {
 
 		BigDecimal asPrice = Double.parseDouble(assetPrice)
 
-		Integer inscoHORow = -1, insAssetCategoryRow = -1
+		Integer inscoHORow = -1, insHOCodeRow = -1
 
 		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePathAssetCat, 'AssetCategory', inscoHOCode)+1
 
@@ -100,55 +100,60 @@ public class verifyInsuranceFee {
 		}
 
 		//check admin & stampduty
-		insAssetCategoryRow = (new customizeKeyword.getRow()).getRowWithColumn(filePath, 'Fee', insAssetCategory,1)+1
+		insHOCodeRow = (new customizeKeyword.getRow()).getRowWithColumn(filePathAssetCat, 'Fee', inscoHOCode,0)+1
 
 		def ruleFee = findTestData('DownloadRule/InsuranceFeeRule')
 
-		int match=0
+		int matchInscoHO = 0, matchAssetCategory = 0, matchAssetCondition = 0
 
-		for(int i=insAssetCategoryRow;;i++){
+		for(int i=insHOCodeRow;i<=ruleFee.getRowNumbers();i++){
+			println(i)
+			if(ruleFee.getValue(1,i)!=inscoHOCode && ruleFee.getValue(1,i)!="" && ruleFee.getValue(1,i)!="-"){
+				matchInscoHO=0
+				
+			}
+			if(ruleFee.getValue(1,i)==inscoHOCode || (matchInscoHO==1 && ruleFee.getValue(1,i)=="") || ruleFee.getValue(1,i)=="-"){
+				if(matchInscoHO==0){
+					matchInscoHO=1
+					
+				}
+				if(ruleFee.getValue(3,i)==insAssetCategory || ruleFee.getValue(3,i)=="-"){
+					matchAssetCategory = 1
+					
+				}
+				else if(ruleFee.getValue(3,i)!=insAssetCategory && ruleFee.getValue(3,i)!="" && ruleFee.getValue(3,i)!="-"){
+					matchAssetCategory = 0
+					
+				}
+				println(assetCondition+""+appNo)
+				if(ruleFee.getValue(6,i)==assetCondition || ruleFee.getValue(6,i)=="-"){
+					matchAssetCondition = 1
+					
+				}
+				else if(ruleFee.getValue(6,i)!=assetCondition && ruleFee.getValue(6,i)!="" && ruleFee.getValue(6,i)!="-"){
+					matchAssetCondition = 0
+					
 
-			if(ruleFee.getValue(2,i)==insAssetCategory || (ruleFee.getValue(2,i)=="-" && match>=1)){
-
-				if(match==0){
-
-					match=1
 				}
 
-				if(assetCondition==ruleFee.getValue(5,i) || (match==2 && ruleFee.getValue(5,i)=="-")){
 
-					match=2
+				if(((ruleFee.getValue(1,i)=="" && matchInscoHO==1) || matchInscoHO==1) && ((ruleFee.getValue(3,i)=="" && matchAssetCategory==1) || matchAssetCategory==1) && ((ruleFee.getValue(6,i)=="" && matchAssetCondition==1) || matchAssetCondition==1)
+				&& Double.parseDouble(ruleFee.getValue(4,i))<asPrice && Double.parseDouble(ruleFee.getValue(5,i))>=asPrice
+				){
+					feeBhv.add(ruleFee.getValue(7,i))
 
-					if(asPrice>Double.parseDouble(ruleFee.getValue(3,i)) && asPrice<=Double.parseDouble(ruleFee.getValue(4,i))){
+					feeBhv.add(ruleFee.getValue(10,i))
 
-						feeBhv.add(ruleFee.getValue(6,i))
+					defAmt.add(ruleFee.getValue(8,i))
 
-						feeBhv.add(ruleFee.getValue(9,i))
+					defAmt.add(ruleFee.getValue(11,i))
 
-						defAmt.add(ruleFee.getValue(7,i))
-
-						defAmt.add(ruleFee.getValue(10,i))
-
-						break
-					}
-					else{
-
-						continue
-					}
-				}
-
-				if(ruleFee.getValue(5,i+1)!="-"){
-
-					match=1
-				}
-
-				if(ruleFee.getValue(2,i+1)!="-"){
-
-					match=0
+					
+					break
 				}
 			}
-			else if(ruleFee.getValue(2,i)=="" && ruleFee.getValue(3,i)==""){
-
+			else if((ruleFee.getValue(1,i)=="" && ruleFee.getValue(2,i)=="" && ruleFee.getValue(3,i)=="" && ruleFee.getValue(4,i)=="" && ruleFee.getValue(5,i)=="" && ruleFee.getValue(6,i)=="")){
+				
 				break
 			}
 
