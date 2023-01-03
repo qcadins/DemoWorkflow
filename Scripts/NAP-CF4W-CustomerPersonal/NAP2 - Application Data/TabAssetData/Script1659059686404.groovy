@@ -20,6 +20,8 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.support.ui.Select
+
 import groovy.sql.Sql as Sql
 
 int flagWarning = 0
@@ -533,7 +535,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
 } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 37) == 'No') {
-    if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status selfusage checkbox'), 
+    if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_self Usage Checkbox'), 
         'aria-checked') == 'true') {
         'click self usage check box'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'))
@@ -586,6 +588,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
 
+	'call function get data asset owner address'
+	getDataOwner()
+	
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
         'function untuk copy address asset location'
         assetLocCopy()
@@ -594,7 +599,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
         assetLocInput()
     }
 } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41) == 'No') {
-    if (WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/status self owner checkbox'), 
+    if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_self Owner Checkbox'), 
         'aria-checked') == 'true') {
         'click self owner checkbox'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'))
@@ -730,6 +735,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
         'click button copy'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Copy'))
 
+		'call function get data asset owner address'
+		getDataOwner()
+		
         'function untuk copy address asset location'
         assetLocCopy()
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'No') {
@@ -919,3 +927,78 @@ def assetLocCopy() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
 }
 
+def getDataOwner() {
+	'declare array for confins data'
+	def confinsdata = []
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 41) == 'Yes'){
+
+		'add owner type to array'
+		confinsdata.add('PERSONAL')
+		
+		'add owner name to array'
+		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Owner Name_form-control ng-untouched ng-pristine ng-invalid'),
+				'value'))
+		
+		Select ownerRelation = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="userRelationship"]')))
+		Select ownerIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="idType"]')))
+		String ownerRelationLabel = ownerRelation.getFirstSelectedOption().getText()
+		String ownerIdTypeLabel = ownerIdType.getFirstSelectedOption().getText()
+		
+		'add owner relation to array'
+		confinsdata.add(ownerRelationLabel)
+		
+		'add owner profession to array'
+		confinsdata.add(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelOwnerProfession')))
+		
+		'add owner id type to array'
+		confinsdata.add(ownerIdTypeLabel)
+		
+		'add owner id no to array'
+		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Owner Id No'),
+				'value'))
+		
+		'add owner owner mobile no to array'
+		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Owner Mobile Phone No'),
+				'value'))
+	}
+
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'),
+			'value'))
+
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_RT'),
+			'value'))
+
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_RW'),
+			'value'))
+
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 41) == 'No'){
+		'modify Asset Owner Zipcode'
+		modifyObjectAssetOwnerZipcode = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelZipcodeAssetOwner'),
+			'xpath', 'equals', '//*[@id="ownerData"]/div/div[2]/div/div[1]/div/lib-uclookupgeneric/div/div/input',
+			true)
+		
+		'add zipcode to array'
+		confinsdata.add(WebUI.getAttribute(modifyObjectAssetOwnerZipcode, 'value'))
+	}else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 41) == 'Yes'){
+		'add zipcode to array'
+		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelZipcodeAssetOwner'), 'value'))
+	}
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelKelurahanAssetOwner'),
+			'value'))
+
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelKecamatanAssetOwner'),
+			'value'))
+
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelKotaAssetOwner'),
+			'value'))
+	
+	GlobalVariable.Confinsdata = confinsdata
+}

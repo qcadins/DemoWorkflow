@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>labelKotaAssetOwner</name>
+   <tag></tag>
+   <elementGuidId>464a3daf-c2e4-4077-891f-2f8bd2c15313</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[4]/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[4]/div/input</value>
+   </webElementProperties>
+</WebElementEntity>

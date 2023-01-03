@@ -593,7 +593,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox'))
 
 	'call function get data asset owner address'
-	getDataOwnerAddress()
+	getDataOwner()
 	
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 52) == 'Yes') {
         assetLocCopy()
@@ -734,7 +734,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Copy'))
 
 		'call function get data asset owner address'
-		getDataOwnerAddress()
+		getDataOwner()
 		
 		'call function asset location copy address'
         assetLocCopy()
@@ -913,7 +913,7 @@ def assetLocCopy() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetLocation_ButtonCopy'))
 }
 
-def getDataOwnerAddress() {
+def getDataOwner() {
 	'declare array for confins data'
 	def confinsdata = []
 	
