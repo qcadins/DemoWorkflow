@@ -404,8 +404,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab asset atau copy app dengan edit'
-    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(GlobalVariable.NumofColm, 
-        10).equalsIgnoreCase('Edit')) {
+    not_run: if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab asset data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {

@@ -185,8 +185,13 @@ for (int i = 1; i <= count; i++) {
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
 			
+			'jika total risk only perlu select 2x lagi agar rate ke refresh'
+			if(mainCoverageValueArray[(i - 1)].equalsIgnoreCase('TOTAL RISK ONLY')){
+			'Select opsi main coverage'
+			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + 'ALL RISK', true)
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+			}
 			
 			WebUI.delay(3)
 		}

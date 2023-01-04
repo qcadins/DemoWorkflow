@@ -69,6 +69,10 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase
 			16, GlobalVariable.NumofColm - 1, overrideSubsidyValueAmountArray)
 	}
 }
+
+'refresh datafileTabFinancial'
+datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
+
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
