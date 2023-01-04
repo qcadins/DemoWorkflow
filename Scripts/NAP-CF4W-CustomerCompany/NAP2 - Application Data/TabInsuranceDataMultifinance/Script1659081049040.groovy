@@ -901,7 +901,7 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerC
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL).replace(',','')
 
-BigDecimal cptlzAmount = Long.parseLong(GlobalVariable.InsuranceCapitalizeAmount)
+Integer cptlzAmount = Integer.parseInt(GlobalVariable.InsuranceCapitalizeAmount)
 
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
