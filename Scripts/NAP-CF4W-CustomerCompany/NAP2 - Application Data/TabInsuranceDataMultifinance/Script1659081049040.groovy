@@ -897,14 +897,14 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerC
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL)
 
-String cptlzAmount = GlobalVariable.InsuranceCapitalizeAmount
+BigDecimal cptlzAmount = Long.parseLong(GlobalVariable.InsuranceCapitalizeAmount)
 
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +
 1
 
 'write to excel capitalize amount'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8.TabInsuranceData', capPartialRow+1,
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '8.TabInsuranceData', capPartialRow+1,
 	GlobalVariable.NumofColm - 1, cptlzAmount)
 	
 public writeFailedReasonVerifyRule(){
