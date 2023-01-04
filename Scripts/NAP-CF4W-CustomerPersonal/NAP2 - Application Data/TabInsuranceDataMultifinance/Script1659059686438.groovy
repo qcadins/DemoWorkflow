@@ -468,14 +468,12 @@ if(capinssetting=="YEARLY"){
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
 				
-				'jika total LOSS only perlu select 2x lagi agar rate ke refresh'
-				if(mainCoverageValueArray[(i - 1)].equalsIgnoreCase('TOTAL LOSS ONLY')){
-					'Select opsi main coverage'
-					WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + 'ALL RISK', true)
+				'Select opsi main coverage'
+				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + 'ALL RISK', true)
 					
-					'Select opsi main coverage'
-					WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
-				}
+				'Select opsi main coverage'
+				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
+				
 				WebUI.delay(3)
 			}
 		}
@@ -706,7 +704,7 @@ if(capinssetting=="YEARLY"){
 						'Pengecekan jika terdapat sum insured amount'
 						if(countSumInsuredAmount == 1){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
-							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value', FailureHandling.OPTIONAL),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 								'Verif additional premi rate sesuai dengan nilai dari rule'
 								if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
 									'write to excel failed reason verify rule'
@@ -967,7 +965,7 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerP
 	
 'get text insurance capitalize amount'
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
-		'value', FailureHandling.OPTIONAL)
+		'value', FailureHandling.OPTIONAL).replace(",","")
 
 BigDecimal cptlzAmount = Long.parseLong(GlobalVariable.InsuranceCapitalizeAmount)
 

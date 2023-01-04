@@ -176,7 +176,7 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No
 
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42).equalsIgnoreCase('Personal')) {
         'verify owner profession'
-        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 45).toUpperCase(), (resultassetinformation[
+        arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     } else {
         'verify owner profession'

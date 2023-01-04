@@ -103,8 +103,6 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
             if (WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
-
-				CustomKeywords.'customizeKeyword.zoomKeyword.zoomOut'(20)
 				
 				ArrayList<WebElement> variabletd = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
 				
