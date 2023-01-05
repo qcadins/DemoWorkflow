@@ -26,11 +26,11 @@ public class checkCapitalizeSetting {
 	@Keyword
 	public checkInsuranceCapSetting(Sql instance){
 		String gs_value
-		
+
 		instance.eachRow(("select gs_value from GENERAL_SETTING where gs_code = 'cptlz_ins_setting'"), { def row ->
 			gs_value = row[0]
 		})
-		
+
 		return gs_value
 	}
 }

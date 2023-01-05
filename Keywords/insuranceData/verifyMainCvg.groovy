@@ -25,7 +25,7 @@ public class verifyMainCvg {
 	//untuk cek default main premi rate pada confins berdasarkan rule
 	public verifyMainPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt){
 		HashMap<String,ArrayList> result = new HashMap<>()
-		
+
 		ArrayList<String> maincvgType = new ArrayList<>()
 
 		ArrayList<String> mainRate = new ArrayList<>()
@@ -101,39 +101,39 @@ public class verifyMainCvg {
 		def ruleMainCvg = findTestData('DownloadRule/InsuranceMainCvgRule')
 
 		int match = 0
-		
+
 		for(int i = inscoHORow;i<=ruleMainCvg.getRowNumbers();i++){
-			
+
 			if(ruleMainCvg.getValue(1,i)!=inscoHOCode && ruleMainCvg.getValue(1,i)!=""){
 				match=0
 			}
-			
+
 			if(ruleMainCvg.getValue(1,i)==inscoHOCode || (match==1 && ruleMainCvg.getValue(1,i)=="")){
-				
+
 				if(match==0){
 					match = 1
 				}
-				
+
 				if((ruleMainCvg.getValue(2,i)==inscoBranchCode || ruleMainCvg.getValue(2,i)=="-")
 				&& (ruleMainCvg.getValue(3,i)==region || ruleMainCvg.getValue(3,i)=="-") && (ruleMainCvg.getValue(4,i)==insAssetCategory || ruleMainCvg.getValue(4,i)=="-")
 				&& Long.parseLong(ruleMainCvg.getValue(5,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleMainCvg.getValue(6,i))>=Long.parseLong(covAmt)){
-					
+
 					maincvgType.add(ruleMainCvg.getValue(7,i))
-					
+
 					mainRate.add(ruleMainCvg.getValue(10,i))
 				}
 			}
 			else if((ruleMainCvg.getValue(1,i)=="" && ruleMainCvg.getValue(2,i)=="" && ruleMainCvg.getValue(3,i)=="")
 			|| match==0){
-				
+
 				break
 			}
 		}
 
 		result.put("MainCvg",maincvgType)
-		
+
 		result.put("MainRate",mainRate)
-		
+
 		return result
 	}
 }
