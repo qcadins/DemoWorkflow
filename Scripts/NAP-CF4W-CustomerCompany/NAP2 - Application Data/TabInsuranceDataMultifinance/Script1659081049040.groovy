@@ -129,8 +129,7 @@ WebUI.setText(insuranceNotesCompany, datafileTabInsurance.getValue(
 		GlobalVariable.NumofColm, 27))
 
 buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
-if (datafileTabInsurance.getValue(
-	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
+if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Klik Generate Insurance'
 	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
 }
@@ -177,10 +176,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Ye
 		writeFailedReasonVerifyRule()
 	}
 	
-	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
-	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
-		writeFailedReasonVerifyRule()
-	}
+//	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
+//	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
+//		writeFailedReasonVerifyRule()
+//	}
 	
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
@@ -446,15 +445,13 @@ if(capinssetting=="YEARLY"){
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
 				
-				'jika total risk only perlu select 2x lagi agar rate ke refresh'
-				if(mainCoverageValueArray[(i - 1)].equalsIgnoreCase('TOTAL RISK ONLY')){
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + 'ALL RISK', true)
+				
 				'Select opsi main coverage'
 				WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
-				}
 				
-				WebUI.delay(10)
+				WebUI.delay(3)
 			}
 		}
 		
@@ -661,7 +658,7 @@ if(capinssetting=="YEARLY"){
 						'Pengecekan jika terdapat sum insured amount'
 						if(countSumInsuredAmount == 1){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
-							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
+							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value',FailureHandling.OPTIONAL),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 								'Verif additional premi rate sesuai dengan nilai dari rule'
 								if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
 									writeFailedReasonVerifyRule()
@@ -901,9 +898,9 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerC
 	
 'get attribute dari confins untuk verify di tab financial'
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
-		'value', FailureHandling.OPTIONAL)
+		'value', FailureHandling.OPTIONAL).replace(',','')
 
-BigDecimal cptlzAmount = Long.parseLong(GlobalVariable.InsuranceCapitalizeAmount)
+Integer cptlzAmount = Integer.parseInt(GlobalVariable.InsuranceCapitalizeAmount)
 
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +

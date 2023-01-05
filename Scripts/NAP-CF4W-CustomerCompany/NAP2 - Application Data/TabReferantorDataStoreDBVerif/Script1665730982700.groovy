@@ -62,6 +62,6 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 if (arrayMatch.contains(false)) {
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 
 }

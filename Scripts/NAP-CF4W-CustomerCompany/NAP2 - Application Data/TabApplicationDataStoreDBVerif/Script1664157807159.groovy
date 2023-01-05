@@ -245,9 +245,13 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 57).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 58).length() > 0){
 'verify Date app data'
 arrayMatch.add(WebUI.verifyMatch(convertDateFormat(datafileTabApplication.getValue(
 			GlobalVariable.NumofColm, 58)), (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
+}else{
+attrindex++
+}
 
 'verify app data code'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
