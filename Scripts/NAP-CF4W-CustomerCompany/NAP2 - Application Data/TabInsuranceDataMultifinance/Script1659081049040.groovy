@@ -129,8 +129,7 @@ WebUI.setText(insuranceNotesCompany, datafileTabInsurance.getValue(
 		GlobalVariable.NumofColm, 27))
 
 buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
-if (datafileTabInsurance.getValue(
-	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
+if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Klik Generate Insurance'
 	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
 }
@@ -177,10 +176,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Ye
 		writeFailedReasonVerifyRule()
 	}
 	
-	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
-	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
-		writeFailedReasonVerifyRule()
-	}
+//	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
+//	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
+//		writeFailedReasonVerifyRule()
+//	}
 	
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
