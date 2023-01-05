@@ -33,9 +33,11 @@ public class verifyAssetRegion {
 		})
 
 		String userDir = System.getProperty('user.dir')
+		
 		String filePath = userDir+GlobalVariable.AssetRegRulePath
 
 		Integer startRow = -1
+		
 		startRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'InsRegion', "AppAsset.TaxCityIssuer == @val")+2
 
 		def ruleAssetRegion = findTestData('DownloadRule/AssetRegionRule')
@@ -43,14 +45,18 @@ public class verifyAssetRegion {
 		int matchLOB = 0, matchCustType = 0, matchCustModel = 0, matchNationalityCode = 0, matchMaritalStat = 0
 
 		for(int i = startRow;i<=ruleAssetRegion.getRowNumbers();i++){
+			
 			if(ruleAssetRegion.getValue(1,i).equalsIgnoreCase(taxCityIssuer) || ruleAssetRegion.getValue(1,i)=="-"){
 				result = ruleAssetRegion.getValue(4,i)
 			}
+			
 			if((ruleAssetRegion.getValue(1,i)=="" && ruleAssetRegion.getValue(2,i)=="" && ruleAssetRegion.getValue(3,i)=="" && ruleAssetRegion.getValue(4,i)=="")||
 			result!=null){
+				
 				break
 			}
 		}
+		
 		return result
 	}
 }

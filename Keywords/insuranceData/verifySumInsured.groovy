@@ -22,10 +22,11 @@ import internal.GlobalVariable
 
 public class verifySumInsured {
 
-
+	//untuk cek nilai default sum insured percentage pada main coverage berdasarkan rule
 	public verifySumInsuredMainCov(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName ){
 
 		HashMap<String,ArrayList> result = new HashMap<>()
+
 		ArrayList<String> yearNo = new ArrayList<>()
 
 		ArrayList<String> sumInsuredPctg = new ArrayList<>()
@@ -42,6 +43,7 @@ public class verifySumInsured {
 
 		instanceLOS.eachRow(("select full_asset_code, mr_asset_condition_code from app_asset where app_id = '"+appId+"'"), { def row ->
 			assetCode = row[0]
+
 			assetCondition = row[1]
 		})
 
@@ -95,26 +97,35 @@ public class verifySumInsured {
 		def ruleSumInsuredRate = findTestData('DownloadRule/InsuranceSumInsuredRule')
 
 		int match = 0
+
 		for(int i=inscoHORow;i<=ruleSumInsuredRate.getRowNumbers();i++){
+
 			if(ruleSumInsuredRate.getValue(1,i)!=inscoHOCode && ruleSumInsuredRate.getValue(1,i)!=""){
 				match=0
 			}
+
 			if(ruleSumInsuredRate.getValue(1,i)==inscoHOCode || (match==1 && ruleSumInsuredRate.getValue(1,i)=="")){
+
 				if(match==0){
 					match = 1
 				}
+
 				if(ruleSumInsuredRate.getValue(2,i)==insAssetCategory && ruleSumInsuredRate.getValue(3,i)==assetCondition){
 					yearNo.add(ruleSumInsuredRate.getValue(4,i))
+
 					sumInsuredPctg.add(ruleSumInsuredRate.getValue(5,i))
 				}
 			}
 			else if((ruleSumInsuredRate.getValue(1,i)=="" && ruleSumInsuredRate.getValue(2,i)=="" && ruleSumInsuredRate.getValue(3,i)=="")
 			|| match==0){
+
 				break
 			}
 		}
 		result.put("Year",yearNo)
+
 		result.put("Pctg",sumInsuredPctg)
+
 		return result
 	}
 }

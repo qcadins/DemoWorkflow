@@ -22,12 +22,15 @@ import internal.GlobalVariable
 
 public class checkCapitalizeSetting {
 
+	//check nilai general setting "cptlz_ins_setting" dalam database
 	@Keyword
 	public checkInsuranceCapSetting(Sql instance){
 		String gs_value
+		
 		instance.eachRow(("select gs_value from GENERAL_SETTING where gs_code = 'cptlz_ins_setting'"), { def row ->
 			gs_value = row[0]
 		})
+		
 		return gs_value
 	}
 }

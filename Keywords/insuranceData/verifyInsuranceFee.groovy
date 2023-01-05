@@ -23,6 +23,7 @@ import internal.GlobalVariable
 public class verifyInsuranceFee {
 
 
+	//untuk verif default insurance fee dan behaviournya berdasarkan rule
 	@Keyword
 	public verifyFee(Sql instanceLOS, String appNo, String inscoBranchName,Sql instanceFOU){
 
@@ -107,35 +108,33 @@ public class verifyInsuranceFee {
 		int matchInscoHO = 0, matchAssetCategory = 0, matchAssetCondition = 0
 
 		for(int i=insHOCodeRow;i<=ruleFee.getRowNumbers();i++){
-			println(i)
+			
 			if(ruleFee.getValue(1,i)!=inscoHOCode && ruleFee.getValue(1,i)!="" && ruleFee.getValue(1,i)!="-"){
 				matchInscoHO=0
-				
+
 			}
 			if(ruleFee.getValue(1,i)==inscoHOCode || (matchInscoHO==1 && ruleFee.getValue(1,i)=="") || ruleFee.getValue(1,i)=="-"){
 				if(matchInscoHO==0){
 					matchInscoHO=1
-					
+
 				}
 				if(ruleFee.getValue(3,i)==insAssetCategory || ruleFee.getValue(3,i)=="-"){
 					matchAssetCategory = 1
-					
+
 				}
 				else if(ruleFee.getValue(3,i)!=insAssetCategory && ruleFee.getValue(3,i)!="" && ruleFee.getValue(3,i)!="-"){
 					matchAssetCategory = 0
-					
+
 				}
-				println(assetCondition+""+appNo)
+			
 				if(ruleFee.getValue(6,i)==assetCondition || ruleFee.getValue(6,i)=="-"){
 					matchAssetCondition = 1
-					
+
 				}
 				else if(ruleFee.getValue(6,i)!=assetCondition && ruleFee.getValue(6,i)!="" && ruleFee.getValue(6,i)!="-"){
 					matchAssetCondition = 0
-					
 
 				}
-
 
 				if(((ruleFee.getValue(1,i)=="" && matchInscoHO==1) || matchInscoHO==1) && ((ruleFee.getValue(3,i)=="" && matchAssetCategory==1) || matchAssetCategory==1) && ((ruleFee.getValue(6,i)=="" && matchAssetCondition==1) || matchAssetCondition==1)
 				&& Double.parseDouble(ruleFee.getValue(4,i))<asPrice && Double.parseDouble(ruleFee.getValue(5,i))>=asPrice
@@ -148,12 +147,11 @@ public class verifyInsuranceFee {
 
 					defAmt.add(ruleFee.getValue(11,i))
 
-					
 					break
 				}
 			}
 			else if((ruleFee.getValue(1,i)=="" && ruleFee.getValue(2,i)=="" && ruleFee.getValue(3,i)=="" && ruleFee.getValue(4,i)=="" && ruleFee.getValue(5,i)=="" && ruleFee.getValue(6,i)=="")){
-				
+
 				break
 			}
 

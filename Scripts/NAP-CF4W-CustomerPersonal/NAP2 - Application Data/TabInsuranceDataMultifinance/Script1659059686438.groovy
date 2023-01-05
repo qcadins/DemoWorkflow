@@ -195,33 +195,46 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && 
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
 		'Verif field admin fee bisa diedit'
-		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			'write to excel failed reason verify rule'
 			writeFailedReasonVerifyRule()
 		}
 	}
 	else if(feeBhv[0]=="LOCK"){
 		'Verif field admin fee tidak bisa diedit'
-		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			'write to excel failed reason verify rule'
 			writeFailedReasonVerifyRule()
+		}
+		else{
+			'write to excel admin fee amount'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 30,
+				GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),'value').replace(",","")))
 		}
 	}
 	if(feeBhv[1]=="DEF"){
 		'Verif field customer stampduty bisa diedit'
-		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			'write to excel failed reason verify rule'
 			writeFailedReasonVerifyRule()
 		}
 	}
 	else if(feeBhv[1]=="LOCK"){
 		'Verif field customer stampduty tidak bisa diedit'
-		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			'write to excel failed reason verify rule'
 			writeFailedReasonVerifyRule()
 		}
+		else{
+			'write to excel cust stampduty amount'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 31,
+				GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),'value').replace(",","")))
+		}
 	}
 }
+
+'declare datafileTabInsurance'
+datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
 
 'Verifikasi/memastikan isfeeusedefault pada excel'
 if (datafileTabInsurance.getValue(
@@ -482,6 +495,9 @@ if(capinssetting=="YEARLY"){
 		mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
 		
 		String mainPremiVal
+		
+		//covAmt = Integer.parseInt()
+		sumInsuredPercentObject
 		//Verif Main Premi Rate Based on Rule
 		if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
@@ -967,7 +983,7 @@ GlobalVariable.TotalInsurance = WebUI.getText(findTestObject('NAP-CF4W-CustomerP
 GlobalVariable.InsuranceCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/CapitalizeInsuranceAmount'),
 		'value', FailureHandling.OPTIONAL).replace(",","")
 
-BigDecimal cptlzAmount = Long.parseLong(GlobalVariable.InsuranceCapitalizeAmount)
+Integer cptlzAmount = Integer.parseInt(GlobalVariable.InsuranceCapitalizeAmount)
 
 'Mengambil nilai row keberapa dimulai data capitalize section Capitalize if GS_Value Partial pada excel'
 def capPartialRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Capitalize if GS_Value Partial') +

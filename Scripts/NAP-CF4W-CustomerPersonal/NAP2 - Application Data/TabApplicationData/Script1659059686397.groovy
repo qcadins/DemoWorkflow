@@ -44,6 +44,12 @@ if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("AP
 	WebUI.refresh()
 	
 	WebUI.delay(3)
+	
+	'click menu consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	
+	'click menu new consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 }
 
 datafileLogin = findTestData('Login/Login')
@@ -56,7 +62,7 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'koneksi database fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
+if(!appLastStep.equalsIgnoreCase("REFERANTOR") && !appLastStep.equalsIgnoreCase("APPLICATION DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 

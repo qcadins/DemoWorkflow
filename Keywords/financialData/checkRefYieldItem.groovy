@@ -22,14 +22,19 @@ import internal.GlobalVariable
 
 public class checkRefYieldItem {
 
+	//untuk cek nilai insurance customer
 	@Keyword
 	public checkInsCust(Sql instanceLOS, String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'INS_TO_CUST' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
+		
 		if(isactive==true){
+			
 			instanceLOS.eachRow(("select total_cust_premi_amt from app_ins ai with(nolock) join app a with(nolock) on ai.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 				value = row[0]
 			})
@@ -38,15 +43,19 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai insurance insco
 	@Keyword
 	public checkInsInsco(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'INS_TO_INSCO' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
 
 		if(isactive==true){
+			
 			instanceLOS.eachRow(("select total_insco_premi_amt from app_ins ai with(nolock) join app a with(nolock) on ai.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 				value = row[0]
 			})
@@ -55,15 +64,19 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai life insurance customer
 	@Keyword
 	public checkLifeInsCust(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'LFI_TO_CUST' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
 
 		if(isactive==true){
+			
 			instanceLOS.eachRow(("select total_premi_to_cust from APP_LIFE_INS_H alih with(nolock) join app a with(nolock) on alih.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 				value = row[0]
 			})
@@ -72,15 +85,19 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai life insurance insco
 	@Keyword
 	public checkLifeInsInsco(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'LFI_TO_INSCO' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
 
 		if(isactive==true){
+			
 			instanceLOS.eachRow(("select total_premi_from_insco from APP_LIFE_INS_H alih with(nolock) join app a with(nolock) on alih.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 				value = row[0]
 			})
@@ -89,10 +106,13 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai admin fee
 	@Keyword
 	public checkAdminFee(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'ADMIN' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
@@ -104,10 +124,13 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai fiducia fee
 	@Keyword
 	public checkFiduciaFee(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = 1
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'FIDUCIA' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
@@ -119,10 +142,13 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai provision fee
 	@Keyword
 	public checkProvisionFee(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'PROVISION' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
@@ -135,14 +161,16 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai other fee
 	@Keyword
 	public checkOtherFee(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'OTHER' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
-
 
 		if(isactive==true){
 			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 24)
@@ -151,14 +179,16 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai notary fee
 	@Keyword
 	public checkNotaryFee(Sql instanceLOS,String appNo){
 		def isactive
+		
 		String value = "0"
+		
 		instanceLOS.eachRow(("select is_active from ref_yield_item where MR_YIELD_ITEM_CODE = 'NOTARY' and biz_tmplt_code = 'CF4W'"), { def row ->
 			isactive = row[0]
 		})
-
 
 		if(isactive==true){
 			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 23)
@@ -167,9 +197,11 @@ public class checkRefYieldItem {
 		return value
 	}
 
+	//untuk cek nilai life insurance capitalize
 	@Keyword
 	public checkLifeInsuranceCapitalize(Sql instanceLOS,String appNo){
 		String value
+		
 		instanceLOS.eachRow(("select TOTAL_LIFE_INS_CPTLZ_AMT from APP_LIFE_INS_H alih with(nolock) join app a with(nolock) on alih.app_id = a.app_id where app_no = '"+appNo+"'"), { def row ->
 			value = row[0]
 		})
