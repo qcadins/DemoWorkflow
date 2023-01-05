@@ -1256,7 +1256,7 @@ public class CustomerDataVerif {
 	public NAP4CustomerAssetDataStoreData (Sql instance, String appno, String name){
 		String customerasset
 		ArrayList <String> listcustomerasset = new ArrayList<String>()
-		instance.eachRow(("SELECT ISNULL(rml.REF_MASTER_NAME,'') AS ASSETTYPE, ISNULL(aca.ASSET_DESCR,'') AS DESCR, ISNULL(FORMAT(aca.ASSET_VALUE, 'N0'),'') AS VAL, ISNULL(aca.ASSET_QTY,'') AS QTY FROM APP_CUST_ASSET aca WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = aca.APP_CUST_ID JOIN  APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aca.MR_CUST_ASSET_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+		instance.eachRow(("SELECT ISNULL(rml.REF_MASTER_NAME,'') AS ASSETTYPE, ISNULL(aca.ASSET_DESCR,'') AS DESCR, ISNULL(FORMAT(aca.ASSET_VALUE, 'N0'),'') AS VAL, ISNULL(aca.ASSET_QTY,'') AS QTY FROM APP_CUST_ASSET aca WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = aca.APP_CUST_ID JOIN  APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN REF_MASTER_LOS rml WITH(NOLOCK) ON rml.REF_MASTER_CODE = aca.MR_CUST_ASSET_TYPE_CODE WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' ORDER BY aca.APP_CUST_ASSET_ID"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -1441,7 +1441,7 @@ public class CustomerDataVerif {
 	public NAP4LegalDocStoreData (Sql instance, String appno, String name){
 		String legaldoc
 		ArrayList <String> listlegaldocdata = new ArrayList<String>()
-		instance.eachRow(("SELECT ISNULL(MR_LEGAL_DOC_TYPE_CODE,'') AS LEGALDOCTYPE , ISNULL(DOC_NO,'') AS DOCNO, ISNULL(FORMAT(accld.DOC_DT, 'MM/dd/yyyy'),'') AS DOCDATE, ISNULL(FORMAT(DOC_EXPIRED_DT, 'MM/dd/yyyy'),'') AS DOCEXPDATE, ISNULL(NOTARY_NAME,'') AS NOTARYNAME, ISNULL(NOTARY_LOCATION,'') AS NOTARYLOC, ISNULL(DOC_NOTES,'') AS DOCNOTE FROM APP_CUST_COMPANY_LEGAL_DOC accld WITH(NOLOCK) JOIN APP_CUST_COMPANY acc WITH(NOLOCK) ON acc.APP_CUST_COMPANY_ID = accld.APP_CUST_COMPANY_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acc.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"'"), {  row ->
+		instance.eachRow(("SELECT ISNULL(MR_LEGAL_DOC_TYPE_CODE,'') AS LEGALDOCTYPE , ISNULL(DOC_NO,'') AS DOCNO, ISNULL(FORMAT(accld.DOC_DT, 'MM/dd/yyyy'),'') AS DOCDATE, ISNULL(FORMAT(DOC_EXPIRED_DT, 'MM/dd/yyyy'),'') AS DOCEXPDATE, ISNULL(NOTARY_NAME,'') AS NOTARYNAME, ISNULL(NOTARY_LOCATION,'') AS NOTARYLOC, ISNULL(DOC_NOTES,'') AS DOCNOTE FROM APP_CUST_COMPANY_LEGAL_DOC accld WITH(NOLOCK) JOIN APP_CUST_COMPANY acc WITH(NOLOCK) ON acc.APP_CUST_COMPANY_ID = accld.APP_CUST_COMPANY_ID JOIN APP_CUST ac WITH(NOLOCK) ON ac.APP_CUST_ID = acc.APP_CUST_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = ac.APP_ID WHERE a.APP_NO = '"+ appno +"' AND ac.CUST_NAME = '"+ name +"' ORDER BY accld.APP_CUST_COMPANY_LEGAL_DOC_ID"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
