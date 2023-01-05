@@ -34,6 +34,18 @@ String CDCGuarantorPersonalPath = CustomKeywords.'dbConnection.connectDB.getExce
 'get data file path CDC Guarantor company'
 String CDCGuarantorCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 
+'open close excel untuk refresh appno agar sama dengan excel datafile'
+CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCManagementShareholderPersonalPath)
+
+WebUI.delay(3)
+CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCManagementShareholderCompanyPath)
+
+WebUI.delay(3)
+CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCGuarantorPersonalPath)
+
+WebUI.delay(3)
+CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCGuarantorCompanyPath)
+
 'connect DB Camunda SIT'
 Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMUNDASIT'()
 
@@ -160,30 +172,65 @@ StoreCDCGuarantorCompanyNameArray = StoreCDCGuarantorCompanyName.split(';')
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerCompany, '1.CustomerDetail', 12, GlobalVariable.NumofColm - 
     1, StoreCDCCustomerName)
 
+'looping untuk mencari colm appno dimulai pada excel CDC'
+loopingStartIndex(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail'))
+
+index = 0
+
 'looping untuk write MS Personal Name ke Excel CDC MS Personal'
-for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderPersonalNameArray.size(); ManagementShareholderName++) {
+for (ManagementShareholderName = GlobalVariable.StartIndex; ManagementShareholderName < StoreCDCManagementShareholderPersonalNameArray.size() + GlobalVariable.StartIndex; ManagementShareholderName++) {
 	'write to excel CDC Shareholder personal Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderPersonalPath, '1.CustomerDetail', 
-        12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[(ManagementShareholderName - 1)])
+        12, ManagementShareholderName, StoreCDCManagementShareholderPersonalNameArray[index++])
 }
+
+'looping untuk mencari colm appno dimulai pada excel CDC'
+loopingStartIndex(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail'))
+
+'reset index untuk array'
+index = 0
 
 'looping untuk write MS Company Name ke Excel CDC MS Company'
-for (ManagementShareholderName = 1; ManagementShareholderName <= StoreCDCManagementShareholderCompanyNameArray.size(); ManagementShareholderName++) {
+for (ManagementShareholderName = GlobalVariable.StartIndex; ManagementShareholderName < StoreCDCManagementShareholderCompanyNameArray.size() + GlobalVariable.StartIndex; ManagementShareholderName++) {
 	'write to excel CDC Shareholder Company Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCManagementShareholderCompanyPath, '1.CustomerDetail', 
-        12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[(ManagementShareholderName - 1)])
+        12, ManagementShareholderName, StoreCDCManagementShareholderCompanyNameArray[index++])
 }
+
+'looping untuk mencari colm appno dimulai pada excel CDC'
+loopingStartIndex(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail'))
+
+'reset index untuk array'
+index = 0
 
 'looping untuk write Guarantor Personal Name ke Excel CDC Guarantor Personal'
-for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorPersonalNameArray.size(); GuarantorName++) {
+for (GuarantorName = GlobalVariable.StartIndex; GuarantorName < StoreCDCGuarantorPersonalNameArray.size() + GlobalVariable.StartIndex; GuarantorName++) {
 	'write to excel CDC Guarantor Personal Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorPersonalPath, '1.CustomerDetail', 12, GuarantorName, 
-        StoreCDCGuarantorPersonalNameArray[(GuarantorName - 1)])
+        StoreCDCGuarantorPersonalNameArray[index++])
 }
 
+'looping untuk mencari colm appno dimulai pada excel CDC'
+loopingStartIndex(findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail'))
+
+'reset index untuk array'
+index = 0
+
 'looping untuk write Guarantor Company Name ke Excel CDC Guarantor Company'
-for (GuarantorName = 1; GuarantorName <= StoreCDCGuarantorCompanyNameArray.size(); GuarantorName++) {
+for (GuarantorName = GlobalVariable.StartIndex; GuarantorName < StoreCDCGuarantorCompanyNameArray.size() + GlobalVariable.StartIndex; GuarantorName++) {
 	'write to excel CDC Guarantor Company Name'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCGuarantorCompanyPath, '1.CustomerDetail', 12, GuarantorName, 
-        StoreCDCGuarantorCompanyNameArray[(GuarantorName - 1)])
+        StoreCDCGuarantorCompanyNameArray[index++])
+}
+
+public loopingStartIndex(TestData datafile){	
+	'untuk mendapatkan posisi copy app dari excel'
+	for (int NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {		
+		if (datafile.getValue(NumOf, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+			GlobalVariable.NumofColm, 13)) {
+			GlobalVariable.StartIndex = NumOf - 1
+
+			break
+		}
+	}
 }

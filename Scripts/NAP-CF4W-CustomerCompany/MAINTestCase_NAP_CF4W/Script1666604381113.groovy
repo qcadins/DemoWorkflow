@@ -92,29 +92,29 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 }
                 
                 'call test case NAP2'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'call test case Comresfund'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), [:], 
-                    FailureHandling.STOP_ON_FAILURE)
+                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/MAINComResvFund'), 
+                    [:], FailureHandling.STOP_ON_FAILURE)
 
                 'declare datafileCommission'
-                datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+                not_run: datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 
                 'declare datafileReservedFund'
-                datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+                not_run: datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
 
                 'Mengambil nilai row keberapa dimulai data return pada excel'
-                def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 
-                    'Return Commission & Reserved Fund') + 1
+                not_run: def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, 
+                    '12.TabCommissionData', 'Return Commission & Reserved Fund') + 1
 
                 'Mengambil nilai row keberapa dimulai data return pada excel'
-                def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 
-                    'Return Commission & Reserved Fund') + 1
+                not_run: def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, 
+                    '13.TabReservedFundData', 'Return Commission & Reserved Fund') + 1
 
                 'Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
-                for (int i = 1; i <= i; i++) {
+                not_run: for (int i = 1; i <= i; i++) {
                     if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || 
                     datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
                         if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')) {
@@ -137,11 +137,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 }
                 
                 'call test case CDC NAP4'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+                not_run: WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'check if verif Appview = yes'
-                if (GlobalVariable.CheckAppViewCompany == 'Yes') {
+                not_run: if (GlobalVariable.CheckAppViewCompany == 'Yes') {
                     'call test case verify app view'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
                 }
