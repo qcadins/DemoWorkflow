@@ -92,18 +92,19 @@ for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument 
     }
 }
 
-if(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'),GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
-	'click button submit edit application'
-	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'))
-	
-}
-else{
-	'click button submit'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'), GlobalVariable.TimeOut, 
+    FailureHandling.OPTIONAL)) {
+    'click button submit edit application'
+    WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SubmitUploadDocument'))
+} else {
+    'click button submit'
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 }
 
 'click menu Customer data completion paging'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))
+
+WebUI.delay(3)
 
 'input app no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 

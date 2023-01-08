@@ -301,10 +301,10 @@ if (variableSupp.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
 	
 //						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)) {
+//						if ((amt != 0) && (pctg != 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if ((amt == 0) || (pctg == 0)){
+//						} else if ((amt == 0) || (pctg == 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount'){
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
 //						}
@@ -575,10 +575,10 @@ if (variableSuppEmp.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
 //						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)) {
+//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)) {
+//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
 //						}
@@ -821,11 +821,11 @@ if (variableRef.size() > 0) {
 						'Ambil nilai total allocate commission amount ke k-1'
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
-//						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)) {
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)) {
+//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
 //						}

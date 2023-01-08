@@ -23,6 +23,9 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import groovy.sql.Sql as Sql
 
+'reset subisidy DP'
+GlobalVariable.SubsidyDP = 0
+
 'declare subsidyfaileddelete'
 ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 
