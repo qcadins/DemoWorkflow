@@ -108,7 +108,7 @@ public class checkRefYieldItem {
 
 	//untuk cek nilai admin fee
 	@Keyword
-	public checkAdminFee(Sql instanceLOS,String appNo){
+	public checkAdminFee(Sql instanceLOS,TestData findTestData){
 		def isactive
 
 		String value = "0"
@@ -118,7 +118,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 21)
+			value = findTestData.getValue(GlobalVariable.NumofColm, 21)
 		}
 
 		return value
@@ -126,7 +126,7 @@ public class checkRefYieldItem {
 
 	//untuk cek nilai fiducia fee
 	@Keyword
-	public checkFiduciaFee(Sql instanceLOS,String appNo){
+	public checkFiduciaFee(Sql instanceLOS,TestData findTestData){
 		def isactive
 
 		String value = 1
@@ -136,7 +136,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 25)
+			value = findTestData.getValue(GlobalVariable.NumofColm, 25)
 		}
 
 		return value
@@ -144,7 +144,7 @@ public class checkRefYieldItem {
 
 	//untuk cek nilai provision fee
 	@Keyword
-	public checkProvisionFee(Sql instanceLOS,String appNo){
+	public checkProvisionFee(Sql instanceLOS,TestData findTestData){
 		def isactive
 
 		String value = "0"
@@ -154,8 +154,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
-					'value', FailureHandling.OPTIONAL).replace(',', '')
+			value = findTestData.getValue(GlobalVariable.NumofColm, 39)
 		}
 
 		return value
@@ -163,7 +162,7 @@ public class checkRefYieldItem {
 
 	//untuk cek nilai other fee
 	@Keyword
-	public checkOtherFee(Sql instanceLOS,String appNo){
+	public checkOtherFee(Sql instanceLOS,TestData findTestData){
 		def isactive
 
 		String value = "0"
@@ -173,7 +172,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 24)
+			value = findTestData.getValue(GlobalVariable.NumofColm, 24)
 		}
 
 		return value
@@ -181,7 +180,7 @@ public class checkRefYieldItem {
 
 	//untuk cek nilai notary fee
 	@Keyword
-	public checkNotaryFee(Sql instanceLOS,String appNo){
+	public checkNotaryFee(Sql instanceLOS,TestData findTestData){
 		def isactive
 
 		String value = "0"
@@ -191,7 +190,7 @@ public class checkRefYieldItem {
 		})
 
 		if(isactive==true){
-			value = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 23)
+			value = findTestData.getValue(GlobalVariable.NumofColm, 23)
 		}
 
 		return value

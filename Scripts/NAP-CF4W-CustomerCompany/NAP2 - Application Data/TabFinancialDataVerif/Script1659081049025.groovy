@@ -31,7 +31,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
+TestData datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 'declare datafileTabApplication'
 datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
@@ -623,19 +623,19 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble('0'))
 
 'write admin fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write provision fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write fiducia fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write notary fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write other fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write additional admin fee'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',13,4, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 22).replace(",","")))
