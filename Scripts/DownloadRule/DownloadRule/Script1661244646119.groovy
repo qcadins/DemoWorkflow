@@ -25,15 +25,13 @@ WebUI.openBrowser('')
 WebUI.maximizeWindow()
 
 'input web Rule '
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1,3))
+WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 3))
 
 'input username'
-WebUI.setText(findTestObject('DownloadRule/input_Username'), 
-    findTestData('Login/Login').getValue(2,3))
+WebUI.setText(findTestObject('DownloadRule/input_Username'), findTestData('Login/Login').getValue(2, 3))
 
 'input Password'
-WebUI.setText(findTestObject('DownloadRule/input_password'), 
-    findTestData('Login/Login').getValue(3,3))
+WebUI.setText(findTestObject('DownloadRule/input_password'), findTestData('Login/Login').getValue(3, 3))
 
 'click button login'
 WebUI.click(findTestObject('DownloadRule/button_login'))
@@ -46,37 +44,37 @@ WebUI.click(findTestObject('DownloadRule/a_RuleFile'))
 
 Integer countFileCode = Integer.parseInt(GlobalVariable.CountFileCode)
 
-for(int i=1;i<=countFileCode;i++){
-	
-	if(findTestData('DownloadRule/DownloadRuleFileCode').getValue(3,i).equalsIgnoreCase("No")){
-		continue
-	}
-	'Input file code'
-	WebUI.setText(findTestObject('DownloadRule/input_FileCode'), 
-	    findTestData('DownloadRule/DownloadRuleFileCode').getValue(1,i))
-	
-	'Klik button search'
-	WebUI.click(findTestObject('DownloadRule/button_searchRule'))
-	
-	'Ambil filename dari web rule'
-	String filenameWithExtension = WebUI.getText(findTestObject('DownloadRule/span_FileName'))
-	
-	'Menentukan nama baru file hasil download'
-	String newFileName = findTestData('DownloadRule/DownloadRuleFileCode').getValue(2,i)
-	
-	'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
-	CustomKeywords.'downloadRule.downloadRule.deleteFile'(newFileName)
-	
-	'Klik download'
-	WebUI.click(findTestObject('DownloadRule/a_Download'))
-	
-	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
-	WebUI.delay(10)
-	
-	'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
-	CustomKeywords.'downloadRule.downloadRule.renameFile'(filenameWithExtension,newFileName)
+for (int i = 1; i <= countFileCode; i++) {
+    if (findTestData('DownloadRule/DownloadRuleFileCode').getValue(3, i).equalsIgnoreCase('No')) {
+        continue
+    }
+    
+    'Input file code'
+    WebUI.setText(findTestObject('DownloadRule/input_FileCode'), findTestData('DownloadRule/DownloadRuleFileCode').getValue(
+            1, i))
 
-	'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
-	WebUI.delay(2)
+    'Klik button search'
+    WebUI.click(findTestObject('DownloadRule/button_searchRule'))
 
+    'Ambil filename dari web rule'
+    String filenameWithExtension = WebUI.getText(findTestObject('DownloadRule/span_FileName'))
+
+    'Menentukan nama baru file hasil download'
+    String newFileName = findTestData('DownloadRule/DownloadRuleFileCode').getValue(2, i)
+
+    'Custom keyword untuk cek apakah ada file lama hasil download yang memiliki nama yang sama dengan file baru hasil download. Jika ada, delete file yang lama'
+    CustomKeywords.'downloadRule.downloadRule.deleteFile'(newFileName)
+
+    'Klik download'
+    WebUI.click(findTestObject('DownloadRule/a_Download'))
+
+    'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
+    WebUI.delay(10)
+
+    'Custom keyword untuk rename file hasil download dengan nama yang baru yang sudah diset sebelumnya'
+    CustomKeywords.'downloadRule.downloadRule.renameFile'(filenameWithExtension, newFileName)
+
+    'Delay 5 detik untuk menunggu proses download selesai (parameterize)'
+    WebUI.delay(2)
 }
+

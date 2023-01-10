@@ -24,7 +24,7 @@ import java.io.File
 import java.nio.file.*;
 import java.io.IOException;
 public class downloadRule {
-	
+
 	//keyword set download path
 	@Keyword
 	def setDownloadPath() {
