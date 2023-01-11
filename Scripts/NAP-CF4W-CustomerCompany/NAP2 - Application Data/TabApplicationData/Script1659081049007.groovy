@@ -78,6 +78,58 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 
 	'Verif interest type pada confins dengan db'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
+	
+	ArrayList<String> appsource = CustomKeywords.'applicationData.checkDDL.checkDDLApplicationSource'(sqlConnectionLOS)
+	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS)
+	ArrayList<String> wop = CustomKeywords.'applicationData.checkDDL.checkDDLWOP'(sqlConnectionLOS)
+	
+	'get total label from ddl app source'
+	int totalddlappsource = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'))
+	
+	'get total label from ddl installment scheme'
+	int totalddlinstallmentscheme = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'))
+	
+	'get total label from ddl wop'
+	int totalddlwop = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'))
+
+	'verify total ddl app source confins = total ddl db'
+	WebUI.verifyEqual(totalddlappsource - 1, appsource.size())
+	
+	'verify total ddl installment scheme confins = total ddl db'
+	WebUI.verifyEqual(totalddlinstallmentscheme - 1, installmentscheme.size())
+	
+	'verify total ddl way of payment confins = total ddl db'
+	WebUI.verifyEqual(totalddlinstallmentscheme - 1, wop.size())
+
+	'verify isi ddl app source confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
+		appsource) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Application Source')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'verify isi ddl installment scheme confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'),
+			installmentscheme) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'verify isi ddl Way of Payment confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'),
+			wop) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'WOP')
+		
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 String spvName
@@ -314,8 +366,7 @@ if (textInterestType.equalsIgnoreCase('Float Rate')) {
 WebUI.selectOptionByLabel(scheme, datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 24), false)
 
-textwop = datafileTabApplication.getValue(
-	GlobalVariable.NumofColm, 25)
+textwop = datafileTabApplication.getValue(GlobalVariable.NumofColm, 25)
 
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
