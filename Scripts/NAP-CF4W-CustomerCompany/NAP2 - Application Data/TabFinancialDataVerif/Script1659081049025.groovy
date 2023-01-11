@@ -601,16 +601,22 @@ def num
 'convert payment frequency to number untuk penghitungan simulasi'
 if (payFreq == 'Monthly') {
 	num = "1"
+	
 } else if (payFreq == 'Bimonthly') {
 	num = "2"
+
 } else if (payFreq == 'Quarterly') {
 	num = "3"
+
 } else if (payFreq == 'Trimester') {
 	num = "4"
+
 } else if (payFreq == 'Semi Annually') {
 	num = "6"
+
 } else if (payFreq == 'Annually') {
 	num = "12"
+
 }
 
 'write payment frequency'
@@ -845,7 +851,10 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".
 	
 'verify gross yield confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
-	
+
+'verify Flat rate'
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
+
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
 	',', '')

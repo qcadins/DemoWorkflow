@@ -11,6 +11,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -29,6 +30,12 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
+'connect DB FOU'
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
+'connect DB LOS'
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
 'Klik tab customer'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-CustomerData/buttonTabCust'))
 
@@ -37,8 +44,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
             'CUSTOMER', false, FailureHandling.OPTIONAL))
 	
-	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
-	
+	'get cust model ddl value from db'
 	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
 	
 	'get total label from ddl cust model'
@@ -218,6 +224,16 @@ if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.TabCustomerMainData')
+	
+	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
+	
+	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS)
+	
+	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU)
+	
+	if(genset == 1 && (negcustLOS == 1 || negcustFOU == 1)){
+		KeywordUtil.markFailedAndStop('Failed Because Negative Customer')
+	}
 }
 
 if (GlobalVariable.FlagFailed == 0) {

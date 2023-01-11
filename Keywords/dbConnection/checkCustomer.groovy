@@ -32,7 +32,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkCustomerModelCompany(Sql instance){
 		String value
@@ -42,5 +42,32 @@ public class checkCustomer {
 			listValue.add(value)
 		})
 		return listValue
+	}
+	
+	@Keyword
+	public checkCustomerNegativeLOS(Sql instance, String name){
+		int value
+		instance.eachRow(("SELECT COUNT(CUST_NAME) FROM APP_NEGATIVE_CHECK_CUST WHERE CUST_NAME = '"+ name +"'"), { def row ->
+			value = (row[0])
+		})
+		return value
+	}
+	
+	@Keyword
+	public checkCustomerNegativeFOU(Sql instance, String name){
+		int value
+		instance.eachRow(("SELECT COUNT(CUST_NAME) FROM NEGATIVE_CUST WHERE CUST_NAME = '"+ name +"'"), { def row ->
+			value = (row[0])
+		})
+		return value
+	}
+	
+	@Keyword
+	public checkCustomerNegativeGenSet(Sql instance){
+		int value
+		instance.eachRow(("SELECT * FROM GENERAL_SETTING_LOS WHERE GS_CODE = 'NEGCUSTALLOWNAP'"), { def row ->
+			value = (row[0])
+		})
+		return value
 	}
 }
