@@ -734,7 +734,7 @@ if(capinssetting=="YEARLY"){
 					'Verif additional coverage type confins sesuai dengan rule'
 					if(WebUI.verifyMatch(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, WebUI.getText(labelAddCovPerYear)),addtCvgType.get(k), false, FailureHandling.OPTIONAL)){
 						'Pengecekan jika terdapat sum insured amount'
-						if(countSumInsuredAmount == 1){
+						if(countSumInsuredAmount == 1 && WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 							'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
 							if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value', FailureHandling.OPTIONAL),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 								'Verif additional premi rate sesuai dengan nilai dari rule'

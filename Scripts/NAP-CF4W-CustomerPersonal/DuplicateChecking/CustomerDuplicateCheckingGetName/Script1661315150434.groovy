@@ -37,11 +37,12 @@ String CDCGuarantorCompanyPath = CustomKeywords.'dbConnection.connectDB.getExcel
 'open close excel untuk refresh appno agar sama dengan excel datafile'
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCFamilyPath)
 
-WebUI.delay(3)
+WebUI.delay(7)
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCGuarantorPersonalPath)
 
-WebUI.delay(3)
+WebUI.delay(7)
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(CDCGuarantorCompanyPath)
+WebUI.delay(7)
 
 'connect DB Camunda SIT'
 Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMUNDASIT'()

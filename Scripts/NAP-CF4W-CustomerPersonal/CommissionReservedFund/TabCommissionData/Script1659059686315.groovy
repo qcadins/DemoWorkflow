@@ -327,14 +327,14 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 							'Ambil nilai total allocate commission amount ke j-1'
 							GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
 		
-//							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//							if ((amt != 0) && (pctg != 0)) {
-//								'Tambahkan komponen fee allocate commission from ke arraylist'
-//								TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//							} else if ((amt == 0) || (pctg == 0)){
+							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+							if ((amt != 0 && pctg != 0) && datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Percentage") {
+								'Tambahkan komponen fee allocate commission from ke arraylist'
+								TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+							} else if ((amt == 0 || pctg == 0) || datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Amount"){
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
-//							}
+							}
 							
 							'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 							break
@@ -619,14 +619,14 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 							'Ambil nilai total allocate commission amount ke k-1'
 							GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 		
-//							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//							if ((amt != 0) && (pctg != 0)) {
-//								'Tambahkan komponen fee allocate commission from ke arraylist'
-//								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//							} else if((amt == 0) || (pctg == 0)) {
+							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+							if ((amt != 0 && pctg != 0) && datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Percentage") {
+								'Tambahkan komponen fee allocate commission from ke arraylist'
+								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+							} else if((amt == 0 || pctg == 0) || datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Amount") {
 								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-//							}
+							}
 							
 							'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 							break
@@ -881,14 +881,14 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 							'Ambil nilai total allocate commission amount ke k-1'
 							GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 		
-//							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//							if ((amt != 0) && (pctg != 0)) {
-//								'Tambahkan komponen fee allocate commission from ke arraylist'
-//								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//							} else if((amt == 0) || (pctg == 0)) {
-//								'Tambahkan komponen fee allocate commission from ke arraylist'
+							'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+							if ((amt != 0 && pctg != 0) && datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Percentage") {
+								'Tambahkan komponen fee allocate commission from ke arraylist'
+								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+							} else if((amt == 0 || pctg == 0) || datafileCommission.getValue(GlobalVariable.NumofColm, 12)=="Amount") {
+								'Tambahkan komponen fee allocate commission from ke arraylist'
 								TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-//							}
+							}
 							
 							'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 							break

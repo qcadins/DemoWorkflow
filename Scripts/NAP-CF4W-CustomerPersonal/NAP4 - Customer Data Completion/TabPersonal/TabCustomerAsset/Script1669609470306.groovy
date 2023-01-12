@@ -91,7 +91,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					WebUI.click(modifyNewbuttonedit)
 
 					'call function input asset data'
-					inputAssetData()
+					inputAssetData(faileddata)
 					
 					'call function count asset value'
 					countAssetValue(i)
@@ -186,7 +186,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Add'))
 
 					'call function input asset data'
-					inputAssetData()
+					inputAssetData(faileddata)
 					
 					if (nodata==false) {
 						'call function count asset value'
@@ -212,7 +212,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerAsset/button_Add'))
 
 			'call function input asset data'
-			inputAssetData()
+			inputAssetData(faileddata)
 			
 			'call function count asset value'
 			countAssetValue(asset)
@@ -266,7 +266,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-def inputAssetData() {
+def inputAssetData(ArrayList<> faileddata) {
 	'declare assettypearray'
 	def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 13).split(';', -1)
 	

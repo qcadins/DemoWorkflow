@@ -827,7 +827,7 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
         '7.TabAssetData')
 }
 
-WebUI.delay(3)
+WebUI.delay(13)
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'

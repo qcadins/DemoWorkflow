@@ -41,11 +41,30 @@ Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckSta
 
 GlobalVariable.FlagFailed = 0
 
+if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+	'click menu consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+}
+
+if(WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/a_Customer Duplicate Checking'), FailureHandling.OPTIONAL)){
+	'click menu new consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+}
+
 if (DupCheckStatus == true) {
+	
+	WebUI.delay(3)
+	
     'click menu duplicate Checking'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/a_Customer Duplicate Checking'))
 
-	WebUI.delay(5)
+	WebUI.delay(10)
+	
+	'click menu duplicate Checking'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/a_Customer Duplicate Checking'))
+	
+	'click menu duplicate Checking'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/a_Customer Duplicate Checking'))
 	
     'call paging testing function'
     pagingTesting()

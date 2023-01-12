@@ -28,10 +28,23 @@ datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Cust
 'declare datafileCDC'
 datafileCDC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion')
 
+if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+	'click menu consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+}
+
+if(WebUI.verifyElementNotVisible(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'), FailureHandling.OPTIONAL)){
+	'click menu new consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+}
+
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
-WebUI.delay(5)
+WebUI.delay(10)
+
+'click menu Customer Data Completion'
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 'call function paging testing'
 pagingTesting()

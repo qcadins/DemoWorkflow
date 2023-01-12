@@ -46,6 +46,19 @@ String POStat
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
+if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+	'click menu consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+}
+
+if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
+	'click menu new consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+}
+
+'click Menu customer main data'
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+
 'click Menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
