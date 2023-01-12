@@ -13,6 +13,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
@@ -40,11 +42,11 @@ if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 }
 
 if(GlobalVariable.RoleCompany == 'Testing'){
-	'connect DB LOS'
-	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+	'connect DB FOU'
+	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 	
 	'get custmodel ddl value from db'
-	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionLOS)
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
 	
 	'get total label from ddl custmodel'
 	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'))
