@@ -627,19 +627,19 @@ println(Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.check
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkLifeInsCust'(sqlConnectionLOS, appNo).replace(",","")))
 
 'write admin fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')).replace(",","")))
 
 'write provision fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')).replace(",","")))
 
 'write fiducia fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')).replace(",","")))
 
 'write notary fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')).replace(",","")))
 
 'write other fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')).replace(",","")))
 
 'write additional admin fee'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',13,4, Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 22).replace(",","")))
