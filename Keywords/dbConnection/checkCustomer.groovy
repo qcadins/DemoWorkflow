@@ -43,7 +43,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkCustomerNegativeLOS(Sql instance, String name){
 		int value
@@ -52,7 +52,7 @@ public class checkCustomer {
 		})
 		return value
 	}
-	
+
 	@Keyword
 	public checkCustomerNegativeFOU(Sql instance, String name){
 		int value
@@ -61,7 +61,7 @@ public class checkCustomer {
 		})
 		return value
 	}
-	
+
 	@Keyword
 	public checkCustomerNegativeGenSet(Sql instance){
 		int value
@@ -69,5 +69,49 @@ public class checkCustomer {
 			value = (row[0])
 		})
 		return value
+	}
+	
+	@Keyword
+	public checkSalutation(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkNationality(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkEducation(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkReligion(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
 	}
 }

@@ -39,6 +39,30 @@ if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	'connect DB LOS'
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+	
+	'get custmodel ddl value from db'
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionLOS)
+	
+	'get total label from ddl custmodel'
+	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'))
+	
+	'verify total ddl religion confins = total ddl db'
+	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+	
+	'verify isi ddl custmodel confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'),
+		custmodel) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'custmodel')
+
+		(GlobalVariable.FlagFailed)++
+	}
+}
+
 'input establishment date'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Establishment Date'),
 	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 14))
