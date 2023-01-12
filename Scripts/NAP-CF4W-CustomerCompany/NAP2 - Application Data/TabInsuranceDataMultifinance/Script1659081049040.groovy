@@ -184,25 +184,25 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Ye
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
 		'Verif field admin fee bisa diedit'
-		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			writeFailedReasonVerifyRule()
 		}
 	}
 	else if(feeBhv[0]=="LOCK"){
 		'Verif field admin fee tidak bisa diedit'
-		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			writeFailedReasonVerifyRule()
 		}
 	}
 	if(feeBhv[1]=="DEF"){
 		'Verif field customer stampduty bisa diedit'
-		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			writeFailedReasonVerifyRule()
 		}
 	}
 	else if(feeBhv[1]=="LOCK"){
 		'Verif field customer stampduty tidak bisa diedit'
-		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"disabled", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
+		if(WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),"readonly", GlobalVariable.TimeOut,FailureHandling.OPTIONAL)==false){
 			writeFailedReasonVerifyRule()
 		}
 	}
@@ -275,6 +275,9 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabIns
 
 'Mengambil nilai setting cap insurance dari db'
 String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlConnectionFOU)
+
+'Mengambil nilai setting insurance rate based on dari db'
+String insratebasesetting = CustomKeywords.'insuranceData.checkInsRateBase.checkInsuranceRateBasedOn'(sqlConnectionFOU)
 
 'Jika cap insurance bernilai yearly'
 if(capinssetting=="YEARLY"){
@@ -459,10 +462,20 @@ if(capinssetting=="YEARLY"){
 		mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input",true)
 		
 		String mainPremiVal
+		
+		Integer cvgAmt
+		
+		if(insratebasesetting=="COVERAGE_AMT_AFT_DEPRECIATION"){
+			cvgAmt = Math.round(Double.parseDouble(covAmt)*Double.parseDouble(WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %",""))/100)
+		}
+		else{
+			cvgAmt = Integer.parseInt(covAmt)
+		}
+		
 		//Verif Main Premi Rate Based on Rule
 		if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
-			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+			HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt)
 			
 			modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
@@ -533,7 +546,7 @@ if(capinssetting=="YEARLY"){
 		
 		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 			
 			addtCvgType = result.get("AddtCvg")
 			addtPremiRate = result.get("AddtRate")

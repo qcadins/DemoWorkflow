@@ -83,6 +83,58 @@ if (GlobalVariable.Role == 'Testing') {
 
     'Verif interest type pada confins dengan db'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
+	
+	ArrayList<String> appsource = CustomKeywords.'applicationData.checkDDL.checkDDLApplicationSource'(sqlConnectionLOS)
+	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS)
+	ArrayList<String> wop = CustomKeywords.'applicationData.checkDDL.checkDDLWOP'(sqlConnectionFOU)
+	
+	'get total label from ddl app source'
+	int totalddlappsource = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'))
+	
+	'get total label from ddl installment scheme'
+	int totalddlinstallmentscheme = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'))
+	
+	'get total label from ddl wop'
+	int totalddlwop = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'))
+
+	'verify total ddl app source confins = total ddl db'
+	WebUI.verifyEqual(totalddlappsource - 1, appsource.size())
+	
+	'verify total ddl installment scheme confins = total ddl db'
+	WebUI.verifyEqual(totalddlinstallmentscheme - 1, installmentscheme.size())
+	
+	'verify total ddl way of payment confins = total ddl db'
+	WebUI.verifyEqual(totalddlwop, wop.size())
+
+	'verify isi ddl app source confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
+		appsource) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Application Source')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'verify isi ddl installment scheme confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'),
+			installmentscheme) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'verify isi ddl Way of Payment confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'),
+			wop) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'WOP')
+		
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 'declare spvname'
@@ -522,6 +574,9 @@ if (datafileTabApplication.getValue(
 
     'Click copy'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Copy'))
+	
+	'call function get address'
+	getAddress()
 } else {
     'Input Address'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/textarea_Address'), 
@@ -827,4 +882,84 @@ public addCrossAppAgr(ArrayList<Integer> s, Sql sqlConnectionLOS){
 		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/Button_X'))
 	}
 	
+}
+
+def getAddress(){
+	
+	'declare array for confins data'
+	def confinsdata = []
+
+	'add address to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/textarea_Address'),
+			'value'))
+
+	'add RT to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_RT'),
+			'value'))
+
+	'add RW to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_RW'),
+			'value'))
+
+	'add zipcode to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/labelZipcode'), 'value'))
+	
+	'add kelurahan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/labelKelurahan'),
+			'value'))
+
+	'add kecamatan to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/labelKecamatan'),
+			'value'))
+
+	'add kota to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/labelKota'),
+			'value'))
+	
+	'add Phone 1 Area to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 1 area'),
+			'value'))
+	
+	'add Phone 1 number to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 1 number'),
+			'value'))
+	
+	'add Phone 1 extension to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 1 extension'),
+			'value'))
+	
+	'add Phone 2 Area to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 2 area'),
+			'value'))
+	
+	'add Phone 2 number to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 2 number'),
+			'value'))
+	
+	'add Phone 2 extension to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 2 extension'),
+			'value'))
+	
+	'add Phone 3 Area to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 3 area'),
+			'value'))
+	
+	'add Phone 3 number to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 3 number'),
+			'value'))
+	
+	'add Phone 3 extension to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_Phone 3 extension'),
+			'value'))
+	
+	'add Phone fax area to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_fax area'),
+			'value'))
+	
+	'add Phone fax number to array'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_fax number'),
+			'value'))
+	
+	GlobalVariable.Confinsdata = confinsdata
+
 }

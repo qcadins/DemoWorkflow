@@ -867,6 +867,9 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".
 'verify gross yield confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
 	
+'verify Flat rate'
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
+
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
     ',', '')
