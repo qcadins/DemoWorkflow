@@ -684,26 +684,33 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	'write advance value'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,1, 1)
 	
+	'write to excel grace period number'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, 0)
+	
 	'get total ar from simulation'
-	totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 14)
+	totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 80)
 	
 	'get total interest from simulation'
-	totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 15)
+	totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 79)
 	
 	'get installment amount from simulation'
-	installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 14)
-	
-	'get ntf value from simulation'
-	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
-	
-	'get tdp from simulation'
-	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
+	installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 80)
 	
 	'write total AR ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',2,1, Double.parseDouble(totalAR.replace(",","")))
 	
 	'write besar angsuran ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
+	
+	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+	
+	WebUI.delay(5)
+	
+	'get ntf value from simulation'
+	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
+	
+	'get tdp from simulation'
+	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
 	
 	'write total AR ke datafile'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'9.TabFinancialData',69,GlobalVariable.NumofColm-1, Double.parseDouble(totalAR.replace(",","")))
@@ -736,14 +743,17 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	
 	'Pengecekan grace period number dan type'
 	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, 0)
+		
 		'get total ar'
-		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 80)
+		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 14)
 		
 		'get total interest'
-		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 79)
+		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 15)
 		
 		'get installment amount'
-		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 80)
+		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 14)
 		
 	}
 	else if(gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&gracePeriodNum>0){
@@ -794,6 +804,10 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	
 	'write besar angsuran ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
+	
+	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+	
+	WebUI.delay(5)
 	
 	'get ntf value from excel'
 	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
