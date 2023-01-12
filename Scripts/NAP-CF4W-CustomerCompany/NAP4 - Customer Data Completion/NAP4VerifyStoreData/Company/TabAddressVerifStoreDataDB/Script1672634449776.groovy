@@ -35,6 +35,92 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 int arrayindex = 0
 
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).length() > 0){
+
+	address = 0
+	
+'verify address type'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify address'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify rt'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify rw'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify zipcode'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify kecamatan'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify kelurahan'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify kota'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 1 Area'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 1'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 1 ext'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 2 Area'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 2'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 2 ext'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 3 area'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 3'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify phn 3 ext'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify Fax area'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify Fax'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+'verify ownership'
+arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    false, FailureHandling.OPTIONAL))
+
+}else{
+
 'verify address type'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
@@ -114,6 +200,8 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 'verify ownership'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
     false, FailureHandling.OPTIONAL))
+
+}
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){
