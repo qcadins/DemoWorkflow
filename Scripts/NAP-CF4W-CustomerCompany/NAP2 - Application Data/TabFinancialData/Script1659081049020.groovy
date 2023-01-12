@@ -70,7 +70,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompany == 'Yes') && GlobalVariable.FirstTimeEntry=="Yes") {
+if ((GlobalVariable.RoleCompany == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") {
+	
+	if((GlobalVariable.CheckRuleCompany == 'Yes')){
 	'Ambil nilai result dari rule credit fee'
 	HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
@@ -340,6 +342,13 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckRuleCompan
 		}
 	}
 }
+	
+	'get default rounding value dari db'
+	int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+	
+	'verify default rounding value'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
+}
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 	'input admin fee'
@@ -501,9 +510,13 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 		WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
 			Keys.chord(Keys.RIGHT, datafileTabFinancial.getValue(GlobalVariable.NumofColm, 38)), FailureHandling.OPTIONAL)
 		
+		WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'))
+		
+		WebUI.delay(2)
+		
 		'write to excel provision fee amount'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9.TabFinancialData',
-			38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '9.TabFinancialData',
+			38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(',','')))
 		
 	} else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
 		

@@ -67,16 +67,19 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).length()>0){
 'verify Rating Debitor'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).length() > 0){
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).length() > 0){
 'verify Rating institute code'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).length()>0){
 'convert date confins dan excel agar sama'
 SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
@@ -92,6 +95,7 @@ String sDate = sdf.format(parsedDate)
 
 'verify Rating Date'
 arrayMatch.add(WebUI.verifyMatch(sDate, resultotherattrlist[arrayindexlist++], false, FailureHandling.OPTIONAL))
+}
 
 'verify AFF with MF code'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlist[

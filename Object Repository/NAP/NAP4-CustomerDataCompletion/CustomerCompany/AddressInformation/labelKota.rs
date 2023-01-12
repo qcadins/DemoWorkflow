@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>labelKelurahanAssetOwner</name>
+   <name>labelKota</name>
    <tag></tag>
-   <elementGuidId>8b0b5bf8-efc0-4520-b4dd-dafc713c9689</elementGuidId>
+   <elementGuidId>7acf0797-9896-464d-b432-f8fc32b9c7ef</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[2]/div/input</value>
+         <value>//*[@id=&quot;Address&quot;]/div/div[1]/div[3]/div[4]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[2]/div/input</value>
+      <value>//*[@id=&quot;Address&quot;]/div/div[1]/div[3]/div[4]/div/input</value>
    </webElementProperties>
 </WebElementEntity>

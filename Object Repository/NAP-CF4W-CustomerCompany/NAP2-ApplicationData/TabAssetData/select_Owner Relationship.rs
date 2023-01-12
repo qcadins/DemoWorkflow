@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;userRelationship&quot;]</value>
+         <value>//*[@id=&quot;userRelationship&quot;][count(. | //*[@formcontrolname = 'MrOwnerRelationshipCode']) = count(//*[@formcontrolname = 'MrOwnerRelationshipCode'])]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -31,7 +31,7 @@
       <value>form-control ng-untouched ng-pristine ng-invalid</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
