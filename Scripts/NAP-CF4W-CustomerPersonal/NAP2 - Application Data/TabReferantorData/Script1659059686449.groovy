@@ -226,6 +226,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 								  }
 							  }
 							  i--
+							 continue
 						  }
 							'write to excel SUCCESS'
 							 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
