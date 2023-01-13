@@ -70,7 +70,9 @@ if (GlobalVariable.Role == 'Testing') {
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == 'Yes') && GlobalVariable.FirstTimeEntry=="Yes") {
+if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") {
+	
+	if(GlobalVariable.CheckRulePersonal == 'Yes'){
     'Ambil nilai result dari rule credit fee'
     HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
@@ -339,6 +341,8 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             }
         }
     }
+	}
+	
 	'get default rounding value dari db'
 	int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
 	
