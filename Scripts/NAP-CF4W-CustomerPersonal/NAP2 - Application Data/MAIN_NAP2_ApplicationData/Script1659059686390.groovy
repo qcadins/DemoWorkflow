@@ -99,7 +99,8 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileReferantor.getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab referantor'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab referantor
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab referantor
+            )
     } else if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
@@ -124,7 +125,8 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabApplication.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'Call test case tab application data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab application
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab application
+            )
     } else if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Save'))
@@ -151,7 +153,8 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab asset data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab asset
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab asset
+            )
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'input chasis number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'), 
@@ -213,7 +216,8 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab insurance'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab insurance
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab insurance
+            )
     } else if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -247,7 +251,8 @@ if (GlobalVariable.Role == 'Data Entry') {
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab life insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceData'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab life insurance
+            FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab life insurance
+            )
     } else if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
@@ -272,7 +277,8 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab financial'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //Dijalankan dengan copy app tab financial
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE //Dijalankan dengan copy app tab financial
+            )
     } else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click button calculate'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
@@ -302,7 +308,8 @@ if (GlobalVariable.Role == 'Data Entry') {
         10).equalsIgnoreCase('Edit')) {
         'call test case tab term condition'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
-            FailureHandling.CONTINUE_ON_FAILURE) //Dijalankan dengan copy app tab term&condition
+            FailureHandling.CONTINUE_ON_FAILURE //Dijalankan dengan copy app tab term&condition
+            )
     } else if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
@@ -338,7 +345,15 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileTabUploadDoc.getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab upload document'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app tab upload document
+        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab upload document
+            ) //dijalankan dengan copy app tab referantor
+        //dijalankan dengan copy app tab application
+        //dijalankan dengan copy app tab asset
+        //dijalankan dengan copy app tab insurance
+        //dijalankan dengan copy app tab life insurance
+        //Dijalankan dengan copy app tab financial
+        //Dijalankan dengan copy app tab term&condition
+        //dijalankan dengan copy app tab upload document
     } else if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button submit'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
@@ -360,14 +375,6 @@ if (GlobalVariable.Role == 'Data Entry') {
         'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah'
         verifyMatch()
     }
-    //dijalankan dengan copy app tab referantor
-    //dijalankan dengan copy app tab application
-    //dijalankan dengan copy app tab asset
-    //dijalankan dengan copy app tab insurance
-    //dijalankan dengan copy app tab life insurance
-    //Dijalankan dengan copy app tab financial
-    //Dijalankan dengan copy app tab term&condition
-    //dijalankan dengan copy app tab upload document
 } else {
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
     for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 

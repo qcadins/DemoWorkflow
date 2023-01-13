@@ -334,19 +334,21 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 			
 			GlobalVariable.FlagWarning++
 	}
-	'declare variabledata'
-	ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 	
-	'declare countdata'
-	int countData = variableData.size()
-	
-	'declare add'
-	int add=0
 	
 	//Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
 	'Looping excel referantor'
 	for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
 			
+		'declare variabledata'
+		ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+		
+		'declare countdata'
+		int countData = variableData.size()
+		
+		'declare add'
+		int add=0
+		
 			if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(
 				GlobalVariable.NumofColm, 13)) {
 				
@@ -453,6 +455,8 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 										writeReasonFailedDelete()
 									}
 									
+									
+									
 									continue
 								}
 								 
@@ -490,9 +494,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 							   'select bank account'
 							   WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(
 									   GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-				   
-							   'call function gettext bankaccount'
-							   getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 							   
 							   'select tax calculation method'
 							   WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(
@@ -525,7 +526,12 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 									   writeReasonFailedDelete()
 								   }
 								   
+								   
+								   
 								   continue
+							   }else{
+							   'call function gettext bankaccount'
+							   getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 							   }
 								   
 								'write to excel SUCCESS'
@@ -666,9 +672,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						'select bank account'
 						WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(
 								GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-			
-						'call function gettext bankaccount'
-						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 						
 						'select tax calculation method'
 						WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(
@@ -702,6 +705,9 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 							}
 							
 							continue
+						}else{
+						'call function gettext bankaccount'
+						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
 						}
 					
 					'write to excel SUCCESS'
@@ -858,9 +864,6 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 				'select bank account'
 				WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(
 						GlobalVariable.NumofReferantor, 16), FailureHandling.OPTIONAL)
-	
-				'call function gettext bankaccount'
-				getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select')
 				
 				'select tax calculation method'
 				WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(
@@ -894,6 +897,9 @@ if(datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase("
 					}
 					
 					continue
+				}else{
+				'call function gettext bankaccount'
+				getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select')
 				}
 				
 				//Testing
@@ -978,7 +984,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 }
 
 'check if role = testing & check store db = yes & status = success'
-if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor-1,  1) == 'SUCCESS') {
+if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes'))) {
     'call test case store db referantor data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
