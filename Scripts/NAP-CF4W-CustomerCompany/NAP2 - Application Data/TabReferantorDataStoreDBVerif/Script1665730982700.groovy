@@ -25,17 +25,20 @@ datafileReferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData
 'get custname from confins'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
+ArrayList<Boolean> vat = new ArrayList<>()
+vat = GlobalVariable.ReferantorVAT
+
 'call keyword NAP2TabReferantorStoreDB dari DB'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
 		GlobalVariable.StartIndex, 12), custname)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 	
-int arrayindex = 0, bankindex = 0
+int arrayindex = 0, bankindex = 0, vatindex = 0
 
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
-for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/6 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
+for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/7 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
 	'verify referantor category'
 	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
 			GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -56,6 +59,8 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 	'verify referantor tax calculation method'
 	arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
 			GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	arrayMatch.add(WebUI.verifyMatch(vat.get(vatindex++).toString(), (result[arrayindex++]).toString(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

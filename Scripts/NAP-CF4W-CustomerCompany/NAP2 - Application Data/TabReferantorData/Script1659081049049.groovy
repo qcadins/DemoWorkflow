@@ -120,6 +120,11 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             'modify select bank account'
             modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/select_BankAccount'), 
                 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select', true)
+			
+			modifycheckboxVAT = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_VAT'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[7]/input",true)
+			 
+			modifyReferantorType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/td_ReferantorType'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[4]",true)
+			
 
             'check if no data available'
             if (WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'), 
@@ -168,6 +173,17 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         'select tax calculation'
                         WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
+						
+						referantorType = WebUI.getText(modifyReferantorType)
+						
+						if(referantorType.equalsIgnoreCase("Customer Company")){
+							if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							   WebUI.check(modifycheckboxVAT)
+							}
+							else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+								WebUI.uncheck(modifycheckboxVAT)
+							}
+						}
 
                         'cek inputan mandatory apakah sudah terisi semua atau belum'
                         if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, 
@@ -202,7 +218,11 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                             }
                             
                             i--
+							continue
                         }
+							'write to excel SUCCESS'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+								0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
                         
                         break
                         //delete jika ada data pada confins, tetapi pada datafile tidak ada
@@ -298,6 +318,11 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                 'modify select bank account'
                 modifySelectBankAccount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/select_BankAccount'), 
                     'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select', true)
+				
+				modifycheckboxVAT = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_VAT'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[7]/input",true)
+				 
+				modifyReferantorType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/td_ReferantorType'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[4]",true)
+				
 
                 String refCategory
 
@@ -412,6 +437,17 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         'select tax calculation method'
                         WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
+						
+						referantorType = WebUI.getText(modifyReferantorType)
+						
+						if(referantorType.equalsIgnoreCase("Customer Company")){
+							if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							   WebUI.check(modifycheckboxVAT)
+							}
+							else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+								WebUI.uncheck(modifycheckboxVAT)
+							}
+						}
 
                         'cek inputan mandatory apakah sudah terisi semua atau belum'
                         if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, 
@@ -431,6 +467,9 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                             
                             continue
                         }
+							'write to excel SUCCESS'
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+								0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
                         
                         add = 0
                     }
@@ -572,6 +611,17 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             17), false, FailureHandling.OPTIONAL)
 
+					referantorType = WebUI.getText(modifyReferantorType)
+					
+					if(referantorType.equalsIgnoreCase("Customer Company")){
+						if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+						   WebUI.check(modifycheckboxVAT)
+						}
+						else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							WebUI.uncheck(modifycheckboxVAT)
+						}
+					}
+					
                     'cek inputan mandatory apakah sudah terisi semua atau belum'
                     if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, 
                         FailureHandling.OPTIONAL) || WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, 
@@ -638,6 +688,11 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             modifyButtonDelete = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Delete'), 
                 'xpath', 'equals', ('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[9]/a/i', 
                 true)
+			
+			modifycheckboxVAT = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_VAT'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+modifyObjectIndex+"]/td[7]/input",true)
+			 
+			modifyReferantorType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/td_ReferantorType'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+modifyObjectIndex+"]/td[4]",true)
+			
 
             'select referantor category'
             WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
@@ -746,6 +801,17 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             'select tax calculation method'
             WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                     17), false, FailureHandling.OPTIONAL)
+			
+			referantorType = WebUI.getText(modifyReferantorType)
+			
+			if(referantorType.equalsIgnoreCase("Customer Company")){
+				if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+				   WebUI.check(modifycheckboxVAT)
+				}
+				else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+					WebUI.uncheck(modifycheckboxVAT)
+				}
+			}
 
             'cek inputan mandatory apakah sudah terisi semua atau belum'
             if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, FailureHandling.OPTIONAL) || 
@@ -819,6 +885,8 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
         }
     }
 }
+
+addArrayVAT()
 
 GlobalVariable.NumofReferantor = GlobalVariable.StartIndex
 
@@ -955,3 +1023,19 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     }
 }
 
+public addArrayVAT(){
+	ArrayList<Boolean> isVat = new ArrayList<>()
+	'declare driver'
+	WebDriver driver = DriverFactory.getWebDriver()
+	def variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+	for(int i = 1;i<=variable.size();i++){
+		def modifycheckboxVAT = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_VAT'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+i+"]/td[7]/input",true)
+		if(WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
+			isVat.add(true)
+		}
+		else{
+			isVat.add(false)
+		}
+	}
+	GlobalVariable.ReferantorVAT = isVat
+}
