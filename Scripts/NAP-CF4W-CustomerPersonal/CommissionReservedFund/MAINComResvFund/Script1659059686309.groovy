@@ -42,7 +42,10 @@ datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 'Klik Commission Reserved Fund'
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
 
-WebUI.delay(5)
+WebUI.delay(10)
+
+'Klik Commission Reserved Fund'
+WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
 
 //Verify sort & paging
 pagingTesting()

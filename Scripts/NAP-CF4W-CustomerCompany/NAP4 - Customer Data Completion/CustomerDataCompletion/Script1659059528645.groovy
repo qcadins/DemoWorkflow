@@ -19,7 +19,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-not_run: WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
+WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
@@ -325,8 +325,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
     'write to excel if failed'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
-        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed) //Verify sort & paging
-    //	verif reset nap4
+        0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed //Verify sort & paging
+        ) //	verif reset nap4
 } else {
     'write to excel if success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 

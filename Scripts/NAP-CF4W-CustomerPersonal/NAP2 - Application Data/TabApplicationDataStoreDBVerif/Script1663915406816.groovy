@@ -124,36 +124,64 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify if copy address'
-if(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 30).length() > 0){
+if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 30).length() > 0){
 
+	address = 0
+	
 	'verify address'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify Rt'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify RW'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify Zipcode'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kecamatan'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kelurahan'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kota'
-	arrayMatch.add(WebUI.verifyMatch(datafileCustomerPersonal.getValue(
-			GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone area 1'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 1'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 1'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone area 2'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 2'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 2'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone area 3'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 3'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 3'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify fax area'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify fax number'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
 }else{
 
 	'verify address'
@@ -183,56 +211,57 @@ if(datafileTabApplication.getValue(
 	'verify kota'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 			GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+	'verify phone area 1'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 1'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 1'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone area 2'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 2'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 2'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone area 3'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone number 3'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify phone ext 3'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 46).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify fax area'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	'verify fax number'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+			GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
 }
-
-'verify phone area 1'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone number 1'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone ext 1'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone area 2'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone number 2'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone ext 2'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone area 3'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone number 3'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify phone ext 3'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 46).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify fax area'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify fax number'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
-		GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
 'verify Characteristic of credit'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 50).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(!(datafileTabApplication.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Lainnya'))){
 'verify previous number of aggrmnt'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 51).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -240,6 +269,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 'verify WOS'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 52).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 
 'verify economic sector code'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
@@ -253,9 +283,14 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 57).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify Date app data'
-arrayMatch.add(WebUI.verifyMatch(convertDateFormat(datafileTabApplication.getValue(
-			GlobalVariable.NumofColm, 58)), (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
+if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 58).length()>0){
+	'verify Date app data'
+	arrayMatch.add(WebUI.verifyMatch(convertDateFormat(datafileTabApplication.getValue(
+				GlobalVariable.NumofColm, 58)), (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
+}
+else{
+	attrindex++
+}
 
 'verify app data code'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(

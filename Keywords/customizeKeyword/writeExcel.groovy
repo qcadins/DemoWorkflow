@@ -116,4 +116,22 @@ public class writeExcel {
 		(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				1, colm - 1, reason)
 	}
+	
+	
+	@Keyword
+	public void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException{
+			  FileInputStream file = new FileInputStream (new File(filePath))
+			  XSSFWorkbook workbook = new XSSFWorkbook(file);
+			  XSSFSheet sheet = workbook.getSheet(sheetName);
+				
+			  XSSFRow row=sheet.createRow(0);
+				
+			  sheet.getRow(rowNo).createCell(collNo).setCellFormula(cellValue)
+				
+			  file.close();
+			  FileOutputStream outFile =new FileOutputStream(new File(filePath));
+			  workbook.write(outFile);
+			  outFile.close();
+			   
+	}
 }

@@ -102,8 +102,6 @@ if ((FamilyArray.size() > 0) && (datafileDupcheck.getValue(GlobalVariable.NumofC
             if (WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
-
-				CustomKeywords.'customizeKeyword.zoomKeyword.zoomOut'(20)
 				
                 'if role == testing'
                 if (GlobalVariable.Role == 'Testing') {

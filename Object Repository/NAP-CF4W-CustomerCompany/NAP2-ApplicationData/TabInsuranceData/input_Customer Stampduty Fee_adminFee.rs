@@ -7,10 +7,15 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@id='adminFee'])[2]</value>
+         <value>(//input[@id='adminFee'])[2]
+</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;insuranceFee&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/input[@id=&quot;adminFee&quot;][count(. | //*[@formcontrolname = 'CustStampDutyFeeAmt']) = count(//*[@formcontrolname = 'CustStampDutyFeeAmt'])]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,21 +32,21 @@
       <value>form-control ng-untouched ng-pristine ng-valid</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
       <value>CustStampDutyFeeAmt</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
       <value>adminFee</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>

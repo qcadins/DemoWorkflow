@@ -52,6 +52,9 @@ datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-Customer
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
 
+'click menu application data'
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+
 //Verify sort & paging
 pagingTesting()
 

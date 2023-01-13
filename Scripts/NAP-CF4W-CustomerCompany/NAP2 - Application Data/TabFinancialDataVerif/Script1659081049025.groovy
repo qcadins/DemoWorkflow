@@ -31,7 +31,7 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
+TestData datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
 
 'declare datafileTabApplication'
 datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
@@ -601,16 +601,22 @@ def num
 'convert payment frequency to number untuk penghitungan simulasi'
 if (payFreq == 'Monthly') {
 	num = "1"
+	
 } else if (payFreq == 'Bimonthly') {
 	num = "2"
+
 } else if (payFreq == 'Quarterly') {
 	num = "3"
+
 } else if (payFreq == 'Trimester') {
 	num = "4"
+
 } else if (payFreq == 'Semi Annually') {
 	num = "6"
+
 } else if (payFreq == 'Annually') {
 	num = "12"
+
 }
 
 'write payment frequency'
@@ -623,19 +629,19 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',6,4, Double.parseDouble('0'))
 
 'write admin fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkAdminFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write provision fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkProvisionFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write fiducia fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',9,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkFiduciaFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write notary fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',10,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkNotaryFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write other fee'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, appNo).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',12,4, Double.parseDouble(CustomKeywords.'financialData.checkRefYieldItem.checkOtherFee'(sqlConnectionLOS, datafileTabFinancial).replace(",","")))
 
 'write additional admin fee'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',13,4, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 22).replace(",","")))
@@ -684,26 +690,33 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	'write advance value'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,1, 1)
 	
+	'write to excel grace period number'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, 0)
+	
 	'get total ar from simulation'
-	totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 14)
+	totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 80)
 	
 	'get total interest from simulation'
-	totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 15)
+	totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 79)
 	
 	'get installment amount from simulation'
-	installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 14)
-	
-	'get ntf value from simulation'
-	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
-	
-	'get tdp from simulation'
-	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
+	installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 80)
 	
 	'write total AR ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',2,1, Double.parseDouble(totalAR.replace(",","")))
 	
 	'write besar angsuran ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
+	
+	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+	
+	WebUI.delay(5)
+	
+	'get ntf value from simulation'
+	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
+	
+	'get tdp from simulation'
+	TDP = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 15)
 	
 	'write total AR ke datafile'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(GlobalVariable.DataFilePath,'9.TabFinancialData',69,GlobalVariable.NumofColm-1, Double.parseDouble(totalAR.replace(",","")))
@@ -736,14 +749,17 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	
 	'Pengecekan grace period number dan type'
 	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+		'write to excel grace period number'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',15,4, 0)
+		
 		'get total ar'
-		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 80)
+		totalAR = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 14)
 		
 		'get total interest'
-		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 79)
+		totalInterest = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(5, 15)
 		
 		'get installment amount'
-		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 80)
+		installmentAmt = findTestData('Simulasi/Simulasi Angsuran Regular Fixed').getValue(2, 14)
 		
 	}
 	else if(gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&gracePeriodNum>0){
@@ -795,6 +811,10 @@ if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/
 	'write besar angsuran ke simualasi'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',16,1, Double.parseDouble(installmentAmt.replace(",","")))
 	
+	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+	
+	WebUI.delay(5)
+	
 	'get ntf value from excel'
 	NTFVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 7)
 	
@@ -845,7 +865,10 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".
 	
 'verify gross yield confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
-	
+
+'verify Flat rate'
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
+
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
 	',', '')

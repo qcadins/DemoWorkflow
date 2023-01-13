@@ -35,7 +35,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-App
 'get applaststep from confins'
 String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
-if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
+if(!appLastStep.equalsIgnoreCase("FINANCIAL DATA") && !appLastStep.equalsIgnoreCase("TERM AND CONDITION") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 

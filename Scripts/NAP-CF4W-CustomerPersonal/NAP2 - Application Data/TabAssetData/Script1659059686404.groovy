@@ -54,7 +54,7 @@ WebUI.delay(5)
 'get app last step from confins'
 String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
-if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && (GlobalVariable.FirstTimeEntry == 'Yes')) {
+if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && !(appLastStep.equalsIgnoreCase('ASSET & COLLATERAL DATA')) &&  (GlobalVariable.FirstTimeEntry == 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
 }
 
@@ -827,7 +827,7 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
         '7.TabAssetData')
 }
 
-WebUI.delay(3)
+WebUI.delay(13)
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'

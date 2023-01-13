@@ -26,6 +26,7 @@ import com.kms.katalon.core.annotation.Keyword
 
 public class verifyInsuranceData {
 
+	//keyword untuk perhitungan nilai premi (main dan additional) dan summary yang muncul pada confins
 	@Keyword
 	public verifyInsuranceCvgResult(){
 		BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0, totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0, capitalizeAmountResult=0
@@ -199,13 +200,19 @@ public class verifyInsuranceData {
 
 		}
 		ArrayList<BigDecimal> totalResult = new ArrayList<BigDecimal>()
+		
 		totalResult.add(totalMainPremiumResult)
+		
 		totalResult.add(totalAdditionalPremiumResult)
+		
 		totalResult.add(counterPaidByMF)
+		
 		totalResult.add(capitalizeAmountResult)
+		
 		return totalResult
 	}
 
+	//keyword untuk perhitungan nilai premi (main dan additional) dan summary yang muncul pada confins untuk settingan general partial
 	@Keyword
 	public verifyInsuranceCvgResultPartialCap(){
 		BigDecimal totalMainPremiumResult = 0, totalAdditionalPremiumResult = 0, totalFeeResult = 0, totalPremitoCustResult = 0, totalPremitoCustAftDiscountResult=0, capitalizeAmountResult=0
@@ -376,10 +383,15 @@ public class verifyInsuranceData {
 
 		}
 		ArrayList<BigDecimal> totalResult = new ArrayList<BigDecimal>()
+		
 		totalResult.add(totalMainPremiumResult)
+		
 		totalResult.add(totalAdditionalPremiumResult)
+		
 		totalResult.add(counterPaidByMF)
+		
 		totalResult.add(capitalizeAmountResult)
+		
 		return totalResult
 	}
 }

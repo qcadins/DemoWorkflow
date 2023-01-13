@@ -11,6 +11,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -23,6 +24,12 @@ int flagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
+'connect DB FOU'
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
+'connect DB LOS'
+Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
 'declare datafileCustomerPersonal'
 datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
 
@@ -34,6 +41,25 @@ if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
             'CUSTOMER', false, FailureHandling.OPTIONAL))
+	
+	'get cust model ddl value from db'
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelPersonal'(sqlConnectionFOU)
+	
+	'get total label from ddl cust model'
+	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'))
+
+	'verify total ddl cust model confins = total ddl db'
+	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+	
+	'verify isi ddl cust model confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'),
+		custmodel) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 //jika inputdata
@@ -276,6 +302,16 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek error alert muncul/tidak'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.TabCustomerMainData')
+	
+	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
+	
+	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS)
+	
+	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU)
+	
+	if(genset == 1 && (negcustLOS == 1 || negcustFOU == 1)){
+		KeywordUtil.markFailedAndStop('Failed Because Negative Customer')
+	}
 }
 
 if (GlobalVariable.FlagFailed == 0) {

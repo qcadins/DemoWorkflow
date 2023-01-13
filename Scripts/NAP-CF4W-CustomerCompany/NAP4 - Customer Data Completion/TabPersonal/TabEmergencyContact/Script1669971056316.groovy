@@ -96,6 +96,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
 
         'click button copy'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/button_Copy'))
+		
+		'call function get address'
+		getDataEmergencyContact()
     } else {
         'input address'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_TextAddress'), 
@@ -205,73 +208,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         (GlobalVariable.FlagFailed)++
     }
     
-    if (GlobalVariable.Role == 'Testing') {
+    if (GlobalVariable.RoleCompany == 'Testing') {
         'call function getdataemergencycontact'
         getDataEmergencyContact()
-
-        'get address'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_TextAddress'), 
-                'value'))
-
-        'get RT'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RT'), 
-                'value'))
-
-        'get RW'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RW'), 
-                'value'))
-
-        'get zipcode'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Zipcode'), 
-                'value'))
-
-        'get Kelurahan'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kelurahan'), 
-                'value'))
-
-        'get Kecamatan'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kecamatan'), 
-                'value'))
-
-        'get Kota'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kota'), 
-                'value'))
-
-        'input phone 1 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Area'), 
-                'value'))
-
-        'input phone 1'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Number'), 
-                'value'))
-
-        'input phone 1 ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Ext'), 
-                'value'))
-
-        'input phone 2 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Area'), 
-                'value'))
-
-        'input phone 2'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Number'), 
-                'value'))
-
-        'input phone 2 ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Ext'), 
-                'value'))
-
-        'input phone 3 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Area'), 
-                'value'))
-
-        'input phone 3'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Number'), 
-                'value'))
-
-        'input phone 3 Ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Ext'), 
-                'value'))
 
         'call tc emergencycontactdataverif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabEmergencyContactDataVerif'), 
@@ -291,76 +230,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgno
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/button_Copy'))
     }
     
-    if (GlobalVariable.Role == 'Testing') {
+    if (GlobalVariable.RoleCompany == 'Testing') {
         'call function getdataemergencycontact'
         getDataEmergencyContact()
-
-        'get address'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_TextAddress'), 
-                'value'))
-
-        'get RT'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RT'), 
-                'value'))
-
-        'get RW'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RW'), 
-                'value'))
-
-        'get zipcode'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Zipcode'), 
-                'value'))
-
-        'get Kelurahan'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kelurahan'), 
-                'value'))
-
-        'get Kecamatan'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kecamatan'), 
-                'value'))
-
-        'get Kota'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kota'), 
-                'value'))
-
-        'input phone 1 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Area'), 
-                'value'))
-
-        'input phone 1'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Number'), 
-                'value'))
-
-        'input phone 1 ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Ext'), 
-                'value'))
-
-        'input phone 2 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Area'), 
-                'value'))
-
-        'input phone 2'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Number'), 
-                'value'))
-
-        'input phone 2 ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Ext'), 
-                'value'))
-
-        'input phone 3 area'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Area'), 
-                'value'))
-
-        'input phone 3'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Number'), 
-                'value'))
-
-        'input phone 3 Ext'
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Ext'), 
-                'value'))
-
-        GlobalVariable.Confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_CustomerRelationship'), 
-                'value'))
     }
 }
 
@@ -409,6 +281,7 @@ if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStor
 def getDataEmergencyContact() {
     ArrayList<String> confinsdata = new ArrayList<String>()
 
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgnoreCase('LookUp')){
     'get name'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_ContactPersonName'), 
             'value'))
@@ -448,7 +321,77 @@ def getDataEmergencyContact() {
     'get mobile phone 2'
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_MobilePhone2'), 
             'value'))
+	}
+	
+	'get address'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_TextAddress'),
+			'value'))
 
+	'get RT'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RT'),
+			'value'))
+
+	'get RW'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_RW'),
+			'value'))
+
+	'get zipcode'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Zipcode'),
+			'value'))
+
+	'get Kelurahan'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kelurahan'),
+			'value'))
+
+	'get Kecamatan'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kecamatan'),
+			'value'))
+
+	'get Kota'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/label_Kota'),
+			'value'))
+
+	'input phone 1 area'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Area'),
+			'value'))
+
+	'input phone 1'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Number'),
+			'value'))
+
+	'input phone 1 ext'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone1_Ext'),
+			'value'))
+
+	'input phone 2 area'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Area'),
+			'value'))
+
+	'input phone 2'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Number'),
+			'value'))
+
+	'input phone 2 ext'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone2_Ext'),
+			'value'))
+
+	'input phone 3 area'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Area'),
+			'value'))
+
+	'input phone 3'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Number'),
+			'value'))
+
+	'input phone 3 Ext'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/input_Phone3_Ext'),
+			'value'))
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgnoreCase('LookUp')){
+	'select ownership'
+	confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_CustomerRelationship'),
+		'value'))
+	}
+	
     GlobalVariable.Confinsdata = confinsdata
 }
-

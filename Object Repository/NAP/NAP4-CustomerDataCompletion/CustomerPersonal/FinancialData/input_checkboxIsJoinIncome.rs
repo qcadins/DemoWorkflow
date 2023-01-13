@@ -6,11 +6,11 @@
    <elementGuidId>342a4669-1503-43a8-9257-b8dfb910eefb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>/html/body/ngb-modal-window/div/div/form/div[2]/div/div[10]/div/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/form/div[2]/div/div[9]/div/input</value>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

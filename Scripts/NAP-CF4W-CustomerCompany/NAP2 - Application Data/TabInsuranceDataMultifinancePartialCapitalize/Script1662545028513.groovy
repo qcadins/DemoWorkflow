@@ -39,6 +39,9 @@ ArrayList<String> arraysuminsured = new ArrayList<>()
 
 ArrayList<String> arrayaddpremi = new ArrayList<>()
 
+'Mengambil nilai setting insurance rate based on dari db'
+String insratebasesetting = CustomKeywords.'insuranceData.checkInsRateBase.checkInsuranceRateBasedOn'(sqlConnectionFOU)
+
 //dimana css_selector_name adalah elemen dari parent atas object yang ingin dilacak, dan div tergantung daripada bentuk element html tersebut
 'Menghitung count (size dari variabel) yang akan digunakan sebagai total banyaknya tahun pada insurance '
 int count = variable.size()
@@ -185,13 +188,11 @@ for (int i = 1; i <= count; i++) {
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
 			
-			'jika total risk only perlu select 2x lagi agar rate ke refresh'
-			if(mainCoverageValueArray[(i - 1)].equalsIgnoreCase('TOTAL RISK ONLY')){
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + 'ALL RISK', true)
+			
 			'Select opsi main coverage'
 			WebUI.selectOptionByLabel(mainCoverageObject, '(?i)' + (mainCoverageValueArray[(i - 1)]), true)
-			}
 			
 			WebUI.delay(3)
 		}
@@ -200,10 +201,19 @@ for (int i = 1; i <= count; i++) {
 	//Main Premi Rate
 	mainPremiRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Rate'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[7]/div/input",true)
 	
+	Integer cvgAmt
+	
+	if(insratebasesetting=="COVERAGE_AMT_AFT_DEPRECIATION"){
+		cvgAmt = Math.round(Double.parseDouble(covAmt)*Double.parseDouble(WebUI.getAttribute(sumInsuredPercentObject,'value').replace(" %",""))/100)
+	}
+	else{
+		cvgAmt = Integer.parseInt(covAmt)
+	}
+	
 	//Verif Main Premi Rate Based on Rule
 	if(GlobalVariable.RoleCompany=="Testing"  && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Mencari nilai main premi rate berdasarkan kondisi-kondisi pada rule excel'
-		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt)
+		HashMap<String,ArrayList> resultMainCvg = CustomKeywords.'insuranceData.verifyMainCvg.verifyMainPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt)
 		
 		modifyRandomObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/testobject'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[2]/td[5]",true)
 			
@@ -273,7 +283,7 @@ for (int i = 1; i <= count; i++) {
 	
 	if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-		result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,covAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+		result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt,WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
 		
 		addtCvgType = result.get("AddtCvg")
 		addtPremiRate = result.get("AddtRate")
@@ -402,7 +412,7 @@ for (int i = 1; i <= count; i++) {
 					'Pengecekan jika terdapat sum insured amount'
 					if(countSumInsuredAmount == 1){
 						'Verif sum insured amount yang dipilih pada confins sesuai dengan rule'
-						if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value'),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
+						if(WebUI.verifyMatch(WebUI.getAttribute(modifySumInsuredAmount,'value',FailureHandling.OPTIONAL),sumInsuredAmt.get(k),false, FailureHandling.OPTIONAL)){
 							'Verif additional premi rate sesuai dengan nilai dari rule'
 							if(WebUI.verifyEqual(Long.parseLong(WebUI.getAttribute(modifyAddtRateObject,'value').replace(",","")),Long.parseLong(addtPremiRate.get(k)))==false){
 								writeFailedReasonVerifyRule()

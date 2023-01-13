@@ -40,7 +40,7 @@ if (GlobalVariable.Role == 'Testing') {
             GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
             'click menu titik 3'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'), FailureHandling.OPTIONAL)
 
             'jika menu titik 3 disabled/enabled'
             if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/a_New Document'), 
@@ -110,11 +110,15 @@ else{
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 }
 
-'click menu consumer finance'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+	'click menu consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+}
 
-'click menu new consumer finance'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+if(WebUI.verifyElementNotVisible(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'), FailureHandling.OPTIONAL)){
+	'click menu new consumer finance'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+}
 
 'click menu Customer data completion paging'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/a_CUSTOMER DATA COMPLETION'))

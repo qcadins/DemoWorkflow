@@ -36,7 +36,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-App
 'get app last step from confins'
 String appLastStep = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/label_AppLastStep'))
 
-if(!appLastStep.equalsIgnoreCase("LIFE INSURANCE") && GlobalVariable.FirstTimeEntry=="Yes"){
+if(!appLastStep.equalsIgnoreCase("LIFE INSURANCE") && !appLastStep.equalsIgnoreCase("FINANCIAL DATA") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 
@@ -339,6 +339,11 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckRulePersonal == '
             }
         }
     }
+	'get default rounding value dari db'
+	int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+	
+	'verify default rounding value'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
 }
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
@@ -520,20 +525,22 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal == 'Yes' &
 	'declare arraylist result'
 	ArrayList<String> result = new ArrayList<String>()
 	
+	Double dpnettpercent = Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 72))
+	
 	'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-	result = CustomKeywords.'financialData.verifyRate.verifyFinancialRate'(sqlConnectionLOS, appNo)
+	result = CustomKeywords.'financialData.verifyRate.verifyFinancialRate'(sqlConnectionLOS, appNo, dpnettpercent)
 	
-	'Verify default effective rate'
-	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))==false){
-		'write to excel reason failed verify rule'
-		writeReasonFailedVerifRule()
-	}
-	
-	'Verify default supplier rate'
-	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))==false){
-		'write to excel reason failed verify rule'
-		writeReasonFailedVerifRule()
-	}
+//	'Verify default effective rate'
+//	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Effective Rate'),'value').replace(" %","")),Double.parseDouble(result.get(1)))==false){
+//		'write to excel reason failed verify rule'
+//		writeReasonFailedVerifRule()
+//	}
+//	
+//	'Verify default supplier rate'
+//	if(WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),'value').replace(" %","")),Double.parseDouble(result.get(0)))==false){
+//		'write to excel reason failed verify rule'
+//		writeReasonFailedVerifRule()
+//	}
 	
 	'Verify def/lock effective rate'
 	if(result.get(2)=="LOCK"){

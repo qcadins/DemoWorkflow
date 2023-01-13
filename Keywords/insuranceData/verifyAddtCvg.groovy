@@ -26,7 +26,9 @@ public class verifyAddtCvg {
 	@Keyword
 	public verifyAddtPremiRate(Sql instanceLOS, Sql instanceFOU, String appNo, String inscoBranchName, String region, String covAmt, String mainCvgType, String yearNo){
 		HashMap<String,ArrayList> result = new HashMap<>()
+		
 		ArrayList<String> sumInsuredAmt = new ArrayList<>()
+		
 		ArrayList<String> addtPremiRate = new ArrayList<>()
 
 		ArrayList<String> addtCvgType = new ArrayList<>()
@@ -109,6 +111,7 @@ public class verifyAddtCvg {
 		inscoHORow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'RuleAddCvg', inscoHOCode)+1
 
 		def ruleAddtCvg = findTestData('DownloadRule/InsuranceAddtCvgRule')
+		
 		Integer assetAge = Integer.parseInt(GlobalVariable.BDYear)-Integer.parseInt(year)+(Integer.parseInt(yearNo)-1)
 
 		int match = 0 , sameAssetCat = 0
@@ -116,50 +119,62 @@ public class verifyAddtCvg {
 		String tempAddtCvg = ""
 
 		for(int i = inscoHORow;i<=ruleAddtCvg.getRowNumbers();i++){
+			
 			if(ruleAddtCvg.getValue(1,i)!=inscoHOCode && ruleAddtCvg.getValue(1,i)!=""){
 				match=0
 			}
+			
 			if(ruleAddtCvg.getValue(1,i)==inscoHOCode || (match>=1 && ruleAddtCvg.getValue(1,i)=="")){
 				if(match==0){
 					match = 1
 				}
+				
 				if(ruleAddtCvg.getValue(4,i)==insAssetCategory){
 					sameAssetCat=1
 				}
 				else if(ruleAddtCvg.getValue(4,i)!=insAssetCategory&&ruleAddtCvg.getValue(4,i)!=""){
 					sameAssetCat=0
 				}
+				
 				if(ruleAddtCvg.getValue(5,i)!=mainCvgType && ruleAddtCvg.getValue(5,i)!=""){
 					match = 1
 				}
+				
 				if(ruleAddtCvg.getValue(5,i)==mainCvgType||match==2 && ruleAddtCvg.getValue(5,i)==""){
 					if(match==1){
 						match = 2
 					}
+					
 					if((ruleAddtCvg.getValue(2,i)==inscoBranchCode || ruleAddtCvg.getValue(2,i)=="-")
 					&& (ruleAddtCvg.getValue(3,i)==region || ruleAddtCvg.getValue(3,i)=="-") && (ruleAddtCvg.getValue(4,i)==insAssetCategory || ruleAddtCvg.getValue(4,i)=="-" || (sameAssetCat==1 && ruleAddtCvg.getValue(4,i)==""))
 					&& Long.parseLong(ruleAddtCvg.getValue(6,i))<=Long.parseLong(covAmt) && Long.parseLong(ruleAddtCvg.getValue(7,i))>=Long.parseLong(covAmt)){
+						
 						sameAssetCat = 1
+						
 						if(ruleAddtCvg.getValue(8,i)!=tempAddtCvg){
 							addtCvg.add(ruleAddtCvg.getValue(8,i))
+							
 							tempAddtCvg = ruleAddtCvg.getValue(8,i)
 						}
+						
 						if((ruleAddtCvg.getValue(10,i)!="0" && Integer.parseInt(ruleAddtCvg.getValue(9,i))<=assetAge
 						&& Integer.parseInt(ruleAddtCvg.getValue(10,i))>=assetAge)||ruleAddtCvg.getValue(10,i)=="0"){
+							
 							if(ruleAddtCvg.getValue(11,i)=="PRCNT"){
 								addtCvgType.add(ruleAddtCvg.getValue(8,i))
+								
 								addtPremiRate.add(ruleAddtCvg.getValue(13,i))
+								
 								sumInsuredAmt.add(ruleAddtCvg.getValue(14,i))
-								println(ruleAddtCvg.getValue(8,i))
-								println(ruleAddtCvg.getValue(13,i))
+					
 							}
 							else if(ruleAddtCvg.getValue(11,i)=="AMT"){
 								addtCvgType.add(ruleAddtCvg.getValue(8,i))
+								
 								addtPremiRate.add(ruleAddtCvg.getValue(16,i))
+								
 								sumInsuredAmt.add(ruleAddtCvg.getValue(14,i))
-								println(ruleAddtCvg.getValue(8,i))
-								println(ruleAddtCvg.getValue(16,i))
-								println(ruleAddtCvg.getValue(14,i))
+					
 							}
 						}
 					}
@@ -167,13 +182,18 @@ public class verifyAddtCvg {
 			}
 			else if((ruleAddtCvg.getValue(1,i)=="" && ruleAddtCvg.getValue(2,i)=="" && ruleAddtCvg.getValue(3,i)=="")
 			|| match==0){
+				
 				break
 			}
 		}
 		result.put("AddtCvg",addtCvgType)
+		
 		result.put("AddtRate",addtPremiRate)
+		
 		result.put("SumInsuredAmt",sumInsuredAmt)
+		
 		result.put("AddCvgList",addtCvg)
+		
 		return result
 	}
 
@@ -181,9 +201,11 @@ public class verifyAddtCvg {
 	@Keyword
 	public checkAddtCvgCode(Sql instanceLOS, String addtName){
 		String refcode
+		
 		instanceLOS.eachRow(("select ref_master_code from REF_MASTER_LOS where REF_MASTER_TYPE_CODE = 'INS_ADD_CVG_TYPE' and is_active=1 and ref_master_name = '"+addtName+"'"), { def row ->
 			refcode = row[0]
 		})
+		
 		return refcode
 	}
 }

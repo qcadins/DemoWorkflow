@@ -21,6 +21,9 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation')
 
+'delay supaya section address info keload'
+WebUI.delay(3)
+
 'input name'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Name_'), 
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12))

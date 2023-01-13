@@ -24,7 +24,7 @@ public class verifyRate {
 
 
 	@Keyword
-	public verifyFinancialRate(Sql instanceLOS, String appNo){
+	public verifyFinancialRate(Sql instanceLOS, String appNo, Double dpnettpercent){
 		ArrayList<String> result = new ArrayList<>()
 		String supplRate,efRate,efBhv
 
@@ -92,10 +92,11 @@ public class verifyRate {
 			if(((ruleRate.getValue(1,i)=="" && matchLOB==1) || matchLOB==1) && ((ruleRate.getValue(2,i)=="" && matchOfficeCode==1) || matchOfficeCode==1)
 			&& ((ruleRate.getValue(3,i)=="" && matchFullAsset==1) || matchFullAsset==1) && ((ruleRate.getValue(4,i)=="" && matchAssetCondition==1) || matchAssetCondition==1) && ((ruleRate.getValue(5,i)=="" && matchFirstInst==1) || matchFirstInst==1)
 			&& Double.parseDouble(asPrice) > Double.parseDouble(ruleRate.getValue(6,i).replace(",","")) && Double.parseDouble(asPrice) <= Double.parseDouble(ruleRate.getValue(7,i).replace(",",""))
-			&& Integer.parseInt(tenor) > Integer.parseInt(ruleRate.getValue(8,i)) && Integer.parseInt(tenor) <= Integer.parseInt(ruleRate.getValue(9,i))){
-				supplRate = ruleRate.getValue(10,i)
-				efRate = ruleRate.getValue(11,i)
-				efBhv = ruleRate.getValue(12,i)
+			&& Integer.parseInt(tenor) > Integer.parseInt(ruleRate.getValue(8,i)) && Integer.parseInt(tenor) <= Integer.parseInt(ruleRate.getValue(9,i))
+			&& dpnettpercent > Double.parseDouble(ruleRate.getValue(10,i)) && dpnettpercent <= Double.parseDouble(ruleRate.getValue(11,i)) ){
+				supplRate = ruleRate.getValue(12,i)
+				efRate = ruleRate.getValue(13,i)
+				efBhv = ruleRate.getValue(14,i)
 				break
 			}
 			else if((ruleRate.getValue(1,i)=="" && ruleRate.getValue(2,i)=="" && ruleRate.getValue(3,i)=="" && ruleRate.getValue(4,i)=="" && ruleRate.getValue(5,i)=="" && ruleRate.getValue(6,i)=="")){

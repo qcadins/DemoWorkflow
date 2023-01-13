@@ -47,7 +47,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/input_Job Title Name'), 
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 40))
 
-if(GlobalVariable.APPSTEP == 'CUSTOMER'){
+if(GlobalVariable.APPSTEP == 'CUSTOMER' && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 126)=="Yes"){
 'Click check ekyc'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
 }
@@ -55,3 +55,6 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 'klik button save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/button_Save  Continue'))
 
+if(GlobalVariable.APPSTEP == 'CUSTOMER' && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 126)=="No"){
+	WebUI.acceptAlert(FailureHandling.OPTIONAL)
+}

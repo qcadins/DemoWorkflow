@@ -43,9 +43,14 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Paid in Advance & Capitalized Mix')){
 'verify premium percentage'
 arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
 		GlobalVariable.NumofColm, 15).replace('%',''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+'skip'
+arrayindex++
+}
 
 'verify notes'
 arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(

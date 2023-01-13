@@ -13,6 +13,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
@@ -36,6 +38,87 @@ if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 	
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+}
+
+if(GlobalVariable.Role == 'Testing'){
+	'connect DB LOS'
+	Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+	
+	'get salutation ddl value from db'
+	ArrayList<String> salutation = CustomKeywords.'dbConnection.checkCustomer.checkSalutation'(sqlConnectionLOS)
+	
+	'get nationality ddl value from db'
+	ArrayList<String> nationality = CustomKeywords.'dbConnection.checkCustomer.checkNationality'(sqlConnectionLOS)
+	
+	'get education ddl value from db'
+	ArrayList<String> education = CustomKeywords.'dbConnection.checkCustomer.checkEducation'(sqlConnectionLOS)
+	
+	'get religion ddl value from db'
+	ArrayList<String> religion = CustomKeywords.'dbConnection.checkCustomer.checkReligion'(sqlConnectionLOS)
+	
+	'get total label from ddl salutation'
+	int totalddlsalutation = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_MrMrsMs'))
+	
+	'get total label from ddl nationality'
+	int totalddlnationality = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_ForeignerLocal'))
+
+	'get total label from ddl education'
+	int totalddleducation = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_S1S2S3SDSMASMP'))
+	
+	'get total label from ddl religion'
+	int totalddlreligion = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_AGAMA'))
+	
+	'verify total ddl salutation confins = total ddl db'
+	WebUI.verifyEqual(totalddlsalutation, salutation.size())
+	
+	'verify total ddl nationality confins = total ddl db'
+	WebUI.verifyEqual(totalddlnationality, nationality.size())
+	
+	'verify total ddl education confins = total ddl db'
+	WebUI.verifyEqual(totalddleducation, education.size())
+	
+	'verify total ddl religion confins = total ddl db'
+	WebUI.verifyEqual(totalddlreligion, religion.size())
+	
+	'verify isi ddl salutation confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_MrMrsMs'),
+		salutation) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Salutation')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'verify isi ddl nationality confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_ForeignerLocal'),
+			nationality) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'nationality')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl education confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_S1S2S3SDSMASMP'),
+			education) == false) {
+				
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'education')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl religion confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_AGAMA'),
+			religion) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'religion')
+		
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 'input gelar nama depan'
