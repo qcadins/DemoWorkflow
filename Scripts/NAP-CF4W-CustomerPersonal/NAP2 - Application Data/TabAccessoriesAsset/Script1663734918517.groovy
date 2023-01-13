@@ -215,7 +215,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 						  break
 						  }
 						  else{
-							  if(datafileAccessories.getValue(GlobalVariable.NumofAccessories + 1, 12) != datafileCustomerCompany.getValue(
+							  if(datafileAccessories.getValue(GlobalVariable.NumofAccessories + 1, 12) != datafileCustomerPersonal.getValue(
 								  GlobalVariable.NumofColm, 13)){
 								  'Jika pada confins accessories ada data seblumnya'
 								  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
@@ -864,7 +864,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 }
 
 def countAccessoriesDP(){
-	if(GlobalVariable.RoleCompany=="Testing"){
+	if(GlobalVariable.Role=="Testing"){
 		'get attribute accessories price dari confins'
 		AccessoriesPrice = WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value').split(',').join()
 						  

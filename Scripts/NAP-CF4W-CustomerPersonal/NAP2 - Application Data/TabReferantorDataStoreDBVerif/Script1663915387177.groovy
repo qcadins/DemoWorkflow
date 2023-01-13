@@ -31,15 +31,18 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Ta
 
 'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+ArrayList<Boolean> vat = new ArrayList<>()
+vat = GlobalVariable.ReferantorVAT
 	
 'declare arrayindex, bankindex'
-int arrayindex = 0, bankindex = 0
+int arrayindex = 0, bankindex = 0, vatindex = 0
 
 'declare bankaccount'
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 'looping referantor data verif'
-for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/6 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
+for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/7 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
@@ -54,6 +57,8 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 
     arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
             GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	arrayMatch.add(WebUI.verifyMatch(vat.get(vatindex++).toString(), (result[arrayindex++]).toString(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
