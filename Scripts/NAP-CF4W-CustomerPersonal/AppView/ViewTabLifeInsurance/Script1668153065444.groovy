@@ -35,7 +35,7 @@ WebUI.click(findTestObject('Object Repository/AppView/LifeInsurance/LifeInsuranc
 if(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut)==false){
 	GlobalVariable.FlagWarning = 1
 	'write to excel status warning'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'7. LifeInsurance')
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.writeWarningAppView'(GlobalVariable.NumofColm,'8. LifeInsurance')
 }
 
 'get appno from confins'
@@ -126,18 +126,18 @@ if(resultLIObject.size()>0 && resultLIObject !=null && variableData.size()>0){
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
 	'write to excel status success'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. LifeInsurance', 0, GlobalVariable.NumofColm -
 		1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		'write to excel status failed'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 0, GlobalVariable.NumofColm -
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. LifeInsurance', 0, GlobalVariable.NumofColm -
 			1, GlobalVariable.StatusFailed)
 
 		'write to excel reason failed verify equal or match'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7. LifeInsurance', 1, GlobalVariable.NumofColm -
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '8. LifeInsurance', 1, GlobalVariable.NumofColm -
 			1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed = 1
