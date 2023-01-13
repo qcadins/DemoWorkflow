@@ -22,6 +22,9 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
 'get text custname'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
@@ -43,11 +46,10 @@ def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 'looping referantor data verif'
 for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/7 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
@@ -55,10 +57,10 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 	
 	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	arrayMatch.add(WebUI.verifyMatch(vat.get(vatindex++).toString(), (result[arrayindex++]).toString(), false, FailureHandling.OPTIONAL))
+	}
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
