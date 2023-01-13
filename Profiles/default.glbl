@@ -584,4 +584,9 @@
       <initValue>'Dupcheck gagal'</initValue>
       <name>ReasonFailedDupcheck</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
+      <name>ReferantorVAT</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
