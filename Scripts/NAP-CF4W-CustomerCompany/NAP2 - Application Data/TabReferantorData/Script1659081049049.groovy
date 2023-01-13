@@ -227,44 +227,45 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         break
                         //delete jika ada data pada confins, tetapi pada datafile tidak ada
                     } else {
-                        'Jika pada confins ada datanya'
-                        if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'), 
-                                FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-                            'get referantor name'
-                            referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-
-                            'Click delete'
-                            WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
-
-                            if (i == variable.size()) {
-                                if (WebUI.verifyElementPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                                    'add cust name failed kedalam array'
-                                    referantorfaileddelete.add(referantornamebefore)
-                                }
-                            } else {
-                                'get cust name sebelum delete'
-                                referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
-
-                                if (WebUI.verifyMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)) {
-                                    'add cust name failed kedalam array'
-                                    referantorfaileddelete.add(referantornamebefore)
-                                }
-                            }
-                            
-                            'count ulang table referantor'
-                            variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-
-                            i--
-
-                            if ((i == variable.size()) && (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 
-                                1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))) {
-                                break
-                            }
-                        } else {
-                            break
-                        }
+                       	continue
                     }
                 } else {
+					'Jika pada confins ada datanya'
+					if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/TableReferantornodata'),
+							FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
+						'get referantor name'
+						referantornamebefore = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+	
+						'Click delete'
+						WebUI.click(modifyButtonDelete, FailureHandling.OPTIONAL)
+	
+						if (i == variable.size()) {
+							if (WebUI.verifyElementPresent(modifyObjectReferantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+								'add cust name failed kedalam array'
+								referantorfaileddelete.add(referantornamebefore)
+							}
+						} else {
+							'get cust name sebelum delete'
+							referantornameafter = WebUI.getAttribute(modifyObjectReferantorName, 'value', FailureHandling.OPTIONAL)
+	
+							if (WebUI.verifyMatch(referantornameafter, referantornamebefore, false, FailureHandling.OPTIONAL)) {
+								'add cust name failed kedalam array'
+								referantorfaileddelete.add(referantornamebefore)
+							}
+						}
+						
+						'count ulang table referantor'
+						variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+	
+						i--
+	
+						if ((i == variable.size()) && (datafileReferantor.getValue(GlobalVariable.NumofReferantor +
+							1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))) {
+							break
+						}
+					} else {
+						break
+					}
                     break
                 }
             }
