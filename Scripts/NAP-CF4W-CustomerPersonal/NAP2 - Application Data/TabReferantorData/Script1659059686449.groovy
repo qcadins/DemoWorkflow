@@ -158,6 +158,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						  'call function gettext bankaccount'
 						  getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
 						  
+						  'write to excel SUCCESS'
+						  CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							  0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
+						  
 						  break
 					  }
 						  

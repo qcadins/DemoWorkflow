@@ -151,6 +151,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						'call function gettext bankaccount'
 						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
 						
+						'write to excel SUCCESS'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
+						
 						break
 					}
 				
@@ -204,6 +208,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                             i--
                         }
                         
+						'write to excel SUCCESS'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
+							
                         break
                         //delete jika ada data pada confins, tetapi pada datafile tidak ada
                     } else {
@@ -236,10 +244,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 
                             i--
 
-                            if ((i == variable.size()) && (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 
-                                1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))) {
+//                            if ((i == variable.size()) && (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 
+//                                1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))) {
                                 break
-                            }
+//                            }
                         } else {
                             break
                         }
@@ -413,6 +421,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
 
+						'write to excel SUCCESS'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
+						
                         'cek inputan mandatory apakah sudah terisi semua atau belum'
                         if ((WebUI.verifyOptionSelectedByIndex(modifyObjectSelectReferantorCategory, 0, GlobalVariable.TimeOut, 
                             FailureHandling.OPTIONAL) || WebUI.verifyOptionSelectedByIndex(modifySelectBankAccount, 0, GlobalVariable.TimeOut, 
