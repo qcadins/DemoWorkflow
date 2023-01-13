@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>labelCMOOfficer</name>
+   <tag></tag>
+   <elementGuidId>56e4b884-6908-4066-8c96-4bba1133f4ec</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[1]/span/div/div[1]/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;SalesInfoId&quot;]/div/div[1]/span/div/div[1]/label</value>
+   </webElementProperties>
+</WebElementEntity>
