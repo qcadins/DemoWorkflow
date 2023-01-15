@@ -33,6 +33,7 @@ public class verifyFee {
 		ArrayList<String> feeBhv = new ArrayList<>()
 		ArrayList<String> feecapType = new ArrayList<>()
 		ArrayList<String> feecap = new ArrayList<>()
+		ArrayList<String> stdFee = new ArrayList<>()
 		//		ArrayList<String> feecapPctg = new ArrayList<>()
 		String appId, lobCode, oriOfficeCode, tenor, asPrice
 
@@ -78,9 +79,11 @@ public class verifyFee {
 					feeType.add(ruleFee.getValue(8,i))
 					if(ruleFee.getValue(8,i)=="AMT"){
 						fee.add(ruleFee.getValue(10,i))
+						stdFee.add(ruleFee.getValue(9,i))
 					}
 					else if(ruleFee.getValue(8,i)=="PRCNT"){
 						fee.add(ruleFee.getValue(12,i))
+						stdFee.add(ruleFee.getValue(11,i))
 					}
 					feeBhv.add(ruleFee.getValue(13,i))
 					feecapType.add(ruleFee.getValue(18,i))
@@ -105,9 +108,82 @@ public class verifyFee {
 		result.put("feeBhv",feeBhv)
 		result.put("feecapType",feecapType)
 		result.put("feecap",feecap)
+		result.put("stdFee",stdFee)
 		return result
 
 	}
+
+	//	//keyword check standard fee from rule
+	//	public checkStdFee(Sql instanceLOS, String appNo){
+	//		HashMap<String,ArrayList> result = new HashMap<>()
+	//		ArrayList<String> listFee = new ArrayList<>()
+	//		ArrayList<String> feeType = new ArrayList<>()
+	//		ArrayList<String> stdFee = new ArrayList<>()
+	//		String appId, lobCode, oriOfficeCode, tenor, asPrice
+	//
+	//		instanceLOS.eachRow(("select app_id,lob_code, ori_office_code, tenor from app where app_no = '"+appNo+"'"), { def row ->
+	//			appId = row[0]
+	//			lobCode = row[1]
+	//			oriOfficeCode = row[2]
+	//			tenor = row[3]
+	//		})
+	//
+	//		instanceLOS.eachRow(("select TOTAL_ASSET_PRICE_AMT from APP_FIN_DATA where app_id = '"+appId+"'"), { def row ->
+	//			asPrice = row[0]
+	//		})
+	//
+	//		String userDir = System.getProperty('user.dir')
+	//		String filePath = userDir+GlobalVariable.FinancialFeeRulePath
+	//
+	//		Integer lobCodeRow = -1
+	//		lobCodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'CreditFee', lobCode)+1
+	//
+	//		def ruleFee = findTestData('DownloadRule/FinancialFeeRule')
+	//
+	//		int matchLOB = 0, matchOfficeCode = 0
+	//
+	//		for(int i = lobCodeRow;i<=ruleFee.getRowNumbers();i++){
+	//			if(ruleFee.getValue(1,i)!=lobCode && ruleFee.getValue(1,i)!="" && ruleFee.getValue(1,i)!="-"){
+	//				matchLOB=0
+	//			}
+	//			if(ruleFee.getValue(1,i)==lobCode || (matchLOB==1 && ruleFee.getValue(1,i)=="") || ruleFee.getValue(1,i)=="-"){
+	//				if(matchLOB==0){
+	//					matchLOB=1
+	//				}
+	//				if(ruleFee.getValue(2,i)==oriOfficeCode || ruleFee.getValue(2,i)=="-"){
+	//					matchOfficeCode = 1
+	//				}
+	//				else if(ruleFee.getValue(2,i)!=oriOfficeCode && ruleFee.getValue(2,i)!="" && ruleFee.getValue(2,i)!="-"){
+	//					matchOfficeCode = 0
+	//				}
+	//				if(((ruleFee.getValue(2,i)=="" && matchOfficeCode==1) || matchOfficeCode==1) && Integer.parseInt(tenor)>Integer.parseInt(ruleFee.getValue(3,i)) &&
+	//				Integer.parseInt(tenor)<=Integer.parseInt(ruleFee.getValue(4,i)) && Double.parseDouble(asPrice)>Double.parseDouble(ruleFee.getValue(5,i).replace(",","")) &&
+	//				Double.parseDouble(asPrice)<=Double.parseDouble(ruleFee.getValue(6,i).replace(",","")) ){
+	//					listFee.add(ruleFee.getValue(7,i))
+	//					feeType.add(ruleFee.getValue(8,i))
+	//					if(ruleFee.getValue(8,i)=="AMT"){
+	//						stdFee.add(ruleFee.getValue(9,i))
+	//					}
+	//					else if(ruleFee.getValue(8,i)=="PRCNT"){
+	//						stdFee.add(ruleFee.getValue(11,i))
+	//					}
+	//
+	//				}
+	//			}
+	//			else if((ruleFee.getValue(1,i)=="" && ruleFee.getValue(2,i)=="" && ruleFee.getValue(3,i)=="" && ruleFee.getValue(4,i)=="" && ruleFee.getValue(5,i)=="" && ruleFee.getValue(6,i)=="")
+	//			|| matchLOB==0){
+	//				break
+	//			}
+	//		}
+	//
+	//		result.put("listFee",listFee)
+	//		result.put("feeType",feeType)
+	//		result.put("stdFee",stdFee)
+	//
+	//		return result
+	//	}
+
+
 
 	//keyword check fee code
 	@Keyword
