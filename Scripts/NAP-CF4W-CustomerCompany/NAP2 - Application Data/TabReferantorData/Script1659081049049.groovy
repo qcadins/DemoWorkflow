@@ -156,6 +156,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 						'call function gettext bankaccount'
 						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
 						
+						'write to excel SUCCESS'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
+							0, GlobalVariable.NumofReferantor - 1, GlobalVariable.StatusSuccess)
+						
 						break
 					}
 				
@@ -280,16 +284,17 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
         (GlobalVariable.FlagWarning)++
     }
     
-    ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
-
-    int countData = variableData.size()
-
-    int add = 0
-
     //Add data jika pada confins tidak ada datanya (yang mau diadd), tetapi pada excel ada
     'Looping excel referantor'
     for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 
     1); (GlobalVariable.NumofReferantor)++) {
+
+		ArrayList<WebElement> variableData = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
+
+		int countData = variableData.size()
+		
+		int add = 0
+		
         if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
             13)) {
             'Looping confins referantor'
@@ -324,7 +329,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 				 
 				modifyReferantorType = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/td_ReferantorType'),'xpath','equals',"//*[@id='accessoriesData']/div[2]/table/tbody/tr["+j+"]/td[4]",true)
 				
-
                 String refCategory
 
                 String referantorCode
@@ -395,6 +399,8 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                                 writeReasonFailedDelete()
                             }
                             
+							
+							
                             continue
                         }
                         
@@ -432,9 +438,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 16), FailureHandling.OPTIONAL)
 
-                        'call function gettext bankaccount'
-                        getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
-
                         'select tax calculation method'
                         WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
@@ -465,8 +468,13 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                             if (WebUI.verifyElementPresent(modifyButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                                 writeReasonFailedDelete()
                             }
-                            
+
+						
+							
                             continue
+                        }else{
+						'call function gettext bankaccount'
+						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
                         }
 							'write to excel SUCCESS'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData',
@@ -605,9 +613,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             16), FailureHandling.OPTIONAL)
 
-                    'call function gettext bankaccount'
-                    getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
-
                     'select tax calculation method'
                     WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
                             17), false, FailureHandling.OPTIONAL)
@@ -639,7 +644,10 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                             writeReasonFailedDelete()
                         }
                         
-                        continue
+                        break
+                    }else{
+					'call function gettext bankaccount'
+					getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + j) + ']/td[5]/select')
                     }
                     
                     'write to excel SUCCESS'
@@ -889,8 +897,6 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 
 addArrayVAT()
 
-GlobalVariable.NumofReferantor = GlobalVariable.StartIndex
-
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
@@ -909,7 +915,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 }
 
 'check if role = testing & check store db = yes & status = success'
-if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) && findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor,  1) == 'SUCCESS') {
+if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes'))) {
     'call test case store db referantor data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), [:], 
         FailureHandling.CONTINUE_ON_FAILURE)
