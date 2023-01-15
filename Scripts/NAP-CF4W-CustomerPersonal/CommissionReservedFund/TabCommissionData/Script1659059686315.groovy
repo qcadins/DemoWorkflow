@@ -68,14 +68,16 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		ArrayList<String> refundFrom = result.get("From")
 		ArrayList<String> refundAmt = result.get("Amt")
 		
+		Integer resultMA = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.verifyMaxAllocation'(sqlConnectionLOS,appNo)
+		
 		'Looping untuk set nilai awal 0 untuk total amount allocate commission dan verif income info berdasarkan rule file'
 		for (int i = 0; i < countIncomeInfo; i++) {
 			TotalAllocateCommissionAmt.add(0.00)
 		
 			'Pengcekan max allocated amount x remaining allocated amount'
 			if(i==countIncomeInfo-1){
-//				'modify max allocated amount'
-//				modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
+				'modify max allocated amount'
+				modifyObjectMaxAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_MaxAllocatedAmtIncome'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
 //				
 //				'modify remaining allocated amount'
 //				modifyObjectRemainingAllocatedAmount = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_RemainingAllocatedAmount'),'xpath','equals',"//*[@id='viewRemainIncomeInfo']/div["+(i+1)+"]/div[2]/label",true)
@@ -83,6 +85,9 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 //				'cek max allocated amount = remaining allocated amount before calculate'
 //				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
 //					GlobalVariable.NumofColm)
+				
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'13.TabCommissionData',
+					GlobalVariable.NumofColm)
 				
 				break
 			}

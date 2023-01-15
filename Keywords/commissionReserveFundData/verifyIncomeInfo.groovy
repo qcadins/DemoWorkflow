@@ -132,4 +132,77 @@ public class verifyIncomeInfo {
 		}
 		return value
 	}
+	
+	@Keyword
+	public verifyMaxAllocation(Sql instanceLOS, String appNo){
+		String lobCode
+		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
+			lobCode = row[0]
+		})
+		
+		ArrayList<String> maxrefundAmt = new ArrayList<>()
+		String userDir = System.getProperty('user.dir')
+		String filePath = userDir+GlobalVariable.MaxRefundRulePath
+		def ruleIncomeInfo = findTestData('DownloadRule/MaxRefundRule')
+		Integer lobcodeRow = -1
+		lobcodeRow = (new customizeKeyword.getRow()).getExcelRow(filePath, 'MaxRefund', lobCode)+1
+		int match = 0
+		for(int i=lobcodeRow;i<=ruleIncomeInfo.getRowNumbers();i++){
+			if(ruleIncomeInfo.getValue(1,i)!=lobCode&&ruleIncomeInfo.getValue(1,i)!=""){
+				match=0
+			}
+			if(ruleIncomeInfo.getValue(1,i)==lobCode||match==1){
+				if(match==0){
+					match=1
+				}
+				maxrefundAmt.add(ruleIncomeInfo.getValue(2,i))
+			}
+			if(ruleIncomeInfo.getValue(1,i)==""&&ruleIncomeInfo.getValue(2,i)==""){
+				break
+			}
+		}
+
+				ArrayList<Double> numbers = new ArrayList<>();
+			
+				Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
+				while(m.find()){
+					println(Double.valueOf(m.group())+"abc")
+					numbers.add(Double.valueOf(m.group()))
+				}
+				
+		
+		Integer totalMaxAllocated = 0
+		BigDecimal value
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
+			value = row[0]
+		})
+		totalMaxAllocated+=value
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
+			value = row[0]
+		})
+		totalMaxAllocated+=value
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
+			value = row[0]
+		})
+		totalMaxAllocated+=value
+		instanceLOS.eachRow(("select TOTAL_LIFE_INS_CUST_AMT, [TOTAL_LIFE_INS_INSCO_AMT ] from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = afd.app_id where APP_NO='"+appNo+"'"), { def row ->
+			value = row[0]-row[1]
+		})
+		totalMaxAllocated+=value
+		instanceLOS.eachRow(("select total_ins_cust_amt, total_ins_insco_amt from app_fin_data afd WITH(NOLOCK) join app a WITH(NOLOCK) on afd.app_id = a.app_id where APP_NO='"+appNo+"'"), { def row ->
+			value = row[0]-row[1]
+		})
+		totalMaxAllocated+=value
+		instanceLOS.eachRow(("select CONVERT(INT,total_interest_amt) from app_fin_data afd join app a on afd.app_id = a.app_id where APP_NO='"+appNo+"'"), { def row ->
+			value = row[0]
+		})
+		totalMaxAllocated+=value
+		println(totalMaxAllocated)
+		totalMaxAllocated-=(numbers[0])
+		totalMaxAllocated*=numbers[1]
+		println(totalMaxAllocated)
+		return totalMaxAllocated
+	}
+	
+	
 }
