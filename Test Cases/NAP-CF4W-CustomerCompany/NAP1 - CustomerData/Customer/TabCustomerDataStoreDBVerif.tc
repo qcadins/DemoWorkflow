@@ -3,6 +3,6 @@
    <description></description>
    <name>TabCustomerDataStoreDBVerif</name>
    <tag></tag>
-   <comment></comment>
+   <comment>connect DB LOS</comment>
    <testCaseGuid>d171d7c6-ee17-4b37-a099-2baba9e20204</testCaseGuid>
 </TestCaseEntity>

@@ -17,7 +17,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'Assign directori file excel ke global variabel'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\1. LoginR3.xlsm")
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'('\\1. LoginR3.xlsm')
 
 'declare datafileLogin'
 datafileLogin = findTestData('Login/Login')
@@ -44,25 +44,24 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/button_LOGIN'))
 
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/input_Choose Your Role_Office'))
 
-WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), "(?i)"+datafileLogin.getValue(
+WebUI.selectOptionByLabel(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), '(?i)' + datafileLogin.getValue(
         4, 2), true)
 
 WebUI.sendKeys(findTestObject('LoginR3BranchManagerSuperuser/NewLogin/select_Role'), Keys.chord(Keys.ENTER))
 
-if(WebUI.verifyElementPresent(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'),2,FailureHandling.OPTIONAL)){
-	
-	WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/input_JobTitle'))
-	
-	WebUI.selectOptionByLabel(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), "(?i)"+findTestData(
-			'Login/Login').getValue(5, 2), true)
-	
-	WebUI.sendKeys(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), Keys.chord(Keys.ENTER))
-}
-else{
-	
-	'write to excel job title'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Login',
-		2, 4, WebUI.getText(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/label_JobTitleRole')))
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), 
+    2, FailureHandling.OPTIONAL)) {
+    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/input_JobTitle'))
+
+    WebUI.selectOptionByLabel(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), 
+        '(?i)' + findTestData('Login/Login').getValue(5, 2), true)
+
+    WebUI.sendKeys(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/NewLogin/select_JobTitle'), Keys.chord(
+            Keys.ENTER))
+} else {
+    'write to excel job title'
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Login', 2, 4, WebUI.getText(
+            findTestObject('Object Repository/LoginR3BranchManagerSuperuser/label_JobTitleRole')))
 }
 
 'Click choose role'
@@ -76,4 +75,3 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance
 
 'click menu customer main data'
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-

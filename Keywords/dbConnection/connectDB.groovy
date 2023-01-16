@@ -43,7 +43,7 @@ public class connectDB {
 
 		String driverclassname = findTestData('Login/Login').getValue(6, 9)
 
-		String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+		String url = (servername + ';databaseName=') + database
 
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
@@ -63,7 +63,7 @@ public class connectDB {
 
 		String driverclassname = findTestData('Login/Login').getValue(6, 7)
 
-		String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+		String url = (servername + ';databaseName=') + database
 
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
@@ -83,7 +83,7 @@ public class connectDB {
 
 		String driverclassname = findTestData('Login/Login').getValue(6, 8)
 
-		String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+		String url = (servername + ';databaseName=') + database
 
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
@@ -103,7 +103,7 @@ public class connectDB {
 
 		String driverclassname = findTestData('Login/Login').getValue(6, 10)
 
-		String url = (((servername + ';instanceName=') + instancename) + ';databaseName=') + database
+		String url = (servername + ';databaseName=') + database
 
 		return Sql.newInstance(url,username,password,driverclassname)
 	}
