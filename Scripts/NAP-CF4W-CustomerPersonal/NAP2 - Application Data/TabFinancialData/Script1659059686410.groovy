@@ -77,7 +77,7 @@ if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") 
     HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 
 	'declare listfee, feetype, fee, feebhv, feecaptype, feecap'
-    ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap
+    ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap, stdFee
 
     listFee = result.get('listFee')
 
@@ -90,6 +90,18 @@ if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") 
     feecapType = result.get('feecapType')
 
     feecap = result.get('feecap')
+	
+	stdFee = result.get('stdFee')
+	
+	Integer stdPcnt = Integer.parseInt(stdFee[5])
+	
+	if(feeType[5] == "PRCNT"){
+		stdFee.remove(5)
+		stdFee.add((stdPcnt*Integer.parseInt(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 73))/100).toString())
+	}
+	
+	GlobalVariable.StandardFee = stdFee
+	
 
 	'declare counter'
     Integer counter = 0

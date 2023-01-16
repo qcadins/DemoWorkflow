@@ -5,7 +5,7 @@
    <tag></tag>
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
-   <dataFileGUID>09109c8c-1a85-4256-8c89-f9bf4476fe82</dataFileGUID>
+   <dataFileGUID>c3a254c0-9faf-41f4-9c3c-baa7aa8150df</dataFileGUID>
    <dataSourceUrl>Rule/MaxRefundRule.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>

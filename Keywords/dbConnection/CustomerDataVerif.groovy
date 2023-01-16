@@ -761,7 +761,7 @@ public class CustomerDataVerif {
 	public NAP2FinancialFeeStoreDB (Sql instance, String appno){
 		String financialfeedata
 		ArrayList <String> listfinancialfeedata = new ArrayList<String>()
-		instance.eachRow(("SELECT ISNULL(CONVERT(INT,app_fee_amt),'') AS APP_FEE_AMT, ISNULL(app_fee_prcnt, '') AS APP_FEE_PERCENT,ISNULL(CASE WHEN is_cptlz = 1 THEN 'Yes' ELSE 'No' END,'') AS IS_CPTLZ, ISNULL(CONVERT(INT,cptlz_amt),'') AS CPTLZ_AMT FROM APP_FEE af with(nolock) join app a with(nolock) on af.app_id = a.app_id where app_no = '"+appno+"'"), {  row ->
+		instance.eachRow(("SELECT ISNULL(CONVERT(INT,app_fee_amt),'') AS APP_FEE_AMT, ISNULL(app_fee_prcnt, '') AS APP_FEE_PERCENT,ISNULL(CASE WHEN is_cptlz = 1 THEN 'Yes' ELSE 'No' END,'') AS IS_CPTLZ, ISNULL(CONVERT(INT,cptlz_amt),'') AS CPTLZ_AMT, CONVERT(INT,STD_FEE_AMT) FROM APP_FEE af with(nolock) join app a with(nolock) on af.app_id = a.app_id where app_no = '"+appno+"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()

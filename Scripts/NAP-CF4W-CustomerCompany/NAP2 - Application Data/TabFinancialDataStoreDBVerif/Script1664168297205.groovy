@@ -40,6 +40,8 @@ ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 'declare arrayindex, arrayfeeindex'
 int arrayindex = 0, arrayFeeIndex = 0
 
+ArrayList<Double> stdFee = GlobalVariable.StandardFee
+
 'Verif jika use default fee value no'
 if(datafileTabFinancial.getValue(
 				GlobalVariable.NumofColm, 20).equalsIgnoreCase("No")){
@@ -68,6 +70,9 @@ if(datafileTabFinancial.getValue(
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
 		
+		'verif admin standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[0],resultFee[arrayFeeIndex++],false))
+		
 	'Verif additional admin'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 			GlobalVariable.NumofColm, 22).replace(',', ''),resultFee[arrayFeeIndex++],false))
@@ -92,6 +97,9 @@ if(datafileTabFinancial.getValue(
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
 	
+		'verif additional admin standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[1],resultFee[arrayFeeIndex++],false))
+		
 	'verif notary fee'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 23).replace(',', ''),resultFee[arrayFeeIndex++],false))
@@ -116,6 +124,9 @@ if(datafileTabFinancial.getValue(
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
 
+		'verif notary standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[2],resultFee[arrayFeeIndex++],false))
+			
 	'verif other fee'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 24).replace(',', ''),resultFee[arrayFeeIndex++],false))
@@ -140,6 +151,9 @@ if(datafileTabFinancial.getValue(
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
 
+		'verif other standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[3],resultFee[arrayFeeIndex++],false))
+			
 	'verif fiducia fee'
 	arrayMatch.add(WebUI.verifyMatch(datafileTabFinancial.getValue(
 		GlobalVariable.NumofColm, 25).replace(',', ''),resultFee[arrayFeeIndex++],false))
@@ -164,6 +178,8 @@ if(datafileTabFinancial.getValue(
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
 	
+		'verif fiducia standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[4],resultFee[arrayFeeIndex++],false))
 	
 	'verif provision fee'
 	if(datafileTabFinancial.getValue(
@@ -204,6 +220,9 @@ if(datafileTabFinancial.getValue(
 		'verif provision fee capitalize'
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
+	
+		'verif provision standard fee'
+		arrayMatch.add(WebUI.verifyMatch(stdFee[5],resultFee[arrayFeeIndex++],false))
 	
 }
 

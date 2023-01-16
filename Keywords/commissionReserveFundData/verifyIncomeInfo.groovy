@@ -49,6 +49,7 @@ public class verifyIncomeInfo {
 				}
 				refundAllocationFrom.add(ruleIncomeInfo.getValue(2,i))
 				refundAmt.add(ruleIncomeInfo.getValue(3,i))
+				println(ruleIncomeInfo.getValue(3,i))
 			}
 			if(ruleIncomeInfo.getValue(1,i)==""&&ruleIncomeInfo.getValue(2,i)==""){
 				break
@@ -56,10 +57,16 @@ public class verifyIncomeInfo {
 		}
 
 		for(int j = 0;j<refundAllocationFrom.size();j++){
-			Matcher m = Pattern.compile("\\d").matcher(refundAmt[j])
-			m.find()
+			if(refundAmt[j].matches(".*\\d.*")){
+				Matcher m = Pattern.compile("\\d").matcher(refundAmt[j])
+				m.find()
+				refundAmt[j] = refundAmt[j].substring(refundAmt[j].indexOf(m.group()))
+			}
+			else{
+				refundAmt[j]="1"
+			}
 			refundAllocationFrom[j] = refundAllocationFrom[j].replace("_"," ")
-			refundAmt[j] = refundAmt[j].substring(refundAmt[j].indexOf(m.group()))
+
 		}
 
 		result.put("From",refundAllocationFrom)
@@ -71,7 +78,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkAdminFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -81,7 +88,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkProvisionFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -101,7 +108,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkOtherFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -198,11 +205,9 @@ public class verifyIncomeInfo {
 		})
 		totalMaxAllocated+=value
 		println(totalMaxAllocated)
-		totalMaxAllocated-=(numbers[0])
+		totalMaxAllocated+=(numbers[0])
 		totalMaxAllocated*=numbers[1]
 		println(totalMaxAllocated)
 		return totalMaxAllocated
 	}
-	
-	
 }

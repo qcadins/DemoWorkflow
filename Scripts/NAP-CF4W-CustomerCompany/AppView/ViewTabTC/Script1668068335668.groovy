@@ -31,7 +31,8 @@ GlobalVariable.FlagWarning = 0
 WebUI.click(findTestObject('Object Repository/AppView/TermCondition/TermAndCondition Tab'))
 
 'Verif tidak ada alert yang muncul'
-if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut) == false) {
+if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut) == 
+false) {
     GlobalVariable.FlagWarning = 1
 
     'write status warning'
@@ -59,25 +60,33 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     modifyNewPriorTo = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[3]', true)
 
+    'modify object Required'
+    modifyNewRequired = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[4]', true)
+
     'modify object Check'
     modifyNewCheck = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[4]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[5]', true)
 
     'modify object Waived'
     modifyNewWaived = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[5]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[6]', true)
 
     'modify object Promise Date'
     modifyNewPromiseDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[6]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[7]', true)
 
     'modify object Expired Date'
     modifyNewExpiredDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[7]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
 
     'modify object Notes'
     modifyNewNotes = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[9]', true)
+	
+	'modify object button download'
+	modifyNewButtonDownload = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals',
+		('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[10]', true)
 
     'verify document name'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDocumentName).toUpperCase(), (resultTC[index++]).toUpperCase(), 
@@ -85,6 +94,10 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
 
     'verify prior to'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPriorTo).toUpperCase(), (resultTC[index++]).toUpperCase(), 
+            false))
+
+    'verify prior to'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRequired).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
     'verify checked'
@@ -106,24 +119,50 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     'verify notes'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotes).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
+	
+//	if(WebUI.verifyElementPresent(modifyNewButtonDownload, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+//		'click button download'
+//		WebUI.click(modifyNewButtonDownload)
+//		
+//		'check if file downloaded success'
+//		isFileDownloaded(filePath)
+//	}
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
-	'write to excel status success'
+    'write to excel status success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
         1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
-		'write to excel status failed'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9. Term and Condition', 0, GlobalVariable.NumofColm - 
-            1, GlobalVariable.StatusFailed)
+        'write to excel status failed'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9. Term and Condition', 
+            0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed)
 
-		'write to excel reason verify equal or match'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9. Term and Condition', 1, GlobalVariable.NumofColm - 
-            1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+        'write to excel reason verify equal or match'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '9. Term and Condition', 
+            1, GlobalVariable.NumofColm - 1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
+}
+
+boolean isFileDownloaded(String downloadPath) {
+    File file = new File(downloadPath)
+
+    Boolean isDownloaded = false
+
+    for (File f : file.listFiles()) {
+        if (!(f.isDirectory())) {
+            if (f.exists()) {
+                isDownloaded = true
+            }
+            
+            f.delete()
+        }
+    }
+    
+    WebUI.verifyEqual(isDownloaded, true)
 }

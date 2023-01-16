@@ -62,6 +62,12 @@ if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=
 }
 
 if (GlobalVariable.RoleCompany == 'Testing') {
+	
+	'verify Label MO > CMO'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOOfficer'), "CMO'S OFFICER", false))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOSupervisor'), "CMO'S SUPERVISOR", false))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMONotes'), "CMO'S NOTES", false))
+	
 	'verify application step'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 		'APPLICATION DATA', false, FailureHandling.OPTIONAL))
