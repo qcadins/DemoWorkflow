@@ -88,6 +88,9 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'13.TabCommissionData',
 					GlobalVariable.NumofColm)
 				
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'13.TabCommissionData',
+					GlobalVariable.NumofColm)
+				
 				break
 			}
 			 

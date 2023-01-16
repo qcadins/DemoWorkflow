@@ -22,38 +22,78 @@ Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare datafileReferantor'
 datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
 
+'declare datafileCustomerPersonal'
+datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+
 'get text custname'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
 'get referantor data from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileReferantor.getValue(
-		GlobalVariable.StartIndex, 12), custname)
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
+		GlobalVariable.NumofColm, 13), custname)
 
 'declare arraymatch'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
+
+ArrayList<Boolean> vat = new ArrayList<>()
+vat = GlobalVariable.ReferantorVAT
 	
 'declare arrayindex, bankindex'
-int arrayindex = 0, bankindex = 0
+int arrayindex = 0, bankindex = 0, vatindex = 0
 
 'declare bankaccount'
 def bankaccount = GlobalVariable.BankAccount.split(' - ')
 
 'looping referantor data verif'
-for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < result.size()/6 + GlobalVariable.StartIndex; (GlobalVariable.NumofReferantor)++) {
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-    arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < ((result.size() / 7) + 
+GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
 	
-	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    refcategory = (result[arrayindex++])
+	refname = (result[arrayindex++])
 	
-	arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+    for (int excelindex = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < (datafileReferantor.getColumnNumbers() - 
+    1); excelindex++) {
+        if (datafileReferantor.getValue(excelindex, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
+			
+            if (datafileReferantor.getValue(excelindex, 13).equalsIgnoreCase(refcategory) && datafileReferantor.getValue(excelindex, 14).equalsIgnoreCase(refname)) {
+                'verify referantor category'
+                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(excelindex, 13).toUpperCase(), refcategory.toUpperCase(), 
+                        false, FailureHandling.OPTIONAL))
 
-    arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(
-            GlobalVariable.NumofReferantor, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+                'verify referantor name'
+                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(excelindex, 14).toUpperCase(), (refname).toUpperCase(), 
+                        false, FailureHandling.OPTIONAL))
+
+                'verify referantor bank acc'
+                arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+                        false, FailureHandling.OPTIONAL))
+
+                'verify referantor bank acc'
+                arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+                        false, FailureHandling.OPTIONAL))
+
+                'verify referantor bank acc'
+                arrayMatch.add(WebUI.verifyMatch((bankaccount[bankindex++]).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+                        false, FailureHandling.OPTIONAL))
+
+                'verify referantor tax calculation method'
+                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 17).toUpperCase(), 
+                        (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+                arrayMatch.add(WebUI.verifyMatch(vat.get(vatindex++).toString(), (result[arrayindex++]).toString(), false, 
+                        FailureHandling.OPTIONAL))
+
+                break
+            } else {
+                continue
+            }
+        } else {
+		if (datafileReferantor.getValue(excelindex+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
+			arrayindex = 0
+            break
+		}
+        }
+    }
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

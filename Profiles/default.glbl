@@ -587,6 +587,11 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>[]</initValue>
+      <name>ReferantorVAT</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
       <name>StandardFee</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
