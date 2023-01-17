@@ -135,7 +135,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                                
                             }
                         }
                         
@@ -227,7 +227,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                               
                             }
                         }
                         
@@ -287,7 +287,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                               
                             }
                         }
                         
@@ -444,7 +444,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                               
                             }
                         }
                         
@@ -512,7 +512,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                            
                             }
                         }
                         
@@ -572,7 +572,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
 
                                 flagWarning++
 
-                                continue
+                         
                             }
                         }
                         

@@ -7,7 +7,9 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;navbarSupportedContent&quot;]/ul/li[6]/span/span[2]</value>
+         <value>//*[@id=&quot;navbarSupportedContent&quot;]/ul/li[5]/span/span[2]
+
+</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +19,8 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;navbarSupportedContent&quot;]/ul/li[6]/span/span[2]</value>
+      <value>//*[@id=&quot;navbarSupportedContent&quot;]/ul/li[5]/span/span[2]
+
+</value>
    </webElementProperties>
 </WebElementEntity>

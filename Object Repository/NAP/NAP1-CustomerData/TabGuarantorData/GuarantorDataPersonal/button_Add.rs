@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[7]</value>
+         <value>//*[@id=&quot;guarantor-tab&quot;]/app-guarantor-main-data-paging/div/div[1]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

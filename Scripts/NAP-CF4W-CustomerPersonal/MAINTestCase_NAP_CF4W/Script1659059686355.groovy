@@ -84,8 +84,16 @@ if (GlobalVariable.Role == 'Data Entry') {
         
         'Jika edit appno pada excel tidak kosong'
         if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
-            'call tc edit nap'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
+			try{
+				'call tc edit nap'
+				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
+			}
+			catch (Exception e) {
+				KeywordUtil.markFailed(e.printStackTrace())
+
+				continue
+			}
+            
         } else {
             try {
                 'call tc main nap1'
@@ -154,11 +162,11 @@ if (GlobalVariable.Role == 'Data Entry') {
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
 
-//                'Jika flag checkappviewpersonal bernilai yes'
-//                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
-//                    'call test case verify app view'
-//                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-//                }
+                'Jika flag checkappviewpersonal bernilai yes'
+                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+                    'call test case verify app view'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+                }
             }
             catch (Exception e) {
                 KeywordUtil.markFailed(e.printStackTrace())

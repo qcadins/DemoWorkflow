@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[5]/a</value>
+         <value>//a[@aria-label=&quot;Next&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-commission-reserved-fund-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[5]/a</value>
+      <value>//a[@aria-label=&quot;Next&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

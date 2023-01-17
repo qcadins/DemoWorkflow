@@ -305,9 +305,9 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
 	
 	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
 	
-	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS)
+	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS, custname)
 	
-	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU)
+	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU, custname)
 	
 	if(genset == 1 && (negcustLOS == 1 || negcustFOU == 1)){
 		KeywordUtil.markFailedAndStop('Failed Because Negative Customer')

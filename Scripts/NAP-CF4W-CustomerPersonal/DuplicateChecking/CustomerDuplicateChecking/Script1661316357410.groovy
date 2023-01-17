@@ -500,6 +500,8 @@ if (DupCheckStatus == true) {
         GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
         'click button back'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Back')) //Verify sort & paging
+		
+		KeywordUtil.markFailed()
     }
 }
 
