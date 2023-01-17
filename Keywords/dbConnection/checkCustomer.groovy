@@ -75,7 +75,7 @@ public class checkCustomer {
 	public checkSalutation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -86,7 +86,7 @@ public class checkCustomer {
 	public checkNationality(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -97,7 +97,7 @@ public class checkCustomer {
 	public checkEducation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -108,7 +108,7 @@ public class checkCustomer {
 	public checkReligion(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

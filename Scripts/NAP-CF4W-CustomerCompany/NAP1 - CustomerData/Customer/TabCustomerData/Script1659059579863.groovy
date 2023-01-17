@@ -39,31 +39,6 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'Klik tab customer'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-CustomerData/buttonTabCust'))
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-    'verify application step'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-            'CUSTOMER', false, FailureHandling.OPTIONAL))
-	
-	'get cust model ddl value from db'
-	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
-	
-	'get total label from ddl cust model'
-	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'))
-
-	'verify total ddl cust model confins = total ddl db'
-	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
-	
-	'verify isi ddl cust model confins = db'
-	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'),
-		custmodel) == false) {
-
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
-
-		(GlobalVariable.FlagFailed)++
-	}
-}
-
 if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
     'click radio button Personal'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/Radio_Personal'))
@@ -71,6 +46,9 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
     'click radio button company'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
+	'call function verify DDL'
+	verifyDDL(sqlConnectionFOU)
+	
     'input customer name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
         datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 19))
@@ -136,6 +114,9 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
         'click radio button company'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
+		'call function verify DDL'
+		verifyDDL(sqlConnectionFOU)
+		
         'click button lookpup Customer'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
 
@@ -225,11 +206,11 @@ if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.TabCustomerMainData')
 	
-	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
+	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS, custname)
 	
-	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS)
+	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS, custname)
 	
-	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU)
+	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU, custname)
 	
 	if(genset == 1 && (negcustLOS == 1 || negcustFOU == 1)){
 		KeywordUtil.markFailedAndStop('Failed Because Negative Customer')
@@ -358,3 +339,29 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     }
 }
 
+def verifyDDL(Sql sqlConnectionFOU){
+	if (GlobalVariable.RoleCompany == 'Testing') {
+		'verify application step'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')),
+				'CUSTOMER', false, FailureHandling.OPTIONAL))
+		
+		'get cust model ddl value from db'
+		ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
+		
+		'get total label from ddl cust model'
+		int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'))
+	
+		'verify total ddl cust model confins = total ddl db'
+		WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+		
+		'verify isi ddl cust model confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'),
+			custmodel) == false) {
+	
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+	
+			(GlobalVariable.FlagFailed)++
+		}
+	}
+}
