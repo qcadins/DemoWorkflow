@@ -73,13 +73,14 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
         
         if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
-			try {
-				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE) 
-			} catch (Exception e) {
-				e.printStackTrace()
-				
-				continue
-			} 
+            try {
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
+            }
+            catch (Exception e) {
+                e.printStackTrace()
+
+                continue
+            } 
         } else {
             try {
                 'call test case NAP1'

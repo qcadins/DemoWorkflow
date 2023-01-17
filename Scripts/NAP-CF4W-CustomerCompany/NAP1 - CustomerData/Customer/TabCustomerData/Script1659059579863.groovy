@@ -47,7 +47,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
 	'call function verify DDL'
-	verifyDDL()
+	verifyDDL(sqlConnectionFOU)
 	
     'input customer name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
@@ -115,7 +115,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
 
 		'call function verify DDL'
-		verifyDDL()
+		verifyDDL(sqlConnectionFOU)
 		
         'click button lookpup Customer'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Customer Legal Name_btn btn-raised btn-primary'))
@@ -206,11 +206,11 @@ if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.TabCustomerMainData')
 	
-	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
+	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS, custname)
 	
-	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS)
+	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS, custname)
 	
-	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU)
+	int negcustFOU = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeFOU'(sqlConnectionFOU, custname)
 	
 	if(genset == 1 && (negcustLOS == 1 || negcustFOU == 1)){
 		KeywordUtil.markFailedAndStop('Failed Because Negative Customer')
@@ -339,7 +339,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     }
 }
 
-def verifyDDL(){
+def verifyDDL(Sql sqlConnectionFOU){
 	if (GlobalVariable.RoleCompany == 'Testing') {
 		'verify application step'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')),

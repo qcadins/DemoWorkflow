@@ -29,6 +29,19 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'get appno dari data file'
+String appNo = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 8)
+
+'check appCurrStep'
+String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
+
+'check custStep'
+String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
+
+'Write to excel Appno'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
+    1, appNo)
+
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
@@ -40,19 +53,6 @@ datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-Customer
 
 'declare datafileGuarantorCompany'
 datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
-
-'get appno dari data file'
-String appNo = datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8)
-
-'check appCurrStep'
-String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
-
-'check custStep'
-String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
-
-'Write to excel Appno'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
-    1, appNo)
 
 'declare list untuk menampung step-step pada nap1'
 List<String> NAP1Step = Arrays.asList("CUST", "SHR", "GUAR")
@@ -652,7 +652,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 def inputAppNo() {
     'input Appno'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+        findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 13))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Search'))
@@ -1009,7 +1009,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 public loopingStartIndex(Integer NumOf, TestData datafile){
 	'untuk mendapatkan posisi copy app dari excel'
 	for (NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {
-		if (datafile.getValue(NumOf, 12) == datafileCustomerPersonal.getValue(
+		if (datafile.getValue(NumOf, 12) == datafileCustomerCompany.getValue(
 			GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = NumOf
 

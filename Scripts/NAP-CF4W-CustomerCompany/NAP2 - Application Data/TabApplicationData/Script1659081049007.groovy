@@ -64,9 +64,9 @@ if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=
 if (GlobalVariable.RoleCompany == 'Testing') {
 	
 	'verify Label MO > CMO'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOOfficer'), "CMO'S OFFICER", false))
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOSupervisor'), "CMO'S SUPERVISOR", false))
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMONotes'), "CMO'S NOTES", false))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOOfficer')), "CMO'S OFFICER", false, FailureHandling.OPTIONAL))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMOSupervisor')), "CMO'S SUPERVISOR", false, FailureHandling.OPTIONAL))
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/labelCMONotes')), "CMO'S NOTES", false, FailureHandling.OPTIONAL))
 	
 	'verify application step'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -119,7 +119,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		
 	'verify isi ddl installment scheme confins = db'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'),
-			installmentscheme) == false) {
+			installmentscheme, FailureHandling.OPTIONAL) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
