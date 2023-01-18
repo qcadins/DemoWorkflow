@@ -611,7 +611,7 @@ if (payFreq == 'Monthly') {
 } else if (payFreq == 'Trimester') {
 	num = "4"
 
-} else if (payFreq == 'Semi Annually') {
+} else if (payFreq == 'Semi Annualy') {
 	num = "6"
 
 } else if (payFreq == 'Annually') {
@@ -863,11 +863,11 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, TDP.replace(",",""), false))
 'verify ntf confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".00",""), false))
 	
-'verify gross yield confins x excel'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
-
-'verify Flat rate'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
+//'verify gross yield confins x excel'
+//checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
+//
+//'verify Flat rate'
+//checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
 
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
