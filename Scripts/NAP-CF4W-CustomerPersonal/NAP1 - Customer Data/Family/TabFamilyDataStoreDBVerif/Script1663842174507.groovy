@@ -64,9 +64,9 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.Numof
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'jika idtype bukan ektp atau bukan akta atau bukan npwp'
-if ((!(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22).equalsIgnoreCase('E-KTP')) || !(datafileTabFamily.getValue(
-    GlobalVariable.NumofFamily, 22).equalsIgnoreCase('AKTA'))) || !(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
-    22).equalsIgnoreCase('NPWP'))) {
+if ((!(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21).equalsIgnoreCase('E-KTP')) || !(datafileTabFamily.getValue(
+    GlobalVariable.NumofFamily, 21).equalsIgnoreCase('AKTA'))) || !(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
+    21).equalsIgnoreCase('NPWP'))) {
     'verify id expired date'
     arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -86,9 +86,13 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.Numof
 arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27).length() > 0){
 'verify profession code'
 arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 26).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+arrayindex++
+}
 
 'verify employee establishment date'
 arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 28).toUpperCase(), 

@@ -176,10 +176,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Ye
 		writeFailedReasonVerifyRule()
 	}
 	
-//	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
-//	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
-//		writeFailedReasonVerifyRule()
-//	}
+	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
+	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
+		writeFailedReasonVerifyRule()
+	}
 	
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
