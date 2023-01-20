@@ -227,6 +227,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
     datafileTabAsset.getValue(GlobalVariable.NumofColm, 19))
 
+
 //if (GlobalVariable.RoleCompany == 'Testing') {
 //    ArrayList<String> assetUsage = new ArrayList<String>()
 //

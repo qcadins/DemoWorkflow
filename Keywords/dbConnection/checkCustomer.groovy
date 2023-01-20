@@ -108,7 +108,7 @@ public class checkCustomer {
 	public checkReligion(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(REF_MASTER_NAME) FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Religion' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

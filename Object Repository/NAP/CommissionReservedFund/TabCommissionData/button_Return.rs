@@ -6,12 +6,12 @@
    <elementGuidId>1d134400-1de2-42ea-8bff-a814d4879341</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[11]</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3-x/div/div/div/form/div[3]/button[1]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(//button[@type='button'])[11]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

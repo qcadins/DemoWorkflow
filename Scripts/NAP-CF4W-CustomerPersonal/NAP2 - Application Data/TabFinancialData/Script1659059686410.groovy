@@ -70,296 +70,331 @@ if (GlobalVariable.Role == 'Testing') {
 datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
 
 //Verif fee based on rule
-if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") {
+if (GlobalVariable.Role == 'Testing') {
 	
 	if(GlobalVariable.CheckRulePersonal == 'Yes'){
-    'Ambil nilai result dari rule credit fee'
-    HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
-
-	'declare listfee, feetype, fee, feebhv, feecaptype, feecap'
-    ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap, stdFee
-
-    listFee = result.get('listFee')
-
-    feeType = result.get('feeType')
-
-    fee = result.get('fee')
-
-    feeBhv = result.get('feeBhv')
-
-    feecapType = result.get('feecapType')
-
-    feecap = result.get('feecap')
+	    'Ambil nilai result dari rule credit fee'
+	    HashMap<String, ArrayList> result = CustomKeywords.'financialData.verifyFee.verifyFinancialFee'(sqlConnectionLOS, appNo)
 	
-	stdFee = result.get('stdFee')
+		'declare listfee, feetype, fee, feebhv, feecaptype, feecap'
+	    ArrayList<String> listFee, feeType, fee, feeBhv, feecapType, feecap, stdFee
 	
-	Integer stdPcnt = Integer.parseInt(stdFee[5])
+	    listFee = result.get('listFee')
 	
-	if(feeType[5] == "PRCNT"){
-		stdFee.remove(5)
-		stdFee.add((stdPcnt*Integer.parseInt(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 73))/100).toString())
-	}
+	    feeType = result.get('feeType')
 	
-	GlobalVariable.StandardFee = stdFee
+	    fee = result.get('fee')
 	
+	    feeBhv = result.get('feeBhv')
+	
+	    feecapType = result.get('feecapType')
+	
+	    feecap = result.get('feecap')
+		
+		stdFee = result.get('stdFee')
+		
+		Integer stdPcnt = Integer.parseInt(stdFee[5])
+		
+		if(feeType[5] == "PRCNT"){
+			stdFee.remove(5)
+			stdFee.add((stdPcnt*Integer.parseInt(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 73))/100).toString())
+		}
+		
+		GlobalVariable.StandardFee = stdFee
+		
+	
+		'declare counter'
+	    Integer counter = 0
 
-	'declare counter'
-    Integer counter = 0
-
-    //Looping listfee dari result rule
-    for (int i = counter; i < listFee.size(); i++) {
-        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee'))) == 
-        listFee.get(i)) {
-            'Verify amount admin fee pada confins sesuai rule'
-            if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'value').replace(',', ''), fee.get(i), false) == false) {
-                'write to excel reason failed verify rule'
-				writeReasonFailedVerifRule()
-            }
-            
-            if (feeBhv.get(i) == 'DEF') {
-                'Verify admin fee tidak terlock'
-                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-            } else if (feeBhv.get(i) == 'LOCK') {
-                'verify admin fee terlock'
-                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-				
-				'write to excel admin fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					20, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",","")))
-				
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify admin fee capitalized amount sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-					writeReasonFailedVerifRule()
-                }
-            }
-        }
-        
-        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee2'))) == 
-        listFee.get(i)) {
-            'Verify amount additional admin pada confins sesuai rule'
-            if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'value').replace(',', ''), fee.get(i), false) == false) {
-				'write to excel reason failed verify rule'
-                writeReasonFailedVerifRule()
-            }
-            
-            if (feeBhv.get(i) == 'DEF') {
-                'verify additional admin tidak terlock'
-                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'readonly', GlobalVariable.TimeOut)
-            } else if (feeBhv.get(i) == 'LOCK') {
-                'verify additional admin terlock'
-                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
-                    'readonly', GlobalVariable.TimeOut)
-				
-				'write to excel additional admin fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					21, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",","")))
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify additional admin capitalized amount sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-            }
-        }
-        
-        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee3'))) == 
-        listFee.get(i)) {
-            'Verify notary fee pada confins sesuai rule'
-            if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'value').replace(',', ''), fee.get(i), false) == false) {
-				'write to excel reason failed verify rule'
-                writeReasonFailedVerifRule()
-            }
-            
-            if (feeBhv.get(i) == 'DEF') {
-                'Verify notary fee tidak terlock'
-                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-            } else if (feeBhv.get(i) == 'LOCK') {
-                'Verify notary fee terlock'
-                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-				
-				'write to excel notary fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					22, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",","")))
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify notary fee capitalized amount sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-            }
-        }
-        
-        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee4'))) == 
-        listFee.get(i)) {
-            'Verify other fee pada confins sesuai rule'
-            if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-                    'value').replace(',', ''), fee.get(i), false) == false) {
-				'write to excel reason failed verify rule'
-                writeReasonFailedVerifRule()
-            }
-            
-            if (feeBhv.get(i) == 'DEF') {
-                'verify other fee tidak terlock'
-                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-            } else if (feeBhv.get(i) == 'LOCK') {
-                'verify other fee terlock'
-                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-				
-				'write to excel other fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					23, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",","")))
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify other fee capitalized amount sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-            }
-        }
-        
-        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
-        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee5'))) == 
-        listFee.get(i)) {
-            'verify fiducia fee pada confins sesuai rule'
-            if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'value').replace(',', ''), fee.get(i), false) == false) {
-				'write to excel reason failed verify rule'
-                writeReasonFailedVerifRule()
-            }
-            
-            if (feeBhv.get(i) == 'DEF') {
-                'Verify fiducia fee tidak terlock'
-                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-            } else if (feeBhv.get(i) == 'LOCK') {
-                'Verify fiducia fee terlock'
-                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
-                    'readonly', GlobalVariable.TimeOut)
-				
-				'write to excel fiducia fee'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-					24, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",","")))
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify fiducia fee capitalized amount sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-            }
-        }
-        
-        'Jika list fee merupakan provision'
-        if (listFee.get(i) == 'PROVISION') {
-            'Pengecekan fee type amount/percentage'
-            if (feeType.get(i) == 'AMT') {
-                'Verify provision fee pada confins sesuai rule'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'value').replace(',', ''), fee.get(i), false) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-                
-                if (feeBhv.get(i) == 'DEF') {
-                    'Verify provision fee amount tidak terlock'
-                    WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', GlobalVariable.TimeOut) //Verify provision fee amt & pctg terlock
-                } else if (feeBhv.get(i) == 'LOCK') {
-					'Verify provision fee amount terlock'
-                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', GlobalVariable.TimeOut)
-
-					'Verify provision fee percentage terlock'
-                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', GlobalVariable.TimeOut)
-					
-					'write to excel provision fee percentage'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
-					
-					'write to excel provision fee amount'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
-                }
-                //Verify provision fee amt & pctg terlock
-            } else if (feeType.get(i) == 'PRCNT') {
-                'Verify provision fee pada confins sesuai rule'
-                if (WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                            'value').replace(' %', '')), Double.parseDouble(fee.get(i))) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-                
-                if (feeBhv.get(i) == 'DEF') {
-                    'verify provision fee percentage tidak terlock'
-                    WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', GlobalVariable.TimeOut)
-                } else if (feeBhv.get(i) == 'LOCK') {
-					'Verify provision fee amount terlock'
-                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
-                        'readonly', GlobalVariable.TimeOut)
-
-					'Verify provision fee percentage terlock'
-                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
-                        'readonly', GlobalVariable.TimeOut)
-					
-					'write to excel provision fee percentage'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
-					
-					'write to excel provision fee amount'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-						38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
+		//Looping listfee dari result rule
+		for (int i = counter; i < listFee.size(); i++) {
+		
+	        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+	        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee'))) == 
+	        listFee.get(i)) {
+				if(GlobalVariable.FirstTimeEntry=="Yes"){
+					'Verify amount admin fee pada confins sesuai rule'
+					if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),
+							'value').replace(',', ''), fee.get(i), false) == false) {
+						'write to excel reason failed verify rule'
+						writeReasonFailedVerifRule()
+					}
+					if (feecapType.get(i) == 'AMT') {
+							'Verify admin fee capitalized amount sesuai rule'
+							if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee Capitalize_'),
+									'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+									'write to excel reason failed verify rule'
+									writeReasonFailedVerifRule()
+							}
+					}
 				}
-            }
-            
-            if (feecapType.get(i) == 'AMT') {
-                'Verify provision fee capitalized amount'
-                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'), 
-                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
-					'write to excel reason failed verify rule'
-                    writeReasonFailedVerifRule()
-                }
-            }
-        }
-    }
+	            
+	            if (feeBhv.get(i) == 'DEF') {
+	                'Verify admin fee tidak terlock'
+	                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+	            } else if (feeBhv.get(i) == 'LOCK') {
+	                'verify admin fee terlock'
+	                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+					
+					'write to excel admin fee'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						20, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Admin Fee'),'value').replace(",","")))
+					
+	            }
+	            
+	            
+	        }
+	        
+	        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+	        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee2'))) == 
+	        listFee.get(i)) {
+				if(GlobalVariable.FirstTimeEntry=="Yes"){
+					'Verify amount additional admin pada confins sesuai rule'
+					if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),
+							'value').replace(',', ''), fee.get(i), false) == false) {
+						'write to excel reason failed verify rule'
+						writeReasonFailedVerifRule()
+					}
+					if (feecapType.get(i) == 'AMT') {
+							'Verify additional admin capitalized amount sesuai rule'
+							if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin Capitalize'),
+										'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+									'write to excel reason failed verify rule'
+									writeReasonFailedVerifRule()
+							}
+					}
+				}
+	            
+	            
+	            if (feeBhv.get(i) == 'DEF') {
+	                'verify additional admin tidak terlock'
+	                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
+	                    'readonly', GlobalVariable.TimeOut)
+	            } else if (feeBhv.get(i) == 'LOCK') {
+	                'verify additional admin terlock'
+	                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'), 
+	                    'readonly', GlobalVariable.TimeOut)
+					
+					'write to excel additional admin fee'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						21, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Additional Admin'),'value').replace(",","")))
+	            }
+	            
+	            
+	        }
+	        
+	        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+	        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee3'))) == 
+	        listFee.get(i)) {
+				if(GlobalVariable.FirstTimeEntry=="Yes"){
+					'Verify notary fee pada confins sesuai rule'
+					if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),
+							'value').replace(',', ''), fee.get(i), false) == false) {
+						'write to excel reason failed verify rule'
+						writeReasonFailedVerifRule()
+					}
+					if (feecapType.get(i) == 'AMT') {
+							'Verify notary fee capitalized amount sesuai rule'
+							if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee Capitalize'),
+										'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+									'write to excel reason failed verify rule'
+									writeReasonFailedVerifRule()
+							}
+					}
+				}
+	            
+	            
+	            if (feeBhv.get(i) == 'DEF') {
+	                'Verify notary fee tidak terlock'
+	                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+	            } else if (feeBhv.get(i) == 'LOCK') {
+	                'Verify notary fee terlock'
+	                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+					
+					'write to excel notary fee'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						22, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Notary Fee'),'value').replace(",","")))
+	            }
+	            
+	            
+	        }
+	        
+	        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+	        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee4'))) == 
+	        listFee.get(i)) {
+			
+				if(GlobalVariable.FirstTimeEntry=="Yes"){
+					'Verify other fee pada confins sesuai rule'
+					if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),
+							'value').replace(',', ''), fee.get(i), false) == false) {
+						'write to excel reason failed verify rule'
+						writeReasonFailedVerifRule()
+					}
+					if (feecapType.get(i) == 'AMT') {
+						'Verify other fee capitalized amount sesuai rule'
+						if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee Capitalize'),
+										'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+									'write to excel reason failed verify rule'
+									writeReasonFailedVerifRule()
+						}
+					}
+							
+				}
+	            
+	            
+	            if (feeBhv.get(i) == 'DEF') {
+	                'verify other fee tidak terlock'
+	                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+	            } else if (feeBhv.get(i) == 'LOCK') {
+	                'verify other fee terlock'
+	                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+					
+					'write to excel other fee'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						23, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Other Fee'),'value').replace(",","")))
+	            }
+	            
+	            
+	        }
+	        
+	        'Pengecekan jika list fee pada rule sesuai dengan fee pada confins'
+	        if (CustomKeywords.'financialData.verifyFee.checkFeeCode'(sqlConnectionLOS, WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/label_Fee5'))) == 
+	        listFee.get(i)) {
+			
+				if(GlobalVariable.FirstTimeEntry=="Yes"){
+					'verify fiducia fee pada confins sesuai rule'
+					if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),
+							'value').replace(',', ''), fee.get(i), false) == false) {
+						'write to excel reason failed verify rule'
+						writeReasonFailedVerifRule()
+					}
+					if (feecapType.get(i) == 'AMT') {
+						'Verify fiducia fee capitalized amount sesuai rule'
+						if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee Capitalize'),
+										'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+									'write to excel reason failed verify rule'
+									writeReasonFailedVerifRule()
+						}
+					}
+							
+				}
+	            
+	            
+	            if (feeBhv.get(i) == 'DEF') {
+	                'Verify fiducia fee tidak terlock'
+	                WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+	            } else if (feeBhv.get(i) == 'LOCK') {
+	                'Verify fiducia fee terlock'
+	                WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'), 
+	                    'readonly', GlobalVariable.TimeOut)
+					
+					'write to excel fiducia fee'
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+						24, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Fiducia Fee'),'value').replace(",","")))
+	            }
+	            
+	            
+	        }
+	        
+	        'Jika list fee merupakan provision'
+	        if (listFee.get(i) == 'PROVISION') {
+	            'Pengecekan fee type amount/percentage'
+	            if (feeType.get(i) == 'AMT') {
+					
+					if(GlobalVariable.FirstTimeEntry=="Yes"){
+						'Verify provision fee pada confins sesuai rule'
+						if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),
+								'value').replace(',', ''), fee.get(i), false) == false) {
+							'write to excel reason failed verify rule'
+							writeReasonFailedVerifRule()
+						}
+					}
+	                
+	                
+	                if (feeBhv.get(i) == 'DEF' && datafileTabFinancial.getValue(GlobalVariable.NumofColm, 36)=="Amount") {
+	                    'Verify provision fee amount tidak terlock'
+	                    WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+	                        'readonly', GlobalVariable.TimeOut) //Verify provision fee amt & pctg terlock
+	                } else if (feeBhv.get(i) == 'LOCK') {
+						'Verify provision fee amount terlock'
+	                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+	                        'readonly', GlobalVariable.TimeOut)
+	
+						'Verify provision fee percentage terlock'
+	                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
+	                        'readonly', GlobalVariable.TimeOut)
+						
+						'write to excel provision fee percentage'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+							37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
+						
+						'write to excel provision fee amount'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+							38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
+	                }
+	                //Verify provision fee amt & pctg terlock
+	            } else if (feeType.get(i) == 'PRCNT') {
+				
+					if(GlobalVariable.FirstTimeEntry=="Yes"){
+						'Verify provision fee pada confins sesuai rule'
+						if (WebUI.verifyEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),
+									'value').replace(' %', '')), Double.parseDouble(fee.get(i))) == false) {
+							'write to excel reason failed verify rule'
+							writeReasonFailedVerifRule()
+						}
+					}
+	                
+	                
+	                if (feeBhv.get(i) == 'DEF' && datafileTabFinancial.getValue(GlobalVariable.NumofColm, 36)=="Percentage") {
+	                    'verify provision fee percentage tidak terlock'
+	                    WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
+	                        'readonly', GlobalVariable.TimeOut)
+	                } else if (feeBhv.get(i) == 'LOCK') {
+						'Verify provision fee amount terlock'
+	                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'), 
+	                        'readonly', GlobalVariable.TimeOut)
+	
+						'Verify provision fee percentage terlock'
+	                    WebUI.verifyElementHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
+	                        'readonly', GlobalVariable.TimeOut)
+						
+						'write to excel provision fee percentage'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+							37, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'),'value').replace(" %","").replace(",","")))
+						
+						'write to excel provision fee amount'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+							38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
+					}
+	            }
+	            
+	            if (GlobalVariable.FirstTimeEntry == "Yes" && feecapType.get(i) == 'AMT') {
+	                'Verify provision fee capitalized amount'
+	                if (WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Capitalize'), 
+	                        'value').replace(',', ''), feecap.get(i), false, FailureHandling.OPTIONAL) == false) {
+						'write to excel reason failed verify rule'
+	                    writeReasonFailedVerifRule()
+	                }
+	            }
+	        }
+    	}
 	}
 	
-	'get default rounding value dari db'
-	int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+	if(GlobalVariable.FirstTimeEntry=="Yes"){
+		'get default rounding value dari db'
+		int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+		
+		'verify default rounding value'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
+	}
 	
-	'verify default rounding value'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
 }
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {

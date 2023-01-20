@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import com.kms.katalon.core.testobject.SelectorMethod as SelectorMethod
 import groovy.sql.Sql as Sql
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
@@ -312,7 +313,8 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 	'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
-
+	
+	KeywordUtil.markFailed()
    
 }
 	

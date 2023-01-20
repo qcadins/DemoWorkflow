@@ -52,7 +52,7 @@ if (GlobalVariable.Role == 'Testing') {
             }
             
             'upload file'
-            CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
+            CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
                 datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 13))
 
@@ -61,20 +61,20 @@ if (GlobalVariable.Role == 'Testing') {
                 datafileTabUploadDoc.getValue(
                     GlobalVariable.NumofUploadDocument, 14))
 
-            'select jenis document'
-            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-                datafileTabUploadDoc.getValue(
-                    GlobalVariable.NumofUploadDocument, 15), false)
-
-            'input MOU Id'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
-                datafileTabUploadDoc.getValue(
-                    GlobalVariable.NumofUploadDocument, 16))
-
-            'input notes'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-                datafileTabUploadDoc.getValue(
-                    GlobalVariable.NumofUploadDocument, 17))
+//            'select jenis document'
+//            WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
+//                datafileTabUploadDoc.getValue(
+//                    GlobalVariable.NumofUploadDocument, 15), false)
+//
+//            'input MOU Id'
+//            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
+//                datafileTabUploadDoc.getValue(
+//                    GlobalVariable.NumofUploadDocument, 16))
+//
+//            'input notes'
+//            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
+//                datafileTabUploadDoc.getValue(
+//                    GlobalVariable.NumofUploadDocument, 17))
 
             'click button save'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_save'))
