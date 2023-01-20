@@ -893,7 +893,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         if (WebUI.verifyElementNotPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Save  Continue'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'click button cancel'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Cancel Bank'))
+            WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Cancel Bank'))
         }
         
         if (GlobalVariable.FlagWarning > 0) {

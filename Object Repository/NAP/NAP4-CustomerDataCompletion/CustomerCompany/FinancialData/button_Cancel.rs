@@ -6,11 +6,15 @@
    <elementGuidId>2c29b0b2-1a8b-4bc6-80d3-c9c514f077d4</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'reset' and (text() = ' Cancel' or . = ' Cancel')]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//button[@type='reset']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

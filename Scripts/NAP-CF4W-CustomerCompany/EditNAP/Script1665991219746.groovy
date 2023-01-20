@@ -38,6 +38,9 @@ String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlcon
 'check custStep'
 String custStep = CustomKeywords.'dbConnection.checkStep.checkCustCheckStep'(sqlconnectionLOS, appNo)
 
+println(appStep)
+println(custStep)
+
 'Write to excel Appno'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
     1, appNo)
