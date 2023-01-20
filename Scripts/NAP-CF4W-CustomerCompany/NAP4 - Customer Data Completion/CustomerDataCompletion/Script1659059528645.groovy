@@ -36,7 +36,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
-WebUI.delay(5)
+WebUI.delay(10)
 
 'call funtion paging testing'
 pagingTesting()

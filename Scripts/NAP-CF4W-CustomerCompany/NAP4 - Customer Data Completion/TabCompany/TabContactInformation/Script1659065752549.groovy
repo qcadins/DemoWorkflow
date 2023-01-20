@@ -16,7 +16,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'delay supaya section address information ke load'
-WebUI.delay(3)
+WebUI.delay(5)
 
 if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	'get data file path'
