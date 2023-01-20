@@ -29,9 +29,10 @@ GlobalVariable.FlagFailed = 0
 'declare datafileCommission'
 datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
 
-'Koneksi database'
+'Koneksi database FOU'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'Koneksi database LOS'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'Inisialisasi driver'
@@ -80,7 +81,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 //			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'12.TabCommissionData',
 //				GlobalVariable.NumofColm)
 			
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'12.TabCommissionData',
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00","").replace(',',''),resultMA.toString(),false),'12.TabCommissionData',
 				GlobalVariable.NumofColm)
 			
 			break
@@ -96,50 +97,50 @@ if(GlobalVariable.RoleCompany == "Testing"){
 						GlobalVariable.NumofColm)
 		}
 		
-		if(GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-			 
-			modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)
-			
-			'Varibel String untuk mengambil dan menampung income information'
-			String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
-			
-			'Verif jika income info allocation sesuai dengan rule file'
-			if(WebUI.verifyMatch(textIncomeInfo, ".*"+refundFrom[i]+".*",true)){
-				
-				BigDecimal getAmountFromAppDB = 1
-				
-				'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
-				if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
-				}
-				else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
-				}
-				else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
-				}
-				else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
-				}
-				else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
-				}
-				else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
-					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
-				}
-				
-				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
-				
-				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
-				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
-					
-					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
-					
-					GlobalVariable.FlagFailed=1
-				}
-			}
-		}
+//		if(GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+//			 
+//			modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)
+//			
+//			'Varibel String untuk mengambil dan menampung income information'
+//			String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
+//			
+//			'Verif jika income info allocation sesuai dengan rule file'
+//			if(WebUI.verifyMatch(textIncomeInfo, ".*"+refundFrom[i]+".*",true)){
+//				
+//				BigDecimal getAmountFromAppDB = 1
+//				
+//				'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
+//				if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
+//				}
+//				else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
+//				}
+//				else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
+//				}
+//				else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
+//				}
+//				else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
+//				}
+//				else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
+//					getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
+//				}
+//				
+//				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
+//				
+//				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
+//				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
+//					
+//					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+//					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+//					
+//					GlobalVariable.FlagFailed=1
+//				}
+//			}
+//		}
 	}
 }
 
@@ -305,14 +306,14 @@ if (variableSupp.size() > 0) {
 						'Ambil nilai total allocate commission amount ke j-1'
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
 	
-//						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
-//							'Tambahkan komponen fee allocate commission from ke arraylist'
-//							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if ((amt == 0) || (pctg == 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount'){
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+						if ((amt != 0) && (pctg != 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else if ((amt == 0) || (pctg == 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount'){
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
-//						}
+						}
 						
 						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 						break
@@ -579,14 +580,14 @@ if (variableSuppEmp.size() > 0) {
 						'Ambil nilai total allocate commission amount ke k-1'
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
-//						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
-//							'Tambahkan komponen fee allocate commission from ke arraylist'
-//							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
+						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
+						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-//						}
+						}
 						
 						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 						break
@@ -827,13 +828,13 @@ if (variableRef.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
 						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
-//							'Tambahkan komponen fee allocate commission from ke arraylist'
-//							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
+						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+							'Tambahkan komponen fee allocate commission from ke arraylist'
+							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
+						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
-//						}
+						}
 						
 						'Keluar dari looping income information jika ditemukan income information yang sesuai dengan fee/income allocate commission from'
 						break

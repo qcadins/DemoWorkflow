@@ -51,16 +51,16 @@ for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument 
         }
         
         'upload file'
-        CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
+        CustomKeywords.'customizeKeyword.uploadFile.uploadFunction'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
             datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 13))
 
         'input document name'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
             datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 14))
 
-        'select jenis document'
-        WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 15), false)
+//        'select jenis document'
+//        WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
+//            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 15), false)
 
         'input MOU Id'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
