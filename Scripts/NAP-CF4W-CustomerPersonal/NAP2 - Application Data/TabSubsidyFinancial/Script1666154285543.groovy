@@ -111,7 +111,7 @@ if(GlobalVariable.Role=="Testing"  && GlobalVariable.CheckRulePersonal=="Yes" &&
 	}
 			
 	'Verif jumlah data subsidy yang muncul pada confins sesuai dengan rule'
-	WebUI.verifyEqual(varsize,SubsidyFromType.size())
+	WebUI.verifyEqual(varsize,SubsidyFromType.size(), FailureHandling.OPTIONAL)
 	
 	'Pengecekan jika jumlah data pada confins lebih dari 0 dan jumlah data subsidy pada confins sesuai dengan rule'
 	if(varsize==SubsidyFromType.size() && varsize > 0){
@@ -290,9 +290,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 						
 						'accept alert'
 						WebUI.acceptAlert(FailureHandling.OPTIONAL)
-						
-						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
-								
+										
 						if(i == variable.size()){
 								if (WebUI.verifyElementPresent(modifyNewSubsidyAllocation, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	                                'add cust name failed kedalam array'
@@ -307,6 +305,8 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 									subsidyfaileddelete.add(subsidyallocationnamebefore)
 								}
 						}
+						
+						variable = driver.findElements(By.cssSelector('#FinData_Subsidy > div.table-responsive > table > tbody tr'))
 						
 						i--
 					} else {

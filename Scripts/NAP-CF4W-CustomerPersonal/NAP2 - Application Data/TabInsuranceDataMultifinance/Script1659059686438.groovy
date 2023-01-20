@@ -42,47 +42,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
 
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
-	String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo, sqlConnectionFOU)
-	
-	'Verif default asset region based on rule'
-	if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
-		writeFailedReasonVerifyRule()
-	}
-
-}
-
-'Select option dropdownlist Asset Region'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'), 
-    datafileTabInsurance.getValue(
-        GlobalVariable.NumofColm, 22), false)
-
-'Input Coverage Amount'
-WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'), 
-    datafileTabInsurance.getValue(
-        GlobalVariable.NumofColm, 23))
-
-'get coverperiod from excel'
-coverPeriod = datafileTabInsurance.getValue(
-    GlobalVariable.NumofColm, 24)
-
-'Select option dropdownlist cover period'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'), 
-    coverPeriod, false)
-
-'Verifikasi Jika cover period over tenor atau partial tenor'
-if ((coverPeriod == 'Over Tenor') || (coverPeriod == 'Partial Tenor')) {
-    'Input Insurance Length'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Insurance Length MF'), 
-        datafileTabInsurance.getValue(
-            GlobalVariable.NumofColm, 28))
-}
-
-'Select option dropdownlist payment type'
-WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'), 
-    datafileTabInsurance.getValue(
-        GlobalVariable.NumofColm, 25), false)
+inputInsInfo(sqlConnectionLOS, sqlConnectionFOU,appNo )
 
 if(GlobalVariable.Role=="Testing"){
 	'declare inscobranchname'
@@ -167,7 +127,7 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 selectedInscoBranch = datafileTabInsurance.getValue(
         GlobalVariable.NumofColm, 26)
 
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes"){
 	
 	'Membaca rule excel untuk menentukan default admin fee dan customer stampduty beserta behaviournya'
 	HashMap<String,ArrayList> result = CustomKeywords.'insuranceData.verifyInsuranceFee.verifyFee'(sqlConnectionLOS, appNo,selectedInscoBranch, sqlConnectionFOU)
@@ -175,25 +135,29 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && 
 	'declare feebhv, defamt'
 	ArrayList<String> feeBhv, defAmt
 	feeBhv = result.get("Bhv")
-	defAmt = result.get("Amt")
 	
-	'Ambil nilai admin fee dari confins'
-	adminFeeDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),'value')
-	
-	'Ambil nilai customer stamp duty dari confins'
-	custStampDutyDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),'value')
-	
-	'Verif nilai default admin fee yang muncul pada confins sesuai rule'
-	if(WebUI.verifyMatch(adminFeeDefAmt.replace(",",""),defAmt[0],false)==false){
-		'write to excel failed reason verify rule'
-		writeFailedReasonVerifyRule()
+	if(GlobalVariable.FirstTimeEntry == "Yes"){
+		defAmt = result.get("Amt")
+		
+		'Ambil nilai admin fee dari confins'
+		adminFeeDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),'value')
+		
+		'Ambil nilai customer stamp duty dari confins'
+		custStampDutyDefAmt = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),'value')
+		
+		'Verif nilai default admin fee yang muncul pada confins sesuai rule'
+		if(WebUI.verifyMatch(adminFeeDefAmt.replace(",",""),defAmt[0],false)==false){
+			'write to excel failed reason verify rule'
+			writeFailedReasonVerifyRule()
+		}
+		
+		'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
+		if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
+			'write to excel failed reason verify rule'
+			writeFailedReasonVerifyRule()
+		}
 	}
 	
-	'Verif nilai default customer stampduty yang muncul pada confins sesuai rule'
-	if(WebUI.verifyMatch(custStampDutyDefAmt.replace(",",""),defAmt[1],false)==false){
-		'write to excel failed reason verify rule'
-		writeFailedReasonVerifyRule()
-	}
 	
 	'Pengecekan field terlock (lock, dan tidak bisa diedit) /tidak terlock (def, bisa diedit) berdasarkan rule'
 	if(feeBhv[0]=="DEF"){
@@ -1026,4 +990,52 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		
 		GlobalVariable.FlagFailed=1
 	}
+}
+
+public inputInsInfo(Sql sqlConnectionLOS,Sql sqlConnectionFOU, String appNo){
+
+	
+	datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
+	
+	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+		'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
+		String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo, sqlConnectionFOU)
+		
+		'Verif default asset region based on rule'
+		if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
+			writeFailedReasonVerifyRule()
+		}
+	
+	}
+	
+	'Select option dropdownlist Asset Region'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),
+		datafileTabInsurance.getValue(
+			GlobalVariable.NumofColm, 22), false)
+	
+	'Input Coverage Amount'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),
+		datafileTabInsurance.getValue(
+			GlobalVariable.NumofColm, 23))
+	
+	'get coverperiod from excel'
+	coverPeriod = datafileTabInsurance.getValue(
+		GlobalVariable.NumofColm, 24)
+	
+	'Select option dropdownlist cover period'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'),
+		coverPeriod, false)
+	
+	'Verifikasi Jika cover period over tenor atau partial tenor'
+	if ((coverPeriod == 'Over Tenor') || (coverPeriod == 'Partial Tenor')) {
+		'Input Insurance Length'
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Insurance Length MF'),
+			datafileTabInsurance.getValue(
+				GlobalVariable.NumofColm, 28))
+	}
+	
+	'Select option dropdownlist payment type'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
+		datafileTabInsurance.getValue(
+			GlobalVariable.NumofColm, 25), false)
 }

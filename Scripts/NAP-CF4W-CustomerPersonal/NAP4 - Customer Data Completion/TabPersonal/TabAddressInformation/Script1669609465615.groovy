@@ -18,6 +18,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.util.KeywordUtil
 
 GlobalVariable.FlagFailed = 0
 
@@ -50,7 +51,7 @@ else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 }
 
 'declare GlobalVariable.StartIndex'
-GlobalVariable.StartIndex = 0
+GlobalVariable.StartIndex = 1
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -106,7 +107,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							'call function input address'
 							inputaddress(Address)
 
-							break
+							
 						}
 					}
 				}
@@ -145,7 +146,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 							'call function input address'
 							inputaddress(Address)
 
-							break
+							
 						}
 					} else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
 							Address, 12))) {
@@ -192,6 +193,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
+	
+	KeywordUtil.markFailed()
 }
 
 def inputaddress(int Address) {
@@ -355,14 +358,16 @@ def inputaddress(int Address) {
         'Click button cancel'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Cancel'))
     }
+	else{
+		if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+			GlobalVariable.NumofVerifStore = Address
+	
+			'call test case verif store data db address'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreDataDB'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	}
     
-    if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-        GlobalVariable.NumofVerifStore = Address
-
-        'call test case verif store data db address'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabAddressVerifStoreDataDB'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
 }
 
 def verifyDDLAddress(int Address){

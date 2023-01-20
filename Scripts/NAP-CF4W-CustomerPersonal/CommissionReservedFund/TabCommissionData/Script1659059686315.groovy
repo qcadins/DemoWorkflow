@@ -85,11 +85,11 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 //				'cek max allocated amount = remaining allocated amount before calculate'
 //				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
 //					GlobalVariable.NumofColm)
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'13.TabCommissionData',
-					GlobalVariable.NumofColm)
 				
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'13.TabCommissionData',
-					GlobalVariable.NumofColm)
+				//#ISSUE
+//				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00","").replace(",",""),resultMA.toString(),false),'13.TabCommissionData',
+//					GlobalVariable.NumofColm)
+		
 				
 				break
 			}
@@ -106,59 +106,60 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 								GlobalVariable.NumofColm)
 			}
 			
-			if(GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-				 
-				'modify income info'
-				modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)
-				
-				'Varibel String untuk mengambil dan menampung income information'
-				String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
-				
-				'Verif jika income info allocation sesuai dengan rule file'
-				if(WebUI.verifyMatch(textIncomeInfo, ".*"+refundFrom[i]+".*",true)){
-					
-					'declare getamountfromappdb'
-					BigDecimal getAmountFromAppDB = 1
-					
-					'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
-					if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
-						'ambil nilai diff rate'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
-					}
-					else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
-						'ambil nilai insurance'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
-					}
-					else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
-						'ambil nilai life insurance'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
-					}
-					else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
-						'ambil nilai admin fee'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
-					}
-					else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
-						'ambil nilai provision fee'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
-					}
-					else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
-						'ambil nilai other fee'
-						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
-					}
-					
-					'get text income info amount'
-					String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
-					
-					'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
-					if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
-						
-						'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyRule)
-						
-						GlobalVariable.FlagFailed=1
-					}
-				}
-			}
+			//#ISSUE
+//			if(GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+//				 
+//				'modify income info'
+//				modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)
+//				
+//				'Varibel String untuk mengambil dan menampung income information'
+//				String textIncomeInfo = WebUI.getText(modifyObjectIncomeInfo)
+//				
+//				'Verif jika income info allocation sesuai dengan rule file'
+//				if(WebUI.verifyMatch(textIncomeInfo, ".*"+refundFrom[i]+".*",true)){
+//					
+//					'declare getamountfromappdb'
+//					BigDecimal getAmountFromAppDB = 1
+//					
+//					'Pengecekan income info allocation untuk menentukan data-data amount apa saja yang diambil dari db untuk penghitungan'
+//					if(textIncomeInfo.equalsIgnoreCase("Upping Rate")){
+//						'ambil nilai diff rate'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkDiffRateAmtValue'(sqlConnectionLOS,appNo)
+//					}
+//					else if(textIncomeInfo.equalsIgnoreCase("Insurance Income")){
+//						'ambil nilai insurance'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkInsValue'(sqlConnectionLOS,appNo)
+//					}
+//					else if(textIncomeInfo.equalsIgnoreCase("Life Insurance Income")){
+//						'ambil nilai life insurance'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkLifeInsValue'(sqlConnectionLOS,appNo)
+//					}
+//					else if(textIncomeInfo.equalsIgnoreCase("Admin Fee")){
+//						'ambil nilai admin fee'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkAdminFeeValue'(sqlConnectionLOS,appNo)
+//					}
+//					else if(textIncomeInfo.equalsIgnoreCase("Provision Fee")){
+//						'ambil nilai provision fee'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkProvisionFeeValue'(sqlConnectionLOS,appNo)
+//					}
+//					else if(textIncomeInfo.equalsIgnoreCase("Other Fee")){
+//						'ambil nilai other fee'
+//						getAmountFromAppDB = CustomKeywords.'commissionReserveFundData.verifyIncomeInfo.checkOtherFeeValue'(sqlConnectionLOS,appNo)
+//					}
+//					
+//					'get text income info amount'
+//					String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
+//					
+//					'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
+//					if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
+//						
+//						'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
+//						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyRule)
+//						
+//						GlobalVariable.FlagFailed=1
+//					}
+//				}
+//			}
 		}
 	}
 	

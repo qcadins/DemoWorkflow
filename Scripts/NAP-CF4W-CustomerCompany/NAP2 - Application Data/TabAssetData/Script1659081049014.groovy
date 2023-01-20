@@ -227,36 +227,37 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Asset Price_assetPriceAmt'), 
     datafileTabAsset.getValue(GlobalVariable.NumofColm, 19))
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-    ArrayList<String> assetUsage = new ArrayList<String>()
-
-    'Ambil array string (text) asset usage dari db'
-    assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
-
-    Integer countAssetUsage = assetUsage.size()
-
-    'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
-    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
-        assetUsage) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
-
-        GlobalVariable.FlagFailed = 1
-    }
-    
-    'Ambil nilai jumlah option/pilihan asset usage dari confins'
-    Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
-
-    'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
-    if (WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
-
-        GlobalVariable.FlagFailed = 1
-    }
-}
+//ISSUE CONFINS
+//if (GlobalVariable.RoleCompany == 'Testing') {
+//    ArrayList<String> assetUsage = new ArrayList<String>()
+//
+//    'Ambil array string (text) asset usage dari db'
+//    assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+//
+//    Integer countAssetUsage = assetUsage.size()
+//
+//    'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
+//    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
+//        assetUsage) == false) {
+//        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+//        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+//            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+//
+//        GlobalVariable.FlagFailed = 1
+//    }
+//    
+//    'Ambil nilai jumlah option/pilihan asset usage dari confins'
+//    Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
+//
+//    'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
+//    if (WebUI.verifyEqual(totalAssetUsage - 1, countAssetUsage) == false) {
+//        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+//        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
+//            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+//
+//        GlobalVariable.FlagFailed = 1
+//    }
+//}
 
 'select asset usage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 

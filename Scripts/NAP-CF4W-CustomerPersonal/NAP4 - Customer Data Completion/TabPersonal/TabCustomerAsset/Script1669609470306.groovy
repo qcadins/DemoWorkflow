@@ -266,7 +266,7 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
-def inputAssetData(ArrayList<> faileddata) {
+def inputAssetData(ArrayList<String> faileddata) {
 	'declare assettypearray'
 	def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 13).split(';', -1)
 	

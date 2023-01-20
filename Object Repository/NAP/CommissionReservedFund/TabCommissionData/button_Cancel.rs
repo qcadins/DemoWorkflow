@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='commission-tab']/app-commission-v3/div/div/div/form/div[3]/button[2]</value>
+         <value>//div[@id='commission-tab']/app-commission-v3-x/div/div/div/form/div[3]/button[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

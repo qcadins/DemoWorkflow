@@ -31,7 +31,7 @@ public class checkReferantor {
 			})
 		}
 		else if(refCategory.equalsIgnoreCase("Agency")){
-			instance.eachRow("select count(*) from vendor v WITH(NOLOCK) join vendor_addr va WITH(NOLOCK) on v.vendor_id = va.vendor_id join vendor_office_mbr vom WITH(NOLOCK) on v.vendor_id = vom.vendor_id join ref_office ro WITH(NOLOCK) on ro.ref_office_id = vom.ref_office_id where mr_addr_type_code = 'legal'  and v.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+originOfficeName+"'", { def row ->
+			instance.eachRow("select count(*) from vendor v WITH(NOLOCK) join vendor_office_mbr vom WITH(NOLOCK) on v.vendor_id = vom.vendor_id join ref_office ro WITH(NOLOCK) on ro.ref_office_id = vom.ref_office_id where v.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+originOfficeName+"'", { def row ->
 				countData = row[0]
 			})
 		}
@@ -73,7 +73,7 @@ public class checkReferantor {
 			})
 		}
 		else{
-			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_account_name+' - '+bank_account_No from vendor a join vendor_addr b on a.vendor_id = b.vendor_id join vendor_office_mbr c on a.vendor_id = c.vendor_id join ref_office d on c.ref_office_id = d.ref_office_id join vendor_bank_acc e on a.vendor_id = e.vendor_id join ref_bank f on e.ref_bank_id = f.ref_bank_id where mr_addr_type_code = 'legal'  and a.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+officeName+"' and e.is_active = 1 and vendor_code = '"+refCode+"' and is_default=1", { def row ->
+			instance.eachRow("select [Bank Account] = bank_name+' - '+bank_account_name+' - '+bank_account_No from vendor a left join vendor_addr b on a.vendor_id = b.vendor_id join vendor_office_mbr c on a.vendor_id = c.vendor_id join ref_office d on c.ref_office_id = d.ref_office_id join vendor_bank_acc e on a.vendor_id = e.vendor_id join ref_bank f on e.ref_bank_id = f.ref_bank_id where a.is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY') and office_name = '"+officeName+"' and e.is_active = 1 and vendor_code = '"+refCode+"' and is_default=1", { def row ->
 				defaultBankAccount = row[0]
 			})
 		}

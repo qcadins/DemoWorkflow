@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3/div/div/div/form/div[3]/button[4]</value>
+         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3-x/div/div/div/form/div[3]/button[4]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

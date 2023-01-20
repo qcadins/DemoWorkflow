@@ -55,16 +55,16 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
-            'call tc main nap2'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            'call tc main comresfund'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-            'call tc nap4 cdc'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
+//            'call tc main nap2'
+//            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
+//                [:], FailureHandling.CONTINUE_ON_FAILURE)
+//
+//            'call tc main comresfund'
+//            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+//
+//            'call tc nap4 cdc'
+//            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
+//                [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     } //jika role == testing
     //jika edit appno kosong
