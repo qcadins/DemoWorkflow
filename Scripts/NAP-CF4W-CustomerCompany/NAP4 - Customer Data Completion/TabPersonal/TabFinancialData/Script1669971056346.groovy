@@ -110,7 +110,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 							break
 						} else {
-							if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).length() == 0) {
+							if (!(GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+							GlobalVariable.ColmNAP4, 12)))) {
 								'modify object button delete'
 								modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 									'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i',
@@ -299,7 +300,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 								break
 							} else {
-								if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 10).length() == 0) {
+								if (!(GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).equalsIgnoreCase(datafilecustdetail.getValue(
+							GlobalVariable.ColmNAP4, 12)))) {
 									'modify button delete'
 									modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 										'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[2]',

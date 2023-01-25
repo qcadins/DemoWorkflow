@@ -6,11 +6,15 @@
    <elementGuidId>a230b14c-1deb-4916-a841-37261f0ff11a</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>id(&quot;CustBankAccDetailSection&quot;)/div[3]/div[@class=&quot;form-actions right&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;][count(. | //*[@type = 'submit' and (text() = ' Save' or . = ' Save')]) = count(//*[@type = 'submit' and (text() = ' Save' or . = ' Save')])]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//button[@type='submit']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +45,7 @@
       <value> Save</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>

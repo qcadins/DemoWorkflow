@@ -7,7 +7,11 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
+<<<<<<< HEAD
+         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3-x/div/div/div/form/div[3]/button[3]</value>
+=======
          <value>//div[@id='commission-tab']/app-commission-v3-x/div/div/div/form/div[3]/button[3]</value>
+>>>>>>> branch 'BNI-LOS' of https://github.com/qcadins/NAP-CF4W-UF
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

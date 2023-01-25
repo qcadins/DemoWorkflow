@@ -6,11 +6,15 @@
    <elementGuidId>73242a3b-e630-4872-be2c-a583baeab507</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'submit' and (text() = ' Save' or . = ' Save')]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//button[@type='submit'])[2]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

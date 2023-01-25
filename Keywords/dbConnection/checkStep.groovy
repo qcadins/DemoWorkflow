@@ -26,7 +26,7 @@ public class checkStep {
 	@Keyword
 	public checkAppCurrStep(Sql instanceLOS, String appNo){
 		String appStep
-		instanceLOS.eachRow(("select app_curr_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select TOP 1 app_curr_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
 			appStep = row[0]
 		})
 		return appStep
@@ -36,7 +36,7 @@ public class checkStep {
 	@Keyword
 	public checkCustCheckStep(Sql instanceLOS, String appNo){
 		String custCheckStep
-		instanceLOS.eachRow(("select cust_checking_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select TOP 1 cust_checking_step from app with(nolock) where app_no = '"+appNo+"'"), { def row ->
 			custCheckStep = row[0]
 		})
 		return custCheckStep

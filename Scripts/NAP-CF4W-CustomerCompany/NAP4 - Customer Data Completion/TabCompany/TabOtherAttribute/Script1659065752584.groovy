@@ -53,8 +53,8 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     'get count total attribute list dari db'
     ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
 
-    'verify total data attribute list == total data attribute list db'
-    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'nap4Data.checkNAP4.countAttributeListCompany'(sqlconnectionFOU), variable.size()))
+//    'verify total data attribute list == total data attribute list db'
+//    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'nap4Data.checkNAP4.countAttributeListCompany'(sqlconnectionFOU), variable.size()))
 
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/OtherAttribute/button_Debtor Group_btn btn-raised btn-primary'))

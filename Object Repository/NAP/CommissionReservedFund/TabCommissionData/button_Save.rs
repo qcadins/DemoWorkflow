@@ -6,12 +6,17 @@
    <elementGuidId>8919b046-f05f-4ecf-bf0f-64e038784999</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>id(&quot;commission-tab&quot;)/app-commission-v3[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12 text-left&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/form[@class=&quot;form form-horizontal ng-valid ng-touched ng-dirty&quot;]/div[@class=&quot;form-actions right ng-star-inserted&quot;]/button[@class=&quot;btn btn-raised btn-primary mr-1&quot;]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3-x/div/div/div/form/div[3]/button[4]</value>
+      </entry>
+      <entry>
+<<<<<<< HEAD
+         <key>BASIC</key>
+         <value>id(&quot;commission-tab&quot;)/app-commission-v3[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12 text-left&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/form[@class=&quot;form form-horizontal ng-valid ng-touched ng-dirty&quot;]/div[@class=&quot;form-actions right ng-star-inserted&quot;]/button[@class=&quot;btn btn-raised btn-primary mr-1&quot;]</value>
+=======
+         <key>XPATH</key>
+         <value>//*[@id=&quot;commission-tab&quot;]/app-commission-v3-x/div/div/div/form/div[3]/button[4]</value>
+>>>>>>> branch 'BNI-LOS' of https://github.com/qcadins/NAP-CF4W-UF
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
