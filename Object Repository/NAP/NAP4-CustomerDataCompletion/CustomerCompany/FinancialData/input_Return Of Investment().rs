@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type=''])[29]</value>
+         <value>//input[@formcontrolname=&quot;ReturnOfInvestmentPrcnt&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

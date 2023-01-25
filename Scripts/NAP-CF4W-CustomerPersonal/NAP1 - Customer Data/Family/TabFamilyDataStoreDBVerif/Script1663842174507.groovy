@@ -37,9 +37,9 @@ String AuthorityAML = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 43)
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+String appNo = WebUI.getText(findTestObject('Object Repository/NAP/NAP1-CustomerData/appNo'))
 'get familydata from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonal'(sqlconnectionLOS, datafileTabFamily.getValue(
-        GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonal'(sqlconnectionLOS, appNo, datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
 
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()

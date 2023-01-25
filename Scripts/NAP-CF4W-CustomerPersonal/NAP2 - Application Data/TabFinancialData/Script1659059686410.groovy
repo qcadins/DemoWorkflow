@@ -389,10 +389,10 @@ if (GlobalVariable.Role == 'Testing') {
 	
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'get default rounding value dari db'
-		int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+		Integer defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
 		
 		'verify default rounding value'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value').replace(",",""))))
 	}
 	
 }
@@ -557,9 +557,11 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Percentage'), 
             Keys.chord(Keys.RIGHT, datafileTabFinancial.getValue(GlobalVariable.NumofColm, 38)), FailureHandling.OPTIONAL)
 		
+		WebUI.delay(3)
+		
 		'write to excel provision fee amount'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '10.TabFinancialData',
-			38, GlobalVariable.NumofColm - 1, WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value'))
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '10.TabFinancialData',
+			38, GlobalVariable.NumofColm - 1, Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Provision Fee Amount'),'value').replace(",","")))
 		
     } else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 36) == 'Amount') {
 		
@@ -729,7 +731,7 @@ if (GlobalVariable.FlagFailed == 0) {
         GlobalVariable.NumofColm, '10.TabFinancialData')
 
     if (iscompleteMandatory == 0) {
-        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
+        errorValObject = findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/div_errorvalidation')
 
         'cek validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(errorValObject, GlobalVariable.NumofColm, '10.TabFinancialData')

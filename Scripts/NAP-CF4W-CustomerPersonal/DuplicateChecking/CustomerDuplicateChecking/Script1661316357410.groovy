@@ -167,7 +167,8 @@ if (DupCheckStatus == true) {
                     GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
                     'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) && 
                     WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
-                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL))) {
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)||(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)))) {
 					
 						ArrayList<String> variablenegcustno = driver.findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
 						

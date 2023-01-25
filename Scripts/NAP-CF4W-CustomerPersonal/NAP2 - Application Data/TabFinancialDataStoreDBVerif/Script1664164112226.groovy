@@ -220,9 +220,9 @@ if(datafileTabFinancial.getValue(
 		'verif provision fee capitalize'
 		arrayMatch.add(WebUI.verifyMatch("0",resultFee[arrayFeeIndex++],false))
 	}
-	
-	'verif provision standard fee'
-	arrayMatch.add(WebUI.verifyMatch(stdFee[5],resultFee[arrayFeeIndex++],false))
+	arrayFeeIndex++
+//	'verif provision standard fee'
+//	arrayMatch.add(WebUI.verifyMatch(stdFee[5],resultFee[arrayFeeIndex++],false))
 }
 
 

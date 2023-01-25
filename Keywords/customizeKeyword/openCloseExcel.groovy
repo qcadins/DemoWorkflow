@@ -96,7 +96,7 @@ class openCloseExcel {
 		}
 		//digunakan close confirmation license activation pada office, jika sudah berlicense dapat dihapus
 		Robot robot = new Robot();
-		robot.delay(3000)
+		robot.delay(5000)
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_SHIFT);
 		robot.keyPress(KeyEvent.VK_ALT);
@@ -110,6 +110,8 @@ class openCloseExcel {
 		robot.keyRelease(KeyEvent.VK_CONTROL)
 		robot.delay(5000)
 		Runtime.getRuntime().exec("taskkill /IM EXCEL.EXE")
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER)
 
 	}
 }

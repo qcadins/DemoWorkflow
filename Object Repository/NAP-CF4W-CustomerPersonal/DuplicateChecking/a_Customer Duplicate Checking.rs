@@ -6,11 +6,11 @@
    <elementGuidId>b206a2f6-7c97-44b8-9558-eb58032b47a6</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/ul/li[3]/a</value>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[2]/ul/li[1]/ul/li[3]/a</value>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/ul/li[3]/a</value>
       </entry>
    </selectorCollection>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/ul/li[3]/a</value>
+      <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[2]/ul/li[1]/ul/li[3]/a</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

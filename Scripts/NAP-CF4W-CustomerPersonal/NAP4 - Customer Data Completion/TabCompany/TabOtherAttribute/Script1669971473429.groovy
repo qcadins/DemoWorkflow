@@ -32,7 +32,7 @@ GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-C
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'check if role == testing'
-if (GlobalVariable.RoleCompany == 'Testing') {
+if (GlobalVariable.Role == 'Testing') {
 	'connect DB FOU'
 	Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 

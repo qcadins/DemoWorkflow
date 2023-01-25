@@ -205,6 +205,10 @@ public class checkRefYieldItem {
 			value = row[0]
 		})
 
+		if(value==null){
+			value = "0"
+		}
+
 		return value
 	}
 }

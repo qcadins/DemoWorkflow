@@ -284,7 +284,8 @@ if(GlobalVariable.FlagFailed==0){
 	}
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && datafileTabLifeInsurance.getValue(
+    GlobalVariable.NumofColm, 12) == 'YES'){
 	'call test case store db life insurance data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

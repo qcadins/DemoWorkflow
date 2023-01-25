@@ -41,7 +41,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'2021'</initValue>
+      <initValue>'2023'</initValue>
       <name>BDYear</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

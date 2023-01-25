@@ -216,7 +216,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 							'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div['+ objectidx +']/div/select', true)
 						
 						'select subsidy from value'
-						WebUI.selectOptionByLabel(subsidyfromvalue,SubsidyfromValueArray[(subsidyarray - 1)], false)
+						WebUI.selectOptionByLabel(subsidyfromvalue,"(?i)"+SubsidyfromValueArray[(subsidyarray - 1)], true)
 						
 						objectidx++
 					}
@@ -466,7 +466,7 @@ public addSubsidy(int s){
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_--Select--MultifinanceSupplier'),
 		'(?i)' + (SubsidyTypeArray[(s - 1)]), true)
 
-	if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')) {
+	if ((SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Supplier')||(SubsidyTypeArray[(s - 1)]).equalsIgnoreCase('Insurance') ) {
 
 		'select subsidy from value'
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_SubsidyFromValueSupplier'),

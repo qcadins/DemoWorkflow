@@ -27,7 +27,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare data file Global variable'
 GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
 
-if(GlobalVariable.RoleCompany == 'Testing'){
+if(GlobalVariable.Role == 'Testing'){
 	'connect DB FOU'
 	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 	
@@ -139,7 +139,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', Address, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
 	'Flagfailed +1 karena gagal melakukan lookup'
 	(GlobalVariable.FlagFailed)++

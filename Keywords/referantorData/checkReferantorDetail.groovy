@@ -44,7 +44,7 @@ public class checkReferantorDetail {
 	@Keyword
 	public checkAgencyReferantor(Sql instance,String referantorCode){
 		ArrayList<String> referantorDetail = new ArrayList<String>()
-		instance.eachRow('select top(1) ISNULL(tax_id_no,""), taxpayer_name, ISNULL(addr,"-"), ISNULL(area_code_4,"-"), ISNULL(area_code_3,"-"), ISNULL(area_code_2,"-"), ISNULL(area_code_1,"-"), ISNULL(city,"-"), ISNULL(zipcode,"-") from vendor v WITH(NOLOCK) right join vendor_addr va WITH(NOLOCK) on v.vendor_id = va.vendor_id where vendor_code = \''+referantorCode+'\' and is_active=1 and (mr_vendor_category_code = \'AGENCY_PERSONAL\' or mr_vendor_category_code = \'AGENCY_COMPANY\')', { def row ->
+		instance.eachRow("select top(1) ISNULL(tax_id_no,''), taxpayer_name, ISNULL(addr,'-'), ISNULL(area_code_4,'-'), ISNULL(area_code_3,'-'), ISNULL(area_code_2,'-'), ISNULL(area_code_1,'-'), ISNULL(city,'-'), ISNULL(zipcode,'-') from vendor v WITH(NOLOCK) right join vendor_addr va WITH(NOLOCK) on v.vendor_id = va.vendor_id where vendor_code = '"+referantorCode+"' and is_active=1 and (mr_vendor_category_code = 'AGENCY_PERSONAL' or mr_vendor_category_code = 'AGENCY_COMPANY')", { def row ->
 			referantorDetail.add(row[0])
 			referantorDetail.add(row[1])
 			referantorDetail.add(row[2])
