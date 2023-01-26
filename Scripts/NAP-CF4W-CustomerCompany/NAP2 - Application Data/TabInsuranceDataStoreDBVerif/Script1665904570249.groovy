@@ -54,6 +54,9 @@ if (arrayMatch.contains(false)) {
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
+	
+	arrayindex = 0
+	
 	'call keyword NAP2InsuranceCustStoreDB untuk get data dari db'
 	ArrayList<Boolean> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS,
 		findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
