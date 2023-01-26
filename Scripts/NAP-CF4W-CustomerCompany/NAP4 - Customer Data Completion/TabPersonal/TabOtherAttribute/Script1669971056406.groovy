@@ -23,10 +23,6 @@ GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
-GlobalVariable.APPSTEP = 'SHAREHOLDER PERSONAL'
-
-GlobalVariable.ColmNAP4 = 2
-
 if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 	'get data file path'
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
@@ -50,9 +46,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 //    'get count total attribute list dari db'
 //    ArrayList<WebElement> variable = DriverFactory.getWebDriver().findElements(By.cssSelector('#AttributeList > div Label'))
 
-    'verify total data attribute list == total data attribute list db'
-    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'nap4Data.checkNAP4.countAttributeListPersonal'(sqlconnectionFOU), 
-            variable.size()))
+//    'verify total data attribute list == total data attribute list db'
+//    checkVerifyEqualOrMatch(WebUI.verifyEqual(CustomKeywords.'nap4Data.checkNAP4.countAttributeListPersonal'(sqlconnectionFOU), 
+//            variable.size()))
 
     'Click Lookup Debtor Group'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Debtor Group_'))

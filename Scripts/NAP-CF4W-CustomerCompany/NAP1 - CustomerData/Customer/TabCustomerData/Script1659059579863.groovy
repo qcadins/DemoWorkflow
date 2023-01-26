@@ -206,7 +206,7 @@ if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
         '1.TabCustomerMainData')
 	
-	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS, custname)
+	int genset = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeGenSet'(sqlConnectionLOS)
 	
 	int negcustLOS = CustomKeywords.'dbConnection.checkCustomer.checkCustomerNegativeLOS'(sqlConnectionLOS, custname)
 	

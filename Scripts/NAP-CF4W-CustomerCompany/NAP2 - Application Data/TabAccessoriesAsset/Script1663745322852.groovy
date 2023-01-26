@@ -114,7 +114,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 			  String textDPType = selectedDPType.getFirstSelectedOption().getText()
 			   
 			  'Looping excel datafile accessories'
-			  for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
+			  for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			  
 				  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerCompany.getValue(
 						  GlobalVariable.NumofColm, 13))) {

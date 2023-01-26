@@ -66,9 +66,9 @@ for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument 
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
             datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 16))
 
-        'input notes'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 17))
+//        'input notes'
+//        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
+//            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 17))
 
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_save'))

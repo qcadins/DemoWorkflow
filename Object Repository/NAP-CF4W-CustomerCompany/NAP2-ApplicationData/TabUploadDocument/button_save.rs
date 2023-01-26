@@ -6,11 +6,15 @@
    <elementGuidId>f82908e1-50b4-417a-b500-d70387770526</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>id(&quot;btnSaveDoc&quot;)[count(. | //*[@name = 'btnSaveDoc' and @value = 'Save' and @ref_element = 'Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/iframe']) = count(//*[@name = 'btnSaveDoc' and @value = 'Save' and @ref_element = 'Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/iframe'])]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>//input[@id='btnSaveDoc']</value>
+         <value>//*[@id=&quot;btnSaveDoc&quot;]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -20,7 +24,7 @@
       <value>input</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
@@ -34,7 +38,7 @@
       <value>btnSaveDoc</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>value</name>
       <type>Main</type>
@@ -48,7 +52,7 @@
       <value>javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btnSaveDoc&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -62,7 +66,7 @@
       <value>btn btn-primary</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>

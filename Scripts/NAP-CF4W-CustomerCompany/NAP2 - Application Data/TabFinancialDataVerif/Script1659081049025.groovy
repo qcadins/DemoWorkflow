@@ -614,7 +614,7 @@ if (payFreq == 'Monthly') {
 } else if (payFreq == 'Semi Annualy') {
 	num = "6"
 
-} else if (payFreq == 'Annually') {
+} else if (payFreq == 'Annualy') {
 	num = "12"
 
 }

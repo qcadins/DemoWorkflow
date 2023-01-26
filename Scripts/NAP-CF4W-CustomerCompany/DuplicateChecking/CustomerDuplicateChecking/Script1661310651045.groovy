@@ -161,7 +161,10 @@ if (DupCheckStatus == true) {
                     'if dupcheck verif == review dan negative check == negative'
                     if ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 'REVIEW') && ((GlobalVariable.NegativeverifResult[
                     GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || (((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
-                    'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE'))) {
+                    'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE')&& 
+                    WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectApplicationInProcessPersonal'), 
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)||(WebUI.verifyElementPresent(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/button_SelectMatchSimilarDataPersonal'), 
+                        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)))) {
                         ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
 
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {

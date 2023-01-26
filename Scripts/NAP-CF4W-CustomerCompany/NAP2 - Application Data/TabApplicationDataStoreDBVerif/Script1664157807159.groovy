@@ -38,21 +38,21 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
 		GlobalVariable.NumofColm, 13))
 		
-//String bankaccount
-//def bankarray, confinsdatabankacc
-//
-//	if(datafileTabApplication.getValue(
-//        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-//
-//	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
-//		GlobalVariable.NumofColm, 13)).replace('HEADER:', '').replace('[', '').replace(']', '')
-//			 bankarray = bankaccount.split(', ')
-//			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
-//	}
+String bankaccount
+def bankarray, confinsdatabankacc
+
+	if(datafileTabApplication.getValue(
+        GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+
+	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+		GlobalVariable.NumofColm, 13))
+	 
+			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
+	}
 
 int arrayindex = 0, attrindex = 0
-//int bankindex = 0
-//int confinsindex = 0
+int bankindex = 0
+int confinsindex = 0
 
 'verify application source'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
@@ -95,17 +95,17 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-//if(datafileTabApplication.getValue(
-//	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-//'verify Bank Name'
-//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-//
-//'verify Bank Acc No'
-//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-//
-//'verify Bank Account Name'
-//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankarray[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-//}
+if(datafileTabApplication.getValue(
+	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+'verify Bank Name'
+arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify Bank Acc No'
+arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+
+'verify Bank Account Name'
+arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
 	
 'verify customer notification'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(

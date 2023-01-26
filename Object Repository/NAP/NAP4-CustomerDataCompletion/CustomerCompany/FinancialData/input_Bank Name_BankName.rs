@@ -6,11 +6,15 @@
    <elementGuidId>9c050764-9c49-4559-9508-af78c75918c0</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'text' and @id = 'BankName']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//input[@id='BankName']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

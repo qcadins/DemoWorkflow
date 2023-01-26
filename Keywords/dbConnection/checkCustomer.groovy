@@ -65,7 +65,7 @@ public class checkCustomer {
 	@Keyword
 	public checkCustomerNegativeGenSet(Sql instance){
 		int value
-		instance.eachRow(("SELECT * FROM GENERAL_SETTING_LOS WHERE GS_CODE = 'NEGCUSTALLOWNAP'"), { def row ->
+		instance.eachRow(("SELECT GS_VALUE FROM GENERAL_SETTING_LOS WHERE GS_CODE = 'NEGCUSTALLOWNAP'"), { def row ->
 			value = (row[0])
 		})
 		return value
