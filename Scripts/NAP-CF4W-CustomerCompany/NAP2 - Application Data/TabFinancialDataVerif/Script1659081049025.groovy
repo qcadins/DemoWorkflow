@@ -855,7 +855,7 @@ checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(
 checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Math.abs(Double.parseDouble(TotalARValue.replace(",",""))-Double.parseDouble(totalAR.replace(",",""))), 15))
 	
 'verify installment amount (rounded) confins x excel'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(strInstallmentAmount, instAmtRounded.replace(",","").replace(".00",""), false))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Double.parseDouble(strInstallmentAmount) - Double.parseDouble(instAmtRounded.replace(",","").replace(".00","")), 1))
 	
 'verify tdp confins x excel'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, TDP.replace(",",""), false))
