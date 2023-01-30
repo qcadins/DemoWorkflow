@@ -70,7 +70,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     //jika edit appno kosong
 } else {
     'looping countnumofcust'
-    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
+    for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal); (GlobalVariable.NumofColm)++) {
 		
 		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
 			break

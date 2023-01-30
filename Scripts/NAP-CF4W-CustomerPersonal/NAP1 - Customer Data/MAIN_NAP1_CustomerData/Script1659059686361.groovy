@@ -200,12 +200,17 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 if (GlobalVariable.Role == 'Data Entry') {
     'jika copyapp bernilai no atau edit atau editappno tidak kosong'
     if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerPersonal.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         8).length() > 1)) {
         'call Testcase tab Customer data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerData'), [:], FailureHandling.CONTINUE_ON_FAILURE //jika copyapp bernilai yes
             )
     } else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+	
+		'Write to empty edit appno'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+			7, GlobalVariable.NumofColm - 1, "")
+	
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -238,7 +243,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'untuk mendapatkan posisi copy app dari excel'
-    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
+    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers()); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofFamily
@@ -287,7 +292,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'untuk mendapatkan posisi copy app dari excel'
-    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
+    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers()); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
@@ -344,7 +349,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
 	'untuk mendapatkan posisi copy app dari excel'
-	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
+	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileTabGuarantorPersonal.getColumnNumbers()); (GlobalVariable.NumofGuarantorCompany)++) {
 		if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
@@ -378,11 +383,16 @@ if (GlobalVariable.Role == 'Data Entry') {
 } else {
     'Jika copyapp no atau copyapp edit atau editappno tidak kosong'
     if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerPersonal.getValue(
-        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
         8).length() > 1)) {
         'call test case tab customer data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerData'), [:], FailureHandling.STOP_ON_FAILURE)
     } else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+	
+		'Write to empty edit appno'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData',
+		7, GlobalVariable.NumofColm - 1, "")
+	
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Save'))
 
@@ -414,8 +424,20 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	'declare datafileCustomerPersonal'
+	datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+	
+	'declare datafileTabFamily'
+	datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+	
+	'declare datafileTabGuarantorPersonal'
+	datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+	
+	'declare datafileTabGuarantorCompany'
+	datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
+	
     'untuk mendapatkan posisi copy app dari excel'
-    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers() - 1); (GlobalVariable.NumofFamily)++) {
+    for (GlobalVariable.NumofFamily = 2; GlobalVariable.NumofFamily <= (datafileTabFamily.getColumnNumbers()); (GlobalVariable.NumofFamily)++) {
         if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofFamily
@@ -463,7 +485,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'untuk mendapatkan posisi copy app dari excel'
-    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorPersonal)++) {
+    for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileTabGuarantorPersonal.getColumnNumbers()); (GlobalVariable.NumofGuarantorPersonal)++) {
         if (datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorPersonal
@@ -519,7 +541,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
 	'untuk mendapatkan posisi copy app dari excel'
-	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileTabGuarantorCompany.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
+	for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileTabGuarantorCompany.getColumnNumbers()); (GlobalVariable.NumofGuarantorCompany)++) {
 		if (datafileTabGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerPersonal.getValue(
 			GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany

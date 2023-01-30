@@ -21,15 +21,15 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkInsRateBase {
-	
+
 	@Keyword
 	public checkInsuranceRateBasedOn(Sql instance){
 		String gs_value
-		
+
 		instance.eachRow(("select gs_value from GENERAL_SETTING where gs_code = 'INS_RATE_BASE_ON'"), { def row ->
 			gs_value = row[0]
 		})
-		
+
 		return gs_value
 	}
 }

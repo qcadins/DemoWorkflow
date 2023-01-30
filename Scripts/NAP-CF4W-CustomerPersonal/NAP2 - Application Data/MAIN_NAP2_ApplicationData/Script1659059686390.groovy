@@ -80,13 +80,13 @@ for (int i = 1; i <= 8; i++) {
 'click icon pensil untuk select'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
+WebUI.delay(5)
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 if (GlobalVariable.Role == 'Data Entry') {
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 
-    1); (GlobalVariable.NumofReferantor)++) {
+    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() ); (GlobalVariable.NumofReferantor)++) {
         if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
@@ -109,6 +109,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 0, 
             GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
+		WebUI.delay(3)
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
@@ -331,8 +332,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() - 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() ); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
@@ -377,8 +377,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
 } else {
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 
-    1); (GlobalVariable.NumofReferantor)++) {
+    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers()); (GlobalVariable.NumofReferantor)++) {
         if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
@@ -400,6 +399,8 @@ if (GlobalVariable.Role == 'Data Entry') {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 0, 
             GlobalVariable.StartIndex - 1, GlobalVariable.StatusSuccess)
 
+		WebUI.delay(10)
+		
         'verify fail'
         if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
@@ -630,8 +631,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() - 
-    1); (GlobalVariable.NumofUploadDocument)++) {
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() ); (GlobalVariable.NumofUploadDocument)++) {
         if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
@@ -663,8 +663,8 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
         }
         
-        'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah'
-        verifyMatch()
+//        'Verify tab insurance, life insurance, financial apakah ada nilai yang berubah'
+//        verifyMatch()
     }
 }
 

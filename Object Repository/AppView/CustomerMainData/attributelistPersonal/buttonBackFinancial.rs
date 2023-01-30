@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/div/mat-tab-body[1]/div/app-view-app-cust-data-personal/app-view-app-cust-data-completion-personal/div/div[3]/div/button</value>
+         <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-personal/app-view-app-cust-data-completion-personal/div/div[3]/div/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/div/mat-tab-body[1]/div/app-view-app-cust-data-personal/app-view-app-cust-data-completion-personal/div/div[3]/div/button</value>
+      <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/app-view-app-cust-data-personal/app-view-app-cust-data-completion-personal/div/div[3]/div/button</value>
    </webElementProperties>
 </WebElementEntity>

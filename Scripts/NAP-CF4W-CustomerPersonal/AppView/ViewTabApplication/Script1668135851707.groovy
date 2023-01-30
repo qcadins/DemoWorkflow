@@ -54,10 +54,10 @@ ArrayList<String> resultAttr = CustomKeywords.'appView.verifyAppView.checkApplic
 int index = 0
 
 'verify Label MO > CMO'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('AppView/Application/labelCMOOfficer'), "CMO'S OFFICER", false))
-checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('AppView/Application/labelCMORecommendation'), "CMO'S RECOMMENDATION", false))
-checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('AppView/Application/TabApplicationData/labelCMOSupervisor'), "CMO'S SUPERVISOR", false))
-checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestObject('AppView/Application/labelCMONotes'), "CMO'S NOTES", false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/Application/labelCMOOfficer')), "CMO'S OFFICER", false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/Application/labelCMORecommendation')), "CMO'S RECOMMENDATION", false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/Application/labelCMOSupervisor')), "CMO'S SUPERVISOR", false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('AppView/Application/labelCMONotes')), "CMO'S NOTES", false))
 
 'verify mo spv'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Application/SPV')).toUpperCase(),

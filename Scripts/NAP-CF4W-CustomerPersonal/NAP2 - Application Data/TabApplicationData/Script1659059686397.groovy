@@ -304,7 +304,7 @@ String payFreq = datafileTabApplication.getValue(
 
 'Select option dropdownlist Payment Frequency'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_PaymentFrequency'), 
-    payFreq, false)
+    "(?i)"+payFreq, true)
 
 'Inisialisasi Variabel'
 String tenorString = datafileTabApplication.getValue(
@@ -319,7 +319,7 @@ if (GlobalVariable.Role == 'Testing') {
     double tenor = Double.parseDouble(tenorString)
 
     'Inisialisasi Variabel'
-    int numOfInstallment
+    int numOfInstallment = 0
 
     'Verify numofinstallment berdasarkan tenor dan payment Frequency'
     if (payFreq == 'Monthly') {
@@ -332,7 +332,7 @@ if (GlobalVariable.Role == 'Testing') {
         numOfInstallment = ((Math.ceil(tenor / 4)) as int)
     } else if (payFreq == 'Semi Annually') {
         numOfInstallment = ((Math.ceil(tenor / 6)) as int)
-    } else if (payFreq == 'Annually') {
+    } else if (payFreq == 'Annualy') {
         numOfInstallment = ((Math.ceil(tenor / 12)) as int)
     } else if (payFreq == 'Weekly') {
         numOfInstallment = (((((4) as int) * tenor) + (Math.round(tenor - 1) / 3)) + 1)
@@ -395,18 +395,18 @@ textwop = datafileTabApplication.getValue(
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
 
-//'Verify/Jika Way of Payment = Auto Debit'
-//if (textwop == 'Auto Debit') {
-//    bankacc = findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
-//
-//    'Select option dropdownlist Customer Bank Account'
-//    WebUI.selectOptionByIndex(bankacc, datafileTabApplication.getValue(
-//            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
-//
-//    Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
-//
-//    GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
-//}
+'Verify/Jika Way of Payment = Auto Debit'
+if (textwop == 'Auto Debit') {
+    bankacc = findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
+
+    'Select option dropdownlist Customer Bank Account'
+    WebUI.selectOptionByIndex(bankacc, datafileTabApplication.getValue(
+            GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
+
+    Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
+
+    GlobalVariable.BankAccount = select.getFirstSelectedOption().getText()
+}
 
 'Select option dropdownlist Customer Notification By'
 WebUI.selectOptionByLabel(notif, datafileTabApplication.getValue(

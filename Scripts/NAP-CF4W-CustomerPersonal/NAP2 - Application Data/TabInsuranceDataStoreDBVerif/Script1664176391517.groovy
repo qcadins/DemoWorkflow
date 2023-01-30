@@ -46,7 +46,7 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 'Verifikasi nilai insured by'
 if (insuredBy == 'Customer') {
     'call function insuredcust'
-    insuredCust(arrayMatch, sqlconnectionLOS)
+    insuredCust(arrayMatch, sqlconnectionLOS, arrayindex)
 } else if (insuredBy == 'Customer - Multifinance') {
     'call function insuredcustmf'
     insuredCustMF(arrayMatch, sqlconnectionLOS, sqlconnectionFOU, arrayindex)
@@ -62,7 +62,7 @@ if (arrayMatch.contains(false)) {
         GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
 
-def insuredCust(ArrayList<String> arrayMatch, Sql sqlconnectionLOS) {
+def insuredCust(ArrayList<String> arrayMatch, Sql sqlconnectionLOS, int arrayindex) {
     'get insurance cust data from db'
     ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(

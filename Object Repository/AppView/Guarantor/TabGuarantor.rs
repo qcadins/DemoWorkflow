@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/mat-tab-header/div/div/div/div[2]/div</value>
+         <value>//div[@id=&quot;mat-tab-label-0-1&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/mat-tab-header/div/div/div/div[2]/div</value>
+      <value>//div[@id=&quot;mat-tab-label-0-1&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

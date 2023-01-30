@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>buttonTabInsurance</name>
+   <name>appNo</name>
    <tag></tag>
-   <elementGuidId>0b1c8faa-bcb2-4389-8450-36446b89a8ff</elementGuidId>
+   <elementGuidId>baa3d4c4-6d46-4827-919f-4d4cd8437b60</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;insurance-tab-trigger&quot;]
-
-</value>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[1]/span/div/div[2]/label/a/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -19,8 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;insurance-tab-trigger&quot;]
-
-</value>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[1]/span/div/div[2]/label/a/span</value>
    </webElementProperties>
 </WebElementEntity>

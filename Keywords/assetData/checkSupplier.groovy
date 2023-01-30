@@ -56,7 +56,7 @@ public class checkSupplier {
 	@Keyword
 	public countSupplierData(Sql instance, String suppschm, String officeName){
 		Integer countData
-		instance.eachRow(("select count(*) from vendor_schm vSchm WITH(NOLOCK) join vendor_schm_mbr vsMbr on vsMbr.vendor_schm_id = vSchm.vendor_schm_id join vendor v on v.vendor_id = vsMbr.vendor_id join vendor_office_mbr vOffice on v.vendor_id = vOffice.vendor_id join ref_office refoffice on refoffice.ref_office_id = vOffice.ref_office_id where vendor_schm_name = '"+suppschm+"' and v.mr_VENDOR_category_code = 'SUPPLIER' AND OFFICE_NAME = '"+officeName+"' AND vsMbr.IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("select count(*) from vendor_schm vSchm WITH(NOLOCK) join vendor_schm_mbr vsMbr on vsMbr.vendor_schm_id = vSchm.vendor_schm_id join vendor v on v.vendor_id = vsMbr.vendor_id join vendor_office_mbr vOffice on v.vendor_id = vOffice.vendor_id join ref_office refoffice on refoffice.ref_office_id = vOffice.ref_office_id where vendor_schm_CODE = '"+suppschm+"' and v.mr_VENDOR_category_code = 'SUPPLIER' AND OFFICE_NAME = '"+officeName+"' AND vsMbr.IS_ACTIVE = 1"), { def row ->
 			countData = (row[0])
 		})
 		return countData
