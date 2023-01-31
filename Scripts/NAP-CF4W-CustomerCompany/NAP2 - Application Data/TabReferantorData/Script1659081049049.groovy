@@ -900,7 +900,7 @@ addArrayVAT()
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 4))
+Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.NumofReferantor - 1, 4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'

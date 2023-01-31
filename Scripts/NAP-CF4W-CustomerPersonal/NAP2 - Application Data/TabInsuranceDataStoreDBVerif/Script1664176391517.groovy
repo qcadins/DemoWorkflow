@@ -63,6 +63,8 @@ if (arrayMatch.contains(false)) {
 }
 
 def insuredCust(ArrayList<String> arrayMatch, Sql sqlconnectionLOS) {
+	arrayindex = 0
+	
     'get insurance cust data from db'
     ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceCustStoreDB'(sqlconnectionLOS, 
         findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(

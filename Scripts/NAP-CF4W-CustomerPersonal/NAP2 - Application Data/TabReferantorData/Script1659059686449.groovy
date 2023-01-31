@@ -963,11 +963,6 @@ addArrayVAT()
 	
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
-//}
-//catch(Exception e){
-//	'click button save'
-//	WebUI.click(findTestObject('Object Repository/NAP/ReturnHandling/SaveReferantor'))
-//}
 
 Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.StartIndex, 4))
 

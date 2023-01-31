@@ -31,13 +31,13 @@ countCustomerPersonal = datafileCustomerPersonal.getColumnNumbers()
 if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
-		
-		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
-			break
-		}
-		
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal) == true) {
+            break
+        }
+        
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
+        if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerPersonal.getValue(
+            GlobalVariable.NumofColm, 12).length() == 0)) {
             'skip ke appno selanjutnya'
             continue
         }
@@ -45,8 +45,10 @@ if (GlobalVariable.Role == 'Data Entry') {
         'jika edit appno tidak kosong'
         if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
             'call tc edit nap'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE) //Jika edit appno kosong
-        } else {
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE //Jika edit appno kosong
+                ) //jika role == testing
+        } //jika edit appno kosong
+        else {
             'call tc main nap1'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
@@ -66,18 +68,21 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
-    } //jika role == testing
-    //jika edit appno kosong
+    } //                'Jika flag checkappviewpersonal bernilai yes'
+    //                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+    //                    'call test case verify app view'
+    //                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+    //                }
 } else {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
-		
-		if(CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal)==true){
-			break
-		}
-		
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal) == true) {
+            break
+        }
+        
         'Jika status pada excel bukan unexecuted'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted' || datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 12).length() == 0) {
+        if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerPersonal.getValue(
+            GlobalVariable.NumofColm, 12).length() == 0)) {
             'skip ke appno selanjutnya'
             continue
         }
@@ -110,55 +115,47 @@ if (GlobalVariable.Role == 'Data Entry') {
                 'call tc main comresfund'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
                     FailureHandling.STOP_ON_FAILURE)
-				
-				'declare datafileCommission'
-				datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
-				
-				'declare datafileReservedFund'
-				datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
-				
-				'Mengambil nilai row keberapa dimulai data return pada excel'
-				def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData',
-					'Return Commission & Reserved Fund') + 1
-				
-				'Mengambil nilai row keberapa dimulai data return pada excel'
-				def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-					'Return Commission & Reserved Fund') + 1
-				
-				'Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
-				for(int i=1;i<=i;i++){
-					if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
-						GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
-					
-						if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')){
-							'write to excel flag return done'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
-									returnRowCom, GlobalVariable.NumofColm - 1, "Done")
-						}
-						else if(datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
-							'write to excel flag return done'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
-									returnRowRsv, GlobalVariable.NumofColm - 1, "Done")
-						}
-						
-						'call tc main comresfund'
-						WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:],
-							FailureHandling.STOP_ON_FAILURE)
-					}
-					else{
-						break
-					}
-				}
-				
+
+                'declare datafileCommission'
+                datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
+
+                'declare datafileReservedFund'
+                datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+
+                'Mengambil nilai row keberapa dimulai data return pada excel'
+                def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 
+                    'Return Commission & Reserved Fund') + 1
+
+                'Mengambil nilai row keberapa dimulai data return pada excel'
+                def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
+                    'Return Commission & Reserved Fund') + 1
+
+                'Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
+                for (int i = 1; i <= i; i++) {
+                    if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || 
+                    datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
+                        if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')) {
+                            'write to excel flag return done'
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData', 
+                                returnRowCom, GlobalVariable.NumofColm - 1, 'Done')
+                        } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase(
+                            'Yes')) {
+                            'write to excel flag return done'
+                            CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
+                                returnRowRsv, GlobalVariable.NumofColm - 1, 'Done')
+                        }
+                        
+                        'call tc main comresfund'
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), 
+                            [:], FailureHandling.STOP_ON_FAILURE)
+                    } else {
+                        break
+                    }
+                }
+                
                 'call tc nap4 cdc'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                     [:], FailureHandling.STOP_ON_FAILURE)
-
-//                'Jika flag checkappviewpersonal bernilai yes'
-//                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
-//                    'call test case verify app view'
-//                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
-//                }
             }
             catch (Exception e) {
                 KeywordUtil.markFailed(e.printStackTrace())

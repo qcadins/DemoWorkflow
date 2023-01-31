@@ -26,7 +26,7 @@ public class checkCustomer {
 	public checkCustomerModelPersonal(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'PERSONAL'"), { def row ->
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'PERSONAL'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -37,7 +37,7 @@ public class checkCustomer {
 	public checkCustomerModelCompany(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'COMPANY'"), { def row ->
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'COMPANY'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -70,7 +70,7 @@ public class checkCustomer {
 		})
 		return value
 	}
-	
+
 	@Keyword
 	public checkSalutation(Sql instance){
 		String value
@@ -81,7 +81,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkNationality(Sql instance){
 		String value
@@ -92,7 +92,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkEducation(Sql instance){
 		String value
@@ -103,7 +103,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkReligion(Sql instance){
 		String value
