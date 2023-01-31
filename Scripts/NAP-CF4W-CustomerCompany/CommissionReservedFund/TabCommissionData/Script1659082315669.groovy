@@ -49,6 +49,8 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP/CommissionRes
 //Pengecekan app last step sementara dilakukan dengan pengecekan dari db karena pengecekan melalui view confins masih issue.
 String appLastStep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlConnectionLOS, appNo)
 
+Double totalRefundComponent = 0
+
 if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
@@ -80,8 +82,14 @@ if(GlobalVariable.RoleCompany == "Testing"){
 //			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'12.TabCommissionData',
 //				GlobalVariable.NumofColm)
 			
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(".00",""),resultMA.toString(),false),'12.TabCommissionData',
-				GlobalVariable.NumofColm)
+			if(totalRefundComponent<resultMA){
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(Math.round(Double.parseDouble(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(",",""))).toString(),Math.round(totalRefundComponent).toString(),false),'12.TabCommissionData',
+						GlobalVariable.NumofColm)
+			}
+			else{
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(Math.round(Double.parseDouble(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(",",""))).toString(),resultMA.toString(),false),'12.TabCommissionData',
+						GlobalVariable.NumofColm)
+			}
 			
 			break
 		}
@@ -130,6 +138,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 				
 				String textIncomeInfoAmt = WebUI.getText(modifyObjectIncomeInfoAmt)
 				
+				totalRefundComponent += Double.parseDouble(textIncomeInfoAmt.replace(",",""))
 				'Verif income info amount yang muncul pada confins sesuai dengan rumus perhitungan rule'
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 					

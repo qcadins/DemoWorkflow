@@ -78,7 +78,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkAdminFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='ADMIN' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -88,7 +88,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkProvisionFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on af.app_id = a.app_id where mr_fee_type_code ='PROVISION' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -108,7 +108,7 @@ public class verifyIncomeInfo {
 	@Keyword
 	public checkOtherFeeValue(Sql instanceLOS, String appNo){
 		BigDecimal value
-		instanceLOS.eachRow(("select app_fee_amt-std_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
+		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
 		return value
@@ -139,14 +139,14 @@ public class verifyIncomeInfo {
 		}
 		return value
 	}
-	
+
 	@Keyword
 	public verifyMaxAllocation(Sql instanceLOS, String appNo){
 		String lobCode
 		instanceLOS.eachRow(("select BIZ_TEMPLATE_CODE from app WITH(NOLOCK) WHERE APP_NO='"+appNo+"'"), { def row ->
 			lobCode = row[0]
 		})
-		
+
 		ArrayList<String> maxrefundAmt = new ArrayList<>()
 		String userDir = System.getProperty('user.dir')
 		String filePath = userDir+GlobalVariable.MaxRefundRulePath
@@ -169,15 +169,15 @@ public class verifyIncomeInfo {
 			}
 		}
 
-				ArrayList<Double> numbers = new ArrayList<>();
-			
-				Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
-				while(m.find()){
-					println(Double.valueOf(m.group())+"abc")
-					numbers.add(Double.valueOf(m.group()))
-				}
-				
-		
+		ArrayList<Double> numbers = new ArrayList<>();
+
+		Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
+		while(m.find()){
+			println(Double.valueOf(m.group())+"abc")
+			numbers.add(Double.valueOf(m.group()))
+		}
+
+
 		Integer totalMaxAllocated = 0
 		BigDecimal value
 		instanceLOS.eachRow(("select app_fee_amt from APP_FEE af WITH(NOLOCK) join app a WITH(NOLOCK) on a.app_id = af.app_id where mr_fee_type_code ='OTHER' and app_no='"+appNo+"'"), { def row ->
@@ -205,7 +205,7 @@ public class verifyIncomeInfo {
 		})
 		totalMaxAllocated+=value
 		println(totalMaxAllocated)
-		totalMaxAllocated+=(numbers[0])
+		totalMaxAllocated-=(numbers[0])
 		totalMaxAllocated*=numbers[1]
 		println(totalMaxAllocated)
 		return totalMaxAllocated
