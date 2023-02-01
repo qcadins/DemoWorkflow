@@ -45,6 +45,27 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 89), false))
 	}
 	
+	'koneksi fou'
+	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+	
+	'get insuredby ddl value from db'
+	ArrayList<String> insuredby = CustomKeywords.'insuranceData.checkInsRateBase.checkInsuredbyDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl insuredby'
+	int totalddlinsuredby = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'))
+
+	'verify total ddl insuredby confins = total ddl db'
+	WebUI.verifyEqual(totalddlinsuredby - 1, insuredby.size())
+	
+	'verify isi ddl insuredby confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'),
+		insuredby) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'insuredby')
+
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 String insuredBy = datafileTabInsurance.getValue(

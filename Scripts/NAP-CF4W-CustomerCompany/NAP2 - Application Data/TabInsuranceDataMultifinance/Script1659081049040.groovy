@@ -109,6 +109,44 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		
 		GlobalVariable.FlagFailed=1
 	}
+	
+	'get coverperiod ddl value from db'
+	ArrayList<String> coverperiod = CustomKeywords.'insuranceData.checkInsRateBase.checkCoverPeriodDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl insuredby'
+	int totalddlcoverperiod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'))
+
+	'verify total ddl coverperiod confins = total ddl db'
+	WebUI.verifyEqual(totalddlcoverperiod - 1, coverperiod.size())
+	
+	'verify isi ddl coverperiod confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'),
+		coverperiod) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'cover period')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'get paymenttype ddl value from db'
+	ArrayList<String> paymenttype = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
+			
+	'get total label from ddl paymenttype'
+	int totalddlpaymenttype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'))
+	
+	'verify total ddl paymenttype confins = total ddl db'
+	WebUI.verifyEqual(totalddlpaymenttype - 1, paymenttype.size())
+			
+	'verify isi ddl coverperiod confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
+			paymenttype) == false) {
+				
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'cover period')
+				
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 'Select option insco branch name'
@@ -222,6 +260,27 @@ if (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	'get maincvg ddl value from db'
+	ArrayList<String> maincvg = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
+			
+			'get total label from ddl maincvg'
+			int totalddlmaincvg = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'))
+			
+			'verify total ddl maincvg confins = total ddl db'
+			WebUI.verifyEqual(totalddlmaincvg, maincvg.size())
+			
+			'verify isi ddl maincvg confins = db'
+			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
+					maincvg) == false) {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'maincvg')
+				
+				(GlobalVariable.FlagFailed)++
+			}
+}
+	
 'Select option dropdownlist main coverage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
 	datafileTabInsurance.getValue(

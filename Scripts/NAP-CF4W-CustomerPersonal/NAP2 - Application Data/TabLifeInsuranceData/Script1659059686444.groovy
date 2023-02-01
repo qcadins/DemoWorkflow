@@ -106,6 +106,25 @@ if (datafileTabLifeInsurance.getValue(
 		
 			GlobalVariable.FlagFailed=1
 		}
+		
+		'get paymentmethod ddl value from db'
+		ArrayList<String> paymentmethod = CustomKeywords.'insuranceData.checkInsRateBase.checkDDLPremiumPaymentMethod'(sqlConnectionFOU)
+		
+		'get total label from ddl paymentmethod'
+		int totalddlpaymentmethod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'))
+	
+		'verify total ddl paymentmethod confins = total ddl db'
+		WebUI.verifyEqual(totalddlpaymentmethod - 1, paymentmethod.size())
+		
+		'verify isi ddl paymentmethod confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'),
+			paymentmethod) == false) {
+	
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'cover period')
+	
+			(GlobalVariable.FlagFailed)++
+		}
 	}
     
     'Select DropDownList Life Insco Branch Name'

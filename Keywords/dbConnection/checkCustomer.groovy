@@ -22,7 +22,7 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkCustomer {
-		@Keyword
+	@Keyword
 	public checkCustomerModelPersonal(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
@@ -43,7 +43,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkMaritalStatusDLL(Sql instance){
 		String value
@@ -87,7 +87,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkPublicTypeDDL(Sql instance){
 		String value

@@ -32,4 +32,48 @@ public class checkInsRateBase {
 
 		return gs_value
 	}
+
+	@Keyword
+	public checkInsuredbyDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'INSURED_BY' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkCoverPeriodDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'INS_COVER_PERIOD' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkPaymentTypeDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'PAY_PERIOD_TO_INSCO' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkMainCVGDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'INS_MAIN_CVG_TYPE' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
 }
