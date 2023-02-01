@@ -141,7 +141,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                     [:], FailureHandling.STOP_ON_FAILURE)
 
                 'check if verif Appview = yes'
-                not_run: if (GlobalVariable.CheckAppViewCompany == 'Yes') {
+                if (GlobalVariable.CheckAppViewCompany == 'Yes') {
                     'call test case verify app view'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
                 }

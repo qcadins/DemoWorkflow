@@ -354,11 +354,13 @@ if ((GlobalVariable.RoleCompany == 'Testing') && GlobalVariable.FirstTimeEntry==
 	}
 }
 	
-	'get default rounding value dari db'
-	int defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
-	
-	'verify default rounding value'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value'))))
+	if(GlobalVariable.FirstTimeEntry=="Yes"){
+		'get default rounding value dari db'
+		Integer defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+		
+		'verify default rounding value'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value').replace(",",""))))
+	}
 }
 
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {

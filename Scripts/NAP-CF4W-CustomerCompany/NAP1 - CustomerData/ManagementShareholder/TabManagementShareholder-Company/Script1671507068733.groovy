@@ -17,6 +17,8 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
@@ -87,6 +89,10 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
 
+						
+						'call function checkDDL'
+						checkDDL()
+						
                         'input shareholder name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
                             datafileMS.getValue(GlobalVariable.NumofMS, 52))
@@ -229,6 +235,9 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         'click radio company'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
 
+						'call function checkDDL'
+						checkDDL()
+						
                         'click button lookup shareholder'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Shareholder Legal Name_btn btn-raised btn-primary'))
 
@@ -564,4 +573,51 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 
         GlobalVariable.FlagFailed = 1
     }
+}
+
+def checkDDL(){
+	
+	'connect DB FOU'
+	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+	
+	if(GlobalVariable.RoleCompany == 'Testing'){
+	'get cust model ddl value from db'
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
+	
+	'get total label from ddl cust model'
+	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One Corporate  Non Corporate'))
+
+	'verify total ddl cust model confins = total ddl db'
+	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+	
+	'verify isi ddl cust model confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One Corporate  Non Corporate'),
+		custmodel) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	
+	'get companyType ddl value from db'
+	ArrayList<String> companyType = CustomKeywords.'dbConnection.checkCustomer.checkCompanyTypeDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl companyType'
+	int totalddlcompanyType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'))
+
+	'verify total ddl companyType confins = total ddl db'
+	WebUI.verifyEqual(totalddlcompanyType - 1, companyType.size())
+	
+	'verify isi ddl companyType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'),
+		companyType) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Company Type')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	}
 }

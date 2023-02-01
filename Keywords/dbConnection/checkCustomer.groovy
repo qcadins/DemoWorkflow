@@ -26,7 +26,40 @@ public class checkCustomer {
 	public checkCustomerModelPersonal(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'PERSONAL'"), { def row ->
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'PERSONAL'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkGenderDLLPersonal(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'GENDER' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkMaritalStatusDLL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'MARITAL_STAT' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkIDTypeDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'ID_TYPE' and IS_ACTIVE = 1"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -37,7 +70,29 @@ public class checkCustomer {
 	public checkCustomerModelCompany(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT DESCR FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'COMPANY'"), { def row ->
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_MODEL' AND IS_ACTIVE = 1 AND MAPPING_CODE = 'COMPANY'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkCompanyTypeDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'COMPANY_TYPE' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkPublicTypeDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'PUBLIC_TYPE' and IS_ACTIVE = 1"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

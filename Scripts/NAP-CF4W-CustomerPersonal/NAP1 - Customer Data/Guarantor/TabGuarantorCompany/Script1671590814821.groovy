@@ -17,6 +17,8 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.support.ui.Select as Select
 
@@ -91,6 +93,9 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                     'click radio company'
                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/Radio Company'))
 
+					'call function check ddl'
+					checkDDL()
+					
                     if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 
                     'Input Data') {
                         'select customer relationship'
@@ -441,4 +446,51 @@ def verifyInputError(int flagWarning) {
 
         flagWarning++
     }
+}
+
+def checkDDL(){
+	if(GlobalVariable.RoleCompany == 'Testing'){
+		
+	'connect DB FOU'
+	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+		
+	'get cust model ddl value from db'
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelCompany'(sqlConnectionFOU)
+	
+	'get total label from ddl cust model'
+	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'))
+
+	'verify total ddl cust model confins = total ddl db'
+	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+	
+	'verify isi ddl cust model confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'),
+		custmodel) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	
+	'get companyType ddl value from db'
+	ArrayList<String> companyType = CustomKeywords.'dbConnection.checkCustomer.checkCompanyTypeDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl companyType'
+	int totalddlcompanyType = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'))
+
+	'verify total ddl companyType confins = total ddl db'
+	WebUI.verifyEqual(totalddlcompanyType - 1, companyType.size())
+	
+	'verify isi ddl companyType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'),
+		companyType) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Company Type')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	}
 }

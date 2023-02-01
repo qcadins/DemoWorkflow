@@ -17,6 +17,8 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
@@ -86,6 +88,31 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         'click radio public'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Public'))
 
+						if(GlobalVariable.RoleCompany == 'Testing'){
+							
+							'connect DB FOU'
+							Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+							
+							'get publictype ddl value from db'
+							ArrayList<String> publictype = CustomKeywords.'dbConnection.checkCustomer.checkPublicTypeDDL'(sqlConnectionFOU)
+							
+							'get total label from ddl publictype'
+							int totalddlpublictype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/select_Select One INSTANSI PUBLIK DAERAH  INSTANSI PUBLIK PUSAT  MASYARAKAT  PEMERINTAH REPUBLIK INDONESIA'))
+						
+							'verify total ddl publictype confins = total ddl db'
+							WebUI.verifyEqual(totalddlpublictype - 1, publictype.size())
+							
+							'verify isi ddl publictype confins = db'
+							if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/select_Select One INSTANSI PUBLIK DAERAH  INSTANSI PUBLIK PUSAT  MASYARAKAT  PEMERINTAH REPUBLIK INDONESIA'),
+								publictype) == false) {
+						
+								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Public Type')
+						
+								(GlobalVariable.FlagFailed)++
+							}
+						}
+						
                         'select Public Type'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Public/select_Select One INSTANSI PUBLIK DAERAH  INSTANSI PUBLIK PUSAT  MASYARAKAT  PEMERINTAH REPUBLIK INDONESIA'), 
                             datafileMS.getValue(GlobalVariable.NumofMS, 62).toUpperCase(), false)

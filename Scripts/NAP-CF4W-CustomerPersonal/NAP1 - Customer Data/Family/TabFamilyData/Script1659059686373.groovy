@@ -16,6 +16,8 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.support.ui.Select as Select
 
@@ -75,6 +77,9 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
+						'call function check ddl'
+						checkDDL()
+						
                         'select customer relation'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
@@ -366,6 +371,9 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                         'click button add'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Add'))
 
+						'call function check ddl'
+						checkDDL()
+						
                         'select customer relation'
                         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_CustomerRelation'), 
                             datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18), false)
@@ -814,4 +822,104 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 		
         GlobalVariable.FlagFailed = 1
     }
+}
+
+def checkDDL(){
+	'connect DB FOU'
+	Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+	
+	'get cust model ddl value from db'
+	ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelPersonal'(sqlConnectionFOU)
+
+	'get total label from ddl cust model'
+	int totalddlcustmodel = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'))
+
+	'verify total ddl cust model confins = total ddl db'
+	WebUI.verifyEqual(totalddlcustmodel - 1, custmodel.size())
+
+	'verify isi ddl cust model confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_CustomerModel'),
+		custmodel) == false) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm,
+			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'get IDType ddl value from db'
+	ArrayList<String> IDType = CustomKeywords.'dbConnection.checkCustomer.checkIDTypeDDL'(sqlConnectionFOU)
+
+	'get total label from ddl IDType'
+	int totalddlIDType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_IDType'))
+
+	'verify total ddl IDType confins = total ddl db'
+	WebUI.verifyEqual(totalddlIDType - 1, IDType.size())
+
+	'verify isi ddl IDType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_IDType'),
+		IDType) == false) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm,
+			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'get MaritalStatus ddl value from db'
+	ArrayList<String> MaritalStatus = CustomKeywords.'dbConnection.checkCustomer.checkMaritalStatusDLL'(sqlConnectionFOU)
+
+	'get total label from ddl MaritalStatus'
+	int totalddlMaritalStatus = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_Marital Status'))
+
+	'verify total ddl MaritalStatus confins = total ddl db'
+	WebUI.verifyEqual(totalddlMaritalStatus - 1, MaritalStatus.size())
+
+	'verify isi ddl MaritalStatus confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_Marital Status'),
+		MaritalStatus) == false) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm,
+			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'MaritalStatus')
+
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'get Gender ddl value from db'
+	ArrayList<String> Gender = CustomKeywords.'dbConnection.checkCustomer.checkGenderDLLPersonal'(sqlConnectionFOU)
+
+	'get total label from ddl Gender'
+	int totalddlGender = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_Gender'))
+
+	'verify total ddl Gender confins = total ddl db'
+	WebUI.verifyEqual(totalddlGender - 1, Gender.size())
+
+	'verify isi ddl Gender confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_Gender'),
+		Gender) == false) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm,
+			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'get nationality ddl value from db'
+	ArrayList<String> nationality = CustomKeywords.'dbConnection.checkCustomer.checkNationality'(sqlConnectionFOU)
+
+	'get total label from ddl Gender'
+	int totalddlnationality = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_nationality'))
+
+	'verify total ddl nationality confins = total ddl db'
+	WebUI.verifyEqual(totalddlnationality - 1, nationality.size())
+
+	'verify isi ddl nationality confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/select_nationality'),
+		nationality) == false) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm,
+			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'nationality')
+
+		(GlobalVariable.FlagFailed)++
+	}
 }

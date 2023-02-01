@@ -159,9 +159,7 @@ if (DupCheckStatus == true) {
                 'if role == testing'
                 if (GlobalVariable.RoleCompany == 'Testing') {
                     'if dupcheck verif == review dan negative check == negative'
-                    if ((((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 'REVIEW') && ((GlobalVariable.NegativeverifResult[
-                    GlobalVariable.NegativeCustCount]) == 'NEGATIVE')) || (((GlobalVariable.DupcheckVerifResult[GlobalVariable.NegativeCustCount]) == 
-                    'LOCK') && ((GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount]) == 'NEGATIVE'))) {
+                    if (GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount] == 'NEGATIVE') {
                         ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
 
                         if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 15).equalsIgnoreCase('Yes')) {
@@ -195,7 +193,7 @@ if (DupCheckStatus == true) {
                 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
-                    'coun similar data row'
+                    'count similar data row'
                     ArrayList<String> variableidno = driver.findElements(By.cssSelector('#subSecMatch > table > tbody tr'))
 
                     for (int id = 1; id <= variableidno.size(); id++) {
