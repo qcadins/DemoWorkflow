@@ -38,6 +38,9 @@ if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/ContactInformation')
 }
 
+'call function check ddl'
+checkDDL()
+
 'input name'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Name_'), 
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12))
@@ -215,4 +218,87 @@ if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStore
     'call test case verify contact info store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+def checkDDL() {
+	if (GlobalVariable.Role == 'Testing') {
+		'connect DB FOU'
+		Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
+		'get IDType ddl value from db'
+		ArrayList<String> IDType = CustomKeywords.'dbConnection.checkCustomer.checkIDTypeDDL'(sqlConnectionFOU)
+
+		'get total label from ddl IDType'
+		int totalddlIDType = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Id Type'))
+
+		'verify total ddl IDType confins = total ddl db'
+		WebUI.verifyEqual(totalddlIDType - 1, IDType.size())
+
+		'verify isi ddl IDType confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Id Type'),
+			IDType) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+
+			(GlobalVariable.FlagFailed)++
+		}
+		
+		'get Gender ddl value from db'
+		ArrayList<String> Gender = CustomKeywords.'dbConnection.checkCustomer.checkGenderDLLPersonal'(sqlConnectionFOU)
+
+		'get total label from ddl Gender'
+		int totalddlGender = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select One Female  Male'))
+
+		'verify total ddl Gender confins = total ddl db'
+		WebUI.verifyEqual(totalddlGender - 1, Gender.size())
+
+		'verify isi ddl Gender confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select One Female  Male'),
+			Gender) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+
+			(GlobalVariable.FlagFailed)++
+		}
+		
+		'get jobposition ddl value from db'
+		ArrayList<String> jobposition = CustomKeywords.'nap4Data.checkNAP4.checkjobPosition'(sqlConnectionFOU)
+
+		'get total label from ddl jobposition'
+		int totalddljobposition = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select Job Position'))
+
+		'verify total ddl jobposition confins = total ddl db'
+		WebUI.verifyEqual(totalddljobposition - 1, jobposition.size())
+
+		'verify isi ddl jobposition confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select Job Position'),
+			jobposition) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+			(GlobalVariable.FlagFailed)++
+		}
+		
+		'get relationship ddl value from db'
+		ArrayList<String> relationship = CustomKeywords.'nap4Data.checkNAP4.checkcompanyrelationship'(sqlConnectionFOU)
+
+		'get total label from ddl jobposition'
+		int totalddlrelationship = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Relation'))
+
+		'verify total ddl relationship confins = total ddl db'
+		WebUI.verifyEqual(totalddlrelationship - 1, relationship.size())
+
+		'verify isi ddl relationship confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Relation'),
+			relationship) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'relationship')
+
+			(GlobalVariable.FlagFailed)++
+		}
+	}
 }

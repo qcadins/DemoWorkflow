@@ -252,4 +252,14 @@ public class checkNAP4 {
 		})
 		return value
 	}
+	
+	//keyword check company relationship status DDL
+	@Keyword
+	public checkcompanyrelationship(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_COMPANY_RELATIONSHIP' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
 }
