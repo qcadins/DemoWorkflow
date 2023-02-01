@@ -193,7 +193,7 @@ public class verifySubsidy {
 	@Keyword
 	public checkSubsidyValueTypeCode(Sql instanceLOS, String name){
 		String Code
-		instanceLOS.eachRow(("select REF_MASTER_CODE from ref_master_los where ref_master_type_code = 'SUBSIDY_VALUE_TYPE' AND REF_MASTER_NAME='"+name+"'"), { def row ->
+		instanceLOS.eachRow(("select MASTER_CODE from FOUNDATION.dbo.REF_MASTER where ref_master_type_code = 'SUBSIDY_VALUE_TYPE' AND DESCR='"+name+"'"), { def row ->
 			Code = row[0]
 		})
 		return Code
@@ -203,7 +203,7 @@ public class verifySubsidy {
 	@Keyword
 	public checkSubsidyFromTypeCode(Sql instanceLOS, String name){
 		String Code
-		instanceLOS.eachRow(("select REF_MASTER_CODE from ref_master_los where ref_master_type_code = 'SUBSIDY_FROM_TYPE' AND REF_MASTER_NAME='"+name+"'"), { def row ->
+		instanceLOS.eachRow(("select MASTER_CODE from FOUNDATION.dbo.REF_MASTER where ref_master_type_code = 'SUBSIDY_FROM_TYPE' AND DESCR='"+name+"'"), { def row ->
 			Code = row[0]
 		})
 		return Code
@@ -213,7 +213,7 @@ public class verifySubsidy {
 	@Keyword
 	public checkSubsidyAllocCode(Sql instanceLOS, String name){
 		String Code
-		instanceLOS.eachRow(("select REF_MASTER_CODE from ref_master_los where ref_master_type_code = 'SUBSIDY_ALLOC' AND REF_MASTER_NAME='"+name+"'"), { def row ->
+		instanceLOS.eachRow(("select MASTER_CODE from FOUNDATION.dbo.REF_MASTER where ref_master_type_code = 'SUBSIDY_ALLOC' AND DESCR='"+name+"'"), { def row ->
 			Code = row[0]
 		})
 		return Code
@@ -223,7 +223,7 @@ public class verifySubsidy {
 	@Keyword
 	public checkSubsidySourceCode(Sql instanceLOS, String name){
 		String Code
-		instanceLOS.eachRow(("select REF_MASTER_CODE from ref_master_los where ref_master_type_code = 'SUBSIDY_SOURCE' AND REF_MASTER_NAME='"+name+"'"), { def row ->
+		instanceLOS.eachRow(("select MASTER_CODE from FOUNDATION.dbo.REF_MASTER where ref_master_type_code = 'SUBSIDY_SOURCE' AND DESCR='"+name+"'"), { def row ->
 			Code = row[0]
 		})
 		return Code

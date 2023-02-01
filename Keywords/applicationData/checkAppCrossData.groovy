@@ -21,7 +21,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable
 
 public class checkAppCrossData {
-	
+
 	@Keyword
 	public checkCountAppAgr(Sql instance){
 		Integer countData

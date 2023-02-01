@@ -27,11 +27,11 @@ public class checkInscoBranch {
 	@Keyword
 	public checkDDLInscoBranch(Sql instance, String officeName){
 		ArrayList<String> inscoBranch = new ArrayList<String>()
-		
+
 		instance.eachRow(("SELECT VENDOR_NAME FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vom ON v.VENDOR_ID=vom.VENDOR_ID JOIN REF_OFFICE ro ON ro.REF_OFFICE_ID = vom.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
 			inscoBranch.add(row[0].toUpperCase())
 		})
-		
+
 		return inscoBranch
 	}
 
@@ -40,11 +40,11 @@ public class checkInscoBranch {
 	@Keyword
 	public countDDLInscoBranch(Sql instance, String officeName){
 		Integer countData
-		
+
 		instance.eachRow(("SELECT count(*) vendor_name FROM VENDOR v WITH(NOLOCK) JOIN VENDOR_OFFICE_MBR vom ON v.VENDOR_ID=vom.VENDOR_ID JOIN REF_OFFICE ro ON vom.REF_OFFICE_ID = ro.REF_OFFICE_ID AND MR_VENDOR_CATEGORY_CODE = 'ASSET_INSCO_BRANCH' AND v.IS_ACTIVE = 1 AND OFFICE_NAME = '"+officeName+"' ORDER BY VENDOR_NAME"), { def row ->
 			countData = (row[0])
 		})
-		
+
 		return countData
 	}
 }

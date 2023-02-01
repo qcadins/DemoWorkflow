@@ -60,33 +60,25 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     modifyNewPriorTo = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
         ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[3]', true)
 
-    'modify object Required'
-    modifyNewRequired = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[4]', true)
-
     'modify object Check'
     modifyNewCheck = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[5]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[4]', true)
 
     'modify object Waived'
     modifyNewWaived = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[6]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[5]', true)
 
     'modify object Promise Date'
     modifyNewPromiseDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[7]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[6]', true)
 
     'modify object Expired Date'
     modifyNewExpiredDate = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[7]', true)
 
     'modify object Notes'
     modifyNewNotes = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals', 
-        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[9]', true)
-	
-	'modify object button download'
-	modifyNewButtonDownload = WebUI.modifyObjectProperty(findTestObject('AppView/CustomerMainData/ModifyObj'), 'xpath', 'equals',
-		('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[10]', true)
+        ('//*[@id="viewAppTcInfo"]/lib-ucgridview/div/table/tbody/tr[' + TCindex) + ']/td[8]', true)
 
     'verify document name'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewDocumentName).toUpperCase(), (resultTC[index++]).toUpperCase(), 
@@ -94,10 +86,6 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
 
     'verify prior to'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewPriorTo).toUpperCase(), (resultTC[index++]).toUpperCase(), 
-            false))
-
-    'verify prior to'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewRequired).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 
     'verify checked'
@@ -120,13 +108,6 @@ for (TCindex = 1; TCindex <= variableData.size(); TCindex++) {
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyNewNotes).toUpperCase(), (resultTC[index++]).toUpperCase(), 
             false))
 	
-//	if(WebUI.verifyElementPresent(modifyNewButtonDownload, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
-//		'click button download'
-//		WebUI.click(modifyNewButtonDownload)
-//		
-//		'check if file downloaded success'
-//		isFileDownloaded(filePath)
-//	}
 }
 
 if ((GlobalVariable.FlagWarning == 0) && (GlobalVariable.FlagFailed == 0)) {
@@ -147,22 +128,4 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 
         GlobalVariable.FlagFailed = 1
     }
-}
-
-boolean isFileDownloaded(String downloadPath) {
-    File file = new File(downloadPath)
-
-    Boolean isDownloaded = false
-
-    for (File f : file.listFiles()) {
-        if (!(f.isDirectory())) {
-            if (f.exists()) {
-                isDownloaded = true
-            }
-            
-            f.delete()
-        }
-    }
-    
-    WebUI.verifyEqual(isDownloaded, true)
 }

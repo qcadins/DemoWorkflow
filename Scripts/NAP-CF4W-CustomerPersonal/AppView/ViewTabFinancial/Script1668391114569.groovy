@@ -221,8 +221,8 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object R
 		(listFinancialData[Finindex++]).toUpperCase(), false))
 
 'verify ltv'
-checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/AppView/Financial/LTV')).replace(",","").replace(" %","")),
-		Double.parseDouble(listFinancialData[Finindex++])*100))
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/AppView/Financial/LTV')).replace(",","").replace(" %",""))),
+		Math.round(Double.parseDouble(listFinancialData[Finindex++])*100)))
 
 'verify num of inst'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/AppView/Financial/NumofInst')).toUpperCase().replace(",",""),

@@ -22,7 +22,7 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkCustomer {
-	@Keyword
+		@Keyword
 	public checkCustomerModelPersonal(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
@@ -43,7 +43,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-
+	
 	@Keyword
 	public checkMaritalStatusDLL(Sql instance){
 		String value
@@ -87,7 +87,7 @@ public class checkCustomer {
 		})
 		return listValue
 	}
-
+	
 	@Keyword
 	public checkPublicTypeDDL(Sql instance){
 		String value
@@ -130,7 +130,7 @@ public class checkCustomer {
 	public checkSalutation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -141,7 +141,7 @@ public class checkCustomer {
 	public checkNationality(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' and IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -152,7 +152,7 @@ public class checkCustomer {
 	public checkEducation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -163,7 +163,7 @@ public class checkCustomer {
 	public checkReligion(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

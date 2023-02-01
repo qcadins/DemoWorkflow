@@ -52,13 +52,13 @@ public class function {
 			}
 		}
 	}
-	
+
 	@Keyword
 	public checkNAPExist(TestData datafilecust){
 		if(datafilecust.getValue(GlobalVariable.NumofColm, 8)=="" && datafilecust.getValue(GlobalVariable.NumofColm, 12)=="" &&datafilecust.getValue(GlobalVariable.NumofColm, 9)==""){
-				return true
+			return true
 		}else {
-				return false
+			return false
 		}
 	}
 }
