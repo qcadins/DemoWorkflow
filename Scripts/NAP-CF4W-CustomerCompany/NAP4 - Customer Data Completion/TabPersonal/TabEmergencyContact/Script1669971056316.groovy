@@ -16,6 +16,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
@@ -32,6 +34,9 @@ if (GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL') {
 
     GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact')
 }
+
+'call function check ddl'
+checkDDL()
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 12).equalsIgnoreCase('Input Data')) {
     'input contact person name asal untuk mereset field jika ke lock'
@@ -394,4 +399,49 @@ def getDataEmergencyContact() {
 	}
 	
     GlobalVariable.Confinsdata = confinsdata
+}
+
+def checkDDL(){
+	if(GlobalVariable.RoleCompany == 'Testing'){
+		'connect DB FOU'
+		Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+		
+		'get IDType ddl value from db'
+		ArrayList<String> IDType = CustomKeywords.'dbConnection.checkCustomer.checkIDTypeDDL'(sqlConnectionFOU)
+	
+		'get total label from ddl IDType'
+		int totalddlIDType = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_ID Type'))
+	
+		'verify total ddl IDType confins = total ddl db'
+		WebUI.verifyEqual(totalddlIDType - 1, IDType.size())
+	
+		'verify isi ddl IDType confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_ID Type'),
+			IDType) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+	
+			(GlobalVariable.FlagFailed)++
+		}
+			
+			'get Gender ddl value from db'
+			ArrayList<String> Gender = CustomKeywords.'dbConnection.checkCustomer.checkGenderDLLPersonal'(sqlConnectionFOU)
+		
+			'get total label from ddl Gender'
+			int totalddlGender = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_Gender'))
+		
+			'verify total ddl Gender confins = total ddl db'
+			WebUI.verifyEqual(totalddlGender - 1, Gender.size())
+		
+			'verify isi ddl Gender confins = db'
+			if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_Gender'),
+				Gender) == false) {
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.NumofColm,
+					GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+		
+				(GlobalVariable.FlagFailed)++
+			}
+	}
 }

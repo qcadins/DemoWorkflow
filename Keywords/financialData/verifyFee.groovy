@@ -204,12 +204,23 @@ public class verifyFee {
 		})
 		return feeCode
 	}
-	
+
 	@Keyword
 	public checkProvisionFeeDDL(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
 		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'PROVISION_SOURCE' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkRateTypeDDL(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'RATE_TYPE' and IS_ACTIVE = 1"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

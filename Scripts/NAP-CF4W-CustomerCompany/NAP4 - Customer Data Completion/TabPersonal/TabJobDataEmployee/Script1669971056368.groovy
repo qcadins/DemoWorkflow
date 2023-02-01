@@ -17,6 +17,9 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
 
+'call function check ddl'
+checkDDL()
+
 'click lookup profesi'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Profession Name_btn btn-raised btn-primary'))
 
@@ -67,8 +70,8 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 }
 
 'input nama perusahaan'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_CompanyName'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_CompanyName'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 20))
 
 'click button lookup industry type'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Industry Type_btn btn-raised btn-primary'))
@@ -94,24 +97,24 @@ WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/J
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 24))
 
 'input job title'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Job Title Name'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Job Title Name'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 25))
 
 'input number of employee'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Number of Employee_'), 
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 26))
 
 'input address'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/textarea_Address_'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 55))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/textarea_Address_'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 55))
 
 'input RT'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_RT'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 56))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_RT'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 56))
 
 'input RW'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_RW'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 57))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_RW'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 57))
 
 'click search zipcode'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Zipcode_btn btn-raised btn-primary'))
@@ -129,8 +132,8 @@ WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/J
     GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 59))
 
 'input kota'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Kota_kota'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 61))
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Kota_kota'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 61))
 
 'click search'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Search'))
@@ -139,52 +142,52 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 verifyInputError()
 
 'input note'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/textarea_notes'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 62), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/textarea_notes'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 62), FailureHandling.OPTIONAL)
 
 'input phone1 Area'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 63), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Area'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 63), FailureHandling.OPTIONAL)
 
 'input phone1 number'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 64), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Number'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 64), FailureHandling.OPTIONAL)
 
 'input phone1 Extension'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 65), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 1_Ext'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 65), FailureHandling.OPTIONAL)
 
 'input phone2 area'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 66), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Area'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 66), FailureHandling.OPTIONAL)
 
 'input phone2 number'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 67), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Number'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 67), FailureHandling.OPTIONAL)
 
 'input phone2 extension'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 68), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 2_Ext'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 68), FailureHandling.OPTIONAL)
 
 'input phone3 area'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 69), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Area'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 69), FailureHandling.OPTIONAL)
 
 'input phone3 number'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 70), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Number'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 70), FailureHandling.OPTIONAL)
 
 'input phone3 extension'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Ext'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 71), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Phone 3_Ext'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 71), FailureHandling.OPTIONAL)
 
 'input fax'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Fax_Area'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 72), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Fax_Area'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 72), FailureHandling.OPTIONAL)
 
 'input fax'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Fax_Number'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 73), FailureHandling.OPTIONAL)
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Fax_Number'), GlobalVariable.FindDataFile.getValue(
+        GlobalVariable.ColmNAP4, 73), FailureHandling.OPTIONAL)
 
 if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 74).length() > 0) {
     'select ownership'
@@ -249,7 +252,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 79).length() >
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/TabApplicationData/Button_X'))
 
-            GlobalVariable.FlagWarning++
+            (GlobalVariable.FlagWarning)++
         }
     }
     
@@ -383,7 +386,7 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 106).length() 
             'click X'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/TabApplicationData/Button_X'))
 
-            GlobalVariable.FlagWarning++
+            (GlobalVariable.FlagWarning)++
         }
     }
     
@@ -451,27 +454,139 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Back'))
 } else {
     if (GlobalVariable.FlagWarning > 0) {
-		'write to excel status warning'
+        'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3.JobData', 0, GlobalVariable.ColmNAP4 - 
             1, GlobalVariable.StatusWarning)
     }
 }
 
-def verifyInputError(){
-	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'),
-		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-		'click select'
-		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'))
-	} else {
-		'click X'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/Button_X'))
-	
-		'click button back'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Back'))
-	
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
-	
-		GlobalVariable.FlagFailed = 1
-	}
+def verifyInputError() {
+    if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'), 
+        GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+        'click select'
+        WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/a_Select'))
+    } else {
+        'click X'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/Button_X'))
+
+        'click button back'
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Back'))
+
+        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, 
+            GlobalVariable.StatusReasonLookup)
+
+        GlobalVariable.FlagFailed = 1
+    }
+}
+
+def checkDDL() {
+    if (GlobalVariable.RoleCompany == 'Testing') {
+        'connect DB FOU'
+        Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
+        'get jobposition ddl value from db'
+        ArrayList<String> jobposition = CustomKeywords.'nap4Data.checkNAP4.checkjobPosition'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddljobposition = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'))
+
+        'verify total ddl jobposition confins = total ddl db'
+        WebUI.verifyEqual(totalddljobposition - 1, jobposition.size())
+
+        'verify isi ddl jobposition confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'), 
+            jobposition) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get jobStatus ddl value from db'
+        ArrayList<String> jobStatus = CustomKeywords.'nap4Data.checkNAP4.checkjobStatus'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddljobStatus = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Contract  Permanent'))
+
+        'verify total ddl jobStatus confins = total ddl db'
+        WebUI.verifyEqual(totalddljobStatus - 1, jobStatus.size())
+
+        'verify isi ddl jobStatus confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Contract  Permanent'), 
+            jobStatus) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get companyScale ddl value from db'
+        ArrayList<String> companyScale = CustomKeywords.'nap4Data.checkNAP4.checkcompanyScale'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddlcompanyScale = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Big  Medium  Small'))
+
+        'verify total ddl companyScale confins = total ddl db'
+        WebUI.verifyEqual(totalddlcompanyScale - 1, companyScale.size())
+
+        'verify isi ddl companyScale confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Big  Medium  Small'), 
+            companyScale) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get data array dari db'
+        ArrayList<String> Ownership = CustomKeywords.'nap4Data.checkNAP4.checkOwnership'(sqlConnectionFOU)
+
+        'get total label from ddl'
+        int totalownershipjobaddr = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
+
+        int totalownershipprevjob = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'))
+
+        int totalownershipothbiz = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Ownership OtherBusinessAddress'))
+
+        'verify total ddl confins = total ddl db'
+        WebUI.verifyEqual(totalownershipjobaddr - 1, Ownership.size())
+
+        WebUI.verifyEqual(totalownershipprevjob - 1, Ownership.size())
+
+        WebUI.verifyEqual(totalownershipothbiz - 1, Ownership.size())
+
+        'verify array dari db == option list confins job addr'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'job addr ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+        
+        'verify array dari db == option list confins prev job addr'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'prev job ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+        
+        'verify array dari db == option list confins othbiz'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Ownership OtherBusinessAddress'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'oth biz ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+    }
 }
