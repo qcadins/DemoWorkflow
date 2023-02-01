@@ -168,5 +168,16 @@ public class checkCustomer {
 			listValue.add(value)
 		})
 		return listValue
-	}	
+	}
+
+	@Keyword
+	public checkCopyAddr(Sql instance, String appno){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("select UPPER(rm.DESCR) from APP_CUST ac JOIN APP_CUST_ADDR acd ON ac.APP_CUST_ID = acd.APP_CUST_ID JOIN APP a ON ac.APP_ID = a.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rm ON rm.MASTER_CODE = acd.MR_CUST_ADDR_TYPE_CODE WHERE APP_NO = '"+ appno +"' and ac.IS_CUSTOMER = 1 AND rm.IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
 }

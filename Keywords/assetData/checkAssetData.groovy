@@ -60,7 +60,17 @@ public class checkAssetData {
 	@Keyword
 	public checkAssetUsageDDL(Sql instance){
 		ArrayList<String> assetUsage = new ArrayList<String>()
-		instance.eachRow(("select descr from REF_MASTER WITH(NOLOCK) where ref_master_type_code = 'asset_usage'"), { def row ->
+		instance.eachRow(("select UPPER(DESCR) from REF_MASTER WITH(NOLOCK) where ref_master_type_code = 'asset_usage' and IS_ACTIVE = 1"), { def row ->
+			assetUsage.add(row[0].toUpperCase())
+		})
+		return assetUsage
+	}
+	
+	//keyword check asset condition DDL
+	@Keyword
+	public checkAssetConditionDDL(Sql instance){
+		ArrayList<String> assetUsage = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'ASSET_CONDITION' and IS_ACTIVE = 1"), { def row ->
 			assetUsage.add(row[0].toUpperCase())
 		})
 		return assetUsage
