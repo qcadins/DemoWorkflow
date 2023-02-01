@@ -18,6 +18,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.WebElement as WebElement
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathAppInquiryPersonal)

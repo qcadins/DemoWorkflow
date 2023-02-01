@@ -200,15 +200,15 @@ public class verifyInsuranceData {
 
 		}
 		ArrayList<BigDecimal> totalResult = new ArrayList<BigDecimal>()
-		
+
 		totalResult.add(totalMainPremiumResult)
-		
+
 		totalResult.add(totalAdditionalPremiumResult)
-		
+
 		totalResult.add(counterPaidByMF)
-		
+
 		totalResult.add(capitalizeAmountResult)
-		
+
 		return totalResult
 	}
 
@@ -383,15 +383,15 @@ public class verifyInsuranceData {
 
 		}
 		ArrayList<BigDecimal> totalResult = new ArrayList<BigDecimal>()
-		
+
 		totalResult.add(totalMainPremiumResult)
-		
+
 		totalResult.add(totalAdditionalPremiumResult)
-		
+
 		totalResult.add(counterPaidByMF)
-		
+
 		totalResult.add(capitalizeAmountResult)
-		
+
 		return totalResult
 	}
 }

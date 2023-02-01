@@ -22,7 +22,7 @@ import internal.GlobalVariable
 import java.awt.event.KeyEvent
 
 public class zoomKeyword {
-	
+
 	//keyword zoom out (percentage dalam kelipatan 10)
 	@Keyword
 	def zoomOut (int percentage) {
@@ -35,6 +35,6 @@ public class zoomKeyword {
 		robot.keyRelease(KeyEvent.VK_CONTROL)
 		robot.delay(1000) //NOTE THE DELAY (500, 1000, 1500 MIGHT WORK FOR YOU)
 	}
-	
-	
+
+
 }

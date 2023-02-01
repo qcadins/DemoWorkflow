@@ -75,8 +75,8 @@ public class checkReferantorDetail {
 		})
 		return referantorDetail
 	}
-	
-	
+
+
 	//keyword check customer referantor for appview
 	@Keyword
 	public checkCustomerReferantorWithRefName(Sql instance,String referantorName){

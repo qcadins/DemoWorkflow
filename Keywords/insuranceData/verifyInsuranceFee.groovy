@@ -108,7 +108,7 @@ public class verifyInsuranceFee {
 		int matchInscoHO = 0, matchAssetCategory = 0, matchAssetCondition = 0
 
 		for(int i=insHOCodeRow;i<=ruleFee.getRowNumbers();i++){
-			
+
 			if(ruleFee.getValue(1,i)!=inscoHOCode && ruleFee.getValue(1,i)!="" && ruleFee.getValue(1,i)!="-"){
 				matchInscoHO=0
 
@@ -126,7 +126,7 @@ public class verifyInsuranceFee {
 					matchAssetCategory = 0
 
 				}
-			
+
 				if(ruleFee.getValue(6,i)==assetCondition || ruleFee.getValue(6,i)=="-"){
 					matchAssetCondition = 1
 

@@ -70,45 +70,45 @@ public class checkCustomer {
 		})
 		return value
 	}
-	
+
 	@Keyword
 	public checkSalutation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'SALUTATION' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkNationality(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkEducation(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkReligion(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT REF_MASTER_NAME FROM REF_MASTER_LOS WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'Education' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
