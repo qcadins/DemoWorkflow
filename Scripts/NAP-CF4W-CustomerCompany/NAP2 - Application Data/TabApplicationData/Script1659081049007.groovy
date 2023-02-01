@@ -376,7 +376,7 @@ if (textwop == 'Auto Debit') {
     bankacc = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
 
     'Select option dropdownlist Customer Bank Account'
-    WebUI.selectOptionByIndex(bankacc, datafileTabApplication.getValue(GlobalVariable.NumofColm, 26), FailureHandling.OPTIONAL)
+    WebUI.selectOptionByIndex(bankacc, datafileTabApplication.getValue(GlobalVariable.NumofColm, 26))
 
     Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
 

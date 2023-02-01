@@ -79,4 +79,26 @@ public class checkReferantor {
 		}
 		return defaultBankAccount
 	}
+
+	@Keyword
+	public checkReferantorType(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'REFERANTOR_CATEGORY' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+
+	@Keyword
+	public checkTaxCalculation(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'TAX_CALC_METHOD' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
 }

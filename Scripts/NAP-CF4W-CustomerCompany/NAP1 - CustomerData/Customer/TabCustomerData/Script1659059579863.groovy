@@ -365,5 +365,25 @@ def checkDDL(Sql sqlConnectionFOU){
 
 		(GlobalVariable.FlagFailed)++
 	}
+	
+	
+	'get companyType ddl value from db'
+	ArrayList<String> companyType = CustomKeywords.'dbConnection.checkCustomer.checkCompanyTypeDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl companyType'
+	int totalddlcompanyType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'))
+
+	'verify total ddl companyType confins = total ddl db'
+	WebUI.verifyEqual(totalddlcompanyType - 1, companyType.size())
+	
+	'verify isi ddl companyType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'),
+		companyType) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Company Type')
+
+		(GlobalVariable.FlagFailed)++
+	}
 	}
 }

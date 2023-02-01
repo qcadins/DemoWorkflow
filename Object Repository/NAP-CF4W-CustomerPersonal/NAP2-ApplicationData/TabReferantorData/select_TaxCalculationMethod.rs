@@ -3,7 +3,7 @@
    <description></description>
    <name>select_TaxCalculationMethod</name>
    <tag></tag>
-   <elementGuidId>827da6ab-4445-4451-81f4-53d3c7ea6538</elementGuidId>
+   <elementGuidId>17f634f9-4e8d-4742-b4a2-f88e5e9e921b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;accessoriesData&quot;)/div[@class=&quot;table-responsive ng-untouched ng-pristine ng-star-inserted ng-invalid&quot;]/table[@class=&quot;table text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/td[@class=&quot;text-center&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[6]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[2]/div/div[2]/table/tbody/tr/td[6]/select</value>
+      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[6]/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

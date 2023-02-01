@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//form[@id='formSearch']/div/div/div/div[2]/div/div/div/div/select</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[2]/select</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,18 +45,18 @@
       <value>Referantor Type</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>All Agency Personal  Agency Company </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formSearch&quot;)/div[@class=&quot;form-body&quot;]/div[@class=&quot;panel-active ng-trigger ng-trigger-changeDivSize&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 form-group ng-tns-c34-2 ng-star-inserted&quot;]/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-7 no-padding&quot;]/div[@class=&quot;ng-tns-c34-2 ng-star-inserted&quot;]/select[@class=&quot;form-control search-form-control ng-untouched ng-pristine ng-valid&quot;]</value>
+      <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr/td[2]/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
