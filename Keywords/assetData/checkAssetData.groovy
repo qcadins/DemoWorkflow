@@ -65,7 +65,7 @@ public class checkAssetData {
 		})
 		return assetUsage
 	}
-	
+
 	//keyword check asset condition DDL
 	@Keyword
 	public checkAssetConditionDDL(Sql instance){

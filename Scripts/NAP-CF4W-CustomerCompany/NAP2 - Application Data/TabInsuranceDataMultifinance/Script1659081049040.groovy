@@ -262,7 +262,7 @@ if (datafileTabInsurance.getValue(
 
 if(GlobalVariable.RoleCompany == 'Testing'){
 	'get maincvg ddl value from db'
-	ArrayList<String> maincvg = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
+	ArrayList<String> maincvg = CustomKeywords.'insuranceData.checkInsRateBase.checkMainCVGDDL'(sqlConnectionFOU)
 			
 			'get total label from ddl maincvg'
 			int totalddlmaincvg = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'))
@@ -852,6 +852,8 @@ if(capinssetting=="YEARLY"){
 	
 	ArrayList<WebElement> totalResult
 	BigDecimal totalPremitoCustResult
+	String totalFeeResult
+	
 	if(GlobalVariable.RoleCompany=="Testing"){
 		
 		'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
@@ -874,22 +876,22 @@ if(capinssetting=="YEARLY"){
 			',', '')
 		
 		'get perhitungan total fee dari excel'
-		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87)
+		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87).replace(',', '')
 		
 		'Perhitungan total premi to customer'
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
 		
 		'Verif total main premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalMainPremiAmt)), Double.parseDouble(String.format('%.2f', totalResult[0]))))
 		
 		'Verif total additional premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalAdditionalPremiAmt)), Double.parseDouble(String.format('%.2f', totalResult[1]))))
 		
 		'Verif total fee sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, totalFeeResult, false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalFeeAmt.replace(',', ''))), Double.parseDouble(totalFeeResult)))
 		
 		'Verif total premi to customer sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremitoCust)), Double.parseDouble(String.format('%.2f', totalPremitoCustResult))))
 		
 		'Jika tidak ada paid by mf'
 		if(totalResult[2]==0){
@@ -929,7 +931,7 @@ if(capinssetting=="YEARLY"){
 		totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 		
 		'Verif total premi to customer after discount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremitoCustAftDisc)), Double.parseDouble(String.format('%.2f', totalPremitoCustAftDiscountResult))))
 		
 		String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 			'value').replace(',', '')
@@ -937,12 +939,12 @@ if(capinssetting=="YEARLY"){
 		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString(), false))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textCapitalizeAmount)), Double.parseDouble((totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString())))
 		}
 		//Jika capitalize amount bernilai 0
 		else if(totalResult[3]==0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textCapitalizeAmount)), Double.parseDouble((totalResult[3]).toString())))
 		}
 		'Jika ada paid by mf'
 		if(totalResult[2]==1){

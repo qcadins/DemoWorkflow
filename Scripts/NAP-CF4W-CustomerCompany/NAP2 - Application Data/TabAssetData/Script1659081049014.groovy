@@ -748,9 +748,9 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerCompany'() == true) {
             }
         }
     } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42) == 'Company') {
-        'select company owner profession'
-        WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Company Owner Profession'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 47), false)
+	    'select company owner profession'
+	    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Company Owner Profession'), 
+	        datafileTabAsset.getValue(GlobalVariable.NumofColm, 47), false)
     }
     
 	

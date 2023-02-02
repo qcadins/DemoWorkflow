@@ -431,12 +431,10 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		numOfInstallment.toString())
 }
 
-if (datafileTabApplication.getValue(
-	GlobalVariable.NumofColm, 21).length() > 0) {
+if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 21).length() > 0) {
 	'Select option dropdownlist DPSourcePaymentType'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'),
-		datafileTabApplication.getValue(
-			GlobalVariable.NumofColm, 21), false)
+		datafileTabApplication.getValue(GlobalVariable.NumofColm, 21), false)
 }
 
 String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
