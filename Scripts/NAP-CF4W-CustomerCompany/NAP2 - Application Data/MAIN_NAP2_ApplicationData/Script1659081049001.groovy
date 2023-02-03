@@ -45,17 +45,17 @@ datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabT
 datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument')
 
 'click menu application data'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA'))
 
 //Verify sort & paging
-not_run: pagingTesting()
+pagingTesting()
 
 'input Appno'
-not_run: WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
+WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
     datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
 
 'Looping delay untuk handling copy app selama +- 2 menit'
-not_run: for (int i = 1; i <= 8; i++) {
+for (int i = 1; i <= 8; i++) {
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Search'))
 
@@ -70,7 +70,7 @@ not_run: for (int i = 1; i <= 8; i++) {
 }
 
 'click icon pensil untuk select'
-not_run: WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/i_FT PRODUCT OFFERING CF4W_font-medium-3 ft-edit-2'))
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
@@ -856,7 +856,7 @@ def pagingTesting() {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
                 GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + GlobalVariable.ReasonFailedReset) + 'NAP2') + ';\n')
+                    '') + findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedReset) + 'NAP2') + ';\n')
 
             GlobalVariable.FlagWarning = 1
         }
@@ -866,7 +866,7 @@ def pagingTesting() {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
                 GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + ((GlobalVariable.ReasonFailedSort + 'NAP2') + ';\n'))
+                    '') + findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedSort + 'NAP2' + ';\n')
 
             GlobalVariable.FlagWarning = 1
         }
@@ -876,7 +876,7 @@ def pagingTesting() {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
                 GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + ((GlobalVariable.ReasonFailedFooter + 'NAP2') + ';\n'))
+                    '') + findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedFooter + 'NAP2' + ';\n')
 
             GlobalVariable.FlagWarning = 1
         }

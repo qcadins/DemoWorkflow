@@ -841,7 +841,7 @@ def mscopyapp(){
 							break
 						} else {
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-								0, GlobalVariable.NumofMS - 1, GlobalVariable.ReasonFailedDelete + customertype)
+								0, GlobalVariable.NumofMS - 1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDelete + customertype)
 						}
 						
 						break

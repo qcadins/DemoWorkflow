@@ -272,7 +272,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 	if(accessoriesnamefaileddelete.size() > 0){
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
@@ -367,7 +367,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
@@ -409,7 +409,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
@@ -460,7 +460,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
@@ -531,7 +531,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
@@ -573,7 +573,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
@@ -624,7 +624,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
@@ -723,7 +723,7 @@ else if(datafileTabAsset.getValue(
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 				}
 				continue
 			}
@@ -764,7 +764,7 @@ else if(datafileTabAsset.getValue(
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 				}
 
 				continue
@@ -819,7 +819,7 @@ else if(datafileTabAsset.getValue(
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 				}
 
 				continue
@@ -845,7 +845,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	
 			'write to excel verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7a.Accessories',
-					1, GlobalVariable.NumofAccessories-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+					1, GlobalVariable.NumofAccessories-1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 			GlobalVariable.FlagFailed=1
 	}

@@ -281,7 +281,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
     if (referantorfaileddelete.size() > 0) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-            GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
+            GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -980,13 +980,13 @@ def adddatatoarraylist(ArrayList<WebElement> referantorDetail) {
 def writeReasonFailedDelete() {
     'Write To Excel GlobalVariable.ReasonFailedDelete'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 
-        1, GlobalVariable.ReasonFailedDelete)
+        1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 }
 
 def writeReasonFailedLookup() {
     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-        GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+        GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
 }
@@ -994,7 +994,7 @@ def writeReasonFailedLookup() {
 def writeReasonFailedDDL() {
     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-        GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+        GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 
     GlobalVariable.FlagFailed = 1
 }
@@ -1026,7 +1026,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -1077,7 +1077,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			ReferantorType) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ReferantorType')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ReferantorType')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -1097,7 +1097,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			taxcalcu) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'tax calculation')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'tax calculation')
 	
 			(GlobalVariable.FlagFailed)++
 		}
