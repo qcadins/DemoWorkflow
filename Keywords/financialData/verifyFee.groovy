@@ -198,8 +198,8 @@ public class verifyFee {
 	//check nilai rounding product offering
 	@Keyword
 	public checkDefaultRounding(Sql instanceLOS, String poCode){
-		int feeCode
-		instanceLOS.eachRow(("select COMPNT_VALUE from PROD_OFFERING po join PROD p on po.PROD_ID = p.PROD_ID join PROD_H ph on ph.PROD_ID = p.PROD_ID join PROD_D pd on pd.PROD_H_ID = p.CURRENT_PROD_H_ID where REF_PROD_COMPNT_CODE = 'INST_ROUNDING' and PROD_OFFERING_CODE = '"+ poCode +"' and ph.PROD_STAT = 'ACT'"), { def row ->
+		Integer feeCode
+		instanceLOS.eachRow(("select CAST(COMPNT_VALUE AS INT) from PROD_OFFERING po join PROD p on po.PROD_ID = p.PROD_ID join PROD_H ph on ph.PROD_ID = p.PROD_ID join PROD_D pd on pd.PROD_H_ID = p.CURRENT_PROD_H_ID where REF_PROD_COMPNT_CODE = 'INST_ROUNDING' and PROD_OFFERING_CODE = '"+ poCode +"' and ph.PROD_STAT = 'ACT'"), { def row ->
 			feeCode = row[0]
 		})
 		return feeCode

@@ -39,6 +39,12 @@ datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-Application
 'get data file path simulasi'
 def datafilepathsim = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiFinancial)
 
+'write total expense'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,7,0)
+
+'write total expense'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,7,0)
+
 'declare NTFforProvisionCalc Value'
 BigDecimal NTFforProvisionCalc
 
@@ -289,7 +295,7 @@ BigDecimal intFiduciaFeeCapitalize = Integer.parseInt(FiduciaFeeCapitalize)
 BigDecimal intProvisionFeeCapitalize = Integer.parseInt(ProvisionFeeCapitalize)
 
 'convert NTF to BigDecimal'
-BigDecimal intNTF = Integer.parseInt(NTF)
+BigDecimal intNTF = Math.round(Double.parseDouble(NTF))
 
 'convert DPAssetAccessoryValue to BigDecimal'
 BigDecimal intDPAssetAccessoryValue = Integer.parseInt(DPAssetAccessoryValue)
@@ -301,22 +307,22 @@ BigDecimal intDPAssetAccessoryMinSubValue = Integer.parseInt(DPAssetAccessoryMin
 BigDecimal intTotalAssetAccessoryPriceValue = Integer.parseInt(TotalAssetAccessoryPriceValue)
 
 'convert TotalAR to BigDecimal'
-BigDecimal intTotalAR = Integer.parseInt(TotalARValue)
+BigDecimal intTotalAR = Math.round(Double.parseDouble(TotalARValue))
 
 'convert InterestAmountValue to BigDecimal'
-BigDecimal intInterestAmountValue = Integer.parseInt(InterestAmountValue)
+BigDecimal intInterestAmountValue = Math.round(Double.parseDouble(InterestAmountValue))
 
 'convert OSPrincipalAmount to BigDecimal'
-BigDecimal intOSPrincipalAmountSeq1 = Integer.parseInt(OSPrincipalAmount)
+BigDecimal intOSPrincipalAmountSeq1 = Math.round(Double.parseDouble(OSPrincipalAmount))
 
 'convert PrincipalAmountValueSeq1 to BigDecimal'
-BigDecimal intPrincipalAmountValueSeq1 = Integer.parseInt(PrincipalAmountValueSeq1)
+BigDecimal intPrincipalAmountValueSeq1 = Math.round(Double.parseDouble(PrincipalAmountValueSeq1))
 
 'convert OSInterestAmount to BigDecimal'
-BigDecimal intOSInterestAmountSeq1 = Integer.parseInt(OSInterestAmount)
+BigDecimal intOSInterestAmountSeq1 = Math.round(Double.parseDouble(OSInterestAmount))
 
 'convert InterestAmountValueSeq1 to BigDecimal'
-BigDecimal intInterestAmountValueSeq1 = Integer.parseInt(InterestAmountValueSeq1)
+BigDecimal intInterestAmountValueSeq1 = Math.round(Double.parseDouble(InterestAmountValueSeq1))
 
 'get value total fee capitalize'
 int TotalFeeCapitalize = Integer.parseInt(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE CAPITALIZED')).replace(
@@ -341,7 +347,7 @@ checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(findTestData('NAP-CF4
 	FailureHandling.CONTINUE_ON_FAILURE))
 
 'Get value Total insurance value'
-String TotalInsuranceValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE'))
+String TotalInsuranceValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE')).replace(",","")
 
 'get value total insurance capitalized value'
 def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL INSURANCE CAPITALIZED')).replace(
@@ -351,7 +357,7 @@ def TotalInsuranceCapitalizeValue = WebUI.getText(findTestObject('NAP-CF4W-Custo
 BigDecimal intTotalInsurancevalue = new BigDecimal(TotalInsuranceCapitalizeValue.replace(',', ''))
 
 'verify match Total insurance(from tab insruance) and total insurance (from tab financial)'
-checkVerifyEqualOrMatch(WebUI.verifyMatch(GlobalVariable.TotalInsurance, TotalInsuranceValue, false))
+checkVerifyEqualOrMatch(WebUI.verifyMatch(CustomKeywords.'financialData.checkRefYieldItem.checkInsCust'(sqlConnectionLOS, appNo), TotalInsuranceValue, false))
 
 'verify match Insurance capitalize amount (from tab insurance) and total insurance capitalize (from tab financial)'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,60).replace(".00",""), TotalInsuranceCapitalizeValue, false))
@@ -390,7 +396,7 @@ WebDriver driver = DriverFactory.getWebDriver()
 ArrayList<WebElement> counttdInstallment = driver.findElements(By.cssSelector('#FinData_FinData > form > div.ng-star-inserted > table > tbody tr'))
 
 'declare installmentamountvalue, principalamountvalue, interestamountvalue'
-int installmentamountvalue, principalamountvalue, interestamountvalue
+Double installmentamountvalue, principalamountvalue, interestamountvalue
 
 'get grace period method from confins'
 String gracePeriodMethod = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_--Select--Interest OnlyRoll Over'),'value')
@@ -444,67 +450,67 @@ for (int InstallmentSchemecount = 1; InstallmentSchemecount <= counttdInstallmen
 		'.00', '')
 
 	'count total of installment amount'
-	if (installmentamountvalue == null) {
-		installmentamountvalue = Integer.parseInt(strInstallmentamount)
-	} else {
-		installmentamountvalue = (installmentamountvalue + Integer.parseInt(strInstallmentamount))
-	}
-	
-	'count total of principal amount'
-	if (principalamountvalue == null) {
-		principalamountvalue = Integer.parseInt(strPrincipalamount)
-	} else {
-		principalamountvalue = (principalamountvalue + Integer.parseInt(strPrincipalamount))
-	}
-	
-	'count total of interest amount'
-	if (interestamountvalue == null) {
-		interestamountvalue = Integer.parseInt(strInterestamount)
-	} else {
-		interestamountvalue = (interestamountvalue + Integer.parseInt(strInterestamount))
-	}
-	
-	'verify value not minus(-)'
-	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInstallmentamount), 0)
+    if (installmentamountvalue == null) {
+        installmentamountvalue = Double.parseDouble(strInstallmentamount)
+    } else {
+        installmentamountvalue = (installmentamountvalue + Double.parseDouble(strInstallmentamount))
+    }
+    
+    'count total of principal amount'
+    if (principalamountvalue == null) {
+        principalamountvalue = Double.parseDouble(strPrincipalamount)
+    } else {
+        principalamountvalue = (principalamountvalue + Double.parseDouble(strPrincipalamount))
+    }
+    
+    'count total of interest amount'
+    if (interestamountvalue == null) {
+        interestamountvalue = Double.parseDouble(strInterestamount)
+    } else {
+        interestamountvalue = (interestamountvalue + Double.parseDouble(strInterestamount))
+    }
+    
+    'verify value not minus(-)'
+    WebUI.verifyGreaterThanOrEqual(Double.parseDouble(strInstallmentamount), 0)
 
 	'Jika grace period method bukan rollover atau jika rollover & seqno>graceperiodnum'
 	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")|| InstallmentSchemecount>gracePeriodNum){
 		'verify value not minus(-)'
-		WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strPrincipalamount), 0)
+		WebUI.verifyGreaterThanOrEqual(Double.parseDouble(strPrincipalamount), 0)
 	}
-	
-	'verify value not minus(-)'
-	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strInterestamount), 0)
+    
+    'verify value not minus(-)'
+    WebUI.verifyGreaterThanOrEqual(Double.parseDouble(strInterestamount), 0)
 
-	'verify value not minus(-)'
-	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSPrincipalAmount), 0)
+    'verify value not minus(-)'
+    WebUI.verifyGreaterThanOrEqual(Double.parseDouble(strOSPrincipalAmount), 0)
 
-	'verify value not minus(-)'
-	WebUI.verifyGreaterThanOrEqual(Integer.parseInt(strOSInterestAmount), 0)
+    'verify value not minus(-)'
+    WebUI.verifyGreaterThanOrEqual(Double.parseDouble(strOSInterestAmount), 0)
 
 	'Jika grace period method bukan rollover dan bukan interest only dan graceperiodnum = 0'
-	if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
+    if(!gracePeriodMethod.equalsIgnoreCase("ROLLOVER")&&!gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY")&&gracePeriodNum==0){
 		'get first row installment amount value'
 		if (InstallmentSchemecount == 1) {
 			'Verify installment amount = installment amount seq1'
-			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount)))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Double.parseDouble(strInstallmentamount)))
 		}
 	}//jika grace period method = rollover atau interest only dan grace period num bukan 0
 	else if((gracePeriodMethod.equalsIgnoreCase("ROLLOVER")||gracePeriodMethod.equalsIgnoreCase("INTEREST_ONLY"))&&gracePeriodNum!=0){
 		if(InstallmentSchemecount==gracePeriodNum+1){
 			'Verify installment amount = installment amount seq graceperiod+1'
-			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Integer.parseInt(strInstallmentamount)))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(BDInstallmentAmount, Double.parseDouble(strInstallmentamount)))
 		}
 	}
-	
-	'get last row value'
-	if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {
-		'verify value is 0'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(strOSPrincipalAmount), 0))
+    
+    'get last row value'
+    if ((InstallmentSchemecount - counttdInstallment.size()) == 0) {
+        'verify value is 0'
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(strOSPrincipalAmount), 0))
 
-		'verify value is 0'
-		checkVerifyEqualOrMatch(WebUI.verifyEqual(Integer.parseInt(strOSInterestAmount), 0))
-	}
+        'verify value is 0'
+        checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(strOSInterestAmount), 0))
+    }
 }
 
 'verify equal Interest amount seq 1 + os interest amount seq1 = Total Interest'
@@ -587,6 +593,17 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim
 'write dp asset accessory '
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',5,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 61).replace(",","")))
 
+Integer DiffRateAmt = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/DiffRateAmt'),"value").replace(",","")) - Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/SubsidyDiffRate'),"value").replace(",",""))
+
+if(DiffRateAmt>=0){
+	'write diff rate amt'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',38,1, 0)
+}
+else{
+'write diff rate amt'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,'Gross Yield (CF)',38,1,DiffRateAmt*(-1))
+}
+
 'write effective rate'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,1, Double.parseDouble(datafileTabFinancial.getValue(GlobalVariable.NumofColm, 44))/100)
 
@@ -611,10 +628,10 @@ if (payFreq == 'Monthly') {
 } else if (payFreq == 'Trimester') {
 	num = "4"
 
-} else if (payFreq == 'Semi Annually') {
+} else if (payFreq == 'Semi Annualy') {
 	num = "6"
 
-} else if (payFreq == 'Annually') {
+} else if (payFreq == 'Annualy') {
 	num = "12"
 
 }
@@ -867,7 +884,7 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(NTF, NTFVal.replace(",","").replace(".
 checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_GROSS YIELD')).replace(" %",""))), Math.round(Double.parseDouble(GrossYieldVal))))
 
 'verify Flat rate'
-checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Integer.parseInt(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Integer.parseInt(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),15))
+checkVerifyEqualOrMatch(WebUI.verifyLessThanOrEqual(Double.parseDouble(findTestData('Simulasi/Simulasi Gross Yield').getValue(2, 19)) - Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_Flat Rate'),'value').replace(' %','')),0.5))
 
 'Ambil nilai total fee dan simpan dari confins financial datas'
 String textTotalFee = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_TOTAL FEE')).replace(
@@ -901,8 +918,9 @@ checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(findTestData('NAP-C
 //checkVerifyEqualOrMatch(WebUI.verifyMatch(textTDP, String.format('%.2f', TDP), false))
 
 'Verifikasi tdp paid at mf <= tdp'
-WebUI.verifyLessThanOrEqual(Long.parseLong(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'),
-			'value').replace(',', '')), Long.parseLong(textTDP.replace('.00', '')))
+WebUI.verifyLessThanOrEqual(Double.parseDouble(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_TDP Paid at MF'), 
+            'value').replace(',', '')), Double.parseDouble(textTDP.replace('.00', '')))
+
 
 if (WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/label_FIRST INSTALLMENT TYPE')).equalsIgnoreCase(
 	'ADVANCE')) {

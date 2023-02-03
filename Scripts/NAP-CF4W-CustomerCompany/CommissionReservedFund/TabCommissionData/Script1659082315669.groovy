@@ -104,7 +104,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 						GlobalVariable.NumofColm)
 		}
 		
-		if(GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+		if(GlobalVariable.CheckRuleCompany=="Yes" ){
 			 
 			modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)
 			

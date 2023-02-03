@@ -427,6 +427,21 @@ checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalDisburseAmt, String.format('%
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalExpenseAmt, String.format('%.2f', GlobalVariable.TotalExpenseAmt), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)
 
+'get data file path simulasi'
+def datafilepathsim = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiFinancial)
+
+'write total expense'
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,7,Double.parseDouble(textTotalExpenseAmt))
+
+CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+
+'get nilai gross yield from simulation'
+GrossYieldVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(10, 84)
+
+'verify gross yield confins x excel'
+checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/label_GrossYield')).replace("%",""))), Math.round(Double.parseDouble(GrossYieldVal))), '12.TabCommissionData',
+	GlobalVariable.NumofColm)
+
 'Verify nilai pada section summary sesuai dengan perhitungan'
 checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalTax, String.format('%.2f', GlobalVariable.TotalTax), false), '12.TabCommissionData',
 	GlobalVariable.NumofColm)

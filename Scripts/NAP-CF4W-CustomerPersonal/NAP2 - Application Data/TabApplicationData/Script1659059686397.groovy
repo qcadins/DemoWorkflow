@@ -325,9 +325,9 @@ if (GlobalVariable.Role == 'Testing') {
         numOfInstallment = ((Math.ceil(tenor / 3)) as int)
     } else if (payFreq == 'Trimester') {
         numOfInstallment = ((Math.ceil(tenor / 4)) as int)
-    } else if (payFreq == 'Semi Annually') {
+    } else if (payFreq == 'Semi Annualy') {
         numOfInstallment = ((Math.ceil(tenor / 6)) as int)
-    } else if (payFreq == 'Annually') {
+    } else if (payFreq == 'Annualy') {
         numOfInstallment = ((Math.ceil(tenor / 12)) as int)
     } else if (payFreq == 'Weekly') {
         numOfInstallment = (((((4) as int) * tenor) + (Math.round(tenor - 1) / 3)) + 1)

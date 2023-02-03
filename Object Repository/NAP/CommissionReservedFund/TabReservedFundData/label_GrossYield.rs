@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_GrossYield</name>
+   <tag></tag>
+   <elementGuidId>b07090d6-7d5e-4d99-8edf-dffda94d52b2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;bottomSide&quot;]/div/div/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;bottomSide&quot;]/div/div/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -263,6 +263,21 @@ if(GlobalVariable.Role=="Testing"){
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(totalReservedFundAmt, totalAmt.toString(), false), '14.TabReservedFundData',
 		 GlobalVariable.NumofColm)
 	
+	'get data file path simulasi'
+	def datafilepathsim = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiFinancial)
+	
+	'write rsv amt'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,7,Double.parseDouble(totalReservedFundAmt))
+	
+	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(datafilepathsim)
+	
+	'get nilai gross yield from simulation'
+	GrossYieldVal = findTestData('Simulasi/Simulasi Gross Yield').getValue(10, 84)
+	
+	'verify gross yield confins x excel'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(WebUI.getText(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/label_GrossYield')).replace("%",""))), Math.round(Double.parseDouble(GrossYieldVal))), '14.TabReservedFundData',
+			GlobalVariable.NumofColm)
+	
 	'Arraylist untuk menampung remaining info'
 	ArrayList<WebElement> varRemainingInfo = driver.findElements(By.cssSelector('#viewRemainIncomeInfo label'))
 	

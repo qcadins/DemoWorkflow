@@ -111,7 +111,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 								GlobalVariable.NumofColm)
 			}
 			
-			if(GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
+			if(GlobalVariable.CheckRulePersonal=="Yes"){
 				 
 				'modify income info'
 				modifyObjectIncomeInfo = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_Upping Rate'),'xpath','equals',"//*[@id='viewIncomeInfo']/div["+(i+1)+"]/div/div[1]/label",true)

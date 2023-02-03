@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>SubsidyDiffRate</name>
+   <tag></tag>
+   <elementGuidId>fe19a488-18ab-4623-95a4-fd21724700b3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[1]/div[10]/div/div/div[4]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;FinData_FinData&quot;]/form/div[1]/div[10]/div/div/div[4]/input</value>
+   </webElementProperties>
+</WebElementEntity>
