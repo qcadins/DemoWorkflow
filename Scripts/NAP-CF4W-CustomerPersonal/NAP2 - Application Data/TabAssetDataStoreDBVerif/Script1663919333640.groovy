@@ -79,21 +79,41 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofC
 arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 20).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify color'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify BPKB ISSUER'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 22).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify BPKB ISSUE DATE'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 23).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify note'
-arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 24).toUpperCase(), (resultassetinformation[
-        arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 21).length() > 0){
+	'verify color'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 21).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+	'skip color'
+	arrayassetinfoindex++
+	}
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 22).length() > 0){
+	'verify BPKB ISSUER'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 22).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+	'skip bpkb'
+	arrayassetinfoindex++
+	}
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 23).length() > 0){
+	'verify BPKB ISSUE DATE'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 23).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+	'skip bpkb issue date'
+	arrayassetinfoindex++
+	}
+	
+	if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 24).length() > 0){
+	'verify note'
+	arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 24).toUpperCase(), (resultassetinformation[
+			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+	'skip note'
+	arrayassetinfoindex++
+	}
 
 'verify manufacturing year'
 arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 25).toUpperCase(), (resultassetinformation[
@@ -175,9 +195,13 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 42).equalsIgnoreCase('Personal')) {
+		if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).length() > 0){
         'verify owner profession'
         arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+		}else{
+		arrayassetinfoindex++
+		}
     } else {
         'verify owner profession'
         arrayMatch.add(WebUI.verifyMatch(datafileTabAsset.getValue(GlobalVariable.NumofColm, 47).toUpperCase(), (resultassetinformation[

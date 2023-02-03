@@ -90,6 +90,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'click button edit'
 					WebUI.click(modifyNewbuttonedit)
 
+					'call function check ddl'
+					checkDDL()
+					
 					'call function input asset data'
 					inputAssetData()
 					
@@ -184,6 +187,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					'click button add'
 					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Add'))
 
+					'call function check ddl'
+					checkDDL()
+					
 					'call function input asset data'
 					inputAssetData()
 					
@@ -210,6 +216,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			'click button add'
 			WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/button_Add'))
 
+			'call function check ddl'
+			checkDDL()
+			
 			'call function input asset data'
 			inputAssetData()
 
@@ -336,4 +345,30 @@ def countAssetValue(int confinssize){
 	
 	'verify equal totalprice = qty*price'
 	WebUI.verifyEqual(TotalPrice, Double.parseDouble(assetTotalPrice))
+}
+
+def checkDDL(){
+	if(GlobalVariable.Role == 'Testing'){
+		'connect DB FOU'
+		Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+		
+		'get assettype ddl value from db'
+		ArrayList<String> assettype = CustomKeywords.'nap4Data.checkNAP4.checkcustAsset'(sqlConnectionFOU)
+	
+		'get total label from ddl assettype'
+		int totalddlassettype = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/select_MobilMotorRumah'))
+	
+		'verify total ddl nationality confins = total ddl db'
+		WebUI.verifyEqual(totalddlassettype, assettype.size())
+	
+		'verify isi ddl assettype confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/select_MobilMotorRumah'),
+			assettype) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.CustomerAsset', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'assettype')
+	
+			(GlobalVariable.FlagFailed)++
+		}
+	}
 }

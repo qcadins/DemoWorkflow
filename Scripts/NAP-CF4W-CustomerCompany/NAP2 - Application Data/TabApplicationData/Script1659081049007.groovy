@@ -63,74 +63,175 @@ if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=
 
 if (GlobalVariable.RoleCompany == 'Testing') {
 	
-	'verify application step'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
-		'APPLICATION DATA', false, FailureHandling.OPTIONAL))
+    'verify application step'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
+        'APPLICATION DATA', false, FailureHandling.OPTIONAL))
 
-	'Ambil text product offering dari confins'
-	String POName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
+    'Ambil text product offering dari confins'
+    String POName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_ProductOffering'))
 
-	'Pengecekan interest type dari db product offering '
-	String InterestType = CustomKeywords.'applicationData.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
+    'Pengecekan interest type dari db product offering '
+    String InterestType = CustomKeywords.'applicationData.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
 
-	'Ambil text interest type dari confins'
-	String textInterest = WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
-		'value')
+    'Ambil text interest type dari confins'
+    String textInterest = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
+        'value')
 
-	'Verif interest type pada confins dengan db'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
+    'Verif interest type pada confins dengan db'
+    checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
 	
-//	ArrayList<String> appsource = CustomKeywords.'applicationData.checkDDL.checkDDLApplicationSource'(sqlConnectionLOS)
-//	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS)
-//	ArrayList<String> wop = CustomKeywords.'applicationData.checkDDL.checkDDLWOP'(sqlConnectionFOU)
-//	
-//	'get total label from ddl app source'
-//	int totalddlappsource = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'))
-//	
-//	'get total label from ddl installment scheme'
-//	int totalddlinstallmentscheme = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'))
-//	
-//	'get total label from ddl wop'
-//	int totalddlwop = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'))
-//
-//	'verify total ddl app source confins = total ddl db'
-//	WebUI.verifyEqual(totalddlappsource - 1, appsource.size())
-//	
-//	'verify total ddl installment scheme confins = total ddl db'
-//	WebUI.verifyEqual(totalddlinstallmentscheme - 1, installmentscheme.size())
-//	
-//	'verify total ddl way of payment confins = total ddl db'
-//	WebUI.verifyEqual(totalddlwop, wop.size())
-//
-//	'verify isi ddl app source confins = db'
-//	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
-//		appsource) == false) {
-//
-//		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-//		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Application Source')
-//
-//		(GlobalVariable.FlagFailed)++
-//	}
-//		
-//	'verify isi ddl installment scheme confins = db'
-//	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'),
-//			installmentscheme) == false) {
-//		
-//		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-//		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
-//		
-//		(GlobalVariable.FlagFailed)++
-//	}
-//	
-//	'verify isi ddl Way of Payment confins = db'
-//	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'),
-//			wop) == false) {
-//		
-//		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-//		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'WOP')
-//		
-//		(GlobalVariable.FlagFailed)++
-//	}
+	ArrayList<String> appsource = CustomKeywords.'applicationData.checkDDL.checkDDLApplicationSource'(sqlConnectionLOS)
+	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS)
+	ArrayList<String> wop = CustomKeywords.'applicationData.checkDDL.checkDDLWOP'(sqlConnectionFOU)
+	ArrayList<String> InstType = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentType'(sqlConnectionFOU)
+	ArrayList<String> COC = CustomKeywords.'applicationData.checkDDL.checkDDLCOC'(sqlConnectionFOU)
+	ArrayList<String> PayFreq = CustomKeywords.'applicationData.checkDDL.checkDDLPayFreq'(sqlConnectionLOS)
+	ArrayList<String> PayType = CustomKeywords.'applicationData.checkDDL.checkDDLPaymentType'(sqlConnectionFOU)
+	ArrayList<String> CustNotif = CustomKeywords.'applicationData.checkDDL.checkDDLCustNotif'(sqlConnectionFOU)
+	
+	'get total label from ddl app source'
+	int totalddlappsource = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'))
+	
+	'get total label from ddl installment scheme'
+	int totalddlinstallmentscheme = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'))
+	
+	'get total label from ddl wop'
+	int totalddlwop = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'))
+	
+	'get total label from ddl InstType'
+	int totalddlInstType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_FirstInstallmentType'))
+	
+	'get total label from ddl COC'
+	int totalddlCOC = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CharacteristicOfCredit'))
+	
+	'get total label from ddl PayFreq'
+	int totalddlPayFreq = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_PaymentFrequency'))
+	
+	'get total label from ddl DPSrcPayType'
+	int totalddlDPSrcPayType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'))
+	
+	'get total label from ddl InstSrcPayType'
+	int totalddlInstSrcPayType = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentSourcePaymentType'))
+	
+	'get total label from ddl CustNotif'
+	int totalddlCustNotif = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CustomerNotification'))
+
+	'verify total ddl app source confins = total ddl db'
+	WebUI.verifyEqual(totalddlappsource - 1, appsource.size())
+	
+	'verify total ddl installment scheme confins = total ddl db'
+	WebUI.verifyEqual(totalddlinstallmentscheme - 1, installmentscheme.size())
+	
+	'verify total ddl way of payment confins = total ddl db'
+	WebUI.verifyEqual(totalddlwop, wop.size())
+	
+	'verify total ddl InstType confins = total ddl db'
+	WebUI.verifyEqual(totalddlInstType - 1, InstType.size())
+	
+	'verify total ddl coc confins = total ddl db'
+	WebUI.verifyEqual(totalddlCOC - 1, COC.size())
+	
+	'verify total ddl PayFreq confins = total ddl db'
+	WebUI.verifyEqual(totalddlPayFreq - 1, PayFreq.size())
+	
+	'verify total ddl DPSrcPayType confins = total ddl db'
+	WebUI.verifyEqual(totalddlDPSrcPayType - 1, PayType.size())
+	
+	'verify total ddl InstSrcPayType confins = total ddl db'
+	WebUI.verifyEqual(totalddlInstSrcPayType - 1, PayType.size())
+	
+	'verify total ddl CustNotif confins = total ddl db'
+	WebUI.verifyEqual(totalddlCustNotif, CustNotif.size())
+
+	'verify isi ddl app source confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
+		appsource) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Application Source')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'verify isi ddl installment scheme confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentScheme'),
+			installmentscheme) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+	
+	'verify isi ddl Way of Payment confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_WayOfPayment'),
+			wop) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'WOP')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl InstType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_FirstInstallmentType'),
+			InstType) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'InstType')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl coc confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CharacteristicOfCredit'),
+			COC) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'COC')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl PayFreq confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_PaymentFrequency'),
+			PayFreq) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'PayFreq')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl DPSrcPayType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'),
+			PayType) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'DP Source PayType')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl InstSrcPayType confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InstallmentSourcePaymentType'),
+			PayType) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Installment Source PayType')
+		
+		(GlobalVariable.FlagFailed)++
+	}
+			
+	'verify isi ddl CustNotif confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_CustomerNotification'),
+			CustNotif) == false) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'CustNotif')
+		
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 String spvName
@@ -330,12 +431,10 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		numOfInstallment.toString())
 }
 
-if (datafileTabApplication.getValue(
-	GlobalVariable.NumofColm, 21).length() > 0) {
+if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 21).length() > 0) {
 	'Select option dropdownlist DPSourcePaymentType'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'),
-		datafileTabApplication.getValue(
-			GlobalVariable.NumofColm, 21), false)
+		datafileTabApplication.getValue(GlobalVariable.NumofColm, 21), false)
 }
 
 String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),

@@ -17,6 +17,9 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
 
+'call function check ddl'
+checkDDL()
+
 'click lookup profesi'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Profession Name_btn btn-raised btn-primary'))
 
@@ -483,4 +486,115 @@ def verifyInputError(){
 	
 		GlobalVariable.FlagFailed = 1
 	}
+}
+
+def checkDDL(){
+	if(GlobalVariable.Role == 'Testing'){
+        'connect DB FOU'
+        Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
+        'get jobposition ddl value from db'
+        ArrayList<String> jobposition = CustomKeywords.'nap4Data.checkNAP4.checkjobPosition'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddljobposition = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'))
+
+        'verify total ddl jobposition confins = total ddl db'
+        WebUI.verifyEqual(totalddljobposition - 1, jobposition.size())
+
+        'verify isi ddl jobposition confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'), 
+            jobposition) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get jobStatus ddl value from db'
+        ArrayList<String> jobStatus = CustomKeywords.'nap4Data.checkNAP4.checkjobStatus'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddljobStatus = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Contract  Permanent'))
+
+        'verify total ddl jobStatus confins = total ddl db'
+        WebUI.verifyEqual(totalddljobStatus - 1, jobStatus.size())
+
+        'verify isi ddl jobStatus confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Contract  Permanent'), 
+            jobStatus) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get companyScale ddl value from db'
+        ArrayList<String> companyScale = CustomKeywords.'nap4Data.checkNAP4.checkcompanyScale'(sqlConnectionFOU)
+
+        'get total label from ddl jobposition'
+        int totalddlcompanyScale = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Big  Medium  Small'))
+
+        'verify total ddl companyScale confins = total ddl db'
+        WebUI.verifyEqual(totalddlcompanyScale - 1, companyScale.size())
+
+        'verify isi ddl companyScale confins = db'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Big  Medium  Small'), 
+            companyScale) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+
+            (GlobalVariable.FlagFailed)++
+        }
+        
+        'get data array dari db'
+        ArrayList<String> Ownership = CustomKeywords.'nap4Data.checkNAP4.checkOwnership'(sqlConnectionFOU)
+
+        'get total label from ddl'
+        int totalownershipjobaddr = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'))
+
+        int totalownershipprevjob = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'))
+
+        int totalownershipothbiz = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Ownership OtherBusinessAddress'))
+
+        'verify total ddl confins = total ddl db'
+        WebUI.verifyEqual(totalownershipjobaddr - 1, Ownership.size())
+
+        WebUI.verifyEqual(totalownershipprevjob - 1, Ownership.size())
+
+        WebUI.verifyEqual(totalownershipothbiz - 1, Ownership.size())
+
+        'verify array dari db == option list confins job addr'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'job addr ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+        
+        'verify array dari db == option list confins prev job addr'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'prev job ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+        
+        'verify array dari db == option list confins othbiz'
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Ownership OtherBusinessAddress'), 
+            Ownership) == false) {
+            'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
+                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'other biz ownership')
+
+            GlobalVariable.FlagFailed = 1
+        }
+    }
 }

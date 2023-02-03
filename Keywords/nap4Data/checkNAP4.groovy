@@ -212,4 +212,54 @@ public class checkNAP4 {
 		})
 		return countData
 	}
+	
+	//keyword check cust asset DDL
+	@Keyword
+	public checkcustAsset(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_ASSET_TYPE' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
+	
+	//keyword check job position DDL
+	@Keyword
+	public checkjobPosition(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'JOB_POSITION' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
+	
+	//keyword check job status DDL
+	@Keyword
+	public checkjobStatus(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'JOB_STAT' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
+	
+	//keyword check company Scale status DDL
+	@Keyword
+	public checkcompanyScale(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'COY_SCALE' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
+	
+	//keyword check company relationship status DDL
+	@Keyword
+	public checkcompanyrelationship(Sql instance){
+		ArrayList<String> value = new ArrayList<String>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_COMPANY_RELATIONSHIP' and IS_ACTIVE = 1"), { def row ->
+			value.add(row[0].toUpperCase())
+		})
+		return value
+	}
 }

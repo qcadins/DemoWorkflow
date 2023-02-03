@@ -95,7 +95,7 @@ public class verifyInsuranceData {
 			'Ambil nilai number of month'
 			String textNumberOfMonth = WebUI.getText(numberOfMonthObject)
 
-			BigDecimal numberOfMonth = Integer.parseInt(textNumberOfMonth)
+			BigDecimal numberOfMonth = Double.parseDouble(textNumberOfMonth)
 
 			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_MainPremiumAmt'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[9]", true)
@@ -107,7 +107,7 @@ public class verifyInsuranceData {
 			BigDecimal Result = Math.round(Amount*sumInsuredPercent*rate*(numberOfMonth/12)/10)*10
 
 			'Verifikasi/memastikan nilai main premium amount pada confins sama dengan perhitungan'
-			WebUI.verifyMatch(textMainPremi,Result.toString(),false, FailureHandling.OPTIONAL)
+			WebUI.verifyEqual(Math.floor(Double.parseDouble(textMainPremi)), Double.parseDouble(Result.toString()), FailureHandling.OPTIONAL)
 
 			'Tambahkan main premium ke total main premium'
 			totalMainPremiumResult+=Result
@@ -172,7 +172,7 @@ public class verifyInsuranceData {
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
 
 				'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-				WebUI.verifyMatch(textAddtPremiAmt, String.format("%.2f", resultAddtPremi),false)
+				WebUI.verifyEqual(Math.floor(Double.parseDouble(textAddtPremiAmt)), Double.parseDouble(String.format("%.2f", resultAddtPremi)))
 
 				totalResultAddtPremi+=resultAddtPremi
 			}
@@ -191,7 +191,7 @@ public class verifyInsuranceData {
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
 
 			'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
-			WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
+			WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremiPerYear)), Double.parseDouble(String.format("%.2f", resultTotalPremiPerYear)))
 
 			if(counterCap==1){
 				capitalizeAmountResult+=resultTotalPremiPerYear
@@ -278,7 +278,7 @@ public class verifyInsuranceData {
 			'Ambil nilai number of month'
 			String textNumberOfMonth = WebUI.getText(numberOfMonthObject)
 
-			BigDecimal numberOfMonth = Integer.parseInt(textNumberOfMonth)
+			BigDecimal numberOfMonth = Double.parseDouble(textNumberOfMonth)
 
 			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_MainPremiumAmt'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]", true)
@@ -290,7 +290,7 @@ public class verifyInsuranceData {
 			BigDecimal Result = Math.round(Amount*sumInsuredPercent*rate*(numberOfMonth/12)/10)*10
 
 			'Verifikasi/memastikan nilai main premium amount pada confins sama dengan perhitungan'
-			WebUI.verifyMatch(textMainPremi,Result.toString(),false, FailureHandling.OPTIONAL)
+			WebUI.verifyEqual(Math.floor(Double.parseDouble(textMainPremi)), Double.parseDouble(Result.toString()), FailureHandling.OPTIONAL)
 
 			'Tambahkan main premium ke total main premium'
 			totalMainPremiumResult+=Result
@@ -354,7 +354,7 @@ public class verifyInsuranceData {
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
 
 				'Verifikasi nilai additional premi confins sama dengan hasil penghitungan pada katalon'
-				WebUI.verifyMatch(textAddtPremiAmt, String.format("%.2f", resultAddtPremi),false)
+				WebUI.verifyEqual(Math.floor(Double.parseDouble(textAddtPremiAmt)), Double.parseDouble(String.format("%.2f", resultAddtPremi)))
 
 				totalResultAddtPremi+=resultAddtPremi
 			}
@@ -373,7 +373,7 @@ public class verifyInsuranceData {
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
 
 			'verifikasi nilai total premi per tahun dari confins sesuai dengan perhitungan'
-			WebUI.verifyMatch(textTotalPremiPerYear, String.format("%.2f", resultTotalPremiPerYear),false)
+			WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremiPerYear)), Double.parseDouble(String.format("%.2f", resultTotalPremiPerYear)))
 
 			'Jika full capitalize amount pada confins tercentang dan paid by customer'
 			if(counterCap==1 && WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)CUSTOMER',true,20,FailureHandling.OPTIONAL)){

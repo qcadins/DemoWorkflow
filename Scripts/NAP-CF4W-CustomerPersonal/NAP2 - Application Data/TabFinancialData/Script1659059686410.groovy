@@ -494,6 +494,46 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/div_PercentageRadio'))
     }
     
+	if(GlobalVariable.Role == 'Testing'){
+		'get paymentmethod ddl value from db'
+		ArrayList<String> provisionfee = CustomKeywords.'financialData.verifyFee.checkProvisionFeeDDL'(sqlConnectionFOU)
+		
+		'get total label from ddl provisionfee'
+		int totalddlprovisionfee = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_OTR-DPOTR-DP  Ins Cptlz  Fee Cptlz(Excl Provision)'))
+	
+		'verify total ddl provisionfee confins = total ddl db'
+		WebUI.verifyEqual(totalddlprovisionfee, provisionfee.size())
+		
+		'verify isi ddl provisionfee confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_OTR-DPOTR-DP  Ins Cptlz  Fee Cptlz(Excl Provision)'),
+			provisionfee) == false) {
+	
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'provisionfee')
+	
+			(GlobalVariable.FlagFailed)++
+		}
+			
+			'get ratetype ddl value from db'
+			ArrayList<String> ratetype = CustomKeywords.'financialData.verifyFee.checkProvisionFeeDDL'(sqlConnectionFOU)
+					
+					'get total label from ddl ratetype'
+					int totalddlratetype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_RateType'))
+					
+					'verify total ddl ratetype confins = total ddl db'
+					WebUI.verifyEqual(totalddlratetype - 1, ratetype.size())
+					
+					'verify isi ddl ratetype confins = db'
+					if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_RateType'),
+							ratetype) == false) {
+						
+						'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ratetype')
+						
+						(GlobalVariable.FlagFailed)++
+					}
+	}
+
     'select Provision fee calculation base'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/select_OTR-DPOTR-DP  Ins Cptlz  Fee Cptlz(Excl Provision)'), 
         datafileTabFinancial.getValue(GlobalVariable.NumofColm, 37), false)

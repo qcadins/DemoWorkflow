@@ -38,7 +38,7 @@ public class checkDDL {
 	public checkDDLInstallmentScheme(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT UPPER(pism.MR_INST_SCHM_NAME) FROM PROD_OFFERING_D pod CROSS APPLY STRING_SPLIT(pod.COMPNT_VALUE,';') join PROD_INST_SCHM_MAP pism on pism.MR_INST_SCHM_CODE = value join prod_offering_h poh on poh.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID join prod_offering po on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID where REF_PROD_COMPNT_CODE = 'INST_SCHM' and prod_offering_name = 'CF4W MRA' and prod_stat = 'ACT' group by MR_INST_SCHM_NAME"), { def row ->
+		instance.eachRow(("SELECT UPPER(pism.DESCR) FROM PROD_OFFERING_D pod CROSS APPLY STRING_SPLIT(pod.COMPNT_VALUE,';') join FOUNDATION.dbo.REF_MASTER pism on pism.MASTER_CODE = value join prod_offering_h poh on poh.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID join prod_offering po on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID where REF_PROD_COMPNT_CODE = 'INST_SCHM' and prod_offering_name = 'CF4W MRA' and prod_stat = 'ACT'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
@@ -50,6 +50,61 @@ public class checkDDL {
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
 		instance.eachRow(("select UPPER(DESCR) from ref_master where ref_master_type_code = 'WOP' AND IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkDDLInstallmentType(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'FIRST_INST_TYPE' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkDDLCOC(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CHARACTERISTIC_OF_CREDIT' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkDDLPayFreq(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(pism.DESCR) FROM PROD_OFFERING_D pod CROSS APPLY STRING_SPLIT(pod.COMPNT_VALUE,';') join FOUNDATION.dbo.REF_PAY_FREQ pism on pism.PAY_FREQ_CODE = value join prod_offering_h poh on poh.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID join prod_offering po on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID where REF_PROD_COMPNT_CODE = 'PAYFREQ' and prod_offering_name = 'CF4W MRA' and prod_stat = 'ACT'"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkDDLPaymentType(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CSP_USL_AML' and IS_ACTIVE = 1"), { def row ->
+			value = (row[0])
+			listValue.add(value)
+		})
+		return listValue
+	}
+	
+	@Keyword
+	public checkDDLCustNotif(Sql instance){
+		String value
+		ArrayList<String> listValue = new ArrayList<>()
+		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CUST_NOTIF_OPT' and IS_ACTIVE = 1"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

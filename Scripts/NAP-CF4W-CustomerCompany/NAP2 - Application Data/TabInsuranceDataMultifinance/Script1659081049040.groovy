@@ -109,6 +109,44 @@ if(GlobalVariable.RoleCompany=="Testing"){
 		
 		GlobalVariable.FlagFailed=1
 	}
+	
+	'get coverperiod ddl value from db'
+	ArrayList<String> coverperiod = CustomKeywords.'insuranceData.checkInsRateBase.checkCoverPeriodDDL'(sqlConnectionFOU)
+	
+	'get total label from ddl insuredby'
+	int totalddlcoverperiod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'))
+
+	'verify total ddl coverperiod confins = total ddl db'
+	WebUI.verifyEqual(totalddlcoverperiod - 1, coverperiod.size())
+	
+	'verify isi ddl coverperiod confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'),
+		coverperiod) == false) {
+
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'cover period')
+
+		(GlobalVariable.FlagFailed)++
+	}
+		
+	'get paymenttype ddl value from db'
+	ArrayList<String> paymenttype = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
+			
+	'get total label from ddl paymenttype'
+	int totalddlpaymenttype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'))
+	
+	'verify total ddl paymenttype confins = total ddl db'
+	WebUI.verifyEqual(totalddlpaymenttype - 1, paymenttype.size())
+			
+	'verify isi ddl coverperiod confins = db'
+	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
+			paymenttype) == false) {
+				
+	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'cover period')
+				
+		(GlobalVariable.FlagFailed)++
+	}
 }
 
 'Select option insco branch name'
@@ -222,6 +260,27 @@ if (datafileTabInsurance.getValue(
 			GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
+if(GlobalVariable.RoleCompany == 'Testing'){
+	'get maincvg ddl value from db'
+	ArrayList<String> maincvg = CustomKeywords.'insuranceData.checkInsRateBase.checkMainCVGDDL'(sqlConnectionFOU)
+			
+			'get total label from ddl maincvg'
+			int totalddlmaincvg = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'))
+			
+			'verify total ddl maincvg confins = total ddl db'
+			WebUI.verifyEqual(totalddlmaincvg, maincvg.size())
+			
+			'verify isi ddl maincvg confins = db'
+			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
+					maincvg) == false) {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'maincvg')
+				
+				(GlobalVariable.FlagFailed)++
+			}
+}
+	
 'Select option dropdownlist main coverage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
 	datafileTabInsurance.getValue(
@@ -793,6 +852,8 @@ if(capinssetting=="YEARLY"){
 	
 	ArrayList<WebElement> totalResult
 	BigDecimal totalPremitoCustResult
+	String totalFeeResult
+	
 	if(GlobalVariable.RoleCompany=="Testing"){
 		
 		'keyword untuk verify tabel hasil generate insurance (main premi, additional premi,total premi per year, total premi'
@@ -815,22 +876,22 @@ if(capinssetting=="YEARLY"){
 			',', '')
 		
 		'get perhitungan total fee dari excel'
-		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87)
+		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87).replace(',', '')
 		
 		'Perhitungan total premi to customer'
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
 		
 		'Verif total main premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalMainPremiAmt, String.format('%.2f', totalResult[0]), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalMainPremiAmt)), Double.parseDouble(String.format('%.2f', totalResult[0]))))
 		
 		'Verif total additional premi sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalAdditionalPremiAmt, String.format('%.2f', totalResult[1]), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalAdditionalPremiAmt)), Double.parseDouble(String.format('%.2f', totalResult[1]))))
 		
 		'Verif total fee sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalFeeAmt, totalFeeResult, false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalFeeAmt.replace(',', ''))), Double.parseDouble(totalFeeResult)))
 		
 		'Verif total premi to customer sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCust, String.format('%.2f', totalPremitoCustResult), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremitoCust)), Double.parseDouble(String.format('%.2f', totalPremitoCustResult))))
 		
 		'Jika tidak ada paid by mf'
 		if(totalResult[2]==0){
@@ -870,7 +931,7 @@ if(capinssetting=="YEARLY"){
 		totalPremitoCustAftDiscountResult = (totalPremitoCustResult - discountAmt)
 		
 		'Verif total premi to customer after discount sesuai perhitungan'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textTotalPremitoCustAftDisc, String.format('%.2f', totalPremitoCustAftDiscountResult), false))
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textTotalPremitoCustAftDisc)), Double.parseDouble(String.format('%.2f', totalPremitoCustAftDiscountResult))))
 		
 		String textCapitalizeAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_Capitalize Amount_insCpltzAmt'),
 			'value').replace(',', '')
@@ -878,12 +939,12 @@ if(capinssetting=="YEARLY"){
 		'Jika capitalize amount tidak bernilai 0'
 		if ((totalResult[3]) != 0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString(), false))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textCapitalizeAmount)), Double.parseDouble((totalResult[3] + Long.parseLong(totalFeeResult.replace(',',''))).toString())))
 		}
 		//Jika capitalize amount bernilai 0
 		else if(totalResult[3]==0) {
 			'Verif capitalize amount sesuai perhitungan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(textCapitalizeAmount, (totalResult[3]).toString(), false))
+			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.floor(Double.parseDouble(textCapitalizeAmount)), Double.parseDouble((totalResult[3]).toString())))
 		}
 		'Jika ada paid by mf'
 		if(totalResult[2]==1){
